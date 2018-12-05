@@ -8,11 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
-		2C4ABC5621B5881E009B4D47 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5521B5881E009B4D47 /* ViewController.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
 		2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5C21B5881F009B4D47 /* LaunchScreen.storyboard */; };
 		2C4ABC6921B5881F009B4D47 /* NineAnimatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC6821B5881F009B4D47 /* NineAnimatorUITests.swift */; };
+		2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */; };
+		2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */; };
+		2C4ABC7B21B59EBD009B4D47 /* FeaturedAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC7A21B59EBD009B4D47 /* FeaturedAnimationView.swift */; };
+		2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */; };
+		2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */; };
+		2C4ABC8121B6FD49009B4D47 /* NineAnimatePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8021B6FD49009B4D47 /* NineAnimatePath.swift */; };
+		2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */; };
+		2C4ABC8521B74A51009B4D47 /* FeaturedAnimePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */; };
+		2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */; };
+		2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +37,6 @@
 /* Begin PBXFileReference section */
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2C4ABC5521B5881E009B4D47 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C4ABC5D21B5881F009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +44,16 @@
 		2C4ABC6421B5881F009B4D47 /* NineAnimatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC6821B5881F009B4D47 /* NineAnimatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorUITests.swift; sourceTree = "<group>"; };
 		2C4ABC6A21B5881F009B4D47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedViewController.swift; sourceTree = "<group>"; };
+		2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimator.swift; sourceTree = "<group>"; };
+		2C4ABC7A21B59EBD009B4D47 /* FeaturedAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAnimationView.swift; sourceTree = "<group>"; };
+		2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAnimeTableViewCell.swift; sourceTree = "<group>"; };
+		2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+BackgroundShadow.swift"; sourceTree = "<group>"; };
+		2C4ABC8021B6FD49009B4D47 /* NineAnimatePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatePath.swift; sourceTree = "<group>"; };
+		2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeLink.swift; sourceTree = "<group>"; };
+		2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAnimePage.swift; sourceTree = "<group>"; };
+		2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IntegerRangeSubstring.swift"; sourceTree = "<group>"; };
+		2C4ABC8D21B76010009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimePlayer.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,11 +95,13 @@
 		2C4ABC5221B5881E009B4D47 /* NineAnimator */ = {
 			isa = PBXGroup;
 			children = (
+				2C4ABC8B21B75FD2009B4D47 /* Storyboards */,
+				2C4ABC8621B753C9009B4D47 /* Utilities */,
+				2C4ABC7721B59C95009B4D47 /* Views */,
+				2C4ABC7621B599E3009B4D47 /* Models */,
+				2C4ABC7321B59982009B4D47 /* Controllers */,
 				2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */,
-				2C4ABC5521B5881E009B4D47 /* ViewController.swift */,
-				2C4ABC5721B5881E009B4D47 /* Main.storyboard */,
 				2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */,
-				2C4ABC5C21B5881F009B4D47 /* LaunchScreen.storyboard */,
 				2C4ABC5F21B5881F009B4D47 /* Info.plist */,
 			);
 			path = NineAnimator;
@@ -94,6 +114,53 @@
 				2C4ABC6A21B5881F009B4D47 /* Info.plist */,
 			);
 			path = NineAnimatorUITests;
+			sourceTree = "<group>";
+		};
+		2C4ABC7321B59982009B4D47 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		2C4ABC7621B599E3009B4D47 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */,
+				2C4ABC8021B6FD49009B4D47 /* NineAnimatePath.swift */,
+				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
+				2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2C4ABC7721B59C95009B4D47 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC7A21B59EBD009B4D47 /* FeaturedAnimationView.swift */,
+				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
+				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2C4ABC8621B753C9009B4D47 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		2C4ABC8B21B75FD2009B4D47 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC5721B5881E009B4D47 /* Main.storyboard */,
+				2C4ABC5C21B5881F009B4D47 /* LaunchScreen.storyboard */,
+				2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
@@ -197,8 +265,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C4ABC5621B5881E009B4D47 /* ViewController.swift in Sources */,
+				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
+				2C4ABC8521B74A51009B4D47 /* FeaturedAnimePage.swift in Sources */,
+				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
+				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
+				2C4ABC7B21B59EBD009B4D47 /* FeaturedAnimationView.swift in Sources */,
+				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
+				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
+				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
+				2C4ABC8121B6FD49009B4D47 /* NineAnimatePath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +311,14 @@
 				2C4ABC5D21B5881F009B4D47 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C4ABC8D21B76010009B4D47 /* Base */,
+			);
+			name = AnimePlayer.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
