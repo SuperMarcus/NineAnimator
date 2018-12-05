@@ -22,6 +22,7 @@
 		2C4ABC8521B74A51009B4D47 /* FeaturedAnimePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */; };
 		2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */; };
 		2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */; };
+		2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedAnimePage.swift; sourceTree = "<group>"; };
 		2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IntegerRangeSubstring.swift"; sourceTree = "<group>"; };
 		2C4ABC8D21B76010009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimePlayer.storyboard; sourceTree = "<group>"; };
+		2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUpdatedAnimeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				2C4ABC7A21B59EBD009B4D47 /* FeaturedAnimationView.swift */,
 				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
 				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
+				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
+				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2C4ABC8121B6FD49009B4D47 /* NineAnimatePath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

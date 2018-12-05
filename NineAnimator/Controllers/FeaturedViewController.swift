@@ -11,7 +11,7 @@ import UIKit
 class FeaturedViewController: UITableViewController {
     var featuredAnimePage: FeaturedAnimePage? = nil {
         didSet{
-            tableView.reloadSections([0], with: .automatic)
+            tableView.reloadData()
         }
     }
     
@@ -32,7 +32,7 @@ class FeaturedViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return featuredAnimePage == nil ? 1 : 1
+        return featuredAnimePage == nil ? 1 : 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -41,8 +41,11 @@ class FeaturedViewController: UITableViewController {
             return 0
         }
         
-        if section == 0 { return featuredAnimePage!.featured.count }
-        return 0
+        switch section {
+        case 0: return featuredAnimePage!.featured.count
+        case 1: return featuredAnimePage!.latest.count
+        default: return 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,9 +58,16 @@ class FeaturedViewController: UITableViewController {
             let animeLink = featuredAnimePage!.featured[indexPath.item]
             let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.featured", for: indexPath) as! FeaturedAnimeTableViewCell
             
-            let imageData = try! Data(contentsOf: animeLink.image)
             animeCell.animeTitleLabel.text = animeLink.title
-            animeCell.animeImageView.image = UIImage(data: imageData)
+            animeCell.animeImageView.image = animeLink.uiImage
+            
+            return animeCell
+        } else if indexPath.section == 1 {
+            let animeLink = featuredAnimePage!.latest[indexPath.item]
+            let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.updated", for: indexPath) as! RecentlyUpdatedAnimeTableViewCell
+            
+            animeCell.title = animeLink.title
+            animeCell.coverImage = animeLink.uiImage
             
             return animeCell
         } else {
