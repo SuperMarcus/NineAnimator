@@ -24,10 +24,10 @@ class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
         get { return nil }
     }
     
-    var coverImage: UIImage? {
+    var coverImage: URL? {
         set {
-            coverImageView.image = newValue
-            blurredCoverImageView.image = newValue
+            coverImageView.kf.setImage(with: newValue)
+            blurredCoverImageView.kf.setImage(with: newValue)
         }
         get { return nil }
     }

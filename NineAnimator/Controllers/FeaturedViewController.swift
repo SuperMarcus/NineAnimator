@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Kingfisher
 
 class FeaturedViewController: UITableViewController {
     var featuredAnimePage: FeaturedAnimePage? = nil {
         didSet{
-            tableView.reloadData()
+            UIView.transition(with: tableView,
+                              duration: 0.35,
+                              options: .transitionCrossDissolve,
+                              animations: { self.tableView.reloadData() })
         }
     }
     
@@ -59,7 +63,7 @@ class FeaturedViewController: UITableViewController {
             let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.featured", for: indexPath) as! FeaturedAnimeTableViewCell
             
             animeCell.animeTitleLabel.text = animeLink.title
-            animeCell.animeImageView.image = animeLink.uiImage
+            animeCell.animeImageView.kf.setImage(with: animeLink.image)
             
             return animeCell
         } else if indexPath.section == 1 {
@@ -67,11 +71,23 @@ class FeaturedViewController: UITableViewController {
             let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.updated", for: indexPath) as! RecentlyUpdatedAnimeTableViewCell
             
             animeCell.title = animeLink.title
-            animeCell.coverImage = animeLink.uiImage
+            animeCell.coverImage = animeLink.image
             
             return animeCell
         } else {
             fatalError("Unknown section")
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let playerViewController = segue.destination as? PlayerViewController {
+            guard let selected = tableView.indexPathForSelectedRow else { return }
+            let pools = [
+                featuredAnimePage?.featured,
+                featuredAnimePage?.latest
+            ]
+            guard let animeLink = pools[selected.section]?[selected.item] else { return }
+            playerViewController.link = animeLink
         }
     }
 }
