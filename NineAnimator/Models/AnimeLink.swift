@@ -22,3 +22,9 @@ struct AnimeLink: Alamofire.URLConvertible {
     
     func asURL() -> URL { return link }
 }
+
+extension AnimeLink: Equatable {
+    static func == (lhs: AnimeLink, rhs: AnimeLink) -> Bool {
+        return lhs.link == rhs.link
+    }
+}

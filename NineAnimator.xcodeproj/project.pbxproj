@@ -25,10 +25,13 @@
 		2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */; };
 		2C4ABC9221B7F41D009B4D47 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9121B7F41D009B4D47 /* Cartfile */; };
 		2C4ABC9521B7F53F009B4D47 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */; };
-		2C4ABC9821B825A5009B4D47 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9721B825A5009B4D47 /* PlayerViewController.swift */; };
+		2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */; };
 		2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9921B88F8C009B4D47 /* Anime.swift */; };
 		2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */; };
 		2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */; };
+		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
+		2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */; };
+		2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,10 +67,13 @@
 		2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUpdatedAnimeTableViewCell.swift; sourceTree = "<group>"; };
 		2C4ABC9121B7F41D009B4D47 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
-		2C4ABC9721B825A5009B4D47 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeViewController.swift; sourceTree = "<group>"; };
 		2C4ABC9921B88F8C009B4D47 /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
 		2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
+		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */,
-				2C4ABC9721B825A5009B4D47 /* PlayerViewController.swift */,
+				2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -152,6 +158,7 @@
 				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
 				2C4ABC8421B74A51009B4D47 /* FeaturedAnimePage.swift */,
 				2C4ABC9921B88F8C009B4D47 /* Anime.swift */,
+				2C7BD23921B9B4F400B29C90 /* Episode.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -163,6 +170,8 @@
 				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
 				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
 				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
+				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
+				2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -327,16 +336,19 @@
 			files = (
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* FeaturedAnimePage.swift in Sources */,
+				2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
 				2C4ABC7B21B59EBD009B4D47 /* FeaturedAnimationView.swift in Sources */,
-				2C4ABC9821B825A5009B4D47 /* PlayerViewController.swift in Sources */,
+				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
+				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
+				2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */,
 				2C4ABC8121B6FD49009B4D47 /* NineAnimatePath.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

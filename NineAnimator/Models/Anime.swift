@@ -32,7 +32,32 @@ extension NineAnimator {
 }
 
 struct Anime {
+    typealias ServerIdentifier = String
+    typealias EpisodeIdentifier = String
+    typealias AnimeIdentifier = String
+    typealias EpisodeLink = (identifier: EpisodeIdentifier, name: String, server: ServerIdentifier, parent: AnimeLink)
+    typealias EpisodeLinksCollection = [EpisodeLink]
+    
     let link: AnimeLink
+    let session: Alamofire.SessionManager
+    let servers: [ServerIdentifier: String]
+    let episodes: [ServerIdentifier: EpisodeLinksCollection]
+    let description: String
+    
+    var currentServer: ServerIdentifier
+    
+    init(_ link: AnimeLink,
+         description: String,
+         with session: Alamofire.SessionManager,
+         on servers: [ServerIdentifier: String],
+         episodes: [ServerIdentifier: EpisodeLinksCollection]) {
+        self.link = link
+        self.session = session
+        self.servers = servers
+        self.episodes = episodes
+        self.currentServer = servers.first!.key
+        self.description = description
+    }
     
     struct AjaxPath: URLConvertible {
         static let ping = AjaxPath("/ajax/film/servers-ping")
@@ -55,8 +80,14 @@ struct Anime {
     static let animeAttributesRegex = try! NSRegularExpression(pattern: "<dt>([^<:]+):*<\\/dt>\\s+<dd>([^<]+)")
     static let animeResourceTagsRegex = try! NSRegularExpression(pattern: "<div id=\"servers-container\" data-id=\"([^\"]+)\" data-bind-api=\"#player\" data-epid=\"([^\"]*)\" data-epname=\"[^\"]*\"\\s*>", options: .caseInsensitive)
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
-    
+}
+
+//MARK: -
+//MARK: Anime page parser
+extension Anime {
     fileprivate static func parse(_ link: AnimeLink, page: String, with session: Alamofire.SessionManager, onCompletion handler: @escaping NineAnimatorCallback<Anime>){
+        
+        let bowl = try! SwiftSoup.parse(page)
         
         let alias: String? = {
             let matches = Anime.animeAliasRegex.matches(in: page, options: [], range: page.matchingRange)
@@ -66,7 +97,7 @@ struct Anime {
         let animeAttributes: [(name: String, value: String)] = {
             let matches = Anime.animeAttributesRegex.matches(in: page, options: [], range: page.matchingRange)
             return matches.filter { page[$0.range(at: 2)].isEmpty }
-                          .map { (page[$0.range(at: 1)], page[$0.range(at: 2)]) }
+                .map { (page[$0.range(at: 1)], page[$0.range(at: 2)]) }
         }()
         
         let animeResourceTags: (id: String, episode: String) = {
@@ -74,8 +105,10 @@ struct Anime {
             return (page[matches[0].range(at: 1)], page[matches[0].range(at: 2)])
         }()
         
-        var animeServers = [(name: String, server: String)]()
-        var animeEpisodes = [String:[(name: String, episodeIdentifier: String)]]()
+        let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
+        
+        var animeServers = [ServerIdentifier: String]()
+        var animeEpisodes = [ServerIdentifier: EpisodeLinksCollection]()
         
         let ajaxHeaders: Alamofire.HTTPHeaders = [ "Referer": link.link.absoluteString ]
         
@@ -102,10 +135,7 @@ struct Anime {
             let matches = Anime.animeServerListRegex.matches(in: htmlList, options: [], range: htmlList.matchingRange)
             
             for match in matches {
-                animeServers.append((
-                    name: htmlList[match.range(at: 2)],
-                    server: htmlList[match.range(at: 1)]
-                ))
+                animeServers[htmlList[match.range(at: 1)]] = htmlList[match.range(at: 2)]
             }
             
             debugPrint("Info: \(animeServers.count) servers found for this anime.")
@@ -116,9 +146,15 @@ struct Anime {
                 for server in try soup.select("div.server") {
                     let serverIdentifier = try server.attr("data-id")
                     animeEpisodes[serverIdentifier] = try server.select("li>a")
-                        .map { (name: try $0.text(), episodeIdentifier: try $0.attr("data-id")) }
+                        .map { (identifier: try $0.attr("data-id"), name: try $0.text(), server: serverIdentifier, parent: link) }
                     debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
                 }
+                
+                handler(Anime(link,
+                              description: animeDescription,
+                              with: session,
+                              on: animeServers,
+                              episodes: animeEpisodes), nil)
             }catch{
                 debugPrint("Unable to parse servers and episodes")
                 handler(nil, error)
@@ -148,6 +184,7 @@ struct Anime {
             
             debugPrint("Info: Session is valid")
             debugPrint("- Alias: \(alias ?? "None")")
+            debugPrint("- Description: \(animeDescription)")
             debugPrint("- Attributes: \(animeAttributes)")
             debugPrint("- Resource Identifiers: ID=\(animeResourceTags.id), EPISODE=\(animeResourceTags.episode)")
             
