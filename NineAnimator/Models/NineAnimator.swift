@@ -14,7 +14,14 @@ typealias NineAnimatorCallback<T> = (T?, Error?) -> ()
 enum NineAnimatorError: Error {
     case urlError
     case responseError(String)
+    case providerError(String)
 }
+
+protocol NineAnimatorAsyncTask {
+    func cancel()
+}
+
+extension Alamofire.DataRequest: NineAnimatorAsyncTask { }
 
 class NineAnimator: Alamofire.SessionDelegate {
     static var `default` = NineAnimator()

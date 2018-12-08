@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import AVKit
+import SafariServices
 
 class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate {
     var avPlayerController: AVPlayerViewController!
@@ -43,6 +44,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     }
     
     var informationCell: AnimeDescriptionTableViewCell? = nil
+    
+    var selectedEpisodeCell: EpisodeTableViewCell? = nil
+    
+    var episodeRequestTask: NineAnimatorAsyncTask? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,13 +102,67 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
             return cell
         }
         if indexPath.section == 2 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") else { fatalError("unable to dequeue reuseable cell") }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
-            cell.textLabel?.text = episodes[indexPath.item].name
-            cell.detailTextLabel?.text = "Start Watching"
+            cell.episodeLink = episodes[indexPath.item]
             return cell
         }
         fatalError()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? EpisodeTableViewCell else {
+            debugPrint("Warning: Cell selection event received when the cell selected is not an EpisodeTableViewCell")
+            return
+        }
+        
+        if cell != selectedEpisodeCell {
+            selectedEpisodeCell?.progressIndicator.hideActivityIndicator()
+            episodeRequestTask?.cancel()
+            cell.progressIndicator.showActivityIndicator()
+            selectedEpisodeCell = cell
+            
+            episodeRequestTask = anime!.episode(with: cell.episodeLink!) {
+                episode, error in
+                guard let episode = episode else {
+                    debugPrint("Error: \(error!)")
+                    return
+                }
+                self.episode = episode
+                
+                debugPrint("Info: Episode target retrived for '\(episode.name)'")
+                debugPrint("- Playback target: \(episode.target)")
+                
+                if episode.nativePlaybackSupported {
+                    self.episodeRequestTask = episode.retrive {
+                        item, error in
+                        
+                        self.episodeRequestTask = nil
+                        
+                        guard let item = item else {
+                            debugPrint("Warn: Item not retrived \(error!), fallback to web access")
+                            DispatchQueue.main.async {
+                                let playbackController = SFSafariViewController(url: episode.target)
+                                self.present(playbackController, animated: true)
+                            }
+                            return
+                        }
+                        
+                        let playerController = AVPlayerViewController()
+                        playerController.player = AVPlayer(playerItem: item)
+                        
+                        DispatchQueue.main.async {
+                            playerController.player?.play()
+                            self.present(playerController, animated: true)
+                        }
+                    }
+                } else {
+                    let playbackController = SFSafariViewController(url: episode.target)
+                    self.present(playbackController, animated: true)
+                    self.episodeRequestTask = nil
+                }
+            }
+        }
     }
     
     func select(server: Anime.ServerIdentifier) {

@@ -133,6 +133,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="trailingMargin" secondItem="Fw1-wC-wkx" secondAttribute="trailing" constant="8" id="F0M-qk-N6L"/>
                                         <constraint firstItem="Fw1-wC-wkx" firstAttribute="leading" secondItem="3Rf-VH-R4u" secondAttribute="leadingMargin" constant="8" id="Hi3-6K-SHW"/>
@@ -154,6 +155,7 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="animeImageView" destination="XPo-Oq-ujR" id="95N-DB-6aE"/>
                                     <outlet property="animeTitleLabel" destination="m7Z-Ws-s51" id="xYg-jQ-E6l"/>
@@ -187,13 +189,13 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
-                                                                <rect key="frame" x="16" y="73.5" width="221.5" height="21"/>
+                                                                <rect key="frame" x="16" y="73.5" width="221" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaF-Aj-Y4A">
-                                                                <rect key="frame" x="16" y="49.5" width="221.5" height="21"/>
+                                                                <rect key="frame" x="16" y="49.5" width="221" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -259,6 +261,7 @@
                                     <outlet property="coverImageView" destination="nAu-b3-xDw" id="CFs-a5-kX3"/>
                                     <outlet property="statusLabel" destination="Xji-1Z-Meq" id="Gwa-ye-cmm"/>
                                     <outlet property="titleLabel" destination="EaF-Aj-Y4A" id="GtP-lH-f0Q"/>
+                                    <segue destination="Vey-hc-6Z0" kind="show" id="hl9-0f-9xm"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -279,7 +282,7 @@
                 <viewControllerPlaceholder storyboardName="AnimePlayer" id="Vey-hc-6Z0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWR-t2-rZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2694" y="-332"/>
+            <point key="canvasLocation" x="2765" y="-332"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tgu-Qd-uUb">
@@ -317,4 +320,7 @@
             <point key="canvasLocation" x="200" y="33"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="5mq-eg-8TQ"/>
+    </inferredMetricsTieBreakers>
 </document>

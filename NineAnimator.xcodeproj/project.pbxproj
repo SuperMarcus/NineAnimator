@@ -32,6 +32,11 @@
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */; };
 		2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */; };
+		2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */; };
+		2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */; };
+		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
+		2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297421BB7A4200284FD0 /* StreamangoParser.swift */; };
+		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +79,11 @@
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerTableViewCell.swift; sourceTree = "<group>"; };
+		2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderParser.swift; sourceTree = "<group>"; };
+		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
+		2C91297421BB7A4200284FD0 /* StreamangoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamangoParser.swift; sourceTree = "<group>"; };
+		2C91297621BB867300284FD0 /* MyCloudParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCloudParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +163,7 @@
 		2C4ABC7621B599E3009B4D47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C91296E21BB608F00284FD0 /* ProviderParsers */,
 				2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */,
 				2C4ABC8021B6FD49009B4D47 /* NineAnimatePath.swift */,
 				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
@@ -172,6 +183,7 @@
 				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
 				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
 				2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */,
+				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +214,17 @@
 				2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C91296E21BB608F00284FD0 /* ProviderParsers */ = {
+			isa = PBXGroup;
+			children = (
+				2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */,
+				2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */,
+				2C91297421BB7A4200284FD0 /* StreamangoParser.swift */,
+				2C91297621BB867300284FD0 /* MyCloudParser.swift */,
+			);
+			path = ProviderParsers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,16 +357,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
+				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* FeaturedAnimePage.swift in Sources */,
 				2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
+				2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */,
 				2C4ABC7B21B59EBD009B4D47 /* FeaturedAnimationView.swift in Sources */,
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
+				2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
+				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,

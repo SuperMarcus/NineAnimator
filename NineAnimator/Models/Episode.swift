@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftSoup
+import AVKit
 
 struct Episode {
     let link: Anime.EpisodeLink
@@ -17,12 +18,27 @@ struct Episode {
     var name: String { return link.name }
     var parentLink: AnimeLink { return link.parent }
     
-    private var _parent: Anime?
+    var nativePlaybackSupported: Bool {
+        return VideoProviderRegistry.default.provider(for: link.server) != nil
+    }
     
-    init(_ link: Anime.EpisodeLink, on target: URL, parent: Anime? = nil) {
+    private var _parent: Anime?
+    private var _session: Alamofire.SessionManager
+    
+    init(_ link: Anime.EpisodeLink, on target: URL, with session: Alamofire.SessionManager, parent: Anime? = nil) {
         self.link = link
         self.target = target
         self._parent = parent
+        self._session = session
+    }
+    
+    func retrive(onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask? {
+        guard let provider = VideoProviderRegistry.default.provider(for: link.server) else {
+            handler(nil, NineAnimatorError.providerError("no parser found for server \(link.server)"))
+            return nil
+        }
+        
+        return provider.parse(url: target, with: _session, onCompletion: handler)
     }
     
     func parent(onCompletion handler: @escaping NineAnimatorCallback<Anime>){
@@ -32,10 +48,10 @@ struct Episode {
 }
 
 extension Anime {
-    func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) {
+    func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask {
         let ajaxHeaders: Alamofire.HTTPHeaders = [ "Referer": self.link.link.absoluteString ]
         
-        session
+        let task = session
             .request(AjaxPath.episode(for: link.identifier, on: link.server), headers: ajaxHeaders)
             .responseJSON{
                 response in
@@ -58,7 +74,9 @@ extension Anime {
                     return
                 }
                 
-                handler(Episode(link, on: target, parent: self), nil)
+                handler(Episode(link, on: target, with: self.session, parent: self), nil)
         }
+        
+        return task
     }
 }

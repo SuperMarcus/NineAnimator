@@ -22,12 +22,11 @@ extension String {
     }
     
     subscript (bounds: NSRange) -> String {
-        let start = index(startIndex, offsetBy: bounds.lowerBound)
-        let end = index(startIndex, offsetBy: bounds.upperBound)
-        return String(self[start..<end])
+        let range = Range(bounds, in: self)!
+        return String(self[range])
     }
     
     var matchingRange: NSRange {
-        return NSRange(location: startIndex.encodedOffset, length: endIndex.encodedOffset)
+        return NSRange(location: 0, length: utf16.count)
     }
 }
