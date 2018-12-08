@@ -14,6 +14,7 @@ protocol ServerPickerSelectionDelegate {
     func select(server: Anime.ServerIdentifier)
 }
 
+@available(*, deprecated)
 class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
     @IBOutlet weak var serverPickerView: UIPickerView!
     

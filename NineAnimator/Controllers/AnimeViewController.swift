@@ -25,7 +25,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
             DispatchQueue.main.async {
                 self.informationCell?.animeDescription = self.anime?.description
                 
-                let sectionsNeededReloading: IndexSet = [1, 2]
+                let sectionsNeededReloading: IndexSet = [1]
                 
                 if self.anime == nil && oldValue != nil {
                     self.tableView.deleteSections(sectionsNeededReloading, with: .fade)
@@ -36,6 +36,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                         anime.servers[recentlyUsedServer] != nil {
                         self.server = recentlyUsedServer
                     } else { self.server = anime.servers.first!.key }
+                    
+                    self.serverSelectionButton.title = anime.servers[self.server!]
+                    self.serverSelectionButton.isEnabled = true
                     
                     if oldValue == nil { self.tableView.insertSections(sectionsNeededReloading, with: .fade) }
                     else { self.tableView.reloadSections(sectionsNeededReloading, with: .fade) }
@@ -80,6 +83,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         
         //Fetch anime if anime does not exists
         if case .none = anime {
+            serverSelectionButton.title = "Select Server"
+            serverSelectionButton.isEnabled = false
             NineAnimator.default.anime(with: link){
                 anime, error in
                 guard let anime = anime else {
@@ -92,13 +97,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return anime == nil ? 1 : 3
+        return anime == nil ? 1 : 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if case 0...1 = section { return 1 }
+        if section == 0 { return 1 }
         
-        if section == 2 {
+        if section == 1 {
             guard let serverIdentifier = server else { return 0 }
             guard let episodes = anime?.episodes[serverIdentifier] else { return 0 }
             return episodes.count
@@ -116,13 +121,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
             informationCell = cell
             return cell
         }
+//        if indexPath.section == 1 {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.serverPicker") as? ServerPickerTableViewCell else { fatalError("cell with wrong type is dequeued") }
+//            cell.delegate = self
+//            cell.servers = anime?.servers
+//            return cell
+//        }
         if indexPath.section == 1 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.serverPicker") as? ServerPickerTableViewCell else { fatalError("cell with wrong type is dequeued") }
-            cell.delegate = self
-            cell.servers = anime?.servers
-            return cell
-        }
-        if indexPath.section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
             let episode = episodes[indexPath.item]
@@ -231,6 +236,23 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     func select(server: Anime.ServerIdentifier) {
         self.server = server
         UserDefaults.standard.set(server, forKey: "server.recent")
-        tableView.reloadSections([2], with: .fade)
+        tableView.reloadSections([1], with: .automatic)
+        serverSelectionButton.title = anime!.servers[server]
+    }
+    
+    @IBAction func onServerButtonTapped(_ sender: Any) {
+        let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
+        for server in anime!.servers {
+            let action = UIAlertAction(title: server.value, style: .default, handler: {
+                _ in
+                self.select(server: server.key)
+            })
+            if self.server == server.key {
+                action.setValue(true, forKey: "checked")
+            }
+            alertView.addAction(action)
+        }
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in }))
+        self.present(alertView, animated: true)
     }
 }

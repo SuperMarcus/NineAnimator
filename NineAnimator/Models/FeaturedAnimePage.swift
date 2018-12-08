@@ -38,7 +38,7 @@ struct FeaturedAnimePage {
 
 extension NineAnimator {
     func loadHomePage(completionHandler: @escaping NineAnimatorCallback<FeaturedAnimePage>){
-        request(.home) {
+        let _ = request(.home) {
             (content, error) in
             if let error = error {
                 self.removeCache(at: .home)

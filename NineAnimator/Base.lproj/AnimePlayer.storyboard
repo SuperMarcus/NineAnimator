@@ -185,7 +185,11 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Anime Title" id="Le5-G5-Fz8">
-                        <barButtonItem key="rightBarButtonItem" title="Server" id="dfI-Mn-95I"/>
+                        <barButtonItem key="rightBarButtonItem" title="Server" id="dfI-Mn-95I">
+                            <connections>
+                                <action selector="onServerButtonTapped:" destination="K93-Pu-iF1" id="sjB-w4-HBA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
