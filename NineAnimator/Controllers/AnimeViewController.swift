@@ -253,6 +253,12 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     
     @IBAction func onServerButtonTapped(_ sender: Any) {
         let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
+        
+        if let popover = alertView.popoverPresentationController {
+            popover.barButtonItem = serverSelectionButton
+            popover.permittedArrowDirections = .up
+        }
+        
         for server in anime!.servers {
             let action = UIAlertAction(title: server.value, style: .default, handler: {
                 _ in
