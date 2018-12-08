@@ -15,6 +15,7 @@ enum NineAnimatorError: Error {
     case urlError
     case responseError(String)
     case providerError(String)
+    case noResults
 }
 
 protocol NineAnimatorAsyncTask {
@@ -64,17 +65,17 @@ class NineAnimator: Alamofire.SessionDelegate {
         cache.removeValue(forKey: path)
     }
     
-    func request(_ path: NineAnimatePath, forceReload: Bool = false, onCompletion: @escaping NineAnimatorCallback<String>) {
+    func request(_ path: NineAnimatePath, forceReload: Bool = false, onCompletion: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         if !forceReload, let cachedData = cache[path] {
             onCompletion(cachedData, nil)
         }
         
         guard let url = URL(string: endpoint + path.value) else {
             onCompletion(nil, NineAnimatorError.urlError)
-            return
+            return nil
         }
         
-        session.request(url).responseString {
+        return session.request(url).responseString {
             response in
             if case let .failure(error) = response.result {
                 debugPrint("Error: Failiure on request: \(error)")

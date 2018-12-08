@@ -11,14 +11,10 @@ import Foundation
 struct NineAnimatePath : Hashable {
     static let home = NineAnimatePath("/")
     
-    static func search(keyword: String?) -> NineAnimatePath {
-        var path = "/search"
-        
-        if let keyword = keyword,
-           let wrappedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        { path += wrappedKeyword }
-        
-        return NineAnimatePath(path)
+    static func search(keyword: String, page: Int = 1) -> NineAnimatePath {
+        let path = "/search"
+        let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        return NineAnimatePath("\(path)?keyword=\(encodedKeyword)&page=\(page)")
     }
     
     let value: String

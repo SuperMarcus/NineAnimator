@@ -9,6 +9,8 @@
 import UIKit
 
 protocol ServerPickerSelectionDelegate {
+    var server: Anime.ServerIdentifier? { get }
+    
     func select(server: Anime.ServerIdentifier)
 }
 
@@ -19,6 +21,10 @@ class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     var servers: [Anime.ServerIdentifier: String]? {
         set {
             _servers = newValue!.map { (identifier: $0.key, name: $0.value) }
+            if let defaultServer = delegate?.server {
+                guard let index = _servers.firstIndex(where: { $0.identifier == defaultServer }) else { return }
+                serverPickerView.selectRow(index, inComponent: 0, animated: true)
+            }
         }
         get { return nil }
     }
@@ -28,7 +34,6 @@ class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
         super.awakeFromNib()
         serverPickerView.dataSource = self
         serverPickerView.delegate = self
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

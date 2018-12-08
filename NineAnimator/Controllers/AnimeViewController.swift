@@ -16,6 +16,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     
     var link: AnimeLink? = nil
     
+    var serverSelectionButton: UIBarButtonItem! {
+        return navigationItem.rightBarButtonItem
+    }
+    
     var anime: Anime? = nil {
         didSet {
             DispatchQueue.main.async {
@@ -28,7 +32,11 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                 }
                 
                 if let anime = self.anime {
-                    self.server = anime.servers.first!.key
+                    if let recentlyUsedServer = UserDefaults.standard.string(forKey: "server.recent"),
+                        anime.servers[recentlyUsedServer] != nil {
+                        self.server = recentlyUsedServer
+                    } else { self.server = anime.servers.first!.key }
+                    
                     if oldValue == nil { self.tableView.insertSections(sectionsNeededReloading, with: .fade) }
                     else { self.tableView.reloadSections(sectionsNeededReloading, with: .fade) }
                 }
@@ -43,6 +51,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         didSet { server = episode?.link.server }
     }
     
+    var displayedPlayer: AVPlayer? = nil
+    
+    var playbackProgressRestored = false
+    
     var informationCell: AnimeDescriptionTableViewCell? = nil
     
     var selectedEpisodeCell: EpisodeTableViewCell? = nil
@@ -55,18 +67,27 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //If episode is set, use episode's anime link as the anime for display
+        if let episode = episode {
+            self.link = episode.parentLink
+        }
+        
         guard let link = self.link else { return }
         
         //Update anime title
         title = link.title
         
-        NineAnimator.default.anime(with: link){
-            anime, error in
-            guard let anime = anime else {
-                debugPrint("Error: \(error!)")
-                return
+        //Fetch anime if anime does not exists
+        if case .none = anime {
+            NineAnimator.default.anime(with: link){
+                anime, error in
+                guard let anime = anime else {
+                    debugPrint("Error: \(error!)")
+                    return
+                }
+                self.anime = anime
             }
-            self.anime = anime
         }
     }
     
@@ -97,14 +118,17 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
         if indexPath.section == 1 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.serverPicker") as? ServerPickerTableViewCell else { fatalError("cell with wrong type is dequeued") }
-            cell.servers = anime?.servers
             cell.delegate = self
+            cell.servers = anime?.servers
             return cell
         }
         if indexPath.section == 2 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
-            cell.episodeLink = episodes[indexPath.item]
+            let episode = episodes[indexPath.item]
+            let playbackProgressKey = "\(episode.identifier).progress"
+            cell.episodeLink = episode
+            cell.progressIndicator.percentage = CGFloat(UserDefaults.standard.float(forKey: playbackProgressKey))
             return cell
         }
         fatalError()
@@ -117,9 +141,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
         
         if cell != selectedEpisodeCell {
-            selectedEpisodeCell?.progressIndicator.hideActivityIndicator()
             episodeRequestTask?.cancel()
-            cell.progressIndicator.showActivityIndicator()
             selectedEpisodeCell = cell
             
             episodeRequestTask = anime!.episode(with: cell.episodeLink!) {
@@ -132,6 +154,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                 
                 debugPrint("Info: Episode target retrived for '\(episode.name)'")
                 debugPrint("- Playback target: \(episode.target)")
+                
+                let playbackProgressKey = "\(episode.link.identifier).progress"
                 
                 if episode.nativePlaybackSupported {
                     self.episodeRequestTask = episode.retrive {
@@ -151,6 +175,31 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                         let playerController = AVPlayerViewController()
                         playerController.player = AVPlayer(playerItem: item)
                         
+                        item.addObserver(self, forKeyPath: "status", options: [], context: nil)
+                        self.displayedPlayer = playerController.player
+                        self.playbackProgressRestored = false
+                        
+                        playerController.player?.addPeriodicTimeObserver(
+                          forInterval: CMTime(seconds: 5, preferredTimescale: CMTimeScale(NSEC_PER_SEC)),
+                          queue: DispatchQueue.main) {
+                            [weak self] time in
+                            if self?.playbackProgressRestored == true {
+                                let percentComplete = Float(CMTimeGetSeconds(time) / CMTimeGetSeconds(item.duration))
+                                UserDefaults.standard.set(percentComplete, forKey: playbackProgressKey)
+                            }
+                        }
+                        
+                        //Initialize audio session to movie playback
+                        let audioSession = AVAudioSession.sharedInstance()
+                        try? audioSession.setCategory(.playback,
+                                                      mode: .moviePlayback,
+                                                      options: [
+                                                        AVAudioSession.CategoryOptions.allowAirPlay,
+                                                        AVAudioSession.CategoryOptions.allowBluetooth,
+                                                        AVAudioSession.CategoryOptions.allowBluetoothA2DP
+                            ])
+                        try? audioSession.setActive(true, options: [])
+                        
                         DispatchQueue.main.async {
                             playerController.player?.play()
                             self.present(playerController, animated: true)
@@ -160,13 +209,28 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                     let playbackController = SFSafariViewController(url: episode.target)
                     self.present(playbackController, animated: true)
                     self.episodeRequestTask = nil
+                    
+                    UserDefaults.standard.set(Float(1.0), forKey: playbackProgressKey)
                 }
             }
         }
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if !playbackProgressRestored, let item = object as? AVPlayerItem, item == displayedPlayer?.currentItem, keyPath == "status", item.status == .readyToPlay {
+            let playbackProgressKey = "\(episode!.link.identifier).progress"
+            let storedProgress = UserDefaults.standard.float(forKey: playbackProgressKey)
+            let progressSeconds = max(Float64(storedProgress) * CMTimeGetSeconds(item.duration) - 5, 0)
+            let time = CMTimeMakeWithSeconds(progressSeconds, preferredTimescale: Int32(NSEC_PER_SEC))
+            displayedPlayer?.seek(to: time)
+            debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
+            playbackProgressRestored = true
+        }
+    }
+    
     func select(server: Anime.ServerIdentifier) {
         self.server = server
+        UserDefaults.standard.set(server, forKey: "server.recent")
         tableView.reloadSections([2], with: .fade)
     }
 }

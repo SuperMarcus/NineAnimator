@@ -80,6 +80,7 @@ class FeaturedViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         if let playerViewController = segue.destination as? AnimeViewController {
             guard let selected = tableView.indexPathForSelectedRow else { return }
             let pools = [

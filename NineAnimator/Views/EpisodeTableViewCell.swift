@@ -28,34 +28,8 @@ class EpisodeAccessoryProcessIndicator: UIView {
     @IBInspectable
     var playIconToRadiusRatio: CGFloat = 0.55
     
-    private var activityIndicator: UIActivityIndicatorView? = nil
-    
-    func showActivityIndicator() {
-        if let oldIndicator = activityIndicator {
-            oldIndicator.stopAnimating()
-            oldIndicator.removeFromSuperview()
-        }
-        
-        activityIndicator = UIActivityIndicatorView(frame: frame)
-        addSubview(activityIndicator!)
-        
-        activityIndicator?.isHidden = false
-        activityIndicator?.startAnimating()
-    }
-    
-    func hideActivityIndicator() {
-        guard let indicator = activityIndicator else { return }
-        indicator.stopAnimating()
-        indicator.removeFromSuperview()
-        
-        activityIndicator = nil
-    }
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        
-        //Do not draw when have activity indicator on display
-        guard case .none = activityIndicator else { return }
         
         let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
         
@@ -115,7 +89,6 @@ class EpisodeTableViewCell: UITableViewCell {
     var episodeLink: Anime.EpisodeLink? = nil {
         didSet {
             titleLabel.text = episodeLink?.name
-            progressIndicator.hideActivityIndicator()
         }
     }
     

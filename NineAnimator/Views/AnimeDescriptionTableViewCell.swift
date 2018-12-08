@@ -26,6 +26,7 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
             
             UIView.transition(with: loadingIndicator, duration: 0.3, options: .curveEaseOut, animations: {
                 self.descriptionText.text = newValue
+                self.descriptionText.setContentOffset(.zero, animated: false)
                 self.descriptionText.isHidden = false
                 self.loadingIndicator.stopAnimating()
                 self.loadingIndicator.isHidden = true
