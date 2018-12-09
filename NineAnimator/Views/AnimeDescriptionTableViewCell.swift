@@ -53,7 +53,4 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
             coverImageView.kf.setImage(with: link.image)
         }
     }
-    
-    #warning("unused")
-    weak var animeViewController: AnimeViewController?
 }

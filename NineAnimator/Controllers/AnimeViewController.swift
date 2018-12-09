@@ -68,7 +68,15 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         didSet { server = episode?.link.server }
     }
     
-    var displayedPlayer: AVPlayer?
+    var displayedPlayer: AVPlayer? {
+        didSet {
+            if let previousPlayer = oldValue,
+                let item = previousPlayer.currentItem {
+                previousPlayer.removeTimeObserver(self)
+                item.removeObserver(self, forKeyPath: "status")
+            }
+        }
+    }
     
     var playbackProgressRestored = false
     
@@ -105,6 +113,18 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        //Cleanup observers and tasks
+        displayedPlayer = nil
+        episodeRequestTask?.cancel()
+        episodeRequestTask = nil
+        
+        //Sets episode and server to nil
+        episode = nil
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return anime == nil ? 1 : 2
     }
@@ -130,7 +150,6 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                 else { fatalError("cell with wrong type is dequeued") }
             cell.link = link
             cell.animeDescription = anime?.description
-            cell.animeViewController = self
             informationCell = cell
             return cell
         case 1:
@@ -193,12 +212,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                         let playerController = AVPlayerViewController()
                         playerController.player = AVPlayer(playerItem: item)
                         
-                        #warning("Need to removeObserver")
                         item.addObserver(self, forKeyPath: "status", options: [], context: nil)
                         self.displayedPlayer = playerController.player
                         self.playbackProgressRestored = false
-                        
-                        #warning("Need to removeTimeObserver")
                         playerController.player?.addPeriodicTimeObserver(
                             forInterval: CMTime(seconds: 5, preferredTimescale: CMTimeScale(NSEC_PER_SEC)),
                             queue: DispatchQueue.main) {
