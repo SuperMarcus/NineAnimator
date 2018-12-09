@@ -2,7 +2,7 @@ NineAnimator
 ==========
 
 A simple yet elegant way of waching anime on your favorite anime website.
-NineAnimator is an **unofficial** app of [9anime.to](9anime.to) for iOS. GPL
+NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
 | Home Page  | Search | Search Results | Choose Episodes |
