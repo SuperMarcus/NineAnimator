@@ -5,9 +5,9 @@ A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
-| Home Page  | Search | Search Results | Choose Episodes |
-| -------------- | -------- | ------------------|----------------------|
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) | ![4](Misc/screenshot_4.png) |
+| Featured Animes | Recently Viewed | Search | Search Results | Choose Episodes |
+| ------------------- | ------------------- | -------- | ------------------ |----------------------|
+| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_2.png) | ![4](Misc/screenshot_3.png) | ![5](Misc/screenshot_4.png) |
 
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
