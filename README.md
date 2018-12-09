@@ -7,7 +7,7 @@ v3 Licensed.
 
 | Featured Animes | Recently Viewed | Search | Search Results | Choose Episodes |
 | ------------------- | ------------------- | -------- | ------------------ |----------------------|
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_2.png) | ![4](Misc/screenshot_3.png) | ![5](Misc/screenshot_4.png) |
+| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) | ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) |
 
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
