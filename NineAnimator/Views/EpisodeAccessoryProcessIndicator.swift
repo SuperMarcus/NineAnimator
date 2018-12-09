@@ -22,10 +22,10 @@ import UIKit
 @IBDesignable
 class EpisodeAccessoryProcessIndicator: UIView {
     @IBInspectable
-    var indicatorColor: UIColor = .blue
+    lazy var indicatorColor: UIColor = tintColor
     
     @IBInspectable
-    var nullColor: UIColor = UIColor.gray.withAlphaComponent(0.3)
+    var nullColor: UIColor = .lightGray
     
     @IBInspectable
     var percentage: CGFloat = 0.0
