@@ -188,7 +188,13 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class CALayer;
 @class NSCoder;
 
-/// <code>AnimatedImageView</code> is a subclass of <code>UIImageView</code> for displaying animated image.
+/// Represents a subclass of <code>UIImageView</code> for displaying animated image.
+/// Different from showing animated image in a normal <code>UIImageView</code> (which load all frames at one time),
+/// <code>AnimatedImageView</code> only tries to load several frames (defined by <code>framePreloadCount</code>) to reduce memory usage.
+/// It provides a tradeoff between memory usage and CPU time. If you have a memory issue when using a normal image
+/// view to load GIF data, you could give this class a try.
+/// Kingfisher supports setting GIF animated data to either <code>UIImageView</code> and <code>AnimatedImageView</code> out of box. So
+/// it would be fairly easy to switch between them.
 SWIFT_CLASS("_TtC10Kingfisher17AnimatedImageView")
 @interface AnimatedImageView : UIImageView
 @property (nonatomic, strong) UIImage * _Nullable image;
@@ -209,6 +215,12 @@ SWIFT_CLASS("_TtC10Kingfisher17AnimatedImageView")
 
 
 
+
+SWIFT_CLASS("_TtC10Kingfisher15SessionDelegate")
+@interface SessionDelegate : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class NSURLSession;
 @class NSURLSessionDataTask;
 @class NSURLResponse;
@@ -216,17 +228,15 @@ SWIFT_CLASS("_TtC10Kingfisher17AnimatedImageView")
 @class NSURLAuthenticationChallenge;
 @class NSURLCredential;
 
-SWIFT_CLASS("_TtC10Kingfisher29ImageDownloaderSessionHandler")
-@interface ImageDownloaderSessionHandler : NSObject <NSURLSessionDataDelegate>
+@interface SessionDelegate (SWIFT_EXTENSION(Kingfisher)) <NSURLSessionDataDelegate>
 - (void)URLSession:(NSURLSession * _Nonnull)session dataTask:(NSURLSessionDataTask * _Nonnull)dataTask didReceiveResponse:(NSURLResponse * _Nonnull)response completionHandler:(void (^ _Nonnull)(NSURLSessionResponseDisposition))completionHandler;
 - (void)URLSession:(NSURLSession * _Nonnull)session dataTask:(NSURLSessionDataTask * _Nonnull)dataTask didReceiveData:(NSData * _Nonnull)data;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
-/// This method is exposed since the compiler requests. Do not call it.
 - (void)URLSession:(NSURLSession * _Nonnull)session didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+
 
 
 
@@ -244,8 +254,6 @@ SWIFT_CLASS("_TtC10Kingfisher29ImageDownloaderSessionHandler")
 @interface UIImageView (SWIFT_EXTENSION(Kingfisher))
 - (BOOL)shouldPreloadAllAnimation SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
