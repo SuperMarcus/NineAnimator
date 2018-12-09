@@ -102,8 +102,8 @@ class FeaturedViewController: UITableViewController {
     }
     
     // turn off highlighting effect when users can't see this happening
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         tableView.deselectSelectedRow()
     }
 }
