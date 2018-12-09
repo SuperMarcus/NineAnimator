@@ -1,0 +1,11 @@
+framework module SwiftSoup {
+  umbrella header "SwiftSoup.h"
+
+  export *
+  module * { export * }
+}
+
+module SwiftSoup.Swift {
+    header "SwiftSoup-Swift.h"
+    requires objc
+}
