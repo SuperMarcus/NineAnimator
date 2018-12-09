@@ -54,5 +54,6 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
         }
     }
     
-    var animeViewController: AnimeViewController?
+    #warning("unused")
+    weak var animeViewController: AnimeViewController?
 }

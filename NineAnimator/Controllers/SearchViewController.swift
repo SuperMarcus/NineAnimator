@@ -34,6 +34,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Make sure we get the navigation bar when clicked on search result
+        definesPresentationContext = true
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -51,6 +53,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
             // For iOS 10 and earlier, place the search controller's search bar in the table view's header.
             tableView.tableHeaderView = searchController.searchBar
         }
+        // Hide table cell separators at empty state
+        tableView.tableFooterView = UIView()
         
         NineAnimator.default.loadHomePage {
             [weak self] page, error in
@@ -67,9 +71,6 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
 extension SearchViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
-        //Have to make sure the search controller is dismissed so we can get our navigation bar back
-        searchController.dismiss(animated: false)
         
         if let resultsViewController = segue.destination as? SearchResultViewController {
             resultsViewController.searchText = sender as? String
