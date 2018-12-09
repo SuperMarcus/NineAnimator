@@ -30,8 +30,8 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        clearsSelectionOnViewWillAppear = true
         tableView.rowHeight = 160
+        tableView.tableFooterView = UIView()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -42,7 +42,6 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     override func viewWillAppear(_ animated: Bool) {
         searchPage = NineAnimator.default.search(searchText!)
         searchPage.delegate = self
-        tableView.tableFooterView = UIView()
     }
     
     func noResult(in: SearchPage) {
@@ -63,6 +62,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        guard searchPage != nil else { return 0 }
         return searchPage.availablePages + (searchPage.moreAvailable || searchPage.totalPages == 0 ? 1 : 0)
     }
 
@@ -76,7 +76,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //No results found
+        // No results found
         if !searchPage.moreAvailable && searchPage.availablePages == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as? SearchNoResultsTableViewCell else { fatalError() }
             cell.query = searchText
