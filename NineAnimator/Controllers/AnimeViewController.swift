@@ -27,7 +27,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     var animeLink: AnimeLink?
     
     var episodeLink: EpisodeLink? {
-        didSet{
+        didSet {
             if let episodeLink = episodeLink {
                 self.animeLink = episodeLink.parent
                 self.server = episodeLink.server
@@ -52,11 +52,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 
                 guard let anime = self.anime else { return }
                 
-                if case .none = self.server {
+                if self.server == nil {
                     if let recentlyUsedServer = UserDefaults.standard.string(forKey: "server.recent"),
                         anime.servers[recentlyUsedServer] != nil {
                         self.server = recentlyUsedServer
-                    } else { self.server = anime.servers.first!.key }
+                    } else {
+                        self.server = anime.servers.first!.key
+                    }
                 }
                 
                 self.serverSelectionButton.title = anime.servers[self.server!]
@@ -73,7 +75,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     var server: Anime.ServerIdentifier?
     
-    //Set episode will update the server identifier as well
+    // Set episode will update the server identifier as well
     var episode: Episode? {
         didSet { server = episode?.link.server }
     }
@@ -101,13 +103,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //If episode is set, use episode's anime link as the anime for display
+        // If episode is set, use episode's anime link as the anime for display
         if let episode = episode {
             animeLink = episode.parentLink
         }
         
         guard let link = animeLink else { return }
-        //Update history
+        // Update history
         NineAnimator.default.user.entering(anime: link)
         
         //Update anime title
@@ -124,13 +126,15 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 return
             }
             self?.anime = anime
-            //Initiate playback if episodeLink is set
-            if ((self?.episodeLink) != nil) { self?.retriveAndPlay() }
+            // Initiate playback if episodeLink is set
+            if self?.episodeLink != nil {
+                self?.retriveAndPlay()
+            }
         }
     }
     
     override func didMove(toParent parent: UIViewController?) {
-        //Cleanup observers and tasks
+        // Cleanup observers and tasks
         displayedPlayer = nil
         episodeRequestTask?.cancel()
         episodeRequestTask = nil
@@ -189,13 +193,13 @@ extension AnimeViewController {
             return
         }
         
-        guard let episodeLink = cell.episodeLink else { return }
+        guard cell != selectedEpisodeCell,
+            let episodeLink = cell.episodeLink
+            else { return }
         
-        if cell != selectedEpisodeCell {
-            selectedEpisodeCell = cell
-            self.episodeLink = episodeLink
-            retriveAndPlay()
-        }
+        selectedEpisodeCell = cell
+        self.episodeLink = episodeLink
+        retriveAndPlay()
     }
     
     func didSelectServer(_ server: Anime.ServerIdentifier) {
@@ -229,10 +233,10 @@ extension AnimeViewController {
         }
         
         for server in anime!.servers {
-            let action = UIAlertAction(title: server.value, style: .default, handler: {
+            let action = UIAlertAction(title: server.value, style: .default) {
                 [weak self] _ in
                 self?.didSelectServer(server.key)
-            })
+            }
             if self.server == server.key {
                 action.setValue(true, forKey: "checked")
             }

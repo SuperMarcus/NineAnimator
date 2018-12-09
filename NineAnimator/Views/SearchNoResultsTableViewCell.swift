@@ -23,19 +23,8 @@ class SearchNoResultsTableViewCell: UITableViewCell {
     @IBOutlet weak var searchSubtitleLabel: UILabel!
     
     var query: String? {
-        set { searchSubtitleLabel.text = "No results found for: \"\(newValue ?? "")\"" }
-        get { return nil }
+        willSet {
+            searchSubtitleLabel.text = "No results found for: \"\(newValue ?? "")\""
+        }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
