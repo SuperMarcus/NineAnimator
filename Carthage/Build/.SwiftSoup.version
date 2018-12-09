@@ -2,30 +2,30 @@
   "Mac" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "a68da97d721768e228bc788d562b5f10267d0d0e6dc1a6e321cc7909e9a97584"
+      "hash" : "d08661b42dcc9552420e18a728bbcca43e4cbc2102f3ce04723fd1dec90b5af1"
     }
   ],
   "watchOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "4aeef6473e3e3d937556f21f75fec7b933ff703b8fffcf158107ef033f39ebcb"
+      "hash" : "25b9aa2af870e7b5ade5f0fa07fecdc35cd5007c37c41bba6460ab508ad90024"
     }
   ],
   "tvOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "12b710df6840291951772c9a20ad95544ce5d38734cedbb565c51d9f21018d86"
+      "hash" : "38e641de82c2ab312a0475a64f27f8fa092314bb266e2f33ea097f269c34ecf2"
     }
   ],
   "commitish" : "1.7.5",
   "iOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "aa8cc3878dfecbabd4a5f85825132d64a0e0f5296c9a263d9584389df0393c55"
+      "hash" : "430d3e37d8dab92dd29143a6271b7e9408d91dc0a5eace2f1c988c2f56492c60"
     },
     {
       "name" : "SwiftSoup",
-      "hash" : "aa8cc3878dfecbabd4a5f85825132d64a0e0f5296c9a263d9584389df0393c55"
+      "hash" : "430d3e37d8dab92dd29143a6271b7e9408d91dc0a5eace2f1c988c2f56492c60"
     }
   ]
 }

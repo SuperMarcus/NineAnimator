@@ -47,4 +47,7 @@ To update dependencies, run `carthage update`
 
 ## Credits
 
-
+* Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
+* The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
+* [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
+* ...and [scinfu](https://github.com/scinfu)'s awesome [SwiftSoup](https://github.com/scinfu/SwiftSoup)
