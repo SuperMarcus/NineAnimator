@@ -36,9 +36,9 @@
 		2C6677A821BC7C31000E5ACC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2C6677A721BC7C31000E5ACC /* LICENSE */; };
 		2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */; };
 		2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677AB21BD5FE0000E5ACC /* NineAnimatorUser.swift */; };
-		2C6677AE21BD6A74000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677AD21BD6A74000E5ACC /* EpisodeAccessoryProcessIndicator.swift */; };
 		2C6677B021BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */; };
 		2C6677B221BD846A000E5ACC /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677B121BD846A000E5ACC /* CMTime.swift */; };
+		2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */; };
 		2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */; };
@@ -99,9 +99,9 @@
 		2C6677A721BC7C31000E5ACC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyViewedTableViewController.swift; sourceTree = "<group>"; };
 		2C6677AB21BD5FE0000E5ACC /* NineAnimatorUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorUser.swift; sourceTree = "<group>"; };
-		2C6677AD21BD6A74000E5ACC /* EpisodeAccessoryProcessIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeAccessoryProcessIndicator.swift; sourceTree = "<group>"; };
 		2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C6677B121BD846A000E5ACC /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
+		2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeAccessoryProcessIndicator.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -219,8 +219,8 @@
 				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
 				2C66779B21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift */,
 				2C66779F21BC4663000E5ACC /* AnimeSearchResultTableViewCell.swift */,
-				2C6677AD21BD6A74000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 				2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */,
+				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,11 +426,11 @@
 				2C66779821BC2213000E5ACC /* SearchViewController.swift in Sources */,
 				2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
-				2C6677AE21BD6A74000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
 				2C6677A021BC4664000E5ACC /* AnimeSearchResultTableViewCell.swift in Sources */,
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
+				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
