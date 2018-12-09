@@ -33,8 +33,8 @@ v3 Licensed.
 - [x] Most popular animes on 9anime
 - [x] Ads Free and no logins
 - [x] Remembers and auto resumes your playback progress
+- [x] Playback history && resume playback with just one click in the Recent tab
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
-- [ ] Playback history (work in progress)
 - [ ] Supports Chromecast/Google Cast (planned)
 
 ## Build & Install
