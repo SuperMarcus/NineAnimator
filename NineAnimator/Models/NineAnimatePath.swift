@@ -29,7 +29,6 @@ struct NineAnimatePath: Hashable {
     }
     
     let value: String
-    var hashValue: Int { return value.hashValue }
     
     private init(_ value: String) { self.value = value }
 }
