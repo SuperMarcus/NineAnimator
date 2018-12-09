@@ -178,9 +178,8 @@ extension AnimeViewController {
                 else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
             let episode = episodes[indexPath.item]
-            let playbackProgressKey = "\(episode.identifier).progress"
             cell.episodeLink = episode
-            cell.progressIndicator.percentage = CGFloat(UserDefaults.standard.float(forKey: playbackProgressKey))
+            cell.progressIndicator.percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: episode))
             return cell
         default:
             fatalError()
