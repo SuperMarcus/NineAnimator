@@ -34,10 +34,10 @@ v3 Licensed.
 - [x] Ads Free and no logins
 - [x] Remembers and auto resumes your playback progress
 - [x] Playback history && resume playback with just one click in the Recent tab
+- [ ] Supports Chromecast/Google Cast (word in progress)
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
-- [ ] Supports Chromecast/Google Cast (planned)
 - [ ] Integration with MAL (planned)
-- [ ] Supports sites other than 9anime (possible)
+- [ ] Support sites other than 9anime (possible)
 
 ## Build & Install
 
