@@ -185,14 +185,24 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Anime Title" id="Le5-G5-Fz8">
-                        <barButtonItem key="rightBarButtonItem" title="Server" id="dfI-Mn-95I">
-                            <connections>
-                                <action selector="onServerButtonTapped:" destination="K93-Pu-iF1" id="sjB-w4-HBA"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="action" id="KXw-Nk-YAC">
+                                <connections>
+                                    <action selector="onActionButtonTapped:" destination="K93-Pu-iF1" id="hFp-A6-nPd"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Server" id="dfI-Mn-95I">
+                                <connections>
+                                    <action selector="onServerButtonTapped:" destination="K93-Pu-iF1" id="sjB-w4-HBA"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="serverSelectionButton" destination="dfI-Mn-95I" id="yX8-Fd-a0g"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7V-nd-iTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

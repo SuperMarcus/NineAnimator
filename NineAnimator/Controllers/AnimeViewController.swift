@@ -36,9 +36,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     }
     
     //MARK: - Managed by AnimeViewController
-    var serverSelectionButton: UIBarButtonItem! {
-        return navigationItem.rightBarButtonItem
-    }
+    @IBOutlet var serverSelectionButton: UIBarButtonItem!
     
     var anime: Anime? {
         didSet {
@@ -140,7 +138,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         //Sets episode and server to nil
         episode = nil
     }
-    
+}
+
+//MARK: - Table view data source
+extension AnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return anime == nil ? 1 : 2
     }
@@ -202,6 +203,21 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         UserDefaults.standard.set(server, forKey: "server.recent")
         tableView.reloadSections([1], with: .automatic)
         serverSelectionButton.title = anime!.servers[server]
+    }
+}
+
+//MARK: - Share and select server
+extension AnimeViewController {
+    @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {
+        guard let link = animeLink else { return }
+        let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
+        
+        if let popover = activityViewController.popoverPresentationController {
+            popover.barButtonItem = sender
+            popover.permittedArrowDirections = .up
+        }
+        
+        present(activityViewController, animated: true)
     }
     
     @IBAction func onServerButtonTapped(_ sender: Any) {
