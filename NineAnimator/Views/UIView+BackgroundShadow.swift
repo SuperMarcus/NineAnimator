@@ -32,9 +32,8 @@ import UIKit
         set { layer.shadowColor = newValue!.cgColor }
         get {
             if let color = layer.shadowColor {
-                return UIColor(cgColor:color)
-            }
-            else { return nil }
+                return UIColor(cgColor: color)
+            } else { return nil }
         }
     }
     
@@ -48,7 +47,7 @@ import UIKit
     /* The shadow offset. Defaults to (0, -3). Animatable. */
     @IBInspectable var shadowOffset: CGPoint {
         set { layer.shadowOffset = CGSize(width: newValue.x, height: newValue.y) }
-        get { return CGPoint(x: layer.shadowOffset.width, y:layer.shadowOffset.height) }
+        get { return CGPoint(x: layer.shadowOffset.width, y: layer.shadowOffset.height) }
     }
     
     /* The blur radius used to create the shadow. Defaults to 3. Animatable. */

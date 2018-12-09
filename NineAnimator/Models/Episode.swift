@@ -34,9 +34,9 @@ struct Episode {
     }
     
     private var _parent: Anime?
-    private var _session: Alamofire.SessionManager
+    private var _session: SessionManager
     
-    init(_ link: Anime.EpisodeLink, on target: URL, with session: Alamofire.SessionManager, parent: Anime? = nil) {
+    init(_ link: Anime.EpisodeLink, on target: URL, with session: SessionManager, parent: Anime? = nil) {
         self.link = link
         self.target = target
         self._parent = parent
@@ -52,7 +52,7 @@ struct Episode {
         return provider.parse(url: target, with: _session, onCompletion: handler)
     }
     
-    func parent(onCompletion handler: @escaping NineAnimatorCallback<Anime>){
+    func parent(onCompletion handler: @escaping NineAnimatorCallback<Anime>) {
         if let parent = _parent { handler(parent, nil) }
         else { NineAnimator.default.anime(with: link.parent, onCompletion: handler) }
     }
@@ -60,11 +60,11 @@ struct Episode {
 
 extension Anime {
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask {
-        let ajaxHeaders: Alamofire.HTTPHeaders = [ "Referer": self.link.link.absoluteString ]
+        let ajaxHeaders: HTTPHeaders = ["Referer": self.link.link.absoluteString]
         
         let task = session
             .request(AjaxPath.episode(for: link.identifier, on: link.server), headers: ajaxHeaders)
-            .responseJSON{
+            .responseJSON {
                 response in
                 if case let .failure(error) = response.result {
                     debugPrint("Error: Failiure on request: \(error)")

@@ -22,7 +22,7 @@ import UIKit
 @IBDesignable
 class EpisodeAccessoryProcessIndicator: UIView {
     @IBInspectable
-    var indicatorColor: UIColor = UIColor.blue
+    var indicatorColor: UIColor = .blue
     
     @IBInspectable
     var nullColor: UIColor = UIColor.gray.withAlphaComponent(0.3)
@@ -73,22 +73,18 @@ class EpisodeAccessoryProcessIndicator: UIView {
         let centerPlayIcon = UIBezierPath()
         let playIconRadius = indicatorRadius * playIconToRadiusRatio
         
-        centerPlayIcon.move(to: .init(
-            x: centerPoint.x + (playIconRadius * cos(0 * .pi)),
-            y: centerPoint.y + (playIconRadius * sin(0 * .pi))
+        centerPlayIcon.move(to: CGPoint(
+            x: centerPoint.x + playIconRadius,
+            y: centerPoint.y
+        ))
+        
+        for theta in [2.0 / 3.0, 4.0 / 3.0, 2] {
+            centerPlayIcon.addLine(to: CGPoint(
+                x: centerPoint.x + playIconRadius * CGFloat(__cospi(theta)),
+                y: centerPoint.y + playIconRadius * CGFloat(__sinpi(theta))
             ))
-        centerPlayIcon.addLine(to: .init(
-            x: centerPoint.x + (playIconRadius * cos(2.0 / 3.0 * .pi)),
-            y: centerPoint.y + (playIconRadius * sin(2.0 / 3.0 * .pi))
-            ))
-        centerPlayIcon.addLine(to: .init(
-            x: centerPoint.x + (playIconRadius * cos(4.0 / 3.0 * .pi)),
-            y: centerPoint.y + (playIconRadius * sin(4.0 / 3.0 * .pi))
-            ))
-        centerPlayIcon.addLine(to: .init(
-            x: centerPoint.x + (playIconRadius * cos(2 * .pi)),
-            y: centerPoint.y + (playIconRadius * sin(2 * .pi))
-            ))
+        }
+        
         centerPlayIcon.close()
         
         indicatorColor.setFill()
@@ -97,7 +93,7 @@ class EpisodeAccessoryProcessIndicator: UIView {
 }
 
 class EpisodeTableViewCell: UITableViewCell {
-    var episodeLink: Anime.EpisodeLink? = nil {
+    var episodeLink: Anime.EpisodeLink? {
         didSet {
             titleLabel.text = episodeLink?.name
         }
@@ -105,16 +101,4 @@ class EpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var progressIndicator: EpisodeAccessoryProcessIndicator!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

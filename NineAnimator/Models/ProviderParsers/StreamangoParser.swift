@@ -24,12 +24,13 @@ import AVKit
 class StreamangoParser: VideoProviderParser {
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
     
-    func parse(url: URL, with session: Alamofire.SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
-        let additionalHeaders: Alamofire.HTTPHeaders = [
+    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+        let additionalHeaders: HTTPHeaders = [
             "Referer": url.absoluteString
         ]
         return session.request(url, headers: additionalHeaders).responseString {
-            response in
+            [weak self] response in
+            guard let self = self else { return }
             guard let text = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
                 handler(nil, NineAnimatorError.responseError("response error: \(response.error?.localizedDescription ?? "Unknown")"))
@@ -60,7 +61,7 @@ class StreamangoParser: VideoProviderParser {
             
             debugPrint("Info: (Streamango Parser) found asset at \(sourceUrl.absoluteString)")
             
-            let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey":additionalHeaders])
+            let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": additionalHeaders])
             let item = AVPlayerItem(asset: asset)
             
             handler(item, nil)
@@ -68,7 +69,7 @@ class StreamangoParser: VideoProviderParser {
     }
     
     func decode(obscured: String, with code: Int) -> String {
-        func charCode(_ c: Character) -> Int{
+        func charCode(_ c: Character) -> Int {
             let k = "=/+9876543210zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA"
             return k.distance(from: k.startIndex, to: k.range(of: String(c))!.lowerBound)
         }
@@ -88,7 +89,7 @@ class StreamangoParser: VideoProviderParser {
         var _0x2c0540 = 0
         var _0x5a46ef = 0
         
-        let sequence = obscured.map{ return charCode($0) }
+        let sequence = obscured.map { return charCode($0) }
         
         for _ in 0..<(obscured.count - 1) {
             while count <= (obscured.count - 1) {

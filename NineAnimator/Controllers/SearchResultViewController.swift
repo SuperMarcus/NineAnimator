@@ -20,7 +20,7 @@
 import UIKit
 
 class SearchResultViewController: UITableViewController, SearchPageDelegate {
-    var searchText: String? = nil {
+    var searchText: String? {
         didSet {
             self.title = searchText
         }
@@ -48,9 +48,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
     
     func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        DispatchQueue.main.async(execute: tableView.reloadData)
     }
 
     // MARK: - Table view data source
@@ -66,8 +64,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if searchPage.availablePages == indexPath.section {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath)
-            return cell
+            return tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath)
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.result", for: indexPath) as? AnimeSearchResultTableViewCell else { fatalError("cell type dequeued is not AnimeSearchResultTableViewCell") }
             cell.animeLink = searchPage.animes(on: indexPath.section)[indexPath.item]
@@ -86,9 +83,9 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         super.prepare(for: segue, sender: sender)
         
         guard let sender = sender as? AnimeSearchResultTableViewCell,
-            let anime = sender.animeLink else { return }
-        
-        guard let player = segue.destination as? AnimeViewController else { return }
+            let anime = sender.animeLink,
+            let player = segue.destination as? AnimeViewController
+            else { return }
         
         player.link = anime
         

@@ -23,8 +23,8 @@ import SwiftSoup
 import AVKit
 
 class RapidVideoParser: VideoProviderParser {
-    func parse(url: URL, with session: Alamofire.SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
-        let additionalHeaders: Alamofire.HTTPHeaders = [
+    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+        let additionalHeaders: HTTPHeaders = [
             "Referer": url.absoluteString
         ]
         return session.request(url, headers: additionalHeaders).responseString {
@@ -34,7 +34,7 @@ class RapidVideoParser: VideoProviderParser {
                 handler(nil, NineAnimatorError.responseError("response error: \(response.error?.localizedDescription ?? "Unknown")"))
                 return
             }
-            do{
+            do {
                 let bowl = try SwiftSoup.parse(value)
                 let sourceString = try bowl.select("video>source").attr("src")
                 guard let sourceUrl = URL(string: sourceString) else {
@@ -44,11 +44,11 @@ class RapidVideoParser: VideoProviderParser {
                 
                 debugPrint("Info: (RapidVideo Parser) found asset at \(sourceUrl.absoluteString)")
                 
-                let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey":additionalHeaders])
+                let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": additionalHeaders])
                 let item = AVPlayerItem(asset: asset)
                 
                 handler(item, nil)
-            }catch{ handler(nil, error) }
+            } catch { handler(nil, error) }
         }
     }
 }

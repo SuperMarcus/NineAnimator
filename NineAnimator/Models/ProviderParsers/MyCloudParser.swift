@@ -25,15 +25,15 @@ class MyCloudParser: VideoProviderParser {
     static let videoIdentifierRegex = try! NSRegularExpression(pattern: "videoId:\\s*'([^']+)", options: .caseInsensitive)
     static let videoSourceRegex = try! NSRegularExpression(pattern: "\"file\":\"([^\"]+)", options: .caseInsensitive)
     
-    func parse(url: URL, with session: Alamofire.SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
-        let additionalHeaders: Alamofire.HTTPHeaders = [
+    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+        let additionalHeaders: HTTPHeaders = [
             "Referer": "https://www1.9anime.to/watch",
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15",
             "Host": "mcloud.to"
         ]
         
-        let playerAdditionalHeaders: Alamofire.HTTPHeaders = [
+        let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": url.absoluteString,
             "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
         ]

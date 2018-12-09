@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-protocol SearchPageDelegate {
+protocol SearchPageDelegate: AnyObject {
     //Index of the page (starting from zero)
     func pageIncoming(_: Int, in: SearchPage)
     
@@ -29,11 +29,11 @@ protocol SearchPageDelegate {
 
 class SearchPage {
     private(set) var query: String
-    private(set) var totalPages: Int? = nil
-    var delegate: SearchPageDelegate? = nil
+    private(set) var totalPages: Int?
+    weak var delegate: SearchPageDelegate?
     
     var moreAvailable: Bool {
-        return totalPages == nil || (_results.count < totalPages!)
+        return totalPages == nil || _results.count < totalPages!
     }
     
     var availablePages: Int { return _results.count }
@@ -51,19 +51,19 @@ class SearchPage {
     }
     
     deinit {
-        if let request = _lastRequest { request.cancel() }
+        _lastRequest?.cancel()
     }
     
     func animes(on page: Int) -> [AnimeLink] { return _results[page] }
     
-    func more(){
+    func more() {
         if moreAvailable && _lastRequest == nil {
             debugPrint("Info: Requesting page \(_results.count + 1) for query \(query)")
             let loadingIndex = _results.count
-            _lastRequest = _animator.request(.search(keyword: query, page: loadingIndex + 1)){
-                response, error in
-                
-                defer{ self._lastRequest = nil }
+            _lastRequest = _animator.request(.search(keyword: query, page: loadingIndex + 1)) {
+                [weak self] response, error in
+                guard let self = self else { return }
+                defer { self._lastRequest = nil }
                 
                 if self._results.count > loadingIndex { return }
                 
@@ -72,30 +72,31 @@ class SearchPage {
                     return
                 }
                 
-                do{
+                do {
                     let bowl = try SwiftSoup.parse(response)
                     
                     if let totalPagesString = try? bowl.select("span.total").text(),
-                        let totalPages = Int(totalPagesString) { self.totalPages = totalPages  }
-                    else { self.totalPages = 1 }
+                        let totalPages = Int(totalPagesString) {
+                        self.totalPages = totalPages
+                    } else {
+                        self.totalPages = 1
+                    }
                     
                     let films = try bowl.select("div.film-list>div.item")
-                    var animes = [AnimeLink]()
-                    
-                    for film in films {
+                    let animes: [AnimeLink] = try films.compactMap { film in
                         let nameElement = try film.select("a.name")
                         let name = try nameElement.text()
                         let linkString = try nameElement.attr("href")
                         let coverImageString = try film.select("img").attr("src")
                         
                         guard let link = URL(string: linkString),
-                            let coverImage = URL(string: coverImageString) else {
+                            let coverImage = URL(string: coverImageString)
+                            else {
                                 debugPrint("Warn: an invalid link was extracted from the search result page")
-                                continue
+                                return nil
                         }
                         
-                        let anime = AnimeLink(title: name, link: link, image: coverImage)
-                        animes.append(anime)
+                        return AnimeLink(title: name, link: link, image: coverImage)
                     }
                     
                     if animes.count > 0 {
@@ -106,7 +107,7 @@ class SearchPage {
                         debugPrint("Info: No matches")
                         self.delegate?.noResult(in: self)
                     }
-                }catch{
+                } catch {
                     debugPrint("Error when loading more results: \(error)")
                 }
             }
