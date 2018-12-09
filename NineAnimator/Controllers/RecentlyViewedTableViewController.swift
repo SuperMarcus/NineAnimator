@@ -53,15 +53,9 @@ extension RecentlyViewedTableViewController{
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-            return 160
-        }
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return 200
-        }
-        
-        return 233
+        return traitCollection.verticalSizeClass == .compact
+            || traitCollection.horizontalSizeClass == .compact
+            ? 160 : 200
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
