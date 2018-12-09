@@ -103,6 +103,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        //Remove lines at the end of the table
+        tableView.tableFooterView = UIView()
+        
         // If episode is set, use episode's anime link as the anime for display
         if let episode = episode {
             animeLink = episode.parentLink
