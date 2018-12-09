@@ -71,19 +71,16 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     var displayedPlayer: AVPlayer? {
         didSet {
             if let previousPlayer = oldValue,
-                let item = previousPlayer.currentItem {
-                if let observer = self.playbackProgressUpdateObserver {
-                    previousPlayer.removeTimeObserver(observer)
-                    self.playbackProgressUpdateObserver = nil
-                }
-                item.removeObserver(self, forKeyPath: "status")
+                let observer = playbackProgressUpdateObserver {
+                previousPlayer.removeTimeObserver(observer)
+                playbackProgressUpdateObserver = nil
             }
         }
     }
     
     var playbackProgressUpdateObserver: Any?
     
-    var playbackProgressRestored = false
+    var playbackProgressRestoreToken: NSKeyValueObservation?
     
     var informationCell: AnimeDescriptionTableViewCell?
     
@@ -183,6 +180,11 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
             episodeRequestTask?.cancel()
             selectedEpisodeCell = cell
             
+            func clearSelection() {
+                tableView.deselectSelectedRow()
+                selectedEpisodeCell = nil
+            }
+            
             episodeRequestTask = anime!.episode(with: episodeLink) {
                 [weak self] episode, error in
                 guard let self = self else { return }
@@ -208,26 +210,16 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                             debugPrint("Warn: Item not retrived \(error!), fallback to web access")
                             DispatchQueue.main.async { [weak self] in
                                 let playbackController = SFSafariViewController(url: episode.target)
-                                self?.present(playbackController, animated: true)
+                                self?.present(playbackController, animated: true, completion: clearSelection)
                             }
                             return
                         }
                         
                         let playerController = AVPlayerViewController()
                         playerController.player = AVPlayer(playerItem: item)
-                        
-                        item.addObserver(self, forKeyPath: "status", options: [], context: nil)
                         self.displayedPlayer = playerController.player
-                        self.playbackProgressRestored = false
-                        
-                        self.playbackProgressUpdateObserver = playerController.player?.addPeriodicTimeObserver(
-                            forInterval: .seconds(5),
-                            queue: DispatchQueue.main) {
-                                [weak self] time in
-                                if self?.playbackProgressRestored == true {
-                                    self?.update(progress: time)
-                                }
-                        }
+
+                        self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
                         
                         //Initialize audio session to movie playback
                         let audioSession = AVAudioSession.sharedInstance()
@@ -239,16 +231,16 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                                 .allowBluetooth,
                                 .allowBluetoothA2DP
                             ])
-                        try? audioSession.setActive(true, options: [])
+                        try? audioSession.setActive(true)
                         
                         DispatchQueue.main.async { [weak self] in
                             playerController.player?.play()
-                            self?.present(playerController, animated: true)
+                            self?.present(playerController, animated: true, completion: clearSelection)
                         }
                     }
                 } else {
                     let playbackController = SFSafariViewController(url: episode.target)
-                    self.present(playbackController, animated: true)
+                    self.present(playbackController, animated: true, completion: clearSelection)
                     self.episodeRequestTask = nil
                     NineAnimator.default.user.update(progress: 1.0, for: episode.link)
                 }
@@ -288,8 +280,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
 
 //MARK: - Playback progress persistance
 extension AnimeViewController {
-    //Update progress
-    fileprivate func update(progress: CMTime) {
+    // Update progress
+    private func persistProgress(_ progress: CMTime) {
         guard let player = displayedPlayer,
             let item = player.currentItem,
             let episode = episode else { return }
@@ -297,21 +289,25 @@ extension AnimeViewController {
         NineAnimator.default.user.update(progress: pctProgress, for: episode.link)
     }
     
-    //Restore progress
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if !playbackProgressRestored,
-            let item = object as? AVPlayerItem,
+    // Restore progress
+    private func restoreProgress(item: AVPlayerItem, change: NSKeyValueObservedChange<AVPlayerItem.Status>) {
+        guard playbackProgressRestoreToken != nil,
             item == displayedPlayer?.currentItem,
-            keyPath == "status",
-            item.status == .readyToPlay {
-            
-            let storedProgress = NineAnimator.default.user.playbackProgress(for: episode!.link)
-            let progressSeconds = max(storedProgress * item.duration.seconds - 5, 0)
-            let time = CMTime.seconds(progressSeconds)
-            
-            displayedPlayer?.seek(to: time)
-            debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
-            playbackProgressRestored = true
-        }
+            item.status == .readyToPlay
+            else { return }
+        
+        let storedProgress = NineAnimator.default.user.playbackProgress(for: episode!.link)
+        let progressSeconds = max(storedProgress * item.duration.seconds - 5, 0)
+        let time = CMTime(seconds: progressSeconds)
+        
+        displayedPlayer?.seek(to: time)
+        debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
+        playbackProgressRestoreToken = nil
+        
+        playbackProgressUpdateObserver = displayedPlayer?.addPeriodicTimeObserver(
+            forInterval: CMTime(seconds: 5),
+            queue: .main,
+            using: persistProgress
+        )
     }
 }
