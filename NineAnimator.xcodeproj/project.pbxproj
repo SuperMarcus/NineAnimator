@@ -47,6 +47,7 @@
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
 		2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297421BB7A4200284FD0 /* StreamangoParser.swift */; };
 		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
+		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
 		2C91297421BB7A4200284FD0 /* StreamangoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamangoParser.swift; sourceTree = "<group>"; };
 		2C91297621BB867300284FD0 /* MyCloudParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCloudParser.swift; sourceTree = "<group>"; };
+		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +232,7 @@
 			children = (
 				2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */,
 				2C6677B121BD846A000E5ACC /* CMTime.swift */,
+				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
+				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
