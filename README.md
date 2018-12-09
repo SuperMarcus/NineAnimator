@@ -36,6 +36,8 @@ v3 Licensed.
 - [x] Playback history && resume playback with just one click in the Recent tab
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
 - [ ] Supports Chromecast/Google Cast (planned)
+- [ ] Integration with MAL (planned)
+- [ ] Supports sites other than 9anime (possible)
 
 ## Build & Install
 
