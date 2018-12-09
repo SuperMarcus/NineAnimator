@@ -46,7 +46,6 @@ struct Anime {
     typealias ServerIdentifier = String
     typealias EpisodeIdentifier = String
     typealias AnimeIdentifier = String
-    typealias EpisodeLink = (identifier: EpisodeIdentifier, name: String, server: ServerIdentifier, parent: AnimeLink)
     typealias EpisodeLinksCollection = [EpisodeLink]
     
     let link: AnimeLink
@@ -156,7 +155,7 @@ extension Anime {
                 for server in try soup.select("div.server") {
                     let serverIdentifier = try server.attr("data-id")
                     animeEpisodes[serverIdentifier] = try server.select("li>a")
-                        .map { (identifier: try $0.attr("data-id"), name: try $0.text(), server: serverIdentifier, parent: link) }
+                        .map { EpisodeLink(identifier: try $0.attr("data-id"), name: try $0.text(), server: serverIdentifier, parent: link) }
                     debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
                 }
                 

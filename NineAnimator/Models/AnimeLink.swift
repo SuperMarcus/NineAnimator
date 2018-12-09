@@ -20,7 +20,7 @@
 import UIKit
 import Alamofire
 
-struct AnimeLink: URLConvertible {
+struct AnimeLink: URLConvertible, Equatable, Codable {
     var title: String
     var link: URL
     var image: URL
@@ -28,8 +28,21 @@ struct AnimeLink: URLConvertible {
     func asURL() -> URL { return link }
 }
 
-extension AnimeLink: Equatable {
+extension AnimeLink {
     static func == (lhs: AnimeLink, rhs: AnimeLink) -> Bool {
         return lhs.link == rhs.link
+    }
+}
+
+struct EpisodeLink: Equatable, Codable {
+    let identifier: Anime.EpisodeIdentifier
+    let name: String
+    let server: Anime.ServerIdentifier
+    let parent: AnimeLink
+}
+
+extension EpisodeLink {
+    static func == (lhs: EpisodeLink, rhs: EpisodeLink) -> Bool {
+        return lhs.identifier == rhs.identifier
     }
 }

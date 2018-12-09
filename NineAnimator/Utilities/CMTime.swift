@@ -17,15 +17,13 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import AVKit
+import Foundation
 
-class EpisodeTableViewCell: UITableViewCell {
-    var episodeLink: EpisodeLink? {
-        didSet {
-            titleLabel.text = episodeLink?.name
-        }
-    }
+extension CMTime {
+    var seconds: Float { return Float(CMTimeGetSeconds(self)) }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var progressIndicator: EpisodeAccessoryProcessIndicator!
+    static func seconds(_ value: Float) -> CMTime {
+        return CMTime(seconds: Double(value), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+    }
 }

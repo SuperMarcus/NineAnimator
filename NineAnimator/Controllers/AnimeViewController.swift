@@ -22,7 +22,7 @@ import WebKit
 import AVKit
 import SafariServices
 
-class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate {
+class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
     var avPlayerController: AVPlayerViewController!
     
     var link: AnimeLink?
@@ -72,11 +72,16 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         didSet {
             if let previousPlayer = oldValue,
                 let item = previousPlayer.currentItem {
-                previousPlayer.removeTimeObserver(self)
+                if let observer = self.playbackProgressUpdateObserver {
+                    previousPlayer.removeTimeObserver(observer)
+                    self.playbackProgressUpdateObserver = nil
+                }
                 item.removeObserver(self, forKeyPath: "status")
             }
         }
     }
+    
+    var playbackProgressUpdateObserver: Any?
     
     var playbackProgressRestored = false
     
@@ -95,6 +100,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
         
         guard let link = link else { return }
+        //Update history
+        NineAnimator.default.user.entering(anime: link)
         
         //Update anime title
         title = link.title
@@ -113,9 +120,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+    override func didMove(toParent parent: UIViewController?) {
         //Cleanup observers and tasks
         displayedPlayer = nil
         episodeRequestTask?.cancel()
@@ -153,10 +158,6 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
             informationCell = cell
             return cell
         case 1:
-            //            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.serverPicker") as? ServerPickerTableViewCell else { fatalError("cell with wrong type is dequeued") }
-            //            cell.delegate = self
-            //            cell.servers = anime?.servers
-            //            return cell
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell
                 else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
@@ -176,11 +177,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
             return
         }
         
+        guard let episodeLink = cell.episodeLink else { return }
+        
         if cell != selectedEpisodeCell {
             episodeRequestTask?.cancel()
             selectedEpisodeCell = cell
             
-            episodeRequestTask = anime!.episode(with: cell.episodeLink!) {
+            episodeRequestTask = anime!.episode(with: episodeLink) {
                 [weak self] episode, error in
                 guard let self = self else { return }
                 guard let episode = episode else {
@@ -189,10 +192,11 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                 }
                 self.episode = episode
                 
+                //Save episode to last playback
+                NineAnimator.default.user.entering(episode: episodeLink)
+                
                 debugPrint("Info: Episode target retrived for '\(episode.name)'")
                 debugPrint("- Playback target: \(episode.target)")
-                
-                let playbackProgressKey = "\(episode.link.identifier).progress"
                 
                 if episode.nativePlaybackSupported {
                     self.episodeRequestTask = episode.retrive {
@@ -215,13 +219,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                         item.addObserver(self, forKeyPath: "status", options: [], context: nil)
                         self.displayedPlayer = playerController.player
                         self.playbackProgressRestored = false
-                        playerController.player?.addPeriodicTimeObserver(
-                            forInterval: CMTime(seconds: 5, preferredTimescale: CMTimeScale(NSEC_PER_SEC)),
+                        
+                        self.playbackProgressUpdateObserver = playerController.player?.addPeriodicTimeObserver(
+                            forInterval: .seconds(5),
                             queue: DispatchQueue.main) {
                                 [weak self] time in
                                 if self?.playbackProgressRestored == true {
-                                    let percentComplete = Float(CMTimeGetSeconds(time) / CMTimeGetSeconds(item.duration))
-                                    UserDefaults.standard.set(percentComplete, forKey: playbackProgressKey)
+                                    self?.update(progress: time)
                                 }
                         }
                         
@@ -246,22 +250,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
                     let playbackController = SFSafariViewController(url: episode.target)
                     self.present(playbackController, animated: true)
                     self.episodeRequestTask = nil
-                    
-                    UserDefaults.standard.set(1 as Float, forKey: playbackProgressKey)
+                    NineAnimator.default.user.update(progress: 1.0, for: episode.link)
                 }
             }
-        }
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if !playbackProgressRestored, let item = object as? AVPlayerItem, item == displayedPlayer?.currentItem, keyPath == "status", item.status == .readyToPlay {
-            let playbackProgressKey = "\(episode!.link.identifier).progress"
-            let storedProgress = UserDefaults.standard.float(forKey: playbackProgressKey)
-            let progressSeconds = max(Float64(storedProgress) * CMTimeGetSeconds(item.duration) - 5, 0)
-            let time = CMTimeMakeWithSeconds(progressSeconds, preferredTimescale: Int32(NSEC_PER_SEC))
-            displayedPlayer?.seek(to: time)
-            debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
-            playbackProgressRestored = true
         }
     }
     
@@ -292,5 +283,35 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate 
         }
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alertView, animated: true)
+    }
+}
+
+//MARK: - Playback progress persistance
+extension AnimeViewController {
+    //Update progress
+    fileprivate func update(progress: CMTime) {
+        guard let player = displayedPlayer,
+            let item = player.currentItem,
+            let episode = episode else { return }
+        let pctProgress = progress.seconds / item.duration.seconds
+        NineAnimator.default.user.update(progress: pctProgress, for: episode.link)
+    }
+    
+    //Restore progress
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
+        if !playbackProgressRestored,
+            let item = object as? AVPlayerItem,
+            item == displayedPlayer?.currentItem,
+            keyPath == "status",
+            item.status == .readyToPlay {
+            
+            let storedProgress = NineAnimator.default.user.playbackProgress(for: episode!.link)
+            let progressSeconds = max(storedProgress * item.duration.seconds - 5, 0)
+            let time = CMTime.seconds(progressSeconds)
+            
+            displayedPlayer?.seek(to: time)
+            debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
+            playbackProgressRestored = true
+        }
     }
 }

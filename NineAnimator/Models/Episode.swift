@@ -23,7 +23,7 @@ import SwiftSoup
 import AVKit
 
 struct Episode {
-    let link: Anime.EpisodeLink
+    let link: EpisodeLink
     let target: URL
     
     var name: String { return link.name }
@@ -36,7 +36,7 @@ struct Episode {
     private var _parent: Anime?
     private var _session: SessionManager
     
-    init(_ link: Anime.EpisodeLink, on target: URL, with session: SessionManager, parent: Anime? = nil) {
+    init(_ link: EpisodeLink, on target: URL, with session: SessionManager, parent: Anime? = nil) {
         self.link = link
         self.target = target
         self._parent = parent

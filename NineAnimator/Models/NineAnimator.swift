@@ -48,6 +48,8 @@ class NineAnimator: SessionDelegate {
     
     var cache = [NineAnimatePath: String]()
     
+    var user = NineAnimatorUser()
+    
     override init() {
         super.init()
         
