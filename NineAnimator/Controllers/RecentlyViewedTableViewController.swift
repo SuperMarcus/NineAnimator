@@ -22,7 +22,7 @@ import UIKit
 class RecentlyViewedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +80,7 @@ extension RecentlyViewedTableViewController{
     }
 }
 
-//MARK: - Segue preparation
+// MARK: - Segue preparation
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let player = segue.destination as? AnimeViewController else { return }

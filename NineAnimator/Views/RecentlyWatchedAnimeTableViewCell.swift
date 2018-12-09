@@ -25,22 +25,10 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
     @IBOutlet weak var animeTitleLabel: UILabel!
     
     var animeLink: AnimeLink? = nil {
-        didSet{
+        didSet {
             guard let link = animeLink else { return }
             coverImageView.kf.setImage(with: link.image)
             animeTitleLabel.text = link.title
         }
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

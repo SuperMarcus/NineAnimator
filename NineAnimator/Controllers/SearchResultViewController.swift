@@ -22,7 +22,7 @@ import UIKit
 class SearchResultViewController: UITableViewController, SearchPageDelegate {
     var searchText: String? {
         didSet {
-            self.title = searchText
+            title = searchText
         }
     }
     
@@ -31,30 +31,32 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearsSelectionOnViewWillAppear = true
-        self.tableView.rowHeight = 160
+        tableView.rowHeight = 160
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        self.searchPage.delegate = nil
-        self.searchPage = nil
+        searchPage.delegate = nil
+        searchPage = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.searchPage = NineAnimator.default.search(searchText!)
-        self.searchPage.delegate = self
-        self.tableView.tableFooterView = UIView()
-        self.tableView.separatorStyle = .none
+        searchPage = NineAnimator.default.search(searchText!)
+        searchPage.delegate = self
+        tableView.tableFooterView = UIView()
+        tableView.separatorStyle = .none
     }
     
     func noResult(in: SearchPage) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.tableView.rowHeight = 300
             self.tableView.reloadSections([0], with: .automatic)
         }
     }
     
     func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
             self.tableView.separatorStyle = .singleLine
             self.tableView.reloadData()
         }
