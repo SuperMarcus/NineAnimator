@@ -18,17 +18,15 @@
 //
 
 import Foundation
+import Alamofire
+import AVKit
 
-struct NineAnimatePath: Hashable {
-    static let home = NineAnimatePath("/")
-    
-    static func search(keyword: String, page: Int = 1) -> NineAnimatePath {
-        let path = "/search"
-        let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        return NineAnimatePath("\(path)?keyword=\(encodedKeyword)&page=\(page)")
+extension AVPlayerItem {
+    convenience init(url: URL, headers: HTTPHeaders) {
+        let asset = AVURLAsset(
+            url: url,
+            options: ["AVURLAssetHTTPHeaderFieldsKey": headers]
+        )
+        self.init(asset: asset)
     }
-    
-    let value: String
-    
-    private init(_ value: String) { self.value = value }
 }

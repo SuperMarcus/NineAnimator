@@ -59,8 +59,7 @@ class MyCloudParser: VideoProviderParser {
             
             debugPrint("Info: (MyCloud Parser) found asset at \(sourceUrl.absoluteString)")
             
-            let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": playerAdditionalHeaders])
-            let item = AVPlayerItem(asset: asset)
+            let item = AVPlayerItem(url: sourceUrl, headers: playerAdditionalHeaders)
             
             handler(item, nil)
         }

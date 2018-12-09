@@ -104,8 +104,6 @@ class FeaturedViewController: UITableViewController {
     // turn off highlighting effect when users can't see this happening
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let selected = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: selected, animated: false)
-        }
+        tableView.deselectSelectedRow()
     }
 }

@@ -17,18 +17,12 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
-struct NineAnimatePath: Hashable {
-    static let home = NineAnimatePath("/")
-    
-    static func search(keyword: String, page: Int = 1) -> NineAnimatePath {
-        let path = "/search"
-        let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        return NineAnimatePath("\(path)?keyword=\(encodedKeyword)&page=\(page)")
+extension UITableView {
+    func deselectSelectedRow() {
+        if let selected = indexPathForSelectedRow {
+            deselectRow(at: selected, animated: false)
+        }
     }
-    
-    let value: String
-    
-    private init(_ value: String) { self.value = value }
 }
