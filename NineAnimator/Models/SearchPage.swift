@@ -105,6 +105,7 @@ class SearchPage {
                         self.delegate?.pageIncoming(newSection, in: self)
                     } else {
                         debugPrint("Info: No matches")
+                        self.totalPages = 0
                         self.delegate?.noResult(in: self)
                     }
                 } catch {

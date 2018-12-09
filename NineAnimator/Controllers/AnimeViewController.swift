@@ -23,10 +23,19 @@ import AVKit
 import SafariServices
 
 class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
-    var avPlayerController: AVPlayerViewController!
+    //MARK: - Set either one of the following item to initialize the anime view
+    var animeLink: AnimeLink?
     
-    var link: AnimeLink?
+    var episodeLink: EpisodeLink? {
+        didSet{
+            if let episodeLink = episodeLink {
+                self.animeLink = episodeLink.parent
+                self.server = episodeLink.server
+            }
+        }
+    }
     
+    //MARK: - Managed by AnimeViewController
     var serverSelectionButton: UIBarButtonItem! {
         return navigationItem.rightBarButtonItem
     }
@@ -44,10 +53,13 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 }
                 
                 guard let anime = self.anime else { return }
-                if let recentlyUsedServer = UserDefaults.standard.string(forKey: "server.recent"),
-                    anime.servers[recentlyUsedServer] != nil {
-                    self.server = recentlyUsedServer
-                } else { self.server = anime.servers.first!.key }
+                
+                if case .none = self.server {
+                    if let recentlyUsedServer = UserDefaults.standard.string(forKey: "server.recent"),
+                        anime.servers[recentlyUsedServer] != nil {
+                        self.server = recentlyUsedServer
+                    } else { self.server = anime.servers.first!.key }
+                }
                 
                 self.serverSelectionButton.title = anime.servers[self.server!]
                 self.serverSelectionButton.isEnabled = true
@@ -93,10 +105,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         
         //If episode is set, use episode's anime link as the anime for display
         if let episode = episode {
-            link = episode.parentLink
+            animeLink = episode.parentLink
         }
         
-        guard let link = link else { return }
+        guard let link = animeLink else { return }
         //Update history
         NineAnimator.default.user.entering(anime: link)
         
@@ -114,6 +126,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 return
             }
             self?.anime = anime
+            //Initiate playback if episodeLink is set
+            if ((self?.episodeLink) != nil) { self?.retriveAndPlay() }
         }
     }
     
@@ -150,7 +164,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         case 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.description") as? AnimeDescriptionTableViewCell
                 else { fatalError("cell with wrong type is dequeued") }
-            cell.link = link
+            cell.link = animeLink
             cell.animeDescription = anime?.description
             informationCell = cell
             return cell
@@ -177,74 +191,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         guard let episodeLink = cell.episodeLink else { return }
         
         if cell != selectedEpisodeCell {
-            episodeRequestTask?.cancel()
             selectedEpisodeCell = cell
-            
-            func clearSelection() {
-                tableView.deselectSelectedRow()
-                selectedEpisodeCell = nil
-            }
-            
-            episodeRequestTask = anime!.episode(with: episodeLink) {
-                [weak self] episode, error in
-                guard let self = self else { return }
-                guard let episode = episode else {
-                    debugPrint("Error: \(error!)")
-                    return
-                }
-                self.episode = episode
-                
-                //Save episode to last playback
-                NineAnimator.default.user.entering(episode: episodeLink)
-                
-                debugPrint("Info: Episode target retrived for '\(episode.name)'")
-                debugPrint("- Playback target: \(episode.target)")
-                
-                if episode.nativePlaybackSupported {
-                    self.episodeRequestTask = episode.retrive {
-                        [weak self] item, error in
-                        guard let self = self else { return }
-                        self.episodeRequestTask = nil
-                        
-                        guard let item = item else {
-                            debugPrint("Warn: Item not retrived \(error!), fallback to web access")
-                            DispatchQueue.main.async { [weak self] in
-                                let playbackController = SFSafariViewController(url: episode.target)
-                                self?.present(playbackController, animated: true, completion: clearSelection)
-                            }
-                            return
-                        }
-                        
-                        let playerController = AVPlayerViewController()
-                        playerController.player = AVPlayer(playerItem: item)
-                        self.displayedPlayer = playerController.player
-
-                        self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
-                        
-                        //Initialize audio session to movie playback
-                        let audioSession = AVAudioSession.sharedInstance()
-                        try? audioSession.setCategory(
-                            .playback,
-                            mode: .moviePlayback,
-                            options: [
-                                .allowAirPlay,
-                                .allowBluetooth,
-                                .allowBluetoothA2DP
-                            ])
-                        try? audioSession.setActive(true)
-                        
-                        DispatchQueue.main.async { [weak self] in
-                            playerController.player?.play()
-                            self?.present(playerController, animated: true, completion: clearSelection)
-                        }
-                    }
-                } else {
-                    let playbackController = SFSafariViewController(url: episode.target)
-                    self.present(playbackController, animated: true, completion: clearSelection)
-                    self.episodeRequestTask = nil
-                    NineAnimator.default.user.update(progress: 1.0, for: episode.link)
-                }
-            }
+            self.episodeLink = episodeLink
+            retriveAndPlay()
         }
     }
     
@@ -275,6 +224,81 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alertView, animated: true)
+    }
+}
+
+//MARK: - Initiate playback
+extension AnimeViewController {
+    func retriveAndPlay() {
+        guard let episodeLink = episodeLink else { return }
+        
+        episodeRequestTask?.cancel()
+        
+        func clearSelection() {
+            tableView.deselectSelectedRow()
+            selectedEpisodeCell = nil
+        }
+        
+        episodeRequestTask = anime!.episode(with: episodeLink) {
+            [weak self] episode, error in
+            guard let self = self else { return }
+            guard let episode = episode else {
+                debugPrint("Error: \(error!)")
+                return
+            }
+            self.episode = episode
+            
+            //Save episode to last playback
+            NineAnimator.default.user.entering(episode: episodeLink)
+            
+            debugPrint("Info: Episode target retrived for '\(episode.name)'")
+            debugPrint("- Playback target: \(episode.target)")
+            
+            if episode.nativePlaybackSupported {
+                self.episodeRequestTask = episode.retrive {
+                    [weak self] item, error in
+                    guard let self = self else { return }
+                    self.episodeRequestTask = nil
+                    
+                    guard let item = item else {
+                        debugPrint("Warn: Item not retrived \(error!), fallback to web access")
+                        DispatchQueue.main.async { [weak self] in
+                            let playbackController = SFSafariViewController(url: episode.target)
+                            self?.present(playbackController, animated: true, completion: clearSelection)
+                        }
+                        return
+                    }
+                    
+                    let playerController = AVPlayerViewController()
+                    playerController.player = AVPlayer(playerItem: item)
+                    self.displayedPlayer = playerController.player
+                    
+                    self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
+                    
+                    //Initialize audio session to movie playback
+                    let audioSession = AVAudioSession.sharedInstance()
+                    try? audioSession.setCategory(
+                        .playback,
+                        mode: .moviePlayback,
+                        options: [
+                            .allowAirPlay,
+                            .allowBluetooth,
+                            .allowBluetoothA2DP
+                        ])
+                    try? audioSession.setActive(true)
+                    
+                    DispatchQueue.main.async { [weak self] in
+                        playerController.player?.play()
+                        self?.present(playerController, animated: true, completion: clearSelection)
+                    }
+                }
+            } else {
+                let playbackController = SFSafariViewController(url: episode.target)
+                self.present(playbackController, animated: true, completion: clearSelection)
+                self.episodeRequestTask = nil
+                NineAnimator.default.user.update(progress: 1.0, for: episode.link)
+            }
+        }
     }
 }
 
