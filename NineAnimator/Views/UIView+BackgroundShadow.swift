@@ -55,4 +55,9 @@ import UIKit
         set { layer.shadowRadius = newValue }
         get { return layer.shadowRadius }
     }
+    
+    @IBInspectable var ignoresInvertColors: Bool {
+        set { accessibilityIgnoresInvertColors = newValue }
+        get { return accessibilityIgnoresInvertColors }
+    }
 }
