@@ -31,6 +31,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         clearsSelectionOnViewWillAppear = true
+        self.tableView.rowHeight = 160
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -41,28 +42,43 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.searchPage = NineAnimator.default.search(searchText!)
         self.searchPage.delegate = self
+        self.tableView.tableFooterView = UIView()
+        self.tableView.separatorStyle = .none
     }
     
     func noResult(in: SearchPage) {
-        
+        DispatchQueue.main.async {
+            self.tableView.rowHeight = 300
+            self.tableView.reloadSections([0], with: .automatic)
+        }
     }
     
     func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
-        DispatchQueue.main.async(execute: tableView.reloadData)
+        DispatchQueue.main.async {
+            self.tableView.separatorStyle = .singleLine
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return searchPage.availablePages + (searchPage.moreAvailable ? 1 : 0)
+        return searchPage.availablePages + (searchPage.moreAvailable || searchPage.totalPages == 0 ? 1 : 0)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == searchPage.availablePages { return 1 }
+        if section == searchPage.availablePages || searchPage.availablePages == 0 { return 1 }
         return searchPage.animes(on: section).count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //No results found
+        if !searchPage.moreAvailable && searchPage.availablePages == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as? SearchNoResultsTableViewCell else { fatalError() }
+            cell.query = searchText
+            return cell
+        }
+        
         if searchPage.availablePages == indexPath.section {
             return tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath)
         } else {

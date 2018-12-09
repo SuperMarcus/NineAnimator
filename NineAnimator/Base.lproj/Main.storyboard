@@ -408,6 +408,49 @@
                                     </constraints>
                                 </tableViewCellContentView>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="search.notfound" rowHeight="146" id="k1H-32-aEE" customClass="SearchNoResultsTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="321" width="375" height="146"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k1H-32-aEE" id="KGr-Tx-y5b">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="145.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Rf-kW-uQZ" userLabel="Container View">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9w-ab-cIl">
+                                                    <rect key="frame" x="132" y="113" width="111" height="26.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No results found for &quot;Search&quot;" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prB-7g-Aay">
+                                                    <rect key="frame" x="75.5" y="147.5" width="224" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="w9w-ab-cIl" firstAttribute="centerX" secondItem="9Rf-kW-uQZ" secondAttribute="centerX" id="0Cy-Fd-S9Y"/>
+                                                <constraint firstItem="prB-7g-Aay" firstAttribute="centerX" secondItem="9Rf-kW-uQZ" secondAttribute="centerX" id="0Xj-FQ-Yr0"/>
+                                                <constraint firstItem="w9w-ab-cIl" firstAttribute="centerY" secondItem="9Rf-kW-uQZ" secondAttribute="centerY" constant="-24" id="J3V-aX-8mZ"/>
+                                                <constraint firstAttribute="height" constant="300" id="raL-Wf-Ch5"/>
+                                                <constraint firstItem="prB-7g-Aay" firstAttribute="top" secondItem="w9w-ab-cIl" secondAttribute="bottom" constant="8" id="uKt-H7-LGW"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="9Rf-kW-uQZ" firstAttribute="leading" secondItem="KGr-Tx-y5b" secondAttribute="leading" id="FDR-YV-xdr"/>
+                                        <constraint firstAttribute="trailing" secondItem="9Rf-kW-uQZ" secondAttribute="trailing" id="Q9q-18-n2Y"/>
+                                        <constraint firstItem="9Rf-kW-uQZ" firstAttribute="top" secondItem="KGr-Tx-y5b" secondAttribute="top" id="wbC-Ty-JKI"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="searchSubtitleLabel" destination="prB-7g-Aay" id="B8T-uj-JdB"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="wkc-dS-QI1" id="jAx-JL-i83"/>

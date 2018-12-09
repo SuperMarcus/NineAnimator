@@ -39,6 +39,7 @@
 		2C6677B021BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */; };
 		2C6677B221BD846A000E5ACC /* CMTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677B121BD846A000E5ACC /* CMTime.swift */; };
 		2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */; };
+		2C6677B621BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */; };
 		2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */; };
@@ -102,6 +103,7 @@
 		2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastViewedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C6677B121BD846A000E5ACC /* CMTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CMTime.swift; sourceTree = "<group>"; };
 		2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeAccessoryProcessIndicator.swift; sourceTree = "<group>"; };
+		2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchNoResultsTableViewCell.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				2C66779F21BC4663000E5ACC /* AnimeSearchResultTableViewCell.swift */,
 				2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */,
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
+				2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
+				2C6677B621BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
