@@ -43,7 +43,6 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         searchPage = NineAnimator.default.search(searchText!)
         searchPage.delegate = self
         tableView.tableFooterView = UIView()
-        tableView.separatorStyle = .none
     }
     
     func noResult(in: SearchPage) {
@@ -57,7 +56,6 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.tableView.separatorStyle = .singleLine
             self.tableView.reloadData()
         }
     }
@@ -69,7 +67,11 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == searchPage.availablePages || searchPage.availablePages == 0 { return 1 }
+        if section == searchPage.availablePages || searchPage.availablePages == 0 {
+            tableView.separatorStyle = .none
+            return 1
+        }
+        tableView.separatorStyle = .singleLine
         return searchPage.animes(on: section).count
     }
     
