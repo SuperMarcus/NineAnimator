@@ -356,4 +356,9 @@ extension AnimeViewController {
             using: persistProgress
         )
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        playbackProgressRestoreToken = nil
+    }
 }
