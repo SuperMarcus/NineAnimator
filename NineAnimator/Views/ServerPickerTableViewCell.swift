@@ -19,10 +19,10 @@
 
 import UIKit
 
-protocol ServerPickerSelectionDelegate {
+protocol ServerPickerSelectionDelegate: AnyObject {
     var server: Anime.ServerIdentifier? { get }
     
-    func select(server: Anime.ServerIdentifier)
+    func didSelectServer(_ server: Anime.ServerIdentifier)
 }
 
 @available(*, deprecated)
@@ -31,25 +31,20 @@ class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     
     var _servers = [(identifier: Anime.ServerIdentifier, name: String)]()
     var servers: [Anime.ServerIdentifier: String]? {
-        set {
+        willSet {
             _servers = newValue!.map { (identifier: $0.key, name: $0.value) }
-            if let defaultServer = delegate?.server {
-                guard let index = _servers.firstIndex(where: { $0.identifier == defaultServer }) else { return }
-                serverPickerView.selectRow(index, inComponent: 0, animated: true)
-            }
+            guard let defaultServer = delegate?.server,
+                let index = _servers.firstIndex(where: { $0.identifier == defaultServer })
+                else { return }
+            serverPickerView.selectRow(index, inComponent: 0, animated: true)
         }
-        get { return nil }
     }
-    var delegate: ServerPickerSelectionDelegate? = nil
+    weak var delegate: ServerPickerSelectionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         serverPickerView.dataSource = self
         serverPickerView.delegate = self
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -65,6 +60,6 @@ class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPick
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        delegate?.select(server: _servers[row].identifier)
+        delegate?.didSelectServer(_servers[row].identifier)
     }
 }

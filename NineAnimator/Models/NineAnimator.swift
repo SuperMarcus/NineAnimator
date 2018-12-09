@@ -33,25 +33,25 @@ protocol NineAnimatorAsyncTask {
     func cancel()
 }
 
-extension Alamofire.DataRequest: NineAnimatorAsyncTask { }
+extension DataRequest: NineAnimatorAsyncTask { }
 
-class NineAnimator: Alamofire.SessionDelegate {
+class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
     let endpoint = "https://www1.9anime.to"
     
     let client = URLSession(configuration: .default)
     
-    var session: Alamofire.SessionManager!
+    var session: SessionManager!
     
-    var ajaxSession: Alamofire.SessionManager!
+    var ajaxSession: SessionManager!
     
-    var cache = [NineAnimatePath:String]()
+    var cache = [NineAnimatePath: String]()
     
     override init() {
         super.init()
         
-        var mainAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        var mainAdditionalHeaders = SessionManager.defaultHTTPHeaders
         mainAdditionalHeaders["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
         mainAdditionalHeaders["Accept-Language"] = "en-us"
         
@@ -63,16 +63,16 @@ class NineAnimator: Alamofire.SessionDelegate {
         mainSessionConfiguration.httpShouldSetCookies = true
         mainSessionConfiguration.httpCookieAcceptPolicy = .always
         mainSessionConfiguration.httpAdditionalHeaders = mainAdditionalHeaders
-        session = Alamofire.SessionManager(configuration: mainSessionConfiguration, delegate: self)
+        session = SessionManager(configuration: mainSessionConfiguration, delegate: self)
         
         let ajaxSessionConfiguration = URLSessionConfiguration.default
         ajaxSessionConfiguration.httpShouldSetCookies = true
         ajaxSessionConfiguration.httpCookieAcceptPolicy = .always
         ajaxSessionConfiguration.httpAdditionalHeaders = ajaxAdditionalHeaders
-        ajaxSession = Alamofire.SessionManager(configuration: ajaxSessionConfiguration, delegate: self)
+        ajaxSession = SessionManager(configuration: ajaxSessionConfiguration, delegate: self)
     }
     
-    func removeCache(at path: NineAnimatePath){
+    func removeCache(at path: NineAnimatePath) {
         cache.removeValue(forKey: path)
     }
     
@@ -87,7 +87,7 @@ class NineAnimator: Alamofire.SessionDelegate {
         }
         
         return session.request(url).responseString {
-            response in
+            [weak self] response in
             if case let .failure(error) = response.result {
                 debugPrint("Error: Failiure on request: \(error)")
                 onCompletion(nil, error)
@@ -100,8 +100,8 @@ class NineAnimator: Alamofire.SessionDelegate {
                 return
             }
             
-            //Cache value
-            self.cache[path] = value
+            // Cache value
+            self?.cache[path] = value
             onCompletion(value, nil)
         }
     }

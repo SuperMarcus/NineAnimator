@@ -27,7 +27,7 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var animeDescription: String? {
-        set {
+        willSet {
             guard let newValue = newValue else {
                 descriptionText.isHidden = true
                 loadingIndicator.isHidden = false
@@ -35,7 +35,8 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
                 return
             }
             
-            UIView.transition(with: loadingIndicator, duration: 0.3, options: .curveEaseOut, animations: {
+            UIView.transition(with: loadingIndicator, duration: 0.3, options: .curveEaseOut, animations: { [weak self] in
+                guard let self = self else { return }
                 self.descriptionText.text = newValue
                 self.descriptionText.setContentOffset(.zero, animated: false)
                 self.descriptionText.isHidden = false
@@ -43,7 +44,6 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
                 self.loadingIndicator.isHidden = true
             })
         }
-        get { return nil }
     }
     
     var link: AnimeLink? {
@@ -52,16 +52,5 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
             backgroundBlurredImageView.kf.setImage(with: link.image)
             coverImageView.kf.setImage(with: link.image)
         }
-    }
-    
-    var animeViewController: AnimeViewController?
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 }

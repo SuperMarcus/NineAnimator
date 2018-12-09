@@ -22,30 +22,27 @@ import Alamofire
 import AVKit
 
 protocol VideoProviderParser {
-    func parse(url: URL, with: Alamofire.SessionManager, onCompletion: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask
+    func parse(url: URL, with: SessionManager, onCompletion: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask
 }
 
 class VideoProviderRegistry {
     static let `default`: VideoProviderRegistry = {
         let defaultProvider = VideoProviderRegistry()
         
-        defaultProvider.register(MyCloudParser(), for: "28")
-        defaultProvider.register(RapidVideoParser(), for: "33")
-        defaultProvider.register(StreamangoParser(), for: "34")
+        defaultProvider.register(MyCloudParser(), forServer: "28")
+        defaultProvider.register(RapidVideoParser(), forServer: "33")
+        defaultProvider.register(StreamangoParser(), forServer: "34")
         
         return defaultProvider
     }()
     
     private var providers = [(server: Anime.ServerIdentifier, provider: VideoProviderParser)]()
     
-    func register(_ provider: VideoProviderParser, for server: Anime.ServerIdentifier) {
+    func register(_ provider: VideoProviderParser, forServer server: Anime.ServerIdentifier) {
         providers.append((server, provider))
     }
     
     func provider(for server: Anime.ServerIdentifier) -> VideoProviderParser? {
-        for provider in providers {
-            if provider.server == server { return provider.provider }
-        }
-        return nil
+        return (providers.first { $0.server == server })?.provider
     }
 }

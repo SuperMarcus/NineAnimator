@@ -28,19 +28,21 @@ struct FeaturedAnimePage {
     
     let latest: [AnimeLink]
     
-    init?(_ pageSource: String) throws{
+    init?(_ pageSource: String) throws {
         let featuredAnimesMatches = FeaturedAnimePage.featuredAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
         self.featured = try featuredAnimesMatches.map {
-            guard let imageLink = URL(string: pageSource[$0.range(at: 1)]) else { throw NineAnimatorError.responseError("parser error") }
-            guard let animeLink = URL(string: pageSource[$0.range(at: 2)]) else { throw NineAnimatorError.responseError("parser error") }
+            guard let imageLink = URL(string: pageSource[$0.range(at: 1)]),
+                let animeLink = URL(string: pageSource[$0.range(at: 2)])
+                else { throw NineAnimatorError.responseError("parser error") }
             let title = pageSource[$0.range(at: 3)]
             return AnimeLink(title: title, link: animeLink, image: imageLink)
         }
         
         let latestAnimesMatches = FeaturedAnimePage.latestUpdateAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
-        self.latest = try latestAnimesMatches.map{
-            guard let imageLink = URL(string: pageSource[$0.range(at: 2)]) else { throw NineAnimatorError.responseError("parser error") }
-            guard let animeLink = URL(string: pageSource[$0.range(at: 1)]) else { throw NineAnimatorError.responseError("parser error") }
+        self.latest = try latestAnimesMatches.map {
+            guard let imageLink = URL(string: pageSource[$0.range(at: 2)]),
+                let animeLink = URL(string: pageSource[$0.range(at: 1)])
+                else { throw NineAnimatorError.responseError("parser error") }
             let title = pageSource[$0.range(at: 3)]
             return AnimeLink(title: title, link: animeLink, image: imageLink)
         }
@@ -48,20 +50,20 @@ struct FeaturedAnimePage {
 }
 
 extension NineAnimator {
-    func loadHomePage(completionHandler: @escaping NineAnimatorCallback<FeaturedAnimePage>){
+    func loadHomePage(completionHandler: @escaping NineAnimatorCallback<FeaturedAnimePage>) {
         let _ = request(.home) {
-            (content, error) in
+            [weak self] (content, error) in
             if let error = error {
-                self.removeCache(at: .home)
+                self?.removeCache(at: .home)
                 completionHandler(nil, error)
                 return
             }
             
-            do{
+            do {
                 let page = try FeaturedAnimePage(content!)
                 completionHandler(page, nil)
             } catch let e {
-                self.removeCache(at: .home)
+                self?.removeCache(at: .home)
                 completionHandler(nil, e)
             }
         }

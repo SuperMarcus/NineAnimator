@@ -19,7 +19,7 @@
 
 import Foundation
 
-struct NineAnimatePath : Hashable {
+struct NineAnimatePath: Hashable {
     static let home = NineAnimatePath("/")
     
     static func search(keyword: String, page: Int = 1) -> NineAnimatePath {

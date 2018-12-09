@@ -20,17 +20,11 @@
 import UIKit
 import Alamofire
 
-struct AnimeLink: Alamofire.URLConvertible {
+struct AnimeLink: URLConvertible {
     var title: String
     var link: URL
     var image: URL
-    
-    init(title: String, link: URL, image: URL) {
-        self.title = title
-        self.link = link
-        self.image = image
-    }
-    
+
     func asURL() -> URL { return link }
 }
 

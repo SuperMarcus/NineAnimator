@@ -23,8 +23,8 @@ import SwiftSoup
 
 extension NineAnimator {
     func anime(with link: AnimeLink, onCompletion handler: @escaping NineAnimatorCallback<Anime>) {
-        session.request(link).responseString{
-            response in
+        session.request(link).responseString {
+            [unowned self] response in
             if case let .failure(error) = response.result {
                 debugPrint("Error: Failiure on request: \(error)")
                 handler(nil, error)
@@ -50,7 +50,7 @@ struct Anime {
     typealias EpisodeLinksCollection = [EpisodeLink]
     
     let link: AnimeLink
-    let session: Alamofire.SessionManager
+    let session: SessionManager
     let servers: [ServerIdentifier: String]
     let episodes: [ServerIdentifier: EpisodeLinksCollection]
     let description: String
@@ -59,7 +59,7 @@ struct Anime {
     
     init(_ link: AnimeLink,
          description: String,
-         with session: Alamofire.SessionManager,
+         with session: SessionManager,
          on servers: [ServerIdentifier: String],
          episodes: [ServerIdentifier: EpisodeLinksCollection]) {
         self.link = link
@@ -93,10 +93,9 @@ struct Anime {
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
 }
 
-//MARK: -
-//MARK: Anime page parser
+//MARK: - Anime page parser
 extension Anime {
-    fileprivate static func parse(_ link: AnimeLink, page: String, with session: Alamofire.SessionManager, onCompletion handler: @escaping NineAnimatorCallback<Anime>){
+    fileprivate static func parse(_ link: AnimeLink, page: String, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<Anime>) {
         
         let bowl = try! SwiftSoup.parse(page)
         
@@ -121,9 +120,9 @@ extension Anime {
         var animeServers = [ServerIdentifier: String]()
         var animeEpisodes = [ServerIdentifier: EpisodeLinksCollection]()
         
-        let ajaxHeaders: Alamofire.HTTPHeaders = [ "Referer": link.link.absoluteString ]
+        let ajaxHeaders: HTTPHeaders = ["Referer": link.link.absoluteString]
         
-        let onRetriveServers: ((Alamofire.DataResponse<Any>) -> ()) = {
+        let onRetriveServers: ((DataResponse<Any>) -> ()) = {
             response in
             if case let .failure(error) = response.result {
                 debugPrint("Error: Failiure on request: \(error)")
@@ -151,7 +150,7 @@ extension Anime {
             
             debugPrint("Info: \(animeServers.count) servers found for this anime.")
             
-            do{
+            do {
                 let soup = try SwiftSoup.parse(htmlList)
                 
                 for server in try soup.select("div.server") {
@@ -166,7 +165,7 @@ extension Anime {
                               with: session,
                               on: animeServers,
                               episodes: animeEpisodes), nil)
-            }catch{
+            } catch {
                 debugPrint("Unable to parse servers and episodes")
                 handler(nil, error)
             }
