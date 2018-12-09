@@ -72,7 +72,8 @@ extension RecentlyViewedTableViewController{
             return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as? RecentlyWatchedAnimeTableViewCell else { fatalError() }
-            let anime = NineAnimator.default.user.recentAnimes[indexPath.item]
+            let animes = NineAnimator.default.user.recentAnimes
+            let anime = animes[animes.count - indexPath.item - 1]
             cell.animeLink = anime
             return cell
         default: fatalError("unimplemented section (\(indexPath.section))")
