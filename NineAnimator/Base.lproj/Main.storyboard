@@ -168,7 +168,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vay-h0-LQu">
                                                     <rect key="frame" x="105.5" y="0.0" width="253.5" height="136"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VCb-1U-YDM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="253" height="136"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="253.5" height="136"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
@@ -517,7 +517,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dQi-V7-FD5">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="122"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-zT-QjK">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-zT-QjK">
                                                     <rect key="frame" x="0.0" y="0.0" width="94.5" height="122"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="aj4-zT-QjK" secondAttribute="height" multiplier="155:200" id="cg4-3f-8fW"/>
@@ -527,7 +527,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymX-sl-7hN">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ba0-1s-HFP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the anime" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdo-VB-Wsl">
@@ -605,10 +605,13 @@
                                             <real key="value" value="0.20000000000000001"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
-                                            <point key="value" x="0.0" y="3.5"/>
+                                            <point key="value" x="0.0" y="0.5"/>
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                             <color key="value" cocoaTouchSystemColor="darkTextColor"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                            <real key="value" value="8"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
@@ -619,6 +622,63 @@
                                     <outlet property="episodeLabel" destination="IId-s4-5QI" id="PDk-wy-u3G"/>
                                     <outlet property="progressIndicator" destination="aBr-0y-FH3" id="kQZ-KA-MJG"/>
                                     <outlet property="titleLabel" destination="tdo-VB-Wsl" id="WdP-S5-qDR"/>
+                                    <segue destination="fnc-Z3-OPF" kind="show" id="Uut-Fq-hAa"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recent.anime" rowHeight="144" id="8kI-CG-O8k" customClass="RecentlyWatchedAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="188" width="375" height="144"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8kI-CG-O8k" id="R7X-mR-5dQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="143.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-gN-0Pw">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="130"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEe-9a-Fgq">
+                                                    <rect key="frame" x="16" y="8" width="88.5" height="114"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="eEe-9a-Fgq" secondAttribute="height" multiplier="155:200" id="KVa-Y1-fGR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7r-tP-s31">
+                                                    <rect key="frame" x="120.5" y="62.5" width="204.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You recently watched..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cty-4k-jCy">
+                                                    <rect key="frame" x="120.5" y="41.5" width="150" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="g7r-tP-s31" firstAttribute="top" secondItem="cty-4k-jCy" secondAttribute="bottom" constant="4" id="6KK-pM-DGY"/>
+                                                <constraint firstAttribute="bottom" secondItem="eEe-9a-Fgq" secondAttribute="bottom" constant="8" id="DSr-ox-e4k"/>
+                                                <constraint firstItem="cty-4k-jCy" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="Hoy-qT-SBt"/>
+                                                <constraint firstItem="eEe-9a-Fgq" firstAttribute="top" secondItem="TMG-gN-0Pw" secondAttribute="top" constant="8" id="Ioj-3s-69t"/>
+                                                <constraint firstAttribute="trailing" secondItem="g7r-tP-s31" secondAttribute="trailing" constant="16" id="Rah-a8-0D5"/>
+                                                <constraint firstItem="g7r-tP-s31" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="XUV-kY-M1U"/>
+                                                <constraint firstItem="eEe-9a-Fgq" firstAttribute="leading" secondItem="TMG-gN-0Pw" secondAttribute="leading" constant="16" id="lt9-at-2xM"/>
+                                                <constraint firstItem="g7r-tP-s31" firstAttribute="centerY" secondItem="TMG-gN-0Pw" secondAttribute="centerY" constant="8" id="rgf-T9-X9O"/>
+                                                <constraint firstAttribute="height" constant="130" id="xCR-Kf-gmY"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="TMG-gN-0Pw" firstAttribute="leading" secondItem="R7X-mR-5dQ" secondAttribute="leading" id="HMq-bW-clE"/>
+                                        <constraint firstAttribute="trailing" secondItem="TMG-gN-0Pw" secondAttribute="trailing" id="SWp-Mu-qaE"/>
+                                        <constraint firstAttribute="bottom" secondItem="TMG-gN-0Pw" secondAttribute="bottom" id="tue-ft-Mkp"/>
+                                        <constraint firstItem="TMG-gN-0Pw" firstAttribute="top" secondItem="R7X-mR-5dQ" secondAttribute="top" id="x7B-Cu-aSJ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="animeTitleLabel" destination="g7r-tP-s31" id="qSR-4O-tkW"/>
+                                    <outlet property="coverImageView" destination="eEe-9a-Fgq" id="yUc-qo-hXJ"/>
+                                    <segue destination="fnc-Z3-OPF" kind="show" id="pnE-3F-WKs"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -632,6 +692,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RX7-9M-xIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1149.5999999999999" y="1156.3718140929536"/>
+        </scene>
+        <!--AnimePlayer-->
+        <scene sceneID="LiF-NM-f4b">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zvQ-c8-IjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1801" y="1157"/>
         </scene>
         <!--Recent Container-->
         <scene sceneID="xrG-1s-UhK">
@@ -697,5 +765,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="5mq-eg-8TQ"/>
+        <segue reference="Uut-Fq-hAa"/>
     </inferredMetricsTieBreakers>
 </document>

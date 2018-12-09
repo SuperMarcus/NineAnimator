@@ -98,7 +98,7 @@ class FeaturedViewController: UITableViewController {
             let selected = tableView.indexPathForSelectedRow,
             let animeLink = pools[selected.section]?[selected.item]
             else { return }
-        playerViewController.link = animeLink
+        playerViewController.animeLink = animeLink
     }
     
     // turn off highlighting effect when users can't see this happening

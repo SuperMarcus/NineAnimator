@@ -103,7 +103,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
             let player = segue.destination as? AnimeViewController
             else { return }
         
-        player.link = anime
+        player.animeLink = anime
         
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: true)
