@@ -113,4 +113,9 @@ class NineAnimatorUser {
         let key = "\(episode).progress"
         return _freezer.float(forKey: key)
     }
+    
+    func clear() {
+        recentAnimes = []
+        _freezer.removeObject(forKey: "episode.recent")
+    }
 }

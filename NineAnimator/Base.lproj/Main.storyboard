@@ -687,7 +687,13 @@
                             <outlet property="delegate" destination="8OU-XT-7E1" id="T05-0I-Xev"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recents" id="smF-4W-Oha"/>
+                    <navigationItem key="navigationItem" title="Recents" id="smF-4W-Oha">
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Zea-3B-Zbo">
+                            <connections>
+                                <action selector="onClearButtonPressed:" destination="8OU-XT-7E1" id="bpE-cb-c5M"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RX7-9M-xIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

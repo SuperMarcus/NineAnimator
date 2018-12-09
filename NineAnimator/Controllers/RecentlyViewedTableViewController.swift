@@ -20,14 +20,26 @@
 import UIKit
 
 class RecentlyViewedTableViewController: UITableViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+}
 
-    // MARK: - Table view data source
+extension RecentlyViewedTableViewController {
+    @IBAction func onClearButtonPressed(_ sender: Any) {
+        NineAnimator.default.user.clear()
+        tableView.reloadSections([0, 1], with: .automatic)
+    }
+}
 
+// MARK: - Table view data source
+extension RecentlyViewedTableViewController{
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -68,6 +80,7 @@ class RecentlyViewedTableViewController: UITableViewController {
     }
 }
 
+//MARK: - Segue preparation
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let player = segue.destination as? AnimeViewController else { return }
