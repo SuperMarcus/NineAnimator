@@ -105,8 +105,6 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         
         player.animeLink = anime
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
+        tableView.deselectSelectedRow()
     }
 }

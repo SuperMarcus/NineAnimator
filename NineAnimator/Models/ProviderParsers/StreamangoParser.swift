@@ -61,8 +61,7 @@ class StreamangoParser: VideoProviderParser {
             
             debugPrint("Info: (Streamango Parser) found asset at \(sourceUrl.absoluteString)")
             
-            let asset = AVURLAsset(url: sourceUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": additionalHeaders])
-            let item = AVPlayerItem(asset: asset)
+            let item = AVPlayerItem(url: sourceUrl, headers: additionalHeaders)
             
             handler(item, nil)
         }

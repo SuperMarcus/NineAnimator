@@ -18,12 +18,11 @@
 //
 
 import AVKit
-import Foundation
 
 extension CMTime {
     var seconds: Float { return Float(CMTimeGetSeconds(self)) }
     
-    static func seconds(_ value: Float) -> CMTime {
-        return CMTime(seconds: Double(value), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+    init(seconds: Float) {
+        self.init(seconds: Double(seconds), preferredTimescale: CMTimeScale(NSEC_PER_SEC))
     }
 }
