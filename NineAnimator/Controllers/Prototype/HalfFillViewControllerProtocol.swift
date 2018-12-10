@@ -40,7 +40,7 @@ extension HalfFillViewControllerProtocol where Self: UIViewController{
         case .full: return .default
         }
     }
-    var requiredSize: CGFloat { return 320 }
+    var requiredSize: CGFloat { return 376 }
     var halfFillController: HalfFillPresentationController? {
         return self.presentationController as? HalfFillPresentationController
     }

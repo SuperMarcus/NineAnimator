@@ -59,31 +59,49 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <prototypes>
-                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="cast.device" textLabel="kya-9g-upa" detailTextLabel="Cow-0w-DuZ" style="IBUITableViewCellStyleSubtitle" id="CQh-ma-3yY">
-                                                            <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="cast.device" rowHeight="56" id="CQh-ma-3yY" customClass="GoogleCastDeviceTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="28" width="343" height="56"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CQh-ma-3yY" id="Yve-04-6eV">
-                                                                <rect key="frame" x="0.0" y="0.0" width="304" height="43.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="304" height="55.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kya-9g-upa">
-                                                                        <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYe-go-Ibx">
+                                                                        <rect key="frame" x="23" y="11" width="239" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cow-0w-DuZ">
-                                                                        <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Device Model" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Epq-MY-bLT">
+                                                                        <rect key="frame" x="23" y="29" width="239" height="16"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="11"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
+                                                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Ipk-3W-0Mx">
+                                                                        <rect key="frame" x="270" y="0.0" width="20" height="55.5"/>
+                                                                    </activityIndicatorView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstItem="Epq-MY-bLT" firstAttribute="leading" secondItem="Yve-04-6eV" secondAttribute="leadingMargin" constant="8" id="Fn4-O0-Qaj"/>
+                                                                    <constraint firstItem="Epq-MY-bLT" firstAttribute="top" secondItem="dYe-go-Ibx" secondAttribute="bottom" id="MSh-Ov-mjn"/>
+                                                                    <constraint firstItem="dYe-go-Ibx" firstAttribute="top" secondItem="Yve-04-6eV" secondAttribute="topMargin" id="MpF-kB-Xk5"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="Ipk-3W-0Mx" secondAttribute="bottom" id="Tdl-vq-12w"/>
+                                                                    <constraint firstItem="dYe-go-Ibx" firstAttribute="leading" secondItem="Yve-04-6eV" secondAttribute="leadingMargin" constant="8" id="eTc-Po-SLh"/>
+                                                                    <constraint firstItem="Ipk-3W-0Mx" firstAttribute="top" secondItem="Yve-04-6eV" secondAttribute="top" id="hdd-5Z-7ve"/>
+                                                                    <constraint firstItem="Ipk-3W-0Mx" firstAttribute="leading" secondItem="Epq-MY-bLT" secondAttribute="trailing" constant="8" id="lUd-Cs-DGh"/>
+                                                                    <constraint firstItem="Ipk-3W-0Mx" firstAttribute="leading" secondItem="dYe-go-Ibx" secondAttribute="trailing" constant="8" id="llP-ky-Px3"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Ipk-3W-0Mx" secondAttribute="trailing" constant="14" id="pER-ql-ubv"/>
+                                                                    <constraint firstItem="Epq-MY-bLT" firstAttribute="bottom" secondItem="Yve-04-6eV" secondAttribute="bottomMargin" id="xyq-SP-73W"/>
+                                                                </constraints>
                                                             </tableViewCellContentView>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <connections>
+                                                                <outlet property="connectingIndicator" destination="Ipk-3W-0Mx" id="ijS-C7-abL"/>
+                                                                <outlet property="deviceModelLabel" destination="Epq-MY-bLT" id="0Q8-bb-o5a"/>
+                                                                <outlet property="deviceNameLabel" destination="dYe-go-Ibx" id="Hst-8M-HRW"/>
+                                                            </connections>
                                                         </tableViewCell>
                                                     </prototypes>
                                                 </tableView>

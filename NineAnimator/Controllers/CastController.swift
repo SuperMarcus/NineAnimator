@@ -20,12 +20,16 @@
 import UIKit
 import OpenCastSwift
 
-class CastController: CastDeviceScannerDelegate {
+class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     static var `default` = CastController()
     
     private let scanner: CastDeviceScanner
     
     var devices = [CastDevice]()
+    
+    var client: CastClient?
+    
+    var content: CastMedia?
     
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
@@ -39,6 +43,26 @@ class CastController: CastDeviceScannerDelegate {
         scanner.delegate = self
     }
     
+    func connect(to device: CastDevice){
+        if let client = client {
+            client.disconnect()
+            client.delegate = nil
+        }
+        
+        debugPrint("Info: Connecting to \(device)")
+        
+        client = CastClient(device: device)
+        client?.delegate = self
+        client?.connect()
+        viewController.deviceListUpdated()
+    }
+    
+    func disconnect(){
+        client?.disconnect()
+        client = nil
+        viewController.deviceListUpdated()
+    }
+    
     func present(from source: UIViewController) -> Any {
         let vc = viewController
         let delegate = setupHalfFillView(for: vc, from: source)
@@ -49,6 +73,18 @@ class CastController: CastDeviceScannerDelegate {
     func start(){ scanner.startScanning() }
     
     func stop(){ scanner.stopScanning() }
+}
+
+extension CastController {
+    func castClient(_ client: CastClient, didConnectTo device: CastDevice) {
+        debugPrint("Info: Connected to \(device)")
+        viewController.deviceListUpdated()
+    }
+    
+    func castClient(_ client: CastClient, didDisconnectFrom device: CastDevice) {
+        debugPrint("Info: Disconnected from \(device)")
+        viewController.deviceListUpdated()
+    }
 }
 
 extension CastController {

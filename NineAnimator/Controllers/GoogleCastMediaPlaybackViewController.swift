@@ -20,6 +20,12 @@
 import UIKit
 import OpenCastSwift
 
+enum CastDeviceState {
+    case idle
+    case connected
+    case connecting
+}
+
 class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource {
     weak var castController: CastController!
     
@@ -32,6 +38,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         deviceListTableView.dataSource = self
+        deviceListTableView.rowHeight = 48
         castController.start()
     }
     
@@ -45,6 +52,16 @@ extension GoogleCastMediaPlaybackViewController {
     func deviceListUpdated(){
         deviceListTableView.reloadSections([0], with: .automatic)
     }
+    
+    func device(selected: Bool, from device: CastDevice, with cell: GoogleCastDeviceTableViewCell) {
+        if selected {
+            if device == castController.client?.device {
+                castController.disconnect()
+            } else {
+                castController.connect(to: device)
+            }
+        }
+    }
 }
 
 //MARK: - Table view data source
@@ -56,10 +73,11 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath) as? GoogleCastDeviceTableViewCell else { fatalError() }
         let device = castController.devices[indexPath.item]
-        cell.textLabel?.text = device.name
-        cell.detailTextLabel?.text = device.modelName
+        cell.device = device
+        cell.state = device == castController.client?.device ? castController.client?.isConnected == true ? .connected : .connecting : .idle
+        cell.delegate = self
         return cell
     }
 }

@@ -20,6 +20,7 @@
 		2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C12EDE121BDE9230064D2BD /* GoogleCastMediaControl.storyboard */; };
 		2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */; };
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
+		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -89,6 +90,7 @@
 		2C12EDE221BDE9230064D2BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/GoogleCastMediaControl.storyboard; sourceTree = "<group>"; };
 		2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastMediaPlaybackViewController.swift; sourceTree = "<group>"; };
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
+		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -273,6 +275,7 @@
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 				2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */,
 				2C6677B821BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift */,
+				2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
 				2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */,
 				2C4ABC7B21B59EBD009B4D47 /* FeaturedAnimationView.swift in Sources */,
+				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */,
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
