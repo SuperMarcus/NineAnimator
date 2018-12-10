@@ -43,13 +43,13 @@ struct Episode {
         self._session = session
     }
     
-    func retrive(onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask? {
+    func retrive(onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask? {
         guard let provider = VideoProviderRegistry.default.provider(for: link.server) else {
             handler(nil, NineAnimatorError.providerError("no parser found for server \(link.server)"))
             return nil
         }
         
-        return provider.parse(url: target, with: _session, onCompletion: handler)
+        return provider.parse(episode: self, with: _session, onCompletion: handler)
     }
     
     func parent(onCompletion handler: @escaping NineAnimatorCallback<Anime>) {

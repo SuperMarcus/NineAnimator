@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
+		2C12EDD221BDDF320064D2BD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCE21BDDF320064D2BD /* Result.framework */; };
+		2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */; };
+		2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */; };
+		2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -65,6 +69,10 @@
 
 /* Begin PBXFileReference section */
 		2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMedia.swift; sourceTree = "<group>"; };
+		2C12EDCE21BDDF320064D2BD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
+		2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
+		2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCastSwift.framework; path = Carthage/Build/iOS/OpenCastSwift.framework; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -126,6 +134,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C12EDD221BDDF320064D2BD /* Result.framework in Frameworks */,
+				2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */,
+				2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */,
+				2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */,
 				2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */,
 				2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */,
 				2C4ABC9521B7F53F009B4D47 /* Kingfisher.framework in Frameworks */,
@@ -258,6 +270,10 @@
 		2C4ABC9321B7F53E009B4D47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */,
+				2C12EDCE21BDDF320064D2BD /* Result.framework */,
+				2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */,
+				2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */,
 				2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */,
 				2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */,
 				2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */,
@@ -401,6 +417,10 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/OpenCastSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftProtobuf.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			outputFileListPaths = (
 			);
@@ -408,6 +428,10 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftSoup.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OpenCastSwift.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftProtobuf.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

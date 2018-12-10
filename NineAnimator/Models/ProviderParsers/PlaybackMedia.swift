@@ -19,9 +19,41 @@
 
 import Foundation
 import AVKit
+import OpenCastSwift
+import Alamofire
 
 protocol PlaybackMedia {
     var avPlayerItem: AVPlayerItem { get }
+    var castMedia: CastMedia? { get }
+}
+
+struct BasicPlaybackMedia: PlaybackMedia {
+    let playbackUrl: URL
+    let customHeaders: Alamofire.HTTPHeaders
+    let parent: Episode
+    let contentType: String
     
+    var avPlayerItem: AVPlayerItem {
+        let asset = AVURLAsset(url: playbackUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": customHeaders])
+        return AVPlayerItem(asset: asset)
+    }
     
+    var castMedia: CastMedia? {
+        let media = CastMedia(
+            title: parent.name,
+            url: playbackUrl,
+            poster: parent.link.parent.image,
+            contentType: contentType,
+            streamType: .buffered,
+            autoplay: true,
+            currentTime: 0)
+        return media
+    }
+    
+    init(_ url: URL, parent: Episode, contentType: String, headers: Alamofire.HTTPHeaders = [:]) {
+        self.playbackUrl = url
+        self.customHeaders = headers
+        self.parent = parent
+        self.contentType = contentType
+    }
 }

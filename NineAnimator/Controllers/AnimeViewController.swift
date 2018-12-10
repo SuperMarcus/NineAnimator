@@ -278,11 +278,11 @@ extension AnimeViewController {
             
             if episode.nativePlaybackSupported {
                 self.episodeRequestTask = episode.retrive {
-                    [weak self] item, error in
+                    [weak self] media, error in
                     guard let self = self else { return }
                     self.episodeRequestTask = nil
                     
-                    guard let item = item else {
+                    guard let media = media else {
                         debugPrint("Warn: Item not retrived \(error!), fallback to web access")
                         DispatchQueue.main.async { [weak self] in
                             let playbackController = SFSafariViewController(url: episode.target)
@@ -291,6 +291,7 @@ extension AnimeViewController {
                         return
                     }
                     
+                    let item = media.avPlayerItem
                     let playerController = AVPlayerViewController()
                     playerController.player = AVPlayer(playerItem: item)
                     self.displayedPlayer = playerController.player
