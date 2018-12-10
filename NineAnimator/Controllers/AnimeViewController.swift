@@ -297,28 +297,35 @@ extension AnimeViewController {
                         return
                     }
                     
-                    let item = media.avPlayerItem
-                    let playerController = AVPlayerViewController()
-                    playerController.player = AVPlayer(playerItem: item)
-                    self.displayedPlayer = playerController.player
-                    
-                    self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
-                    
-                    //Initialize audio session to movie playback
-                    let audioSession = AVAudioSession.sharedInstance()
-                    try? audioSession.setCategory(
-                        .playback,
-                        mode: .moviePlayback,
-                        options: [
-                            .allowAirPlay,
-                            .allowBluetooth,
-                            .allowBluetoothA2DP
-                        ])
-                    try? audioSession.setActive(true)
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        playerController.player?.play()
-                        self?.present(playerController, animated: true, completion: clearSelection)
+                    if CastController.default.isReady {
+                        CastController.default.initiate(playbackMedia: media)
+                        DispatchQueue.main.async {
+                            self.castPresentationDelegate = CastController.default.present(from: self)
+                        }
+                    } else {
+                        let item = media.avPlayerItem
+                        let playerController = AVPlayerViewController()
+                        playerController.player = AVPlayer(playerItem: item)
+                        self.displayedPlayer = playerController.player
+                        
+                        self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
+                        
+                        //Initialize audio session to movie playback
+                        let audioSession = AVAudioSession.sharedInstance()
+                        try? audioSession.setCategory(
+                            .playback,
+                            mode: .moviePlayback,
+                            options: [
+                                .allowAirPlay,
+                                .allowBluetooth,
+                                .allowBluetoothA2DP
+                            ])
+                        try? audioSession.setActive(true)
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            playerController.player?.play()
+                            self?.present(playerController, animated: true, completion: clearSelection)
+                        }
                     }
                 }
             } else {

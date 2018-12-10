@@ -31,6 +31,8 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     var content: CastMedia?
     
+    var isReady: Bool { return client?.isConnected ?? false }
+    
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
         let vc = storyboard.instantiateInitialViewController() as! GoogleCastMediaPlaybackViewController
@@ -68,6 +70,21 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         let delegate = setupHalfFillView(for: vc, from: source)
         source.present(vc, animated: true)
         return delegate
+    }
+    
+    func initiate(playbackMedia media: PlaybackMedia) {
+        guard let client = client else { return }
+        guard let castMedia = media.castMedia else { return }
+        
+        client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
+            result in
+            guard let app = result.value else {
+                debugPrint("Error: \(result.error!)")
+                return
+            }
+            
+            client.load(media: castMedia, with: app){ _ in }
+        }
     }
     
     func start(){ scanner.startScanning() }
