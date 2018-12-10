@@ -54,18 +54,50 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cy-JY-WrH">
-                                                    <rect key="frame" x="148" y="129" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Play"/>
-                                                </button>
+                                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="r7V-Al-yfC">
+                                                    <rect key="frame" x="0.0" y="72" width="343" height="144"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <prototypes>
+                                                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="cast.device" textLabel="kya-9g-upa" detailTextLabel="Cow-0w-DuZ" style="IBUITableViewCellStyleSubtitle" id="CQh-ma-3yY">
+                                                            <rect key="frame" x="0.0" y="28" width="343" height="44"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CQh-ma-3yY" id="Yve-04-6eV">
+                                                                <rect key="frame" x="0.0" y="0.0" width="304" height="43.5"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kya-9g-upa">
+                                                                        <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cow-0w-DuZ">
+                                                                        <rect key="frame" x="15" y="25.5" width="33" height="14.5"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </tableViewCellContentView>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </tableViewCell>
+                                                    </prototypes>
+                                                </tableView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="r7V-Al-yfC" secondAttribute="trailing" id="6Fr-ho-q2g"/>
+                                                <constraint firstItem="r7V-Al-yfC" firstAttribute="top" secondItem="8lZ-LQ-fSn" secondAttribute="bottom" constant="8" id="RN9-ii-xdu"/>
                                                 <constraint firstItem="8lZ-LQ-fSn" firstAttribute="leading" secondItem="1du-9o-adF" secondAttribute="leading" constant="24" id="VZ7-9w-UrI"/>
                                                 <constraint firstAttribute="bottom" secondItem="nCq-UB-A8A" secondAttribute="bottom" constant="16" id="WTM-u3-NQX"/>
                                                 <constraint firstItem="nCq-UB-A8A" firstAttribute="leading" secondItem="1du-9o-adF" secondAttribute="leading" constant="24" id="a04-ZM-Ynt"/>
                                                 <constraint firstAttribute="trailing" secondItem="8lZ-LQ-fSn" secondAttribute="trailing" constant="24" id="bIB-Vb-a89"/>
+                                                <constraint firstItem="r7V-Al-yfC" firstAttribute="leading" secondItem="1du-9o-adF" secondAttribute="leading" id="heW-cX-8rl"/>
                                                 <constraint firstAttribute="trailing" secondItem="nCq-UB-A8A" secondAttribute="trailing" constant="24" id="kWE-RR-E8e"/>
+                                                <constraint firstItem="nCq-UB-A8A" firstAttribute="top" secondItem="r7V-Al-yfC" secondAttribute="bottom" constant="16" id="pwL-k2-o2q"/>
                                                 <constraint firstItem="8lZ-LQ-fSn" firstAttribute="top" secondItem="1du-9o-adF" secondAttribute="top" constant="16" id="wLk-7h-g17"/>
                                             </constraints>
                                         </view>
@@ -113,6 +145,9 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <size key="freeformSize" width="375" height="320"/>
+                    <connections>
+                        <outlet property="deviceListTableView" destination="r7V-Al-yfC" id="gnj-lb-Qke"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roa-nd-ztM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

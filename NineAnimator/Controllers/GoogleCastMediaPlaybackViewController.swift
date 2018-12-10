@@ -18,9 +18,12 @@
 //
 
 import UIKit
+import OpenCastSwift
 
-class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol {
+class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource {
     weak var castController: CastController!
+    
+    @IBOutlet weak var deviceListTableView: UITableView!
     
     @IBAction func onDoneButtonPressed(_ sender: Any) {
         dismiss(animated: true)
@@ -28,11 +31,35 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deviceListTableView.dataSource = self
         castController.start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         castController.stop()
+    }
+}
+
+extension GoogleCastMediaPlaybackViewController {
+    func deviceListUpdated(){
+        deviceListTableView.reloadSections([0], with: .automatic)
+    }
+}
+
+//MARK: - Table view data source
+extension GoogleCastMediaPlaybackViewController {
+    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return castController.devices.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath)
+        let device = castController.devices[indexPath.item]
+        cell.textLabel?.text = device.name
+        cell.detailTextLabel?.text = device.modelName
+        return cell
     }
 }

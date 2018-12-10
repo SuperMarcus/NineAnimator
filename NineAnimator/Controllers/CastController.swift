@@ -20,10 +20,12 @@
 import UIKit
 import OpenCastSwift
 
-class CastController {
+class CastController: CastDeviceScannerDelegate {
     static var `default` = CastController()
     
-    private let scanner = CastDeviceScanner()
+    private let scanner: CastDeviceScanner
+    
+    var devices = [CastDevice]()
     
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
@@ -31,6 +33,11 @@ class CastController {
         vc.castController = self
         return vc
     }()
+    
+    init(){
+        scanner = CastDeviceScanner()
+        scanner.delegate = self
+    }
     
     func present(from source: UIViewController) -> Any {
         let vc = viewController
@@ -42,4 +49,20 @@ class CastController {
     func start(){ scanner.startScanning() }
     
     func stop(){ scanner.stopScanning() }
+}
+
+extension CastController {
+    func deviceDidComeOnline(_ device: CastDevice){
+        devices.append(device)
+        viewController.deviceListUpdated()
+    }
+    
+    func deviceDidChange(_ device: CastDevice){
+        viewController.deviceListUpdated()
+    }
+    
+    func deviceDidGoOffline(_ device: CastDevice){
+        devices.removeAll { $0.id == device.id }
+        viewController.deviceListUpdated()
+    }
 }
