@@ -34,8 +34,7 @@ struct BasicPlaybackMedia: PlaybackMedia {
     let contentType: String
     
     var avPlayerItem: AVPlayerItem {
-        let asset = AVURLAsset(url: playbackUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": customHeaders])
-        return AVPlayerItem(asset: asset)
+        return AVPlayerItem(url: playbackUrl, headers: customHeaders)
     }
     
     var castMedia: CastMedia? {
