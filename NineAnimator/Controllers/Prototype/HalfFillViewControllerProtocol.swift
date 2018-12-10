@@ -21,6 +21,8 @@ import UIKit
 
 public protocol HalfFillViewControllerProtocol: CustomBarStyleRequiredProtocol {
     var requiredSize: CGFloat { get }
+    
+    var needsTopInset: Bool { get }
 }
 
 public enum HalfFillState{
@@ -33,6 +35,8 @@ extension HalfFillViewControllerProtocol where Self: UIViewController{
 //        if let state = self.halfFillController?.currentState, case .half = state { return true }
 //        else { return false }
 //    }
+    var needsTopInset: Bool { return true }
+    
     var suggestedStatusBarStyle: UIStatusBarStyle {
         guard let controller = halfFillController else { return .default }
         switch controller.currentState {

@@ -31,7 +31,11 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     var content: CastMedia?
     
+    var contentDuration: Double? = nil
+    
     var isReady: Bool { return client?.isConnected ?? false }
+    
+    var currentApp: CastApp?
     
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
@@ -83,7 +87,24 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
                 return
             }
             
-            client.load(media: castMedia, with: app){ _ in }
+            self.currentApp = app
+            client.load(media: castMedia, with: app){
+                mediaResult in
+                switch mediaResult {
+                case .success(let status):
+                    self.content = castMedia
+                    if let duration = status.media?.duration {
+                        debugPrint("Info: Media duration is \(duration)")
+                        self.contentDuration = duration
+                    }
+                    self.viewController.playback(didStart: castMedia, with: status)
+                    self.viewController.playback(update: castMedia, with: status)
+                    debugPrint("Info: Playback status \(status)")
+                case .failure(let error):
+                    self.viewController.playback(didEnd: castMedia)
+                    debugPrint("Warn: Error on playback \(error)")
+                }
+            }
         }
     }
     

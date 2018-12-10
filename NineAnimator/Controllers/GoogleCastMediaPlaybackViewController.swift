@@ -19,6 +19,7 @@
 
 import UIKit
 import OpenCastSwift
+import Kingfisher
 
 enum CastDeviceState {
     case idle
@@ -29,7 +30,13 @@ enum CastDeviceState {
 class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource {
     weak var castController: CastController!
     
+    @IBOutlet weak var playbackControlView: UIView!
+    
+    @IBOutlet weak var coverImage: UIImageView!
+    
     @IBOutlet weak var deviceListTableView: UITableView!
+    
+    var isSeeking = false
     
     @IBAction func onDoneButtonPressed(_ sender: Any) {
         dismiss(animated: true)
@@ -40,6 +47,15 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         deviceListTableView.dataSource = self
         deviceListTableView.rowHeight = 48
         castController.start()
+        playbackControlView.isHidden = true
+        playbackControlView.alpha = 0
+        
+        self.animateFill(to: .full)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -48,6 +64,45 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     }
 }
 
+extension GoogleCastMediaPlaybackViewController {
+    var needsTopInset: Bool { return false }
+    
+    func updateUI(playbackProgress progress: Float) {
+        
+    }
+}
+
+//MARK: - Updates from media server
+extension GoogleCastMediaPlaybackViewController {
+    func playback(update media: CastMedia, with status: CastMediaStatus) {
+        coverImage.kf.setImage(with: media.poster)
+        if !isSeeking {
+//            status.adjustedCurrentTime
+        }
+    }
+    
+    func playback(didStart media: CastMedia, with status: CastMediaStatus) {
+        if playbackControlView.isHidden {
+            playbackControlView.isHidden = false
+            playbackControlView.alpha = 0.01
+            self.animateFill(to: .full)
+            playbackControlView.setNeedsLayout()
+            UIView.animate(withDuration: 0.3){
+                self.playbackControlView.alpha = 1.0
+            }
+        }
+    }
+    
+    func playback(didEnd media: CastMedia) {
+        if !playbackControlView.isHidden {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.playbackControlView.alpha = 0.0
+            }){ _ in self.playbackControlView.isHidden = true }
+        }
+    }
+}
+
+//MARK: Device discovery
 extension GoogleCastMediaPlaybackViewController {
     func deviceListUpdated(){
         deviceListTableView.reloadSections([0], with: .automatic)

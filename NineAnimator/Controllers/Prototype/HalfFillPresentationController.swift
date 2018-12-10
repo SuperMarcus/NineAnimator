@@ -48,11 +48,14 @@ public class HalfFillPresentationController: UIPresentationController {
         return view
     }
     
-    private(set) var currentState: HalfFillState = .half
+    var currentState: HalfFillState = .full
     
     var size: CGFloat {
-        guard let vc = self.presentedViewController as? HalfFillViewControllerProtocol else { return 320 }
-        return vc.requiredSize
+        return viewController.requiredSize
+    }
+    
+    public var viewController: HalfFillViewControllerProtocol {
+        return super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
     private var insertedView: UIView? = nil
@@ -77,7 +80,7 @@ public class HalfFillPresentationController: UIPresentationController {
         
         var topInsect: CGFloat = 0
         
-        if !self.haveDefaultTopInsect{
+        if self.viewController.needsTopInset && !self.haveDefaultTopInsect{
             topInsect = UIApplication.shared.statusBarFrame.height
             let coveringView = UIView(frame: CGRect(
                 origin: CGPoint.zero,
@@ -89,13 +92,17 @@ public class HalfFillPresentationController: UIPresentationController {
             self.insertedView = coveringView
         }
         
-        UIView.animate(withDuration: 0.5, animations: {
-            presented.frame = CGRect(
-                origin: CGPoint(x: 0, y: topInsect),
-                size: CGSize(width: container.bounds.width, height: container.bounds.height - topInsect)
-            )
-            self.insertedView?.alpha = 1.0
-        }) { _ in self.updateState(to: .full, with: self.presentingViewController) }
+//        UIView.animate(withDuration: 0.5, animations: {
+//            presented.frame = CGRect(
+//                origin: CGPoint(x: 0, y: topInsect),
+//                size: CGSize(width: container.bounds.width, height: container.bounds.height - topInsect)
+//            )
+//            self.insertedView?.alpha = 1.0
+//        }) { _ in self.updateState(to: .full, with: self.presentingViewController) }
+        presented.frame = CGRect(
+            origin: CGPoint(x: 0, y: topInsect),
+            size: CGSize(width: container.bounds.width, height: container.bounds.height - topInsect)
+        )
     }
     
     private func presentAsHalfScreen(){
