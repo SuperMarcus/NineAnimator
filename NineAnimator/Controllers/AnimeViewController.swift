@@ -100,6 +100,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     var episodeRequestTask: NineAnimatorAsyncTask?
     
+    private var castPresentationDelegate: Any?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -214,6 +216,10 @@ extension AnimeViewController {
 
 //MARK: - Share and select server
 extension AnimeViewController {
+    @IBAction func onCastButtonTapped(_ sender: Any) {
+        self.castPresentationDelegate = CastController.default.present(from: self)
+    }
+    
     @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {
         guard let link = animeLink else { return }
         let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wSC-JZ-tly">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Google Cast Media Playback View Controller-->
+        <scene sceneID="Jc8-Oi-wbH">
+            <objects>
+                <viewController id="wSC-JZ-tly" customClass="GoogleCastMediaPlaybackViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7r8-oH-jdQ" userLabel="Root View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IsI-vv-DvR" userLabel="Container View">
+                                <rect key="frame" x="16" y="16" width="343" height="288"/>
+                                <subviews>
+                                    <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OFm-HH-8J0">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="288"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1du-9o-adF">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="288"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCq-UB-A8A">
+                                                    <rect key="frame" x="24" y="232" width="295" height="40"/>
+                                                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="40" id="8VR-Bx-6Tu"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Done">
+                                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    </state>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="16"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onDoneButtonPressed:" destination="wSC-JZ-tly" eventType="touchUpInside" id="J1M-o3-x4v"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Google Cast" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lZ-LQ-fSn">
+                                                    <rect key="frame" x="24" y="16" width="295" height="48"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="48" id="rAX-Lb-zb1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cy-JY-WrH">
+                                                    <rect key="frame" x="148" y="129" width="46" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" title="Play"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8lZ-LQ-fSn" firstAttribute="leading" secondItem="1du-9o-adF" secondAttribute="leading" constant="24" id="VZ7-9w-UrI"/>
+                                                <constraint firstAttribute="bottom" secondItem="nCq-UB-A8A" secondAttribute="bottom" constant="16" id="WTM-u3-NQX"/>
+                                                <constraint firstItem="nCq-UB-A8A" firstAttribute="leading" secondItem="1du-9o-adF" secondAttribute="leading" constant="24" id="a04-ZM-Ynt"/>
+                                                <constraint firstAttribute="trailing" secondItem="8lZ-LQ-fSn" secondAttribute="trailing" constant="24" id="bIB-Vb-a89"/>
+                                                <constraint firstAttribute="trailing" secondItem="nCq-UB-A8A" secondAttribute="trailing" constant="24" id="kWE-RR-E8e"/>
+                                                <constraint firstItem="8lZ-LQ-fSn" firstAttribute="top" secondItem="1du-9o-adF" secondAttribute="top" constant="16" id="wLk-7h-g17"/>
+                                            </constraints>
+                                        </view>
+                                        <blurEffect style="extraLight"/>
+                                    </visualEffectView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="OFm-HH-8J0" firstAttribute="leading" secondItem="IsI-vv-DvR" secondAttribute="leading" id="Dqq-8f-PP7"/>
+                                    <constraint firstItem="OFm-HH-8J0" firstAttribute="top" secondItem="IsI-vv-DvR" secondAttribute="top" id="czT-0B-cw4"/>
+                                    <constraint firstAttribute="trailing" secondItem="OFm-HH-8J0" secondAttribute="trailing" id="jaX-jH-HBd"/>
+                                    <constraint firstAttribute="bottom" secondItem="OFm-HH-8J0" secondAttribute="bottom" id="kiD-gT-VZl"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="8cD-7T-B3o" firstAttribute="trailing" secondItem="IsI-vv-DvR" secondAttribute="trailing" constant="16" id="6wr-Ty-J1j"/>
+                            <constraint firstItem="8cD-7T-B3o" firstAttribute="bottom" secondItem="IsI-vv-DvR" secondAttribute="bottom" constant="16" id="RKu-0v-bQS"/>
+                            <constraint firstItem="IsI-vv-DvR" firstAttribute="leading" secondItem="8cD-7T-B3o" secondAttribute="leading" constant="16" id="nnp-ec-SzZ"/>
+                            <constraint firstItem="IsI-vv-DvR" firstAttribute="top" secondItem="8cD-7T-B3o" secondAttribute="top" constant="16" id="nve-70-t1z"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="8cD-7T-B3o"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.29999999999999999"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                <point key="value" x="0.0" y="0.5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <size key="freeformSize" width="375" height="320"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="roa-nd-ztM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80.799999999999997" y="151.12443778110946"/>
+        </scene>
+    </scenes>
+</document>
