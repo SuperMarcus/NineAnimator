@@ -5,13 +5,6 @@ A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
-| Featured Animes | Recently Viewed | Search |
-| ------------------- | ------------------- | -------- |
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
-
-| Search Results | Choose Episodes | Chromecast |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
     
@@ -28,6 +21,13 @@ v3 Licensed.
     You should have received a copy of the GNU General Public License
     along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
     
+
+## Table of Contents
+
+- [Features](#features)
+- [Build & Install](#build--install)
+- [Screenshots](#screenshots)
+- [Credits](#credits)
 
 ## Features
 
@@ -82,6 +82,16 @@ Still, you should make sure that you have a working copy of Carthage first.
 ```sh
 $ carthage update
 ```
+
+## Screenshots
+
+| Featured Animes | Recently Viewed | Search |
+| ------------------- | ------------------- | -------- |
+| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
+
+| Search Results | Choose Episodes | Chromecast |
+| ----------------- | -------------------- | --------------- |
+| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
 
 ## Credits
 
