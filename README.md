@@ -10,6 +10,7 @@ v3 Licensed.
 | ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
 
 | Search Results | Choose Episodes | Chromecast |
+| ----------------- | -------------------- | --------------- |
 | ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
