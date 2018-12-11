@@ -5,13 +5,12 @@ A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
-| Featured Animes | Recently Viewed | Search |
-| ------------------- | ------------------- | -------- |
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
+## Google Cast is now supported by the [master](https://github.com/SuperMarcus/NineAnimator) branch
 
-| Search Results | Choose Episodes | Chromecast |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
+google-cast-support has been merged into mainstream. This branch will no longer be maintained and will be deleted soon.
+
+Please check out the [master](https://github.com/SuperMarcus/NineAnimator) branch instead.
+
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
     
@@ -28,28 +27,6 @@ v3 Licensed.
     You should have received a copy of the GNU General Public License
     along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
     
-
-## Features
-
-- [x] iOS's native video playback interface (works with RapidVideo, Streamango, and MyCloud -- more is coming), which also gives you the option to use AirPlay
-- [x] Supports Chromecast/Google Cast (works with RapidVideo, Streamango. Doesn't work with MyCloud because of CORS)
-- [x] Search animes on 9anime
-- [x] Show the most popular/recent animes on 9anime
-- [x] Ads Free and no logins
-- [x] Auto resumes your playback progress
-- [x] Playback history && resume playback with just one click in the Recent tab
-- [x] Super-duper clean UIs
-- [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
-- [ ] Integration with MAL (planned)
-- [ ] Support sites other than 9anime (possible)
-
-## Build & Install
-
-You don't need any Apple Developer membership to build and install this app.
-Just open this project in Xcode and hopefully you'll be allowed to install and
-run NineAnimator on your phone.
-
-To update dependencies, run `carthage update`
 
 ## Credits
 
