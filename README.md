@@ -51,9 +51,9 @@ Sites that are being considered
 - [x] Auto resumes your playback progress
 - [x] Playback history && resume playback with just one click in the Recent tab
 - [x] Super-duper clean UIs
+- [ ] Support sites other than 9anime (work in progress)
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
 - [ ] Integration with MAL (planned)
-- [ ] Support sites other than 9anime (possible)
 
 ## Build & Install
 
