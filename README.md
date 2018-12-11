@@ -45,11 +45,43 @@ v3 Licensed.
 
 ## Build & Install
 
-You don't need any Apple Developer membership to build and install this app.
-Just open this project in Xcode and hopefully you'll be allowed to install and
-run NineAnimator on your phone.
+### Step One: Install Carthage
 
-To update dependencies, run `carthage update`
+To build this app, you will need [Carthage](https://github.com/Carthage/Carthage#installing-carthage) installed.
+
+The simplest way to install Carthage is to use Homebrew.
+
+```sh
+$ brew update
+$ brew install carthage
+```
+
+You can also install Carthage with the installer package, which can be found
+[here](https://github.com/Carthage/Carthage/releases).
+
+### Step Two: Build the app with Xcode
+
+You won't need any Apple Developer membership to build and install this app.
+Open this project in Xcode, connect your phone to the computer, select your
+device, and click the run button on the top left corner.
+
+Xcode might prompt you that the bundle identifier cannot be used. In this case,
+select the `NineAnimator` in the Navigator, choose `NineAnimator` in the Targets,
+click the `General` tab on the top, and change the `Bundle Identifier` in the
+Identity section to whatever you like. Then, click the `Team` drawer in the Signing
+section, and choose your developer profile. You should be good to go after this.
+
+### Step Three (Optional): Update dependencies
+
+All the required binaries have been compiled and uploaded to the repository, so
+you shouldn't need to do this. But if something doesn't work out, you might want
+to try updating the dependencies.
+
+Still, you should make sure that you have a working copy of Carthage first.
+
+```sh
+$ carthage update
+```
 
 ## Credits
 
