@@ -298,7 +298,7 @@ extension AnimeViewController {
                     }
                     
                     if CastController.default.isReady {
-                        CastController.default.initiate(playbackMedia: media)
+                        CastController.default.initiate(playbackMedia: media, with: episode)
                         DispatchQueue.main.async {
                             self.castPresentationDelegate = CastController.default.present(from: self)
                         }

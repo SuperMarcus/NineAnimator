@@ -19,11 +19,7 @@
 
 import UIKit
 
-public protocol HalfFillViewControllerProtocol: CustomBarStyleRequiredProtocol {
-    var requiredSize: CGFloat { get }
-    
-    var needsTopInset: Bool { get }
-}
+public protocol HalfFillViewControllerProtocol: CustomBarStyleRequiredProtocol { }
 
 public enum HalfFillState{
     case full
@@ -31,26 +27,8 @@ public enum HalfFillState{
 }
 
 extension HalfFillViewControllerProtocol where Self: UIViewController{
-//    var shouldStatusBarBeHidden: Bool {
-//        if let state = self.halfFillController?.currentState, case .half = state { return true }
-//        else { return false }
-//    }
-    var needsTopInset: Bool { return true }
-    
-    var suggestedStatusBarStyle: UIStatusBarStyle {
-        guard let controller = halfFillController else { return .default }
-        switch controller.currentState {
-        case .half: return .lightContent
-        case .full: return .default
-        }
-    }
-    var requiredSize: CGFloat { return 376 }
     var halfFillController: HalfFillPresentationController? {
         return self.presentationController as? HalfFillPresentationController
-    }
-    
-    func animateFill(to state: HalfFillState){
-        self.halfFillController?.animate(to: state)
     }
 }
 

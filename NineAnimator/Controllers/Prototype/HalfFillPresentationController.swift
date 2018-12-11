@@ -48,89 +48,23 @@ public class HalfFillPresentationController: UIPresentationController {
         return view
     }
     
-    var currentState: HalfFillState = .full
-    
-    var size: CGFloat {
-        return viewController.requiredSize
-    }
-    
     public var viewController: HalfFillViewControllerProtocol {
         return super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
-    private var insertedView: UIView? = nil
-    
-    private var haveDefaultTopInsect: Bool {
-        return self.presentingViewController.navigationController != nil
-    }
-    
-    override public var frameOfPresentedViewInContainerView: CGRect {
-        return CGRect(
-            origin: CGPoint(x: 0, y: containerView!.bounds.height - size),
-            size: CGSize(
-                width: containerView!.bounds.width,
-                height: size
-            )
-        )
+    public func layoutBackgroundView(with size: CGSize){
+        var view: UIView? = _dimmingView
+        while view != nil {
+            view?.frame.size = size
+            view = view?.subviews.first
+        }
     }
     
     private func presentAsFullScreen(){
         guard let presented = self.presentedView else { return }
         guard let container = self.containerView else { return }
         
-        var topInsect: CGFloat = 0
-        
-        if self.viewController.needsTopInset && !self.haveDefaultTopInsect{
-            topInsect = UIApplication.shared.statusBarFrame.height
-            let coveringView = UIView(frame: CGRect(
-                origin: CGPoint.zero,
-                size: CGSize(width: container.bounds.width, height: topInsect)
-            ))
-            coveringView.backgroundColor = UIColor(red: 0.976, green: 0.976, blue: 0.976, alpha: 1.0)
-            coveringView.alpha = 0
-            container.addSubview(coveringView)
-            self.insertedView = coveringView
-        }
-        
-//        UIView.animate(withDuration: 0.5, animations: {
-//            presented.frame = CGRect(
-//                origin: CGPoint(x: 0, y: topInsect),
-//                size: CGSize(width: container.bounds.width, height: container.bounds.height - topInsect)
-//            )
-//            self.insertedView?.alpha = 1.0
-//        }) { _ in self.updateState(to: .full, with: self.presentingViewController) }
-        presented.frame = CGRect(
-            origin: CGPoint(x: 0, y: topInsect),
-            size: CGSize(width: container.bounds.width, height: container.bounds.height - topInsect)
-        )
-    }
-    
-    private func presentAsHalfScreen(){
-        guard let presented = self.presentedView else { return }
-        guard let container = self.containerView else { return }
-        
-        self.updateState(to: .half, with: self.presentingViewController)
-        UIView.animate(withDuration: 0.5, animations: {
-            presented.frame = CGRect(
-                origin: CGPoint(x: 0, y: container.bounds.height - self.size),
-                size: CGSize(width: container.bounds.width, height: self.size)
-            )
-            self.insertedView?.alpha = 0
-        }) { _ in self.clearInsertedView() }
-    }
-    
-    private func clearInsertedView(){
-        if let inserted = insertedView {
-            inserted.removeFromSuperview()
-            insertedView = nil
-        }
-    }
-    
-    public func animate(to state: HalfFillState){
-        switch state {
-        case .half: presentAsHalfScreen()
-        case .full: presentAsFullScreen()
-        }
+        presented.frame = container.bounds
     }
     
     override public func presentationTransitionWillBegin() {
@@ -146,7 +80,7 @@ public class HalfFillPresentationController: UIPresentationController {
             _ in
             dimmer.alpha = 1
             self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }){ _ in self.updateState(to: .half, with: self.presentingViewController) }
+        }){ _ in self.updateState(viewController: self.presentingViewController) }
     }
     
     override public func dismissalTransitionWillBegin(){
@@ -156,7 +90,6 @@ public class HalfFillPresentationController: UIPresentationController {
             self.dimmer?.alpha = 0
             self.presentingViewController.view.transform = .identity
         })
-        clearInsertedView()
     }
     
     override public func dismissalTransitionDidEnd(_ completed: Bool){
@@ -164,8 +97,7 @@ public class HalfFillPresentationController: UIPresentationController {
         self._dimmingView = nil
     }
     
-    private func updateState(to state: HalfFillState, with viewController: UIViewController){
-        currentState = state
+    private func updateState(viewController: UIViewController){
         viewController.setNeedsStatusBarAppearanceUpdate()
     }
 }

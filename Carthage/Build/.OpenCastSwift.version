@@ -2,7 +2,7 @@
   "Mac" : [
     {
       "name" : "OpenCastSwift",
-      "hash" : "76c0393fa431230e5eb9f9409039652562611fd8fa63f10a0e2a4e7be6384402"
+      "hash" : "38c3c3ce429e3789ffc8e52033314777a8a1748c918d1654bea8884d45041f4e"
     }
   ],
   "watchOS" : [
@@ -15,7 +15,7 @@
   "iOS" : [
     {
       "name" : "OpenCastSwift",
-      "hash" : "fa498373606d65496494b6335c1dd09966018a8e9bd1666fd2fd51443a73a83d"
+      "hash" : "4172ca9e3d195f06bb790038997f5a86009ab255735d7b1aeaca216b26c4a449"
     }
   ]
 }
