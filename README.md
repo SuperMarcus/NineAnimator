@@ -5,6 +5,18 @@ A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
+## Multi-sites support branch
+
+This branch aims to support multiple anime streaming websites (along with
+9anime) in the app.
+
+Sites that will be supported
+* [masterani.me](//masterani.me)
+
+Sites that are being considered
+* [eyeonanime.tv](//eyeonanime.tv)
+* [animeheaven.eu](//animeheaven.eu)
+
 | Featured Animes | Recently Viewed | Search |
 | ------------------- | ------------------- | -------- |
 | ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
