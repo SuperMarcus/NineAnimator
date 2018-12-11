@@ -1,0 +1,27 @@
+{
+  "Mac" : [
+    {
+      "name" : "SwiftProtobuf",
+      "hash" : "b4bd263dcba9b9717e6cd7ef4a74e0189ba4b91f0e5507049342c976cd20badf"
+    }
+  ],
+  "watchOS" : [
+    {
+      "name" : "SwiftProtobuf",
+      "hash" : "3b085d1d217cd6f7bd73176c29430cb884262b4d3906be6fa08aa461e195a105"
+    }
+  ],
+  "tvOS" : [
+    {
+      "name" : "SwiftProtobuf",
+      "hash" : "701f271cb60ccfc2e530ec5fe71bea60601980679cf4cd823bb29bb27ff62560"
+    }
+  ],
+  "commitish" : "1.2.0",
+  "iOS" : [
+    {
+      "name" : "SwiftProtobuf",
+      "hash" : "5afcf19f73d5040d6f4bc9037779e98f5ef980216af3a0cfa0c0f90bc498f85b"
+    }
+  ]
+}

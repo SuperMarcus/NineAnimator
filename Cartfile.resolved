@@ -1,3 +1,7 @@
 github "Alamofire/Alamofire" "4.8.0"
+github "SuperMarcus/OpenCastSwift" "1.1"
+github "SwiftyJSON/SwiftyJSON" "4.2.0"
+github "antitypical/Result" "3.2.4"
+github "apple/swift-protobuf" "1.2.0"
 github "onevcat/Kingfisher" "5.0.0"
 github "scinfu/SwiftSoup" "1.7.5"

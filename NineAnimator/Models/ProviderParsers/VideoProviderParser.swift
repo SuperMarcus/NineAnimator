@@ -22,7 +22,7 @@ import Alamofire
 import AVKit
 
 protocol VideoProviderParser {
-    func parse(url: URL, with: SessionManager, onCompletion: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask
+    func parse(episode: Episode, with: SessionManager, onCompletion: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
 }
 
 class VideoProviderRegistry {

@@ -100,6 +100,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     var episodeRequestTask: NineAnimatorAsyncTask?
     
+    private var castPresentationDelegate: Any?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -214,6 +216,10 @@ extension AnimeViewController {
 
 //MARK: - Share and select server
 extension AnimeViewController {
+    @IBAction func onCastButtonTapped(_ sender: Any) {
+        self.castPresentationDelegate = CastController.default.present(from: self)
+    }
+    
     @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {
         guard let link = animeLink else { return }
         let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
@@ -278,11 +284,11 @@ extension AnimeViewController {
             
             if episode.nativePlaybackSupported {
                 self.episodeRequestTask = episode.retrive {
-                    [weak self] item, error in
+                    [weak self] media, error in
                     guard let self = self else { return }
                     self.episodeRequestTask = nil
                     
-                    guard let item = item else {
+                    guard let media = media else {
                         debugPrint("Warn: Item not retrived \(error!), fallback to web access")
                         DispatchQueue.main.async { [weak self] in
                             let playbackController = SFSafariViewController(url: episode.target)
@@ -291,27 +297,35 @@ extension AnimeViewController {
                         return
                     }
                     
-                    let playerController = AVPlayerViewController()
-                    playerController.player = AVPlayer(playerItem: item)
-                    self.displayedPlayer = playerController.player
-                    
-                    self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
-                    
-                    //Initialize audio session to movie playback
-                    let audioSession = AVAudioSession.sharedInstance()
-                    try? audioSession.setCategory(
-                        .playback,
-                        mode: .moviePlayback,
-                        options: [
-                            .allowAirPlay,
-                            .allowBluetooth,
-                            .allowBluetoothA2DP
-                        ])
-                    try? audioSession.setActive(true)
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        playerController.player?.play()
-                        self?.present(playerController, animated: true, completion: clearSelection)
+                    if CastController.default.isReady {
+                        CastController.default.initiate(playbackMedia: media, with: episode)
+                        DispatchQueue.main.async {
+                            self.castPresentationDelegate = CastController.default.present(from: self)
+                        }
+                    } else {
+                        let item = media.avPlayerItem
+                        let playerController = AVPlayerViewController()
+                        playerController.player = AVPlayer(playerItem: item)
+                        self.displayedPlayer = playerController.player
+                        
+                        self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
+                        
+                        //Initialize audio session to movie playback
+                        let audioSession = AVAudioSession.sharedInstance()
+                        try? audioSession.setCategory(
+                            .playback,
+                            mode: .moviePlayback,
+                            options: [
+                                .allowAirPlay,
+                                .allowBluetooth,
+                                .allowBluetoothA2DP
+                            ])
+                        try? audioSession.setActive(true)
+                        
+                        DispatchQueue.main.async { [weak self] in
+                            playerController.player?.play()
+                            self?.present(playerController, animated: true, completion: clearSelection)
+                        }
                     }
                 }
             } else {

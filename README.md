@@ -5,10 +5,13 @@ A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
 v3 Licensed.
 
-| Featured Animes | Recently Viewed | Search | Search Results | Choose Episodes |
-| ------------------- | ------------------- | -------- | ------------------ |----------------------|
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) | ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) |
+| Featured Animes | Recently Viewed | Search |
+| ------------------- | ------------------- | -------- |
+| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
 
+| Search Results | Choose Episodes | Chromecast |
+| ----------------- | -------------------- | --------------- |
+| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
     
@@ -28,13 +31,14 @@ v3 Licensed.
 
 ## Features
 
-- [x] iOS's native video playback interface (works with RapidVideo, Streamango, and MyCloud -- more is coming)
+- [x] iOS's native video playback interface (works with RapidVideo, Streamango, and MyCloud -- more is coming), which also gives you the option to use AirPlay
+- [x] Supports Chromecast/Google Cast (works with RapidVideo, Streamango. Doesn't work with MyCloud because of CORS)
 - [x] Search animes on 9anime
-- [x] Most popular animes on 9anime
+- [x] Show the most popular/recent animes on 9anime
 - [x] Ads Free and no logins
-- [x] Remembers and auto resumes your playback progress
+- [x] Auto resumes your playback progress
 - [x] Playback history && resume playback with just one click in the Recent tab
-- [ ] Supports Chromecast/Google Cast (word in progress)
+- [x] Super-duper clean UIs
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
 - [ ] Integration with MAL (planned)
 - [ ] Support sites other than 9anime (possible)

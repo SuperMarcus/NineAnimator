@@ -25,19 +25,19 @@ class MyCloudParser: VideoProviderParser {
     static let videoIdentifierRegex = try! NSRegularExpression(pattern: "videoId:\\s*'([^']+)", options: .caseInsensitive)
     static let videoSourceRegex = try! NSRegularExpression(pattern: "\"file\":\"([^\"]+)", options: .caseInsensitive)
     
-    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
-            "Referer": "https://www1.9anime.to/watch",
+            "Referer": episode.parentLink.link.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15",
             "Host": "mcloud.to"
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
-            "Referer": url.absoluteString,
+            "Referer": episode.target.absoluteString,
             "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
         ]
-        return session.request(url, headers: additionalHeaders).responseString {
+        return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let text = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
@@ -59,9 +59,12 @@ class MyCloudParser: VideoProviderParser {
             
             debugPrint("Info: (MyCloud Parser) found asset at \(sourceUrl.absoluteString)")
             
-            let item = AVPlayerItem(url: sourceUrl, headers: playerAdditionalHeaders)
-            
-            handler(item, nil)
+            //MyCloud might not support Chromecast, since it uses COR checking
+            handler(BasicPlaybackMedia(
+                sourceUrl,
+                parent: episode,
+                contentType: "application/vnd.apple.mpegurl",
+                headers: playerAdditionalHeaders), nil)
         }
     }
 }

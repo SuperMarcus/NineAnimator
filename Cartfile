@@ -1,3 +1,4 @@
 github "onevcat/Kingfisher" ~> 5.0
 github "Alamofire/Alamofire" ~> 4.8
 github "scinfu/SwiftSoup" ~> 1.7.5
+github "SuperMarcus/OpenCastSwift" ~> 1.1

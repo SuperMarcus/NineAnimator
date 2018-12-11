@@ -24,11 +24,11 @@ import AVKit
 class StreamangoParser: VideoProviderParser {
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
     
-    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
-            "Referer": url.absoluteString
+            "Referer": episode.parentLink.link.absoluteString
         ]
-        return session.request(url, headers: additionalHeaders).responseString {
+        return session.request(episode.target, headers: additionalHeaders).responseString {
             [weak self] response in
             guard let self = self else { return }
             guard let text = response.value else {
@@ -61,9 +61,12 @@ class StreamangoParser: VideoProviderParser {
             
             debugPrint("Info: (Streamango Parser) found asset at \(sourceUrl.absoluteString)")
             
-            let item = AVPlayerItem(url: sourceUrl, headers: additionalHeaders)
-            
-            handler(item, nil)
+            handler(BasicPlaybackMedia(
+                sourceUrl,
+                parent: episode,
+                contentType: "video/mp4",
+                headers:
+                additionalHeaders), nil)
         }
     }
     

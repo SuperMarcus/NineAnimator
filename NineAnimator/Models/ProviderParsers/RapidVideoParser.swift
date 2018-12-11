@@ -23,11 +23,11 @@ import SwiftSoup
 import AVKit
 
 class RapidVideoParser: VideoProviderParser {
-    func parse(url: URL, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<AVPlayerItem>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
-            "Referer": url.absoluteString
+            "Referer": episode.target.absoluteString
         ]
-        return session.request(url, headers: additionalHeaders).responseString {
+        return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let value = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
@@ -44,9 +44,12 @@ class RapidVideoParser: VideoProviderParser {
                 
                 debugPrint("Info: (RapidVideo Parser) found asset at \(sourceUrl.absoluteString)")
                 
-                let item = AVPlayerItem(url: sourceUrl, headers: additionalHeaders)
-                
-                handler(item, nil)
+                handler(BasicPlaybackMedia(
+                    sourceUrl,
+                    parent: episode,
+                    contentType: "video/mp4",
+                    headers:
+                    additionalHeaders), nil)
             } catch { handler(nil, error) }
         }
     }

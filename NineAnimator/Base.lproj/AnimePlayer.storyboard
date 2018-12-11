@@ -192,6 +192,11 @@
                                     <action selector="onActionButtonTapped:" destination="K93-Pu-iF1" id="hFp-A6-nPd"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Cast" id="LNG-QH-z6q">
+                                <connections>
+                                    <action selector="onCastButtonTapped:" destination="K93-Pu-iF1" id="iVz-VU-Tey"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Server" id="dfI-Mn-95I">
                                 <connections>
                                     <action selector="onServerButtonTapped:" destination="K93-Pu-iF1" id="sjB-w4-HBA"/>

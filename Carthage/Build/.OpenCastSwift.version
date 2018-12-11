@@ -1,0 +1,21 @@
+{
+  "Mac" : [
+    {
+      "name" : "OpenCastSwift",
+      "hash" : "38c3c3ce429e3789ffc8e52033314777a8a1748c918d1654bea8884d45041f4e"
+    }
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ],
+  "commitish" : "1.1",
+  "iOS" : [
+    {
+      "name" : "OpenCastSwift",
+      "hash" : "4172ca9e3d195f06bb790038997f5a86009ab255735d7b1aeaca216b26c4a449"
+    }
+  ]
+}
