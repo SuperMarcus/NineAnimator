@@ -127,6 +127,13 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
                     if let deviceStatus = client.currentStatus { self.viewController.playback(update: castMedia, deviceStatus: deviceStatus) }
                     self.viewController.playback(update: castMedia, mediaStatus: status)
                     
+                    let storedPctProgress = NineAnimator.default.user.playbackProgress(for: episode.link)
+                    
+                    if storedPctProgress != 0, let duration = status.media?.duration {
+                        //Restore playback progress
+                        self.seek(to: max(storedPctProgress * Float(duration) - 5.0, 0))
+                    }
+                    
                     self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
                         [weak self] timer in
                         guard let self = self else {
