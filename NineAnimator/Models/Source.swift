@@ -32,6 +32,8 @@ protocol SourceProtocol {
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask?
     
     func search(keyword: String) -> SearchProtocol
+    
+    func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser?
 }
 
 /**
@@ -42,7 +44,7 @@ class BaseSource {
     
     var endpoint: String { return "" }
     
-    var retriverSession: Alamofire.SessionManager { return parent.session }
+    var retriverSession: Alamofire.SessionManager { return parent.ajaxSession }
     
     init(with parent: NineAnimator) {
         self.parent = parent

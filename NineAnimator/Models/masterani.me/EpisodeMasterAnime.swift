@@ -20,6 +20,7 @@
 import Foundation
 
 struct NAMasterAnimeStreamingInfo {
+    let identifier: Int
     let hostIdentifier: Int
     let hostName: String
     let quality: Int
@@ -41,6 +42,9 @@ struct NAMasterAnimeEpisodeInfo {
     }
     
     var link: EpisodeLink
+    var url: URL
+    var animeIdentifier: String
+    var episodeIdentifier: String
     var servers: [NAMasterAnimeStreamingInfo]
     
     var availableHosts: [Anime.ServerIdentifier: String] {
@@ -69,12 +73,16 @@ struct NAMasterAnimeEpisodeInfo {
         }
     }
     
-    init(_ link: EpisodeLink, streamingInfo: [NSDictionary]) {
+    init(_ link: EpisodeLink, streamingInfo: [NSDictionary], with url: URL, parentId: String, episodeId: String) {
         self.link = link
+        self.url = url
+        self.animeIdentifier = parentId
+        self.episodeIdentifier = episodeId
         self.servers = streamingInfo.map{
             source in
             let host = source["host"] as! NSDictionary
             return NAMasterAnimeStreamingInfo(
+                identifier: source["id"] as! Int,
                 hostIdentifier: source["host_id"] as! Int,
                 hostName: host["name"] as! String,
                 quality: source["quality"] as! Int,

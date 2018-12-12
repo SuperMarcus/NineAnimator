@@ -28,6 +28,7 @@ class StreamangoParser: VideoProviderParser {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString
         ]
+        debugPrint("Info: Parsing Streamango with referer '\(episode.parentLink.link.absoluteString)'")
         return session.request(episode.target, headers: additionalHeaders).responseString {
             [weak self] response in
             guard let self = self else { return }

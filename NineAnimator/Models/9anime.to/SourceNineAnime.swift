@@ -46,4 +46,8 @@ class NineAnimeSource: BaseSource, SourceProtocol {
     func search(keyword: String) -> SearchProtocol {
         return NineAnimeSearch(self, query: keyword)
     }
+    
+    func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        return VideoProviderRegistry.default.provider(for: name)
+    }
 }

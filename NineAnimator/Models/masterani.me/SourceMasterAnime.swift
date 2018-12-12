@@ -32,6 +32,7 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
     static let apiPathAnimeDetailed = "/api/anime/%@/detailed"
     static let animePathInfo = "/anime/info/"
     static let episodePathWatch = "/anime/watch/%@/%@"
+    static let episodePathVerify = "/api/user/library/episode/%@?episode=%@&episode_id=%@&trigger=0"
     
     static let animeResourceIdentifierRegex = try! NSRegularExpression(pattern: "\\/(\\d+)[\\da-zA-Z0-9-_]+$", options: .caseInsensitive)
     static let animeCompleteIdentifierRegex = try! NSRegularExpression(pattern: "\\/([\\da-zA-Z0-9-_]+)$", options: .caseInsensitive)
@@ -175,13 +176,18 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
+        guard let animeIdNumber = episodeUniqueId.first else {
+            handler(nil, NineAnimatorError.urlError)
+            return nil
+        }
         let animeLinkString = link.parent.link.absoluteString
         let matches = NASourceMasterAnime.animeCompleteIdentifierRegex.matches(in: animeLinkString, options: [], range: animeLinkString.matchingRange)
         guard let animeIdentifier = matches.first else {
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
-        return request(browse: String(format: NASourceMasterAnime.episodePathWatch, animeLinkString[animeIdentifier.range(at: 1)], String(episodeNumber))){
+        let path = String(format: NASourceMasterAnime.episodePathWatch, animeLinkString[animeIdentifier.range(at: 1)], String(episodeNumber))
+        return request(browse: path){
             response, error in
             guard let response = response else { handler(nil, error); return }
             do{
@@ -191,23 +197,41 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
                 let mirrorsJsonData = mirrorsJsonString.data(using: .utf8)!
                 guard let mirrors = try JSONSerialization.jsonObject(with: mirrorsJsonData, options: []) as? [NSDictionary] else { throw NineAnimatorError.responseError("invalid mirrors") }
                 debugPrint("Info: \(mirrors.count) mirrors found for episode \(episodeNumber)")
-                handler(NAMasterAnimeEpisodeInfo(link, streamingInfo: mirrors), nil)
+                handler(NAMasterAnimeEpisodeInfo(
+                    link,
+                    streamingInfo: mirrors,
+                    with: URL(string: "\(self.endpoint)\(path)")!,
+                    parentId: String(animeIdNumber),
+                    episodeId: String(episodeNumber)
+                ), nil)
             }catch let e { handler(nil, e) }
         }
     }
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        return episodeInfo(from: link){
+        let task = NineAnimatorMultistepAsyncTask()
+        task.add(episodeInfo(from: link){
             info, error in
             guard let info = info else { handler(nil, error); return }
             guard let stream = info.select(server: link.server, option: .bestQuality) else {
                 handler(nil, NineAnimatorError.providerError("This episode is not availble on the selected server"))
                 return
             }
+            
+//            let verifyPath = String(format: NASourceMasterAnime.episodePathVerify, info.animeIdentifier, info.episodeIdentifier, "\(stream.identifier)")
+//            task.add(self.request(ajax: verifyPath){
+//                response, error in
+//                guard let _ = response else { handler(nil, NineAnimatorError.responseError("Error verifying")); return }
+//                guard let streamTarget = stream.target else { handler(nil, NineAnimatorError.urlError); return }
+//                let episode = Episode(link, target: streamTarget, parent: anime, referer: info.url.absoluteString)
+//                handler(episode, nil)
+//            })
+            
             guard let streamTarget = stream.target else { handler(nil, NineAnimatorError.urlError); return }
-            let episode = Episode(link, target: streamTarget, parent: anime)
+            let episode = Episode(link, target: streamTarget, parent: anime, referer: info.url.absoluteString)
             handler(episode, nil)
-        }
+        })
+        return task
     }
     
     func search(keyword: String) -> SearchProtocol {
@@ -221,5 +245,9 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
     
     func anime(slug: String) -> URL {
         return URL(string: "\(endpoint)\(NASourceMasterAnime.animePathInfo)\(slug)")!
+    }
+    
+    func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        return VideoProviderRegistry.default.provider(for: name)
     }
 }

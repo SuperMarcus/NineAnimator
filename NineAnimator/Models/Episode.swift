@@ -28,23 +28,27 @@ struct Episode {
     
     var name: String { return link.name }
     var parentLink: AnimeLink { return link.parent }
+    var referer: String
     
     var nativePlaybackSupported: Bool {
-        return VideoProviderRegistry.default.provider(for: link.server) != nil
+        guard let serverName = _parent.servers[link.server] else { return false }
+        return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
     var source: SourceProtocol { return _parent.source }
     
     private var _parent: Anime
     
-    init(_ link: EpisodeLink, target: URL, parent: Anime) {
+    init(_ link: EpisodeLink, target: URL, parent: Anime, referer: String? = nil) {
         self.link = link
         self.target = target
         self._parent = parent
+        self.referer = referer ?? parent.link.link.absoluteString
     }
     
     func retrive(onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask? {
-        guard let provider = VideoProviderRegistry.default.provider(for: link.server) else {
+        guard let serverName = _parent.servers[link.server],
+            let provider = source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) else {
             handler(nil, NineAnimatorError.providerError("no parser found for server \(link.server)"))
             return nil
         }
