@@ -46,6 +46,11 @@ class FeaturedViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if loadedSource?.name != source.name {
             reload()
         }

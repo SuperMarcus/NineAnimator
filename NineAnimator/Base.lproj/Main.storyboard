@@ -311,9 +311,16 @@
                             <outlet property="delegate" destination="W9q-Ho-7mv" id="ENf-sT-pXy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Search" id="Y8g-si-rdv"/>
+                    <navigationItem key="navigationItem" title="Search" id="Y8g-si-rdv">
+                        <barButtonItem key="rightBarButtonItem" title="Select Site" id="Tll-ir-ZZq">
+                            <connections>
+                                <action selector="onSelectSourceButtonTapped:" destination="W9q-Ho-7mv" id="PId-jl-84V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="Bvt-sZ-SfL" id="zkz-kS-GVj"/>
+                        <outlet property="selectSiteBarButton" destination="Tll-ir-ZZq" id="jiE-ER-IEr"/>
                         <segue destination="wkc-dS-QI1" kind="show" identifier="search.result.show" id="fvD-mN-Fqp"/>
                     </connections>
                 </tableViewController>
