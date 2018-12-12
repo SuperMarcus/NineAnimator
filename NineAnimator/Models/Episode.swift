@@ -33,14 +33,14 @@ struct Episode {
         return VideoProviderRegistry.default.provider(for: link.server) != nil
     }
     
-    private var _parent: Anime?
-    private var _session: SessionManager
+    var source: SourceProtocol { return _parent.source }
     
-    init(_ link: EpisodeLink, on target: URL, with session: SessionManager, parent: Anime? = nil) {
+    private var _parent: Anime
+    
+    init(_ link: EpisodeLink, target: URL, parent: Anime) {
         self.link = link
         self.target = target
         self._parent = parent
-        self._session = session
     }
     
     func retrive(onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask? {
@@ -49,45 +49,40 @@ struct Episode {
             return nil
         }
         
-        return provider.parse(episode: self, with: _session, onCompletion: handler)
-    }
-    
-    func parent(onCompletion handler: @escaping NineAnimatorCallback<Anime>) {
-        if let parent = _parent { handler(parent, nil) }
-        else { NineAnimator.default.anime(with: link.parent, onCompletion: handler) }
+        return provider.parse(episode: self, with: source.retriverSession, onCompletion: handler)
     }
 }
 
-extension Anime {
-    func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask {
-        let ajaxHeaders: HTTPHeaders = ["Referer": self.link.link.absoluteString]
-        
-        let task = session
-            .request(AjaxPath.episode(for: link.identifier, on: link.server), headers: ajaxHeaders)
-            .responseJSON {
-                response in
-                if case let .failure(error) = response.result {
-                    debugPrint("Error: Failiure on request: \(error)")
-                    handler(nil, error)
-                    return
-                }
-                
-                guard let responseJson = response.value as? NSDictionary else {
-                    debugPrint("Error: No content received")
-                    handler(nil, NineAnimatorError.responseError("no content received from server"))
-                    return
-                }
-                
-                guard let targetString = responseJson["target"] as? String,
-                      let target = URL(string: targetString) else {
-                    debugPrint("Error: Target not defined or is invalid in response")
-                    handler(nil, NineAnimatorError.responseError("target url not defined or invalid"))
-                    return
-                }
-                
-                handler(Episode(link, on: target, with: self.session, parent: self), nil)
-        }
-        
-        return task
-    }
-}
+//extension Anime {
+//    func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask {
+//        let ajaxHeaders: HTTPHeaders = ["Referer": self.link.link.absoluteString]
+//
+//        let task = session
+//            .request(AjaxPath.episode(for: link.identifier, on: link.server), headers: ajaxHeaders)
+//            .responseJSON {
+//                response in
+//                if case let .failure(error) = response.result {
+//                    debugPrint("Error: Failiure on request: \(error)")
+//                    handler(nil, error)
+//                    return
+//                }
+//
+//                guard let responseJson = response.value as? NSDictionary else {
+//                    debugPrint("Error: No content received")
+//                    handler(nil, NineAnimatorError.responseError("no content received from server"))
+//                    return
+//                }
+//
+//                guard let targetString = responseJson["target"] as? String,
+//                      let target = URL(string: targetString) else {
+//                    debugPrint("Error: Target not defined or is invalid in response")
+//                    handler(nil, NineAnimatorError.responseError("target url not defined or invalid"))
+//                    return
+//                }
+//
+//                handler(Episode(link, on: target, with: self.session, parent: self), nil)
+//        }
+//
+//        return task
+//    }
+//}

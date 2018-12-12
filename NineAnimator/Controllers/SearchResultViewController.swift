@@ -26,7 +26,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         }
     }
     
-    private var searchPage: SearchPage!
+    private var searchPage: SearchProtocol!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +40,11 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        searchPage = NineAnimator.default.search(searchText!)
+        searchPage = NineAnimator.default.sources.first!.search(keyword: searchText!)
         searchPage.delegate = self
     }
     
-    func noResult(in: SearchPage) {
+    func noResult(in: SearchProtocol) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
@@ -52,7 +52,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         }
     }
     
-    func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
+    func pageIncoming(_ sectionNumber: Int, in page: SearchProtocol) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()

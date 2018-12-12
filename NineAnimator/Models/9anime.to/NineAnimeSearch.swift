@@ -20,32 +20,23 @@
 import Foundation
 import SwiftSoup
 
-protocol SearchPageDelegate: AnyObject {
-    //Index of the page (starting from zero)
-    func pageIncoming(_: Int, in: SearchPage)
-    
-    func noResult(in: SearchPage)
-}
-
-class SearchPage {
+class NineAnimeSearch: SearchProtocol {
     private(set) var query: String
     private(set) var totalPages: Int?
     weak var delegate: SearchPageDelegate?
     
-    var moreAvailable: Bool {
-        return totalPages == nil || _results.count < totalPages!
-    }
+    var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
     var availablePages: Int { return _results.count }
     
     private var _results: [[AnimeLink]]
-    private var _animator: NineAnimator
     private var _lastRequest: NineAnimatorAsyncTask? = nil
+    private let _parent: NineAnimeSource
     
-    init(_ animator: NineAnimator, query: String) {
+    init(_ parent: NineAnimeSource, query: String) {
         self.query = query
-        self._animator = animator
         self._results = []
+        self._parent = parent
         //Request the first page
         more()
     }
@@ -60,7 +51,8 @@ class SearchPage {
         if moreAvailable && _lastRequest == nil {
             debugPrint("Info: Requesting page \(_results.count + 1) for query \(query)")
             let loadingIndex = _results.count
-            _lastRequest = _animator.request(.search(keyword: query, page: loadingIndex + 1)) {
+            let encodedKeyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            _lastRequest = _parent.request(browse: "/search?keyword=\(encodedKeyword)&page=\(_results.count + 1)"){
                 [weak self] response, error in
                 guard let self = self else { return }
                 defer { self._lastRequest = nil }
@@ -96,7 +88,7 @@ class SearchPage {
                                 return nil
                         }
                         
-                        return AnimeLink(title: name, link: link, image: coverImage)
+                        return AnimeLink(title: name, link: link, image: coverImage, source: self._parent)
                     }
                     
                     if animes.count > 0 {
@@ -113,11 +105,5 @@ class SearchPage {
                 }
             }
         }
-    }
-}
-
-extension NineAnimator {
-    func search(_ keyword: String) -> SearchPage {
-        return SearchPage(self, query: keyword)
     }
 }

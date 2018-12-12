@@ -18,17 +18,27 @@
 //
 
 import Foundation
+import SwiftSoup
 
-struct NineAnimatePath: Hashable {
-    static let home = NineAnimatePath("/")
+protocol SearchPageDelegate: AnyObject {
+    //Index of the page (starting from zero)
+    func pageIncoming(_: Int, in: SearchProtocol)
     
-    static func search(keyword: String, page: Int = 1) -> NineAnimatePath {
-        let path = "/search"
-        let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        return NineAnimatePath("\(path)?keyword=\(encodedKeyword)&page=\(page)")
-    }
+    func noResult(in: SearchProtocol)
+}
+
+protocol SearchProtocol {
+    var query: String { get }
     
-    let value: String
+    var totalPages: Int? { get }
     
-    private init(_ value: String) { self.value = value }
+    var availablePages: Int { get }
+    
+    var moreAvailable: Bool { get }
+    
+    var delegate: SearchPageDelegate? { get set }
+    
+    func animes(on page: Int) -> [AnimeLink]
+    
+    func more()
 }

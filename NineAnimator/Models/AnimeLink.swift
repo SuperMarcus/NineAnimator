@@ -24,8 +24,45 @@ struct AnimeLink: URLConvertible, Equatable, Codable {
     var title: String
     var link: URL
     var image: URL
+    var source: SourceProtocol
 
     func asURL() -> URL { return link }
+    
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case link = "link"
+        case image = "image"
+        case source = "source"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        title = try values.decode(String.self, forKey: .title)
+        link = try values.decode(URL.self, forKey: .link)
+        image = try values.decode(URL.self, forKey: .image)
+        
+        let sourceName = try values.decode(String.self, forKey: .source)
+        guard let source = NineAnimator.default.source(with: sourceName) else {
+            throw NineAnimatorError.decodeError
+        }
+        
+        self.source = source
+    }
+    
+    init(title: String, link: URL, image: URL, source: SourceProtocol){
+        self.title = title
+        self.link = link
+        self.image = image
+        self.source = source
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(title, forKey: .title)
+        try values.encode(link, forKey: .link)
+        try values.encode(image, forKey: .image)
+        try values.encode(source.name, forKey: .source)
+    }
 }
 
 extension AnimeLink {

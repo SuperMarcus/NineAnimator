@@ -21,7 +21,7 @@ import UIKit
 import Kingfisher
 
 class FeaturedViewController: UITableViewController {
-    var featuredAnimePage: FeaturedAnimePage? {
+    var featuredAnimePage: FeaturedProtocol? {
         didSet {
             UIView.transition(
                 with: tableView,
@@ -34,10 +34,12 @@ class FeaturedViewController: UITableViewController {
     
     var error: Error?
     
+    var requestTask: NineAnimatorAsyncTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard featuredAnimePage == nil else { return }
-        NineAnimator.default.loadHomePage {
+        requestTask = NineAnimator.default.sources.first!.featured {
             page, error in
             DispatchQueue.main.async { [weak self] in
                 self?.featuredAnimePage = page

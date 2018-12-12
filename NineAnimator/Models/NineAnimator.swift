@@ -27,10 +27,24 @@ enum NineAnimatorError: Error {
     case responseError(String)
     case providerError(String)
     case noResults
+    case decodeError
 }
 
 protocol NineAnimatorAsyncTask {
     func cancel()
+}
+
+//This class is used to keep track of multiple async tasks that might be needed
+class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
+    var tasks: [NineAnimatorAsyncTask]
+    
+    init(){ tasks = [] }
+    
+    func add(_ task: NineAnimatorAsyncTask?){ if let task = task { tasks.append(task) } }
+    
+    func cancel(){ for task in tasks { task.cancel() } }
+    
+    //Discussion: Should i implement deinit to auto cancel all tasks? Maybe i should.
 }
 
 extension DataRequest: NineAnimatorAsyncTask { }
@@ -38,17 +52,15 @@ extension DataRequest: NineAnimatorAsyncTask { }
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
-    let endpoint = "https://www1.9anime.to"
-    
     let client = URLSession(configuration: .default)
     
     var session: SessionManager!
     
     var ajaxSession: SessionManager!
     
-    var cache = [NineAnimatePath: String]()
-    
     var user = NineAnimatorUser()
+    
+    var sources = [SourceProtocol]()
     
     override init() {
         super.init()
@@ -72,39 +84,19 @@ class NineAnimator: SessionDelegate {
         ajaxSessionConfiguration.httpCookieAcceptPolicy = .always
         ajaxSessionConfiguration.httpAdditionalHeaders = ajaxAdditionalHeaders
         ajaxSession = SessionManager(configuration: ajaxSessionConfiguration, delegate: self)
+        
+        self.registerDefaultSources()
     }
     
-    func removeCache(at path: NineAnimatePath) {
-        cache.removeValue(forKey: path)
+    func register(source: SourceProtocol){ self.sources.append(source) }
+    
+    func remove(source: SourceProtocol){ sources.removeAll{ $0.name == source.name } }
+    
+    func source(with name: String) -> SourceProtocol? {
+        return sources.first{ $0.name == name }
     }
     
-    func request(_ path: NineAnimatePath, forceReload: Bool = false, onCompletion: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        if !forceReload, let cachedData = cache[path] {
-            onCompletion(cachedData, nil)
-        }
-        
-        guard let url = URL(string: endpoint + path.value) else {
-            onCompletion(nil, NineAnimatorError.urlError)
-            return nil
-        }
-        
-        return session.request(url).responseString {
-            [weak self] response in
-            if case let .failure(error) = response.result {
-                debugPrint("Error: Failiure on request: \(error)")
-                onCompletion(nil, error)
-                return
-            }
-            
-            guard let value = response.value else {
-                debugPrint("Error: No data received")
-                onCompletion(nil, NineAnimatorError.responseError("no data received"))
-                return
-            }
-            
-            // Cache value
-            self?.cache[path] = value
-            onCompletion(value, nil)
-        }
+    private func registerDefaultSources(){
+        register(source: NineAnimeSource(with: self))
     }
 }

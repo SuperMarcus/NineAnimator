@@ -100,6 +100,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     var episodeRequestTask: NineAnimatorAsyncTask?
     
+    var animeRequestTask: NineAnimatorAsyncTask?
+    
     private var castPresentationDelegate: Any?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,7 +126,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         guard anime == nil else { return }
         serverSelectionButton.title = "Select Server"
         serverSelectionButton.isEnabled = false
-        NineAnimator.default.anime(with: link) {
+        animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             guard let anime = anime else {
                 debugPrint("Error: \(error!)")
