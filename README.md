@@ -2,28 +2,10 @@ NineAnimator
 ==========
 
 A simple yet elegant way of waching anime on your favorite anime website.
-NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
-v3 Licensed.
+NineAnimator is a free and open source anime watching app for iOS. Currently
+it supports [9anime.to](//9anime.to) and [masterani.me](//masterani.me).
+GPLv3 Licensed.
 
-## Multi-sites support branch
-
-This branch aims to support multiple anime streaming websites (along with
-9anime) in the app.
-
-Sites that will be supported
-* [masterani.me](//masterani.me)
-
-Sites that are being considered
-* [eyeonanime.tv](//eyeonanime.tv)
-* [animeheaven.eu](//animeheaven.eu)
-
-| Featured Animes | Recently Viewed | Search |
-| ------------------- | ------------------- | -------- |
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
-
-| Search Results | Choose Episodes | Chromecast |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
     
@@ -41,6 +23,13 @@ Sites that are being considered
     along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
     
 
+## Table of Contents
+
+- [Features](#features)
+- [Build & Install](#build--install)
+- [Screenshots](#screenshots)
+- [Credits](#credits)
+
 ## Features
 
 - [x] iOS's native video playback interface (works with RapidVideo, Streamango, and MyCloud -- more is coming), which also gives you the option to use AirPlay
@@ -51,7 +40,7 @@ Sites that are being considered
 - [x] Auto resumes your playback progress
 - [x] Playback history && resume playback with just one click in the Recent tab
 - [x] Super-duper clean UIs
-- [ ] Support sites other than 9anime (work in progress)
+- [x] Support [9anime.to](//9anime.to) and [masterani.me](//masterani.me)
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
 - [ ] Integration with MAL (planned)
 
@@ -94,6 +83,16 @@ Still, you should make sure that you have a working copy of Carthage first.
 ```sh
 $ carthage update
 ```
+
+## Screenshots
+
+| Featured Animes | Recently Viewed | Search |
+| ------------------- | ------------------- | -------- |
+| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
+
+| Search Results | Choose Episodes | Chromecast |
+| ----------------- | -------------------- | --------------- |
+| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
 
 ## Credits
 
