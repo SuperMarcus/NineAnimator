@@ -211,14 +211,15 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
     }
     
     func search(keyword: String) -> SearchProtocol {
-        return NASearchMasterAnime(query: keyword)
+        debugPrint("Info: Searching masterani.me with keyword '\(keyword)'")
+        return NASearchMasterAnime(query: keyword, parent: self)
     }
     
-    private func poster(file name: String) -> URL {
+    func poster(file name: String) -> URL {
         return URL(string: "\(NASourceMasterAnime.cdnEndpoint)/poster/1/\(name)")!
     }
     
-    private func anime(slug: String) -> URL {
+    func anime(slug: String) -> URL {
         return URL(string: "\(endpoint)\(NASourceMasterAnime.animePathInfo)\(slug)")!
     }
 }
