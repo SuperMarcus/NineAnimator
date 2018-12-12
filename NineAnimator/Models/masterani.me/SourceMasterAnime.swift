@@ -197,7 +197,17 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
     }
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        return nil
+        return episodeInfo(from: link){
+            info, error in
+            guard let info = info else { handler(nil, error); return }
+            guard let stream = info.select(server: link.server, option: .bestQuality) else {
+                handler(nil, NineAnimatorError.providerError("This episode is not availble on the selected server"))
+                return
+            }
+            guard let streamTarget = stream.target else { handler(nil, NineAnimatorError.urlError); return }
+            let episode = Episode(link, target: streamTarget, parent: anime)
+            handler(episode, nil)
+        }
     }
     
     func search(keyword: String) -> SearchProtocol {
