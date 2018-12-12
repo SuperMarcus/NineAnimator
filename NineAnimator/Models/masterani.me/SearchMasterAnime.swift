@@ -19,14 +19,26 @@
 
 import Foundation
 
-protocol FeaturedProtocol {
-    var featured: [AnimeLink] { get }
+struct NASearchMasterAnime: SearchProtocol {
+    var query: String
     
-    var latest: [AnimeLink] { get }
-}
-
-struct BasicFeaturedContainer: FeaturedProtocol {
-    var featured: [AnimeLink]
+    var totalPages: Int?
     
-    var latest: [AnimeLink]
+    var availablePages: Int = 0
+    
+    var moreAvailable: Bool = false
+    
+    var delegate: SearchPageDelegate?
+    
+    init(query: String) {
+        self.query = query
+    }
+    
+    func animes(on page: Int) -> [AnimeLink] {
+        return []
+    }
+    
+    func more() {
+        
+    }
 }

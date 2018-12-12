@@ -97,6 +97,7 @@ class NineAnimator: SessionDelegate {
     }
     
     private func registerDefaultSources(){
+        register(source: NASourceMasterAnime(with: self))
         register(source: NineAnimeSource(with: self))
     }
 }

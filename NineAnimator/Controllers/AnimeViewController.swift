@@ -58,6 +58,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                         self.server = recentlyUsedServer
                     } else {
                         self.server = anime.servers.first!.key
+                        debugPrint("Info: No server selected. Using \(anime.servers.first!.key)")
                     }
                 }
                 
@@ -77,7 +78,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     // Set episode will update the server identifier as well
     var episode: Episode? {
-        didSet { server = episode?.link.server }
+        didSet {
+            guard let episode = episode else { return }
+            server = episode.link.server
+        }
     }
     
     var displayedPlayer: AVPlayer? {
