@@ -21,7 +21,7 @@ import Foundation
 import Alamofire
 
 class NineAnimeSource: BaseSource, SourceProtocol {
-    let name: String = "9anime"
+    let name: String = "9anime.to"
     
     override var endpoint: String { return "https://www1.9anime.to" }
     

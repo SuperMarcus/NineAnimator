@@ -25,7 +25,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-L6-uVI">
+                                        <activityIndicatorView opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-L6-uVI">
                                             <rect key="frame" x="177.5" y="43" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contents are loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTY-yy-a3Z">
@@ -583,7 +583,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IId-s4-5QI">
-                                                                <rect key="frame" x="16" y="75.5" width="98" height="18"/>
+                                                                <rect key="frame" x="16" y="75.5" width="176" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -596,6 +596,7 @@
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="VXh-Cs-QjW"/>
                                                             <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" secondItem="tdo-VB-Wsl" secondAttribute="trailing" constant="8" id="a56-7O-WPf"/>
                                                             <constraint firstItem="663-rl-gtc" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="alu-gw-2v3"/>
+                                                            <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" secondItem="IId-s4-5QI" secondAttribute="trailing" id="cal-1m-hvf"/>
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="cvU-H0-Mki"/>
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="top" secondItem="tdo-VB-Wsl" secondAttribute="bottom" constant="4" id="n8A-E9-bE1"/>
                                                             <constraint firstAttribute="trailing" secondItem="aBr-0y-FH3" secondAttribute="trailing" constant="16" id="pxW-W0-vRj"/>

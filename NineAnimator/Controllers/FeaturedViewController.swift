@@ -114,7 +114,9 @@ class FeaturedViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let featuredAnimePage = featuredAnimePage else {
-            return tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+            (cell.viewWithTag(5) as! UIActivityIndicatorView).startAnimating()
+            return cell
         }
         switch indexPath.section {
         case 0:
