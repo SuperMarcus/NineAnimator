@@ -53,6 +53,13 @@ class NineAnimatorUser {
         }
     }
     
+    var source: SourceProtocol {
+        if let sourceName = _freezer.string(forKey: "source.recent"),
+            let source = NineAnimator.default.source(with: sourceName) {
+            return source
+        } else { return NineAnimator.default.sources.first! }
+    }
+    
     var lastEpisode: EpisodeLink? {
         let decoder = PropertyListDecoder()
         if let data = _freezer.value(forKey: "episode.recent") as? Data {
@@ -71,6 +78,10 @@ class NineAnimatorUser {
         var animes = recentAnimes.filter{ $0 != anime }
         animes.append(anime)
         recentAnimes = animes
+    }
+    
+    func select(source: SourceProtocol) {
+        _freezer.set(source.name, forKey: "source.recent")
     }
     
     /**

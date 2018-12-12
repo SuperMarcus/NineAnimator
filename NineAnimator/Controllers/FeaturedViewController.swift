@@ -32,20 +32,63 @@ class FeaturedViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var sourceSelectionButton: UIBarButtonItem!
+    
     var error: Error?
     
-    var requestTask: NineAnimatorAsyncTask?
+    var requestTask: NineAnimatorAsyncTask? {
+        didSet { sourceSelectionButton.isEnabled = requestTask == nil }
+    }
+    
+    var loadedSource: SourceProtocol?
+    
+    var source: SourceProtocol { return NineAnimator.default.user.source }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard featuredAnimePage == nil else { return }
-        requestTask = NineAnimator.default.sources.first!.featured {
+        if loadedSource?.name != source.name {
+            reload()
+        }
+    }
+    
+    func reload(){
+        self.featuredAnimePage = nil
+        tableView.reloadData()
+        let source = self.source
+        requestTask = source.featured {
             page, error in
             DispatchQueue.main.async { [weak self] in
+                defer { self?.requestTask = nil }
                 self?.featuredAnimePage = page
                 self?.error = error
+                self?.loadedSource = source
+                self?.sourceSelectionButton.title = source.name
             }
         }
+    }
+    
+    @IBAction func onSourceSelectionButtonPressed(_ sender: Any) {
+        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
+        
+        if let popover = alertView.popoverPresentationController {
+            popover.barButtonItem = sourceSelectionButton
+            popover.permittedArrowDirections = .up
+        }
+        
+        for source in NineAnimator.default.sources {
+            let action = UIAlertAction(title: source.name, style: .default) {
+                [weak self] _ in
+                NineAnimator.default.user.select(source: source)
+                self?.reload()
+            }
+            if source.name == loadedSource?.name {
+                action.setValue(true, forKey: "checked")
+            }
+            alertView.addAction(action)
+        }
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertView, animated: true)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

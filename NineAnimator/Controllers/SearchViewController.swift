@@ -33,6 +33,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     var filteredAnimeLinks = [AnimeLink]()
     
     var requestTask: NineAnimatorAsyncTask?
+    
+    var source: SourceProtocol { return NineAnimator.default.user.source }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +60,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         // Hide table cell separators at empty state
         tableView.tableFooterView = UIView()
         
-        requestTask = NineAnimator.default.sources.first!.featured {
+        requestTask = source.featured {
             [weak self] page, error in
             guard let page = page else {
                 debugPrint("Error: \(error!)")
