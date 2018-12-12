@@ -40,7 +40,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        searchPage = NineAnimator.default.sources.first!.search(keyword: searchText!)
+        searchPage = NineAnimator.default.user.source.search(keyword: searchText!)
         searchPage.delegate = self
     }
     
