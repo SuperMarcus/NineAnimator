@@ -65,11 +65,12 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         
         deviceListTableView.dataSource = self
         deviceListTableView.rowHeight = 48
+        deviceListTableView.tableFooterView = UIView()
         
         if castController.isAttached {
-            showPlaybackControls(animate: false)
+            showPlaybackControls(animated: false)
         } else {
-            hidePlaybackControls(animate: false)
+            hidePlaybackControls(animated: false)
         }
         
         playbackProgressSlider.setThumbImage(normalThumbImage, for: .normal)
@@ -100,49 +101,30 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
 extension GoogleCastMediaPlaybackViewController {
     var needsTopInset: Bool { return false }
     
-    var normalThumbImage: UIImage? {
-        let size = CGSize(width: 8, height: 8)
+    func circle(ofSideLength length: CGFloat, color: UIColor) -> UIImage {
+        let size = CGSize(width: length, height: length)
         let color = UIColor.gray
         let renderer = UIGraphicsImageRenderer(size: size)
         
-        let image = renderer.image {
-            ctx in
-            let path = UIBezierPath(ovalIn: .init(origin: .zero, size: size))
+        let image = renderer.image { _ in
+            let path = UIBezierPath(ovalIn: CGRect(origin: .zero, size: size))
             color.setFill()
             path.fill()
         }
         
         return image
+    }
+    
+    var normalThumbImage: UIImage? {
+        return circle(ofSideLength: 8, color: .gray)
     }
     
     var highlightedThumbImage: UIImage? {
-        let size = CGSize(width: 12, height: 12)
-        let color = UIColor.gray
-        let renderer = UIGraphicsImageRenderer(size: size)
-        
-        let image = renderer.image {
-            ctx in
-            let path = UIBezierPath(ovalIn: .init(origin: .zero, size: size))
-            color.setFill()
-            path.fill()
-        }
-        
-        return image
+        return circle(ofSideLength: 12, color: .gray)
     }
     
     var buttonBackgroundImage: UIImage {
-        let size = CGSize(width: 128, height: 128)
-        let color = UIColor.gray.withAlphaComponent(0.15)
-        let renderer = UIGraphicsImageRenderer(size: size)
-        
-        let image = renderer.image {
-            ctx in
-            let path = UIBezierPath(ovalIn: .init(origin: .zero, size: size))
-            color.setFill()
-            path.fill()
-        }
-        
-        return image
+        return circle(ofSideLength: 128, color: UIColor.gray.withAlphaComponent(0.15))
     }
     
     func format(seconds input: Int) -> String {
@@ -175,26 +157,27 @@ extension GoogleCastMediaPlaybackViewController {
         }
     }
     
-    func showPlaybackControls(animate: Bool){
-        if playbackControlView.isHidden {
-            playbackControlView.isHidden = false
-            if animate {
-                playbackControlView.alpha = 0.01
-                UIView.animate(withDuration: 0.3){
-                    self.playbackControlView.alpha = 1.0
-                }
-            } else { playbackControlView.alpha = 1.0 }
-            playbackControlView.setNeedsLayout()
-        }
+    func showPlaybackControls(animated: Bool) {
+        guard playbackControlView.isHidden else { return }
+        playbackControlView.isHidden = false
+        if animated {
+            playbackControlView.alpha = 0.01
+            UIView.animate(withDuration: 0.3) {
+                self.playbackControlView.alpha = 1.0
+            }
+        } else { playbackControlView.alpha = 1.0 }
+        playbackControlView.setNeedsLayout()
     }
     
-    func hidePlaybackControls(animate: Bool){
+    func hidePlaybackControls(animated: Bool) {
         if !playbackControlView.isHidden {
-            if animate {
+            if animated {
                 playbackControlView.alpha = 1.0
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.playbackControlView.alpha = 0
-                }){ _ in self.playbackControlView.isHidden = true }
+                UIView.animate(
+                    withDuration: 0.3,
+                    animations: { self.playbackControlView.alpha = 0 },
+                    completion: { _ in self.playbackControlView.isHidden = true }
+                )
             } else {
                 playbackControlView.alpha = 0.0
                 playbackControlView.isHidden = true
@@ -226,8 +209,11 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     @IBAction func onPlayPauseButtonTapped(_ sender: UIButton) {
-        if castController.isPaused { castController.play() }
-        else { castController.pause() }
+        if castController.isPaused {
+            castController.play()
+        } else {
+            castController.pause()
+        }
     }
     
     @IBAction func onRewindButtonTapped(_ sender: Any) {
@@ -263,27 +249,26 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     func playback(didStart media: CastMedia) {
-        if isPresenting { showPlaybackControls(animate: true) }
+        if isPresenting { showPlaybackControls(animated: true) }
     }
     
     func playback(didEnd media: CastMedia) {
-        if isPresenting { hidePlaybackControls(animate: true) }
+        if isPresenting { hidePlaybackControls(animated: true) }
     }
 }
 
 //MARK: Device discovery
 extension GoogleCastMediaPlaybackViewController {
-    func deviceListUpdated(){
+    func deviceListUpdated() {
         deviceListTableView.reloadSections([0], with: .automatic)
     }
     
     func device(selected: Bool, from device: CastDevice, with cell: GoogleCastDeviceTableViewCell) {
-        if selected {
-            if device == castController.client?.device {
-                castController.disconnect()
-            } else {
-                castController.connect(to: device)
-            }
+        guard selected else { return }
+        if device == castController.client?.device {
+            castController.disconnect()
+        } else {
+            castController.connect(to: device)
         }
     }
 }
@@ -300,7 +285,10 @@ extension GoogleCastMediaPlaybackViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath) as? GoogleCastDeviceTableViewCell else { fatalError() }
         let device = castController.devices[indexPath.item]
         cell.device = device
-        cell.state = device == castController.client?.device ? castController.client?.isConnected == true ? .connected : .connecting : .idle
+        cell.state = device == castController.client?.device
+            ? castController.client?.isConnected == true
+                ? .connected : .connecting
+            : .idle
         cell.delegate = self
         return cell
     }

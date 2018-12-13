@@ -20,14 +20,17 @@
 import UIKit
 import Alamofire
 
-struct AnimeLink: URLConvertible, Equatable, Codable {
+struct AnimeLink {
     var title: String
     var link: URL
     var image: URL
-    var source: SourceProtocol
-
+    var source: Source
+}
+extension AnimeLink: URLConvertible {
     func asURL() -> URL { return link }
-    
+}
+
+extension AnimeLink: Codable {
     enum CodingKeys: String, CodingKey {
         case title = "title"
         case link = "link"
@@ -49,13 +52,6 @@ struct AnimeLink: URLConvertible, Equatable, Codable {
         self.source = source
     }
     
-    init(title: String, link: URL, image: URL, source: SourceProtocol){
-        self.title = title
-        self.link = link
-        self.image = image
-        self.source = source
-    }
-    
     func encode(to encoder: Encoder) throws {
         var values = encoder.container(keyedBy: CodingKeys.self)
         try values.encode(title, forKey: .title)
@@ -65,7 +61,7 @@ struct AnimeLink: URLConvertible, Equatable, Codable {
     }
 }
 
-extension AnimeLink {
+extension AnimeLink: Equatable {
     static func == (lhs: AnimeLink, rhs: AnimeLink) -> Bool {
         return lhs.link == rhs.link
     }

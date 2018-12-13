@@ -46,18 +46,19 @@ class NineAnimatorUser {
         set {
             let encoder = PropertyListEncoder()
             guard let data = try? encoder.encode(newValue) else {
-                debugPrint("Warn: Recent animes failed to encode")
-                return
+                return debugPrint("Warn: Recent animes failed to encode")
             }
             _freezer.set(data, forKey: "anime.recent")
         }
     }
     
-    var source: SourceProtocol {
+    var source: Source {
         if let sourceName = _freezer.string(forKey: "source.recent"),
             let source = NineAnimator.default.source(with: sourceName) {
             return source
-        } else { return NineAnimator.default.sources.first! }
+        } else {
+            return NineAnimator.default.sources.first!
+        }
     }
     
     var lastEpisode: EpisodeLink? {
@@ -68,28 +69,22 @@ class NineAnimatorUser {
         return nil
     }
     
-    /**
-     Triggered when an anime is presented
-     
-     - parameters:
-        - anime: AnimeLink of the anime
-     */
+    /// Triggered when an anime is presented
+    ///
+    /// - Parameter anime: AnimeLink of the anime
     func entering(anime: AnimeLink) {
         var animes = recentAnimes.filter{ $0 != anime }
         animes.append(anime)
         recentAnimes = animes
     }
     
-    func select(source: SourceProtocol) {
+    func select(source: Source) {
         _freezer.set(source.name, forKey: "source.recent")
     }
     
-    /**
-     Triggered when the playback is about to start
-     
-     - parameters:
-        - episode: EpisodeLink of the episode
-     */
+    /// Triggered when the playback is about to start
+    ///
+    /// - Parameter episode: EpisodeLink of the episode
     func entering(episode: EpisodeLink) {
         let encoder = PropertyListEncoder()
         guard let data = try? encoder.encode(episode) else {
@@ -99,27 +94,20 @@ class NineAnimatorUser {
         _freezer.set(data, forKey: "episode.recent")
     }
     
-    /**
-     Periodically called by an observer in AVPlayer
-     
-     - parameters:
-        - progress: Float value ranging from 0.0 to 1.0
-        - for: EpisodeLink of the episode
-     */
+    /// Periodically called by an observer in AVPlayer
+    ///
+    /// - Parameters:
+    ///   - progress: Float value ranging from 0.0 to 1.0.
+    ///   - episode: EpisodeLink of the episode.
     func update(progress: Float, for episode: EpisodeLink) {
         let key = "\(episode).progress"
         _freezer.set(progress, forKey: key)
     }
     
-    /**
-     Retrive playback progress for episode
-     
-     - parameters:
-        - for: EpisodeLink of the episode
-     
-     - returns:
-     Float value ranging from 0.0 to 1.0
-     */
+    /// Retrive playback progress for episode
+    ///
+    /// - Parameter episode: EpisodeLink of the episode
+    /// - Returns: Float value ranging from 0.0 to 1.0
     func playbackProgress(for episode: EpisodeLink) -> Float {
         let key = "\(episode).progress"
         return _freezer.float(forKey: key)

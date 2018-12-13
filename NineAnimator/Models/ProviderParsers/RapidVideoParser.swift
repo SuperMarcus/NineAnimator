@@ -31,21 +31,23 @@ class RapidVideoParser: VideoProviderParser {
             response in
             guard let value = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
-                handler(nil, NineAnimatorError.responseError("response error: \(response.error?.localizedDescription ?? "Unknown")"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "response error: \(response.error?.localizedDescription ?? "Unknown")"
+                ))
             }
             do {
                 let bowl = try SwiftSoup.parse(value)
                 let sourceString = try bowl.select("video>source").attr("src")
-                guard let sourceUrl = URL(string: sourceString) else {
-                    handler(nil, NineAnimatorError.responseError("unable to convert video source to URL"))
-                    return
+                guard let sourceURL = URL(string: sourceString) else {
+                    return handler(nil, NineAnimatorError.responseError(
+                        "unable to convert video source to URL"
+                    ))
                 }
                 
-                debugPrint("Info: (RapidVideo Parser) found asset at \(sourceUrl.absoluteString)")
+                debugPrint("Info: (RapidVideo Parser) found asset at \(sourceURL.absoluteString)")
                 
                 handler(BasicPlaybackMedia(
-                    sourceUrl,
+                    url: sourceURL,
                     parent: episode,
                     contentType: "video/mp4",
                     headers:

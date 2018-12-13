@@ -19,14 +19,14 @@
 
 import UIKit
 
-class SearchResultViewController: UITableViewController, SearchPageDelegate {
+class SearchResultViewController: UITableViewController, SearchPageProviderDelegate {
     var searchText: String? {
         didSet {
             title = searchText
         }
     }
     
-    private var searchPage: SearchProtocol!
+    private var searchPage: SearchPageProvider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         searchPage.delegate = self
     }
     
-    func noResult(in: SearchProtocol) {
+    func noResult(from: SearchPageProvider) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
@@ -52,11 +52,8 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         }
     }
     
-    func pageIncoming(_ sectionNumber: Int, in page: SearchProtocol) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
+    func pageIncoming(_ sectionNumber: Int, from page: SearchPageProvider) {
+        DispatchQueue.main.async(execute: tableView.reloadData)
     }
 
     // MARK: - Table view data source

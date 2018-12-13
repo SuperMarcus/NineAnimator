@@ -20,19 +20,17 @@
 import Foundation
 import Alamofire
 
-class NineAnimeSource: BaseSource, SourceProtocol {
+class NineAnimeSource: BaseSource, Source {
     let name: String = "9anime.to"
     
     override var endpoint: String { return "https://www1.9anime.to" }
     
-    override init(with parent: NineAnimator) {
-        super.init(with: parent)
-    }
-    
-    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedProtocol>) -> NineAnimatorAsyncTask? {
-        return self.request(browse: "/"){
+    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
+        return request(browse: "/") {
             value, error in
-            guard let value = value else { handler(nil, error); return }
+            guard let value = value else {
+                return handler(nil, error)
+            }
             
             do {
                 let page = try NineAnimeFeatured(value, with: self)
@@ -43,7 +41,7 @@ class NineAnimeSource: BaseSource, SourceProtocol {
         }
     }
     
-    func search(keyword: String) -> SearchProtocol {
+    func search(keyword: String) -> SearchPageProvider {
         return NineAnimeSearch(self, query: keyword)
     }
     

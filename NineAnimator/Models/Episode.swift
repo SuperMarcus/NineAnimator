@@ -35,7 +35,7 @@ struct Episode {
         return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
-    var source: SourceProtocol { return _parent.source }
+    var source: Source { return _parent.source }
     
     private var _parent: Anime
     
@@ -56,37 +56,3 @@ struct Episode {
         return provider.parse(episode: self, with: source.retriverSession, onCompletion: handler)
     }
 }
-
-//extension Anime {
-//    func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask {
-//        let ajaxHeaders: HTTPHeaders = ["Referer": self.link.link.absoluteString]
-//
-//        let task = session
-//            .request(AjaxPath.episode(for: link.identifier, on: link.server), headers: ajaxHeaders)
-//            .responseJSON {
-//                response in
-//                if case let .failure(error) = response.result {
-//                    debugPrint("Error: Failiure on request: \(error)")
-//                    handler(nil, error)
-//                    return
-//                }
-//
-//                guard let responseJson = response.value as? NSDictionary else {
-//                    debugPrint("Error: No content received")
-//                    handler(nil, NineAnimatorError.responseError("no content received from server"))
-//                    return
-//                }
-//
-//                guard let targetString = responseJson["target"] as? String,
-//                      let target = URL(string: targetString) else {
-//                    debugPrint("Error: Target not defined or is invalid in response")
-//                    handler(nil, NineAnimatorError.responseError("target url not defined or invalid"))
-//                    return
-//                }
-//
-//                handler(Episode(link, on: target, with: self.session, parent: self), nil)
-//        }
-//
-//        return task
-//    }
-//}

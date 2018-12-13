@@ -48,26 +48,23 @@ struct NAMasterAnimeEpisodeInfo {
     var servers: [NAMasterAnimeStreamingInfo]
     
     var availableHosts: [Anime.ServerIdentifier: String] {
-        var hosts = [(Anime.ServerIdentifier, String)]()
-        servers.forEach{
-            src in
-            if !hosts.contains(where: { $0.0 == "\(src.hostIdentifier)" }) {
-                hosts.append(("\(src.hostIdentifier)", src.hostName))
-            }
-        }
-        return Dictionary(uniqueKeysWithValues: hosts)
+        return Dictionary(
+            servers.map { ("\($0.hostIdentifier)", $0.hostName) },
+            uniquingKeysWith: { old, _ in old }
+        )
     }
     
     func select(server hostIdentifier: Anime.ServerIdentifier, option: SelectOption) -> NAMasterAnimeStreamingInfo? {
+        var sorted: [NAMasterAnimeStreamingInfo] {
+            return servers
+                .filter { "\($0.hostIdentifier)" == hostIdentifier }
+                .sorted { $0.quality > $1.quality }
+        }
         switch option {
         case .bestQuality:
-            let servers = self.servers.filter{ "\($0.hostIdentifier)" == hostIdentifier }
-                .sorted{ $0.quality > $1.quality }
-            return servers.first
+            return sorted.first
         case .worstQuality:
-            let servers = self.servers.filter{ "\($0.hostIdentifier)" == hostIdentifier }
-                .sorted{ $0.quality > $1.quality }
-            return servers.last
+            return sorted.last
         case .firstOccurance:
             return servers.first { "\($0.hostIdentifier)" == hostIdentifier }
         }
@@ -78,7 +75,7 @@ struct NAMasterAnimeEpisodeInfo {
         self.url = url
         self.animeIdentifier = parentId
         self.episodeIdentifier = episodeId
-        self.servers = streamingInfo.map{
+        self.servers = streamingInfo.map {
             source in
             let host = source["host"] as! NSDictionary
             return NAMasterAnimeStreamingInfo(
@@ -88,7 +85,8 @@ struct NAMasterAnimeEpisodeInfo {
                 quality: source["quality"] as! Int,
                 embeddedIdentifier: source["embed_id"] as! String,
                 embeddedPrefix: host["embed_prefix"] as! String,
-                embeddedSuffix: host["embed_suffix"] as? String ?? "")
+                embeddedSuffix: host["embed_suffix"] as? String ?? ""
+            )
         }
     }
 }

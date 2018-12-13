@@ -19,7 +19,7 @@
 
 import Foundation
 
-class NASearchMasterAnime: SearchProtocol {
+class NASearchMasterAnime: SearchPageProvider {
     static let apiPathSearch = "/api/anime/filter?search=%@&order=score_desc&page=%@"
     
     var query: String
@@ -30,7 +30,7 @@ class NASearchMasterAnime: SearchProtocol {
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
-    var delegate: SearchPageDelegate?
+    var delegate: SearchPageProviderDelegate?
     
     private let _parent: NASourceMasterAnime
     
@@ -54,41 +54,41 @@ class NASearchMasterAnime: SearchProtocol {
         if _lastRequest == nil && moreAvailable {
             let keyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
-            _lastRequest = _parent.request(ajax: path){
+            _lastRequest = _parent.request(ajax: path) {
                 response, error in
-//                [weak self] response, error in
-//                guard let self = self else { return }
+                #warning("Not working with weak self")
+                // [weak self] response, error in
+                // guard let self = self else { return }
                 
-                defer{ self._lastRequest = nil }
+                defer { self._lastRequest = nil }
                 
                 guard let response = response else { return }
                 
                 self.totalPages = response["last_page"] as? Int
                 
-                if self.totalPages == 0 { self.delegate?.noResult(in: self) }
-                else {
-                    guard let animes = response["data"] as? [NSDictionary] else { return }
-                    
-                    var pageResult = [AnimeLink]()
-                    
-                    for anime in animes {
-                        guard let title = anime["title"] as? String,
-                            let slug = anime["slug"] as? String,
-                            let posterDict = anime["poster"] as? NSDictionary,
-                            let posterName = posterDict["file"] as? String
-                            else { continue }
-                        
-                        pageResult.append(AnimeLink(
-                            title: title,
-                            link: self._parent.anime(slug: slug),
-                            image: self._parent.poster(file: posterName),
-                            source: self._parent))
-                    }
-                    
-                    let newPage = self.availablePages
-                    self._results.append(pageResult)
-                    self.delegate?.pageIncoming(newPage, in: self)
+                guard self.totalPages != 0 else {
+                    self.delegate?.noResult(from: self);return
                 }
+                guard let animes = response["data"] as? [NSDictionary] else { return }
+                
+                let pageResult: [AnimeLink] = animes.compactMap { anime in
+                    guard let title = anime["title"] as? String,
+                        let slug = anime["slug"] as? String,
+                        let posterDict = anime["poster"] as? NSDictionary,
+                        let posterName = posterDict["file"] as? String
+                        else { return nil }
+                    
+                    return AnimeLink(
+                        title: title,
+                        link: self._parent.anime(slug: slug),
+                        image: self._parent.poster(file: posterName),
+                        source: self._parent
+                    )
+                }
+                
+                let newPage = self.availablePages
+                self._results.append(pageResult)
+                self.delegate?.pageIncoming(newPage, from: self)
             }
         }
     }
