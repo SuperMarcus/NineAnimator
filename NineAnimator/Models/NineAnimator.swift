@@ -44,7 +44,7 @@ class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
     
     func cancel() { for task in tasks { task.cancel() } }
     
-    // Discussion: Should i implement deinit to auto cancel all tasks? Maybe i should.
+    deinit { cancel(); tasks = [] }
 }
 
 extension DataRequest: NineAnimatorAsyncTask { }

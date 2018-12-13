@@ -22,7 +22,7 @@ import Alamofire
 import AVKit
 
 protocol VideoProviderParser {
-    func parse(episode: Episode, with: SessionManager, onCompletion: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
 }
 
 class VideoProviderRegistry {
@@ -32,6 +32,7 @@ class VideoProviderRegistry {
         defaultProvider.register(MyCloudParser(), forServer: "MyCloud")
         defaultProvider.register(RapidVideoParser(), forServer: "RapidVideo")
         defaultProvider.register(StreamangoParser(), forServer: "Streamango")
+        defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
         
         return defaultProvider
     }()

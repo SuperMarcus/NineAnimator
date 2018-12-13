@@ -320,7 +320,11 @@ extension AnimeViewController {
                         let playerController = AVPlayerViewController()
                         playerController.player = AVPlayer(playerItem: item)
                         playerController.delegate = self
+                        
                         self.displayedPlayer = playerController.player
+                        
+                        self.playbackProgressRestoreToken?.invalidate()
+                        self.playbackRateObservation?.invalidate()
                         
                         self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
                         self.playbackRateObservation = playerController.player?.observe(\.rate, changeHandler: self.onRateChange)
