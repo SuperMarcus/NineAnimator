@@ -28,9 +28,6 @@ class EpisodeAccessoryProcessIndicator: UIView {
     var nullColor: UIColor = .lightGray
     
     @IBInspectable
-    var percentage: CGFloat = 0.0
-    
-    @IBInspectable
     var strokeWidth: CGFloat = 2.0
     
     @IBInspectable
@@ -39,8 +36,18 @@ class EpisodeAccessoryProcessIndicator: UIView {
     @IBInspectable
     var playIconToRadiusRatio: CGFloat = 0.55
     
+    var episodeLink: EpisodeLink? {
+        didSet { setNeedsDisplay() }
+    }
+    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
+        
+        var percentage: CGFloat = 0
+        
+        if let episodeLink = episodeLink {
+            percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: episodeLink))
+        }
         
         let centerPoint = CGPoint(x: rect.midX, y: rect.midY)
         

@@ -98,6 +98,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     var playbackProgressRestoreToken: NSKeyValueObservation?
     
+    var playbackRateObservation: NSKeyValueObservation?
+    
     var informationCell: AnimeDescriptionTableViewCell?
     
     var selectedEpisodeCell: EpisodeTableViewCell?
@@ -152,6 +154,11 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         
         //Sets episode and server to nil
         episode = nil
+        
+        playbackRateObservation?.invalidate()
+        playbackRateObservation?.invalidate()
+        playbackProgressRestoreToken = nil
+        playbackRateObservation = nil
     }
 }
 
@@ -190,7 +197,7 @@ extension AnimeViewController {
             let episodes = anime!.episodes[server!]!
             let episode = episodes[indexPath.item]
             cell.episodeLink = episode
-            cell.progressIndicator.percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: episode))
+            cell.progressIndicator.episodeLink = episode
             return cell
         default:
             fatalError()
@@ -312,9 +319,11 @@ extension AnimeViewController {
                         let item = media.avPlayerItem
                         let playerController = AVPlayerViewController()
                         playerController.player = AVPlayer(playerItem: item)
+                        playerController.delegate = self
                         self.displayedPlayer = playerController.player
                         
                         self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
+                        self.playbackRateObservation = playerController.player?.observe(\.rate, changeHandler: self.onRateChange)
                         
                         //Initialize audio session to movie playback
                         let audioSession = AVAudioSession.sharedInstance()
@@ -371,14 +380,23 @@ extension AnimeViewController {
         playbackProgressRestoreToken = nil
         
         playbackProgressUpdateObserver = displayedPlayer?.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 5),
+            forInterval: CMTime(seconds: 1),
             queue: .main,
             using: persistProgress
         )
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        playbackProgressRestoreToken = nil
+    private func onRateChange(player: AVPlayer, _: NSKeyValueObservedChange<Float>) {
+        debugPrint("Info: Playback rate changed to \(player.rate)")
+        
+        if playbackProgressRestoreToken == nil {
+            let time = player.currentTime()
+            self.persistProgress(time)
+        }
+        
+        //Reload progresses
+        if player.rate == 0 {
+            tableView.reloadSections([1], with: .automatic)
+        }
     }
 }

@@ -33,7 +33,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell {
             let coverImageLink = link.parent.image
             coverImageView.kf.setImage(with: coverImageLink)
             backgroundBlurredImageView.kf.setImage(with: coverImageLink)
-            progressIndicator.percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: link))
+            progressIndicator.episodeLink = link
             titleLabel.text = link.parent.title
             episodeLabel.text = "Episode: \(link.name)"
         }
