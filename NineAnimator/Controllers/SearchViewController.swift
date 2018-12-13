@@ -34,7 +34,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     
     var requestTask: NineAnimatorAsyncTask?
     
-    var source: SourceProtocol { return NineAnimator.default.user.source }
+    var source: Source { return NineAnimator.default.user.source }
 
     @IBOutlet weak var selectSiteBarButton: UIBarButtonItem!
     
@@ -160,8 +160,7 @@ extension SearchViewController {
                     [weak self] page, error in
                     defer { self?.requestTask = nil }
                     guard let page = page else {
-                        debugPrint("Error: \(error!)")
-                        return
+                        return debugPrint("Error: \(error!)")
                     }
                     self?.popularAnimeLinks = page.featured + page.latest
                 }

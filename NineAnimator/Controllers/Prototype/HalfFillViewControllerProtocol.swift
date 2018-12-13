@@ -21,18 +21,18 @@ import UIKit
 
 public protocol HalfFillViewControllerProtocol: CustomBarStyleRequiredProtocol { }
 
-public enum HalfFillState{
+public enum HalfFillState {
     case full
     case half
 }
 
-extension HalfFillViewControllerProtocol where Self: UIViewController{
+extension HalfFillViewControllerProtocol where Self: UIViewController {
     var halfFillController: HalfFillPresentationController? {
-        return self.presentationController as? HalfFillPresentationController
+        return presentationController as? HalfFillPresentationController
     }
 }
 
-public func setupHalfFillView(for vc: UIViewController, from source: UIViewController) -> HalfFillTransitionDelegate{
+public func setupHalfFillView(for vc: UIViewController, from source: UIViewController) -> HalfFillTransitionDelegate {
     let configTransitionDelegate = HalfFillTransitionDelegate(
         presented: source,
         presenting: vc)

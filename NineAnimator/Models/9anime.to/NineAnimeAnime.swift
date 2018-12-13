@@ -30,11 +30,10 @@ extension NineAnimeSource {
         let taskTracker = NineAnimatorMultistepAsyncTask()
         taskTracker.add(request(browse: link.link, headers: [:]) {
             [weak taskTracker] response, error in
-            //Return without trigger an error
+            // Return without trigger an error
             guard let taskTracker = taskTracker else { return }
             guard let response = response else {
-                handler(nil, error)
-                return
+                return handler(nil, error)
             }
             taskTracker.add(self.parseAnime(from: response, with: link, handler))
         })
@@ -45,25 +44,30 @@ extension NineAnimeSource {
         let bowl = try! SwiftSoup.parse(page)
         
         let alias: String? = {
-            let matches = NineAnimeSource.animeAliasRegex.matches(in: page, options: [], range: page.matchingRange)
+            let matches = NineAnimeSource.animeAliasRegex.matches(
+                in: page, range: page.matchingRange
+            )
             return matches.count > 0 ? page[matches[0].range(at: 1)] : nil
         }()
         
         let animeAttributes: [(name: String, value: String)] = {
-            let matches = NineAnimeSource.animeAttributesRegex.matches(in: page, options: [], range: page.matchingRange)
-            return matches.filter { page[$0.range(at: 2)].isEmpty }
+            let matches = NineAnimeSource.animeAttributesRegex.matches(
+                in: page,
+                range: page.matchingRange
+            )
+            return matches
+                .filter { page[$0.range(at: 2)].isEmpty }
                 .map { (page[$0.range(at: 1)], page[$0.range(at: 2)]) }
         }()
         
         let animeResourceTags: (id: String, episode: String) = {
-            let matches = NineAnimeSource.animeResourceTagsRegex.matches(in: page, options: [], range: page.matchingRange)
+            let matches = NineAnimeSource.animeResourceTagsRegex.matches(
+                in: page, range: page.matchingRange
+            )
             return (page[matches[0].range(at: 1)], page[matches[0].range(at: 2)])
         }()
         
         let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
-        
-        var animeServers = [Anime.ServerIdentifier: String]()
-        var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
         
         let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
         
@@ -73,24 +77,30 @@ extension NineAnimeSource {
         debugPrint("- Attributes: \(animeAttributes)")
         debugPrint("- Resource Identifiers: ID=\(animeResourceTags.id), EPISODE=\(animeResourceTags.episode)")
         
-        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders){
+        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders) {
             response, error in
             guard let responseJson = response else {
-                handler(nil, error)
-                return
+                return handler(nil, error)
             }
             
             guard let htmlList = responseJson["html"] as? String else {
                 debugPrint("Error: Invalid response")
-                handler(nil, NineAnimatorError.responseError("unable to retrive episode list from responses"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "unable to retrive episode list from responses"
+                ))
             }
             
-            let matches = NineAnimeSource.animeServerListRegex.matches(in: htmlList, options: [], range: htmlList.matchingRange)
+            let matches = NineAnimeSource.animeServerListRegex.matches(
+                in: htmlList, range: htmlList.matchingRange
+            )
             
-            for match in matches {
-                animeServers[htmlList[match.range(at: 1)]] = htmlList[match.range(at: 2)]
-            }
+            let animeServers: [Anime.ServerIdentifier: String] = Dictionary(
+                matches.map { match in
+                    (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
+                }, uniquingKeysWith: { _, new in new }
+            )
+            
+            var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
             
             debugPrint("Info: \(animeServers.count) servers found for this anime.")
             
@@ -99,8 +109,12 @@ extension NineAnimeSource {
                 
                 for server in try soup.select("div.server") {
                     let serverIdentifier = try server.attr("data-id")
-                    animeEpisodes[serverIdentifier] = try server.select("li>a")
-                        .map { EpisodeLink(identifier: try $0.attr("data-id"), name: try $0.text(), server: serverIdentifier, parent: link) }
+                    animeEpisodes[serverIdentifier] = try server.select("li>a").map {
+                        EpisodeLink(
+                            identifier: try $0.attr("data-id"),
+                            name: try $0.text(),
+                            server: serverIdentifier,
+                            parent: link) }
                     debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
                 }
                 

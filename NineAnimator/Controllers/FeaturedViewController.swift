@@ -21,7 +21,7 @@ import UIKit
 import Kingfisher
 
 class FeaturedViewController: UITableViewController {
-    var featuredAnimePage: FeaturedProtocol? {
+    var featuredAnimePage: FeaturedContainer? {
         didSet {
             UIView.transition(
                 with: tableView,
@@ -40,13 +40,9 @@ class FeaturedViewController: UITableViewController {
         didSet { sourceSelectionButton.isEnabled = requestTask == nil }
     }
     
-    var loadedSource: SourceProtocol?
+    var loadedSource: Source?
     
-    var source: SourceProtocol { return NineAnimator.default.user.source }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    var source: Source { return NineAnimator.default.user.source }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -56,12 +52,11 @@ class FeaturedViewController: UITableViewController {
         }
     }
     
-    func reload(){
-        self.featuredAnimePage = nil
+    func reload() {
+        featuredAnimePage = nil
         tableView.reloadData()
-        let source = self.source
         requestTask = source.featured {
-            page, error in
+            [source] page, error in
             DispatchQueue.main.async { [weak self] in
                 defer { self?.requestTask = nil }
                 self?.featuredAnimePage = page

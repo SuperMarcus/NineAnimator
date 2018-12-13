@@ -19,7 +19,7 @@
 
 import Foundation
 
-struct NineAnimeFeatured: FeaturedProtocol {
+struct NineAnimeFeatured: FeaturedContainer {
     static let featuredAnimesRegex = try! NSRegularExpression(pattern: "<div class=\"item swiper-slide\" style=\"background-image: url\\(([^)]+)\\)[^h]+href=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
     
     static let latestUpdateAnimesRegex = try! NSRegularExpression(pattern: "(https:\\/\\/www1.9anime.to\\/watch[^\"]+)\"[^>]+>\\s+\\<img src=\"(https[^\"]+)\" alt=\"([^\"]+)[^>]+>", options: .caseInsensitive)
@@ -29,7 +29,9 @@ struct NineAnimeFeatured: FeaturedProtocol {
     let latest: [AnimeLink]
     
     init?(_ pageSource: String, with parent: NineAnimeSource) throws {
-        let featuredAnimesMatches = NineAnimeFeatured.featuredAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
+        let featuredAnimesMatches = NineAnimeFeatured.featuredAnimesRegex.matches(
+            in: pageSource, range: pageSource.matchingRange
+        )
         self.featured = try featuredAnimesMatches.map {
             guard let imageLink = URL(string: pageSource[$0.range(at: 1)]),
                 let animeLink = URL(string: pageSource[$0.range(at: 2)])
@@ -38,7 +40,9 @@ struct NineAnimeFeatured: FeaturedProtocol {
             return AnimeLink(title: title, link: animeLink, image: imageLink, source: parent)
         }
         
-        let latestAnimesMatches = NineAnimeFeatured.latestUpdateAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
+        let latestAnimesMatches = NineAnimeFeatured.latestUpdateAnimesRegex.matches(
+            in: pageSource, range: pageSource.matchingRange
+        )
         self.latest = try latestAnimesMatches.map {
             guard let imageLink = URL(string: pageSource[$0.range(at: 2)]),
                 let animeLink = URL(string: pageSource[$0.range(at: 1)])

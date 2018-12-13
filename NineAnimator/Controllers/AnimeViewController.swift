@@ -223,7 +223,7 @@ extension AnimeViewController {
 //MARK: - Share and select server
 extension AnimeViewController {
     @IBAction func onCastButtonTapped(_ sender: Any) {
-        self.castPresentationDelegate = CastController.default.present(from: self)
+        castPresentationDelegate = CastController.default.present(from: self)
     }
     
     @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {

@@ -27,7 +27,7 @@ public class HalfFillPresentationController: UIPresentationController {
             return dimmedView
         }
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: containerView!.bounds.width, height: containerView!.bounds.height))
+        let view = UIView(frame: containerView!.bounds)
         
         // Blur Effect
         let blurEffect = UIBlurEffect(style: .dark)
@@ -52,7 +52,7 @@ public class HalfFillPresentationController: UIPresentationController {
         return super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
-    public func layoutBackgroundView(with size: CGSize){
+    public func layoutBackgroundView(with size: CGSize) {
         var view: UIView? = _dimmingView
         while view != nil {
             view?.frame.size = size
@@ -60,44 +60,44 @@ public class HalfFillPresentationController: UIPresentationController {
         }
     }
     
-    private func presentAsFullScreen(){
-        guard let presented = self.presentedView else { return }
-        guard let container = self.containerView else { return }
+    private func presentAsFullScreen() {
+        guard let presented = presentedView,
+            let container = containerView
+            else { return }
         
         presented.frame = container.bounds
     }
     
     override public func presentationTransitionWillBegin() {
-        guard let dimmer = self.dimmer else { return }
-        guard let container = self.containerView else { return }
+        guard let dimmer = dimmer,
+            let container = containerView
+            else { return }
         
         dimmer.alpha = 0
         container.addSubview(dimmer)
         dimmer.addSubview(presentedViewController.view)
         
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
-        coordinator.animate(alongsideTransition: {
-            _ in
+        coordinator.animate(alongsideTransition: { _ in
             dimmer.alpha = 1
             self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }){ _ in self.updateState(viewController: self.presentingViewController) }
+        }) { _ in self.updateState(viewController: self.presentingViewController) }
     }
     
-    override public func dismissalTransitionWillBegin(){
+    override public func dismissalTransitionWillBegin() {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
-        coordinator.animate(alongsideTransition: {
-            _ in
+        coordinator.animate(alongsideTransition: { _ in
             self.dimmer?.alpha = 0
             self.presentingViewController.view.transform = .identity
         })
     }
     
-    override public func dismissalTransitionDidEnd(_ completed: Bool){
-        self.dimmer?.removeFromSuperview()
-        self._dimmingView = nil
+    override public func dismissalTransitionDidEnd(_ completed: Bool) {
+        dimmer?.removeFromSuperview()
+        _dimmingView = nil
     }
     
-    private func updateState(viewController: UIViewController){
+    private func updateState(viewController: UIViewController) {
         viewController.setNeedsStatusBarAppearanceUpdate()
     }
 }

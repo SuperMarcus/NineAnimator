@@ -24,18 +24,19 @@ extension NineAnimeSource {
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         let ajaxHeaders: [String: String] = ["Referer": link.parent.link.absoluteString]
         let infoPath = "/ajax/episode/info?id=\(link.identifier)&server=\(link.server)"
-        return request(ajax: infoPath, with: ajaxHeaders){
+        return request(ajax: infoPath, with: ajaxHeaders) {
             response, error in
             guard let responseJson = response else {
-                handler(nil, error)
-                return
+                return handler(nil, error)
             }
             
             guard let targetString = responseJson["target"] as? String,
-                let target = URL(string: targetString) else {
+                let target = URL(string: targetString)
+                else {
                     debugPrint("Error: Target not defined or is invalid in response")
-                    handler(nil, NineAnimatorError.responseError("target url not defined or invalid"))
-                    return
+                    return handler(nil, NineAnimatorError.responseError(
+                        "target url not defined or invalid"
+                    ))
             }
             
             handler(Episode(link, target: target, parent: anime), nil)

@@ -20,18 +20,18 @@
 import Foundation
 import Alamofire
 
-protocol SourceProtocol {
+protocol Source {
     var name: String { get }
     
-    var retriverSession: Alamofire.SessionManager { get }
+    var retriverSession: SessionManager { get }
     
-    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedProtocol>) -> NineAnimatorAsyncTask?
+    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask?
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask?
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask?
     
-    func search(keyword: String) -> SearchProtocol
+    func search(keyword: String) -> SearchPageProvider
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser?
 }
@@ -44,14 +44,14 @@ class BaseSource {
     
     var endpoint: String { return "" }
     
-    var retriverSession: Alamofire.SessionManager { return parent.ajaxSession }
+    var retriverSession: SessionManager { return parent.ajaxSession }
     
     init(with parent: NineAnimator) {
         self.parent = parent
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.session.request(url, headers: headers).responseString{
+        return parent.session.request(url, headers: headers).responseString {
             response in
             switch response.result {
             case .failure(let error):
@@ -80,7 +80,7 @@ class BaseSource {
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.ajaxSession.request(url, headers: headers).responseString{
+        return parent.ajaxSession.request(url, headers: headers).responseString {
             response in
             switch response.result {
             case .failure(let error):

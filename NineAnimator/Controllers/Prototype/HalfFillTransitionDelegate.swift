@@ -23,10 +23,10 @@ public class HalfFillTransitionDelegate: NSObject, UIViewControllerTransitioning
     private let presented: UIViewController
     private let presenting: UIViewController
     
-    init(presented: UIViewController, presenting: UIViewController){
+    init(presented: UIViewController, presenting: UIViewController) {
         self.presented = presented
         self.presenting = presenting
-        
+
         super.init()
     }
     
@@ -34,8 +34,7 @@ public class HalfFillTransitionDelegate: NSObject, UIViewControllerTransitioning
         return HalfFillTransitionAnimator()
     }
     
-    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController?{
-        let pc = HalfFillPresentationController(presentedViewController: presented, presenting: presenting)
-        return pc
+    public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return HalfFillPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

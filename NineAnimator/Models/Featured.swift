@@ -19,13 +19,13 @@
 
 import Foundation
 
-protocol FeaturedProtocol {
+protocol FeaturedContainer {
     var featured: [AnimeLink] { get }
     
     var latest: [AnimeLink] { get }
 }
 
-struct BasicFeaturedContainer: FeaturedProtocol {
+struct BasicFeaturedContainer: FeaturedContainer {
     var featured: [AnimeLink]
     
     var latest: [AnimeLink]

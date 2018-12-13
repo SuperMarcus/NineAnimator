@@ -34,17 +34,17 @@ protocol NineAnimatorAsyncTask {
     func cancel()
 }
 
-//This class is used to keep track of multiple async tasks that might be needed
+/// This class is used to keep track of multiple async tasks that might be needed
 class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
     var tasks: [NineAnimatorAsyncTask]
     
-    init(){ tasks = [] }
+    init() { tasks = [] }
     
-    func add(_ task: NineAnimatorAsyncTask?){ if let task = task { tasks.append(task) } }
+    func add(_ task: NineAnimatorAsyncTask?) { if let task = task { tasks.append(task) } }
     
-    func cancel(){ for task in tasks { task.cancel() } }
+    func cancel() { for task in tasks { task.cancel() } }
     
-    //Discussion: Should i implement deinit to auto cancel all tasks? Maybe i should.
+    // Discussion: Should i implement deinit to auto cancel all tasks? Maybe i should.
 }
 
 extension DataRequest: NineAnimatorAsyncTask { }
@@ -60,7 +60,7 @@ class NineAnimator: SessionDelegate {
     
     var user = NineAnimatorUser()
     
-    var sources = [SourceProtocol]()
+    var sources = [Source]()
     
     override init() {
         super.init()
@@ -85,18 +85,20 @@ class NineAnimator: SessionDelegate {
         ajaxSessionConfiguration.httpAdditionalHeaders = ajaxAdditionalHeaders
         ajaxSession = SessionManager(configuration: ajaxSessionConfiguration, delegate: self)
         
-        self.registerDefaultSources()
+        registerDefaultSources()
     }
     
-    func register(source: SourceProtocol){ self.sources.append(source) }
+    func register(source: Source) { sources.append(source) }
     
-    func remove(source: SourceProtocol){ sources.removeAll{ $0.name == source.name } }
+    func remove(source: Source) {
+        sources.removeAll { $0.name == source.name }
+    }
     
-    func source(with name: String) -> SourceProtocol? {
+    func source(with name: String) -> Source? {
         return sources.first{ $0.name == name }
     }
     
-    private func registerDefaultSources(){
+    private func registerDefaultSources() {
         register(source: NineAnimeSource(with: self))
         register(source: NASourceMasterAnime(with: self))
     }

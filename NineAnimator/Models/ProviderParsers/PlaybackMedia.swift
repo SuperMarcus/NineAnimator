@@ -28,31 +28,24 @@ protocol PlaybackMedia {
 }
 
 struct BasicPlaybackMedia: PlaybackMedia {
-    let playbackUrl: URL
-    let customHeaders: Alamofire.HTTPHeaders
+    let url: URL
     let parent: Episode
     let contentType: String
+    let headers: HTTPHeaders
     
     var avPlayerItem: AVPlayerItem {
-        return AVPlayerItem(url: playbackUrl, headers: customHeaders)
+        return AVPlayerItem(url: url, headers: headers)
     }
     
     var castMedia: CastMedia? {
-        let media = CastMedia(
+        return CastMedia(
             title: parent.name,
-            url: playbackUrl,
+            url: url,
             poster: parent.link.parent.image,
             contentType: contentType,
             streamType: .buffered,
             autoplay: true,
-            currentTime: 0)
-        return media
-    }
-    
-    init(_ url: URL, parent: Episode, contentType: String, headers: Alamofire.HTTPHeaders = [:]) {
-        self.playbackUrl = url
-        self.customHeaders = headers
-        self.parent = parent
-        self.contentType = contentType
+            currentTime: 0
+        )
     }
 }

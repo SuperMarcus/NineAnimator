@@ -40,7 +40,7 @@ struct Anime {
     
     var currentServer: ServerIdentifier
     
-    var source: SourceProtocol { return link.source }
+    var source: Source { return link.source }
     
     init(_ link: AnimeLink,
          description: String,

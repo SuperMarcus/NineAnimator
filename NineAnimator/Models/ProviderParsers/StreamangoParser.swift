@@ -34,36 +34,43 @@ class StreamangoParser: VideoProviderParser {
             guard let self = self else { return }
             guard let text = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
-                handler(nil, NineAnimatorError.responseError("response error: \(response.error?.localizedDescription ?? "Unknown")"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "response error: \(response.error?.localizedDescription ?? "Unknown")"
+                ))
             }
             
-            let matches = StreamangoParser.obscuredVideoSourceRegex.matches(in: text, options: [], range: text.matchingRange)
+            let matches = StreamangoParser.obscuredVideoSourceRegex.matches(
+                in: text, range: text.matchingRange
+            )
             
             guard let match = matches.first else {
-                handler(nil, NineAnimatorError.responseError("no matches for source url"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no matches for source url"
+                ))
             }
             
             let obscuredLink = text[match.range(at: 1)]
             
             guard let obscuredDecodingKey = Int(text[match.range(at: 2)]) else {
-                handler(nil, NineAnimatorError.responseError("decoding key is not an integer"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "decoding key is not an integer"
+                ))
             }
             
             let decodedLink = self.decode(obscured: obscuredLink, with: obscuredDecodingKey)
             
             
-            guard let sourceUrl = URL(string: decodedLink.hasPrefix("//") ? "https:\(decodedLink)" : decodedLink) else {
-                handler(nil, NineAnimatorError.responseError("source url not recongized"))
-                return
+            guard let sourceURL = URL(string:
+                decodedLink.hasPrefix("//") ? "https:\(decodedLink)" : decodedLink)
+                else { return handler(nil, NineAnimatorError.responseError(
+                    "source url not recongized"
+                ))
             }
             
-            debugPrint("Info: (Streamango Parser) found asset at \(sourceUrl.absoluteString)")
+            debugPrint("Info: (Streamango Parser) found asset at \(sourceURL.absoluteString)")
             
             handler(BasicPlaybackMedia(
-                sourceUrl,
+                url: sourceURL,
                 parent: episode,
                 contentType: "video/mp4",
                 headers:

@@ -41,27 +41,32 @@ class MyCloudParser: VideoProviderParser {
             response in
             guard let text = response.value else {
                 debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
-                handler(nil, NineAnimatorError.responseError("response error: \(response.error?.localizedDescription ?? "Unknown")"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "response error: \(response.error?.localizedDescription ?? "Unknown")"
+                ))
             }
             
-            let matches = MyCloudParser.videoSourceRegex.matches(in: text, options: [], range: text.matchingRange)
+            let matches = MyCloudParser.videoSourceRegex.matches(
+                in: text, range: text.matchingRange
+            )
             
             guard let match = matches.first else {
-                handler(nil, NineAnimatorError.responseError("no matches for source url"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no matches for source url"
+                ))
             }
             
-            guard let sourceUrl = URL(string: text[match.range(at: 1)]) else {
-                handler(nil, NineAnimatorError.responseError("source url not recongized"))
-                return
+            guard let sourceURL = URL(string: text[match.range(at: 1)]) else {
+                return handler(nil, NineAnimatorError.responseError(
+                    "source url not recongized"
+                ))
             }
             
-            debugPrint("Info: (MyCloud Parser) found asset at \(sourceUrl.absoluteString)")
+            debugPrint("Info: (MyCloud Parser) found asset at \(sourceURL.absoluteString)")
             
             //MyCloud might not support Chromecast, since it uses COR checking
             handler(BasicPlaybackMedia(
-                sourceUrl,
+                url: sourceURL,
                 parent: episode,
                 contentType: "application/vnd.apple.mpegurl",
                 headers: playerAdditionalHeaders), nil)

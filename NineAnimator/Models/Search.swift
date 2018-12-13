@@ -20,14 +20,14 @@
 import Foundation
 import SwiftSoup
 
-protocol SearchPageDelegate: AnyObject {
+protocol SearchPageProviderDelegate: AnyObject {
     //Index of the page (starting from zero)
-    func pageIncoming(_: Int, in: SearchProtocol)
+    func pageIncoming(_: Int, from page: SearchPageProvider)
     
-    func noResult(in: SearchProtocol)
+    func noResult(from page: SearchPageProvider)
 }
 
-protocol SearchProtocol {
+protocol SearchPageProvider {
     var query: String { get }
     
     var totalPages: Int? { get }
@@ -36,7 +36,7 @@ protocol SearchProtocol {
     
     var moreAvailable: Bool { get }
     
-    var delegate: SearchPageDelegate? { get set }
+    var delegate: SearchPageProviderDelegate? { get set }
     
     func animes(on page: Int) -> [AnimeLink]
     

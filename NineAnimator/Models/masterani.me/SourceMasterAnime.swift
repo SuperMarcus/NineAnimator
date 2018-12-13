@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-class NASourceMasterAnime: BaseSource, SourceProtocol {
+class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
     
     override var endpoint: String { return "https://www.masterani.me" }
@@ -37,23 +37,23 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
     static let animeResourceIdentifierRegex = try! NSRegularExpression(pattern: "\\/(\\d+)[\\da-zA-Z0-9-_]+$", options: .caseInsensitive)
     static let animeCompleteIdentifierRegex = try! NSRegularExpression(pattern: "\\/([\\da-zA-Z0-9-_]+)$", options: .caseInsensitive)
     
-    override init(with parent: NineAnimator) {
-        super.init(with: parent)
-    }
-    
-    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedProtocol>) -> NineAnimatorAsyncTask? {
-        return request(ajax: NASourceMasterAnime.apiPathTrending){
+    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
+        return request(ajax: NASourceMasterAnime.apiPathTrending) {
             response, error in
-            guard let response = response else { handler(nil, error); return }
+            guard let response = response else {
+                return handler(nil, error)
+            }
             
             guard let beingWatchedAnimes = response["being_watched"] as? [NSDictionary] else {
-                handler(nil, NineAnimatorError.responseError("no being watched animes entry found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no being watched animes entry found"
+                ))
             }
             
             guard let popularAnimes = response["popular_today"] as? [NSDictionary] else {
-                handler(nil, NineAnimatorError.responseError("no trending animes entry found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no trending animes entry found"
+                ))
             }
             
             var watchedAnimes = [AnimeLink]()
@@ -71,19 +71,18 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
                 watchedAnimes.append(animeLink)
             }
             
-            var alsoFeaturedAnimes = [AnimeLink]()
-            
-            for anime in popularAnimes {
+            let alsoFeaturedAnimes: [AnimeLink] =
+                popularAnimes.compactMap { anime in
                 guard let title = anime["title"] as? String,
                     let slug = anime["slug"] as? String,
                     let posterName = anime["poster"] as? String
-                    else { continue }
-                let animeLink = AnimeLink(
+                    else { return nil }
+                return AnimeLink(
                     title: title,
                     link: self.anime(slug: slug),
                     image: self.poster(file: posterName),
-                    source: self)
-                alsoFeaturedAnimes.append(animeLink)
+                    source: self
+                )
             }
             
             let featuredPage = BasicFeaturedContainer(featured: alsoFeaturedAnimes, latest: watchedAnimes)
@@ -104,63 +103,74 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
         
         debugPrint("Info: Requesting episodes of anime \(identifier) on masterani.me")
         
-        task.add(request(ajax: path){
+        task.add(request(ajax: path) {
             [weak task] response, error in
             guard let task = task else { return }
-            guard let response = response else { handler(nil, error); return }
+            guard let response = response else {
+                return handler(nil, error)
+            }
             
             guard let animeInfo = response["info"] as? [String: Any] else {
-                handler(nil, NineAnimatorError.responseError("no info entry found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no info entry found"
+                ))
             }
             
             guard let animeSynopsis = animeInfo["synopsis"] as? String else {
-                handler(nil, NineAnimatorError.responseError("no info.synopsis entry found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no info.synopsis entry found"
+                ))
             }
             
             guard let animeEpisodes = response["episodes"] as? [NSDictionary] else {
-                handler(nil, NineAnimatorError.responseError("no episodes entry found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no episodes entry found"
+                ))
             }
             
-            var episodes = [EpisodeLink]()
-            
-            for episode in animeEpisodes {
+            let episodes: [EpisodeLink] = animeEpisodes.compactMap {
+                episode in
                 guard let episodeInfo = episode["info"] as? NSDictionary,
-//                    let episodeIdentifier = episodeInfo["id"] as? Int,
+                    // let episodeIdentifier = episodeInfo["id"] as? Int,
                     let episodeNumber = episodeInfo["episode"] as? String,
                     let animeIdentifier = episodeInfo["anime_id"] as? Int,
                     let episodeTitle = episodeInfo["title"] as? String
-                    else { continue }
-                let episode = EpisodeLink(
+                    else { return nil }
+                return EpisodeLink(
                     identifier: "\(animeIdentifier):\(episodeNumber)",
                     name: "\(episodeNumber) - \(episodeTitle)",
                     server: "Masterani.me",
-                    parent: link)
-                episodes.append(episode)
+                    parent: link
+                )
             }
             
             guard let firstEpisode = episodes.first else {
-                handler(nil, NineAnimatorError.responseError("no episodes found"))
-                return
+                return handler(nil, NineAnimatorError.responseError(
+                    "no episodes found"
+                ))
             }
             
             debugPrint("Info: Found \(episodes.count) episodes")
             debugPrint("Info: Requesting availble streaming servers")
             
-            task.add(self.episodeInfo(from: firstEpisode){
+            task.add(self.episodeInfo(from: firstEpisode) {
                 info, error in
-                guard let info = info else { handler(nil, error); return }
+                guard let info = info else { return handler(nil, error) }
                 let hosts = info.availableHosts
-                handler(Anime(link,
+                handler(Anime(
+                    link,
                     description: animeSynopsis,
                     on: hosts,
-                    episodes: Dictionary(uniqueKeysWithValues: hosts.map{
+                    episodes: Dictionary(uniqueKeysWithValues: hosts.map {
                         host in
-                        return (
+                        (
                             host.key,
-                            episodes.map{ EpisodeLink(identifier: $0.identifier, name: $0.name, server: host.key, parent: $0.parent) }
+                            episodes.map { EpisodeLink(
+                                identifier: $0.identifier,
+                                name: $0.name,
+                                server: host.key,
+                                parent: $0.parent)
+                            }
                         )
                     })
                 ), nil)
@@ -181,60 +191,63 @@ class NASourceMasterAnime: BaseSource, SourceProtocol {
             return nil
         }
         let animeLinkString = link.parent.link.absoluteString
-        let matches = NASourceMasterAnime.animeCompleteIdentifierRegex.matches(in: animeLinkString, options: [], range: animeLinkString.matchingRange)
+        let matches = NASourceMasterAnime.animeCompleteIdentifierRegex.matches(
+            in: animeLinkString, options: [], range: animeLinkString.matchingRange
+        )
         guard let animeIdentifier = matches.first else {
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
-        let path = String(format: NASourceMasterAnime.episodePathWatch, animeLinkString[animeIdentifier.range(at: 1)], String(episodeNumber))
-        return request(browse: path){
-            response, error in
-            guard let response = response else { handler(nil, error); return }
-            do{
+        let path = String(
+            format: NASourceMasterAnime.episodePathWatch,
+            animeLinkString[animeIdentifier.range(at: 1)],
+            String(episodeNumber)
+        )
+        return request(browse: path) {
+            [endpoint] response, error in
+            guard let response = response else { return handler(nil, error) }
+            do {
                 let bowl = try SwiftSoup.parse(response)
                 let mirrors$ = try bowl.select("video-mirrors")
                 let mirrorsJsonString = try mirrors$.attr(":mirrors")
                 let mirrorsJsonData = mirrorsJsonString.data(using: .utf8)!
-                guard let mirrors = try JSONSerialization.jsonObject(with: mirrorsJsonData, options: []) as? [NSDictionary] else { throw NineAnimatorError.responseError("invalid mirrors") }
+                guard let mirrors = try JSONSerialization
+                    .jsonObject(with: mirrorsJsonData) as? [NSDictionary] else {
+                    throw NineAnimatorError.responseError("invalid mirrors")
+                }
                 debugPrint("Info: \(mirrors.count) mirrors found for episode \(episodeNumber)")
                 handler(NAMasterAnimeEpisodeInfo(
                     link,
                     streamingInfo: mirrors,
-                    with: URL(string: "\(self.endpoint)\(path)")!,
+                    with: URL(string: "\(endpoint)\(path)")!,
                     parentId: String(animeIdNumber),
                     episodeId: String(episodeNumber)
                 ), nil)
-            }catch let e { handler(nil, e) }
+            } catch let e { handler(nil, e) }
         }
     }
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         let task = NineAnimatorMultistepAsyncTask()
-        task.add(episodeInfo(from: link){
+        task.add(episodeInfo(from: link) {
             info, error in
-            guard let info = info else { handler(nil, error); return }
+            guard let info = info else { return handler(nil, error) }
             guard let stream = info.select(server: link.server, option: .bestQuality) else {
-                handler(nil, NineAnimatorError.providerError("This episode is not availble on the selected server"))
-                return
+                return handler(nil, NineAnimatorError.providerError(
+                    "This episode is not availble on the selected server"
+                ))
             }
             
-//            let verifyPath = String(format: NASourceMasterAnime.episodePathVerify, info.animeIdentifier, info.episodeIdentifier, "\(stream.identifier)")
-//            task.add(self.request(ajax: verifyPath){
-//                response, error in
-//                guard let _ = response else { handler(nil, NineAnimatorError.responseError("Error verifying")); return }
-//                guard let streamTarget = stream.target else { handler(nil, NineAnimatorError.urlError); return }
-//                let episode = Episode(link, target: streamTarget, parent: anime, referer: info.url.absoluteString)
-//                handler(episode, nil)
-//            })
-            
-            guard let streamTarget = stream.target else { handler(nil, NineAnimatorError.urlError); return }
+            guard let streamTarget = stream.target else {
+                return handler(nil, NineAnimatorError.urlError)
+            }
             let episode = Episode(link, target: streamTarget, parent: anime, referer: info.url.absoluteString)
             handler(episode, nil)
         })
         return task
     }
     
-    func search(keyword: String) -> SearchProtocol {
+    func search(keyword: String) -> SearchPageProvider {
         debugPrint("Info: Searching masterani.me with keyword '\(keyword)'")
         return NASearchMasterAnime(query: keyword, parent: self)
     }
