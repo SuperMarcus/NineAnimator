@@ -20,8 +20,8 @@
 import UIKit
 
 public class HalfFillTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
-    private let presented: UIViewController
-    private let presenting: UIViewController
+    private weak var presented: UIViewController!
+    private weak var presenting: UIViewController!
     
     init(presented: UIViewController, presenting: UIViewController){
         self.presented = presented
