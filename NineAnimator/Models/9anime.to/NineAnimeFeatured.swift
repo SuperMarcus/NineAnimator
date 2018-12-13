@@ -19,7 +19,7 @@
 
 import Foundation
 
-struct FeaturedAnimePage {
+struct NineAnimeFeatured: FeaturedContainer {
     static let featuredAnimesRegex = try! NSRegularExpression(pattern: "<div class=\"item swiper-slide\" style=\"background-image: url\\(([^)]+)\\)[^h]+href=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
     
     static let latestUpdateAnimesRegex = try! NSRegularExpression(pattern: "(https:\\/\\/www1.9anime.to\\/watch[^\"]+)\"[^>]+>\\s+\\<img src=\"(https[^\"]+)\" alt=\"([^\"]+)[^>]+>", options: .caseInsensitive)
@@ -28,44 +28,27 @@ struct FeaturedAnimePage {
     
     let latest: [AnimeLink]
     
-    init?(_ pageSource: String) throws {
-        let featuredAnimesMatches = FeaturedAnimePage.featuredAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
+    init?(_ pageSource: String, with parent: NineAnimeSource) throws {
+        let featuredAnimesMatches = NineAnimeFeatured.featuredAnimesRegex.matches(
+            in: pageSource, range: pageSource.matchingRange
+        )
         self.featured = try featuredAnimesMatches.map {
             guard let imageLink = URL(string: pageSource[$0.range(at: 1)]),
                 let animeLink = URL(string: pageSource[$0.range(at: 2)])
                 else { throw NineAnimatorError.responseError("parser error") }
             let title = pageSource[$0.range(at: 3)]
-            return AnimeLink(title: title, link: animeLink, image: imageLink)
+            return AnimeLink(title: title, link: animeLink, image: imageLink, source: parent)
         }
         
-        let latestAnimesMatches = FeaturedAnimePage.latestUpdateAnimesRegex.matches(in: pageSource, options: [], range: pageSource.matchingRange)
+        let latestAnimesMatches = NineAnimeFeatured.latestUpdateAnimesRegex.matches(
+            in: pageSource, range: pageSource.matchingRange
+        )
         self.latest = try latestAnimesMatches.map {
             guard let imageLink = URL(string: pageSource[$0.range(at: 2)]),
                 let animeLink = URL(string: pageSource[$0.range(at: 1)])
                 else { throw NineAnimatorError.responseError("parser error") }
             let title = pageSource[$0.range(at: 3)]
-            return AnimeLink(title: title, link: animeLink, image: imageLink)
-        }
-    }
-}
-
-extension NineAnimator {
-    func loadHomePage(completionHandler: @escaping NineAnimatorCallback<FeaturedAnimePage>) {
-        let _ = request(.home) {
-            [weak self] (content, error) in
-            if let error = error {
-                self?.removeCache(at: .home)
-                completionHandler(nil, error)
-                return
-            }
-            
-            do {
-                let page = try FeaturedAnimePage(content!)
-                completionHandler(page, nil)
-            } catch let e {
-                self?.removeCache(at: .home)
-                completionHandler(nil, e)
-            }
+            return AnimeLink(title: title, link: animeLink, image: imageLink, source: parent)
         }
     }
 }

@@ -18,34 +18,27 @@
 //
 
 import Foundation
-import AVKit
-import OpenCastSwift
-import Alamofire
+import SwiftSoup
 
-protocol PlaybackMedia {
-    var avPlayerItem: AVPlayerItem { get }
-    var castMedia: CastMedia? { get }
+protocol SearchPageProviderDelegate: AnyObject {
+    //Index of the page (starting from zero)
+    func pageIncoming(_: Int, from page: SearchPageProvider)
+    
+    func noResult(from page: SearchPageProvider)
 }
 
-struct BasicPlaybackMedia: PlaybackMedia {
-    let url: URL
-    let parent: Episode
-    let contentType: String
-    let headers: HTTPHeaders
+protocol SearchPageProvider {
+    var query: String { get }
     
-    var avPlayerItem: AVPlayerItem {
-        return AVPlayerItem(url: url, headers: headers)
-    }
+    var totalPages: Int? { get }
     
-    var castMedia: CastMedia? {
-        return CastMedia(
-            title: parent.name,
-            url: url,
-            poster: parent.link.parent.image,
-            contentType: contentType,
-            streamType: .buffered,
-            autoplay: true,
-            currentTime: 0
-        )
-    }
+    var availablePages: Int { get }
+    
+    var moreAvailable: Bool { get }
+    
+    var delegate: SearchPageProviderDelegate? { get set }
+    
+    func animes(on page: Int) -> [AnimeLink]
+    
+    func more()
 }

@@ -25,7 +25,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="127"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-L6-uVI">
+                                        <activityIndicatorView opaque="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xtF-L6-uVI">
                                             <rect key="frame" x="177.5" y="43" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contents are loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bTY-yy-a3Z">
@@ -177,17 +177,17 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vay-h0-LQu">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VCb-1U-YDM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
-                                                                <rect key="frame" x="8" y="67.5" width="232.5" height="21"/>
+                                                                <rect key="frame" x="8" y="67.5" width="232" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaF-Aj-Y4A">
-                                                                <rect key="frame" x="8" y="39" width="232.5" height="20.5"/>
+                                                                <rect key="frame" x="8" y="39" width="232" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -261,7 +261,16 @@
                             <outlet property="delegate" destination="SPf-bx-P2k" id="pBe-VX-dz9"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Featured" id="Xx9-4a-rNT"/>
+                    <navigationItem key="navigationItem" title="Featured" id="Xx9-4a-rNT">
+                        <barButtonItem key="rightBarButtonItem" title="Select Site" id="Ukz-aW-wFy">
+                            <connections>
+                                <action selector="onSourceSelectionButtonPressed:" destination="SPf-bx-P2k" id="nxk-11-bbX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="sourceSelectionButton" destination="Ukz-aW-wFy" id="BEx-2f-7ly"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roT-OD-0Be" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -302,9 +311,16 @@
                             <outlet property="delegate" destination="W9q-Ho-7mv" id="ENf-sT-pXy"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Search" id="Y8g-si-rdv"/>
+                    <navigationItem key="navigationItem" title="Search" id="Y8g-si-rdv">
+                        <barButtonItem key="rightBarButtonItem" title="Select Site" id="Tll-ir-ZZq">
+                            <connections>
+                                <action selector="onSelectSourceButtonTapped:" destination="W9q-Ho-7mv" id="PId-jl-84V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="Bvt-sZ-SfL" id="zkz-kS-GVj"/>
+                        <outlet property="selectSiteBarButton" destination="Tll-ir-ZZq" id="jiE-ER-IEr"/>
                         <segue destination="wkc-dS-QI1" kind="show" identifier="search.result.show" id="fvD-mN-Fqp"/>
                     </connections>
                 </tableViewController>
@@ -544,7 +560,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymX-sl-7hN">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ba0-1s-HFP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the anime" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdo-VB-Wsl">
@@ -567,7 +583,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IId-s4-5QI">
-                                                                <rect key="frame" x="16" y="75.5" width="98" height="18"/>
+                                                                <rect key="frame" x="16" y="75.5" width="176" height="18"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -580,6 +596,7 @@
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="VXh-Cs-QjW"/>
                                                             <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" secondItem="tdo-VB-Wsl" secondAttribute="trailing" constant="8" id="a56-7O-WPf"/>
                                                             <constraint firstItem="663-rl-gtc" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="alu-gw-2v3"/>
+                                                            <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" secondItem="IId-s4-5QI" secondAttribute="trailing" id="cal-1m-hvf"/>
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="cvU-H0-Mki"/>
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="top" secondItem="tdo-VB-Wsl" secondAttribute="bottom" constant="4" id="n8A-E9-bE1"/>
                                                             <constraint firstAttribute="trailing" secondItem="aBr-0y-FH3" secondAttribute="trailing" constant="16" id="pxW-W0-vRj"/>

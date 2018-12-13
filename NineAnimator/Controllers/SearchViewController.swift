@@ -31,7 +31,18 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     var filteredAnimeLinks = [AnimeLink]()
+    
+    var requestTask: NineAnimatorAsyncTask?
+    
+    var source: Source { return NineAnimator.default.user.source }
 
+    @IBOutlet weak var selectSiteBarButton: UIBarButtonItem!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        selectSiteBarButton.title = NineAnimator.default.user.source.name
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Make sure we get the navigation bar when clicked on search result
@@ -56,8 +67,9 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         // Hide table cell separators at empty state
         tableView.tableFooterView = UIView()
         
-        NineAnimator.default.loadHomePage {
+        requestTask = source.featured {
             [weak self] page, error in
+            defer { self?.requestTask = nil }
             guard let page = page else {
                 debugPrint("Error: \(error!)")
                 return
@@ -118,5 +130,48 @@ extension SearchViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.container.simple", for: indexPath) as? SimpleAnimeTableViewCell else { fatalError("Cell dequeued is not a SimpleAnimeTableViewCell") }
         cell.animeLink = filteredAnimeLinks[indexPath.item]
         return cell
+    }
+}
+
+//MARK: - Source selection
+extension SearchViewController {
+    @IBAction func onSelectSourceButtonTapped(_ sender: Any) {
+        let currentSource = NineAnimator.default.user.source
+        
+        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
+        
+        if let popover = alertView.popoverPresentationController {
+            popover.barButtonItem = selectSiteBarButton
+            popover.permittedArrowDirections = .up
+        }
+        
+        for source in NineAnimator.default.sources {
+            let action = UIAlertAction(title: source.name, style: .default) {
+                [weak self] _ in
+                
+                NineAnimator.default.user.select(source: source)
+                
+                guard let self = self else { return }
+                
+                self.selectSiteBarButton.title = source.name
+                
+                self.requestTask?.cancel()
+                self.requestTask = source.featured {
+                    [weak self] page, error in
+                    defer { self?.requestTask = nil }
+                    guard let page = page else {
+                        return debugPrint("Error: \(error!)")
+                    }
+                    self?.popularAnimeLinks = page.featured + page.latest
+                }
+            }
+            if source.name == currentSource.name {
+                action.setValue(true, forKey: "checked")
+            }
+            alertView.addAction(action)
+        }
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertView, animated: true)
     }
 }

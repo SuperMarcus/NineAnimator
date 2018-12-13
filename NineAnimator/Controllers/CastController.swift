@@ -52,12 +52,12 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         return vc
     }()
     
-    init(){
+    init() {
         scanner = CastDeviceScanner()
         scanner.delegate = self
     }
     
-    func connect(to device: CastDevice){
+    func connect(to device: CastDevice) {
         if client != nil { disconnect() }
         
         debugPrint("Info: Connecting to \(device)")
@@ -68,22 +68,22 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         viewController.deviceListUpdated()
     }
     
-    func setVolume(to volume: Float){
+    func setVolume(to volume: Float) {
         client?.setVolume(volume)
         client?.setMuted(volume < 0.001)
     }
     
-    func pause(){ client?.pause() }
+    func pause() { client?.pause() }
     
-    func play(){ client?.play() }
+    func play() { client?.play() }
     
-    func seek(to time: Float){
+    func seek(to time: Float) {
         if isAttached, let client = client {
             client.seek(to: time)
         }
     }
     
-    func disconnect(){
+    func disconnect() {
         client?.disconnect()
         if isAttached { viewController.playback(didEnd: content!) }
         client = nil
@@ -109,12 +109,11 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
             result in
             guard let app = result.value else {
-                debugPrint("Error: \(result.error!)")
-                return
+                return debugPrint("Error: \(result.error!)")
             }
             
             self.currentApp = app
-            client.load(media: castMedia, with: app){
+            client.load(media: castMedia, with: app) {
                 mediaResult in
                 switch mediaResult {
                 case .success(let status):
@@ -137,8 +136,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
                     self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
                         [weak self] timer in
                         guard let self = self else {
-                            timer.invalidate()
-                            return
+                            return timer.invalidate()
                         }
                         
                         if self.isAttached, let app = self.currentApp {
@@ -158,9 +156,9 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         }
     }
     
-    func start(){ scanner.startScanning() }
+    func start() { scanner.startScanning() }
     
-    func stop(){ scanner.stopScanning() }
+    func stop() { scanner.stopScanning() }
 }
 
 extension CastController {
@@ -199,16 +197,16 @@ extension CastController {
 }
 
 extension CastController {
-    func deviceDidComeOnline(_ device: CastDevice){
+    func deviceDidComeOnline(_ device: CastDevice) {
         devices.append(device)
         viewController.deviceListUpdated()
     }
     
-    func deviceDidChange(_ device: CastDevice){
+    func deviceDidChange(_ device: CastDevice) {
         viewController.deviceListUpdated()
     }
     
-    func deviceDidGoOffline(_ device: CastDevice){
+    func deviceDidGoOffline(_ device: CastDevice) {
         devices.removeAll { $0.id == device.id }
         viewController.deviceListUpdated()
     }

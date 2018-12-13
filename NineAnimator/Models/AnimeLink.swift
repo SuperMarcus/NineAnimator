@@ -20,15 +20,48 @@
 import UIKit
 import Alamofire
 
-struct AnimeLink: URLConvertible, Equatable, Codable {
+struct AnimeLink {
     var title: String
     var link: URL
     var image: URL
-
+    var source: Source
+}
+extension AnimeLink: URLConvertible {
     func asURL() -> URL { return link }
 }
 
-extension AnimeLink {
+extension AnimeLink: Codable {
+    enum CodingKeys: String, CodingKey {
+        case title = "title"
+        case link = "link"
+        case image = "image"
+        case source = "source"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        title = try values.decode(String.self, forKey: .title)
+        link = try values.decode(URL.self, forKey: .link)
+        image = try values.decode(URL.self, forKey: .image)
+        
+        let sourceName = try values.decode(String.self, forKey: .source)
+        guard let source = NineAnimator.default.source(with: sourceName) else {
+            throw NineAnimatorError.decodeError
+        }
+        
+        self.source = source
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var values = encoder.container(keyedBy: CodingKeys.self)
+        try values.encode(title, forKey: .title)
+        try values.encode(link, forKey: .link)
+        try values.encode(image, forKey: .image)
+        try values.encode(source.name, forKey: .source)
+    }
+}
+
+extension AnimeLink: Equatable {
     static func == (lhs: AnimeLink, rhs: AnimeLink) -> Bool {
         return lhs.link == rhs.link
     }

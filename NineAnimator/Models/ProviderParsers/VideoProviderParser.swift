@@ -29,20 +29,20 @@ class VideoProviderRegistry {
     static let `default`: VideoProviderRegistry = {
         let defaultProvider = VideoProviderRegistry()
         
-        defaultProvider.register(MyCloudParser(), forServer: "28")
-        defaultProvider.register(RapidVideoParser(), forServer: "33")
-        defaultProvider.register(StreamangoParser(), forServer: "34")
+        defaultProvider.register(MyCloudParser(), forServer: "MyCloud")
+        defaultProvider.register(RapidVideoParser(), forServer: "RapidVideo")
+        defaultProvider.register(StreamangoParser(), forServer: "Streamango")
         
         return defaultProvider
     }()
     
-    private var providers = [(server: Anime.ServerIdentifier, provider: VideoProviderParser)]()
+    private var providers = [(server: String, provider: VideoProviderParser)]()
     
-    func register(_ provider: VideoProviderParser, forServer server: Anime.ServerIdentifier) {
+    func register(_ provider: VideoProviderParser, forServer server: String) {
         providers.append((server, provider))
     }
     
-    func provider(for server: Anime.ServerIdentifier) -> VideoProviderParser? {
-        return (providers.first { $0.server == server })?.provider
+    func provider(for server: String) -> VideoProviderParser? {
+        return (providers.first { $0.server.lowercased() == server.lowercased() })?.provider
     }
 }

@@ -21,16 +21,19 @@ import UIKit
 
 public class HalfFillTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     @objc public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let source = transitionContext.viewController(forKey: .from) else { return }
-        guard let destination = transitionContext.viewController(forKey: .to) else { return }
-        UIView.animate(withDuration: 0.5, animations: { source.view.frame.origin.y = destination.view.frame.height }){
-            _ in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-            transitionContext.viewController(forKey: .to)?.setNeedsStatusBarAppearanceUpdate()
-        }
+        guard let source = transitionContext.viewController(forKey: .from),
+            let destination = transitionContext.viewController(forKey: .to)
+            else { return }
+        UIView.animate(
+            withDuration: 0.5,
+            animations: { source.view.frame.origin.y = destination.view.frame.height },
+            completion: { _ in
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+                transitionContext.viewController(forKey: .to)?.setNeedsStatusBarAppearanceUpdate()
+        })
     }
     
-    @objc public func transitionDuration(using: UIViewControllerContextTransitioning?) -> TimeInterval{
+    @objc public func transitionDuration(using: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.5
     }
 }

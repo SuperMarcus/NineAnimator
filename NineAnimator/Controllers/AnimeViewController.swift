@@ -58,6 +58,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                         self.server = recentlyUsedServer
                     } else {
                         self.server = anime.servers.first!.key
+                        debugPrint("Info: No server selected. Using \(anime.servers.first!.key)")
                     }
                 }
                 
@@ -77,7 +78,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     // Set episode will update the server identifier as well
     var episode: Episode? {
-        didSet { server = episode?.link.server }
+        didSet {
+            guard let episode = episode else { return }
+            server = episode.link.server
+        }
     }
     
     var displayedPlayer: AVPlayer? {
@@ -99,6 +103,8 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     var selectedEpisodeCell: EpisodeTableViewCell?
     
     var episodeRequestTask: NineAnimatorAsyncTask?
+    
+    var animeRequestTask: NineAnimatorAsyncTask?
     
     private var castPresentationDelegate: Any?
     
@@ -124,7 +130,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         guard anime == nil else { return }
         serverSelectionButton.title = "Select Server"
         serverSelectionButton.isEnabled = false
-        NineAnimator.default.anime(with: link) {
+        animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             guard let anime = anime else {
                 debugPrint("Error: \(error!)")
@@ -217,7 +223,7 @@ extension AnimeViewController {
 //MARK: - Share and select server
 extension AnimeViewController {
     @IBAction func onCastButtonTapped(_ sender: Any) {
-        self.castPresentationDelegate = CastController.default.present(from: self)
+        castPresentationDelegate = CastController.default.present(from: self)
     }
     
     @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {

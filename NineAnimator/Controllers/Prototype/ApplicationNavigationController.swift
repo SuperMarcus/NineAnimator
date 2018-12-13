@@ -25,13 +25,9 @@ public protocol CustomBarStyleRequiredProtocol{
 
 class ApplicationNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let vc = self.visibleViewController as? CustomBarStyleRequiredProtocol{
+        if let vc = self.visibleViewController as? CustomBarStyleRequiredProtocol {
             return vc.preferredStatusBarStyle
         }
         return super.preferredStatusBarStyle
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }

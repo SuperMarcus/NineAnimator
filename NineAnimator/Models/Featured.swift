@@ -19,16 +19,14 @@
 
 import Foundation
 
-struct NineAnimatePath: Hashable {
-    static let home = NineAnimatePath("/")
+protocol FeaturedContainer {
+    var featured: [AnimeLink] { get }
     
-    static func search(keyword: String, page: Int = 1) -> NineAnimatePath {
-        let path = "/search"
-        let encodedKeyword = keyword.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        return NineAnimatePath("\(path)?keyword=\(encodedKeyword)&page=\(page)")
-    }
+    var latest: [AnimeLink] { get }
+}
+
+struct BasicFeaturedContainer: FeaturedContainer {
+    var featured: [AnimeLink]
     
-    let value: String
-    
-    private init(_ value: String) { self.value = value }
+    var latest: [AnimeLink]
 }

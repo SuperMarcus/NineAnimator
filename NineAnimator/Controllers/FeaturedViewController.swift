@@ -21,7 +21,7 @@ import UIKit
 import Kingfisher
 
 class FeaturedViewController: UITableViewController {
-    var featuredAnimePage: FeaturedAnimePage? {
+    var featuredAnimePage: FeaturedContainer? {
         didSet {
             UIView.transition(
                 with: tableView,
@@ -32,18 +32,63 @@ class FeaturedViewController: UITableViewController {
         }
     }
     
+    @IBOutlet weak var sourceSelectionButton: UIBarButtonItem!
+    
     var error: Error?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        guard featuredAnimePage == nil else { return }
-        NineAnimator.default.loadHomePage {
-            page, error in
+    var requestTask: NineAnimatorAsyncTask? {
+        didSet { sourceSelectionButton.isEnabled = requestTask == nil }
+    }
+    
+    var loadedSource: Source?
+    
+    var source: Source { return NineAnimator.default.user.source }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if loadedSource?.name != source.name {
+            reload()
+        }
+    }
+    
+    func reload() {
+        featuredAnimePage = nil
+        tableView.reloadData()
+        requestTask = source.featured {
+            [source] page, error in
             DispatchQueue.main.async { [weak self] in
+                defer { self?.requestTask = nil }
                 self?.featuredAnimePage = page
                 self?.error = error
+                self?.loadedSource = source
+                self?.sourceSelectionButton.title = source.name
             }
         }
+    }
+    
+    @IBAction func onSourceSelectionButtonPressed(_ sender: Any) {
+        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
+        
+        if let popover = alertView.popoverPresentationController {
+            popover.barButtonItem = sourceSelectionButton
+            popover.permittedArrowDirections = .up
+        }
+        
+        for source in NineAnimator.default.sources {
+            let action = UIAlertAction(title: source.name, style: .default) {
+                [weak self] _ in
+                NineAnimator.default.user.select(source: source)
+                self?.reload()
+            }
+            if source.name == loadedSource?.name {
+                action.setValue(true, forKey: "checked")
+            }
+            alertView.addAction(action)
+        }
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alertView, animated: true)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -64,7 +109,9 @@ class FeaturedViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let featuredAnimePage = featuredAnimePage else {
-            return tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+            (cell.viewWithTag(5) as! UIActivityIndicatorView).startAnimating()
+            return cell
         }
         switch indexPath.section {
         case 0:

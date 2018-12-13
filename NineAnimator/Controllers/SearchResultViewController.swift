@@ -19,14 +19,14 @@
 
 import UIKit
 
-class SearchResultViewController: UITableViewController, SearchPageDelegate {
+class SearchResultViewController: UITableViewController, SearchPageProviderDelegate {
     var searchText: String? {
         didSet {
             title = searchText
         }
     }
     
-    private var searchPage: SearchPage!
+    private var searchPage: SearchPageProvider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +40,11 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        searchPage = NineAnimator.default.search(searchText!)
+        searchPage = NineAnimator.default.user.source.search(keyword: searchText!)
         searchPage.delegate = self
     }
     
-    func noResult(in: SearchPage) {
+    func noResult(from: SearchPageProvider) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
@@ -52,11 +52,8 @@ class SearchResultViewController: UITableViewController, SearchPageDelegate {
         }
     }
     
-    func pageIncoming(_ sectionNumber: Int, in page: SearchPage) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.tableView.reloadData()
-        }
+    func pageIncoming(_ sectionNumber: Int, from page: SearchPageProvider) {
+        DispatchQueue.main.async(execute: tableView.reloadData)
     }
 
     // MARK: - Table view data source

@@ -2,8 +2,9 @@ NineAnimator
 ==========
 
 A simple yet elegant way of waching anime on your favorite anime website.
-NineAnimator is an **unofficial** app of [9anime.to](//9anime.to) for iOS. GPL
-v3 Licensed.
+NineAnimator is a free and open source anime watching app for iOS. Currently
+it supports [9anime.to](//9anime.to) and [masterani.me](//masterani.me).
+GPLv3 Licensed.
 
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
@@ -39,9 +40,9 @@ v3 Licensed.
 - [x] Auto resumes your playback progress
 - [x] Playback history && resume playback with just one click in the Recent tab
 - [x] Super-duper clean UIs
+- [x] Support [9anime.to](//9anime.to) and [masterani.me](//masterani.me)
 - [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
 - [ ] Integration with MAL (planned)
-- [ ] Support sites other than 9anime (possible)
 
 ## Build & Install
 
