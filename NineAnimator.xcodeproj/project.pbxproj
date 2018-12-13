@@ -61,8 +61,6 @@
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
 		2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297421BB7A4200284FD0 /* StreamangoParser.swift */; };
 		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
-		2CAEF62521BF7BDD00E7C123 /* screenshot_6.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */; };
-		2CAEF62621BF7BDD00E7C123 /* screenshot_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
 		2CCC745C21C063EC0007502A /* SourceNineAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745B21C063EC0007502A /* SourceNineAnime.swift */; };
 		2CCC745E21C064800007502A /* NineAnimeSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745D21C064800007502A /* NineAnimeSearch.swift */; };
@@ -470,8 +468,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2CAEF62521BF7BDD00E7C123 /* screenshot_6.png in Resources */,
-				2CAEF62621BF7BDD00E7C123 /* screenshot_5.png in Resources */,
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
