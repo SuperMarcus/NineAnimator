@@ -55,10 +55,8 @@ class NASearchMasterAnime: SearchPageProvider {
             let keyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
             _lastRequest = _parent.request(ajax: path) {
-                response, error in
-                #warning("Not working with weak self")
-                // [weak self] response, error in
-                // guard let self = self else { return }
+                [weak self] response, error in
+                guard let self = self else { return }
                 
                 defer { self._lastRequest = nil }
                 
