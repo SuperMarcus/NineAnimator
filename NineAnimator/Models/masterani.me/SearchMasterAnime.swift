@@ -19,7 +19,7 @@
 
 import Foundation
 
-class NASearchMasterAnime: SearchPageProvider {
+class NASearchMasterAnime: SearchProvider {
     static let apiPathSearch = "/api/anime/filter?search=%@&order=score_desc&page=%@"
     
     var query: String
@@ -30,7 +30,7 @@ class NASearchMasterAnime: SearchPageProvider {
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
-    var delegate: SearchPageProviderDelegate?
+    var delegate: SearchProviderDelegate?
     
     private let _parent: NASourceMasterAnime
     

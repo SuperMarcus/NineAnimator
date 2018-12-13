@@ -20,10 +20,10 @@
 import Foundation
 import SwiftSoup
 
-class NineAnimeSearch: SearchPageProvider {
+class NineAnimeSearch: SearchProvider {
     private(set) var query: String
     private(set) var totalPages: Int?
-    weak var delegate: SearchPageProviderDelegate?
+    weak var delegate: SearchProviderDelegate?
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     

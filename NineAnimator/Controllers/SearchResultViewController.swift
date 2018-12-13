@@ -19,14 +19,14 @@
 
 import UIKit
 
-class SearchResultViewController: UITableViewController, SearchPageProviderDelegate {
+class SearchResultViewController: UITableViewController, SearchProviderDelegate {
     var searchText: String? {
         didSet {
             title = searchText
         }
     }
     
-    private var searchPage: SearchPageProvider!
+    private var searchPage: SearchProvider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
         searchPage.delegate = self
     }
     
-    func noResult(from: SearchPageProvider) {
+    func noResult(from: SearchProvider) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
@@ -52,7 +52,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
         }
     }
     
-    func pageIncoming(_ sectionNumber: Int, from page: SearchPageProvider) {
+    func pageIncoming(_ sectionNumber: Int, from page: SearchProvider) {
         DispatchQueue.main.async(execute: tableView.reloadData)
     }
 

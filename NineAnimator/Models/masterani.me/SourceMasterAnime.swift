@@ -247,7 +247,7 @@ class NASourceMasterAnime: BaseSource, Source {
         return task
     }
     
-    func search(keyword: String) -> SearchPageProvider {
+    func search(keyword: String) -> SearchProvider {
         debugPrint("Info: Searching masterani.me with keyword '\(keyword)'")
         return NASearchMasterAnime(query: keyword, parent: self)
     }

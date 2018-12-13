@@ -41,7 +41,7 @@ class NineAnimeSource: BaseSource, Source {
         }
     }
     
-    func search(keyword: String) -> SearchPageProvider {
+    func search(keyword: String) -> SearchProvider {
         return NineAnimeSearch(self, query: keyword)
     }
     
