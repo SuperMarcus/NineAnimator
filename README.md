@@ -97,6 +97,7 @@ $ carthage update
 ## Credits
 
 * Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
+* The free and open source chromecast library [OpenCastSwift](https://github.com/mhmiles/OpenCastSwift) (slightly [modified](https://github.com/SuperMarcus/OpenCastSwift)).
 * The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
 * [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
 * ...and [scinfu](https://github.com/scinfu)'s awesome [SwiftSoup](https://github.com/scinfu/SwiftSoup)
