@@ -192,7 +192,7 @@
                                     <action selector="onActionButtonTapped:" destination="K93-Pu-iF1" id="hFp-A6-nPd"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Cast" id="LNG-QH-z6q">
+                            <barButtonItem title="Cast" image="Chromecast Icon" id="LNG-QH-z6q">
                                 <connections>
                                     <action selector="onCastButtonTapped:" destination="K93-Pu-iF1" id="iVz-VU-Tey"/>
                                 </connections>
@@ -215,4 +215,7 @@
             <point key="canvasLocation" x="204" y="135.38230884557723"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Chromecast Icon" width="25" height="25"/>
+    </resources>
 </document>

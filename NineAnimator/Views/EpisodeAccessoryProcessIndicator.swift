@@ -25,7 +25,7 @@ class EpisodeAccessoryProcessIndicator: UIView {
     lazy var indicatorColor: UIColor = tintColor
     
     @IBInspectable
-    var nullColor: UIColor = .lightGray
+    var nullColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
     
     @IBInspectable
     var strokeWidth: CGFloat = 2.0
