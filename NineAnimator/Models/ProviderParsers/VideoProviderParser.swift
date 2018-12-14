@@ -33,6 +33,7 @@ class VideoProviderRegistry {
         defaultProvider.register(RapidVideoParser(), forServer: "RapidVideo")
         defaultProvider.register(StreamangoParser(), forServer: "Streamango")
         defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
+//        defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
         
         return defaultProvider
     }()

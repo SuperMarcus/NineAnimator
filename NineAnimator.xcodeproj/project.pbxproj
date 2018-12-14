@@ -42,6 +42,7 @@
 		2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */; };
 		2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */; };
 		2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */; };
+		2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */; };
 		2C66779821BC2213000E5ACC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C66779721BC2213000E5ACC /* SearchViewController.swift */; };
 		2C66779A21BC2671000E5ACC /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C66779921BC2671000E5ACC /* SearchResultViewController.swift */; };
 		2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C66779B21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift */; };
@@ -126,6 +127,7 @@
 		2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp4UploadParser.swift; sourceTree = "<group>"; };
+		2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiwiKiwiParser.swift; sourceTree = "<group>"; };
 		2C66779721BC2213000E5ACC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		2C66779921BC2671000E5ACC /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		2C66779B21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAnimeTableViewCell.swift; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				2C91297621BB867300284FD0 /* MyCloudParser.swift */,
 				2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */,
 				2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */,
+				2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */,
 			);
 			path = ProviderParsers;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				52CADD6721BD86F40077BEB1 /* UITableView+Extensions.swift in Sources */,
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
+				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */,
