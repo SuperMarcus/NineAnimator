@@ -89,6 +89,8 @@ public class HalfFillPresentationController: UIPresentationController {
         coordinator.animate(alongsideTransition: { _ in
             self.dimmer?.alpha = 0
             self.presentingViewController.view.transform = .identity
+            self.presentingViewController.view.frame.origin = .zero
+            self.presentingViewController.view.frame.size = self.presentedViewController.view.frame.size
         })
     }
     
