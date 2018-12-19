@@ -52,6 +52,8 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     @IBOutlet weak var fastForwardButton: UIButton!
     
+    @IBOutlet weak var playbackTitleLabel: UILabel!
+    
     var isPresenting = false
     
     private var isSeeking = false
@@ -270,6 +272,7 @@ extension GoogleCastMediaPlaybackViewController {
     func playback(didStart media: CastMedia) {
         showPlaybackControls(animated: isPresenting)
         nowPlaying(setup: castController.currentEpisode!)
+        playbackTitleLabel.text = "\(castController.currentEpisode!.name) - \(castController.currentEpisode!.parentLink.title)"
     }
     
     func playback(didEnd media: CastMedia) {
