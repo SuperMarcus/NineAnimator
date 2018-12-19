@@ -1,9 +1,14 @@
 NineAnimator
 ==========
 
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat)](https://github.com/Carthage/Carthage)
+![Swift 4.2](https://img.shields.io/badge/Swift-4.2-orange.svg)
+![Platform: iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](/LICENSE)
+
 A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is a free and open source anime watching app for iOS. Currently
-it supports [9anime.to](//9anime.to) and [masterani.me](//masterani.me).
+it supports [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me).
 GPLv3 Licensed.
 
     
@@ -27,21 +32,22 @@ GPLv3 Licensed.
 
 - [Features](#features)
 - [Build & Install](#build--install)
+- [Google Cast](#google-cast)
+- [Picture in Picture Playback](#picture-in-picture-playback)
+- [Video Sources](#video-sources)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
 
 ## Features
 
-- [x] iOS's native video playback interface (works with RapidVideo, Streamango, and MyCloud -- more is coming), which also gives you the option to use AirPlay
-- [x] Supports Chromecast/Google Cast (works with RapidVideo, Streamango. Doesn't work with MyCloud because of CORS)
-- [x] Search animes on 9anime
-- [x] Show the most popular/recent animes on 9anime
 - [x] Ads Free and no logins
-- [x] Auto resumes your playback progress
-- [x] Playback history && resume playback with just one click in the Recent tab
 - [x] Super-duper clean UIs
-- [x] Support [9anime.to](//9anime.to) and [masterani.me](//masterani.me)
-- [ ] Custom anime lists, e.g. favorites and to-watch list (work in progress)
+- [x] iOS's native video playback interface
+- [x] Picture in Picture playback on iPads
+- [x] Chromecast/Google Cast with lockscreen & control center support
+- [x] Playback History & Auto Resumes
+- [x] Support [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me)
+- [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
 
 ## Build & Install
@@ -83,6 +89,44 @@ Still, you should make sure that you have a working copy of Carthage first.
 ```sh
 $ carthage update
 ```
+
+## Google Cast
+
+NineAnimator supports playing back on both AirPlay (via iOS's native media player) and
+Chromecast/Google Cast devices. However, not all of the video sources are supported
+on Chromecast. Check [Video Sources](#video-sources) for details.
+
+To use Google Cast in NineAnimator, tap on the Google Cast icon on the navigation bar.
+A window will pop up to prompt you to select a playback device. Once the device is
+connected, click "Done" and select an episode from the episode list. The video will
+starts playing automatically on the Google Cast device.
+
+The playback control interface will appear once the playback starts. You may use the
+volume up/down buttons to adjust the volume.
+
+To disconnect from a Google Cast device, tap on the Google Cast icon on the navigation
+bar and tap the device that is already connected.
+
+## Picture in Picture Playback
+
+This feature is only supported on iPads.
+
+The Picture in Picture (PiP) icon will appear on the top left corner of the player once PiP
+is ready. You may tap on this icon to initiate PiP playback.
+
+Note: Player restoration is not currently supported. Once you tap on the restore button,
+playback will stop. You may resume the playback manually in the Recent tab.
+
+## Video Sources
+
+Currently only a selection of video streaming hosts is supported by NineAnimator:
+
+- RapidVideo
+- Mp4Upload
+- Streamango
+- MyCloud (unavailable for Google Cast)
+
+More hosts may be added later. Feel free to open an issue to request additional hosts.
 
 ## Screenshots
 
