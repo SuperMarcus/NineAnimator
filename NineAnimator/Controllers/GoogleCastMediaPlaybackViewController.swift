@@ -158,7 +158,10 @@ extension GoogleCastMediaPlaybackViewController {
         }
         
         if let volume = volume, !volumeIsChanging {
-            volumeSlider.value = volume
+            if volumeSlider.value != volume {
+                debugPrint("Info: Cast device volume updated to \(volume)")
+                volumeSlider.value = volume
+            }
         }
         
         if let isPaused = isPaused {
@@ -400,6 +403,13 @@ extension GoogleCastMediaPlaybackViewController {
             return .success
         }
         commandCenter.skipBackwardCommand.isEnabled = true
+        
+        //Add system volume change handler
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(systemVolumeDidChange(notification:)),
+            name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"),
+            object: nil)
     }
     
     private func nowPlaying(teardown: Episode){
@@ -408,6 +418,9 @@ extension GoogleCastMediaPlaybackViewController {
         let infoCenter = MPNowPlayingInfoCenter.default()
         infoCenter.nowPlayingInfo = nil
         infoCenter.playbackState = .stopped
+        
+        //Remove volume change observer
+        NotificationCenter.default.removeObserver(self, name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
     }
     
     private func nowPlaying(update status: CastMediaStatus){
@@ -422,5 +435,13 @@ extension GoogleCastMediaPlaybackViewController {
         
         infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
         infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
+    }
+    
+    @objc private func systemVolumeDidChange(notification: Notification) {
+        guard let newVolume = notification.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float else {
+            debugPrint("Error: Received a volume change notification without new volume parameter.")
+            return
+        }
+        castController.setVolume(to: newVolume)
     }
 }

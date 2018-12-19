@@ -72,6 +72,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
 //MARK: - Media Playback Control
 extension CastController {
     func setVolume(to volume: Float) {
+        debugPrint("Info: Setting Cast device volume to \(volume)")
         client?.setVolume(volume)
         client?.setMuted(volume < 0.001)
     }
