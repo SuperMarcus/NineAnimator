@@ -74,7 +74,7 @@ class NineAnimatorUser {
     /// - Parameter anime: AnimeLink of the anime
     func entering(anime: AnimeLink) {
         var animes = recentAnimes.filter{ $0 != anime }
-        animes.append(anime)
+        animes.insert(anime, at: 0)
         recentAnimes = animes
     }
     
