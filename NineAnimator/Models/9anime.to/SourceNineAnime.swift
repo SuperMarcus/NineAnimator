@@ -21,9 +21,9 @@ import Foundation
 import Alamofire
 
 class NineAnimeSource: BaseSource, Source {
-    let name: String = "9anime.to"
+    let name: String = "9anime.ru"
     
-    override var endpoint: String { return "https://www1.9anime.to" }
+    override var endpoint: String { return "https://9anime.ru" }
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
         return request(browse: "/") {

@@ -20,6 +20,8 @@
 import UIKit
 import OpenCastSwift
 import Kingfisher
+import AVFoundation
+import MediaPlayer
 
 enum CastDeviceState {
     case idle
@@ -50,11 +52,18 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     @IBOutlet weak var fastForwardButton: UIButton!
     
-    var isSeeking = false
-    
-    var volumeIsChanging = false
-    
     var isPresenting = false
+    
+    private var isSeeking = false
+    
+    private var volumeIsChanging = false
+    
+    private var sharedNowPlayingInfo = [String: Any]()
+    
+    private var castDummyAudioPlayer: AVAudioPlayer?
+    
+    //The amount of time (in seconds) that fast forward and rewind button seeks
+    private var fastSeekAmount: Float = 15.0
     
     @IBAction func onDoneButtonPressed(_ sender: Any) {
         dismiss(animated: true)
@@ -218,7 +227,7 @@ extension GoogleCastMediaPlaybackViewController {
     
     @IBAction func onRewindButtonTapped(_ sender: Any) {
         let current = playbackProgressSlider.value
-        let seekTo = max(current - 15.00, 0.0)
+        let seekTo = max(current - fastSeekAmount, 0.0)
         playbackProgressSlider.value = seekTo
         castController.seek(to: seekTo)
     }
@@ -226,7 +235,7 @@ extension GoogleCastMediaPlaybackViewController {
     @IBAction func onFastForwardButtonTapped(_ sender: Any) {
         let current = playbackProgressSlider.value
         let max = playbackProgressSlider.maximumValue
-        let seekTo = min(current + 15.00, max)
+        let seekTo = min(current + fastSeekAmount, max)
         playbackProgressSlider.value = seekTo
         castController.seek(to: seekTo)
     }
@@ -240,8 +249,18 @@ extension GoogleCastMediaPlaybackViewController {
 //MARK: - Updates from media server
 extension GoogleCastMediaPlaybackViewController {
     func playback(update media: CastMedia, mediaStatus status: CastMediaStatus) {
-        coverImage.kf.setImage(with: media.poster)
+        coverImage.kf.setImage(with: media.poster) {
+            result in
+            guard let image = result.value?.image else { return }
+            //Set poster image but let the updater to push it to the now playing center
+            self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
+                MPMediaItemArtwork(boundsSize: image.size)
+                { _ in return image }
+        }
+        
         updateUI(playbackProgress: Float(status.currentTime), volume: nil, isPaused: status.playerState == .paused)
+        
+        nowPlaying(update: status)
     }
     
     func playback(update media: CastMedia, deviceStatus status: CastStatus) {
@@ -249,11 +268,13 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     func playback(didStart media: CastMedia) {
-        if isPresenting { showPlaybackControls(animated: true) }
+        showPlaybackControls(animated: isPresenting)
+        nowPlaying(setup: castController.currentEpisode!)
     }
     
     func playback(didEnd media: CastMedia) {
-        if isPresenting { hidePlaybackControls(animated: true) }
+        hidePlaybackControls(animated: isPresenting)
+        nowPlaying(teardown: castController.currentEpisode!)
     }
 }
 
@@ -291,5 +312,112 @@ extension GoogleCastMediaPlaybackViewController {
             : .idle
         cell.delegate = self
         return cell
+    }
+}
+
+//MARK: - Dummy audio players for control center and lock screen controls
+extension GoogleCastMediaPlaybackViewController {
+    private func startDummyPlayer(){
+        do{
+            debugPrint("Info: Starting cast dummy audio player")
+            guard let dummyAudioAsset = NSDataAsset(name: "CastDummyAudio")
+                else { throw NineAnimatorError.urlError }
+            
+            let audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.playback, mode: .moviePlayback)
+            try audioSession.setActive(true)
+            
+            self.castDummyAudioPlayer?.stop()
+            
+            try self.castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "wav")
+            self.castDummyAudioPlayer?.numberOfLoops = -1
+            self.castDummyAudioPlayer?.volume = 0.01
+            self.castDummyAudioPlayer?.prepareToPlay()
+            self.castDummyAudioPlayer?.play()
+        }catch { debugPrint("Error: \(error)") }
+    }
+    
+    private func stopDummyPlayer(){
+        debugPrint("Info: Stopping cast dummy audio player")
+        self.castDummyAudioPlayer?.stop()
+        self.castDummyAudioPlayer = nil
+        try? AVAudioSession.sharedInstance().setActive(false, options: [])
+    }
+    
+    private func nowPlaying(setup episode: Episode){
+        //Start the dummy player so we can control cast playback from lockscreen
+        //and control center
+        startDummyPlayer()
+        
+        let infoCenter = MPNowPlayingInfoCenter.default()
+        
+        self.sharedNowPlayingInfo[MPMediaItemPropertyTitle] = "\(episode.name)"
+//        self.sharedNowPlayingInfo[MPMediaItemPropertyMediaType] = MPNowPlayingInfoMediaType.video
+        self.sharedNowPlayingInfo[MPMediaItemPropertyAlbumTitle] = episode.parentLink.title
+        
+        infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
+        infoCenter.playbackState = .playing
+        
+        //Setup command center
+        let commandCenter = MPRemoteCommandCenter.shared()
+        
+        //Seek
+        commandCenter.changePlaybackPositionCommand.addTarget {
+            event in
+            guard let event = event as? MPChangePlaybackPositionCommandEvent else { return .commandFailed }
+            self.castController.seek(to: Float(event.positionTime))
+            return .success
+        }
+        commandCenter.changePlaybackPositionCommand.isEnabled = true
+        
+        //Play
+        commandCenter.playCommand.addTarget {
+            _ in self.castController.play()
+            return .success
+        }
+        commandCenter.playCommand.isEnabled = true
+        
+        //Pause
+        commandCenter.pauseCommand.addTarget {
+            _ in self.castController.pause()
+            return .success
+        }
+        commandCenter.pauseCommand.isEnabled = true
+        
+        //Fast forward
+        commandCenter.seekForwardCommand.addTarget {
+            _ in self.onFastForwardButtonTapped(self)
+            return .success
+        }
+        commandCenter.seekForwardCommand.isEnabled = true
+        
+        //Rewind
+        commandCenter.seekBackwardCommand.addTarget {
+            _ in self.onRewindButtonTapped(self)
+            return .success
+        }
+        commandCenter.seekBackwardCommand.isEnabled = true
+    }
+    
+    private func nowPlaying(teardown: Episode){
+        stopDummyPlayer()
+        
+        let infoCenter = MPNowPlayingInfoCenter.default()
+        infoCenter.nowPlayingInfo = nil
+        infoCenter.playbackState = .stopped
+    }
+    
+    private func nowPlaying(update status: CastMediaStatus){
+        let infoCenter = MPNowPlayingInfoCenter.default()
+        
+        self.sharedNowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] =
+            NSNumber(value: status.playerState == .paused ? 0.0 : 1.0)
+        self.sharedNowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] =
+            NSNumber(value: status.currentTime)
+        self.sharedNowPlayingInfo[MPMediaItemPropertyPlaybackDuration] =
+            NSNumber(value: Double(playbackProgressSlider.maximumValue))
+        
+        infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
+        infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
     }
 }

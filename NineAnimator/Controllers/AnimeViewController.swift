@@ -314,6 +314,7 @@ extension AnimeViewController {
                         CastController.default.initiate(playbackMedia: media, with: episode)
                         DispatchQueue.main.async {
                             self.castPresentationDelegate = CastController.default.present(from: self)
+                            clearSelection()
                         }
                     } else {
                         let item = media.avPlayerItem

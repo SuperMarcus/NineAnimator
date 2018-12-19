@@ -43,7 +43,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     var currentApp: CastApp?
     
-    var timer: Timer?
+    var updateTimer: Timer?
     
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
@@ -57,17 +57,20 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         scanner.delegate = self
     }
     
-    func connect(to device: CastDevice) {
-        if client != nil { disconnect() }
-        
-        debugPrint("Info: Connecting to \(device)")
-        
-        client = CastClient(device: device)
-        client?.delegate = self
-        client?.connect()
-        viewController.deviceListUpdated()
+    /**
+     Present cast device selector and playback controller in parent controller
+     */
+    func present(from source: UIViewController) -> Any {
+        let vc = viewController
+        let delegate = setupHalfFillView(for: vc, from: source)
+        source.present(vc, animated: true)
+        vc.isPresenting = true
+        return delegate
     }
-    
+}
+
+//MARK: - Media Playback Control
+extension CastController {
     func setVolume(to volume: Float) {
         client?.setVolume(volume)
         client?.setMuted(volume < 0.001)
@@ -81,23 +84,6 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         if isAttached, let client = client {
             client.seek(to: time)
         }
-    }
-    
-    func disconnect() {
-        client?.disconnect()
-        if isAttached { viewController.playback(didEnd: content!) }
-        client = nil
-        content = nil
-        currentApp = nil
-        viewController.deviceListUpdated()
-    }
-    
-    func present(from source: UIViewController) -> Any {
-        let vc = viewController
-        let delegate = setupHalfFillView(for: vc, from: source)
-        source.present(vc, animated: true)
-        vc.isPresenting = true
-        return delegate
     }
     
     func initiate(playbackMedia media: PlaybackMedia, with episode: Episode) {
@@ -133,19 +119,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
                         self.seek(to: max(storedPctProgress * Float(duration) - 5.0, 0))
                     }
                     
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) {
-                        [weak self] timer in
-                        guard let self = self else {
-                            return timer.invalidate()
-                        }
-                        
-                        if self.isAttached, let app = self.currentApp {
-                            self.client?.requestMediaStatus(for: app)
-                        } else {
-                            timer.invalidate()
-                            self.timer = nil
-                        }
-                    }
+                    self.updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: self.timerUpdateProgressTask)
                     
                     debugPrint("Info: Playback status \(status)")
                 case .failure(let error):
@@ -155,13 +129,55 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
             }
         }
     }
+}
+
+//MARK: - Session Control and Discovery
+extension CastController {
+    func connect(to device: CastDevice) {
+        if client != nil { disconnect() }
+        
+        debugPrint("Info: Connecting to \(device)")
+        
+        currentApp = nil
+        
+        client = CastClient(device: device)
+        client?.delegate = self
+        client?.connect()
+        viewController.deviceListUpdated()
+    }
+    
+    func disconnect() {
+        if isAttached { viewController.playback(didEnd: content!) }
+        client?.disconnect()
+        client = nil
+        content = nil
+        currentApp = nil
+        viewController.deviceListUpdated()
+    }
     
     func start() { scanner.startScanning() }
     
     func stop() { scanner.stopScanning() }
 }
 
+//MARK: - Media State Delegate
 extension CastController {
+    var timerUpdateProgressTask: ((Timer) -> ()) {
+        return {
+            [weak self] timer in
+            guard let self = self else {
+                return timer.invalidate()
+            }
+            
+            if self.isAttached, let app = self.currentApp {
+                self.client?.requestMediaStatus(for: app)
+            } else {
+                timer.invalidate()
+                self.updateTimer = nil
+            }
+        }
+    }
+    
     func castClient(_ client: CastClient, didConnectTo device: CastDevice) {
         debugPrint("Info: Connected to \(device)")
         viewController.deviceListUpdated()
@@ -174,8 +190,8 @@ extension CastController {
         if isAttached, let content = content {
             currentApp = nil
             self.client = nil
-            timer?.invalidate()
-            timer = nil
+            updateTimer?.invalidate()
+            updateTimer = nil
             viewController.playback(didEnd: content)
         }
         viewController.deviceListUpdated()
@@ -196,6 +212,7 @@ extension CastController {
     }
 }
 
+//MARK: - Device State Delegate
 extension CastController {
     func deviceDidComeOnline(_ device: CastDevice) {
         devices.append(device)
