@@ -346,6 +346,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="kyF-yk-2kZ" firstAttribute="top" secondItem="8cD-7T-B3o" secondAttribute="top" constant="16" id="06y-hh-VTF"/>
                             <constraint firstItem="8cD-7T-B3o" firstAttribute="trailing" secondItem="IsI-vv-DvR" secondAttribute="trailing" constant="16" id="7EX-gQ-77C"/>
@@ -471,6 +472,9 @@
                                 <include reference="Int-PD-ikL"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0Xy-Jz-LnZ" appends="YES" id="UNT-ud-Bhg"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="coverImage" destination="bhd-zg-Q7i" id="jT5-4j-7oQ"/>
@@ -487,6 +491,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="roa-nd-ztM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0Xy-Jz-LnZ">
+                    <connections>
+                        <action selector="onBackgroundTapGestureRecognizerWithSender:" destination="wSC-JZ-tly" id="q2o-L7-TQk"/>
+                        <outlet property="delegate" destination="wSC-JZ-tly" id="Vq8-BH-dPm"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="77.599999999999994" y="147.07646176911544"/>
         </scene>

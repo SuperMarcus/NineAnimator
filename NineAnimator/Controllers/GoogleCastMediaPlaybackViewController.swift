@@ -29,7 +29,7 @@ enum CastDeviceState {
     case connecting
 }
 
-class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource {
+class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource, UIGestureRecognizerDelegate {
     weak var castController: CastController!
     
     @IBOutlet weak var playbackControlView: UIView!
@@ -197,6 +197,14 @@ extension GoogleCastMediaPlaybackViewController {
                 playbackControlView.isHidden = true
             }
         }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == self.view
+    }
+    
+    @IBAction func onBackgroundTapGestureRecognizer(sender: UITapGestureRecognizer) {
+        dismiss(animated: true)
     }
     
     @IBAction func onPlaybackProgressSeek(_ sender: UISlider) {
