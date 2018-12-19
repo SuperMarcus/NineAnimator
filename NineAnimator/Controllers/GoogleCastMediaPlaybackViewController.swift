@@ -385,18 +385,18 @@ extension GoogleCastMediaPlaybackViewController {
         commandCenter.pauseCommand.isEnabled = true
         
         //Fast forward
-        commandCenter.seekForwardCommand.addTarget {
+        commandCenter.skipForwardCommand.addTarget {
             _ in self.onFastForwardButtonTapped(self)
             return .success
         }
-        commandCenter.seekForwardCommand.isEnabled = true
+        commandCenter.skipForwardCommand.isEnabled = true
         
         //Rewind
-        commandCenter.seekBackwardCommand.addTarget {
+        commandCenter.skipBackwardCommand.addTarget {
             _ in self.onRewindButtonTapped(self)
             return .success
         }
-        commandCenter.seekBackwardCommand.isEnabled = true
+        commandCenter.skipBackwardCommand.isEnabled = true
     }
     
     private func nowPlaying(teardown: Episode){
