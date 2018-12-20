@@ -69,6 +69,14 @@ class NineAnimatorUser {
         return nil
     }
     
+    var persistedProgresses: [String: Float] {
+        get {
+            if let dict = _freezer.dictionary(forKey: "episode.progress") as? [String: Float]
+            { return dict } else { return [:] }
+        }
+        set { _freezer.set(newValue, forKey: "episode.progress") }
+    }
+    
     /// Triggered when an anime is presented
     ///
     /// - Parameter anime: AnimeLink of the anime
@@ -100,8 +108,9 @@ class NineAnimatorUser {
     ///   - progress: Float value ranging from 0.0 to 1.0.
     ///   - episode: EpisodeLink of the episode.
     func update(progress: Float, for episode: EpisodeLink) {
-        let key = "\(episode).progress"
-        _freezer.set(progress, forKey: key)
+        var store = persistedProgresses
+        store["\(episode.parent.source.name)+\(episode.identifier)"] = progress
+        persistedProgresses = store
     }
     
     /// Retrive playback progress for episode
@@ -109,8 +118,7 @@ class NineAnimatorUser {
     /// - Parameter episode: EpisodeLink of the episode
     /// - Returns: Float value ranging from 0.0 to 1.0
     func playbackProgress(for episode: EpisodeLink) -> Float {
-        let key = "\(episode).progress"
-        return _freezer.float(forKey: key)
+        return persistedProgresses["\(episode.parent.source.name)+\(episode.identifier)"] ?? 0
     }
     
     func clear() {
