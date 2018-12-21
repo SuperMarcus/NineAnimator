@@ -23,4 +23,28 @@ class FeaturedAnimeTableViewCell: UITableViewCell {
     @IBOutlet weak var animeImageView: UIImageView!
     
     @IBOutlet weak var animeTitleLabel: UILabel!
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.1){
+            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }
+        
+        super.touchesBegan(touches, with: event)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.1){
+            self.transform = .identity
+        }
+        
+        super.touchesEnded(touches, with: event)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        UIView.animate(withDuration: 0.3){
+            self.transform = .identity
+        }
+        
+        super.touchesMoved(touches, with: event)
+    }
 }
