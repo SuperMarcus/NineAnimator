@@ -177,7 +177,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vay-h0-LQu">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VCb-1U-YDM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
@@ -262,11 +262,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Featured" id="Xx9-4a-rNT">
-                        <barButtonItem key="rightBarButtonItem" title="Select Site" id="Ukz-aW-wFy">
-                            <connections>
-                                <action selector="onSourceSelectionButtonPressed:" destination="SPf-bx-P2k" id="nxk-11-bbX"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Settings" image="Settings Icon" id="g8T-nX-rcs">
+                                <connections>
+                                    <segue destination="z0H-w6-yJK" kind="popoverPresentation" popoverAnchorBarButtonItem="g8T-nX-rcs" id="7fY-mT-Xki">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Select Site" id="Ukz-aW-wFy">
+                                <connections>
+                                    <action selector="onSourceSelectionButtonPressed:" destination="SPf-bx-P2k" id="nxk-11-bbX"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="sourceSelectionButton" destination="Ukz-aW-wFy" id="BEx-2f-7ly"/>
@@ -560,7 +569,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymX-sl-7hN">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ba0-1s-HFP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title of the anime" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tdo-VB-Wsl">
@@ -764,13 +773,21 @@
             </objects>
             <point key="canvasLocation" x="199" y="1158"/>
         </scene>
+        <!--Settings-->
+        <scene sceneID="UHc-GO-QfN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="z0H-w6-yJK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t5n-Nk-8CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2745" y="-457"/>
+        </scene>
         <!--AnimePlayer-->
         <scene sceneID="fxf-kY-AKA">
             <objects>
                 <viewControllerPlaceholder storyboardName="AnimePlayer" id="Vey-hc-6Z0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWR-t2-rZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765" y="-332"/>
+            <point key="canvasLocation" x="2765" y="-283"/>
         </scene>
         <!--Featured Page Container-->
         <scene sceneID="tgu-Qd-uUb">
@@ -809,6 +826,9 @@
             <point key="canvasLocation" x="200" y="33"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Settings Icon" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5mq-eg-8TQ"/>
         <segue reference="Uut-Fq-hAa"/>

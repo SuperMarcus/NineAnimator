@@ -63,6 +63,9 @@
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
 		2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297421BB7A4200284FD0 /* StreamangoParser.swift */; };
 		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
+		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
+		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
+		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
 		2CCC745C21C063EC0007502A /* SourceNineAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745B21C063EC0007502A /* SourceNineAnime.swift */; };
 		2CCC745E21C064800007502A /* NineAnimeSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745D21C064800007502A /* NineAnimeSearch.swift */; };
@@ -155,6 +158,9 @@
 		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
 		2C91297421BB7A4200284FD0 /* StreamangoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamangoParser.swift; sourceTree = "<group>"; };
 		2C91297621BB867300284FD0 /* MyCloudParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCloudParser.swift; sourceTree = "<group>"; };
+		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
+		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
 		2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_5.png; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -255,6 +261,7 @@
 		2C4ABC7321B59982009B4D47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C9C44FC21CD2B07004C8F0C /* Settings */,
 				2C12EDD621BDE66E0064D2BD /* Prototype */,
 				2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */,
 				2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */,
@@ -324,6 +331,7 @@
 				2C4ABC5C21B5881F009B4D47 /* LaunchScreen.storyboard */,
 				2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */,
 				2C12EDE121BDE9230064D2BD /* GoogleCastMediaControl.storyboard */,
+				2C9C44F921CD2405004C8F0C /* Settings.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -370,6 +378,15 @@
 				2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */,
 			);
 			path = ProviderParsers;
+			sourceTree = "<group>";
+		};
+		2C9C44FC21CD2B07004C8F0C /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */,
+				2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		2CCC745821C05F640007502A /* 9anime.to */ = {
@@ -487,6 +504,7 @@
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
+				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 			);
@@ -569,12 +587,14 @@
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
 				2C66779821BC2213000E5ACC /* SearchViewController.swift in Sources */,
+				2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */,
 				2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */,
 				2CCC745A21C060480007502A /* Source.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
 				52CADD6721BD86F40077BEB1 /* UITableView+Extensions.swift in Sources */,
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
+				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
@@ -646,6 +666,14 @@
 				2C4ABC8D21B76010009B4D47 /* Base */,
 			);
 			name = AnimePlayer.storyboard;
+			sourceTree = "<group>";
+		};
+		2C9C44F921CD2405004C8F0C /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C9C44FA21CD2405004C8F0C /* Base */,
+			);
+			name = Settings.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

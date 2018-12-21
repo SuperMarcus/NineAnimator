@@ -91,7 +91,7 @@ public class HalfFillPresentationController: UIPresentationController {
             self.presentingViewController.view.transform = .identity
             self.presentingViewController.view.frame.origin = .zero
             self.presentingViewController.view.frame.size = self.presentedViewController.view.frame.size
-        })
+        }) { _ in self.presentingViewController.view.setNeedsLayout() }
     }
     
     override public func dismissalTransitionDidEnd(_ completed: Bool) {

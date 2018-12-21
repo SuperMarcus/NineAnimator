@@ -196,7 +196,12 @@ extension AnimeViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell
                 else { fatalError("unable to dequeue reuseable cell") }
             let episodes = anime!.episodes[server!]!
-            let episode = episodes[indexPath.item]
+            var episode = episodes[indexPath.item]
+            
+            if NineAnimator.default.user.episodeListingOrder == .reversed {
+                episode = episodes[episodes.count - indexPath.item - 1]
+            }
+            
             cell.episodeLink = episode
             cell.progressIndicator.episodeLink = episode
             return cell

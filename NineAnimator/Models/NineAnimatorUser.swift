@@ -110,9 +110,33 @@ class NineAnimatorUser {
         return persistedProgresses["\(episode.parent.source.name)+\(episode.identifier)"] ?? 0
     }
     
-    func clear() {
+    func clearRecents() {
         recentAnimes = []
         _freezer.removeObject(forKey: .recentEpisode)
+    }
+    
+    func clearAll() {
+        guard let bundleId = Bundle.main.bundleIdentifier else { return }
+        _freezer.removePersistentDomain(forName: bundleId)
+    }
+}
+
+//MARK: - Preferences
+extension NineAnimatorUser {
+    enum EpisodeListingOrder: String {
+        case ordered
+        case reversed
+        
+        init(from value: Any?) {
+            guard let value = value as? String else { self = .ordered; return }
+            guard let order = EpisodeListingOrder(rawValue: value) else { self = .ordered; return }
+            self = order
+        }
+    }
+    
+    var episodeListingOrder: EpisodeListingOrder {
+        get { return EpisodeListingOrder(from: _freezer.string(forKey: .episodeListingOrder)) }
+        set { _freezer.set(newValue.rawValue, forKey: .episodeListingOrder) }
     }
 }
 
@@ -170,12 +194,18 @@ extension NineAnimatorUser {
         set { _cloud.set(newValue, forKey: .persistedProgresses) }
     }
     
-    func pull(){ merge(piority: .remoteFirst) }
+    func pull(){
+        //Not using iCloud rn
+//        merge(piority: .remoteFirst)
+    }
     
-    func push(){ merge(piority: .localFirst) }
+    func push(){
+        //Not using iCloud rn
+//        merge(piority: .localFirst)
+    }
     
     func merge(piority: MergePiority){
-        debugPrint("Info: Synchronizing defaults with piority \(piority)")
+//        debugPrint("Info: Synchronizing defaults with piority \(piority)")
         
         if piority == .remoteFirst { _cloud.synchronize() }
         
@@ -234,4 +264,5 @@ fileprivate extension String {
     static var recentEpisode: String { return "episode.recent" }
     static var recentSource: String { return "source.recent" }
     static var persistedProgresses: String { return "episode.progress" }
+    static var episodeListingOrder: String { return "episode.listing.order" }
 }
