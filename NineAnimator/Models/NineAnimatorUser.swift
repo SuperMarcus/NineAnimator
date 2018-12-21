@@ -33,27 +33,20 @@ import Foundation
  */
 class NineAnimatorUser {
     private let _freezer = UserDefaults.standard
+    private let _cloud = NSUbiquitousKeyValueStore.default
     
     private(set) var recentAnimes: [AnimeLink] {
-        get {
-            let decoder = PropertyListDecoder()
-            if let data = _freezer.value(forKey: "anime.recent") as? Data,
-                let recents = try? decoder.decode([AnimeLink].self, from: data) {
-                return recents
-            }
-            return []
-        }
+        get { return decode([AnimeLink].self, from: _freezer.value(forKey: .recentAnimeList)) ?? [] }
         set {
-            let encoder = PropertyListEncoder()
-            guard let data = try? encoder.encode(newValue) else {
+            guard let data = encode(data: newValue) else {
                 return debugPrint("Warn: Recent animes failed to encode")
             }
-            _freezer.set(data, forKey: "anime.recent")
+            _freezer.set(data, forKey: .recentAnimeList)
         }
     }
     
     var source: Source {
-        if let sourceName = _freezer.string(forKey: "source.recent"),
+        if let sourceName = _freezer.string(forKey: .recentSource),
             let source = NineAnimator.default.source(with: sourceName) {
             return source
         } else {
@@ -62,19 +55,15 @@ class NineAnimatorUser {
     }
     
     var lastEpisode: EpisodeLink? {
-        let decoder = PropertyListDecoder()
-        if let data = _freezer.value(forKey: "episode.recent") as? Data {
-            return try? decoder.decode(EpisodeLink.self, from: data)
-        }
-        return nil
+        return decode(EpisodeLink.self, from: _freezer.value(forKey: .recentEpisode))
     }
     
     var persistedProgresses: [String: Float] {
         get {
-            if let dict = _freezer.dictionary(forKey: "episode.progress") as? [String: Float]
+            if let dict = _freezer.dictionary(forKey: .persistedProgresses) as? [String: Float]
             { return dict } else { return [:] }
         }
-        set { _freezer.set(newValue, forKey: "episode.progress") }
+        set { _freezer.set(newValue, forKey: .persistedProgresses) }
     }
     
     /// Triggered when an anime is presented
@@ -87,19 +76,19 @@ class NineAnimatorUser {
     }
     
     func select(source: Source) {
-        _freezer.set(source.name, forKey: "source.recent")
+        _freezer.set(source.name, forKey: .recentSource)
+        push()
     }
     
     /// Triggered when the playback is about to start
     ///
     /// - Parameter episode: EpisodeLink of the episode
     func entering(episode: EpisodeLink) {
-        let encoder = PropertyListEncoder()
-        guard let data = try? encoder.encode(episode) else {
+        guard let data = encode(data: episode) else {
             debugPrint("Warn: EpisodeLink failed to encode.")
             return
         }
-        _freezer.set(data, forKey: "episode.recent")
+        _freezer.set(data, forKey: .recentEpisode)
     }
     
     /// Periodically called by an observer in AVPlayer
@@ -123,6 +112,126 @@ class NineAnimatorUser {
     
     func clear() {
         recentAnimes = []
-        _freezer.removeObject(forKey: "episode.recent")
+        _freezer.removeObject(forKey: .recentEpisode)
     }
+}
+
+//MARK: - Serialization
+extension NineAnimatorUser {
+    private func encode<T: Encodable>(data: T) -> Data? {
+        let encoder = PropertyListEncoder()
+        return try? encoder.encode(data)
+    }
+    
+    private func decode<T: Decodable>(_ type: T.Type, from data: Any?) -> T? {
+        guard let data = data as? Data else { return nil }
+        let decoder = PropertyListDecoder()
+        return try? decoder.decode(type, from: data)
+    }
+}
+
+//MARK: - Cloud Sync
+extension NineAnimatorUser {
+    enum MergePiority {
+        case localFirst
+        case remoteFirst
+    }
+    
+    private var cloudRecentAnime: [AnimeLink] {
+        get {
+            return decode([AnimeLink].self, from: _cloud.data(forKey: .recentAnimeList)) ?? []
+        }
+        set {
+            guard let data = encode(data: newValue) else {
+                return debugPrint("Warn: Recent animes failed to encode")
+            }
+            _cloud.set(data, forKey: .recentAnimeList)
+        }
+    }
+    
+    private var cloudSource: Source {
+        get {
+            if let sourceName = _cloud.string(forKey: .recentSource),
+                let source = NineAnimator.default.source(with: sourceName) {
+                return source
+            } else { return source }
+        }
+    }
+    
+    private var cloudLastEpisode: EpisodeLink? {
+        get { return decode(EpisodeLink.self, from: _cloud) }
+    }
+    
+    private var cloudPersistedProgresses: [String: Float] {
+        get {
+            if let dict = _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float]
+            { return dict } else { return [:] }
+        }
+        set { _cloud.set(newValue, forKey: .persistedProgresses) }
+    }
+    
+    func pull(){ merge(piority: .remoteFirst) }
+    
+    func push(){ merge(piority: .localFirst) }
+    
+    func merge(piority: MergePiority){
+        debugPrint("Info: Synchronizing defaults with piority \(piority)")
+        
+        if piority == .remoteFirst { _cloud.synchronize() }
+        
+        //Merge recently watched anime
+        let primaryRecentAnime = piority == .localFirst ?
+            recentAnimes : cloudRecentAnime
+        let secondaryRecentAnime = piority == .localFirst ?
+            cloudRecentAnime : recentAnimes
+        
+        let mergedRecentAnime = merge(
+            primary: primaryRecentAnime,
+            secondary: secondaryRecentAnime)
+        
+        recentAnimes = mergedRecentAnime
+        cloudRecentAnime = mergedRecentAnime
+        
+        //Merge source
+        if piority == .localFirst { _cloud.set(source.name, forKey: .recentSource) }
+        else { _freezer.set(_cloud.string(forKey: .recentSource) ?? source.name, forKey: .recentSource) }
+        
+        //Merge recent episode
+        if piority == .localFirst {
+            if let episode = _freezer.data(forKey: .recentEpisode) {
+                _cloud.set(episode, forKey: .recentEpisode)
+            }
+        } else {
+            if let episode = _cloud.data(forKey: .recentEpisode) {
+                _freezer.set(episode, forKey: .recentEpisode)
+            }
+        }
+        
+        //Merge persisted progresses
+        let primaryPersistedProgresses = piority == .localFirst ?
+            persistedProgresses : cloudPersistedProgresses
+        let secondaryPersistedProgresses = piority == .localFirst ?
+            cloudPersistedProgresses : persistedProgresses
+        
+        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses)
+            { v, _ in return v }
+        cloudPersistedProgresses = mergedPersistedProgresses
+        persistedProgresses = mergedPersistedProgresses
+        
+        _ = _cloud.synchronize()
+        _ = _freezer.synchronize()
+    }
+    
+    fileprivate func merge<T: Equatable>(primary: [T], secondary: [T]) -> [T] {
+        return primary + secondary.filter({
+            link in return !primary.contains { $0 == link }
+        })
+    }
+}
+
+fileprivate extension String {
+    static var recentAnimeList: String { return "anime.recent" }
+    static var recentEpisode: String { return "episode.recent" }
+    static var recentSource: String { return "source.recent" }
+    static var persistedProgresses: String { return "episode.progress" }
 }

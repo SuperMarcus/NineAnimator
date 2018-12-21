@@ -124,6 +124,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         guard let link = animeLink else { return }
         // Update history
         NineAnimator.default.user.entering(anime: link)
+        NineAnimator.default.user.push()
         
         //Update anime title
         title = link.title
@@ -399,9 +400,10 @@ extension AnimeViewController {
             self.persistProgress(time)
         }
         
-        //Reload progresses
+        //Reload and upload progresses
         if player.rate == 0 {
             tableView.reloadSections([1], with: .automatic)
+            NineAnimator.default.user.push()
         }
     }
 }

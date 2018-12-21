@@ -40,6 +40,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        NineAnimator.default.user.pull()
         selectSiteBarButton.title = NineAnimator.default.user.source.name
     }
     

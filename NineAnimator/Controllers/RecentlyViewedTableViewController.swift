@@ -27,6 +27,9 @@ class RecentlyViewedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        //Pull any updates from the cloud
+        NineAnimator.default.user.pull()
         tableView.reloadData()
     }
 }

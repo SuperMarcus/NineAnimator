@@ -289,6 +289,7 @@ extension GoogleCastMediaPlaybackViewController {
     func playback(didEnd media: CastMedia) {
         hidePlaybackControls(animated: isPresenting)
         nowPlaying(teardown: castController.currentEpisode!)
+        NineAnimator.default.user.push()
     }
 }
 

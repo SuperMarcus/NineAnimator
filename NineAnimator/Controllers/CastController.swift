@@ -188,7 +188,7 @@ extension CastController {
         guard client != self.client else { return }
         
         debugPrint("Info: Disconnected from \(device)")
-        if isAttached, let content = content {
+        if currentApp != nil, let content = content {
             currentApp = nil
             self.client = nil
             updateTimer?.invalidate()
