@@ -19,6 +19,7 @@
 
 import UIKit
 import SafariServices
+import AVKit
 
 class SettingsRootTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -29,14 +30,16 @@ class SettingsRootTableViewController: UITableViewController {
     
     @IBOutlet weak var viewingHistoryStatsLabel: UILabel!
     
+    @IBOutlet weak var backgroundPlaybackSwitch: UISwitch!
+    
+    @IBOutlet weak var pictureInPictureSwitch: UISwitch!
+    
     private var castControllerHandler: Any?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
-        
-        updateHistoryStats()
+        updatePreferencesUI()
     }
     
     @IBAction func onEpisodeListingOrderChange(_ sender: UISegmentedControl) {
@@ -47,6 +50,16 @@ class SettingsRootTableViewController: UITableViewController {
         case 1: NineAnimator.default.user.episodeListingOrder = .ordered
         default: return
         }
+    }
+    
+    @IBAction func onPiPDidChange(_ sender: UISwitch) {
+        let newValue = sender.isOn
+        NineAnimator.default.user.allowPictureInPicturePlayback = newValue
+        updatePreferencesUI()
+    }
+    
+    @IBAction func onBackgroundPlaybackDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.allowBackgroundPlayback = sender.isOn
     }
     
     @IBAction func onDoneButtonClicked(_ sender: Any) {
@@ -66,7 +79,7 @@ class SettingsRootTableViewController: UITableViewController {
             self.castControllerHandler = CastController.default.present(from: self)
         case "settings.history.recents":
             NineAnimator.default.user.clearRecents()
-            updateHistoryStats()
+            updatePreferencesUI()
         case "settings.history.reset":
             let alertView = UIAlertController(title: "Reset local storage", message: "This action is irreversible. All data and preferences will be deleted from your local storage.", preferredStyle: .actionSheet)
             
@@ -78,7 +91,7 @@ class SettingsRootTableViewController: UITableViewController {
             let action = UIAlertAction(title: "Reset", style: .destructive) {
                 [weak self] _ in
                 NineAnimator.default.user.clearAll()
-                self?.updateHistoryStats()
+                self?.updatePreferencesUI()
             }
             alertView.addAction(action)
             
@@ -88,11 +101,17 @@ class SettingsRootTableViewController: UITableViewController {
         }
     }
     
-    private func updateHistoryStats(){
+    private func updatePreferencesUI(){
+        episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
+        
+        pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
+        pictureInPictureSwitch.setOn(AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback, animated: true)
+        
+        backgroundPlaybackSwitch.isEnabled = !pictureInPictureSwitch.isOn
+        backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
+        
         //To be gramatically correct :D
         let recentAnimesCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimesCount) \(recentAnimesCount > 1 ? "Items" : "Item")"
-        
-        
     }
 }

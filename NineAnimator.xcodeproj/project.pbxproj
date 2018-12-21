@@ -66,6 +66,7 @@
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
+		2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C450121CD56B0004C8F0C /* Notifications.swift */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
 		2CCC745C21C063EC0007502A /* SourceNineAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745B21C063EC0007502A /* SourceNineAnime.swift */; };
 		2CCC745E21C064800007502A /* NineAnimeSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745D21C064800007502A /* NineAnimeSearch.swift */; };
@@ -161,6 +162,7 @@
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
+		2C9C450121CD56B0004C8F0C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
 		2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_5.png; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				2C6677B121BD846A000E5ACC /* CMTime.swift */,
 				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
 				52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */,
+				2C9C450121CD56B0004C8F0C /* Notifications.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -597,6 +600,7 @@
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
+				2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,

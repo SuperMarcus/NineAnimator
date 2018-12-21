@@ -94,6 +94,10 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
     }
     
+    static var presentedPlayerController: AVPlayerViewController?
+    
+    static var pictureInPictureIsActive: Bool = false
+    
     var playbackProgressUpdateObserver: Any?
     
     var playbackProgressRestoreToken: NSKeyValueObservation?
@@ -156,10 +160,51 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         //Sets episode and server to nil
         episode = nil
         
+        AnimeViewController.presentedPlayerController?.delegate = self
+        
         playbackRateObservation?.invalidate()
         playbackRateObservation?.invalidate()
         playbackProgressRestoreToken = nil
         playbackRateObservation = nil
+        
+        //Remove all observations
+        NotificationCenter.default.removeObserver(self)
+    }
+}
+
+//MARK: - Playback control
+extension AnimeViewController {
+    @objc func onEnteringBackground(notification: Notification){
+        //Do not do anything if picture in picture playback is supported
+        if AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback { return }
+        
+        if NineAnimator.default.user.allowBackgroundPlayback {
+            AnimeViewController.presentedPlayerController?.player = nil
+        } else { displayedPlayer?.pause() }
+    }
+    
+    @objc func onEnteringForeground(notification: Notification){
+        if AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback { return }
+        
+//        displayedPlayer?.play()
+        AnimeViewController.presentedPlayerController?.player = displayedPlayer
+    }
+    
+    func playerViewControllerWillStartPictureInPicture(_ playerViewController: AVPlayerViewController) {
+        NotificationCenter.default.removeObserver(self, name: .appWillBecomeInactive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .appDidBecameActive, object: nil)
+        AnimeViewController.pictureInPictureIsActive = true
+    }
+    
+    func playerViewControllerWillStopPictureInPicture(_ playerViewController: AVPlayerViewController) {
+        AnimeViewController.pictureInPictureIsActive = false
+    }
+    
+    func playerViewController(_ playerViewController: AVPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
+        present(playerViewController, animated: true){ completionHandler(true) }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(onEnteringBackground(notification:)), name: .appWillBecomeInactive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onEnteringForeground(notification:)), name: .appDidBecameActive, object: nil)
     }
 }
 
@@ -280,6 +325,7 @@ extension AnimeViewController {
         guard let episodeLink = episodeLink else { return }
         
         episodeRequestTask?.cancel()
+        NotificationCenter.default.removeObserver(self)
         
         func clearSelection() {
             tableView.deselectSelectedRow()
@@ -324,11 +370,19 @@ extension AnimeViewController {
                         }
                     } else {
                         let item = media.avPlayerItem
-                        let playerController = AVPlayerViewController()
-                        playerController.player = AVPlayer(playerItem: item)
+                        let playerController = AnimeViewController.presentedPlayerController ?? AVPlayerViewController()
+                        if let player = playerController.player {
+                            player.replaceCurrentItem(with: item)
+                        } else { playerController.player = AVPlayer(playerItem: item) }
+                        
                         playerController.delegate = self
+                        playerController.allowsPictureInPicturePlayback = NineAnimator.default.user.allowPictureInPicturePlayback
+                        
+                        NotificationCenter.default.addObserver(self, selector: #selector(self.onEnteringBackground(notification:)), name: .appWillBecomeInactive, object: nil)
+                        NotificationCenter.default.addObserver(self, selector: #selector(self.onEnteringForeground(notification:)), name: .appDidBecameActive, object: nil)
                         
                         self.displayedPlayer = playerController.player
+                        AnimeViewController.presentedPlayerController = playerController
                         
                         self.playbackProgressRestoreToken?.invalidate()
                         self.playbackRateObservation?.invalidate()
@@ -348,9 +402,14 @@ extension AnimeViewController {
                             ])
                         try? audioSession.setActive(true)
                         
-                        DispatchQueue.main.async { [weak self] in
+                        //Since clearSelection is still maintaining a reference to self,
+                        //no point in using weak self
+                        DispatchQueue.main.async {
                             playerController.player?.play()
-                            self?.present(playerController, animated: true, completion: clearSelection)
+                            if !AnimeViewController.pictureInPictureIsActive {
+                                self.present(playerController, animated: true)
+                            }
+                            clearSelection()
                         }
                     }
                 }

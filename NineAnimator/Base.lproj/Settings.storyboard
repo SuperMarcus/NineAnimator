@@ -99,9 +99,73 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Playback Controls" id="7nJ-6V-9oy">
+                                <string key="footerTitle">Picture in Picture (PiP) playback is only supported on iPads. Enables PiP will also enables Background Playback.
+
+Enable background playback to allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.</string>
                                 <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.playback.pip" id="qhX-cq-vU4">
+                                        <rect key="frame" x="0.0" y="348.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qhX-cq-vU4" id="OSj-kC-9rq">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture in Picture Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-np-Dks">
+                                                    <rect key="frame" x="16" y="11.5" width="286" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-YN-aHk">
+                                                    <rect key="frame" x="310" y="8" width="51" height="27.5"/>
+                                                    <connections>
+                                                        <action selector="onPiPDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="bNU-Fd-iPa"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="KSq-np-Dks" firstAttribute="leading" secondItem="OSj-kC-9rq" secondAttribute="leadingMargin" id="5AY-bS-XZd"/>
+                                                <constraint firstAttribute="trailing" secondItem="6vy-YN-aHk" secondAttribute="trailing" constant="16" id="99F-PJ-qzZ"/>
+                                                <constraint firstItem="6vy-YN-aHk" firstAttribute="top" secondItem="OSj-kC-9rq" secondAttribute="top" constant="8" id="ADc-Z4-HRl"/>
+                                                <constraint firstItem="6vy-YN-aHk" firstAttribute="leading" secondItem="KSq-np-Dks" secondAttribute="trailing" constant="8" id="Wme-Q7-Jcq"/>
+                                                <constraint firstAttribute="bottom" secondItem="6vy-YN-aHk" secondAttribute="bottom" constant="8" id="gvL-tO-hrP"/>
+                                                <constraint firstItem="KSq-np-Dks" firstAttribute="centerY" secondItem="OSj-kC-9rq" secondAttribute="centerY" id="vXg-IY-QbZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.playback.background" rowHeight="49" id="n4D-7A-fGL">
+                                        <rect key="frame" x="0.0" y="392.5" width="375" height="49"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n4D-7A-fGL" id="YQZ-Ov-IMJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
+                                                    <rect key="frame" x="16" y="14" width="286" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
+                                                    <rect key="frame" x="310" y="8" width="51" height="32.5"/>
+                                                    <connections>
+                                                        <action selector="onBackgroundPlaybackDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Thu-pY-uHV"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gAn-bf-I7y" firstAttribute="leading" secondItem="YQZ-Ov-IMJ" secondAttribute="leadingMargin" id="193-oq-BfI"/>
+                                                <constraint firstItem="l15-ir-tZP" firstAttribute="leading" secondItem="gAn-bf-I7y" secondAttribute="trailing" constant="8" id="5sx-nU-pgb"/>
+                                                <constraint firstAttribute="bottom" secondItem="l15-ir-tZP" secondAttribute="bottom" constant="8" id="Gaa-D6-zZO"/>
+                                                <constraint firstItem="gAn-bf-I7y" firstAttribute="centerY" secondItem="YQZ-Ov-IMJ" secondAttribute="centerY" id="JaA-VA-YLl"/>
+                                                <constraint firstItem="l15-ir-tZP" firstAttribute="top" secondItem="YQZ-Ov-IMJ" secondAttribute="top" constant="8" id="QdQ-1P-rDH"/>
+                                                <constraint firstItem="l15-ir-tZP" firstAttribute="centerY" secondItem="YQZ-Ov-IMJ" secondAttribute="centerY" id="bpd-Yb-86f"/>
+                                                <constraint firstAttribute="trailing" secondItem="l15-ir-tZP" secondAttribute="trailing" constant="16" id="yBh-UQ-1to"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.playback.cast.controller" textLabel="7gK-el-Ee1" style="IBUITableViewCellStyleDefault" id="Gfi-kw-cMp">
-                                        <rect key="frame" x="0.0" y="341" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="441.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gfi-kw-cMp" id="Bba-gR-8CX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -122,7 +186,7 @@
                             <tableViewSection headerTitle="Privacy" id="dNx-EX-rHK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
-                                        <rect key="frame" x="0.0" y="441" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="649.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1L-Nj-oEr" id="GUF-UM-X8f">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -146,7 +210,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.reset" textLabel="qo6-KM-Xua" style="IBUITableViewCellStyleDefault" id="24A-0U-h1t">
-                                        <rect key="frame" x="0.0" y="485" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="693.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24A-0U-h1t" id="tu1-Qe-wbN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -178,7 +242,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backgroundPlaybackSwitch" destination="l15-ir-tZP" id="3zp-ZE-n13"/>
                         <outlet property="episodeListingOrderControl" destination="QFr-Ue-S7z" id="sOn-C7-tkt"/>
+                        <outlet property="pictureInPictureSwitch" destination="6vy-YN-aHk" id="Ah9-GZ-SZP"/>
                         <outlet property="viewingHistoryStatsLabel" destination="Rns-aJ-RlM" id="LWz-DK-wng"/>
                     </connections>
                 </tableViewController>

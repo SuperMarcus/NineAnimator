@@ -17,17 +17,12 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+extension Notification.Name {
+    static var appWillBecomeInactive: Notification.Name
+    { return .init("com.marcuszhou.nineanimator.appWillBecomeInactive") }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appDidBecameActive, object: self)
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appWillBecomeInactive, object: self)
-    }
+    static var appDidBecameActive: Notification.Name
+    { return .init("com.marcuszhou.nineanimator.appDidBecameActive") }
 }

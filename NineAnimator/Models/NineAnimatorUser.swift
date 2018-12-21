@@ -138,6 +138,16 @@ extension NineAnimatorUser {
         get { return EpisodeListingOrder(from: _freezer.string(forKey: .episodeListingOrder)) }
         set { _freezer.set(newValue.rawValue, forKey: .episodeListingOrder) }
     }
+    
+    var allowBackgroundPlayback: Bool {
+        get { return _freezer.bool(forKey: .backgroundPlayback) }
+        set { _freezer.set(newValue, forKey: .backgroundPlayback) }
+    }
+    
+    var allowPictureInPicturePlayback: Bool {
+        get { return _freezer.value(forKey: .pictureInPicturePlayback) as? Bool ?? true }
+        set { _freezer.set(newValue, forKey: .pictureInPicturePlayback) }
+    }
 }
 
 //MARK: - Serialization
@@ -265,4 +275,6 @@ fileprivate extension String {
     static var recentSource: String { return "source.recent" }
     static var persistedProgresses: String { return "episode.progress" }
     static var episodeListingOrder: String { return "episode.listing.order" }
+    static var backgroundPlayback: String { return "playback.background" }
+    static var pictureInPicturePlayback: String { return "playback.pip" }
 }
