@@ -155,3 +155,13 @@ class FeaturedViewController: UITableViewController {
         tableView.deselectSelectedRow()
     }
 }
+
+extension FeaturedViewController {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        guard let topCellPath = tableView.indexPathsForVisibleRows?.first else { return }
+        self.tableView.reloadSections(.init(0..<self.tableView.numberOfSections), with: .automatic)
+        coordinator.animate(alongsideTransition: nil){
+            _ in self.tableView.scrollToRow(at: topCellPath, at: .top, animated: true)
+        }
+    }
+}
