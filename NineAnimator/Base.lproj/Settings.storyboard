@@ -193,14 +193,14 @@ Enable background playback to allow audios to be played while the app is in the 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Recently Watched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcd-Wl-m61">
-                                                    <rect key="frame" x="16" y="12" width="183.5" height="20.5"/>
+                                                    <rect key="frame" x="15" y="12" width="183.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rns-aJ-RlM">
-                                                    <rect key="frame" x="310.5" y="12" width="48.5" height="20.5"/>
+                                                    <rect key="frame" x="311.5" y="12" width="48.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -217,7 +217,7 @@ Enable background playback to allow audios to be played while the app is in the 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qo6-KM-Xua">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
@@ -255,7 +255,6 @@ Enable background playback to allow audios to be played while the app is in the 
         <!--About-->
         <scene sceneID="70b-Dy-kVo">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NAG-Jy-bX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController title="About" id="Rvs-DG-kmr" customClass="AboutNineAnimatorTableViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="YIH-aH-OsU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -304,7 +303,7 @@ Enable background playback to allow audios to be played while the app is in the 
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
                                 <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences manual.
 
-NineAnimator will never uploads your personal information or playback history to any third party servoces. However, NineAnimator is not designed to prevent souce and playback services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
+NineAnimator will never uploads your personal information or playback history to any third party services. However, NineAnimator is not designed to prevent souce and playback services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
 
 Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
@@ -328,13 +327,13 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="GNU General Public License version 3" id="SRm-Su-TD8">
-                                <mutableString key="footerTitle">Copyright © 2018 Marcus Zhou. All rights reserved.
+                                <string key="footerTitle">Copyright © 2018 Marcus Zhou. All rights reserved.
 
 NineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
 NineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</mutableString>
+You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.license" textLabel="p2c-ro-yj3" style="IBUITableViewCellStyleDefault" id="3WC-jV-54E">
                                         <rect key="frame" x="0.0" y="610.5" width="375" height="44"/>
@@ -356,7 +355,7 @@ You should have received a copy of the GNU General Public License along with Nin
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Third Party Softwares and Websites" id="2US-vI-tzZ">
-                                <mutableString key="footerTitle">NineAnimator is developed with the help of the open source community.
+                                <string key="footerTitle">NineAnimator is developed with the help of the open source community.
 
 NineAnimator is not associated or affiliated with third party websites such as 9anime.ru or masterani.me.
 
@@ -404,7 +403,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copyof t
 
 The above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.</mutableString>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
                                         <rect key="frame" x="0.0" y="986" width="375" height="44"/>
@@ -432,6 +431,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIE
                         </connections>
                     </tableView>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NAG-Jy-bX5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1534" y="90"/>
         </scene>
