@@ -38,7 +38,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5Y-HZ-n89">
-                                                        <rect key="frame" x="16" y="32" width="111.5" height="201.5"/>
+                                                        <rect key="frame" x="16" y="32" width="111.5" height="201"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="C5Y-HZ-n89" secondAttribute="height" multiplier="56:101" id="PYW-LH-97B"/>
                                                         </constraints>
@@ -62,7 +62,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-An-PYX">
-                                                        <rect key="frame" x="135.5" y="32" width="231.5" height="201.5"/>
+                                                        <rect key="frame" x="135.5" y="32" width="231.5" height="201"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,7 +70,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TqH-7U-lSE">
-                                                        <rect key="frame" x="143.5" y="114.5" width="215.5" height="37"/>
+                                                        <rect key="frame" x="143.5" y="114" width="215.5" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
