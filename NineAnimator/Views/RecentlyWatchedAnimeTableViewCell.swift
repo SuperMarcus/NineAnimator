@@ -23,12 +23,14 @@ import Kingfisher
 class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var animeTitleLabel: UILabel!
+    @IBOutlet weak var sourceTitleLabel: UILabel!
     
     var animeLink: AnimeLink? = nil {
         didSet {
             guard let link = animeLink else { return }
             coverImageView.kf.setImage(with: link.image)
             animeTitleLabel.text = link.title
+            sourceTitleLabel.text = "Viewed on \(link.source.name)..."
         }
     }
 }

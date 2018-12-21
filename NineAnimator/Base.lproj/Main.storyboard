@@ -586,8 +586,8 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue Watching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-rl-gtc">
-                                                                <rect key="frame" x="16" y="30" width="134" height="17"/>
-                                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                                <rect key="frame" x="16" y="32.5" width="168" height="14.5"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
@@ -609,6 +609,7 @@
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="cvU-H0-Mki"/>
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="top" secondItem="tdo-VB-Wsl" secondAttribute="bottom" constant="4" id="n8A-E9-bE1"/>
                                                             <constraint firstAttribute="trailing" secondItem="aBr-0y-FH3" secondAttribute="trailing" constant="16" id="pxW-W0-vRj"/>
+                                                            <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="663-rl-gtc" secondAttribute="trailing" constant="8" id="uL0-tH-IdR"/>
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="top" secondItem="663-rl-gtc" secondAttribute="bottom" constant="4" id="wFp-db-T5J"/>
                                                         </constraints>
                                                     </view>
@@ -664,6 +665,7 @@
                                     <outlet property="coverImageView" destination="aj4-zT-QjK" id="zIp-pk-QGw"/>
                                     <outlet property="episodeLabel" destination="IId-s4-5QI" id="PDk-wy-u3G"/>
                                     <outlet property="progressIndicator" destination="aBr-0y-FH3" id="kQZ-KA-MJG"/>
+                                    <outlet property="sourceTitleLabel" destination="663-rl-gtc" id="9O5-OZ-059"/>
                                     <outlet property="titleLabel" destination="tdo-VB-Wsl" id="WdP-S5-qDR"/>
                                     <segue destination="fnc-Z3-OPF" kind="show" id="Uut-Fq-hAa"/>
                                 </connections>
@@ -698,7 +700,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You recently watched..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cty-4k-jCy">
-                                                    <rect key="frame" x="110.5" y="38" width="150" height="17"/>
+                                                    <rect key="frame" x="110.5" y="38" width="198.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -710,6 +712,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eEe-9a-Fgq" secondAttribute="bottom" id="DSr-ox-e4k"/>
                                                 <constraint firstItem="cty-4k-jCy" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="Hoy-qT-SBt"/>
                                                 <constraint firstItem="eEe-9a-Fgq" firstAttribute="top" secondItem="TMG-gN-0Pw" secondAttribute="top" id="Ioj-3s-69t"/>
+                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="cty-4k-jCy" secondAttribute="trailing" constant="8" id="Olh-6Q-p2L"/>
                                                 <constraint firstAttribute="trailing" secondItem="g7r-tP-s31" secondAttribute="trailing" constant="16" id="Rah-a8-0D5"/>
                                                 <constraint firstItem="g7r-tP-s31" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="XUV-kY-M1U"/>
                                                 <constraint firstItem="eEe-9a-Fgq" firstAttribute="leading" secondItem="TMG-gN-0Pw" secondAttribute="leading" id="lt9-at-2xM"/>
@@ -727,6 +730,7 @@
                                 <connections>
                                     <outlet property="animeTitleLabel" destination="g7r-tP-s31" id="qSR-4O-tkW"/>
                                     <outlet property="coverImageView" destination="eEe-9a-Fgq" id="yUc-qo-hXJ"/>
+                                    <outlet property="sourceTitleLabel" destination="cty-4k-jCy" id="qQs-X1-itN"/>
                                     <segue destination="fnc-Z3-OPF" kind="show" id="pnE-3F-WKs"/>
                                 </connections>
                             </tableViewCell>

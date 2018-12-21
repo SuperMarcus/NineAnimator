@@ -26,6 +26,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell {
     @IBOutlet weak var progressIndicator: EpisodeAccessoryProcessIndicator!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var episodeLabel: UILabel!
+    @IBOutlet weak var sourceTitleLabel: UILabel!
     
     var episodeLink: EpisodeLink? = nil {
         didSet {
@@ -36,6 +37,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell {
             progressIndicator.episodeLink = link
             titleLabel.text = link.parent.title
             episodeLabel.text = "Episode: \(link.name)"
+            sourceTitleLabel.text = "Continue Watching on \(link.parent.source.name)..."
         }
     }
 }
