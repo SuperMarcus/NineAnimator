@@ -161,6 +161,8 @@
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
 		2C9C450121CD56B0004C8F0C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		2C9C450321CDA7CF004C8F0C /* screenshot_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_7.png; sourceTree = "<group>"; };
+		2C9C450421CDA7D0004C8F0C /* screenshot_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_8.png; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
 		2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_5.png; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -353,6 +355,8 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				2C9C450321CDA7CF004C8F0C /* screenshot_7.png */,
+				2C9C450421CDA7D0004C8F0C /* screenshot_8.png */,
 				2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */,
 				2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */,
 				2C6677B721BD98A8000E5ACC /* LICENSE */,

@@ -139,6 +139,10 @@ More hosts may be added later. Feel free to open an issue to request additional 
 | ----------------- | -------------------- | --------------- |
 | ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
 
+| Featured Animes (iPad) | Picture in Picture (iPad) |
+| ----------------- | -------------------- |
+| ![7](Misc/screenshot_7.png) | ![8](Misc/screenshot_8.png) |
+
 ## Credits
 
 * Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
