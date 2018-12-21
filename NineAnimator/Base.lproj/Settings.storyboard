@@ -183,7 +183,7 @@ Enable background playback to allow audios to be played while the app is in the 
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Privacy" id="dNx-EX-rHK">
+                            <tableViewSection headerTitle="Data and Privacy" id="dNx-EX-rHK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
                                         <rect key="frame" x="0.0" y="649.5" width="375" height="44"/>
@@ -262,7 +262,7 @@ Enable background playback to allow audios to be played while the app is in the 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
-                            <tableViewSection headerTitle="About Nine Animator" id="EzJ-Ri-uNU">
+                            <tableViewSection headerTitle="About NineAnimator" id="EzJ-Ri-uNU">
                                 <string key="footerTitle">NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.viewrepo" textLabel="0ne-Hh-nMP" style="IBUITableViewCellStyleDefault" id="dyi-RY-36i">
