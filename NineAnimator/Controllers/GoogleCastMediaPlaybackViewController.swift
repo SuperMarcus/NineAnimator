@@ -89,11 +89,6 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         volumeSlider.minimumValue = 0.0
         volumeSlider.maximumValue = 1.0
         
-        let grayBackgroundHighlight = buttonBackgroundImage
-        playPauseButton.setBackgroundImage(grayBackgroundHighlight, for: .highlighted)
-        rewindButton.setBackgroundImage(grayBackgroundHighlight, for: .highlighted)
-        fastForwardButton.setBackgroundImage(grayBackgroundHighlight, for: .highlighted)
-        
         castController.start()
     }
     
@@ -132,10 +127,6 @@ extension GoogleCastMediaPlaybackViewController {
     
     var highlightedThumbImage: UIImage? {
         return circle(ofSideLength: 12, color: .gray)
-    }
-    
-    var buttonBackgroundImage: UIImage {
-        return circle(ofSideLength: 128, color: UIColor.gray.withAlphaComponent(0.15))
     }
     
     func format(seconds input: Int) -> String {
