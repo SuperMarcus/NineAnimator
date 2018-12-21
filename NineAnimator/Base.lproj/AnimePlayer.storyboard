@@ -26,19 +26,19 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2ii-5a-PBB">
-                                            <rect key="frame" x="16" y="11" width="343" height="246"/>
+                                            <rect key="frame" x="16" y="11" width="343" height="244"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MbL-mh-n2A">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="267.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="265.5"/>
                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QZp-HE-7tB">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="267.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="265.5"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5Y-HZ-n89">
-                                                        <rect key="frame" x="16" y="32" width="112.5" height="203"/>
+                                                        <rect key="frame" x="16" y="32" width="111.5" height="201.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="C5Y-HZ-n89" secondAttribute="height" multiplier="56:101" id="PYW-LH-97B"/>
                                                         </constraints>
@@ -62,7 +62,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-An-PYX">
-                                                        <rect key="frame" x="136.5" y="32" width="230.5" height="203"/>
+                                                        <rect key="frame" x="135.5" y="32" width="231.5" height="201.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -70,14 +70,14 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TqH-7U-lSE">
-                                                        <rect key="frame" x="144.5" y="115" width="214.5" height="37"/>
+                                                        <rect key="frame" x="143.5" y="114.5" width="215.5" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="leading" secondItem="QZp-HE-7tB" secondAttribute="leading" constant="16" id="1Dc-uP-NhI"/>
                                                     <constraint firstItem="TqH-7U-lSE" firstAttribute="centerY" secondItem="QZp-HE-7tB" secondAttribute="centerY" id="3fS-TB-ba0"/>
                                                     <constraint firstItem="xl0-An-PYX" firstAttribute="leading" secondItem="C5Y-HZ-n89" secondAttribute="trailing" constant="8" id="6k9-qf-fST"/>
-                                                    <constraint firstItem="C5Y-HZ-n89" firstAttribute="width" secondItem="QZp-HE-7tB" secondAttribute="width" multiplier="0.3" id="EM4-CV-Vgx"/>
+                                                    <constraint firstItem="C5Y-HZ-n89" firstAttribute="width" secondItem="QZp-HE-7tB" secondAttribute="width" multiplier="0.3" priority="800" id="EM4-CV-Vgx"/>
                                                     <constraint firstAttribute="bottom" secondItem="xl0-An-PYX" secondAttribute="bottom" constant="32" id="EPC-Yk-gQ6"/>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="centerY" secondItem="QZp-HE-7tB" secondAttribute="centerY" id="GCy-vJ-G23"/>
                                                     <constraint firstItem="xl0-An-PYX" firstAttribute="top" secondItem="QZp-HE-7tB" secondAttribute="top" constant="32" id="ITE-VW-lG0"/>
