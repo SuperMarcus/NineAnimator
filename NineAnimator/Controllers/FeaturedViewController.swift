@@ -158,7 +158,8 @@ class FeaturedViewController: UITableViewController {
 
 extension FeaturedViewController {
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        guard let topCellPath = tableView.indexPathsForVisibleRows?.first else { return }
+        guard let visibleRows = tableView.indexPathsForVisibleRows, visibleRows.count > 0 else { return }
+        let topCellPath = visibleRows.count > 1 ? visibleRows[1] : visibleRows[0]
         self.tableView.reloadSections(.init(0..<self.tableView.numberOfSections), with: .automatic)
         coordinator.animate(alongsideTransition: nil){
             _ in self.tableView.scrollToRow(at: topCellPath, at: .top, animated: true)
