@@ -52,12 +52,15 @@ public class HalfFillPresentationController: UIPresentationController {
         return super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
-    public func layoutBackgroundView(with size: CGSize) {
+    public func layoutBackgroundView(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         var view: UIView? = _dimmingView
-        while view != nil {
-            view?.frame.size = size
-            view = view?.subviews.first
-        }
+        coordinator.animate(alongsideTransition: {
+            _ in
+            while view != nil {
+                view?.frame.size = size
+                view = view?.subviews.first
+            }
+        })
     }
     
     private func presentAsFullScreen() {
@@ -80,7 +83,7 @@ public class HalfFillPresentationController: UIPresentationController {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
         coordinator.animate(alongsideTransition: { _ in
             dimmer.alpha = 1
-            self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+//            self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
         }) { _ in self.updateState(viewController: self.presentingViewController) }
     }
     
@@ -88,9 +91,9 @@ public class HalfFillPresentationController: UIPresentationController {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
         coordinator.animate(alongsideTransition: { _ in
             self.dimmer?.alpha = 0
-            self.presentingViewController.view.transform = .identity
-            self.presentingViewController.view.frame.origin = .zero
-            self.presentingViewController.view.frame.size = self.presentedViewController.view.frame.size
+//            self.presentingViewController.view.transform = .identity
+//            self.presentingViewController.view.frame.origin = .zero
+//            self.presentingViewController.view.frame.size = self.presentedViewController.view.frame.size
         }) { _ in self.presentingViewController.view.setNeedsLayout() }
     }
     

@@ -67,6 +67,13 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
         vc.isPresenting = true
         return delegate
     }
+    
+    /**
+     Dismiss the controller
+     */
+    func dismiss() {
+        viewController.dismiss(animated: true)
+    }
 }
 
 //MARK: - Media Playback Control

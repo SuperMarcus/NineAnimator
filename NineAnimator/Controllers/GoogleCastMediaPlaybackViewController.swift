@@ -99,7 +99,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         view.setNeedsLayout()
-        halfFillController?.layoutBackgroundView(with: size)
+        halfFillController?.layoutBackgroundView(to: size, with: coordinator)
     }
 }
 
