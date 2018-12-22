@@ -52,12 +52,13 @@ public class HalfFillPresentationController: UIPresentationController {
         return super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
-    public func layoutBackgroundView(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    public func transitioning(with coordinator: UIViewControllerTransitionCoordinator) {
         var view: UIView? = _dimmingView
         coordinator.animate(alongsideTransition: {
             _ in
+            guard let containerFrame = self.containerView?.frame else { return }
             while view != nil {
-                view?.frame.size = size
+                view?.frame = containerFrame
                 view = view?.subviews.first
             }
         })

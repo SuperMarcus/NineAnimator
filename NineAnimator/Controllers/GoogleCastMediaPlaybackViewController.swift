@@ -97,9 +97,8 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         castController.stop()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        view.setNeedsLayout()
-        halfFillController?.layoutBackgroundView(to: size, with: coordinator)
+    override func viewWillTransition(to _: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        transitionController?.transitioning(with: coordinator)
     }
 }
 

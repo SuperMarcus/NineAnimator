@@ -27,7 +27,7 @@ public enum HalfFillState {
 }
 
 extension HalfFillViewControllerProtocol where Self: UIViewController {
-    var halfFillController: HalfFillPresentationController? {
+    var transitionController: HalfFillPresentationController? {
         return presentationController as? HalfFillPresentationController
     }
 }
