@@ -133,12 +133,19 @@ class NASourceMasterAnime: BaseSource, Source {
                 guard let episodeInfo = episode["info"] as? NSDictionary,
                     // let episodeIdentifier = episodeInfo["id"] as? Int,
                     let episodeNumber = episodeInfo["episode"] as? String,
-                    let animeIdentifier = episodeInfo["anime_id"] as? Int,
-                    let episodeTitle = episodeInfo["title"] as? String
+                    let animeIdentifier = episodeInfo["anime_id"] as? Int
                     else { return nil }
+                
+                var episodeName = "\(episodeNumber)"
+                
+                //New anime may not always have the title set
+                if let episodeTitle = episodeInfo["title"] as? String {
+                    episodeName = "\(episodeName) - \(episodeTitle)"
+                }
+                
                 return EpisodeLink(
                     identifier: "\(animeIdentifier):\(episodeNumber)",
-                    name: "\(episodeNumber) - \(episodeTitle)",
+                    name: episodeName,
                     server: "Masterani.me",
                     parent: link
                 )
