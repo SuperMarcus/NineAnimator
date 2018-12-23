@@ -28,20 +28,23 @@ public class HalfFillPresentationController: UIPresentationController {
         }
         
         let view = UIView(frame: containerView!.bounds)
+        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         // Blur Effect
         let blurEffect = UIBlurEffect(style: .dark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurEffectView.frame = view.bounds
         view.addSubview(blurEffectView)
         
-        // Vibrancy Effect
-        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-        vibrancyEffectView.frame = view.bounds
-        
-        // Add the vibrancy view to the blur view
-        blurEffectView.contentView.addSubview(vibrancyEffectView)
+//        // Vibrancy Effect
+//        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+//        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
+//        vibrancyEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        vibrancyEffectView.frame = view.bounds
+//
+//        // Add the vibrancy view to the blur view
+//        blurEffectView.contentView.addSubview(vibrancyEffectView)
         
         _dimmingView = view
         
@@ -50,18 +53,6 @@ public class HalfFillPresentationController: UIPresentationController {
     
     public var viewController: HalfFillViewControllerProtocol {
         return super.presentedViewController as! HalfFillViewControllerProtocol
-    }
-    
-    public func transitioning(with coordinator: UIViewControllerTransitionCoordinator) {
-        var view: UIView? = _dimmingView
-        coordinator.animate(alongsideTransition: {
-            _ in
-            guard let containerFrame = self.containerView?.frame else { return }
-            while view != nil {
-                view?.frame = containerFrame
-                view = view?.subviews.first
-            }
-        })
     }
     
     private func presentAsFullScreen() {

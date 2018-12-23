@@ -25,6 +25,7 @@ import Alamofire
 protocol PlaybackMedia {
     var avPlayerItem: AVPlayerItem { get }
     var castMedia: CastMedia? { get }
+    var parent: Episode { get }
 }
 
 struct BasicPlaybackMedia: PlaybackMedia {
@@ -47,5 +48,13 @@ struct BasicPlaybackMedia: PlaybackMedia {
             autoplay: true,
             currentTime: 0
         )
+    }
+}
+
+//A shortcut for setting and retriving playback progress
+extension PlaybackMedia {
+    var progress: Float {
+        get { return parent.progress }
+        set { parent.update(progress: newValue) }
     }
 }

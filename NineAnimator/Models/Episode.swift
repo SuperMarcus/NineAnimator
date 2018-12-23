@@ -35,6 +35,10 @@ struct Episode {
         return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
+    var progress: Float { return NineAnimator.default.user.playbackProgress(for: link) }
+    
+    func update(progress: Float){ NineAnimator.default.user.update(progress: progress, for: link) }
+    
     var source: Source { return _parent.source }
     
     private var _parent: Anime

@@ -96,10 +96,6 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         super.viewWillDisappear(animated)
         castController.stop()
     }
-    
-    override func viewWillTransition(to _: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        transitionController?.transitioning(with: coordinator)
-    }
 }
 
 //MARK: - User Interface

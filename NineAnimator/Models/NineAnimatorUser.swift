@@ -100,6 +100,11 @@ class NineAnimatorUser {
         var store = persistedProgresses
         store["\(episode.parent.source.name)+\(episode.identifier)"] = progress
         persistedProgresses = store
+        
+        NotificationCenter.default.post(
+            name: .playbackProgressDidUpdate,
+            object: episode,
+            userInfo: ["progress": progress])
     }
     
     /// Retrive playback progress for episode
@@ -136,17 +141,26 @@ extension NineAnimatorUser {
     
     var episodeListingOrder: EpisodeListingOrder {
         get { return EpisodeListingOrder(from: _freezer.string(forKey: .episodeListingOrder)) }
-        set { _freezer.set(newValue.rawValue, forKey: .episodeListingOrder) }
+        set {
+            _freezer.set(newValue.rawValue, forKey: .episodeListingOrder)
+            fireUpdates()
+        }
     }
     
     var allowBackgroundPlayback: Bool {
         get { return _freezer.bool(forKey: .backgroundPlayback) }
-        set { _freezer.set(newValue, forKey: .backgroundPlayback) }
+        set {
+            _freezer.set(newValue, forKey: .backgroundPlayback)
+            fireUpdates()
+        }
     }
     
     var allowPictureInPicturePlayback: Bool {
         get { return _freezer.value(forKey: .pictureInPicturePlayback) as? Bool ?? true }
-        set { _freezer.set(newValue, forKey: .pictureInPicturePlayback) }
+        set {
+            _freezer.set(newValue, forKey: .pictureInPicturePlayback)
+            fireUpdates()
+        }
     }
 }
 
@@ -266,6 +280,12 @@ extension NineAnimatorUser {
         return primary + secondary.filter({
             link in return !primary.contains { $0 == link }
         })
+    }
+}
+
+extension NineAnimatorUser {
+    fileprivate func fireUpdates(){
+        NotificationCenter.default.post(name: .userPreferencesDidChange, object: self)
     }
 }
 

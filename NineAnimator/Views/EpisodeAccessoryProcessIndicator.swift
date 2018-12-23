@@ -37,7 +37,21 @@ class EpisodeAccessoryProcessIndicator: UIView {
     var playIconToRadiusRatio: CGFloat = 0.55
     
     var episodeLink: EpisodeLink? {
-        didSet { setNeedsDisplay() }
+        didSet {
+            setNeedsDisplay()
+            
+            NotificationCenter.default.removeObserver(self)
+            NotificationCenter.default.addObserver(
+                self, selector: #selector(onProgressUpdate(notification:)),
+                name: .playbackProgressDidUpdate,
+                object: nil)
+        }
+    }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
+    
+    @objc func onProgressUpdate(notification: Notification){
+        DispatchQueue.main.async{ self.setNeedsDisplay() }
     }
     
     override func draw(_ rect: CGRect) {

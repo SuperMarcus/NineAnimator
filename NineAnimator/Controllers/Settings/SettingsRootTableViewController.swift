@@ -76,7 +76,8 @@ class SettingsRootTableViewController: UITableViewController {
             let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator")!)
             present(safariViewController, animated: true)
         case "settings.playback.cast.controller":
-            self.castControllerHandler = CastController.default.present(from: self)
+//            self.castControllerHandler = CastController.default.present(from: self)
+            RootViewController.shared?.showCastController()
         case "settings.history.recents":
             NineAnimator.default.user.clearRecents()
             updatePreferencesUI()

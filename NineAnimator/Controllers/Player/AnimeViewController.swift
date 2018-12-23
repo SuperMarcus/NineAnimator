@@ -84,26 +84,6 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
     }
     
-    var displayedPlayer: AVPlayer? {
-        didSet {
-            if let previousPlayer = oldValue,
-                let observer = playbackProgressUpdateObserver {
-                previousPlayer.removeTimeObserver(observer)
-                playbackProgressUpdateObserver = nil
-            }
-        }
-    }
-    
-    static var presentedPlayerController: AVPlayerViewController?
-    
-    static var pictureInPictureIsActive: Bool = false
-    
-    var playbackProgressUpdateObserver: Any?
-    
-    var playbackProgressRestoreToken: NSKeyValueObservation?
-    
-    var playbackRateObservation: NSKeyValueObservation?
-    
     var informationCell: AnimeDescriptionTableViewCell?
     
     var selectedEpisodeCell: EpisodeTableViewCell?
@@ -111,8 +91,6 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     var episodeRequestTask: NineAnimatorAsyncTask?
     
     var animeRequestTask: NineAnimatorAsyncTask?
-    
-    private var castPresentationDelegate: Any?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -153,58 +131,14 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     override func didMove(toParent parent: UIViewController?) {
         // Cleanup observers and tasks
-        displayedPlayer = nil
         episodeRequestTask?.cancel()
         episodeRequestTask = nil
         
         //Sets episode and server to nil
         episode = nil
         
-        AnimeViewController.presentedPlayerController?.delegate = self
-        
-        playbackRateObservation?.invalidate()
-        playbackRateObservation?.invalidate()
-        playbackProgressRestoreToken = nil
-        playbackRateObservation = nil
-        
         //Remove all observations
         NotificationCenter.default.removeObserver(self)
-    }
-}
-
-//MARK: - Playback control
-extension AnimeViewController {
-    @objc func onEnteringBackground(notification: Notification){
-        //Do not do anything if picture in picture playback is supported
-        if AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback { return }
-        
-        if NineAnimator.default.user.allowBackgroundPlayback {
-            AnimeViewController.presentedPlayerController?.player = nil
-        } else { displayedPlayer?.pause() }
-    }
-    
-    @objc func onEnteringForeground(notification: Notification){
-        if AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback { return }
-        
-//        displayedPlayer?.play()
-        AnimeViewController.presentedPlayerController?.player = displayedPlayer
-    }
-    
-    func playerViewControllerWillStartPictureInPicture(_ playerViewController: AVPlayerViewController) {
-        NotificationCenter.default.removeObserver(self, name: .appWillBecomeInactive, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .appDidBecameActive, object: nil)
-        AnimeViewController.pictureInPictureIsActive = true
-    }
-    
-    func playerViewControllerWillStopPictureInPicture(_ playerViewController: AVPlayerViewController) {
-        AnimeViewController.pictureInPictureIsActive = false
-    }
-    
-    func playerViewController(_ playerViewController: AVPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        present(playerViewController, animated: true){ completionHandler(true) }
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(onEnteringBackground(notification:)), name: .appWillBecomeInactive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(onEnteringForeground(notification:)), name: .appDidBecameActive, object: nil)
     }
 }
 
@@ -281,7 +215,7 @@ extension AnimeViewController {
 //MARK: - Share and select server
 extension AnimeViewController {
     @IBAction func onCastButtonTapped(_ sender: Any) {
-        castPresentationDelegate = CastController.default.present(from: self)
+        RootViewController.shared?.showCastController()
     }
     
     @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {
@@ -365,109 +299,20 @@ extension AnimeViewController {
                     if CastController.default.isReady {
                         CastController.default.initiate(playbackMedia: media, with: episode)
                         DispatchQueue.main.async {
-                            self.castPresentationDelegate = CastController.default.present(from: self)
+                            RootViewController.shared?.showCastController()
                             clearSelection()
                         }
                     } else {
-                        let item = media.avPlayerItem
-                        let playerController = AnimeViewController.presentedPlayerController ?? AVPlayerViewController()
-                        if let player = playerController.player {
-                            player.replaceCurrentItem(with: item)
-                        } else { playerController.player = AVPlayer(playerItem: item) }
-                        
-                        playerController.delegate = self
-                        playerController.allowsPictureInPicturePlayback = NineAnimator.default.user.allowPictureInPicturePlayback
-                        
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.onEnteringBackground(notification:)), name: .appWillBecomeInactive, object: nil)
-                        NotificationCenter.default.addObserver(self, selector: #selector(self.onEnteringForeground(notification:)), name: .appDidBecameActive, object: nil)
-                        
-                        self.displayedPlayer = playerController.player
-                        AnimeViewController.presentedPlayerController = playerController
-                        
-                        self.playbackProgressRestoreToken?.invalidate()
-                        self.playbackRateObservation?.invalidate()
-                        
-                        self.playbackProgressRestoreToken = item.observe(\.status, changeHandler: self.restoreProgress)
-                        self.playbackRateObservation = playerController.player?.observe(\.rate, changeHandler: self.onRateChange)
-                        
-                        //Initialize audio session to movie playback
-                        let audioSession = AVAudioSession.sharedInstance()
-                        try? audioSession.setCategory(
-                            .playback,
-                            mode: .moviePlayback,
-                            options: [
-                                .allowAirPlay,
-                                .allowBluetooth,
-                                .allowBluetoothA2DP
-                            ])
-                        try? audioSession.setActive(true)
-                        
-                        //Since clearSelection is still maintaining a reference to self,
-                        //no point in using weak self
-                        DispatchQueue.main.async {
-                            playerController.player?.play()
-                            if !AnimeViewController.pictureInPictureIsActive {
-                                self.present(playerController, animated: true)
-                            }
-                            clearSelection()
-                        }
+                        NativePlayerController.default.play(media: media)
+                        clearSelection()
                     }
                 }
             } else {
                 let playbackController = SFSafariViewController(url: episode.target)
                 self.present(playbackController, animated: true, completion: clearSelection)
                 self.episodeRequestTask = nil
-                NineAnimator.default.user.update(progress: 1.0, for: episode.link)
+                episode.update(progress: 1.0)
             }
-        }
-    }
-}
-
-//MARK: - Playback progress persistance
-extension AnimeViewController {
-    // Update progress
-    private func persistProgress(_ progress: CMTime) {
-        guard let player = displayedPlayer,
-            let item = player.currentItem,
-            let episode = episode else { return }
-        let pctProgress = progress.seconds / item.duration.seconds
-        NineAnimator.default.user.update(progress: pctProgress, for: episode.link)
-    }
-    
-    // Restore progress
-    private func restoreProgress(item: AVPlayerItem, change: NSKeyValueObservedChange<AVPlayerItem.Status>) {
-        guard playbackProgressRestoreToken != nil,
-            item == displayedPlayer?.currentItem,
-            item.status == .readyToPlay
-            else { return }
-        
-        let storedProgress = NineAnimator.default.user.playbackProgress(for: episode!.link)
-        let progressSeconds = max(storedProgress * item.duration.seconds - 5, 0)
-        let time = CMTime(seconds: progressSeconds)
-        
-        displayedPlayer?.seek(to: time)
-        debugPrint("Info: Restoring playback progress to \(storedProgress), \(progressSeconds) seconds.")
-        playbackProgressRestoreToken = nil
-        
-        playbackProgressUpdateObserver = displayedPlayer?.addPeriodicTimeObserver(
-            forInterval: CMTime(seconds: 1),
-            queue: .main,
-            using: persistProgress
-        )
-    }
-    
-    private func onRateChange(player: AVPlayer, _: NSKeyValueObservedChange<Float>) {
-        debugPrint("Info: Playback rate changed to \(player.rate)")
-        
-        if playbackProgressRestoreToken == nil {
-            let time = player.currentTime()
-            self.persistProgress(time)
-        }
-        
-        //Reload and upload progresses
-        if player.rate == 0 {
-            tableView.reloadSections([1], with: .automatic)
-            NineAnimator.default.user.push()
         }
     }
 }
