@@ -113,10 +113,7 @@ This feature is only supported on iPads.
 
 The Picture in Picture (PiP) icon will appear on the top left corner of the player once PiP
 is ready. You may tap on this icon to initiate PiP playback. To restore fullscreen playback,
-tap on the restore button of the PiP window.
-
-Note: You may not restore PiP outside the select episode page. Doing so will cause the
-PiP window to disappear. This is a known bug and will be resolved later.
+tap the restore button on the PiP window.
 
 ## Video Sources
 
