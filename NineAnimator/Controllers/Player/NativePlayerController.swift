@@ -227,12 +227,7 @@ extension NativePlayerController {
         do{
             try audioSession.setCategory(
                 .playback,
-                mode: .moviePlayback,
-                options: [
-                    .allowAirPlay,
-                    .allowBluetooth,
-                    .allowBluetoothA2DP
-                ])
+                mode: .moviePlayback)
             try audioSession.setActive(true, options: [])
         }catch { debugPrint("Error: Unable to setup audio session - \(error)") }
     }

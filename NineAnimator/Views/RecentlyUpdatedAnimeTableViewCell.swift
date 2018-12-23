@@ -40,27 +40,12 @@ class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.1){
-            self.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        let newTransform = highlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
         
-        super.touchesBegan(touches, with: event)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.1){
-            self.transform = .identity
+        //Ignoring the animated option
+        UIView.animate(withDuration: 0.2){
+            self.transform = newTransform
         }
-        
-        super.touchesEnded(touches, with: event)
-    }
-    
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.animate(withDuration: 0.3){
-            self.transform = .identity
-        }
-        
-        super.touchesMoved(touches, with: event)
     }
 }
