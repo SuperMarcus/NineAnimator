@@ -121,6 +121,7 @@ class FeaturedViewController: UITableViewController {
             
             animeCell.animeTitleLabel.text = animeLink.title
             animeCell.animeImageView.kf.setImage(with: animeLink.image)
+            animeCell.animeImageView.kf.indicatorType = .activity
             
             return animeCell
         case 1:

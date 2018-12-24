@@ -29,7 +29,6 @@ public class HalfFillTransitionAnimator: NSObject, UIViewControllerAnimatedTrans
             animations: { source.view.frame.origin.y = destination.view.frame.height },
             completion: { _ in
                 transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
-                transitionContext.viewController(forKey: .to)?.setNeedsStatusBarAppearanceUpdate()
         })
     }
     

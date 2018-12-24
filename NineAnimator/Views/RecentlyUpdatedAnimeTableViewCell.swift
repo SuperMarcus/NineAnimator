@@ -36,6 +36,7 @@ class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
     var coverImage: URL? {
         willSet {
             coverImageView.kf.setImage(with: newValue)
+            coverImageView.kf.indicatorType = .activity
             blurredCoverImageView.kf.setImage(with: newValue)
         }
     }

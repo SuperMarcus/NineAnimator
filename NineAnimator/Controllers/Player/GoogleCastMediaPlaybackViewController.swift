@@ -256,6 +256,7 @@ extension GoogleCastMediaPlaybackViewController {
                 MPMediaItemArtwork(boundsSize: image.size)
                 { _ in return image }
         }
+        coverImage.kf.indicatorType = .activity
         
         updateUI(playbackProgress: Float(status.currentTime), volume: nil, isPaused: status.playerState == .paused)
         

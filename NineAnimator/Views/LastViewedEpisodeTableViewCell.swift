@@ -33,6 +33,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell {
             guard let link = episodeLink else { return }
             let coverImageLink = link.parent.image
             coverImageView.kf.setImage(with: coverImageLink)
+            coverImageView.kf.indicatorType = .activity
             backgroundBlurredImageView.kf.setImage(with: coverImageLink)
             progressIndicator.episodeLink = link
             titleLabel.text = link.parent.title

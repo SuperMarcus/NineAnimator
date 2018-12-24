@@ -29,6 +29,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
         didSet {
             guard let link = animeLink else { return }
             coverImageView.kf.setImage(with: link.image)
+            coverImageView.kf.indicatorType = .activity
             animeTitleLabel.text = link.title
             sourceTitleLabel.text = "Viewed on \(link.source.name)..."
         }

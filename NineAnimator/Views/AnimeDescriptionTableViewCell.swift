@@ -51,6 +51,7 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
             guard let link = link else { return }
             backgroundBlurredImageView.kf.setImage(with: link.image)
             coverImageView.kf.setImage(with: link.image)
+            coverImageView.kf.indicatorType = .activity
         }
     }
 }

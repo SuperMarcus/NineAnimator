@@ -19,12 +19,7 @@
 
 import UIKit
 
-public protocol HalfFillViewControllerProtocol: CustomBarStyleRequiredProtocol { }
-
-public enum HalfFillState {
-    case full
-    case half
-}
+public protocol HalfFillViewControllerProtocol { }
 
 extension HalfFillViewControllerProtocol where Self: UIViewController {
     var transitionController: HalfFillPresentationController? {

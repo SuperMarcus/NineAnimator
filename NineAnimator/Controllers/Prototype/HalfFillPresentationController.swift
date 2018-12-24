@@ -37,15 +37,6 @@ public class HalfFillPresentationController: UIPresentationController {
         blurEffectView.frame = view.bounds
         view.addSubview(blurEffectView)
         
-//        // Vibrancy Effect
-//        let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
-//        let vibrancyEffectView = UIVisualEffectView(effect: vibrancyEffect)
-//        vibrancyEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        vibrancyEffectView.frame = view.bounds
-//
-//        // Add the vibrancy view to the blur view
-//        blurEffectView.contentView.addSubview(vibrancyEffectView)
-        
         _dimmingView = view
         
         return view
@@ -75,26 +66,18 @@ public class HalfFillPresentationController: UIPresentationController {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
         coordinator.animate(alongsideTransition: { _ in
             dimmer.alpha = 1
-//            self.presentingViewController.view.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
-        }) { _ in self.updateState(viewController: self.presentingViewController) }
+        })
     }
     
     override public func dismissalTransitionWillBegin() {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
         coordinator.animate(alongsideTransition: { _ in
             self.dimmer?.alpha = 0
-//            self.presentingViewController.view.transform = .identity
-//            self.presentingViewController.view.frame.origin = .zero
-//            self.presentingViewController.view.frame.size = self.presentedViewController.view.frame.size
         }) { _ in self.presentingViewController.view.setNeedsLayout() }
     }
     
     override public func dismissalTransitionDidEnd(_ completed: Bool) {
         dimmer?.removeFromSuperview()
         _dimmingView = nil
-    }
-    
-    private func updateState(viewController: UIViewController) {
-        viewController.setNeedsStatusBarAppearanceUpdate()
     }
 }

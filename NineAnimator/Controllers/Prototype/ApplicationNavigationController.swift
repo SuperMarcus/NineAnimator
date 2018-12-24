@@ -19,15 +19,6 @@
 
 import UIKit
 
-public protocol CustomBarStyleRequiredProtocol{
-    var preferredStatusBarStyle: UIStatusBarStyle { get }
-}
-
 class ApplicationNavigationController: UINavigationController {
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if let vc = self.visibleViewController as? CustomBarStyleRequiredProtocol {
-            return vc.preferredStatusBarStyle
-        }
-        return super.preferredStatusBarStyle
-    }
+    
 }
