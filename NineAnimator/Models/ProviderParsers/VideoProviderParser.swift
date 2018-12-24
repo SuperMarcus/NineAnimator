@@ -25,6 +25,12 @@ protocol VideoProviderParser {
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
 }
 
+extension VideoProviderParser {
+    var defaultUserAgent: String {
+        return "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1"
+    }
+}
+
 class VideoProviderRegistry {
     static let `default`: VideoProviderRegistry = {
         let defaultProvider = VideoProviderRegistry()
@@ -33,7 +39,7 @@ class VideoProviderRegistry {
         defaultProvider.register(RapidVideoParser(), forServer: "RapidVideo")
         defaultProvider.register(StreamangoParser(), forServer: "Streamango")
         defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
-//        defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
+        defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
         
         return defaultProvider
     }()

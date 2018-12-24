@@ -6,7 +6,8 @@
   "data" : [
     {
       "idiom" : "universal",
-      "filename" : "CastDummyAudio.wav"
+      "filename" : "dummy.mp3",
+      "universal-type-identifier" : "public.mp3"
     }
   ]
 }

@@ -123,6 +123,7 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - Mp4Upload
 - Streamango
 - MyCloud (unavailable for Google Cast)
+- Tiwi.Kiwi (may not be available for Google Cast)
 
 More hosts may be added later. Feel free to open an issue to request additional hosts.
 

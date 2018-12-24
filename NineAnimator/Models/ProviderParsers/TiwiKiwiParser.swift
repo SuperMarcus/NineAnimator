@@ -28,7 +28,7 @@ class TiwiKiwiParser: VideoProviderParser {
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let headers = [
-            "User-Agents": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15",
+            "User-Agents": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
         let task = NineAnimatorMultistepAsyncTask()
@@ -37,7 +37,8 @@ class TiwiKiwiParser: VideoProviderParser {
             guard let task = task else { return }
             
             let playbackHeaders = [
-                "Origin": episode.target.absoluteString
+                "Origin": episode.target.absoluteString,
+                "User-Agent": self.defaultUserAgent
             ]
             
             guard let text = response.value else {

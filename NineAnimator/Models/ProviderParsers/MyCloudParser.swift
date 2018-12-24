@@ -29,13 +29,13 @@ class MyCloudParser: VideoProviderParser {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15",
+            "User-Agnet": defaultUserAgent,
             "Host": "mcloud.to"
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString,
-            "User-Agnet": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
+            "User-Agnet": defaultUserAgent
         ]
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
