@@ -262,6 +262,40 @@
                                     <segue destination="Vey-hc-6Z0" kind="show" id="hl9-0f-9xm"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.unavailable" rowHeight="159" id="xj6-jY-7H9" customClass="UnavailableTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="534" width="375" height="159"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xj6-jY-7H9" id="cA5-9h-54P">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NineAnimator is Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBh-Sa-wuU">
+                                            <rect key="frame" x="55" y="91" width="265" height="24"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sDJ-cG-QcG">
+                                            <rect key="frame" x="48" y="127.5" width="279" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="leading" secondItem="cA5-9h-54P" secondAttribute="leadingMargin" constant="32" id="Ahn-KJ-mez"/>
+                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="L9l-JZ-uOp"/>
+                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SBh-Sa-wuU" secondAttribute="bottom" constant="8" id="Rh7-sg-SXi"/>
+                                        <constraint firstItem="SBh-Sa-wuU" firstAttribute="top" secondItem="cA5-9h-54P" secondAttribute="topMargin" constant="80" id="Wve-Az-EgT"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="sDJ-cG-QcG" secondAttribute="trailing" constant="32" id="bau-7E-LUe"/>
+                                        <constraint firstItem="SBh-Sa-wuU" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="d2F-oO-SAG"/>
+                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="bottom" secondItem="cA5-9h-54P" secondAttribute="bottomMargin" id="geh-Y8-cbM"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="unavailableErrorMessageLabel" destination="sDJ-cG-QcG" id="aaf-Qf-xm9"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="SPf-bx-P2k" id="fNI-aK-Xtd"/>

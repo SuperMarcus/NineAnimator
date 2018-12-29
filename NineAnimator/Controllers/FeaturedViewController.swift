@@ -34,6 +34,8 @@ class FeaturedViewController: UITableViewController {
     
     @IBOutlet weak var sourceSelectionButton: UIBarButtonItem!
     
+    private var refresher: UIRefreshControl!
+    
     var error: Error?
     
     var requestTask: NineAnimatorAsyncTask? {
@@ -44,29 +46,26 @@ class FeaturedViewController: UITableViewController {
     
     var source: Source { return NineAnimator.default.user.source }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        NineAnimator.default.user.pull()
-        if loadedSource?.name != source.name {
-            reload()
-        }
-    }
-    
     func reload() {
         featuredAnimePage = nil
+        refresher.beginRefreshing()
         tableView.reloadData()
         requestTask = source.featured {
             [source] page, error in
             DispatchQueue.main.async { [weak self] in
-                defer { self?.requestTask = nil }
-                self?.featuredAnimePage = page
+                defer {
+                    self?.requestTask = nil
+                    self?.refresher.endRefreshing()
+                }
                 self?.error = error
                 self?.loadedSource = source
                 self?.sourceSelectionButton.title = source.name
+                self?.featuredAnimePage = page
             }
         }
     }
+    
+    @objc func onRefreshRequested(){ reload() }
     
     @IBAction func onSourceSelectionButtonPressed(_ sender: Any) {
         let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
@@ -97,9 +96,7 @@ class FeaturedViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let featuredAnimePage = featuredAnimePage else {
-            return section == 0 ? 1 : 0
-        }
+        guard let featuredAnimePage = featuredAnimePage else { return error == nil ? 0 : 1 }
         
         switch section {
         case 0: return featuredAnimePage.featured.count
@@ -110,8 +107,8 @@ class FeaturedViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let featuredAnimePage = featuredAnimePage else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
-            (cell.viewWithTag(5) as! UIActivityIndicatorView).startAnimating()
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.unavailable", for: indexPath)
+            if let cell = cell as? UnavailableTableViewCell { cell.error = error }
             return cell
         }
         switch indexPath.section {
@@ -149,11 +146,31 @@ class FeaturedViewController: UITableViewController {
             else { return }
         playerViewController.animeLink = animeLink
     }
+}
+
+//MARK: - ViewController lifecycle
+extension FeaturedViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NineAnimator.default.user.pull()
+        if loadedSource?.name != source.name {
+            reload()
+        }
+    }
     
     // turn off highlighting effect when users can't see this happening
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.deselectSelectedRow()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRefreshRequested), for: .valueChanged)
+        tableView.refreshControl = refresher
     }
 }
 

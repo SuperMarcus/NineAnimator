@@ -21,6 +21,7 @@
 		2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */; };
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
+		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -106,6 +107,7 @@
 		2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastMediaPlaybackViewController.swift; sourceTree = "<group>"; };
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -219,6 +221,16 @@
 			path = Prototype;
 			sourceTree = "<group>";
 		};
+		2C17E08721D7D63100E3FD1F /* Featured Tab */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
+				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
+				2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */,
+			);
+			path = "Featured Tab";
+			sourceTree = "<group>";
+		};
 		2C4ABC4721B5881E009B4D47 = {
 			isa = PBXGroup;
 			children = (
@@ -300,9 +312,8 @@
 		2C4ABC7721B59C95009B4D47 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
+				2C17E08721D7D63100E3FD1F /* Featured Tab */,
 				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
-				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
 				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
 				2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */,
 				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
@@ -624,6 +635,7 @@
 				2C6677A021BC4664000E5ACC /* AnimeSearchResultTableViewCell.swift in Sources */,
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
+				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2C6677B621BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift in Sources */,
