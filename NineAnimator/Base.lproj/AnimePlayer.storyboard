@@ -192,6 +192,11 @@
                                     <action selector="onActionButtonTapped:" destination="K93-Pu-iF1" id="hFp-A6-nPd"/>
                                 </connections>
                             </barButtonItem>
+                            <barButtonItem title="Notification Toggle" image="Notification Disabled" id="or1-q2-CC1">
+                                <connections>
+                                    <action selector="onToggleNotification:" destination="K93-Pu-iF1" id="lWD-jd-FXA"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem title="Cast" image="Chromecast Icon" id="LNG-QH-z6q">
                                 <connections>
                                     <action selector="onCastButtonTapped:" destination="K93-Pu-iF1" id="iVz-VU-Tey"/>
@@ -207,6 +212,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="notificationToggleButton" destination="or1-q2-CC1" id="O4r-rO-ohx"/>
                         <outlet property="serverSelectionButton" destination="dfI-Mn-95I" id="yX8-Fd-a0g"/>
                     </connections>
                 </tableViewController>
@@ -217,5 +223,6 @@
     </scenes>
     <resources>
         <image name="Chromecast Icon" width="25" height="25"/>
+        <image name="Notification Disabled" width="25" height="25"/>
     </resources>
 </document>

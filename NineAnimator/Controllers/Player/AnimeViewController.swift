@@ -21,6 +21,7 @@ import UIKit
 import WebKit
 import AVKit
 import SafariServices
+import UserNotifications
 
 class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
     //MARK: - Set either one of the following item to initialize the anime view
@@ -36,13 +37,17 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     }
     
     //MARK: - Managed by AnimeViewController
-    @IBOutlet var serverSelectionButton: UIBarButtonItem!
+    @IBOutlet weak var serverSelectionButton: UIBarButtonItem!
+    
+    @IBOutlet weak var notificationToggleButton: UIBarButtonItem!
     
     var anime: Anime? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.informationCell?.animeDescription = self.anime?.description
+                
+                self.updateNotificationToggle()
                 
                 let sectionsNeededReloading: IndexSet = [1]
                 
@@ -115,6 +120,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         guard anime == nil else { return }
         serverSelectionButton.title = "Select Server"
         serverSelectionButton.isEnabled = false
+        
+        notificationToggleButton.isEnabled = false
+        
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             guard let anime = anime else {
@@ -212,7 +220,7 @@ extension AnimeViewController {
     }
 }
 
-//MARK: - Share and select server
+//MARK: - Share/Select Server/Notifications
 extension AnimeViewController {
     @IBAction func onCastButtonTapped(_ sender: Any) {
         RootViewController.shared?.showCastController()
@@ -250,6 +258,38 @@ extension AnimeViewController {
         }
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alertView, animated: true)
+    }
+    
+    @IBAction func onToggleNotification(_ sender: Any) {
+        guard let anime = anime else { return }
+        
+        if NineAnimator.default.user.isWatching(anime) {
+            NineAnimator.default.user.unwatch(anime: anime)
+        } else {
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.requestAuthorization(options: [.badge]){
+                [weak self] success, error in
+                if !success {
+                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alertController, animated: true)
+                }
+            }
+            NineAnimator.default.user.watch(anime: anime)
+        }
+        
+        updateNotificationToggle()
+    }
+    
+    private func updateNotificationToggle(){
+        guard let anime = anime else {
+            notificationToggleButton.isEnabled = false
+            return
+        }
+        notificationToggleButton.isEnabled = true
+        
+        let image = NineAnimator.default.user.isWatching(anime) ? #imageLiteral(resourceName: "Notification Enabled") : #imageLiteral(resourceName: "Notification Disabled")
+        notificationToggleButton.image = image
     }
 }
 
