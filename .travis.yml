@@ -1,10 +1,14 @@
 language: objective-c
 iosx_image: xcode10.1
 
+cache:
+  directories:
+    - Carthage
+
 install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
-  - brew outdated swiftlint ||  brew install swiftlint
+  - brew outdated swiftlint ||  brew upgrade swiftlint
   - gem install xcpretty
   - gem install xcpretty-travis-formatter
 
