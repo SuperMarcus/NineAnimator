@@ -3,8 +3,10 @@ iosx_image: xcode10.1
 
 install:
     - brew install swiftlint
+    - gem install xcpretty
+    - gem install xcpretty-travis-formatter
 
 script:
     - swiftlint
-    - xctool test -project NineAnimator.xcodeproj -scheme NineAnimator -sdk iphonesimulator
+    - xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
 
