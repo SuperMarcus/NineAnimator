@@ -21,12 +21,12 @@ import Kingfisher
 import UIKit
 
 class LastViewedEpisodeTableViewCell: UITableViewCell {
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var backgroundBlurredImageView: UIImageView!
-    @IBOutlet weak var progressIndicator: EpisodeAccessoryProcessIndicator!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var episodeLabel: UILabel!
-    @IBOutlet weak var sourceTitleLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
+    @IBOutlet private weak var backgroundBlurredImageView: UIImageView!
+    @IBOutlet private weak var progressIndicator: EpisodeAccessoryProcessIndicator!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var episodeLabel: UILabel!
+    @IBOutlet private weak var sourceTitleLabel: UILabel!
     
     var episodeLink: EpisodeLink? = nil {
         didSet {

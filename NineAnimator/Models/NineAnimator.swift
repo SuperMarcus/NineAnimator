@@ -54,9 +54,32 @@ class NineAnimator: SessionDelegate {
     
     let client = URLSession(configuration: .default)
     
-    var session: SessionManager!
+    private let mainAdditionalHeaders: HTTPHeaders = {
+        var headers = SessionManager.defaultHTTPHeaders
+        headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
+        headers["Accept-Language"] = "en-us"
+        return headers
+    }()
     
-    var ajaxSession: SessionManager!
+    private(set) lazy var session: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpAdditionalHeaders = mainAdditionalHeaders
+        return SessionManager(configuration: configuration, delegate: self)
+    }()
+    
+    private(set) lazy var ajaxSession: SessionManager = {
+        var ajaxAdditionalHeaders = mainAdditionalHeaders
+        ajaxAdditionalHeaders["X-Requested-With"] = "XMLHttpRequest"
+        ajaxAdditionalHeaders["Accept"] = "application/json, text/javascript, */*; q=0.01"
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpAdditionalHeaders = ajaxAdditionalHeaders
+        return SessionManager(configuration: configuration, delegate: self)
+    }()
     
     var user = NineAnimatorUser()
     
@@ -64,27 +87,6 @@ class NineAnimator: SessionDelegate {
     
     override init() {
         super.init()
-        
-        var mainAdditionalHeaders = SessionManager.defaultHTTPHeaders
-        mainAdditionalHeaders["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
-        mainAdditionalHeaders["Accept-Language"] = "en-us"
-        
-        var ajaxAdditionalHeaders = mainAdditionalHeaders
-        ajaxAdditionalHeaders["X-Requested-With"] = "XMLHttpRequest"
-        ajaxAdditionalHeaders["Accept"] = "application/json, text/javascript, */*; q=0.01"
-        
-        let mainSessionConfiguration = URLSessionConfiguration.default
-        mainSessionConfiguration.httpShouldSetCookies = true
-        mainSessionConfiguration.httpCookieAcceptPolicy = .always
-        mainSessionConfiguration.httpAdditionalHeaders = mainAdditionalHeaders
-        session = SessionManager(configuration: mainSessionConfiguration, delegate: self)
-        
-        let ajaxSessionConfiguration = URLSessionConfiguration.default
-        ajaxSessionConfiguration.httpShouldSetCookies = true
-        ajaxSessionConfiguration.httpCookieAcceptPolicy = .always
-        ajaxSessionConfiguration.httpAdditionalHeaders = ajaxAdditionalHeaders
-        ajaxSession = SessionManager(configuration: ajaxSessionConfiguration, delegate: self)
-        
         registerDefaultSources()
     }
     

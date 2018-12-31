@@ -184,6 +184,7 @@
 		2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeMasterAnime.swift; sourceTree = "<group>"; };
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
 		52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +373,7 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				52F6A4F221DABDB00005D78D /* .swiftlint.yml */,
 				2C9C450321CDA7CF004C8F0C /* screenshot_7.png */,
 				2C9C450421CDA7D0004C8F0C /* screenshot_8.png */,
 				2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */,
@@ -854,7 +856,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = KZ7D8X3PRK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -876,7 +878,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = KZ7D8X3PRK;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -898,7 +900,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = KZ7D8X3PRK;
 				INFOPLIST_FILE = NineAnimatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -918,7 +920,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = KZ7D8X3PRK;
 				INFOPLIST_FILE = NineAnimatorUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

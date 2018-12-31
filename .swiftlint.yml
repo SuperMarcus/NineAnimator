@@ -1,11 +1,14 @@
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Carthage
 disabled_rules: # rule identifiers to exclude from running
+  - closure_parameter_position
+  - force_cast
   - force_try
   - notification_center_detachment
+  - identifier_name
+  - line_length
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
-  - attributes
   - closure_end_indentation
   - closure_spacing
   - collection_alignment
@@ -27,10 +30,8 @@ opt_in_rules: # some rules are only opt-in
   - lower_acl_than_parent
   - modifier_order
   - multiline_arguments
-  - multiline_arguments_brackets
   - multiline_literal_brackets
   - multiline_parameters
-  - multiline_parameters_brackets
   - object_literal
   - pattern_matching_keywords
   - private_action # ?

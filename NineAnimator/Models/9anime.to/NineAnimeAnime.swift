@@ -47,7 +47,7 @@ extension NineAnimeSource {
             let matches = NineAnimeSource.animeAliasRegex.matches(
                 in: page, range: page.matchingRange
             )
-            return matches.count > 0 ? page[matches[0].range(at: 1)] : nil
+            return matches.isEmpty ? nil : page[matches[0].range(at: 1)]
         }()
         
         let animeAttributes: [(name: String, value: String)] = {

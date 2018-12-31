@@ -103,7 +103,8 @@ class NineAnimatorUser {
         NotificationCenter.default.post(
             name: .playbackProgressDidUpdate,
             object: episode,
-            userInfo: ["progress": progress])
+            userInfo: ["progress": progress]
+        )
     }
     
     /// Retrive playback progress for episode
@@ -194,21 +195,19 @@ extension NineAnimatorUser {
     }
     
     private var cloudSource: Source {
-        get {
-            if let sourceName = _cloud.string(forKey: .recentSource),
-                let source = NineAnimator.default.source(with: sourceName) {
-                return source
-            } else { return source }
-        }
+        if let sourceName = _cloud.string(forKey: .recentSource),
+            let source = NineAnimator.default.source(with: sourceName) {
+            return source
+        } else { return source }
     }
     
     private var cloudLastEpisode: EpisodeLink? {
-        get { return decode(EpisodeLink.self, from: _cloud) }
+        return decode(EpisodeLink.self, from: _cloud)
     }
     
     private var cloudPersistedProgresses: [String: Float] {
         get {
-            if let dict = _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float] { return dict } else { return [:] }
+            return _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float] ?? [:]
         }
         set { _cloud.set(newValue, forKey: .persistedProgresses) }
     }
@@ -236,7 +235,8 @@ extension NineAnimatorUser {
         
         let mergedRecentAnime = merge(
             primary: primaryRecentAnime,
-            secondary: secondaryRecentAnime)
+            secondary: secondaryRecentAnime
+        )
         
         recentAnimes = mergedRecentAnime
         cloudRecentAnime = mergedRecentAnime
@@ -261,7 +261,7 @@ extension NineAnimatorUser {
         let secondaryPersistedProgresses = piority == .localFirst ?
             cloudPersistedProgresses : persistedProgresses
         
-        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses) { v, _ in v }
+        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses) { old, _ in old }
         cloudPersistedProgresses = mergedPersistedProgresses
         persistedProgresses = mergedPersistedProgresses
         
@@ -270,9 +270,9 @@ extension NineAnimatorUser {
     }
     
     fileprivate func merge<T: Equatable>(primary: [T], secondary: [T]) -> [T] {
-        return primary + secondary.filter({
+        return primary + secondary.filter {
             link in !primary.contains { $0 == link }
-        })
+        }
     }
 }
 

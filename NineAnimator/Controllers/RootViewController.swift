@@ -22,7 +22,7 @@ import UIKit
 class RootViewController: UITabBarController {
     private(set) static weak var shared: RootViewController?
     
-    private var castControllerDelegate: Any?
+    private weak var castControllerDelegate: AnyObject?
     
     private var topViewController: UIViewController {
         var topViewController: UIViewController = self

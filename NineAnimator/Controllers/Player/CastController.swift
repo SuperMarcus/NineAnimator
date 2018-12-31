@@ -60,7 +60,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     /**
      Present cast device selector and playback controller in parent controller
      */
-    func present(from source: UIViewController) -> Any {
+    func present(from source: UIViewController) -> AnyObject {
         let vc = viewController
         let delegate = setupHalfFillView(for: vc, from: source)
         source.present(vc, animated: true)

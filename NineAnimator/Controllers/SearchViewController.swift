@@ -128,7 +128,7 @@ extension SearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.container.simple", for: indexPath) as? SimpleAnimeTableViewCell else { fatalError("Cell dequeued is not a SimpleAnimeTableViewCell") }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "anime.container.simple", for: indexPath) as! SimpleAnimeTableViewCell
         cell.animeLink = filteredAnimeLinks[indexPath.item]
         return cell
     }

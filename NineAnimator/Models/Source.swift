@@ -52,8 +52,7 @@ class BaseSource {
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         return parent.session.request(url, headers: headers).responseString {
-            response in
-            switch response.result {
+            switch $0.result {
             case .failure(let error):
                 debugPrint("Error: request to \(url) failed - \(error)")
                 handler(nil, error)

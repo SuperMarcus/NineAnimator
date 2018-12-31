@@ -92,14 +92,14 @@ class NineAnimeSearch: SearchPageProvider {
                     return AnimeLink(title: name, link: link, image: coverImage, source: self._parent)
                 }
                 
-                if animes.count > 0 {
-                    let newSection = self._results.count
-                    self._results.append(animes)
-                    self.delegate?.pageIncoming(newSection, from: self)
-                } else {
+                if animes.isEmpty {
                     debugPrint("Info: No matches")
                     self.totalPages = 0
                     self.delegate?.noResult(from: self)
+                } else {
+                    let newSection = self._results.count
+                    self._results.append(animes)
+                    self.delegate?.pageIncoming(newSection, from: self)
                 }
             } catch {
                 debugPrint("Error when loading more results: \(error)")

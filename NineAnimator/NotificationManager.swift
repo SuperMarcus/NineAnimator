@@ -151,9 +151,8 @@ extension UserNotificationManager {
         let watchedAnimeLinks = NineAnimator.default.user.watchedAnimes
         var resultsPool = [FetchResult?]()
         
-        guard watchedAnimeLinks.count > 0 else {
-            completionHandler(.noData)
-            return
+        guard !watchedAnimeLinks.isEmpty else {
+            return completionHandler(.noData)
         }
         
         func onFinalTask() {
@@ -219,7 +218,7 @@ extension UserNotificationManager {
      Post notification to user
      */
     private func notify(result: FetchResult) {
-        guard result.newEpisodeTitles.count > 0 else { return }
+        guard !result.newEpisodeTitles.isEmpty else { return }
         
         let notificationCenter = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()

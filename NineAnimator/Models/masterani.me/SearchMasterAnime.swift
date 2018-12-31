@@ -30,7 +30,7 @@ class NASearchMasterAnime: SearchPageProvider {
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
-    var delegate: SearchPageProviderDelegate?
+    weak var delegate: SearchPageProviderDelegate?
     
     private let _parent: NASourceMasterAnime
     

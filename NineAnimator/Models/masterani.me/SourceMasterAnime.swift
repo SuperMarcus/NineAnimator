@@ -63,12 +63,12 @@ class NASourceMasterAnime: BaseSource, Source {
                     let slug = anime["slug"] as? String,
                     let posterName = anime["poster"] as? String
                     else { continue }
-                let animeLink = AnimeLink(
+                watchedAnimes.append(AnimeLink(
                     title: title,
                     link: self.anime(slug: slug),
                     image: self.poster(file: posterName),
-                    source: self)
-                watchedAnimes.append(animeLink)
+                    source: self
+                ))
             }
             
             let alsoFeaturedAnimes: [AnimeLink] =

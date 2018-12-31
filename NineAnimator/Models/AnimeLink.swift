@@ -32,10 +32,10 @@ extension AnimeLink: URLConvertible {
 
 extension AnimeLink: Codable {
     enum CodingKeys: String, CodingKey {
-        case title = "title"
-        case link = "link"
-        case image = "image"
-        case source = "source"
+        case title
+        case link
+        case image
+        case source
     }
     
     init(from decoder: Decoder) throws {
