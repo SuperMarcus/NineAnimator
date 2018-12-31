@@ -185,13 +185,13 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
-                                                                <rect key="frame" x="8" y="67.5" width="232" height="21"/>
+                                                                <rect key="frame" x="8" y="67.5" width="232.5" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaF-Aj-Y4A">
-                                                                <rect key="frame" x="8" y="39" width="232" height="20.5"/>
+                                                                <rect key="frame" x="8" y="39" width="232.5" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -626,7 +626,7 @@
                                                                 </constraints>
                                                             </view>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue Watching..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="663-rl-gtc">
-                                                                <rect key="frame" x="16" y="33.5" width="167" height="14.5"/>
+                                                                <rect key="frame" x="16" y="33.5" width="175" height="14.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -649,7 +649,7 @@
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="leading" secondItem="ba0-1s-HFP" secondAttribute="leading" constant="16" id="cvU-H0-Mki"/>
                                                             <constraint firstItem="IId-s4-5QI" firstAttribute="top" secondItem="tdo-VB-Wsl" secondAttribute="bottom" constant="4" id="n8A-E9-bE1"/>
                                                             <constraint firstAttribute="trailing" secondItem="aBr-0y-FH3" secondAttribute="trailing" constant="16" id="pxW-W0-vRj"/>
-                                                            <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="663-rl-gtc" secondAttribute="trailing" constant="8" id="uL0-tH-IdR"/>
+                                                            <constraint firstItem="aBr-0y-FH3" firstAttribute="leading" secondItem="663-rl-gtc" secondAttribute="trailing" id="uL0-tH-IdR"/>
                                                             <constraint firstItem="tdo-VB-Wsl" firstAttribute="top" secondItem="663-rl-gtc" secondAttribute="bottom" constant="4" id="wFp-db-T5J"/>
                                                         </constraints>
                                                     </view>

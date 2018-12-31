@@ -21,33 +21,26 @@ import UIKit
 import SafariServices
 
 class AboutNineAnimatorTableViewController: UITableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    let urlForIdentifier: [String?: String] = [
+        // View GitHub Repository
+        "about.viewrepo": "https://github.com/SuperMarcus/NineAnimator",
+        // Report issue
+        "about.issue": "https://github.com/SuperMarcus/NineAnimator/issues/new",
+        // View License
+        "about.license": "https://github.com/SuperMarcus/NineAnimator/blob/master/LICENSE",
+        "about.credits": "https://github.com/SuperMarcus/NineAnimator/blob/master/README.md#credits"
+    ]
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        super.tableView(tableView, didSelectRowAt: indexPath)
-        
         defer { tableView.deselectSelectedRow() }
         
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        
-        switch cell.reuseIdentifier {
-        case "about.viewrepo": //View Github Repository
-            let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator")!)
+        if let url = urlForIdentifier[cell.reuseIdentifier] {
+            let safariViewController = SFSafariViewController(url: URL(string: url)!)
             present(safariViewController, animated: true)
-        case "about.privacy": //Manage persisted data (on the previous page)
+        } else { // "about.privacy"
+            // Manage persisted data (on the previous page)
             navigationController?.popViewController(animated: true)
-        case "about.issue": //Report issue
-            let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator/issues/new")!)
-            present(safariViewController, animated: true)
-        case "about.license": //View License
-            let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator/blob/master/LICENSE")!)
-            present(safariViewController, animated: true)
-        case "about.credits":
-            let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator/blob/master/README.md#credits")!)
-            present(safariViewController, animated: true)
-        default: return
         }
     }
 }

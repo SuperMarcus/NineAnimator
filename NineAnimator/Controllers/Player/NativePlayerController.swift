@@ -71,17 +71,17 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
         //Observers
         NotificationCenter.default.addObserver(
             self, selector: #selector(onAppEntersBackground(notification:)),
-            name: .appWillBecomeInactive,
+            name: UIApplication.willResignActiveNotification,
             object: nil)
         
         NotificationCenter.default.addObserver(
             self, selector: #selector(onAppEntersForeground(notification:)),
-            name: .appDidBecameActive,
+            name: UIApplication.didBecomeActiveNotification,
             object: nil)
         
         NotificationCenter.default.addObserver(
             self, selector: #selector(onUserPreferenceDidChange(notification:)),
-            name: .userPreferencesDidChange,
+            name: UserDefaults.didChangeNotification,
             object: nil)
         
         //Configurate AVPlayerViewController

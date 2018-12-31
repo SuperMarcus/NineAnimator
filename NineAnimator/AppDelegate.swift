@@ -24,16 +24,8 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appDidBecameActive, object: self)
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appWillBecomeInactive, object: self)
-    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        //Update once in two hours
+        // Update once in two hours
         UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
         return true
     }
@@ -51,10 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         func onFinalTask(){
             let succeededResultsCount = resultsPool
-                .filter { return $0 != nil }
+                .compactMap { $0 }
                 .count
             let newResultsCount = resultsPool
-                .filter { return ($0?.count ?? 0) > 0 }
+                .filter { ($0?.count ?? 0) > 0 }
                 .count
             completionHandler(
                 succeededResultsCount == watchers.count ?
@@ -68,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         debugPrint("[*] Beginning background fetch with \(watchers.count) watched anime.")
         
         taskPool = watchers.map { return $0.updates {
-            (error: Error?, watcher: NineAnimatorUser.WatchedAnime, diff: [EpisodeLink]) -> () in
+            (error: Error?, watcher: NineAnimatorUser.WatchedAnime, diff: [EpisodeLink]) in
             defer { if resultsPool.count == watchers.count { onFinalTask() } }
             
             if let error = error {
@@ -78,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 resultsPool.append(diff)
                 debugPrint("[*] \(diff.count) new episodes found for '\(watcher.link.title)'.")
                 
-                //Send notification to user
+                // Send notification to user
                 if diff.count > 0 {
                     let content = UNMutableNotificationContent()
                     

@@ -20,15 +20,6 @@
 import Foundation
 
 extension Notification.Name {
-    static var appWillBecomeInactive: Notification.Name
-    { return .init("com.marcuszhou.nineanimator.appWillBecomeInactive") }
-    
-    static var appDidBecameActive: Notification.Name
-    { return .init("com.marcuszhou.nineanimator.appDidBecameActive") }
-    
-    static var userPreferencesDidChange: Notification.Name
-    { return .init("com.marcuszhou.nineanimator.userPreferencesDidChange") }
-    
     static var playbackProgressDidUpdate: Notification.Name
     { return .init("com.marcuszhou.nineanimator.playbackProgressDidUpdate") }
 }
