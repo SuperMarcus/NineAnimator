@@ -59,6 +59,13 @@ extension AnimeLink: Codable {
         try values.encode(image, forKey: .image)
         try values.encode(source.name, forKey: .source)
     }
+    
+    /**
+     A shortcut for source.anime(from:handler:)
+     */
+    func retrive(_ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
+        return source.anime(from: self, handler)
+    }
 }
 
 extension AnimeLink: Equatable {

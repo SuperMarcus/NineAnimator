@@ -22,6 +22,7 @@
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
+		2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* NotificationManager.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -108,6 +109,7 @@
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
+		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 				2C4ABC7621B599E3009B4D47 /* Models */,
 				2C4ABC7321B59982009B4D47 /* Controllers */,
 				2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */,
+				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
 				2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */,
 				2C4ABC5F21B5881F009B4D47 /* Info.plist */,
 			);
@@ -629,6 +632,7 @@
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
+				2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
 				2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */,

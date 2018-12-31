@@ -26,83 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Update once in two hours
-        UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(UserNotificationManager.default.suggestedFetchInterval)
         return true
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let watchers = NineAnimator.default.user.watchedAnimes
-        var resultsPool = [[EpisodeLink]?]()
-        
-        guard watchers.count > 0 else {
-            completionHandler(.noData)
-            return
-        }
-        
-        func onFinalTask(){
-            let succeededResultsCount = resultsPool
-                .compactMap { $0 }
-                .count
-            let newResultsCount = resultsPool
-                .filter { ($0?.count ?? 0) > 0 }
-                .count
-            completionHandler(
-                succeededResultsCount == watchers.count ?
-                    newResultsCount > 0 ? .newData : .noData
-                : .failed
-            )
-            debugPrint("[*] Background fetch is complete.")
-            taskPool = nil
-        }
-        
-        debugPrint("[*] Beginning background fetch with \(watchers.count) watched anime.")
-        
-        taskPool = watchers.map { return $0.updates {
-            (error: Error?, watcher: NineAnimatorUser.WatchedAnime, diff: [EpisodeLink]) in
-            defer { if resultsPool.count == watchers.count { onFinalTask() } }
-            
-            if let error = error {
-                resultsPool.append(nil)
-                debugPrint("[!] Error: \(error)")
-            } else {
-                resultsPool.append(diff)
-                debugPrint("[*] \(diff.count) new episodes found for '\(watcher.link.title)'.")
-                
-                // Send notification to user
-                if diff.count > 0 {
-                    let content = UNMutableNotificationContent()
-                    
-                    if diff.count == 1 {
-                        let episode = diff.first!
-                        content.title = "\(watcher.link.title)"
-                        content.body = "Episode \(episode.name) is now available on \(watcher.link.source.name)."
-                    } else {
-                        content.title = "\(watcher.link.title)"
-                        content.body = "\(diff.count) new episodes are now availble on \(watcher.link.source.name)."
-                    }
-                    
-                    let request = UNNotificationRequest(
-                        identifier: .episodeUpdateNotificationIdentifier(watcher.link),
-                        content: content,
-                        trigger: nil)
-                    
-                    UNUserNotificationCenter.current().add(request){
-                        error in
-                        if let error = error {
-                            debugPrint("[*] Error posting notification: \(error)")
-                        }
-                    }
-                }
-            }
-        } }
-    }
-}
-
-//MARK: - Notification identifiers
-extension String {
-    static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
-        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(anime.link.hashValue)"
+        UserNotificationManager.default.performFetch(with: completionHandler)
     }
 }

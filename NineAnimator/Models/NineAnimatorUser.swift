@@ -282,68 +282,16 @@ extension NineAnimatorUser {
 
 //MARK: - Watched anime stores
 extension NineAnimatorUser {
-    struct WatchedAnime: Codable {
-        let link: AnimeLink
-        let episodes: [EpisodeLink]
-        let lastCheck: Date
-        
-        func isSameAnime(_ anotherWatcher: WatchedAnime) -> Bool { return link == anotherWatcher.link }
-        
-        func isSameAnime(_ anime: Anime) -> Bool { return link == anime.link }
-        
-        func updates(onCompletion handler: @escaping (Error?, WatchedAnime, [EpisodeLink]) -> ()) -> NineAnimatorAsyncTask? {
-            let currentEpisodes = episodes
-            return link.source.anime(from: link){
-                anime, error in
-                guard let anime = anime else { return handler(error, self, []) }
-                let newEpisodes = anime.episodes
-                    .flatMap { return $0.value }
-                    .filter { episodeLink in return !currentEpisodes.contains{ $0.name == episodeLink.name } }
-                var uniqueNewEpisodes = [EpisodeLink]()
-                newEpisodes.forEach {
-                    episodeLink in
-                    if !uniqueNewEpisodes.contains { $0.name == episodeLink.name } {
-                        uniqueNewEpisodes.append(episodeLink)
-                    }
-                }
-                
-                //Store updated version of the anime
-                NineAnimator.default.user.watch(anime: anime)
-                
-                handler(nil, self, uniqueNewEpisodes)
-            }
-        }
-    }
-    
     /**
      Returns the list of anime currently set to be notified for updates
      */
-    var watchedAnimes: [WatchedAnime] {
-        get {
-            do {
-                let fileManager = FileManager.default
-                let parentDirectory = try fileManager.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                let url = parentDirectory.appendingPathComponent(.watchedAnimesFileName)
-                
-                if try url.checkResourceIsReachable() {
-                    let decoder = PropertyListDecoder()
-                    let data = try Data(contentsOf: url)
-                    return try decoder.decode([WatchedAnime].self, from: data)
-                }
-            } catch { debugPrint("[*] Error reading persisted watched anime: \(error)") }
-            
-            return []
-        }
+    var watchedAnimes: [AnimeLink] {
+        get { return decode([AnimeLink].self, from: _freezer.value(forKey: .subscribedAnimeList)) ?? [] }
         set {
-            do {
-                let fileManager = FileManager.default
-                let parentDirectory = try fileManager.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                let url = parentDirectory.appendingPathComponent(.watchedAnimesFileName)
-                
-                let encoder = PropertyListEncoder()
-                let data = try encoder.encode(newValue)
-                try data.write(to: url)
-            } catch { debugPrint("[*] Error persisting watched anime: \(error)") }
+            guard let data = encode(data: newValue) else {
+                return debugPrint("Warn: Subscribed animes failed to encode")
+            }
+            _freezer.set(data, forKey: .subscribedAnimeList)
         }
     }
     
@@ -351,7 +299,7 @@ extension NineAnimatorUser {
      Return if the provided link is being watched
      */
     func isWatching(anime: AnimeLink) -> Bool {
-        return watchedAnimes.contains { return $0.link == anime }
+        return watchedAnimes.contains { return $0 == anime }
     }
     
     /**
@@ -363,25 +311,18 @@ extension NineAnimatorUser {
      Add the anime to the watch list
      */
     func watch(anime: Anime){
-        var episodes = [EpisodeLink]()
-        anime.episodes.flatMap { $0.value }.forEach{
-            episodeLink in
-            //Only stores episode with the same name
-            if !episodes.contains{ $0.name == episodeLink.name } {
-                episodes.append(episodeLink)
-            }
-        }
-        
-        let watcher = WatchedAnime(link: anime.link, episodes: episodes, lastCheck: Date())
-        let currentWatchers = watchedAnimes.filter { return !$0.isSameAnime(watcher) }
-        watchedAnimes = currentWatchers + [watcher]
+        var newWatchList = watchedAnimes.filter { $0 != anime.link }
+        newWatchList.append(anime.link)
+        watchedAnimes = newWatchList
+        UserNotificationManager.default.update(anime)
     }
     
     /**
      Remove the anime from the watch list
      */
     func unwatch(anime: Anime){
-        watchedAnimes = watchedAnimes.filter { !$0.isSameAnime(anime) }
+        watchedAnimes = watchedAnimes.filter { $0 != anime.link }
+        UserNotificationManager.default.remove(anime.link)
     }
 }
 
@@ -389,6 +330,7 @@ extension NineAnimatorUser {
 
 fileprivate extension String {
     static var recentAnimeList: String { return "anime.recent" }
+    static var subscribedAnimeList: String { return "anime.subscribed" }
     static var recentEpisode: String { return "episode.recent" }
     static var recentSource: String { return "source.recent" }
     static var persistedProgresses: String { return "episode.progress" }

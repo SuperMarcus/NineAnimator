@@ -289,9 +289,7 @@ extension AnimeViewController {
         notificationToggleButton.image = image
         
         //Remove the notification once the anime is viewed
-        let notificationCenter = UNUserNotificationCenter.current()
-        let viewedAnimeNotificationIdentifiers: [String] = [.episodeUpdateNotificationIdentifier(anime.link)]
-        notificationCenter.removeDeliveredNotifications(withIdentifiers: viewedAnimeNotificationIdentifiers)
+        UserNotificationManager.default.clearNotifications(for: anime.link)
     }
 }
 

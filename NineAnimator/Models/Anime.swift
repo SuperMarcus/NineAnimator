@@ -57,3 +57,20 @@ struct Anime {
         return source.episode(from: link, with: self, handler)
     }
 }
+
+extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.EpisodeLinksCollection {
+    var uniqueEpisodeNames: [String] {
+        var names = [String]()
+        self.flatMap{ $0.value }.forEach{
+            episodeLink in
+            if !names.contains{ return $0 == episodeLink.name } {
+                names.append(episodeLink.name)
+            }
+        }
+        return names
+    }
+    
+    func links(withName episodeName: String) -> [EpisodeLink] {
+        return self.flatMap { $0.value }.filter { $0.name == episodeName }
+    }
+}
