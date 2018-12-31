@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
 
 class AnimeSearchResultTableViewCell: UITableViewCell {
     @IBOutlet weak var coverImageView: UIImageView!

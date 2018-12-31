@@ -17,9 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Kingfisher
 import UIKit
 import UserNotifications
-import Kingfisher
 
 /**
  A structure used to persist episode information.
@@ -45,14 +45,14 @@ class UserNotificationManager {
     
     private let animeCachingDirectory: URL
     
-    init(){
+    init() {
         let fileManager = FileManager.default
         
         self.animeCachingDirectory = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
     }
 }
 
-//MARK: - File path helpers
+// MARK: - File path helpers
 extension UserNotificationManager {
     private func url(for anime: AnimeLink) -> URL {
         return self.animeCachingDirectory.appendingPathComponent(.animePersistFilenameComponent(anime))
@@ -63,7 +63,7 @@ extension UserNotificationManager {
     }
 }
 
-//MARK: - Watcher Persistent
+// MARK: - Watcher Persistent
 extension UserNotificationManager {
     /**
      Retrive the watcher for the anime from the file system
@@ -141,11 +141,11 @@ extension UserNotificationManager {
     }
 }
 
-//MARK: - Perform episodes fetching
+// MARK: - Perform episodes fetching
 extension UserNotificationManager {
     fileprivate typealias FetchResult = (anime: AnimeLink, newEpisodeTitles: [String], availableServerNames: [String])
     
-    func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+    func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //Do not perform fetch if the last one is incomeplete
         guard taskPool == nil else { return completionHandler(.failed) }
         
@@ -157,7 +157,7 @@ extension UserNotificationManager {
             return
         }
         
-        func onFinalTask(){
+        func onFinalTask() {
             let succeededResultsCount = resultsPool
                 .compactMap { $0 }
                 .count
@@ -178,8 +178,8 @@ extension UserNotificationManager {
         taskPool = watchedAnimeLinks.map {
             animeLink in
             
-            return animeLink.retrive {
-                anime, error in
+            animeLink.retrive {
+                anime, _ in
                 
                 defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
                 
@@ -189,19 +189,19 @@ extension UserNotificationManager {
                 
                 if let currentWatcher = self.retrive(for: animeLink) {
                     result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
-                        return !currentWatcher.episodeNames.contains($0)
+                        !currentWatcher.episodeNames.contains($0)
                     }
                     result.availableServerNames = result
                         .newEpisodeTitles
                         .flatMap(anime.episodes.links)
-                        .reduce([Anime.ServerIdentifier]()){
+                        .reduce([Anime.ServerIdentifier]()) {
                             (list: [Anime.ServerIdentifier], current: EpisodeLink) -> [String] in
                             if !list.contains(current.server) {
                                 return list + [current.server]
                             }
                             return list
                         }
-                        .compactMap { return anime.servers[$0] }
+                        .compactMap { anime.servers[$0] }
                     
                     //Post notification to user
                     self.notify(result: result)
@@ -219,7 +219,7 @@ extension UserNotificationManager {
     /**
      Post notification to user
      */
-    private func notify(result: FetchResult){
+    private func notify(result: FetchResult) {
         guard result.newEpisodeTitles.count > 0 else { return }
         
         let notificationCenter = UNUserNotificationCenter.current()
@@ -266,7 +266,7 @@ extension UserNotificationManager {
     }
 }
 
-//MARK: - Notification identifiers/File Name paths
+// MARK: - Notification identifiers/File Name paths
 extension String {
     static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
         return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(anime.link.hashValue)"

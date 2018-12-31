@@ -17,9 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
 import AVKit
+import Foundation
 
 extension AVPlayerItem {
     convenience init(url: URL, headers: HTTPHeaders) {

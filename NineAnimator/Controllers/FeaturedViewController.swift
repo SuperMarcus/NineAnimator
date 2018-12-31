@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import Kingfisher
+import UIKit
 
 class FeaturedViewController: UITableViewController {
     var featuredAnimePage: FeaturedContainer? {
@@ -65,7 +65,7 @@ class FeaturedViewController: UITableViewController {
         }
     }
     
-    @objc func onRefreshRequested(){ reload() }
+    @objc func onRefreshRequested() { reload() }
     
     @IBAction func onSourceSelectionButtonPressed(_ sender: Any) {
         let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
@@ -148,7 +148,7 @@ class FeaturedViewController: UITableViewController {
     }
 }
 
-//MARK: - ViewController lifecycle
+// MARK: - ViewController lifecycle
 extension FeaturedViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -179,7 +179,7 @@ extension FeaturedViewController {
         guard let visibleRows = tableView.indexPathsForVisibleRows, visibleRows.count > 0 else { return }
         let topCellPath = visibleRows.count > 1 ? visibleRows[1] : visibleRows[0]
         self.tableView.reloadSections(.init(0..<self.tableView.numberOfSections), with: .automatic)
-        coordinator.animate(alongsideTransition: nil){
+        coordinator.animate(alongsideTransition: nil) {
             _ in self.tableView.scrollToRow(at: topCellPath, at: .top, animated: true)
         }
     }

@@ -134,7 +134,7 @@ extension SearchViewController {
     }
 }
 
-//MARK: - Source selection
+// MARK: - Source selection
 extension SearchViewController {
     @IBAction func onSelectSourceButtonTapped(_ sender: Any) {
         let currentSource = NineAnimator.default.user.source
@@ -149,7 +149,6 @@ extension SearchViewController {
         for source in NineAnimator.default.sources {
             let action = UIAlertAction(title: source.name, style: .default) {
                 [weak self] _ in
-                
                 NineAnimator.default.user.select(source: source)
                 
                 guard let self = self else { return }

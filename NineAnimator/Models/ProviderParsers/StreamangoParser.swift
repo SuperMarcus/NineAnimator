@@ -17,9 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
 import AVKit
+import Foundation
 
 class StreamangoParser: VideoProviderParser {
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
@@ -58,7 +58,6 @@ class StreamangoParser: VideoProviderParser {
             }
             
             let decodedLink = self.decode(obscured: obscuredLink, with: obscuredDecodingKey)
-            
             
             guard let sourceURL = URL(string:
                 decodedLink.hasPrefix("//") ? "https:\(decodedLink)" : decodedLink)
@@ -99,7 +98,7 @@ class StreamangoParser: VideoProviderParser {
         var _0x2c0540 = 0
         var _0x5a46ef = 0
         
-        let sequence = obscured.map { return charCode($0) }
+        let sequence = obscured.map { charCode($0) }
         
         for _ in 0..<(obscured.count - 1) {
             while count <= (obscured.count - 1) {

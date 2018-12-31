@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import OpenCastSwift
+import UIKit
 
 class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     static var `default` = CastController()
@@ -33,7 +33,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     var currentEpisode: Episode?
     
-    var contentDuration: Double? = nil
+    var contentDuration: Double?
     
     var isReady: Bool { return client?.isConnected ?? false }
     
@@ -76,7 +76,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     }
 }
 
-//MARK: - Media Playback Control
+// MARK: - Media Playback Control
 extension CastController {
     func setVolume(to volume: Float) {
         debugPrint("Info: Setting Cast device volume to \(volume)")
@@ -139,7 +139,7 @@ extension CastController {
     }
 }
 
-//MARK: - Session Control and Discovery
+// MARK: - Session Control and Discovery
 extension CastController {
     func connect(to device: CastDevice) {
         if client != nil { disconnect() }
@@ -168,9 +168,9 @@ extension CastController {
     func stop() { scanner.stopScanning() }
 }
 
-//MARK: - Media State Delegate
+// MARK: - Media State Delegate
 extension CastController {
-    var timerUpdateProgressTask: ((Timer) -> ()) {
+    var timerUpdateProgressTask: ((Timer) -> Void) {
         return {
             [weak self] timer in
             guard let self = self else {
@@ -220,7 +220,7 @@ extension CastController {
     }
 }
 
-//MARK: - Device State Delegate
+// MARK: - Device State Delegate
 extension CastController {
     func deviceDidComeOnline(_ device: CastDevice) {
         devices.append(device)

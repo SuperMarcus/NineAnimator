@@ -83,7 +83,7 @@ class NASourceMasterAnime: BaseSource, Source {
                     image: self.poster(file: posterName),
                     source: self
                 )
-            }
+                }
             
             let featuredPage = BasicFeaturedContainer(featured: alsoFeaturedAnimes, latest: watchedAnimes)
             handler(featuredPage, nil)

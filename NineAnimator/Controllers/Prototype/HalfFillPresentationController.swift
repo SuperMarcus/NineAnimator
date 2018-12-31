@@ -73,7 +73,8 @@ public class HalfFillPresentationController: UIPresentationController {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
         coordinator.animate(alongsideTransition: { _ in
             self.dimmer?.alpha = 0
-        }) { _ in self.presentingViewController.view.setNeedsLayout() }
+        }) { _ in self.presentingViewController.view.setNeedsLayout()
+        }
     }
     
     override public func dismissalTransitionDidEnd(_ completed: Bool) {

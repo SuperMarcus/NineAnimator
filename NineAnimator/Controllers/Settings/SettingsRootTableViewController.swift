@@ -17,9 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import SafariServices
 import AVKit
+import SafariServices
+import UIKit
 
 class SettingsRootTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -65,7 +65,7 @@ class SettingsRootTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer{ tableView.deselectSelectedRow() }
+        defer { tableView.deselectSelectedRow() }
         
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
@@ -99,7 +99,7 @@ class SettingsRootTableViewController: UITableViewController {
         }
     }
     
-    private func updatePreferencesUI(){
+    private func updatePreferencesUI() {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()

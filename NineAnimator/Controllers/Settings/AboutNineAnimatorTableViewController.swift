@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import SafariServices
+import UIKit
 
 class AboutNineAnimatorTableViewController: UITableViewController {
     let urlForIdentifier: [String?: String] = [

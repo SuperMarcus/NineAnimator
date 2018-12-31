@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import OpenCastSwift
+import UIKit
 
 class GoogleCastDeviceTableViewCell: UITableViewCell {
     @IBOutlet weak var connectingIndicator: UIActivityIndicatorView!

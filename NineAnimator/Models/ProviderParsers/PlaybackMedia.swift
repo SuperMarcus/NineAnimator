@@ -17,10 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import AVKit
-import OpenCastSwift
 import Alamofire
+import AVKit
+import Foundation
+import OpenCastSwift
 
 protocol PlaybackMedia {
     var avPlayerItem: AVPlayerItem { get }

@@ -30,7 +30,7 @@ class NineAnimeSearch: SearchPageProvider {
     var availablePages: Int { return _results.count }
     
     private var _results: [[AnimeLink]]
-    private var _lastRequest: NineAnimatorAsyncTask? = nil
+    private var _lastRequest: NineAnimatorAsyncTask?
     private let _parent: NineAnimeSource
     
     init(_ parent: NineAnimeSource, query: String) {

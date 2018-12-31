@@ -17,14 +17,14 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import WebKit
 import AVKit
 import SafariServices
+import UIKit
 import UserNotifications
+import WebKit
 
 class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
-    //MARK: - Set either one of the following item to initialize the anime view
+    // MARK: - Set either one of the following item to initialize the anime view
     var animeLink: AnimeLink?
     
     var episodeLink: EpisodeLink? {
@@ -36,7 +36,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
     }
     
-    //MARK: - Managed by AnimeViewController
+    // MARK: - Managed by AnimeViewController
     @IBOutlet weak var serverSelectionButton: UIBarButtonItem!
     
     @IBOutlet weak var notificationToggleButton: UIBarButtonItem!
@@ -150,7 +150,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     }
 }
 
-//MARK: - Table view data source
+// MARK: - Table view data source
 extension AnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return anime == nil ? 1 : 2
@@ -217,7 +217,7 @@ extension AnimeViewController {
     }
 }
 
-//MARK: - Share/Select Server/Notifications
+// MARK: - Share/Select Server/Notifications
 extension AnimeViewController {
     @IBAction func onCastButtonTapped(_ sender: Any) {
         RootViewController.shared?.showCastController()
@@ -264,8 +264,8 @@ extension AnimeViewController {
             NineAnimator.default.user.unwatch(anime: anime)
         } else {
             let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.requestAuthorization(options: [.badge]){
-                [weak self] success, error in
+            notificationCenter.requestAuthorization(options: [.badge]) {
+                [weak self] success, _ in
                 if !success {
                     let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
@@ -278,7 +278,7 @@ extension AnimeViewController {
         updateNotificationToggle()
     }
     
-    private func updateNotificationToggle(){
+    private func updateNotificationToggle() {
         guard let anime = anime else {
             notificationToggleButton.isEnabled = false
             return
@@ -293,7 +293,7 @@ extension AnimeViewController {
     }
 }
 
-//MARK: - Initiate playback
+// MARK: - Initiate playback
 extension AnimeViewController {
     func retriveAndPlay() {
         guard let episodeLink = episodeLink else { return }

@@ -17,10 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 
-typealias NineAnimatorCallback<T> = (T?, Error?) -> ()
+typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
 
 enum NineAnimatorError: Error {
     case urlError
@@ -95,7 +95,7 @@ class NineAnimator: SessionDelegate {
     }
     
     func source(with name: String) -> Source? {
-        return sources.first{ $0.name == name }
+        return sources.first { $0.name == name }
     }
     
     private func registerDefaultSources() {
