@@ -23,7 +23,7 @@ import UIKit
 class GoogleCastDeviceTableViewCell: UITableViewCell {
     @IBOutlet weak var connectingIndicator: UIActivityIndicatorView!
     
-    var delegate: GoogleCastMediaPlaybackViewController?
+    weak var delegate: GoogleCastMediaPlaybackViewController?
     
     var device: CastDevice? {
         didSet {

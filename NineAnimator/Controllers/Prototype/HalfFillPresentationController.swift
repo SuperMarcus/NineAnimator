@@ -64,6 +64,7 @@ public class HalfFillPresentationController: UIPresentationController {
         dimmer.addSubview(presentedViewController.view)
         
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
+        // swiftlint:disable:next trailing_closure
         coordinator.animate(alongsideTransition: { _ in
             dimmer.alpha = 1
         })
@@ -71,10 +72,10 @@ public class HalfFillPresentationController: UIPresentationController {
     
     override public func dismissalTransitionWillBegin() {
         guard let coordinator = presentingViewController.transitionCoordinator else { return }
-        coordinator.animate(alongsideTransition: { _ in
-            self.dimmer?.alpha = 0
-        }) { _ in self.presentingViewController.view.setNeedsLayout()
-        }
+        coordinator.animate(
+            alongsideTransition: { _ in self.dimmer?.alpha = 0 },
+            completion: { _ in self.presentingViewController.view.setNeedsLayout() }
+        )
     }
     
     override public func dismissalTransitionDidEnd(_ completed: Bool) {

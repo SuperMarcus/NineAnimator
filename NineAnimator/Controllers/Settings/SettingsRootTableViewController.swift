@@ -19,9 +19,9 @@
 
 import AVKit
 import Kingfisher
-import UserNotifications
 import SafariServices
 import UIKit
+import UserNotifications
 
 class SettingsRootTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -117,14 +117,14 @@ class SettingsRootTableViewController: UITableViewController {
         }
     }
     
-    private func clearCache(){
+    private func clearCache() {
         Kingfisher.ImageCache.default.clearDiskCache()
         Kingfisher.ImageCache.default.clearMemoryCache()
         URLCache.shared.removeAllCachedResponses()
         UserNotificationManager.default.removeAll()
     }
     
-    private func updatePreferencesUI(){
+    private func updatePreferencesUI() {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
@@ -159,7 +159,7 @@ class SettingsRootTableViewController: UITableViewController {
             
             DispatchQueue.main.async {
                 [weak self] in
-                self?.subscriptionStatusLabel.text = subscriptionEngineStatus.count == 0 ?
+                self?.subscriptionStatusLabel.text = subscriptionEngineStatus.isEmpty ?
                     "Normal" : subscriptionEngineStatus.joined(separator: ", ")
             }
         }

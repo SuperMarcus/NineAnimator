@@ -333,7 +333,7 @@ extension NineAnimatorUser {
     /**
      Remove all watched anime
      */
-    func unwatchAll(){
+    func unwatchAll() {
         watchedAnimes.forEach(UserNotificationManager.default.remove)
         watchedAnimes = []
     }
