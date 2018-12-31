@@ -64,11 +64,11 @@ extension RecentlyViewedTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "recent.last", for: indexPath) as? LastViewedEpisodeTableViewCell else { fatalError() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recent.last", for: indexPath) as! LastViewedEpisodeTableViewCell
             cell.episodeLink = NineAnimator.default.user.lastEpisode
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as? RecentlyWatchedAnimeTableViewCell else { fatalError() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as! RecentlyWatchedAnimeTableViewCell
             let animes = NineAnimator.default.user.recentAnimes
             let anime = animes[indexPath.item]
             cell.animeLink = anime

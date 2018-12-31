@@ -190,7 +190,7 @@ extension AnimeViewController {
             cell.episodeLink = episode
             return cell
         default:
-            fatalError()
+            fatalError("Anime view don't have section \(indexPath.section)")
         }
     }
     

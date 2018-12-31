@@ -35,6 +35,7 @@ class AnimeDescriptionTableViewCell: UITableViewCell {
                 return
             }
             
+            // swiftlint:disable:next trailing_closure
             UIView.transition(with: loadingIndicator, duration: 0.3, options: .curveEaseOut, animations: { [weak self] in
                 guard let self = self else { return }
                 self.descriptionText.text = newValue

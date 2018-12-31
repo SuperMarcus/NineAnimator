@@ -25,7 +25,8 @@ class EpisodeAccessoryProcessIndicator: UIView {
     lazy var indicatorColor: UIColor = tintColor
     
     @IBInspectable
-    var nullColor = UIColor.lightGray.withAlphaComponent(0.4)
+    // swiftlint:disable:next redundant_type_annotation
+    var nullColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
     
     @IBInspectable
     var strokeWidth: CGFloat = 2.0
@@ -42,15 +43,17 @@ class EpisodeAccessoryProcessIndicator: UIView {
             
             NotificationCenter.default.removeObserver(self)
             NotificationCenter.default.addObserver(
-                self, selector: #selector(onProgressUpdate(notification:)),
+                self,
+                selector: #selector(onProgressUpdate),
                 name: .playbackProgressDidUpdate,
-                object: nil)
+                object: nil
+            )
         }
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
     
-    @objc func onProgressUpdate(notification: Notification) {
+    @objc func onProgressUpdate() {
         DispatchQueue.main.async { self.setNeedsDisplay() }
     }
     

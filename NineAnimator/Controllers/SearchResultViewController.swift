@@ -75,7 +75,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // No results found
         if !searchPage.moreAvailable && searchPage.availablePages == 0 {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as? SearchNoResultsTableViewCell else { fatalError() }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as! SearchNoResultsTableViewCell
             cell.query = searchText
             return cell
         }
