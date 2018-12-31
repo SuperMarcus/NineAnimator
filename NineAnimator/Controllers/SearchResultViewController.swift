@@ -26,6 +26,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
         }
     }
     
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var searchPage: SearchPageProvider!
 
     override func viewDidLoad() {

@@ -34,7 +34,11 @@ class FeaturedViewController: UITableViewController {
     
     @IBOutlet private weak var sourceSelectionButton: UIBarButtonItem!
     
-    private var refresher: UIRefreshControl!
+    private lazy var refresher: UIRefreshControl = {
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(onRefreshRequested), for: .valueChanged)
+        return refresher
+    }()
     
     var error: Error?
     
@@ -115,11 +119,7 @@ class FeaturedViewController: UITableViewController {
         case 0:
             let animeLink = featuredAnimePage.featured[indexPath.item]
             let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.featured", for: indexPath) as! FeaturedAnimeTableViewCell
-            
-            animeCell.animeTitleLabel.text = animeLink.title
-            animeCell.animeImageView.kf.setImage(with: animeLink.image)
-            animeCell.animeImageView.kf.indicatorType = .activity
-            
+            animeCell.setAnime(animeLink)
             return animeCell
         case 1:
             let animeLink = featuredAnimePage.latest[indexPath.item]
@@ -167,9 +167,6 @@ extension FeaturedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        refresher = UIRefreshControl()
-        refresher.addTarget(self, action: #selector(onRefreshRequested), for: .valueChanged)
         tableView.refreshControl = refresher
     }
 }
