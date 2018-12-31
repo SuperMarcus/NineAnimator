@@ -10,7 +10,6 @@ addons:
     packages:
     - carthage
     - swiftlint
-    update: true
 
 install:
   - gem install xcpretty
