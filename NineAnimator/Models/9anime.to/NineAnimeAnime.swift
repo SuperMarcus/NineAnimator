@@ -97,8 +97,8 @@ extension NineAnimeSource {
             let animeServers: [Anime.ServerIdentifier: String] = Dictionary(
                 matches.map { match in
                     (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
-                }, uniquingKeysWith: { _, new in new }
-            )
+                }
+            ) { _, new in new }
             
             var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
             

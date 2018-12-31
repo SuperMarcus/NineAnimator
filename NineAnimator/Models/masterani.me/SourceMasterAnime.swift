@@ -169,8 +169,7 @@ class NASourceMasterAnime: BaseSource, Source {
                     description: animeSynopsis,
                     on: hosts,
                     episodes: Dictionary(uniqueKeysWithValues: hosts.map {
-                        host in
-                        (
+                        host in (
                             host.key,
                             episodes.map { EpisodeLink(
                                 identifier: $0.identifier,
@@ -230,7 +229,7 @@ class NASourceMasterAnime: BaseSource, Source {
                     parentId: String(animeIdNumber),
                     episodeId: String(episodeNumber)
                 ), nil)
-            } catch let e { handler(nil, e) }
+            } catch { handler(nil, error) }
         }
     }
     

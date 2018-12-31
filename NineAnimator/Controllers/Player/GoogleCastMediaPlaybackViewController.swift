@@ -32,27 +32,27 @@ enum CastDeviceState {
 class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource, UIGestureRecognizerDelegate {
     weak var castController: CastController!
     
-    @IBOutlet weak var playbackControlView: UIView!
+    @IBOutlet private weak var playbackControlView: UIView!
     
-    @IBOutlet weak var coverImage: UIImageView!
+    @IBOutlet private weak var coverImage: UIImageView!
     
-    @IBOutlet weak var deviceListTableView: UITableView!
+    @IBOutlet private weak var deviceListTableView: UITableView!
     
-    @IBOutlet weak var playbackProgressSlider: UISlider!
+    @IBOutlet private weak var playbackProgressSlider: UISlider!
     
-    @IBOutlet weak var tPlusIndicatorLabel: UILabel!
+    @IBOutlet private weak var tPlusIndicatorLabel: UILabel!
     
-    @IBOutlet weak var tMinusIndicatorLabel: UILabel!
+    @IBOutlet private weak var tMinusIndicatorLabel: UILabel!
     
-    @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet private weak var volumeSlider: UISlider!
     
-    @IBOutlet weak var playPauseButton: UIButton!
+    @IBOutlet private weak var playPauseButton: UIButton!
     
-    @IBOutlet weak var rewindButton: UIButton!
+    @IBOutlet private weak var rewindButton: UIButton!
     
-    @IBOutlet weak var fastForwardButton: UIButton!
+    @IBOutlet private weak var fastForwardButton: UIButton!
     
-    @IBOutlet weak var playbackTitleLabel: UILabel!
+    @IBOutlet private weak var playbackTitleLabel: UILabel!
     
     var isPresenting = false
     
@@ -67,7 +67,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     //The amount of time (in seconds) that fast forward and rewind button seeks
     private var fastSeekAmount: Float = 15.0
     
-    @IBAction func onDoneButtonPressed(_ sender: Any) {
+    @IBAction private func onDoneButtonPressed(_ sender: Any) {
         dismiss(animated: true)
     }
     
@@ -107,13 +107,11 @@ extension GoogleCastMediaPlaybackViewController {
         let color = UIColor.gray
         let renderer = UIGraphicsImageRenderer(size: size)
         
-        let image = renderer.image { _ in
+        return renderer.image { _ in
             let path = UIBezierPath(ovalIn: CGRect(origin: .zero, size: size))
             color.setFill()
             path.fill()
         }
-        
-        return image
     }
     
     var normalThumbImage: UIImage? {
@@ -132,6 +130,7 @@ extension GoogleCastMediaPlaybackViewController {
         return "\(m):\(s)"
     }
     
+    // swiftlint:disable:next discouraged_optional_boolean
     func updateUI(playbackProgress progress: Float?, volume: Float?, isPaused: Bool?) {
         guard let duration = castController.contentDuration else { return }
         
@@ -189,34 +188,34 @@ extension GoogleCastMediaPlaybackViewController {
         return touch.view == self.view
     }
     
-    @IBAction func onBackgroundTapGestureRecognizer(sender: UITapGestureRecognizer) {
+    @IBAction private func onBackgroundTapGestureRecognizer(sender: UITapGestureRecognizer) {
         dismiss(animated: true)
     }
     
-    @IBAction func onPlaybackProgressSeek(_ sender: UISlider) {
+    @IBAction private func onPlaybackProgressSeek(_ sender: UISlider) {
         let duration = sender.maximumValue
         let current = sender.value
         tPlusIndicatorLabel.text = "\(format(seconds: Int(current)))"
         tMinusIndicatorLabel.text = "-\(format(seconds: Int(duration - current)))"
     }
     
-    @IBAction func onSeekStart(_ sender: Any) { isSeeking = true }
+    @IBAction private func onSeekStart(_ sender: Any) { isSeeking = true }
     
-    @IBAction func onSeekEnd(_ sender: Any) {
+    @IBAction private func onSeekEnd(_ sender: Any) {
         isSeeking = false
         castController.seek(to: playbackProgressSlider.value)
     }
     
-    @IBAction func onVolumeAttenuate(_ sender: Any) { }
+    @IBAction private func onVolumeAttenuate(_ sender: Any) { }
     
-    @IBAction func onVolumeAttenuateStart(_ sender: Any) { volumeIsChanging = true }
+    @IBAction private func onVolumeAttenuateStart(_ sender: Any) { volumeIsChanging = true }
     
-    @IBAction func onVolumeAttenuateEnd(_ sender: Any) {
+    @IBAction private func onVolumeAttenuateEnd(_ sender: Any) {
         volumeIsChanging = false
         castController.setVolume(to: volumeSlider.value)
     }
     
-    @IBAction func onPlayPauseButtonTapped(_ sender: UIButton) {
+    @IBAction private func onPlayPauseButtonTapped(_ sender: UIButton) {
         if castController.isPaused {
             castController.play()
         } else {
@@ -224,14 +223,14 @@ extension GoogleCastMediaPlaybackViewController {
         }
     }
     
-    @IBAction func onRewindButtonTapped(_ sender: Any) {
+    @IBAction private func onRewindButtonTapped(_ sender: Any) {
         let current = playbackProgressSlider.value
         let seekTo = max(current - fastSeekAmount, 0.0)
         playbackProgressSlider.value = seekTo
         castController.seek(to: seekTo)
     }
     
-    @IBAction func onFastForwardButtonTapped(_ sender: Any) {
+    @IBAction private func onFastForwardButtonTapped(_ sender: Any) {
         let current = playbackProgressSlider.value
         let max = playbackProgressSlider.maximumValue
         let seekTo = min(current + fastSeekAmount, max)
@@ -251,7 +250,7 @@ extension GoogleCastMediaPlaybackViewController {
         coverImage.kf.setImage(with: media.poster) {
             result in
             guard let image = result.value?.image else { return }
-            //Set poster image but let the updater to push it to the now playing center
+            // Set poster image but let the updater to push it to the now playing center
             self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
                 MPMediaItemArtwork(boundsSize: image.size) { _ in image }
         }
@@ -304,7 +303,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath) as? GoogleCastDeviceTableViewCell else { fatalError() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cast.device", for: indexPath) as! GoogleCastDeviceTableViewCell
         let device = castController.devices[indexPath.item]
         cell.device = device
         cell.state = device == castController.client?.device
@@ -328,13 +327,13 @@ extension GoogleCastMediaPlaybackViewController {
             try audioSession.setCategory(.playback, mode: .moviePlayback)
             try audioSession.setActive(true)
             
-            self.castDummyAudioPlayer?.stop()
+            castDummyAudioPlayer?.stop()
             
-            try self.castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "wav")
-            self.castDummyAudioPlayer?.numberOfLoops = -1
-            self.castDummyAudioPlayer?.volume = 0.01
-            self.castDummyAudioPlayer?.prepareToPlay()
-            self.castDummyAudioPlayer?.play()
+            try castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "wav")
+            castDummyAudioPlayer?.numberOfLoops = -1
+            castDummyAudioPlayer?.volume = 0.01
+            castDummyAudioPlayer?.prepareToPlay()
+            castDummyAudioPlayer?.play()
         } catch { debugPrint("Error: \(error)") }
     }
     
@@ -346,8 +345,8 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     private func nowPlaying(setup episode: Episode) {
-        //Start the dummy player so we can control cast playback from lockscreen
-        //and control center
+        // Start the dummy player so we can control cast playback
+        // from lockscreen and control center
         startDummyPlayer()
         
         let infoCenter = MPNowPlayingInfoCenter.default()
@@ -359,52 +358,52 @@ extension GoogleCastMediaPlaybackViewController {
         infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
         infoCenter.playbackState = .playing
         
-        //Setup command center
+        // Setup command center
         let commandCenter = MPRemoteCommandCenter.shared()
         
-        //Seek
-        commandCenter.changePlaybackPositionCommand.addTarget {
-            event in
+        // Seek
+        commandCenter.changePlaybackPositionCommand.addTarget { event in
             guard let event = event as? MPChangePlaybackPositionCommandEvent else { return .commandFailed }
             self.castController.seek(to: Float(event.positionTime))
             return .success
         }
         commandCenter.changePlaybackPositionCommand.isEnabled = true
         
-        //Play
-        commandCenter.playCommand.addTarget {
-            _ in self.castController.play()
+        // Play
+        commandCenter.playCommand.addTarget { _ in
+            self.castController.play()
             return .success
         }
         commandCenter.playCommand.isEnabled = true
         
-        //Pause
-        commandCenter.pauseCommand.addTarget {
-            _ in self.castController.pause()
+        // Pause
+        commandCenter.pauseCommand.addTarget { _ in
+            self.castController.pause()
             return .success
         }
         commandCenter.pauseCommand.isEnabled = true
         
-        //Fast forward
-        commandCenter.skipForwardCommand.addTarget {
-            _ in self.onFastForwardButtonTapped(self)
+        // Fast forward
+        commandCenter.skipForwardCommand.addTarget { _ in
+            self.onFastForwardButtonTapped(self)
             return .success
         }
         commandCenter.skipForwardCommand.isEnabled = true
         
-        //Rewind
-        commandCenter.skipBackwardCommand.addTarget {
-            _ in self.onRewindButtonTapped(self)
+        // Rewind
+        commandCenter.skipBackwardCommand.addTarget { _ in
+            self.onRewindButtonTapped(self)
             return .success
         }
         commandCenter.skipBackwardCommand.isEnabled = true
         
-        //Add system volume change handler
+        // Add system volume change handler
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(systemVolumeDidChange(notification:)),
             name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"),
-            object: nil)
+            object: nil
+        )
     }
     
     private func nowPlaying(teardown: Episode) {
@@ -414,21 +413,21 @@ extension GoogleCastMediaPlaybackViewController {
         infoCenter.nowPlayingInfo = nil
         infoCenter.playbackState = .stopped
         
-        //Remove volume change observer
+        // Remove volume change observer
         NotificationCenter.default.removeObserver(self, name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
     }
     
     private func nowPlaying(update status: CastMediaStatus) {
         let infoCenter = MPNowPlayingInfoCenter.default()
         
-        self.sharedNowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] =
+        sharedNowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] =
             NSNumber(value: status.playerState == .paused ? 0.0 : 1.0)
-        self.sharedNowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] =
+        sharedNowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] =
             NSNumber(value: status.currentTime)
-        self.sharedNowPlayingInfo[MPMediaItemPropertyPlaybackDuration] =
+        sharedNowPlayingInfo[MPMediaItemPropertyPlaybackDuration] =
             NSNumber(value: Double(playbackProgressSlider.maximumValue))
         
-        infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
+        infoCenter.nowPlayingInfo = sharedNowPlayingInfo
         infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
     }
     

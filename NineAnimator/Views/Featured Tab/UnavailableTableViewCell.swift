@@ -20,7 +20,7 @@
 import UIKit
 
 class UnavailableTableViewCell: UITableViewCell {
-    @IBOutlet weak var unavailableErrorMessageLabel: UILabel!
+    @IBOutlet private weak var unavailableErrorMessageLabel: UILabel!
     
     var error: Error? {
         get { return nil }

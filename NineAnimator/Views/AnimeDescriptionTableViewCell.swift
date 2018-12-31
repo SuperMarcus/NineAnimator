@@ -21,10 +21,10 @@ import Kingfisher
 import UIKit
 
 class AnimeDescriptionTableViewCell: UITableViewCell {
-    @IBOutlet weak var backgroundBlurredImageView: UIImageView!
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var backgroundBlurredImageView: UIImageView!
+    @IBOutlet private weak var coverImageView: UIImageView!
+    @IBOutlet private weak var descriptionText: UITextView!
+    @IBOutlet private weak var loadingIndicator: UIActivityIndicatorView!
     
     var animeDescription: String? {
         willSet {

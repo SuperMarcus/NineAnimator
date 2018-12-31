@@ -32,7 +32,7 @@ class FeaturedViewController: UITableViewController {
         }
     }
     
-    @IBOutlet weak var sourceSelectionButton: UIBarButtonItem!
+    @IBOutlet private weak var sourceSelectionButton: UIBarButtonItem!
     
     private var refresher: UIRefreshControl!
     
@@ -67,7 +67,7 @@ class FeaturedViewController: UITableViewController {
     
     @objc func onRefreshRequested() { reload() }
     
-    @IBAction func onSourceSelectionButtonPressed(_ sender: Any) {
+    @IBAction private func onSourceSelectionButtonPressed(_ sender: Any) {
         let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
         
         if let popover = alertView.popoverPresentationController {

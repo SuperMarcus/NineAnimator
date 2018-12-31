@@ -21,7 +21,7 @@ import OpenCastSwift
 import UIKit
 
 class GoogleCastDeviceTableViewCell: UITableViewCell {
-    @IBOutlet weak var connectingIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var connectingIndicator: UIActivityIndicatorView!
     
     weak var delegate: GoogleCastMediaPlaybackViewController?
     
@@ -42,8 +42,8 @@ class GoogleCastDeviceTableViewCell: UITableViewCell {
                 connectingIndicator.isHidden = true
             case .connecting:
                 accessoryType = .none
-                connectingIndicator.isHidden = false
                 connectingIndicator.startAnimating()
+                connectingIndicator.isHidden = false
             case .connected:
                 accessoryType = .checkmark
                 connectingIndicator.stopAnimating()
@@ -53,8 +53,8 @@ class GoogleCastDeviceTableViewCell: UITableViewCell {
         }
     }
     
-    @IBOutlet weak var deviceNameLabel: UILabel!
-    @IBOutlet weak var deviceModelLabel: UILabel!
+    @IBOutlet private weak var deviceNameLabel: UILabel!
+    @IBOutlet private weak var deviceModelLabel: UILabel!
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

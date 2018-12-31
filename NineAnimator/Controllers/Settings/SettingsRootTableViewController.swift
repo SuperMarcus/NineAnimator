@@ -24,31 +24,26 @@ import UIKit
 import UserNotifications
 
 class SettingsRootTableViewController: UITableViewController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     
-    @IBOutlet weak var episodeListingOrderControl: UISegmentedControl!
+    @IBOutlet private weak var viewingHistoryStatsLabel: UILabel!
     
-    @IBOutlet weak var viewingHistoryStatsLabel: UILabel!
+    @IBOutlet private weak var backgroundPlaybackSwitch: UISwitch!
     
-    @IBOutlet weak var backgroundPlaybackSwitch: UISwitch!
+    @IBOutlet private weak var pictureInPictureSwitch: UISwitch!
     
-    @IBOutlet weak var pictureInPictureSwitch: UISwitch!
+    @IBOutlet private weak var subscriptionStatsLabel: UILabel!
     
-    @IBOutlet weak var subscriptionStatsLabel: UILabel!
+    @IBOutlet private weak var subscriptionStatusLabel: UILabel!
     
-    @IBOutlet weak var subscriptionStatusLabel: UILabel!
-    
-    @IBOutlet weak var subscriptionShowStreamsSwitch: UISwitch!
+    @IBOutlet private weak var subscriptionShowStreamsSwitch: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         updatePreferencesUI()
     }
     
-    @IBAction func onEpisodeListingOrderChange(_ sender: UISegmentedControl) {
+    @IBAction private func onEpisodeListingOrderChange(_ sender: UISegmentedControl) {
         defer { NineAnimator.default.user.push() }
         
         switch sender.selectedSegmentIndex {
@@ -58,21 +53,21 @@ class SettingsRootTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func onPiPDidChange(_ sender: UISwitch) {
+    @IBAction private func onPiPDidChange(_ sender: UISwitch) {
         let newValue = sender.isOn
         NineAnimator.default.user.allowPictureInPicturePlayback = newValue
         updatePreferencesUI()
     }
     
-    @IBAction func onBackgroundPlaybackDidChange(_ sender: UISwitch) {
+    @IBAction private func onBackgroundPlaybackDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.allowBackgroundPlayback = sender.isOn
     }
     
-    @IBAction func onShowStreamsInNotificationDidChange(_ sender: UISwitch) {
+    @IBAction private func onShowStreamsInNotificationDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.notificationShowStreams = sender.isOn
     }
     
-    @IBAction func onDoneButtonClicked(_ sender: Any) {
+    @IBAction private func onDoneButtonClicked(_ sender: Any) {
         dismiss(animated: true)
     }
     

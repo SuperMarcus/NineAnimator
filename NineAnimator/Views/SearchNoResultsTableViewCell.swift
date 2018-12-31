@@ -20,7 +20,7 @@
 import UIKit
 
 class SearchNoResultsTableViewCell: UITableViewCell {
-    @IBOutlet weak var searchSubtitleLabel: UILabel!
+    @IBOutlet private weak var searchSubtitleLabel: UILabel!
     
     var query: String? {
         willSet {
