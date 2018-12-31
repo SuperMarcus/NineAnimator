@@ -450,6 +450,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C4ABC6D21B5881F009B4D47 /* Build configuration list for PBXNativeTarget "NineAnimator" */;
 			buildPhases = (
+				52F6A4F121DABBE60005D78D /* ShellScript */,
 				2C4ABC9621B7F55B009B4D47 /* ShellScript */,
 				2C4ABC4C21B5881E009B4D47 /* Sources */,
 				2C4ABC4D21B5881E009B4D47 /* Frameworks */,
@@ -582,6 +583,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		52F6A4F121DABBE60005D78D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
