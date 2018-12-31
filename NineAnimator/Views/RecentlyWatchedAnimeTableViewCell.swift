@@ -21,9 +21,9 @@ import Kingfisher
 import UIKit
 
 class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var animeTitleLabel: UILabel!
-    @IBOutlet weak var sourceTitleLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
+    @IBOutlet private weak var animeTitleLabel: UILabel!
+    @IBOutlet private weak var sourceTitleLabel: UILabel!
     
     var animeLink: AnimeLink? = nil {
         didSet {

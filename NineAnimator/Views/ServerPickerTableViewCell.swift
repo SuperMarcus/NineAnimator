@@ -27,7 +27,7 @@ protocol ServerPickerSelectionDelegate: AnyObject {
 
 @available(*, deprecated)
 class ServerPickerTableViewCell: UITableViewCell, UIPickerViewDataSource, UIPickerViewDelegate {
-    @IBOutlet weak var serverPickerView: UIPickerView!
+    @IBOutlet private weak var serverPickerView: UIPickerView!
     
     var _servers = [(identifier: Anime.ServerIdentifier, name: String)]()
     var servers: [Anime.ServerIdentifier: String]? {

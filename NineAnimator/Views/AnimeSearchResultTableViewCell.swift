@@ -21,8 +21,8 @@ import Kingfisher
 import UIKit
 
 class AnimeSearchResultTableViewCell: UITableViewCell {
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var animeTitleLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
+    @IBOutlet private weak var animeTitleLabel: UILabel!
     
     var animeLink: AnimeLink? {
         didSet {

@@ -35,8 +35,8 @@ class NineAnimeSource: BaseSource, Source {
             do {
                 let page = try NineAnimeFeatured(value, with: self)
                 handler(page, nil)
-            } catch let e {
-                handler(nil, e)
+            } catch {
+                handler(nil, error)
             }
         }
     }

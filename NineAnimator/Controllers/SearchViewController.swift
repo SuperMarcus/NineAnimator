@@ -36,7 +36,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     
     var source: Source { return NineAnimator.default.user.source }
 
-    @IBOutlet weak var selectSiteBarButton: UIBarButtonItem!
+    @IBOutlet private weak var selectSiteBarButton: UIBarButtonItem!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -136,7 +136,7 @@ extension SearchViewController {
 
 // MARK: - Source selection
 extension SearchViewController {
-    @IBAction func onSelectSourceButtonTapped(_ sender: Any) {
+    @IBAction private func onSelectSourceButtonTapped(_ sender: Any) {
         let currentSource = NineAnimator.default.user.source
         
         let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)

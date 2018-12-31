@@ -20,10 +20,10 @@
 import UIKit
 
 class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
-    @IBOutlet weak var coverImageView: UIImageView!
-    @IBOutlet weak var blurredCoverImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet private weak var coverImageView: UIImageView!
+    @IBOutlet private weak var blurredCoverImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var statusLabel: UILabel!
     
     var title: String? {
         willSet { titleLabel.text = newValue ?? "" }
@@ -43,9 +43,8 @@ class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let newTransform = highlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
-        
-        //Ignoring the animated option
-        UIView.animate(withDuration: 0.2) {
+
+        UIView.animate(withDuration: animated ? 0.2 : 0) {
             self.transform = newTransform
         }
     }

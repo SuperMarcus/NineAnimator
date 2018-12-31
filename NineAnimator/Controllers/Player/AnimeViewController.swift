@@ -37,9 +37,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     }
     
     // MARK: - Managed by AnimeViewController
-    @IBOutlet weak var serverSelectionButton: UIBarButtonItem!
+    @IBOutlet private weak var serverSelectionButton: UIBarButtonItem!
     
-    @IBOutlet weak var notificationToggleButton: UIBarButtonItem!
+    @IBOutlet private weak var notificationToggleButton: UIBarButtonItem!
     
     var anime: Anime? {
         didSet {
@@ -219,11 +219,11 @@ extension AnimeViewController {
 
 // MARK: - Share/Select Server/Notifications
 extension AnimeViewController {
-    @IBAction func onCastButtonTapped(_ sender: Any) {
+    @IBAction private func onCastButtonTapped(_ sender: Any) {
         RootViewController.shared?.showCastController()
     }
     
-    @IBAction func onActionButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction private func onActionButtonTapped(_ sender: UIBarButtonItem) {
         guard let link = animeLink else { return }
         let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
         
@@ -235,7 +235,7 @@ extension AnimeViewController {
         present(activityViewController, animated: true)
     }
     
-    @IBAction func onServerButtonTapped(_ sender: Any) {
+    @IBAction private func onServerButtonTapped(_ sender: Any) {
         let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
         
         if let popover = alertView.popoverPresentationController {
@@ -257,7 +257,7 @@ extension AnimeViewController {
         present(alertView, animated: true)
     }
     
-    @IBAction func onToggleNotification(_ sender: Any) {
+    @IBAction private func onToggleNotification(_ sender: Any) {
         guard let anime = anime else { return }
         
         if NineAnimator.default.user.isWatching(anime) {
