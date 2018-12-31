@@ -143,7 +143,6 @@ extension NineAnimatorUser {
         get { return EpisodeListingOrder(from: _freezer.string(forKey: .episodeListingOrder)) }
         set {
             _freezer.set(newValue.rawValue, forKey: .episodeListingOrder)
-            fireUpdates()
         }
     }
     
@@ -151,7 +150,6 @@ extension NineAnimatorUser {
         get { return _freezer.bool(forKey: .backgroundPlayback) }
         set {
             _freezer.set(newValue, forKey: .backgroundPlayback)
-            fireUpdates()
         }
     }
     
@@ -159,7 +157,6 @@ extension NineAnimatorUser {
         get { return _freezer.value(forKey: .pictureInPicturePlayback) as? Bool ?? true }
         set {
             _freezer.set(newValue, forKey: .pictureInPicturePlayback)
-            fireUpdates()
         }
     }
 }
@@ -389,11 +386,6 @@ extension NineAnimatorUser {
 }
 
 //MARK: - Private
-extension NineAnimatorUser {
-    fileprivate func fireUpdates(){
-        NotificationCenter.default.post(name: .userPreferencesDidChange, object: self)
-    }
-}
 
 fileprivate extension String {
     static var recentAnimeList: String { return "anime.recent" }

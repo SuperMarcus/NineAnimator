@@ -24,14 +24,6 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appDidBecameActive, object: self)
-    }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        NotificationCenter.default.post(name: .appWillBecomeInactive, object: self)
-    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         //Update once in two hours
         UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
