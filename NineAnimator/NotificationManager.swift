@@ -98,8 +98,7 @@ extension UserNotificationManager {
     func update(_ anime: Anime) {
         let newWatcher = WatchedAnime(
             link: anime.link,
-            episodeNames: [],
-//            episodeNames: anime.episodes.uniqueEpisodeNames,
+            episodeNames: anime.episodes.uniqueEpisodeNames,
             lastCheck: Date()
         )
         persist(newWatcher)
@@ -231,9 +230,14 @@ extension UserNotificationManager {
         let sourceName = result.anime.source.name
         
         if result.newEpisodeTitles.count == 1 {
-            content.body = "Episode \(result.newEpisodeTitles.first!) is now available on \(sourceName). Stream now from \(streamingSites)."
+            content.body = "Episode \(result.newEpisodeTitles.first!) is now available on \(sourceName)."
         } else {
-            content.body = "\(result.newEpisodeTitles.count) more episodes are now available on \(sourceName). Stream now from \(streamingSites)."
+            content.body = "\(result.newEpisodeTitles.count) more episodes are now available on \(sourceName)."
+        }
+        
+        //Sometimes showing what stream the anime is on can be helpful
+        if NineAnimator.default.user.notificationShowStreams {
+            content.body += " Stream now from \(streamingSites)."
         }
         
         do {

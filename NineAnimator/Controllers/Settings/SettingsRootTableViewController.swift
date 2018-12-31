@@ -20,6 +20,8 @@
 import UIKit
 import SafariServices
 import AVKit
+import Kingfisher
+import UserNotifications
 
 class SettingsRootTableViewController: UITableViewController {
     override func viewDidLoad() {
@@ -33,6 +35,12 @@ class SettingsRootTableViewController: UITableViewController {
     @IBOutlet weak var backgroundPlaybackSwitch: UISwitch!
     
     @IBOutlet weak var pictureInPictureSwitch: UISwitch!
+    
+    @IBOutlet weak var subscriptionStatsLabel: UILabel!
+    
+    @IBOutlet weak var subscriptionStatusLabel: UILabel!
+    
+    @IBOutlet weak var subscriptionShowStreamsSwitch: UISwitch!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,6 +68,10 @@ class SettingsRootTableViewController: UITableViewController {
         NineAnimator.default.user.allowBackgroundPlayback = sender.isOn
     }
     
+    @IBAction func onShowStreamsInNotificationDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.notificationShowStreams = sender.isOn
+    }
+    
     @IBAction func onDoneButtonClicked(_ sender: Any) {
         dismiss(animated: true)
     }
@@ -78,6 +90,8 @@ class SettingsRootTableViewController: UITableViewController {
         case "settings.history.recents":
             NineAnimator.default.user.clearRecents()
             updatePreferencesUI()
+        case "settings.history.cache":
+            clearCache()
         case "settings.history.reset":
             let alertView = UIAlertController(title: "Reset local storage", message: "This action is irreversible. All data and preferences will be deleted from your local storage.", preferredStyle: .actionSheet)
             
@@ -89,14 +103,25 @@ class SettingsRootTableViewController: UITableViewController {
             let action = UIAlertAction(title: "Reset", style: .destructive) {
                 [weak self] _ in
                 NineAnimator.default.user.clearAll()
+                self?.clearCache()
                 self?.updatePreferencesUI()
             }
             alertView.addAction(action)
             
             alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
             present(alertView, animated: true)
+        case "settings.notification.unsubscribe":
+            NineAnimator.default.user.unwatchAll()
+            updatePreferencesUI()
         default: return
         }
+    }
+    
+    private func clearCache(){
+        Kingfisher.ImageCache.default.clearDiskCache()
+        Kingfisher.ImageCache.default.clearMemoryCache()
+        URLCache.shared.removeAllCachedResponses()
+        UserNotificationManager.default.removeAll()
     }
     
     private func updatePreferencesUI(){
@@ -109,7 +134,34 @@ class SettingsRootTableViewController: UITableViewController {
         backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
         
         //To be gramatically correct :D
-        let recentAnimesCount = NineAnimator.default.user.recentAnimes.count
-        viewingHistoryStatsLabel.text = "\(recentAnimesCount) \(recentAnimesCount > 1 ? "Items" : "Item")"
+        let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
+        viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount > 1 ? "Items" : "Item")"
+        
+        let subscribedAnimeCount = NineAnimator.default.user.watchedAnimes.count
+        subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount > 1 ? "Items" : "Item")"
+        
+        subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
+        
+        //Notification and fetch status
+        var subscriptionEngineStatus = [String]()
+        
+        switch UIApplication.shared.backgroundRefreshStatus {
+        case .available: break
+        case .denied: subscriptionEngineStatus.append("App Refresh Denied")
+        case .restricted: subscriptionEngineStatus.append("App Refresh Restricted")
+        }
+        
+        UNUserNotificationCenter.current().getNotificationSettings {
+            settings in
+            if settings.authorizationStatus == .denied {
+                subscriptionEngineStatus.append("Permission Denied")
+            }
+            
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.subscriptionStatusLabel.text = subscriptionEngineStatus.count == 0 ?
+                    "Normal" : subscriptionEngineStatus.joined(separator: ", ")
+            }
+        }
     }
 }

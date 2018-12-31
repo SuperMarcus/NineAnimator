@@ -296,6 +296,15 @@ extension NineAnimatorUser {
     }
     
     /**
+     Show what streaming services that the new episode of a subscribed anime
+     is available on in an notification.
+     */
+    var notificationShowStreams: Bool {
+        get { return _freezer.bool(forKey: .notificationShowStream) }
+        set { _freezer.set(newValue, forKey: .notificationShowStream) }
+    }
+    
+    /**
      Return if the provided link is being watched
      */
     func isWatching(anime: AnimeLink) -> Bool {
@@ -324,6 +333,14 @@ extension NineAnimatorUser {
         watchedAnimes = watchedAnimes.filter { $0 != anime.link }
         UserNotificationManager.default.remove(anime.link)
     }
+    
+    /**
+     Remove all watched anime
+     */
+    func unwatchAll(){
+        watchedAnimes.forEach(UserNotificationManager.default.remove)
+        watchedAnimes = []
+    }
 }
 
 //MARK: - Private
@@ -337,6 +354,7 @@ fileprivate extension String {
     static var episodeListingOrder: String { return "episode.listing.order" }
     static var backgroundPlayback: String { return "playback.background" }
     static var pictureInPicturePlayback: String { return "playback.pip" }
+    static var notificationShowStream: String { return "notification.showStreams" }
     
     //Watching anime episodes persist filename
     static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }
