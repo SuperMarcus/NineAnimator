@@ -6,6 +6,9 @@ install:
     - gem install xcpretty
     - gem install xcpretty-travis-formatter
 
+before_script:
+    - carthage bootstrap --platform iOS --cache-builds
+
 script:
     - swiftlint
     - xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
