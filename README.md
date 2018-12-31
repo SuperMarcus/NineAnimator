@@ -42,6 +42,7 @@ GPLv3 Licensed.
 
 - [x] Ads Free and no logins
 - [x] Super-duper clean UIs
+- [x] Get notifications when new episodes come out
 - [x] iOS's native video playback interface
 - [x] Picture in Picture playback on iPads
 - [x] Chromecast/Google Cast with lockscreen & control center support
