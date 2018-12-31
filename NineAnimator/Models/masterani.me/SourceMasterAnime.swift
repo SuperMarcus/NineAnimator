@@ -92,7 +92,7 @@ class NASourceMasterAnime: BaseSource, Source {
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
         let animeLinkString = link.link.absoluteString
-        let matches = NASourceMasterAnime.animeResourceIdentifierRegex.matches(in: animeLinkString, options: [], range: animeLinkString.matchingRange)
+        let matches = NASourceMasterAnime.animeResourceIdentifierRegex.matches(in: animeLinkString, range: animeLinkString.matchingRange)
         guard let match = matches.first else {
             handler(nil, NineAnimatorError.urlError)
             return nil
@@ -103,33 +103,25 @@ class NASourceMasterAnime: BaseSource, Source {
         
         debugPrint("Info: Requesting episodes of anime \(identifier) on masterani.me")
         
-        task.add(request(ajax: path) {
-            [weak task] response, error in
+        task.add(request(ajax: path) { [weak task] response, error in
             guard let task = task else { return }
             guard let response = response else {
                 return handler(nil, error)
             }
-            
+            func handleError(_ error: String) {
+                handler(nil, NineAnimatorError.responseError(error))
+            }
             guard let animeInfo = response["info"] as? [String: Any] else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no info entry found"
-                ))
+                return handleError("no info entry found")
             }
-            
             guard let animeSynopsis = animeInfo["synopsis"] as? String else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no info.synopsis entry found"
-                ))
+                return handleError("no info.synopsis entry found")
             }
-            
             guard let animeEpisodes = response["episodes"] as? [NSDictionary] else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no episodes entry found"
-                ))
+                return handleError("no episodes entry found")
             }
             
-            let episodes: [EpisodeLink] = animeEpisodes.compactMap {
-                episode in
+            let episodes: [EpisodeLink] = animeEpisodes.compactMap { episode in
                 guard let episodeInfo = episode["info"] as? NSDictionary,
                     // let episodeIdentifier = episodeInfo["id"] as? Int,
                     let episodeNumber = episodeInfo["episode"] as? String,
@@ -137,12 +129,10 @@ class NASourceMasterAnime: BaseSource, Source {
                     else { return nil }
                 
                 var episodeName = "\(episodeNumber)"
-                
-                //New anime may not always have the title set
+                // New anime may not always have the title set
                 if let episodeTitle = episodeInfo["title"] as? String {
                     episodeName = "\(episodeName) - \(episodeTitle)"
                 }
-                
                 return EpisodeLink(
                     identifier: "\(animeIdentifier):\(episodeNumber)",
                     name: episodeName,
@@ -152,18 +142,15 @@ class NASourceMasterAnime: BaseSource, Source {
             }
             
             guard let firstEpisode = episodes.first else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no episodes found"
-                ))
+                return handleError("no episodes found")
             }
             
             debugPrint("Info: Found \(episodes.count) episodes")
             debugPrint("Info: Requesting availble streaming servers")
             
-            task.add(self.episodeInfo(from: firstEpisode) {
-                info, error in
-                guard let info = info else { return handler(nil, error) }
-                let hosts = info.availableHosts
+            task.add(self.episodeInfo(from: firstEpisode) { info, error in
+                guard let hosts = info?.availableHosts
+                    else { return handler(nil, error) }
                 handler(Anime(
                     link,
                     description: animeSynopsis,

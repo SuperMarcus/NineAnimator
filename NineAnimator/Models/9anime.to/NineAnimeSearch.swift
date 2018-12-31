@@ -53,9 +53,8 @@ class NineAnimeSearch: SearchPageProvider {
         let loadingIndex = _results.count
         let encodedKeyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         _lastRequest = _parent.request(browse:
-        "/search?keyword=\(encodedKeyword)&page=\(_results.count + 1)"
-        ) {
-            [weak self] response, error in
+            "/search?keyword=\(encodedKeyword)&page=\(_results.count + 1)"
+        ) { [weak self] response, error in
             guard let self = self else { return }
             defer { self._lastRequest = nil }
             
@@ -101,9 +100,7 @@ class NineAnimeSearch: SearchPageProvider {
                     self._results.append(animes)
                     self.delegate?.pageIncoming(newSection, from: self)
                 }
-            } catch {
-                debugPrint("Error when loading more results: \(error)")
-            }
+            } catch { debugPrint("Error when loading more results: \(error)") }
         }
     }
 }

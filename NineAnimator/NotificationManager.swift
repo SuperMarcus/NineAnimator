@@ -173,12 +173,8 @@ extension UserNotificationManager {
         
         debugPrint("Info: Beginning background fetch with \(watchedAnimeLinks.count) watched anime.")
         
-        taskPool = watchedAnimeLinks.map {
-            animeLink in
-            
-            animeLink.retrive {
-                anime, _ in
-                
+        taskPool = watchedAnimeLinks.map { animeLink in
+            animeLink.retrive { anime, _ in
                 defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
                 
                 guard let anime = anime else { return resultsPool.append(nil) }
@@ -192,12 +188,10 @@ extension UserNotificationManager {
                     result.availableServerNames = result
                         .newEpisodeTitles
                         .flatMap(anime.episodes.links)
-                        .reduce([Anime.ServerIdentifier]()) {
-                            (list: [Anime.ServerIdentifier], current: EpisodeLink) -> [String] in
-                            if !list.contains(current.server) {
-                                return list + [current.server]
+                        .reduce(into: [Anime.ServerIdentifier]()) {
+                            if !$0.contains($1.server) {
+                                $0.append($1.server)
                             }
-                            return list
                         }
                         .compactMap { anime.servers[$0] }
                     

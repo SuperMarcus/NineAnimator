@@ -77,7 +77,8 @@ extension NineAnimeSource {
         debugPrint("- Attributes: \(animeAttributes)")
         debugPrint("- Resource Identifiers: ID=\(animeResourceTags.id), EPISODE=\(animeResourceTags.episode)")
         
-        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders) { response, error in
+        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders)
+        { response, error in
             guard let responseJson = response else {
                 return handler(nil, error)
             }
@@ -109,11 +110,10 @@ extension NineAnimeSource {
                 for server in try soup.select("div.server") {
                     let serverIdentifier = try server.attr("data-id")
                     animeEpisodes[serverIdentifier] = try server.select("li>a").map {
-                        EpisodeLink(
-                            identifier: try $0.attr("data-id"),
-                            name: try $0.text(),
-                            server: serverIdentifier,
-                            parent: link)
+                        EpisodeLink(identifier: try $0.attr("data-id"),
+                                    name: try $0.text(),
+                                    server: serverIdentifier,
+                                    parent: link)
                     }
                     debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
                 }
