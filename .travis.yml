@@ -5,10 +5,14 @@ cache:
   directories:
     - Carthage
 
+addons:
+  homebrew:
+    packages:
+    - carthage
+    - swiftlint
+    update: true
+
 install:
-  - brew update
-  - brew outdated carthage || brew upgrade carthage
-  - brew outdated swiftlint ||  brew upgrade swiftlint
   - gem install xcpretty
   - gem install xcpretty-travis-formatter
 
