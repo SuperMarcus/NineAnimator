@@ -22,6 +22,7 @@
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
+		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* NotificationManager.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
@@ -84,6 +85,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2C2196D321DAC555002059D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2C4ABC4821B5881E009B4D47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2C4ABC4F21B5881E009B4D47;
+			remoteInfo = NineAnimator;
+		};
 		2C4ABC6521B5881F009B4D47 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2C4ABC4821B5881E009B4D47 /* Project object */;
@@ -109,6 +117,9 @@
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
+		2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
+		2C2196D221DAC555002059D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,6 +199,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2C2196CB21DAC555002059D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C4ABC4D21B5881E009B4D47 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,12 +252,22 @@
 			path = "Featured Tab";
 			sourceTree = "<group>";
 		};
+		2C2196CF21DAC555002059D3 /* NineAnimatorTests */ = {
+			isa = PBXGroup;
+			children = (
+				2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */,
+				2C2196D221DAC555002059D3 /* Info.plist */,
+			);
+			path = NineAnimatorTests;
+			sourceTree = "<group>";
+		};
 		2C4ABC4721B5881E009B4D47 = {
 			isa = PBXGroup;
 			children = (
 				2C6677A221BC78EF000E5ACC /* Misc */,
 				2C4ABC5221B5881E009B4D47 /* NineAnimator */,
 				2C4ABC6721B5881F009B4D47 /* NineAnimatorUITests */,
+				2C2196CF21DAC555002059D3 /* NineAnimatorTests */,
 				2C4ABC5121B5881E009B4D47 /* Products */,
 				2C4ABC9321B7F53E009B4D47 /* Frameworks */,
 			);
@@ -250,6 +278,7 @@
 			children = (
 				2C4ABC5021B5881E009B4D47 /* NineAnimator.app */,
 				2C4ABC6421B5881F009B4D47 /* NineAnimatorUITests.xctest */,
+				2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -448,6 +477,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2C2196CD21DAC555002059D3 /* NineAnimatorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2C2196D721DAC555002059D3 /* Build configuration list for PBXNativeTarget "NineAnimatorTests" */;
+			buildPhases = (
+				2C2196CA21DAC555002059D3 /* Sources */,
+				2C2196CB21DAC555002059D3 /* Frameworks */,
+				2C2196CC21DAC555002059D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2C2196D421DAC555002059D3 /* PBXTargetDependency */,
+			);
+			name = NineAnimatorTests;
+			productName = NineAnimatorTests;
+			productReference = 2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		2C4ABC4F21B5881E009B4D47 /* NineAnimator */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C4ABC6D21B5881F009B4D47 /* Build configuration list for PBXNativeTarget "NineAnimator" */;
@@ -495,6 +542,10 @@
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Marcus Zhou";
 				TargetAttributes = {
+					2C2196CD21DAC555002059D3 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = 2C4ABC4F21B5881E009B4D47;
+					};
 					2C4ABC4F21B5881E009B4D47 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
@@ -527,11 +578,19 @@
 			targets = (
 				2C4ABC4F21B5881E009B4D47 /* NineAnimator */,
 				2C4ABC6321B5881F009B4D47 /* NineAnimatorUITests */,
+				2C2196CD21DAC555002059D3 /* NineAnimatorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2C2196CC21DAC555002059D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C4ABC4E21B5881E009B4D47 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -606,6 +665,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2C2196CA21DAC555002059D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2C4ABC4C21B5881E009B4D47 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -684,6 +751,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2C2196D421DAC555002059D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2C4ABC4F21B5881E009B4D47 /* NineAnimator */;
+			targetProxy = 2C2196D321DAC555002059D3 /* PBXContainerItemProxy */;
+		};
 		2C4ABC6621B5881F009B4D47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2C4ABC4F21B5881E009B4D47 /* NineAnimator */;
@@ -735,6 +807,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2C2196D521DAC555002059D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WB2V923XT;
+				INFOPLIST_FILE = NineAnimatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NineAnimator.app/NineAnimator";
+			};
+			name = Debug;
+		};
+		2C2196D621DAC555002059D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8WB2V923XT;
+				INFOPLIST_FILE = NineAnimatorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NineAnimator.app/NineAnimator";
+			};
+			name = Release;
+		};
 		2C4ABC6B21B5881F009B4D47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -938,6 +1050,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2C2196D721DAC555002059D3 /* Build configuration list for PBXNativeTarget "NineAnimatorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2C2196D521DAC555002059D3 /* Debug */,
+				2C2196D621DAC555002059D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2C4ABC4B21B5881E009B4D47 /* Build configuration list for PBXProject "NineAnimator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

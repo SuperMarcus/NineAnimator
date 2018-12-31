@@ -38,6 +38,16 @@
                ReferencedContainer = "container:NineAnimator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2C2196CD21DAC555002059D3"
+               BuildableName = "NineAnimatorTests.xctest"
+               BlueprintName = "NineAnimatorTests"
+               ReferencedContainer = "container:NineAnimator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

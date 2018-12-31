@@ -1,0 +1,10 @@
+language: objective-c
+iosx_image: xcode10.1
+
+install:
+    - brew install swiftlint
+
+script:
+    - swiftlint
+    - xctool test -project NineAnimator.xcodeproj -scheme NineAnimator -sdk iphonesimulator
+
