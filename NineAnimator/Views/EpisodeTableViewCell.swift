@@ -23,9 +23,10 @@ class EpisodeTableViewCell: UITableViewCell {
     var episodeLink: EpisodeLink? {
         didSet {
             titleLabel.text = episodeLink?.name
+            progressIndicator.episodeLink = episodeLink
         }
     }
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var progressIndicator: EpisodeAccessoryProcessIndicator!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var progressIndicator: EpisodeAccessoryProcessIndicator!
 }

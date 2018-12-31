@@ -57,7 +57,7 @@ class EpisodeAccessoryProcessIndicator: UIView {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        var percentage: CGFloat = 0
+        var percentage = 0 as CGFloat
         
         if let episodeLink = episodeLink {
             percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: episodeLink))

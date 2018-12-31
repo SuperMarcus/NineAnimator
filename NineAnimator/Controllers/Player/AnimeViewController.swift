@@ -100,7 +100,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //Remove lines at the end of the table
+        // Remove lines at the end of the table
         tableView.tableFooterView = UIView()
         
         // If episode is set, use episode's anime link as the anime for display
@@ -173,15 +173,13 @@ extension AnimeViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.description") as? AnimeDescriptionTableViewCell
-                else { fatalError("cell with wrong type is dequeued") }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.description") as! AnimeDescriptionTableViewCell
             cell.link = animeLink
             cell.animeDescription = anime?.description
             informationCell = cell
             return cell
         case 1:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as? EpisodeTableViewCell
-                else { fatalError("unable to dequeue reuseable cell") }
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as! EpisodeTableViewCell
             let episodes = anime!.episodes[server!]!
             var episode = episodes[indexPath.item]
             
@@ -190,7 +188,6 @@ extension AnimeViewController {
             }
             
             cell.episodeLink = episode
-            cell.progressIndicator.episodeLink = episode
             return cell
         default:
             fatalError()
