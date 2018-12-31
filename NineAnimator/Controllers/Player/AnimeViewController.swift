@@ -290,6 +290,11 @@ extension AnimeViewController {
         
         let image = NineAnimator.default.user.isWatching(anime) ? #imageLiteral(resourceName: "Notification Enabled") : #imageLiteral(resourceName: "Notification Disabled")
         notificationToggleButton.image = image
+        
+        //Remove the notification once the anime is viewed
+        let notificationCenter = UNUserNotificationCenter.current()
+        let viewedAnimeNotificationIdentifiers: [String] = [.episodeUpdateNotificationIdentifier(anime.link)]
+        notificationCenter.removeDeliveredNotifications(withIdentifiers: viewedAnimeNotificationIdentifiers)
     }
 }
 

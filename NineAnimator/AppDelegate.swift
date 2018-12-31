@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     }
                     
                     let request = UNNotificationRequest(
-                        identifier: .episodeUpdateNotification,
+                        identifier: .episodeUpdateNotificationIdentifier(watcher.link),
                         content: content,
                         trigger: nil)
                     
@@ -108,6 +108,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
-fileprivate extension String {
-    static var episodeUpdateNotification: String { return "com.marcuszhou.NineAnimator.notification.episodeUpdates" }
+//MARK: - Notification identifiers
+extension String {
+    static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
+        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(anime.link.hashValue)"
+    }
 }
