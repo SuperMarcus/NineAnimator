@@ -114,7 +114,8 @@ extension NineAnimeSource {
                             identifier: try $0.attr("data-id"),
                             name: try $0.text(),
                             server: serverIdentifier,
-                            parent: link) }
+                            parent: link)
+                    }
                     debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
                 }
                 

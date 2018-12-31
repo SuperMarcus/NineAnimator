@@ -37,15 +37,15 @@ class RootViewController: UITabBarController {
         RootViewController.shared = self
     }
     
-    func presentOnTop(_ vc: UIViewController, animated: Bool = true, completion: (() -> ())? = nil){
+    func presentOnTop(_ vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
         topViewController.present(vc, animated: animated, completion: completion)
     }
     
-    func showCastController(){
+    func showCastController() {
         self.castControllerDelegate = CastController.default.present(from: topViewController)
     }
     
-    deinit{
+    deinit {
         if RootViewController.shared == self {
             debugPrint("Warn: RootViewController is deinitialized.")
         }

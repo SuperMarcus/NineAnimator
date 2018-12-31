@@ -17,11 +17,11 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
-import OpenCastSwift
-import Kingfisher
 import AVFoundation
+import Kingfisher
 import MediaPlayer
+import OpenCastSwift
+import UIKit
 
 enum CastDeviceState {
     case idle
@@ -98,7 +98,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     }
 }
 
-//MARK: - User Interface
+// MARK: - User Interface
 extension GoogleCastMediaPlaybackViewController {
     var needsTopInset: Bool { return false }
     
@@ -245,7 +245,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
 }
 
-//MARK: - Updates from media server
+// MARK: - Updates from media server
 extension GoogleCastMediaPlaybackViewController {
     func playback(update media: CastMedia, mediaStatus status: CastMediaStatus) {
         coverImage.kf.setImage(with: media.poster) {
@@ -253,8 +253,7 @@ extension GoogleCastMediaPlaybackViewController {
             guard let image = result.value?.image else { return }
             //Set poster image but let the updater to push it to the now playing center
             self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
-                MPMediaItemArtwork(boundsSize: image.size)
-                { _ in return image }
+                MPMediaItemArtwork(boundsSize: image.size) { _ in image }
         }
         coverImage.kf.indicatorType = .activity
         
@@ -280,7 +279,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
 }
 
-//MARK: Device discovery
+// MARK: Device discovery
 extension GoogleCastMediaPlaybackViewController {
     func deviceListUpdated() {
         deviceListTableView.reloadSections([0], with: .automatic)
@@ -296,7 +295,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
 }
 
-//MARK: - Table view data source
+// MARK: - Table view data source
 extension GoogleCastMediaPlaybackViewController {
     func numberOfSections(in tableView: UITableView) -> Int { return 1 }
     
@@ -317,10 +316,10 @@ extension GoogleCastMediaPlaybackViewController {
     }
 }
 
-//MARK: - Dummy audio players for control center and lock screen controls
+// MARK: - Dummy audio players for control center and lock screen controls
 extension GoogleCastMediaPlaybackViewController {
-    private func startDummyPlayer(){
-        do{
+    private func startDummyPlayer() {
+        do {
             debugPrint("Info: Starting cast dummy audio player")
             guard let dummyAudioAsset = NSDataAsset(name: "CastDummyAudio")
                 else { throw NineAnimatorError.urlError }
@@ -336,17 +335,17 @@ extension GoogleCastMediaPlaybackViewController {
             self.castDummyAudioPlayer?.volume = 0.01
             self.castDummyAudioPlayer?.prepareToPlay()
             self.castDummyAudioPlayer?.play()
-        }catch { debugPrint("Error: \(error)") }
+        } catch { debugPrint("Error: \(error)") }
     }
     
-    private func stopDummyPlayer(){
+    private func stopDummyPlayer() {
         debugPrint("Info: Stopping cast dummy audio player")
         self.castDummyAudioPlayer?.stop()
         self.castDummyAudioPlayer = nil
         try? AVAudioSession.sharedInstance().setActive(false, options: [])
     }
     
-    private func nowPlaying(setup episode: Episode){
+    private func nowPlaying(setup episode: Episode) {
         //Start the dummy player so we can control cast playback from lockscreen
         //and control center
         startDummyPlayer()
@@ -408,7 +407,7 @@ extension GoogleCastMediaPlaybackViewController {
             object: nil)
     }
     
-    private func nowPlaying(teardown: Episode){
+    private func nowPlaying(teardown: Episode) {
         stopDummyPlayer()
         
         let infoCenter = MPNowPlayingInfoCenter.default()
@@ -419,7 +418,7 @@ extension GoogleCastMediaPlaybackViewController {
         NotificationCenter.default.removeObserver(self, name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
     }
     
-    private func nowPlaying(update status: CastMediaStatus){
+    private func nowPlaying(update status: CastMediaStatus) {
         let infoCenter = MPNowPlayingInfoCenter.default()
         
         self.sharedNowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] =

@@ -60,8 +60,7 @@ class NineAnimatorUser {
     
     var persistedProgresses: [String: Float] {
         get {
-            if let dict = _freezer.dictionary(forKey: .persistedProgresses) as? [String: Float]
-            { return dict } else { return [:] }
+            if let dict = _freezer.dictionary(forKey: .persistedProgresses) as? [String: Float] { return dict } else { return [:] }
         }
         set { _freezer.set(newValue, forKey: .persistedProgresses) }
     }
@@ -70,7 +69,7 @@ class NineAnimatorUser {
     ///
     /// - Parameter anime: AnimeLink of the anime
     func entering(anime: AnimeLink) {
-        var animes = recentAnimes.filter{ $0 != anime }
+        var animes = recentAnimes.filter { $0 != anime }
         animes.insert(anime, at: 0)
         recentAnimes = animes
     }
@@ -126,7 +125,7 @@ class NineAnimatorUser {
     }
 }
 
-//MARK: - Preferences
+// MARK: - Preferences
 extension NineAnimatorUser {
     enum EpisodeListingOrder: String {
         case ordered
@@ -161,7 +160,7 @@ extension NineAnimatorUser {
     }
 }
 
-//MARK: - Serialization
+// MARK: - Serialization
 extension NineAnimatorUser {
     private func encode<T: Encodable>(data: T) -> Data? {
         let encoder = PropertyListEncoder()
@@ -175,7 +174,7 @@ extension NineAnimatorUser {
     }
 }
 
-//MARK: - Cloud Sync
+// MARK: - Cloud Sync
 extension NineAnimatorUser {
     enum MergePiority {
         case localFirst
@@ -209,23 +208,22 @@ extension NineAnimatorUser {
     
     private var cloudPersistedProgresses: [String: Float] {
         get {
-            if let dict = _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float]
-            { return dict } else { return [:] }
+            if let dict = _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float] { return dict } else { return [:] }
         }
         set { _cloud.set(newValue, forKey: .persistedProgresses) }
     }
     
-    func pull(){
+    func pull() {
         //Not using iCloud rn
 //        merge(piority: .remoteFirst)
     }
     
-    func push(){
+    func push() {
         //Not using iCloud rn
 //        merge(piority: .localFirst)
     }
     
-    func merge(piority: MergePiority){
+    func merge(piority: MergePiority) {
 //        debugPrint("Info: Synchronizing defaults with piority \(piority)")
         
         if piority == .remoteFirst { _cloud.synchronize() }
@@ -244,8 +242,7 @@ extension NineAnimatorUser {
         cloudRecentAnime = mergedRecentAnime
         
         //Merge source
-        if piority == .localFirst { _cloud.set(source.name, forKey: .recentSource) }
-        else { _freezer.set(_cloud.string(forKey: .recentSource) ?? source.name, forKey: .recentSource) }
+        if piority == .localFirst { _cloud.set(source.name, forKey: .recentSource) } else { _freezer.set(_cloud.string(forKey: .recentSource) ?? source.name, forKey: .recentSource) }
         
         //Merge recent episode
         if piority == .localFirst {
@@ -264,8 +261,7 @@ extension NineAnimatorUser {
         let secondaryPersistedProgresses = piority == .localFirst ?
             cloudPersistedProgresses : persistedProgresses
         
-        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses)
-            { v, _ in return v }
+        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses) { v, _ in v }
         cloudPersistedProgresses = mergedPersistedProgresses
         persistedProgresses = mergedPersistedProgresses
         
@@ -275,12 +271,12 @@ extension NineAnimatorUser {
     
     fileprivate func merge<T: Equatable>(primary: [T], secondary: [T]) -> [T] {
         return primary + secondary.filter({
-            link in return !primary.contains { $0 == link }
+            link in !primary.contains { $0 == link }
         })
     }
 }
 
-//MARK: - Watched anime stores
+// MARK: - Watched anime stores
 extension NineAnimatorUser {
     /**
      Returns the list of anime currently set to be notified for updates
@@ -308,7 +304,7 @@ extension NineAnimatorUser {
      Return if the provided link is being watched
      */
     func isWatching(anime: AnimeLink) -> Bool {
-        return watchedAnimes.contains { return $0 == anime }
+        return watchedAnimes.contains { $0 == anime }
     }
     
     /**
@@ -319,7 +315,7 @@ extension NineAnimatorUser {
     /**
      Add the anime to the watch list
      */
-    func watch(anime: Anime){
+    func watch(anime: Anime) {
         var newWatchList = watchedAnimes.filter { $0 != anime.link }
         newWatchList.append(anime.link)
         watchedAnimes = newWatchList
@@ -329,7 +325,7 @@ extension NineAnimatorUser {
     /**
      Remove the anime from the watch list
      */
-    func unwatch(anime: Anime){
+    func unwatch(anime: Anime) {
         watchedAnimes = watchedAnimes.filter { $0 != anime.link }
         UserNotificationManager.default.remove(anime.link)
     }
@@ -343,7 +339,7 @@ extension NineAnimatorUser {
     }
 }
 
-//MARK: - Private
+// MARK: - Private
 
 fileprivate extension String {
     static var recentAnimeList: String { return "anime.recent" }

@@ -44,7 +44,7 @@ class NASearchMasterAnime: SearchPageProvider {
         more()
     }
     
-    deinit{ _lastRequest?.cancel() }
+    deinit { _lastRequest?.cancel() }
     
     func animes(on page: Int) -> [AnimeLink] {
         return _results[page]
@@ -55,7 +55,7 @@ class NASearchMasterAnime: SearchPageProvider {
             let keyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
             _lastRequest = _parent.request(ajax: path) {
-                [weak self] response, error in
+                [weak self] response, _ in
                 guard let self = self else { return }
                 
                 defer { self._lastRequest = nil }

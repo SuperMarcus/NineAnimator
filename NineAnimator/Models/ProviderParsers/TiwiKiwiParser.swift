@@ -17,9 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
 import AVKit
+import Foundation
 
 class TiwiKiwiParser: VideoProviderParser {
     static let jwPlayerOptionRegex = try! NSRegularExpression(pattern: "'([^']+)'\\.split", options: .caseInsensitive)
@@ -48,7 +48,7 @@ class TiwiKiwiParser: VideoProviderParser {
                 ))
             }
             
-            var url: URL? = nil
+            var url: URL?
             
             if let match = TiwiKiwiParser.jwPlayerOptionRegex.matches(in: text, options: [], range: text.matchingRange).first {
                 url = TiwiKiwiParser.assembleTwPlayerURL(for: text[match.range(at: 1)])
@@ -106,7 +106,7 @@ class TiwiKiwiParser: VideoProviderParser {
         return task
     }
     
-    static fileprivate func assembleTwPlayerURL(for playerOptionsString: String) -> URL? {
+    fileprivate static func assembleTwPlayerURL(for playerOptionsString: String) -> URL? {
         let playerOptions = playerOptionsString.split(separator: "|")
         
         let serverPrefix = playerOptions[29]

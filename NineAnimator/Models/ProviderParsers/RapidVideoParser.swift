@@ -17,10 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
-import SwiftSoup
 import AVKit
+import Foundation
+import SwiftSoup
 
 class RapidVideoParser: VideoProviderParser {
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {

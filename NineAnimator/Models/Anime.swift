@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
+import Foundation
 import SwiftSoup
 
 extension NineAnimator {
@@ -61,9 +61,9 @@ struct Anime {
 extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.EpisodeLinksCollection {
     var uniqueEpisodeNames: [String] {
         var names = [String]()
-        self.flatMap{ $0.value }.forEach{
+        self.flatMap { $0.value }.forEach {
             episodeLink in
-            if !names.contains{ return $0 == episodeLink.name } {
+            if !names.contains { $0 == episodeLink.name } {
                 names.append(episodeLink.name)
             }
         }

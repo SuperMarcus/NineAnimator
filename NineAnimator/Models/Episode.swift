@@ -17,10 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import Alamofire
-import SwiftSoup
 import AVKit
+import Foundation
+import SwiftSoup
 
 struct Episode {
     let link: EpisodeLink
@@ -37,7 +37,7 @@ struct Episode {
     
     var progress: Float { return NineAnimator.default.user.playbackProgress(for: link) }
     
-    func update(progress: Float){ NineAnimator.default.user.update(progress: progress, for: link) }
+    func update(progress: Float) { NineAnimator.default.user.update(progress: progress, for: link) }
     
     var source: Source { return _parent.source }
     

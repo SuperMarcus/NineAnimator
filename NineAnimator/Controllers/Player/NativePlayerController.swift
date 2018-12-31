@@ -17,8 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
 import AVKit
+import UIKit
 
 /**
  This class handles native video playback events such as picture in
@@ -65,7 +65,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
     //State of the player
     private(set) var state: State = .idle
     
-    override private init(){
+    override private init() {
         super.init()
         
         //Observers
@@ -94,7 +94,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
     }
 }
 
-//MARK: - Playing medias
+// MARK: - Playing medias
 extension NativePlayerController {
     /**
      Reset the playback queue and start playing the current item
@@ -115,12 +115,12 @@ extension NativePlayerController {
         let item = media.avPlayerItem
         
         //Add item ready observation to restore playback progress
-        mediaItemsObervations[item] = item.observe(\.status){
+        mediaItemsObervations[item] = item.observe(\.status) {
             [weak self] (_: AVPlayerItem, _: NSKeyValueObservedChange<AVPlayerItem.Status>) in
             guard let self = self else { return }
             if item.status == .readyToPlay {
                 //Seek to five seconds before the persisted progress
-                item.seek(to: CMTime(seconds: max(media.progress * item.duration.seconds - 5, 0))){
+                item.seek(to: CMTime(seconds: max(media.progress * item.duration.seconds - 5, 0))) {
                     //Remove the observer after progress has been restored
                     _ in self.mediaItemsObervations.removeValue(forKey: item)
                 }
@@ -141,7 +141,7 @@ extension NativePlayerController {
     }
 }
 
-//MARK: - Picture in Picture playback handling
+// MARK: - Picture in Picture playback handling
 extension NativePlayerController {
     //Check if picture in picture is supported and enabled
     private var shouldUsePictureInPicture: Bool {
@@ -162,9 +162,9 @@ extension NativePlayerController {
     }
 }
 
-//MARK: - AVPlayer & AVPlayerItem observers
+// MARK: - AVPlayer & AVPlayerItem observers
 extension NativePlayerController {
-    private func onPlayerRateChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Float>){
+    private func onPlayerRateChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Float>) {
         updatePlaybackSession()
         persistProgress()
         
@@ -174,19 +174,19 @@ extension NativePlayerController {
         }
         
         if player.rate > 0 {
-            playerPeriodicObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0), queue: queue) { [weak self] time in self?.updatePlaybackSession(); self?.persistProgress() }
+            playerPeriodicObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0), queue: queue) { [weak self] _ in self?.updatePlaybackSession(); self?.persistProgress() }
         }
     }
 }
 
-//MARK: - Progress persistence
+// MARK: - Progress persistence
 extension NativePlayerController {
     private var isCurrentItemPlaybackProgressRestored: Bool {
         guard let item = currentItem else { return false }
         return self.mediaItemsObervations[item] == nil
     }
     
-    private func persistProgress(){
+    private func persistProgress() {
         //Only persist progress after progress restoration
         
         //Using a little shortcut here
@@ -196,9 +196,9 @@ extension NativePlayerController {
     }
 }
 
-//MARK: - App state handlers
+// MARK: - App state handlers
 extension NativePlayerController {
-    @objc func onAppEntersBackground(notification _: Notification){
+    @objc func onAppEntersBackground(notification _: Notification) {
         guard !shouldUsePictureInPicture else { return }
         
         if NineAnimator.default.user.allowBackgroundPlayback {
@@ -206,46 +206,46 @@ extension NativePlayerController {
         } else { player.pause() }
     }
     
-    @objc func onAppEntersForeground(notification _: Notification){
+    @objc func onAppEntersForeground(notification _: Notification) {
         playerViewController.player = player
     }
 }
 
-//MARK: - Update preferences
+// MARK: - Update preferences
 extension NativePlayerController {
-    @objc func onUserPreferenceDidChange(notification _: Notification){
+    @objc func onUserPreferenceDidChange(notification _: Notification) {
         playerViewController.allowsPictureInPicturePlayback = shouldUsePictureInPicture
         //Ignoring the others since those are retrived on app state changes
     }
 }
 
-//MARK: - AVAudioSession setup, update, teardown
+// MARK: - AVAudioSession setup, update, teardown
 extension NativePlayerController {
-    private func setupPlaybackSession(){
+    private func setupPlaybackSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
-        do{
+        do {
             try audioSession.setCategory(
                 .playback,
                 mode: .moviePlayback)
             try audioSession.setActive(true, options: [])
-        }catch { debugPrint("Error: Unable to setup audio session - \(error)") }
+        } catch { debugPrint("Error: Unable to setup audio session - \(error)") }
     }
     
-    private func updatePlaybackSession(){
+    private func updatePlaybackSession() {
         //Not doing anything right now
     }
     
-    private func teardownPlaybackSession(){
+    private func teardownPlaybackSession() {
         let audioSession = AVAudioSession.sharedInstance()
         
-        do{
+        do {
             try audioSession.setActive(false, options: [])
-        }catch { debugPrint("Error: Unable to teardown audio session - \(error)") }
+        } catch { debugPrint("Error: Unable to teardown audio session - \(error)") }
     }
 }
 
-//MARK: - States
+// MARK: - States
 extension NativePlayerController {
     enum State {
         case idle

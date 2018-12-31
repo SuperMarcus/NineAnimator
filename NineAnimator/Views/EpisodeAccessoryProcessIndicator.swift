@@ -25,7 +25,7 @@ class EpisodeAccessoryProcessIndicator: UIView {
     lazy var indicatorColor: UIColor = tintColor
     
     @IBInspectable
-    var nullColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
+    var nullColor = UIColor.lightGray.withAlphaComponent(0.4)
     
     @IBInspectable
     var strokeWidth: CGFloat = 2.0
@@ -50,8 +50,8 @@ class EpisodeAccessoryProcessIndicator: UIView {
     
     deinit { NotificationCenter.default.removeObserver(self) }
     
-    @objc func onProgressUpdate(notification: Notification){
-        DispatchQueue.main.async{ self.setNeedsDisplay() }
+    @objc func onProgressUpdate(notification: Notification) {
+        DispatchQueue.main.async { self.setNeedsDisplay() }
     }
     
     override func draw(_ rect: CGRect) {

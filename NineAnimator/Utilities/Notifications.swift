@@ -20,6 +20,5 @@
 import Foundation
 
 extension Notification.Name {
-    static var playbackProgressDidUpdate: Notification.Name
-    { return .init("com.marcuszhou.nineanimator.playbackProgressDidUpdate") }
+    static var playbackProgressDidUpdate: Notification.Name { return .init("com.marcuszhou.nineanimator.playbackProgressDidUpdate") }
 }
