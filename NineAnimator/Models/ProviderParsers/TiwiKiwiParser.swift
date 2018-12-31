@@ -50,23 +50,28 @@ class TiwiKiwiParser: VideoProviderParser {
             
             var url: URL?
             
-            if let match = TiwiKiwiParser.jwPlayerOptionRegex.matches(in: text, options: [], range: text.matchingRange).first {
+            if let match = TiwiKiwiParser.jwPlayerOptionRegex.matches(in: text, range: text.matchingRange).first {
                 url = TiwiKiwiParser.assembleTwPlayerURL(for: text[match.range(at: 1)])
             }
             
-            if url == nil, let match = TiwiKiwiParser.flowPlayerPropertyURLRegex.matches(in: text, options: [], range: text.matchingRange).last {
+            if url == nil, let match = TiwiKiwiParser.flowPlayerPropertyURLRegex.matches(in: text, range: text.matchingRange).last {
                 debugPrint("Info: This episode uses flow player. Tracing source URLs.")
                 let propertyListUrl = text[match.range(at: 1)]
-                task.add(session.request(propertyListUrl, headers: headers).responseString {
+                return task.add(session.request(propertyListUrl, headers: headers).responseString {
                     response in
-                    guard case .success(let playbackPropertyList) = response.result else { return handler(
-                        nil, NineAnimatorError.responseError("unable to retrive playback media property list")
-                    ) }
-                    let matches = TiwiKiwiParser.flowPlayerBaseURLRegex.matches(in: playbackPropertyList, options: [], range: playbackPropertyList.matchingRange)
-                    guard let baseUrl = matches.first else { return handler(
-                        nil, NineAnimatorError.responseError("unable to retrive media base url from property list")
-                    ) }
-                    guard let propertyUrlBaseStopIndex = propertyListUrl.lastIndex(of: "/") else { return handler(nil, NineAnimatorError.urlError) }
+                    guard case .success(let playbackPropertyList) = response.result else {
+                        return handler(nil, NineAnimatorError.responseError(
+                            "unable to retrive playback media property list"
+                        ))
+                    }
+                    let matches = TiwiKiwiParser.flowPlayerBaseURLRegex.matches(in: playbackPropertyList, range: playbackPropertyList.matchingRange)
+                    guard let baseUrl = matches.first else {
+                        return handler(nil, NineAnimatorError.responseError(
+                            "unable to retrive media base url from property list"
+                        ))
+                    }
+                    guard let propertyUrlBaseStopIndex = propertyListUrl.lastIndex(of: "/")
+                        else { return handler(nil, NineAnimatorError.urlError) }
                     let resourceUrlBase = propertyListUrl[..<propertyUrlBaseStopIndex]
                     let resourceUrlString = "\(resourceUrlBase)/\(playbackPropertyList[baseUrl.range(at: 1)])"
                     
@@ -85,7 +90,6 @@ class TiwiKiwiParser: VideoProviderParser {
                         contentType: "video/mp4",
                         headers: playbackHeaders), nil)
                 })
-                return
             }
             
             guard let sourceURL = url else {

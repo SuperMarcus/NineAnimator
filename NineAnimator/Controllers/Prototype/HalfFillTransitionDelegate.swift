@@ -20,7 +20,9 @@
 import UIKit
 
 public class HalfFillTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private weak var presented: UIViewController!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private weak var presenting: UIViewController!
     
     init(presented: UIViewController, presenting: UIViewController) {

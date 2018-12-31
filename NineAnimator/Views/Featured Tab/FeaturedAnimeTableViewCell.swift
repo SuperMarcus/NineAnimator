@@ -20,15 +20,20 @@
 import UIKit
 
 class FeaturedAnimeTableViewCell: UITableViewCell {
-    @IBOutlet weak var animeImageView: UIImageView!
+    @IBOutlet private weak var animeImageView: UIImageView!
     
-    @IBOutlet weak var animeTitleLabel: UILabel!
+    @IBOutlet private weak var animeTitleLabel: UILabel!
+    
+    func setAnime(_ animeLink: AnimeLink) {
+        animeTitleLabel.text = animeLink.title
+        animeImageView.kf.setImage(with: animeLink.image)
+        animeImageView.kf.indicatorType = .activity
+    }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let newTransform = highlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
         
-        //Ignoring the animated option
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: animated ? 0.2 : 0) {
             self.transform = newTransform
         }
     }

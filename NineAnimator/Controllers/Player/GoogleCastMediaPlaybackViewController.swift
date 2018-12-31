@@ -30,6 +30,7 @@ enum CastDeviceState {
 }
 
 class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource, UIGestureRecognizerDelegate {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     weak var castController: CastController!
     
     @IBOutlet private weak var playbackControlView: UIView!

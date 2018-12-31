@@ -77,8 +77,7 @@ extension NineAnimeSource {
         debugPrint("- Attributes: \(animeAttributes)")
         debugPrint("- Resource Identifiers: ID=\(animeResourceTags.id), EPISODE=\(animeResourceTags.episode)")
         
-        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders) {
-            response, error in
+        return request(ajax: "/ajax/film/servers/\(animeResourceTags.id)", with: ajaxHeaders) { response, error in
             guard let responseJson = response else {
                 return handler(nil, error)
             }

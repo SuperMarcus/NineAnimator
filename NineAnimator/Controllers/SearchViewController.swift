@@ -20,7 +20,14 @@
 import UIKit
 
 class SearchViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
-    var searchController: UISearchController!
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.autocapitalizationType = .words
+        searchController.searchBar.delegate = self
+        return searchController
+    }()
     
     var popularAnimeLinks: [AnimeLink]? {
         didSet {
@@ -48,12 +55,6 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         super.viewDidLoad()
         // Make sure we get the navigation bar when clicked on search result
         definesPresentationContext = true
-        
-        searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.autocapitalizationType = .words
-        searchController.searchBar.delegate = self
         
         if #available(iOS 11.0, *) {
             // For iOS 11 and later, place the search bar in the navigation bar.
