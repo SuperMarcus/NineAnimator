@@ -1,27 +1,9 @@
 {
-  "Mac" : [
-    {
-      "name" : "Result",
-      "hash" : "7cfa0dda7cbd9f1f320b9394a96940f8aa50fd0782f863bad26c940cf29e8a2c"
-    }
-  ],
-  "watchOS" : [
-    {
-      "name" : "Result",
-      "hash" : "b303506cfc3ae1845870b54a614374e1c0429141eea75727dc28919a2336468b"
-    }
-  ],
-  "tvOS" : [
-    {
-      "name" : "Result",
-      "hash" : "df9a9bad73dec34af08b19b3f105fe7989f06c6d0a4e3acc1e0a061aebdcd441"
-    }
-  ],
   "commitish" : "3.2.4",
   "iOS" : [
     {
       "name" : "Result",
-      "hash" : "0feefc1c11d5debfacc95da60745cc167da0da46a6b19fc1f8e4822c2bf25d41"
+      "hash" : "1e9207cadda0deb9a76e6ac48f37989fe3edb6cbcbe557afe87d5cec76a8ed4e"
     }
   ]
 }
