@@ -220,7 +220,10 @@ extension UserNotificationManager {
     
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //Do not perform fetch if the last one is incomeplete
-        guard taskPool == nil else { return completionHandler(.failed) }
+        guard taskPool == nil else {
+            debugPrint("Info: Cancelling background fetch since another task is in progress.")
+            return completionHandler(.failed)
+        }
         
         let watchedAnimeLinks = NineAnimator.default.user.watchedAnimes
         var resultsPool = [FetchResult?]()
@@ -240,16 +243,14 @@ extension UserNotificationManager {
                 succeededResultsCount == watchedAnimeLinks.count ?
                 ( newResultsCount > 0 ? .newData : .noData )
                 : .failed
-            completionHandler(finalFetchResult)
             debugPrint("Info: Background fetch finished with result: \(finalFetchResult.rawValue)")
             self?.taskPool = nil
+            completionHandler(finalFetchResult)
         }
         
         debugPrint("Info: Beginning background fetch with \(watchedAnimeLinks.count) watched anime.")
         
         taskPool = watchedAnimeLinks.map { animeLink in
-            defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
-            
             //Ignore the watcher that is fetched within 2 hours
             if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow >= -7200 {
                 debugPrint("Info: Skipping '\(animeLink.title)' (last checked: \(watcher.lastCheck), \(watcher.lastCheck.timeIntervalSinceNow) seconds since now")
@@ -289,6 +290,9 @@ extension UserNotificationManager {
                 resultsPool.append(result)
             }
         }
+        
+        // This is just in case we skipped everything
+        if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
     }
     
     /**
