@@ -32,6 +32,7 @@ extension AnimeLink: URLConvertible {
 }
 
 extension AnimeLink: Hashable {
+    // swiftlint:disable legacy_hashing
     var hashValue: Int { return link.hashValue }
 }
 

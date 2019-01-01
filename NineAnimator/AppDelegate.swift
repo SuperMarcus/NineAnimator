@@ -33,7 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
+        // swiftlint:disable implicitly_unwrapped_optional
         var identifier: UIBackgroundTaskIdentifier!
+        
         identifier = UIApplication.shared.beginBackgroundTask {
             UIApplication.shared.endBackgroundTask(identifier)
         }
