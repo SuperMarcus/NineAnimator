@@ -248,14 +248,14 @@
 			path = Prototype;
 			sourceTree = "<group>";
 		};
-		2C17E08721D7D63100E3FD1F /* Featured Tab */ = {
+		2C17E08721D7D63100E3FD1F /* Featured Tab Scene */ = {
 			isa = PBXGroup;
 			children = (
 				2C4ABC7C21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift */,
 				2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */,
 				2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */,
 			);
-			path = "Featured Tab";
+			path = "Featured Tab Scene";
 			sourceTree = "<group>";
 		};
 		2C2196CF21DAC555002059D3 /* NineAnimatorTests */ = {
@@ -267,13 +267,13 @@
 			path = NineAnimatorTests;
 			sourceTree = "<group>";
 		};
-		2C4817A121DB118F0092F694 /* Recents Tab */ = {
+		2C4817A121DB118F0092F694 /* Recents Tab Scene */ = {
 			isa = PBXGroup;
 			children = (
 				2C6677AF21BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift */,
 				2C6677B821BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift */,
 			);
-			path = "Recents Tab";
+			path = "Recents Tab Scene";
 			sourceTree = "<group>";
 		};
 		2C4817A221DB297D0092F694 /* Media */ = {
@@ -379,16 +379,11 @@
 		2C4ABC7721B59C95009B4D47 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2C4817A121DB118F0092F694 /* Recents Tab */,
-				2C17E08721D7D63100E3FD1F /* Featured Tab */,
-				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
-				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
-				2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */,
-				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
-				2C66779B21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift */,
-				2C66779F21BC4663000E5ACC /* AnimeSearchResultTableViewCell.swift */,
+				2CEB56D521DBE48F0018D804 /* Search Scene */,
+				2CEB56D421DBE45B0018D804 /* Anime Scene */,
+				2C4817A121DB118F0092F694 /* Recents Tab Scene */,
+				2C17E08721D7D63100E3FD1F /* Featured Tab Scene */,
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
-				2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */,
 				2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */,
 			);
 			path = Views;
@@ -402,6 +397,7 @@
 				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
 				52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */,
 				2C9C450121CD56B0004C8F0C /* Notifications.swift */,
+				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -500,6 +496,26 @@
 				2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */,
 			);
 			path = masterani.me;
+			sourceTree = "<group>";
+		};
+		2CEB56D421DBE45B0018D804 /* Anime Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
+				2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */,
+				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
+			);
+			path = "Anime Scene";
+			sourceTree = "<group>";
+		};
+		2CEB56D521DBE48F0018D804 /* Search Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C66779B21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift */,
+				2C66779F21BC4663000E5ACC /* AnimeSearchResultTableViewCell.swift */,
+				2C6677B521BD8FA1000E5ACC /* SearchNoResultsTableViewCell.swift */,
+			);
+			path = "Search Scene";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
