@@ -92,6 +92,7 @@ extension RecentlyViewedTableViewController {
                     title: "Unsubscribe"
                 ) { _, _, handler in
                     NineAnimator.default.user.unwatch(anime: animeLink)
+                    cell.animeLink = animeLink // This forces the cell to display the bell icon accordinly
                     handler(true)
                 }
                 unsubscribeAction.backgroundColor = UIColor.orange
@@ -103,6 +104,7 @@ extension RecentlyViewedTableViewController {
                     title: "Subscribe"
                 ) { _, _, handler in
                     NineAnimator.default.user.watch(uncached: animeLink)
+                    cell.animeLink = animeLink
                     handler(true)
                 }
                 subscribeAction.backgroundColor = UIColor.orange

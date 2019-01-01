@@ -741,8 +741,8 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7r-tP-s31">
-                                                    <rect key="frame" x="110.5" y="59" width="190.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7r-tP-s31">
+                                                    <rect key="frame" x="110.5" y="59" width="182.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -753,19 +753,29 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification Enabled" translatesAutoresizingMaskIntoConstraints="NO" id="NEt-AQ-iJq">
+                                                    <rect key="frame" x="301" y="53" width="16" height="16"/>
+                                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="16" id="4qi-o4-vgT"/>
+                                                        <constraint firstAttribute="height" constant="16" id="bmb-Wx-sMI"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="g7r-tP-s31" firstAttribute="top" secondItem="cty-4k-jCy" secondAttribute="bottom" constant="4" id="6KK-pM-DGY"/>
+                                                <constraint firstAttribute="trailing" secondItem="cty-4k-jCy" secondAttribute="trailing" constant="8" id="BRv-hK-bbn"/>
                                                 <constraint firstAttribute="bottom" secondItem="eEe-9a-Fgq" secondAttribute="bottom" id="DSr-ox-e4k"/>
                                                 <constraint firstItem="cty-4k-jCy" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="Hoy-qT-SBt"/>
                                                 <constraint firstItem="eEe-9a-Fgq" firstAttribute="top" secondItem="TMG-gN-0Pw" secondAttribute="top" id="Ioj-3s-69t"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="cty-4k-jCy" secondAttribute="trailing" constant="8" id="Olh-6Q-p2L"/>
-                                                <constraint firstAttribute="trailing" secondItem="g7r-tP-s31" secondAttribute="trailing" constant="16" id="Rah-a8-0D5"/>
                                                 <constraint firstItem="g7r-tP-s31" firstAttribute="leading" secondItem="eEe-9a-Fgq" secondAttribute="trailing" constant="16" id="XUV-kY-M1U"/>
+                                                <constraint firstAttribute="trailing" secondItem="NEt-AQ-iJq" secondAttribute="trailing" id="djX-y8-vtK"/>
                                                 <constraint firstItem="eEe-9a-Fgq" firstAttribute="leading" secondItem="TMG-gN-0Pw" secondAttribute="leading" id="lt9-at-2xM"/>
                                                 <constraint firstAttribute="height" priority="800" constant="122" id="m3c-T7-YRq"/>
                                                 <constraint firstItem="g7r-tP-s31" firstAttribute="centerY" secondItem="TMG-gN-0Pw" secondAttribute="centerY" constant="8" id="rgf-T9-X9O"/>
+                                                <constraint firstItem="NEt-AQ-iJq" firstAttribute="centerY" secondItem="TMG-gN-0Pw" secondAttribute="centerY" id="rho-PK-9iU"/>
+                                                <constraint firstItem="NEt-AQ-iJq" firstAttribute="leading" secondItem="g7r-tP-s31" secondAttribute="trailing" constant="8" id="vth-jD-bU9"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -779,6 +789,7 @@
                                 <connections>
                                     <outlet property="animeTitleLabel" destination="g7r-tP-s31" id="qSR-4O-tkW"/>
                                     <outlet property="coverImageView" destination="eEe-9a-Fgq" id="yUc-qo-hXJ"/>
+                                    <outlet property="notificationEnabledImage" destination="NEt-AQ-iJq" id="eT0-Zf-iNj"/>
                                     <outlet property="sourceTitleLabel" destination="cty-4k-jCy" id="qQs-X1-itN"/>
                                     <segue destination="fnc-Z3-OPF" kind="show" id="pnE-3F-WKs"/>
                                 </connections>
@@ -880,6 +891,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Notification Enabled" width="25" height="25"/>
         <image name="Settings Icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

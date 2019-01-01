@@ -24,6 +24,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var animeTitleLabel: UILabel!
     @IBOutlet private weak var sourceTitleLabel: UILabel!
+    @IBOutlet weak var notificationEnabledImage: UIImageView!
     
     var animeLink: AnimeLink? = nil {
         didSet {
@@ -32,6 +33,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
             coverImageView.kf.indicatorType = .activity
             animeTitleLabel.text = link.title
             sourceTitleLabel.text = "Viewed on \(link.source.name)..."
+            notificationEnabledImage.isHidden = !NineAnimator.default.user.isWatching(anime: link)
         }
     }
 }
