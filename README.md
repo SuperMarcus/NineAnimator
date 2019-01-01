@@ -35,6 +35,7 @@ GPLv3 Licensed.
 - [Build & Install](#build--install)
 - [Google Cast](#google-cast)
 - [Picture in Picture Playback](#picture-in-picture-playback)
+- [Notifications & Subscription](#notifications--subscription)
 - [Video Sources](#video-sources)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
@@ -73,6 +74,8 @@ You can also install Carthage with the installer package, which can be found
 You won't need any Apple Developer membership to build and install this app.
 Open this project in Xcode, connect your phone to the computer, select your
 device, and click the run button on the top left corner.
+
+![Xcode select device](Misc/Media/xcode_select_device.jpg)
 
 Xcode might prompt you that the bundle identifier cannot be used. In this case,
 select the `NineAnimator` in the Navigator, choose `NineAnimator` in the Targets,
@@ -117,6 +120,22 @@ The Picture in Picture (PiP) icon will appear on the top left corner of the play
 is ready. You may tap on this icon to initiate PiP playback. To restore fullscreen playback,
 tap the restore button on the PiP window.
 
+## Notifications & Subscription
+
+Subscribing anime in NineAnimator is implemented with iOS's Background Application
+Refresh. NineAnimator will actively polls the available episodes and compares it with
+locally cached episodes.
+
+![Notification Example](Misc/Media/notification_example.jpg)
+
+To subscribe an anime, swipe on the anime from left to right in the Recents tab.
+
+![Swipe Right to Subscribe](Misc/Media/subscribe_recent_tab.jpg)
+
+Or simply tap on the bell icon when you are viewing any anime.
+
+![Subscribe with the bell icon](Misc/Media/subscribe_bell_icon.jpg)
+
 ## Video Sources
 
 Currently only a selection of video streaming hosts is supported by NineAnimator:
@@ -133,15 +152,15 @@ More hosts may be added later. Feel free to open an issue to request additional 
 
 | Featured Animes | Recently Viewed | Search |
 | ------------------- | ------------------- | -------- |
-| ![1](Misc/screenshot_1.png) | ![2](Misc/screenshot_2.png) | ![3](Misc/screenshot_3.png) |
+| ![1](Misc/Media/screenshot_1.png) | ![2](Misc/Media/screenshot_2.png) | ![3](Misc/Media/screenshot_3.png) |
 
 | Search Results | Choose Episodes | Chromecast |
 | ----------------- | -------------------- | --------------- |
-| ![4](Misc/screenshot_4.png) | ![5](Misc/screenshot_5.png) | ![6](Misc/screenshot_6.png) |
+| ![4](Misc/Media/screenshot_4.png) | ![5](Misc/Media/screenshot_5.png) | ![6](Misc/Media/screenshot_6.png) |
 
 | Featured Animes (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
-| ![7](Misc/screenshot_7.png) | ![8](Misc/screenshot_8.png) |
+| ![7](Misc/Media/screenshot_7.png) | ![8](Misc/Media/screenshot_8.png) |
 
 ## Credits
 

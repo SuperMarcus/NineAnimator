@@ -121,6 +121,10 @@
 		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
 		2C2196D221DAC555002059D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2C4817A421DB2A210092F694 /* notification_example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification_example.jpg; sourceTree = "<group>"; };
+		2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_recent_tab.jpg; sourceTree = "<group>"; };
+		2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_bell_icon.jpg; sourceTree = "<group>"; };
+		2C4817A721DB2F320092F694 /* xcode_select_device.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xcode_select_device.jpg; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C4ABC5821B5881E009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -270,6 +274,25 @@
 			path = "Recents Tab";
 			sourceTree = "<group>";
 		};
+		2C4817A221DB297D0092F694 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				2C4817A721DB2F320092F694 /* xcode_select_device.jpg */,
+				2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */,
+				2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */,
+				2C4817A421DB2A210092F694 /* notification_example.jpg */,
+				2C6677A621BC7AF8000E5ACC /* screenshot_1.png */,
+				2C6677A421BC7AF8000E5ACC /* screenshot_2.png */,
+				2C6677A521BC7AF8000E5ACC /* screenshot_3.png */,
+				2C6677A321BC7AF8000E5ACC /* screenshot_4.png */,
+				2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */,
+				2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */,
+				2C9C450321CDA7CF004C8F0C /* screenshot_7.png */,
+				2C9C450421CDA7D0004C8F0C /* screenshot_8.png */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		2C4ABC4721B5881E009B4D47 = {
 			isa = PBXGroup;
 			children = (
@@ -410,18 +433,11 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				2C4817A221DB297D0092F694 /* Media */,
 				52F6A4F221DABDB00005D78D /* .swiftlint.yml */,
-				2C9C450321CDA7CF004C8F0C /* screenshot_7.png */,
-				2C9C450421CDA7D0004C8F0C /* screenshot_8.png */,
-				2CAEF62421BF7BDD00E7C123 /* screenshot_5.png */,
-				2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */,
 				2C6677B721BD98A8000E5ACC /* LICENSE */,
 				2C4ABC9121B7F41D009B4D47 /* Cartfile */,
 				2C6677A121BC7883000E5ACC /* README.md */,
-				2C6677A621BC7AF8000E5ACC /* screenshot_1.png */,
-				2C6677A421BC7AF8000E5ACC /* screenshot_2.png */,
-				2C6677A521BC7AF8000E5ACC /* screenshot_3.png */,
-				2C6677A321BC7AF8000E5ACC /* screenshot_4.png */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
