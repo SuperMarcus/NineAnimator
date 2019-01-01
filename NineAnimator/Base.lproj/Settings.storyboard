@@ -184,7 +184,10 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Notifications and Subscriptions" footerTitle="NineAnimator uses Background App Refresh to determine if an new expisode of a subscribed anime has been released." id="dnn-sT-oir">
+                            <tableViewSection headerTitle="Notifications and Subscriptions" id="dnn-sT-oir">
+                                <string key="footerTitle">NineAnimator uses Background App Refresh to determine if an new expisode of a subscribed anime has been released.
+
+Without Background App Refresh, you will only receive notifications of new releases when the app launches.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="46" id="Bf7-Pu-dBT">
                                         <rect key="frame" x="0.0" y="657" width="375" height="46"/>
@@ -287,21 +290,21 @@ Enabling Background Playback will allow audios to be played while the app is in 
                             <tableViewSection headerTitle="Data and Privacy" footerTitle="Clear Cached Data will remove cached images, requests, and episode information." id="dNx-EX-rHK">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
-                                        <rect key="frame" x="0.0" y="942.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="990.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1L-Nj-oEr" id="GUF-UM-X8f">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Recently Watched" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcd-Wl-m61">
-                                                    <rect key="frame" x="15" y="12" width="183.5" height="20.5"/>
+                                                    <rect key="frame" x="16" y="12" width="183.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rns-aJ-RlM">
-                                                    <rect key="frame" x="311.5" y="12" width="48.5" height="20.5"/>
+                                                    <rect key="frame" x="310.5" y="12" width="48.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -311,14 +314,14 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.cache" textLabel="1VP-oc-aqz" style="IBUITableViewCellStyleDefault" id="PVj-MT-9I3">
-                                        <rect key="frame" x="0.0" y="986.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1034.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVj-MT-9I3" id="MPd-xb-7NG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1VP-oc-aqz">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -328,14 +331,14 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.reset" textLabel="qo6-KM-Xua" style="IBUITableViewCellStyleDefault" id="24A-0U-h1t">
-                                        <rect key="frame" x="0.0" y="1030.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1078.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24A-0U-h1t" id="tu1-Qe-wbN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qo6-KM-Xua">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>

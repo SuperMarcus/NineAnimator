@@ -245,7 +245,16 @@ extension UserNotificationManager {
         debugPrint("Info: Beginning background fetch with \(watchedAnimeLinks.count) watched anime.")
         
         taskPool = watchedAnimeLinks.map { animeLink in
-            animeLink.retrive { anime, _ in
+            defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
+            
+            //Ignore the watcher that is fetched within 2 hours
+            if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow < 7200 {
+                debugPrint("Info: Skipping '\(animeLink.title)' (last checked: \(watcher.lastCheck)")
+                resultsPool.append(FetchResult(animeLink, [], []))
+                return nil
+            }
+            
+            return animeLink.retrive { anime, _ in
                 defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
                 
                 guard let anime = anime else { return resultsPool.append(nil) }

@@ -26,8 +26,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Update once in two hours
-        UIApplication.shared.setMinimumBackgroundFetchInterval(UserNotificationManager.default.suggestedFetchInterval)
+        UIApplication.shared.setMinimumBackgroundFetchInterval(
+            UserNotificationManager.default.suggestedFetchInterval
+        )
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Also perform fetch when the app becomes active
+        UserNotificationManager.default.performFetch { _ in }
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
