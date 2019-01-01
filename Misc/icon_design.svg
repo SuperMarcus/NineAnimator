@@ -7,7 +7,7 @@
  </defs>
  <g>
   <title>background</title>
-  <rect fill="url(#svg_1)" id="canvas_background" height="502" width="502" y="-1" x="-1"/>
+  <rect fill="url(#svg_1)" id="canvas_background" height="500" width="500" y="0" x="0" rx="64" ry="64"/>
   <g display="none" id="canvasGrid">
    <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_2"/>
   </g>
