@@ -141,7 +141,8 @@ class FeaturedViewController: UITableViewController {
             featuredAnimePage?.latest
         ]
         guard let playerViewController = segue.destination as? AnimeViewController,
-            let selected = tableView.indexPathForSelectedRow,
+            let cell = sender as? UITableViewCell,
+            let selected = tableView.indexPath(for: cell),
             let animeLink = pools[selected.section]?[selected.item]
             else { return }
         playerViewController.animeLink = animeLink

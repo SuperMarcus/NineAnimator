@@ -149,7 +149,10 @@
                                 <connections>
                                     <outlet property="animeImageView" destination="XPo-Oq-ujR" id="95N-DB-6aE"/>
                                     <outlet property="animeTitleLabel" destination="m7Z-Ws-s51" id="xYg-jQ-E6l"/>
-                                    <segue destination="Vey-hc-6Z0" kind="show" id="5mq-eg-8TQ"/>
+                                    <segue destination="Vey-hc-6Z0" kind="show" id="5mq-eg-8TQ">
+                                        <segue key="commit" inheritsFrom="parent" id="Bxu-cj-6dk"/>
+                                        <segue key="preview" inheritsFrom="commit" id="OTa-h0-h9J"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.updated" rowHeight="160" id="nER-v4-dqi" userLabel="anime.updated" customClass="RecentlyUpdatedAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
@@ -259,7 +262,10 @@
                                     <outlet property="coverImageView" destination="nAu-b3-xDw" id="CFs-a5-kX3"/>
                                     <outlet property="statusLabel" destination="Xji-1Z-Meq" id="Gwa-ye-cmm"/>
                                     <outlet property="titleLabel" destination="EaF-Aj-Y4A" id="GtP-lH-f0Q"/>
-                                    <segue destination="Vey-hc-6Z0" kind="show" id="hl9-0f-9xm"/>
+                                    <segue destination="Vey-hc-6Z0" kind="show" id="hl9-0f-9xm">
+                                        <segue key="commit" inheritsFrom="parent" id="u7O-3t-hH1"/>
+                                        <segue key="preview" inheritsFrom="commit" id="KUj-Qv-5ZA"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.unavailable" rowHeight="159" id="xj6-jY-7H9" customClass="UnavailableTableViewCell" customModule="NineAnimator" customModuleProvider="target">
@@ -877,7 +883,7 @@
         <image name="Settings Icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5mq-eg-8TQ"/>
+        <segue reference="hl9-0f-9xm"/>
         <segue reference="Uut-Fq-hAa"/>
     </inferredMetricsTieBreakers>
 </document>
