@@ -33,7 +33,7 @@ class FeaturedAnimeTableViewCell: UITableViewCell {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let newTransform = highlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
         
-        UIView.animate(withDuration: animated ? 0.2 : 0) {
+        UIView.animate(withDuration: 0.2) {
             self.transform = newTransform
         }
     }
