@@ -327,6 +327,7 @@ extension NineAnimatorUser {
         var newWatchList = watchedAnimes.filter { $0 != link }
         newWatchList.append(link)
         watchedAnimes = newWatchList
+        UserNotificationManager.default.lazyPersist(link)
     }
     
     /**

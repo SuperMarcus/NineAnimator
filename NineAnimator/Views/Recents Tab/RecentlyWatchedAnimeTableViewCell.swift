@@ -24,7 +24,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var animeTitleLabel: UILabel!
     @IBOutlet private weak var sourceTitleLabel: UILabel!
-    @IBOutlet weak var notificationEnabledImage: UIImageView!
+    @IBOutlet private weak var notificationEnabledImage: UIImageView!
     
     var animeLink: AnimeLink? = nil {
         didSet {

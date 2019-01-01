@@ -43,12 +43,67 @@ class UserNotificationManager {
     
     private var taskPool: [NineAnimatorAsyncTask?]? // Hold references to async tasks
     
+    private var lazyPersistPool = Set<AnimeLink>()
+    
+    private var persistentTaskIdentifier: UIBackgroundTaskIdentifier?
+    
     private let animeCachingDirectory: URL
     
     init() {
         let fileManager = FileManager.default
         
         self.animeCachingDirectory = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        //Cache lazy persist data when the app resigns active
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onAppBecomesInactive(notification:)),
+            name: UIApplication.willResignActiveNotification,
+            object: nil
+        )
+    }
+}
+
+// MARK: - App state handling
+extension UserNotificationManager {
+    @objc func onAppBecomesInactive(notification: Notification) {
+        if !lazyPersistPool.isEmpty {
+            debugPrint("Info: Caching subscribed anime.")
+            
+            let concludeLazyPersist = {
+                [weak self] () -> Void in
+                debugPrint("Info: Finish caching subscribed anime.")
+                guard let identifier = self?.persistentTaskIdentifier else { return }
+                UIApplication.shared.endBackgroundTask(identifier)
+                self?.persistentTaskIdentifier = nil
+                self?.taskPool = nil
+            }
+            
+            persistentTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: concludeLazyPersist)
+            
+            var counter = 0
+            
+            taskPool = lazyPersistPool.compactMap {
+                // Retrieve each lazy persist anime
+                $0.retrive { [weak self] anime, error in
+                    defer {
+                        counter -= 1
+                        if counter == 0, let identifier = self?.persistentTaskIdentifier {
+                            concludeLazyPersist()
+                        }
+                    }
+                
+                    guard let anime = anime else {
+                        debugPrint("Error: Unable to persist data - \(error!)")
+                        return
+                    }
+                    
+                    self?.update(anime)
+                }
+            }
+            counter = taskPool!.count
+            lazyPersistPool.removeAll()
+        }
     }
 }
 
@@ -89,7 +144,18 @@ extension UserNotificationManager {
             let encoder = PropertyListEncoder()
             let serializedWatcher = try encoder.encode(watcher)
             try serializedWatcher.write(to: persistUrl)
+            lazyPersistPool.remove(watcher.link)
         } catch { debugPrint("Error: Unable to persist watcher - \(error)") }
+    }
+    
+    /**
+     Add the anime but do not cache the episodes until the app becomes inactive
+     or the user enters the anime.
+     
+     See persist(_ watcher: WatchedAnime)
+     */
+    func lazyPersist(_ link: AnimeLink) {
+        lazyPersistPool.insert(link)
     }
     
     /**
@@ -108,11 +174,16 @@ extension UserNotificationManager {
      Clear cached anime episodes
      */
     func remove(_ anime: AnimeLink) {
+        guard lazyPersistPool.remove(anime) == nil else { return }
         do {
             let fileManager = FileManager.default
             try fileManager.removeItem(at: url(for: anime))
-            try fileManager.removeItem(at: posterUrl(for: anime))
-        } catch { debugPrint("Error: Unable to remove persisted watcher") }
+            
+            //Not deleting the poster since it should be remvoed by the
+            // user notification center
+            
+            //try fileManager.removeItem(at: posterUrl(for: anime))
+        } catch { debugPrint("Error: Unable to remove persisted watcher - \(error)") }
     }
     
     /**
@@ -127,7 +198,7 @@ extension UserNotificationManager {
                 options: [.skipsSubdirectoryDescendants]
             )
             try enumeratedItems.forEach(fileManager.removeItem)
-        } catch { debugPrint("Error: Unable to remove persisted watcher") }
+        } catch { debugPrint("Error: Unable to remove persisted watcher - \(error)") }
     }
     
     /**
@@ -197,7 +268,7 @@ extension UserNotificationManager {
                     
                     //Post notification to user
                     self.notify(result: result)
-                }
+                } else { debugPrint("Info: Anime '\(anime.link.title)' is being registered but has not been cached yet. No new notifications will be sent.") }
                 
                 //If unable to retrive the persisted episodes (maybe deleted by the system)
                 //Just store the latest version without posting any notifications.
