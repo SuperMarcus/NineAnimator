@@ -126,15 +126,15 @@ Subscribing anime in NineAnimator is implemented with iOS's Background Applicati
 Refresh. NineAnimator will actively polls the available episodes and compares it with
 locally cached episodes.
 
-![Notification Example](Misc/Media/notification_example.jpg)
+<img src="Misc/Media/notification_example.jpg" width="320" />
 
 To subscribe an anime, swipe on the anime from left to right in the Recents tab.
 
-![Swipe Right to Subscribe](Misc/Media/subscribe_recent_tab.jpg)
+<img src="Misc/Media/subscribe_recent_tab.jpg" width="320" />
 
 Or simply tap on the bell icon when you are viewing any anime.
 
-![Subscribe with the bell icon](Misc/Media/subscribe_bell_icon.jpg)
+<img src="Misc/Media/subscribe_bell_icon.jpg" width="320" />
 
 ## Video Sources
 
