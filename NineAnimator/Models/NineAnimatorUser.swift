@@ -35,7 +35,7 @@ class NineAnimatorUser {
     private let _freezer = UserDefaults.standard
     private let _cloud = NSUbiquitousKeyValueStore.default
     
-    private(set) var recentAnimes: [AnimeLink] {
+    var recentAnimes: [AnimeLink] {
         get { return decode([AnimeLink].self, from: _freezer.value(forKey: .recentAnimeList)) ?? [] }
         set {
             guard let data = encode(data: newValue) else {
@@ -316,18 +316,30 @@ extension NineAnimatorUser {
      Add the anime to the watch list
      */
     func watch(anime: Anime) {
-        var newWatchList = watchedAnimes.filter { $0 != anime.link }
-        newWatchList.append(anime.link)
-        watchedAnimes = newWatchList
+        watch(uncached: anime.link)
         UserNotificationManager.default.update(anime)
     }
     
     /**
+     Add AnimeLink to watch list but don't cache all the episodes just yet
+     */
+    func watch(uncached link: AnimeLink) {
+        var newWatchList = watchedAnimes.filter { $0 != link }
+        newWatchList.append(link)
+        watchedAnimes = newWatchList
+    }
+    
+    /**
+     An alias of unwatch(anime: AnimeLink)
+     */
+    func unwatch(anime: Anime) { unwatch(anime: anime.link) }
+    
+    /**
      Remove the anime from the watch list
      */
-    func unwatch(anime: Anime) {
-        watchedAnimes = watchedAnimes.filter { $0 != anime.link }
-        UserNotificationManager.default.remove(anime.link)
+    func unwatch(anime link: AnimeLink) {
+        watchedAnimes = watchedAnimes.filter { $0 != link }
+        UserNotificationManager.default.remove(link)
     }
     
     /**

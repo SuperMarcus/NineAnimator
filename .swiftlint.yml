@@ -7,6 +7,8 @@ disabled_rules: # rule identifiers to exclude from running
   - notification_center_detachment
   - identifier_name
   - line_length
+  - function_body_length
+  - file_length
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
   - closure_end_indentation

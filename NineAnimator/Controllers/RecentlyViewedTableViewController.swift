@@ -78,6 +78,81 @@ extension RecentlyViewedTableViewController {
     }
 }
 
+// MARK: - Swipe actions
+extension RecentlyViewedTableViewController {
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var actions = [UIContextualAction]()
+        
+        if indexPath.section == 1,
+            let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
+            let animeLink = cell.animeLink {
+            if NineAnimator.default.user.isWatching(anime: animeLink) {
+                let unsubscribeAction = UIContextualAction(
+                    style: .normal,
+                    title: "Unsubscribe"
+                ) { _, _, handler in
+                    NineAnimator.default.user.unwatch(anime: animeLink)
+                    handler(true)
+                }
+                unsubscribeAction.backgroundColor = UIColor.orange
+                unsubscribeAction.image = #imageLiteral(resourceName: "Notification Disabled")
+                actions.append(unsubscribeAction)
+            } else {
+                let subscribeAction = UIContextualAction(
+                    style: .normal,
+                    title: "Subscribe"
+                ) { _, _, handler in
+                    NineAnimator.default.user.watch(uncached: animeLink)
+                    handler(true)
+                }
+                subscribeAction.backgroundColor = UIColor.orange
+                subscribeAction.image = #imageLiteral(resourceName: "Notification Enabled")
+                actions.append(subscribeAction)
+            }
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: actions)
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if indexPath.section == 1 {
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
+                _, _ in
+                guard let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
+                    let animeLink = cell.animeLink else { return }
+                NineAnimator.default.user.recentAnimes = NineAnimator.default.user.recentAnimes.filter {
+                    $0 != animeLink
+                }
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            let shareAction = UITableViewRowAction(style: .normal, title: "Share") {
+                [weak self] _, _ in
+                guard let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
+                    let animeLink = cell.animeLink else { return }
+                
+                let activityViewController = UIActivityViewController(
+                    activityItems: [ animeLink.link ], applicationActivities: nil
+                )
+                
+                if let popover = activityViewController.popoverPresentationController {
+                    popover.sourceView = cell
+                    popover.permittedArrowDirections = .any
+                }
+                
+                self?.present(activityViewController, animated: true)
+            }
+            
+            shareAction.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 1)
+            
+            return [ deleteAction, shareAction ]
+        }
+        return []
+    }
+}
+
 // MARK: - Segue preparation
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

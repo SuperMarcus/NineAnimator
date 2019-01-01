@@ -19,12 +19,4 @@
 
 import XCTest
 
-class NineAnimeSourceTests: XCTestCase {
-    override func setUp() {
-        
-    }
-
-    override func tearDown() {
-        
-    }
-}
+class NineAnimeSourceTests: XCTestCase { }

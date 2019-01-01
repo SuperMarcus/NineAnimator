@@ -26,8 +26,13 @@ struct AnimeLink {
     var image: URL
     var source: Source
 }
+
 extension AnimeLink: URLConvertible {
     func asURL() -> URL { return link }
+}
+
+extension AnimeLink: Hashable {
+    var hashValue: Int { return link.hashValue }
 }
 
 extension AnimeLink: Codable {

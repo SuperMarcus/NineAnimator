@@ -26,7 +26,9 @@ class TiwiKiwiParser: VideoProviderParser {
     static let flowPlayerPropertyURLRegex = try! NSRegularExpression(pattern: "src:\\s*\"([^\"]+)\"", options: .caseInsensitive)
     static let flowPlayerBaseURLRegex = try! NSRegularExpression(pattern: "BaseURL>([^<]+)", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode,
+               with session: SessionManager,
+               onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let headers = [
             "User-Agents": defaultUserAgent,
             "Origin": episode.target.absoluteString
