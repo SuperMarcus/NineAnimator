@@ -1,0 +1,20 @@
+<svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient y2="1" x2="0.5" y1="0" x1="0.5" id="svg_1">
+   <stop offset="0" stop-color="#8559da"/>
+   <stop offset="1" stop-color="#512da8"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="url(#svg_1)" id="canvas_background" height="502" width="502" y="-1" x="-1"/>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_2"/>
+  </g>
+ </g>
+ <g>
+  <title>Surrounding Circle and the 9</title>
+  <circle stroke="#fff" r="200" cy="250" cx="250" stroke-width="10" fill="none"/>
+  <text fill="#fff" stroke="#000" stroke-width="0" stroke-opacity="null" fill-opacity="null" x="185" y="335" id="svg_4" font-size="250" font-family="Helvetica, Arial, sans-serif" text-anchor="start" xml:space="preserve" font-weight="normal">9</text>
+ </g>
+</svg>

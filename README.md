@@ -1,3 +1,5 @@
+<img src="Misc/icon_design.svg" width="250px"/>
+
 NineAnimator
 ==========
 
