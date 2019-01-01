@@ -54,7 +54,7 @@ class BaseSource {
         return parent.session.request(url, headers: headers).responseString {
             switch $0.result {
             case .failure(let error):
-                debugPrint("Error: request to \(url) failed - \(error)")
+                Log.error("request to %@ failed - %@", url, error)
                 handler(nil, error)
             case .success(let value):
                 handler(value, nil)
@@ -67,12 +67,12 @@ class BaseSource {
             response in
             switch response.result {
             case .failure(let error):
-                debugPrint("Error: Request to \(url) failed - \(error)")
+                Log.error("request to %@ failed - %@", url, error)
                 handler(nil, error)
             case .success(let value as NSDictionary):
                 handler(value, nil)
             default:
-                debugPrint("Error: Unable to convert response value to NSDictionary")
+                Log.error("Unable to convert response value to NSDictionary")
                 handler(nil, NineAnimatorError.responseError("Invalid Response"))
             }
         }
@@ -83,7 +83,7 @@ class BaseSource {
             response in
             switch response.result {
             case .failure(let error):
-                debugPrint("Error: request to \(url) failed - \(error)")
+                Log.error("request to %@ failed - %@", url, error)
                 handler(nil, error)
             case .success(let value):
                 handler(value, nil)
@@ -97,7 +97,7 @@ class BaseSource {
     
     func request(browse path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         guard let url = URL(string: "\(endpoint)\(path)") else {
-            debugPrint("Error: Unable to parse URL with endpoint \"\(endpoint)\" at path \"\(path)\"")
+            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
@@ -110,7 +110,7 @@ class BaseSource {
     
     func request(ajax path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
         guard let url = URL(string: "\(endpoint)\(path)") else {
-            debugPrint("Error: Unable to parse URL with endpoint \"\(endpoint)\" at path \"\(path)\"")
+            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
@@ -123,7 +123,7 @@ class BaseSource {
     
     func request(ajaxString path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         guard let url = URL(string: "\(endpoint)\(path)") else {
-            debugPrint("Error: Unable to parse URL with endpoint \"\(endpoint)\" at path \"\(path)\"")
+            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
             handler(nil, NineAnimatorError.urlError)
             return nil
         }

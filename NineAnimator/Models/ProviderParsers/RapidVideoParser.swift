@@ -30,7 +30,7 @@ class RapidVideoParser: VideoProviderParser {
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let value = response.value else {
-                debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
+                Log.error(response.error)
                 return handler(nil, NineAnimatorError.responseError(
                     "response error: \(response.error?.localizedDescription ?? "Unknown")"
                 ))
@@ -44,7 +44,7 @@ class RapidVideoParser: VideoProviderParser {
                     ))
                 }
                 
-                debugPrint("Info: (RapidVideo Parser) found asset at \(sourceURL.absoluteString)")
+                Log.info("(RapidVideo Parser) found asset at %@", sourceURL.absoluteString)
                 
                 handler(BasicPlaybackMedia(
                     url: sourceURL,

@@ -71,11 +71,11 @@ extension UserNotificationManager {
         guard taskPool == nil else { return }
         
         if !lazyPersistPool.isEmpty {
-            debugPrint("Info: Caching subscribed anime.")
+            Log.info("Caching subscribed anime.")
             
             let concludeLazyPersist = {
                 [weak self] () -> Void in
-                debugPrint("Info: Finish caching subscribed anime.")
+                Log.info("Finish caching subscribed anime.")
                 guard let identifier = self?.persistentTaskIdentifier else { return }
                 UIApplication.shared.endBackgroundTask(identifier)
                 self?.persistentTaskIdentifier = nil
@@ -97,7 +97,7 @@ extension UserNotificationManager {
                     }
                 
                     guard let anime = anime else {
-                        debugPrint("Error: Unable to persist data - \(error!)")
+                        Log.error("Unable to persist data - %@", error!)
                         return
                     }
                     
@@ -134,7 +134,7 @@ extension UserNotificationManager {
                 let decoer = PropertyListDecoder()
                 return try decoer.decode(WatchedAnime.self, from: serializedWatcher)
             }
-        } catch { debugPrint("Error: Unable to retrive watcher for anime - \(error)") }
+        } catch { Log.error("Unable to retrive watcher for anime - %@", error) }
         return nil
     }
     
@@ -148,7 +148,7 @@ extension UserNotificationManager {
             let serializedWatcher = try encoder.encode(watcher)
             try serializedWatcher.write(to: persistUrl)
             lazyPersistPool.remove(watcher.link)
-        } catch { debugPrint("Error: Unable to persist watcher - \(error)") }
+        } catch { Log.error("Unable to persist watcher - %@", error) }
     }
     
     /**
@@ -186,7 +186,7 @@ extension UserNotificationManager {
             // user notification center
             
             //try fileManager.removeItem(at: posterUrl(for: anime))
-        } catch { debugPrint("Error: Unable to remove persisted watcher - \(error)") }
+        } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
     /**
@@ -201,7 +201,7 @@ extension UserNotificationManager {
                 options: [.skipsSubdirectoryDescendants]
             )
             try enumeratedItems.forEach(fileManager.removeItem)
-        } catch { debugPrint("Error: Unable to remove persisted watcher - \(error)") }
+        } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
     /**
@@ -221,7 +221,7 @@ extension UserNotificationManager {
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //Do not perform fetch if the last one is incomeplete
         guard taskPool == nil else {
-            debugPrint("Info: Cancelling background fetch since another task is in progress.")
+            Log.info("Cancelling background fetch since another task is in progress.")
             return completionHandler(.failed)
         }
         
@@ -243,17 +243,17 @@ extension UserNotificationManager {
                 succeededResultsCount == watchedAnimeLinks.count ?
                 ( newResultsCount > 0 ? .newData : .noData )
                 : .failed
-            debugPrint("Info: Background fetch finished with result: \(finalFetchResult.rawValue)")
+            Log.info("Background fetch finished with result: %@", finalFetchResult.rawValue)
             self?.taskPool = nil
             completionHandler(finalFetchResult)
         }
         
-        debugPrint("Info: Beginning background fetch with \(watchedAnimeLinks.count) watched anime.")
+        Log.info("Beginning background fetch with %@ watched anime.", watchedAnimeLinks.count)
         
         taskPool = watchedAnimeLinks.map { animeLink in
             //Ignore the watcher that is fetched within 2 hours
             if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow >= -7200 {
-                debugPrint("Info: Skipping '\(animeLink.title)' (last checked: \(watcher.lastCheck), \(watcher.lastCheck.timeIntervalSinceNow) seconds since now")
+                Log.info("Skipping '%@' (last checked: %@, %@ seconds since now", animeLink.title, watcher.lastCheck, watcher.lastCheck.timeIntervalSinceNow)
                 resultsPool.append(FetchResult(animeLink, [], []))
                 return nil
             }
@@ -281,7 +281,7 @@ extension UserNotificationManager {
                     
                     //Post notification to user
                     self.notify(result: result)
-                } else { debugPrint("Info: Anime '\(anime.link.title)' is being registered but has not been cached yet. No new notifications will be sent.") }
+                } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
                 
                 //If unable to retrive the persisted episodes (maybe deleted by the system)
                 //Just store the latest version without posting any notifications.
@@ -337,7 +337,7 @@ extension UserNotificationManager {
                 options: nil
             )
             content.attachments.append(posterAttachment)
-        } catch { debugPrint("Error: Unable to attach poster to notification - \(error)") }
+        } catch { Log.error("Unable to attach poster to notification - %@", error) }
         
         let request = UNNotificationRequest(
             identifier: .episodeUpdateNotificationIdentifier(result.anime),
@@ -348,7 +348,7 @@ extension UserNotificationManager {
         //Alas, post notification to the user
         notificationCenter.add(request, withCompletionHandler: nil)
         
-        debugPrint("Info: Notification for '\(result.anime.title)' sent.")
+        Log.info("Notification for '%@' sent.", result.anime.title)
     }
 }
 

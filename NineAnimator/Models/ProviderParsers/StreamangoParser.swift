@@ -28,12 +28,12 @@ class StreamangoParser: VideoProviderParser {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString
         ]
-        debugPrint("Info: Parsing Streamango with referer '\(episode.parentLink.link.absoluteString)'")
+        Log.debug("Parsing Streamango with referer '%@'", episode.parentLink.link.absoluteString)
         return session.request(episode.target, headers: additionalHeaders).responseString {
             [weak self] response in
             guard let self = self else { return }
             guard let text = response.value else {
-                debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
+                Log.error(response.error)
                 return handler(nil, NineAnimatorError.responseError(
                     "response error: \(response.error?.localizedDescription ?? "Unknown")"
                 ))
@@ -66,7 +66,7 @@ class StreamangoParser: VideoProviderParser {
                 ))
             }
             
-            debugPrint("Info: (Streamango Parser) found asset at \(sourceURL.absoluteString)")
+            Log.info("(Streamango Parser) found asset at %@", sourceURL.absoluteString)
             
             handler(BasicPlaybackMedia(
                 url: sourceURL,

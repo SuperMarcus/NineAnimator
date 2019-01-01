@@ -79,7 +79,7 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
 // MARK: - Media Playback Control
 extension CastController {
     func setVolume(to volume: Float) {
-        debugPrint("Info: Setting Cast device volume to \(volume)")
+        Log.info("Setting Cast device volume to %@", volume)
         client?.setVolume(volume)
         client?.setMuted(volume < 0.001)
     }
@@ -102,9 +102,7 @@ extension CastController {
         
         client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
             result in
-            guard let app = result.value else {
-                return debugPrint("Error: \(result.error!)")
-            }
+            guard let app = result.value else { return Log.error(result.error) }
             
             self.currentApp = app
             client.load(media: castMedia, with: app) {
@@ -113,7 +111,7 @@ extension CastController {
                 case .success(let status):
                     self.content = castMedia
                     if let duration = status.media?.duration {
-                        debugPrint("Info: Media duration is \(duration)")
+                        Log.info("Media duration is %@", duration)
                         self.contentDuration = duration
                     }
                     self.viewController.playback(didStart: castMedia)
@@ -129,10 +127,10 @@ extension CastController {
                     
                     self.updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: self.timerUpdateProgressTask)
                     
-                    debugPrint("Info: Playback status \(status)")
+                    Log.info("Playback status @%", status)
                 case .failure(let error):
                     self.viewController.playback(didEnd: castMedia)
-                    debugPrint("Warn: Error on playback \(error)")
+                    Log.error("Error on playback %@", error)
                 }
             }
         }
@@ -144,7 +142,7 @@ extension CastController {
     func connect(to device: CastDevice) {
         if client != nil { disconnect() }
         
-        debugPrint("Info: Connecting to \(device)")
+        Log.info("Connecting to %@", device)
         
         currentApp = nil
         
@@ -187,14 +185,14 @@ extension CastController {
     }
     
     func castClient(_ client: CastClient, didConnectTo device: CastDevice) {
-        debugPrint("Info: Connected to \(device)")
+        Log.info("Connected to %@", device)
         viewController.deviceListUpdated()
     }
     
     func castClient(_ client: CastClient, didDisconnectFrom device: CastDevice) {
         guard client != self.client else { return }
         
-        debugPrint("Info: Disconnected from \(device)")
+        Log.info("Disconnected from %@", device)
         if currentApp != nil, let content = content {
             currentApp = nil
             self.client = nil

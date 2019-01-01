@@ -39,7 +39,7 @@ class NineAnimatorUser {
         get { return decode([AnimeLink].self, from: _freezer.value(forKey: .recentAnimeList)) ?? [] }
         set {
             guard let data = encode(data: newValue) else {
-                return debugPrint("Warn: Recent animes failed to encode")
+                return Log.error("Recent animes failed to encode")
             }
             _freezer.set(data, forKey: .recentAnimeList)
         }
@@ -84,7 +84,7 @@ class NineAnimatorUser {
     /// - Parameter episode: EpisodeLink of the episode
     func entering(episode: EpisodeLink) {
         guard let data = encode(data: episode) else {
-            debugPrint("Warn: EpisodeLink failed to encode.")
+            Log.error("EpisodeLink failed to encode.")
             return
         }
         _freezer.set(data, forKey: .recentEpisode)
@@ -188,7 +188,7 @@ extension NineAnimatorUser {
         }
         set {
             guard let data = encode(data: newValue) else {
-                return debugPrint("Warn: Recent animes failed to encode")
+                return Log.error("Recent animes failed to encode")
             }
             _cloud.set(data, forKey: .recentAnimeList)
         }
@@ -223,8 +223,6 @@ extension NineAnimatorUser {
     }
     
     func merge(piority: MergePiority) {
-//        debugPrint("Info: Synchronizing defaults with piority \(piority)")
-        
         if piority == .remoteFirst { _cloud.synchronize() }
         
         //Merge recently watched anime
@@ -285,7 +283,7 @@ extension NineAnimatorUser {
         get { return decode([AnimeLink].self, from: _freezer.value(forKey: .subscribedAnimeList)) ?? [] }
         set {
             guard let data = encode(data: newValue) else {
-                return debugPrint("Warn: Subscribed animes failed to encode")
+                return Log.error("Subscribed animes failed to encode")
             }
             _freezer.set(data, forKey: .subscribedAnimeList)
         }

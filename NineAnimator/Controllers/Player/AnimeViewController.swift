@@ -63,7 +63,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                         self.server = recentlyUsedServer
                     } else {
                         self.server = anime.servers.first!.key
-                        debugPrint("Info: No server selected. Using \(anime.servers.first!.key)")
+                        Log.info("No server selected. Using %@", anime.servers.first!.key)
                     }
                 }
                 
@@ -125,10 +125,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
-            guard let anime = anime else {
-                debugPrint("Error: \(error!)")
-                return
-            }
+            guard let anime = anime else { return Log.error(error) }
             self?.anime = anime
             // Initiate playback if episodeLink is set
             if self?.episodeLink != nil {
@@ -196,7 +193,7 @@ extension AnimeViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? EpisodeTableViewCell else {
-            debugPrint("Warning: Cell selection event received when the cell selected is not an EpisodeTableViewCell")
+            Log.error("Cell selection event received (from %@) when the cell selected is not an EpisodeTableViewCell", indexPath)
             return
         }
         
@@ -309,17 +306,14 @@ extension AnimeViewController {
         episodeRequestTask = anime!.episode(with: episodeLink) {
             [weak self] episode, error in
             guard let self = self else { return }
-            guard let episode = episode else {
-                debugPrint("Error: \(error!)")
-                return
-            }
+            guard let episode = episode else { return Log.error(error) }
             self.episode = episode
             
             //Save episode to last playback
             NineAnimator.default.user.entering(episode: episodeLink)
             
-            debugPrint("Info: Episode target retrived for '\(episode.name)'")
-            debugPrint("- Playback target: \(episode.target)")
+            Log.info("Episode target retrived for '%@'", episode.name)
+            Log.debug("- Playback target: %@", episode.target)
             
             if episode.nativePlaybackSupported {
                 self.episodeRequestTask = episode.retrive {
@@ -328,7 +322,7 @@ extension AnimeViewController {
                     self.episodeRequestTask = nil
                     
                     guard let media = media else {
-                        debugPrint("Warn: Item not retrived \(error!), fallback to web access")
+                        Log.error("Item not retrived: \"%@\", fallback to web access", error!)
                         DispatchQueue.main.async { [weak self] in
                             let playbackController = SFSafariViewController(url: episode.target)
                             self?.present(playbackController, animated: true, completion: clearSelection)

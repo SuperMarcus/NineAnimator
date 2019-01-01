@@ -101,7 +101,7 @@ class NASourceMasterAnime: BaseSource, Source {
         let path = String(format: NASourceMasterAnime.apiPathAnimeDetailed, identifier)
         let task = NineAnimatorMultistepAsyncTask()
         
-        debugPrint("Info: Requesting episodes of anime \(identifier) on masterani.me")
+        Log.info("Requesting episodes of anime %@ on masterani.me", identifier)
         
         task.add(request(ajax: path) { [weak task] response, error in
             guard let task = task else { return }
@@ -145,8 +145,8 @@ class NASourceMasterAnime: BaseSource, Source {
                 return handleError("no episodes found")
             }
             
-            debugPrint("Info: Found \(episodes.count) episodes")
-            debugPrint("Info: Requesting availble streaming servers")
+            Log.debug("Found %@ episodes", episodes.count)
+            Log.debug("Requesting availble streaming servers")
             
             task.add(self.episodeInfo(from: firstEpisode) { info, error in
                 guard let hosts = info?.availableHosts
@@ -208,7 +208,7 @@ class NASourceMasterAnime: BaseSource, Source {
                     .jsonObject(with: mirrorsJsonData) as? [NSDictionary] else {
                     throw NineAnimatorError.responseError("invalid mirrors")
                 }
-                debugPrint("Info: \(mirrors.count) mirrors found for episode \(episodeNumber)")
+                Log.debug("%@ mirrors found for episode %@", mirrors.count, episodeNumber)
                 handler(NAMasterAnimeEpisodeInfo(
                     link,
                     streamingInfo: mirrors,
@@ -241,7 +241,7 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func search(keyword: String) -> SearchPageProvider {
-        debugPrint("Info: Searching masterani.me with keyword '\(keyword)'")
+        Log.info("Searching masterani.me with keyword '%@'", keyword)
         return NASearchMasterAnime(query: keyword, parent: self)
     }
     

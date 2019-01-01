@@ -71,11 +71,11 @@ extension NineAnimeSource {
         
         let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
         
-        debugPrint("Info: Retrived information for \(link)")
-        debugPrint("- Alias: \(alias ?? "None")")
-        debugPrint("- Description: \(animeDescription)")
-        debugPrint("- Attributes: \(animeAttributes)")
-        debugPrint("- Resource Identifiers: ID=\(animeResourceTags.id), EPISODE=\(animeResourceTags.episode)")
+        Log.info("Retrived information for %@", link)
+        Log.debug("- Alias: %@", alias ?? "None")
+        Log.debug("- Description: %@", animeDescription)
+        Log.debug("- Attributes: %@", animeAttributes)
+        Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
         
         return request(
             ajax: "/ajax/film/servers/\(animeResourceTags.id)",
@@ -85,7 +85,7 @@ extension NineAnimeSource {
             }
             
             guard let htmlList = responseJson["html"] as? String else {
-                debugPrint("Error: Invalid response")
+                Log.error("Invalid response")
                 return handler(nil, NineAnimatorError.responseError(
                     "unable to retrive episode list from responses"
                 ))
@@ -103,7 +103,7 @@ extension NineAnimeSource {
             
             var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
             
-            debugPrint("Info: \(animeServers.count) servers found for this anime.")
+            Log.debug("%@ servers found for this anime.", animeServers.count)
             
             do {
                 let soup = try SwiftSoup.parse(htmlList)
@@ -116,7 +116,7 @@ extension NineAnimeSource {
                                     server: serverIdentifier,
                                     parent: link)
                     }
-                    debugPrint("Info: \(animeEpisodes[serverIdentifier]!.count) episodes found on server \(serverIdentifier)")
+                    Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
                 }
                 
                 handler(Anime(link,
@@ -124,7 +124,7 @@ extension NineAnimeSource {
                               on: animeServers,
                               episodes: animeEpisodes), nil)
             } catch {
-                debugPrint("Unable to parse servers and episodes")
+                Log.error("Unable to parse servers and episodes")
                 handler(nil, error)
             }
         }

@@ -47,7 +47,7 @@ class RootViewController: UITabBarController {
     
     deinit {
         if RootViewController.shared == self {
-            debugPrint("Warn: RootViewController is deinitialized.")
+            Log.error("RootViewController is deinitialized.")
         }
     }
 }

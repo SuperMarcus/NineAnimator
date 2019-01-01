@@ -33,7 +33,7 @@ extension NineAnimeSource {
             guard let targetString = responseJson["target"] as? String,
                 let target = URL(string: targetString)
                 else {
-                    debugPrint("Error: Target not defined or is invalid in response")
+                    Log.error("Target not defined or is invalid in response")
                     return handler(nil, NineAnimatorError.responseError(
                         "target url not defined or invalid"
                     ))

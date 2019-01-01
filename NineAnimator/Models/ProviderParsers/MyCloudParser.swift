@@ -40,7 +40,7 @@ class MyCloudParser: VideoProviderParser {
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let text = response.value else {
-                debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
+                Log.error(response.error)
                 return handler(nil, NineAnimatorError.responseError(
                     "response error: \(response.error?.localizedDescription ?? "Unknown")"
                 ))
@@ -62,7 +62,7 @@ class MyCloudParser: VideoProviderParser {
                 ))
             }
             
-            debugPrint("Info: (MyCloud Parser) found asset at \(sourceURL.absoluteString)")
+            Log.info("(MyCloud Parser) found asset at %@", sourceURL.absoluteString)
             
             //MyCloud might not support Chromecast, since it uses COR checking
             handler(BasicPlaybackMedia(

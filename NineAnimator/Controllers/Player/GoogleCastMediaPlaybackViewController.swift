@@ -145,7 +145,7 @@ extension GoogleCastMediaPlaybackViewController {
         
         if let volume = volume, !volumeIsChanging {
             if volumeSlider.value != volume {
-                debugPrint("Info: Cast device volume updated to \(volume)")
+                Log.info("Cast device volume updated to %@", volume)
                 volumeSlider.value = volume
             }
         }
@@ -320,7 +320,7 @@ extension GoogleCastMediaPlaybackViewController {
 extension GoogleCastMediaPlaybackViewController {
     private func startDummyPlayer() {
         do {
-            debugPrint("Info: Starting cast dummy audio player")
+            Log.info("Starting cast dummy audio player")
             guard let dummyAudioAsset = NSDataAsset(name: "CastDummyAudio")
                 else { throw NineAnimatorError.urlError }
             
@@ -335,11 +335,11 @@ extension GoogleCastMediaPlaybackViewController {
             castDummyAudioPlayer?.volume = 0.01
             castDummyAudioPlayer?.prepareToPlay()
             castDummyAudioPlayer?.play()
-        } catch { debugPrint("Error: \(error)") }
+        } catch { Log.error(error) }
     }
     
     private func stopDummyPlayer() {
-        debugPrint("Info: Stopping cast dummy audio player")
+        Log.info("Stopping cast dummy audio player")
         self.castDummyAudioPlayer?.stop()
         self.castDummyAudioPlayer = nil
         try? AVAudioSession.sharedInstance().setActive(false, options: [])
@@ -434,7 +434,7 @@ extension GoogleCastMediaPlaybackViewController {
     
     @objc private func systemVolumeDidChange(notification: Notification) {
         guard let newVolume = notification.userInfo?["AVSystemController_AudioVolumeNotificationParameter"] as? Float else {
-            debugPrint("Error: Received a volume change notification without new volume parameter.")
+            Log.error("Received a volume change notification without new volume parameter.")
             return
         }
         castController.setVolume(to: newVolume)

@@ -233,7 +233,7 @@ extension NativePlayerController {
                 .playback,
                 mode: .moviePlayback)
             try audioSession.setActive(true, options: [])
-        } catch { debugPrint("Error: Unable to setup audio session - \(error)") }
+        } catch { Log.error("Unable to setup audio session - %@", error) }
     }
     
     private func updatePlaybackSession() {
@@ -245,7 +245,7 @@ extension NativePlayerController {
         
         do {
             try audioSession.setActive(false, options: [])
-        } catch { debugPrint("Error: Unable to teardown audio session - \(error)") }
+        } catch { Log.error("Unable to teardown audio session - %@", error) }
     }
 }
 

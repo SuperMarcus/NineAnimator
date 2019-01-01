@@ -44,7 +44,7 @@ class TiwiKiwiParser: VideoProviderParser {
             ]
             
             guard let text = response.value else {
-                debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
+                Log.error(response.error)
                 return handler(nil, NineAnimatorError.responseError(
                     "response error: \(response.error?.localizedDescription ?? "Unknown")"
                 ))
@@ -57,7 +57,7 @@ class TiwiKiwiParser: VideoProviderParser {
             }
             
             if url == nil, let match = TiwiKiwiParser.flowPlayerPropertyURLRegex.matches(in: text, range: text.matchingRange).last {
-                debugPrint("Info: This episode uses flow player. Tracing source URLs.")
+                Log.info("Info: This episode uses flow player. Tracing source URLs.")
                 let propertyListUrl = text[match.range(at: 1)]
                 return task.add(session.request(propertyListUrl, headers: headers).responseString {
                     response in
@@ -83,7 +83,7 @@ class TiwiKiwiParser: VideoProviderParser {
                         ))
                     }
                     
-                    debugPrint("Info: (Tiwi.Kiwi Parser) found asset at \(sourceURL.absoluteString)")
+                    Log.info("(Tiwi.Kiwi Parser) found asset at %@", sourceURL.absoluteString)
                     
                     //This also doen't work with chromecast
                     handler(BasicPlaybackMedia(
@@ -100,7 +100,7 @@ class TiwiKiwiParser: VideoProviderParser {
                 ))
             }
             
-            debugPrint("Info: (Tiwi.Kiwi Parser) found asset at \(sourceURL.absoluteString)")
+            Log.info("(Tiwi.Kiwi Parser) found asset at %@", sourceURL.absoluteString)
             
             //This also doen't work with chromecast
             handler(BasicPlaybackMedia(

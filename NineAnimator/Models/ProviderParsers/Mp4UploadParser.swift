@@ -28,7 +28,7 @@ class Mp4UploadParser: VideoProviderParser {
         return session.request(episode.target).responseString {
             response in
             guard let text = response.value else {
-                debugPrint("Error: \(response.error?.localizedDescription ?? "Unknown")")
+                Log.error(response.error)
                 return handler(nil, NineAnimatorError.responseError(
                     "response error: \(response.error?.localizedDescription ?? "Unknown")"
                 ))
@@ -52,7 +52,7 @@ class Mp4UploadParser: VideoProviderParser {
                 ))
             }
             
-            debugPrint("Info: (Mp4Upload Parser) found asset at \(sourceURL.absoluteString)")
+            Log.info("(Mp4Upload Parser) found asset at %@", sourceURL.absoluteString)
             
             handler(BasicPlaybackMedia(
                 url: sourceURL,

@@ -49,7 +49,7 @@ class NineAnimeSearch: SearchPageProvider {
     
     func more() {
         guard moreAvailable && _lastRequest == nil else { return }
-        debugPrint("Info: Requesting page \(_results.count + 1) for query \(query)")
+        Log.debug("Requesting page %@ for query %@", _results.count + 1, query)
         let loadingIndex = _results.count
         let encodedKeyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         _lastRequest = _parent.request(browse:
@@ -61,7 +61,7 @@ class NineAnimeSearch: SearchPageProvider {
             if self._results.count > loadingIndex { return }
             
             guard let response = response else {
-                return debugPrint("Error: \(error!)")
+                return Log.error(error)
             }
             
             do {
@@ -84,7 +84,7 @@ class NineAnimeSearch: SearchPageProvider {
                     guard let link = URL(string: linkString),
                         let coverImage = URL(string: coverImageString)
                         else {
-                            debugPrint("Warn: an invalid link was extracted from the search result page")
+                            Log.error("An invalid link (%@) was extracted from the search result page", linkString)
                             return nil
                     }
                     
@@ -92,7 +92,7 @@ class NineAnimeSearch: SearchPageProvider {
                 }
                 
                 if animes.isEmpty {
-                    debugPrint("Info: No matches")
+                    Log.debug("No results for search @%", self.query)
                     self.totalPages = 0
                     self.delegate?.noResult(from: self)
                 } else {
@@ -100,7 +100,7 @@ class NineAnimeSearch: SearchPageProvider {
                     self._results.append(animes)
                     self.delegate?.pageIncoming(newSection, from: self)
                 }
-            } catch { debugPrint("Error when loading more results: \(error)") }
+            } catch { Log.error("Error when loading more results: %@", error) }
         }
     }
 }

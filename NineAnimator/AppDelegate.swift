@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var taskPool: [NineAnimatorAsyncTask?]?
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        debugPrint("Info: Received background fetch notification.")
+        Log.info("Received background fetch notification.")
         UserNotificationManager.default.performFetch(with: completionHandler)
     }
 }

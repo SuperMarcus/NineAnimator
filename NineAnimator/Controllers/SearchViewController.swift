@@ -72,10 +72,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         requestTask = source.featured {
             [weak self] page, error in
             defer { self?.requestTask = nil }
-            guard let page = page else {
-                debugPrint("Error: \(error!)")
-                return
-            }
+            guard let page = page else { return Log.error(error) }
             self?.popularAnimeLinks = page.featured + page.latest
         }
     }
@@ -160,9 +157,7 @@ extension SearchViewController {
                 self.requestTask = source.featured {
                     [weak self] page, error in
                     defer { self?.requestTask = nil }
-                    guard let page = page else {
-                        return debugPrint("Error: \(error!)")
-                    }
+                    guard let page = page else { return Log.error(error) }
                     self?.popularAnimeLinks = page.featured + page.latest
                 }
             }
