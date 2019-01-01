@@ -67,6 +67,9 @@ class UserNotificationManager {
 // MARK: - App state handling
 extension UserNotificationManager {
     @objc func onAppBecomesInactive(notification: Notification) {
+        // Don't do anything if another background task is running
+        guard taskPool == nil else { return }
+        
         if !lazyPersistPool.isEmpty {
             debugPrint("Info: Caching subscribed anime.")
             
@@ -226,7 +229,7 @@ extension UserNotificationManager {
             return completionHandler(.noData)
         }
         
-        func onFinalTask() {
+        let onFinalTask = { [weak self] () -> Void in
             let succeededResultsCount = resultsPool
                 .compactMap { $0 }
                 .count
@@ -238,8 +241,8 @@ extension UserNotificationManager {
                 ( newResultsCount > 0 ? .newData : .noData )
                 : .failed
             completionHandler(finalFetchResult)
-            debugPrint("Info: Background fetch finished with result: \(finalFetchResult)")
-            taskPool = nil
+            debugPrint("Info: Background fetch finished with result: \(finalFetchResult.rawValue)")
+            self?.taskPool = nil
         }
         
         debugPrint("Info: Beginning background fetch with \(watchedAnimeLinks.count) watched anime.")
@@ -248,8 +251,8 @@ extension UserNotificationManager {
             defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
             
             //Ignore the watcher that is fetched within 2 hours
-            if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow < 7200 {
-                debugPrint("Info: Skipping '\(animeLink.title)' (last checked: \(watcher.lastCheck)")
+            if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow >= -7200 {
+                debugPrint("Info: Skipping '\(animeLink.title)' (last checked: \(watcher.lastCheck), \(watcher.lastCheck.timeIntervalSinceNow) seconds since now")
                 resultsPool.append(FetchResult(animeLink, [], []))
                 return nil
             }
@@ -340,6 +343,8 @@ extension UserNotificationManager {
         
         //Alas, post notification to the user
         notificationCenter.add(request, withCompletionHandler: nil)
+        
+        debugPrint("Info: Notification for '\(result.anime.title)' sent.")
     }
 }
 

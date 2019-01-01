@@ -32,9 +32,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Also perform fetch when the app becomes active
-        UserNotificationManager.default.performFetch { _ in }
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        var identifier: UIBackgroundTaskIdentifier!
+        identifier = UIApplication.shared.beginBackgroundTask {
+            UIApplication.shared.endBackgroundTask(identifier)
+        }
+        
+        //Perform fetch when app enters background
+        UserNotificationManager.default.performFetch { _ in
+            UIApplication.shared.endBackgroundTask(identifier)
+        }
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
