@@ -37,7 +37,7 @@ class UserNotificationManager {
     // Exposed properties
     static let `default` = UserNotificationManager()
     
-    let suggestedFetchInterval: TimeInterval = 7200
+    let suggestedFetchInterval: TimeInterval = 3600
     
     // Private properties
     
