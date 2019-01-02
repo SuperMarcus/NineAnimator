@@ -23,11 +23,27 @@ import UIKit
 import UserNotifications
 import WebKit
 
+/**
+ NineAnimator's one and only `AnimeViewController`
+ 
+ - important:
+ Always initalize this class from storyboard and use the `setPresenting(_: AnimeLink)`
+ method or the `setPresenting(episode: EpisodeLink)` method to initialize before
+ presenting.
+ 
+ ## Example Usage
+ 
+ 1. Create segues in storyboard with reference to `AnimePlayer.storyboard`.
+ 2. Override `prepare(for segue: UIStoryboardSegue)` method.
+ 3. Retrive the `AnimeViewController` from `segue.destination as? AnimeViewController`
+ 4. Initialize the `AnimeViewController` with either `setPresenting(_: AnimeLink)` or
+    `setPresenting(episode: EpisodeLink)`.
+ */
 class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
     // MARK: - Set either one of the following item to initialize the anime view
-    var animeLink: AnimeLink?
+    private var animeLink: AnimeLink?
     
-    var episodeLink: EpisodeLink? {
+    private var episodeLink: EpisodeLink? {
         didSet {
             if let episodeLink = episodeLink {
                 self.animeLink = episodeLink.parent
@@ -41,7 +57,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     
     @IBOutlet private weak var notificationToggleButton: UIBarButtonItem!
     
-    var anime: Anime? {
+    private var anime: Anime? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -82,20 +98,20 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
     var server: Anime.ServerIdentifier?
     
     // Set episode will update the server identifier as well
-    var episode: Episode? {
+    private var episode: Episode? {
         didSet {
             guard let episode = episode else { return }
             server = episode.link.server
         }
     }
     
-    var informationCell: AnimeDescriptionTableViewCell?
+    private var informationCell: AnimeDescriptionTableViewCell?
     
-    var selectedEpisodeCell: EpisodeTableViewCell?
+    private var selectedEpisodeCell: EpisodeTableViewCell?
     
-    var episodeRequestTask: NineAnimatorAsyncTask?
+    private var episodeRequestTask: NineAnimatorAsyncTask?
     
-    var animeRequestTask: NineAnimatorAsyncTask?
+    private var animeRequestTask: NineAnimatorAsyncTask?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -144,6 +160,41 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         
         //Remove all observations
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+// MARK: - Exposed Interfaces
+extension AnimeViewController {
+    /**
+     Initialize the `AnimeViewController` with the provided
+     AnimeLink.
+     
+     - parameters:
+        - link: The `AnimeLink` object that is used to
+                initialize this `AnimeViewController`
+     
+     By calling this method, `AnimeViewController` will use the
+     Source object from this link to retrive the `Anime` object.
+     */
+    func setPresenting(_ link: AnimeLink) {
+        self.episodeLink = nil
+        self.animeLink = link
+    }
+    
+    /**
+     Initialize the `AnimeViewController` with the parent AnimeLink
+     of the provided `EpisodeLink`, and immedietly starts playing
+     the episode once the anime is retrived and parsed.
+     
+     - parameters:
+        - episode: The `EpisodeLink` object that is used to
+                   initialize this `AnimeViewController`
+     
+     `AnimeViewController` will first retrive the Anime object from
+     the Source in `AnimeViewController.viewWillAppear`
+     */
+    func setPresenting(episode link: EpisodeLink) {
+        self.episodeLink = link
     }
 }
 
@@ -292,7 +343,7 @@ extension AnimeViewController {
 
 // MARK: - Initiate playback
 extension AnimeViewController {
-    func retriveAndPlay() {
+    private func retriveAndPlay() {
         guard let episodeLink = episodeLink else { return }
         
         episodeRequestTask?.cancel()

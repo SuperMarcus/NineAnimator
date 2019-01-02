@@ -105,7 +105,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
             let player = segue.destination as? AnimeViewController
             else { return }
         
-        player.animeLink = anime
+        player.setPresenting(anime)
         
         tableView.deselectSelectedRow()
     }

@@ -89,7 +89,7 @@ extension SearchViewController {
         
         if let animeViewController = segue.destination as? AnimeViewController,
            let cell = sender as? SimpleAnimeTableViewCell {
-            animeViewController.animeLink = cell.animeLink
+            animeViewController.setPresenting(cell.animeLink!)
         }
     }
 }
