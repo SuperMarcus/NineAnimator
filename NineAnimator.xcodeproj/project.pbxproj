@@ -186,6 +186,7 @@
 		2C9C450121CD56B0004C8F0C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		2C9C450321CDA7CF004C8F0C /* screenshot_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_7.png; sourceTree = "<group>"; };
 		2C9C450421CDA7D0004C8F0C /* screenshot_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_8.png; sourceTree = "<group>"; };
+		2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nineanimator_banner.jpg; sourceTree = "<group>"; };
 		2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlayerController.swift; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
@@ -281,6 +282,7 @@
 		2C4817A221DB297D0092F694 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */,
 				2C4817A721DB2F320092F694 /* xcode_select_device.jpg */,
 				2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */,
 				2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */,

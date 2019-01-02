@@ -1,6 +1,4 @@
-<img src="Misc/icon_design.svg" width="250px"/>
-
-NineAnimator
+![NineAnimator](Misc/Media/nineanimator_banner.jpg)
 ==========
 
 [![Build Status](https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master)](https://travis-ci.org/SuperMarcus/NineAnimator)
