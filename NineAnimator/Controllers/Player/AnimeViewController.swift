@@ -144,8 +144,12 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
             guard let anime = anime else { return Log.error(error) }
             self?.anime = anime
             // Initiate playback if episodeLink is set
-            if self?.episodeLink != nil {
-                self?.retriveAndPlay()
+            if let episodeLink = self?.episodeLink {
+                // Present the cast controller if the episode is currently playing on
+                // an attached cast device
+                if CastController.default.isAttached(to: episodeLink) {
+                    CastController.default.presentPlaybackController()
+                } else { self?.retriveAndPlay() }
             }
         }
     }
@@ -268,7 +272,7 @@ extension AnimeViewController {
 // MARK: - Share/Select Server/Notifications
 extension AnimeViewController {
     @IBAction private func onCastButtonTapped(_ sender: Any) {
-        RootViewController.shared?.showCastController()
+        CastController.default.presentPlaybackController()
     }
     
     @IBAction private func onActionButtonTapped(_ sender: UIBarButtonItem) {

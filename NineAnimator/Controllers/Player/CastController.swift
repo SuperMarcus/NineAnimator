@@ -35,12 +35,6 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     var contentDuration: Double?
     
-    var isReady: Bool { return client?.isConnected ?? false }
-    
-    var isAttached: Bool { return isReady && currentApp != nil }
-    
-    var isPaused: Bool { return client?.currentMediaStatus?.playerState == .paused }
-    
     var currentApp: CastApp?
     
     var updateTimer: Timer?
@@ -73,6 +67,26 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
      */
     func dismiss() {
         viewController.dismiss(animated: true)
+    }
+}
+
+// MARK: - Accessing CastController
+extension CastController {
+    var isReady: Bool { return client?.isConnected ?? false }
+    
+    var isAttached: Bool { return isReady && currentApp != nil }
+    
+    var isPaused: Bool { return client?.currentMediaStatus?.playerState == .paused }
+    
+    func isAttached(to link: EpisodeLink) -> Bool {
+        return isAttached && currentEpisode?.link == link
+    }
+    
+    /**
+     Present the cast controller interface in RootViewController
+     */
+    func presentPlaybackController() {
+        RootViewController.shared?.showCastController()
     }
 }
 
