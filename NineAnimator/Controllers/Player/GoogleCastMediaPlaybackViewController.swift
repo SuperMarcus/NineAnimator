@@ -79,16 +79,20 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         deviceListTableView.rowHeight = 48
         deviceListTableView.tableFooterView = UIView()
         
+        playbackProgressSlider.setThumbImage(normalThumbImage, for: .normal)
+        playbackProgressSlider.setThumbImage(highlightedThumbImage, for: .highlighted)
+        volumeSlider.minimumValue = 0.0
+        volumeSlider.maximumValue = 1.0
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         if castController.isAttached {
             showPlaybackControls(animated: false)
         } else {
             hidePlaybackControls(animated: false)
         }
-        
-        playbackProgressSlider.setThumbImage(normalThumbImage, for: .normal)
-        playbackProgressSlider.setThumbImage(highlightedThumbImage, for: .highlighted)
-        volumeSlider.minimumValue = 0.0
-        volumeSlider.maximumValue = 1.0
         
         castController.start()
     }
