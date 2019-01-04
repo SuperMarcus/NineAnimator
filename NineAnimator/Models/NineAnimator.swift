@@ -26,7 +26,7 @@ enum NineAnimatorError: Error {
     case urlError
     case responseError(String)
     case providerError(String)
-    case noResults
+    case searchError(String)
     case decodeError
 }
 

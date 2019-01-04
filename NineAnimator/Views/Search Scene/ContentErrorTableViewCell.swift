@@ -17,28 +17,23 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import SwiftSoup
+import UIKit
 
-protocol SearchPageProviderDelegate: AnyObject {
-    //Index of the page (starting from zero)
-    func pageIncoming(_: Int, from page: SearchPageProvider)
+class ContentErrorTableViewCell: UITableViewCell {
+    @IBOutlet private weak var searchSubtitleLabel: UILabel!
     
-    func noResult(from page: SearchPageProvider)
-}
-
-protocol SearchPageProvider {
-    var query: String { get }
-    
-    var totalPages: Int? { get }
-    
-    var availablePages: Int { get }
-    
-    var moreAvailable: Bool { get }
-    
-    var delegate: SearchPageProviderDelegate? { get set }
-    
-    func animes(on page: Int) -> [AnimeLink]
-    
-    func more()
+    var error: Error? {
+        set {
+            if let providerError = newValue as? NineAnimatorError {
+                switch providerError {
+                case .searchError(let error):
+                    searchSubtitleLabel.text = error
+                default: searchSubtitleLabel.text = providerError.localizedDescription
+                }
+            } else {
+                searchSubtitleLabel.text = newValue?.localizedDescription ?? "Unknown Error"
+            }
+        }
+        get { return nil }
+    }
 }

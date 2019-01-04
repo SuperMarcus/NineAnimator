@@ -240,7 +240,7 @@ class NASourceMasterAnime: BaseSource, Source {
         return task
     }
     
-    func search(keyword: String) -> SearchPageProvider {
+    func search(keyword: String) -> ContentProvider {
         Log.info("Searching masterani.me with keyword '%@'", keyword)
         return NASearchMasterAnime(query: keyword, parent: self)
     }

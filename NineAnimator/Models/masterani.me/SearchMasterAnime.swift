@@ -19,7 +19,7 @@
 
 import Foundation
 
-class NASearchMasterAnime: SearchPageProvider {
+class NASearchMasterAnime: ContentProvider {
     static let apiPathSearch = "/api/anime/filter?search=%@&order=score_desc&page=%@"
     
     var query: String
@@ -30,7 +30,7 @@ class NASearchMasterAnime: SearchPageProvider {
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
-    weak var delegate: SearchPageProviderDelegate?
+    weak var delegate: ContentProviderDelegate?
     
     private let _parent: NASourceMasterAnime
     
@@ -60,12 +60,16 @@ class NASearchMasterAnime: SearchPageProvider {
                 
                 defer { self._lastRequest = nil }
                 
-                guard let response = response else { return }
+                guard let response = response else {
+                    self.delegate?.onError(NineAnimatorError.searchError("Did not find any results for \"\(self.query)\". This might suggests a bad network condition or a service issue."), from: self)
+                    return
+                }
                 
                 self.totalPages = response["last_page"] as? Int
                 
                 guard self.totalPages != 0 else {
-                    self.delegate?.noResult(from: self);return
+                    self.delegate?.onError(NineAnimatorError.searchError("Results Error"), from: self)
+                    return
                 }
                 guard let animes = response["data"] as? [NSDictionary] else { return }
                 

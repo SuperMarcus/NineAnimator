@@ -19,15 +19,17 @@
 
 import UIKit
 
-class SearchResultViewController: UITableViewController, SearchPageProviderDelegate {
+class SearchResultViewController: UITableViewController, ContentProviderDelegate {
     var searchText: String? {
         didSet {
             title = searchText
         }
     }
     
+    var providerError: Error?
+    
     // swiftlint:disable:next implicitly_unwrapped_optional
-    private var searchPage: SearchPageProvider!
+    private var searchPage: ContentProvider!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +43,13 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        providerError = nil
         searchPage = NineAnimator.default.user.source.search(keyword: searchText!)
         searchPage.delegate = self
     }
     
-    func noResult(from: SearchPageProvider) {
+    func onError(_ error: Error, from: ContentProvider) {
+        self.providerError = error
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
@@ -53,7 +57,7 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
         }
     }
     
-    func pageIncoming(_ sectionNumber: Int, from page: SearchPageProvider) {
+    func pageIncoming(_ sectionNumber: Int, from page: ContentProvider) {
         DispatchQueue.main.async(execute: tableView.reloadData)
     }
 
@@ -74,10 +78,9 @@ class SearchResultViewController: UITableViewController, SearchPageProviderDeleg
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // No results found
-        if !searchPage.moreAvailable && searchPage.availablePages == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as! SearchNoResultsTableViewCell
-            cell.query = searchText
+        if let providerError = providerError {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as! ContentErrorTableViewCell
+            cell.error = providerError
             return cell
         }
         

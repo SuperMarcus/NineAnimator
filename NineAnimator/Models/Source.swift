@@ -31,7 +31,7 @@ protocol Source {
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask?
     
-    func search(keyword: String) -> SearchPageProvider
+    func search(keyword: String) -> ContentProvider
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser?
 }

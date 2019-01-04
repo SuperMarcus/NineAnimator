@@ -20,10 +20,10 @@
 import Foundation
 import SwiftSoup
 
-class NineAnimeSearch: SearchPageProvider {
+class NineAnimeSearch: ContentProvider {
     private(set) var query: String
     private(set) var totalPages: Int?
-    weak var delegate: SearchPageProviderDelegate?
+    weak var delegate: ContentProviderDelegate?
     
     var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
     
@@ -61,6 +61,7 @@ class NineAnimeSearch: SearchPageProvider {
             if self._results.count > loadingIndex { return }
             
             guard let response = response else {
+                self.delegate?.onError(NineAnimatorError.searchError("Response cannot be parsed."), from: self)
                 return Log.error(error)
             }
             
@@ -92,15 +93,18 @@ class NineAnimeSearch: SearchPageProvider {
                 }
                 
                 if animes.isEmpty {
-                    Log.debug("No results for search @%", self.query)
+                    Log.debug("No results found for '@%'", self.query)
                     self.totalPages = 0
-                    self.delegate?.noResult(from: self)
+                    self.delegate?.onError(NineAnimatorError.searchError("No results found for \"\(self.query)\""), from: self)
                 } else {
                     let newSection = self._results.count
                     self._results.append(animes)
                     self.delegate?.pageIncoming(newSection, from: self)
                 }
-            } catch { Log.error("Error when loading more results: %@", error) }
+            } catch {
+                self.delegate?.onError(error, from: self)
+                Log.error("Error when loading more results: %@", error)
+            }
         }
     }
 }
