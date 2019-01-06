@@ -23,7 +23,6 @@ import SwiftSoup
 extension NineAnimeSource {
     static let animeAliasRegex = try! NSRegularExpression(pattern: "<p class=\"alias\">([^<]+)", options: .caseInsensitive)
     static let animeAttributesRegex = try! NSRegularExpression(pattern: "<dt>([^<:]+):*<\\/dt>\\s+<dd>([^<]+)")
-    static let animeResourceTagsRegex = try! NSRegularExpression(pattern: "<div id=\"servers-container\" data-id=\"([^\"]+)\" data-bind-api=\"#player\" data-epid=\"([^\"]*)\" data-epname=\"[^\"]*\"\\s*>", options: .caseInsensitive)
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
@@ -60,73 +59,78 @@ extension NineAnimeSource {
                 .map { (page[$0.range(at: 1)], page[$0.range(at: 2)]) }
         }()
         
-        let animeResourceTags: (id: String, episode: String) = {
-            let matches = NineAnimeSource.animeResourceTagsRegex.matches(
-                in: page, range: page.matchingRange
-            )
-            return (page[matches[0].range(at: 1)], page[matches[0].range(at: 2)])
-        }()
-        
-        let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
-        
-        let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
-        
-        Log.info("Retrived information for %@", link)
-        Log.debug("- Alias: %@", alias ?? "None")
-        Log.debug("- Description: %@", animeDescription)
-        Log.debug("- Attributes: %@", animeAttributes)
-        Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
-        
-        return request(
-            ajax: "/ajax/film/servers/\(animeResourceTags.id)",
-            with: ajaxHeaders) { response, error in
-            guard let responseJson = response else {
-                return handler(nil, error)
-            }
+        do {
+            let serverContainerElement = try bowl.select("div#servers-container")
             
-            guard let htmlList = responseJson["html"] as? String else {
-                Log.error("Invalid response")
-                return handler(nil, NineAnimatorError.responseError(
-                    "unable to retrive episode list from responses"
-                ))
-            }
-            
-            let matches = NineAnimeSource.animeServerListRegex.matches(
-                in: htmlList, range: htmlList.matchingRange
+            let animeResourceTags = (
+                id: try serverContainerElement.attr("data-id"),
+                episode: try serverContainerElement.attr("data-epid")
             )
             
-            let animeServers: [Anime.ServerIdentifier: String] = Dictionary(
-                matches.map { match in
-                    (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
+            let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
+            
+            let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
+            
+            Log.info("Retrived information for %@", link)
+            Log.debug("- Alias: %@", alias ?? "None")
+            Log.debug("- Description: %@", animeDescription)
+            Log.debug("- Attributes: %@", animeAttributes)
+            Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
+            
+            return request(
+                ajax: "/ajax/film/servers/\(animeResourceTags.id)",
+                with: ajaxHeaders) { response, error in
+                guard let responseJson = response else {
+                    return handler(nil, error)
                 }
-            ) { _, new in new }
-            
-            var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
-            
-            Log.debug("%@ servers found for this anime.", animeServers.count)
-            
-            do {
-                let soup = try SwiftSoup.parse(htmlList)
                 
-                for server in try soup.select("div.server") {
-                    let serverIdentifier = try server.attr("data-id")
-                    animeEpisodes[serverIdentifier] = try server.select("li>a").map {
-                        EpisodeLink(identifier: try $0.attr("data-id"),
-                                    name: try $0.text(),
-                                    server: serverIdentifier,
-                                    parent: link)
+                guard let htmlList = responseJson["html"] as? String else {
+                    Log.error("Invalid response")
+                    return handler(nil, NineAnimatorError.responseError(
+                        "unable to retrive episode list from responses"
+                    ))
+                }
+                
+                let matches = NineAnimeSource.animeServerListRegex.matches(
+                    in: htmlList, range: htmlList.matchingRange
+                )
+                
+                let animeServers: [Anime.ServerIdentifier: String] = Dictionary(
+                    matches.map { match in
+                        (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
                     }
-                    Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
-                }
+                ) { _, new in new }
                 
-                handler(Anime(link,
-                              description: animeDescription,
-                              on: animeServers,
-                              episodes: animeEpisodes), nil)
-            } catch {
-                Log.error("Unable to parse servers and episodes")
-                handler(nil, error)
+                var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
+                
+                Log.debug("%@ servers found for this anime.", animeServers.count)
+                
+                do {
+                    let soup = try SwiftSoup.parse(htmlList)
+                    
+                    for server in try soup.select("div.server") {
+                        let serverIdentifier = try server.attr("data-id")
+                        animeEpisodes[serverIdentifier] = try server.select("li>a").map {
+                            EpisodeLink(identifier: try $0.attr("data-id"),
+                                        name: try $0.text(),
+                                        server: serverIdentifier,
+                                        parent: link)
+                        }
+                        Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
+                    }
+                    
+                    handler(Anime(link,
+                                  description: animeDescription,
+                                  on: animeServers,
+                                  episodes: animeEpisodes), nil)
+                } catch {
+                    Log.error("Unable to parse servers and episodes")
+                    handler(nil, error)
+                }
             }
+        } catch {
+            handler(nil, error)
         }
+        return nil
     }
 }

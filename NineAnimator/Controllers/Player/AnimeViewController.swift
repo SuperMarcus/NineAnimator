@@ -180,7 +180,7 @@ extension AnimeViewController {
      By calling this method, `AnimeViewController` will use the
      Source object from this link to retrive the `Anime` object.
      */
-    func setPresenting(_ link: AnimeLink) {
+    func setPresenting(anime link: AnimeLink) {
         self.episodeLink = nil
         self.animeLink = link
     }
@@ -199,6 +199,25 @@ extension AnimeViewController {
      */
     func setPresenting(episode link: EpisodeLink) {
         self.episodeLink = link
+    }
+    
+    /**
+     Initialize the `AnimeViewController` with the link contained
+     in the provided `AnyLink`.
+     
+     - parameters:
+        - link: The `AnyLink` object that is used to initialize
+                this `AnimeViewController`
+     
+     `setPresenting(_ link: AnyLink)` is a shortcut for calling
+     `setPresenting(episode: EpisodeLink)` or
+     `setPresenting(anime: AnimeLink)`.
+     */
+    func setPresenting(_ link: AnyLink) {
+        switch link {
+        case .anime(let animeLink): setPresenting(anime: animeLink)
+        case .episode(let episodeLink): setPresenting(episode: episodeLink)
+        }
     }
 }
 

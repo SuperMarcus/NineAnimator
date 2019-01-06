@@ -145,7 +145,7 @@ class FeaturedViewController: UITableViewController {
             let selected = tableView.indexPath(for: cell),
             let animeLink = pools[selected.section]?[selected.item]
             else { return }
-        playerViewController.setPresenting(animeLink)
+        playerViewController.setPresenting(anime: animeLink)
     }
 }
 

@@ -32,6 +32,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        guard let scheme = url.scheme else { return false }
+        
+        switch scheme {
+        case "nineanimator":
+            guard let resourceSpecifier = (url as NSURL).resourceSpecifier?[String.Index(encodedOffset: 2)...] else {
+                Log.error("Cannot open url '%@': no resource specifier", url.absoluteString)
+                return false
+            }
+            
+            let animeUrlString = resourceSpecifier.hasPrefix("http") ? String(resourceSpecifier) : "https://\(resourceSpecifier)"
+            
+            guard let animeUrl = URL(string: animeUrlString) else {
+                Log.error("Cannot open url '%@': invalid url", url.absoluteString)
+                return false
+            }
+            
+            let task = NineAnimator.default.link(with: animeUrl) {
+                link, error in
+                guard let link = link else {
+                    return Log.error(error)
+                }
+                
+                RootViewController.open(whenReady: link)
+            }
+            taskPool = [task]
+            
+            return true
+        default: return false
+        }
+    }
+    
     func applicationDidEnterBackground(_ application: UIApplication) {
         // swiftlint:disable implicitly_unwrapped_optional
         var identifier: UIBackgroundTaskIdentifier!

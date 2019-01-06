@@ -161,7 +161,7 @@ extension RecentlyViewedTableViewController {
         guard let player = segue.destination as? AnimeViewController else { return }
         
         if let animeCell = sender as? RecentlyWatchedAnimeTableViewCell {
-            player.setPresenting(animeCell.animeLink!)
+            player.setPresenting(anime: animeCell.animeLink!)
         }
         
         if let episodeCell = sender as? LastViewedEpisodeTableViewCell {
