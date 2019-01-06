@@ -111,7 +111,7 @@ extension NineAnimator {
 
 // MARK: - Retriving and identifying links
 extension NineAnimator {
-    func link(with url: URL, handler: NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
+    func link(with url: URL, handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
         guard let parentSource = sources.first(where: { $0.canHandle(url: url) }) else {
             handler(nil, NineAnimatorError.urlError)
             return nil
