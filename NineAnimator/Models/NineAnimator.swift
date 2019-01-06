@@ -22,12 +22,22 @@ import Foundation
 
 typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
 
-enum NineAnimatorError: Error {
+enum NineAnimatorError: Error, CustomStringConvertible {
     case urlError
     case responseError(String)
     case providerError(String)
     case searchError(String)
     case decodeError
+    
+    var description: String {
+        switch self {
+        case .decodeError: return  "Cannot decode an encoded media. This app might be outdated."
+        case .urlError: return "There is something wrong with the URL"
+        case .responseError(let errorString): return "Response Error: \(errorString)"
+        case .providerError(let errorString): return "Provider Error: \(errorString)"
+        case .searchError(let errorString): return "Search Error: \(errorString)"
+        }
+    }
 }
 
 protocol NineAnimatorAsyncTask {
