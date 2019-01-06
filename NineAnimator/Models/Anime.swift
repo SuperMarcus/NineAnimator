@@ -32,10 +32,11 @@ struct Anime {
     typealias EpisodeIdentifier = String
     typealias AnimeIdentifier = String
     typealias EpisodeLinksCollection = [EpisodeLink]
+    typealias EpisodesCollection = [ServerIdentifier: EpisodeLinksCollection]
     
     let link: AnimeLink
     let servers: [ServerIdentifier: String]
-    let episodes: [ServerIdentifier: EpisodeLinksCollection]
+    let episodes: EpisodesCollection
     let description: String
     
     var currentServer: ServerIdentifier
@@ -71,6 +72,12 @@ extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.Episode
     }
     
     func links(withName episodeName: String) -> [EpisodeLink] {
-        return self.flatMap { $0.value }.filter { $0.name == episodeName }
+        return self.flatMap { $0.value }
+            .filter { $0.name == episodeName }
+    }
+    
+    func link(withIdentifier episodeIdentifier: String) -> EpisodeLink? {
+        return self.flatMap { $0.value }
+            .first { $0.identifier == episodeIdentifier }
     }
 }

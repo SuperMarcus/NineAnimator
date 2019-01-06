@@ -91,7 +91,11 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        let animeLinkString = link.link.absoluteString
+        return anime(from: link.link, handler)
+    }
+    
+    func anime(from url: URL, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
+        let animeLinkString = url.absoluteString
         let matches = NASourceMasterAnime.animeResourceIdentifierRegex.matches(in: animeLinkString, range: animeLinkString.matchingRange)
         guard let match = matches.first else {
             handler(nil, NineAnimatorError.urlError)
@@ -117,9 +121,25 @@ class NASourceMasterAnime: BaseSource, Source {
             guard let animeSynopsis = animeInfo["synopsis"] as? String else {
                 return handleError("no info.synopsis entry found")
             }
+            guard let animeTitle = animeInfo["title"] as? String else {
+                return handleError("no info.title entry found")
+            }
+            guard let slug = animeInfo["slug"] as? String else {
+                return handleError("no info.slug entry found")
+            }
+            guard let posterFileName = response["poster"] as? String else {
+                return handleError("no poster entry found")
+            }
             guard let animeEpisodes = response["episodes"] as? [NSDictionary] else {
                 return handleError("no episodes entry found")
             }
+            
+            let parentLink = AnimeLink(
+                title: animeTitle,
+                link: self.anime(slug: slug),
+                image: self.poster(file: posterFileName),
+                source: self
+            )
             
             let episodes: [EpisodeLink] = animeEpisodes.compactMap { episode in
                 guard let episodeInfo = episode["info"] as? NSDictionary,
@@ -137,7 +157,7 @@ class NASourceMasterAnime: BaseSource, Source {
                     identifier: "\(animeIdentifier):\(episodeNumber)",
                     name: episodeName,
                     server: "Masterani.me",
-                    parent: link
+                    parent: parentLink
                 )
             }
             
@@ -152,7 +172,7 @@ class NASourceMasterAnime: BaseSource, Source {
                 guard let hosts = info?.availableHosts
                     else { return handler(nil, error) }
                 handler(Anime(
-                    link,
+                    parentLink,
                     description: animeSynopsis,
                     on: hosts,
                     episodes: Dictionary(uniqueKeysWithValues: hosts.map {

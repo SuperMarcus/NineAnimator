@@ -69,6 +69,9 @@
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
 		2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C450121CD56B0004C8F0C /* Notifications.swift */; };
+		2CA1DD4121E18FC6009241CB /* MasterAnimeLinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */; };
+		2CA1DD4321E18FDB009241CB /* NineAnimeLinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4221E18FDB009241CB /* NineAnimeLinkRetriver.swift */; };
+		2CA1DD4521E1B765009241CB /* NineAnimeFilmServersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4421E1B765009241CB /* NineAnimeFilmServersParser.swift */; };
 		2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */; };
 		2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
@@ -187,6 +190,9 @@
 		2C9C450321CDA7CF004C8F0C /* screenshot_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_7.png; sourceTree = "<group>"; };
 		2C9C450421CDA7D0004C8F0C /* screenshot_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_8.png; sourceTree = "<group>"; };
 		2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nineanimator_banner.jpg; sourceTree = "<group>"; };
+		2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterAnimeLinkRetriver.swift; sourceTree = "<group>"; };
+		2CA1DD4221E18FDB009241CB /* NineAnimeLinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimeLinkRetriver.swift; sourceTree = "<group>"; };
+		2CA1DD4421E1B765009241CB /* NineAnimeFilmServersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimeFilmServersParser.swift; sourceTree = "<group>"; };
 		2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlayerController.swift; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
@@ -489,6 +495,8 @@
 				2CCC745F21C06D1B0007502A /* NineAnimeFeatured.swift */,
 				2CCC746321C07C700007502A /* NineAnimeAnime.swift */,
 				2CCC746521C088980007502A /* NineAnimeEpisode.swift */,
+				2CA1DD4221E18FDB009241CB /* NineAnimeLinkRetriver.swift */,
+				2CA1DD4421E1B765009241CB /* NineAnimeFilmServersParser.swift */,
 			);
 			path = 9anime.to;
 			sourceTree = "<group>";
@@ -499,6 +507,7 @@
 				2CCC746821C0975A0007502A /* SourceMasterAnime.swift */,
 				2CCC746A21C098860007502A /* SearchMasterAnime.swift */,
 				2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */,
+				2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */,
 			);
 			path = masterani.me;
 			sourceTree = "<group>";
@@ -731,6 +740,7 @@
 				2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */,
 				2C66779A21BC2671000E5ACC /* SearchResultViewController.swift in Sources */,
 				2C6677B921BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift in Sources */,
+				2CA1DD4321E18FDB009241CB /* NineAnimeLinkRetriver.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
@@ -753,6 +763,7 @@
 				2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */,
 				2CCC745E21C064800007502A /* NineAnimeSearch.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
+				2CA1DD4521E1B765009241CB /* NineAnimeFilmServersParser.swift in Sources */,
 				2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */,
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
@@ -783,6 +794,7 @@
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
 				2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
+				2CA1DD4121E18FC6009241CB /* MasterAnimeLinkRetriver.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2CCC746421C07C700007502A /* NineAnimeAnime.swift in Sources */,
 				2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */,

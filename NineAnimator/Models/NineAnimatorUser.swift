@@ -350,6 +350,14 @@ extension NineAnimatorUser {
     }
 }
 
+// MARK: - Recently used server
+extension NineAnimatorUser {
+    var recentServer: Anime.ServerIdentifier? {
+        get { return _freezer.string(forKey: .recentServer) }
+        set { _freezer.set(newValue as String?, forKey: .recentServer) }
+    }
+}
+
 // MARK: - Private
 
 fileprivate extension String {
@@ -357,6 +365,7 @@ fileprivate extension String {
     static var subscribedAnimeList: String { return "anime.subscribed" }
     static var recentEpisode: String { return "episode.recent" }
     static var recentSource: String { return "source.recent" }
+    static var recentServer: String { return "server.recent" }
     static var persistedProgresses: String { return "episode.progress" }
     static var episodeListingOrder: String { return "episode.listing.order" }
     static var backgroundPlayback: String { return "playback.background" }

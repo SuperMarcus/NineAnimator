@@ -20,6 +20,14 @@
 import Alamofire
 import UIKit
 
+/**
+ A container for all possible links
+ */
+enum AnyLink {
+    case anime(AnimeLink)
+    case episode(EpisodeLink)
+}
+
 struct AnimeLink {
     var title: String
     var link: URL

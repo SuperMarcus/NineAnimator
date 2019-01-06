@@ -34,6 +34,13 @@ protocol Source {
     func search(keyword: String) -> ContentProvider
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser?
+    
+    func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask?
+    
+    /**
+     Test if the url belongs to this source
+     */
+    func canHandle(url: URL) -> Bool
 }
 
 /**
@@ -48,6 +55,20 @@ class BaseSource {
     
     init(with parent: NineAnimator) {
         self.parent = parent
+    }
+    
+    /**
+     Test if the url belongs to this source
+     
+     The default logic to test if the url belongs to this source is to see if
+     the host name of this url ends with the source's endpoint.
+     
+     Subclasses should override this method if the anime watching url is
+     different from the enpoint url.
+     */
+    func canHandle(url: URL) -> Bool {
+        guard let host = url.host else { return false }
+        return endpoint.hasSuffix(host)
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {

@@ -89,7 +89,10 @@ class NineAnimator: SessionDelegate {
         super.init()
         registerDefaultSources()
     }
-    
+}
+
+// MARK: - Source management
+extension NineAnimator {
     func register(source: Source) { sources.append(source) }
     
     func remove(source: Source) {
@@ -103,5 +106,17 @@ class NineAnimator: SessionDelegate {
     private func registerDefaultSources() {
         register(source: NineAnimeSource(with: self))
         register(source: NASourceMasterAnime(with: self))
+    }
+}
+
+// MARK: - Retriving and identifying links
+extension NineAnimator {
+    func link(with url: URL, handler: NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
+        guard let parentSource = sources.first(where: { $0.canHandle(url: url) }) else {
+            handler(nil, NineAnimatorError.urlError)
+            return nil
+        }
+        
+        return parentSource.link(from: url, handler)
     }
 }

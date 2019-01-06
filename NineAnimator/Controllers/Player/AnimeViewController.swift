@@ -74,7 +74,7 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 guard let anime = self.anime else { return }
                 
                 if self.server == nil {
-                    if let recentlyUsedServer = UserDefaults.standard.string(forKey: "server.recent"),
+                    if let recentlyUsedServer = NineAnimator.default.user.recentServer,
                         anime.servers[recentlyUsedServer] != nil {
                         self.server = recentlyUsedServer
                     } else {
@@ -263,7 +263,7 @@ extension AnimeViewController {
     
     func didSelectServer(_ server: Anime.ServerIdentifier) {
         self.server = server
-        UserDefaults.standard.set(server, forKey: "server.recent")
+        NineAnimator.default.user.recentServer = server
         tableView.reloadSections([1], with: .automatic)
         serverSelectionButton.title = anime!.servers[server]
     }
