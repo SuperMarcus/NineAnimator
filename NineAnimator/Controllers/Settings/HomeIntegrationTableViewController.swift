@@ -57,11 +57,11 @@ class HomeIntegrationTableViewController: UITableViewController {
 extension HomeIntegrationTableViewController {
     fileprivate func updatePreferences() {
         if let startsSceneUUID = NineAnimator.default.user.homeIntegrationStartsActionSetUUID {
-            startsPlayingActionSetLabel.text = HomeController.shared?.name(forScene: startsSceneUUID) ?? "Unavailable"
+            startsPlayingActionSetLabel.text = HomeController.shared.name(forScene: startsSceneUUID) ?? "Unavailable"
         } else { startsPlayingActionSetLabel.text = "Not Setup" }
         
         if let endsSceneUUID = NineAnimator.default.user.homeIntegrationEndsActionSetUUID {
-            endsPlayingActionSetLabel.text = HomeController.shared?.name(forScene: endsSceneUUID) ?? "Unavailable"
+            endsPlayingActionSetLabel.text = HomeController.shared.name(forScene: endsSceneUUID) ?? "Unavailable"
         } else { endsPlayingActionSetLabel.text = "Not Setup" }
         
         externalPlaybackOnlySwitch.setOn(NineAnimator.default.user.homeIntegrationRunOnExternalPlaybackOnly, animated: true)
@@ -102,7 +102,7 @@ extension HomeIntegrationTableViewController {
     }
     
     private func openSelectionMenu(for event: DeferredSelectSceneEvent) {
-        if HomeController.shared?.isReady == true {
+        if HomeController.shared.isReady == true {
             _openSelectionMenu(for: event)
         } else { queuedSelectionEvent = event }
     }
@@ -114,7 +114,7 @@ extension HomeIntegrationTableViewController {
             case .endScene: return NineAnimator.default.user.homeIntegrationEndsActionSetUUID
             }
         }()
-        let availableScenes = HomeController.shared?.availableScenes
+        let availableScenes = HomeController.shared.availableScenes
         
         let alert = UIAlertController(title: "Scene to Run", message: nil, preferredStyle: .actionSheet)
         
@@ -140,14 +140,12 @@ extension HomeIntegrationTableViewController {
             }
         }
         
-        if let availableScenes = availableScenes {
-            for scene in availableScenes {
-                let action = UIAlertAction(title: scene.value, style: .default) {
-                    _ in finishWithNewUUID(scene.key)
-                }
-                action.setValue(scene.key == currentSceneUUID, forKey: "checked")
-                alert.addAction(action)
+        for scene in availableScenes {
+            let action = UIAlertAction(title: scene.value, style: .default) {
+                _ in finishWithNewUUID(scene.key)
             }
+            action.setValue(scene.key == currentSceneUUID, forKey: "checked")
+            alert.addAction(action)
         }
         
         let noSceneAction = UIAlertAction(title: "Do Nothing", style: .default) {

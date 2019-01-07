@@ -266,7 +266,7 @@ extension GoogleCastMediaPlaybackViewController {
         nowPlaying(update: status)
         
         if let duration = castController.contentDuration,
-            case 14.0...15.0 = (duration - status.currentTime){
+            case 14.0...15.0 = (duration - status.currentTime) {
             NotificationCenter.default.post(name: .playbackWillEnd, object: castController, userInfo: nil)
             NotificationCenter.default.post(name: .externalPlaybackWillEnd, object: castController, userInfo: nil)
         }

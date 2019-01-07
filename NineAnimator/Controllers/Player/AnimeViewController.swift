@@ -391,7 +391,7 @@ extension AnimeViewController {
             
             if episode.nativePlaybackSupported {
                 // Prime the HMHomeManager
-                HomeController.shared?.primeIfNeeded()
+                HomeController.shared.primeIfNeeded()
                 
                 self.episodeRequestTask = episode.retrive {
                     [weak self] media, error in

@@ -28,12 +28,12 @@ import HomeKit
  progress notification.
  */
 class HomeController: NSObject, HMHomeManagerDelegate {
-    static weak var shared: HomeController?
+    static let shared = HomeController()
     
     private var _isReady: Bool = false
     
     var isReady: Bool {
-        _ = manager
+        primeIfNeeded()
         return _isReady
     }
     
@@ -48,10 +48,6 @@ class HomeController: NSObject, HMHomeManagerDelegate {
     
     override init() {
         super.init()
-        
-        if HomeController.shared != nil { Log.error("HomeController is initialized twice.") }
-
-        HomeController.shared = self
         
         NotificationCenter.default.addObserver(
             self,
@@ -173,12 +169,10 @@ extension HomeController {
     func run(scene uuid: UUID) {
         Log.info("Searching HomeKit scene with UUID '%@'", uuid.uuidString)
         for home in manager.homes {
-            for scene in home.actionSets {
-                if scene.uniqueIdentifier == uuid {
-                    Log.info("Executing HomeKit action set '%@', total actions %@", scene.name, scene.actions.count)
-                    home.executeActionSet(scene) {
-                        error in Log.info("Finished with error: %@", String(describing: error))
-                    }
+            for scene in home.actionSets where scene.uniqueIdentifier == uuid {
+                Log.info("Executing HomeKit action set '%@', total actions %@", scene.name, scene.actions.count)
+                home.executeActionSet(scene) {
+                    error in Log.info("Finished with error: %@", String(describing: error))
                 }
             }
         }
