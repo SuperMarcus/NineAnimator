@@ -36,6 +36,7 @@ GPLv3 Licensed.
 - [Google Cast](#google-cast)
 - [Picture in Picture Playback](#picture-in-picture-playback)
 - [Notifications & Subscription](#notifications--subscription)
+- [Smart Home Integration](#smart-home-integration)
 - [Video Sources](#video-sources)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
@@ -50,6 +51,7 @@ GPLv3 Licensed.
 - [x] Chromecast/Google Cast with lockscreen & control center support
 - [x] Playback History & Auto Resumes
 - [x] Support [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me)
+- [x] Integration with HomeKit
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
 
@@ -135,6 +137,22 @@ To subscribe an anime, swipe on the anime from left to right in the Recents tab.
 Or simply tap on the bell icon when you are viewing any anime.
 
 <img src="Misc/Media/subscribe_bell_icon.jpg" width="320" />
+
+## Smart Home Integration
+
+NineAnimator can be configurated to run Home scenes when the playback starts and
+ends. The default behavior is to only run the scenes when the video is playing on
+external screens (e.g. Google Cast, AirPlay). However, you may change that in the
+`Preference` -> `Home` panel.
+
+- NineAnimator runs `Starts Playing` scene immedietly after the video starts playing
+- The `Ends Playing` scene will be performed 15 seconds before video playback ends
+
+<img src="Misc/Media/homekit.jpg" width="320" />
+
+See [`Notifications`](/NineAnimator/Utilities/Notifications.swift) and
+[`HomeController`](/NineAnimator/Controllers/HomeController.swift) for implementation
+details.
 
 ## Video Sources
 

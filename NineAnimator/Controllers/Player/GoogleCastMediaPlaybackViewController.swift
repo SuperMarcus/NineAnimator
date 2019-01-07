@@ -264,6 +264,12 @@ extension GoogleCastMediaPlaybackViewController {
         updateUI(playbackProgress: Float(status.currentTime), volume: nil, isPaused: status.playerState == .paused)
         
         nowPlaying(update: status)
+        
+        if let duration = castController.contentDuration,
+            case 14.0...15.0 = (duration - status.currentTime) {
+            NotificationCenter.default.post(name: .playbackWillEnd, object: castController, userInfo: nil)
+            NotificationCenter.default.post(name: .externalPlaybackWillEnd, object: castController, userInfo: nil)
+        }
     }
     
     func playback(update media: CastMedia, deviceStatus status: CastStatus) {
@@ -274,12 +280,18 @@ extension GoogleCastMediaPlaybackViewController {
         showPlaybackControls(animated: isPresenting)
         nowPlaying(setup: castController.currentEpisode!)
         playbackTitleLabel.text = "\(castController.currentEpisode!.name) - \(castController.currentEpisode!.parentLink.title)"
+        
+        NotificationCenter.default.post(name: .playbackDidStart, object: castController, userInfo: nil)
+        NotificationCenter.default.post(name: .externalPlaybackDidStart, object: castController, userInfo: nil)
     }
     
     func playback(didEnd media: CastMedia) {
         hidePlaybackControls(animated: isPresenting)
         nowPlaying(teardown: castController.currentEpisode!)
         NineAnimator.default.user.push()
+        
+        NotificationCenter.default.post(name: .playbackDidEnd, object: castController, userInfo: nil)
+        NotificationCenter.default.post(name: .externalPlaybackDidEnd, object: castController, userInfo: nil)
     }
 }
 

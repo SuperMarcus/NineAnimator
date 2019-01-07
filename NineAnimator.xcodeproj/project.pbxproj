@@ -72,6 +72,9 @@
 		2CA1DD4121E18FC6009241CB /* MasterAnimeLinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */; };
 		2CA1DD4321E18FDB009241CB /* NineAnimeLinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4221E18FDB009241CB /* NineAnimeLinkRetriver.swift */; };
 		2CA1DD4521E1B765009241CB /* NineAnimeFilmServersParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4421E1B765009241CB /* NineAnimeFilmServersParser.swift */; };
+		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
+		2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; };
+		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
 		2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */; };
 		2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
@@ -176,6 +179,7 @@
 		2C6677B721BD98A8000E5ACC /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		2C6677B821BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyWatchedAnimeTableViewCell.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		2C8BCB5521E2EB7600430598 /* homekit.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homekit.jpg; sourceTree = "<group>"; };
 		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296A21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerPickerTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
@@ -193,6 +197,9 @@
 		2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterAnimeLinkRetriver.swift; sourceTree = "<group>"; };
 		2CA1DD4221E18FDB009241CB /* NineAnimeLinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimeLinkRetriver.swift; sourceTree = "<group>"; };
 		2CA1DD4421E1B765009241CB /* NineAnimeFilmServersParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimeFilmServersParser.swift; sourceTree = "<group>"; };
+		2CA1DD5B21E2B404009241CB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		2CA1DD5D21E2B423009241CB /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
+		2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntegrationTableViewController.swift; sourceTree = "<group>"; };
 		2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlayerController.swift; sourceTree = "<group>"; };
 		2CAEF62321BF7BDD00E7C123 /* screenshot_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot_6.png; sourceTree = "<group>"; };
@@ -231,6 +238,7 @@
 				2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */,
 				2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */,
 				2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */,
+				2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */,
 				2C4ABC9521B7F53F009B4D47 /* Kingfisher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,6 +296,7 @@
 		2C4817A221DB297D0092F694 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				2C8BCB5521E2EB7600430598 /* homekit.jpg */,
 				2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */,
 				2C4817A721DB2F320092F694 /* xcode_select_device.jpg */,
 				2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */,
@@ -364,6 +373,7 @@
 				2C66779921BC2671000E5ACC /* SearchResultViewController.swift */,
 				2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */,
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
+				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -428,6 +438,7 @@
 		2C4ABC9321B7F53E009B4D47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2CA1DD5D21E2B423009241CB /* HomeKit.framework */,
 				2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */,
 				2C12EDCE21BDDF320064D2BD /* Result.framework */,
 				2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */,
@@ -472,6 +483,7 @@
 			children = (
 				2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */,
 				2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */,
+				2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -610,6 +622,12 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.HealthKit = {
+								enabled = 0;
+							};
+							com.apple.HomeKit = {
+								enabled = 1;
+							};
 							com.apple.InterAppAudio = {
 								enabled = 0;
 							};
@@ -745,6 +763,7 @@
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
+				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2CCC746021C06D1B0007502A /* NineAnimeFeatured.swift in Sources */,
 				2C91296B21BA1E0C00284FD0 /* ServerPickerTableViewCell.swift in Sources */,
@@ -754,6 +773,7 @@
 				2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */,
 				2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
+				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
@@ -1027,6 +1047,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1048,6 +1069,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -390,6 +390,9 @@ extension AnimeViewController {
             Log.debug("- Playback target: %@", episode.target)
             
             if episode.nativePlaybackSupported {
+                // Prime the HMHomeManager
+                HomeController.shared.primeIfNeeded()
+                
                 self.episodeRequestTask = episode.retrive {
                     [weak self] media, error in
                     guard let self = self else { return }

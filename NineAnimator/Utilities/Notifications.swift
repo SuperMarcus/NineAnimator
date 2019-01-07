@@ -20,5 +20,82 @@
 import Foundation
 
 extension Notification.Name {
-    static var playbackProgressDidUpdate: Notification.Name { return .init("com.marcuszhou.nineanimator.playbackProgressDidUpdate") }
+    /**
+     Fired when the playback progress has been updated in the NineAnimatorUser
+     */
+    static let playbackProgressDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.playbackProgressDidUpdate")
+    
+    /**
+     Fired when the video is starting to play
+     
+     ## Where its posted
+     
+     - After `NativePlayerController.play(media: PlaybackMedia)` presented the player
+     - `GoogleCastMediaPlaybackViewController.playback(didStart media: CastMedia)`
+     */
+    static let playbackDidStart =
+        Notification.Name("com.marcuszhou.nineanimator.playbackDidStart")
+    
+    /**
+     Fired within the last 15 seconds of video playback
+     
+     ## Where its posted
+     
+     - Checked in `NativePlayerController.persistProgress()`
+     - Checked in `GoogleCastMediaPlaybackViewController.playback(update media: CastMedia, mediaStatus status: CastMediaStatus)`
+     */
+    static let playbackWillEnd =
+        Notification.Name("com.marcuszhou.nineanimator.playbackWillEnd")
+    
+    /**
+     Fired after the playback has ended
+     
+     ## Where its posted
+     
+     - `GoogleCastMediaPlaybackViewController.playback(didEnd media: CastMedia)`
+     */
+    static let playbackDidEnd =
+        Notification.Name("com.marcuszhou.nineanimator.playbackWillEnd")
+    
+    /**
+     Fired when the video is starting to play on an external display
+     
+     ## Where its posted
+     
+     - When `NativePlayerController.onPlayerExternalPlaybackChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Bool>)` detects external playback is active
+     - `GoogleCastMediaPlaybackViewController.playback(didStart media: CastMedia)`
+     */
+    static let externalPlaybackDidStart =
+        Notification.Name("com.marcuszhou.nineanimator.externalPlaybackDidStart")
+    
+    /**
+     Fired within the last 15 seconds of external playback
+     
+     ## Where its posted
+     
+     - Fired after `playbackWillEnd` in `NativePlayerController.persistProgress()` if external playback is active
+     - Checked in `GoogleCastMediaPlaybackViewController.playback(update media: CastMedia, mediaStatus status: CastMediaStatus)`
+     */
+    static let externalPlaybackWillEnd =
+        Notification.Name("com.marcuszhou.nineanimator.externalPlaybackWillEnd")
+    
+    /**
+     Fired when external playback stops
+     
+     This event might fire even if `externalPlaybackWillEnd` did not fire
+     
+     ## Where its posted
+     
+     - Fired when `NativePlayerController.onPlayerExternalPlaybackChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Bool>)` detects external playback is not active anymore
+     - `GoogleCastMediaPlaybackViewController.playback(didEnd media: CastMedia)`
+     */
+    static let externalPlaybackDidEnd =
+        Notification.Name("com.marcuszhou.nineanimator.externalPlaybackDidEnd")
+    
+    /**
+     Fired when HomeKit status is updated
+     */
+    static let homeDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.homeDidUpdate")
 }
