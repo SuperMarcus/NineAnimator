@@ -404,7 +404,7 @@ Without Background App Refresh, you will only receive notifications of new relea
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Home Integration" id="ZPg-j7-wjg">
-                                <string key="footerTitle">NineAnimator can be set to run certain scenes when the playback starts or ends. For example, you can tell NineAnimator to dimm the lights once AirPlay starts.
+                                <string key="footerTitle">NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.
 
 For Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.</string>
                                 <cells>
