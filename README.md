@@ -150,9 +150,9 @@ external screens (e.g. Google Cast, AirPlay). However, you may change that in th
 
 <img src="Misc/Media/homekit.jpg" width="320" />
 
-See [`Notifications`](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Utilities/Notifications.swift)
-and [`HomeController`](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Controllers/HomeController.swift)
-for implementation details.
+See [`Notifications`](/NineAnimator/Utilities/Notifications.swift) and
+[`HomeController`](/NineAnimator/Controllers/HomeController.swift) for implementation
+details.
 
 ## Video Sources
 
