@@ -24,7 +24,11 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
+    private var homeController: HomeController?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        if homeController == nil { self.homeController = HomeController() }
+        
         // Update once in two hours
         UIApplication.shared.setMinimumBackgroundFetchInterval(
             UserNotificationManager.default.suggestedFetchInterval

@@ -44,6 +44,8 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
     
     private var playerRateObservation: NSKeyValueObservation?
     
+    private var playerExternalPlaybackObservation: NSKeyValueObservation?
+    
     private var playerPeriodicObservation: Any?
     
     var currentPlaybackTime: CMTime { return player.currentTime() }
@@ -51,6 +53,11 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
     var currentPlaybackPercentage: Float {
         guard let item = currentItem else { return 0 }
         return currentPlaybackTime.seconds / item.duration.seconds
+    }
+    
+    var currentPlaybackTMinus: Float {
+        guard let item = currentItem else { return 0 }
+        return item.duration.seconds - currentPlaybackTime.seconds
     }
     
     //Media queue and AVPlayerItem observations
@@ -95,6 +102,8 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
         
         //Observers
         playerRateObservation = player.observe(\.rate, changeHandler: self.onPlayerRateChange)
+        playerExternalPlaybackObservation =
+            player.observe(\.isExternalPlaybackActive, changeHandler: self.onPlayerExternalPlaybackChange)
     }
 }
 
@@ -112,6 +121,8 @@ extension NativePlayerController {
         RootViewController.shared?.presentOnTop(playerViewController, animated: true) {
             self.state = .fullscreen
             self.player.play()
+            
+            NotificationCenter.default.post(name: .playbackDidStart, object: self)
         }
     }
     
@@ -181,6 +192,15 @@ extension NativePlayerController {
             playerPeriodicObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0), queue: queue) { [weak self] _ in self?.updatePlaybackSession(); self?.persistProgress() }
         }
     }
+    
+    private func onPlayerExternalPlaybackChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Bool>) {
+        // Deactivation is handled in the progress monitor
+        if player.isExternalPlaybackActive {
+            NotificationCenter.default.post(name: .externalPlaybackDidStart, object: self)
+        } else {
+            NotificationCenter.default.post(name: .externalPlaybackDidEnd, object: self)
+        }
+    }
 }
 
 // MARK: - Progress persistence
@@ -191,12 +211,21 @@ extension NativePlayerController {
     }
     
     private func persistProgress() {
-        //Only persist progress after progress restoration
+        // Only persist progress after progress restoration
         
         //Using a little shortcut here
         guard isCurrentItemPlaybackProgressRestored, var media = currentMedia else { return }
-        //Setting the progress will update the entry in UserDefaults
+        // Setting the progress will update the entry in UserDefaults
         media.progress = currentPlaybackPercentage
+        
+        // Last 15 seconds, fire will end events
+        if case 14.0...15.0 = currentPlaybackTMinus {
+            NotificationCenter.default.post(name: .playbackWillEnd, object: self, userInfo: nil)
+            
+            if player.isExternalPlaybackActive {
+                NotificationCenter.default.post(name: .externalPlaybackWillEnd, object: self, userInfo: nil)
+            }
+        }
     }
 }
 

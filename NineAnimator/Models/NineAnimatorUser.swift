@@ -358,6 +358,39 @@ extension NineAnimatorUser {
     }
 }
 
+// MARK: - Home Integration preferences
+extension NineAnimatorUser {
+    var homeIntegrationRunOnExternalPlaybackOnly: Bool {
+        get {
+            if let storedValue = _freezer.value(forKey: .homeExternalOnly) as? Bool {
+                return storedValue
+            }
+            return true
+        }
+        set { _freezer.set(newValue, forKey: .homeExternalOnly) }
+    }
+    
+    var homeIntegrationStartsActionSetUUID: UUID? {
+        get {
+            if let uuidString = _freezer.string(forKey: .homeUUIDStart) {
+                return UUID(uuidString: uuidString)
+            }
+            return nil
+        }
+        set { _freezer.set(newValue?.uuidString, forKey: .homeUUIDStart) }
+    }
+    
+    var homeIntegrationEndsActionSetUUID: UUID? {
+        get {
+            if let uuidString = _freezer.string(forKey: .homeUUIDEnd) {
+                return UUID(uuidString: uuidString)
+            }
+            return nil
+        }
+        set { _freezer.set(newValue?.uuidString, forKey: .homeUUIDEnd) }
+    }
+}
+
 // MARK: - Private
 
 fileprivate extension String {
@@ -371,6 +404,9 @@ fileprivate extension String {
     static var backgroundPlayback: String { return "playback.background" }
     static var pictureInPicturePlayback: String { return "playback.pip" }
     static var notificationShowStream: String { return "notification.showStreams" }
+    static var homeExternalOnly: String { return "home.externalOnly" }
+    static var homeUUIDStart: String { return "home.actionset.uuid.start" }
+    static var homeUUIDEnd: String { return "home.actionset.uuid.end" }
     
     //Watching anime episodes persist filename
     static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }
