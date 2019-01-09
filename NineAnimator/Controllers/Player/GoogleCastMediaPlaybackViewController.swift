@@ -346,7 +346,7 @@ extension GoogleCastMediaPlaybackViewController {
             
             castDummyAudioPlayer?.stop()
             
-            try castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "wav")
+            try castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "mp3")
             castDummyAudioPlayer?.numberOfLoops = -1
             castDummyAudioPlayer?.volume = 0.01
             castDummyAudioPlayer?.prepareToPlay()
