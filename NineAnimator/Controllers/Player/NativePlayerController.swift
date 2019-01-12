@@ -191,6 +191,12 @@ extension NativePlayerController {
         if player.rate > 0 {
             playerPeriodicObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0), queue: queue) { [weak self] _ in self?.updatePlaybackSession(); self?.persistProgress() }
         }
+        
+        // Check if the video playback has stopped
+        if player.rate == 0 && playerViewController.isBeingDismissed && state == .fullscreen {
+            state = .idle
+            NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: nil)
+        }
     }
     
     private func onPlayerExternalPlaybackChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Bool>) {

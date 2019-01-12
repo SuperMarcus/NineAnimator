@@ -33,7 +33,7 @@ struct WatchedAnime: Codable {
 /**
  A standalone class used to manage fetch requests and updates
  */
-class UserNotificationManager {
+class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     // Exposed properties
     static let `default` = UserNotificationManager()
     
@@ -49,10 +49,11 @@ class UserNotificationManager {
     
     private let animeCachingDirectory: URL
     
-    init() {
+    override init() {
         let fileManager = FileManager.default
-        
         self.animeCachingDirectory = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        super.init()
         
         //Cache lazy persist data when the app resigns active
         NotificationCenter.default.addObserver(
@@ -61,6 +62,22 @@ class UserNotificationManager {
             name: UIApplication.willResignActiveNotification,
             object: nil
         )
+        
+        //Register Notification categories
+        let openAction = UNNotificationAction(
+            identifier: "com.marcuszhou.NineAnimator.notificaiton.action.open",
+            title: "View",
+            options: [.foreground]
+        )
+        
+        let animeUpdateCategory = UNNotificationCategory(
+            identifier: "com.marcuszhou.NineAnimator.notificaiton.category.animeUpdates",
+            actions: [openAction],
+            intentIdentifiers: [],
+            options: []
+        )
+        
+        UNUserNotificationCenter.current().setNotificationCategories([animeUpdateCategory])
     }
 }
 
@@ -212,6 +229,17 @@ extension UserNotificationManager {
         let viewedAnimeNotificationIdentifiers: [String] = [.episodeUpdateNotificationIdentifier(anime)]
         notificationCenter.removeDeliveredNotifications(withIdentifiers: viewedAnimeNotificationIdentifiers)
     }
+    
+    func hasNotifications(for anime: AnimeLink, _ handler: @escaping NineAnimatorCallback<Bool>) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getDeliveredNotifications {
+            notificaitons in
+            handler(
+                notificaitons.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(anime) },
+                nil
+            )
+        }
+    }
 }
 
 // MARK: - Perform episodes fetching
@@ -305,6 +333,7 @@ extension UserNotificationManager {
         let content = UNMutableNotificationContent()
         
         content.title = "\(result.anime.title)"
+        content.categoryIdentifier = "com.marcuszhou.NineAnimator.notificaiton.category.animeUpdates"
     
         let streamingSites = result.availableServerNames.joined(separator: ", ")
         let sourceName = result.anime.source.name
@@ -318,6 +347,15 @@ extension UserNotificationManager {
         //Sometimes showing what stream the anime is on can be helpful
         if NineAnimator.default.user.notificationShowStreams {
             content.body += " Stream now from \(streamingSites)."
+        }
+        
+        do {
+            let encoder = PropertyListEncoder()
+            let linkData = try encoder.encode(result.anime)
+            content.userInfo = [ "link": linkData ]
+        } catch {
+            Log.error("Unable to encode AnimeLink to notificaiton (%@). Aborting notificaiton.", error)
+            return
         }
         
         do {
@@ -349,6 +387,37 @@ extension UserNotificationManager {
         notificationCenter.add(request, withCompletionHandler: nil)
         
         Log.info("Notification for '%@' sent.", result.anime.title)
+    }
+}
+
+// MARK: - Present notification
+extension UserNotificationManager {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Present the notificaiton as badge
+        completionHandler(.badge)
+    }
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void) {
+        let content = response.notification.request.content
+        let decoder = PropertyListDecoder()
+        
+        guard let serializedAnimeLink = content.userInfo["link"] as? Data,
+            let animeLink = try? decoder.decode(AnimeLink.self, from: serializedAnimeLink) else {
+                Log.error("Unable to deserialize AnimeLink. Won't present notification.")
+                return
+        }
+        
+        Log.info("Presenting notification with link %@", animeLink)
+        
+        RootViewController.open(whenReady: .anime(animeLink))
+        
+        completionHandler()
     }
 }
 

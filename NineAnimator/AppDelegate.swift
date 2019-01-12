@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.setMinimumBackgroundFetchInterval(
             UserNotificationManager.default.suggestedFetchInterval
         )
+        UNUserNotificationCenter.current().delegate = UserNotificationManager.default
         return true
     }
     

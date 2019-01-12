@@ -427,3 +427,21 @@ extension AnimeViewController {
         }
     }
 }
+
+// Peek preview actions
+extension AnimeViewController {
+    override var previewActionItems: [UIPreviewActionItem] {
+        guard let animeLink = self.animeLink else { return [] }
+        
+        let subscriptionAction = NineAnimator.default.user.isWatching(anime: animeLink) ?
+                UIPreviewAction(title: "Unsubscribe", style: .default) { _, _ in
+                    NineAnimator.default.user.unwatch(anime: animeLink)
+                } : UIPreviewAction(title: "Subscribe", style: .default) { [weak self] _, _ in
+                    if let anime = self?.anime {
+                        NineAnimator.default.user.watch(anime: anime)
+                    } else { NineAnimator.default.user.watch(uncached: animeLink) }
+                }
+        
+        return [ subscriptionAction ]
+    }
+}

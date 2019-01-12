@@ -34,6 +34,13 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
             animeTitleLabel.text = link.title
             sourceTitleLabel.text = "Viewed on \(link.source.name)..."
             notificationEnabledImage.isHidden = !NineAnimator.default.user.isWatching(anime: link)
+            
+            UserNotificationManager.default.hasNotifications(for: link) { hasNotification, _ in
+                guard let hasNotification = hasNotification else { return }
+                DispatchQueue.main.async { [weak self] in
+                    self?.notificationEnabledImage.tintColor = hasNotification ? UIColor.red : UIColor.darkText
+                }
+            }
         }
     }
 }

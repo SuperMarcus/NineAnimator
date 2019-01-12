@@ -378,7 +378,25 @@ extension GoogleCastMediaPlaybackViewController {
         // Setup command center
         let commandCenter = MPRemoteCommandCenter.shared()
         
+        // Disable the rest
+        commandCenter.seekForwardCommand.isEnabled = false
+        commandCenter.seekBackwardCommand.isEnabled = false
+        commandCenter.togglePlayPauseCommand.isEnabled = false
+        commandCenter.stopCommand.isEnabled = false
+        commandCenter.nextTrackCommand.isEnabled = false
+        commandCenter.previousTrackCommand.isEnabled = false
+        commandCenter.changeRepeatModeCommand.isEnabled = false
+        commandCenter.changeShuffleModeCommand.isEnabled = false
+        commandCenter.changePlaybackRateCommand.isEnabled = false
+        commandCenter.ratingCommand.isEnabled = false
+        commandCenter.likeCommand.isEnabled = false
+        commandCenter.dislikeCommand.isEnabled = false
+        commandCenter.bookmarkCommand.isEnabled = false
+        commandCenter.enableLanguageOptionCommand.isEnabled = false
+        commandCenter.disableLanguageOptionCommand.isEnabled = false
+        
         // Seek
+        commandCenter.changePlaybackPositionCommand.removeTarget(nil)
         commandCenter.changePlaybackPositionCommand.addTarget { event in
             guard let event = event as? MPChangePlaybackPositionCommandEvent else { return .commandFailed }
             self.castController.seek(to: Float(event.positionTime))
@@ -387,6 +405,7 @@ extension GoogleCastMediaPlaybackViewController {
         commandCenter.changePlaybackPositionCommand.isEnabled = true
         
         // Play
+        commandCenter.playCommand.removeTarget(nil)
         commandCenter.playCommand.addTarget { _ in
             self.castController.play()
             return .success
@@ -394,6 +413,7 @@ extension GoogleCastMediaPlaybackViewController {
         commandCenter.playCommand.isEnabled = true
         
         // Pause
+        commandCenter.pauseCommand.removeTarget(nil)
         commandCenter.pauseCommand.addTarget { _ in
             self.castController.pause()
             return .success
@@ -401,6 +421,7 @@ extension GoogleCastMediaPlaybackViewController {
         commandCenter.pauseCommand.isEnabled = true
         
         // Fast forward
+        commandCenter.skipForwardCommand.removeTarget(nil)
         commandCenter.skipForwardCommand.addTarget { _ in
             self.onFastForwardButtonTapped(self)
             return .success
@@ -408,6 +429,7 @@ extension GoogleCastMediaPlaybackViewController {
         commandCenter.skipForwardCommand.isEnabled = true
         
         // Rewind
+        commandCenter.skipBackwardCommand.removeTarget(nil)
         commandCenter.skipBackwardCommand.addTarget { _ in
             self.onRewindButtonTapped(self)
             return .success

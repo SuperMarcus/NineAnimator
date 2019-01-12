@@ -793,7 +793,10 @@
                                     <outlet property="coverImageView" destination="eEe-9a-Fgq" id="yUc-qo-hXJ"/>
                                     <outlet property="notificationEnabledImage" destination="NEt-AQ-iJq" id="eT0-Zf-iNj"/>
                                     <outlet property="sourceTitleLabel" destination="cty-4k-jCy" id="qQs-X1-itN"/>
-                                    <segue destination="fnc-Z3-OPF" kind="show" id="pnE-3F-WKs"/>
+                                    <segue destination="fnc-Z3-OPF" kind="show" id="pnE-3F-WKs">
+                                        <segue key="commit" inheritsFrom="parent" id="6dc-7G-eaP"/>
+                                        <segue key="preview" inheritsFrom="commit" id="7ro-wa-QD8"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -898,6 +901,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hl9-0f-9xm"/>
-        <segue reference="Uut-Fq-hAa"/>
+        <segue reference="pnE-3F-WKs"/>
     </inferredMetricsTieBreakers>
 </document>
