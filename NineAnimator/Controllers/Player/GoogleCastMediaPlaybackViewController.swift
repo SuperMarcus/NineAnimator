@@ -65,6 +65,8 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     private var castDummyAudioPlayer: AVAudioPlayer?
     
+    private var impactGenerator: UIImpactFeedbackGenerator?
+    
     //The amount of time (in seconds) that fast forward and rewind button seeks
     private var fastSeekAmount: Float = 15.0
     
@@ -95,11 +97,15 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         }
         
         castController.start()
+        impactGenerator = UIImpactFeedbackGenerator(style: .light)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         castController.stop()
+        
+        // Remove reference to impact generator when view is not on screen
+        impactGenerator = nil
     }
 }
 
@@ -204,23 +210,41 @@ extension GoogleCastMediaPlaybackViewController {
         tMinusIndicatorLabel.text = "-\(format(seconds: Int(duration - current)))"
     }
     
-    @IBAction private func onSeekStart(_ sender: Any) { isSeeking = true }
+    @IBAction private func onSeekStart(_ sender: Any) {
+        isSeeking = true
+        
+        // Trigger impact and prepare for the impact at the end of seek
+        impactGenerator?.impactOccurred()
+        impactGenerator?.prepare()
+    }
     
     @IBAction private func onSeekEnd(_ sender: Any) {
         isSeeking = false
         castController.seek(to: playbackProgressSlider.value)
+        
+        // Trigger impact
+        impactGenerator?.impactOccurred()
     }
     
     @IBAction private func onVolumeAttenuate(_ sender: Any) { }
     
-    @IBAction private func onVolumeAttenuateStart(_ sender: Any) { volumeIsChanging = true }
+    @IBAction private func onVolumeAttenuateStart(_ sender: Any) {
+        volumeIsChanging = true
+        
+        impactGenerator?.impactOccurred()
+        impactGenerator?.prepare()
+    }
     
     @IBAction private func onVolumeAttenuateEnd(_ sender: Any) {
         volumeIsChanging = false
         castController.setVolume(to: volumeSlider.value)
+        
+        impactGenerator?.impactOccurred()
     }
     
     @IBAction private func onPlayPauseButtonTapped(_ sender: UIButton) {
+        impactGenerator?.impactOccurred()
+        
         if castController.isPaused {
             castController.play()
         } else {
@@ -233,6 +257,8 @@ extension GoogleCastMediaPlaybackViewController {
         let seekTo = max(current - fastSeekAmount, 0.0)
         playbackProgressSlider.value = seekTo
         castController.seek(to: seekTo)
+        
+        impactGenerator?.impactOccurred()
     }
     
     @IBAction private func onFastForwardButtonTapped(_ sender: Any) {
@@ -241,6 +267,8 @@ extension GoogleCastMediaPlaybackViewController {
         let seekTo = min(current + fastSeekAmount, max)
         playbackProgressSlider.value = seekTo
         castController.seek(to: seekTo)
+        
+        impactGenerator?.impactOccurred()
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
