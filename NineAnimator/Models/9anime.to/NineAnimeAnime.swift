@@ -68,6 +68,7 @@ extension NineAnimeSource {
             )
             
             let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
+            let animePosterURL = URL(string: try bowl.select("div.thumb>img").attr("src")) ?? link.image
             
             let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
             
@@ -119,7 +120,13 @@ extension NineAnimeSource {
                         Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
                     }
                     
-                    handler(Anime(link,
+                    // Reconstruct the AnimeLink so we get the correct URLs and titles
+                    handler(Anime(AnimeLink(
+                                      title: link.title,
+                                      link: link.link,
+                                      image: animePosterURL,
+                                      source: link.source
+                                  ),
                                   description: animeDescription,
                                   on: animeServers,
                                   episodes: animeEpisodes), nil)

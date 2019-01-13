@@ -86,6 +86,14 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 self.serverSelectionButton.title = anime.servers[self.server!]
                 self.serverSelectionButton.isEnabled = true
                 
+                // Update the AnimeLink in the info cell so we get the correct poster displayed
+                self.animeLink = anime.link
+                self.informationCell?.link = anime.link
+                
+                // Update history
+                NineAnimator.default.user.entering(anime: anime.link)
+                NineAnimator.default.user.push()
+                
                 if oldValue == nil {
                     self.tableView.insertSections(sectionsNeededReloading, with: .fade)
                 } else {
@@ -125,9 +133,6 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
         
         guard let link = animeLink else { return }
-        // Update history
-        NineAnimator.default.user.entering(anime: link)
-        NineAnimator.default.user.push()
         
         //Update anime title
         title = link.title
