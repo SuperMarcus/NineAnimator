@@ -49,16 +49,6 @@ extension NineAnimeSource {
             return matches.isEmpty ? nil : page[matches[0].range(at: 1)]
         }()
         
-        let animeAttributes: [(name: String, value: String)] = {
-            let matches = NineAnimeSource.animeAttributesRegex.matches(
-                in: page,
-                range: page.matchingRange
-            )
-            return matches
-                .filter { page[$0.range(at: 2)].isEmpty }
-                .map { (page[$0.range(at: 1)], page[$0.range(at: 2)]) }
-        }()
-        
         do {
             let serverContainerElement = try bowl.select("div#servers-container")
             
@@ -69,13 +59,15 @@ extension NineAnimeSource {
             
             let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
             let animePosterURL = URL(string: try bowl.select("div.thumb>img").attr("src")) ?? link.image
+            let animeAttributes = (try? zip(
+                try bowl.select("div.info>div.row dt").array(),
+                try bowl.select("div.info>div.row dd").array()
+            ).map { "・ \(try $0.0.text()) \(try $0.1.text())\n" }.joined()) ?? "No Attributes"
             
             let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
             
             Log.info("Retrived information for %@", link)
             Log.debug("- Alias: %@", alias ?? "None")
-            Log.debug("- Description: %@", animeDescription)
-            Log.debug("- Attributes: %@", animeAttributes)
             Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
             
             return request(
@@ -127,7 +119,7 @@ extension NineAnimeSource {
                                       image: animePosterURL,
                                       source: link.source
                                   ),
-                                  description: animeDescription,
+                                  description: "\(animeAttributes)\n\(animeDescription)",
                                   on: animeServers,
                                   episodes: animeEpisodes), nil)
                 } catch {

@@ -41,7 +41,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5Y-HZ-n89">
-                                                        <rect key="frame" x="16" y="44.5" width="137" height="176.5"/>
+                                                        <rect key="frame" x="16" y="68.5" width="99.5" height="128.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="C5Y-HZ-n89" secondAttribute="height" multiplier="155:200" id="PYW-LH-97B"/>
                                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="QiV-T2-T2S"/>
@@ -66,7 +66,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-An-PYX">
-                                                        <rect key="frame" x="161" y="32" width="206" height="201.5"/>
+                                                        <rect key="frame" x="123.5" y="16" width="243.5" height="233.5"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,19 +74,19 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TqH-7U-lSE">
-                                                        <rect key="frame" x="169" y="114.5" width="190" height="37"/>
+                                                        <rect key="frame" x="131.5" y="114.5" width="227.5" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="leading" secondItem="QZp-HE-7tB" secondAttribute="leading" constant="16" id="1Dc-uP-NhI"/>
                                                     <constraint firstItem="TqH-7U-lSE" firstAttribute="centerY" secondItem="QZp-HE-7tB" secondAttribute="centerY" id="3fS-TB-ba0"/>
                                                     <constraint firstItem="xl0-An-PYX" firstAttribute="leading" secondItem="C5Y-HZ-n89" secondAttribute="trailing" constant="8" id="6k9-qf-fST"/>
-                                                    <constraint firstAttribute="bottom" secondItem="xl0-An-PYX" secondAttribute="bottom" constant="32" id="EPC-Yk-gQ6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="xl0-An-PYX" secondAttribute="bottom" constant="16" id="EPC-Yk-gQ6"/>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="centerY" secondItem="QZp-HE-7tB" secondAttribute="centerY" id="GCy-vJ-G23"/>
-                                                    <constraint firstItem="xl0-An-PYX" firstAttribute="top" secondItem="QZp-HE-7tB" secondAttribute="top" constant="32" id="ITE-VW-lG0"/>
+                                                    <constraint firstItem="xl0-An-PYX" firstAttribute="top" secondItem="QZp-HE-7tB" secondAttribute="top" constant="16" id="ITE-VW-lG0"/>
                                                     <constraint firstAttribute="trailing" secondItem="xl0-An-PYX" secondAttribute="trailing" constant="8" id="Ie7-iU-miK"/>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="height" secondItem="QZp-HE-7tB" secondAttribute="height" multiplier="0.9" priority="800" id="RvD-Y8-XH2"/>
-                                                    <constraint firstItem="xl0-An-PYX" firstAttribute="width" relation="greaterThanOrEqual" secondItem="QZp-HE-7tB" secondAttribute="width" multiplier="0.55" priority="900" id="ebF-Hd-buO"/>
+                                                    <constraint firstItem="xl0-An-PYX" firstAttribute="width" relation="greaterThanOrEqual" secondItem="QZp-HE-7tB" secondAttribute="width" multiplier="0.65" priority="900" id="ebF-Hd-buO"/>
                                                     <constraint firstItem="C5Y-HZ-n89" firstAttribute="top" relation="greaterThanOrEqual" secondItem="QZp-HE-7tB" secondAttribute="top" constant="32" id="fZ3-ZY-oiM"/>
                                                     <constraint firstAttribute="trailing" secondItem="TqH-7U-lSE" secondAttribute="trailing" constant="16" id="ozg-kY-4hk"/>
                                                     <constraint firstItem="TqH-7U-lSE" firstAttribute="leading" secondItem="C5Y-HZ-n89" secondAttribute="trailing" constant="16" id="pa2-oU-t4m"/>
