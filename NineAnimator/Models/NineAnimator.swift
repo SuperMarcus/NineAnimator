@@ -28,6 +28,7 @@ enum NineAnimatorError: Error, CustomStringConvertible {
     case providerError(String)
     case searchError(String)
     case decodeError
+    case lastItemInQueueError
     
     var description: String {
         switch self {
@@ -36,6 +37,7 @@ enum NineAnimatorError: Error, CustomStringConvertible {
         case .responseError(let errorString): return "Response Error: \(errorString)"
         case .providerError(let errorString): return "Provider Error: \(errorString)"
         case .searchError(let errorString): return "Search Error: \(errorString)"
+        case .lastItemInQueueError: return "The selected item is the last item in the queue."
         }
     }
 }

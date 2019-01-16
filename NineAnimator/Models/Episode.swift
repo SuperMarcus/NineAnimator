@@ -59,4 +59,25 @@ struct Episode {
         
         return provider.parse(episode: self, with: source.retriverSession, onCompletion: handler)
     }
+    
+    func next(onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
+        guard let episodesQueue = _parent.episodes[link.server], episodesQueue.count > 1 else {
+            handler(nil, NineAnimatorError.lastItemInQueueError)
+            return nil
+        }
+        
+        Log.info("Looking for the next episode")
+        
+        for offset in 1..<episodesQueue.count {
+            if episodesQueue[offset - 1] == link {
+                let nextEpisodeLink = episodesQueue[offset]
+                return _parent.episode(with: nextEpisodeLink, onCompletion: handler)
+            }
+        }
+        
+        Log.info("This is the last episode")
+        
+        handler(nil, NineAnimatorError.lastItemInQueueError)
+        return nil
+    }
 }
