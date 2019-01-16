@@ -68,11 +68,9 @@ struct Episode {
         
         Log.info("Looking for the next episode")
         
-        for offset in 1..<episodesQueue.count {
-            if episodesQueue[offset - 1] == link {
-                let nextEpisodeLink = episodesQueue[offset]
-                return _parent.episode(with: nextEpisodeLink, onCompletion: handler)
-            }
+        for offset in 1..<episodesQueue.count where episodesQueue[offset - 1] == link {
+            let nextEpisodeLink = episodesQueue[offset]
+            return _parent.episode(with: nextEpisodeLink, onCompletion: handler)
         }
         
         Log.info("This is the last episode")
