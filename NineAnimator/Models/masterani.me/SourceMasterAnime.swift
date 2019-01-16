@@ -141,25 +141,7 @@ class NASourceMasterAnime: BaseSource, Source {
                 source: self
             )
             
-            let episodes: [EpisodeLink] = animeEpisodes.compactMap { episode in
-                guard let episodeInfo = episode["info"] as? NSDictionary,
-                    // let episodeIdentifier = episodeInfo["id"] as? Int,
-                    let episodeNumber = episodeInfo["episode"] as? String,
-                    let animeIdentifier = episodeInfo["anime_id"] as? Int
-                    else { return nil }
-                
-                var episodeName = "\(episodeNumber)"
-                // New anime may not always have the title set
-                if let episodeTitle = episodeInfo["title"] as? String {
-                    episodeName = "\(episodeName) - \(episodeTitle)"
-                }
-                return EpisodeLink(
-                    identifier: "\(animeIdentifier):\(episodeNumber)",
-                    name: episodeName,
-                    server: "Masterani.me",
-                    parent: parentLink
-                )
-            }
+            let episodes: [EpisodeLink] = self.episodes(from: animeEpisodes, with: parentLink)
             
             guard let firstEpisode = episodes.first else {
                 return handleError("no episodes found")
@@ -168,32 +150,70 @@ class NASourceMasterAnime: BaseSource, Source {
             Log.debug("Found %@ episodes", episodes.count)
             Log.debug("Requesting availble streaming servers")
             
-            task.add(self.episodeInfo(from: firstEpisode) { info, error in
-                guard let hosts = info?.availableHosts
-                    else { return handler(nil, error) }
-                handler(Anime(
-                    parentLink,
-                    description: animeSynopsis,
-                    on: hosts,
-                    episodes: Dictionary(uniqueKeysWithValues: hosts.map {
-                        host in (
-                            host.key,
-                            episodes.map { EpisodeLink(
-                                identifier: $0.identifier,
-                                name: $0.name,
-                                server: host.key,
-                                parent: $0.parent)
-                            }
-                        )
-                    })
-                ), nil)
-            })
+            task.add(self.assembleAnime(
+                withFirstEpisodeLink: firstEpisode,
+                parent: parentLink,
+                synopsis: animeSynopsis,
+                episodes: episodes,
+                handler
+            ))
         })
         return task
     }
     
+    // Parse the episodes available from the response json object
+    private func episodes(from animeEpisodes: [NSDictionary], with parentLink: AnimeLink) -> [EpisodeLink] {
+        return animeEpisodes.compactMap { episode in
+            guard let episodeInfo = episode["info"] as? NSDictionary,
+                // let episodeIdentifier = episodeInfo["id"] as? Int,
+                let episodeNumber = episodeInfo["episode"] as? String,
+                let animeIdentifier = episodeInfo["anime_id"] as? Int
+                else { return nil }
+            
+            var episodeName = "\(episodeNumber)"
+            // New anime may not always have the title set
+            if let episodeTitle = episodeInfo["title"] as? String {
+                episodeName = "\(episodeName) - \(episodeTitle)"
+            }
+            return EpisodeLink(
+                identifier: "\(animeIdentifier):\(episodeNumber)",
+                name: episodeName,
+                server: "Masterani.me",
+                parent: parentLink
+            )
+        }
+    }
+    
+    // Assemble Anime object from the first episode link given
+    private func assembleAnime(withFirstEpisodeLink link: EpisodeLink,
+                               parent parentLink: AnimeLink,
+                               synopsis: String,
+                               episodes: [EpisodeLink],
+                               _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
+        return self.episodeInfo(from: link) { info, error in
+            guard let hosts = info?.availableHosts
+                else { return handler(nil, error) }
+            handler(Anime(
+                parentLink,
+                description: synopsis,
+                on: hosts,
+                episodes: Dictionary(uniqueKeysWithValues: hosts.map {
+                    host in (
+                        host.key,
+                        episodes.map { EpisodeLink(
+                            identifier: $0.identifier,
+                            name: $0.name,
+                            server: host.key,
+                            parent: $0.parent)
+                        }
+                    )
+                })
+            ), nil)
+        }
+    }
+    
     //Fetch episode mirrors from link
-    func episodeInfo(from link: EpisodeLink, _ handler: @escaping NineAnimatorCallback<NAMasterAnimeEpisodeInfo>) -> NineAnimatorAsyncTask? {
+    private func episodeInfo(from link: EpisodeLink, _ handler: @escaping NineAnimatorCallback<NAMasterAnimeEpisodeInfo>) -> NineAnimatorAsyncTask? {
         let episodeUniqueId = link.identifier.split(separator: ":")
         guard let episodeNumber = episodeUniqueId.last else {
             handler(nil, NineAnimatorError.urlError)
