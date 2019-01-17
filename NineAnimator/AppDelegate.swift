@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Check the pasteboard when moved to the application
-        fetchUrlFromPasteboard()
+        if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?

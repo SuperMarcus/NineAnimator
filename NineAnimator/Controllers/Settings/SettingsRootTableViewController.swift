@@ -26,6 +26,8 @@ import UserNotifications
 class SettingsRootTableViewController: UITableViewController {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     
+    @IBOutlet private weak var detectClipboardLinksSwitch: UISwitch!
+    
     @IBOutlet private weak var viewingHistoryStatsLabel: UILabel!
     
     @IBOutlet private weak var backgroundPlaybackSwitch: UISwitch!
@@ -41,6 +43,10 @@ class SettingsRootTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updatePreferencesUI()
+    }
+    
+    @IBAction private func onDetectClipboardLinksChange(_ sender: UISwitch) {
+        NineAnimator.default.user.detectsPasteboardLinks = sender.isOn
     }
     
     @IBAction private func onEpisodeListingOrderChange(_ sender: UISegmentedControl) {
@@ -121,6 +127,7 @@ class SettingsRootTableViewController: UITableViewController {
     
     private func updatePreferencesUI() {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
+        detectClipboardLinksSwitch.setOn(NineAnimator.default.user.detectsPasteboardLinks, animated: true)
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
         pictureInPictureSwitch.setOn(AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback, animated: true)

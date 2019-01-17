@@ -159,6 +159,11 @@ extension NineAnimatorUser {
             _freezer.set(newValue, forKey: .pictureInPicturePlayback)
         }
     }
+    
+    var detectsPasteboardLinks: Bool {
+        get { return _freezer.bool(forKey: .detectClipboardAnimeLinks) }
+        set { _freezer.set(newValue, forKey: .detectClipboardAnimeLinks) }
+    }
 }
 
 // MARK: - Serialization
@@ -395,6 +400,7 @@ extension NineAnimatorUser {
 
 fileprivate extension String {
     static var recentAnimeList: String { return "anime.recent" }
+    static var detectClipboardAnimeLinks: String { return "anime.links.detect" }
     static var subscribedAnimeList: String { return "anime.subscribed" }
     static var recentEpisode: String { return "episode.recent" }
     static var recentSource: String { return "source.recent" }
