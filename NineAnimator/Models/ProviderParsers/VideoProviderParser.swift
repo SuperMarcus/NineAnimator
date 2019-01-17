@@ -40,6 +40,7 @@ class VideoProviderRegistry {
         defaultProvider.register(StreamangoParser(), forServer: "Streamango")
         defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
         defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
+        defaultProvider.register(DummyParser(), forServer: "Dummy")
         
         return defaultProvider
     }()
@@ -52,5 +53,9 @@ class VideoProviderRegistry {
     
     func provider(for server: String) -> VideoProviderParser? {
         return (providers.first { $0.server.lowercased() == server.lowercased() })?.provider
+    }
+    
+    func provider<Provider: VideoProviderParser>(_ type: Provider.Type) -> Provider? {
+        return providers.first { $0.provider is Provider }?.provider as? Provider
     }
 }

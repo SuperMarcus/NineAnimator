@@ -29,7 +29,10 @@ struct NAMasterAnimeStreamingInfo {
     let embeddedPrefix: String
     let embeddedSuffix: String
     
+    let locallyHostedUrl: URL?
+    
     var target: URL? {
+        if let url = locallyHostedUrl { return url }
         return URL(string: "\(embeddedPrefix)\(embeddedIdentifier)\(embeddedSuffix)")
     }
 }
@@ -84,7 +87,28 @@ struct NAMasterAnimeEpisodeInfo {
                 quality: source["quality"] as! Int,
                 embeddedIdentifier: source["embed_id"] as! String,
                 embeddedPrefix: host["embed_prefix"] as! String,
-                embeddedSuffix: host["embed_suffix"] as? String ?? ""
+                embeddedSuffix: host["embed_suffix"] as? String ?? "",
+                locallyHostedUrl: nil
+            )
+        }
+    }
+    
+    init(_ link: EpisodeLink, locallyHosted videoSources: [(resolution: Int, source: URL)], with url: URL, parentId: String, episodeId: String) {
+        self.link = link
+        self.url = url
+        self.animeIdentifier = parentId
+        self.episodeIdentifier = episodeId
+        
+        self.servers = videoSources.map {
+            NAMasterAnimeStreamingInfo(
+                identifier: 0,
+                hostIdentifier: 0,
+                hostName: "masterani.me",
+                quality: $0.0,
+                embeddedIdentifier: "masterani.me",
+                embeddedPrefix: "",
+                embeddedSuffix: "",
+                locallyHostedUrl: $0.1
             )
         }
     }

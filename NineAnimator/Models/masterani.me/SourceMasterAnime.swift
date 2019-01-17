@@ -20,6 +20,8 @@
 import Foundation
 import SwiftSoup
 
+// swiftlint:disable type_body_length
+// swiftlint:disable cyclomatic_complexity
 class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
     
@@ -239,8 +241,12 @@ class NASourceMasterAnime: BaseSource, Source {
         return request(browse: path) {
             [endpoint] response, error in
             guard let response = response else { return handler(nil, error) }
+            
+            guard let bowl = try? SwiftSoup.parse(response) else {
+                return handler(nil, NineAnimatorError.responseError("Response is invalid"))
+            }
+            
             do {
-                let bowl = try SwiftSoup.parse(response)
                 let mirrors$ = try bowl.select("video-mirrors")
                 let mirrorsJsonString = try mirrors$.attr(":mirrors")
                 let mirrorsJsonData = mirrorsJsonString.data(using: .utf8)!
@@ -248,15 +254,64 @@ class NASourceMasterAnime: BaseSource, Source {
                     .jsonObject(with: mirrorsJsonData) as? [NSDictionary] else {
                     throw NineAnimatorError.responseError("invalid mirrors")
                 }
+                
                 Log.debug("%@ mirrors found for episode %@", mirrors.count, episodeNumber)
-                handler(NAMasterAnimeEpisodeInfo(
+                
+                return handler(NAMasterAnimeEpisodeInfo(
                     link,
                     streamingInfo: mirrors,
                     with: URL(string: "\(endpoint)\(path)")!,
                     parentId: String(animeIdNumber),
                     episodeId: String(episodeNumber)
                 ), nil)
-            } catch { handler(nil, error) }
+            } catch {
+                Log.debug("It seems like this episode does not have multiple streaming services.")
+                Log.debug("Trying to find a masterani.me hosted video source.")
+            }
+            
+            do {
+                let videoSourcesRegex = try NSRegularExpression(pattern: "var\\s*videos\\s*=\\s*(\\[[^\\]]+\\])", options: [.caseInsensitive])
+                
+                guard let sourceMatch = videoSourcesRegex.matches(in: response, options: [], range: response.matchingRange).first else {
+                    throw NineAnimatorError.responseError("No video source found.")
+                }
+                
+                guard let sourceJsonData = response[sourceMatch.range(at: 1)].data(using: .utf8) else {
+                    throw NineAnimatorError.responseError("Response cannot be utf8 encoded.")
+                }
+                
+                guard let sourceArray = try JSONSerialization.jsonObject(with: sourceJsonData, options: []) as? NSArray else {
+                    throw NineAnimatorError.responseError("Matched object is not an valid JSON array.")
+                }
+                
+                let sources = sourceArray.compactMap { source -> (resolution: Int, source: URL, type: String)? in
+                    guard let source = source as? NSDictionary else {
+                        Log.error("One of the source object cannot be cast to NSDictionary")
+                        return nil
+                    }
+                    
+                    guard let res = source["res"] as? Int,
+                          let srcString = source["src"] as? String,
+                          let src = URL(string: srcString),
+                          let type = source["type"] as? String else {
+                        Log.error("Values are incomplete for one of the objects in this episode")
+                        return nil
+                    }
+                    
+                    return (res, src, type)
+                }
+                
+                handler(NAMasterAnimeEpisodeInfo(
+                    link,
+                    locallyHosted: sources.map { ($0.0, $0.1) },
+                    with: URL(string: "\(endpoint)\(path)")!,
+                    parentId: String(animeIdNumber),
+                    episodeId: String(episodeNumber)
+                ), nil)
+            } catch {
+                Log.error("Did not find a masterani.me hosted video source either (%@). Aborting.", error)
+                handler(nil, error)
+            }
         }
     }
     
@@ -294,6 +349,9 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        if name == "masterani.me" {
+            return VideoProviderRegistry.default.provider(DummyParser.self)
+        }
         return VideoProviderRegistry.default.provider(for: name)
     }
 }
