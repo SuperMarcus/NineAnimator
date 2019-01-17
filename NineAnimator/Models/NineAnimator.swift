@@ -131,4 +131,8 @@ extension NineAnimator {
         
         return parentSource.link(from: url, handler)
     }
+    
+    func canHandle(link: URL) -> Bool {
+        return sources.reduce(false) { $0 || $1.canHandle(url: link) }
+    }
 }

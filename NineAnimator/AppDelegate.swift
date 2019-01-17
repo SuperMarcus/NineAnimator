@@ -24,6 +24,8 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
+    var trackedPasteboardChangeTimes: Int = 0
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Update once in two hours
         UIApplication.shared.setMinimumBackgroundFetchInterval(
@@ -86,10 +88,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Check the pasteboard when moved to the application
+        fetchUrlFromPasteboard()
+    }
+    
     var taskPool: [NineAnimatorAsyncTask?]?
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         Log.info("Received background fetch notification.")
         UserNotificationManager.default.performFetch(with: completionHandler)
+    }
+}
+
+// Open links from pasteboard
+extension AppDelegate {
+    func fetchUrlFromPasteboard() {
+        let pasteboard = UIPasteboard.general
+        
+        if pasteboard.changeCount != trackedPasteboardChangeTimes {
+            trackedPasteboardChangeTimes = pasteboard.changeCount
+            
+            var pasteboardUrl: URL?
+            
+            if pasteboard.hasStrings {
+                let pasteboardContent = pasteboard.string!
+                if let urlFromString = URL(string: pasteboardContent) {
+                    pasteboardUrl = urlFromString
+                }
+            }
+            
+            if pasteboard.hasURLs {
+                pasteboardUrl = pasteboard.url
+            }
+            
+            if let url = pasteboardUrl,
+                NineAnimator.default.canHandle(link: url) {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Open Link", message: "Do you want to open link: \(url.absoluteString)?", preferredStyle: .alert)
+                    
+                    let yesOption = UIAlertAction(title: "Yes", style: .default) {
+                        [weak self] _ in
+                        guard let self = self else { return }
+                        let task = NineAnimator.default.link(with: url) {
+                            link, error in
+                            guard let link = link else {
+                                let alert = UIAlertController(
+                                    title: "Cannot open link",
+                                    message: error != nil ? "\(error!)" : "Unknown Error",
+                                    preferredStyle: .alert
+                                )
+                                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                                RootViewController.shared?.presentOnTop(alert)
+                                return Log.error(error)
+                            }
+                            
+                            RootViewController.open(whenReady: link)
+                        }
+                        self.taskPool = [task]
+                    }
+                    
+                    let noOption = UIAlertAction(title: "No", style: .cancel, handler: nil)
+                    
+                    alert.addAction(yesOption)
+                    alert.addAction(noOption)
+                    
+                    RootViewController.shared?.presentOnTop(alert)
+                }
+            }
+        }
     }
 }
