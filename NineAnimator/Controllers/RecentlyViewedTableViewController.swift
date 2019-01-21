@@ -35,9 +35,8 @@ class RecentlyViewedTableViewController: UITableViewController {
 }
 
 extension RecentlyViewedTableViewController {
-    @IBAction private func onClearButtonPressed(_ sender: Any) {
-        NineAnimator.default.user.clearRecents()
-        tableView.reloadSections([0, 1], with: .automatic)
+    @IBAction private func onCastButtonPressed(_ sender: Any) {
+        CastController.default.presentPlaybackController()
     }
 }
 

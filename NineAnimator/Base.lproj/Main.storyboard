@@ -806,9 +806,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Recents" id="smF-4W-Oha">
-                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Zea-3B-Zbo">
+                        <barButtonItem key="rightBarButtonItem" title="Google Cast" image="Chromecast Icon" id="mEy-g5-ff5">
                             <connections>
-                                <action selector="onClearButtonPressed:" destination="8OU-XT-7E1" id="bpE-cb-c5M"/>
+                                <action selector="onCastButtonPressed:" destination="8OU-XT-7E1" id="tcX-Im-XFB"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -896,6 +896,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Chromecast Icon" width="25" height="25"/>
         <image name="Notification Enabled" width="25" height="25"/>
         <image name="Settings Icon" width="25" height="25"/>
     </resources>
