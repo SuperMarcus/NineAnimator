@@ -33,27 +33,19 @@ import Foundation
  */
 class NineAnimatorUser {
     private let _freezer = UserDefaults.standard
-    private let _cloud = NSUbiquitousKeyValueStore.default
     
-    var recentAnimes: [AnimeLink] {
-        get { return decode([AnimeLink].self, from: _freezer.value(forKey: .recentAnimeList)) ?? [] }
-        set {
-            guard let data = encode(data: newValue) else {
-                return Log.error("Recent animes failed to encode")
-            }
-            _freezer.set(data, forKey: .recentAnimeList)
-        }
+    private var _syncingServices = [SyncingService]()
+    
+    private var _dirtyKeys = Set<PartialKeyPath<NineAnimatorUser>>()
+    
+    func clearAll() {
+        guard let bundleId = Bundle.main.bundleIdentifier else { return }
+        _freezer.removePersistentDomain(forName: bundleId)
     }
-    
-    var source: Source {
-        if let sourceName = _freezer.string(forKey: .recentSource),
-            let source = NineAnimator.default.source(with: sourceName) {
-            return source
-        } else {
-            return NineAnimator.default.sources.first!
-        }
-    }
-    
+}
+
+// MARK: - Playback Progresses & State Preservation
+extension NineAnimatorUser {
     var lastEpisode: EpisodeLink? {
         return decode(EpisodeLink.self, from: _freezer.value(forKey: .recentEpisode))
     }
@@ -65,6 +57,21 @@ class NineAnimatorUser {
         set { _freezer.set(newValue, forKey: .persistedProgresses) }
     }
     
+    var recentAnimes: [AnimeLink] {
+        get { return decode([AnimeLink].self, from: _freezer.value(forKey: .recentAnimeList)) ?? [] }
+        set {
+            guard let data = encode(data: newValue) else {
+                return Log.error("Recent animes failed to encode")
+            }
+            _freezer.set(data, forKey: .recentAnimeList)
+        }
+    }
+    
+    var recentServer: Anime.ServerIdentifier? {
+        get { return _freezer.string(forKey: .recentServer) }
+        set { _freezer.set(newValue as String?, forKey: .recentServer) }
+    }
+    
     /// Triggered when an anime is presented
     ///
     /// - Parameter anime: AnimeLink of the anime
@@ -72,11 +79,6 @@ class NineAnimatorUser {
         var animes = recentAnimes.filter { $0 != anime }
         animes.insert(anime, at: 0)
         recentAnimes = animes
-    }
-    
-    func select(source: Source) {
-        _freezer.set(source.name, forKey: .recentSource)
-        push()
     }
     
     /// Triggered when the playback is about to start
@@ -120,9 +122,22 @@ class NineAnimatorUser {
         _freezer.removeObject(forKey: .recentEpisode)
     }
     
-    func clearAll() {
-        guard let bundleId = Bundle.main.bundleIdentifier else { return }
-        _freezer.removePersistentDomain(forName: bundleId)
+    /// Current anime source
+    var source: Source {
+        if let sourceName = _freezer.string(forKey: .recentSource),
+            let source = NineAnimator.default.source(with: sourceName) {
+            return source
+        } else {
+            return NineAnimator.default.sources.first!
+        }
+    }
+    
+    /// Select new anime source
+    ///
+    /// - Parameter source: New anime Source
+    func select(source: Source) {
+        _freezer.set(source.name, forKey: .recentSource)
+        push()
     }
 }
 
@@ -166,116 +181,19 @@ extension NineAnimatorUser {
     }
 }
 
-// MARK: - Serialization
-extension NineAnimatorUser {
-    private func encode<T: Encodable>(data: T) -> Data? {
-        let encoder = PropertyListEncoder()
-        return try? encoder.encode(data)
-    }
-    
-    private func decode<T: Decodable>(_ type: T.Type, from data: Any?) -> T? {
-        guard let data = data as? Data else { return nil }
-        let decoder = PropertyListDecoder()
-        return try? decoder.decode(type, from: data)
-    }
-}
-
 // MARK: - Cloud Sync
 extension NineAnimatorUser {
-    enum MergePiority {
-        case localFirst
-        case remoteFirst
-    }
-    
-    private var cloudRecentAnime: [AnimeLink] {
-        get {
-            return decode([AnimeLink].self, from: _cloud.data(forKey: .recentAnimeList)) ?? []
-        }
-        set {
-            guard let data = encode(data: newValue) else {
-                return Log.error("Recent animes failed to encode")
-            }
-            _cloud.set(data, forKey: .recentAnimeList)
-        }
-    }
-    
-    private var cloudSource: Source {
-        if let sourceName = _cloud.string(forKey: .recentSource),
-            let source = NineAnimator.default.source(with: sourceName) {
-            return source
-        } else { return source }
-    }
-    
-    private var cloudLastEpisode: EpisodeLink? {
-        return decode(EpisodeLink.self, from: _cloud)
-    }
-    
-    private var cloudPersistedProgresses: [String: Float] {
-        get {
-            return _cloud.dictionary(forKey: .persistedProgresses) as? [String: Float] ?? [:]
-        }
-        set { _cloud.set(newValue, forKey: .persistedProgresses) }
+    func register(syncingService: SyncingService) {
+        _syncingServices.append(syncingService)
+        syncingService.delegate = self
     }
     
     func pull() {
-        //Not using iCloud rn
-//        merge(piority: .remoteFirst)
+        
     }
     
     func push() {
-        //Not using iCloud rn
-//        merge(piority: .localFirst)
-    }
-    
-    func merge(piority: MergePiority) {
-        if piority == .remoteFirst { _cloud.synchronize() }
         
-        //Merge recently watched anime
-        let primaryRecentAnime = piority == .localFirst ?
-            recentAnimes : cloudRecentAnime
-        let secondaryRecentAnime = piority == .localFirst ?
-            cloudRecentAnime : recentAnimes
-        
-        let mergedRecentAnime = merge(
-            primary: primaryRecentAnime,
-            secondary: secondaryRecentAnime
-        )
-        
-        recentAnimes = mergedRecentAnime
-        cloudRecentAnime = mergedRecentAnime
-        
-        //Merge source
-        if piority == .localFirst { _cloud.set(source.name, forKey: .recentSource) } else { _freezer.set(_cloud.string(forKey: .recentSource) ?? source.name, forKey: .recentSource) }
-        
-        //Merge recent episode
-        if piority == .localFirst {
-            if let episode = _freezer.data(forKey: .recentEpisode) {
-                _cloud.set(episode, forKey: .recentEpisode)
-            }
-        } else {
-            if let episode = _cloud.data(forKey: .recentEpisode) {
-                _freezer.set(episode, forKey: .recentEpisode)
-            }
-        }
-        
-        //Merge persisted progresses
-        let primaryPersistedProgresses = piority == .localFirst ?
-            persistedProgresses : cloudPersistedProgresses
-        let secondaryPersistedProgresses = piority == .localFirst ?
-            cloudPersistedProgresses : persistedProgresses
-        
-        let mergedPersistedProgresses = primaryPersistedProgresses.merging(secondaryPersistedProgresses) { old, _ in old }
-        cloudPersistedProgresses = mergedPersistedProgresses
-        persistedProgresses = mergedPersistedProgresses
-        
-        _ = _cloud.synchronize()
-        _ = _freezer.synchronize()
-    }
-    
-    fileprivate func merge<T: Equatable>(primary: [T], secondary: [T]) -> [T] {
-        return primary + secondary.filter {
-            link in !primary.contains { $0 == link }
-        }
     }
 }
 
@@ -355,14 +273,6 @@ extension NineAnimatorUser {
     }
 }
 
-// MARK: - Recently used server
-extension NineAnimatorUser {
-    var recentServer: Anime.ServerIdentifier? {
-        get { return _freezer.string(forKey: .recentServer) }
-        set { _freezer.set(newValue as String?, forKey: .recentServer) }
-    }
-}
-
 // MARK: - Home Integration preferences
 extension NineAnimatorUser {
     var homeIntegrationRunOnExternalPlaybackOnly: Bool {
@@ -393,6 +303,20 @@ extension NineAnimatorUser {
             return nil
         }
         set { _freezer.set(newValue?.uuidString, forKey: .homeUUIDEnd) }
+    }
+}
+
+// MARK: - Serialization helpers
+private extension NineAnimatorUser {
+    private func encode<T: Encodable>(data: T) -> Data? {
+        let encoder = PropertyListEncoder()
+        return try? encoder.encode(data)
+    }
+    
+    private func decode<T: Decodable>(_ type: T.Type, from data: Any?) -> T? {
+        guard let data = data as? Data else { return nil }
+        let decoder = PropertyListDecoder()
+        return try? decoder.decode(type, from: data)
     }
 }
 

@@ -64,6 +64,8 @@ extension DataRequest: NineAnimatorAsyncTask { }
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
+    let nearbyDeviceSyncingController = NearbyDeviceSyncingController()
+    
     let client = URLSession(configuration: .default)
     
     private let mainAdditionalHeaders: HTTPHeaders = {

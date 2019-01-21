@@ -54,6 +54,8 @@
 	</array>
 	<key>NSHomeKitUsageDescription</key>
 	<string>NineAnimator uses Home to run certain scenes during playback.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>NineAnimator uses Bluetooth to sync configurations with nearby paired devices.</string>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
