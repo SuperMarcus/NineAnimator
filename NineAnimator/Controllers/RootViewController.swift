@@ -45,6 +45,12 @@ class RootViewController: UITabBarController {
             RootViewController._pendingOpeningLink = nil
             _open(pendingOpeningLink)
         }
+        
+        // Restore config if there is any
+        if let pendingRestoreConfig = RootViewController._pendingRestoreConfig {
+            RootViewController._pendingRestoreConfig = nil
+            _restore(pendingRestoreConfig)
+        }
     }
     
     deinit {
@@ -69,8 +75,15 @@ extension RootViewController {
             sharedRootViewController._open(link)
         } else { _pendingOpeningLink = link }
     }
+    
+    static func restore(whenReady url: URL) {
+        if let sharedRootViewController = shared {
+            sharedRootViewController._restore(url)
+        } else { _pendingRestoreConfig = url }
+    }
 }
 
+// MARK: - Open links
 extension RootViewController {
     fileprivate static var _pendingOpeningLink: AnyLink?
     
@@ -92,5 +105,60 @@ extension RootViewController {
         
         animeViewController.setPresenting(link)
         navigationController.pushViewController(animeViewController, animated: true)
+    }
+}
+
+// MARK: - Restore configurations
+extension RootViewController {
+    static var _pendingRestoreConfig: URL?
+    
+    fileprivate func _restore(_ config: URL) {
+        let alert = UIAlertController(
+            title: "Import Configurations",
+            message: "How do you want to import this configuration?",
+            preferredStyle: .alert
+        )
+        
+        let errorAlert = UIAlertController(
+            title: "Error",
+            message: "Cannot import configurations",
+            preferredStyle: .alert
+        )
+        
+        errorAlert.addAction(UIAlertAction(
+            title: "Done",
+            style: .cancel,
+            handler: nil
+        ))
+        
+        func showErrorAlert() { presentOnTop(errorAlert) }
+        
+        alert.addAction(UIAlertAction(title: "Replace Current", style: .destructive) {
+            _ in
+            if !replace(NineAnimator.default.user, with: config) {
+                showErrorAlert()
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Merge - Pioritize Local", style: .default) {
+            _ in
+            if !merge(NineAnimator.default.user, with: config, policy: .localFirst) {
+                showErrorAlert()
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Merge - Pioritize Importing", style: .default) {
+            _ in
+            if !merge(NineAnimator.default.user, with: config, policy: .remoteFirst) {
+                showErrorAlert()
+            }
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        // Change to Featured view so when we tap back to recents view the imported
+        // anime will show up.
+        selectedIndex = 0
+        presentOnTop(alert)
     }
 }

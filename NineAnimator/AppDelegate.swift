@@ -36,6 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        if url.pathExtension == "naconfig" {
+            RootViewController.restore(whenReady: url)
+            return true
+        }
+        
         guard let scheme = url.scheme else { return false }
         
         switch scheme {

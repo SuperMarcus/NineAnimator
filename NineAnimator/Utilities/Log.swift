@@ -42,7 +42,7 @@ class NineAnimatorLogger {
     }
     
     fileprivate init() {
-        let logObject = OSLog(subsystem: "com.marcuszhou.NineAnimator", category: OSLog.Category.pointsOfInterest)
+        let logObject = OSLog(subsystem: "com.marcuszhou.NineAnimator", category: "log")
         
         //Maintains a reference to the log object
         customLog = logObject

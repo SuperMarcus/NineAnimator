@@ -114,6 +114,20 @@ class SettingsRootTableViewController: UITableViewController {
         case "settings.notification.unsubscribe":
             NineAnimator.default.user.unwatchAll()
             updatePreferencesUI()
+        case "settings.history.export":
+            guard let exportedSettingsUrl = export(NineAnimator.default.user) else {
+                let alert = UIAlertController(title: "Error", message: "Cannot export configurations", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                return
+            }
+            
+            let activityController = UIActivityViewController(activityItems: [exportedSettingsUrl], applicationActivities: nil)
+            
+            if let popoverController = activityController.popoverPresentationController {
+                popoverController.sourceView = cell
+            }
+            
+            present(activityController, animated: true, completion: nil)
         default: return
         }
     }
