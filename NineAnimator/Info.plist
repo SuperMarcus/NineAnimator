@@ -53,6 +53,7 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.marcuszhou.nineanimator.activity.viewAnime</string>
+		<string>com.marcuszhou.nineanimator.activity.resumePlayback</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

@@ -178,6 +178,12 @@ extension AppDelegate {
                 return false
             }
             RootViewController.open(whenReady: .anime(link))
+        case Continuity.activityTypeResumePlayback:
+            guard let episodeLink = NineAnimator.default.user.lastEpisode else {
+                Log.info("Will not resume anime playback because no last watched anime record was found.")
+                return false
+            }
+            RootViewController.open(whenReady: .episode(episodeLink))
         default: Log.error("Trying to restore unkown activity type %@. Aborting.", userActivity.activityType)
         }
         

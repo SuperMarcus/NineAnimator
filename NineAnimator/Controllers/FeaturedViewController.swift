@@ -169,6 +169,7 @@ extension FeaturedViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refresher
+        userActivity = Continuity.activityForResumeLastAnime()
     }
 }
 

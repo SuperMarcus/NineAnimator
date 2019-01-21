@@ -26,6 +26,9 @@ import UIKit
 enum Continuity {
     static let activityTypeViewAnime = "com.marcuszhou.nineanimator.activity.viewAnime"
     
+    static let activityTypeResumePlayback = "com.marcuszhou.nineanimator.activity.resumePlayback"
+    
+    /// Obtain the activity for currently browsing anime
     static func activity(for anime: Anime) -> NSUserActivity {
         let link = anime.link
         let activity = NSUserActivity(activityType: activityTypeViewAnime)
@@ -44,7 +47,7 @@ enum Continuity {
         } else { Log.info("Thumbnail cannot be saved to activity now for this anime. Will be saved later if needed.") }
         
         attributeSet.contentSources = [ link.source.name ]
-        attributeSet.comment = anime.description
+        attributeSet.contentDescription = anime.description
         
         activity.contentAttributeSet = attributeSet
         
@@ -65,6 +68,27 @@ enum Continuity {
             
             activity.userInfo = [ "link": data ]
         } catch { Log.error("Cannot encode AnimeLink into activity (%@). This activity may become invalid.", error) }
+        
+        return activity
+    }
+    
+    /// Obtain the activity for resuming last watched anime
+    ///
+    /// This activity is meant for Siri Shortcuts and Sportlight
+    static func activityForResumeLastAnime() -> NSUserActivity {
+        let activity = NSUserActivity(activityType: activityTypeResumePlayback)
+        
+        activity.title = "Resume anime on NineAnimator"
+        activity.keywords = [ "resume", "anime" ]
+        
+        activity.isEligibleForSearch = true
+        activity.isEligibleForHandoff = false
+        activity.isEligibleForPublicIndexing = true
+        activity.needsSave = false
+        
+        if #available(iOS 12.0, *) {
+            activity.isEligibleForPrediction = true
+        }
         
         return activity
     }
