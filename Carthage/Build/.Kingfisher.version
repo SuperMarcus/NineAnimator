@@ -1,9 +1,9 @@
 {
-  "commitish" : "5.0.1",
+  "commitish" : "5.1.0",
   "iOS" : [
     {
       "name" : "Kingfisher",
-      "hash" : "cc807ded6915441ad908f361c7696e0b4d0803fb0597d692ba3989f7d09e208e"
+      "hash" : "91d69d507ef69f975537b6e3d403c3225e254b8265f5c24adc7f2ad70354d3d5"
     }
   ]
 }

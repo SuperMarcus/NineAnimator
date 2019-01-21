@@ -1,9 +1,9 @@
 {
-  "commitish" : "1.2.0",
+  "commitish" : "1.3.1",
   "iOS" : [
     {
       "name" : "SwiftProtobuf",
-      "hash" : "b91fe66071d7285b829a65db97330bd645756d0b15eb65dc1cc9cb209ceb06d2"
+      "hash" : "26fd78deded94351b979d6004db7fa4d159e993f071bf50ad8b2f49847b7bdfc"
     }
   ]
 }

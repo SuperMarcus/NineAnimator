@@ -32,6 +32,7 @@ GPLv3 Licensed.
 ## Table of Contents
 
 - [Features](#features)
+- [Device Compatibility](#device-compatibility)
 - [Build & Install](#build--install)
 - [Google Cast](#google-cast)
 - [Picture in Picture Playback](#picture-in-picture-playback)
@@ -55,6 +56,17 @@ GPLv3 Licensed.
 - [x] Integration with HomeKit
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
+
+## Device Compatibility
+
+NineAnimator is theoretically compatible with all iPhone and iPads running iOS
+11.2 or later. However, the app is only tested on the following devices running
+the latest operation systems:
+
+- iPhone Xs Max
+- iPhone X
+- iPad 9.7-inch (2018)
+- iPad Pro 11-inch (2018)
 
 ## Build & Install
 

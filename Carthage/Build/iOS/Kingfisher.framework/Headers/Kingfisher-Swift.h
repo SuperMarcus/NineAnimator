@@ -216,6 +216,10 @@ SWIFT_CLASS("_TtC10Kingfisher17AnimatedImageView")
 
 
 
+
+
+
+
 SWIFT_CLASS("_TtC10Kingfisher15SessionDelegate")
 @interface SessionDelegate : NSObject
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
@@ -227,6 +231,7 @@ SWIFT_CLASS("_TtC10Kingfisher15SessionDelegate")
 @class NSURLSessionTask;
 @class NSURLAuthenticationChallenge;
 @class NSURLCredential;
+@class NSHTTPURLResponse;
 
 @interface SessionDelegate (SWIFT_EXTENSION(Kingfisher)) <NSURLSessionDataDelegate>
 - (void)URLSession:(NSURLSession * _Nonnull)session dataTask:(NSURLSessionDataTask * _Nonnull)dataTask didReceiveResponse:(NSURLResponse * _Nonnull)response completionHandler:(void (^ _Nonnull)(NSURLSessionResponseDisposition))completionHandler;
@@ -234,6 +239,7 @@ SWIFT_CLASS("_TtC10Kingfisher15SessionDelegate")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
 - (void)URLSession:(NSURLSession * _Nonnull)session didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
 @end
 
 
