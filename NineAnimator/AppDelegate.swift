@@ -171,19 +171,29 @@ extension AppDelegate {
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
         ) -> Bool {
         switch userActivity.activityType {
-        case Continuity.activityTypeViewAnime:
+        case Continuity.activityTypeViewAnime: // Browse anime
             guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
                 let link = try? PropertyListDecoder().decode(AnimeLink.self, from: linkData) else {
                 Log.error("Cannot resume activity: invalid user info")
                 return false
             }
             RootViewController.open(whenReady: .anime(link))
-        case Continuity.activityTypeResumePlayback:
+        case Continuity.activityTypeResumePlayback: // Resume last watched episode
             guard let episodeLink = NineAnimator.default.user.lastEpisode else {
                 Log.info("Will not resume anime playback because no last watched anime record was found.")
                 return false
             }
             RootViewController.open(whenReady: .episode(episodeLink))
+        case Continuity.activityTypeContinueEpisode: // Handoff episode progress
+            guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
+                let progress = info["progress"] as? Float,
+                let link = try? PropertyListDecoder().decode(EpisodeLink.self, from: linkData) else {
+                Log.error("Cannot resume activity: invalid user info")
+                return false
+            }
+            // Save progress so it will resume once we starts it
+            NineAnimator.default.user.update(progress: progress, for: link)
+            RootViewController.open(whenReady: .episode(link))
         default: Log.error("Trying to restore unkown activity type %@. Aborting.", userActivity.activityType)
         }
         

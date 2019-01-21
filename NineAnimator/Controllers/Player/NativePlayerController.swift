@@ -30,7 +30,7 @@ import UIKit
  When accessing this class, always use the singleton
  `NativePlayerController.default`.
  */
-class NativePlayerController: NSObject, AVPlayerViewControllerDelegate {
+class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserActivityDelegate {
     static let `default` = NativePlayerController()
     
     //Background DispatchQueue shared by the native player controller
@@ -124,6 +124,9 @@ extension NativePlayerController {
             
             NotificationCenter.default.post(name: .playbackDidStart, object: self)
         }
+        
+        playerViewController.userActivity = Continuity.activity(for: media.parent)
+        playerViewController.userActivity?.delegate = self
     }
     
     func append(media: PlaybackMedia) {
@@ -290,5 +293,27 @@ extension NativePlayerController {
         case idle
         case fullscreen
         case pictureInPicture
+    }
+}
+
+// MARK: - Continuity
+extension NativePlayerController {
+    func userActivityWillSave(_ userActivity: NSUserActivity) {
+        guard let media = currentMedia else {
+            return Log.error("Cannot save user activity: current media is undefined.")
+        }
+        
+        do {
+            let encoder = PropertyListEncoder()
+            let encodedEpisodeData = try encoder.encode(media.parent.link)
+            
+            userActivity.userInfo = [
+                "link": encodedEpisodeData,
+                "progress": media.progress
+            ]
+        } catch { return Log.error("Cannot encode episode data for handoff: %@", error) }
+        
+        // Pause the player when switched to new device
+        player.pause()
     }
 }

@@ -54,6 +54,7 @@
 	<array>
 		<string>com.marcuszhou.nineanimator.activity.viewAnime</string>
 		<string>com.marcuszhou.nineanimator.activity.resumePlayback</string>
+		<string>com.marcuszhou.nineanimator.activity.continueEpisode</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
