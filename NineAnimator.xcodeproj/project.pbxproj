@@ -88,6 +88,8 @@
 		2CCC746B21C098860007502A /* SearchMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746A21C098860007502A /* SearchMasterAnime.swift */; };
 		2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */; };
 		2CEA0BE621F54E1D007EECC4 /* StatesSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */; };
+		2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE721F66D49007EECC4 /* Continuity.swift */; };
+		2CEA0BEA21F67EB0007EECC4 /* continuity.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE921F67EB0007EECC4 /* continuity.jpg */; };
 		2CEB56D721DBE53A0018D804 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEB56D621DBE53A0018D804 /* Log.swift */; };
 		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */; };
@@ -217,6 +219,8 @@
 		2CCC746A21C098860007502A /* SearchMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMasterAnime.swift; sourceTree = "<group>"; };
 		2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeMasterAnime.swift; sourceTree = "<group>"; };
 		2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesSerialization.swift; sourceTree = "<group>"; };
+		2CEA0BE721F66D49007EECC4 /* Continuity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Continuity.swift; sourceTree = "<group>"; };
+		2CEA0BE921F67EB0007EECC4 /* continuity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = continuity.jpg; sourceTree = "<group>"; };
 		2CEB56D621DBE53A0018D804 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
@@ -300,6 +304,7 @@
 		2C4817A221DB297D0092F694 /* Media */ = {
 			isa = PBXGroup;
 			children = (
+				2CEA0BE921F67EB0007EECC4 /* continuity.jpg */,
 				2C8BCB5521E2EB7600430598 /* homekit.jpg */,
 				2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */,
 				2C4817A721DB2F320092F694 /* xcode_select_device.jpg */,
@@ -424,6 +429,7 @@
 				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
 				2CEB56D621DBE53A0018D804 /* Log.swift */,
 				2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */,
+				2CEA0BE721F66D49007EECC4 /* Continuity.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -681,6 +687,7 @@
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
+				2CEA0BEA21F67EB0007EECC4 /* continuity.jpg in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 			);
@@ -769,6 +776,7 @@
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
+				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2CCC746021C06D1B0007502A /* NineAnimeFeatured.swift in Sources */,

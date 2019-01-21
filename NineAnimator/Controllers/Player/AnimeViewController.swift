@@ -99,6 +99,9 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
                 } else {
                     self.tableView.reloadSections(sectionsNeededReloading, with: .fade)
                 }
+                
+                // Setup userActivity
+                self.prepareContinuity()
             }
         }
     }
@@ -448,5 +451,13 @@ extension AnimeViewController {
                 }
         
         return [ subscriptionAction ]
+    }
+}
+
+// MARK: - Continuity support
+extension AnimeViewController {
+    private func prepareContinuity() {
+        guard let anime = anime else { return }
+        userActivity = Continuity.activity(for: anime)
     }
 }

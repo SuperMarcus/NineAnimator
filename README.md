@@ -38,6 +38,7 @@ GPLv3 Licensed.
 - [Picture in Picture Playback](#picture-in-picture-playback)
 - [Notifications & Subscription](#notifications--subscription)
 - [Smart Home Integration](#smart-home-integration)
+- [Handoff & Siri Shortcuts](#handoff--siri-shortcuts)
 - [Video Sources](#video-sources)
 - [Backup History and Playback Progresses](#backup-history-and-playback-progresses)
 - [Screenshots](#screenshots)
@@ -54,6 +55,7 @@ GPLv3 Licensed.
 - [x] Playback History & Auto Resumes
 - [x] Support [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me)
 - [x] Integration with HomeKit
+- [x] Handoff & Siri Shortcuts
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
 
@@ -166,6 +168,20 @@ external screens (e.g. Google Cast, AirPlay). However, you may change that in th
 See [`Notifications`](/NineAnimator/Utilities/Notifications.swift) and
 [`HomeController`](/NineAnimator/Controllers/HomeController.swift) for implementation
 details.
+
+## Handoff & Siri Shortcuts
+
+NineAnimator supports iOS's handoff and Siri Shortcuts. This enables you to seemlessly
+switch between devices when browsing and viewing anime.
+
+<img src="Misc/Media/continuity.jpg" width="320" />
+
+When you browse an anime, depending on the device you are using, NineAnimator icon
+will show up on the dock (iPad) or the task switcher of your other devices. You may tap
+on the icon to continue browsing or watching on the new device.
+
+To add a siri shortcut, navigate to the system preferences app. Find NineAnimator under
+the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
 ## Video Sources
 

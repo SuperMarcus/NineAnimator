@@ -50,6 +50,10 @@
 	<true/>
 	<key>NSHomeKitUsageDescription</key>
 	<string>NineAnimator uses Home to run certain scenes during playback.</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.marcuszhou.nineanimator.activity.viewAnime</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -96,7 +100,5 @@
 			</dict>
 		</dict>
 	</array>
-	<key>UTImportedTypeDeclarations</key>
-	<array/>
 </dict>
 </plist>

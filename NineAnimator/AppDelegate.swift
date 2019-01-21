@@ -164,3 +164,23 @@ extension AppDelegate {
         }
     }
 }
+
+extension AppDelegate {
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+        ) -> Bool {
+        switch userActivity.activityType {
+        case Continuity.activityTypeViewAnime:
+            guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
+                let link = try? PropertyListDecoder().decode(AnimeLink.self, from: linkData) else {
+                Log.error("Cannot resume activity: invalid user info")
+                return false
+            }
+            RootViewController.open(whenReady: .anime(link))
+        default: Log.error("Trying to restore unkown activity type %@. Aborting.", userActivity.activityType)
+        }
+        
+        return false
+    }
+}
