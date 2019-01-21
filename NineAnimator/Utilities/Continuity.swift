@@ -93,6 +93,7 @@ enum Continuity {
         } else { Log.info("Thumbnail cannot be saved to activity now for this anime. Will be saved later if needed.") }
         
         attributeSet.contentSources = [ link.source.name ]
+        attributeSet.contentDescription = episode.parentLink.title
         
         activity.contentAttributeSet = attributeSet
         

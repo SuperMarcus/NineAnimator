@@ -312,7 +312,9 @@ extension NativePlayerController {
                 "progress": media.progress
             ]
         } catch { return Log.error("Cannot encode episode data for handoff: %@", error) }
-        
+    }
+    
+    func userActivityWasContinued(_ userActivity: NSUserActivity) {
         // Pause the player when switched to new device
         player.pause()
     }
