@@ -106,7 +106,7 @@ enum Continuity {
         activity.expirationDate = Date() + 172800
         
         if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = true
+            activity.isEligibleForPrediction = false
             activity.persistentIdentifier = "\(identifier(for: link.link)).\(episode.link.identifier)"
         }
         
