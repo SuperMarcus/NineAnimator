@@ -23,6 +23,7 @@ import SafariServices
 import UIKit
 import UserNotifications
 
+// swiftlint:disable cyclomatic_complexity
 class SettingsRootTableViewController: UITableViewController {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     
@@ -82,6 +83,24 @@ class SettingsRootTableViewController: UITableViewController {
         
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
+        func askForConfirmation(title: String,
+                                message: String,
+                                continueActionName: String,
+                                proceed: @escaping () -> Void) {
+            let alertView = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            
+            if let popover = alertView.popoverPresentationController {
+                popover.sourceView = cell.contentView
+                popover.permittedArrowDirections = .any
+            }
+            
+            let action = UIAlertAction(title: continueActionName, style: .destructive) { _ in proceed() }
+            alertView.addAction(action)
+            
+            alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+            present(alertView, animated: true)
+        }
+        
         switch cell.reuseIdentifier {
         case "settings.viewrepo":
             let safariViewController = SFSafariViewController(url: URL(string: "https://github.com/SuperMarcus/NineAnimator")!)
@@ -89,31 +108,38 @@ class SettingsRootTableViewController: UITableViewController {
         case "settings.playback.cast.controller":
             RootViewController.shared?.showCastController()
         case "settings.history.recents":
-            NineAnimator.default.user.clearRecents()
-            updatePreferencesUI()
+            askForConfirmation(title: "Clear Recent Anime",
+                               message: "This action is irreversible. All anime history under the Recents tab will be cleared.",
+                               continueActionName: "Clear Recents"
+            ) { [weak self] in
+                NineAnimator.default.user.clearRecents()
+                self?.updatePreferencesUI()
+            }
         case "settings.history.cache":
             clearCache()
         case "settings.history.reset":
-            let alertView = UIAlertController(title: "Reset local storage", message: "This action is irreversible. All data and preferences will be deleted from your local storage.", preferredStyle: .actionSheet)
-            
-            if let popover = alertView.popoverPresentationController {
-                popover.sourceView = cell.contentView
-                popover.permittedArrowDirections = .any
-            }
-            
-            let action = UIAlertAction(title: "Reset", style: .destructive) {
-                [weak self] _ in
+            askForConfirmation(title: "Reset NineAnimator",
+                               message: "This action is irreversible. All data and preferences will be deleted from your local storage.",
+                               continueActionName: "Reset"
+            ) { [weak self] in
                 NineAnimator.default.user.clearAll()
                 self?.clearCache()
+                self?.clearActivities()
                 self?.updatePreferencesUI()
             }
-            alertView.addAction(action)
-            
-            alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-            present(alertView, animated: true)
         case "settings.notification.unsubscribe":
-            NineAnimator.default.user.unwatchAll()
-            updatePreferencesUI()
+            askForConfirmation(title: "Unsubscribe from All",
+                               message: "This action is irreversible. You will be unsubscribed from all anime.",
+                               continueActionName: "Unsubscribe All"
+            ) { [weak self] in
+                NineAnimator.default.user.unwatchAll()
+                self?.updatePreferencesUI()
+            }
+        case "settings.history.activities":
+            askForConfirmation(title: "Delete All Activity Items",
+                               message: "This action is irreversible. All existing Siri Shortcuts and Spotlight items will be deleted.",
+                               continueActionName: "Clear Activities"
+            ) { [weak self] in self?.clearActivities() }
         case "settings.history.export":
             guard let exportedSettingsUrl = export(NineAnimator.default.user) else {
                 let alert = UIAlertController(title: "Error", message: "Cannot export configurations", preferredStyle: .alert)
@@ -137,6 +163,14 @@ class SettingsRootTableViewController: UITableViewController {
         Kingfisher.ImageCache.default.clearMemoryCache()
         URLCache.shared.removeAllCachedResponses()
         UserNotificationManager.default.removeAll()
+    }
+    
+    private func clearActivities() {
+        if #available(iOS 12.0, *) {
+            NSUserActivity.deleteAllSavedUserActivities {
+                [weak self] in self?.updatePreferencesUI()
+            }
+        }
     }
     
     private func updatePreferencesUI() {
