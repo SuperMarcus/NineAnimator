@@ -58,6 +58,8 @@ GPLv3 Licensed.
 - [x] Handoff & Siri Shortcuts
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
+- [ ] Dark mode (planned)
+- [ ] Downloads & cache while playing
 
 ## Device Compatibility
 
