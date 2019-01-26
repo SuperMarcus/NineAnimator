@@ -19,14 +19,11 @@
 
 import UIKit
 
-class ApplicationNavigationController: UINavigationController, Themable {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        Theme.provision(self)
-    }
-    
-    func theme(didUpdate theme: Theme) {
-        navigationBar.barStyle = theme.barStyle
-        view.tintColor = theme.tint
+@IBDesignable
+extension UITableViewCell {
+    /// Use Theme.tint for the color of the text
+    @IBInspectable var tintText: Bool {
+        get { return themableOptionsStore["cell.tintText"] as? Bool ?? false }
+        set { themableOptionsStore["cell.tintText"] = newValue }
     }
 }

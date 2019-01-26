@@ -43,6 +43,11 @@ class SettingsRootTableViewController: UITableViewController {
     
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.makeThemable()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updatePreferencesUI()
@@ -84,6 +89,10 @@ class SettingsRootTableViewController: UITableViewController {
         let newAppearanceName = sender.selectedSegmentIndex == 0 ? "dark" : "light"
         guard let theme = Theme.availableThemes[newAppearanceName] else { return }
         Theme.setTheme(theme)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.makeThemable()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -191,7 +200,7 @@ class SettingsRootTableViewController: UITableViewController {
         backgroundPlaybackSwitch.isEnabled = !pictureInPictureSwitch.isOn
         backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
         
-        appearanceSegmentControl.selectedSegmentIndex = NineAnimator.default.user.theme == "dark" ? 0 : 1
+        appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
         
         //To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count

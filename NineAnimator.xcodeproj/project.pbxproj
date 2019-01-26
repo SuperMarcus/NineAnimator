@@ -68,6 +68,7 @@
 		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
 		2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */; };
 		2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */; };
+		2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -196,6 +197,7 @@
 		2C91297621BB867300284FD0 /* MyCloudParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCloudParser.swift; sourceTree = "<group>"; };
 		2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MakeThemable.swift"; sourceTree = "<group>"; };
 		2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+StyleAttributes.swift"; sourceTree = "<group>"; };
+		2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+StyleAttributes.swift"; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				2C73A3A521FB72230080A8B2 /* Theme.swift */,
 				2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */,
 				2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */,
+				2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */,
 				2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
+				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,

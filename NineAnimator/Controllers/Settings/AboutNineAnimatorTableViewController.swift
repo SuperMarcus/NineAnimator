@@ -43,4 +43,13 @@ class AboutNineAnimatorTableViewController: UITableViewController {
             navigationController?.popViewController(animated: true)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.makeThemable()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.makeThemable()
+    }
 }

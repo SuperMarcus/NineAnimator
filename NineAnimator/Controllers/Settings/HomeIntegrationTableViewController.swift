@@ -166,4 +166,13 @@ extension HomeIntegrationTableViewController {
             [weak self] in self?.present(alert, animated: true, completion: nil)
         }
     }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.makeThemable()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.makeThemable()
+    }
 }

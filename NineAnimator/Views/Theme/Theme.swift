@@ -33,6 +33,8 @@ struct Theme {
     
     let background: UIColor
     
+    let secondaryBackground: UIColor
+    
     let tint: UIColor
     
     let blurStyle: UIBlurEffect.Style
@@ -91,11 +93,17 @@ extension Theme {
         
         if let view = view as? UITableView {
             view.indicatorStyle = theme.scrollIndicatorStyle
-            view.backgroundColor = theme.background
+            
+            if view.style == .grouped {
+                view.backgroundColor = theme.secondaryBackground
+            } else { view.backgroundColor = theme.background }
         }
         
         if let view = view as? UITableViewCell {
-            view.textLabel?.textColor = theme.primaryText
+            if view.tintText {
+                view.textLabel?.textColor = theme.tint
+            } else { view.textLabel?.textColor = theme.primaryText }
+            
             view.detailTextLabel?.textColor = theme.secondaryText
             view.backgroundColor = theme.background
         }
@@ -118,6 +126,7 @@ extension Theme {
             primaryText: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
             secondaryText: #colorLiteral(red: 0.6352941176, green: 0.6352941176, blue: 0.6549019608, alpha: 1),
             background: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
+            secondaryBackground: UIColor.groupTableViewBackground,
             tint: #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1),
             blurStyle: .extraLight,
             barStyle: .default,
@@ -130,7 +139,8 @@ extension Theme {
             name: "dark",
             primaryText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             secondaryText: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
-            background: #colorLiteral(red: 0.1176470588, green: 0.1176470588, blue: 0.1176470588, alpha: 1),
+            background: #colorLiteral(red: 0.1600990295, green: 0.1600990295, blue: 0.1600990295, alpha: 1),
+            secondaryBackground: #colorLiteral(red: 0.05490267277, green: 0.05490267277, blue: 0.05490267277, alpha: 1),
             tint: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),
             blurStyle: .dark,
             barStyle: .black,
