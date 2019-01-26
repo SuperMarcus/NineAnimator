@@ -19,20 +19,10 @@
 
 import UIKit
 
-class UnavailableTableViewCell: UITableViewCell, Themable {
-    @IBOutlet private weak var unavailableErrorTitleLabel: UILabel!
-    @IBOutlet private weak var unavailableErrorMessageLabel: UILabel!
-    
-    var error: Error? {
-        get { return nil }
-        set {
-            guard let error = newValue else { return }
-            unavailableErrorMessageLabel.text = error.localizedDescription
-        }
-    }
-    
-    func theme(didUpdate theme: Theme) {
-        unavailableErrorTitleLabel.textColor = theme.primaryText
-        unavailableErrorMessageLabel.textColor = theme.secondaryText
+extension UIView {
+    func makeThemable() {
+        if let themableSelf = self as? Themable {
+            Theme.provision(themableSelf)
+        } else { Theme.provision(view: self) }
     }
 }

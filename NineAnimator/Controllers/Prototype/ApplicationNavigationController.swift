@@ -19,5 +19,13 @@
 
 import UIKit
 
-class ApplicationNavigationController: UINavigationController {
+class ApplicationNavigationController: UINavigationController, Themable {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        Theme.provision(self)
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        navigationBar.barStyle = theme.barStyle
+    }
 }

@@ -113,6 +113,7 @@ class FeaturedViewController: UITableViewController {
         guard let featuredAnimePage = featuredAnimePage else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.unavailable", for: indexPath)
             if let cell = cell as? UnavailableTableViewCell { cell.error = error }
+            cell.makeThemable()
             return cell
         }
         switch indexPath.section {
@@ -120,6 +121,7 @@ class FeaturedViewController: UITableViewController {
             let animeLink = featuredAnimePage.featured[indexPath.item]
             let animeCell = tableView.dequeueReusableCell(withIdentifier: "anime.featured", for: indexPath) as! FeaturedAnimeTableViewCell
             animeCell.setAnime(animeLink)
+            animeCell.makeThemable()
             return animeCell
         case 1:
             let animeLink = featuredAnimePage.latest[indexPath.item]
@@ -127,6 +129,7 @@ class FeaturedViewController: UITableViewController {
             
             animeCell.title = animeLink.title
             animeCell.coverImage = animeLink.image
+            animeCell.makeThemable()
             
             return animeCell
         default:
@@ -170,6 +173,8 @@ extension FeaturedViewController {
         super.viewDidLoad()
         tableView.refreshControl = refresher
         userActivity = Continuity.activityForResumeLastAnime()
+        view.makeThemable()
+        tableView.makeThemable()
     }
 }
 

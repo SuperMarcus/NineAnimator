@@ -19,11 +19,12 @@
 
 import UIKit
 
-class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
+class RecentlyUpdatedAnimeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var blurredCoverImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var statusLabel: UILabel!
+    @IBOutlet private weak var backgroundBlurEffectView: UIVisualEffectView!
     
     var title: String? {
         willSet { titleLabel.text = newValue ?? "" }
@@ -47,5 +48,11 @@ class RecentlyUpdatedAnimeTableViewCell: UITableViewCell {
         UIView.animate(withDuration: 0.2) {
             self.transform = newTransform
         }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        backgroundBlurEffectView.effect = UIBlurEffect(style: theme.blurStyle)
+        titleLabel.textColor = theme.primaryText
+        statusLabel.textColor = theme.primaryText
     }
 }

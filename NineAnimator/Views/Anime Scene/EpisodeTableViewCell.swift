@@ -19,7 +19,7 @@
 
 import UIKit
 
-class EpisodeTableViewCell: UITableViewCell {
+class EpisodeTableViewCell: UITableViewCell, Themable {
     var episodeLink: EpisodeLink? {
         didSet {
             titleLabel.text = episodeLink?.name
@@ -29,4 +29,9 @@ class EpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var progressIndicator: EpisodeAccessoryProcessIndicator!
+    
+    func theme(didUpdate theme: Theme) {
+        backgroundColor = theme.background
+        titleLabel.textColor = theme.primaryText
+    }
 }

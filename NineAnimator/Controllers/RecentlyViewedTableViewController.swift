@@ -23,6 +23,7 @@ class RecentlyViewedTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
+        tableView.makeThemable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,12 +66,14 @@ extension RecentlyViewedTableViewController {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.last", for: indexPath) as! LastViewedEpisodeTableViewCell
             cell.episodeLink = NineAnimator.default.user.lastEpisode
+            cell.makeThemable()
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as! RecentlyWatchedAnimeTableViewCell
             let animes = NineAnimator.default.user.recentAnimes
             let anime = animes[indexPath.item]
             cell.animeLink = anime
+            cell.makeThemable()
             return cell
         default: fatalError("unimplemented section (\(indexPath.section))")
         }

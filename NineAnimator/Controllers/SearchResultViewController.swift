@@ -35,6 +35,7 @@ class SearchResultViewController: UITableViewController, ContentProviderDelegate
         super.viewDidLoad()
         tableView.rowHeight = 160
         tableView.tableFooterView = UIView()
+        tableView.makeThemable()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,14 +82,18 @@ class SearchResultViewController: UITableViewController, ContentProviderDelegate
         if let providerError = providerError {
             let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as! ContentErrorTableViewCell
             cell.error = providerError
+            cell.makeThemable()
             return cell
         }
         
         if searchPage.availablePages == indexPath.section {
-            return tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath)
+            cell.makeThemable()
+            return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.result", for: indexPath) as? AnimeSearchResultTableViewCell else { fatalError("cell type dequeued is not AnimeSearchResultTableViewCell") }
             cell.animeLink = searchPage.animes(on: indexPath.section)[indexPath.item]
+            cell.makeThemable()
             return cell
         }
     }

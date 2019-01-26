@@ -20,13 +20,14 @@
 import Kingfisher
 import UIKit
 
-class LastViewedEpisodeTableViewCell: UITableViewCell {
+class LastViewedEpisodeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var backgroundBlurredImageView: UIImageView!
     @IBOutlet private weak var progressIndicator: EpisodeAccessoryProcessIndicator!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var episodeLabel: UILabel!
     @IBOutlet private weak var sourceTitleLabel: UILabel!
+    @IBOutlet private weak var backgroundBlurView: UIVisualEffectView!
     
     var episodeLink: EpisodeLink? = nil {
         didSet {
@@ -49,5 +50,12 @@ class LastViewedEpisodeTableViewCell: UITableViewCell {
         UIView.animate(withDuration: 0.2) {
             self.transform = newTransform
         }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        backgroundBlurView.effect = UIBlurEffect(style: theme.blurStyle)
+        titleLabel.textColor = theme.primaryText
+        sourceTitleLabel.textColor = theme.primaryText
+        episodeLabel.textColor = theme.secondaryText
     }
 }

@@ -39,7 +39,7 @@ import WebKit
  4. Initialize the `AnimeViewController` with either `setPresenting(_: AnimeLink)` or
     `setPresenting(episode: EpisodeLink)`.
  */
-class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate, AVPlayerViewControllerDelegate {
+class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate {
     // MARK: - Set either one of the following item to initialize the anime view
     private var animeLink: AnimeLink?
     
@@ -162,7 +162,14 @@ class AnimeViewController: UITableViewController, ServerPickerSelectionDelegate,
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.makeThemable()
+    }
+    
     override func didMove(toParent parent: UIViewController?) {
+        super.didMove(toParent: parent)
+        
         // Cleanup observers and tasks
         episodeRequestTask?.cancel()
         episodeRequestTask = nil
@@ -266,7 +273,9 @@ extension AnimeViewController {
                 episode = episodes[episodes.count - indexPath.item - 1]
             }
             
+            cell.makeThemable()
             cell.episodeLink = episode
+            
             return cell
         default:
             fatalError("Anime view don't have section \(indexPath.section)")

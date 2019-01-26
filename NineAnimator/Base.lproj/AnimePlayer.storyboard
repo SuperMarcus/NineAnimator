@@ -41,7 +41,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="C5Y-HZ-n89">
-                                                        <rect key="frame" x="16" y="68.5" width="99.5" height="128.5"/>
+                                                        <rect key="frame" x="16" y="68.5" width="99.5" height="128"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="C5Y-HZ-n89" secondAttribute="height" multiplier="155:200" id="PYW-LH-97B"/>
                                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="QiV-T2-T2S"/>
@@ -66,7 +66,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </imageView>
                                                     <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xl0-An-PYX">
-                                                        <rect key="frame" x="123.5" y="16" width="243.5" height="233.5"/>
+                                                        <rect key="frame" x="123.5" y="16" width="243.5" height="233"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,7 +74,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TqH-7U-lSE">
-                                                        <rect key="frame" x="131.5" y="114.5" width="227.5" height="37"/>
+                                                        <rect key="frame" x="131.5" y="114" width="227.5" height="37"/>
                                                     </activityIndicatorView>
                                                 </subviews>
                                                 <constraints>
@@ -117,33 +117,8 @@
                                     <outlet property="loadingIndicator" destination="TqH-7U-lSE" id="8og-dB-8H8"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.serverPicker" rowHeight="90" id="whz-6S-zQF" customClass="ServerPickerTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="294" width="375" height="90"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="whz-6S-zQF" id="gUe-u5-ksR">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K1U-Yw-mmk">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="88" id="H76-Uv-UMO"/>
-                                            </constraints>
-                                        </pickerView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="K1U-Yw-mmk" secondAttribute="bottom" id="Rek-TY-InU"/>
-                                        <constraint firstItem="K1U-Yw-mmk" firstAttribute="top" secondItem="gUe-u5-ksR" secondAttribute="top" id="V7s-AS-h4O"/>
-                                        <constraint firstItem="K1U-Yw-mmk" firstAttribute="leading" secondItem="gUe-u5-ksR" secondAttribute="leading" id="YSF-jP-dxN"/>
-                                        <constraint firstAttribute="trailing" secondItem="K1U-Yw-mmk" secondAttribute="trailing" id="k68-Mk-6ew"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="serverPickerView" destination="K1U-Yw-mmk" id="Mv8-4G-l7P"/>
-                                </connections>
-                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" id="0Uk-RM-2XQ" customClass="EpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="384" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="294" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uk-RM-2XQ" id="rZ2-du-FqS">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -157,7 +132,7 @@
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGg-f0-0vC" customClass="EpisodeAccessoryProcessIndicator" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="327" y="0.0" width="40" height="43.5"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="g60-2V-VR6"/>
                                             </constraints>
@@ -168,6 +143,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="PGg-f0-0vC" firstAttribute="top" secondItem="rZ2-du-FqS" secondAttribute="top" id="CwN-W5-8oS"/>
                                         <constraint firstItem="wtb-zz-Opg" firstAttribute="centerY" secondItem="rZ2-du-FqS" secondAttribute="centerY" id="Vcm-Rc-d9q"/>
@@ -177,6 +153,7 @@
                                         <constraint firstAttribute="trailing" secondItem="PGg-f0-0vC" secondAttribute="trailing" constant="8" id="saU-Z4-3eB"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="progressIndicator" destination="PGg-f0-0vC" id="Khz-VT-Hrg"/>
                                     <outlet property="titleLabel" destination="wtb-zz-Opg" id="m3s-nn-kpq"/>

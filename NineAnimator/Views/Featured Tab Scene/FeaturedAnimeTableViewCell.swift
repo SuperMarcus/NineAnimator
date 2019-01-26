@@ -19,10 +19,12 @@
 
 import UIKit
 
-class FeaturedAnimeTableViewCell: UITableViewCell {
+class FeaturedAnimeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var animeImageView: UIImageView!
     
     @IBOutlet private weak var animeTitleLabel: UILabel!
+    
+    @IBOutlet private weak var viewButton: UIButton!
     
     func setAnime(_ animeLink: AnimeLink) {
         animeTitleLabel.text = animeLink.title
@@ -36,5 +38,9 @@ class FeaturedAnimeTableViewCell: UITableViewCell {
         UIView.animate(withDuration: 0.2) {
             self.transform = newTransform
         }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        viewButton.backgroundColor = theme.background
     }
 }

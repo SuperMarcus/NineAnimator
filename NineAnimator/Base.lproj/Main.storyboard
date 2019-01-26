@@ -149,6 +149,7 @@
                                 <connections>
                                     <outlet property="animeImageView" destination="XPo-Oq-ujR" id="95N-DB-6aE"/>
                                     <outlet property="animeTitleLabel" destination="m7Z-Ws-s51" id="xYg-jQ-E6l"/>
+                                    <outlet property="viewButton" destination="rUB-Iw-liv" id="vjr-hh-uMc"/>
                                     <segue destination="Vey-hc-6Z0" kind="show" id="5mq-eg-8TQ">
                                         <segue key="commit" inheritsFrom="parent" id="Bxu-cj-6dk"/>
                                         <segue key="preview" inheritsFrom="commit" id="OTa-h0-h9J"/>
@@ -257,7 +258,9 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="backgroundBlurEffectView" destination="vay-h0-LQu" id="TCu-hs-cjU"/>
                                     <outlet property="blurredCoverImageView" destination="Ox1-9s-uGc" id="IhP-qP-BsT"/>
                                     <outlet property="coverImageView" destination="nAu-b3-xDw" id="CFs-a5-kX3"/>
                                     <outlet property="statusLabel" destination="Xji-1Z-Meq" id="Gwa-ye-cmm"/>
@@ -288,6 +291,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="sDJ-cG-QcG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cA5-9h-54P" secondAttribute="leadingMargin" constant="32" id="Ahn-KJ-mez"/>
                                         <constraint firstItem="sDJ-cG-QcG" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="L9l-JZ-uOp"/>
@@ -298,8 +302,10 @@
                                         <constraint firstItem="sDJ-cG-QcG" firstAttribute="bottom" secondItem="cA5-9h-54P" secondAttribute="bottomMargin" id="geh-Y8-cbM"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="unavailableErrorMessageLabel" destination="sDJ-cG-QcG" id="aaf-Qf-xm9"/>
+                                    <outlet property="unavailableErrorTitleLabel" destination="SBh-Sa-wuU" id="cdo-Ci-v74"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -427,7 +433,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="rTr-e6-pzd" firstAttribute="width" relation="lessThanOrEqual" secondItem="Qkq-xt-baH" secondAttribute="width" multiplier="0.3" id="2d6-j4-fKN"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="rTr-e6-pzd" secondAttribute="bottom" constant="8" id="9wk-qw-uOT"/>
@@ -444,6 +450,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="Qkq-xt-baH" firstAttribute="top" secondItem="z7a-Mz-K6F" secondAttribute="topMargin" id="Eu1-nu-fHn"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Qkq-xt-baH" secondAttribute="bottom" priority="800" id="NSW-qZ-sr1"/>
@@ -451,6 +458,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="Qkq-xt-baH" secondAttribute="trailing" id="lh9-eu-dNT"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="animeTitleLabel" destination="sFc-hI-0Eo" id="JBs-IJ-KnK"/>
                                     <outlet property="coverImageView" destination="rTr-e6-pzd" id="wyD-fs-Yx2"/>
@@ -646,6 +654,7 @@
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                         </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="bottom" secondItem="aBr-0y-FH3" secondAttribute="bottom" constant="8" id="8vI-3g-hiD"/>
                                                             <constraint firstItem="aBr-0y-FH3" firstAttribute="top" secondItem="ba0-1s-HFP" secondAttribute="top" constant="8" id="DRS-tN-eHa"/>
@@ -712,6 +721,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="backgroundBlurView" destination="ymX-sl-7hN" id="0f7-GQ-r46"/>
                                     <outlet property="backgroundBlurredImageView" destination="dQi-V7-FD5" id="SKO-1T-CQj"/>
                                     <outlet property="coverImageView" destination="aj4-zT-QjK" id="zIp-pk-QGw"/>
                                     <outlet property="episodeLabel" destination="IId-s4-5QI" id="PDk-wy-u3G"/>
@@ -757,6 +767,7 @@
                                                 </label>
                                                 <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification Enabled" translatesAutoresizingMaskIntoConstraints="NO" id="NEt-AQ-iJq">
                                                     <rect key="frame" x="301" y="53" width="16" height="16"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="16" id="4qi-o4-vgT"/>
@@ -764,7 +775,7 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="g7r-tP-s31" firstAttribute="top" secondItem="cty-4k-jCy" secondAttribute="bottom" constant="4" id="6KK-pM-DGY"/>
                                                 <constraint firstAttribute="trailing" secondItem="cty-4k-jCy" secondAttribute="trailing" constant="8" id="BRv-hK-bbn"/>
@@ -781,6 +792,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="TMG-gN-0Pw" firstAttribute="leading" secondItem="R7X-mR-5dQ" secondAttribute="leadingMargin" id="HMq-bW-clE"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="TMG-gN-0Pw" secondAttribute="trailing" id="SWp-Mu-qaE"/>
@@ -788,6 +800,7 @@
                                         <constraint firstItem="TMG-gN-0Pw" firstAttribute="top" secondItem="R7X-mR-5dQ" secondAttribute="topMargin" id="x7B-Cu-aSJ"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="animeTitleLabel" destination="g7r-tP-s31" id="qSR-4O-tkW"/>
                                     <outlet property="coverImageView" destination="eEe-9a-Fgq" id="yUc-qo-hXJ"/>
@@ -901,7 +914,7 @@
         <image name="Settings Icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hl9-0f-9xm"/>
+        <segue reference="5mq-eg-8TQ"/>
         <segue reference="pnE-3F-WKs"/>
     </inferredMetricsTieBreakers>
 </document>

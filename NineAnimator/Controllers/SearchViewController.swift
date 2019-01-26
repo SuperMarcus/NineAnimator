@@ -66,8 +66,11 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
             // For iOS 10 and earlier, place the search controller's search bar in the table view's header.
             tableView.tableHeaderView = searchController.searchBar
         }
+        
         // Hide table cell separators at empty state
         tableView.tableFooterView = UIView()
+        
+        tableView.makeThemable()
         
         requestTask = source.featured {
             [weak self] page, error in
@@ -128,6 +131,7 @@ extension SearchViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "anime.container.simple", for: indexPath) as! SimpleAnimeTableViewCell
         cell.animeLink = filteredAnimeLinks[indexPath.item]
+        cell.makeThemable()
         return cell
     }
 }

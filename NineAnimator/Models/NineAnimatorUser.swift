@@ -164,6 +164,11 @@ extension NineAnimatorUser {
         get { return _freezer.bool(forKey: .detectClipboardAnimeLinks) }
         set { _freezer.set(newValue, forKey: .detectClipboardAnimeLinks) }
     }
+    
+    var theme: String {
+        get { return _freezer.string(forKey: .theme) ?? "light" }
+        set { _freezer.set(newValue, forKey: .theme) }
+    }
 }
 
 // MARK: - Serialization
@@ -413,6 +418,7 @@ fileprivate extension String {
     static var homeExternalOnly: String { return "home.externalOnly" }
     static var homeUUIDStart: String { return "home.actionset.uuid.start" }
     static var homeUUIDEnd: String { return "home.actionset.uuid.end" }
+    static var theme: String { return "interface.theme" }
     
     //Watching anime episodes persist filename
     static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }

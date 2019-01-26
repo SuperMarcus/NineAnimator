@@ -19,7 +19,7 @@
 
 import UIKit
 
-class RootViewController: UITabBarController {
+class RootViewController: UITabBarController, Themable {
     private(set) static weak var shared: RootViewController?
     
     private weak var castControllerDelegate: AnyObject?
@@ -35,6 +35,7 @@ class RootViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         RootViewController.shared = self
+        Theme.provision(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -160,5 +161,13 @@ extension RootViewController {
         // anime will show up.
         selectedIndex = 0
         presentOnTop(alert)
+    }
+}
+
+// MARK: - Themable
+extension RootViewController {
+    func theme(didUpdate theme: Theme) {
+        tabBar.barStyle = theme.barStyle
+        view.tintColor = theme.tint
     }
 }

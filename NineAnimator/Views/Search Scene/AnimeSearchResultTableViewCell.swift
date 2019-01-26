@@ -20,7 +20,7 @@
 import Kingfisher
 import UIKit
 
-class AnimeSearchResultTableViewCell: UITableViewCell {
+class AnimeSearchResultTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var animeTitleLabel: UILabel!
     
@@ -31,5 +31,10 @@ class AnimeSearchResultTableViewCell: UITableViewCell {
             coverImageView.kf.indicatorType = .activity
             animeTitleLabel.text = link.title
         }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        backgroundColor = theme.background
+        animeTitleLabel.textColor = theme.primaryText
     }
 }

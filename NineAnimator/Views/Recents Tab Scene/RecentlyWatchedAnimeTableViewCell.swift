@@ -20,7 +20,7 @@
 import Kingfisher
 import UIKit
 
-class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
+class RecentlyWatchedAnimeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var animeTitleLabel: UILabel!
     @IBOutlet private weak var sourceTitleLabel: UILabel!
@@ -38,9 +38,14 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell {
             UserNotificationManager.default.hasNotifications(for: link) { hasNotification, _ in
                 guard let hasNotification = hasNotification else { return }
                 DispatchQueue.main.async { [weak self] in
-                    self?.notificationEnabledImage.tintColor = hasNotification ? UIColor.red : UIColor.darkText
+                    self?.notificationEnabledImage.tintColor = hasNotification ? UIColor.red : Theme.current.secondaryText
                 }
             }
         }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        animeTitleLabel.textColor = theme.primaryText
+        sourceTitleLabel.textColor = theme.primaryText
     }
 }
