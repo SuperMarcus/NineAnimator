@@ -22,6 +22,8 @@ import UIKit
 class ContentErrorTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var searchSubtitleLabel: UILabel!
     
+    @IBOutlet private weak var searchTitleLabel: UILabel!
+    
     var error: Error? {
         set {
             if let providerError = newValue as? NineAnimatorError {
@@ -38,7 +40,8 @@ class ContentErrorTableViewCell: UITableViewCell, Themable {
     }
     
     func theme(didUpdate theme: Theme) {
-        searchSubtitleLabel.textColor = theme.primaryText
+        searchSubtitleLabel.textColor = theme.secondaryText
+        searchTitleLabel.textColor = theme.primaryText
         backgroundColor = theme.background
     }
 }

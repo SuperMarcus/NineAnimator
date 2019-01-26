@@ -185,7 +185,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vay-h0-LQu">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VCb-1U-YDM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
@@ -522,7 +522,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="w9w-ab-cIl" firstAttribute="centerX" secondItem="9Rf-kW-uQZ" secondAttribute="centerX" id="0Cy-Fd-S9Y"/>
                                                 <constraint firstItem="prB-7g-Aay" firstAttribute="centerX" secondItem="9Rf-kW-uQZ" secondAttribute="centerX" id="0Xj-FQ-Yr0"/>
@@ -534,14 +534,17 @@
                                             </constraints>
                                         </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="9Rf-kW-uQZ" firstAttribute="leading" secondItem="KGr-Tx-y5b" secondAttribute="leading" id="FDR-YV-xdr"/>
                                         <constraint firstAttribute="trailing" secondItem="9Rf-kW-uQZ" secondAttribute="trailing" id="Q9q-18-n2Y"/>
                                         <constraint firstItem="9Rf-kW-uQZ" firstAttribute="top" secondItem="KGr-Tx-y5b" secondAttribute="top" id="wbC-Ty-JKI"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="searchSubtitleLabel" destination="prB-7g-Aay" id="B8T-uj-JdB"/>
+                                    <outlet property="searchTitleLabel" destination="w9w-ab-cIl" id="nBU-Zm-oaF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

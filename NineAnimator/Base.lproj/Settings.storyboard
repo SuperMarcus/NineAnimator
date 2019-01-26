@@ -68,10 +68,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WSB-go-EfB">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WSB-go-EfB">
                                                     <rect key="frame" x="224" y="10" width="143" height="30.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="143" id="N6t-Df-vWB"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="143" id="N6t-Df-vWB"/>
                                                     </constraints>
                                                     <segments>
                                                         <segment title="Dark"/>

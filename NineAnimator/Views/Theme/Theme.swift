@@ -64,13 +64,22 @@ extension Theme {
         update(current, for: view)
     }
     
-    static func setTheme(_ theme: Theme) {
+    static func setTheme(_ theme: Theme, animated: Bool = true) {
         collectGarbage()
         NineAnimator.default.user.theme = theme.name
         Theme.current = theme
-        provisionedThemables.forEach {
-            $0.themable?.theme(didUpdate: theme)
-            update(theme, for: $0.view)
+        if animated {
+            UIView.animate(withDuration: 0.2) {
+                provisionedThemables.forEach {
+                    $0.themable?.theme(didUpdate: theme)
+                    update(theme, for: $0.view)
+                }
+            }
+        } else {
+            provisionedThemables.forEach {
+                $0.themable?.theme(didUpdate: theme)
+                update(theme, for: $0.view)
+            }
         }
     }
     
