@@ -20,27 +20,9 @@
 import UIKit
 
 @IBDesignable
-extension UIView {
-    @IBInspectable
-    var isThemable: Bool {
-        set {
-            if newValue { makeThemable() }
-        }
-        get { return false }
-    }
-    
-    var themableOptionsStore: [String: Any] {
-        get { return layer.style?["themable.options"] as? [String: Any] ?? [:] }
-        set {
-            var layerStyles = layer.style ?? [:]
-            layerStyles["themable.options"] = newValue
-            layer.style = layerStyles
-        }
-    }
-    
-    func makeThemable() {
-        if let themableSelf = self as? Themable {
-            Theme.provision(themableSelf)
-        } else { Theme.provision(view: self) }
+extension UILabel {
+    @IBInspectable var isPrimaryText: Bool {
+        get { return themableOptionsStore["label.primary"] as? Bool ?? true }
+        set { themableOptionsStore["label.primary"] = newValue }
     }
 }

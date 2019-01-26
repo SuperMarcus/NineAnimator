@@ -42,6 +42,8 @@ struct Theme {
     let backgroundBlurStyle: UIBlurEffect.Style
     
     let scrollIndicatorStyle: UIScrollView.IndicatorStyle
+    
+    let activityIndicatorStyle: UIActivityIndicatorView.Style
 }
 
 // MARK: - Accessing Theme object
@@ -97,6 +99,14 @@ extension Theme {
             view.detailTextLabel?.textColor = theme.secondaryText
             view.backgroundColor = theme.background
         }
+        
+        if let view = view as? UILabel {
+            view.textColor = view.isPrimaryText ? theme.primaryText : theme.secondaryText
+        }
+        
+        if let view = view as? UIActivityIndicatorView {
+            view.style = theme.activityIndicatorStyle
+        }
     }
 }
 
@@ -112,7 +122,8 @@ extension Theme {
             blurStyle: .extraLight,
             barStyle: .default,
             backgroundBlurStyle: .dark,
-            scrollIndicatorStyle: .black
+            scrollIndicatorStyle: .black,
+            activityIndicatorStyle: .gray
         )
         
         let dark = Theme(
@@ -124,7 +135,8 @@ extension Theme {
             blurStyle: .dark,
             barStyle: .black,
             backgroundBlurStyle: .regular,
-            scrollIndicatorStyle: .white
+            scrollIndicatorStyle: .white,
+            activityIndicatorStyle: .white
         )
         
         return [ light.name: light, dark.name: dark ]

@@ -185,7 +185,7 @@
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vay-h0-LQu">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="VCb-1U-YDM">
-                                                        <rect key="frame" x="0.0" y="0.0" width="248" height="122"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="248.5" height="122"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
@@ -477,6 +477,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="Elo-pH-QxW"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </activityIndicatorView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2q8-Xx-SZk">
                                             <rect key="frame" x="158.5" y="56" width="58" height="25"/>
@@ -486,8 +489,13 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="UJO-1K-N6w" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4xT-hm-b4U" secondAttribute="topMargin" constant="16" id="4I9-aY-KsP"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="UJO-1K-N6w" secondAttribute="trailing" constant="16" id="cK5-1y-3vd"/>
@@ -498,6 +506,7 @@
                                         <constraint firstItem="UJO-1K-N6w" firstAttribute="centerY" secondItem="4xT-hm-b4U" secondAttribute="centerY" constant="-16" id="m5b-8m-6wU"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="search.notfound" rowHeight="146" id="k1H-32-aEE" customClass="ContentErrorTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="321" width="375" height="146"/>

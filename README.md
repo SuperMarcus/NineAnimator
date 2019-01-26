@@ -47,7 +47,7 @@ GPLv3 Licensed.
 ## Features
 
 - [x] Ads Free and no logins
-- [x] Super-duper clean UIs
+- [x] Super-duper clean UIs + Dark Mode
 - [x] Get notifications when new episodes come out
 - [x] iOS's native video playback interface
 - [x] Picture in Picture playback on iPads
@@ -58,7 +58,6 @@ GPLv3 Licensed.
 - [x] Handoff & Siri Shortcuts
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
-- [ ] Dark mode (planned)
 - [ ] Downloads & cache while playing
 
 ## Device Compatibility
