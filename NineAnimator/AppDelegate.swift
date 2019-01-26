@@ -32,6 +32,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UserNotificationManager.default.suggestedFetchInterval
         )
         UNUserNotificationCenter.current().delegate = UserNotificationManager.default
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onScreenBrightnessDidChange(_:)),
+            name: UIScreen.brightnessDidChangeNotification,
+            object: nil
+        )
         return true
     }
     
@@ -96,6 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
+        
+        // Also updates dynamic appearance
+        updateDynamicBrightness()
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
@@ -165,6 +174,7 @@ extension AppDelegate {
     }
 }
 
+// MARK: - Continuity
 extension AppDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
@@ -198,5 +208,30 @@ extension AppDelegate {
         }
         
         return false
+    }
+}
+
+// MARK: - Dynamic appearance
+extension AppDelegate {
+    func updateDynamicBrightness() {
+        let threshold: CGFloat = 0.25
+        
+        var targetTheme: Theme
+        
+        if UIScreen.main.brightness > threshold {
+            guard let lightTheme = Theme.availableThemes["light"] else { return }
+            targetTheme = lightTheme
+        } else {
+            guard let darkTheme = Theme.availableThemes["dark"] else { return }
+            targetTheme = darkTheme
+        }
+        
+        if Theme.current != targetTheme { Theme.setTheme(targetTheme) }
+    }
+    
+    @objc func onScreenBrightnessDidChange(_ notification: Notification) {
+        if NineAnimator.default.user.brightnessBasedTheme {
+            updateDynamicBrightness()
+        }
     }
 }

@@ -58,13 +58,13 @@ extension Theme {
     
     static func provision(_ themable: Themable) {
         collectGarbage()
-        provisionedThemables.append(ThemableContainer(themable: themable, view: nil))
+        provisionedThemables.insert(ThemableContainer(themable: themable, view: nil))
         themable.theme(didUpdate: current)
     }
     
     static func provision(view: UIView) {
         collectGarbage()
-        provisionedThemables.append(ThemableContainer(themable: nil, view: view))
+        provisionedThemables.insert(ThemableContainer(themable: nil, view: view))
         update(current, for: view)
     }
     
@@ -152,15 +152,37 @@ extension Theme {
         return [ light.name: light, dark.name: dark ]
     }()
     
-    private static var provisionedThemables = [ThemableContainer]()
+    private static var provisionedThemables = Set<ThemableContainer>()
     
     private static func collectGarbage() {
         provisionedThemables = provisionedThemables.filter { $0.themable != nil || $0.view != nil }
     }
     
-    private struct ThemableContainer {
+    private struct ThemableContainer: Hashable {
         weak var themable: Themable?
         
         weak var view: UIView?
+        
+        func hash(into hasher: inout Hasher) {
+            if let view = view {
+                hasher.combine(view)
+            }
+            
+            if let themable = themable {
+                let identifier = ObjectIdentifier(themable)
+                hasher.combine(identifier)
+            }
+        }
+        
+        static func == (_ lhs: Theme.ThemableContainer, _ rhs: Theme.ThemableContainer) -> Bool {
+            return lhs.hashValue == rhs.hashValue
+        }
+    }
+}
+
+// MARK: - Theme: Equatable
+extension Theme: Equatable {
+    static func == (_ lhs: Theme, _ rhs: Theme) -> Bool {
+        return lhs.name == rhs.name
     }
 }

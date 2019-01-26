@@ -24,7 +24,7 @@ import UIKit
 import UserNotifications
 
 // swiftlint:disable cyclomatic_complexity
-class SettingsRootTableViewController: UITableViewController {
+class SettingsRootTableViewController: UITableViewController, Themable {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     
     @IBOutlet private weak var detectClipboardLinksSwitch: UISwitch!
@@ -43,9 +43,12 @@ class SettingsRootTableViewController: UITableViewController {
     
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
     
+    @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
+        Theme.provision(self)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,6 +92,12 @@ class SettingsRootTableViewController: UITableViewController {
         let newAppearanceName = sender.selectedSegmentIndex == 0 ? "dark" : "light"
         guard let theme = Theme.availableThemes[newAppearanceName] else { return }
         Theme.setTheme(theme)
+    }
+    
+    @IBAction private func onDynamicAppearanceDidChange(_ sender: UISwitch) {
+        // Dynamic appearance is managed by the AppDelegate
+        NineAnimator.default.user.brightnessBasedTheme = sender.isOn
+        updatePreferencesUI()
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -200,9 +209,12 @@ class SettingsRootTableViewController: UITableViewController {
         backgroundPlaybackSwitch.isEnabled = !pictureInPictureSwitch.isOn
         backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
         
+        // Appearance settings
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
+        appearanceSegmentControl.isEnabled = !NineAnimator.default.user.brightnessBasedTheme
+        dynamicAppearanceSwitch.setOn(NineAnimator.default.user.brightnessBasedTheme, animated: true)
         
-        //To be gramatically correct :D
+        // To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount > 1 ? "Items" : "Item")"
         
@@ -232,5 +244,10 @@ class SettingsRootTableViewController: UITableViewController {
                     "Normal" : subscriptionEngineStatus.joined(separator: ", ")
             }
         }
+    }
+    
+    // Register this class as themable to update the segment control value when theme changes
+    func theme(didUpdate _: Theme) {
+        updatePreferencesUI()
     }
 }
