@@ -411,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				2C9383C921FBE774008C0D01 /* Theme */,
+				2C9383CE21FC0364008C0D01 /* Settings Scene */,
 				2CEB56D521DBE48F0018D804 /* Search Scene */,
 				2CEB56D421DBE45B0018D804 /* Anime Scene */,
 				2C4817A121DB118F0092F694 /* Recents Tab Scene */,
@@ -500,6 +501,13 @@
 				2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */,
 			);
 			path = Theme;
+			sourceTree = "<group>";
+		};
+		2C9383CE21FC0364008C0D01 /* Settings Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Settings Scene";
 			sourceTree = "<group>";
 		};
 		2C9C44FC21CD2B07004C8F0C /* Settings */ = {
