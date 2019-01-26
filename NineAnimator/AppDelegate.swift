@@ -214,6 +214,8 @@ extension AppDelegate {
 // MARK: - Dynamic appearance
 extension AppDelegate {
     func updateDynamicBrightness() {
+        guard NineAnimator.default.user.brightnessBasedTheme else { return }
+        
         let threshold: CGFloat = 0.25
         
         var targetTheme: Theme
@@ -230,8 +232,6 @@ extension AppDelegate {
     }
     
     @objc func onScreenBrightnessDidChange(_ notification: Notification) {
-        if NineAnimator.default.user.brightnessBasedTheme {
-            updateDynamicBrightness()
-        }
+        updateDynamicBrightness()
     }
 }
