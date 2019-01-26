@@ -105,6 +105,7 @@ extension RecentlyViewedTableViewController {
                     style: .normal,
                     title: "Subscribe"
                 ) { _, _, handler in
+                    UserNotificationManager.default.requestNotificationPermissions()
                     NineAnimator.default.user.watch(uncached: animeLink)
                     cell.animeLink = animeLink
                     handler(true)

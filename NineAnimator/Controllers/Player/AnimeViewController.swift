@@ -351,15 +351,7 @@ extension AnimeViewController {
         if NineAnimator.default.user.isWatching(anime) {
             NineAnimator.default.user.unwatch(anime: anime)
         } else {
-            let notificationCenter = UNUserNotificationCenter.current()
-            notificationCenter.requestAuthorization(options: [.badge]) {
-                [weak self] success, _ in
-                if !success {
-                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alertController, animated: true)
-                }
-            }
+            UserNotificationManager.default.requestNotificationPermissions()
             NineAnimator.default.user.watch(anime: anime)
         }
         
