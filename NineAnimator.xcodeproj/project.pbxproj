@@ -361,7 +361,6 @@
 				2C4ABC7621B599E3009B4D47 /* Models */,
 				2C4ABC7321B59982009B4D47 /* Controllers */,
 				2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */,
-				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
 				2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */,
 				2C4ABC5F21B5881F009B4D47 /* Info.plist */,
 			);
@@ -380,15 +379,15 @@
 		2C4ABC7321B59982009B4D47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2CAA70D121CFF40900F0D082 /* Player */,
-				2C9C44FC21CD2B07004C8F0C /* Settings */,
+				2C9383DB21FDFBC9008C0D01 /* Recents Scene */,
+				2C9383DA21FDFBB2008C0D01 /* Search Scene */,
+				2C9383D921FDFBA6008C0D01 /* Featured Scene */,
+				2CAA70D121CFF40900F0D082 /* Player Scene */,
+				2C9C44FC21CD2B07004C8F0C /* Settings Scene */,
 				2C12EDD621BDE66E0064D2BD /* Prototype */,
-				2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */,
-				2C66779721BC2213000E5ACC /* SearchViewController.swift */,
-				2C66779921BC2671000E5ACC /* SearchResultViewController.swift */,
-				2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */,
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
+				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -516,17 +515,42 @@
 			path = "Settings Scene";
 			sourceTree = "<group>";
 		};
-		2C9C44FC21CD2B07004C8F0C /* Settings */ = {
+		2C9383D921FDFBA6008C0D01 /* Featured Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC7421B599A2009B4D47 /* FeaturedViewController.swift */,
+			);
+			path = "Featured Scene";
+			sourceTree = "<group>";
+		};
+		2C9383DA21FDFBB2008C0D01 /* Search Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C66779721BC2213000E5ACC /* SearchViewController.swift */,
+				2C66779921BC2671000E5ACC /* SearchResultViewController.swift */,
+			);
+			path = "Search Scene";
+			sourceTree = "<group>";
+		};
+		2C9383DB21FDFBC9008C0D01 /* Recents Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */,
+			);
+			path = "Recents Scene";
+			sourceTree = "<group>";
+		};
+		2C9C44FC21CD2B07004C8F0C /* Settings Scene */ = {
 			isa = PBXGroup;
 			children = (
 				2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */,
 				2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */,
 				2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */,
 			);
-			path = Settings;
+			path = "Settings Scene";
 			sourceTree = "<group>";
 		};
-		2CAA70D121CFF40900F0D082 /* Player */ = {
+		2CAA70D121CFF40900F0D082 /* Player Scene */ = {
 			isa = PBXGroup;
 			children = (
 				2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */,
@@ -534,7 +558,7 @@
 				2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */,
 				2C12EDE621BDFFFF0064D2BD /* CastController.swift */,
 			);
-			path = Player;
+			path = "Player Scene";
 			sourceTree = "<group>";
 		};
 		2CCC745821C05F640007502A /* 9anime.to */ = {
