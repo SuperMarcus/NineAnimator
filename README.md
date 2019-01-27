@@ -253,3 +253,11 @@ implementation details.
 * The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
 * [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
 * ...and [scinfu](https://github.com/scinfu)'s awesome [SwiftSoup](https://github.com/scinfu/SwiftSoup)
+
+### Media & Icons
+
+Most of the resources are obtained from the open domains with their respective authors listed below.
+
+- Cloud Download Icon by [Storm Icons](https://thenounproject.com/stormicons)
+- [Google Cast Icon](https://commons.wikimedia.org/wiki/File:Chromecast_cast_button_icon.svg): uploaded to Wikimedia Commons by Y2kcrazyjoker4
+- [Media Control Icons](https://icons8.com/icon/pack/media-controls/ios) from [Icons8](https://icons8.com/).
