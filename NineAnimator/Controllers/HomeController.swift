@@ -159,9 +159,14 @@ extension HomeController {
     func primeIfNeeded() {
         if NineAnimator.default.user.homeIntegrationEndsActionSetUUID != nil ||
             NineAnimator.default.user.homeIntegrationStartsActionSetUUID != nil {
-            _ = manager
+            prime()
         }
     }
+    
+    /**
+     Initialize the HMHomeManager
+     */
+    func prime() { _ = manager }
 }
 
 // MARK: - Run Scenes

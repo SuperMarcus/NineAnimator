@@ -102,6 +102,7 @@ extension HomeIntegrationTableViewController {
     }
     
     private func openSelectionMenu(for event: DeferredSelectSceneEvent) {
+        HomeController.shared.prime()
         if HomeController.shared.isReady == true {
             _openSelectionMenu(for: event)
         } else { queuedSelectionEvent = event }
