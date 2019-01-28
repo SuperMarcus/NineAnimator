@@ -146,6 +146,11 @@ extension NineAnimatorUser {
         }
     }
     
+    var showEpisodeDetails: Bool {
+        get { return (_freezer.value(forKey: .episodeDetails) as? Bool) ?? true }
+        set { _freezer.set(newValue, forKey: .episodeDetails) }
+    }
+    
     var allowBackgroundPlayback: Bool {
         get { return _freezer.bool(forKey: .backgroundPlayback) }
         set {
@@ -417,6 +422,7 @@ fileprivate extension String {
     static var recentServer: String { return "server.recent" }
     static var persistedProgresses: String { return "episode.progress" }
     static var episodeListingOrder: String { return "episode.listing.order" }
+    static var episodeDetails: String { return "episode.details" }
     static var backgroundPlayback: String { return "playback.background" }
     static var pictureInPicturePlayback: String { return "playback.pip" }
     static var notificationShowStream: String { return "notification.showStreams" }

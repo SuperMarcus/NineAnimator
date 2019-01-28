@@ -276,7 +276,9 @@ extension AnimeViewController {
         case .episodes:
             let episode = episodeLink(for: indexPath)!
             
-            if let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
+            // Use detailed view when possible and enabled
+            if NineAnimator.default.user.showEpisodeDetails,
+                let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
                 cell.makeThemable()
                 cell.episodeInformation = detailedEpisodeInfo

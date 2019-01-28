@@ -45,6 +45,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
     
+    @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
@@ -82,6 +84,10 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBAction private func onShowStreamsInNotificationDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.notificationShowStreams = sender.isOn
+    }
+    
+    @IBAction private func onShowEpisodeDetailsDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.showEpisodeDetails = sender.isOn
     }
     
     @IBAction private func onDoneButtonClicked(_ sender: Any) {
@@ -201,6 +207,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     private func updatePreferencesUI() {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
+        animeShowEpisodeDetailsSwitch.setOn(NineAnimator.default.user.showEpisodeDetails, animated: true)
         detectClipboardLinksSwitch.setOn(NineAnimator.default.user.detectsPasteboardLinks, animated: true)
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
