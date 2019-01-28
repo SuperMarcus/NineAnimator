@@ -37,7 +37,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     }
     
     func navigationController(_ navigationController: UINavigationController,
-                              willShow viewController: UIViewController,
+                              didShow viewController: UIViewController,
                               animated: Bool) {
         // Disable shadow image and set to not translucent when trying to blend in
         // the navigation bar and the contents
