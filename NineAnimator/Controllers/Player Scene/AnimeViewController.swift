@@ -118,7 +118,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var informationCell: AnimeDescriptionTableViewCell?
     
-    private var selectedEpisodeCell: EpisodeTableViewCell?
+    private var selectedEpisodeCell: UITableViewCell?
     
     private var episodeRequestTask: NineAnimatorAsyncTask?
     
@@ -270,12 +270,7 @@ extension AnimeViewController {
             }
             return cell
         case 1:
-            let episodes = anime!.episodes[server!]!
-            var episode = episodes[indexPath.item]
-            
-            if NineAnimator.default.user.episodeListingOrder == .reversed {
-                episode = episodes[episodes.count - indexPath.item - 1]
-            }
+            let episode = episodeLink(for: indexPath)!
             
             if let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
@@ -300,17 +295,28 @@ extension AnimeViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? EpisodeTableViewCell else {
-            Log.error("Cell selection event received (from %@) when the cell selected is not an EpisodeTableViewCell", indexPath)
+        guard indexPath.section == 1 else {
+            tableView.deselectSelectedRow()
+            return Log.info("A non-episode cell has been selected")
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath), cell != selectedEpisodeCell else {
+            Log.info("A cell is either tapped twice or does not exist. Peacefully aborting task.")
+            episodeRequestTask?.cancel()
+            episodeRequestTask = nil
+            selectedEpisodeCell = nil
+            tableView.deselectSelectedRow()
             return
         }
         
-        guard cell != selectedEpisodeCell,
-            let episodeLink = cell.episodeLink
-            else { return }
+        guard let episodeLink = episodeLink(for: indexPath) else {
+            tableView.deselectSelectedRow()
+            return Log.error("Unable to retrive episode link from pool")
+        }
         
         selectedEpisodeCell = cell
         self.episodeLink = episodeLink
+        
         retriveAndPlay()
     }
     
@@ -324,6 +330,21 @@ extension AnimeViewController {
         animeHeadingView.update(animated: true) {
             $0.selectedServerName = self.anime!.servers[server]
         }
+    }
+    
+    private func episodeLink(for indexPath: IndexPath) -> EpisodeLink? {
+        guard let server = server,
+            let episodes = anime?.episodes[server] else {
+                return nil
+        }
+        
+        var episode = episodes[indexPath.item]
+        
+        if NineAnimator.default.user.episodeListingOrder == .reversed {
+            episode = episodes[episodes.count - indexPath.item - 1]
+        }
+        
+        return episode
     }
 }
 
@@ -373,7 +394,11 @@ extension AnimeViewController {
         episodeRequestTask = anime!.episode(with: episodeLink) {
             [weak self] episode, error in
             guard let self = self else { return }
-            guard let episode = episode else { return Log.error(error) }
+            guard let episode = episode else {
+                clearSelection()
+                self.presentError(error!)
+                return Log.error(error)
+            }
             self.episode = episode
             
             //Save episode to last playback
@@ -539,5 +564,14 @@ extension AnimeViewController {
     private func prepareContinuity() {
         guard let anime = anime else { return }
         userActivity = Continuity.activity(for: anime)
+    }
+}
+
+// MARK: - Error handling
+extension AnimeViewController {
+    private func presentError(_ error: Error) {
+        let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

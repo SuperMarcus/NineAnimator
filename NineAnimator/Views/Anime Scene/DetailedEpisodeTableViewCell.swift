@@ -38,6 +38,9 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     
     var episodeInformation: Anime.AdditionalEpisodeLinkInformation? {
         didSet {
+            // Remove observation first
+            NotificationCenter.default.removeObserver(self)
+            
             guard let info = episodeInformation else { return }
             
             // Title
@@ -67,13 +70,22 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
             // Progress
             
             progress = NineAnimator.default.user.playbackProgress(for: info.parent)
+            
+            // Listen to progress updates
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(onProgressUpdate),
+                name: .playbackProgressDidUpdate,
+                object: nil
+            )
         }
     }
     
     private var progress: Float {
         get { return episodePlaybackProgressView.progress }
         set {
-            hideProgressViewConstraint.priority = (newValue > 0.1) ? .defaultLow : .defaultHigh
+            hideProgressViewConstraint.priority = (newValue > 0.01) ? .defaultLow : .defaultHigh
             setNeedsLayout()
             
             episodePlaybackProgressView.progress = newValue
@@ -86,4 +98,27 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
                 "\(formatter.string(from: NSNumber(value: 1.0 - newValue)) ?? "Unknown percentage") left"
         }
     }
+    
+    @objc private func onProgressUpdate() {
+        guard let info = episodeInformation else { return }
+        
+        let currentProgress = NineAnimator.default.user.playbackProgress(for: info.parent)
+        
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            
+            if self.progress == 0.0 && currentProgress > self.progress {
+                UIView.animate(withDuration: 0.1) {
+                    [weak self] in
+                    guard let self = self else { return }
+                    self.progress = currentProgress
+                    self.setNeedsLayout()
+                    self.onStateChange?(self)
+                }
+            } else { self.progress = currentProgress }
+        }
+    }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
