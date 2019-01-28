@@ -57,6 +57,10 @@ class AnimeSynopsisCellTableViewCell: UITableViewCell {
     override func updateConstraints() {
         super.updateConstraints()
         synopsisContainerConstraint.priority = state == .miniaturized ? .defaultHigh : .defaultLow
+        
+        // Hides expand/collapse button when synopsis is short enough
+        expandCollapseButton.isHidden = (synopsisContainerTextView.sizeThatFits(UIView.layoutFittingCompressedSize)
+            .height < synopsisContainerConstraint.constant)
     }
     
     @IBAction private func onExpandButtonTapped(_ sender: Any) {

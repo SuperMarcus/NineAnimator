@@ -20,8 +20,10 @@
 import Foundation
 import SwiftSoup
 
+// ---- TO BE FIXED ----
 // swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
+// swiftlint:disable function_parameter_count
 class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
     
@@ -136,6 +138,23 @@ class NASourceMasterAnime: BaseSource, Source {
                 return handleError("no episodes entry found")
             }
             
+            let additionalAttributes: [Anime.AttributeKey: Any] = {
+                var dict = [Anime.AttributeKey: Any]()
+                
+                dict[.airDate] = "\(animeInfo["started_airing_date"] as? String ?? "?") - \(animeInfo["finished_airing_date"] as? String ?? "?")"
+                
+                if let score = animeInfo["score"] as? Double {
+                    dict[.rating] = Float(score)
+                    dict[.ratingScale] = Float(5.0)
+                }
+                
+                return dict
+            }()
+            
+            let synonyms = ((response["synonyms"] as? [Any]) ?? []).compactMap {
+                ($0 as? NSDictionary)?.value(forKey: "title") as? String
+            }.joined(separator: "; ")
+            
             let parentLink = AnimeLink(
                 title: animeTitle,
                 link: self.anime(slug: slug),
@@ -156,7 +175,9 @@ class NASourceMasterAnime: BaseSource, Source {
                 withFirstEpisodeLink: firstEpisode,
                 parent: parentLink,
                 synopsis: animeSynopsis,
+                synonyms: synonyms,
                 episodes: episodes,
+                attributes: additionalAttributes,
                 handler
             ))
         })
@@ -190,13 +211,17 @@ class NASourceMasterAnime: BaseSource, Source {
     private func assembleAnime(withFirstEpisodeLink link: EpisodeLink,
                                parent parentLink: AnimeLink,
                                synopsis: String,
+                               synonyms: String,
                                episodes: [EpisodeLink],
+                               attributes: [Anime.AttributeKey: Any],
                                _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
         return self.episodeInfo(from: link) { info, error in
             guard let hosts = info?.availableHosts
                 else { return handler(nil, error) }
             handler(Anime(
                 parentLink,
+                alias: synonyms,
+                additionalAttributes: attributes,
                 description: synopsis,
                 on: hosts,
                 episodes: Dictionary(uniqueKeysWithValues: hosts.map {
