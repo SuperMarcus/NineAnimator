@@ -80,9 +80,16 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 }
                 
                 // Push server updates to the heading view
-                self.animeHeadingView.update(animated: true) {
+                self.animeHeadingView.update(animated: true) { [weak self] in
+                    guard let self = self else { return }
+                    
                     $0.selectedServerName = anime.servers[self.server!]
                     $0.anime = anime
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.setNeedsLayout()
+                    self.tableView.reloadSections(sectionsNeededReloading, with: .automatic)
+                    self.tableView.endUpdates()
                 }
                 
                 // Update the AnimeLink in the info cell so we get the correct poster displayed
@@ -92,8 +99,6 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 // Update history
                 NineAnimator.default.user.entering(anime: anime.link)
                 NineAnimator.default.user.push()
-                
-                self.tableView.reloadSections(sectionsNeededReloading, with: .fade)
                 
                 // Setup userActivity
                 self.prepareContinuity()
@@ -135,11 +140,13 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         // Not updating title anymore because we are showing anime name in the heading view
 //        title = link.title
         
-        // Set animeLink property of the heading view so proper anime information is displayed
-        animeHeadingView.animeLink = link
-        
         // Fetch anime if anime does not exists
         guard anime == nil else { return }
+        
+        // Set animeLink property of the heading view so proper anime information is displayed
+        animeHeadingView.animeLink = link
+        animeHeadingView.sizeToFit()
+        view.setNeedsLayout()
         
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in

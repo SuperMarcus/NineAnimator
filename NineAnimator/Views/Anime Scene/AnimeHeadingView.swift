@@ -42,9 +42,6 @@ class AnimeHeadingView: UIView {
             serverInformationRightLayoutConstraint.priority = NineAnimator.default.user.isWatching(anime: animeLink) ?
                 .defaultHigh : .defaultLow
             
-            // Hide extra information container
-            extraInformationContainer.alpha = 0.0
-            
             // Layout
             setNeedsLayout()
             sizeToFit()
@@ -57,9 +54,6 @@ class AnimeHeadingView: UIView {
             guard let anime = anime else { return }
             animeLink = anime.link // Update poster and title fetched from the new anime link
             animeAliasLabel.text = anime.alias
-            
-            // Show extra information container
-            extraInformationContainer.alpha = 1.0
             
             if let ratings = anime.additionalAttributes[.rating] as? Float,
                 let ratingsScale = anime.additionalAttributes[.ratingScale] as? Float {
@@ -145,8 +139,9 @@ class AnimeHeadingView: UIView {
             }
         }
     }
-//
-//    override func sizeThatFits(_ size: CGSize) -> CGSize {
-//        return systemLayoutSizeFitting(CGSize(width: size.width, height: UIView.layoutFittingCompressedSize.height))
-//    }
+
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        let fitSize = systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        return CGSize(width: size.width, height: fitSize.height)
+    }
 }

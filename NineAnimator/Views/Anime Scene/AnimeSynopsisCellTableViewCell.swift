@@ -38,8 +38,8 @@ class AnimeSynopsisCellTableViewCell: UITableViewCell {
     var synopsisText: String? {
         get { return synopsisContainerTextView.text }
         set {
-            guard let text = newValue else { return }
-            synopsisContainerTextView.text = text
+            guard let text = newValue?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+            synopsisContainerTextView.text = text.isEmpty ? "No synopsis found for this anime" : text
         }
     }
     
