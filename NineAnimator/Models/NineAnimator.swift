@@ -27,6 +27,7 @@ enum NineAnimatorError: Error, CustomStringConvertible {
     case responseError(String)
     case providerError(String)
     case searchError(String)
+    case authenticationRequiredError(String, URL?)
     case decodeError
     case lastItemInQueueError
     
@@ -38,6 +39,9 @@ enum NineAnimatorError: Error, CustomStringConvertible {
         case .providerError(let errorString): return "Provider Error: \(errorString)"
         case .searchError(let errorString): return "Search Error: \(errorString)"
         case .lastItemInQueueError: return "The selected item is the last item in the queue."
+        case let .authenticationRequiredError(message, url):
+            let urlDescription = url == nil ? "" : " (\(url!))"
+            return "Authentication required: \(message)\(urlDescription)"
         }
     }
 }

@@ -150,7 +150,13 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
-            guard let anime = anime else { return Log.error(error) }
+            guard let anime = anime else {
+                Log.error(error)
+                self?.presentError(error!) {
+                    if !$0 { self?.navigationController?.popViewController(animated: true) }
+                }
+                return
+            }
             self?.anime = anime
             // Initiate playback if episodeLink is set
             if let episodeLink = self?.episodeLink {
@@ -569,9 +575,41 @@ extension AnimeViewController {
 
 // MARK: - Error handling
 extension AnimeViewController {
-    private func presentError(_ error: Error) {
+    /// Present error
+    ///
+    /// - parameter error: The error to present
+    /// - parameter completionHandler: Called when the user selected an option.
+    ///             `true` if the user wants to proceed.
+    ///
+    private func presentError(_ error: Error, completionHandler: ((Bool) -> Void)? = nil) {
+        if let error = error as? NineAnimatorError {
+            switch error {
+            // If the error is an authentication error with authentication url, try access the url
+            case let .authenticationRequiredError(message, authenticationURL):
+                guard let authenticationURL = authenticationURL else { break }
+                
+                let authenticationAlert = UIAlertController(title: "Authentication Required", message: message, preferredStyle: .alert)
+                
+                authenticationAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel) {
+                    _ in completionHandler?(false)
+                })
+                
+                authenticationAlert.addAction(UIAlertAction(title: "Open", style: .default) {
+                    [weak self] _ in
+                    let authenticationController = SFSafariViewController(url: authenticationURL)
+                    self?.present(authenticationController, animated: true) {
+                        // Call completion handler with true
+                        completionHandler?(true)
+                    }
+                })
+                
+                return
+            default: break
+            }
+        }
+        
         let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true) { completionHandler?(false) }
     }
 }

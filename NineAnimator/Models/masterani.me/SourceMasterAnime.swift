@@ -307,7 +307,7 @@ class NASourceMasterAnime: BaseSource, Source {
                 let videoSourcesRegex = try NSRegularExpression(pattern: "var\\s*videos\\s*=\\s*(\\[[^\\]]+\\])", options: [.caseInsensitive])
                 
                 guard let sourceMatch = videoSourcesRegex.matches(in: response, options: [], range: response.matchingRange).first else {
-                    throw NineAnimatorError.responseError("No video source found.")
+                    throw NineAnimatorError.authenticationRequiredError("Cannot find a video source on masterani.me: This is most likely due to the presence of a CAPTCHA. You may complete the CAPTCHA in the opening link. Tap done when you are finished, after which NineAnimator will attempt to load the resource again.", URL(string: "\(endpoint)\(path)"))
                 }
                 
                 guard let sourceJsonData = response[sourceMatch.range(at: 1)].data(using: .utf8) else {
