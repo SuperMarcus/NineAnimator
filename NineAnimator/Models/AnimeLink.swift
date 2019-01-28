@@ -88,13 +88,22 @@ extension AnimeLink: Equatable {
     }
 }
 
-struct EpisodeLink: Equatable, Codable {
+struct EpisodeLink: Equatable, Codable, Hashable {
     let identifier: Anime.EpisodeIdentifier
     let name: String
     let server: Anime.ServerIdentifier
     let parent: AnimeLink
 }
 
+// Hashable
+extension EpisodeLink {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(identifier)
+        hasher.combine(parent)
+    }
+}
+
+// Equatable
 extension EpisodeLink {
     static func == (lhs: EpisodeLink, rhs: EpisodeLink) -> Bool {
         return lhs.identifier == rhs.identifier

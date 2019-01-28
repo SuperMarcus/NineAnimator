@@ -260,7 +260,7 @@ extension AnimeViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis") as! AnimeSynopsisCellTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis", for: indexPath) as! AnimeSynopsisCellTableViewCell
             cell.synopsisText = anime?.description
             cell.stateChangeHandler = {
                 [weak tableView] _ in
@@ -270,7 +270,6 @@ extension AnimeViewController {
             }
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as! EpisodeTableViewCell
             let episodes = anime!.episodes[server!]!
             var episode = episodes[indexPath.item]
             
@@ -278,10 +277,23 @@ extension AnimeViewController {
                 episode = episodes[episodes.count - indexPath.item - 1]
             }
             
-            cell.makeThemable()
-            cell.episodeLink = episode
-            
-            return cell
+            if let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
+                cell.makeThemable()
+                cell.episodeInformation = detailedEpisodeInfo
+                cell.onStateChange = {
+                    [weak self] _ in
+                    self?.tableView.beginUpdates()
+                    self?.tableView.layoutIfNeeded()
+                    self?.tableView.endUpdates()
+                }
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode", for: indexPath) as! EpisodeTableViewCell
+                cell.makeThemable()
+                cell.episodeLink = episode
+                return cell
+            }
         default:
             fatalError("Anime view don't have section \(indexPath.section)")
         }

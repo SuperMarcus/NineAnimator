@@ -122,6 +122,11 @@ extension Theme {
         if let view = view as? UITextView {
             view.textColor = theme.primaryText
         }
+        
+        if let view = view as? UIProgressView {
+            view.progressTintColor = theme.tint
+            view.trackTintColor = theme.secondaryText
+        }
     }
 }
 

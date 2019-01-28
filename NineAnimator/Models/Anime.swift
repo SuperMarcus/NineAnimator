@@ -40,6 +40,7 @@ struct Anime {
     let episodes: EpisodesCollection
     let description: String
     let alias: String
+    let episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation]
     
     let additionalAttributes: [AttributeKey: Any]
     
@@ -52,7 +53,8 @@ struct Anime {
          additionalAttributes: [AttributeKey: Any] = [:],
          description: String,
          on servers: [ServerIdentifier: String],
-         episodes: [ServerIdentifier: EpisodeLinksCollection]) {
+         episodes: [ServerIdentifier: EpisodeLinksCollection],
+         episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation] = [:]) {
         self.link = link
         self.servers = servers
         self.episodes = episodes
@@ -60,10 +62,29 @@ struct Anime {
         self.description = description
         self.alias = alias
         self.additionalAttributes = additionalAttributes
+        self.episodesAttributes = episodesAttributes
     }
     
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         return source.episode(from: link, with: self, handler)
+    }
+}
+
+extension Anime {
+    /// A set of optional information to the EpisodeLink.
+    ///
+    /// Attached to the Anime object to provide additional
+    /// information for EpisodeLink struct
+    struct AdditionalEpisodeLinkInformation {
+        var parent: EpisodeLink
+        
+        var synopsis: String?
+        
+        var airDate: String?
+        
+        var episodeNumber: Int?
+        
+        var title: String?
     }
 }
 

@@ -162,7 +162,7 @@ class NASourceMasterAnime: BaseSource, Source {
                 source: self
             )
             
-            let episodes: [EpisodeLink] = self.episodes(from: animeEpisodes, with: parentLink)
+            let episodes = self.episodes(from: animeEpisodes, with: parentLink)
             
             guard let firstEpisode = episodes.first else {
                 return handleError("no episodes found")
@@ -172,11 +172,12 @@ class NASourceMasterAnime: BaseSource, Source {
             Log.debug("Requesting availble streaming servers")
             
             task.add(self.assembleAnime(
-                withFirstEpisodeLink: firstEpisode,
+                withFirstEpisodeLink: firstEpisode.parent,
                 parent: parentLink,
                 synopsis: animeSynopsis,
                 synonyms: synonyms,
                 episodes: episodes,
+                
                 attributes: additionalAttributes,
                 handler
             ))
@@ -185,7 +186,7 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     // Parse the episodes available from the response json object
-    private func episodes(from animeEpisodes: [NSDictionary], with parentLink: AnimeLink) -> [EpisodeLink] {
+    private func episodes(from animeEpisodes: [NSDictionary], with parentLink: AnimeLink) -> [Anime.AdditionalEpisodeLinkInformation] {
         return animeEpisodes.compactMap { episode in
             guard let episodeInfo = episode["info"] as? NSDictionary,
                 // let episodeIdentifier = episodeInfo["id"] as? Int,
@@ -198,11 +199,18 @@ class NASourceMasterAnime: BaseSource, Source {
             if let episodeTitle = episodeInfo["title"] as? String {
                 episodeName = "\(episodeName) - \(episodeTitle)"
             }
-            return EpisodeLink(
+            let episode = EpisodeLink(
                 identifier: "\(animeIdentifier):\(episodeNumber)",
                 name: episodeName,
                 server: "Masterani.me",
                 parent: parentLink
+            )
+            return Anime.AdditionalEpisodeLinkInformation(
+                parent: episode,
+                synopsis: episodeInfo["description"] as? String,
+                airDate: episodeInfo["aired"] as? String,
+                episodeNumber: Int(episodeNumber),
+                title: episodeInfo["title"] as? String
             )
         }
     }
@@ -212,7 +220,7 @@ class NASourceMasterAnime: BaseSource, Source {
                                parent parentLink: AnimeLink,
                                synopsis: String,
                                synonyms: String,
-                               episodes: [EpisodeLink],
+                               episodes: [Anime.AdditionalEpisodeLinkInformation],
                                attributes: [Anime.AttributeKey: Any],
                                _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
         return self.episodeInfo(from: link) { info, error in
@@ -228,13 +236,14 @@ class NASourceMasterAnime: BaseSource, Source {
                     host in (
                         host.key,
                         episodes.map { EpisodeLink(
-                            identifier: $0.identifier,
-                            name: $0.name,
+                            identifier: $0.parent.identifier,
+                            name: $0.parent.name,
                             server: host.key,
-                            parent: $0.parent)
+                            parent: $0.parent.parent)
                         }
                     )
-                })
+                }),
+                episodesAttributes: Dictionary(uniqueKeysWithValues: episodes.map { ($0.parent, $0) })
             ), nil)
         }
     }
