@@ -60,7 +60,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                let sectionsNeededReloading: IndexSet = [0, 1]
+                let sectionsNeededReloading = Section.indexSet(.all)
                 
                 if self.anime == nil && oldValue != nil {
                     self.tableView.deleteSections(sectionsNeededReloading, with: .fade)
@@ -246,26 +246,24 @@ extension AnimeViewController {
 // MARK: - Table view data source
 extension AnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return [Section].all.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
+        switch Section(rawValue: section)! {
+        case .synopsis:
             return anime == nil ? 0 : 1
-        case 1:
+        case .episodes:
             guard let serverIdentifier = server,
                 let episodes = anime?.episodes[serverIdentifier]
                 else { return 0 }
             return episodes.count
-        default:
-            return 0
         }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
+        switch Section(rawValue: indexPath.section)! {
+        case .synopsis:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis", for: indexPath) as! AnimeSynopsisCellTableViewCell
             cell.synopsisText = anime?.description
             cell.stateChangeHandler = {
@@ -275,7 +273,7 @@ extension AnimeViewController {
                 tableView?.endUpdates()
             }
             return cell
-        case 1:
+        case .episodes:
             let episode = episodeLink(for: indexPath)!
             
             if let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
@@ -295,13 +293,11 @@ extension AnimeViewController {
                 cell.episodeLink = episode
                 return cell
             }
-        default:
-            fatalError("Anime view don't have section \(indexPath.section)")
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else {
+        guard indexPath.section == Section.episodes else {
             tableView.deselectSelectedRow()
             return Log.info("A non-episode cell has been selected")
         }
@@ -328,7 +324,7 @@ extension AnimeViewController {
     
     func didSelectServer(_ server: Anime.ServerIdentifier) {
         self.server = server
-        tableView.reloadSections([1], with: .automatic)
+        tableView.reloadSections(Section.indexSet(.episodes), with: .automatic)
         
         NineAnimator.default.user.recentServer = server
         
@@ -612,4 +608,42 @@ extension AnimeViewController {
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         present(alert, animated: true) { completionHandler?(false) }
     }
+}
+
+// MARK: - Helpers and stubs
+fileprivate extension AnimeViewController {
+    // Using this enum to remind me to implement stuff when adding new sections...
+    fileprivate enum Section: Int, Equatable {
+        case synopsis = 0
+        
+        case episodes = 1
+        
+        subscript(_ item: Int) -> IndexPath {
+            return IndexPath(item: item, section: self.rawValue)
+        }
+        
+        static func indexSet(_ sections: [Section]) -> IndexSet {
+            return IndexSet(sections.map { $0.rawValue })
+        }
+        
+        static func indexSet(_ sections: Section...) -> IndexSet {
+            return IndexSet(sections.map { $0.rawValue })
+        }
+        
+        static func == (_ lhs: Section, _ rhs: Section) -> Bool {
+            return lhs.rawValue == rhs.rawValue
+        }
+        
+        static func == (_ lhs: Int, _ rhs: Section) -> Bool {
+            return lhs == rhs.rawValue
+        }
+        
+        static func == (_ lhs: Section, _ rhs: Int) -> Bool {
+            return lhs.rawValue == rhs
+        }
+    }
+}
+
+fileprivate extension Array where Element == AnimeViewController.Section {
+    fileprivate static let all: [AnimeViewController.Section] = [ .synopsis, .episodes ]
 }
