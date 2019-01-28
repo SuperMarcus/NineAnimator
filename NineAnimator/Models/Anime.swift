@@ -33,17 +33,23 @@ struct Anime {
     typealias AnimeIdentifier = String
     typealias EpisodeLinksCollection = [EpisodeLink]
     typealias EpisodesCollection = [ServerIdentifier: EpisodeLinksCollection]
+    typealias AttributeKey = String
     
     let link: AnimeLink
     let servers: [ServerIdentifier: String]
     let episodes: EpisodesCollection
     let description: String
+    let alias: String
+    
+    let additionalAttributes: [AttributeKey: Any]
     
     var currentServer: ServerIdentifier
     
     var source: Source { return link.source }
     
     init(_ link: AnimeLink,
+         alias: String = "",
+         additionalAttributes: [AttributeKey: Any] = [:],
          description: String,
          on servers: [ServerIdentifier: String],
          episodes: [ServerIdentifier: EpisodeLinksCollection]) {
@@ -52,11 +58,21 @@ struct Anime {
         self.episodes = episodes
         self.currentServer = servers.first!.key
         self.description = description
+        self.alias = alias
+        self.additionalAttributes = additionalAttributes
     }
     
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         return source.episode(from: link, with: self, handler)
     }
+}
+
+extension Anime.AttributeKey {
+    static let rating: Anime.AttributeKey = "Ratings"
+    
+    static let ratingScale: Anime.AttributeKey = "Ratings Scale"
+    
+    static let airDate: Anime.AttributeKey = "Air Date"
 }
 
 extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.EpisodeLinksCollection {

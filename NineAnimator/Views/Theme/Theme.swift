@@ -118,6 +118,10 @@ extension Theme {
         if let view = view as? UIActivityIndicatorView {
             view.style = theme.activityIndicatorStyle
         }
+        
+        if let view = view as? UITextView {
+            view.textColor = theme.primaryText
+        }
     }
 }
 

@@ -260,4 +260,7 @@ Most of the resources are obtained from the open domains with their respective a
 
 - Cloud Download Icon by [Storm Icons](https://thenounproject.com/stormicons)
 - [Google Cast Icon](https://commons.wikimedia.org/wiki/File:Chromecast_cast_button_icon.svg): uploaded to Wikimedia Commons by Y2kcrazyjoker4
-- [Media Control Icons](https://icons8.com/icon/pack/media-controls/ios) from [Icons8](https://icons8.com/).
+- [Media Control Icons](https://icons8.com/icon/pack/media-controls/ios) from [Icons8](https://icons8.com/)
+- [Details Icon](https://thenounproject.com/search/?q=detail&i=408469) by [Viktor Vorobyev](https://thenounproject.com/vityavorobyev/)
+- [Action Icon](https://thenounproject.com/search/?q=share&i=1058858) by [Тимур Минвалеев](https://thenounproject.com/timur.minvaleev/)
+- [Server Icon](https://thenounproject.com/search/?q=server&i=78508) by [Hans Paul Mösl Junior](https://thenounproject.com/hansmosl)

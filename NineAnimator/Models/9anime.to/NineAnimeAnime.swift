@@ -59,12 +59,43 @@ extension NineAnimeSource {
             
             let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
             let animePosterURL = URL(string: try bowl.select("div.thumb>img").attr("src")) ?? link.image
-            let animeAttributes = (try? zip(
-                try bowl.select("div.info>div.row dt").array(),
-                try bowl.select("div.info>div.row dd").array()
-            ).map { "・ \(try $0.0.text()) \(try $0.1.text())\n" }.joined()) ?? "No Attributes"
+            let animeAttributesRaw: [String: String] = {
+                do {
+                    let zippedSequence = zip(
+                        try bowl.select("div.info>div.row dt").array().map { try $0.text() },
+                        try bowl.select("div.info>div.row dd").array().map { try $0.text() }
+                    )
+                return Dictionary(uniqueKeysWithValues: zippedSequence)
+                } catch { return [:] }
+            }()
+//            let animeAttributesString = animeAttributesRaw.map { "・ \($0.0) \($0.1)\n" }.joined()
+            let animeTitle = try bowl.select(".info .title").text()
+            let animeAlias = (try? bowl.select(".info .alias").text()) ?? ""
+            
+            var animeAttributes = [Anime.AttributeKey: Any]()
+            
+            for (key, value) in animeAttributesRaw {
+                switch key.lowercased() {
+                case "rating:":
+                    let labels = value.split(separator: "/")
+                    guard let ratingString = labels.first?.trimmingCharacters(in: .whitespacesAndNewlines),
+                        let rating = Float(String(ratingString)) else { continue }
+                    animeAttributes[.rating] = rating
+                    animeAttributes[.ratingScale] = Float(10.0)
+                case "date aired:":
+                    animeAttributes[.airDate] = value.trimmingCharacters(in: .whitespacesAndNewlines)
+                default: continue
+                }
+            }
             
             let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
+            
+            let reconstructedLink = AnimeLink(
+                title: animeTitle,
+                link: link.link,
+                image: animePosterURL,
+                source: link.source
+            )
             
             Log.info("Retrived information for %@", link)
             Log.debug("- Alias: %@", alias ?? "None")
@@ -107,19 +138,17 @@ extension NineAnimeSource {
                             EpisodeLink(identifier: try $0.attr("data-id"),
                                         name: try $0.text(),
                                         server: serverIdentifier,
-                                        parent: link)
+                                        parent: reconstructedLink)
                         }
                         Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
                     }
                     
                     // Reconstruct the AnimeLink so we get the correct URLs and titles
-                    handler(Anime(AnimeLink(
-                                      title: link.title,
-                                      link: link.link,
-                                      image: animePosterURL,
-                                      source: link.source
-                                  ),
-                                  description: "\(animeAttributes)\n\(animeDescription)",
+                    handler(Anime(reconstructedLink,
+                                  alias: animeAlias,
+                                  additionalAttributes: animeAttributes,
+//                                  description: "\(animeAttributesString)\n\(animeDescription)",
+                                  description: animeDescription,
                                   on: animeServers,
                                   episodes: animeEpisodes), nil)
                 } catch {

@@ -39,7 +39,7 @@ import WebKit
  4. Initialize the `AnimeViewController` with either `setPresenting(_: AnimeLink)` or
     `setPresenting(episode: EpisodeLink)`.
  */
-class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate {
+class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate, BlendInViewController {
     // MARK: - Set either one of the following item to initialize the anime view
     private var animeLink: AnimeLink?
     
@@ -52,20 +52,15 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         }
     }
     
-    // MARK: - Managed by AnimeViewController
-    @IBOutlet private weak var serverSelectionButton: UIBarButtonItem!
+    @IBOutlet private weak var animeHeadingView: AnimeHeadingView!
     
-    @IBOutlet private weak var notificationToggleButton: UIBarButtonItem!
+    @IBOutlet private weak var moreOptionsButton: UIButton!
     
     private var anime: Anime? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
-                self.informationCell?.animeDescription = self.anime?.description
-                
-                self.updateNotificationToggle()
-                
-                let sectionsNeededReloading: IndexSet = [1]
+                let sectionsNeededReloading: IndexSet = [0, 1]
                 
                 if self.anime == nil && oldValue != nil {
                     self.tableView.deleteSections(sectionsNeededReloading, with: .fade)
@@ -73,6 +68,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 
                 guard let anime = self.anime else { return }
                 
+                // Choose a server
                 if self.server == nil {
                     if let recentlyUsedServer = NineAnimator.default.user.recentServer,
                         anime.servers[recentlyUsedServer] != nil {
@@ -83,8 +79,11 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                     }
                 }
                 
-                self.serverSelectionButton.title = anime.servers[self.server!]
-                self.serverSelectionButton.isEnabled = true
+                // Push server updates to the heading view
+                self.animeHeadingView.update(animated: true) {
+                    $0.selectedServerName = anime.servers[self.server!]
+                    $0.anime = anime
+                }
                 
                 // Update the AnimeLink in the info cell so we get the correct poster displayed
                 self.animeLink = anime.link
@@ -94,11 +93,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 NineAnimator.default.user.entering(anime: anime.link)
                 NineAnimator.default.user.push()
                 
-                if oldValue == nil {
-                    self.tableView.insertSections(sectionsNeededReloading, with: .fade)
-                } else {
-                    self.tableView.reloadSections(sectionsNeededReloading, with: .fade)
-                }
+                self.tableView.reloadSections(sectionsNeededReloading, with: .fade)
                 
                 // Setup userActivity
                 self.prepareContinuity()
@@ -137,15 +132,14 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         
         guard let link = animeLink else { return }
         
-        //Update anime title
-        title = link.title
+        // Not updating title anymore because we are showing anime name in the heading view
+//        title = link.title
+        
+        // Set animeLink property of the heading view so proper anime information is displayed
+        animeHeadingView.animeLink = link
         
         // Fetch anime if anime does not exists
         guard anime == nil else { return }
-        serverSelectionButton.title = "Select Server"
-        serverSelectionButton.isEnabled = false
-        
-        notificationToggleButton.isEnabled = false
         
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
@@ -239,13 +233,13 @@ extension AnimeViewController {
 // MARK: - Table view data source
 extension AnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return anime == nil ? 1 : 2
+        return 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 1
+            return anime == nil ? 0 : 1
         case 1:
             guard let serverIdentifier = server,
                 let episodes = anime?.episodes[serverIdentifier]
@@ -259,10 +253,14 @@ extension AnimeViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.description") as! AnimeDescriptionTableViewCell
-            cell.link = animeLink
-            cell.animeDescription = anime?.description
-            informationCell = cell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis") as! AnimeSynopsisCellTableViewCell
+            cell.synopsisText = anime?.description
+            cell.stateChangeHandler = {
+                [weak tableView] _ in
+                tableView?.beginUpdates()
+                tableView?.setNeedsLayout()
+                tableView?.endUpdates()
+            }
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode") as! EpisodeTableViewCell
@@ -299,9 +297,14 @@ extension AnimeViewController {
     
     func didSelectServer(_ server: Anime.ServerIdentifier) {
         self.server = server
-        NineAnimator.default.user.recentServer = server
         tableView.reloadSections([1], with: .automatic)
-        serverSelectionButton.title = anime!.servers[server]
+        
+        NineAnimator.default.user.recentServer = server
+        
+        // Update headings
+        animeHeadingView.update(animated: true) {
+            $0.selectedServerName = self.anime!.servers[server]
+        }
     }
 }
 
@@ -323,53 +326,15 @@ extension AnimeViewController {
         present(activityViewController, animated: true)
     }
     
-    @IBAction private func onServerButtonTapped(_ sender: Any) {
-        let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
-        
-        if let popover = alertView.popoverPresentationController {
-            popover.barButtonItem = serverSelectionButton
-            popover.permittedArrowDirections = .up
-        }
-        
-        for server in anime!.servers {
-            let action = UIAlertAction(title: server.value, style: .default) {
-                [weak self] _ in
-                self?.didSelectServer(server.key)
+    @IBAction private func onSubscribeButtonTapped(_ sender: Any) {
+        animeHeadingView.update(animated: true) {
+            [weak self] _ in
+            if let anime = self?.anime {
+                NineAnimator.default.user.watch(anime: anime)
+            } else if let animeLink = self?.animeLink {
+                NineAnimator.default.user.watch(uncached: animeLink)
             }
-            if self.server == server.key {
-                action.setValue(true, forKey: "checked")
-            }
-            alertView.addAction(action)
         }
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alertView, animated: true)
-    }
-    
-    @IBAction private func onToggleNotification(_ sender: Any) {
-        guard let anime = anime else { return }
-        
-        if NineAnimator.default.user.isWatching(anime) {
-            NineAnimator.default.user.unwatch(anime: anime)
-        } else {
-            UserNotificationManager.default.requestNotificationPermissions()
-            NineAnimator.default.user.watch(anime: anime)
-        }
-        
-        updateNotificationToggle()
-    }
-    
-    private func updateNotificationToggle() {
-        guard let anime = anime else {
-            notificationToggleButton.isEnabled = false
-            return
-        }
-        notificationToggleButton.isEnabled = true
-        
-        let image = NineAnimator.default.user.isWatching(anime) ? #imageLiteral(resourceName: "Notification Enabled") : #imageLiteral(resourceName: "Notification Disabled")
-        notificationToggleButton.image = image
-        
-        //Remove the notification once the anime is viewed
-        UserNotificationManager.default.clearNotifications(for: anime.link)
     }
 }
 
@@ -434,6 +399,101 @@ extension AnimeViewController {
                 episode.update(progress: 1.0)
             }
         }
+    }
+}
+
+// Show more options
+extension AnimeViewController {
+    @IBAction private func onMoreOptionsButtonTapped(_ sender: Any) {
+        guard let animeLink = animeLink else { return }
+        
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = moreOptionsButton
+        }
+        
+        actionSheet.addAction({
+            let action = UIAlertAction(title: "Select Server", style: .default) {
+                [weak self] _ in self?.showSelectServerDialog()
+            }
+            action.image = #imageLiteral(resourceName: "Server")
+            action.textAlignment = .left
+            return action
+        }())
+        
+        actionSheet.addAction({
+            let action = UIAlertAction(title: "Share", style: .default) {
+                [weak self] _ in self?.showShareDiaglog()
+            }
+            action.image = #imageLiteral(resourceName: "Action")
+            action.textAlignment = .left
+            return action
+        }())
+        
+        actionSheet.addAction({
+            let action = UIAlertAction(title: "Setup Google Cast", style: .default) {
+                _ in CastController.default.presentPlaybackController()
+            }
+            action.image = #imageLiteral(resourceName: "Chromecast Icon")
+            action.textAlignment = .left
+            return action
+        }())
+        
+        if NineAnimator.default.user.isWatching(anime: animeLink) {
+            actionSheet.addAction({
+                let action = UIAlertAction(title: "Unsubscribe", style: .default) {
+                    [weak self] _ in
+                    self?.animeHeadingView.update(animated: true) {
+                        _ in NineAnimator.default.user.unwatch(anime: animeLink)
+                    }
+                }
+                action.image = #imageLiteral(resourceName: "Notification Disabled")
+                action.textAlignment = .left
+                return action
+            }())
+        }
+        
+        actionSheet.addAction({
+            let action = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//            action.textAlignment = .left
+            return action
+        }())
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func showSelectServerDialog() {
+        let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
+        
+        if let popover = alertView.popoverPresentationController {
+            popover.sourceView = moreOptionsButton
+        }
+        
+        for server in anime!.servers {
+            let action = UIAlertAction(title: server.value, style: .default) {
+                [weak self] _ in self?.didSelectServer(server.key)
+            }
+            if self.server == server.key {
+                action.setValue(true, forKey: "checked")
+            }
+            alertView.addAction(action)
+        }
+        
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alertView, animated: true)
+    }
+    
+    private func showShareDiaglog() {
+        guard let link = animeLink else { return }
+        let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
+        
+        if let popover = activityViewController.popoverPresentationController {
+            popover.sourceView = moreOptionsButton
+        }
+        
+        present(activityViewController, animated: true)
     }
 }
 

@@ -19,14 +19,29 @@
 
 import UIKit
 
-class ApplicationNavigationController: UINavigationController, Themable {
+protocol BlendInViewController { }
+
+class ApplicationNavigationController: UINavigationController, UINavigationControllerDelegate, Themable {
     override func viewDidLoad() {
         super.viewDidLoad()
         Theme.provision(self)
+        delegate = self
     }
     
     func theme(didUpdate theme: Theme) {
         navigationBar.barStyle = theme.barStyle
+        navigationBar.barTintColor = theme.background
+        
         view.tintColor = theme.tint
+        view.backgroundColor = theme.background
+    }
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              willShow viewController: UIViewController,
+                              animated: Bool) {
+        // Disable shadow image and set to not translucent when trying to blend in
+        // the navigation bar and the contents
+        navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
+        navigationBar.isTranslucent = !(viewController is BlendInViewController)
     }
 }
