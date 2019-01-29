@@ -589,6 +589,9 @@ extension AnimeViewController {
                     }
                 })
                 
+                // Present the authentication notice to user
+                present(authenticationAlert, animated: true, completion: nil)
+                
                 return
             default: break
             }
