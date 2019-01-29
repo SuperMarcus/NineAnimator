@@ -371,57 +371,117 @@
                                     <outlet property="synopsisContainerTextView" destination="Qx1-Ur-pF8" id="z7V-qd-YfC"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" id="0Uk-RM-2XQ" customClass="EpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="390" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" rowHeight="62" id="0Uk-RM-2XQ" customClass="EpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="390" width="375" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uk-RM-2XQ" id="rZ2-du-FqS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-zz-Opg">
-                                            <rect key="frame" x="16" y="11.5" width="303" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-zz-Opg">
+                                            <rect key="frame" x="16" y="11" width="295" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGg-f0-0vC" customClass="EpisodeAccessoryProcessIndicator" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="327" y="0.0" width="40" height="43.5"/>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="xsl-vp-f0K" userLabel="Anime Progress Container">
+                                            <rect key="frame" x="16" y="32" width="303" height="19"/>
+                                            <subviews>
+                                                <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yQy-Cx-TTd">
+                                                    <rect key="frame" x="0.0" y="8.5" width="120" height="2"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" priority="250" id="5LK-XI-l3X"/>
+                                                        <constraint firstAttribute="width" priority="500" constant="120" id="FP3-TU-YkZ"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </progressView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5w-32-GEP">
+                                                    <rect key="frame" x="128" y="0.0" width="175" height="19"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="g60-2V-VR6"/>
+                                                <constraint firstItem="K5w-32-GEP" firstAttribute="top" secondItem="xsl-vp-f0K" secondAttribute="top" priority="750" id="6DM-zs-Bgg"/>
+                                                <constraint firstItem="yQy-Cx-TTd" firstAttribute="centerY" secondItem="xsl-vp-f0K" secondAttribute="centerY" id="LRM-bD-SAo"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="500" constant="20" id="TmK-s2-c2W"/>
+                                                <constraint firstAttribute="trailing" secondItem="K5w-32-GEP" secondAttribute="trailing" id="ZIP-9D-E5x"/>
+                                                <constraint firstItem="yQy-Cx-TTd" firstAttribute="leading" secondItem="xsl-vp-f0K" secondAttribute="leading" id="gQ6-cG-u1w"/>
+                                                <constraint firstItem="K5w-32-GEP" firstAttribute="leading" secondItem="yQy-Cx-TTd" secondAttribute="trailing" constant="8" id="kOJ-pi-Qz5"/>
+                                                <constraint firstAttribute="bottom" secondItem="K5w-32-GEP" secondAttribute="bottom" priority="750" id="yyj-Y5-O53"/>
                                             </constraints>
+                                        </view>
+                                        <button opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="752" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2n-TQ-hy9" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="319" y="11" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="GLx-iq-W6a"/>
+                                                <constraint firstAttribute="width" secondItem="B2n-TQ-hy9" secondAttribute="height" multiplier="1:1" id="n7q-1R-Ncn"/>
+                                            </constraints>
+                                            <state key="normal" title="Offline Access" image="Cloud Download"/>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="indicatorRadius">
-                                                    <real key="value" value="12"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="size" keyPath="imageSize">
+                                                    <size key="value" width="40" height="40"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="insetSpace">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="strokeWidth">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="centerRectCornerRadius">
+                                                    <real key="value" value="2"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="centerRectWidth">
+                                                    <real key="value" value="8"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </view>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstItem="PGg-f0-0vC" firstAttribute="top" secondItem="rZ2-du-FqS" secondAttribute="top" id="CwN-W5-8oS"/>
-                                        <constraint firstItem="wtb-zz-Opg" firstAttribute="centerY" secondItem="rZ2-du-FqS" secondAttribute="centerY" id="Vcm-Rc-d9q"/>
-                                        <constraint firstAttribute="bottom" secondItem="PGg-f0-0vC" secondAttribute="bottom" id="ZMC-kX-wGb"/>
+                                        <constraint firstItem="B2n-TQ-hy9" firstAttribute="leading" secondItem="wtb-zz-Opg" secondAttribute="trailing" constant="8" id="DPw-UR-5SJ"/>
+                                        <constraint firstItem="wtb-zz-Opg" firstAttribute="top" secondItem="rZ2-du-FqS" secondAttribute="topMargin" id="Src-dC-wl5"/>
+                                        <constraint firstItem="xsl-vp-f0K" firstAttribute="leading" secondItem="rZ2-du-FqS" secondAttribute="leadingMargin" id="bWO-Jz-XSF"/>
+                                        <constraint firstItem="xsl-vp-f0K" firstAttribute="top" secondItem="wtb-zz-Opg" secondAttribute="bottom" id="c61-6G-y8j"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="xsl-vp-f0K" secondAttribute="bottom" id="g64-qb-9DP"/>
+                                        <constraint firstItem="B2n-TQ-hy9" firstAttribute="trailing" secondItem="rZ2-du-FqS" secondAttribute="trailingMargin" id="gSG-1s-BJ7"/>
                                         <constraint firstItem="wtb-zz-Opg" firstAttribute="leading" secondItem="rZ2-du-FqS" secondAttribute="leadingMargin" id="iKo-py-lbE"/>
-                                        <constraint firstItem="PGg-f0-0vC" firstAttribute="leading" secondItem="wtb-zz-Opg" secondAttribute="trailing" constant="8" id="o2Y-sw-0KC"/>
-                                        <constraint firstAttribute="trailing" secondItem="PGg-f0-0vC" secondAttribute="trailing" constant="8" id="saU-Z4-3eB"/>
+                                        <constraint firstItem="B2n-TQ-hy9" firstAttribute="centerY" secondItem="rZ2-du-FqS" secondAttribute="centerY" id="nKb-bE-lcN"/>
+                                        <constraint firstItem="B2n-TQ-hy9" firstAttribute="leading" secondItem="xsl-vp-f0K" secondAttribute="trailing" id="yHR-XU-V13"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
-                                    <outlet property="progressIndicator" destination="PGg-f0-0vC" id="Khz-VT-Hrg"/>
+                                    <outlet property="episodeProgressLabel" destination="K5w-32-GEP" id="Pba-MS-yiR"/>
+                                    <outlet property="episodeProgressView" destination="yQy-Cx-TTd" id="ZLa-ek-MW4"/>
+                                    <outlet property="hidesProgressLayoutConstraint" destination="5LK-XI-l3X" id="jjq-ux-Ans"/>
+                                    <outlet property="offlineAccessButton" destination="B2n-TQ-hy9" id="SMG-lq-rPC"/>
                                     <outlet property="titleLabel" destination="wtb-zz-Opg" id="m3s-nn-kpq"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode.detailed" rowHeight="113" id="aDw-5S-Pc5" customClass="DetailedEpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="434" width="375" height="113"/>
+                                <rect key="frame" x="0.0" y="452" width="375" height="113"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aDw-5S-Pc5" id="Iex-hH-e25">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="112.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-ZF-O7B">
-                                            <rect key="frame" x="16" y="19" width="343" height="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-ZF-O7B">
+                                            <rect key="frame" x="16" y="19" width="295" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -430,8 +490,8 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-eC-jxx">
-                                            <rect key="frame" x="16" y="36" width="343" height="21.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-eC-jxx">
+                                            <rect key="frame" x="16" y="36" width="295" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -486,17 +546,39 @@
                                                 <constraint firstAttribute="trailing" secondItem="GaV-Q7-TKT" secondAttribute="trailing" id="yvP-ad-29A"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsN-rZ-dbV">
+                                            <rect key="frame" x="319" y="11" width="40" height="50.5"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wev-7V-WQ7" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="5.5" width="40" height="40"/>
+                                                    <state key="normal" title="Offline Access" image="Cloud Download"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="Wev-7V-WQ7" firstAttribute="centerY" secondItem="qsN-rZ-dbV" secondAttribute="centerY" id="M3C-Qr-EqP"/>
+                                                <constraint firstItem="Wev-7V-WQ7" firstAttribute="leading" secondItem="qsN-rZ-dbV" secondAttribute="leading" id="RSk-gX-8IH"/>
+                                                <constraint firstAttribute="trailing" secondItem="Wev-7V-WQ7" secondAttribute="trailing" id="eQN-Z0-4oI"/>
+                                                <constraint firstAttribute="width" constant="40" id="trZ-B1-0t8"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="qsN-rZ-dbV" firstAttribute="trailing" secondItem="Iex-hH-e25" secondAttribute="trailingMargin" id="1LK-ru-NpE"/>
                                         <constraint firstItem="REM-IJ-4Ku" firstAttribute="leading" secondItem="K1G-eG-Vkn" secondAttribute="leading" id="254-Kp-baS"/>
-                                        <constraint firstItem="TMT-ZF-O7B" firstAttribute="trailing" secondItem="Iex-hH-e25" secondAttribute="trailingMargin" id="744-2u-VZe"/>
+                                        <constraint firstItem="K1G-eG-Vkn" firstAttribute="top" secondItem="qsN-rZ-dbV" secondAttribute="bottom" id="7HM-pl-yh3"/>
                                         <constraint firstItem="K1G-eG-Vkn" firstAttribute="trailing" secondItem="Iex-hH-e25" secondAttribute="trailingMargin" id="7oc-Wg-O1r"/>
                                         <constraint firstItem="TMT-ZF-O7B" firstAttribute="leading" secondItem="Iex-hH-e25" secondAttribute="leadingMargin" id="EZn-8l-4tU"/>
-                                        <constraint firstItem="K1G-eG-Vkn" firstAttribute="leadingMargin" secondItem="Iex-hH-e25" secondAttribute="leadingMargin" constant="8" id="JrN-i4-SkQ"/>
+                                        <constraint firstItem="qsN-rZ-dbV" firstAttribute="leading" secondItem="TMT-ZF-O7B" secondAttribute="trailing" constant="8" id="KzB-j8-Anf"/>
                                         <constraint firstItem="Vsi-eC-jxx" firstAttribute="top" secondItem="TMT-ZF-O7B" secondAttribute="bottom" constant="1" id="S6V-Jc-73P"/>
+                                        <constraint firstItem="qsN-rZ-dbV" firstAttribute="top" secondItem="Iex-hH-e25" secondAttribute="topMargin" id="TWI-7k-5a4"/>
                                         <constraint firstItem="TMT-ZF-O7B" firstAttribute="top" secondItem="Iex-hH-e25" secondAttribute="topMargin" constant="8" id="bBp-IJ-Mf3"/>
-                                        <constraint firstItem="Vsi-eC-jxx" firstAttribute="trailing" secondItem="Iex-hH-e25" secondAttribute="trailingMargin" id="eZZ-JE-xhv"/>
+                                        <constraint firstItem="qsN-rZ-dbV" firstAttribute="leading" secondItem="Vsi-eC-jxx" secondAttribute="trailing" constant="8" id="fn1-wu-lhi"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="REM-IJ-4Ku" secondAttribute="bottom" constant="12" id="luv-Ly-Zn3"/>
+                                        <constraint firstItem="K1G-eG-Vkn" firstAttribute="leading" secondItem="Iex-hH-e25" secondAttribute="leadingMargin" id="mGy-cH-zxR"/>
                                         <constraint firstItem="K1G-eG-Vkn" firstAttribute="top" secondItem="Vsi-eC-jxx" secondAttribute="bottom" constant="4" id="p4Q-5K-sNk"/>
                                         <constraint firstItem="REM-IJ-4Ku" firstAttribute="trailing" secondItem="K1G-eG-Vkn" secondAttribute="trailing" id="pNr-1w-dIo"/>
                                         <constraint firstItem="Vsi-eC-jxx" firstAttribute="leading" secondItem="Iex-hH-e25" secondAttribute="leadingMargin" id="sTe-7E-oya"/>
@@ -511,6 +593,7 @@
                                     <outlet property="episodeSubtitleLabel" destination="TMT-ZF-O7B" id="a5a-YA-AVo"/>
                                     <outlet property="episodeSynopsisLabel" destination="K1G-eG-Vkn" id="zha-RG-rhi"/>
                                     <outlet property="hideProgressViewConstraint" destination="5AI-Bo-wZt" id="Zhv-DW-AZB"/>
+                                    <outlet property="offlineAccessButton" destination="Wev-7V-WQ7" id="QgW-Va-dQZ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -534,6 +617,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Cloud Download" width="40" height="40"/>
         <image name="Details" width="20" height="20"/>
     </resources>
 </document>

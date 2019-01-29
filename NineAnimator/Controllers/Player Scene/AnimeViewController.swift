@@ -79,6 +79,9 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                     }
                 }
                 
+                // Update the AnimeLink in the info cell so we get the correct poster displayed
+                self.animeLink = anime.link
+                
                 // Push server updates to the heading view
                 self.animeHeadingView.update(animated: true) { [weak self] in
                     guard let self = self else { return }
@@ -91,10 +94,6 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                     self.tableView.reloadSections(sectionsNeededReloading, with: .automatic)
                     self.tableView.endUpdates()
                 }
-                
-                // Update the AnimeLink in the info cell so we get the correct poster displayed
-                self.animeLink = anime.link
-                self.informationCell?.link = anime.link
                 
                 // Update history
                 NineAnimator.default.user.entering(anime: anime.link)
@@ -115,8 +114,6 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             server = episode.link.server
         }
     }
-    
-    private var informationCell: AnimeDescriptionTableViewCell?
     
     private var selectedEpisodeCell: UITableViewCell?
     

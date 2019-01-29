@@ -60,7 +60,6 @@
 		2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73A3A521FB72230080A8B2 /* Theme.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C86BD0921F0169F002D876A /* DummyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86BD0821F0169F002D876A /* DummyParser.swift */; };
-		2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */; };
 		2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */; };
 		2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */; };
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
@@ -93,6 +92,8 @@
 		2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746821C0975A0007502A /* SourceMasterAnime.swift */; };
 		2CCC746B21C098860007502A /* SearchMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746A21C098860007502A /* SearchMasterAnime.swift */; };
 		2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */; };
+		2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */; };
+		2CD7825A21FFEF2800477FC6 /* OfflineAccessButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD7825921FFEF2800477FC6 /* OfflineAccessButton.swift */; };
 		2CD9B9A021FE2F1900203442 /* UIAlertAction+Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */; };
 		2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A121FE41AD00203442 /* AnimeRatingView.swift */; };
 		2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */; };
@@ -196,7 +197,6 @@
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C86BD0821F0169F002D876A /* DummyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyParser.swift; sourceTree = "<group>"; };
 		2C8BCB5521E2EB7600430598 /* homekit.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homekit.jpg; sourceTree = "<group>"; };
-		2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderParser.swift; sourceTree = "<group>"; };
 		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
@@ -234,6 +234,8 @@
 		2CCC746821C0975A0007502A /* SourceMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceMasterAnime.swift; sourceTree = "<group>"; };
 		2CCC746A21C098860007502A /* SearchMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMasterAnime.swift; sourceTree = "<group>"; };
 		2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeMasterAnime.swift; sourceTree = "<group>"; };
+		2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineContentManager.swift; sourceTree = "<group>"; };
+		2CD7825921FFEF2800477FC6 /* OfflineAccessButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAccessButton.swift; sourceTree = "<group>"; };
 		2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertAction+Properties.swift"; sourceTree = "<group>"; };
 		2CD9B9A121FE41AD00203442 /* AnimeRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeRatingView.swift; sourceTree = "<group>"; };
 		2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeAirDateView.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
 				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
+				2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 				2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */,
 				2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */,
+				2CD7825921FFEF2800477FC6 /* OfflineAccessButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -597,13 +601,12 @@
 		2CEB56D421DBE45B0018D804 /* Anime Scene */ = {
 			isa = PBXGroup;
 			children = (
-				2C91296821BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift */,
 				2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */,
+				2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */,
 				2C9383DC21FE0CE9008C0D01 /* AnimeHeadingView.swift */,
 				2CD9B9A121FE41AD00203442 /* AnimeRatingView.swift */,
 				2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */,
 				2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */,
-				2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */,
 			);
 			path = "Anime Scene";
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */,
+				2CD7825A21FFEF2800477FC6 /* OfflineAccessButton.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
 				2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* NineAnimatorUser.swift in Sources */,
@@ -895,6 +899,7 @@
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */,
 				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
+				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2C6677B621BD8FA1000E5ACC /* ContentErrorTableViewCell.swift in Sources */,
@@ -905,7 +910,6 @@
 				2CA1DD4121E18FC6009241CB /* MasterAnimeLinkRetriver.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2CCC746421C07C700007502A /* NineAnimeAnime.swift in Sources */,
-				2C91296921BA0FA600284FD0 /* AnimeDescriptionTableViewCell.swift in Sources */,
 				2C66779E21BC36A5000E5ACC /* BufferedContent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

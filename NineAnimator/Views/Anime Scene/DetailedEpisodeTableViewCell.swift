@@ -33,6 +33,8 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var hideProgressViewConstraint: NSLayoutConstraint!
     
+    @IBOutlet private weak var offlineAccessButton: OfflineAccessButton!
+    
     // Callback that is invoked when the progress view is becoming hidden/presented
     var onStateChange: ((DetailedEpisodeTableViewCell) -> Void)?
     
@@ -71,6 +73,10 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
             
             progress = NineAnimator.default.user.playbackProgress(for: info.parent)
             
+            // Offline access status
+            
+            offlineAccessButton.isHidden = true
+            
             // Listen to progress updates
             
             NotificationCenter.default.addObserver(
@@ -85,17 +91,22 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     private var progress: Float {
         get { return episodePlaybackProgressView.progress }
         set {
-            hideProgressViewConstraint.priority = (newValue > 0.01) ? .defaultLow : .defaultHigh
-            setNeedsLayout()
+            let newPiority: UILayoutPriority = (newValue > 0.01) ? .defaultLow : .defaultHigh
+            if newPiority != hideProgressViewConstraint.priority {
+                hideProgressViewConstraint.priority = newPiority
+                setNeedsLayout()
+            }
             
             episodePlaybackProgressView.progress = newValue
             
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .percent
-            formatter.maximumFractionDigits = 1
-            
-            episodePlaybackProgressLabel.text =
+            if newValue < 0.95 {
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .percent
+                formatter.maximumFractionDigits = 1
+                
+                episodePlaybackProgressLabel.text =
                 "\(formatter.string(from: NSNumber(value: 1.0 - newValue)) ?? "Unknown percentage") left"
+            } else { episodePlaybackProgressLabel.text = "Completed" }
         }
     }
     

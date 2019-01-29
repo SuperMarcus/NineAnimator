@@ -19,19 +19,93 @@
 
 import UIKit
 
-class EpisodeTableViewCell: UITableViewCell, Themable {
+class EpisodeTableViewCell: UITableViewCell {
     var episodeLink: EpisodeLink? {
         didSet {
-            titleLabel.text = episodeLink?.name
-            progressIndicator.episodeLink = episodeLink
+            // Remove observer first
+            NotificationCenter.default.removeObserver(self)
+            
+            guard let link = episodeLink else { return }
+            
+            // Set name and progress
+            titleLabel.text = "Episode \(link.name)"
+            progress = NineAnimator.default.user.playbackProgress(for: link)
+            
+            // Update offline access button image
+            offlineAccessButton.isHidden = true
+            
+            // Add observer for progress updates
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(onProgressUpdate),
+                name: .playbackProgressDidUpdate,
+                object: nil
+            )
         }
     }
     
+    var onStateChange: ((EpisodeTableViewCell) -> Void)?
+    
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var progressIndicator: EpisodeAccessoryProcessIndicator!
+    
+    @IBOutlet private weak var episodeProgressView: UIProgressView!
+    
+    @IBOutlet private weak var episodeProgressLabel: UILabel!
+    
+    @IBOutlet private weak var hidesProgressLayoutConstraint: NSLayoutConstraint!
+    
+    @IBOutlet private weak var offlineAccessButton: OfflineAccessButton!
+    
+    private var progress: Float {
+        get { return episodeProgressView.progress }
+        set {
+            let newPiority: UILayoutPriority = (newValue > 0.01) ? .defaultLow : .defaultHigh
+            if newPiority != hidesProgressLayoutConstraint.priority {
+                hidesProgressLayoutConstraint.priority = newPiority
+                setNeedsLayout()
+            }
+            
+            episodeProgressView.progress = newValue
+            
+            // Show as completed if >= 0.95
+            if newValue < 0.01 {
+                episodeProgressLabel.text = "Start Now"
+            } else if newValue < 0.95 {
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .percent
+                formatter.maximumFractionDigits = 1
+                
+                episodeProgressLabel.text =
+                "\(formatter.string(from: NSNumber(value: 1.0 - newValue)) ?? "Unknown percentage") left"
+            } else { episodeProgressLabel.text = "Completed" }
+        }
+    }
+    
+    @objc private func onProgressUpdate() {
+        guard let link = episodeLink else { return }
+        
+        let currentProgress = NineAnimator.default.user.playbackProgress(for: link)
+        
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            
+            if self.progress == 0.0 && currentProgress > self.progress {
+                UIView.animate(withDuration: 0.1) {
+                    [weak self] in
+                    guard let self = self else { return }
+                    self.progress = currentProgress
+                    self.setNeedsLayout()
+                    self.onStateChange?(self)
+                }
+            } else { self.progress = currentProgress }
+        }
+    }
     
     func theme(didUpdate theme: Theme) {
         backgroundColor = theme.background
         titleLabel.textColor = theme.primaryText
     }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }
