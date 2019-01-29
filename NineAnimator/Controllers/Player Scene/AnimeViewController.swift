@@ -82,6 +82,9 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 // Update the AnimeLink in the info cell so we get the correct poster displayed
                 self.animeLink = anime.link
                 
+                // Clean user notifications for this anime
+                UserNotificationManager.default.clearNotifications(for: anime.link)
+                
                 // Push server updates to the heading view
                 self.animeHeadingView.update(animated: true) { [weak self] in
                     guard let self = self else { return }
@@ -351,22 +354,6 @@ extension AnimeViewController {
 
 // MARK: - Share/Select Server/Notifications
 extension AnimeViewController {
-    @IBAction private func onCastButtonTapped(_ sender: Any) {
-        CastController.default.presentPlaybackController()
-    }
-    
-    @IBAction private func onActionButtonTapped(_ sender: UIBarButtonItem) {
-        guard let link = animeLink else { return }
-        let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
-        
-        if let popover = activityViewController.popoverPresentationController {
-            popover.barButtonItem = sender
-            popover.permittedArrowDirections = .up
-        }
-        
-        present(activityViewController, animated: true)
-    }
-    
     @IBAction private func onSubscribeButtonTapped(_ sender: Any) {
         // Request permission first
         UserNotificationManager.default.requestNotificationPermissions()
