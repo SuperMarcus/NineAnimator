@@ -368,6 +368,10 @@ extension AnimeViewController {
     }
     
     @IBAction private func onSubscribeButtonTapped(_ sender: Any) {
+        // Request permission first
+        UserNotificationManager.default.requestNotificationPermissions()
+        
+        // Then update the heading view
         animeHeadingView.update(animated: true) {
             [weak self] _ in
             if let anime = self?.anime {
