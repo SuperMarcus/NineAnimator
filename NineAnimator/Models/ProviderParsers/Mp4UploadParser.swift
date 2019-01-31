@@ -61,7 +61,8 @@ class Mp4UploadParser: VideoProviderParser {
                 headers: [
                     "User-Agent": self.defaultUserAgent,
                     "Origin": episode.target.absoluteString
-                ]), nil)
+                ],
+                isAggregated: false), nil)
         }
     }
 }

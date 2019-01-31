@@ -36,6 +36,14 @@ class RootViewController: UITabBarController, Themable {
         super.viewDidLoad()
         RootViewController.shared = self
         Theme.provision(self)
+        
+        // Add observer for downloading task update
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onDownloadingTaskUpdate(_:)),
+            name: .offlineAccessStateDidUpdate,
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,5 +177,24 @@ extension RootViewController {
     func theme(didUpdate theme: Theme) {
         tabBar.barStyle = theme.barStyle
         view.tintColor = theme.tint
+    }
+}
+
+// MARK: - Display error for downloading task
+extension RootViewController {
+    @objc func onDownloadingTaskUpdate(_ notification: Notification) {
+        guard let content = notification.object as? OfflineContent else { return }
+        
+        switch content.state {
+        case .error(let error):
+            let alert = UIAlertController(
+                title: "Error",
+                message: String(describing: error),
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            presentOnTop(alert)
+        default: break
+        }
     }
 }

@@ -30,9 +30,7 @@ class EpisodeTableViewCell: UITableViewCell {
             // Set name and progress
             titleLabel.text = "Episode \(link.name)"
             progress = NineAnimator.default.user.playbackProgress(for: link)
-            
-            // Update offline access button image
-            offlineAccessButton.isHidden = true
+            offlineAccessButton.episodeLink = link
             
             // Add observer for progress updates
             NotificationCenter.default.addObserver(

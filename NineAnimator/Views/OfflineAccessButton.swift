@@ -19,16 +19,27 @@
 
 import UIKit
 
+/// A self-contained view to handle download initiating and monitoring tasks
 @IBDesignable
 class OfflineAccessButton: UIButton, Themable {
-    enum OfflineState {
-        case ready
-        case preserved
-        case preserving(Float)
-    }
-    
     var offlineAccessState: OfflineState = .preserving(0.5) {
         didSet { updateContent() }
+    }
+    
+    var episodeLink: EpisodeLink? {
+        didSet {
+            NotificationCenter.default.removeObserver(self)
+            guard let link = episodeLink, link != oldValue else { return }
+            offlineAccessState = OfflineContentManager.shared.state(for: link)
+            
+            // Add observer to listen to update notification
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(onOfflineAccessStateUpdates(_:)),
+                name: .offlineAccessStateDidUpdate,
+                object: nil
+            )
+        }
     }
     
     @IBInspectable var insetSpace: CGFloat = 8 {
@@ -51,10 +62,36 @@ class OfflineAccessButton: UIButton, Themable {
         didSet { updateContent() }
     }
     
+    private var preservationInitiatedActivityIndicator: UIActivityIndicatorView?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addTarget(self, action: #selector(onTapped(_:)), for: .touchUpInside)
+    }
+    
     private func updateContent() {
         switch offlineAccessState {
-        case .ready: setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
-        case .preserved: setImage(UIImage(), for: .normal)
+        case .preservationInitialed:
+            // Use an empty image and add activity indicator to it
+            setImage(UIImage(), for: .normal)
+            preservationInitiatedActivityIndicator?.removeFromSuperview()
+            let newIndicator = UIActivityIndicatorView(style: Theme.current.activityIndicatorStyle)
+            newIndicator.frame = bounds
+            newIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+            newIndicator.hidesWhenStopped = true
+            addSubview(newIndicator)
+            preservationInitiatedActivityIndicator = newIndicator
+            newIndicator.startAnimating()
+        case .error, .ready:
+            setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
+            preservationInitiatedActivityIndicator?.stopAnimating()
+            preservationInitiatedActivityIndicator?.removeFromSuperview()
+            preservationInitiatedActivityIndicator = nil
+        case .preserved:
+            setImage(UIImage(), for: .normal)
+            preservationInitiatedActivityIndicator?.stopAnimating()
+            preservationInitiatedActivityIndicator?.removeFromSuperview()
+            preservationInitiatedActivityIndicator = nil
         case .preserving(let progress):
             let size = CGSize(width: 40, height: 40)
             let renderer = UIGraphicsImageRenderer(size: size)
@@ -97,8 +134,33 @@ class OfflineAccessButton: UIButton, Themable {
                 centerRect.fill()
             }
             setImage(image, for: .normal)
+            preservationInitiatedActivityIndicator?.stopAnimating()
+            preservationInitiatedActivityIndicator?.removeFromSuperview()
+            preservationInitiatedActivityIndicator = nil
+        }
+    }
+    
+    // Update UI when received state update notification
+    @objc private func onOfflineAccessStateUpdates(_ notification: Notification) {
+        guard let episodeLink = episodeLink else { return }
+        DispatchQueue.main.async {
+            self.offlineAccessState = OfflineContentManager.shared.state(for: episodeLink)
+        }
+    }
+    
+    @objc private func onTapped(_ sender: Any) {
+        guard let episodeLink = episodeLink else { return }
+        
+        switch offlineAccessState {
+        case .preservationInitialed, .preserving:
+            OfflineContentManager.shared.cancelPreservation(for: episodeLink)
+        case .error, .ready:
+            OfflineContentManager.shared.initiatePreservation(for: episodeLink)
+        default: break
         }
     }
     
     func theme(didUpdate theme: Theme) { updateContent() }
+    
+    deinit { NotificationCenter.default.removeObserver(self) }
 }

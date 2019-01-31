@@ -90,7 +90,8 @@ class TiwiKiwiParser: VideoProviderParser {
                         url: sourceURL,
                         parent: episode,
                         contentType: "video/mp4",
-                        headers: playbackHeaders), nil)
+                        headers: playbackHeaders,
+                        isAggregated: false), nil)
                 })
             }
             
@@ -107,7 +108,8 @@ class TiwiKiwiParser: VideoProviderParser {
                 url: sourceURL,
                 parent: episode,
                 contentType: "video/mp4",
-                headers: playbackHeaders), nil)
+                headers: playbackHeaders,
+                isAggregated: false), nil)
         })
         return task
     }

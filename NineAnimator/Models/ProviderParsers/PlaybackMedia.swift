@@ -22,10 +22,23 @@ import AVKit
 import Foundation
 import OpenCastSwift
 
+/// Representing a playable media
 protocol PlaybackMedia {
+    /// Obtain the AVPlayerItem object for this asset
     var avPlayerItem: AVPlayerItem { get }
+    
+    /// Obtain the CastMedia object for this asset
     var castMedia: CastMedia? { get }
+    
+    /// Obtain the URLRequest for this asset
+    var urlRequest: URLRequest? { get }
+    
+    /// Obtain the Episode object of this media
     var parent: Episode { get }
+    
+    /// Specify if this media uses HLS/m3u8 playlist
+    /// and should be preserved using AVAssetDownloadURLSession
+    var isAggregated: Bool { get }
 }
 
 struct BasicPlaybackMedia: PlaybackMedia {
@@ -33,6 +46,7 @@ struct BasicPlaybackMedia: PlaybackMedia {
     let parent: Episode
     let contentType: String
     let headers: HTTPHeaders
+    let isAggregated: Bool
     
     var avPlayerItem: AVPlayerItem {
         return AVPlayerItem(url: url, headers: headers)
@@ -48,6 +62,14 @@ struct BasicPlaybackMedia: PlaybackMedia {
             autoplay: true,
             currentTime: 0
         )
+    }
+    
+    var urlRequest: URLRequest? {
+        // Return nil on aggregated asset
+        guard !isAggregated else { return nil }
+        
+        // Construct the URLRequest from the information provided
+        return try? URLRequest(url: url, method: .get, headers: headers)
     }
 }
 

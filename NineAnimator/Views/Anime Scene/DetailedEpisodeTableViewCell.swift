@@ -38,12 +38,18 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     // Callback that is invoked when the progress view is becoming hidden/presented
     var onStateChange: ((DetailedEpisodeTableViewCell) -> Void)?
     
+    var episodeLink: EpisodeLink? {
+        didSet { offlineAccessButton.episodeLink = episodeLink }
+    }
+    
     var episodeInformation: Anime.AdditionalEpisodeLinkInformation? {
         didSet {
             // Remove observation first
             NotificationCenter.default.removeObserver(self)
             
             guard let info = episodeInformation else { return }
+            
+            if episodeLink == nil { episodeLink = info.parent }
             
             // Title
             
@@ -72,10 +78,6 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
             // Progress
             
             progress = NineAnimator.default.user.playbackProgress(for: info.parent)
-            
-            // Offline access status
-            
-            offlineAccessButton.isHidden = true
             
             // Listen to progress updates
             
@@ -111,9 +113,9 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     }
     
     @objc private func onProgressUpdate() {
-        guard let info = episodeInformation else { return }
+        guard let episodeLink = episodeLink else { return }
         
-        let currentProgress = NineAnimator.default.user.playbackProgress(for: info.parent)
+        let currentProgress = NineAnimator.default.user.playbackProgress(for: episodeLink)
         
         DispatchQueue.main.async {
             [weak self] in

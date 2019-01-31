@@ -281,6 +281,7 @@ extension AnimeViewController {
                 let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
                 cell.makeThemable()
+                cell.episodeLink = episode
                 cell.episodeInformation = detailedEpisodeInfo
                 cell.onStateChange = {
                     [weak self] _ in
@@ -377,6 +378,15 @@ extension AnimeViewController {
         
         episodeRequestTask?.cancel()
         NotificationCenter.default.removeObserver(self)
+        
+        let content = OfflineContentManager.shared.content(for: episodeLink)
+        
+        // This needs to be updated
+        if let url = content.preservedContentURL {
+            Log.info("Offline content found. Using donloaded asset.")
+            NativePlayerController.default.play(localMedia: url, with: episodeLink)
+            return
+        }
         
         func clearSelection() {
             tableView.deselectSelectedRow()

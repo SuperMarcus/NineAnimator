@@ -69,7 +69,8 @@ class MyCloudParser: VideoProviderParser {
                 url: sourceURL,
                 parent: episode,
                 contentType: "application/vnd.apple.mpegurl",
-                headers: playerAdditionalHeaders), nil)
+                headers: playerAdditionalHeaders,
+                isAggregated: true), nil)
         }
     }
 }

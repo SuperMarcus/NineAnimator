@@ -72,8 +72,8 @@ class StreamangoParser: VideoProviderParser {
                 url: sourceURL,
                 parent: episode,
                 contentType: "video/mp4",
-                headers:
-                additionalHeaders), nil)
+                headers: additionalHeaders,
+                isAggregated: false), nil)
         }
     }
     

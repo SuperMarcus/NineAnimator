@@ -129,6 +129,41 @@ extension NativePlayerController {
         playerViewController.userActivity?.delegate = self
     }
     
+    // This PlaybackMedia needs to be updated. For now, this is
+    // the implementation for local media.
+    func play(localMedia: URL, with episodeLink: EpisodeLink) {
+        clearQueue()
+        
+        let asset = AVAsset(url: localMedia)
+        let item = AVPlayerItem(asset: asset)
+        
+        let progress = NineAnimator.default.user.playbackProgress(for: episodeLink)
+        
+        //Add item ready observation to restore playback progress
+        mediaItemsObervations[item] = item.observe(\.status) {
+            [weak self] (_: AVPlayerItem, _: NSKeyValueObservedChange<AVPlayerItem.Status>) in
+            guard let self = self else { return }
+            if item.status == .readyToPlay {
+                //Seek to five seconds before the persisted progress
+                item.seek(to: CMTime(seconds: max(progress * item.duration.seconds - 5, 0))) {
+                    //Remove the observer after progress has been restored
+                    _ in self.mediaItemsObervations.removeValue(forKey: item)
+                }
+            }
+        }
+        
+        player.insert(item, after: nil)
+        
+        setupPlaybackSession()
+        
+        RootViewController.shared?.presentOnTop(playerViewController, animated: true) {
+            self.state = .fullscreen
+            self.player.play()
+            
+            NotificationCenter.default.post(name: .playbackDidStart, object: self)
+        }
+    }
+    
     func append(media: PlaybackMedia) {
         let item = media.avPlayerItem
         

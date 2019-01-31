@@ -99,4 +99,10 @@ extension Notification.Name {
      */
     static let homeDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.homeDidUpdate")
+    
+    /**
+     Fired when the offline access state is updated for an episode link
+     */
+    static let offlineAccessStateDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.offlineAccessStateDidUpdate")
 }

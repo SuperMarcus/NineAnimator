@@ -17,21 +17,13 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import AVKit
-import Foundation
+import Kingfisher
+import UIKit
 
-///
-/// Manages offline contents such as downloads
-///
-/// Note that this class is seperate from the NotificationManager
-/// because they have different purposes. The OfflineContentManager
-/// is implemented to permanently preserve data offline, not for
-/// caching.
-///
-class OfflineContentManager {
-    static let shared = OfflineContentManager()
-    
-    func isPreserved(_ episodeLink: EpisodeLink) -> Bool {
-        return false
-    }
+/// Retriving the cached artwork/poster for anime
+func artwork(for anime: AnimeLink) -> UIImage? {
+    let cache = Kingfisher.ImageCache.default
+    let cacheIdentifeir = anime.image.absoluteString
+    let artworkPath = cache.cachePath(forKey: cacheIdentifeir)
+    return UIImage(contentsOfFile: artworkPath)
 }

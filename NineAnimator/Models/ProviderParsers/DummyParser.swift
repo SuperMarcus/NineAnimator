@@ -32,7 +32,8 @@ class DummyParser: VideoProviderParser {
                 url: episode.target,
                 parent: episode,
                 contentType: "video/mp4",
-                headers: [ "Referer": episode.link.parent.link.absoluteString ]
+                headers: [ "Referer": episode.link.parent.link.absoluteString ],
+                isAggregated: false
             ), nil)
         }
         
