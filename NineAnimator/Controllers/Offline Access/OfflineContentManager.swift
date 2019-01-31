@@ -160,8 +160,8 @@ extension OfflineContentManager {
             let newName = content.suggestName(for: location)
                 .components(separatedBy: illegalCharacters)
                 .joined(separator: "_")
-            
-            destinationUrl = downloadFolder.appendingPathComponent("\(newName).\(location.pathExtension)")
+            let pathExtension = downloadTask.response?.suggestedFilename?.split(separator: ".").last ?? "bin"
+            destinationUrl = downloadFolder.appendingPathComponent("\(newName).\(pathExtension)")
             
             if (try? destinationUrl.checkResourceIsReachable()) == true {
                 Log.error("Duplicated file detected, removing.")
