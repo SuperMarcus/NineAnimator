@@ -125,7 +125,7 @@ extension NativePlayerController {
             NotificationCenter.default.post(name: .playbackDidStart, object: self)
         }
         
-        playerViewController.userActivity = Continuity.activity(for: media.parent)
+        playerViewController.userActivity = Continuity.activity(for: media)
         playerViewController.userActivity?.delegate = self
     }
     
@@ -340,7 +340,7 @@ extension NativePlayerController {
         
         do {
             let encoder = PropertyListEncoder()
-            let encodedEpisodeData = try encoder.encode(media.parent.link)
+            let encodedEpisodeData = try encoder.encode(media.link)
             
             userActivity.userInfo = [
                 "link": encodedEpisodeData,

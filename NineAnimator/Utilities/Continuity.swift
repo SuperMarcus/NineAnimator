@@ -74,26 +74,26 @@ enum Continuity {
         return activity
     }
     
-    static func activity(for episode: Episode) -> NSUserActivity {
-        let link = episode.parentLink
+    static func activity(for media: PlaybackMedia) -> NSUserActivity {
+        let link = media.link
         let activity = NSUserActivity(activityType: activityTypeContinueEpisode)
         
-        activity.title = "Continue Watching Episode \(episode.link.name) of \(episode.parentLink.title)"
-        activity.webpageURL = link.link // Also using the anime's webpage url since otherwise it would be useless
-        activity.keywords = [ episode.name, episode.parentLink.title, "anime", "episode" ]
+        activity.title = "Continue Watching Episode \(link.name) of \(link.parent.title)"
+        activity.webpageURL = link.parent.link // Also using the anime's webpage url since otherwise it would be useless
+        activity.keywords = [ media.name, link.parent.title, "anime", "episode" ]
         
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: "public.movie")
-        attributeSet.contentURL = episode.target
-        attributeSet.displayName = "Continue Watching Episode \(episode.link.name)"
-        attributeSet.keywords = [ episode.name, episode.parentLink.title, "anime", "episode" ]
-        attributeSet.thumbnailURL = URL(string: Kingfisher.ImageCache.default.cachePath(forKey: link.image.absoluteString))
+        attributeSet.contentURL = link.parent.link
+        attributeSet.displayName = "Continue Watching Episode \(link.name)"
+        attributeSet.keywords = [ media.name, link.parent.title, "anime", "episode" ]
+        attributeSet.thumbnailURL = URL(string: Kingfisher.ImageCache.default.cachePath(forKey: link.parent.image.absoluteString))
         
         if let url = attributeSet.thumbnailURL, let image = UIImage(contentsOfFile: url.absoluteString) {
             attributeSet.thumbnailData = image.jpegData(compressionQuality: 0.8)
         } else { Log.info("Thumbnail cannot be saved to activity now for this anime. Will be saved later if needed.") }
         
-        attributeSet.contentSources = [ link.source.name ]
-        attributeSet.contentDescription = episode.parentLink.title
+        attributeSet.contentSources = [ link.parent.source.name ]
+        attributeSet.contentDescription = link.name
         
         activity.contentAttributeSet = attributeSet
         
@@ -107,7 +107,7 @@ enum Continuity {
         
         if #available(iOS 12.0, *) {
             activity.isEligibleForPrediction = false
-            activity.persistentIdentifier = "\(identifier(for: link.link)).\(episode.link.identifier)"
+            activity.persistentIdentifier = "\(identifier(for: link.parent.link)).\(link.identifier)"
         }
         
         // Will not update the user info yet. It should be updated by the video player later.

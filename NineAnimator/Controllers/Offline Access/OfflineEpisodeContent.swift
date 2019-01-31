@@ -100,7 +100,7 @@ class OfflineEpisodeContent: OfflineContent {
     
     /// Preserve playback media
     func preserve(media: PlaybackMedia) {
-        guard episodeLink == media.parent.link else { return }
+        guard episodeLink == media.link else { return }
         
         // Return if already preserved
         if case .preserved = state { return }

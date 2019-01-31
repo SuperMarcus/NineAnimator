@@ -33,8 +33,11 @@ protocol PlaybackMedia {
     /// Obtain the URLRequest for this asset
     var urlRequest: URLRequest? { get }
     
-    /// Obtain the Episode object of this media
-    var parent: Episode { get }
+    /// The episode link that this playback media is referring to
+    var link: EpisodeLink { get }
+    
+    /// Describing the episode
+    var name: String { get }
     
     /// Specify if this media uses HLS/m3u8 playlist
     /// and should be preserved using AVAssetDownloadURLSession
@@ -51,6 +54,10 @@ struct BasicPlaybackMedia: PlaybackMedia {
     var avPlayerItem: AVPlayerItem {
         return AVPlayerItem(url: url, headers: headers)
     }
+    
+    var link: EpisodeLink { return parent.link }
+    
+    var name: String { return parent.name }
     
     var castMedia: CastMedia? {
         return CastMedia(
@@ -76,7 +83,7 @@ struct BasicPlaybackMedia: PlaybackMedia {
 //A shortcut for setting and retriving playback progress
 extension PlaybackMedia {
     var progress: Float {
-        get { return parent.progress }
-        set { parent.update(progress: newValue) }
+        get { return NineAnimator.default.user.playbackProgress(for: link) }
+        set { NineAnimator.default.user.update(progress: newValue, for: link) }
     }
 }
