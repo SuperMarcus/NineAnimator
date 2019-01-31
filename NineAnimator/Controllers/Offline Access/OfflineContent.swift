@@ -101,6 +101,7 @@ class OfflineContent: NSObject {
 
 extension OfflineState {
     init(from dict: [String: Any]) {
+        self = .ready
         if let type = dict["type"] as? String {
             switch type {
             case "ready": self = .ready; return
@@ -112,7 +113,6 @@ extension OfflineState {
             default: break
             }
         }
-        self = .ready
     }
     
     var export: [String: Any] {

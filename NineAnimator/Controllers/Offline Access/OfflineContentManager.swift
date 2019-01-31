@@ -65,7 +65,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     private lazy var registeredContentTypes: [String: ([String: Any], OfflineState) -> OfflineContent?] = {
         var typeRegistry = [String: ([String: Any], OfflineState) -> OfflineContent?]()
         
-        typeRegistry[String(describing: type(of: OfflineContent.self))] = {
+        typeRegistry["OfflineEpisodeContent"] = {
             OfflineEpisodeContent(self, from: $0, initialState: $1)
         }
         
@@ -80,12 +80,19 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
                 guard let type = dict["type"] as? String,
                     let stateDict = dict["state"] as? [String: Any],
                     let properties = dict["properties"] as? [String: Any] else { return nil }
-                let state = OfflineState(from: stateDict)
-                let content = registeredContentTypes[type]?(properties, state)
                 
-                if let urlString = dict["path"] as? String {
-                    content?.preservedContentURL = URL(string: urlString)
+                var state = OfflineState(from: stateDict)
+                var preservedUrl: URL?
+                
+                if case .preserved = state {
+                    if let urlString = dict["path"] as? String,
+                        let url = URL(string: urlString) {
+                        preservedUrl = url
+                    } else { state = .ready }
                 }
+                
+                let content = registeredContentTypes[type]?(properties, state)
+                content?.preservedContentURL = preservedUrl
                 
                 return content
             }
@@ -130,6 +137,7 @@ extension OfflineContentManager {
         }
         
         defer {
+            content.persistOfflineState()
             // Call the background session completion handler
             backgroundSessionCompletionHandler?()
             backgroundSessionCompletionHandler = nil
@@ -152,7 +160,13 @@ extension OfflineContentManager {
             let newName = content.suggestName(for: location)
                 .components(separatedBy: illegalCharacters)
                 .joined(separator: "_")
+            
             destinationUrl = downloadFolder.appendingPathComponent("\(newName).\(location.pathExtension)")
+            
+            if (try? destinationUrl.checkResourceIsReachable()) == true {
+                Log.error("Duplicated file detected, removing.")
+                try fs.removeItem(at: destinationUrl)
+            }
             
             // Move the item
             try fs.moveItem(at: location, to: destinationUrl)
@@ -165,15 +179,14 @@ extension OfflineContentManager {
         
         // Call the internal completion handler
         content._onCompletion(session, location: destinationUrl)
-        content.persistOfflineState()
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        guard session == sharedSession, let content = content(for: task) else {
+        guard session == sharedSession, let content = content(for: task), let error = error else {
             return
         }
         
-        content._onCompletion(session, error: error ?? NineAnimatorError.providerError("Unknown error"))
+        content._onCompletion(session, error: error)
     }
     
     func urlSession(_ session: URLSession,
@@ -203,13 +216,13 @@ extension OfflineContentManager {
         }
         
         defer {
+            content.persistOfflineState()
             // Call the background session completion handler
             backgroundSessionCompletionHandler?()
             backgroundSessionCompletionHandler = nil
         }
         
         content._onCompletion(session, location: location)
-        content.persistOfflineState()
     }
     
     func urlSession(_ session: URLSession,
@@ -259,8 +272,8 @@ extension OfflineContent {
     }
     
     fileprivate func _onCompletion(_ session: URLSession, location: URL) {
-        state = .preserved
         preservedContentURL = location
+        state = .preserved
         onCompletion(with: location)
     }
     

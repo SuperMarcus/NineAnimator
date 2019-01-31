@@ -382,7 +382,7 @@ extension AnimeViewController {
         let content = OfflineContentManager.shared.content(for: episodeLink)
         
         // This needs to be updated
-        if let url = content.preservedContentURL {
+        if let url = content.preservedContentURL, (try? url.checkResourceIsReachable()) == true {
             Log.info("Offline content found. Using donloaded asset.")
             NativePlayerController.default.play(localMedia: url, with: episodeLink)
             return
