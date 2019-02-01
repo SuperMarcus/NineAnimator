@@ -88,6 +88,10 @@ class OfflineContent: NSObject {
     /// Initiate preservation
     func preserve() { }
     
+    /// Checks if the content still exists on file system and
+    /// update the states accordingly.
+    func updateResourceAvailability() { }
+    
     /// Cancel preservation
     func cancel() {
         guard case .preserving = state else { return }

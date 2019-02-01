@@ -202,7 +202,7 @@ extension OfflineContentManager {
             let resourceIdentifierPath = "\(newName).\(pathExtension)"
             
             // Set resource identifier
-            content.persistentResourceIdentifier = ("\(newName).\(pathExtension)", "persist")
+            content.persistentResourceIdentifier = (resourceIdentifierPath, "persist")
             
             guard let destinationUrl = content.preservedContentURL else {
                 throw NineAnimatorError.providerError("Cannot retrive url when resource identifier has been set")
