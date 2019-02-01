@@ -142,16 +142,32 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
                 }
                 
                 return content
+            } .filter {
+                // Only return contents that are not 'ready' nor 'error'
+                switch $0.state {
+                case .error, .ready: return false
+                default: return true
+                }
             }
     }
     
     // An array to store references to contents
     private lazy var contentPool = persistedContentPool
     
+    /// Retrieve a list of preserved contents
+    var preservedContents: [OfflineContent] {
+        return contentPool.filter {
+            $0.updateResourceAvailability()
+            if case .preserved = $0.state { return true }
+            return false
+        }
+    }
+    
     func content(for episodeLink: EpisodeLink) -> OfflineEpisodeContent {
         if let content = contentPool
             .compactMap({ $0 as? OfflineEpisodeContent })
             .first(where: { $0.episodeLink == episodeLink }) {
+            content.updateResourceAvailability()
             return content
         } else {
             let content = OfflineEpisodeContent(episodeLink, parent: self)
@@ -300,6 +316,15 @@ extension OfflineContent {
             } else { return [:] }
         }
         set {
+            // Do not store this object if it is still in error or ready state
+            switch state {
+            case .error, .ready:
+                // Remove the content from store if it is errored or ready
+                parent.offlineContentProperties.removeObject(forKey: identifier)
+                return
+            default: break
+            }
+            
             if !identifier.isEmpty {
                 var entry = parent.offlineContentProperties.dictionary(forKey: identifier) ?? [:]
                 entry["type"] = String(describing: type(of: self))

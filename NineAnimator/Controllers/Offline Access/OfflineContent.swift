@@ -55,7 +55,11 @@ class OfflineContent: NSObject {
     // The provisioned downloading task of this OfflineContent
     var task: URLSessionTask?
     
-    // This is what is acutally used to recreate the persistent url
+    /// Used to recreate the persistent url
+    ///
+    /// Ideally no one besides the manager should access this property.
+    /// Subclasses should use the `preservedContentURL` property to
+    /// access the content.
     var persistentResourceIdentifier: (relativePath: String, relativeTo: String)?
     
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
@@ -90,7 +94,25 @@ class OfflineContent: NSObject {
     
     /// Checks if the content still exists on file system and
     /// update the states accordingly.
-    func updateResourceAvailability() { }
+    func updateResourceAvailability() {
+        if case .preserved = state {
+            // Check if the content is available and readable
+            guard let url = preservedContentURL,
+                FileManager.default.fileExists(atPath: url.path) else {
+                state = .ready
+                return
+            }
+        }
+    }
+    
+    /// Delete the preserved offline content
+    func delete() {
+        if let url = preservedContentURL {
+            do {
+                try FileManager.default.removeItem(at: url)
+            } catch { Log.error(error) }
+        }
+    }
     
     /// Cancel preservation
     func cancel() {
@@ -108,7 +130,7 @@ class OfflineContent: NSObject {
     /// The default behavior is to check if the target is an readable file
     func canRestore(persistentContent url: URL) -> Bool {
         let fs = FileManager.default
-        return fs.isReadableFile(atPath: url.path)
+        return fs.fileExists(atPath: url.path)
     }
 }
 
