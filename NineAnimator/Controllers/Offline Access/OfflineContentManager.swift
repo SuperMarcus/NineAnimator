@@ -33,8 +33,31 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
-    // A user defaults suit for indexing & handling offline contents
-    fileprivate let offlineContentProperties = UserDefaults(suiteName: "com.marcuszhou.NineAnimator.OfflineContents")!
+    fileprivate var persistedContentList: [String: [String: Any]] {
+        get {
+            let url = persistentDirectory
+                .appendingPathComponent("com.marcuszhou.nineanimator.offlinecontents.index.plist")
+            do {
+                let data = try Data(contentsOf: url)
+                guard let dict = try PropertyListSerialization
+                    .propertyList(from: data, options: [], format: nil) as? [String: [String: Any]] else {
+                        throw NineAnimatorError.providerError("Error decoding property listed file")
+                }
+                return dict
+            } catch { Log.error(error) }
+            return [:]
+        }
+        set {
+            let url = persistentDirectory
+                .appendingPathComponent("com.marcuszhou.nineanimator.offlinecontents.index.plist")
+            
+            do {
+                try PropertyListSerialization
+                    .data(fromPropertyList: newValue, format: .binary, options: 0)
+                    .write(to: url)
+            } catch { Log.error(error) }
+        }
+    }
     
     fileprivate lazy var sharedAssetSession: AVAssetDownloadURLSession = {
         let sessionConfiguration: URLSessionConfiguration =
@@ -108,47 +131,46 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     }()
     
     private var persistedContentPool: [OfflineContent] {
-        return offlineContentProperties.dictionaryRepresentation()
-            .compactMap {
-                item -> OfflineContent? in
-                guard let dict = item.value as? [String: Any] else { return nil }
-                guard let type = dict["type"] as? String,
-                    let stateDict = dict["state"] as? [String: Any],
-                    let properties = dict["properties"] as? [String: Any] else { return nil }
+        return persistedContentList.compactMap {
+            item -> OfflineContent? in
+            let dict = item.value
+            guard let type = dict["type"] as? String,
+                let stateDict = dict["state"] as? [String: Any],
+                let properties = dict["properties"] as? [String: Any] else { return nil }
+            
+            let state = OfflineState(from: stateDict)
                 
-                let state = OfflineState(from: stateDict)
-                
-                // The content is restored with the initial state
-                guard let content = registeredContentTypes[type]?(properties, state) else { return nil }
-                
-                if case .preserved = state {
-                    if let relativePath = dict["path"] as? String,
-                        let relativeTo = dict["relative"] as? String {
-                        content.persistentResourceIdentifier = (relativePath, relativeTo)
-                        
-                        // Ask the content itself if it is able to restore the offline content
-                        if let url = content.preservedContentURL,
-                            content.canRestore(persistentContent: url) {
-                            content.onRestore(persistentContent: url)
-                            return content
-                        }
+            // The content is restored with the initial state
+            guard let content = registeredContentTypes[type]?(properties, state) else { return nil }
+            
+            if case .preserved = state {
+                if let relativePath = dict["path"] as? String,
+                    let relativeTo = dict["relative"] as? String {
+                    content.persistentResourceIdentifier = (relativePath, relativeTo)
+                    
+                    // Ask the content itself if it is able to restore the offline content
+                    if let url = content.preservedContentURL,
+                        content.canRestore(persistentContent: url) {
+                        content.onRestore(persistentContent: url)
+                        return content
                     }
-                    
-                    Log.info("A preserved resource is unrestorable. Resetting to ready state.")
-                    
-                    // If the url cannot be restored, reset state to ready
-                    content.persistentResourceIdentifier = nil
-                    content.state = .ready
                 }
                 
-                return content
-            } .filter {
-                // Only return contents that are not 'ready' nor 'error'
-                switch $0.state {
-                case .error, .ready: return false
-                default: return true
-                }
+                Log.info("A preserved resource is unrestorable. Resetting to ready state.")
+                
+                // If the url cannot be restored, reset state to ready
+                content.persistentResourceIdentifier = nil
+                content.state = .ready
             }
+            
+            return content
+        } .filter {
+            // Only return contents that are not 'ready' nor 'error'
+            switch $0.state {
+            case .error, .ready: return false
+            default: return true
+            }
+        }
     }
     
     // An array to store references to contents
@@ -308,39 +330,6 @@ extension OfflineContent {
     
     var downloadingSession: URLSession { return parent.sharedSession }
     
-    var persistedProperties: [String: Any] {
-        get {
-            if !identifier.isEmpty, let store = parent.offlineContentProperties
-                .dictionary(forKey: identifier)?["properties"] as? [String: Any] {
-                return store
-            } else { return [:] }
-        }
-        set {
-            // Do not store this object if it is still in error or ready state
-            switch state {
-            case .error, .ready:
-                // Remove the content from store if it is errored or ready
-                parent.offlineContentProperties.removeObject(forKey: identifier)
-                return
-            default: break
-            }
-            
-            if !identifier.isEmpty {
-                var entry = parent.offlineContentProperties.dictionary(forKey: identifier) ?? [:]
-                entry["type"] = String(describing: type(of: self))
-                entry["properties"] = newValue
-                entry["state"] = state.export
-                
-                if let resourceIdentifier = persistentResourceIdentifier {
-                    entry["path"] = resourceIdentifier.relativePath
-                    entry["relative"] = resourceIdentifier.relativeTo
-                }
-                
-                parent.offlineContentProperties.set(entry, forKey: identifier)
-            }
-        }
-    }
-    
     /// The url on the file system to where the offline content is stored
     ///
     /// Set by the manager
@@ -392,6 +381,31 @@ extension OfflineContent {
     
     fileprivate func _onProgress(_ session: URLSession, progress: Double) {
         state = .preserving(Float(progress))
+    }
+    
+    // Encode and stores the persistent information for this content on the file system
+    func persistedLocalProperties() {
+        switch state {
+        case .error, .ready:
+            // Remove the content from store if it is errored or ready
+            parent.persistedContentList.removeValue(forKey: identifier)
+            return
+        default: break
+        }
+        
+        if !identifier.isEmpty {
+            var entry = parent.persistedContentList[identifier] ?? [:]
+            entry["type"] = String(describing: type(of: self))
+            entry["properties"] = persistedProperties
+            entry["state"] = state.export
+            
+            if let resourceIdentifier = persistentResourceIdentifier {
+                entry["path"] = resourceIdentifier.relativePath
+                entry["relative"] = resourceIdentifier.relativeTo
+            }
+            
+            parent.persistedContentList[identifier] = entry
+        }
     }
 }
 

@@ -55,6 +55,12 @@ class OfflineContent: NSObject {
     // The provisioned downloading task of this OfflineContent
     var task: URLSessionTask?
     
+    /// Properties in this dictionary are persisted across launches
+    var persistedProperties: [String: Any] {
+        // Save local properties when updated
+        didSet { persistedLocalProperties() }
+    }
+    
     /// Used to recreate the persistent url
     ///
     /// Ideally no one besides the manager should access this property.
@@ -65,12 +71,14 @@ class OfflineContent: NSObject {
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
         parent = manager
+        persistedProperties = [:]
         super.init()
     }
     
     required init?(_ manager: OfflineContentManager, from properties: [String: Any], initialState: OfflineState) {
         state = initialState
         parent = manager
+        persistedProperties = properties
         super.init()
     }
     
