@@ -27,10 +27,31 @@ class OfflineEpisodeContent: OfflineContent {
     // Assign anime object if has it
     var anime: Anime?
     
+    // Retrive the playback media from the offline content
+    var media: PlaybackMedia? {
+        guard let url = preservedContentURL else { return nil }
+        
+        // Check the validity of the resource
+        guard (try? url.checkResourceIsReachable()) == true else { return nil }
+        
+        // Construct offline playback media
+        return OfflinePlaybackMedia(
+            link: episodeLink,
+            isAggregated: isAggregatedAsset,
+            url: url
+        )
+    }
+    
     override var identifier: String { return episodeLink.identifier }
     
     // Hold reference to the current task
     private var currentTask: NineAnimatorAsyncTask?
+    
+    // Set to indicate if this asset is an persisted hls asset
+    private var isAggregatedAsset: Bool {
+        get { return persistedProperties["aggregated"] as? Bool ?? false }
+        set { persistedProperties["aggregated"] = newValue }
+    }
     
     required init?(_ manager: OfflineContentManager, from properties: [String: Any], initialState: OfflineState) {
         // Decode link from properties
@@ -104,6 +125,9 @@ class OfflineEpisodeContent: OfflineContent {
         
         // Return if already preserved
         if case .preserved = state { return }
+        
+        // Update hls flag
+        isAggregatedAsset = media.isAggregated
         
         // Preserve using the AVAssetDownloadURLSession
         if media.isAggregated {

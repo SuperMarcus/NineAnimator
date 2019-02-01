@@ -52,13 +52,11 @@ class OfflineContent: NSObject {
     
     var identifier: String { return "" }
     
-    /// The url on the file system to where the offline content is stored
-    ///
-    /// Set by the manager
-    var preservedContentURL: URL?
-    
     // The provisioned downloading task of this OfflineContent
     var task: URLSessionTask?
+    
+    // This is what is acutally used to recreate the persistent url
+    var persistentResourceIdentifier: (relativePath: String, relativeTo: String)?
     
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
@@ -96,6 +94,17 @@ class OfflineContent: NSObject {
         task?.cancel()
         task = nil
         state = .ready
+    }
+    
+    /// Called when the content is restored from persistent storage
+    func onRestore(persistentContent url: URL) { }
+    
+    /// Ask the content if it is able to restore the file from url
+    ///
+    /// The default behavior is to check if the target is an readable file
+    func canRestore(persistentContent url: URL) -> Bool {
+        let fs = FileManager.default
+        return fs.isReadableFile(atPath: url.path)
     }
 }
 

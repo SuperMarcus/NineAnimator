@@ -31,6 +31,7 @@ class OfflineAccessButton: UIButton, Themable {
             NotificationCenter.default.removeObserver(self)
             guard let link = episodeLink, link != oldValue else { return }
             offlineAccessState = OfflineContentManager.shared.state(for: link)
+            setTitle(nil, for: .normal)
             
             // Add observer to listen to update notification
             NotificationCenter.default.addObserver(
