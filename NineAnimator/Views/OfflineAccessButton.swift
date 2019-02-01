@@ -43,7 +43,7 @@ class OfflineAccessButton: UIButton, Themable {
         }
     }
     
-    @IBInspectable var insetSpace: CGFloat = 8 {
+    @IBInspectable var insetSpace: CGFloat = 6 {
         didSet { updateContent() }
     }
     

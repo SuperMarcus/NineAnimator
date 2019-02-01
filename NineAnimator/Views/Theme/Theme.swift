@@ -125,7 +125,7 @@ extension Theme {
         
         if let view = view as? UIProgressView {
             view.progressTintColor = theme.tint
-            view.trackTintColor = theme.secondaryText
+            view.trackTintColor = theme.secondaryText.withAlphaComponent(0.6)
         }
     }
 }

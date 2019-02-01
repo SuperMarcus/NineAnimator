@@ -379,7 +379,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-zz-Opg">
-                                            <rect key="frame" x="16" y="11" width="295" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="300" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -389,7 +389,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="xsl-vp-f0K" userLabel="Anime Progress Container">
-                                            <rect key="frame" x="16" y="32" width="303" height="19"/>
+                                            <rect key="frame" x="16" y="32" width="308" height="19"/>
                                             <subviews>
                                                 <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yQy-Cx-TTd">
                                                     <rect key="frame" x="0.0" y="8.5" width="120" height="2"/>
@@ -403,7 +403,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5w-32-GEP">
-                                                    <rect key="frame" x="128" y="0.0" width="175" height="19"/>
+                                                    <rect key="frame" x="128" y="0.0" width="180" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -425,29 +425,14 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="752" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2n-TQ-hy9" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="319" y="11" width="40" height="40"/>
+                                            <rect key="frame" x="324" y="13.5" width="35" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="GLx-iq-W6a"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="GLx-iq-W6a"/>
                                                 <constraint firstAttribute="width" secondItem="B2n-TQ-hy9" secondAttribute="height" multiplier="1:1" id="n7q-1R-Ncn"/>
                                             </constraints>
                                             <state key="normal" title="Offline Access" image="Cloud Download"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="size" keyPath="imageSize">
-                                                    <size key="value" width="40" height="40"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="insetSpace">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="strokeWidth">
-                                                    <real key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="centerRectCornerRadius">
-                                                    <real key="value" value="2"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="centerRectWidth">
-                                                    <real key="value" value="8"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </button>
                                     </subviews>
@@ -481,7 +466,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-ZF-O7B">
-                                            <rect key="frame" x="16" y="19" width="295" height="16"/>
+                                            <rect key="frame" x="16" y="19" width="300" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -491,7 +476,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-eC-jxx">
-                                            <rect key="frame" x="16" y="36" width="295" height="21.5"/>
+                                            <rect key="frame" x="16" y="36" width="300" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -547,10 +532,10 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsN-rZ-dbV">
-                                            <rect key="frame" x="319" y="11" width="40" height="50.5"/>
+                                            <rect key="frame" x="324" y="11" width="35" height="50.5"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wev-7V-WQ7" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="5.5" width="40" height="40"/>
+                                                    <rect key="frame" x="0.0" y="5.5" width="35" height="40"/>
                                                     <state key="normal" title="Offline Access" image="Cloud Download"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -562,7 +547,7 @@
                                                 <constraint firstItem="Wev-7V-WQ7" firstAttribute="centerY" secondItem="qsN-rZ-dbV" secondAttribute="centerY" id="M3C-Qr-EqP"/>
                                                 <constraint firstItem="Wev-7V-WQ7" firstAttribute="leading" secondItem="qsN-rZ-dbV" secondAttribute="leading" id="RSk-gX-8IH"/>
                                                 <constraint firstAttribute="trailing" secondItem="Wev-7V-WQ7" secondAttribute="trailing" id="eQN-Z0-4oI"/>
-                                                <constraint firstAttribute="width" constant="40" id="trZ-B1-0t8"/>
+                                                <constraint firstAttribute="width" constant="35" id="trZ-B1-0t8"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -617,7 +602,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Cloud Download" width="40" height="40"/>
+        <image name="Cloud Download" width="28" height="28"/>
         <image name="Details" width="20" height="20"/>
     </resources>
 </document>
