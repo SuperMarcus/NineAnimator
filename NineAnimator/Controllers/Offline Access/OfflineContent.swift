@@ -41,7 +41,8 @@ enum OfflineState {
 class OfflineContent: NSObject {
     var state: OfflineState {
         didSet {
-            persistOfflineState()
+            // Save the new state
+            persistedLocalProperties()
             
             // Fire notification
             NotificationCenter.default.post(name: .offlineAccessStateDidUpdate, object: self)

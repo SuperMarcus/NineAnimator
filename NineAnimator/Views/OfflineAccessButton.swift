@@ -47,10 +47,6 @@ class OfflineAccessButton: UIButton, Themable {
         didSet { updateContent() }
     }
     
-    @IBInspectable var imageSize: CGSize = .init(width: 40, height: 40) {
-        didSet { updateContent() }
-    }
-    
     @IBInspectable var strokeWidth: CGFloat = 2 {
         didSet { updateContent() }
     }
@@ -94,7 +90,7 @@ class OfflineAccessButton: UIButton, Themable {
             preservationInitiatedActivityIndicator?.removeFromSuperview()
             preservationInitiatedActivityIndicator = nil
         case .preserving(let progress):
-            let size = CGSize(width: 40, height: 40)
+            let size = bounds.size
             let renderer = UIGraphicsImageRenderer(size: size)
             let image = renderer.image {
                 _ in

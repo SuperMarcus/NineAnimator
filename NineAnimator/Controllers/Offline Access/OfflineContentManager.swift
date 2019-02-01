@@ -222,7 +222,7 @@ extension OfflineContentManager {
         }
         
         defer {
-            content.persistOfflineState()
+            content.persistedLocalProperties()
             // Call the background session completion handler
             backgroundSessionCompletionHandler?()
             backgroundSessionCompletionHandler = nil
@@ -299,7 +299,7 @@ extension OfflineContentManager {
         }
         
         defer {
-            content.persistOfflineState()
+            content.persistedLocalProperties()
             // Call the background session completion handler
             backgroundSessionCompletionHandler?()
             backgroundSessionCompletionHandler = nil
@@ -346,11 +346,6 @@ extension OfflineContent {
         }
     }
     
-    func persistOfflineState() {
-        let properties = persistedProperties
-        persistedProperties = properties
-    }
-    
     fileprivate func _onCompletion(_ session: URLSession) {
         guard let location = preservedContentURL else {
             persistentResourceIdentifier = nil
@@ -388,7 +383,7 @@ extension OfflineContent {
         switch state {
         case .error, .ready:
             // Remove the content from store if it is errored or ready
-            parent.persistedContentList.removeValue(forKey: identifier)
+            parent.persistedContentList[identifier] = nil
             return
         default: break
         }
