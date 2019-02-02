@@ -336,16 +336,17 @@ extension AnimeViewController {
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
         
-        // Use offline media is possible
-        if let media = content.media {
-            Log.info("Offline content found. Using donloaded asset.")
-            NativePlayerController.default.play(media: media)
-            return
-        }
-        
         func clearSelection() {
             tableView.deselectSelectedRow()
             selectedEpisodeCell = nil
+        }
+        
+        // Use offline media is possible
+        if let media = content.media {
+            Log.info("Offline content found. Using donloaded asset.")
+            clearSelection()
+            NativePlayerController.default.play(media: media)
+            return
         }
         
         episodeRequestTask = anime!.episode(with: episodeLink) {
