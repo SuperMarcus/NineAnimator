@@ -149,6 +149,11 @@ class SettingsRootTableViewController: UITableViewController, Themable {
             }
         case "settings.history.cache":
             clearCache()
+        case "settings.history.download":
+            askForConfirmation(title: "Remove all Downloads",
+                               message: "This action is irreversible. All downloaded episodes and contents will be removed.",
+                               continueActionName: "Remove Downloads"
+            ) { OfflineContentManager.shared.deleteAll() }
         case "settings.history.reset":
             askForConfirmation(title: "Reset NineAnimator",
                                message: "This action is irreversible. All data and preferences will be deleted from your local storage.",
