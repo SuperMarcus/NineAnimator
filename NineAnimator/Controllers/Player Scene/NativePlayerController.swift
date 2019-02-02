@@ -132,7 +132,7 @@ extension NativePlayerController {
     func append(media: PlaybackMedia) {
         let item = media.avPlayerItem
         
-        //Add item ready observation to restore playback progress
+        // Add item ready observation to restore playback progress
         mediaItemsObervations[item] = item.observe(\.status) {
             [weak self] (_: AVPlayerItem, _: NSKeyValueObservedChange<AVPlayerItem.Status>) in
             guard let self = self else { return }
@@ -145,12 +145,22 @@ extension NativePlayerController {
             }
         }
         
+        // Add observer for did reach end notification
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlayerDidReachEnd(_:)),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: item
+        )
+        
         player.insert(item, after: nil)
-        //This needs to be changed
+        // This needs to be changed
         mediaQueue.append(media)
     }
     
     func clearQueue() {
+        // Remove all player item observers
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
         mediaItemsObervations.forEach { $0.value.invalidate() }
         mediaItemsObervations.removeAll()
         mediaQueue.removeAll()
@@ -208,6 +218,28 @@ extension NativePlayerController {
             NotificationCenter.default.post(name: .externalPlaybackDidStart, object: self)
         } else {
             NotificationCenter.default.post(name: .externalPlaybackDidEnd, object: self)
+        }
+    }
+    
+    @objc private func onPlayerDidReachEnd(_ notification: Notification) {
+        // Remove all did play to end time notificiation observer
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: notification.object
+        )
+        
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            
+            // Remove the finished item
+            self.mediaQueue.removeFirst()
+            
+            // Dismiss the player if no more item is in the queue
+            if self.mediaQueue.isEmpty {
+                self.playerViewController.dismiss(animated: true, completion: nil)
+            }
         }
     }
 }

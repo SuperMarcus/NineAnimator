@@ -324,51 +324,6 @@ extension AnimeViewController {
         
         retriveAndPlay()
     }
-    
-    func didSelectServer(_ server: Anime.ServerIdentifier) {
-        self.server = server
-        tableView.reloadSections(Section.indexSet(.episodes), with: .automatic)
-        
-        NineAnimator.default.user.recentServer = server
-        
-        // Update headings
-        animeHeadingView.update(animated: true) {
-            $0.selectedServerName = self.anime!.servers[server]
-        }
-    }
-    
-    private func episodeLink(for indexPath: IndexPath) -> EpisodeLink? {
-        guard let server = server,
-            let episodes = anime?.episodes[server] else {
-                return nil
-        }
-        
-        var episode = episodes[indexPath.item]
-        
-        if NineAnimator.default.user.episodeListingOrder == .reversed {
-            episode = episodes[episodes.count - indexPath.item - 1]
-        }
-        
-        return episode
-    }
-}
-
-// MARK: - Share/Select Server/Notifications
-extension AnimeViewController {
-    @IBAction private func onSubscribeButtonTapped(_ sender: Any) {
-        // Request permission first
-        UserNotificationManager.default.requestNotificationPermissions()
-        
-        // Then update the heading view
-        animeHeadingView.update(animated: true) {
-            [weak self] _ in
-            if let anime = self?.anime {
-                NineAnimator.default.user.watch(anime: anime)
-            } else if let animeLink = self?.animeLink {
-                NineAnimator.default.user.watch(uncached: animeLink)
-            }
-        }
-    }
 }
 
 // MARK: - Initiate playback
@@ -448,8 +403,23 @@ extension AnimeViewController {
     }
 }
 
-// Show more options
+// MARK: - Handling events from the header view
 extension AnimeViewController {
+    @IBAction private func onSubscribeButtonTapped(_ sender: Any) {
+        // Request permission first
+        UserNotificationManager.default.requestNotificationPermissions()
+        
+        // Then update the heading view
+        animeHeadingView.update(animated: true) {
+            [weak self] _ in
+            if let anime = self?.anime {
+                NineAnimator.default.user.watch(anime: anime)
+            } else if let animeLink = self?.animeLink {
+                NineAnimator.default.user.watch(uncached: animeLink)
+            }
+        }
+    }
+    
     @IBAction private func onMoreOptionsButtonTapped(_ sender: Any) {
         guard let animeLink = animeLink else { return }
         
@@ -541,6 +511,19 @@ extension AnimeViewController {
         
         present(activityViewController, animated: true)
     }
+    
+    // Update the heading view and reload the list of episodes for the server
+    private func didSelectServer(_ server: Anime.ServerIdentifier) {
+        self.server = server
+        tableView.reloadSections(Section.indexSet(.episodes), with: .automatic)
+        
+        NineAnimator.default.user.recentServer = server
+        
+        // Update headings
+        animeHeadingView.update(animated: true) {
+            $0.selectedServerName = self.anime!.servers[server]
+        }
+    }
 }
 
 // Peek preview actions
@@ -615,6 +598,22 @@ extension AnimeViewController {
 
 // MARK: - Helpers and stubs
 fileprivate extension AnimeViewController {
+    /// Retrive EpisodeLink for the specific indexPath
+    private func episodeLink(for indexPath: IndexPath) -> EpisodeLink? {
+        guard let server = server,
+            let episodes = anime?.episodes[server] else {
+                return nil
+        }
+        
+        var episode = episodes[indexPath.item]
+        
+        if NineAnimator.default.user.episodeListingOrder == .reversed {
+            episode = episodes[episodes.count - indexPath.item - 1]
+        }
+        
+        return episode
+    }
+    
     // Using this enum to remind me to implement stuff when adding new sections...
     fileprivate enum Section: Int, Equatable {
         case synopsis = 0

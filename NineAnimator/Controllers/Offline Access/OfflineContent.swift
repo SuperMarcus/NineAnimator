@@ -120,6 +120,9 @@ class OfflineContent: NSObject {
             do {
                 try FileManager.default.removeItem(at: url)
             } catch { Log.error(error) }
+            
+            // Update state to ready
+            state = .ready
         }
     }
     

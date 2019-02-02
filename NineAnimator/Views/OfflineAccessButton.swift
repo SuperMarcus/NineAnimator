@@ -78,17 +78,20 @@ class OfflineAccessButton: UIButton, Themable {
             newIndicator.hidesWhenStopped = true
             addSubview(newIndicator)
             preservationInitiatedActivityIndicator = newIndicator
+            isHidden = false
             newIndicator.startAnimating()
         case .error, .ready:
             setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
             preservationInitiatedActivityIndicator?.stopAnimating()
             preservationInitiatedActivityIndicator?.removeFromSuperview()
             preservationInitiatedActivityIndicator = nil
+            isHidden = false
         case .preserved:
             setImage(UIImage(), for: .normal)
             preservationInitiatedActivityIndicator?.stopAnimating()
             preservationInitiatedActivityIndicator?.removeFromSuperview()
             preservationInitiatedActivityIndicator = nil
+            isHidden = true
         case .preserving(let progress):
             let size = bounds.size
             let renderer = UIGraphicsImageRenderer(size: size)
@@ -134,6 +137,7 @@ class OfflineAccessButton: UIButton, Themable {
             preservationInitiatedActivityIndicator?.stopAnimating()
             preservationInitiatedActivityIndicator?.removeFromSuperview()
             preservationInitiatedActivityIndicator = nil
+            isHidden = false
         }
     }
     

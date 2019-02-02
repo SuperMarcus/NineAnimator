@@ -33,12 +33,15 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
+    fileprivate var persistedContentIndexURL: URL {
+        return persistentDirectory
+            .appendingPathComponent("com.marcuszhou.nineanimator.offlinecontents.index.plist")
+    }
+    
     fileprivate var persistedContentList: [String: [String: Any]] {
         get {
-            let url = persistentDirectory
-                .appendingPathComponent("com.marcuszhou.nineanimator.offlinecontents.index.plist")
             do {
-                let data = try Data(contentsOf: url)
+                let data = try Data(contentsOf: persistedContentIndexURL)
                 guard let dict = try PropertyListSerialization
                     .propertyList(from: data, options: [], format: nil) as? [String: [String: Any]] else {
                         throw NineAnimatorError.providerError("Error decoding property listed file")
@@ -48,13 +51,10 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             return [:]
         }
         set {
-            let url = persistentDirectory
-                .appendingPathComponent("com.marcuszhou.nineanimator.offlinecontents.index.plist")
-            
             do {
                 try PropertyListSerialization
                     .data(fromPropertyList: newValue, format: .binary, options: 0)
-                    .write(to: url)
+                    .write(to: persistedContentIndexURL)
             } catch { Log.error(error) }
         }
     }
@@ -130,49 +130,6 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         return typeRegistry
     }()
     
-    private var persistedContentPool: [OfflineContent] {
-        return persistedContentList.compactMap {
-            item -> OfflineContent? in
-            let dict = item.value
-            guard let type = dict["type"] as? String,
-                let stateDict = dict["state"] as? [String: Any],
-                let properties = dict["properties"] as? [String: Any] else { return nil }
-            
-            let state = OfflineState(from: stateDict)
-                
-            // The content is restored with the initial state
-            guard let content = registeredContentTypes[type]?(properties, state) else { return nil }
-            
-            if case .preserved = state {
-                if let relativePath = dict["path"] as? String,
-                    let relativeTo = dict["relative"] as? String {
-                    content.persistentResourceIdentifier = (relativePath, relativeTo)
-                    
-                    // Ask the content itself if it is able to restore the offline content
-                    if let url = content.preservedContentURL,
-                        content.canRestore(persistentContent: url) {
-                        content.onRestore(persistentContent: url)
-                        return content
-                    }
-                }
-                
-                Log.info("A preserved resource is unrestorable. Resetting to ready state.")
-                
-                // If the url cannot be restored, reset state to ready
-                content.persistentResourceIdentifier = nil
-                content.state = .ready
-            }
-            
-            return content
-        } .filter {
-            // Only return contents that are not 'ready' nor 'error'
-            switch $0.state {
-            case .error, .ready: return false
-            default: return true
-            }
-        }
-    }
-    
     // An array to store references to contents
     private lazy var contentPool = persistedContentPool
     
@@ -242,7 +199,7 @@ extension OfflineContentManager {
             // Set resource identifier
             content.persistentResourceIdentifier = (resourceIdentifierPath, "persist")
             
-            guard let destinationUrl = content.preservedContentURL else {
+            guard var destinationUrl = content.preservedContentURL else {
                 throw NineAnimatorError.providerError("Cannot retrive url when resource identifier has been set")
             }
             
@@ -250,6 +207,11 @@ extension OfflineContentManager {
                 Log.error("Duplicated file detected, removing.")
                 try fs.removeItem(at: destinationUrl)
             }
+            
+            // Set the resource to be excluded from backups
+            var resourceValues = URLResourceValues()
+            resourceValues.isExcludedFromBackup = true
+            try destinationUrl.setResourceValues(resourceValues)
             
             // Move the item
             try fs.moveItem(at: location, to: destinationUrl)
@@ -321,6 +283,78 @@ extension OfflineContentManager {
         
         let progress = Double(timeRange.end.value) / Double(timeRangeExpectedToLoad.end.value)
         content._onProgress(session, progress: progress)
+    }
+}
+
+// MARK: - Managing persisted assets
+extension OfflineContentManager {
+    /// Parse OfflineContent from file system
+    private var persistedContentPool: [OfflineContent] {
+        return persistedContentList.compactMap {
+            item -> OfflineContent? in
+            let dict = item.value
+            guard let type = dict["type"] as? String,
+                let stateDict = dict["state"] as? [String: Any],
+                let properties = dict["properties"] as? [String: Any] else { return nil }
+            
+            let state = OfflineState(from: stateDict)
+            
+            // The content is restored with the initial state
+            guard let content = registeredContentTypes[type]?(properties, state) else { return nil }
+            
+            if case .preserved = state {
+                if let relativePath = dict["path"] as? String,
+                    let relativeTo = dict["relative"] as? String {
+                    content.persistentResourceIdentifier = (relativePath, relativeTo)
+                    
+                    // Ask the content itself if it is able to restore the offline content
+                    if let url = content.preservedContentURL,
+                        content.canRestore(persistentContent: url) {
+                        content.onRestore(persistentContent: url)
+                        return content
+                    }
+                }
+                
+                Log.info("A preserved resource is unrestorable. Resetting to ready state.")
+                
+                // If the url cannot be restored, reset state to ready
+                content.persistentResourceIdentifier = nil
+                content.state = .ready
+            }
+            
+            return content
+        }.filter {
+            // Only return contents that are not 'ready' nor 'error'
+            switch $0.state {
+            case .error, .ready: return false
+            default: return true
+            }
+        }
+    }
+    
+    /// Parse and update the persisted content pool from the file system
+    fileprivate func readPersistedContents() {
+        contentPool = persistedContentPool
+    }
+    
+    /// Remove all downloaded contents - free up the disk space
+    func deleteAll() {
+        do {
+            let fs = FileManager.default
+            
+            // First, tell all the contents to clean up after themselves
+            preservedContents.forEach { $0.delete() }
+            
+            // List and remove files from the persistent directory
+            try fs.contentsOfDirectory(
+                at: persistentDirectory,
+                includingPropertiesForKeys: nil,
+                options: [.skipsSubdirectoryDescendants]
+            ).forEach { try fs.removeItem(at: $0) }
+            
+            // Last, remove references to all contents
+            contentPool = []
+        } catch { Log.error("Faild to clean persist directory: %@", error) }
     }
 }
 
