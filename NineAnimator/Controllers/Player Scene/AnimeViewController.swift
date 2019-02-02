@@ -506,46 +506,51 @@ extension AnimeViewController {
         // Search from the latest to the earliest
         guard let availableEpisodes = anime.episodes[server] else { return }
         
-        var suggestingEpisodeLink: EpisodeLink?
-        
-        if availableEpisodes.count > 1 {
-            // The policy for suggestion is:
-            // 1. If an episode with a progress of 0.01...0.80 exists, suggest that episode
-            // 2. If an episode with a progress greater than 0.80 exists, suggest the next
-            //    episode to that eisode if it exists, or the episode itself if there is no
-            //    more after that episode
-            // 3. Suggest the first episode
-            if let unfinishedAnimeIndex = availableEpisodes.lastIndex(where: { $0.playbackProgress > 0.01 }) {
-                let link: EpisodeLink
-                switch availableEpisodes[unfinishedAnimeIndex].playbackProgress {
-                case 0.80... where (unfinishedAnimeIndex + 1) < availableEpisodes.count:
-                    link = availableEpisodes[unfinishedAnimeIndex + 1]
+        DispatchQueue.global().async {
+            [weak self] in
+            var suggestingEpisodeLink: EpisodeLink?
+            
+            func update(_ link: EpisodeLink, reason: AnimePredictedEpisodeTableViewCell.SuggestionReason) {
+                DispatchQueue.main.async {
                     cell.episodeLink = link
-                    cell.reason = .start
-                case 0.01..<0.80:
-                    link = availableEpisodes[unfinishedAnimeIndex]
-                    cell.episodeLink = link
-                    cell.reason = .continue
-                default:
-                    link = availableEpisodes[unfinishedAnimeIndex]
-                    cell.episodeLink = link
-                    cell.reason = .start
+                    cell.reason = reason
                 }
-                suggestingEpisodeLink = link
-            } else {
-                let link = availableEpisodes.first!
-                suggestingEpisodeLink = link
-                cell.episodeLink = link
-                cell.reason = .start
             }
-        } else if let link = availableEpisodes.first {
-            suggestingEpisodeLink = link
-            cell.episodeLink = link
-            cell.reason = link.playbackProgress > 0.01 ? .continue : .start
+            
+            if availableEpisodes.count > 1 {
+                // The policy for suggestion is:
+                // 1. If an episode with a progress of 0.01...0.80 exists, suggest that episode
+                // 2. If an episode with a progress greater than 0.80 exists, suggest the next
+                //    episode to that eisode if it exists, or the episode itself if there is no
+                //    more after that episode
+                // 3. Suggest the first episode
+                if let unfinishedAnimeIndex = availableEpisodes.lastIndex(where: { $0.playbackProgress > 0.01 }) {
+                    let link: EpisodeLink
+                    switch availableEpisodes[unfinishedAnimeIndex].playbackProgress {
+                    case 0.80... where (unfinishedAnimeIndex + 1) < availableEpisodes.count:
+                        link = availableEpisodes[unfinishedAnimeIndex + 1]
+                        update(link, reason: .start)
+                    case 0.01..<0.80:
+                        link = availableEpisodes[unfinishedAnimeIndex]
+                        update(link, reason: .continue)
+                    default:
+                        link = availableEpisodes[unfinishedAnimeIndex]
+                        update(link, reason: .start)
+                    }
+                    suggestingEpisodeLink = link
+                } else {
+                    let link = availableEpisodes.first!
+                    suggestingEpisodeLink = link
+                    update(link, reason: .start)
+                }
+            } else if let link = availableEpisodes.first {
+                suggestingEpisodeLink = link
+                update(link, reason: link.playbackProgress > 0.01 ? .continue : .start)
+            }
+            
+            // Store the suggested episode link
+            self?.presentedSuggestingEpisode = suggestingEpisodeLink
         }
-        
-        // Store the suggested episode link
-        presentedSuggestingEpisode = suggestingEpisodeLink
     }
     
     // Update suggestion when playback did end
