@@ -56,6 +56,9 @@ class OfflineContent: NSObject {
     // The provisioned downloading task of this OfflineContent
     var task: URLSessionTask?
     
+    /// Access the date that the content is preserved
+    var datePreserved: Date?
+    
     /// Properties in this dictionary are persisted across launches
     var persistedProperties: [String: Any] {
         // Save local properties when updated

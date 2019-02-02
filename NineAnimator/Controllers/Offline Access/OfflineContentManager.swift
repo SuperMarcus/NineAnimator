@@ -310,6 +310,7 @@ extension OfflineContentManager {
                     // Ask the content itself if it is able to restore the offline content
                     if let url = content.preservedContentURL,
                         content.canRestore(persistentContent: url) {
+                        content.datePreserved = (dict["date"] as? Date) ?? Date()
                         content.onRestore(persistentContent: url)
                         return content
                     }
@@ -400,6 +401,7 @@ extension OfflineContent {
         Log.info("Content persisted to %@", location.absoluteString)
         
         // Update state and call completion handler
+        datePreserved = Date()
         state = .preserved
         onCompletion(with: location)
     }
@@ -433,6 +435,11 @@ extension OfflineContent {
             if let resourceIdentifier = persistentResourceIdentifier {
                 entry["path"] = resourceIdentifier.relativePath
                 entry["relative"] = resourceIdentifier.relativeTo
+            }
+            
+            if let date = datePreserved {
+                // Save the date that this asset is persisted
+                entry["date"] = date as NSDate
             }
             
             parent.persistedContentList[identifier] = entry
