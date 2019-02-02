@@ -208,13 +208,13 @@ extension OfflineContentManager {
                 try fs.removeItem(at: destinationUrl)
             }
             
+            // Move the item
+            try fs.moveItem(at: location, to: destinationUrl)
+            
             // Set the resource to be excluded from backups
             var resourceValues = URLResourceValues()
             resourceValues.isExcludedFromBackup = true
             try destinationUrl.setResourceValues(resourceValues)
-            
-            // Move the item
-            try fs.moveItem(at: location, to: destinationUrl)
             
             // Call the internal completion handler
             content._onCompletion(session)
@@ -340,6 +340,8 @@ extension OfflineContentManager {
     /// Remove all downloaded contents - free up the disk space
     func deleteAll() {
         do {
+            Log.info("Removing all persisted contents")
+            
             let fs = FileManager.default
             
             // First, tell all the contents to clean up after themselves
