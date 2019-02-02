@@ -118,6 +118,8 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         }
     }
     
+    private var presentedSuggestingEpisode: EpisodeLink?
+    
     private var selectedEpisodeCell: UITableViewCell?
     
     private var episodeRequestTask: NineAnimatorAsyncTask?
@@ -167,6 +169,18 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 } else { self?.retriveAndPlay() }
             }
         }
+        
+        // Receive playback did end notification and update suggestions
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackDidEnd(_:)),
+            name: .playbackDidEnd,
+            object: nil
+        )
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidLoad() {
@@ -251,7 +265,7 @@ extension AnimeViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
-        case .synopsis:
+        case .suggestion, .synopsis:
             return anime == nil ? 0 : 1
         case .episodes:
             guard let serverIdentifier = server,
@@ -263,6 +277,10 @@ extension AnimeViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch Section(rawValue: indexPath.section)! {
+        case .suggestion:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.suggestion", for: indexPath) as! AnimePredictedEpisodeTableViewCell
+            updateSuggestingEpisode(for: cell)
+            return cell
         case .synopsis:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis", for: indexPath) as! AnimeSynopsisCellTableViewCell
             cell.synopsisText = anime?.description
@@ -300,7 +318,7 @@ extension AnimeViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == Section.episodes else {
+        guard indexPath.section == Section.episodes || indexPath.section == Section.suggestion else {
             tableView.deselectSelectedRow()
             return Log.info("A non-episode cell has been selected")
         }
@@ -317,6 +335,13 @@ extension AnimeViewController {
         guard let episodeLink = episodeLink(for: indexPath) else {
             tableView.deselectSelectedRow()
             return Log.error("Unable to retrive episode link from pool")
+        }
+        
+        // Scroll and highlight the cell in the episodes section
+        if cell is AnimePredictedEpisodeTableViewCell,
+            let destinationIndexPath = self.indexPath(for: episodeLink) {
+            tableView.deselectSelectedRow()
+            tableView.selectRow(at: destinationIndexPath, animated: true, scrollPosition: .middle)
         }
         
         selectedEpisodeCell = cell
@@ -401,6 +426,131 @@ extension AnimeViewController {
                 episode.update(progress: 1.0)
             }
         }
+    }
+}
+
+// MARK: - Suggesting To Watch episode
+extension AnimeViewController {
+    @IBAction private func onQuickJumpButtonTapped(_ sender: UIButton) {
+        guard let server = server, let episodes = anime?.episodes[server] else { return }
+        
+        // Scroll to the suggested episode if no more than 50 episodes are available
+        guard episodes.count > 50 else {
+            if let suggestedEpisode = presentedSuggestingEpisode,
+                let index = indexPath(for: suggestedEpisode) {
+                tableView.scrollToRow(at: index, at: .middle, animated: true)
+            }
+            return
+        }
+        
+        let quickJumpSheet = UIAlertController(title: "Qucik Jump", message: nil, preferredStyle: .actionSheet)
+        
+        if let popoverController = quickJumpSheet.popoverPresentationController {
+            popoverController.sourceView = sender
+        }
+        
+        if episodes.count <= 100 {
+            quickJumpSheet.addAction({
+                let index = indexPath(for: episodes[0])!
+                return UIAlertAction(title: "1 - 49", style: .default) {
+                    [weak self] _ in self?.tableView.scrollToRow(at: index, at: .middle, animated: true)
+                }
+            }())
+            
+            quickJumpSheet.addAction({
+                let index = indexPath(for: episodes[49])!
+                return UIAlertAction(title: "50 - \(episodes.count)", style: .default) {
+                    [weak self] _ in self?.tableView.scrollToRow(at: index, at: .middle, animated: true)
+                }
+            }())
+        } else {
+            let episodesPerSection = 100
+            let totalSections = episodes.count / episodesPerSection
+            (0...totalSections).map {
+                section in
+                let startEpisodeNumber = episodesPerSection * section
+                let endEpisodeNumber = min(startEpisodeNumber + episodesPerSection, episodes.count)
+                let index = indexPath(for: episodes[max(startEpisodeNumber, 0)])!
+                return UIAlertAction(
+                    title: startEpisodeNumber == endEpisodeNumber ?
+                        "Episode \(startEpisodeNumber + 1)" : "Episode \(startEpisodeNumber + 1) - \(endEpisodeNumber)",
+                    style: .default) {
+                    [weak self] _ in self?.tableView.scrollToRow(at: index, at: .middle, animated: true)
+                }
+            }.forEach(quickJumpSheet.addAction)
+        }
+        
+        if let suggestedEpisode = presentedSuggestingEpisode,
+            let index = indexPath(for: suggestedEpisode) {
+            let suggestedEpisodeLabel: String = {
+                if let episodeNumber = anime?.episodesAttributes[suggestedEpisode]?.episodeNumber {
+                    return "Episode \(episodeNumber)"
+                } else { return "Episode \(suggestedEpisode.name)" }
+            }()
+            quickJumpSheet.addAction({
+                UIAlertAction(
+                    title: "Suggested: \(suggestedEpisodeLabel)",
+                    style: .default) {
+                    [weak self] _ in self?.tableView.scrollToRow(at: index, at: .middle, animated: true)
+                }
+            }())
+        }
+        
+        quickJumpSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(quickJumpSheet, animated: true, completion: nil)
+    }
+    
+    private func updateSuggestingEpisode(for cell: AnimePredictedEpisodeTableViewCell) {
+        guard let anime = anime, let server = server else { return }
+        // Search from the latest to the earliest
+        guard let availableEpisodes = anime.episodes[server] else { return }
+        
+        var suggestingEpisodeLink: EpisodeLink?
+        
+        if availableEpisodes.count > 1 {
+            // The policy for suggestion is:
+            // 1. If an episode with a progress of 0.01...0.80 exists, suggest that episode
+            // 2. If an episode with a progress greater than 0.80 exists, suggest the next
+            //    episode to that eisode if it exists, or the episode itself if there is no
+            //    more after that episode
+            // 3. Suggest the first episode
+            if let unfinishedAnimeIndex = availableEpisodes.lastIndex(where: { $0.playbackProgress > 0.01 }) {
+                let link: EpisodeLink
+                switch availableEpisodes[unfinishedAnimeIndex].playbackProgress {
+                case 0.80... where (unfinishedAnimeIndex + 1) < availableEpisodes.count:
+                    link = availableEpisodes[unfinishedAnimeIndex + 1]
+                    cell.episodeLink = link
+                    cell.reason = .start
+                case 0.01..<0.80:
+                    link = availableEpisodes[unfinishedAnimeIndex]
+                    cell.episodeLink = link
+                    cell.reason = .continue
+                default:
+                    link = availableEpisodes[unfinishedAnimeIndex]
+                    cell.episodeLink = link
+                    cell.reason = .start
+                }
+                suggestingEpisodeLink = link
+            } else {
+                let link = availableEpisodes.first!
+                suggestingEpisodeLink = link
+                cell.episodeLink = link
+                cell.reason = .start
+            }
+        } else if let link = availableEpisodes.first {
+            suggestingEpisodeLink = link
+            cell.episodeLink = link
+            cell.reason = link.playbackProgress > 0.01 ? .continue : .start
+        }
+        
+        // Store the suggested episode link
+        presentedSuggestingEpisode = suggestingEpisodeLink
+    }
+    
+    // Update suggestion when playback did end
+    @objc private func onPlaybackDidEnd(_ notification: Notification) {
+        tableView.reloadSections(Section.indexSet(.suggestion), with: .automatic)
     }
 }
 
@@ -516,7 +666,7 @@ extension AnimeViewController {
     // Update the heading view and reload the list of episodes for the server
     private func didSelectServer(_ server: Anime.ServerIdentifier) {
         self.server = server
-        tableView.reloadSections(Section.indexSet(.episodes), with: .automatic)
+        tableView.reloadSections(Section.indexSet(.episodes, .suggestion), with: .automatic)
         
         NineAnimator.default.user.recentServer = server
         
@@ -606,20 +756,41 @@ fileprivate extension AnimeViewController {
                 return nil
         }
         
-        var episode = episodes[indexPath.item]
-        
-        if NineAnimator.default.user.episodeListingOrder == .reversed {
-            episode = episodes[episodes.count - indexPath.item - 1]
+        switch Section(rawValue: indexPath.section)! {
+        case .episodes:
+            let episode: EpisodeLink
+            if NineAnimator.default.user.episodeListingOrder == .reversed {
+                episode = episodes[episodes.count - indexPath.item - 1]
+            } else { episode = episodes[indexPath.item] }
+            return episode
+        case .suggestion: return presentedSuggestingEpisode
+        default: return nil
+        }
+    }
+    
+    private func indexPath(for episodeLink: EpisodeLink) -> IndexPath? {
+        guard let server = server, var episodes = anime?.episodes[server] else {
+            return nil
         }
         
-        return episode
+        if NineAnimator.default.user.episodeListingOrder == .reversed {
+            episodes = episodes.reversed()
+        }
+        
+        if let index = episodes.firstIndex(of: episodeLink) {
+            return Section.episodes[index]
+        }
+        
+        return nil
     }
     
     // Using this enum to remind me to implement stuff when adding new sections...
     fileprivate enum Section: Int, Equatable {
-        case synopsis = 0
+        case suggestion = 0
         
-        case episodes = 1
+        case synopsis = 1
+        
+        case episodes = 2
         
         subscript(_ item: Int) -> IndexPath {
             return IndexPath(item: item, section: self.rawValue)
@@ -648,5 +819,5 @@ fileprivate extension AnimeViewController {
 }
 
 fileprivate extension Array where Element == AnimeViewController.Section {
-    fileprivate static let all: [AnimeViewController.Section] = [ .synopsis, .episodes ]
+    fileprivate static let all: [AnimeViewController.Section] = [ .suggestion, .synopsis, .episodes ]
 }

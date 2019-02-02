@@ -96,14 +96,15 @@ class NineAnimatorUser {
     ///   - progress: Float value ranging from 0.0 to 1.0.
     ///   - episode: EpisodeLink of the episode.
     func update(progress: Float, for episode: EpisodeLink) {
+        let clippedProgress = max(min(1.0, progress), 0.0)
         var store = persistedProgresses
-        store["\(episode.parent.source.name)+\(episode.identifier)"] = progress
+        store["\(episode.parent.source.name)+\(episode.identifier)"] = clippedProgress
         persistedProgresses = store
         
         NotificationCenter.default.post(
             name: .playbackProgressDidUpdate,
             object: episode,
-            userInfo: ["progress": progress]
+            userInfo: ["progress": clippedProgress]
         )
     }
     
@@ -112,7 +113,8 @@ class NineAnimatorUser {
     /// - Parameter episode: EpisodeLink of the episode
     /// - Returns: Float value ranging from 0.0 to 1.0
     func playbackProgress(for episode: EpisodeLink) -> Float {
-        return persistedProgresses["\(episode.parent.source.name)+\(episode.identifier)"] ?? 0
+        let persistedProgress = persistedProgresses["\(episode.parent.source.name)+\(episode.identifier)"] ?? 0
+        return max(min(persistedProgress, 1.0), 0.0)
     }
     
     func clearRecents() {

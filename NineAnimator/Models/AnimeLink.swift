@@ -109,3 +109,11 @@ extension EpisodeLink {
         return lhs.identifier == rhs.identifier
     }
 }
+
+// Progress
+extension EpisodeLink {
+    var playbackProgress: Float {
+        get { return NineAnimator.default.user.playbackProgress(for: self) }
+        set { NineAnimator.default.user.update(progress: newValue, for: self) }
+    }
+}

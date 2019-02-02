@@ -60,6 +60,7 @@
 		2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73A3A521FB72230080A8B2 /* Theme.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C86BD0921F0169F002D876A /* DummyParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86BD0821F0169F002D876A /* DummyParser.swift */; };
+		2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */; };
 		2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */; };
 		2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */; };
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
@@ -200,6 +201,7 @@
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C86BD0821F0169F002D876A /* DummyParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyParser.swift; sourceTree = "<group>"; };
 		2C8BCB5521E2EB7600430598 /* homekit.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homekit.jpg; sourceTree = "<group>"; };
+		2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimePredictedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C91296C21BAD10B00284FD0 /* EpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderParser.swift; sourceTree = "<group>"; };
 		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 				2CD9B9A121FE41AD00203442 /* AnimeRatingView.swift */,
 				2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */,
 				2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */,
+				2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */,
 			);
 			path = "Anime Scene";
 			sourceTree = "<group>";
@@ -868,6 +871,7 @@
 				2CCC746B21C098860007502A /* SearchMasterAnime.swift in Sources */,
 				2C6677B021BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift in Sources */,
 				2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */,
+				2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */,
 				2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */,
 				2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,

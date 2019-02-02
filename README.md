@@ -264,3 +264,4 @@ Most of the resources are obtained from the open domains with their respective a
 - [Details Icon](https://thenounproject.com/search/?q=detail&i=408469) by [Viktor Vorobyev](https://thenounproject.com/vityavorobyev/)
 - [Action Icon](https://thenounproject.com/search/?q=share&i=1058858) by [Тимур Минвалеев](https://thenounproject.com/timur.minvaleev/)
 - [Server Icon](https://thenounproject.com/search/?q=server&i=78508) by [Hans Paul Mösl Junior](https://thenounproject.com/hansmosl)
+- [Solid Play Icon](https://thenounproject.com/search/?q=play&i=2184153) by [Eagle Eye](https://thenounproject.com/eagleeye)
