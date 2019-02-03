@@ -20,6 +20,8 @@
 import UIKit
 
 class RecentlyViewedTableViewController: UITableViewController {
+    private lazy var statefulAnime = OfflineContentManager.shared.statefulAnime
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -28,6 +30,9 @@ class RecentlyViewedTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Store the preserved or preserving anime list
+        statefulAnime = OfflineContentManager.shared.statefulAnime
         
         //Pull any updates from the cloud
         NineAnimator.default.user.pull()
@@ -44,23 +49,18 @@ extension RecentlyViewedTableViewController {
 // MARK: - Table view data source
 extension RecentlyViewedTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return NineAnimator.default.user.lastEpisode == nil ? 0 : 1
-        case 1: return NineAnimator.default.user.recentAnimes.count
+        case 1: return statefulAnime.count
+        case 2: return NineAnimator.default.user.recentAnimes.count
         default: return 0
         }
     }
     
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return traitCollection.verticalSizeClass == .compact
-            || traitCollection.horizontalSizeClass == .compact
-            ? 160 : 200
-    }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -69,6 +69,11 @@ extension RecentlyViewedTableViewController {
             cell.makeThemable()
             return cell
         case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recent.download", for: indexPath) as! OfflineAnimeTableViewCell
+            cell.animeLink = statefulAnime[indexPath.item]
+            cell.makeThemable()
+            return cell
+        case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as! RecentlyWatchedAnimeTableViewCell
             let animes = NineAnimator.default.user.recentAnimes
             let anime = animes[indexPath.item]
@@ -85,7 +90,7 @@ extension RecentlyViewedTableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var actions = [UIContextualAction]()
         
-        if indexPath.section == 1,
+        if indexPath.section == 2,
             let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
             let animeLink = cell.animeLink {
             if NineAnimator.default.user.isWatching(anime: animeLink) {
@@ -122,7 +127,7 @@ extension RecentlyViewedTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        if indexPath.section == 1 {
+        if indexPath.section == 2 {
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
                 _, _ in
                 guard let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
@@ -161,14 +166,20 @@ extension RecentlyViewedTableViewController {
 // MARK: - Segue preparation
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let player = segue.destination as? AnimeViewController else { return }
-        
-        if let animeCell = sender as? RecentlyWatchedAnimeTableViewCell {
-            player.setPresenting(anime: animeCell.animeLink!)
+        if let player = segue.destination as? AnimeViewController {
+            if let animeCell = sender as? RecentlyWatchedAnimeTableViewCell {
+                player.setPresenting(anime: animeCell.animeLink!)
+            }
+            
+            if let episodeCell = sender as? LastViewedEpisodeTableViewCell {
+                player.setPresenting(episode: episodeCell.episodeLink!)
+            }
         }
         
-        if let episodeCell = sender as? LastViewedEpisodeTableViewCell {
-            player.setPresenting(episode: episodeCell.episodeLink!)
+        if let offlinePlayer = segue.destination as? OfflineAnimeViewController {
+            if let animeCell = sender as? OfflineAnimeTableViewCell {
+                offlinePlayer.setPresenting(anime: animeCell.animeLink!)
+            }
         }
     }
 }

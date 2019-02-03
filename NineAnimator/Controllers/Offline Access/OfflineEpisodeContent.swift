@@ -116,7 +116,7 @@ class OfflineEpisodeContent: OfflineContent {
         }
         
         // Update state at last
-        state = .preservationInitialed
+        state = .preservationInitiated
     }
     
     /// Preserve playback media

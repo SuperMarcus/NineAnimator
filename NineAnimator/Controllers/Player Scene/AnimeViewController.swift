@@ -280,6 +280,7 @@ extension AnimeViewController {
         case .suggestion:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.suggestion", for: indexPath) as! AnimePredictedEpisodeTableViewCell
             updateSuggestingEpisode(for: cell)
+            cell.makeThemable()
             return cell
         case .synopsis:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.synopsis", for: indexPath) as! AnimeSynopsisCellTableViewCell

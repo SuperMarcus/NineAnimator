@@ -109,23 +109,28 @@ extension Theme {
             
             view.detailTextLabel?.textColor = theme.secondaryText
             view.backgroundColor = theme.background
+            view.contentView.backgroundColor = .clear
         }
         
         if let view = view as? UILabel {
             view.textColor = view.isPrimaryText ? theme.primaryText : theme.secondaryText
+            view.backgroundColor = .clear
         }
         
         if let view = view as? UIActivityIndicatorView {
             view.style = theme.activityIndicatorStyle
+            view.backgroundColor = .clear
         }
         
         if let view = view as? UITextView {
             view.textColor = theme.primaryText
+            view.backgroundColor = .clear
         }
         
         if let view = view as? UIProgressView {
             view.progressTintColor = theme.tint
             view.trackTintColor = theme.secondaryText.withAlphaComponent(0.6)
+            view.backgroundColor = .clear
         }
     }
 }

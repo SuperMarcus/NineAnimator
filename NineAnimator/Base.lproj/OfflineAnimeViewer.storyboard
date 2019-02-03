@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HsB-Tv-idj">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Offline Anime View Controller-->
+        <scene sceneID="X9X-aS-T2n">
+            <objects>
+                <tableViewController id="HsB-Tv-idj" customClass="OfflineAnimeViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7Lp-V4-k16">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Hbr-Om-3IK" userLabel="Heading View">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="181"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9lf-YH-F7c" userLabel="Container">
+                                    <rect key="frame" x="8" y="0.0" width="359" height="181"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LZ3-Ra-hpO">
+                                            <rect key="frame" x="16" y="16" width="103" height="133"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="LZ3-Ra-hpO" secondAttribute="height" multiplier="155:200" id="dbI-Go-fMy"/>
+                                                <constraint firstAttribute="height" priority="750" constant="150" id="xLX-8S-EyW"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloaded Anime Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="eFs-rr-t1A">
+                                            <rect key="frame" x="135" y="22.5" width="208" height="60"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="25"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download Statistics" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7US-lL-eqn">
+                                            <rect key="frame" x="135" y="82.5" width="208" height="18"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oHE-Da-4Bi" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="135" y="119" width="120" height="30"/>
+                                            <color key="backgroundColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="pfE-Sa-Fpj"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="VIEW ANIME"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <segue destination="fsz-xa-anA" kind="show" id="9Ut-hs-Kkj"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="oHE-Da-4Bi" firstAttribute="leading" secondItem="LZ3-Ra-hpO" secondAttribute="trailing" constant="16" id="0Kw-SD-FcZ"/>
+                                        <constraint firstItem="oHE-Da-4Bi" firstAttribute="top" relation="greaterThanOrEqual" secondItem="7US-lL-eqn" secondAttribute="bottom" id="2gB-hm-hq1"/>
+                                        <constraint firstItem="7US-lL-eqn" firstAttribute="top" secondItem="eFs-rr-t1A" secondAttribute="bottom" id="AJw-YL-53e"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="oHE-Da-4Bi" secondAttribute="trailing" id="Atg-5y-8Pl"/>
+                                        <constraint firstAttribute="trailing" secondItem="7US-lL-eqn" secondAttribute="trailing" constant="16" id="LHK-B8-7o4"/>
+                                        <constraint firstItem="LZ3-Ra-hpO" firstAttribute="top" secondItem="9lf-YH-F7c" secondAttribute="top" constant="16" id="LbG-gd-NwX"/>
+                                        <constraint firstItem="eFs-rr-t1A" firstAttribute="leading" secondItem="LZ3-Ra-hpO" secondAttribute="trailing" constant="16" id="NSL-Qj-75O"/>
+                                        <constraint firstItem="eFs-rr-t1A" firstAttribute="bottom" secondItem="LZ3-Ra-hpO" secondAttribute="centerY" priority="500" id="Q2D-zS-m2V"/>
+                                        <constraint firstAttribute="bottom" secondItem="LZ3-Ra-hpO" secondAttribute="bottom" constant="32" id="b0r-zw-3DU"/>
+                                        <constraint firstItem="7US-lL-eqn" firstAttribute="leading" secondItem="eFs-rr-t1A" secondAttribute="leading" id="iZZ-bD-UM4"/>
+                                        <constraint firstAttribute="trailing" secondItem="eFs-rr-t1A" secondAttribute="trailing" constant="16" id="imz-CP-X53"/>
+                                        <constraint firstItem="LZ3-Ra-hpO" firstAttribute="leading" secondItem="9lf-YH-F7c" secondAttribute="leading" constant="16" id="j3Y-UL-ohX"/>
+                                        <constraint firstItem="LZ3-Ra-hpO" firstAttribute="leading" secondItem="9lf-YH-F7c" secondAttribute="leading" constant="24" id="lXr-rv-46v"/>
+                                        <constraint firstItem="eFs-rr-t1A" firstAttribute="top" relation="greaterThanOrEqual" secondItem="LZ3-Ra-hpO" secondAttribute="top" id="mT8-Ay-yDQ"/>
+                                        <constraint firstItem="oHE-Da-4Bi" firstAttribute="bottom" secondItem="LZ3-Ra-hpO" secondAttribute="bottom" id="pwc-wK-JEG"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="j3Y-UL-ohX"/>
+                                            <exclude reference="lXr-rv-46v"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=compact">
+                                        <mask key="constraints">
+                                            <include reference="j3Y-UL-ohX"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="lXr-rv-46v"/>
+                                        </mask>
+                                    </variation>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="9lf-YH-F7c" secondAttribute="bottom" id="90l-60-lJk"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="9lf-YH-F7c" secondAttribute="trailing" id="FNb-qc-VSW"/>
+                                <constraint firstItem="9lf-YH-F7c" firstAttribute="top" secondItem="Hbr-Om-3IK" secondAttribute="top" id="NyB-Vc-6k0"/>
+                                <constraint firstItem="9lf-YH-F7c" firstAttribute="leading" secondItem="Hbr-Om-3IK" secondAttribute="leadingMargin" id="rKZ-WO-S5k"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" rowHeight="76" id="lVw-DU-qdd" customClass="OfflineEpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="209" width="375" height="76"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lVw-DU-qdd" id="O06-us-tmu">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloaded on Jan. 1, 2000" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLh-Zr-rat">
+                                            <rect key="frame" x="16" y="11" width="343" height="14.5"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="QKz-J0-kb0">
+                                            <rect key="frame" x="16" y="29.5" width="343" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="x41-3v-Mmi">
+                                            <rect key="frame" x="16" y="58" width="120" height="2"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" priority="500" id="E9a-uS-jxI"/>
+                                                <constraint firstAttribute="width" priority="750" constant="120" id="WoI-lW-qu4"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mp-09-F5N">
+                                            <rect key="frame" x="144" y="52" width="223" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="4mp-09-F5N" firstAttribute="leading" secondItem="x41-3v-Mmi" secondAttribute="trailing" constant="8" id="8X4-1Z-E7k"/>
+                                        <constraint firstItem="FLh-Zr-rat" firstAttribute="top" secondItem="O06-us-tmu" secondAttribute="topMargin" id="9cU-Cg-Ne5"/>
+                                        <constraint firstItem="x41-3v-Mmi" firstAttribute="leading" secondItem="O06-us-tmu" secondAttribute="leadingMargin" id="BYY-Ge-0HO"/>
+                                        <constraint firstItem="QKz-J0-kb0" firstAttribute="top" secondItem="FLh-Zr-rat" secondAttribute="bottom" constant="4" id="Fdw-uO-NyI"/>
+                                        <constraint firstItem="x41-3v-Mmi" firstAttribute="top" secondItem="QKz-J0-kb0" secondAttribute="bottom" constant="8" id="b9F-Bi-dXV"/>
+                                        <constraint firstItem="FLh-Zr-rat" firstAttribute="leading" secondItem="O06-us-tmu" secondAttribute="leadingMargin" id="bEc-9h-Zpx"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4mp-09-F5N" secondAttribute="bottom" constant="8" id="ffn-B2-qTE"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="FLh-Zr-rat" secondAttribute="trailing" id="g4O-sq-hD0"/>
+                                        <constraint firstItem="4mp-09-F5N" firstAttribute="centerY" secondItem="x41-3v-Mmi" secondAttribute="centerY" id="ooH-aw-ddj"/>
+                                        <constraint firstItem="QKz-J0-kb0" firstAttribute="leading" secondItem="O06-us-tmu" secondAttribute="leadingMargin" id="rmw-FP-cFA"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="QKz-J0-kb0" secondAttribute="trailing" id="veL-UX-Lik"/>
+                                        <constraint firstAttribute="trailing" secondItem="4mp-09-F5N" secondAttribute="trailing" constant="8" id="wJz-8O-ySS"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="downloadStatusLabel" destination="FLh-Zr-rat" id="zmO-o3-DzK"/>
+                                    <outlet property="episodeNameLabel" destination="QKz-J0-kb0" id="ib3-P4-ia2"/>
+                                    <outlet property="progressLabel" destination="4mp-09-F5N" id="jOU-zp-VXx"/>
+                                    <outlet property="progressView" destination="x41-3v-Mmi" id="NWd-jA-H6y"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="anime.more" textLabel="fzM-YT-Gfw" style="IBUITableViewCellStyleDefault" id="a8l-WY-Enp">
+                                <rect key="frame" x="0.0" y="285" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="a8l-WY-Enp" id="8w6-ic-vkR">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="More Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fzM-YT-Gfw">
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintText" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="fsz-xa-anA" kind="show" id="i5R-Ee-3fM"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="HsB-Tv-idj" id="9EB-hx-7Uk"/>
+                            <outlet property="delegate" destination="HsB-Tv-idj" id="lWP-k5-FSp"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="st3-qC-GOP"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="animePosterImageView" destination="LZ3-Ra-hpO" id="e2O-ba-Fen"/>
+                        <outlet property="animeTitleLabel" destination="eFs-rr-t1A" id="pp2-rF-SaD"/>
+                        <outlet property="downloadStatusLabel" destination="7US-lL-eqn" id="AcH-XG-g4J"/>
+                        <outlet property="headingView" destination="Hbr-Om-3IK" id="pHm-Ei-BE8"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HfD-Sl-ECh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="76" y="132.68365817091455"/>
+        </scene>
+        <!--AnimePlayer-->
+        <scene sceneID="JIU-N6-GU4">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnimePlayer" id="fsz-xa-anA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Apa-uV-bDT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="633" y="132"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="9Ut-hs-Kkj"/>
+    </inferredMetricsTieBreakers>
+</document>

@@ -824,6 +824,95 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recent.download" rowHeight="144" id="xLx-7Q-mg8" customClass="OfflineAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="366" width="375" height="144"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xLx-7Q-mg8" id="tDW-Uv-3vr">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="143.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEc-zC-0Z2" userLabel="Container">
+                                            <rect key="frame" x="16" y="11" width="317" height="121.5"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ubo-OB-a5H">
+                                                    <rect key="frame" x="0.0" y="0.0" width="94" height="121.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="ubo-OB-a5H" secondAttribute="height" multiplier="155:200" id="Wjd-Zt-ezV"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading from 9anime.ru..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9jV-g1-31m">
+                                                    <rect key="frame" x="110" y="29.5" width="207" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Episodes Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKi-LU-Eem">
+                                                    <rect key="frame" x="110" y="75" width="207" height="14.5"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="ubo-OB-a5H" firstAttribute="leading" secondItem="LEc-zC-0Z2" secondAttribute="leading" id="Hjq-pc-tDX"/>
+                                                <constraint firstAttribute="height" priority="800" constant="122" id="IQs-3q-gMe"/>
+                                                <constraint firstItem="ubo-OB-a5H" firstAttribute="top" secondItem="LEc-zC-0Z2" secondAttribute="top" id="Jr8-sZ-DOq"/>
+                                                <constraint firstAttribute="trailing" secondItem="fKi-LU-Eem" secondAttribute="trailing" id="Ktn-d0-pOy"/>
+                                                <constraint firstAttribute="trailing" secondItem="9jV-g1-31m" secondAttribute="trailing" id="LTc-qB-aEj"/>
+                                                <constraint firstAttribute="bottom" secondItem="ubo-OB-a5H" secondAttribute="bottom" id="SBL-tt-LLn"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpQ-a2-wLE">
+                                            <rect key="frame" x="126" y="61.5" width="207" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="LEc-zC-0Z2" firstAttribute="centerY" secondItem="tDW-Uv-3vr" secondAttribute="centerY" id="1bv-kj-Nty"/>
+                                        <constraint firstItem="fKi-LU-Eem" firstAttribute="leading" secondItem="MpQ-a2-wLE" secondAttribute="leading" id="7wF-wL-PAb"/>
+                                        <constraint firstItem="LEc-zC-0Z2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tDW-Uv-3vr" secondAttribute="topMargin" id="REW-d2-dvG"/>
+                                        <constraint firstItem="MpQ-a2-wLE" firstAttribute="top" secondItem="9jV-g1-31m" secondAttribute="bottom" constant="4" id="Wbb-s8-s2X"/>
+                                        <constraint firstItem="LEc-zC-0Z2" firstAttribute="leading" secondItem="tDW-Uv-3vr" secondAttribute="leadingMargin" id="X6Z-3T-nXc"/>
+                                        <constraint firstItem="fKi-LU-Eem" firstAttribute="top" secondItem="MpQ-a2-wLE" secondAttribute="bottom" constant="4" id="YNh-o5-gMk"/>
+                                        <constraint firstItem="MpQ-a2-wLE" firstAttribute="leading" secondItem="ubo-OB-a5H" secondAttribute="trailing" constant="16" id="azL-N0-zeY"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="MpQ-a2-wLE" secondAttribute="trailing" id="sDK-JT-mo3"/>
+                                        <constraint firstItem="9jV-g1-31m" firstAttribute="leading" secondItem="MpQ-a2-wLE" secondAttribute="leading" id="tJT-fd-DEY"/>
+                                        <constraint firstItem="MpQ-a2-wLE" firstAttribute="centerY" secondItem="tDW-Uv-3vr" secondAttribute="centerY" id="zoR-zj-lEW"/>
+                                        <constraint firstItem="LEc-zC-0Z2" firstAttribute="trailing" secondItem="tDW-Uv-3vr" secondAttribute="trailingMargin" id="zwl-bb-pwq"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="animePosterImageView" destination="ubo-OB-a5H" id="cq1-vW-HVy"/>
+                                    <outlet property="animeTitleLabel" destination="MpQ-a2-wLE" id="lvE-Yx-XbQ"/>
+                                    <outlet property="availabilityLabel" destination="fKi-LU-Eem" id="Wjb-TX-saM"/>
+                                    <outlet property="offlineStateLabel" destination="9jV-g1-31m" id="ptg-cm-dns"/>
+                                    <segue destination="Aai-c1-tKt" kind="show" id="snt-dk-hEz">
+                                        <segue key="commit" inheritsFrom="parent" id="YhJ-eA-0yM"/>
+                                        <segue key="preview" inheritsFrom="commit" id="S5j-yB-xDL"/>
+                                    </segue>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="8OU-XT-7E1" id="gDm-Lt-aH0"/>
@@ -848,7 +937,15 @@
                 <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvQ-c8-IjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1801" y="1157"/>
+            <point key="canvasLocation" x="1800" y="1133"/>
+        </scene>
+        <!--OfflineAnimeViewer-->
+        <scene sceneID="RWb-rZ-98f">
+            <objects>
+                <viewControllerPlaceholder storyboardName="OfflineAnimeViewer" id="Aai-c1-tKt" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ulM-S7-d4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1835" y="1202"/>
         </scene>
         <!--Recent Container-->
         <scene sceneID="xrG-1s-UhK">
@@ -927,6 +1024,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5mq-eg-8TQ"/>
-        <segue reference="pnE-3F-WKs"/>
+        <segue reference="snt-dk-hEz"/>
+        <segue reference="Uut-Fq-hAa"/>
     </inferredMetricsTieBreakers>
 </document>

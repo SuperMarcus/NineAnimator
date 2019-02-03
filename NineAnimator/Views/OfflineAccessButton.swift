@@ -22,15 +22,10 @@ import UIKit
 /// A self-contained view to handle download initiating and monitoring tasks
 @IBDesignable
 class OfflineAccessButton: UIButton, Themable {
-    var offlineAccessState: OfflineState = .preserving(0.5) {
-        didSet { updateContent() }
-    }
-    
     var episodeLink: EpisodeLink? {
         didSet {
             NotificationCenter.default.removeObserver(self)
             guard let link = episodeLink, link != oldValue else { return }
-            offlineAccessState = OfflineContentManager.shared.state(for: link)
             setTitle(nil, for: .normal)
             
             // Add observer to listen to update notification
@@ -40,6 +35,8 @@ class OfflineAccessButton: UIButton, Themable {
                 name: .offlineAccessStateDidUpdate,
                 object: nil
             )
+            
+            updateContent()
         }
     }
     
@@ -67,8 +64,9 @@ class OfflineAccessButton: UIButton, Themable {
     }
     
     private func updateContent() {
-        switch offlineAccessState {
-        case .preservationInitialed:
+        guard let link = episodeLink else { return }
+        switch OfflineContentManager.shared.state(for: link) {
+        case .preservationInitiated:
             // Use an empty image and add activity indicator to it
             setImage(UIImage(), for: .normal)
             preservationInitiatedActivityIndicator?.removeFromSuperview()
@@ -143,17 +141,14 @@ class OfflineAccessButton: UIButton, Themable {
     
     // Update UI when received state update notification
     @objc private func onOfflineAccessStateUpdates(_ notification: Notification) {
-        guard let episodeLink = episodeLink else { return }
-        DispatchQueue.main.async {
-            self.offlineAccessState = OfflineContentManager.shared.state(for: episodeLink)
-        }
+        DispatchQueue.main.async { [weak self] in self?.updateContent() }
     }
     
     @objc private func onTapped(_ sender: Any) {
         guard let episodeLink = episodeLink else { return }
         
-        switch offlineAccessState {
-        case .preservationInitialed, .preserving:
+        switch OfflineContentManager.shared.state(for: episodeLink) {
+        case .preservationInitiated, .preserving:
             OfflineContentManager.shared.cancelPreservation(for: episodeLink)
         case .error, .ready:
             OfflineContentManager.shared.initiatePreservation(for: episodeLink)

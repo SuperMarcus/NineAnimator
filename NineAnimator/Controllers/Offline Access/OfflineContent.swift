@@ -22,7 +22,7 @@ import Foundation
 /// Representing the state of the object
 enum OfflineState {
     case ready
-    case preservationInitialed
+    case preservationInitiated
     case preserving(Float)
     case error(Error)
     case preserved
@@ -168,7 +168,7 @@ extension OfflineState {
     var export: [String: Any] {
         var dict = [String: Any]()
         switch self {
-        case .ready, .error, .preservationInitialed: dict["type"] = "ready"
+        case .ready, .error, .preservationInitiated: dict["type"] = "ready"
         case .preserving(let progress):
             dict["type"] = "preserving"
             dict["progress"] = progress

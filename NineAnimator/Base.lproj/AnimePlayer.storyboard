@@ -353,6 +353,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="bBA-Ks-wXf" firstAttribute="leading" secondItem="AVT-Pg-Bdx" secondAttribute="trailing" id="46Q-Hs-66E"/>
                                         <constraint firstItem="bBA-Ks-wXf" firstAttribute="centerY" secondItem="ELY-ri-KMl" secondAttribute="centerY" id="8Ac-Pd-JC0"/>
@@ -605,7 +606,7 @@
                                             <rect key="frame" x="324" y="11" width="35" height="52.5"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wev-7V-WQ7" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="6.5" width="35" height="40"/>
+                                                    <rect key="frame" x="0.0" y="12.5" width="35" height="28"/>
                                                     <state key="normal" title="Offline Access" image="Cloud Download"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>

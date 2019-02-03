@@ -142,6 +142,17 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         }
     }
     
+    /// Retrieve a list of preserved or preserving contents
+    var statefulContents: [OfflineContent] {
+        return contentPool.filter {
+            if case .preserving = $0.state { return true }
+            if case .preservationInitiated = $0.state { return true }
+            $0.updateResourceAvailability()
+            if case .preserved = $0.state { return true }
+            return false
+        }
+    }
+    
     func content(for episodeLink: EpisodeLink) -> OfflineEpisodeContent {
         if let content = contentPool
             .compactMap({ $0 as? OfflineEpisodeContent })
@@ -283,6 +294,28 @@ extension OfflineContentManager {
         
         let progress = Double(timeRange.end.value) / Double(timeRangeExpectedToLoad.end.value)
         content._onProgress(session, progress: progress)
+    }
+}
+
+// MARK: - Navigating through contents
+extension OfflineContentManager {
+    /// A list of anime that have episodes being preserved
+    var statefulAnime: [AnimeLink] {
+        let listOfAnime = statefulContents
+            .compactMap { $0 as? OfflineEpisodeContent }
+            .map { $0.episodeLink.parent }
+        var uniqueAnime = [AnimeLink]()
+        for anime in listOfAnime where !uniqueAnime.contains(anime) {
+            uniqueAnime.append(anime)
+        }
+        return uniqueAnime
+    }
+    
+    /// Obtain the list of episode content under the anime
+    func contents(for anime: AnimeLink) -> [OfflineEpisodeContent] {
+        return statefulContents
+            .compactMap { $0 as? OfflineEpisodeContent }
+            .filter { $0.episodeLink.parent == anime }
     }
 }
 
