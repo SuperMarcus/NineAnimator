@@ -362,17 +362,22 @@ extension AnimeViewController {
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
         
-        func clearSelection() {
-            tableView.deselectSelectedRow()
-            selectedEpisodeCell = nil
+        let clearSelection = {
+            [weak self] in
+            self?.tableView.deselectSelectedRow()
+            self?.selectedEpisodeCell = nil
         }
         
-        // Use offline media is possible
+        // Use offline media if google cast is not setup
         if let media = content.media {
-            Log.info("Offline content found. Using donloaded asset.")
-            clearSelection()
-            NativePlayerController.default.play(media: media)
-            return
+            if CastController.default.isReady {
+                Log.info("Offline content is available, but Google Cast has been setup. Using online media.")
+            } else {
+                Log.info("Offline content is available. Using donloaded asset.")
+                clearSelection()
+                onPlaybackMediaRetrieved(media)
+                return
+            }
         }
         
         episodeRequestTask = anime!.episode(with: episodeLink) {
@@ -398,35 +403,44 @@ extension AnimeViewController {
                 self.episodeRequestTask = episode.retrive {
                     [weak self] media, error in
                     guard let self = self else { return }
+                    
+                    defer { clearSelection() }
+                    
                     self.episodeRequestTask = nil
                     
                     guard let media = media else {
-                        Log.error("Item not retrived: \"%@\", fallback to web access", error!)
+                        Log.error("Item not retrived: \"%@\"", error!)
                         DispatchQueue.main.async { [weak self] in
-                            let playbackController = SFSafariViewController(url: episode.target)
-                            self?.present(playbackController, animated: true, completion: clearSelection)
+                            self?.onPlaybackMediaStall(episode.target)
                         }
                         return
                     }
                     
-                    if CastController.default.isReady {
-                        CastController.default.initiate(playbackMedia: media, with: episode)
-                        DispatchQueue.main.async {
-                            RootViewController.shared?.showCastController()
-                            clearSelection()
-                        }
-                    } else {
-                        NativePlayerController.default.play(media: media)
-                        clearSelection()
-                    }
+                    self.onPlaybackMediaRetrieved(media, episode: episode)
                 }
             } else {
-                let playbackController = SFSafariViewController(url: episode.target)
-                self.present(playbackController, animated: true, completion: clearSelection)
-                self.episodeRequestTask = nil
+                // Always stall unsupported episodes and update the progress to 1.0
+                self.onPlaybackMediaStall(episode.target)
                 episode.update(progress: 1.0)
+                clearSelection()
             }
         }
+    }
+    
+    // Handle when the link to the episode has been retrieved but no streamable link was found
+    private func onPlaybackMediaStall(_ fallbackURL: URL) {
+        Log.info("Playback media retrival stalled. Falling back to web access.")
+        let playbackController = SFSafariViewController(url: fallbackURL)
+        present(playbackController, animated: true)
+    }
+    
+    // Handle the playback media
+    private func onPlaybackMediaRetrieved(_ media: PlaybackMedia, episode: Episode? = nil) {
+        // Use Google Cast if it is setup and ready
+        if let episode = episode, CastController.default.isReady {
+            CastController.default.initiate(playbackMedia: media, with: episode)
+            CastController.default.presentPlaybackController()
+        } else { NativePlayerController.default.play(media: media) }
     }
 }
 
