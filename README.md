@@ -41,6 +41,7 @@ GPLv3 Licensed.
 - [Handoff & Siri Shortcuts](#handoff--siri-shortcuts)
 - [Video Sources](#video-sources)
 - [Backup History and Playback Progresses](#backup-history-and-playback-progresses)
+- [Download Episodes](#download-episodes)
 - [Screenshots](#screenshots)
 - [Credits](#credits)
 
@@ -56,9 +57,9 @@ GPLv3 Licensed.
 - [x] Support [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me)
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
+- [x] Download & play episodes offline
 - [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
 - [ ] Integration with MAL (planned)
-- [ ] Downloads & cache while playing
 
 ## Device Compatibility
 
@@ -150,9 +151,9 @@ To subscribe an anime, swipe on the anime from left to right in the Recents tab.
 
 <img src="Misc/Media/subscribe_recent_tab.jpg" width="320" />
 
-Or simply tap on the bell icon when you are viewing any anime.
+Or simply tap on the subscribe button when you are viewing any anime.
 
-<img src="Misc/Media/subscribe_bell_icon.jpg" width="320" />
+<img src="Misc/Media/subscribe_button.jpg" width="320" />
 
 ## Smart Home Integration
 
@@ -194,7 +195,8 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - MyCloud (unavailable for Google Cast)
 - Tiwi.Kiwi (may not be available for Google Cast)
 
-More hosts may be added later. Feel free to open an issue to request additional hosts.
+All of the sources above support downloading. More hosts may be added later.
+Feel free to open an issue to request additional hosts.
 
 ## Backup History and Playback Progresses
 
@@ -231,6 +233,16 @@ entries:
 
 See [StatesSerialization.swift](NineAnimator/Utilities/StatesSerialization.swift) for
 implementation details.
+
+## Download Episodes
+
+NineAnimator can download episodes for later playback. Tap on the cloud icon in the anime browser
+to initiate download tasks. Downloaded episodes will appear in the Recents tab.
+
+There are some limitations to NineAnimator's ability to download and playback videos:
+
+- NineAnimator only supports downloading videos from a selection of [video sources](#video-sources)
+- Downloaded videos are only available to local playback. You may encounter problems playing offline episodes on AirPlay devices, and, if you are connected to a Google Cast device, NineAnimator will still attempt to fetch online resources for playback.
 
 ## Screenshots
 

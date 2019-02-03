@@ -154,7 +154,6 @@
 		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2C4817A421DB2A210092F694 /* notification_example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification_example.jpg; sourceTree = "<group>"; };
 		2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_recent_tab.jpg; sourceTree = "<group>"; };
-		2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_bell_icon.jpg; sourceTree = "<group>"; };
 		2C4817A721DB2F320092F694 /* xcode_select_device.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xcode_select_device.jpg; sourceTree = "<group>"; };
 		2C4817A821DB36970092F694 /* icon_design.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = icon_design.svg; sourceTree = "<group>"; };
 		2C4ABC5021B5881E009B4D47 /* NineAnimator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NineAnimator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -272,6 +271,7 @@
 		2CEBE9072207469F006A64CC /* browse_episodes_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse_episodes_ipad.png; sourceTree = "<group>"; };
 		2CEBE9082207469F006A64CC /* featured_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = featured_ipad.png; sourceTree = "<group>"; };
 		2CEBE9092207478F006A64CC /* google_cast_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = google_cast_ipad.png; sourceTree = "<group>"; };
+		2CEBE90A22074826006A64CC /* subscribe_button.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_button.jpg; sourceTree = "<group>"; };
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
@@ -361,7 +361,7 @@
 				2C8BCB5521E2EB7600430598 /* homekit.jpg */,
 				2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */,
 				2C4817A721DB2F320092F694 /* xcode_select_device.jpg */,
-				2C4817A621DB2D620092F694 /* subscribe_bell_icon.jpg */,
+				2CEBE90A22074826006A64CC /* subscribe_button.jpg */,
 				2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */,
 				2C4817A421DB2A210092F694 /* notification_example.jpg */,
 			);
