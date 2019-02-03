@@ -262,6 +262,12 @@ implementation details.
 | ----------------- | -------------------- |
 | ![7](Misc/Media/Demo/Dark/featured_ipad.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
 
+### Google Cast
+
+| Cast Playback Control | Cast Playback Control (iPad) |
+| ----------------- | -------------------- |
+| ![Cast](Misc/Media/Demo/google_cast.png) | ![Cast on iPad](Misc/Media/Demo/google_cast_ipad.png) |
+
 ## Credits
 
 * Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
