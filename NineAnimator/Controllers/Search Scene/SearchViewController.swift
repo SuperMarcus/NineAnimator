@@ -71,6 +71,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         tableView.tableFooterView = UIView()
         
         tableView.makeThemable()
+        searchController.searchBar.makeThemable()
         
         requestTask = source.featured {
             [weak self] page, error in

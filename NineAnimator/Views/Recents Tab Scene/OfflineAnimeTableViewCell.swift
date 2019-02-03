@@ -29,8 +29,8 @@ class OfflineAnimeTableViewCell: UITableViewCell {
             animeTitleLabel.text = link.title
             
             let availableEpisodes = OfflineContentManager.shared.contents(for: link).count
-            availabilityLabel.text = availableEpisodes > 1 ? "\(availableEpisodes) Episodes Available" :
-                "1 Episodes Available"
+            availabilityLabel.text = availableEpisodes > 1 ? "\(availableEpisodes) Episodes Available Offline" :
+                "1 Episode Available Offline"
             
             // Kingfisher should try to use cached data
             animePosterImageView.kf.setImage(with: link.image)
