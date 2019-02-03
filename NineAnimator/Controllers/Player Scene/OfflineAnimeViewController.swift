@@ -42,6 +42,7 @@ class OfflineAnimeViewController: UITableViewController, BlendInViewController {
         guard let anime = presentingAnimeLink else { return }
         animePosterImageView.kf.setImage(with: anime.image)
         
+        tableView.makeThemable()
         tableView.performBatchUpdates({
             contents = OfflineContentManager.shared
                 .contents(for: anime)
