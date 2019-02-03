@@ -234,17 +234,33 @@ implementation details.
 
 ## Screenshots
 
+### Light Appearance
+
 | Featured Animes | Recently Viewed | Search |
 | ------------------- | ------------------- | -------- |
-| ![1](Misc/Media/screenshot_1.png) | ![2](Misc/Media/screenshot_2.png) | ![3](Misc/Media/screenshot_3.png) |
+| ![1](Misc/Media/Demo/Light/featured.png) | ![2](Misc/Media/Demo/Light/recents.png) | ![3](Misc/Media/Demo/Light/search.png) |
 
-| Search Results | Choose Episodes | Chromecast |
+| Search Results | Choose Episodes | Downloads |
 | ----------------- | -------------------- | --------------- |
-| ![4](Misc/Media/screenshot_4.png) | ![5](Misc/Media/screenshot_5.png) | ![6](Misc/Media/screenshot_6.png) |
+| ![4](Misc/Media/Demo/Light/search_results.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
 
 | Featured Animes (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
-| ![7](Misc/Media/screenshot_7.png) | ![8](Misc/Media/screenshot_8.png) |
+| ![7](Misc/Media/Demo/Light/featured_ipad.png) | ![8](Misc/Media/Demo/Light/browse_episodes_ipad.png) |
+
+### Dark Appearance
+
+| Featured Animes | Recently Viewed | Search |
+| ------------------- | ------------------- | -------- |
+| ![1](Misc/Media/Demo/Dark/featured.png) | ![2](Misc/Media/Demo/Dark/recents.png) | ![3](Misc/Media/Demo/Dark/search.png) |
+
+| Search Results | Choose Episodes | Downloads |
+| ----------------- | -------------------- | --------------- |
+| ![4](Misc/Media/Demo/Dark/search_results.png) | ![5](Misc/Media/Demo/Dark/browse_episodes.png) | ![6](Misc/Media/Demo/Dark/downloads.png) |
+
+| Featured Animes (iPad) | Picture in Picture (iPad) |
+| ----------------- | -------------------- |
+| ![7](Misc/Media/Demo/Dark/featured_ipad.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
 
 ## Credits
 
