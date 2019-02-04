@@ -29,6 +29,7 @@ enum NineAnimatorError: Error, CustomStringConvertible {
     case searchError(String)
     case authenticationRequiredError(String, URL?)
     case decodeError
+    case unknownError
     case lastItemInQueueError
     
     var description: String {
@@ -42,25 +43,9 @@ enum NineAnimatorError: Error, CustomStringConvertible {
         case let .authenticationRequiredError(message, url):
             let urlDescription = url == nil ? "" : " (\(url!))"
             return "Authentication required: \(message)\(urlDescription)"
+        case .unknownError: return "Unknwon Error"
         }
     }
-}
-
-protocol NineAnimatorAsyncTask {
-    func cancel()
-}
-
-/// This class is used to keep track of multiple async tasks that might be needed
-class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
-    var tasks: [NineAnimatorAsyncTask]
-    
-    init() { tasks = [] }
-    
-    func add(_ task: NineAnimatorAsyncTask?) { if let task = task { tasks.append(task) } }
-    
-    func cancel() { for task in tasks { task.cancel() } }
-    
-    deinit { cancel(); tasks = [] }
 }
 
 extension DataRequest: NineAnimatorAsyncTask { }
