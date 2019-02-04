@@ -19,13 +19,17 @@
 
 import Foundation
 
+private protocol NineAnimatorPromiseProtocol {
+    func concludePromise()
+}
+
 /// NineAnimator's implementation of promise
 ///
 /// Since NineAnimator is involved in many chainned networking stuff,
 /// which, as many can tell, creates numerous "callback hells" in the
 /// code, and that Marcus couldn't come up with which promise
 /// framework to use, I am just going to write one myself.
-class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
+class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromiseProtocol {
     // Hold reference to the task
     private var referenceTask: NineAnimatorAsyncTask?
     
@@ -33,55 +37,49 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
     // to make sure of that.
     private(set) var isResolved = false
     
+    // A flag to mark if this promise has been rejected
+    private(set) var isRejected = true
+    
     private var chainedPromiseCallback: ((ResultType) -> Void)?
     
     private var chainedErrorCallback: ((Error) -> Void)?
+    
+    // Keep a reference to the previous promise
+    private var chainedReference: (NineAnimatorAsyncTask & NineAnimatorPromiseProtocol)?
     
     // The DispatchQueue in which the task and the subsequent
     // promises will run in
     private var queue: DispatchQueue
     
-    // A DispatchSemaphore for waiting the success resolver to be set
-    private var successSemaphore: DispatchSemaphore
-    
-    // A DispatchSemaphore for waiting the error resolver to be set
-    private var errorSemaphore: DispatchSemaphore
-    
     // The latest DispatchTime that the resolvers can be set
     private var creationDate: DispatchTime = .now()
     
+    // The task to perform when the promise concludes setup
+    private var task: NineAnimatorPromiseInitialTask?
+    
+    // Thread safety
+    private var semaphore: DispatchSemaphore
+    
     typealias NineAnimatorPromiseCallback = NineAnimatorCallback<ResultType>
+    typealias NineAnimatorPromiseInitialTask = (@escaping NineAnimatorPromiseCallback) -> NineAnimatorAsyncTask?
     
     /// Create a new promise in the DispatchQueue with a
     /// classic NineAnimator callback task
-    init(queue: DispatchQueue = .global(), _ task: ((@escaping NineAnimatorPromiseCallback) -> NineAnimatorAsyncTask?)?) {
+    init(queue: DispatchQueue = .global(), _ task: NineAnimatorPromiseInitialTask?) {
         // Execute the promise task in the DispatchQueue if there is one
         self.queue = queue
-        self.successSemaphore = DispatchSemaphore(value: 0)
-        self.errorSemaphore = DispatchSemaphore(value: 0)
-        
-        // Only continue to execute when the task is not nil
-        guard let task = task else { return }
-        
-        queue.async {
-            [weak self] in
-            guard let self = self else {
-                Log.error("Reference to promise is lost before the promised task can run")
-                return
-            }
-            
-            // Store the reference to the async task
-            self.referenceTask = task {
-                [weak self] result, error in
-                if let result = result {
-                    self?.resolve(result)
-                } else { self?.reject(error ?? NineAnimatorError.providerError("Unknown Error")) }
-            }
-        }
+        self.task = task
+        self.semaphore = DispatchSemaphore(value: 1)
     }
     
     /// Resolve the promise with value
+    ///
+    /// This method is thread safe
     func resolve(_ value: ResultType) {
+        // Atomicy
+        semaphore.wait()
+        defer { semaphore.signal() }
+        
         defer { releaseAll() }
         
         guard !isResolved else {
@@ -91,15 +89,21 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
         
         defer { isResolved = true }
         
-        // Wait for at most 1 second after creation
-        _ = successSemaphore.wait(timeout: creationDate + 1_000_000_000)
         if let resolver = chainedPromiseCallback {
-            resolver(value)
+            // Runs the handler in another tick
+            queue.async { resolver(value) }
         } else { Log.error("Promise has no resolver") }
     }
     
     /// Reject the promise with error
+    ///
+    /// This method is thread safe
     func reject(_ error: Error) {
+        // Atomicy
+        semaphore.wait()
+        defer { semaphore.signal() }
+        
+        // Release references after reject
         defer { releaseAll() }
         
         guard !isResolved else {
@@ -107,12 +111,14 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
             return
         }
         
-        defer { isResolved = true }
+        defer {
+            isResolved = true
+            isRejected = true
+        }
         
-        // Wait for at most 1 second after creation
-        _ = errorSemaphore.wait(timeout: creationDate + 1_000_000_000)
         if let handler = chainedErrorCallback {
-            handler(error)
+            // Runs the handler in another tick
+            queue.async { handler(error) }
         } else {
             Log.error("No rejection handler declared for this promise")
             Log.error(error)
@@ -126,6 +132,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
     /// is set for the current one
     func then<NextResultType>(_ nextFunction: @escaping (ResultType) throws -> NextResultType?) -> NineAnimatorPromise<NextResultType> {
         let promise = NineAnimatorPromise<NextResultType>(queue: self.queue, nil)
+        promise.chainedReference = self // Store our reference to the chained promise
         
         // Set resolve callback
         chainedPromiseCallback = {
@@ -136,33 +143,44 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
                 } else { promise.reject(NineAnimatorError.unknownError) }
             } catch { promise.reject(error) }
         }
-        successSemaphore.signal()
         
-        // Pass on the error if none
+        // Pass on the error if no handler is set
         if chainedErrorCallback == nil {
             chainedErrorCallback = { error in promise.reject(error) }
-            errorSemaphore.signal()
         }
         
         return promise
     }
     
     /// Concludes the promise
+    ///
+    /// Promise is not executed until finally is called
     func finally(_ finalFunction: @escaping (ResultType) -> Void) -> NineAnimatorAsyncTask {
+        if chainedErrorCallback == nil {
+            Log.error("Promise concluded without error handler")
+        }
+        
+        // Save callback and conclude the promise
         chainedPromiseCallback = finalFunction
-        successSemaphore.signal()
+        concludePromise()
+        
         return self
     }
     
     /// Catches errors
     func error(_ handler: @escaping (Error) -> Void) -> NineAnimatorPromise {
         chainedErrorCallback = handler
-        errorSemaphore.signal()
         return self
     }
     
     /// Cancel the underlying NineAnimatorAsyncTask
+    ///
+    /// This method is thread safe
     func cancel() {
+        // Atomicy
+        semaphore.wait()
+        defer { semaphore.signal() }
+        
         referenceTask?.cancel()
         releaseAll()
     }
@@ -172,8 +190,34 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
         referenceTask = nil
         chainedPromiseCallback = nil
         chainedErrorCallback = nil
-        successSemaphore.signal()
-        errorSemaphore.signal()
+        chainedReference = nil
+        isResolved = true
+    }
+    
+    /// Conclude the setup of promise and start the task
+    fileprivate func concludePromise() {
+        // Tell the previous promise to conclude first
+        if let previous = chainedReference {
+            previous.concludePromise()
+        }
+        
+        // Run the initial task
+        if let task = task {
+            queue.async {
+                [weak self] in
+                guard let self = self else {
+                    Log.error("Reference to promise lost before the initial task can run")
+                    return
+                }
+                // Save the reference created by the task
+                self.referenceTask = task {
+                    [weak self] result, error in
+                    if let result = result {
+                        self?.resolve(result)
+                    } else { self?.reject(error ?? NineAnimatorError.providerError("Unknown Error")) }
+                }
+            }
+        }
     }
     
     /// Make a promise with a closure that will be executed asynchronously
@@ -190,5 +234,10 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask {
         }
     }
     
-    deinit { cancel() }
+    deinit {
+        if !isResolved {
+            Log.error("Losing reference to unresolved promise")
+        }
+        cancel()
+    }
 }

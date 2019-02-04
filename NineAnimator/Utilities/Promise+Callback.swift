@@ -25,6 +25,8 @@ extension NineAnimatorPromise {
     func handle(_ callback: @escaping NineAnimatorPromiseCallback) -> NineAnimatorAsyncTask {
         return self
             .error { callback(nil, $0) }
-            .finally { callback($0, nil) }
+            .finally {
+                callback($0, nil)
+            }
     }
 }

@@ -20,18 +20,18 @@
 import Foundation
 
 extension NineAnimatorPromise {
-    /// Executing a list of async tasks
+    /// Executing a list of promises
     ///
     /// The results are located in the same positions as the tasks that
     /// produced them
     static func all<GroupedResultType>(
             queue: DispatchQueue = .global(),
-            listOfTasks: [() throws -> GroupedResultType?]
+            listOfPromises promises: [NineAnimatorPromise<GroupedResultType>]
         ) -> NineAnimatorPromise<[GroupedResultType]> {
         // The resulting type is a giant NineAnimatorPromise
         return NineAnimatorPromise<[GroupedResultType]>(queue: queue) {
-            callback in
-            var results = [GroupedResultType?](repeating: nil, count: listOfTasks.count)
+            [promises] callback in
+            var results = [GroupedResultType?](repeating: nil, count: promises.count)
             var isRejected = false
             
             // Use NineAnimatorMultistepAsyncTask to hold references to all the tasks
@@ -54,17 +54,16 @@ extension NineAnimatorPromise {
                     guard !isRejected else { return }
                     results[index] = result
                     let resolvedResults = results.compactMap { $0 }
-                    if resolvedResults.count == listOfTasks.count {
+                    if resolvedResults.count == promises.count {
                         callback(resolvedResults, nil)
                     }
                 }
             }
             
             // Map the tasks to promises
-            listOfTasks.enumerated().map {
+            promises.enumerated().map {
                 index, task in
-                let taskPromise = NineAnimatorPromise<GroupedResultType>
-                    .firstly(task)
+                let taskPromise = task
                     .error(rejectOnce)
                     .finally(resolve(index))
                 return taskPromise
@@ -74,10 +73,27 @@ extension NineAnimatorPromise {
         }
     }
     
+    /// Executing a list of tasks
+    static func all<GroupedResultType>(
+            queue: DispatchQueue = .global(),
+            listOfTasks: [() throws -> GroupedResultType?]
+        ) -> NineAnimatorPromise<[GroupedResultType]> {
+        return all(queue: queue, listOfPromises: listOfTasks.map { NineAnimatorPromise<GroupedResultType>.firstly($0) })
+    }
+    
+    /// Alias
     static func all<GroupedResultType>(
             queue: DispatchQueue = .global(),
             _ tasks: (() throws -> GroupedResultType?)...
         ) -> NineAnimatorPromise<[GroupedResultType]> {
         return all(queue: queue, listOfTasks: tasks)
+    }
+    
+    /// Alias
+    static func all<GroupedResultType>(
+            queue: DispatchQueue = .global(),
+            promises: NineAnimatorPromise<GroupedResultType>...
+        ) -> NineAnimatorPromise<[GroupedResultType]> {
+        return all(queue: queue, listOfPromises: promises)
     }
 }
