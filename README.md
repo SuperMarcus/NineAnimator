@@ -9,8 +9,8 @@
 
 A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is a free and open source anime watching app for iOS. Currently
-it supports [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me).
-GPLv3 Licensed.
+it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and
+[gogoanime.io](//gogoanime.io). GPLv3 Licensed.
 
     
     Copyright © 2018 Marcus Zhou. All rights reserved.
@@ -54,7 +54,7 @@ GPLv3 Licensed.
 - [x] Picture in Picture playback on iPads
 - [x] Chromecast/Google Cast with lockscreen & control center support
 - [x] Playback History & Auto Resumes
-- [x] Support [9anime.ru](//9anime.ru) and [masterani.me](//masterani.me)
+- [x] Support [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and [gogoanime.io](//gogoanime.io)
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
@@ -117,7 +117,7 @@ $ carthage update
 ## Google Cast
 
 NineAnimator supports playing back on both AirPlay (via iOS's native media player) and
-Chromecast/Google Cast devices. However, not all of the video sources are supported
+Chromecast/Google Cast devices. However, not all of the steaming sources are supported
 on Chromecast. Check [Video Sources](#video-sources) for details.
 
 To use Google Cast in NineAnimator, tap on the Google Cast icon on the navigation bar.
@@ -187,6 +187,8 @@ the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
 ## Video Sources
 
+### Streaming Sources
+
 Currently only a selection of video streaming hosts is supported by NineAnimator:
 
 - RapidVideo
@@ -197,6 +199,14 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 
 All of the sources above support downloading. More hosts may be added later.
 Feel free to open an issue to request additional hosts.
+
+### Anime Websites
+
+NineAnimator supports browsing and playing on the following anime websites:
+
+- [9anime.ru](//9anime.ru)
+- [masterani.me](//masterani.me)
+- [gogoanime.io](//gogoanime.io)
 
 ## Backup History and Playback Progresses
 
@@ -241,7 +251,7 @@ to initiate download tasks. Downloaded episodes will appear in the Recents tab.
 
 There are some limitations to NineAnimator's ability to download and playback videos:
 
-- NineAnimator only supports downloading videos from a selection of [video sources](#video-sources)
+- NineAnimator only supports downloading videos from a selection of [streaming sources](#video-sources)
 - Downloaded videos are only available to local playback. You may encounter problems playing offline episodes on AirPlay devices, and, if you are connected to a Google Cast device, NineAnimator will still attempt to fetch online resources for playback.
 
 ## Screenshots
