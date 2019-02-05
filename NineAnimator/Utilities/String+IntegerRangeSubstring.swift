@@ -37,6 +37,10 @@ extension String {
         return String(self[range])
     }
     
+    subscript (_ matchResult: NSTextCheckingResult, at group: Int) -> String {
+        return self[matchResult.range(at: group)]
+    }
+    
     var matchingRange: NSRange {
         return NSRange(location: 0, length: utf16.count)
     }

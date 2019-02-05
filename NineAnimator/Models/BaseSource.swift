@@ -28,6 +28,8 @@ class BaseSource {
     
     var endpoint: String { return "" }
     
+    var endpointURL: URL { return URL(string: endpoint)! }
+    
     var retriverSession: SessionManager { return parent.ajaxSession }
     
     init(with parent: NineAnimator) {

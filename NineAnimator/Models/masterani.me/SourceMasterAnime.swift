@@ -77,16 +77,16 @@ class NASourceMasterAnime: BaseSource, Source {
             
             let alsoFeaturedAnimes: [AnimeLink] =
                 popularAnimes.compactMap { anime in
-                guard let title = anime["title"] as? String,
-                    let slug = anime["slug"] as? String,
-                    let posterName = anime["poster"] as? String
-                    else { return nil }
-                return AnimeLink(
-                    title: title,
-                    link: self.anime(slug: slug),
-                    image: self.poster(file: posterName),
-                    source: self
-                )
+                    guard let title = anime["title"] as? String,
+                        let slug = anime["slug"] as? String,
+                        let posterName = anime["poster"] as? String
+                        else { return nil }
+                    return AnimeLink(
+                        title: title,
+                        link: self.anime(slug: slug),
+                        image: self.poster(file: posterName),
+                        source: self
+                    )
                 }
             
             let featuredPage = BasicFeaturedContainer(featured: alsoFeaturedAnimes, latest: watchedAnimes)

@@ -107,6 +107,7 @@ extension NineAnimator {
     private func registerDefaultSources() {
         register(source: NineAnimeSource(with: self))
         register(source: NASourceMasterAnime(with: self))
+        register(source: NASourceGogoAnime(with: self))
     }
 }
 

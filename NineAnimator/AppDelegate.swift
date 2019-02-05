@@ -146,18 +146,21 @@ extension AppDelegate {
                         guard let self = self else { return }
                         let task = NineAnimator.default.link(with: url) {
                             link, error in
-                            guard let link = link else {
-                                let alert = UIAlertController(
-                                    title: "Cannot open link",
-                                    message: error != nil ? "\(error!)" : "Unknown Error",
-                                    preferredStyle: .alert
-                                )
-                                alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
-                                RootViewController.shared?.presentOnTop(alert)
-                                return Log.error(error)
+                            DispatchQueue.main.async {
+                                guard let link = link else {
+                                    let alert = UIAlertController(
+                                        title: "Cannot open link",
+                                        message: error != nil ? "\(error!)" : "Unknown Error",
+                                        preferredStyle: .alert
+                                    )
+                                    alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                                    RootViewController.shared?.presentOnTop(alert)
+                                    return Log.error(error)
+                                }
+                                
+                                // Open the link
+                                RootViewController.open(whenReady: link)
                             }
-                            
-                            RootViewController.open(whenReady: link)
                         }
                         self.taskPool = [task]
                     }

@@ -152,6 +152,36 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         return promise
     }
     
+    /// Pass the result of the promise into another function, which generates
+    /// another promise to be chained on.
+    func thenPromise<NextResultType>(_ nextPromise: @escaping (ResultType) throws -> NineAnimatorPromise<NextResultType>?) -> NineAnimatorPromise<NextResultType> {
+        let untilThenPromise = NineAnimatorPromise<NextResultType>(queue: self.queue, nil)
+        untilThenPromise.chainedReference = self
+        
+        chainedPromiseCallback = {
+            result in
+            do {
+                if let promise = try nextPromise(result) {
+                    // Run the promise and save the reference in the
+                    // referenceTask (NOT chainedReference)
+                    untilThenPromise.referenceTask =  promise
+                        .error(untilThenPromise.reject)
+                        .finally(untilThenPromise.resolve)
+                    // Set chained reference to nil so the current promise
+                    // is released
+                    untilThenPromise.chainedReference = nil
+                } else { untilThenPromise.reject(NineAnimatorError.unknownError) }
+            } catch { untilThenPromise.reject(error) }
+        }
+        
+        // Pass on the error if no handler is set
+        if chainedErrorCallback == nil {
+            chainedErrorCallback = { error in untilThenPromise.reject(error) }
+        }
+        
+        return untilThenPromise
+    }
+    
     /// Concludes the promise
     ///
     /// Promise is not executed until finally is called

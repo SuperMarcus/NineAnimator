@@ -32,7 +32,7 @@ class NASearchMasterAnime: ContentProvider {
     
     weak var delegate: ContentProviderDelegate?
     
-    private let _parent: NASourceMasterAnime
+    private unowned let _parent: NASourceMasterAnime
     
     private var _lastRequest: NineAnimatorAsyncTask?
     
