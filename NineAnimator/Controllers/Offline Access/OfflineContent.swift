@@ -119,14 +119,18 @@ class OfflineContent: NSObject {
     
     /// Delete the preserved offline content
     func delete() {
+        // Cancel the task first
+        cancel()
+        
+        // If the file exists, remove it
         if let url = preservedContentURL {
             do {
                 try FileManager.default.removeItem(at: url)
             } catch { Log.error(error) }
-            
-            // Update state to ready
-            state = .ready
         }
+        
+        // Update state to ready
+        state = .ready
     }
     
     /// Cancel preservation
