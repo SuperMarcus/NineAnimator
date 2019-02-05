@@ -69,15 +69,18 @@ class OfflineAccessButton: UIButton, Themable {
         case .preservationInitiated:
             // Use an empty image and add activity indicator to it
             setImage(UIImage(), for: .normal)
-            preservationInitiatedActivityIndicator?.removeFromSuperview()
-            let newIndicator = UIActivityIndicatorView(style: Theme.current.activityIndicatorStyle)
-            newIndicator.frame = bounds
-            newIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-            newIndicator.hidesWhenStopped = true
-            addSubview(newIndicator)
-            preservationInitiatedActivityIndicator = newIndicator
             isHidden = false
-            newIndicator.startAnimating()
+            
+            // Add the activity indicator if it was not added
+            if preservationInitiatedActivityIndicator == nil {
+                let newIndicator = UIActivityIndicatorView(style: Theme.current.activityIndicatorStyle)
+                newIndicator.frame = bounds
+                newIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+                newIndicator.hidesWhenStopped = true
+                addSubview(newIndicator)
+                preservationInitiatedActivityIndicator = newIndicator
+                newIndicator.startAnimating()
+            }
         case .error, .ready:
             setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
             preservationInitiatedActivityIndicator?.stopAnimating()

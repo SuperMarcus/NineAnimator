@@ -29,6 +29,18 @@ class OfflineEpisodeContent: OfflineContent {
     
     // Retrive the playback media from the offline content
     var media: PlaybackMedia? {
+        // If the asset is downloading with an AVAssetDownloadTask, try playing
+        // while caching
+        if isAggregatedAsset,
+            let aggregateAssetDownloadTask = task as? AVAssetDownloadTask {
+            let asset = aggregateAssetDownloadTask.urlAsset
+            return OfflinePlaybackMedia(
+                link: episodeLink,
+                isAggregated: true,
+                asset: asset
+            )
+        }
+        
         guard let url = preservedContentURL else { return nil }
         
         // Check the validity of the resource

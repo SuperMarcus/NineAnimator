@@ -97,14 +97,6 @@ extension OfflineAnimeViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        guard indexPath.section == 0 else { return indexPath }
-        
-        if case .preserved = contents[indexPath.item].state {
-            return indexPath
-        } else { return nil }
-    }
-    
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
         ) -> UISwipeActionsConfiguration? {

@@ -34,10 +34,7 @@ struct OfflinePlaybackMedia: PlaybackMedia {
     var name: String { return link.name }
     
     // AVPlayerItem
-    var avPlayerItem: AVPlayerItem {
-        let asset = AVURLAsset(url: url)
-        return AVPlayerItem(asset: asset)
-    }
+    var avPlayerItem: AVPlayerItem
     
     // Google Cast is not supported by offline playback media
     // May be implemented later
@@ -45,4 +42,20 @@ struct OfflinePlaybackMedia: PlaybackMedia {
     
     // Do not re-download OfflinePlaybackMedia
     var urlRequest: URLRequest? { return nil }
+    
+    /// Initialize the offline playback media with url
+    init(link: EpisodeLink, isAggregated: Bool, url: URL) {
+        self.link = link
+        self.isAggregated = isAggregated
+        self.url = url
+        self.avPlayerItem = AVPlayerItem(url: url)
+    }
+    
+    /// Initialize the offline playback media with AVURLAsset
+    init(link: EpisodeLink, isAggregated: Bool, asset: AVURLAsset) {
+        self.link = link
+        self.isAggregated = isAggregated
+        self.url = asset.url
+        self.avPlayerItem = AVPlayerItem(asset: asset)
+    }
 }

@@ -57,7 +57,14 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
             formatter.percentSymbol = "%"
             progressView.setProgress(progress, animated: true)
             progressLabel.text = "Downloading (\(formatter.string(from: NSNumber(value: progress)) ?? "0%") complete)"
-            downloadStatusLabel.text = "Download in Progress - \(link.parent.source.name)"
+            
+            // If the download is immedietly available, reflect that in the download
+            // status label
+            if content.media == nil {
+                downloadStatusLabel.text = "Download in Progress - \(link.parent.source.name)"
+            } else {
+                downloadStatusLabel.text = "Ready for Playback - \(link.parent.source.name)"
+            }
         case .preserved:
             if let date = content.datePreserved {
                 let formatter = DateFormatter()
