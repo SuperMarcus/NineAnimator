@@ -202,11 +202,27 @@ Feel free to open an issue to request additional hosts.
 
 ### Anime Websites
 
-NineAnimator supports browsing and playing on the following anime websites:
+NineAnimator supports the following anime websites but with different sets
+of features:
 
 - [9anime.ru](//9anime.ru)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Ratings and Air Date)
+    - [ ] Detailed episode synopsis
 - [masterani.me](//masterani.me)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Ratings and Air Date)
+    - [x] Detailed episode synopsis
 - [gogoanime.io](//gogoanime.io)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is availble)
+    - [ ] Detailed episode synopsis
 
 ## Backup History and Playback Progresses
 
