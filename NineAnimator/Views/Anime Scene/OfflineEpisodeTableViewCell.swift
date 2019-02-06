@@ -45,7 +45,7 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
     
     // This is to make sure that we don't update the UI too frequently,
     // which might cause some performance issues
-    private var _lastProgressUpdateData = Date()
+    private var _lastProgressUpdateData = Date.distantPast
     
     // swiftlint:disable cyclomatic_complexity
     private func updateFromContent() {
