@@ -606,7 +606,10 @@
                                             <rect key="frame" x="324" y="11" width="35" height="52.5"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wev-7V-WQ7" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="12.5" width="35" height="28"/>
+                                                    <rect key="frame" x="0.0" y="9" width="35" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Wev-7V-WQ7" secondAttribute="height" multiplier="1:1" id="zbP-b6-a0R"/>
+                                                    </constraints>
                                                     <state key="normal" title="Offline Access" image="Cloud Download"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>

@@ -145,11 +145,69 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     /// Retrieve a list of preserved or preserving contents
     var statefulContents: [OfflineContent] {
         return contentPool.filter {
+            if case .interrupted = $0.state { return true }
             if case .preserving = $0.state { return true }
             if case .preservationInitiated = $0.state { return true }
+            if case .error = $0.state { return true }
+            
+            // Update availability before deciding if this content is preserved
             $0.updateResourceAvailability()
             if case .preserved = $0.state { return true }
+            
+            // Default to no
             return false
+        }
+    }
+    
+    /// Called upon app launch to fetch any incomplete tasks
+    func recoverPendingTasks() {
+        // Restore persisted session tasks
+        sharedSession.getAllTasks {
+            tasks in
+            let contents = self.contentPool.filter { $0.persistedDownloadSessionType == "common" }
+            
+            // Assign tasks to the contents
+            for task in tasks {
+                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
+                    Log.info("URLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.task = task
+                } else {
+                    Log.info("URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    task.cancel()
+                }
+            }
+            
+            // Trying to resume the tasks
+            if NineAnimator.default.user.autoRestartInterruptedDownloads {
+                Log.info("Automatically resuming any unfinished downloads for the shared URLSession")
+                for content in contents {
+                    if case .interrupted = content.state { content.resumeInterruption() }
+                }
+            }
+        }
+        
+        sharedAssetSession.getAllTasks {
+            tasks in
+            let contents = self.contentPool.filter { $0.persistedDownloadSessionType == "avasset" }
+            
+            // Assign tasks to the contents
+            for task in tasks {
+                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
+                    Log.info("AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.task = task
+                } else {
+                    Log.info("AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    task.cancel()
+                }
+            }
+            
+            // Trying to resume the tasks
+            if NineAnimator.default.user.autoRestartInterruptedDownloads {
+                Log.info("Automatically resuming any unfinished downloads for the shared asset session")
+                for content in contents {
+                    if case .interrupted = content.state { content.resumeInterruption() }
+                }
+            }
         }
     }
     
@@ -242,6 +300,12 @@ extension OfflineContentManager {
             return
         }
         
+        // Save the resume data if possible
+        if let resumeData = (error as NSError).userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+            Log.info("The task is possibilly resumable")
+            content.resumeData = resumeData
+        }
+        
         content._onCompletion(session, error: error)
     }
     
@@ -292,8 +356,12 @@ extension OfflineContentManager {
             return
         }
         
-        let progress = Double(timeRange.end.value) / Double(timeRangeExpectedToLoad.end.value)
-        content._onProgress(session, progress: progress)
+        // Calculate the progress
+        let progress = loadedTimeRanges
+            .map { $0.timeRangeValue.duration.seconds }
+            .reduce(0.0, +) / timeRangeExpectedToLoad.duration.seconds
+        
+        content._onProgress(session, progress: Double(progress))
     }
 }
 
@@ -356,6 +424,11 @@ extension OfflineContentManager {
                 content.state = .ready
             }
             
+            // Restore the resume data
+            if let resumeData = dict["resumeData"] as? Data {
+                content.resumeData = resumeData
+            }
+            
             return content
         }.filter {
             // Only return contents that are not 'ready' nor 'error'
@@ -416,6 +489,16 @@ extension OfflineContent {
         }
     }
     
+    /// The persisted task identifier
+    var persistedTaskIdentifier: Int? {
+        return parent.persistedContentList[identifier]?["taskIdentifier"] as? Int
+    }
+    
+    /// The persisted session type
+    var persistedDownloadSessionType: String? {
+        return parent.persistedContentList[identifier]?["session"] as? String
+    }
+    
     fileprivate func _onCompletion(_ session: URLSession) {
         guard let location = preservedContentURL else {
             persistentResourceIdentifier = nil
@@ -452,7 +535,7 @@ extension OfflineContent {
     // Encode and stores the persistent information for this content on the file system
     func persistedLocalProperties() {
         switch state {
-        case .error, .ready:
+        case .ready:
             // Remove the content from store if it is errored or ready
             parent.persistedContentList[identifier] = nil
             return
@@ -475,6 +558,23 @@ extension OfflineContent {
                 entry["date"] = date as NSDate
             }
             
+            // Save the task information
+            if let task = task {
+                // Save session type
+                if task is AVAssetDownloadTask {
+                    entry["session"] = "avasset"
+                } else { entry["session"] = "common" }
+                
+                // Save taskIdentifier
+                entry["taskIdentifier"] = task.taskIdentifier
+            }
+            
+            // Save resume data
+            if let resumeData = resumeData {
+                entry["resumeData"] = resumeData
+            }
+            
+            // Persist the data to parent
             parent.persistedContentList[identifier] = entry
         }
     }

@@ -188,12 +188,12 @@ extension RootViewController {
         switch content.state {
         case .error(let error):
             let alert = UIAlertController(
-                title: "Error",
+                title: "Download Error",
                 message: String(describing: error),
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            presentOnTop(alert)
+            DispatchQueue.main.async { [weak self] in self?.presentOnTop(alert) }
         default: break
         }
     }

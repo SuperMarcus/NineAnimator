@@ -27,17 +27,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var trackedPasteboardChangeTimes: Int = 0
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        // Update once in two hours
+        // Fetch for generating episode update notifications once in two hours
         UIApplication.shared.setMinimumBackgroundFetchInterval(
             UserNotificationManager.default.suggestedFetchInterval
         )
+        
+        // Update UserNotification delegate
         UNUserNotificationCenter.current().delegate = UserNotificationManager.default
+        
+        // Add observer for the dynamic screen brightness feature
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onScreenBrightnessDidChange(_:)),
             name: UIScreen.brightnessDidChangeNotification,
             object: nil
         )
+        
+        // Recover any pending download tasks
+        OfflineContentManager.shared.recoverPendingTasks()
         return true
     }
     

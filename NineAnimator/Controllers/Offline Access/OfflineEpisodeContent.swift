@@ -32,7 +32,8 @@ class OfflineEpisodeContent: OfflineContent {
         // If the asset is downloading with an AVAssetDownloadTask, try playing
         // while caching
         if isAggregatedAsset,
-            let aggregateAssetDownloadTask = task as? AVAssetDownloadTask {
+            let aggregateAssetDownloadTask = task as? AVAssetDownloadTask,
+            aggregateAssetDownloadTask.urlAsset.isPlayable {
             let asset = aggregateAssetDownloadTask.urlAsset
             return OfflinePlaybackMedia(
                 link: episodeLink,
@@ -46,11 +47,17 @@ class OfflineEpisodeContent: OfflineContent {
         // Check the validity of the resource
         guard (try? url.checkResourceIsReachable()) == true else { return nil }
         
+        // Construct url asset
+        let asset = AVURLAsset(url: url)
+        
+        // Check if the asset is playable
+        guard asset.isPlayable else { return nil }
+        
         // Construct offline playback media
         return OfflinePlaybackMedia(
             link: episodeLink,
             isAggregated: isAggregatedAsset,
-            url: url
+            asset: asset
         )
     }
     
@@ -81,6 +88,17 @@ class OfflineEpisodeContent: OfflineContent {
         // Store link into the persisted proeprties
         persistedProperties["link"] = encode(episodeLink)!
     }
+    
+    // Disabling this checking for now. This is taking to much time to complete.
+//    override func updateResourceAvailability() {
+//        // If the state is preserved, make sure the media is retrievable
+//        if case .preserved = state, media == nil {
+//            task?.cancel()
+//            task = nil
+//            state = .ready
+//        }
+//        super.updateResourceAvailability()
+//    }
     
     override func preserve() {
         super.preserve()
@@ -164,6 +182,13 @@ class OfflineEpisodeContent: OfflineContent {
         
         // Resumes the task
         task?.resume()
+    }
+    
+    override func cancel() {
+        // Cleanup current task
+        currentTask?.cancel()
+        currentTask = nil
+        super.cancel()
     }
     
     override func suggestName(for url: URL) -> String {

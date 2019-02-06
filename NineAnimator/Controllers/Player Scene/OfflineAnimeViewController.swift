@@ -161,11 +161,35 @@ extension OfflineAnimeViewController {
         defer { tableView.deselectSelectedRow() }
         
         guard indexPath.section == 0 else { return }
-        
-        // Grab and play
+        // Grab the content
         let content = contents[indexPath.item]
-        if let media = content.media {
-            NativePlayerController.default.play(media: media)
+        
+        switch content.state {
+        case .interrupted: content.resumeInterruption()
+        case .error, .ready: content.preserve()
+        case .preservationInitiated: content.cancel()
+        case .preserving:
+            // If media is available for playback, play directly
+            if let media = content.media {
+                NativePlayerController.default.play(media: media)
+                return
+            } else { content.suspend() }
+        case .preserved:
+            if let media = content.media {
+                NativePlayerController.default.play(media: media)
+                return
+            } else {
+                // Present an alert stating that this episode is no longer available
+                let alert = UIAlertController(
+                    title: "Not Available",
+                    message: "This episode is no longer available offline.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(title: "Ok", style: .cancel) {
+                    _ in content.delete()
+                })
+                present(alert, animated: true)
+            }
         }
     }
 }

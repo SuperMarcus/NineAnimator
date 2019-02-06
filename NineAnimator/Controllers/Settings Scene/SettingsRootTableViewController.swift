@@ -47,6 +47,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
     
+    @IBOutlet private weak var autoResumeDownloadTasksSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
@@ -104,6 +106,10 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         // Dynamic appearance is managed by the AppDelegate
         NineAnimator.default.user.brightnessBasedTheme = sender.isOn
         updatePreferencesUI()
+    }
+    
+    @IBAction private func onAutoResumeDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.autoRestartInterruptedDownloads = true
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -214,6 +220,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
         animeShowEpisodeDetailsSwitch.setOn(NineAnimator.default.user.showEpisodeDetails, animated: true)
         detectClipboardLinksSwitch.setOn(NineAnimator.default.user.detectsPasteboardLinks, animated: true)
+        autoResumeDownloadTasksSwitch.setOn(NineAnimator.default.user.autoRestartInterruptedDownloads, animated: true)
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
         pictureInPictureSwitch.setOn(AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback, animated: true)

@@ -25,6 +25,7 @@ enum OfflineState {
     case preservationInitiated
     case preserving(Float)
     case error(Error)
+    case interrupted
     case preserved
 }
 
@@ -72,6 +73,9 @@ class OfflineContent: NSObject {
     /// access the content.
     var persistentResourceIdentifier: (relativePath: String, relativeTo: String)?
     
+    /// The data to resume the download task
+    var resumeData: Data?
+    
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
         parent = manager
@@ -107,12 +111,41 @@ class OfflineContent: NSObject {
     /// Checks if the content still exists on file system and
     /// update the states accordingly.
     func updateResourceAvailability() {
+        func fallbackToReady() {
+            resumeData = nil
+            task?.cancel()
+            task = nil
+            state = .ready
+        }
+        
+        // If the content is preserved, check if the resource is still available
         if case .preserved = state {
             // Check if the content is available and readable
             guard let url = preservedContentURL,
                 FileManager.default.fileExists(atPath: url.path) else {
-                state = .ready
+                fallbackToReady()
                 return
+            }
+        }
+        
+        // If the content is interrupted, check if the resume data is presence,
+        // or, in the case of AVAssetDownloadingURLSession, if the task is restored
+        if case .interrupted = state {
+            if let sessionType = persistedDownloadSessionType {
+                if sessionType == "common" && resumeData == nil {
+                    Log.info("A download task has invalid resume data. Fallbacking to ready state.")
+                    fallbackToReady()
+                }
+                
+                if sessionType == "avasset" && task == nil {
+                    Log.info("A download task has invalid task reference. Fallbacking to ready state.")
+                    fallbackToReady()
+                }
+                
+                // What about if the session type is unknown??
+            } else {
+                Log.error("An interrupted content has an invalid session type")
+                fallbackToReady()
             }
         }
     }
@@ -141,6 +174,53 @@ class OfflineContent: NSObject {
         state = .ready
     }
     
+    /// Resume the interruption if possible
+    func resumeInterruption() {
+        // Only resume a task that is suspended or errored
+        switch state {
+        case .interrupted, .error: break
+        default:
+            Log.error("Trying to resume a task that is neither suspended nor errored. Aborting.")
+            return
+        }
+        
+        // Resume the task
+        if let task = task {
+            if case .suspended = task.state {
+                Log.info("Trying to resume a suspended download task")
+                task.resume()
+                state = .preservationInitiated
+            } else { state = .error(NineAnimatorError.providerError("Task is not resumable")) }
+            return
+        } else if let resumeData = resumeData {
+            Log.info("Trying to resume a download task with resume data")
+            
+            // Resuming with resume data is only possible with common session
+            if persistedDownloadSessionType == "common" {
+                task = downloadingSession.downloadTask(withResumeData: resumeData)
+                state = .preservationInitiated
+                return
+            }
+            
+            Log.error("Cannot resume task. No supported session found, only %@", persistedDownloadSessionType ?? "Unknown Type (nil)")
+        }
+        
+        // Update state to error
+        state = .error(NineAnimatorError.providerError("Cannot resume downloading task"))
+    }
+    
+    /// Temporarily pause the content preservation
+    func suspend() {
+        // Only suspend a task that is preserving
+        guard case .preserving = state else {
+            return Log.error("Trying to suspend a task that is not preserving. Aborting.")
+        }
+        
+        // Tell the task to suspend
+        task?.suspend()
+        state = .interrupted
+    }
+    
     /// Called when the content is restored from persistent storage
     func onRestore(persistentContent url: URL) { }
     
@@ -158,11 +238,9 @@ extension OfflineState {
         self = .ready
         if let type = dict["type"] as? String {
             switch type {
-            case "ready": self = .ready; return
-            case "preserving":
-                if let progress = dict["progress"] as? Float {
-                    self = .preserving(progress)
-                }
+            case "ready": self = .ready
+            // The following states are all handled as interrupted
+            case "error", "interrupted", "preserving": self = .interrupted
             case "preserved": self = .preserved
             default: break
             }
@@ -172,10 +250,11 @@ extension OfflineState {
     var export: [String: Any] {
         var dict = [String: Any]()
         switch self {
-        case .ready, .error, .preservationInitiated: dict["type"] = "ready"
+        case .ready, .preservationInitiated: dict["type"] = "ready"
         case .preserving(let progress):
             dict["type"] = "preserving"
             dict["progress"] = progress
+        case .interrupted, .error: dict["type"] = "interrupted"
         case .preserved: dict["type"] = "preserved"
         }
         return dict

@@ -43,72 +43,115 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
         }
     }
     
+    // This is to make sure that we don't update the UI too frequently,
+    // which might cause some performance issues
+    private var _lastProgressUpdateData = Date()
+    
+    // swiftlint:disable cyclomatic_complexity
     private func updateFromContent() {
         guard let content = content else { return }
-        
         let link = content.episodeLink
-        episodeNameLabel.text = "Episode \(link.name)"
         
         switch content.state {
         case .preserving(let progress):
+            // Once every one second at most
+            guard _lastProgressUpdateData.timeIntervalSinceNow < -1.0 else { break }
+            _lastProgressUpdateData = Date()
+            
             let formatter = NumberFormatter()
             formatter.numberStyle = .percent
             formatter.maximumFractionDigits = 1
             formatter.percentSymbol = "%"
-            progressView.setProgress(progress, animated: true)
-            progressLabel.text = "Downloading (\(formatter.string(from: NSNumber(value: progress)) ?? "0%") complete)"
             
             // If the download is immedietly available, reflect that in the download
             // status label
-            if content.media == nil {
-                downloadStatusLabel.text = "Download in Progress - \(link.parent.source.name)"
-            } else {
-                downloadStatusLabel.text = "Ready for Playback - \(link.parent.source.name)"
-            }
+            updateLabels(
+                status: "Download in Progress - \(link.parent.source.name)",
+                progressStatus: "Downloading (\(formatter.string(from: NSNumber(value: progress)) ?? "0%") complete)",
+                progress: progress
+            )
         case .preserved:
+            let downloadStatus: String
             if let date = content.datePreserved {
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
                 formatter.dateStyle = .medium
-                downloadStatusLabel.text = "Downloaded on \(formatter.string(from: date))"
-            } else { downloadStatusLabel.text = "Unknown date preserved" }
+                downloadStatus = "Downloaded on \(formatter.string(from: date)) \(link.parent.source.name)"
+            } else { downloadStatus = "Unknown date preserved" }
             
             let playbackProgress = link.playbackProgress
-            progressView.setProgress(playbackProgress, animated: true)
-            
+            let progressLabelText: String
             // Update progress label if the asset is downloaded
             switch playbackProgress {
             case 0.00...0.01:
-                progressLabel.text = "Start Now"
+                progressLabelText = "Start Now"
             case 0.90...:
-                progressLabel.text = "Done Watching | Swipe left to delete"
+                progressLabelText = "Done Watching | Swipe left to delete"
             default:
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .percent
                 formatter.maximumFractionDigits = 2
                 formatter.percentSymbol = "%"
-                progressLabel.text = "\(formatter.string(from: NSNumber(value: 1.0 - playbackProgress)) ?? "0%") left to watch"
+                progressLabelText = "\(formatter.string(from: NSNumber(value: 1.0 - playbackProgress)) ?? "0%") left to watch"
             }
+            
+            updateLabels(
+                status: downloadStatus,
+                progressStatus: progressLabelText,
+                progress: playbackProgress
+            )
         case .error(let error):
-            progressLabel.text = "Error"
-            downloadStatusLabel.text = error is NineAnimatorError ? "\(error)" : "\(error.localizedDescription)"
+            updateLabels(
+                status: error is NineAnimatorError ? "\(error)" : "\(error.localizedDescription)",
+                progressStatus: "Error | Tap to Retry"
+            )
         case .preservationInitiated:
-            progressLabel.text = "Queued"
-            progressView.setProgress(0.0, animated: true)
-            downloadStatusLabel.text = "Download in Progress - \(link.parent.source.name)"
+            updateLabels(
+                status: "Download in Progress - \(link.parent.source.name)",
+                progressStatus: "Queued",
+                progress: 0.0
+            )
         case .ready:
-            progressLabel.text = "Ready for Download"
-            progressView.setProgress(0.0, animated: true)
-            downloadStatusLabel.text = "Unavailable for Offline Access"
+            updateLabels(
+                status: "Ready for Download - \(link.parent.source.name)",
+                progressStatus: "Ready | Tap to Start",
+                progress: 0.0
+            )
+        case .interrupted:
+            updateLabels(
+                status: "Ready to Resume Download - \(link.parent.source.name)",
+                progressStatus: "Suspended | Tap to Resume",
+                progress: 0.0
+            )
+        }
+    }
+    // swiftlint:enable cyclomatic_complexity
+    
+    private func updateLabels(status: String, progressStatus: String, progress: Float? = nil) {
+        DispatchQueue.main.async {
+            [weak self] in
+            // Update episode name
+            if let link = self?.content?.episodeLink {
+                self?.episodeNameLabel.text = "Episode \(link.name)"
+            }
+            
+            // Update labels
+            self?.progressLabel.text = progressStatus
+            self?.downloadStatusLabel.text = status
+            
+            // Update progress view
+            if let progress = progress {
+                self?.progressView.setProgress(progress, animated: true)
+            }
         }
     }
     
     @objc private func onProgressUpdateNotification(_ notification: Notification) {
-        DispatchQueue.main.async { [weak self] in self?.updateFromContent() }
+        DispatchQueue.global().async { [weak self] in self?.updateFromContent() }
     }
     
     @objc private func onPlaybackProgressDidUpdate(_ notification: Notification) {
-        DispatchQueue.main.async { [weak self] in self?.updateFromContent() }
+        DispatchQueue.global().async { [weak self] in self?.updateFromContent() }
     }
     
     @IBOutlet private weak var episodeNameLabel: UILabel!

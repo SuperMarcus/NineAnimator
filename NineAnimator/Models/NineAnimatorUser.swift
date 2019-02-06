@@ -172,6 +172,11 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: .detectClipboardAnimeLinks) }
     }
     
+    var autoRestartInterruptedDownloads: Bool {
+        get { return _freezer.bool(forKey: .autoRestartInterruptedDownloadTasks) }
+        set { _freezer.set(newValue, forKey: .autoRestartInterruptedDownloadTasks) }
+    }
+    
     var theme: String {
         get { return _freezer.string(forKey: .theme) ?? "light" }
         set { _freezer.set(newValue, forKey: .theme) }
@@ -419,6 +424,7 @@ fileprivate extension String {
     static var recentAnimeList: String { return "anime.recent" }
     static var detectClipboardAnimeLinks: String { return "anime.links.detect" }
     static var subscribedAnimeList: String { return "anime.subscribed" }
+    static var autoRestartInterruptedDownloadTasks: String { return "episode.download.autorestart" }
     static var recentEpisode: String { return "episode.recent" }
     static var recentSource: String { return "source.recent" }
     static var recentServer: String { return "server.recent" }

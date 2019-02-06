@@ -81,7 +81,7 @@ class OfflineAccessButton: UIButton, Themable {
                 preservationInitiatedActivityIndicator = newIndicator
                 newIndicator.startAnimating()
             }
-        case .error, .ready:
+        case .error, .ready, .interrupted:
             setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
             preservationInitiatedActivityIndicator?.stopAnimating()
             preservationInitiatedActivityIndicator?.removeFromSuperview()
@@ -155,7 +155,9 @@ class OfflineAccessButton: UIButton, Themable {
             OfflineContentManager.shared.cancelPreservation(for: episodeLink)
         case .error, .ready:
             OfflineContentManager.shared.initiatePreservation(for: episodeLink)
-        default: break
+        case .interrupted:
+            OfflineContentManager.shared.content(for: episodeLink).resumeInterruption()
+        case .preserved: break // Do nothing if preserved
         }
     }
     
