@@ -24,6 +24,7 @@
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
 		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* NotificationManager.swift */; };
+		2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -128,7 +129,7 @@
 		2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC21A1220917D200A30F4F /* Promise+Fail.swift */; };
 		2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */; };
 		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
-		52CADD6721BD86F40077BEB1 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */; };
+		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
 		2C2196D221DAC555002059D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringArray+FirstMatchingGroup.swift"; sourceTree = "<group>"; };
 		2C4817A421DB2A210092F694 /* notification_example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification_example.jpg; sourceTree = "<group>"; };
 		2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_recent_tab.jpg; sourceTree = "<group>"; };
 		2C4817A721DB2F320092F694 /* xcode_select_device.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xcode_select_device.jpg; sourceTree = "<group>"; };
@@ -307,7 +309,7 @@
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
-		52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectRows.swift"; sourceTree = "<group>"; };
 		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -373,6 +375,38 @@
 				2C2196D221DAC555002059D3 /* Info.plist */,
 			);
 			path = NineAnimatorTests;
+			sourceTree = "<group>";
+		};
+		2C433154220B34ED00A2E64F /* Asynchronous */ = {
+			isa = PBXGroup;
+			children = (
+				2CEBE9102207CBE7006A64CC /* Promise.swift */,
+				2CEC21892207E34E00A30F4F /* Promise+All.swift */,
+				2CEC21932207F5A100A30F4F /* Promise+Callback.swift */,
+				2CEC219D22088B4900A30F4F /* Promise+Queue.swift */,
+				2CEC21A1220917D200A30F4F /* Promise+Fail.swift */,
+				2CEC218B2207E3A900A30F4F /* AsyncTask.swift */,
+			);
+			path = Asynchronous;
+			sourceTree = "<group>";
+		};
+		2C433155220B354300A2E64F /* String Operation */ = {
+			isa = PBXGroup;
+			children = (
+				2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */,
+				2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */,
+				2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */,
+			);
+			path = "String Operation";
+			sourceTree = "<group>";
+		};
+		2C433158220B35E600A2E64F /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
+				2C6677B121BD846A000E5ACC /* CMTime.swift */,
+			);
+			path = AVFoundation;
 			sourceTree = "<group>";
 		};
 		2C4817A121DB118F0092F694 /* Recents Tab Scene */ = {
@@ -494,6 +528,8 @@
 				2CEB56D421DBE45B0018D804 /* Anime Scene */,
 				2C4817A121DB118F0092F694 /* Recents Tab Scene */,
 				2C17E08721D7D63100E3FD1F /* Featured Tab Scene */,
+				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
+				52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */,
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 				2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */,
 				2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */,
@@ -505,24 +541,15 @@
 		2C4ABC8621B753C9009B4D47 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */,
-				2C6677B121BD846A000E5ACC /* CMTime.swift */,
-				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
-				52CADD6621BD86F40077BEB1 /* UITableView+Extensions.swift */,
+				2C433158220B35E600A2E64F /* AVFoundation */,
+				2C433154220B34ED00A2E64F /* Asynchronous */,
+				2C433155220B354300A2E64F /* String Operation */,
 				2C9C450121CD56B0004C8F0C /* Notifications.swift */,
-				2C4ABC7E21B6D69E009B4D47 /* UIView+BackgroundShadow.swift */,
 				2CEB56D621DBE53A0018D804 /* Log.swift */,
 				2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */,
 				2CEA0BE721F66D49007EECC4 /* Continuity.swift */,
 				2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */,
 				2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */,
-				2CEBE9102207CBE7006A64CC /* Promise.swift */,
-				2CEC21892207E34E00A30F4F /* Promise+All.swift */,
-				2CEC21932207F5A100A30F4F /* Promise+Callback.swift */,
-				2CEC219D22088B4900A30F4F /* Promise+Queue.swift */,
-				2CEC21A1220917D200A30F4F /* Promise+Fail.swift */,
-				2CEC218B2207E3A900A30F4F /* AsyncTask.swift */,
-				2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1026,8 +1053,9 @@
 				2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */,
 				2CCC745A21C060480007502A /* Source.swift in Sources */,
 				2CD9B9A621FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift in Sources */,
+				2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
-				52CADD6721BD86F40077BEB1 /* UITableView+Extensions.swift in Sources */,
+				52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */,
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
