@@ -76,7 +76,7 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
                 let formatter = DateFormatter()
                 formatter.timeStyle = .short
                 formatter.dateStyle = .medium
-                downloadStatus = "Downloaded on \(formatter.string(from: date)) \(link.parent.source.name)"
+                downloadStatus = "Downloaded on \(formatter.string(from: date)) from \(link.parent.source.name)"
             } else { downloadStatus = "Unknown date preserved" }
             
             let playbackProgress = link.playbackProgress

@@ -189,10 +189,11 @@ extension RootViewController {
         case .error(let error):
             let alert = UIAlertController(
                 title: "Download Error",
-                message: String(describing: error),
+                message: error is NineAnimatorError ? "\(error)" : error.localizedDescription,
                 preferredStyle: .alert
             )
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            Log.error("Presenting download error: %@", error)
             DispatchQueue.main.async { [weak self] in self?.presentOnTop(alert) }
         default: break
         }
