@@ -13,7 +13,7 @@ it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and
 [gogoanime.io](//gogoanime.io). GPLv3 Licensed.
 
     
-    Copyright © 2018 Marcus Zhou. All rights reserved.
+    Copyright © 2018-2019 Marcus Zhou. All rights reserved.
     
     NineAnimator is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
