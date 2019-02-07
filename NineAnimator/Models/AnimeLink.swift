@@ -18,7 +18,7 @@
 //
 
 import Alamofire
-import UIKit
+import Foundation
 
 /**
  A container for all possible links

@@ -19,7 +19,7 @@
 
 import Alamofire
 import AVKit
-import UIKit
+import Foundation
 
 protocol VideoProviderParser {
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
