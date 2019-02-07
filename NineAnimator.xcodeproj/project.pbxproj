@@ -25,6 +25,7 @@
 		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* NotificationManager.swift */; };
 		2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */; };
+		2C43315A220B380200A2E64F /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433159220B380200A2E64F /* Error.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -170,6 +171,7 @@
 		2C2196D221DAC555002059D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringArray+FirstMatchingGroup.swift"; sourceTree = "<group>"; };
+		2C433159220B380200A2E64F /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		2C4817A421DB2A210092F694 /* notification_example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification_example.jpg; sourceTree = "<group>"; };
 		2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_recent_tab.jpg; sourceTree = "<group>"; };
 		2C4817A721DB2F320092F694 /* xcode_select_device.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xcode_select_device.jpg; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				2CEA0BE721F66D49007EECC4 /* Continuity.swift */,
 				2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */,
 				2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */,
+				2C433159220B380200A2E64F /* Error.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1058,6 +1061,7 @@
 				52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */,
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
+				2C43315A220B380200A2E64F /* Error.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,

@@ -48,8 +48,8 @@ class OfflineAnimeViewController: UITableViewController, BlendInViewController {
                 .contents(for: anime)
                 .sorted {
                     if NineAnimator.default.user.episodeListingOrder == .reversed {
-                        return $0.episodeLink.name > $1.episodeLink.name
-                    } else { return $0.episodeLink.name < $1.episodeLink.name }
+                        return self.compareEpisodeLinks($1.episodeLink, $0.episodeLink)
+                    } else { return self.compareEpisodeLinks($0.episodeLink, $1.episodeLink) }
                 }
             tableView.reloadSections([ 0 ], with: .automatic)
         }, completion: nil)
@@ -200,5 +200,19 @@ extension OfflineAnimeViewController {
     /// should configure and present
     func setPresenting(anime: AnimeLink) {
         presentingAnimeLink = anime
+    }
+}
+
+// MARK: - Compare episode link
+extension OfflineAnimeViewController {
+    private func compareEpisodeLinks(_ lhs: EpisodeLink, _ rhs: EpisodeLink) -> Bool {
+        let lName = lhs.name
+        let rName = rhs.name
+        
+        // Try to parse episode numbers from name
+        if let lComponent = lName.split(separator: " ").first, let lNum = Int(String(lComponent)),
+            let rComponent = rName.split(separator: " ").first, let rNum = Int(String(rComponent)) {
+            return lNum < rNum
+        } else { return lName < rName }
     }
 }
