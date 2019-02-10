@@ -20,14 +20,14 @@
 import Foundation
 import SwiftSoup
 
-extension NineAnimeSource {
+extension NASourceNineAnime {
     static let animeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/www2\\.9anime\\.to\\/watch\\/([^/]+)", options: .caseInsensitive)
     static let episodeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/www2\\.9anime\\.to\\/watch\\/[^/]+\\/([0-9A-Za-z]+)", options: .caseInsensitive)
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
         let urlString = url.absoluteString
         
-        guard let animeIdentifierMatch = NineAnimeSource.animeLinkParsingRegex.matches(
+        guard let animeIdentifierMatch = NASourceNineAnime.animeLinkParsingRegex.matches(
             in: urlString,
             options: [],
             range: urlString.matchingRange
@@ -39,7 +39,7 @@ extension NineAnimeSource {
         let animeIdentifier = urlString[animeIdentifierMatch.range(at: 1)]
         var episodeIdentifier: String?
         
-        if let episodeIdentifierMatch = NineAnimeSource.episodeLinkParsingRegex.matches(
+        if let episodeIdentifierMatch = NASourceNineAnime.episodeLinkParsingRegex.matches(
             in: urlString,
             options: [],
             range: urlString.matchingRange

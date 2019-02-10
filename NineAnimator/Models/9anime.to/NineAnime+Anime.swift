@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-extension NineAnimeSource {
+extension NASourceNineAnime {
     static let animeAliasRegex = try! NSRegularExpression(pattern: "<p class=\"alias\">([^<]+)", options: .caseInsensitive)
     static let animeAttributesRegex = try! NSRegularExpression(pattern: "<dt>([^<:]+):*<\\/dt>\\s+<dd>([^<]+)")
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
@@ -43,7 +43,7 @@ extension NineAnimeSource {
         let bowl = try! SwiftSoup.parse(page)
         
         let alias: String? = {
-            let matches = NineAnimeSource.animeAliasRegex.matches(
+            let matches = NASourceNineAnime.animeAliasRegex.matches(
                 in: page, range: page.matchingRange
             )
             return matches.isEmpty ? nil : page[matches[0].range(at: 1)]
@@ -115,7 +115,7 @@ extension NineAnimeSource {
                     ))
                 }
                 
-                let matches = NineAnimeSource.animeServerListRegex.matches(
+                let matches = NASourceNineAnime.animeServerListRegex.matches(
                     in: htmlList, range: htmlList.matchingRange
                 )
                 

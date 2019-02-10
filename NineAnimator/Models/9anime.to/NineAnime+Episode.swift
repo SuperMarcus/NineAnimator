@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-extension NineAnimeSource {
+extension NASourceNineAnime {
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         let ajaxHeaders: [String: String] = ["Referer": link.parent.link.absoluteString]
         let infoPath = "/ajax/episode/info?id=\(link.identifier)&server=\(link.server)"

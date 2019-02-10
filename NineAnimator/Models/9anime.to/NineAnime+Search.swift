@@ -31,9 +31,9 @@ class NineAnimeSearch: ContentProvider {
     
     private var _results: [[AnimeLink]]
     private var _lastRequest: NineAnimatorAsyncTask?
-    private let _parent: NineAnimeSource
+    private let _parent: NASourceNineAnime
     
-    init(_ parent: NineAnimeSource, query: String) {
+    init(_ parent: NASourceNineAnime, query: String) {
         self.query = query
         self._results = []
         self._parent = parent
@@ -106,5 +106,11 @@ class NineAnimeSearch: ContentProvider {
                 Log.error("Error when loading more results: %@", error)
             }
         }
+    }
+}
+
+extension NASourceNineAnime {
+    func search(keyword: String) -> ContentProvider {
+        return NineAnimeSearch(self, query: keyword)
     }
 }

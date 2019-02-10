@@ -28,7 +28,7 @@ struct NineAnimeFeatured: FeaturedContainer {
     
     let latest: [AnimeLink]
     
-    init?(_ pageSource: String, with parent: NineAnimeSource) throws {
+    init?(_ pageSource: String, with parent: NASourceNineAnime) throws {
         let featuredAnimesMatches = NineAnimeFeatured.featuredAnimesRegex.matches(
             in: pageSource, range: pageSource.matchingRange
         )
@@ -49,6 +49,24 @@ struct NineAnimeFeatured: FeaturedContainer {
                 else { throw NineAnimatorError.responseError("parser error") }
             let title = pageSource[$0.range(at: 3)]
             return AnimeLink(title: title, link: animeLink, image: imageLink, source: parent)
+        }
+    }
+}
+
+extension NASourceNineAnime {
+    func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
+        return request(browse: "/") {
+            value, error in
+            guard let value = value else {
+                return handler(nil, error)
+            }
+            
+            do {
+                let page = try NineAnimeFeatured(value, with: self)
+                handler(page, nil)
+            } catch {
+                handler(nil, error)
+            }
         }
     }
 }

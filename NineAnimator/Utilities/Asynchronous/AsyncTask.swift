@@ -36,5 +36,7 @@ class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
     
     func cancel() { for task in tasks { task.cancel() } }
     
+    static func += (left: NineAnimatorMultistepAsyncTask, right: NineAnimatorAsyncTask?) { left.add(right) }
+    
     deinit { cancel(); tasks = [] }
 }
