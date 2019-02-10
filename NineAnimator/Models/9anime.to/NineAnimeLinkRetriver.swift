@@ -21,8 +21,8 @@ import Foundation
 import SwiftSoup
 
 extension NineAnimeSource {
-    static let animeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/9anime\\.ru\\/watch\\/([^/]+)", options: .caseInsensitive)
-    static let episodeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/9anime\\.ru\\/watch\\/[^/]+\\/([0-9A-Za-z]+)", options: .caseInsensitive)
+    static let animeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/www2\\.9anime\\.to\\/watch\\/([^/]+)", options: .caseInsensitive)
+    static let episodeLinkParsingRegex = try! NSRegularExpression(pattern: "https*:\\/\\/www2\\.9anime\\.to\\/watch\\/[^/]+\\/([0-9A-Za-z]+)", options: .caseInsensitive)
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
         let urlString = url.absoluteString

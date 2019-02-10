@@ -23,7 +23,7 @@ import Foundation
 class NineAnimeSource: BaseSource, Source {
     let name: String = "9anime.ru"
     
-    override var endpoint: String { return "https://9anime.ru" }
+    override var endpoint: String { return "https://www2.9anime.to" }
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
         return request(browse: "/") {
