@@ -127,8 +127,6 @@ extension NASourceNineAnime {
                 
                 var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
                 
-                Log.debug("%@ servers found for this anime.", animeServers.count)
-                
                 do {
                     let soup = try SwiftSoup.parse(htmlList)
                     
@@ -140,7 +138,6 @@ extension NASourceNineAnime {
                                         server: serverIdentifier,
                                         parent: reconstructedLink)
                         }
-                        Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
                     }
                     
                     // Reconstruct the AnimeLink so we get the correct URLs and titles
