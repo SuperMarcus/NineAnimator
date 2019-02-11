@@ -238,6 +238,11 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     func cancelPreservation(for episodeLink: EpisodeLink) {
         content(for: episodeLink).cancel()
     }
+    
+    /// Remove all preserved content under the anime link
+    func removeContents(under animeLink: AnimeLink) {
+        contents(for: animeLink).forEach { $0.delete() }
+    }
 }
 
 // MARK: - URLSessionDownloadDelegate

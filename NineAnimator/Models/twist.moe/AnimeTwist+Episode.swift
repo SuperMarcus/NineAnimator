@@ -51,6 +51,7 @@ extension NASourceAnimeTwist {
             var destinationBuffer = Data(count: destinationBufferLength)
             var decryptedBytes = 0
             
+            // AES256-CBC decrypt with the derived key and iv
             let decryptionStatus = destinationBuffer.withUnsafeMutableBytes {
                 destinationPointer in
                 data.withUnsafeBytes {

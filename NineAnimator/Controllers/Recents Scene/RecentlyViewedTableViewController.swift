@@ -31,12 +31,15 @@ class RecentlyViewedTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Store the preserved or preserving anime list
-        statefulAnime = OfflineContentManager.shared.statefulAnime
-        
         //Pull any updates from the cloud
         NineAnimator.default.user.pull()
+        reloadStatefulAnime()
         tableView.reloadData()
+    }
+    
+    private func reloadStatefulAnime() {
+        // Store the preserved or preserving anime list
+        statefulAnime = OfflineContentManager.shared.statefulAnime
     }
 }
 
@@ -127,6 +130,7 @@ extension RecentlyViewedTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        // Recent anime section
         if indexPath.section == 2 {
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
                 _, _ in
@@ -159,6 +163,22 @@ extension RecentlyViewedTableViewController {
             
             return [ deleteAction, shareAction ]
         }
+        
+        // Downloads section
+        if indexPath.section == 1 {
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
+                [weak self] _, _ in
+                guard let cell = tableView.cellForRow(at: indexPath) as? OfflineAnimeTableViewCell,
+                    let animeLink = cell.animeLink else { return }
+                OfflineContentManager.shared.removeContents(under: animeLink)
+                self?.reloadStatefulAnime()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            
+            return [ deleteAction ]
+        }
+        
+        // No actions for the others
         return []
     }
 }
