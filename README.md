@@ -9,8 +9,8 @@
 
 A simple yet elegant way of waching anime on your favorite anime website.
 NineAnimator is a free and open source anime watching app for iOS. Currently
-it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and
-[gogoanime.io](//gogoanime.io). GPLv3 Licensed.
+it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me),
+[gogoanime.io](//gogoanime.io), and [Anime Twist](//twist.moe). GPLv3 Licensed.
 
     
     Copyright © 2018-2019 Marcus Zhou. All rights reserved.
@@ -54,7 +54,7 @@ it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and
 - [x] Picture in Picture playback on iPads
 - [x] Chromecast/Google Cast with lockscreen & control center support
 - [x] Playback History & Auto Resumes
-- [x] Support [9anime.ru](//9anime.ru), [masterani.me](//masterani.me), and [gogoanime.io](//gogoanime.io)
+- [x] Support [Multiple Anime Websites](#anime-websites)
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
@@ -196,6 +196,7 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - Streamango
 - MyCloud (unavailable for Google Cast)
 - Tiwi.Kiwi (may not be available for Google Cast)
+- Self-hosted Streaming Services ([masterani.me](//masterani.me) and [Anime Twist](//twist.moe))
 
 All of the sources above support downloading. More hosts may be added later.
 Feel free to open an issue to request additional hosts.
@@ -221,7 +222,13 @@ of features:
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is availble)
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- [Anime Twist](//twist.moe)
+    - [x] Basic features (featured list, notifications, search, and playback; no anime artworks)
+    - [ ] Open arbitrary links
+    - [ ] Anime synopsis
+    - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
 
 ## Backup History and Playback Progresses
