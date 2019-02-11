@@ -82,6 +82,7 @@ extension NineAnimator {
         register(source: NASourceNineAnime(with: self))
         register(source: NASourceMasterAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
+        register(source: NASourceAnimeTwist(with: self))
     }
 }
 

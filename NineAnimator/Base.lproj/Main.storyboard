@@ -166,7 +166,7 @@
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJE-7K-dq8" userLabel="Spaced Container">
                                             <rect key="frame" x="16" y="19" width="343" height="122"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nAu-b3-xDw">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nAu-b3-xDw">
                                                     <rect key="frame" x="0.0" y="0.0" width="94.5" height="122"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="nAu-b3-xDw" secondAttribute="height" multiplier="155:200" id="Xqs-G3-tCz"/>
@@ -176,7 +176,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ox1-9s-uGc">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ox1-9s-uGc">
                                                     <rect key="frame" x="94.5" y="0.0" width="248.5" height="122"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
@@ -417,7 +417,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkq-xt-baH" userLabel="Container View">
                                             <rect key="frame" x="16" y="11" width="317" height="144"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-e6-pzd">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rTr-e6-pzd">
                                                     <rect key="frame" x="8" y="10.5" width="95" height="123"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="rTr-e6-pzd" secondAttribute="height" multiplier="155:200" id="IZh-1y-MYJ"/>
