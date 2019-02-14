@@ -58,8 +58,8 @@ it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me),
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
-- [ ] Custom anime lists, e.g. favorites and to-watch list (planned)
-- [ ] Integration with MAL (planned)
+- [ ] Integration with third party anime listing websites (work in progress)
+- [ ] Custom anime lists, e.g. favorites and to-watch list (planned, may be integrated with 3rdp lists)
 
 ## Device Compatibility
 
