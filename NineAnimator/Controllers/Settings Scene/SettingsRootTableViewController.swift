@@ -175,7 +175,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
                                message: "This action is irreversible. You will be unsubscribed from all anime.",
                                continueActionName: "Unsubscribe All"
             ) { [weak self] in
-                NineAnimator.default.user.unwatchAll()
+                NineAnimator.default.user.unsubscribeAll()
                 self?.updatePreferencesUI()
             }
         case "settings.history.activities":
@@ -237,7 +237,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount > 1 ? "Items" : "Item")"
         
-        let subscribedAnimeCount = NineAnimator.default.user.watchedAnimes.count
+        let subscribedAnimeCount = NineAnimator.default.user.subscribedAnimes.count
         subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount > 1 ? "Items" : "Item")"
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)

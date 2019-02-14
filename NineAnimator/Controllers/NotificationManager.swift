@@ -267,7 +267,7 @@ extension UserNotificationManager {
             return completionHandler(.failed)
         }
         
-        let watchedAnimeLinks = NineAnimator.default.user.watchedAnimes
+        let watchedAnimeLinks = NineAnimator.default.user.subscribedAnimes
         var resultsPool = [FetchResult?]()
         
         guard !watchedAnimeLinks.isEmpty else {

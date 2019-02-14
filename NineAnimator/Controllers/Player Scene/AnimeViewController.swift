@@ -584,9 +584,9 @@ extension AnimeViewController {
         animeHeadingView.update(animated: true) {
             [weak self] _ in
             if let anime = self?.anime {
-                NineAnimator.default.user.watch(anime: anime)
+                NineAnimator.default.user.subscribe(anime: anime)
             } else if let animeLink = self?.animeLink {
-                NineAnimator.default.user.watch(uncached: animeLink)
+                NineAnimator.default.user.subscribe(uncached: animeLink)
             }
         }
     }
@@ -627,12 +627,12 @@ extension AnimeViewController {
             return action
         }())
         
-        if NineAnimator.default.user.isWatching(anime: animeLink) {
+        if NineAnimator.default.user.isSubscribing(anime: animeLink) {
             actionSheet.addAction({
                 let action = UIAlertAction(title: "Unsubscribe", style: .default) {
                     [weak self] _ in
                     self?.animeHeadingView.update(animated: true) {
-                        _ in NineAnimator.default.user.unwatch(anime: animeLink)
+                        _ in NineAnimator.default.user.unsubscribe(anime: animeLink)
                     }
                 }
                 action.image = #imageLiteral(resourceName: "Notification Disabled")
@@ -702,13 +702,13 @@ extension AnimeViewController {
     override var previewActionItems: [UIPreviewActionItem] {
         guard let animeLink = self.animeLink else { return [] }
         
-        let subscriptionAction = NineAnimator.default.user.isWatching(anime: animeLink) ?
+        let subscriptionAction = NineAnimator.default.user.isSubscribing(anime: animeLink) ?
                 UIPreviewAction(title: "Unsubscribe", style: .default) { _, _ in
-                    NineAnimator.default.user.unwatch(anime: animeLink)
+                    NineAnimator.default.user.unsubscribe(anime: animeLink)
                 } : UIPreviewAction(title: "Subscribe", style: .default) { [weak self] _, _ in
                     if let anime = self?.anime {
-                        NineAnimator.default.user.watch(anime: anime)
-                    } else { NineAnimator.default.user.watch(uncached: animeLink) }
+                        NineAnimator.default.user.subscribe(anime: anime)
+                    } else { NineAnimator.default.user.subscribe(uncached: animeLink) }
                 }
         
         return [ subscriptionAction ]

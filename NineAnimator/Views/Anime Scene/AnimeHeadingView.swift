@@ -33,13 +33,13 @@ class AnimeHeadingView: UIView {
             posterImageView.kf.setImage(with: animeLink.image)
             
             // Subscription status - Hide subscribe button when is subscribed
-            isSubscribedLabel.alpha = NineAnimator.default.user.isWatching(anime: animeLink) ? 1.0 : 0.0
-            subscriptionButton.alpha = NineAnimator.default.user.isWatching(anime: animeLink) ? 0.0 : 1.0
+            isSubscribedLabel.alpha = NineAnimator.default.user.isSubscribing(anime: animeLink) ? 1.0 : 0.0
+            subscriptionButton.alpha = NineAnimator.default.user.isSubscribing(anime: animeLink) ? 0.0 : 1.0
             
             // Change the bottom space based on if the button is present or not
-            serverInformationBottomLayoutConstraint.priority = NineAnimator.default.user.isWatching(anime: animeLink) ?
+            serverInformationBottomLayoutConstraint.priority = NineAnimator.default.user.isSubscribing(anime: animeLink) ?
                 .init(rawValue: 900) : .defaultLow
-            serverInformationRightLayoutConstraint.priority = NineAnimator.default.user.isWatching(anime: animeLink) ?
+            serverInformationRightLayoutConstraint.priority = NineAnimator.default.user.isSubscribing(anime: animeLink) ?
                 .defaultHigh : .defaultLow
             
             // Layout

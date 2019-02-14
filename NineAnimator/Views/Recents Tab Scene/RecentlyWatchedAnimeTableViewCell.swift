@@ -33,7 +33,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell, Themable {
             coverImageView.kf.indicatorType = .activity
             animeTitleLabel.text = link.title
             sourceTitleLabel.text = "Viewed on \(link.source.name)..."
-            notificationEnabledImage.isHidden = !NineAnimator.default.user.isWatching(anime: link)
+            notificationEnabledImage.isHidden = !NineAnimator.default.user.isSubscribing(anime: link)
             
             UserNotificationManager.default.hasNotifications(for: link) { hasNotification, _ in
                 guard let hasNotification = hasNotification else { return }

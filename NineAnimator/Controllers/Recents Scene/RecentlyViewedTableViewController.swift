@@ -96,12 +96,12 @@ extension RecentlyViewedTableViewController {
         if indexPath.section == 2,
             let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
             let animeLink = cell.animeLink {
-            if NineAnimator.default.user.isWatching(anime: animeLink) {
+            if NineAnimator.default.user.isSubscribing(anime: animeLink) {
                 let unsubscribeAction = UIContextualAction(
                     style: .normal,
                     title: "Unsubscribe"
                 ) { _, _, handler in
-                    NineAnimator.default.user.unwatch(anime: animeLink)
+                    NineAnimator.default.user.unsubscribe(anime: animeLink)
                     cell.animeLink = animeLink // This forces the cell to display the bell icon accordinly
                     handler(true)
                 }
@@ -114,7 +114,7 @@ extension RecentlyViewedTableViewController {
                     title: "Subscribe"
                 ) { _, _, handler in
                     UserNotificationManager.default.requestNotificationPermissions()
-                    NineAnimator.default.user.watch(uncached: animeLink)
+                    NineAnimator.default.user.subscribe(uncached: animeLink)
                     cell.animeLink = animeLink
                     handler(true)
                 }
