@@ -87,10 +87,14 @@ extension SearchViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        if let resultsViewController = segue.destination as? SearchResultViewController {
-            resultsViewController.searchText = sender as? String
+        // If the segue is pointing towards search results container, show that
+        if let resultsViewController = segue.destination as? ContentListViewController,
+            let query = (sender as? UISearchBar)?.text {
+            let contentProvider = NineAnimator.default.user.source.search(keyword: query)
+            resultsViewController.setPresenting(contentProvider: contentProvider)
         }
         
+        // Open anime directly
         if let animeViewController = segue.destination as? AnimeViewController,
            let cell = sender as? SimpleAnimeTableViewCell {
             animeViewController.setPresenting(anime: cell.animeLink!)
@@ -114,7 +118,7 @@ extension SearchViewController {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchController.dismiss(animated: true) { [weak self] in
-            self?.performSegue(withIdentifier: "search.result.show", sender: searchBar.text)
+            self?.performSegue(withIdentifier: "search.result.show", sender: searchBar)
         }
     }
 }

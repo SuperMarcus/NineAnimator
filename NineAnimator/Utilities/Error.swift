@@ -19,10 +19,6 @@
 
 import Foundation
 
-struct NewNineAnimatorError: LocalizedError {
-    let errorDescription: String?
-}
-
 enum NineAnimatorError: Error, CustomStringConvertible {
     case urlError
     case responseError(String)

@@ -18,31 +18,9 @@
 //
 
 import Foundation
-import SwiftSoup
 
-protocol ContentProviderDelegate: AnyObject {
-    //Index of the page (starting from zero)
-    func pageIncoming(_: Int, from provider: ContentProvider)
-    
-    func onError(_: Error, from provider: ContentProvider)
-}
+/// Representing
+struct AnimeListingInformation { }
 
-/// An AnimeList source
-///
-/// Content providers should not begin collecting anime until
-/// the more() method is called.
-protocol ContentProvider {
-    var title: String { get }
-    
-    var totalPages: Int? { get }
-    
-    var availablePages: Int { get }
-    
-    var moreAvailable: Bool { get }
-    
-    var delegate: ContentProviderDelegate? { get set }
-    
-    func animes(on page: Int) -> [AnimeLink]
-    
-    func more()
-}
+/// Representing a anime listing service
+protocol AnimeListingService { }

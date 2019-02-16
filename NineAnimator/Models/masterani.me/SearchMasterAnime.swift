@@ -22,7 +22,7 @@ import Foundation
 class NASearchMasterAnime: ContentProvider {
     static let apiPathSearch = "/api/anime/filter?search=%@&order=score_desc&page=%@"
     
-    var query: String
+    var title: String
     
     var totalPages: Int?
     
@@ -39,7 +39,7 @@ class NASearchMasterAnime: ContentProvider {
     private var _results = [[AnimeLink]]()
     
     init(query: String, parent: NASourceMasterAnime) {
-        self.query = query
+        self.title = query
         self._parent = parent
         more()
     }
@@ -52,7 +52,7 @@ class NASearchMasterAnime: ContentProvider {
     
     func more() {
         if _lastRequest == nil && moreAvailable {
-            let keyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let keyword = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
             let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
             _lastRequest = _parent.request(ajax: path) {
                 [weak self] response, _ in
@@ -61,7 +61,7 @@ class NASearchMasterAnime: ContentProvider {
                 defer { self._lastRequest = nil }
                 
                 guard let response = response else {
-                    self.delegate?.onError(NineAnimatorError.searchError("Did not find any results for \"\(self.query)\". This might suggests a bad network condition or a service issue."), from: self)
+                    self.delegate?.onError(NineAnimatorError.searchError("Did not find any results for \"\(self.title)\". This might suggests a bad network condition or a service issue."), from: self)
                     return
                 }
                 

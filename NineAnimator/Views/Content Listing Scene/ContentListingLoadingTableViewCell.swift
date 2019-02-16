@@ -17,32 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
-import SwiftSoup
+import UIKit
 
-protocol ContentProviderDelegate: AnyObject {
-    //Index of the page (starting from zero)
-    func pageIncoming(_: Int, from provider: ContentProvider)
+class ContentListingLoadingTableViewCell: UITableViewCell {
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
-    func onError(_: Error, from provider: ContentProvider)
-}
-
-/// An AnimeList source
-///
-/// Content providers should not begin collecting anime until
-/// the more() method is called.
-protocol ContentProvider {
-    var title: String { get }
-    
-    var totalPages: Int? { get }
-    
-    var availablePages: Int { get }
-    
-    var moreAvailable: Bool { get }
-    
-    var delegate: ContentProviderDelegate? { get set }
-    
-    func animes(on page: Int) -> [AnimeLink]
-    
-    func more()
+    func activates() { activityIndicator.startAnimating() }
 }

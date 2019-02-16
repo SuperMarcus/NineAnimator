@@ -21,7 +21,7 @@ import Foundation
 
 extension NASourceAnimeTwist {
     class TwistContentProvider: ContentProvider {
-        var query: String
+        var title: String
         
         var totalPages: Int? = 1
         
@@ -48,13 +48,13 @@ extension NASourceAnimeTwist {
                 [weak self] list -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 return list
-                    .filter { $0.title.contains(self.query) }
+                    .filter { $0.title.contains(self.title) }
                     .map(self.parent.anime)
             } .then {
                 [weak self] list -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 guard !list.isEmpty else {
-                    throw NineAnimatorError.searchError("No results found for \"\(self.query)\"")
+                    throw NineAnimatorError.searchError("No results found for \"\(self.title)\"")
                 }
                 return list
             } .error {
@@ -72,7 +72,7 @@ extension NASourceAnimeTwist {
         
         init(_ query: String, parent: NASourceAnimeTwist) {
             self.parent = parent
-            self.query = query
+            self.title = query
             more()
         }
     }

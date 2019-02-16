@@ -21,7 +21,7 @@ import Foundation
 import SwiftSoup
 
 class NineAnimeSearch: ContentProvider {
-    private(set) var query: String
+    private(set) var title: String
     private(set) var totalPages: Int?
     weak var delegate: ContentProviderDelegate?
     
@@ -34,7 +34,7 @@ class NineAnimeSearch: ContentProvider {
     private let _parent: NASourceNineAnime
     
     init(_ parent: NASourceNineAnime, query: String) {
-        self.query = query
+        self.title = query
         self._results = []
         self._parent = parent
         // Request the first page
@@ -49,9 +49,9 @@ class NineAnimeSearch: ContentProvider {
     
     func more() {
         guard moreAvailable && _lastRequest == nil else { return }
-        Log.debug("Requesting page %@ for query %@", _results.count + 1, query)
+        Log.debug("Requesting page %@ for query %@", _results.count + 1, title)
         let loadingIndex = _results.count
-        let encodedKeyword = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let encodedKeyword = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         _lastRequest = _parent.request(browse:
             "/search?keyword=\(encodedKeyword)&page=\(_results.count + 1)"
         ) { [weak self] response, error in
@@ -93,9 +93,9 @@ class NineAnimeSearch: ContentProvider {
                 }
                 
                 if animes.isEmpty {
-                    Log.debug("No results found for '@%'", self.query)
+                    Log.debug("No results found for '@%'", self.title)
                     self.totalPages = 0
-                    self.delegate?.onError(NineAnimatorError.searchError("No results found for \"\(self.query)\""), from: self)
+                    self.delegate?.onError(NineAnimatorError.searchError("No results found for \"\(self.title)\""), from: self)
                 } else {
                     let newSection = self._results.count
                     self._results.append(animes)

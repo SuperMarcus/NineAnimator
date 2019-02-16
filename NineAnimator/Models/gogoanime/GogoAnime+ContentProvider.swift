@@ -23,7 +23,7 @@ import SwiftSoup
 // swiftlint:disable closure_end_indentation
 extension NASourceGogoAnime {
     class GogoContentProvider: ContentProvider {
-        var query: String
+        var title: String
         
         var totalPages: Int?
         
@@ -44,7 +44,7 @@ extension NASourceGogoAnime {
         
         init(query: String, parent: NASourceGogoAnime) {
             self._parent = parent
-            self.query = query
+            self.title = query
             more()
         }
         
@@ -66,7 +66,7 @@ extension NASourceGogoAnime {
                 
                 // Set GET parameters
                 urlBuilder.queryItems = [
-                    .init(name: "keyword", value: query),
+                    .init(name: "keyword", value: title),
                     .init(name: "page", value: "\(requestingPage + 1)")
                 ]
                 guard let url = urlBuilder.url else {
@@ -94,7 +94,7 @@ extension NASourceGogoAnime {
                         
                         if self.totalPages == 0 {
                             Log.info("No results found")
-                            throw NineAnimatorError.searchError("No results found for \"\(self.query)\"")
+                            throw NineAnimatorError.searchError("No results found for \"\(self.title)\"")
                         }
                         
                         Log.info("%@ pages in total", self.totalPages!)
@@ -132,9 +132,9 @@ extension NASourceGogoAnime {
                         defer { self._lastRequest = nil }
                         
                         if $0.isEmpty {
-                            Log.info("No results found for '%@'", self.query)
+                            Log.info("No results found for '%@'", self.title)
                             self.delegate?.onError(
-                                NineAnimatorError.searchError("No results found for \"\(self.query)\""),
+                                NineAnimatorError.searchError("No results found for \"\(self.title)\""),
                                 from: self
                             )
                         } else {

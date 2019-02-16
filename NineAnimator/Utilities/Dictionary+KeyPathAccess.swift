@@ -18,31 +18,10 @@
 //
 
 import Foundation
-import SwiftSoup
 
-protocol ContentProviderDelegate: AnyObject {
-    //Index of the page (starting from zero)
-    func pageIncoming(_: Int, from provider: ContentProvider)
-    
-    func onError(_: Error, from provider: ContentProvider)
-}
-
-/// An AnimeList source
-///
-/// Content providers should not begin collecting anime until
-/// the more() method is called.
-protocol ContentProvider {
-    var title: String { get }
-    
-    var totalPages: Int? { get }
-    
-    var availablePages: Int { get }
-    
-    var moreAvailable: Bool { get }
-    
-    var delegate: ContentProviderDelegate? { get set }
-    
-    func animes(on page: Int) -> [AnimeLink]
-    
-    func more()
+extension Dictionary {
+    /// Obtain value with the provided keypath
+    func value(at path: String) -> Any? {
+        return (self as NSDictionary).value(forKeyPath: path)
+    }
 }
