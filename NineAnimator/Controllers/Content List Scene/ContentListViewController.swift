@@ -41,9 +41,12 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
     override func viewWillAppear(_ animated: Bool) {
         providerError = nil
         contentSource.delegate = self
-        
         title = contentSource.title
-        if contentSource.moreAvailable { contentSource.more() }
+        
+        // Request the first page
+        if contentSource.availablePages == 0 && contentSource.moreAvailable {
+            contentSource.more()
+        }
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {

@@ -37,13 +37,9 @@ class NineAnimeSearch: ContentProvider {
         self.title = query
         self._results = []
         self._parent = parent
-        // Request the first page
-        more()
     }
     
-    deinit {
-        _lastRequest?.cancel()
-    }
+    deinit { _lastRequest?.cancel() }
     
     func animes(on page: Int) -> [AnimeLink] { return _results[page] }
     

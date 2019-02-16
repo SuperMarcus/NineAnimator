@@ -41,7 +41,6 @@ class NASearchMasterAnime: ContentProvider {
     init(query: String, parent: NASourceMasterAnime) {
         self.title = query
         self._parent = parent
-        more()
     }
     
     deinit { _lastRequest?.cancel() }

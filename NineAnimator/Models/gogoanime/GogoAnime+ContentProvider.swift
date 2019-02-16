@@ -45,7 +45,6 @@ extension NASourceGogoAnime {
         init(query: String, parent: NASourceGogoAnime) {
             self._parent = parent
             self.title = query
-            more()
         }
         
         func animes(on page: Int) -> [AnimeLink] {

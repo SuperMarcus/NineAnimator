@@ -73,7 +73,6 @@ extension NASourceAnimeTwist {
         init(_ query: String, parent: NASourceAnimeTwist) {
             self.parent = parent
             self.title = query
-            more()
         }
     }
     
