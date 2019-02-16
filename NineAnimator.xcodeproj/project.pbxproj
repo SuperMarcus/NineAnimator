@@ -24,6 +24,10 @@
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
 		2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C716622183FA500760A69 /* AnimeListing.storyboard */; };
 		2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C716B221845A800760A69 /* ContentListingLoadingTableViewCell.swift */; };
+		2C1C716F221853AD00760A69 /* Anilist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C716E221853AD00760A69 /* Anilist.swift */; };
+		2C1C7171221854CA00760A69 /* BaseListingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C7170221854CA00760A69 /* BaseListingService.swift */; };
+		2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C717222186EC900760A69 /* TrackingServiceTableViewController.swift */; };
+		2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C717422188CA500760A69 /* Anilist+User.swift */; };
 		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C2C54F122159E4700BAA76E /* String+Proximity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54F022159E4700BAA76E /* String+Proximity.swift */; };
 		2C2C54F52215D42700BAA76E /* User+Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54F42215D42700BAA76E /* User+Preferences.swift */; };
@@ -187,6 +191,10 @@
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
 		2C1C716722183FA500760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeListing.storyboard; sourceTree = "<group>"; };
 		2C1C716B221845A800760A69 /* ContentListingLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListingLoadingTableViewCell.swift; sourceTree = "<group>"; };
+		2C1C716E221853AD00760A69 /* Anilist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anilist.swift; sourceTree = "<group>"; };
+		2C1C7170221854CA00760A69 /* BaseListingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseListingService.swift; sourceTree = "<group>"; };
+		2C1C717222186EC900760A69 /* TrackingServiceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingServiceTableViewController.swift; sourceTree = "<group>"; };
+		2C1C717422188CA500760A69 /* Anilist+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+User.swift"; sourceTree = "<group>"; };
 		2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
 		2C2196D221DAC555002059D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -426,6 +434,15 @@
 			path = "Content Listing Scene";
 			sourceTree = "<group>";
 		};
+		2C1C716D2218537700760A69 /* Anilist */ = {
+			isa = PBXGroup;
+			children = (
+				2C1C716E221853AD00760A69 /* Anilist.swift */,
+				2C1C717422188CA500760A69 /* Anilist+User.swift */,
+			);
+			path = Anilist;
+			sourceTree = "<group>";
+		};
 		2C2196CF21DAC555002059D3 /* NineAnimatorTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,7 +470,9 @@
 		2C3BBAAD22183BA900F1C77B /* Anime Listing Service */ = {
 			isa = PBXGroup;
 			children = (
+				2C1C716D2218537700760A69 /* Anilist */,
 				2C3BBAAE22183BCF00F1C77B /* AnimeListingService.swift */,
+				2C1C7170221854CA00760A69 /* BaseListingService.swift */,
 			);
 			path = "Anime Listing Service";
 			sourceTree = "<group>";
@@ -755,6 +774,7 @@
 				2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */,
 				2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */,
 				2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */,
+				2C1C717222186EC900760A69 /* TrackingServiceTableViewController.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -1122,6 +1142,7 @@
 				2C6677B221BD846A000E5ACC /* CMTime.swift in Sources */,
 				2C2C54F52215D42700BAA76E /* User+Preferences.swift in Sources */,
 				2CCC746B21C098860007502A /* SearchMasterAnime.swift in Sources */,
+				2C1C716F221853AD00760A69 /* Anilist.swift in Sources */,
 				2C2C54FF221606F800BAA76E /* User+UserDefaultKeys.swift in Sources */,
 				2C6677B021BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift in Sources */,
 				2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */,
@@ -1141,6 +1162,7 @@
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
 				2CEC21982207FA6800A30F4F /* GogoAnime+Anime.swift in Sources */,
 				2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */,
+				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C3D7BF62210825B0045D648 /* NineAnime+Reachability.swift in Sources */,
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
 				2CCC746621C088980007502A /* NineAnime+Episode.swift in Sources */,
@@ -1172,11 +1194,13 @@
 				2C43315A220B380200A2E64F /* Error.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
+				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C3D7BFB2210AE1D0045D648 /* AnimeTwist+Anime.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
+				2C1C7171221854CA00760A69 /* BaseListingService.swift in Sources */,
 				2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */,
 				2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */,
 				2CD7825A21FFEF2800477FC6 /* OfflineAccessButton.swift in Sources */,

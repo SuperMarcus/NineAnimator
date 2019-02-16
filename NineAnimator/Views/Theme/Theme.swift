@@ -161,7 +161,7 @@ extension Theme {
             primaryText: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             secondaryText: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
             background: #colorLiteral(red: 0.1600990295, green: 0.1600990295, blue: 0.1600990295, alpha: 1),
-            secondaryBackground: #colorLiteral(red: 0.05490267277, green: 0.05490267277, blue: 0.05490267277, alpha: 1),
+            secondaryBackground: #colorLiteral(red: 0.1326085031, green: 0.1326085031, blue: 0.1326085031, alpha: 1),
             tint: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),
             seperator: #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1),
             blurStyle: .dark,

@@ -19,8 +19,33 @@
 
 import Foundation
 
-/// Representing
-struct AnimeListingInformation { }
+/// Representing the tracking state of the listed anime
+enum ListingAnimeTrackingState {
+    case toWatch
+    case watching
+    case finished
+}
+
+/// Representing a listed anime
+struct ListingAnimeInformation {
+    let parentService: ListingService
+}
 
 /// Representing a anime listing service
-protocol AnimeListingService { }
+protocol ListingService {
+    /// The name of the listing service
+    var name: String { get }
+    
+    /// Report if this service is capable of generating `ListingAnimeInformation`
+    var isCapableOfListingAnimeInformation: Bool { get }
+    
+    /// Report if this service is capable of receiving notifications about
+    /// anime state changes notification (watched, watching, to-watch)
+    var isCapableOfPersistingAnimeState: Bool { get }
+    
+    /// Report if NineAnimator can retrieve anime with states (watched, watching,
+    /// to-watch) from this service
+    var isCapableOfRetrievingAnimeState: Bool { get }
+    
+    init(_: NineAnimator)
+}

@@ -56,33 +56,75 @@ class NineAnimator: SessionDelegate {
         return SessionManager(configuration: configuration, delegate: self)
     }()
     
-    var user = NineAnimatorUser()
+    private(set) var user = NineAnimatorUser()
     
-    var sources = [Source]()
+    // Container for the list of sources
+    private(set) var sources = [Source]()
+    
+    // Container for the list of tracking services
+    private(set) var trackingServices = [ListingService]()
     
     override init() {
         super.init()
+        
+        // Register implemented sources and services
         registerDefaultSources()
+        registerDefaultServices()
     }
 }
 
 // MARK: - Source management
 extension NineAnimator {
+    /// Register a new source
     func register(source: Source) { sources.append(source) }
     
+    /// Remove a source from the pool
     func remove(source: Source) {
         sources.removeAll { $0.name == source.name }
     }
     
+    /// Find the source with name
     func source(with name: String) -> Source? {
         return sources.first { $0.name == name }
     }
     
+    /// Register the default set of sources
     private func registerDefaultSources() {
         register(source: NASourceNineAnime(with: self))
         register(source: NASourceMasterAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
+    }
+}
+
+// MARK: - Tracking & Listing services
+extension NineAnimator {
+    /// Register a tracking service in NineAnimator
+    func register(service: ListingService) { trackingServices.append(service) }
+    
+    /// Remove the service with name
+    func remove(service: ListingService) {
+        trackingServices.removeAll { $0.name == service.name }
+    }
+    
+    /// Retrieve the service with name
+    func service(with name: String) -> ListingService? {
+        return trackingServices.first { $0.name == name }
+    }
+    
+    /// Retrieve the service with the specific type
+    func service<T: ListingService>(type: T.Type) -> T {
+        if let service = trackingServices.first(where: { $0 is T }) as? T {
+            return service
+        } else {
+            let newService = T(self)
+            register(service: newService)
+            return newService
+        }
+    }
+    
+    private func registerDefaultServices() {
+        register(service: Anilist(self))
     }
 }
 
