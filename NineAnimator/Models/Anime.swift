@@ -46,6 +46,8 @@ struct Anime {
     ///
     /// Reference to the tracking context is kept as long as
     /// a player is holding the PlaybackMedia (BasicPlaybackMedia)
+    ///
+    /// TrackingContext is not initialized during background fetch.
     let trackingContext: TrackingContext
     
     let additionalAttributes: [AttributeKey: Any]

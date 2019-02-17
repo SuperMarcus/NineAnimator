@@ -68,6 +68,10 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 
                 guard let anime = self.anime else { return }
                 
+                // Prepare the tracking context
+                let trackingContext = anime.trackingContext
+                trackingContext.prepareContext()
+                
                 // Choose a server
                 if self.server == nil {
                     if let recentlyUsedServer = NineAnimator.default.user.recentServer,
@@ -361,6 +365,7 @@ extension AnimeViewController {
         NotificationCenter.default.removeObserver(self)
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
+        let trackingContext = anime?.trackingContext
         
         let clearSelection = {
             [weak self] in
@@ -381,7 +386,7 @@ extension AnimeViewController {
         }
         
         episodeRequestTask = anime!.episode(with: episodeLink) {
-            [weak self] episode, error in
+            [weak self, weak trackingContext] episode, error in
             guard let self = self else { return }
             guard let episode = episode else {
                 clearSelection()
@@ -422,6 +427,8 @@ extension AnimeViewController {
                 // Always stall unsupported episodes and update the progress to 1.0
                 self.onPlaybackMediaStall(episode.target)
                 episode.update(progress: 1.0)
+                // Update tracking state
+                trackingContext?.endWatching(episode: episode.link)
                 clearSelection()
             }
         }

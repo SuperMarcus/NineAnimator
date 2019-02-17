@@ -41,6 +41,7 @@ class TrackingContext {
     
     private unowned var parent: NineAnimator
     private let link: AnimeLink
+    private var current: EpisodeLink?
     
     init(_ parent: NineAnimator, link: AnimeLink) {
         self.parent = parent
@@ -59,19 +60,31 @@ class TrackingContext {
             name: .playbackDidEnd,
             object: nil
         )
-        
+    }
+    
+    /// Prepare this tracking context for updates
+    ///
+    /// TrackingContext must be prepared before being used
+    func prepareContext() {
         Log.info("[TrackingContext] Preparing tracking context for \"%@\"", link.title)
         fetchReferences()
     }
     
     /// Set the anime to `watching` if it was in `toWatch` state
     ///
+    /// See `beginWatching(episode: EpisodeLink)`
+    func beginWatching(media: PlaybackMedia) {
+        beginWatching(episode: media.link)
+    }
+    
+    /// Set the anime to `watching` if it was in `toWatch` state
+    ///
     /// Messages are only relayed to services that support
     /// persisting anime state
-    func beginWatching(media: PlaybackMedia) {
+    func beginWatching(episode: EpisodeLink) {
         // Intentionally using a strong reference
         queue.async {
-            guard media.link.parent == self.link else {
+            guard episode.parent == self.link else {
                 Log.error("[TrackingContext] Attempting to send a beginWatching message to a TrackingContext that does not belong to the media.")
                 return
             }
@@ -85,29 +98,47 @@ class TrackingContext {
                     Log.info("[TrackingContext] Updating anime state to \"watching\" on \"%@\" for \"%@\"", reference.parentService.name, self.link.title)
                 }
             }
+            
+            // At last, set the current episode link to episode
+            self.current = episode
         }
+    }
+    
+    func endWatching() {
+        guard let episodeLink = current else {
+            Log.error("[TrackingContext] Attempting to send a endWatching message to a TrackingContext that did not start")
+            return
+        }
+        endWatching(episode: episodeLink)
+    }
+    
+    /// Update progress of the anime
+    ///
+    /// See `endWatching(episode: EpisodeLink)`
+    func endWatching(media: PlaybackMedia) {
+        endWatching(episode: media.link)
     }
     
     /// Update progress of the anime
     ///
     /// Messages are only relayed to services that support
     /// persisting anime state
-    func endWatching(media: PlaybackMedia) {
+    func endWatching(episode: EpisodeLink) {
         queue.async {
-            guard media.link.parent == self.link else {
+            guard episode.parent == self.link else {
                 Log.error("[TrackingContext] Attempting to send a endWatching message to a TrackingContext that does not belong to the media.")
                 return
             }
             
             // Update states
             for (_, reference) in self.listingAnimeReferences where reference.parentService.isCapableOfPersistingAnimeState {
-                reference.parentService.update(reference, didComplete: media.link)
+                reference.parentService.update(reference, didComplete: episode)
             }
         }
     }
     
     /// Fetch anime references if they do not exists
-    func fetchReferences() {
+    private func fetchReferences() {
         queue.async {
             let link = self.link
             // Create reference fetching tasks
