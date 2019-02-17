@@ -122,7 +122,9 @@ extension NativePlayerController {
             self.state = .fullscreen
             self.player.play()
             
-            NotificationCenter.default.post(name: .playbackDidStart, object: self)
+            NotificationCenter.default.post(name: .playbackDidStart, object: self, userInfo: [
+                "media": media
+            ])
         }
         
         playerViewController.userActivity = Continuity.activity(for: media)
@@ -206,9 +208,11 @@ extension NativePlayerController {
         }
         
         // Check if the video playback has stopped
-        if player.rate == 0 && playerViewController.isBeingDismissed && state == .fullscreen {
+        if player.rate == 0 && !playerViewController.isFirstResponder && state == .fullscreen {
             state = .idle
-            NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: nil)
+            NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: [
+                "media": currentMedia!
+            ])
         }
     }
     

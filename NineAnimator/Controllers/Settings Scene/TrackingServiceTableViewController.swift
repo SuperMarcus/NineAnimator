@@ -89,7 +89,7 @@ extension TrackingServiceTableViewController {
     func anilistPresentAuthenticationPage() {
         let callback: NineAnimatorCallback<URL> = {
             [weak anilist, weak self] url, callbackError in
-            defer { DispatchQueue.global().async { [weak self] in self?.anilistUpdateStatus() } }
+            defer { DispatchQueue.main.async { [weak self] in self?.anilistUpdateStatus() } }
             var error = callbackError
             
             // If callback url is provided

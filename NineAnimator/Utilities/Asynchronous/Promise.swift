@@ -19,7 +19,15 @@
 
 import Foundation
 
-private protocol NineAnimatorPromiseProtocol {
+/// A non-generic protocol for the promise
+protocol NineAnimatorPromiseProtocol {
+    /// True if this promise has been resolved or rejected
+    var isResolved: Bool { get }
+    
+    /// True if an error had occurred and this promise is rejected
+    var isRejected: Bool { get }
+    
+    /// Execute the promise immedietly
     func concludePromise()
 }
 
@@ -29,7 +37,7 @@ private protocol NineAnimatorPromiseProtocol {
 /// which, as many can tell, creates numerous "callback hells" in the
 /// code, and that Marcus couldn't come up with which promise
 /// framework to use, I am just going to write one myself.
-class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromiseProtocol {
+class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromiseProtocol, Hashable {
     // Hold reference to the task
     private var referenceTask: NineAnimatorAsyncTask?
     
@@ -225,7 +233,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     }
     
     /// Conclude the setup of promise and start the task
-    fileprivate func concludePromise() {
+    func concludePromise() {
         // Tell the previous promise to conclude first
         if let previous = chainedReference {
             previous.concludePromise()

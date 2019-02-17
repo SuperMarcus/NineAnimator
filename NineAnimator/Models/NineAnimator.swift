@@ -24,6 +24,12 @@ typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
 
 extension DataRequest: NineAnimatorAsyncTask { }
 
+private struct WeakRef<T: AnyObject> {
+    weak var object: T?
+    var hasValue: Bool { return object != nil }
+    init (_ object: T) { self.object = object }
+}
+
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
@@ -58,11 +64,14 @@ class NineAnimator: SessionDelegate {
     
     private(set) var user = NineAnimatorUser()
     
-    // Container for the list of sources
+    /// Container for the list of sources
     private(set) var sources = [Source]()
     
-    // Container for the list of tracking services
+    /// Container for the list of tracking services
     private(set) var trackingServices = [ListingService]()
+    
+    /// Container for the cached references to tracking contexts
+    fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
     override init() {
         super.init()
@@ -123,8 +132,30 @@ extension NineAnimator {
         }
     }
     
+    /// Retrieve the tracking context for the anime
+    func trackingContext(for anime: AnimeLink) -> TrackingContext {
+        collectGarbage()
+        
+        // If the context has been created, use the cached one
+        if let context = trackingContextReferences[anime]?.object {
+            return context
+        }
+        
+        // If the context does not exists, create a new one
+        let context = TrackingContext(self, link: anime)
+        trackingContextReferences[anime] = WeakRef(context)
+        return context
+    }
+    
     private func registerDefaultServices() {
         register(service: Anilist(self))
+    }
+    
+    /// Remove all expired weak references
+    private func collectGarbage() {
+        for (index, ref) in trackingContextReferences where !ref.hasValue {
+            trackingContextReferences[index] = nil
+        }
     }
 }
 

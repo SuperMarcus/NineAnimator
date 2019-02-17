@@ -1005,7 +1005,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences manual.
+                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
 
 NineAnimator will never uploads your personal information or playback history to any third party services without your consent. However, NineAnimator is not designed to prevent souce and playback services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
 
@@ -1018,7 +1018,7 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Manage Persisted Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N8M-Jf-n7k">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Manage Personal Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N8M-Jf-n7k">
                                                     <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

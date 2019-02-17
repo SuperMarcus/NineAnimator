@@ -42,6 +42,12 @@ struct Anime {
     let alias: String
     let episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation]
     
+    /// The tracking context of the anime
+    ///
+    /// Reference to the tracking context is kept as long as
+    /// a player is holding the PlaybackMedia (BasicPlaybackMedia)
+    let trackingContext: TrackingContext
+    
     let additionalAttributes: [AttributeKey: Any]
     
     var currentServer: ServerIdentifier
@@ -63,6 +69,7 @@ struct Anime {
         self.alias = alias
         self.additionalAttributes = additionalAttributes
         self.episodesAttributes = episodesAttributes
+        self.trackingContext = NineAnimator.default.trackingContext(for: link)
     }
     
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {

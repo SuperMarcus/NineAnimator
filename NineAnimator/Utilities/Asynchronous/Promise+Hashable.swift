@@ -19,24 +19,13 @@
 
 import Foundation
 
-/// Representing an asynchronized task that can be cancelled
-protocol NineAnimatorAsyncTask: AnyObject {
-    func cancel()
-}
-
-/// A container class used to hold strong references to the
-/// contained NineAnimatorAsyncTask and cancel them when
-/// needed.
-class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
-    private var tasks: [NineAnimatorAsyncTask]
+extension NineAnimatorPromise {
+    func hash(into hasher: inout Hasher) {
+        let identifier = ObjectIdentifier(self)
+        identifier.hash(into: &hasher)
+    }
     
-    init() { tasks = [] }
-    
-    func add(_ task: NineAnimatorAsyncTask?) { if let task = task { tasks.append(task) } }
-    
-    func cancel() { for task in tasks { task.cancel() } }
-    
-    static func += (left: NineAnimatorMultistepAsyncTask, right: NineAnimatorAsyncTask?) { left.add(right) }
-    
-    deinit { cancel(); tasks = [] }
+    static func == (lhs: NineAnimatorPromise<ResultType>, rhs: NineAnimatorPromise<ResultType>) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
 }

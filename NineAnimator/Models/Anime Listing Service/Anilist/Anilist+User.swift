@@ -27,9 +27,14 @@ extension Anilist {
     }
     
     func currentUser() -> NineAnimatorPromise<User> {
+        // Return the cached user if it exists
+        if let cachedUser = _currentUser {
+            return NineAnimatorPromise.firstly { cachedUser }
+        }
+        
         return graphQL(query: "{ Viewer { id, name, siteUrl } }", variables: [:])
             .then {
-                results in
+                results -> User in
                 guard let id = results.value(forKeyPath: "Viewer.id") as? Int,
                     let name = results.value(forKeyPath: "Viewer.name") as? String,
                     let siteUrlString = results.value(forKeyPath: "Viewer.siteUrl") as? String,
@@ -37,6 +42,10 @@ extension Anilist {
                     throw NineAnimatorError.responseError("Cannot find all entries required for the response")
                 }
                 return User(id: id, name: name, siteUrl: siteUrl)
+            } .then {
+                [unowned self] in
+                self._currentUser = $0
+                return $0
             }
     }
 }

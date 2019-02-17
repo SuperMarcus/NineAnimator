@@ -26,6 +26,12 @@ class Anilist: BaseListingService, ListingService {
     /// Anilist API endpoint
     let endpoint = URL(string: "https://graphql.anilist.co")!
     
+    /// Cached current user settings
+    var _currentUser: User?
+    
+    /// Hold reference to mutation requests
+    var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
+    
     override var identifier: String {
         return "com.marcuszhou.nineanimator.service.anilist"
     }
@@ -108,6 +114,7 @@ extension Anilist {
         Log.info("[AniList.co] Removing credentials")
         accessToken = nil
         accessTokenExpirationDate = Date.distantPast
+        _currentUser = nil
     }
 }
 
@@ -162,6 +169,26 @@ extension Anilist {
             }
             
             return responseObject["data"] as? NSDictionary
+        }
+    }
+    
+    func mutationGraphQL(query: String, variables: [String: CustomStringConvertible]) {
+        let task = graphQL(query: query, variables: variables)
+        .error {
+            [unowned self] in
+            Log.error("[AniList.co] Unable to update: %@", $0)
+            self.cleanupReferencePool()
+        } .finally {
+            [unowned self] _ in
+            Log.info("[AniList.co] Mutation made")
+            self.cleanupReferencePool()
+        }
+        _mutationRequestReferencePool.append(task)
+    }
+    
+    private func cleanupReferencePool() {
+        _mutationRequestReferencePool.removeAll {
+            ($0 as! NineAnimatorPromise<NSDictionary>).isResolved
         }
     }
 }
