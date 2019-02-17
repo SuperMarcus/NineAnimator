@@ -31,7 +31,7 @@ struct Episode {
     var referer: String
     
     var nativePlaybackSupported: Bool {
-        guard let serverName = _parent.servers[link.server] else { return false }
+        guard let serverName = parent.servers[link.server] else { return false }
         return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
@@ -39,19 +39,24 @@ struct Episode {
     
     func update(progress: Float) { NineAnimator.default.user.update(progress: progress, for: link) }
     
-    var source: Source { return _parent.source }
+    var source: Source { return parent.source }
     
-    private var _parent: Anime
+    let parent: Anime
+    
+    /// The tracking content for the episode
+    var trackingContext: TrackingContext {
+        return parent.trackingContext
+    }
     
     init(_ link: EpisodeLink, target: URL, parent: Anime, referer: String? = nil) {
         self.link = link
         self.target = target
-        self._parent = parent
+        self.parent = parent
         self.referer = referer ?? parent.link.link.absoluteString
     }
     
     func retrive(onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask? {
-        guard let serverName = _parent.servers[link.server],
+        guard let serverName = parent.servers[link.server],
             let provider = source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) else {
             handler(nil, NineAnimatorError.providerError("no parser found for server \(link.server)"))
             return nil
@@ -61,7 +66,7 @@ struct Episode {
     }
     
     func next(onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        guard let episodesQueue = _parent.episodes[link.server], episodesQueue.count > 1 else {
+        guard let episodesQueue = parent.episodes[link.server], episodesQueue.count > 1 else {
             handler(nil, NineAnimatorError.lastItemInQueueError)
             return nil
         }
@@ -70,7 +75,7 @@ struct Episode {
         
         for offset in 1..<episodesQueue.count where episodesQueue[offset - 1] == link {
             let nextEpisodeLink = episodesQueue[offset]
-            return _parent.episode(with: nextEpisodeLink, onCompletion: handler)
+            return parent.episode(with: nextEpisodeLink, onCompletion: handler)
         }
         
         Log.info("This is the last episode")

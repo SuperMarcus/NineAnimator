@@ -25,19 +25,22 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
     
     private let scanner: CastDeviceScanner
     
-    var devices = [CastDevice]()
+    /// The tracking context for the current playback media
+    private var trackingContext: TrackingContext?
     
-    var client: CastClient?
+    private(set) var devices = [CastDevice]()
     
-    var content: CastMedia?
+    private(set) var client: CastClient?
     
-    var currentEpisode: Episode?
+    private(set) var content: CastMedia?
     
-    var contentDuration: Double?
+    private(set) var currentEpisode: Episode?
     
-    var currentApp: CastApp?
+    private(set) var contentDuration: Double?
     
-    var updateTimer: Timer?
+    private(set) var currentApp: CastApp?
+    
+    private(set) var updateTimer: Timer?
     
     lazy var viewController: GoogleCastMediaPlaybackViewController = {
         let storyboard = UIStoryboard(name: "GoogleCastMediaControl", bundle: Bundle.main)
@@ -113,6 +116,7 @@ extension CastController {
         guard let castMedia = media.castMedia else { return }
         
         self.currentEpisode = episode
+        self.trackingContext = episode.trackingContext
         
         client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
             result in
@@ -140,6 +144,9 @@ extension CastController {
                     }
                     
                     self.updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: self.timerUpdateProgressTask)
+                    
+                    // Notify tracking context
+                    self.trackingContext?.beginWatching(episode: episode.link)
                     
                     Log.info("Playback status @%", status)
                 case .failure(let error):
@@ -215,6 +222,12 @@ extension CastController {
             viewController.playback(didEnd: content)
         }
         viewController.deviceListUpdated()
+        
+        // Notify tracking context
+        if let trackingContext = trackingContext {
+            trackingContext.endWatching()
+            self.trackingContext = nil
+        }
     }
     
     func castClient(_ client: CastClient, mediaStatusDidChange status: CastMediaStatus) {
@@ -222,7 +235,15 @@ extension CastController {
         viewController.playback(update: content, mediaStatus: status)
         
         if let episode = currentEpisode, let duration = contentDuration {
-            NineAnimator.default.user.update(progress: Float(status.currentTime / duration), for: episode.link)
+            let playbackProgress = Float(status.currentTime / duration)
+            NineAnimator.default.user.update(progress: playbackProgress, for: episode.link)
+            
+            // Notify tracking context
+            if playbackProgress > 0.7, let trackingContext = trackingContext {
+                trackingContext.endWatching()
+                // This will make sure the endWatching only gets called once
+                self.trackingContext = nil
+            }
         }
     }
     
