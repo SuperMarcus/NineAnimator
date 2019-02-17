@@ -19,7 +19,7 @@
 
 import UIKit
 
-class RecentlyViewedTableViewController: UITableViewController {
+class RecentlyViewedTableViewController: UITableViewController, BlendInViewController {
     private lazy var statefulAnime = OfflineContentManager.shared.statefulAnime
     
     override func viewDidLoad() {
