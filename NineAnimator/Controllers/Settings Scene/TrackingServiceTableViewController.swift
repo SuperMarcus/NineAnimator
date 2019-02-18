@@ -35,6 +35,7 @@ class TrackingServiceTableViewController: UITableViewController {
         
         // Update status
         anilistUpdateStatus()
+        tableView.makeThemable()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
