@@ -52,7 +52,7 @@ class RootViewController: UITabBarController, Themable {
         // Open the pending if there is any
         if let pendingOpeningLink = RootViewController._pendingOpeningLink {
             RootViewController._pendingOpeningLink = nil
-            _open(pendingOpeningLink)
+            open(immedietly: pendingOpeningLink)
         }
         
         // Restore config if there is any
@@ -81,7 +81,7 @@ extension RootViewController {
     
     static func open(whenReady link: AnyLink) {
         if let sharedRootViewController = shared {
-            sharedRootViewController._open(link)
+            sharedRootViewController.open(immedietly: link)
         } else { _pendingOpeningLink = link }
     }
     
@@ -96,24 +96,49 @@ extension RootViewController {
 extension RootViewController {
     fileprivate static var _pendingOpeningLink: AnyLink?
     
-    fileprivate func _open(_ link: AnyLink) {
-        selectedIndex = 0
+    func open(immedietly link: AnyLink, in viewController: UIViewController? = nil) {
+        let targetViewController: UIViewController
         
-        guard let navigationController = viewControllers?.first as? ApplicationNavigationController else {
-            Log.error("The first view controller is not ApplicationNavigationController.")
+        // Determine if the link is supported
+        switch link {
+        case .anime, .episode: // Present anime and episode link with AnimeViewController
+            let storyboard = UIStoryboard(name: "AnimePlayer", bundle: Bundle.main)
+            
+            // Instantiate the view controller from storyboard
+            guard let animeViewController = storyboard.instantiateInitialViewController() as? AnimeViewController else {
+                Log.error("The view controller instantiated from AnimePlayer.storyboard is not AnimeViewController.")
+                return
+            }
+            
+            // Initialize the AnimeViewController with the link
+            animeViewController.setPresenting(link)
+            targetViewController = animeViewController
+        default:
+            Log.error("Unknown link type: %@", link)
             return
         }
         
-        navigationController.popToRootViewController(animated: true)
-        
-        let storyboard = UIStoryboard(name: "AnimePlayer", bundle: Bundle.main)
-        guard let animeViewController = storyboard.instantiateInitialViewController() as? AnimeViewController else {
-            Log.error("The view controller instantiated from AnimePlayer.storyboard is not AnimeViewController.")
-            return
+        // If a view controller is provided
+        if let viewController = viewController {
+            // If the provided view controller has a navigation controller,
+            // open the link in the navigation controller. Else present it
+            // directly from the provided view controller.
+            if let navigationController = viewController.navigationController {
+                navigationController.pushViewController(targetViewController, animated: true)
+            } else { viewController.present(targetViewController, animated: true) }
+        } else { // If no view controller is provided, present the link in the featured tab
+            // Jump to Featured tab
+            selectedIndex = 0
+            
+            guard let navigationController = viewControllers?.first as? ApplicationNavigationController else {
+                Log.error("The first view controller is not ApplicationNavigationController.")
+                return
+            }
+            
+            // Pop to root view controller
+            navigationController.popToRootViewController(animated: true)
+            navigationController.pushViewController(targetViewController, animated: true)
         }
-        
-        animeViewController.setPresenting(link)
-        navigationController.pushViewController(animeViewController, animated: true)
     }
 }
 

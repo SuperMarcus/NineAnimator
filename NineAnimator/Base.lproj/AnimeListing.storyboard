@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="search.result" rowHeight="185" id="iK5-te-yhG" customClass="AnimeSearchResultTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="search.result" rowHeight="185" id="iK5-te-yhG" customClass="ListingEntryTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="185"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iK5-te-yhG" id="FM0-9g-w7c">
@@ -73,7 +73,6 @@
                                 <connections>
                                     <outlet property="animeTitleLabel" destination="lFR-07-AK0" id="j30-B2-ylw"/>
                                     <outlet property="coverImageView" destination="kOw-qz-9y5" id="dQV-GA-dug"/>
-                                    <segue destination="Kq6-hV-YGj" kind="show" id="qmV-HN-cnf"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="search.loading" rowHeight="108" id="qYn-E0-JJo" customClass="ContentListingLoadingTableViewCell" customModule="NineAnimator" customModuleProvider="target">
@@ -182,14 +181,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etF-bv-8bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3109.5999999999999" y="170.46476761619192"/>
-        </scene>
-        <!--AnimePlayer-->
-        <scene sceneID="vE4-RE-9ti">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Kq6-hV-YGj" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d2K-bB-24s" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3788" y="170"/>
         </scene>
     </scenes>
 </document>

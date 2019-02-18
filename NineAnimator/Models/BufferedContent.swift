@@ -42,7 +42,7 @@ protocol ContentProvider {
     
     var delegate: ContentProviderDelegate? { get set }
     
-    func animes(on page: Int) -> [AnimeLink]
+    func links(on page: Int) -> [AnyLink]
     
     func more()
 }

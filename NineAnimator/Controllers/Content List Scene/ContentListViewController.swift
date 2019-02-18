@@ -33,13 +33,13 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
         tableView.makeThemable()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        contentSource.delegate = nil
-        contentSource = nil
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         providerError = nil
+        
+        // Make sure the content source exists
+        guard contentSource != nil else { return }
+        
+        // Set delegate
         contentSource.delegate = self
         title = contentSource.title
         
@@ -54,19 +54,6 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height { contentSource.more() }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        guard let sender = sender as? AnimeSearchResultTableViewCell,
-            let anime = sender.animeLink,
-            let player = segue.destination as? AnimeViewController
-            else { return }
-        
-        player.setPresenting(anime: anime)
-        
-        tableView.deselectSelectedRow()
     }
 }
 
@@ -98,7 +85,7 @@ extension ContentListViewController {
             return 1
         }
         tableView.separatorStyle = .singleLine
-        return contentSource.animes(on: section).count
+        return contentSource.links(on: section).count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -115,10 +102,24 @@ extension ContentListViewController {
             cell.makeThemable()
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.result", for: indexPath) as? AnimeSearchResultTableViewCell else { fatalError("cell type dequeued is not AnimeSearchResultTableViewCell") }
-            cell.animeLink = contentSource.animes(on: indexPath.section)[indexPath.item]
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.result", for: indexPath) as? ListingEntryTableViewCell else { fatalError("cell type dequeued is not AnimeSearchResultTableViewCell") }
+            cell.link = contentSource.links(on: indexPath.section)[indexPath.item]
             cell.makeThemable()
             return cell
+        }
+    }
+}
+
+// MARK: - Delegate taps
+extension ContentListViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        defer { tableView.deselectSelectedRow() }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        
+        // Open the link if it exists
+        if let cell = cell as? ListingEntryTableViewCell,
+            let link = cell.link {
+            RootViewController.shared?.open(immedietly: link, in: self)
         }
     }
 }

@@ -257,6 +257,7 @@ extension AnimeViewController {
         switch link {
         case .anime(let animeLink): setPresenting(anime: animeLink)
         case .episode(let episodeLink): setPresenting(episode: episodeLink)
+        default: Log.error("Unsupported link: %@", link)
         }
     }
 }

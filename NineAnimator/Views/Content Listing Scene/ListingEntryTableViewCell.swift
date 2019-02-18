@@ -20,16 +20,22 @@
 import Kingfisher
 import UIKit
 
-class AnimeSearchResultTableViewCell: UITableViewCell, Themable {
+class ListingEntryTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var coverImageView: UIImageView!
     @IBOutlet private weak var animeTitleLabel: UILabel!
     
-    var animeLink: AnimeLink? {
+    var link: AnyLink? {
         didSet {
-            guard let link = animeLink else { return }
-            coverImageView.kf.setImage(with: link.image)
-            coverImageView.kf.indicatorType = .activity
-            animeTitleLabel.text = link.title
+            guard let link = self.link else { return }
+            
+            // Set the title label
+            animeTitleLabel.text = link.name
+            
+            // Load the image if it exists
+            if let artworkUrl = link.artwork {
+                coverImageView.kf.setImage(with: artworkUrl)
+                coverImageView.kf.indicatorType = .activity
+            }
         }
     }
     

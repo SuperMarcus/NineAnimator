@@ -26,6 +26,7 @@ import Foundation
 enum AnyLink {
     case anime(AnimeLink)
     case episode(EpisodeLink)
+    case listingReference(ListingAnimeReference)
 }
 
 struct AnimeLink {
@@ -115,5 +116,26 @@ extension EpisodeLink {
     var playbackProgress: Float {
         get { return NineAnimator.default.user.playbackProgress(for: self) }
         set { NineAnimator.default.user.update(progress: newValue, for: self) }
+    }
+}
+
+// Access basic info of the link
+extension AnyLink {
+    // The name of this link
+    var name: String {
+        switch self {
+        case .anime(let anime): return anime.title
+        case .episode(let episode): return episode.name
+        case .listingReference(let reference): return reference.name
+        }
+    }
+    
+    // The artwork url of this link, if it has any
+    var artwork: URL? {
+        switch self {
+        case .anime(let anime): return anime.image
+        case .episode(let episode): return episode.parent.image
+        case .listingReference(let reference): return reference.artwork
+        }
     }
 }

@@ -45,8 +45,8 @@ class NASearchMasterAnime: ContentProvider {
     
     deinit { _lastRequest?.cancel() }
     
-    func animes(on page: Int) -> [AnimeLink] {
-        return _results[page]
+    func links(on page: Int) -> [AnyLink] {
+        return _results[page].map { .anime($0) }
     }
     
     func more() {

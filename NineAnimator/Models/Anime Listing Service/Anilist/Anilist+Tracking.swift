@@ -36,6 +36,9 @@ extension Anilist {
             "mediaId": Int(reference.uniqueIdentifier)!,
             "status": state
         ])
+        
+        // Invalidate collection caches
+        _collections = nil
     }
     
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {

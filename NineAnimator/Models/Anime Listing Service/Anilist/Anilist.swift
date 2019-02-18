@@ -29,6 +29,9 @@ class Anilist: BaseListingService, ListingService {
     /// Cached current user settings
     var _currentUser: User?
     
+    /// Cached collections, invalidated when an mutation request has been made
+    var _collections: [ListingAnimeCollection]?
+    
     /// Hold reference to mutation requests
     var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
     
@@ -115,6 +118,7 @@ extension Anilist {
         accessToken = nil
         accessTokenExpirationDate = Date.distantPast
         _currentUser = nil
+        _collections = nil
     }
 }
 

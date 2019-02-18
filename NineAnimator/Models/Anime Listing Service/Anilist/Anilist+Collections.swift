@@ -45,6 +45,11 @@ query ($userId: Int) {
 
 extension Anilist {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
+        // If cached collections does exists
+        if let cachedCollections = _collections {
+            return NineAnimatorPromise.firstly { cachedCollections }
+        }
+        
         return currentUser().thenPromise {
             [unowned self] user in self.graphQL(query: _queryUserMediaCollection, variables: [
                 "userId": user.id
