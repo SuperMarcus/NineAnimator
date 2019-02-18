@@ -208,10 +208,14 @@ extension NativePlayerController {
         }
         
         // Check if the video playback has stopped
-        if player.rate == 0 && !playerViewController.isFirstResponder && state == .fullscreen {
+        if player.rate == 0 && (
+                (!playerViewController.isFirstResponder && state == .fullscreen) || // Fullscreen dismiss
+                (state == .idle) // PiP dismiss
+            ) {
             state = .idle
+            let media = mediaQueue.removeFirst()
             NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: [
-                "media": currentMedia!
+                "media": media
             ])
         }
     }
@@ -237,12 +241,9 @@ extension NativePlayerController {
             [weak self] in
             guard let self = self else { return }
             
-            // Remove the finished item
-            self.mediaQueue.removeFirst()
-            
             // Dismiss the player if no more item is in the queue
-            if self.mediaQueue.isEmpty {
-                self.playerViewController.dismiss(animated: true, completion: nil)
+            if self.mediaQueue.count == 1 {
+                self.playerViewController.dismiss(animated: true)
             }
         }
     }
