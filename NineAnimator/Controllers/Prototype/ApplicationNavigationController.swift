@@ -30,7 +30,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     
     func theme(didUpdate theme: Theme) {
         navigationBar.barStyle = theme.barStyle
-        navigationBar.barTintColor = theme.background
+        navigationBar.barTintColor = (navigationController?.topViewController is BlendInViewController) ? theme.background : nil
         
         view.tintColor = theme.tint
         view.backgroundColor = theme.background
@@ -43,5 +43,6 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         // the navigation bar and the contents
         navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
         navigationBar.isTranslucent = !(viewController is BlendInViewController)
+        navigationBar.barTintColor = (viewController is BlendInViewController) ? Theme.current.background : nil
     }
 }
