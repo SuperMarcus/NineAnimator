@@ -26,14 +26,9 @@ enum ListingAnimeTrackingState: String, Codable {
     case finished
 }
 
-/// Representing a listed anime
-struct ListingAnimeInformation {
-    let parentService: ListingService
-}
-
 /// Representing a reference that can be used to construct
 /// `ListingAnimeInformation`
-struct ListingAnimeReference: Codable {
+struct ListingAnimeReference: Codable, Hashable {
     let parentService: ListingService
     
     /// An identifier of this reference (and the referencing anime
@@ -114,92 +109,4 @@ protocol ListingService: AnyObject {
     ///
     /// Only called if the service returns true for `isCapableOfRetrievingAnimeState`
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]>
-}
-
-// MARK: - Implementations
-
-extension ListingAnimeReference {
-    enum Keys: CodingKey {
-        case service
-        case identifier
-        case state
-        case name
-        case artwork
-        case userInfo
-    }
-    
-    init(_ parent: ListingService,
-         name: String,
-         identifier: String,
-         state: ListingAnimeTrackingState?,
-         artwork: URL? = nil,
-         userInfo: [String: Any] = [:]) {
-        self.parentService = parent
-        self.name = name
-        self.uniqueIdentifier = identifier
-        self.artwork = artwork
-        self.userInfo = userInfo
-        self.state = state
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: Keys.self)
-        
-        // Decode parent service
-        let serviceName = try container.decode(String.self, forKey: .service)
-        guard let service = NineAnimator.default.service(with: serviceName) else {
-            throw NineAnimatorError.decodeError
-        }
-        parentService = service
-        
-        // Decode basic info
-        uniqueIdentifier = try container.decode(String.self, forKey: .identifier)
-        artwork = try container.decodeIfPresent(URL.self, forKey: .artwork)
-        name = try container.decode(String.self, forKey: .name)
-        state = try container.decodeIfPresent(ListingAnimeTrackingState.self, forKey: .state)
-        
-        // Decode user info
-        let encodedUserInfo = try container.decode(Data.self, forKey: .userInfo)
-        guard let decodedUserInfo = try PropertyListSerialization.propertyList(
-                from: encodedUserInfo,
-                options: [],
-                format: nil
-            ) as? [String: Any] else {
-            throw NineAnimatorError.decodeError
-        }
-        userInfo = decodedUserInfo
-    }
-    
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: Keys.self)
-        
-        // Encode basic info
-        try container.encode(parentService.name, forKey: .service)
-        try container.encode(uniqueIdentifier, forKey: .identifier)
-        try container.encodeIfPresent(artwork, forKey: .artwork)
-        try container.encode(name, forKey: .name)
-        try container.encodeIfPresent(state, forKey: .state)
-        
-        // Encode user info
-        let encodedUserInfo = try PropertyListSerialization.data(
-            fromPropertyList: userInfo,
-            format: .binary,
-            options: 0
-        )
-        try container.encode(encodedUserInfo, forKey: .userInfo)
-    }
-}
-
-extension ListingAnimeCollection {
-    init(_ parent: ListingService,
-         name: String,
-         identifier: String,
-         collection: [ListingAnimeReference],
-         userInfo: [String: Any] = [:]) {
-        self.parentService = parent
-        self.name = name
-        self.identifier = identifier
-        self.collection = collection
-        self.userInfo = userInfo
-    }
 }

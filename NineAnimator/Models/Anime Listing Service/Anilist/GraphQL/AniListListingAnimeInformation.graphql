@@ -1,0 +1,100 @@
+query ($mediaId: Int) {
+    Media(id: $mediaId) {
+        id
+        idMal
+        title {
+            romaji
+            english
+            native
+            userPreferred
+        }
+        type
+        format
+        status
+        description(asHtml: true)
+        startDate {
+            year
+            month
+            day
+        }
+        endDate {
+            year
+            month
+            day
+        }
+        season
+        episodes
+        duration
+        countryOfOrigin
+        isLicensed
+        source
+        hashtag
+        trailer {
+            id
+            site
+        }
+        updatedAt
+        coverImage {
+            extraLarge
+        }
+        bannerImage
+        genres
+        popularity
+        tags {
+            id
+            name
+        }
+        relations {
+            nodes {
+                id
+                coverImage { extraLarge }
+                title { userPreferred },
+                mediaListEntry { status }
+            }
+        }
+        characters {
+            edges {
+                node {
+                    name {
+                        first
+                        last
+                        native
+                    }
+                    image {
+                        large
+                        medium
+                    }
+                }
+                role
+                voiceActors {
+                    name {
+                        first
+                        last
+                        native
+                    }
+                }
+            }
+        }
+        studios {
+            nodes {
+                name
+            }
+        }
+        isFavourite
+        reviews {
+            nodes {
+                summary
+                user {
+                    name
+                }
+            }
+        }
+        siteUrl
+        stats {
+            scoreDistribution {
+                score
+                amount
+            }
+        }
+    }
+}

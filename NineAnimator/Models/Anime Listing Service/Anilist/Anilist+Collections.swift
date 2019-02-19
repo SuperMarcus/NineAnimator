@@ -19,30 +19,6 @@
 
 import Foundation
 
-private let _queryUserMediaCollection =
-"""
-query ($userId: Int) {
-  MediaListCollection(
-    userId: $userId
-    type: ANIME
-  ) {
-    lists {
-      name
-      isCustomList
-      status
-      entries {
-        media {
-          id
-          coverImage { extraLarge }
-          title { userPreferred }
-          mediaListEntry { status }
-        }
-      }
-    }
-  }
-}
-"""
-
 extension Anilist {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
         // If cached collections does exists
@@ -51,7 +27,7 @@ extension Anilist {
         }
         
         return currentUser().thenPromise {
-            [unowned self] user in self.graphQL(query: _queryUserMediaCollection, variables: [
+            [unowned self] user in self.graphQL(fileQuery: "AniListUserMediaCollections", variables: [
                 "userId": user.id
             ])
         } .then {

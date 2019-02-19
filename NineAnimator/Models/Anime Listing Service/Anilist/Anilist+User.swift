@@ -32,7 +32,7 @@ extension Anilist {
             return NineAnimatorPromise.firstly { cachedUser }
         }
         
-        return graphQL(query: "{ Viewer { id, name, siteUrl } }", variables: [:])
+        return graphQL(fileQuery: "AniListUser", variables: [:])
             .then {
                 results -> User in
                 guard let id = results.value(forKeyPath: "Viewer.id") as? Int,

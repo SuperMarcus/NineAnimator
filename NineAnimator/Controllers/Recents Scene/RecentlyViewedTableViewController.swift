@@ -120,9 +120,8 @@ extension RecentlyViewedTableViewController {
             cell.makeThemable()
             return cell
         case .collections:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "recent.collection", for: indexPath)
-            let collection = listingServiceCollections[indexPath.item]
-            cell.textLabel?.text = "\(collection.parentService.name) - \(collection.name)"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "recent.collection", for: indexPath) as! ListingCollectionEntryTableViewCell
+            cell.collection = listingServiceCollections[indexPath.item]
             cell.makeThemable()
             return cell
         }
@@ -227,6 +226,7 @@ extension RecentlyViewedTableViewController {
 // MARK: - Segue preparation
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Episodes and anime
         if let player = segue.destination as? AnimeViewController {
             if let animeCell = sender as? RecentlyWatchedAnimeTableViewCell {
                 player.setPresenting(anime: animeCell.animeLink!)
@@ -237,9 +237,17 @@ extension RecentlyViewedTableViewController {
             }
         }
         
+        // If the target is an offline anime
         if let offlinePlayer = segue.destination as? OfflineAnimeViewController {
             if let animeCell = sender as? OfflineAnimeTableViewCell {
                 offlinePlayer.setPresenting(anime: animeCell.animeLink!)
+            }
+        }
+        
+        // If the target is a list collection
+        if let list = segue.destination as? ContentListViewController {
+            if let collectionCell = sender as? ListingCollectionEntryTableViewCell {
+                list.setPresenting(contentProvider: collectionCell.collection!)
             }
         }
     }

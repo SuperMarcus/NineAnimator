@@ -19,8 +19,6 @@
 
 import Foundation
 
-private let _queryMutateMediaState = "mutation ( $id: Int, $mediaId: Int, $status: MediaListStatus, $score: Float, $progress: Int, $progressVolumes: Int, $repeat: Int, $private: Boolean, $notes: String, $customLists: [String], $hiddenFromStatusLists: Boolean, $advancedScores: [Float], $startedAt: FuzzyDateInput, $completedAt: FuzzyDateInput ) { SaveMediaListEntry ( id: $id, mediaId: $mediaId, status: $status, score: $score, progress: $progress, progressVolumes: $progressVolumes, repeat: $repeat, private: $private, notes: $notes, customLists: $customLists, hiddenFromStatusLists: $hiddenFromStatusLists, advancedScores: $advancedScores, startedAt: $startedAt, completedAt: $completedAt ) { id mediaId status score progress progressVolumes repeat priority private hiddenFromStatusLists customLists notes updatedAt startedAt { year month day } completedAt { year month day } user { id name } media { id title { userPreferred } coverImage { large } type format status episodes volumes chapters averageScore popularity isAdult startDate { year } } } }"
-
 extension Anilist {
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         // Convert NineAnimator state to Anilist state enum
@@ -32,7 +30,7 @@ extension Anilist {
         }
         
         // Making a mutational GraphQL request
-        mutationGraphQL(query: _queryMutateMediaState, variables: [
+        mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
             "status": state
         ])
@@ -50,7 +48,7 @@ extension Anilist {
         }
         
         // Make GraphQL mutation request
-        mutationGraphQL(query: _queryMutateMediaState, variables: [
+        mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
             "progress": episodeNumber
         ])

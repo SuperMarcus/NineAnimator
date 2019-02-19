@@ -1,0 +1,7 @@
+query {
+    Viewer {
+        id,
+        name,
+        siteUrl
+    }
+}

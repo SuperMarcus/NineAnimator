@@ -1,0 +1,20 @@
+query ($userId: Int) {
+    MediaListCollection(
+        userId: $userId,
+        type: ANIME
+    ) {
+        lists {
+            name,
+            isCustomList,
+            status,
+            entries {
+                media {
+                    id,
+                    coverImage { extraLarge },
+                    title { userPreferred },
+                    mediaListEntry { status }
+                }
+            }
+        }
+    }
+}

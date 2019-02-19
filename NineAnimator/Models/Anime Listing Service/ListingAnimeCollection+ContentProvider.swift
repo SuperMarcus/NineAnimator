@@ -19,26 +19,21 @@
 
 import Foundation
 
-extension Dictionary {
-    /// Obtain value with the provided keypath
-    func value(at path: String) -> Any? {
-        return (self as NSDictionary).value(forKeyPath: path)
+/// Conforming `ListingAnimeCollection` as a `ContentProvider`
+extension ListingAnimeCollection: ContentProvider {
+    var title: String { return name }
+    var totalPages: Int? { return 1 }
+    var availablePages: Int { return 1 }
+    var moreAvailable: Bool { return false }
+    
+    var delegate: ContentProviderDelegate? {
+        get { return nil }
+        set { newValue?.pageIncoming(0, from: self) }
     }
     
-    /// Obtain value at path of a specific type
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(at: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
+    func links(on page: Int) -> [AnyLink] {
+        return collection.map { .listingReference($0) }
     }
-}
-
-extension NSDictionary {
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(forKeyPath: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
-    }
+    
+    func more() { }
 }

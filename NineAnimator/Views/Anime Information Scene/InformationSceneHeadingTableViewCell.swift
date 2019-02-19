@@ -17,28 +17,18 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
-extension Dictionary {
-    /// Obtain value with the provided keypath
-    func value(at path: String) -> Any? {
-        return (self as NSDictionary).value(forKeyPath: path)
+class InformationSceneHeadingTableViewCell: UITableViewCell {
+    @IBOutlet private weak var headingLabel: UILabel!
+    
+    var headingText: String? {
+        didSet { headingLabel.text = headingText }
     }
     
-    /// Obtain value at path of a specific type
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(at: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
-    }
-}
-
-extension NSDictionary {
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(forKeyPath: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Remove seperator
+        separatorInset = .init(top: 0, left: bounds.width / 2, bottom: 0, right: bounds.width / 2)
     }
 }

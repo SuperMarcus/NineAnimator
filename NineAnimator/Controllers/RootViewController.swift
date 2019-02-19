@@ -113,9 +113,18 @@ extension RootViewController {
             // Initialize the AnimeViewController with the link
             animeViewController.setPresenting(link)
             targetViewController = animeViewController
-        default:
-            Log.error("Unknown link type: %@", link)
-            return
+        case .listingReference:
+            let storyboard = UIStoryboard(name: "AnimeInformation", bundle: Bundle.main)
+            
+            // Instantiate the view controller from storyboard
+            guard let animeInformationController = storyboard.instantiateInitialViewController() as? AnimeInformationTableViewController else {
+                Log.error("The view controller instantiated from AnimeInformation.storyboard is not AnimeInformationTableViewController.")
+                return
+            }
+            
+            // Initialize the AnimeInformationTableViewController with the link
+            animeInformationController.setPresenting(link)
+            targetViewController = animeInformationController
         }
         
         // If a view controller is provided

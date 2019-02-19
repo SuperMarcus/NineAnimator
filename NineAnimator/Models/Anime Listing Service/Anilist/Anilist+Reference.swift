@@ -19,33 +19,34 @@
 
 import Foundation
 
-private let _queryMediaWithName =
-"""
-query ($search: String, $seasonYear: Int) {
-  Media (
-    search: $search
-    type: ANIME
-    seasonYear: $seasonYear
-    sort: [TITLE_ENGLISH, TITLE_ROMAJI, TITLE_NATIVE]
-  ) {
-    id
-    coverImage { extraLarge }
-    title { userPreferred }
-    mediaListEntry { status }
-  }
-}
-"""
-
 extension Anilist {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        return graphQL(query: _queryMediaWithName, variables: [
+        func nameProximity(_ mediaEntry: NSDictionary) -> Double {
+            guard let titleEntry = mediaEntry["title"] as? NSDictionary else { return 0 }
+            return titleEntry
+                .allValues
+                .compactMap { $0 as? String }
+                .reduce(0.0) { max($0, $1.proximity(to: link.title)) }
+        }
+        
+        return graphQL(fileQuery: "AniListSearchReference", variables: [
             "search": link.title
         ]) .then {
             responseDictionary in
-            guard let mediaEntry = responseDictionary["Media"] as? NSDictionary else {
+            guard let mediaEntries = responseDictionary.value(forKeyPath: "Page.media") as? [NSDictionary] else {
                 throw NineAnimatorError.responseError("Media entry not found")
             }
-            return try ListingAnimeReference(self, withMediaEntry: mediaEntry)
+            let results = try mediaEntries
+                .map {
+                    (
+                        try ListingAnimeReference(self, withMediaEntry: $0),
+                        nameProximity($0)
+                    )
+                } .sorted { $0.1 > $1.1 }
+            guard let bestMatch = results.first?.0 else {
+                throw NineAnimatorError.responseError("No results found")
+            }
+            return bestMatch
         }
     }
 }

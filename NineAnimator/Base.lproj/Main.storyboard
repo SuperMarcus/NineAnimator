@@ -574,7 +574,7 @@
                                     <segue destination="fnc-Z3-OPF" kind="show" id="Uut-Fq-hAa"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recent.collection" textLabel="Rn2-Is-RZS" rowHeight="45" style="IBUITableViewCellStyleDefault" id="56Y-bH-HlN">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recent.collection" textLabel="Rn2-Is-RZS" rowHeight="45" style="IBUITableViewCellStyleDefault" id="56Y-bH-HlN" customClass="ListingCollectionEntryTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="222" width="375" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="56Y-bH-HlN" id="wUM-Qv-QgJ">
@@ -595,6 +595,9 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="tintText" value="YES"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="SHI-Va-UwC" kind="show" id="99S-gz-QvA"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="recent.anime" rowHeight="144" id="8kI-CG-O8k" customClass="RecentlyWatchedAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="267" width="375" height="144"/>
@@ -790,7 +793,7 @@
                 <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvQ-c8-IjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1800" y="1133"/>
+            <point key="canvasLocation" x="1834" y="1112"/>
         </scene>
         <!--OfflineAnimeViewer-->
         <scene sceneID="RWb-rZ-98f">
@@ -798,7 +801,15 @@
                 <viewControllerPlaceholder storyboardName="OfflineAnimeViewer" id="Aai-c1-tKt" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ulM-S7-d4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1835" y="1202"/>
+            <point key="canvasLocation" x="1869" y="1179"/>
+        </scene>
+        <!--AnimeListing-->
+        <scene sceneID="P1u-Vx-V0r">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnimeListing" id="SHI-Va-UwC" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aF2-KF-Reg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1837" y="1225"/>
         </scene>
         <!--Recent Container-->
         <scene sceneID="xrG-1s-UhK">

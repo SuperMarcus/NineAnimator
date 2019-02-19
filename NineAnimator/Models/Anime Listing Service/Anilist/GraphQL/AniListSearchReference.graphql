@@ -1,0 +1,19 @@
+query ($search: String) {
+    Page (page: 0, perPage:25) {
+        media (
+            search: $search
+            type: ANIME
+            sort: [TITLE_ENGLISH, TITLE_ROMAJI, TITLE_NATIVE]
+        ) {
+            id
+            coverImage { extraLarge }
+            title {
+                userPreferred
+                romaji
+                english
+                native
+            }
+            mediaListEntry { status }
+        }
+    }
+}

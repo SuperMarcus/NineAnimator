@@ -21,6 +21,8 @@ import UIKit
 
 protocol BlendInViewController { }
 
+protocol DontBotherViewController { }
+
 class ApplicationNavigationController: UINavigationController, UINavigationControllerDelegate, Themable {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     func theme(didUpdate theme: Theme) {
         navigationBar.barStyle = theme.barStyle
         navigationBar.barTintColor = (navigationController?.topViewController is BlendInViewController) ? theme.background : nil
+        navigationBar.tintColor = theme.tint
         
         view.tintColor = theme.tint
         view.backgroundColor = theme.background
@@ -39,10 +42,19 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     func navigationController(_ navigationController: UINavigationController,
                               didShow viewController: UIViewController,
                               animated: Bool) {
-        // Disable shadow image and set to not translucent when trying to blend in
-        // the navigation bar and the contents
-        navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
-        navigationBar.isTranslucent = !(viewController is BlendInViewController)
-        navigationBar.barTintColor = (viewController is BlendInViewController) ? Theme.current.background : nil
+        // Don't bother DontBotherViewController
+        guard !(viewController is DontBotherViewController) else { return }
+        
+        UIView.animate(withDuration: 0.2) {
+            [unowned navigationBar] in
+            // Disable shadow image and set to not translucent when trying to blend in
+            // the navigation bar and the contents
+            navigationBar.backgroundColor = nil
+            navigationBar.setBackgroundImage(nil, for: .default)
+            navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
+            navigationBar.isTranslucent = !(viewController is BlendInViewController)
+            navigationBar.barTintColor = (viewController is BlendInViewController) ? Theme.current.background : nil
+            navigationBar.tintColor = Theme.current.tint
+        }
     }
 }

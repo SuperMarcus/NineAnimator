@@ -124,6 +124,20 @@ extension Anilist {
 
 // MARK: - Making requests
 extension Anilist {
+    func graphQL(fileQuery bundleResourceName: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
+        return NineAnimatorPromise.firstly {
+            guard let resourceUrl = Bundle.main.url(
+                    forResource: bundleResourceName,
+                    withExtension: "graphql"
+                ) else {
+                throw NineAnimatorError.providerError("No query with name \"\(bundleResourceName)\" was found")
+            }
+            
+            // Load query string
+            return try String(contentsOf: resourceUrl).replacingOccurrences(of: "\\s+", with: " ")
+        } .thenPromise { [weak self] in self?.graphQL(query: $0, variables: variables) }
+    }
+    
     func graphQL(query: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
         var headers = [
             "Content-Type": "application/json",
@@ -176,8 +190,8 @@ extension Anilist {
         }
     }
     
-    func mutationGraphQL(query: String, variables: [String: CustomStringConvertible]) {
-        let task = graphQL(query: query, variables: variables)
+    func mutationGraphQL(fileQuery name: String, variables: [String: CustomStringConvertible]) {
+        let task = graphQL(fileQuery: name, variables: variables)
         .error {
             [unowned self] in
             Log.error("[AniList.co] Unable to update: %@", $0)
