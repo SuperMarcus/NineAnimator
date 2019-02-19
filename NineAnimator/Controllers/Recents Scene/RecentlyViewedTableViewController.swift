@@ -51,27 +51,72 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
     }
     
     private func reloadListingServiceCollections() {
-        // First, clean all the existing collections
-        listingServiceCollections = []
-        
         for service in NineAnimator.default.trackingServices where service.isCapableOfRetrievingAnimeState {
             let task = service.collections().error {
                 [unowned service] in
                 Log.error("Did not load lists from service \"%@\": %@", service.name, $0)
             } .finally {
-                [weak self] collections in
+                [weak self, unowned service] collections in
                 DispatchQueue.main.async {
+                    [unowned service] in
                     guard let self = self else { return }
-                    // Calculate changed index
-                    let startItem = self.listingServiceCollections.count
-                    let endItem = startItem + collections.count
-                    self.listingServiceCollections.append(contentsOf: collections)
                     
-                    //Insert rows with animation
-                    self.tableView.insertRows(
-                        at: (startItem..<endItem).map { Section.collections[$0] },
-                        with: .automatic
-                    )
+                    // Use a batch update block
+                    self.tableView.performBatchUpdates({
+                        // First, update all collections that did not
+                        // appear again in the latest collections
+                        var variableCollections = collections
+                        var indexesToDelete = [Int]()
+                        
+                        for (index, collection) in self.listingServiceCollections.enumerated()
+                            where collection.parentService.name == service.name {
+                            // If the collection exists in the presented collections,
+                            // just update the value without notifying tableview
+                            if let (sourceIndex, newCollection) = variableCollections
+                                .enumerated()
+                                .first(where: { $0.element.name == collection.name }) {
+                                // Remove the collection from the source
+                                _ = variableCollections.remove(at: sourceIndex)
+                                self.listingServiceCollections[index] = newCollection
+                            } else {
+                                // Else, mark this row as deleted and remove it from
+                                // the listing service collections
+                                indexesToDelete.append(index)
+                            }
+                        }
+                        
+                        // Remove all marked-to-remove elements
+                        self.listingServiceCollections = self.listingServiceCollections
+                            .enumerated()
+                            .filter { !indexesToDelete.contains($0.offset) }
+                            .map { $0.element }
+                        
+                        // Send remove message to table view
+                        self.tableView.deleteRows(
+                            at: indexesToDelete.map { Section.collections[$0] },
+                            with: .automatic
+                        )
+                        
+                        // Since the use will likely be used to have collections grouped
+                        // together by the services, find the index of the first occurance
+                        // and insert it from there
+                        let insertingIndex = self.listingServiceCollections
+                            .enumerated()
+                            .first { $0.element.parentService.name == service.name }?
+                            .offset ?? 0
+                        
+                        // Make the insertion
+                        variableCollections.forEach {
+                            self.listingServiceCollections.insert($0, at: insertingIndex)
+                        }
+                        
+                        // Tell the table view that we have made those insertions
+                        self.tableView.insertRows(
+                            at: (insertingIndex..<(insertingIndex + variableCollections.count))
+                                .map { Section.collections[$0] },
+                            with: .automatic
+                        )
+                    }, completion: nil)
                 }
             }
             taskReferencePool.append(task)

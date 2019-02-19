@@ -58,7 +58,7 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(
             width: size.width,
-            height: 145
+            height: 160
         )
     }
 }
