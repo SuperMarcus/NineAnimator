@@ -213,6 +213,11 @@ extension NativePlayerController {
                 (state == .idle) // PiP dismiss
             ) {
             state = .idle
+            guard !mediaQueue.isEmpty else {
+                return Log.error("A playback end action was detected, but there are no media in the queue.")
+            }
+            
+            // Post playback did end notification
             let media = mediaQueue.removeFirst()
             NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: [
                 "media": media

@@ -51,7 +51,7 @@ extension Anilist {
     }
     
     var isCapableOfPersistingAnimeState: Bool {
-        return didSetup && !didExpire
+        return didSetup && !didExpire && isTrackingEnabled
     }
     
     var isCapableOfRetrievingAnimeState: Bool {
@@ -69,6 +69,15 @@ extension Anilist {
     
     /// Single-Sign-On Callback Scheme
     var ssoCallbackScheme: String { return "nineanimator-list-auth" }
+    
+    /// If the user wants NineAnimator to push updates of current
+    /// watching prgoress to AniList
+    ///
+    /// Default to true
+    var isTrackingEnabled: Bool {
+        get { return (persistedProperties["enable_tracking"] as? Bool) ?? true }
+        set { persistedProperties["enable_tracking"] = newValue }
+    }
 }
 
 // MARK: - Tokens & authentication data

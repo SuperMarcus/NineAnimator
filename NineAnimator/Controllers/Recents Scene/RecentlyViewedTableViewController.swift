@@ -150,26 +150,26 @@ extension RecentlyViewedTableViewController {
         case .continueWatching:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.last", for: indexPath) as! LastViewedEpisodeTableViewCell
             cell.episodeLink = NineAnimator.default.user.lastEpisode
-            cell.makeThemable()
             return cell
         case .statefulAnime:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.download", for: indexPath) as! OfflineAnimeTableViewCell
             cell.animeLink = statefulAnime[indexPath.item]
-            cell.makeThemable()
             return cell
         case .recentAnime:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as! RecentlyWatchedAnimeTableViewCell
             let animes = NineAnimator.default.user.recentAnimes
             let anime = animes[indexPath.item]
             cell.animeLink = anime
-            cell.makeThemable()
             return cell
         case .collections:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.collection", for: indexPath) as! ListingCollectionEntryTableViewCell
             cell.collection = listingServiceCollections[indexPath.item]
-            cell.makeThemable()
             return cell
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.makeThemable()
     }
 }
 

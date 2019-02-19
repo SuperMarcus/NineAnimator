@@ -25,6 +25,7 @@ class TrackingServiceTableViewController: UITableViewController {
     // AniList
     @IBOutlet private weak var anilistStatusLabel: UILabel!
     @IBOutlet private weak var anilistActionLabel: UILabel!
+    @IBOutlet private weak var anilistPushNineAnimatorUpdatesSwitch: UISwitch!
     private var anilistAccountInfoFetchTask: NineAnimatorAsyncTask?
     
     // Preserve a reference to the authentication session
@@ -60,9 +61,13 @@ class TrackingServiceTableViewController: UITableViewController {
 
 // MARK: - AniList.co specifics
 extension TrackingServiceTableViewController {
-    var anilist: Anilist { return NineAnimator.default.service(type: Anilist.self) }
+    private var anilist: Anilist { return NineAnimator.default.service(type: Anilist.self) }
     
-    func anilistUpdateStatus() {
+    private func anilistUpdateStatus() {
+        // Disable switch by default
+        anilistPushNineAnimatorUpdatesSwitch.setOn(false, animated: true)
+        anilistPushNineAnimatorUpdatesSwitch.isEnabled = false
+        
         if anilist.didSetup {
             if anilist.didExpire {
                 anilistStatusLabel.text = "Expired"
@@ -79,6 +84,10 @@ extension TrackingServiceTableViewController {
                 anilistAccountInfoFetchTask = anilist.currentUser()
                     .error { _ in updateStatusLabel("Error") }
                     .finally { updateStatusLabel("Signed in as \($0.name)") }
+                
+                // Update the state accordingly
+                anilistPushNineAnimatorUpdatesSwitch.setOn(anilist.isTrackingEnabled, animated: true)
+                anilistPushNineAnimatorUpdatesSwitch.isEnabled = true
             }
         } else { // Present initial setup labels
             anilistStatusLabel.text = "Not Setup"
@@ -86,8 +95,12 @@ extension TrackingServiceTableViewController {
         }
     }
     
+    @IBAction private func anilistOnPushNineAnimatorUpdatesToggled(_ sender: UISwitch) {
+        anilist.isTrackingEnabled = sender.isOn
+    }
+    
     // Present the SSO login page
-    func anilistPresentAuthenticationPage() {
+    private func anilistPresentAuthenticationPage() {
         let callback: NineAnimatorCallback<URL> = {
             [weak anilist, weak self] url, callbackError in
             defer { DispatchQueue.main.async { [weak self] in self?.anilistUpdateStatus() } }
@@ -117,7 +130,7 @@ extension TrackingServiceTableViewController {
     }
     
     // Tell AniList service to logout
-    func anilistLogOut() {
+    private func anilistLogOut() {
         anilist.deauthenticate()
         anilistUpdateStatus()
     }
