@@ -104,6 +104,11 @@ extension Theme {
             } else { view.backgroundColor = theme.background }
         }
         
+        if let view = view as? UICollectionView {
+            view.backgroundColor = theme.background
+            view.indicatorStyle = theme.scrollIndicatorStyle
+        }
+        
         if let view = view as? UITableViewCell {
             if view.tintText {
                 view.textLabel?.textColor = theme.tint
