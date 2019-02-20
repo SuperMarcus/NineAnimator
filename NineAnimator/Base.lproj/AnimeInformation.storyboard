@@ -73,17 +73,25 @@
                                                     <real key="value" value="15"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onViewEpisodesButtonTapped:" destination="f9r-ko-ADk" eventType="touchUpInside" id="GUv-0b-QFK"/>
+                                            </connections>
                                         </button>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-Fn-Vlp" userLabel="Episode Fetching Activity Indicator">
+                                            <rect key="frame" x="211" y="140.5" width="20" height="20"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="leading" secondItem="1X4-Yz-FdX" secondAttribute="leading" constant="16" id="3WH-3p-VCE"/>
                                         <constraint firstItem="dKd-8l-exf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1X4-Yz-FdX" secondAttribute="top" id="5Ss-Ki-ZtC"/>
+                                        <constraint firstItem="RhY-Fn-Vlp" firstAttribute="centerY" secondItem="nNy-wE-HN7" secondAttribute="centerY" id="BSa-aJ-jJw"/>
                                         <constraint firstItem="nNy-wE-HN7" firstAttribute="bottom" secondItem="lGh-Aj-f92" secondAttribute="bottom" priority="760" id="JeY-fq-lSv"/>
                                         <constraint firstAttribute="trailing" secondItem="dKd-8l-exf" secondAttribute="trailing" constant="16" id="Nau-bL-Rht"/>
                                         <constraint firstItem="CGQ-fc-eQZ" firstAttribute="leading" secondItem="dKd-8l-exf" secondAttribute="leading" id="PmV-pL-vCL"/>
                                         <constraint firstItem="nNy-wE-HN7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CGQ-fc-eQZ" secondAttribute="bottom" constant="8" id="RoP-b0-mYL"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lGh-Aj-f92" secondAttribute="bottom" constant="8" id="T5T-wN-1ax"/>
+                                        <constraint firstItem="RhY-Fn-Vlp" firstAttribute="centerX" secondItem="nNy-wE-HN7" secondAttribute="centerX" id="T5Y-9c-OCO"/>
                                         <constraint firstItem="dKd-8l-exf" firstAttribute="leading" secondItem="lGh-Aj-f92" secondAttribute="trailing" constant="16" id="TXZ-cy-Qie"/>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="leading" secondItem="1X4-Yz-FdX" secondAttribute="leading" constant="8" id="UaI-zS-9SD"/>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="top" secondItem="1X4-Yz-FdX" secondAttribute="top" constant="8" id="VkH-uL-CaF"/>
@@ -440,7 +448,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="bR6-FP-TqS"/>
                     <connections>
+                        <outlet property="fetchEpisodesActivityIndicator" destination="RhY-Fn-Vlp" id="JOX-5h-Xel"/>
                         <outlet property="headingView" destination="Ske-2g-v1i" id="j4E-hF-XLe"/>
+                        <outlet property="showEpisodesButton" destination="nNy-wE-HN7" id="Fxf-hc-ImA"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IH5-59-mGL" userLabel="First Responder" sceneMemberID="firstResponder"/>

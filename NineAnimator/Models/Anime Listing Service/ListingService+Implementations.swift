@@ -110,6 +110,12 @@ extension ListingAnimeCollection {
 // ListingAnimeName+CustomStringConvertible
 extension ListingAnimeName {
     var description: String { return self.default }
+    
+    func proximity(to anime: AnimeLink) -> Double {
+        return [ native, english, romaji, `default` ].reduce(0.0) {
+            max($0, $1.proximity(to: anime.title))
+        }
+    }
 }
 
 extension ListingAnimeReference {

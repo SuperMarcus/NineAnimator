@@ -29,12 +29,17 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     // References to tasks
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
     private var characterListRequestTask: NineAnimatorAsyncTask?
+    private var episodeFetchingTask: NineAnimatorAsyncTask?
     
     // Cached information list
     private var enumeratedInformationList = [(name: String, value: String)]()
     
     // Cached character list
     private var characterList: [ListingAnimeCharacter]?
+    
+    // Outlets
+    @IBOutlet private var showEpisodesButton: UIButton!
+    @IBOutlet private var fetchEpisodesActivityIndicator: UIActivityIndicatorView!
     
     // Cell needs layout handler
     private lazy var needsLayoutHandler: (() -> Void) = {
@@ -58,6 +63,10 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Resets the episodes fetching button and indicator
+        showEpisodesButton.isHidden = false
+        fetchEpisodesActivityIndicator.stopAnimating()
         
         // Remove extra lines and make tableview themable
         tableView.tableFooterView = UIView()
@@ -107,6 +116,11 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             .dispatch(on: DispatchQueue.main)
             .error(onError) // Promises manages references pretty nicely, so no need to worry about reference cycle
             .finally(onAnimeInformationDidLoad)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.cancelPerformingTasks()
     }
     
     private func onAnimeInformationDidLoad(_ information: ListingAnimeInformation) {
@@ -269,6 +283,94 @@ extension AnimeInformationTableViewController {
     }
 }
 
+// MARK: - Fetch Episodes
+extension AnimeInformationTableViewController {
+    /// Fetch and display the current anime reference in the
+    /// currently selected source
+    private func performEpisodeFetching() {
+        // Use all available names to make decisions
+        guard let information = presentingAnimeInformation else {
+            return
+        }
+        let animeName = information.name
+        
+        // Hides the view episodes button and starts animating
+        // the activity indicator
+        fetchEpisodesActivityIndicator.isHidden = false
+        fetchEpisodesActivityIndicator.startAnimating()
+        showEpisodesButton.isHidden = true
+        
+        // Perform fetch task
+        episodeFetchingTask = AnimeFetchingAgent
+            .search(information.name.default)
+            .then {
+                results -> (Double, AnimeLink)? in
+                try some(
+                    results.compactMap {
+                        anyLink -> (Double, AnimeLink)? in
+                        if case .anime(let link) = anyLink {
+                            return (animeName.proximity(to: link), link)
+                        } else { return nil }
+                    } .max { $0.0 < $1.0 },
+                    or: .searchError("No matching anime found")
+                )
+            }
+            .error(onError)
+            .finally {
+                [weak self] match in
+                let (confidence, link) = match
+                Log.info("Found an anime \"%@\" with %@ confidence", link.title, confidence)
+                DispatchQueue.main.async {
+                    // If we are highly confident that we got a match, open that link
+                    if confidence > 0.95 {
+                        self?.onPerfectMatch(link)
+                    } else { self?.onUnconfidentMatch() }
+                }
+            }
+    }
+    
+    @IBAction private func onViewEpisodesButtonTapped(_ sender: Any) {
+        // Fetch episodes
+        performEpisodeFetching()
+    }
+    
+    private class AnimeFetchingAgent: NineAnimatorAsyncTask, ContentProviderDelegate {
+        // Keep a reference to the content provider
+        private var contentProviderReference: ContentProvider?
+        private weak var referencingPromise: NineAnimatorPromise<[AnyLink]>?
+        
+        private init(provider: ContentProvider) {
+            self.contentProviderReference = provider
+            self.contentProviderReference?.delegate = self
+        }
+        
+        func promise() -> NineAnimatorPromise<[AnyLink]> {
+            let promise = NineAnimatorPromise<[AnyLink]> {
+                _ in
+                self.contentProviderReference?.more()
+                return self
+            }
+            self.referencingPromise = promise
+            return promise
+        }
+        
+        func cancel() { contentProviderReference = nil }
+        
+        func pageIncoming(_ page: Int, from provider: ContentProvider) {
+            referencingPromise?.resolve(provider.links(on: page))
+        }
+        
+        func onError(_ error: Error, from provider: ContentProvider) {
+            referencingPromise?.reject(error)
+        }
+        
+        class func search(_ query: String, on source: Source = NineAnimator.default.user.source) -> NineAnimatorPromise<[AnyLink]> {
+            let provider = source.search(keyword: query)
+            return AnimeFetchingAgent(provider: provider).promise()
+        }
+    }
+}
+
 // MARK: - Handle errors
 extension AnimeInformationTableViewController {
     private func onError(_ error: Error) {
@@ -290,8 +392,33 @@ extension AnimeInformationTableViewController {
         })
         
         // Present alert
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            [weak self] in self?.present(alert, animated: true)
+        }
     }
+    
+    /// Cleanup the references to tasks
+    ///
+    /// Not cancelling tasks that will result in contents
+    /// presenting in the tableview, only contents that are
+    /// not immedietly visible
+    private func cancelPerformingTasks() {
+        // Resets the episodes fetching button and indicator
+        showEpisodesButton.isHidden = false
+        fetchEpisodesActivityIndicator.stopAnimating()
+        
+        // Cancel and remove reference to the episode fetching task
+        episodeFetchingTask?.cancel()
+        episodeFetchingTask = nil
+    }
+    
+    /// Open the match directly
+    private func onPerfectMatch(_ animeLink: AnimeLink) {
+        RootViewController.shared?.open(immedietly: .anime(animeLink), in: self)
+    }
+    
+    /// Present options to the user for multiple match
+    private func onUnconfidentMatch() { }
 }
 
 fileprivate extension AnimeInformationTableViewController {
