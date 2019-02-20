@@ -22,7 +22,7 @@ import UIKit
 class InformationSceneSynopsisTableViewCell: UITableViewCell {
     @IBOutlet private weak var collapseExpandButton: UIButton!
     @IBOutlet private weak var synopsisContainer: UITextView!
-    @IBOutlet private weak var collapseLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var collapseLayoutConstraint: NSLayoutConstraint?
     
     var onLayoutChange: (() -> Void)?
     
@@ -32,6 +32,7 @@ class InformationSceneSynopsisTableViewCell: UITableViewCell {
     
     private var isCollapsed: Bool = true {
         didSet {
+            guard let collapseLayoutConstraint = collapseLayoutConstraint else { return }
             if isCollapsed {
                 collapseLayoutConstraint.priority = .defaultHigh
             } else { collapseLayoutConstraint.priority = .defaultLow }
@@ -45,6 +46,7 @@ class InformationSceneSynopsisTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        guard let collapseLayoutConstraint = collapseLayoutConstraint else { return }
         collapseExpandButton.isHidden = synopsisContainer.frame.height < collapseLayoutConstraint.constant
     }
     
