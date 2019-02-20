@@ -668,11 +668,20 @@
                     <connections>
                         <outlet property="animeHeadingView" destination="1RC-uj-48l" id="iOs-OV-zkM"/>
                         <outlet property="moreOptionsButton" destination="wRU-Fx-6li" id="GDE-H5-Cr2"/>
+                        <segue destination="Fyd-QP-bYK" kind="show" identifier="anime.information" id="nNL-XI-4fF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7V-nd-iTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="202.40000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--AnimeInformation-->
+        <scene sceneID="UT6-0e-zoR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnimeInformation" id="Fyd-QP-bYK" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="q7Y-az-x79" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="758" y="133"/>
         </scene>
     </scenes>
     <resources>

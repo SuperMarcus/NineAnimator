@@ -608,6 +608,18 @@ extension AnimeViewController {
             popoverController.sourceView = moreOptionsButton
         }
         
+        // If an reference is available, show option to present it
+        if anime?.trackingContext.availableReferences.isEmpty == false {
+            actionSheet.addAction({
+                let action = UIAlertAction(title: "Show Information", style: .default) {
+                    [weak self] _ in self?.performSegue(withIdentifier: "anime.information", sender: self)
+                }
+                action.image = #imageLiteral(resourceName: "Info")
+                action.textAlignment = .left
+                return action
+            }())
+        }
+        
         actionSheet.addAction({
             let action = UIAlertAction(title: "Select Server", style: .default) {
                 [weak self] _ in self?.showSelectServerDialog()
@@ -720,6 +732,23 @@ extension AnimeViewController {
                 }
         
         return [ subscriptionAction ]
+    }
+}
+
+// MARK: - Seguing
+extension AnimeViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // If we are presenting a reference
+        if let informationViewController = segue.destination as? AnimeInformationTableViewController {
+            guard let reference = anime?.trackingContext.availableReferences.first else {
+                return Log.error("Attempting to present a information page without any references")
+            }
+            // Set reference and mark the parent view controller as matching the anime
+            informationViewController.setPresenting(
+                reference: reference,
+                isPreviousViewControllerMatchingAnime: true
+            )
+        }
     }
 }
 

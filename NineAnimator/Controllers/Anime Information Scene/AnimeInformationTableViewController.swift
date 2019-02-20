@@ -25,6 +25,7 @@ import UIKit
 class AnimeInformationTableViewController: UITableViewController, DontBotherViewController, Themable {
     private var presentingReference: ListingAnimeReference?
     private var presentingAnimeInformation: ListingAnimeInformation?
+    private var previousViewControllerMatchesAnime = false
     
     // References to tasks
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
@@ -215,17 +216,18 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
 extension AnimeInformationTableViewController {
     /// Initialize this `AnimeInformationTableViewController` with
     /// the `ListingAnimeReference`.
-    func setPresenting(reference: ListingAnimeReference) {
+    func setPresenting(reference: ListingAnimeReference, isPreviousViewControllerMatchingAnime: Bool = false) {
         self.presentingReference = reference
+        self.previousViewControllerMatchesAnime = isPreviousViewControllerMatchingAnime
     }
     
     /// Initialize this `AnimeInformationTableViewController` with
     /// the `AnyLink`.
     ///
     /// Only `.listingReference` link is supported
-    func setPresenting(_ link: AnyLink) {
+    func setPresenting(_ link: AnyLink, isPreviousViewControllerMatchingAnime value: Bool = false) {
         switch link {
-        case .listingReference(let reference): setPresenting(reference: reference)
+        case .listingReference(let reference): setPresenting(reference: reference, isPreviousViewControllerMatchingAnime: value)
         default: Log.error("Attempting to initialize a AnimeInformationTableViewController with unsupported link %@", link)
         }
     }
@@ -330,8 +332,16 @@ extension AnimeInformationTableViewController {
     }
     
     @IBAction private func onViewEpisodesButtonTapped(_ sender: Any) {
-        // Fetch episodes
-        performEpisodeFetching()
+        if previousViewControllerMatchesAnime {
+            // If previous view controller matches the anime, pop
+            // to previous view controller
+            if let navigationController = navigationController {
+                navigationController.popViewController(animated: true)
+            } else { dismiss(animated: true) }
+        } else {
+            // Fetch episodes
+            performEpisodeFetching()
+        }
     }
     
     private class AnimeFetchingAgent: NineAnimatorAsyncTask, ContentProviderDelegate {

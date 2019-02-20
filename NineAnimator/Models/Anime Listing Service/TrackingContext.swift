@@ -62,6 +62,11 @@ class TrackingContext {
         )
     }
     
+    /// Retrieve the list of references that are loaded
+    var availableReferences: [ListingAnimeReference] {
+        return listingAnimeReferences.map { $0.1 }
+    }
+    
     /// Prepare this tracking context for updates
     ///
     /// TrackingContext must be prepared before being used
