@@ -40,6 +40,7 @@ it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me),
 - [Smart Home Integration](#smart-home-integration)
 - [Handoff & Siri Shortcuts](#handoff--siri-shortcuts)
 - [Video Sources](#video-sources)
+- [Anime Listing & Tracking Websites](#anime-listing--tracking-websites)
 - [Backup History and Playback Progresses](#backup-history-and-playback-progresses)
 - [Download Episodes](#download-episodes)
 - [Screenshots](#screenshots)
@@ -58,8 +59,8 @@ it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me),
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
-- [ ] Integration with third party anime listing websites (work in progress)
-- [ ] Custom anime lists, e.g. favorites and to-watch list (planned, may be integrated with 3rdp lists)
+- [x] Third party anime [listing & tracking websites](#anime-listing--tracking-websites)
+- [ ] Custom anime lists, e.g. favorites and to-watch list (currently retrieved from tracking websites; mutations are work-in-progress)
 
 ## Device Compatibility
 
@@ -230,6 +231,29 @@ of features:
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
+
+## Anime Listing & Tracking Websites
+
+>
+> Third-party Listing & Tracking support is still being improved. As of now, NineAnimator can only
+> present limited amount of information (among the data retrieved) and only AniList.co is supported.
+>
+> Later updates will improve content presentation and bring support to more services
+> (e.g. MyAnimeList, Kitsu.io).
+>
+
+NineAnimator can present information on a selection of third party listing websites. You can configure
+NineAnimator to push local playback history to those tracking services.
+
+The tracking services can be configured in the `Preferences` menu, under the `Anime Tracking Services`
+submenu in the `Data and Privacy` section.
+
+Supported tracking/listing services and capabilities:
+
+- [AniList.co](//anilist.co)
+    - [x] Display detailed anime information
+    - [x] Push local playback history to the remote service
+    - [x] Retrieve remote anime state and anime collections
 
 ## Backup History and Playback Progresses
 
