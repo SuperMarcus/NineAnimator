@@ -29,6 +29,7 @@ class InformationSceneHeadingView: UIView, Themable {
     
     private var reference: ListingAnimeReference?
     private weak var imageMaskLayer: CAGradientLayer?
+    private var topImageOriginalFrame: CGRect?
     
     /// A callback closure when the layout of the heading view has changed
     var onNeededLayout: (() -> Void)?
@@ -37,6 +38,22 @@ class InformationSceneHeadingView: UIView, Themable {
     /// coordinate system
     var suggestedTransitionHeight: CGFloat {
         return frame.origin.y + (topImageView.frame.height / 2)
+    }
+    
+    /// A negative value indicating how much the user had scrolled passed
+    /// the boundary
+    var headingScrollExpansion: CGFloat = 0 {
+        didSet {
+            guard let oFrame = topImageOriginalFrame else { return }
+            topImageView.frame = CGRect(
+                x: oFrame.origin.x,
+                y: oFrame.origin.y + headingScrollExpansion,
+                width: oFrame.size.width,
+                height: oFrame.size.height - headingScrollExpansion
+            )
+            imageMaskLayer?.frame = topImageView.bounds
+            imageMaskLayer?.speed = 10 // Make the image mask layer speed faster
+        }
     }
     
     func initialize(withReference reference: ListingAnimeReference) {
@@ -108,7 +125,14 @@ class InformationSceneHeadingView: UIView, Themable {
     }
     
     override func layoutSubviews() {
+        // Make sure we've resetted the frame first
+        let scrollPassPosition = headingScrollExpansion
+        headingScrollExpansion = 0
+        
         super.layoutSubviews()
+        
         imageMaskLayer?.frame = topImageView.bounds
+        topImageOriginalFrame = topImageView.frame
+        headingScrollExpansion = scrollPassPosition
     }
 }

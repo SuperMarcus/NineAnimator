@@ -244,6 +244,24 @@ extension AnimeInformationTableViewController {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         adjustNavigationBarStyle()
+        
+        // If the content offset is smaller than 0, tell the heading view
+        // to expand the top image
+        if scrollView.contentOffset.y < 0 {
+            headingView.headingScrollExpansion = scrollView.contentOffset.y
+        } else { headingView.headingScrollExpansion = 0 }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // Add scroll view insets
+        tableView.scrollIndicatorInsets = .init(
+            top: navigationController?.navigationBar.frame.height ?? 0,
+            left: 0,
+            bottom: tabBarController?.tabBar.frame.height ?? 0,
+            right: 0
+        )
     }
     
     func theme(didUpdate theme: Theme) {
