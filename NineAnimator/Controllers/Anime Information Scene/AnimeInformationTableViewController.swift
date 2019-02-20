@@ -418,7 +418,24 @@ extension AnimeInformationTableViewController {
     }
     
     /// Present options to the user for multiple match
-    private func onUnconfidentMatch() { }
+    private func onUnconfidentMatch() {
+        guard let reference = presentingReference else { return }
+        
+        let storyboard = UIStoryboard(name: "AnimeListing", bundle: Bundle.main)
+        guard let listingViewController = storyboard.instantiateInitialViewController() as? ContentListViewController else {
+            return Log.error("View controller instantiated from AnimeListing.storyboard is not ContentListViewController")
+        }
+        
+        // Initialize the view controller with content provider
+        listingViewController.setPresenting(
+            contentProvider: NineAnimator.default.user.source.search(keyword: reference.name)
+        )
+        
+        // Present the listing view controller
+        if let navigationController = navigationController {
+            navigationController.pushViewController(listingViewController, animated: true)
+        } else { present(listingViewController, animated: true) }
+    }
 }
 
 fileprivate extension AnimeInformationTableViewController {
