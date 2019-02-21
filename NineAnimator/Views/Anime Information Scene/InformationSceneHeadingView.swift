@@ -126,18 +126,21 @@ class InformationSceneHeadingView: UIView, Themable {
     
     override func layoutSubviews() {
         // Restore top image original frame if there is one
-        if let topImageOriginalFrame = topImageOriginalFrame {
+        if let topImageOriginalFrame = topImageOriginalFrame,
+            let topImageView = topImageView {
             topImageView.frame = topImageOriginalFrame
         }
         
         super.layoutSubviews()
         
-        // Make sure the original frame is correctly updated
-        topImageOriginalFrame = topImageView.frame
-        imageMaskLayer?.frame = topImageView.bounds
-        
-        // Then update the expansion again
-        let expansion = headingScrollExpansion
-        headingScrollExpansion = expansion
+        if let topImageView = topImageView {
+            // Make sure the original frame is correctly updated
+            topImageOriginalFrame = topImageView.frame
+            imageMaskLayer?.frame = topImageView.bounds
+            
+            // Then update the expansion again
+            let expansion = headingScrollExpansion
+            headingScrollExpansion = expansion
+        }
     }
 }

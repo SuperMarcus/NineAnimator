@@ -66,7 +66,7 @@ struct ListingAnimeStatistics {
     let numberOfRatings: Int
     
     /// The total number of episodes
-    let episodesCount: Int
+    let episodesCount: Int?
 }
 
 /// Representing the ratings

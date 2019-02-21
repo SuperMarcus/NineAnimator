@@ -129,3 +129,11 @@ extension ListingAnimeReference {
             (lhs.uniqueIdentifier == rhs.uniqueIdentifier)
     }
 }
+
+extension ListingAnimeStatistics {
+    var meanScore: Double {
+        let sum = ratingsDistribution.reduce((0, 0)) { ($0.0 + ($1.key * $1.value), $0.1 + $1.value) }
+        guard sum.1 > 0 else { return 0 }
+        return sum.0 / sum.1
+    }
+}

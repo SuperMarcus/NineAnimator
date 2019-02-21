@@ -79,6 +79,9 @@
                                         </button>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-Fn-Vlp" userLabel="Episode Fetching Activity Indicator">
                                             <rect key="frame" x="211" y="140.5" width="20" height="20"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </activityIndicatorView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -258,7 +261,7 @@
                                     <outlet property="headingLabel" destination="pv7-K0-NCl" id="gPa-dc-hq3"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.statistics" rowHeight="90" id="FkU-13-VMD">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.statistics" rowHeight="90" id="FkU-13-VMD" customClass="InformationSceneStatisticsTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="520" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkU-13-VMD" id="8N7-zJ-TmF">
@@ -268,7 +271,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXD-Fj-vns" userLabel="Score Container">
                                             <rect key="frame" x="16" y="0.0" width="120" height="79"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1d-9b-682">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y1d-9b-682">
                                                     <rect key="frame" x="2" y="12" width="116" height="43"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="36"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -301,13 +304,29 @@
                                                 <constraint firstItem="Y1d-9b-682" firstAttribute="leading" secondItem="nXD-Fj-vns" secondAttribute="leading" constant="2" id="xBP-ch-vX0"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J22-cR-52l" customClass="FrequencyChartView" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="144" y="0.0" width="215" height="79"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="J22-cR-52l" firstAttribute="trailing" secondItem="8N7-zJ-TmF" secondAttribute="trailingMargin" id="2SV-b4-Ben"/>
+                                        <constraint firstItem="J22-cR-52l" firstAttribute="leading" secondItem="nXD-Fj-vns" secondAttribute="trailing" constant="8" id="58e-ck-bQj"/>
                                         <constraint firstItem="nXD-Fj-vns" firstAttribute="bottom" secondItem="8N7-zJ-TmF" secondAttribute="bottomMargin" id="G85-mH-iz5"/>
                                         <constraint firstItem="nXD-Fj-vns" firstAttribute="leading" secondItem="8N7-zJ-TmF" secondAttribute="leadingMargin" id="Ju9-wj-Kz6"/>
                                         <constraint firstItem="nXD-Fj-vns" firstAttribute="top" secondItem="8N7-zJ-TmF" secondAttribute="top" id="YEc-Sx-aCa"/>
+                                        <constraint firstItem="J22-cR-52l" firstAttribute="bottom" secondItem="nXD-Fj-vns" secondAttribute="bottom" id="bb2-Q8-cFT"/>
+                                        <constraint firstItem="J22-cR-52l" firstAttribute="top" secondItem="nXD-Fj-vns" secondAttribute="top" id="hn1-tc-yZt"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="averageScoreLabel" destination="Y1d-9b-682" id="n8a-HI-E0c"/>
+                                    <outlet property="frequencyChart" destination="J22-cR-52l" id="I5A-bE-a2T"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.characters" rowHeight="150" id="V2x-8D-p6l" customClass="InformationSceneCharactersTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="610" width="375" height="150"/>

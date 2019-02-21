@@ -399,7 +399,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="700" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qx1-Ur-pF8">
-                                            <rect key="frame" x="16" y="39" width="343" height="85"/>
+                                            <rect key="frame" x="12" y="39" width="351" height="85"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="250" constant="96" id="U2Q-Fj-ZRu"/>
@@ -423,9 +423,9 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Qx1-Ur-pF8" firstAttribute="leading" secondItem="hTI-uy-sG6" secondAttribute="leadingMargin" id="46A-oE-yiQ"/>
+                                        <constraint firstItem="Qx1-Ur-pF8" firstAttribute="leading" secondItem="hTI-uy-sG6" secondAttribute="leadingMargin" constant="-4" id="46A-oE-yiQ"/>
                                         <constraint firstItem="mFd-Ay-cFU" firstAttribute="top" secondItem="hTI-uy-sG6" secondAttribute="top" id="4gh-jL-5k2"/>
-                                        <constraint firstItem="Qx1-Ur-pF8" firstAttribute="trailing" secondItem="hTI-uy-sG6" secondAttribute="trailingMargin" id="5oy-TQ-HWY"/>
+                                        <constraint firstItem="Qx1-Ur-pF8" firstAttribute="trailing" secondItem="hTI-uy-sG6" secondAttribute="trailingMargin" constant="4" id="5oy-TQ-HWY"/>
                                         <constraint firstItem="mFd-Ay-cFU" firstAttribute="leading" secondItem="oxU-lU-8me" secondAttribute="trailing" constant="8" id="Eda-NV-eVK"/>
                                         <constraint firstItem="Qx1-Ur-pF8" firstAttribute="bottom" secondItem="hTI-uy-sG6" secondAttribute="bottomMargin" id="PJm-qq-MP9"/>
                                         <constraint firstItem="oxU-lU-8me" firstAttribute="leading" secondItem="hTI-uy-sG6" secondAttribute="leadingMargin" id="SgD-By-Dmt"/>

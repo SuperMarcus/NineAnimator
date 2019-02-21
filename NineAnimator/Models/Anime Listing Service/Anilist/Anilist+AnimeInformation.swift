@@ -31,13 +31,16 @@ extension Anilist {
         var information: [String: String]
         
         var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
-            return .firstly { [weak self] in self?._characters }
+            return .firstly { [_characters] in _characters }
         }
-        var statistics: NineAnimatorPromise<ListingAnimeStatistics> { return .fail(.unknownError) }
+        var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
+            return .firstly { [_statistics] in _statistics }
+        }
         var reviews: NineAnimatorPromise<[ListingAnimeReview]> { return .fail(.unknownError) }
         
         // For now, all optional properties are fetched with other values
         var _characters: [ListingAnimeCharacter]
+        var _statistics: ListingAnimeStatistics
         
         // swiftlint:disable cyclomatic_complexity
         init(_ reference: ListingAnimeReference, mediaEntry: NSDictionary) throws {
@@ -88,6 +91,9 @@ extension Anilist {
             _characters = try mediaEntry
                 .value(at: "characters.edges", type: [NSDictionary].self)
                 .map { try ListingAnimeCharacter(characterEdgeEntry: $0) }
+            
+            // Statistics
+            _statistics = try ListingAnimeStatistics(mediaEntry: mediaEntry)
             
             // Extra information
             var information = [String: String]()
@@ -213,5 +219,29 @@ private extension ListingAnimeCharacter {
             URL(string: try characterEdgeEntry.value(at: "node.image.large", type: String.self)),
             or: .urlError
         )
+    }
+}
+
+private extension ListingAnimeStatistics {
+    init(mediaEntry: NSDictionary) throws {
+        // Ratings distribution
+        ratingsDistribution = Dictionary(
+            uniqueKeysWithValues: try mediaEntry
+                .value(at: "stats.scoreDistribution", type: [NSDictionary].self)
+                .map {
+                    (
+                        Double(try $0.value(at: "score", type: Int.self)),
+                        Double(try $0.value(at: "amount", type: Int.self))
+                    )
+                }
+        )
+        
+        // Calculate total amount of ratings from the sum of all
+        numberOfRatings = ratingsDistribution.reduce(0) {
+            $0 + Int($1.value)
+        }
+        
+        // Number of episodes
+        episodesCount = mediaEntry["episodes"] as? Int
     }
 }

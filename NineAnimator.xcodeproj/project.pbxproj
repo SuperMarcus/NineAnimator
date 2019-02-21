@@ -123,6 +123,7 @@
 		2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */; };
 		2C9383DD21FE0CE9008C0D01 /* AnimeHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383DC21FE0CE9008C0D01 /* AnimeHeadingView.swift */; };
 		2C9383DF21FE147E008C0D01 /* ThemedSolidButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */; };
+		2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -133,6 +134,7 @@
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
 		2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; };
 		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
+		2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */; };
 		2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */; };
 		2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */; };
 		2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB004242200AEBC00351B7E /* OfflineContent.swift */; };
@@ -332,6 +334,7 @@
 		2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+StyleAttributes.swift"; sourceTree = "<group>"; };
 		2C9383DC21FE0CE9008C0D01 /* AnimeHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHeadingView.swift; sourceTree = "<group>"; };
 		2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedSolidButton.swift; sourceTree = "<group>"; };
+		2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneStatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -343,6 +346,7 @@
 		2CA1DD5B21E2B404009241CB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		2CA1DD5D21E2B423009241CB /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
 		2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeIntegrationTableViewController.swift; sourceTree = "<group>"; };
+		2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyChartView.swift; sourceTree = "<group>"; };
 		2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlayerController.swift; sourceTree = "<group>"; };
 		2CB004242200AEBC00351B7E /* OfflineContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineContent.swift; sourceTree = "<group>"; };
@@ -508,11 +512,13 @@
 		2C1C7194221B1C0D00760A69 /* Anime Information Scene */ = {
 			isa = PBXGroup;
 			children = (
+				2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */,
 				2C1C7195221B1C3000760A69 /* InformationSceneHeadingView.swift */,
 				2C6CF24D221C2E080009D554 /* InformationSceneHeadingTableViewCell.swift */,
 				2C6CF24F221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift */,
 				2C6CF253221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift */,
 				2C6CF255221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift */,
+				2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */,
 			);
 			path = "Anime Information Scene";
 			sourceTree = "<group>";
@@ -1268,6 +1274,7 @@
 				2CEC21982207FA6800A30F4F /* GogoAnime+Anime.swift in Sources */,
 				2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */,
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
+				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
 				2C3D7BF62210825B0045D648 /* NineAnime+Reachability.swift in Sources */,
@@ -1324,6 +1331,7 @@
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* User.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
+				2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */,
 				2C6CF256221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift in Sources */,
 				2CEA0BE621F54E1D007EECC4 /* StatesSerialization.swift in Sources */,
 				2CEC218C2207E3A900A30F4F /* AsyncTask.swift in Sources */,

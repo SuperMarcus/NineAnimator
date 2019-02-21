@@ -19,14 +19,21 @@
 
 import UIKit
 
-class ContentListingLoadingTableViewCell: UITableViewCell {
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+class InformationSceneStatisticsTableViewCell: UITableViewCell {
+    private var statistics: ListingAnimeStatistics?
     
-    func activates() { activityIndicator.startAnimating() }
+    @IBOutlet private weak var averageScoreLabel: UILabel!
+    @IBOutlet private weak var frequencyChart: FrequencyChartView!
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // Remove seperator
-        separatorInset = .init(top: 0, left: bounds.width / 2, bottom: 0, right: bounds.width / 2)
+    func initialize(_ statistics: ListingAnimeStatistics) {
+        self.statistics = statistics
+        self.frequencyChart.distribution = statistics.ratingsDistribution
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.maximumSignificantDigits = 3
+        
+        self.averageScoreLabel.text = formatter.string(from: NSNumber(value: statistics.meanScore))
     }
 }

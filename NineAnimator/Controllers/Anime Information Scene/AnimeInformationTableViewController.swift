@@ -30,13 +30,13 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     // References to tasks
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
     private var characterListRequestTask: NineAnimatorAsyncTask?
+    private var statisticsRequestTask: NineAnimatorAsyncTask?
     private var episodeFetchingTask: NineAnimatorAsyncTask?
     
-    // Cached information list
+    // Cached values
     private var enumeratedInformationList = [(name: String, value: String)]()
-    
-    // Cached character list
     private var characterList: [ListingAnimeCharacter]?
+    private var _statistics: ListingAnimeStatistics?
     
     // Outlets
     @IBOutlet private var showEpisodesButton: UIButton!
@@ -122,6 +122,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.cancelPerformingTasks()
+        self.restoreNavigationBarStyle()
     }
     
     private func onAnimeInformationDidLoad(_ information: ListingAnimeInformation) {
@@ -150,12 +151,25 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
                     self.tableView.reloadSections(Section.indexSet(.characters), with: .automatic)
                 }
             }
+        
+        // Request ratings
+        statisticsRequestTask = information
+            .statistics
+            .error(onError)
+            .finally {
+                [weak self] statistics in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self._statistics = statistics
+                    self.tableView.reloadSections(Section.indexSet(.statistics), with: .automatic)
+                }
+            }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -166,6 +180,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         case .information: return enumeratedInformationList.count + 1
         case .synopsis: return 1
         case .characters: return characterList == nil ? 0 : 2
+        case .statistics: return _statistics == nil ? 0 : 2
         }
     }
     
@@ -189,6 +204,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             switch section {
             case .information: cell.headingText = "Information"
             case .characters: cell.headingText = "Characters"
+            case .statistics: cell.headingText = "Ratings & Statistics"
             default: break
             }
             
@@ -206,6 +222,10 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         case .characters:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.characters", for: indexPath) as! InformationSceneCharactersTableViewCell
             cell.initialize(characterList!)
+            return cell
+        case .statistics:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.statistics", for: indexPath) as! InformationSceneStatisticsTableViewCell
+            cell.initialize(_statistics!)
             return cell
         default: fatalError("No section \(section) was found")
         }
@@ -252,6 +272,22 @@ extension AnimeInformationTableViewController {
         statusBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
         navigationBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
         navigationBar.tintColor = alpha == 1.0 ? Theme.current.tint : Theme.current.primaryText
+    }
+    
+    func restoreNavigationBarStyle() {
+        guard let navigationBar = navigationController?.navigationBar,
+            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+            else { return }
+        
+        // Animate changes
+        UIView.animate(withDuration: 0.2) {
+            statusBar.backgroundColor = nil
+            navigationBar.setBackgroundImage(nil, for: .default)
+            navigationBar.barTintColor = nil
+            navigationBar.backgroundColor = nil
+            navigationBar.isTranslucent = true
+            navigationBar.tintColor = Theme.current.tint
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -324,7 +360,8 @@ extension AnimeInformationTableViewController {
                 Log.info("Found an anime \"%@\" with %@ confidence", link.title, confidence)
                 DispatchQueue.main.async {
                     // If we are highly confident that we got a match, open that link
-                    if confidence > 0.95 {
+                    // ...using alpha=0.002
+                    if confidence > 0.998 {
                         self?.onPerfectMatch(link)
                     } else { self?.onUnconfidentMatch() }
                 }
@@ -452,6 +489,8 @@ fileprivate extension AnimeInformationTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
     fileprivate enum Section: Int, Equatable {
         case synopsis = 0
+        
+        case statistics
         
         case characters
         

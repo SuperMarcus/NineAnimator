@@ -58,4 +58,10 @@ class LastViewedEpisodeTableViewCell: UITableViewCell, Themable {
         sourceTitleLabel.textColor = theme.primaryText
         episodeLabel.textColor = theme.secondaryText
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        // Remove seperator
+        separatorInset = .init(top: 0, left: bounds.width / 2, bottom: 0, right: bounds.width / 2)
+    }
 }
