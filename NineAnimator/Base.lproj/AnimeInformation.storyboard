@@ -440,22 +440,100 @@
                                     <outlet property="flowLayout" destination="gXH-ou-CMP" id="DeR-qo-4Ni"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.related" rowHeight="224" id="bgx-yg-IDS" customClass="InformationSceneRelatedTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="760" width="375" height="224"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgx-yg-IDS" id="cW9-Kf-Wi3">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="krO-gp-LVO">
+                                            <rect key="frame" x="24" y="8" width="327" height="207.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="850" constant="220" id="CVx-Vl-4ED"/>
+                                            </constraints>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="osi-eZ-CHQ">
+                                                <size key="itemSize" width="109" height="196"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="anime.reference" id="RKY-Uz-of4" customClass="InformationReferenceCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="6" width="109" height="196"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="109" height="196"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wMN-eT-lMN">
+                                                                <rect key="frame" x="4" y="0.0" width="100" height="143"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="wMN-eT-lMN" secondAttribute="height" multiplier="215:307" id="fik-u2-TWh"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="sAw-OV-27m"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lQW-cW-z7d">
+                                                                <rect key="frame" x="4" y="147" width="101" height="17"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </label>
+                                                        </subviews>
+                                                    </view>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="lQW-cW-z7d" secondAttribute="bottom" constant="4" id="5LI-HZ-9z5"/>
+                                                        <constraint firstItem="lQW-cW-z7d" firstAttribute="leading" secondItem="RKY-Uz-of4" secondAttribute="leading" constant="4" id="5Q5-7O-CRY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="wMN-eT-lMN" secondAttribute="trailing" priority="750" constant="4" id="TRK-L6-XCD"/>
+                                                        <constraint firstItem="wMN-eT-lMN" firstAttribute="top" secondItem="RKY-Uz-of4" secondAttribute="top" id="fj6-dN-vEY"/>
+                                                        <constraint firstItem="wMN-eT-lMN" firstAttribute="leading" secondItem="RKY-Uz-of4" secondAttribute="leading" constant="4" id="oBG-5S-pEl"/>
+                                                        <constraint firstAttribute="trailing" secondItem="lQW-cW-z7d" secondAttribute="trailing" constant="4" id="r0D-rW-ohA"/>
+                                                        <constraint firstItem="lQW-cW-z7d" firstAttribute="top" secondItem="wMN-eT-lMN" secondAttribute="bottom" constant="4" id="wzY-93-6eU"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <outlet property="artworkImageView" destination="wMN-eT-lMN" id="YaY-4k-wjp"/>
+                                                        <outlet property="referenceNameLabel" destination="lQW-cW-z7d" id="Umb-30-Ygl"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="krO-gp-LVO" secondAttribute="bottom" id="Jv2-aQ-D9l"/>
+                                        <constraint firstAttribute="trailing" secondItem="krO-gp-LVO" secondAttribute="trailing" constant="24" id="u1H-MZ-2Vv"/>
+                                        <constraint firstItem="krO-gp-LVO" firstAttribute="leading" secondItem="cW9-Kf-Wi3" secondAttribute="leading" constant="24" id="uK8-P1-h7i"/>
+                                        <constraint firstItem="krO-gp-LVO" firstAttribute="top" secondItem="cW9-Kf-Wi3" secondAttribute="topMargin" id="wdv-Yq-bL6"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="collectionView" destination="krO-gp-LVO" id="Reo-bL-gdS"/>
+                                    <outlet property="flowLayout" destination="osi-eZ-CHQ" id="hL5-9w-lwg"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.information" textLabel="rEQ-Pw-ii4" detailTextLabel="16a-OX-bbP" style="IBUITableViewCellStyleValue1" id="p1i-Sw-S7B">
-                                <rect key="frame" x="0.0" y="760" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="984" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p1i-Sw-S7B" id="xrr-az-rSt">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Information Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rEQ-Pw-ii4">
-                                            <rect key="frame" x="16" y="14" width="122.5" height="18"/>
+                                            <rect key="frame" x="15" y="14" width="122.5" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Information Value" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" id="16a-OX-bbP">
-                                            <rect key="frame" x="225" y="12" width="134" height="20.5"/>
+                                            <rect key="frame" x="226" y="12" width="134" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>

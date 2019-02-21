@@ -31,12 +31,14 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
     private var characterListRequestTask: NineAnimatorAsyncTask?
     private var statisticsRequestTask: NineAnimatorAsyncTask?
+    private var relatedAnimeRequestTask: NineAnimatorAsyncTask?
     private var episodeFetchingTask: NineAnimatorAsyncTask?
     
     // Cached values
     private var enumeratedInformationList = [(name: String, value: String)]()
     private var characterList: [ListingAnimeCharacter]?
     private var _statistics: ListingAnimeStatistics?
+    private var _relatedReferences: [ListingAnimeReference]?
     
     // Outlets
     @IBOutlet private var showEpisodesButton: UIButton!
@@ -167,12 +169,25 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
                     self.tableView.reloadSections(Section.indexSet(.statistics), with: .automatic)
                 }
             }
+        
+        // Related anime
+        relatedAnimeRequestTask = information
+            .relatedReferences
+            .error(onError)
+            .finally {
+                [weak self] relatedReferences in
+                DispatchQueue.main.async {
+                    guard let self = self else { return }
+                    self._relatedReferences = relatedReferences
+                    self.tableView.reloadSections(Section.indexSet(.relatedReferences), with: .automatic)
+                }
+            }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -184,9 +199,11 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         case .synopsis: return 1
         case .characters: return characterList == nil ? 0 : 2
         case .statistics: return _statistics == nil ? 0 : 2
+        case .relatedReferences: return _relatedReferences == nil ? 0 : 2
         }
     }
     
+    // swiftlint:disable cyclomatic_complexity
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let information = presentingAnimeInformation!
         let section = Section(rawValue: indexPath.section)!
@@ -208,6 +225,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             case .information: cell.headingText = "Information"
             case .characters: cell.headingText = "Characters"
             case .statistics: cell.headingText = "Ratings & Statistics"
+            case .relatedReferences: cell.headingText = "Related"
             default: break
             }
             
@@ -230,9 +248,17 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.statistics", for: indexPath) as! InformationSceneStatisticsTableViewCell
             cell.initialize(_statistics!)
             return cell
+        case .relatedReferences:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.related", for: indexPath) as! InformationSceneRelatedTableViewCell
+            cell.initialize(_relatedReferences!) {
+                [weak self] reference in
+                RootViewController.shared?.open(immedietly: .listingReference(reference), in: self)
+            }
+            return cell
         default: fatalError("No section \(section) was found")
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
 
 // MARK: - Exposed interface
@@ -502,6 +528,8 @@ fileprivate extension AnimeInformationTableViewController {
         case characters
         
         case information
+        
+        case relatedReferences
         
         subscript(_ item: Int) -> IndexPath {
             return IndexPath(item: item, section: self.rawValue)

@@ -124,6 +124,8 @@
 		2C9383DD21FE0CE9008C0D01 /* AnimeHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383DC21FE0CE9008C0D01 /* AnimeHeadingView.swift */; };
 		2C9383DF21FE147E008C0D01 /* ThemedSolidButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */; };
 		2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */; };
+		2C93BD45221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */; };
+		2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -335,6 +337,8 @@
 		2C9383DC21FE0CE9008C0D01 /* AnimeHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHeadingView.swift; sourceTree = "<group>"; };
 		2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedSolidButton.swift; sourceTree = "<group>"; };
 		2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneStatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneRelatedTableViewCell.swift; sourceTree = "<group>"; };
+		2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationReferenceCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -519,6 +523,8 @@
 				2C6CF253221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift */,
 				2C6CF255221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift */,
 				2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */,
+				2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */,
+				2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */,
 			);
 			path = "Anime Information Scene";
 			sourceTree = "<group>";
@@ -1243,6 +1249,7 @@
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
 				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
+				2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */,
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C3BBAAC2217635000F1C77B /* Dictionary+KeyPathAccess.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
@@ -1299,6 +1306,7 @@
 				2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */,
 				2C3D7C012210AE640045D648 /* AnimeTwist+Episode.swift in Sources */,
 				2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */,
+				2C93BD45221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift in Sources */,
 				2C6CF250221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift in Sources */,
 				2C6CF24C221B9F1E0009D554 /* SomeOrError.swift in Sources */,
 				2CEBE9112207CBE7006A64CC /* Promise.swift in Sources */,

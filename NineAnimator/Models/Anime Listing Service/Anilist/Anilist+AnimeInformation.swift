@@ -36,12 +36,15 @@ extension Anilist {
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
             return .firstly { [_statistics] in _statistics }
         }
+        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
+            return .firstly { [_relations] in _relations }
+        }
         var reviews: NineAnimatorPromise<[ListingAnimeReview]> { return .fail(.unknownError) }
-        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { return .fail(.unknownError) }
         
         // For now, all optional properties are fetched with other values
         var _characters: [ListingAnimeCharacter]
         var _statistics: ListingAnimeStatistics
+        var _relations: [ListingAnimeReference]
         
         // swiftlint:disable cyclomatic_complexity
         init(_ reference: ListingAnimeReference, mediaEntry: NSDictionary) throws {
@@ -92,6 +95,11 @@ extension Anilist {
             _characters = try mediaEntry
                 .value(at: "characters.edges", type: [NSDictionary].self)
                 .map { try ListingAnimeCharacter(characterEdgeEntry: $0) }
+            
+            // Related anime
+            _relations = try mediaEntry
+                .value(at: "relations.nodes", type: [NSDictionary].self)
+                .compactMap { try? ListingAnimeReference(reference.parentService as! Anilist, withMediaEntry: $0) }
             
             // Statistics
             _statistics = try ListingAnimeStatistics(mediaEntry: mediaEntry)

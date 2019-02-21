@@ -19,51 +19,48 @@
 
 import UIKit
 
-class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class InformationSceneRelatedTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var flowLayout: UICollectionViewFlowLayout!
     
-    private var characters = [ListingAnimeCharacter]()
+    private var references = [ListingAnimeReference]()
+    private var onSelectionCallback: ((ListingAnimeReference) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        collectionView.delegate = self
         collectionView.dataSource = self
-        
-        // Make themable
+        collectionView.delegate = self
         collectionView.makeThemable()
         
-        // Use layout constraint
-        flowLayout.estimatedItemSize = CGSize(width: 110, height: 165)
+        flowLayout.estimatedItemSize = CGSize(width: 120, height: 200)
     }
     
-    func initialize(_ characters: [ListingAnimeCharacter]) {
-        self.characters = characters
-    }
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+    func initialize(_ references: [ListingAnimeReference], callback: @escaping (ListingAnimeReference) -> Void) {
+        self.references = references
+        self.onSelectionCallback = callback
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return characters.count
+        return references.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "anime.character", for: indexPath) as! InformationSceneCharacterCollectionViewCell
-        cell.initialize(characters[indexPath.item])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "anime.reference", for: indexPath) as! InformationReferenceCollectionViewCell
+        cell.initialize(references[indexPath.item])
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        cell.makeThemable()
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize(
-            width: size.width,
-            height: 170
-        )
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? InformationReferenceCollectionViewCell,
+            let reference = cell.reference else {
+            return
+        }
+        onSelectionCallback?(reference)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
