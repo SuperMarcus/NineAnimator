@@ -55,11 +55,14 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Listen to didBecomeActiveNotification event and update the
+        // navigation bar appearance accordinly
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onAppDidEnterForeground(_:)),
+            name: UIApplication.didBecomeActiveNotification,
+            object: nil
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -317,6 +320,10 @@ extension AnimeInformationTableViewController {
     }
     
     func theme(didUpdate theme: Theme) {
+        adjustNavigationBarStyle()
+    }
+    
+    @objc private func onAppDidEnterForeground(_ notification: Notification) {
         adjustNavigationBarStyle()
     }
 }

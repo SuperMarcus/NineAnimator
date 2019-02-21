@@ -33,7 +33,7 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
         collectionView.makeThemable()
         
         // Use layout constraint
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        flowLayout.estimatedItemSize = CGSize(width: 110, height: 165)
     }
     
     func initialize(_ characters: [ListingAnimeCharacter]) {

@@ -35,6 +35,8 @@ struct Theme {
     
     let secondaryBackground: UIColor
     
+    let translucentBackground: UIColor
+    
     let tint: UIColor
     
     let seperator: UIColor
@@ -151,6 +153,7 @@ extension Theme {
             secondaryText: #colorLiteral(red: 0.6352941176, green: 0.6352941176, blue: 0.6549019608, alpha: 1),
             background: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             secondaryBackground: UIColor.groupTableViewBackground,
+            translucentBackground: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             tint: #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1),
             seperator: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
             blurStyle: .extraLight,
@@ -167,6 +170,7 @@ extension Theme {
             secondaryText: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
             background: #colorLiteral(red: 0.1600990295, green: 0.1600990295, blue: 0.1600990295, alpha: 1),
             secondaryBackground: #colorLiteral(red: 0.1326085031, green: 0.1326085031, blue: 0.1326085031, alpha: 1),
+            translucentBackground: #colorLiteral(red: 0.093, green: 0.093, blue: 0.093, alpha: 1), // Really tried my best to match this color...still
             tint: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1),
             seperator: #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1),
             blurStyle: .dark,

@@ -31,12 +31,14 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     }
     
     func theme(didUpdate theme: Theme) {
-        navigationBar.barStyle = theme.barStyle
-        navigationBar.barTintColor = (navigationController?.topViewController is BlendInViewController) ? theme.background : nil
-        navigationBar.tintColor = theme.tint
-        
         view.tintColor = theme.tint
         view.backgroundColor = theme.background
+        navigationBar.barStyle = theme.barStyle
+        
+        guard !(topViewController is DontBotherViewController) else { return }
+        
+        navigationBar.tintColor = theme.tint
+        navigationBar.barTintColor = theme.translucentBackground
     }
     
     func navigationController(_ navigationController: UINavigationController,
@@ -45,15 +47,26 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         // Don't bother DontBotherViewController
         guard !(viewController is DontBotherViewController) else { return }
         
+//        UIView.animate(withDuration: 0.2) {
+//            [unowned navigationBar] in
+//            // Disable shadow image and set to not translucent when trying to blend in
+//            // the navigation bar and the contents
+//            navigationBar.backgroundColor = nil
+//            navigationBar.setBackgroundImage(nil, for: .default)
+//            navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
+//            navigationBar.isTranslucent = !(viewController is BlendInViewController)
+//            navigationBar.barTintColor = (viewController is BlendInViewController) ? Theme.current.background : nil
+//            navigationBar.tintColor = Theme.current.tint
+//        }
+        
+        navigationBar.shadowImage = UIImage()
+        navigationBar.isTranslucent = true
+        navigationBar.setBackgroundImage(nil, for: .default)
+        navigationBar.backgroundColor = nil
+        
         UIView.animate(withDuration: 0.2) {
-            [unowned navigationBar] in
-            // Disable shadow image and set to not translucent when trying to blend in
-            // the navigation bar and the contents
-            navigationBar.backgroundColor = nil
-            navigationBar.setBackgroundImage(nil, for: .default)
-            navigationBar.shadowImage = viewController is BlendInViewController ? UIImage() : nil
-            navigationBar.isTranslucent = !(viewController is BlendInViewController)
-            navigationBar.barTintColor = (viewController is BlendInViewController) ? Theme.current.background : nil
+            [navigationBar] in
+            navigationBar.barTintColor = Theme.current.translucentBackground
             navigationBar.tintColor = Theme.current.tint
         }
     }
