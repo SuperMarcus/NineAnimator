@@ -116,4 +116,7 @@ protocol ListingAnimeInformation {
     
     /// Retrieve the list of reviews authored on this website
     var reviews: NineAnimatorPromise<[ListingAnimeReview]> { get }
+    
+    /// Retrieve the list of related anime
+    var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { get }
 }

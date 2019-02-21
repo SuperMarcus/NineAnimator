@@ -37,6 +37,7 @@ extension Anilist {
             return .firstly { [_statistics] in _statistics }
         }
         var reviews: NineAnimatorPromise<[ListingAnimeReview]> { return .fail(.unknownError) }
+        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { return .fail(.unknownError) }
         
         // For now, all optional properties are fetched with other values
         var _characters: [ListingAnimeCharacter]

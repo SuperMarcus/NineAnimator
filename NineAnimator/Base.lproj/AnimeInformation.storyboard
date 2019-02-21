@@ -338,6 +338,9 @@
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-1f-Spi" userLabel="Characters Collection">
                                             <rect key="frame" x="16" y="0.0" width="343" height="149.5"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="170" id="EIz-Lj-eNB"/>
+                                            </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gXH-ou-CMP">
                                                 <size key="itemSize" width="150" height="159"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -355,7 +358,8 @@
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vKD-Ht-i0n">
                                                                 <rect key="frame" x="31" y="4" width="88" height="88"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="88" id="kTb-d5-vHN"/>
+                                                                    <constraint firstAttribute="height" priority="750" constant="88" id="kTb-d5-vHN"/>
+                                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="88" id="kfQ-so-lLZ"/>
                                                                     <constraint firstAttribute="width" constant="88" id="wFU-Xl-gow"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
@@ -394,7 +398,7 @@
                                                                     <constraint firstAttribute="width" priority="750" constant="110" id="8Kl-yp-xpr"/>
                                                                     <constraint firstAttribute="trailing" secondItem="zLy-V6-RBp" secondAttribute="trailing" id="FiR-MZ-fTL"/>
                                                                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="6Nj-hm-d7s" secondAttribute="bottom" constant="4" id="I5x-Ky-FjK"/>
-                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="60" id="QHe-tT-OcV"/>
+                                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="40" id="QHe-tT-OcV"/>
                                                                     <constraint firstItem="zLy-V6-RBp" firstAttribute="top" secondItem="oku-NH-KZO" secondAttribute="top" id="b1c-IA-T43"/>
                                                                     <constraint firstItem="6Nj-hm-d7s" firstAttribute="top" secondItem="zLy-V6-RBp" secondAttribute="bottom" id="q8o-xR-hab"/>
                                                                     <constraint firstItem="zLy-V6-RBp" firstAttribute="leading" secondItem="oku-NH-KZO" secondAttribute="leading" id="tOW-11-VVX"/>
@@ -426,12 +430,14 @@
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="TvS-1f-Spi" secondAttribute="trailing" constant="16" id="0Hk-nL-PsC"/>
                                         <constraint firstItem="TvS-1f-Spi" firstAttribute="leading" secondItem="YZy-p9-hHC" secondAttribute="leading" constant="16" id="AoJ-M3-Wpz"/>
-                                        <constraint firstAttribute="bottom" secondItem="TvS-1f-Spi" secondAttribute="bottom" id="DJs-nu-blf"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="TvS-1f-Spi" secondAttribute="bottom" id="DJs-nu-blf"/>
+                                        <constraint firstAttribute="bottom" secondItem="TvS-1f-Spi" secondAttribute="bottom" priority="750" id="HMQ-Vf-oOh"/>
                                         <constraint firstItem="TvS-1f-Spi" firstAttribute="top" secondItem="YZy-p9-hHC" secondAttribute="top" id="tV4-qR-E05"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="collectionView" destination="TvS-1f-Spi" id="ZvS-Sa-mG9"/>
+                                    <outlet property="flowLayout" destination="gXH-ou-CMP" id="DeR-qo-4Ni"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.information" textLabel="rEQ-Pw-ii4" detailTextLabel="16a-OX-bbP" style="IBUITableViewCellStyleValue1" id="p1i-Sw-S7B">

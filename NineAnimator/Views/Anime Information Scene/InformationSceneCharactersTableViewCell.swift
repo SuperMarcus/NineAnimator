@@ -21,6 +21,7 @@ import UIKit
 
 class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var flowLayout: UICollectionViewFlowLayout!
     
     private var characters = [ListingAnimeCharacter]()
     
@@ -30,6 +31,9 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
         
         // Make themable
         collectionView.makeThemable()
+        
+        // Use layout constraint
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
     }
     
     func initialize(_ characters: [ListingAnimeCharacter]) {
@@ -58,7 +62,7 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return CGSize(
             width: size.width,
-            height: 160
+            height: 170
         )
     }
 }
