@@ -59,7 +59,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-wE-HN7" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-wE-HN7" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="146" y="135.5" width="150" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="150" id="Xrm-xC-VMD"/>
@@ -83,11 +83,30 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </activityIndicatorView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXK-JH-G4x" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="321" y="135.5" width="30" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="WXK-JH-G4x" secondAttribute="height" multiplier="1:1" id="LnF-ok-XRi"/>
+                                            </constraints>
+                                            <state key="normal" image="Details"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onOptionsButtonTappedWithSender:" destination="f9r-ko-ADk" eventType="touchUpInside" id="h0j-Y5-f6i"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="WXK-JH-G4x" secondAttribute="trailing" constant="16" id="2ua-cX-vGE"/>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="leading" secondItem="1X4-Yz-FdX" secondAttribute="leading" constant="16" id="3WH-3p-VCE"/>
                                         <constraint firstItem="dKd-8l-exf" firstAttribute="top" relation="greaterThanOrEqual" secondItem="1X4-Yz-FdX" secondAttribute="top" id="5Ss-Ki-ZtC"/>
+                                        <constraint firstItem="WXK-JH-G4x" firstAttribute="bottom" secondItem="nNy-wE-HN7" secondAttribute="bottom" id="AZr-mC-dfr"/>
                                         <constraint firstItem="RhY-Fn-Vlp" firstAttribute="centerY" secondItem="nNy-wE-HN7" secondAttribute="centerY" id="BSa-aJ-jJw"/>
                                         <constraint firstItem="nNy-wE-HN7" firstAttribute="bottom" secondItem="lGh-Aj-f92" secondAttribute="bottom" priority="760" id="JeY-fq-lSv"/>
                                         <constraint firstAttribute="trailing" secondItem="dKd-8l-exf" secondAttribute="trailing" constant="16" id="Nau-bL-Rht"/>
@@ -98,11 +117,13 @@
                                         <constraint firstItem="dKd-8l-exf" firstAttribute="leading" secondItem="lGh-Aj-f92" secondAttribute="trailing" constant="16" id="TXZ-cy-Qie"/>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="leading" secondItem="1X4-Yz-FdX" secondAttribute="leading" constant="8" id="UaI-zS-9SD"/>
                                         <constraint firstItem="lGh-Aj-f92" firstAttribute="top" secondItem="1X4-Yz-FdX" secondAttribute="top" constant="8" id="VkH-uL-CaF"/>
+                                        <constraint firstItem="WXK-JH-G4x" firstAttribute="top" secondItem="nNy-wE-HN7" secondAttribute="top" id="Y3Z-Dl-3Nt"/>
                                         <constraint firstAttribute="trailing" secondItem="CGQ-fc-eQZ" secondAttribute="trailing" constant="16" id="cKp-cr-wXO"/>
                                         <constraint firstItem="nNy-wE-HN7" firstAttribute="leading" secondItem="dKd-8l-exf" secondAttribute="leading" id="fjP-xq-w96"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="nNy-wE-HN7" secondAttribute="bottom" constant="8" id="lcr-ib-ngs"/>
                                         <constraint firstItem="dKd-8l-exf" firstAttribute="bottom" secondItem="lGh-Aj-f92" secondAttribute="centerY" priority="500" id="mYN-Dz-1se"/>
                                         <constraint firstItem="CGQ-fc-eQZ" firstAttribute="top" secondItem="dKd-8l-exf" secondAttribute="bottom" priority="751" id="oDy-D1-HPG"/>
+                                        <constraint firstItem="WXK-JH-G4x" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nNy-wE-HN7" secondAttribute="trailing" constant="8" id="sJa-mY-zzD"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
@@ -151,6 +172,7 @@
                                 <outlet property="animeAlternativeTitleLabel" destination="CGQ-fc-eQZ" id="tof-Hl-XT0"/>
                                 <outlet property="animeArtworkImageView" destination="lGh-Aj-f92" id="x7G-pr-CTT"/>
                                 <outlet property="animeTitleLabel" destination="dKd-8l-exf" id="nQq-zA-SzO"/>
+                                <outlet property="optionsButton" destination="WXK-JH-G4x" id="35B-hG-e6B"/>
                                 <outlet property="showEpisodesButton" destination="nNy-wE-HN7" id="qLM-Cn-A9W"/>
                                 <outlet property="topImageView" destination="BFX-qw-k0c" id="Ha9-hl-u2G"/>
                             </connections>
@@ -561,4 +583,7 @@
             <point key="canvasLocation" x="88.799999999999997" y="100.29985007496252"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Details" width="20" height="20"/>
+    </resources>
 </document>

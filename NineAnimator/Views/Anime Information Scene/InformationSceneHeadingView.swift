@@ -26,6 +26,7 @@ class InformationSceneHeadingView: UIView, Themable {
     @IBOutlet private weak var animeTitleLabel: UILabel!
     @IBOutlet private weak var animeAlternativeTitleLabel: UILabel!
     @IBOutlet private weak var showEpisodesButton: UIButton!
+    @IBOutlet private weak var optionsButton: UIButton!
     
     private var reference: ListingAnimeReference?
     private weak var imageMaskLayer: CAGradientLayer?
@@ -60,7 +61,10 @@ class InformationSceneHeadingView: UIView, Themable {
         self.reference = reference
         animeTitleLabel.text = reference.name
         animeAlternativeTitleLabel.text = "Loading..." // Set alternative title to an empty string
-        showEpisodesButton.isEnabled = false // Disable show episdoes button
+        
+        // Disable buttons
+        showEpisodesButton.isEnabled = false
+        optionsButton.isEnabled = false
         
         animeArtworkImageView.alpha = 0.0
         animeArtworkImageView.kf.setImage(with: reference.artwork) {
@@ -92,8 +96,9 @@ class InformationSceneHeadingView: UIView, Themable {
                 .filter { !$0.isEmpty }
                 .joined(separator: "; ")
             
-            // Allow show episodes button
+            // Enable buttons
             self?.showEpisodesButton.isEnabled = true
+            self?.optionsButton.isEnabled = true
             
             // Tell parent that layout is needed
             self?.onNeededLayout?()

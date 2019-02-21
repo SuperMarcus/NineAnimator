@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import SafariServices
 import UIKit
 
 /// ViewController for presenting listing service anime information
@@ -26,6 +27,14 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     private var presentingReference: ListingAnimeReference?
     private var presentingAnimeInformation: ListingAnimeInformation?
     private var previousViewControllerMatchesAnime = false
+    
+    // Fade navigation bar when presenting alerts so we don't get those ugly unmatched
+    // status bar backgrounds
+    private var isAlertPresenting: Bool = false {
+        didSet {
+            UIView.animate(withDuration: 0.2) { [weak self] in self?.adjustNavigationBarStyle() }
+        }
+    }
     
     // References to tasks
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
@@ -197,9 +206,9 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         switch Section(rawValue: section)! {
         case .information: return enumeratedInformationList.count + 1
         case .synopsis: return 1
-        case .characters: return characterList == nil ? 0 : 2
+        case .characters: return characterList?.isEmpty == false ? 2 : 0
         case .statistics: return _statistics == nil ? 0 : 2
-        case .relatedReferences: return _relatedReferences == nil ? 0 : 2
+        case .relatedReferences: return _relatedReferences?.isEmpty == false ? 2 : 0
         }
     }
     
@@ -297,7 +306,7 @@ extension AnimeInformationTableViewController {
         navigationBar.isTranslucent = true
         
         // If scrolled way pass the position, set the navigation bar to opaque
-        let alpha = min(scrollPosition / transitionPosition, 1.0)
+        let alpha = isAlertPresenting ? 0 : min(scrollPosition / transitionPosition, 1.0)
         statusBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
         navigationBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
         navigationBar.tintColor = alpha == 1.0 ? Theme.current.tint : Theme.current.primaryText
@@ -467,13 +476,16 @@ extension AnimeInformationTableViewController {
             
             // If the anime information has not been loaded yet, back to previous page
             if self.presentingAnimeInformation == nil {
+                self.isAlertPresenting = false
                 self.navigationController?.popViewController(animated: true)
             }
         })
         
         // Present alert
         DispatchQueue.main.async {
-            [weak self] in self?.present(alert, animated: true)
+            [weak self] in
+            self?.isAlertPresenting = true
+            self?.present(alert, animated: true)
         }
     }
     
@@ -518,6 +530,48 @@ extension AnimeInformationTableViewController {
     }
 }
 
+// MARK: - Options
+extension AnimeInformationTableViewController {
+    @IBAction private func onOptionsButtonTapped(sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        // Set the source to the button
+        if let popoverController = actionSheet.popoverPresentationController {
+            popoverController.sourceView = sender
+        }
+        
+        // Show view on website option
+        if presentingAnimeInformation != nil {
+            actionSheet.addAction({
+                let action = UIAlertAction(title: "View on Website", style: .default) {
+                    [weak self] _ in
+                    self?.openInWebsite()
+                    self?.isAlertPresenting = false
+                }
+                action.textAlignment = .left
+                action.image = #imageLiteral(resourceName: "Compass")
+                return action
+            }())
+        }
+        
+        // Cancel option
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel) {
+            [weak self] _ in self?.isAlertPresenting = false
+        })
+        
+        // Present options
+        isAlertPresenting = true
+        present(actionSheet, animated: true)
+    }
+    
+    private func openInWebsite() {
+        guard let information = presentingAnimeInformation else { return }
+        let webPage = SFSafariViewController(url: information.siteUrl)
+        present(webPage, animated: true)
+    }
+}
+
+// MARK: - Helpers
 fileprivate extension AnimeInformationTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
     fileprivate enum Section: Int, Equatable {
