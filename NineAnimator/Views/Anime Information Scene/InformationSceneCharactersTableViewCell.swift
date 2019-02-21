@@ -38,7 +38,6 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
     
     func initialize(_ characters: [ListingAnimeCharacter]) {
         self.characters = characters
-        self.collectionView.reloadSections([0])
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
