@@ -317,6 +317,9 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ----------------- | -------------------- |
 | ![7](Misc/Media/Demo/Light/featured_ipad.png) | ![8](Misc/Media/Demo/Light/browse_episodes_ipad.png) |
 
+| Anime Information | Anime Information (iPad) |
+| ![9](Misc/Media/Demo/Light/information.png) | ![10](Misc/Media/Demo/Light/information_ipad.png) |
+
 ### Dark Appearance
 
 | Featured Animes | Recently Viewed | Search |
@@ -330,6 +333,9 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | Featured Animes (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
 | ![7](Misc/Media/Demo/Dark/featured_ipad.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
+
+| Anime Information | Anime Information (iPad) |
+| ![9](Misc/Media/Demo/Dark/information.png) | ![10](Misc/Media/Demo/Dark/information_ipad.png) |
 
 ### Google Cast
 
