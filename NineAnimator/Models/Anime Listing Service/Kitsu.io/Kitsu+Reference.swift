@@ -1,0 +1,39 @@
+//
+//  This file is part of the NineAnimator project.
+//
+//  Copyright © 2018-2019 Marcus Zhou. All rights reserved.
+//
+//  NineAnimator is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  NineAnimator is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+import Foundation
+
+extension Kitsu {
+    func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
+        return apiRequest("/anime", query: [
+            "fields[anime]": "canonicalTitle,posterImage,titles",
+            "filter[text]": link.title,
+            "page[offset]": "0",
+            "page[limit]": "20" // Looking for the first 20 anime entries to match
+        ]) .then {
+            [unowned self] matchedObjects in
+            try matchedObjects.map {
+                match -> (Double, ListingAnimeReference) in
+                let titles = (match.attributes["titles"] as? [String: String]) ?? [:]
+                let proximity = titles.reduce(0.0) { max($0, $1.value.proximity(to: link.title)) }
+                return (proximity, try ListingAnimeReference(self, withAnimeObject: match))
+            } .max { $0.0 < $1.0 }?.1
+        }
+    }
+}

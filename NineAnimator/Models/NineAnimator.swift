@@ -149,6 +149,7 @@ extension NineAnimator {
     
     private func registerDefaultServices() {
         register(service: Anilist(self))
+        register(service: Kitsu(self))
     }
     
     /// Remove all expired weak references

@@ -126,6 +126,13 @@
 		2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */; };
 		2C93BD45221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */; };
 		2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */; };
+		2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD4922220B07000411CB /* Kitsu.swift */; };
+		2C93BD4C22220BE3000411CB /* Kitsu+Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD4B22220BE3000411CB /* Kitsu+Reference.swift */; };
+		2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD4D22220C17000411CB /* Kitsu+Mutation.swift */; };
+		2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD4F22220C41000411CB /* Kitsu+Information.swift */; };
+		2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5122220C70000411CB /* Kitsu+Collections.swift */; };
+		2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */; };
+		2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD552222E7AD000411CB /* Kitsu+User.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -339,6 +346,13 @@
 		2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneStatisticsTableViewCell.swift; sourceTree = "<group>"; };
 		2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneRelatedTableViewCell.swift; sourceTree = "<group>"; };
 		2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationReferenceCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C93BD4922220B07000411CB /* Kitsu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kitsu.swift; sourceTree = "<group>"; };
+		2C93BD4B22220BE3000411CB /* Kitsu+Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+Reference.swift"; sourceTree = "<group>"; };
+		2C93BD4D22220C17000411CB /* Kitsu+Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+Mutation.swift"; sourceTree = "<group>"; };
+		2C93BD4F22220C41000411CB /* Kitsu+Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+Information.swift"; sourceTree = "<group>"; };
+		2C93BD5122220C70000411CB /* Kitsu+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+Collections.swift"; sourceTree = "<group>"; };
+		2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListingAnimeReference+Kitsu.swift"; sourceTree = "<group>"; };
+		2C93BD552222E7AD000411CB /* Kitsu+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+User.swift"; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +570,7 @@
 		2C3BBAAD22183BA900F1C77B /* Anime Listing Service */ = {
 			isa = PBXGroup;
 			children = (
+				2C93BD4822220AEF000411CB /* Kitsu.io */,
 				2C1C716D2218537700760A69 /* Anilist */,
 				2C3BBAAE22183BCF00F1C77B /* ListingService.swift */,
 				2C1C7170221854CA00760A69 /* BaseListingService.swift */,
@@ -874,6 +889,20 @@
 				2C6677A921BD5F22000E5ACC /* RecentlyViewedTableViewController.swift */,
 			);
 			path = "Recents Scene";
+			sourceTree = "<group>";
+		};
+		2C93BD4822220AEF000411CB /* Kitsu.io */ = {
+			isa = PBXGroup;
+			children = (
+				2C93BD4922220B07000411CB /* Kitsu.swift */,
+				2C93BD552222E7AD000411CB /* Kitsu+User.swift */,
+				2C93BD4B22220BE3000411CB /* Kitsu+Reference.swift */,
+				2C93BD4D22220C17000411CB /* Kitsu+Mutation.swift */,
+				2C93BD4F22220C41000411CB /* Kitsu+Information.swift */,
+				2C93BD5122220C70000411CB /* Kitsu+Collections.swift */,
+				2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */,
+			);
+			path = Kitsu.io;
 			sourceTree = "<group>";
 		};
 		2C9C44FC21CD2B07004C8F0C /* Settings Scene */ = {
@@ -1268,8 +1297,10 @@
 				2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */,
 				2CEC219A2207FA9800A30F4F /* GogoAnime+Episode.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
+				2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */,
 				2CEC218A2207E34E00A30F4F /* Promise+All.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
+				2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */,
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
@@ -1284,9 +1315,12 @@
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
+				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
 				2C3D7BF62210825B0045D648 /* NineAnime+Reachability.swift in Sources */,
 				2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */,
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
+				2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */,
+				2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */,
 				2C1C7196221B1C3000760A69 /* InformationSceneHeadingView.swift in Sources */,
 				2CCC746621C088980007502A /* NineAnime+Episode.swift in Sources */,
 				2CEC21922207F2D500A30F4F /* PromiseSource.swift in Sources */,
@@ -1378,9 +1412,11 @@
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2CEC21962207F95D00A30F4F /* GogoAnime+ContentProvider.swift in Sources */,
 				2CEC218E2207EC9300A30F4F /* BaseSource.swift in Sources */,
+				2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */,
 				2CEBE90D2207BEAD006A64CC /* GogoAnime.swift in Sources */,
 				2CCC746421C07C700007502A /* NineAnime+Anime.swift in Sources */,
 				2C66779E21BC36A5000E5ACC /* BufferedContent.swift in Sources */,
+				2C93BD4C22220BE3000411CB /* Kitsu+Reference.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

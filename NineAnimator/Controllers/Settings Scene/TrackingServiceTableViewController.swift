@@ -28,6 +28,11 @@ class TrackingServiceTableViewController: UITableViewController {
     @IBOutlet private weak var anilistPushNineAnimatorUpdatesSwitch: UISwitch!
     private var anilistAccountInfoFetchTask: NineAnimatorAsyncTask?
     
+    // Kitsu.io
+    @IBOutlet private weak var kitsuStatusLabel: UILabel!
+    @IBOutlet private weak var kitsuActionLabel: UILabel!
+    private var kitsuAuthenticationTask: NineAnimatorAsyncTask?
+    
     // Preserve a reference to the authentication session
     private var authenticationSessionReference: AnyObject?
     
@@ -36,6 +41,7 @@ class TrackingServiceTableViewController: UITableViewController {
         
         // Update status
         anilistUpdateStatus()
+        kitsuUpdateStatus()
         tableView.makeThemable()
     }
     
@@ -53,8 +59,118 @@ class TrackingServiceTableViewController: UITableViewController {
             if anilist.didExpire || !anilist.didSetup {
                 anilistPresentAuthenticationPage()
             } else { anilistLogOut() }
+        case "service.kitsu.action":
+            if kitsu.didExpire || !kitsu.didSetup {
+                kitsuPresentAuthenticationPage()
+            } else { kitsuLogout() }
         default:
             Log.info("An unimplemented cell with identifier \"%@\" was selected", identifier)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return indexPath }
+        
+        // Disable the action cell if there is a task running
+        if cell.reuseIdentifier == "service.kitsu.action",
+            kitsuAuthenticationTask != nil {
+            return nil
+        }
+        
+        return indexPath
+    }
+}
+
+extension TrackingServiceTableViewController {
+    private var kitsu: Kitsu { return NineAnimator.default.service(type: Kitsu.self) }
+    
+    private func kitsuPresentAuthenticationPage() {
+        let alert = UIAlertController(
+            title: "Setup Kitsu.io",
+            message: "Login to Kitsu.io with your email and password.",
+            preferredStyle: .alert
+        )
+        
+        // Email field
+        alert.addTextField {
+            $0.placeholder = "example@example.com"
+            $0.textContentType = .emailAddress
+        }
+        
+        // Password field
+        alert.addTextField {
+            $0.placeholder = "Kitsu.io Password"
+            $0.textContentType = .password
+            $0.isSecureTextEntry = true
+        }
+        
+        alert.addAction(UIAlertAction(title: "Login", style: .default) {
+            [unowned kitsu, weak self] _ in
+            guard let self = self else { return }
+            
+            // Obtain username and password values
+            guard let user = alert.textFields?.first?.text,
+                let password = alert.textFields?.last?.text else {
+                return
+            }
+            
+            // Authenticate with the provided username and password
+            self.kitsuAuthenticationTask = kitsu.authenticate(user: user, password: password).error {
+                [weak self] error in
+                let message: String
+                if let error = error as? NineAnimatorError {
+                    if case .authenticationRequiredError = error {
+                        message = "Your email or password was incorrect"
+                    } else { message = error.description }
+                } else { message = error.localizedDescription }
+                
+                // Present the error message
+                let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)
+                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                self?.kitsuAuthenticationTask = nil
+                
+                DispatchQueue.main.async {
+                    self?.present(errorAlert, animated: true)
+                    self?.kitsuUpdateStatus()
+                }
+            } .finally {
+                [weak self] in
+                Log.info("Successfully logged in to Kitsu.io")
+                self?.kitsuAuthenticationTask = nil
+                DispatchQueue.main.async { self?.kitsuUpdateStatus() }
+            }
+            self.kitsuUpdateStatus()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+    
+    private func kitsuLogout() {
+        kitsu.deauthenticate()
+        kitsuUpdateStatus()
+    }
+    
+    private func kitsuUpdateStatus() {
+        // First, tint the action label
+        kitsuActionLabel.textColor = Theme.current.tint
+        
+        if kitsu.didSetup {
+            if kitsu.didExpire {
+                kitsuStatusLabel.text = "Expired"
+                kitsuActionLabel.text = "Authenticate Kitsu.io"
+            } else {
+                kitsuStatusLabel.text = "Normal"
+                kitsuActionLabel.text = "Sign Out"
+            }
+        } else if kitsuAuthenticationTask != nil {
+            kitsuStatusLabel.text = "Updating"
+            kitsuActionLabel.text = "Signing you in..."
+            kitsuActionLabel.textColor = Theme.current.secondaryText
+        } else {
+            kitsuStatusLabel.text = "Not Setup"
+            kitsuActionLabel.text = "Setup Kitsu.io"
         }
     }
 }
@@ -74,7 +190,7 @@ extension TrackingServiceTableViewController {
                 anilistActionLabel.text = "Authenticate AniList.co"
             } else {
                 anilistStatusLabel.text = "Loading..."
-                anilistActionLabel.text = "Log Out"
+                anilistActionLabel.text = "Sign Out"
                 
                 let updateStatusLabel = {
                     text in
