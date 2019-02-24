@@ -34,6 +34,15 @@ extension Kitsu {
                 let proximity = titles.reduce(0.0) { max($0, $1.value.proximity(to: link.title)) }
                 return (proximity, try ListingAnimeReference(self, withAnimeObject: match))
             } .max { $0.0 < $1.0 }?.1
+        } .thenPromise { // Fetch library entry state
+            [unowned self] matchedReference in
+            NineAnimatorPromise {
+                [unowned self] callback in
+                // Look for the reference in the library entry
+                self.libraryEntry(for: matchedReference).error {
+                    _ in callback(matchedReference, nil) // If errored (or DNE), return the original reference
+                } .finally { entry in callback(matchedReference.with(libraryEntry: entry), nil) }
+            }
         }
     }
 }

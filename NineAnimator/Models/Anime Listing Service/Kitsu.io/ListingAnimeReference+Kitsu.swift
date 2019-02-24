@@ -20,7 +20,7 @@
 import Foundation
 
 extension ListingAnimeReference {
-    init(_ parent: Kitsu, withAnimeObject animeObject: Kitsu.APIObject) throws {
+    init(_ parent: Kitsu, withAnimeObject animeObject: Kitsu.APIObject, libraryEntry: Kitsu.LibraryEntry? = nil) throws {
         // Save identifier
         let uniqueIdentifier = animeObject.identifier
         let name = (animeObject.attributes["canonicalTitle"] as? String) ?? "Untitled"
@@ -32,7 +32,42 @@ extension ListingAnimeReference {
             artwork = URL(string: originalArtworkUrl)
         }
         
+        var userInfo = [String: Any]()
+        if let entry = libraryEntry { userInfo["libraryEntry"] = entry }
+        
         // Call the parent init method
-        self.init(parent, name: name, identifier: uniqueIdentifier, state: nil, artwork: artwork, userInfo: [:])
+        self.init(
+            parent,
+            name: name,
+            identifier: uniqueIdentifier,
+            state: nil,
+            artwork: artwork,
+            userInfo: userInfo
+        )
+    }
+    
+    func with(libraryEntry: Kitsu.LibraryEntry) -> ListingAnimeReference {
+        // Obtain the state from the library entry item
+        var state: ListingAnimeTrackingState?
+        switch libraryEntry.status {
+        case "completed": state = .finished
+        case "current": state = .watching
+        case "planned": state = .toWatch
+        default: break
+        }
+        
+        // Save the libraryEntry in the userInfo
+        var info = userInfo
+        info["libraryEntry"] = libraryEntry
+        
+        // Create a shallow copy of the reference
+        return ListingAnimeReference(
+            parentService,
+            name: name,
+            identifier: uniqueIdentifier,
+            state: state,
+            artwork: artwork,
+            userInfo: info
+        )
     }
 }

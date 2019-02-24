@@ -43,7 +43,11 @@ extension Kitsu {
                     let relatedAnime = entry.includedRelations["anime"] else { continue }
                 
                 // Create the reference
-                var reference = try ListingAnimeReference(self, withAnimeObject: relatedAnime)
+                var reference = try ListingAnimeReference(
+                    self,
+                    withAnimeObject: relatedAnime,
+                    libraryEntry: try LibraryEntry(from: entry)
+                )
                 
                 switch status {
                 case "completed": reference.state = .finished

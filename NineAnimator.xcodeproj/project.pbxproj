@@ -133,6 +133,7 @@
 		2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5122220C70000411CB /* Kitsu+Collections.swift */; };
 		2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */; };
 		2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD552222E7AD000411CB /* Kitsu+User.swift */; };
+		2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -353,6 +354,7 @@
 		2C93BD5122220C70000411CB /* Kitsu+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+Collections.swift"; sourceTree = "<group>"; };
 		2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListingAnimeReference+Kitsu.swift"; sourceTree = "<group>"; };
 		2C93BD552222E7AD000411CB /* Kitsu+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+User.swift"; sourceTree = "<group>"; };
+		2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+LibraryEntry.swift"; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -900,6 +902,7 @@
 				2C93BD4D22220C17000411CB /* Kitsu+Mutation.swift */,
 				2C93BD4F22220C41000411CB /* Kitsu+Information.swift */,
 				2C93BD5122220C70000411CB /* Kitsu+Collections.swift */,
+				2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */,
 				2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */,
 			);
 			path = Kitsu.io;
@@ -1357,6 +1360,7 @@
 				2C43315A220B380200A2E64F /* Error.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
+				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,

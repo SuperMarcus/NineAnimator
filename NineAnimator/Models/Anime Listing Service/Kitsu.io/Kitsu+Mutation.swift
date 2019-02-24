@@ -20,7 +20,103 @@
 import Foundation
 
 extension Kitsu {
-    func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) { }
+    func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
+        // Cleanup any previous completed mutation request
+        collectMutationTaskPoolGarbage()
+        
+        let libraryEntryState: String
+        switch newState {
+        case .finished: libraryEntryState = "completed"
+        case .toWatch: libraryEntryState = "planned"
+        case .watching: libraryEntryState = "current"
+        }
+        
+        // Make the request
+        let task = currentUser().thenPromise {
+            [unowned self] user in
+            self.apiRequest(
+                "/library-entries",
+                body: [
+                    "data": [
+                        "attributes": [ "status": libraryEntryState ],
+                        "relationships": [
+                            "anime": [
+                                "data": [
+                                    "type": "anime",
+                                    "id": reference.uniqueIdentifier
+                                ]
+                            ],
+                            "user": [
+                                "data": [
+                                    "type": "users",
+                                    "id": user.identifier
+                                ]
+                            ]
+                        ],
+                        "type": "library-entries"
+                    ]
+                ],
+                method: .post
+            )
+        } .error {
+            Log.error("[Kitsu.io] Failed to mutate: %@", $0)
+        } .finally { _ in Log.info("[Kitsu.io] Mutation made") }
+        
+        // Save the reference in the task pool
+        _mutationTaskPool.append(task)
+    }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) { }
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {
+        collectMutationTaskPoolGarbage()
+        
+        // First, get the episode number
+        guard let nameFirstPortion = episode.name.split(separator: " ").first,
+            let episodeNumber = Int(String(nameFirstPortion)) else {
+            Log.info("Cannot update episode with name \"%\": the name does not suggest an episode number", episode.name)
+            return
+        }
+        
+        // Make the request
+        let task = currentUser().thenPromise {
+            [unowned self] user in self.libraryEntry(for: reference).then { (user, $0) }
+        } .thenPromise {
+            [unowned self] (user: User, entry: LibraryEntry) in
+            self.apiRequest(
+                "/library-entries/\(entry.identifier)",
+                body: [
+                    "data": [
+                        "id": entry.identifier,
+                        "attributes": [ "progress": episodeNumber ],
+                        "relationships": [
+                            "anime": [
+                                "data": [
+                                    "type": "anime",
+                                    "id": reference.uniqueIdentifier
+                                ]
+                            ],
+                            "user": [
+                                "data": [
+                                    "type": "users",
+                                    "id": user.identifier
+                                ]
+                            ],
+                            "mediaReaction": [ "data": nil ]
+                        ],
+                        "type": "library-entries"
+                    ]
+                ],
+                method: .patch
+            )
+        } .error {
+            Log.error("[Kitsu.io] Failed to mutate: %@", $0)
+        } .finally { _ in Log.info("[Kitsu.io] Mutation made") }
+        
+        // Save the reference in the task pool
+        _mutationTaskPool.append(task)
+    }
+    
+    private func collectMutationTaskPoolGarbage() {
+        // Remove all resolved promises
+        _mutationTaskPool.removeAll { ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true }
+    }
 }

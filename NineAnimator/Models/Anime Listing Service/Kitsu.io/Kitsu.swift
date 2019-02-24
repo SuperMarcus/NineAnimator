@@ -27,6 +27,7 @@ class Kitsu: BaseListingService, ListingService {
     let endpoint = URL(string: "https://kitsu.io/api/edge")!
     
     var _cachedUser: User?
+    var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
         return "com.marcuszhou.nineanimator.service.kitsu"
@@ -162,7 +163,7 @@ extension Kitsu {
         }
     }
     
-    func apiRequest(_ path: String, query: [String: String]) -> NineAnimatorPromise<[APIObject]> {
+    func apiRequest(_ path: String, query: [String: String] = [:], body: [String: Any] = [:], method: HTTPMethod = .get) -> NineAnimatorPromise<[APIObject]> {
         // Headers for JSON: API
         var headers = [
             "Accept": "application/vnd.api+json",
@@ -174,9 +175,18 @@ extension Kitsu {
             headers["Authorization"] = "Bearer \(token)"
         }
         
+        // Encode body data
+        var bodyData: Data?
+        if !body.isEmpty {
+            bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
+        }
+        
         return NineAnimatorPromise.firstly {
             [endpoint] in // First and foremost, build the request URL
-            guard var urlBuilder = URLComponents(url: endpoint.appendingPathComponent(path), resolvingAgainstBaseURL: false) else {
+            let requestingUrl = endpoint.appendingPathComponent(path)
+            guard !query.isEmpty else { return requestingUrl }
+            
+            guard var urlBuilder = URLComponents(url: requestingUrl, resolvingAgainstBaseURL: false) else {
                 throw NineAnimatorError.urlError
             }
             
@@ -187,10 +197,11 @@ extension Kitsu {
             return try some(urlBuilder.url, or: NineAnimatorError.urlError)
         } .thenPromise {
             [unowned self] in // Then request
-            self.request($0, method: .get, data: nil, headers: headers)
+            self.request($0, method: method, data: bodyData, headers: headers)
         } .then {
+            data -> NSDictionary in
             try some(
-                (try JSONSerialization.jsonObject(with: $0, options: [])) as? NSDictionary,
+                (try JSONSerialization.jsonObject(with: data, options: [])) as? NSDictionary,
                 or: NineAnimatorError.decodeError
             )
         } .then {
