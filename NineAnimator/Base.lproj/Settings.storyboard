@@ -838,6 +838,9 @@ For Home integration to function, at least one HomeKit compatible accessory have
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="Anilist" id="KLV-mK-zbJ">
+                                <string key="footerTitle">Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.
+
+NineAnimator is not affiliated with AniList.co.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.anilist.header" rowHeight="126" id="MYg-L7-BIb">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="126"/>
@@ -914,7 +917,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.anilist.pushUpdates" rowHeight="47" id="lmu-OH-tqb">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.anilist.pushUpdates" rowHeight="47" id="lmu-OH-tqb">
                                         <rect key="frame" x="0.0" y="225.5" width="375" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lmu-OH-tqb" id="cFj-k1-9az">
@@ -978,9 +981,12 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Kitsu" id="Mk4-hl-YHD">
+                                <string key="footerTitle">Only the playback events after you have signed in will be pushed to Kitsu.
+
+NineAnimator is not affiliated with Kitsu.io.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.header" rowHeight="126" id="ZzN-jk-VgZ">
-                                        <rect key="frame" x="0.0" y="372.5" width="375" height="126"/>
+                                        <rect key="frame" x="0.0" y="456" width="375" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZzN-jk-VgZ" id="Cx7-Pa-crA">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="125.5"/>
@@ -1018,7 +1024,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.status" textLabel="6ow-N9-6M8" detailTextLabel="d3R-vQ-52G" style="IBUITableViewCellStyleValue1" id="zz3-Nw-Iu0">
-                                        <rect key="frame" x="0.0" y="498.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="582" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zz3-Nw-Iu0" id="q15-lp-Qv4">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1035,8 +1041,8 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d3R-vQ-52G">
-                                                    <rect key="frame" x="315" y="12" width="44" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d3R-vQ-52G">
+                                                    <rect key="frame" x="281.5" y="12" width="77.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1052,8 +1058,44 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.pushUpdates" id="bNv-bF-MtV">
+                                        <rect key="frame" x="0.0" y="626" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bNv-bF-MtV" id="ufl-eA-HHy">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Push NineAnimator Updates" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekC-7m-AFc">
+                                                    <rect key="frame" x="8" y="8" width="215.5" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QR5-ny-fRJ">
+                                                    <rect key="frame" x="310" y="8" width="51" height="27.5"/>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ekC-7m-AFc" secondAttribute="bottom" id="6U8-t7-pYQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="QR5-ny-fRJ" secondAttribute="trailing" constant="16" id="N8r-P5-Hjp"/>
+                                                <constraint firstItem="ekC-7m-AFc" firstAttribute="top" secondItem="ufl-eA-HHy" secondAttribute="topMargin" id="Toa-lS-7RA"/>
+                                                <constraint firstItem="ekC-7m-AFc" firstAttribute="leading" secondItem="ufl-eA-HHy" secondAttribute="leadingMargin" id="YoD-hS-J4t"/>
+                                                <constraint firstAttribute="bottom" secondItem="QR5-ny-fRJ" secondAttribute="bottom" constant="8" id="eT3-6P-YXa"/>
+                                                <constraint firstItem="QR5-ny-fRJ" firstAttribute="top" secondItem="ufl-eA-HHy" secondAttribute="top" constant="8" id="mrS-m0-XNJ"/>
+                                                <constraint firstItem="QR5-ny-fRJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ekC-7m-AFc" secondAttribute="trailing" constant="8" id="mzj-BV-RrQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.kitsu.action" textLabel="qV5-lV-yLf" style="IBUITableViewCellStyleDefault" id="ilf-Bn-2TC">
-                                        <rect key="frame" x="0.0" y="542.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="670" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ilf-Bn-2TC" id="vDd-bY-AXQ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -1089,6 +1131,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                         <outlet property="anilistPushNineAnimatorUpdatesSwitch" destination="1OA-en-uja" id="DLm-UB-phD"/>
                         <outlet property="anilistStatusLabel" destination="Avi-8B-KpP" id="QVx-Zn-jCQ"/>
                         <outlet property="kitsuActionLabel" destination="qV5-lV-yLf" id="QEL-Dl-VVU"/>
+                        <outlet property="kitsuPushNineAnimatorUpdatesSwitch" destination="QR5-ny-fRJ" id="akz-Yc-0CE"/>
                         <outlet property="kitsuStatusLabel" destination="d3R-vQ-52G" id="2o7-z3-Qc0"/>
                     </connections>
                 </tableViewController>
@@ -1145,11 +1188,13 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
+                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
 
-NineAnimator will never uploads your personal information or playback history to any third party services without your consent. However, NineAnimator is not designed to prevent souce and playback services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
+NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
 
-Your playback history and preferences may be stored in your iCloud account.</string>
+By setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.
+
+Your playback history and preferences may be stored in your iCloud account.</mutableString>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy" textLabel="N8M-Jf-n7k" style="IBUITableViewCellStyleDefault" id="V5E-7b-5XW">
                                         <rect key="frame" x="0.0" y="315" width="375" height="44"/>
@@ -1180,7 +1225,7 @@ NineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.license" textLabel="p2c-ro-yj3" style="IBUITableViewCellStyleDefault" id="3WC-jV-54E">
-                                        <rect key="frame" x="0.0" y="610.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="674.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3WC-jV-54E" id="OKY-Es-GnJ">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
@@ -1199,9 +1244,9 @@ You should have received a copy of the GNU General Public License along with Nin
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Third Party Softwares and Websites" id="2US-vI-tzZ">
-                                <string key="footerTitle">NineAnimator is developed with the help of the open source community.
+                                <mutableString key="footerTitle">NineAnimator is developed with the help of the open source community.
 
-NineAnimator is not associated or affiliated with third party websites such as 9anime.ru or masterani.me.
+NineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.
 
 - OpenCast Swift
 
@@ -1247,10 +1292,14 @@ Permission is hereby granted, free of charge, to any person obtaining a copyof t
 
 The above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.</string>
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.
+
+- Other Media and Frameworks
+
+See the complete credit list in the "Credits" page.</mutableString>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
-                                        <rect key="frame" x="0.0" y="1002" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1066" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="edi-Jf-1sC" id="02i-0k-mmN">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>

@@ -31,7 +31,9 @@ class TrackingServiceTableViewController: UITableViewController {
     // Kitsu.io
     @IBOutlet private weak var kitsuStatusLabel: UILabel!
     @IBOutlet private weak var kitsuActionLabel: UILabel!
+    @IBOutlet private weak var kitsuPushNineAnimatorUpdatesSwitch: UISwitch!
     private var kitsuAuthenticationTask: NineAnimatorAsyncTask?
+    private var kitsuAccountInfoFetchTask: NineAnimatorAsyncTask?
     
     // Preserve a reference to the authentication session
     private var authenticationSessionReference: AnyObject?
@@ -156,13 +158,28 @@ extension TrackingServiceTableViewController {
         // First, tint the action label
         kitsuActionLabel.textColor = Theme.current.tint
         
+        // Disable the push update switch, since kitsu is implemented as a track-only service
+        kitsuPushNineAnimatorUpdatesSwitch.isEnabled = false
+        kitsuPushNineAnimatorUpdatesSwitch.setOn(kitsu.didSetup && !kitsu.didExpire, animated: true)
+        
         if kitsu.didSetup {
             if kitsu.didExpire {
                 kitsuStatusLabel.text = "Expired"
                 kitsuActionLabel.text = "Authenticate Kitsu.io"
             } else {
-                kitsuStatusLabel.text = "Normal"
+                kitsuStatusLabel.text = "Updating"
                 kitsuActionLabel.text = "Sign Out"
+                
+                // Fetch current user info
+                kitsuAccountInfoFetchTask = kitsu.currentUser().error {
+                    [weak kitsuStatusLabel] _ in DispatchQueue.main.async {
+                        kitsuStatusLabel?.text = "Error"
+                    }
+                } .finally {
+                    [weak kitsuStatusLabel] user in DispatchQueue.main.async {
+                        kitsuStatusLabel?.text = "Signed in as \(user.name)"
+                    }
+                }
             }
         } else if kitsuAuthenticationTask != nil {
             kitsuStatusLabel.text = "Updating"
