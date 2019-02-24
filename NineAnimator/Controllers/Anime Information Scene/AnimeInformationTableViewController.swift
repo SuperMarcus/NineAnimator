@@ -22,7 +22,8 @@ import UIKit
 
 /// ViewController for presenting listing service anime information
 ///
-/// Must be instantiated from storyboard. See `AnimeViewController`
+/// - important: Must be instantiated from storyboard. See `AnimeViewController`. Always encapsulate
+///              `AnimeInformationTableViewController` with a navigation controller.
 class AnimeInformationTableViewController: UITableViewController, DontBotherViewController, Themable {
     private var presentingReference: ListingAnimeReference?
     private var presentingAnimeInformation: ListingAnimeInformation?
@@ -48,6 +49,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     private var characterList: [ListingAnimeCharacter]?
     private var _statistics: ListingAnimeStatistics?
     private var _relatedReferences: [ListingAnimeReference]?
+    private var didPerformEpisodeFetchingTask = false
     
     // Outlets
     @IBOutlet private var showEpisodesButton: UIButton!
@@ -124,13 +126,23 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         // Initialize the heading view with the provided reference
         headingView.initialize(withReference: reference)
         
-        // Request anime information
-        listingAnimeRequestTask = reference
-            .parentService
-            .listingAnime(from: reference)
-            .dispatch(on: DispatchQueue.main)
-            .error(onError) // Promises manages references pretty nicely, so no need to worry about reference cycle
-            .finally(onAnimeInformationDidLoad)
+        // If the listing service is capable of providing information, then request the information
+        if reference.parentService.isCapableOfListingAnimeInformation {
+            // Request anime information
+            listingAnimeRequestTask = reference
+                .parentService
+                .listingAnime(from: reference)
+                .dispatch(on: DispatchQueue.main)
+                .error(onError) // Promises manages references pretty nicely, so no need to worry about reference cycle
+                .finally(onAnimeInformationDidLoad)
+        } else if didPerformEpisodeFetchingTask == false {
+            // If the listing service is not capable of providing information, try to redirect to the anime scene
+            performEpisodeFetching()
+        } else {
+            if let navigationController = navigationController {
+                navigationController.popViewController(animated: true)
+            } else { dismiss(animated: true) }
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -369,10 +381,9 @@ extension AnimeInformationTableViewController {
     /// currently selected source
     private func performEpisodeFetching() {
         // Use all available names to make decisions
-        guard let information = presentingAnimeInformation else {
-            return
-        }
-        let animeName = information.name
+        guard let reference = presentingReference else { return }
+        let information = presentingAnimeInformation
+        let indexingName = information?.name.default ?? reference.name
         
         // Hides the view episodes button and starts animating
         // the activity indicator
@@ -382,14 +393,14 @@ extension AnimeInformationTableViewController {
         
         // Perform fetch task
         episodeFetchingTask = AnimeFetchingAgent
-            .search(information.name.default)
+            .search(indexingName)
             .then {
                 results -> (Double, AnimeLink)? in
                 try some(
                     results.compactMap {
                         anyLink -> (Double, AnimeLink)? in
                         if case .anime(let link) = anyLink {
-                            return (animeName.proximity(to: link), link)
+                            return (information?.name.proximity(to: link) ?? indexingName.proximity(to: link.title), link)
                         } else { return nil }
                     } .max { $0.0 < $1.0 },
                     or: .searchError("No matching anime found")
@@ -406,6 +417,7 @@ extension AnimeInformationTableViewController {
                     if confidence > 0.998 {
                         self?.onPerfectMatch(link)
                     } else { self?.onUnconfidentMatch() }
+                    self?.didPerformEpisodeFetchingTask = true
                 }
             }
     }
@@ -506,6 +518,7 @@ extension AnimeInformationTableViewController {
     
     /// Open the match directly
     private func onPerfectMatch(_ animeLink: AnimeLink) {
+        if presentingAnimeInformation == nil { navigationController?.popViewController(animated: true) }
         RootViewController.shared?.open(immedietly: .anime(animeLink), in: self)
     }
     
@@ -525,6 +538,7 @@ extension AnimeInformationTableViewController {
         
         // Present the listing view controller
         if let navigationController = navigationController {
+            if presentingAnimeInformation == nil { navigationController.popViewController(animated: true) }
             navigationController.pushViewController(listingViewController, animated: true)
         } else { present(listingViewController, animated: true) }
     }
