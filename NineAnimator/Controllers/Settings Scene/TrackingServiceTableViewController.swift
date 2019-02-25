@@ -101,7 +101,7 @@ extension TrackingServiceTableViewController {
         
         // Password field
         alert.addTextField {
-            $0.placeholder = "Kitsu.io Password"
+            $0.placeholder = "Password"
             $0.textContentType = .password
             $0.isSecureTextEntry = true
         }

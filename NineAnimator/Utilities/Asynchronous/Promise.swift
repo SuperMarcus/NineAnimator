@@ -160,10 +160,11 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         return promise
     }
     
-    /// Switch the dispatch queue for the handlers and tasks
+    /// Switch the dispatch queue for the handlers
     func dispatch(on queue: DispatchQueue) -> NineAnimatorPromise<ResultType> {
-        self.queue = queue
-        return self
+        let nextPromise = then { $0 }
+        nextPromise.queue = queue
+        return nextPromise
     }
     
     /// Pass the result of the promise into another function, which generates

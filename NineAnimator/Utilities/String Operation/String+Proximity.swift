@@ -33,8 +33,9 @@ extension String {
     ///
     /// Authored by [Imizaac](https://rosettacode.org/wiki/User:Imizaac):
     /// [Jaro_distance#Swift](https://rosettacode.org/wiki/Jaro_distance#Swift)
-    func proximity(to t: String) -> Double {
-        let s = self
+    func proximity(to comparingString: String) -> Double {
+        let s = withoutUnicodeRomanNumerals
+        let t = comparingString.withoutUnicodeRomanNumerals
         let s_len: Int = s.count
         let t_len: Int = t.count
         

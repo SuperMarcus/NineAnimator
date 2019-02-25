@@ -147,6 +147,7 @@
 		2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */; };
 		2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */; };
 		2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */; };
+		2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAD37542224A277008AD6B4 /* String+RomanNumerals.swift */; };
 		2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB004242200AEBC00351B7E /* OfflineContent.swift */; };
 		2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */; };
 		2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */; };
@@ -369,6 +370,7 @@
 		2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyChartView.swift; sourceTree = "<group>"; };
 		2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativePlayerController.swift; sourceTree = "<group>"; };
+		2CAD37542224A277008AD6B4 /* String+RomanNumerals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+RomanNumerals.swift"; sourceTree = "<group>"; };
 		2CB004242200AEBC00351B7E /* OfflineContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineContent.swift; sourceTree = "<group>"; };
 		2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeContent.swift; sourceTree = "<group>"; };
 		2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAnimeArtworkRetriver.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 				2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */,
 				2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */,
 				2C2C54F022159E4700BAA76E /* String+Proximity.swift */,
+				2CAD37542224A277008AD6B4 /* String+RomanNumerals.swift */,
 			);
 			path = "String Operation";
 			sourceTree = "<group>";
@@ -1385,6 +1388,7 @@
 				2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */,
 				2C3BBAAF22183BCF00F1C77B /* ListingService.swift in Sources */,
 				2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */,
+				2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
 				2C2C54F122159E4700BAA76E /* String+Proximity.swift in Sources */,
 				2C6677A021BC4664000E5ACC /* ListingEntryTableViewCell.swift in Sources */,
