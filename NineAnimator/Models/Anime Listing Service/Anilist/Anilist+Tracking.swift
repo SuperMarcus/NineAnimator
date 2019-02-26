@@ -41,10 +41,11 @@ extension Anilist {
     
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {
         // First, get the episode number
-        guard let nameFirstPortion = episode.name.split(separator: " ").first,
-            let episodeNumber = Int(String(nameFirstPortion)) else {
-            Log.info("Cannot update episode with name \"%\": the name does not suggest an episode number", episode.name)
-                return
+        var episodeNumber = 1 // Default to episode 1
+        if let nameFirstPortion = episode.name.split(separator: " ").first {
+            episodeNumber = Int(String(nameFirstPortion)) ?? 1
+            Log.info("[Kitsu.io] Episode name \"%\" does not suggest an episode number. Using 1 as the progress.", episode.name)
+            return
         }
         
         // Make GraphQL mutation request
