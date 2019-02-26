@@ -173,6 +173,11 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 } else { self?.retriveAndPlay() }
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        tableView.makeThemable()
         
         // Receive playback did end notification and update suggestions
         NotificationCenter.default.addObserver(
@@ -183,15 +188,6 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         )
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.makeThemable()
-    }
-    
     override func didMove(toParent parent: UIViewController?) {
         super.didMove(toParent: parent)
         
@@ -199,11 +195,11 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         episodeRequestTask?.cancel()
         episodeRequestTask = nil
         
+        // Remove tableView selections
+        tableView.deselectSelectedRow()
+        
         //Sets episode and server to nil
         episode = nil
-        
-        //Remove all observations
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
