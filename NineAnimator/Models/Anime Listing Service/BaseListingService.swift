@@ -109,4 +109,18 @@ class BaseListingService: SessionDelegate {
             }
         }
     }
+    
+    /// Retrieve the episode number from the assigned episode name
+    ///
+    /// Typically the first portion of the episode name contains the
+    /// episode number.
+    func suggestEpisodeNumber(from name: String) -> Int {
+        if let nameFirstPortion = name.split(separator: " ").first,
+            let episodeNumber = Int(String(nameFirstPortion)) {
+            return episodeNumber
+        } else {
+            Log.info("Episode name \"%\" does not suggest an episode number. Using 1 as the progress.", name)
+            return 1
+        }
+    }
 }
