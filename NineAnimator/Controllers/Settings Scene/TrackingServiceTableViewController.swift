@@ -36,7 +36,10 @@ class TrackingServiceTableViewController: UITableViewController {
     private var kitsuAccountInfoFetchTask: NineAnimatorAsyncTask?
     
     // MAL
+    @IBOutlet private weak var malStatusLabel: UILabel!
+    @IBOutlet private weak var malActionLabel: UILabel!
     private var malAuthenticationTask: NineAnimatorAsyncTask?
+    private var malAccountInfoFetchTask: NineAnimatorAsyncTask?
     
     // Preserve a reference to the authentication session
     private var authenticationSessionReference: AnyObject?
@@ -82,8 +85,14 @@ class TrackingServiceTableViewController: UITableViewController {
         guard let cell = tableView.cellForRow(at: indexPath) else { return indexPath }
         
         // Disable the action cell if there is a task running
+        
         if cell.reuseIdentifier == "service.kitsu.action",
             kitsuAuthenticationTask != nil {
+            return nil
+        }
+        
+        if cell.reuseIdentifier == "service.mal.action",
+            malAuthenticationTask != nil {
             return nil
         }
         
@@ -91,6 +100,7 @@ class TrackingServiceTableViewController: UITableViewController {
     }
 }
 
+// MARK: - MAL specifics
 extension TrackingServiceTableViewController {
     private var mal: MyAnimeList { return NineAnimator.default.service(type: MyAnimeList.self) }
     
@@ -164,9 +174,37 @@ extension TrackingServiceTableViewController {
         malUpdateStatus()
     }
     
-    private func malUpdateStatus() { }
+    private func malUpdateStatus() {
+        // First, tint the action label
+        malActionLabel.textColor = Theme.current.tint
+        
+        if mal.didSetup {
+            malStatusLabel.text = "Updating"
+            malActionLabel.text = "Sign Out"
+            
+            // Fetch current user info
+            malAccountInfoFetchTask = mal
+                .currentUser()
+                .dispatch(on: .main)
+                .error {
+                    [weak malStatusLabel] _ in
+                    malStatusLabel?.text = "Error"
+                } .finally {
+                    [weak malStatusLabel] user in
+                    malStatusLabel?.text = "Signed in as \(user.name)"
+                }
+        } else if malAuthenticationTask != nil {
+            malStatusLabel.text = "Updating"
+            malActionLabel.text = "Signing you in..."
+            malActionLabel.textColor = Theme.current.secondaryText
+        } else {
+            malStatusLabel.text = "Not Setup"
+            malActionLabel.text = "Setup MyAnimeList.net"
+        }
+    }
 }
 
+// MARK: - Kitsu specifics
 extension TrackingServiceTableViewController {
     private var kitsu: Kitsu { return NineAnimator.default.service(type: Kitsu.self) }
     

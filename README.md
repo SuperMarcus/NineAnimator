@@ -367,4 +367,6 @@ Most of the resources are obtained from the open domains with their respective a
 - [Server Icon](https://thenounproject.com/search/?q=server&i=78508) by [Hans Paul Mösl Junior](https://thenounproject.com/hansmosl)
 - [Solid Play Icon](https://thenounproject.com/search/?q=play&i=2184153) by [Eagle Eye](https://thenounproject.com/eagleeye)
 - Anilist icon from [anilist.co](//anilist.co)
+- Kitsu icon from [kitsu.io](//kitsu.io)
+- MyAnimeList icon from [myanimelist.net](//myanimelist.net)
 - [Information Icon](https://thenounproject.com/search/?q=information&i=1281664) by [Wawan Hermawan](https://thenounproject.com/wawan3)
