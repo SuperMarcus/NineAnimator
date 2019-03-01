@@ -256,6 +256,10 @@ Supported tracking/listing services and capabilities:
     - [ ] Display detailed anime information
     - [x] Push local playback history to the remote service
     - [x] Retrieve remote anime state and anime collections
+- [MyAnimeList](//myanimelist.net)
+    - [ ] Display detailed anime information
+    - [x] Push local playback history to the remote service
+    - [x] Retrieve remote anime state (but no anime collections)
 
 ## Backup History and Playback Progresses
 
