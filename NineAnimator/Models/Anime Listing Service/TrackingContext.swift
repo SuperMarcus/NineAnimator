@@ -186,7 +186,9 @@ class TrackingContext {
     }
     
     deinit {
-        Log.info("[TrackingContext] Releasing TrackingContext for anime \"%@\"", link.title)
+        if !availableReferences.isEmpty {
+            Log.info("[TrackingContext] Releasing TrackingContext for anime \"%@\"", link.title)
+        }
         NotificationCenter.default.removeObserver(self) // As unnecessary as this might be
     }
 }

@@ -1117,6 +1117,34 @@ NineAnimator is not affiliated with Kitsu.io.</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="MyAnimeList" id="k58-8v-meo">
+                                <string key="footerTitle">Only the playback events after you have signed in will be pushed to MyAnimeList.
+
+NineAnimator is not affiliated with MyAnimeList.net.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.mal.action" textLabel="bH1-Rj-cxO" style="IBUITableViewCellStyleDefault" id="WBM-Nh-MGU">
+                                        <rect key="frame" x="0.0" y="837.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WBM-Nh-MGU" id="Oqh-Fa-C0m">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Setup MyAnimeList.net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bH1-Rj-cxO">
+                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="tintText" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -1188,13 +1216,13 @@ NineAnimator is not affiliated with Kitsu.io.</string>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
+                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, masterani.me, MyCloud, Streamango) or your Internet Service Provider from tracking you.
 
 By setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.
 
-Your playback history and preferences may be stored in your iCloud account.</mutableString>
+Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy" textLabel="N8M-Jf-n7k" style="IBUITableViewCellStyleDefault" id="V5E-7b-5XW">
                                         <rect key="frame" x="0.0" y="315" width="375" height="44"/>
@@ -1244,7 +1272,7 @@ You should have received a copy of the GNU General Public License along with Nin
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Third Party Softwares and Websites" id="2US-vI-tzZ">
-                                <mutableString key="footerTitle">NineAnimator is developed with the help of the open source community.
+                                <string key="footerTitle">NineAnimator is developed with the help of the open source community.
 
 NineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.
 
@@ -1296,7 +1324,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIE
 
 - Other Media and Frameworks
 
-See the complete credit list in the "Credits" page.</mutableString>
+See the complete credit list in the "Credits" page.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
                                         <rect key="frame" x="0.0" y="1066" width="375" height="44"/>

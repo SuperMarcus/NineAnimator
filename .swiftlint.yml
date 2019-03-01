@@ -9,6 +9,7 @@ disabled_rules: # rule identifiers to exclude from running
   - line_length
   - function_body_length
   - file_length
+  - closure_end_indentation
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
   - closure_end_indentation

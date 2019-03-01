@@ -35,6 +35,9 @@ class TrackingServiceTableViewController: UITableViewController {
     private var kitsuAuthenticationTask: NineAnimatorAsyncTask?
     private var kitsuAccountInfoFetchTask: NineAnimatorAsyncTask?
     
+    // MAL
+    private var malAuthenticationTask: NineAnimatorAsyncTask?
+    
     // Preserve a reference to the authentication session
     private var authenticationSessionReference: AnyObject?
     
@@ -44,6 +47,7 @@ class TrackingServiceTableViewController: UITableViewController {
         // Update status
         anilistUpdateStatus()
         kitsuUpdateStatus()
+        malUpdateStatus()
         tableView.makeThemable()
     }
     
@@ -65,6 +69,10 @@ class TrackingServiceTableViewController: UITableViewController {
             if kitsu.didExpire || !kitsu.didSetup {
                 kitsuPresentAuthenticationPage()
             } else { kitsuLogout() }
+        case "service.mal.action":
+            if !mal.didSetup {
+                malPresentAuthenticationPage()
+            } else { malLogout() }
         default:
             Log.info("An unimplemented cell with identifier \"%@\" was selected", identifier)
         }
@@ -81,6 +89,82 @@ class TrackingServiceTableViewController: UITableViewController {
         
         return indexPath
     }
+}
+
+extension TrackingServiceTableViewController {
+    private var mal: MyAnimeList { return NineAnimator.default.service(type: MyAnimeList.self) }
+    
+    private func malPresentAuthenticationPage() {
+        let alert = UIAlertController(
+            title: "Setup MyAnimeList",
+            message: "Login to MyAnimeList.net with your account name and password.",
+            preferredStyle: .alert
+        )
+        
+        // Username field
+        alert.addTextField {
+            $0.placeholder = "User Name"
+            $0.textContentType = .username
+        }
+        
+        // Password field
+        alert.addTextField {
+            $0.placeholder = "Password"
+            $0.textContentType = .password
+            $0.isSecureTextEntry = true
+        }
+        
+        alert.addAction(UIAlertAction(title: "Sign In", style: .default) {
+            [unowned mal, weak self, unowned alert] _ in
+            guard let self = self else { return }
+            
+            // Obtain username and password values
+            guard let user = alert.textFields?.first?.text,
+                let password = alert.textFields?.last?.text else {
+                    return
+            }
+            
+            // Create authentication task
+            self.malAuthenticationTask = mal
+                .authenticate(withUser: user, password: password)
+                .dispatch(on: .main)
+                .error {
+                    [weak self] error in
+                    let message: String
+                    if let error = error as? NineAnimatorError {
+                        if case .authenticationRequiredError = error {
+                            message = "Your account name or password was incorrect"
+                        } else { message = error.description }
+                    } else { message = error.localizedDescription }
+                    
+                    // Present the error message
+                    let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)
+                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                    
+                    self?.malAuthenticationTask = nil
+                    self?.present(errorAlert, animated: true)
+                    self?.malUpdateStatus()
+                } .finally {
+                    [weak self] in
+                    Log.info("Successfully logged in to MyAnimeList.net")
+                    self?.malAuthenticationTask = nil
+                    self?.malUpdateStatus()
+                }
+            
+            self.malUpdateStatus()
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        present(alert, animated: true)
+    }
+    
+    private func malLogout() {
+        mal.deauthenticate()
+        malUpdateStatus()
+    }
+    
+    private func malUpdateStatus() { }
 }
 
 extension TrackingServiceTableViewController {
@@ -106,8 +190,8 @@ extension TrackingServiceTableViewController {
             $0.isSecureTextEntry = true
         }
         
-        alert.addAction(UIAlertAction(title: "Login", style: .default) {
-            [unowned kitsu, weak self] _ in
+        alert.addAction(UIAlertAction(title: "Sign In", style: .default) {
+            [unowned kitsu, weak self, unowned alert] _ in
             guard let self = self else { return }
             
             // Obtain username and password values
