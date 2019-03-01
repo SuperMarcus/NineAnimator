@@ -104,8 +104,14 @@ extension Kitsu {
                 method: .patch
             )
         } .error {
+            [weak self] in
             Log.error("[Kitsu.io] Failed to mutate: %@", $0)
-        } .finally { _ in Log.info("[Kitsu.io] Mutation made") }
+            self?.collectMutationTaskPoolGarbage()
+        } .finally {
+            [weak self] _ in
+            Log.info("[Kitsu.io] Mutation made")
+            self?.collectMutationTaskPoolGarbage()
+        }
         
         // Save the reference in the task pool
         _mutationTaskPool.append(task)

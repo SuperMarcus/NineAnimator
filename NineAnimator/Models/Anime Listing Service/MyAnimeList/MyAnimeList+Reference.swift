@@ -70,13 +70,25 @@ extension ListingAnimeReference {
         let artworkUrlString = try some(animeNode.value(at: "main_picture.large", type: String.self), or: .decodeError)
         let artwork = try some(URL(string: artworkUrlString), or: .decodeError)
         let uniqueIdentifier = try some(animeNode["id"] as? Int, or: .decodeError)
+        var currentState: ListingAnimeTrackingState?
+        
+        // If the current status entry is present in the response object
+        if let currentStatusEntry = animeNode["my_list_status"] as? NSDictionary,
+            let status = currentStatusEntry["status"] as? String {
+            switch status {
+            case "watching": currentState = .watching
+            case "plan_to_watch": currentState = .toWatch
+            case "completed": currentState = .finished
+            default: break
+            }
+        }
         
         // Call parent initializer
         self.init(
             parent,
             name: animeTitle,
             identifier: String(uniqueIdentifier),
-            state: nil,
+            state: currentState,
             artwork: artwork,
             userInfo: [:]
         )

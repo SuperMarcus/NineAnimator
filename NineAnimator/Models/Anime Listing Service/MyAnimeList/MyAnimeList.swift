@@ -27,13 +27,15 @@ class MyAnimeList: BaseListingService, ListingService {
     
     /// MAL api endpoint
     let endpoint = URL(string: "https://api.myanimelist.net/v0.21")!
+    
+    var _mutationTaskPool = [NineAnimatorAsyncTask]()
 }
 
 // MARK: - Capabilities
 extension MyAnimeList {
     var isCapableOfListingAnimeInformation: Bool { return false }
     
-    var isCapableOfPersistingAnimeState: Bool { return false }
+    var isCapableOfPersistingAnimeState: Bool { return didSetup }
     
     var isCapableOfRetrievingAnimeState: Bool { return false }
 }
@@ -115,8 +117,8 @@ extension MyAnimeList {
             
             // Send refresh request with refresh token
             return self.request(URL(string: "https://myanimelist.net/v1/oauth2/token")!, method: .post, data: encodedForm, headers: [
-                ":authority": "myanimelist.net",
                 "Content-Type": "application/x-www-form-urlencoded",
+                "Accept": "application/json",
                 "Content-Length": String(encodedForm.count)
             ])
         } .then {
@@ -161,10 +163,6 @@ extension MyAnimeList {
 
 // MARK: - Unimplemented
 extension MyAnimeList {
-    func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) { }
-    
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) { }
-    
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         return .fail(.unknownError)
     }
@@ -182,23 +180,25 @@ extension MyAnimeList {
         
         init(_ raw: NSDictionary) throws {
             self.raw = raw
-            self.data = try some(
-                raw["data"] as? [NSDictionary],
-                or: .responseError("No data found in the response object")
-            )
+            
+            // Store the data section
+            if let dataSection = raw["data"] as? [NSDictionary] {
+                data = dataSection
+            } else { data = [ raw ] }
         }
     }
     
-    func apiRequest(_ path: String, query: [String: CustomStringConvertible] = [:]) -> NineAnimatorPromise<APIResponse> {
+    func apiRequest(_ path: String, query: [String: CustomStringConvertible] = [:], body: [String: CustomStringConvertible] = [:], method: HTTPMethod = .get) -> NineAnimatorPromise<APIResponse> {
         var firstPromise: NineAnimatorPromise<Void> = .success(())
         if didSetup && didExpire {
             // Refresh the token first if needed
             firstPromise = authenticateWithRefreshToken()
         }
         return firstPromise.then {
-            [endpoint, clientIdentifier] () -> (URL, [String: String]) in
+            [endpoint, clientIdentifier, weak self] () -> (URL, [String: String], Data?) in
             var url = endpoint.appendingPathComponent(path)
-            let headers = [ "X-MAL-Client-ID": clientIdentifier ]
+            var headers = [ "X-MAL-Client-ID": clientIdentifier ]
+            var encodedBodyContent: Data?
             
             // Build GET parameters
             if !query.isEmpty,
@@ -210,10 +210,31 @@ extension MyAnimeList {
                 )
             }
             
+            // Add authorization header
+            if let token = self?.accessToken {
+                headers["Authorization"] = "Bearer \(token)"
+            }
+            
+            // Encode content type and content length
+            if !body.isEmpty {
+                // Encode the content
+                encodedBodyContent = try {
+                    var formBuilder = URLComponents()
+                    formBuilder.queryItems = body.map {
+                        .init(name: $0.key, value: $0.value.description)
+                    }
+                    return try some(formBuilder.percentEncodedQuery?.data(using: .utf8), or: .unknownError)
+                }()
+                
+                // Update headers
+                headers["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8"
+                headers["Content-Length"] = String(encodedBodyContent!.count)
+            }
+            
             // Return the request parameters
-            return (url, headers)
+            return (url, headers, encodedBodyContent)
         } .thenPromise {
-            url, headers in self.request(url, method: .get, data: nil, headers: headers)
+            url, headers, body in self.request(url, method: method, data: body, headers: headers)
         } .then {
             try JSONSerialization.jsonObject(with: $0, options: []) as? NSDictionary
         } .then {
