@@ -74,7 +74,7 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
                             // just update the value without notifying tableview
                             if let (sourceIndex, newCollection) = variableCollections
                                 .enumerated()
-                                .first(where: { $0.element.name == collection.name }) {
+                                .first(where: { $0.element.title == collection.title }) {
                                 // Remove the collection from the source
                                 _ = variableCollections.remove(at: sourceIndex)
                                 self.listingServiceCollections[index] = newCollection

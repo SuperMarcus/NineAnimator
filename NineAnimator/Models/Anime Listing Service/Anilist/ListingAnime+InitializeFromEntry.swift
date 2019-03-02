@@ -44,7 +44,7 @@ extension ListingAnimeReference {
     }
 }
 
-extension ListingAnimeCollection {
+extension StaticListingAnimeCollection {
     init(_ parent: Anilist, withCollectionEntry collectionEntry: NSDictionary) throws {
         guard let name = collectionEntry["name"] as? String,
             let entries = collectionEntry["entries"] as? [NSDictionary] else {

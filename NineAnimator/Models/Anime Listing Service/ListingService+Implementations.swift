@@ -92,21 +92,6 @@ extension ListingAnimeReference {
     }
 }
 
-// Default initializer of ListingAnimeCollection
-extension ListingAnimeCollection {
-    init(_ parent: ListingService,
-         name: String,
-         identifier: String,
-         collection: [ListingAnimeReference],
-         userInfo: [String: Any] = [:]) {
-        self.parentService = parent
-        self.name = name
-        self.identifier = identifier
-        self.collection = collection
-        self.userInfo = userInfo
-    }
-}
-
 // ListingAnimeName+CustomStringConvertible
 extension ListingAnimeName {
     var description: String { return self.default }

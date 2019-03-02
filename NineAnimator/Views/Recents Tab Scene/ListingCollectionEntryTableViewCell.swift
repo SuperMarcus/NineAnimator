@@ -31,8 +31,8 @@ class ListingCollectionEntryTableViewCell: UITableViewCell {
                 .trackingServices
                 .filter({ $0.isCapableOfRetrievingAnimeState })
                 .count > 1 {
-                textLabel?.text = "\(collection.parentService.name) - \(collection.name)"
-            } else { textLabel?.text = collection.name }
+                textLabel?.text = "\(collection.parentService.name) - \(collection.title)"
+            } else { textLabel?.text = collection.title }
         }
     }
 }

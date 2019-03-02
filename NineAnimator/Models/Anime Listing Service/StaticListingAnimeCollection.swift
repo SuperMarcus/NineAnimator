@@ -19,9 +19,34 @@
 
 import Foundation
 
-/// Conforming `ListingAnimeCollection` as a `ContentProvider`
-extension ListingAnimeCollection: ContentProvider {
-    var title: String { return name }
+struct StaticListingAnimeCollection: ListingAnimeCollection {
+    let parentService: ListingService
+    
+    /// The "user friendly" name of this collection
+    let title: String
+    
+    /// Internal identifier of this collection unique to the parent service
+    let identifier: String
+    
+    /// The list of anime references
+    let collection: [ListingAnimeReference]
+    
+    var userInfo: [String: Any]
+    
+    init(_ parent: ListingService,
+         name: String,
+         identifier: String,
+         collection: [ListingAnimeReference],
+         userInfo: [String: Any] = [:]) {
+        self.parentService = parent
+        self.title = name
+        self.identifier = identifier
+        self.collection = collection
+        self.userInfo = userInfo
+    }
+}
+
+extension StaticListingAnimeCollection {
     var totalPages: Int? { return 1 }
     var availablePages: Int { return 1 }
     var moreAvailable: Bool { return false }

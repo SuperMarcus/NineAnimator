@@ -50,21 +50,8 @@ struct ListingAnimeReference: Codable, Hashable {
 }
 
 /// Representing a collection of anime references
-struct ListingAnimeCollection {
-    let parentService: ListingService
-    
-    /// The "user friendly" name of this collection
-    let name: String
-    
-    /// Internal identifier of this collection unique to the parent service
-    let identifier: String
-    
-    /// Additional information of the reference that the parent
-    /// service use to identify the reference
-    let userInfo: [String: Any]
-    
-    /// The list of anime references
-    let collection: [ListingAnimeReference]
+protocol ListingAnimeCollection: ContentProvider {
+    var parentService: ListingService { get }
 }
 
 /// Representing a anime listing service

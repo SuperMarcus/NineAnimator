@@ -63,7 +63,7 @@ extension Kitsu {
             }
             
             return collections.map {
-                ListingAnimeCollection(
+                StaticListingAnimeCollection(
                     self,
                     name: $0.key.prefix(1).uppercased() + $0.key.lowercased().dropFirst(),
                     identifier: $0.key,

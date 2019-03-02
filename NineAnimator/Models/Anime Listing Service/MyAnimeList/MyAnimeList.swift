@@ -29,6 +29,14 @@ class MyAnimeList: BaseListingService, ListingService {
     let endpoint = URL(string: "https://api.myanimelist.net/v0.21")!
     
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
+    
+    lazy var _allCollections: [Collection] = [
+        ("watching", "Currently Watching"),
+        ("completed", "Completed"),
+        ("on_hold", "On Hold"),
+        ("dropped", "Dropped"),
+        ("plan_to_watch", "Plan to Watch")
+    ] .map { Collection(self, key: $0.0, title: $0.1) }
 }
 
 // MARK: - Capabilities
@@ -37,7 +45,7 @@ extension MyAnimeList {
     
     var isCapableOfPersistingAnimeState: Bool { return didSetup }
     
-    var isCapableOfRetrievingAnimeState: Bool { return false }
+    var isCapableOfRetrievingAnimeState: Bool { return didSetup }
 }
 
 // MARK: - Authentications
@@ -166,17 +174,23 @@ extension MyAnimeList {
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         return .fail(.unknownError)
     }
-    
-    func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
-        return .fail(.unknownError)
-    }
 }
 
 // MARK: - Request Helper
 extension MyAnimeList {
     struct APIResponse {
+        /// Access the raw response object
         let raw: NSDictionary
+        
+        /// Data section of the response object
+        ///
+        /// If no data section is found, the raw response
+        /// is placed as the first element
         let data: [NSDictionary]
+        
+        // Paging
+        let nextPageOffset: Int?
+        let currentPageLimit: Int?
         
         init(_ raw: NSDictionary) throws {
             self.raw = raw
@@ -185,6 +199,40 @@ extension MyAnimeList {
             if let dataSection = raw["data"] as? [NSDictionary] {
                 data = dataSection
             } else { data = [ raw ] }
+            
+            // Parse paging section
+            if let pagingSection = raw["paging"] as? NSDictionary,
+                let nextPageUrlString = pagingSection["next"] as? String,
+                let nextPageUrlComponents = URLComponents(string: nextPageUrlString),
+                let queryItems = nextPageUrlComponents.queryItems {
+                // tmp values
+                var nextPageOffset: Int?
+                var currentPageLimit: Int?
+                
+                // Interate through query items
+                for queryItem in queryItems {
+                    // Next page offset
+                    if queryItem.name == "offset",
+                        let offsetString = queryItem.value,
+                        let offset = Int(offsetString) {
+                        nextPageOffset = offset
+                    }
+                    
+                    // Page limit
+                    if queryItem.name == "limit",
+                        let limitString = queryItem.value,
+                        let limit = Int(limitString) {
+                        currentPageLimit = limit
+                    }
+                }
+                
+                // Store the values
+                self.nextPageOffset = nextPageOffset
+                self.currentPageLimit = currentPageLimit
+            } else { // Set the paging values to nil if none
+                nextPageOffset = nil
+                currentPageLimit = nil
+            }
         }
     }
     
