@@ -29,6 +29,8 @@ struct OfflinePlaybackMedia: PlaybackMedia {
     
     let url: URL
     
+    let trackingContext: TrackingContext
+    
     // All of the followings are generated from the above content
     
     var name: String { return link.name }
@@ -49,6 +51,7 @@ struct OfflinePlaybackMedia: PlaybackMedia {
         self.isAggregated = isAggregated
         self.url = url
         self.avPlayerItem = AVPlayerItem(url: url)
+        self.trackingContext = NineAnimator.default.trackingContext(for: link.parent)
     }
     
     /// Initialize the offline playback media with AVURLAsset
@@ -57,5 +60,6 @@ struct OfflinePlaybackMedia: PlaybackMedia {
         self.isAggregated = isAggregated
         self.url = asset.url
         self.avPlayerItem = AVPlayerItem(asset: asset)
+        self.trackingContext = NineAnimator.default.trackingContext(for: link.parent)
     }
 }

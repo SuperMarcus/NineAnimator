@@ -29,6 +29,7 @@ class OfflineAnimeViewController: UITableViewController, BlendInViewController {
     @IBOutlet private weak var downloadStatusLabel: UILabel!
     
     private var contents = [OfflineEpisodeContent]()
+    private var trackingContext: TrackingContext?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,10 @@ class OfflineAnimeViewController: UITableViewController, BlendInViewController {
         
         animeTitleLabel.text = anime.title
         updateStatistics()
+        
+        // Prepare the context NOW instead of on selection
+        // so the context have the time to be fully prepared.
+        trackingContext?.prepareContext()
         
         // Add observer
         NotificationCenter.default.addObserver(
@@ -200,6 +205,7 @@ extension OfflineAnimeViewController {
     /// should configure and present
     func setPresenting(anime: AnimeLink) {
         presentingAnimeLink = anime
+        trackingContext = NineAnimator.default.trackingContext(for: anime)
     }
 }
 
