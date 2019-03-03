@@ -50,7 +50,7 @@ extension MyAnimeList {
             self.myAnimeList = parentService
             self.title = title
             self.key = key
-            self.nextPageOffset = 0
+            self.reset()
         }
     }
 }
@@ -80,6 +80,7 @@ extension MyAnimeList.Collection {
     /// Remove all cached entries and reset the collection.
     fileprivate func reset() {
         self.nextPageOffset = 0
+        self.references = []
     }
     
     func more() {
