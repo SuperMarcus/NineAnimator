@@ -30,6 +30,9 @@
                                                 <constraint firstAttribute="width" secondItem="LZ3-Ra-hpO" secondAttribute="height" multiplier="155:200" id="dbI-Go-fMy"/>
                                                 <constraint firstAttribute="height" priority="750" constant="150" id="xLX-8S-EyW"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloaded Anime Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="eFs-rr-t1A">
                                             <rect key="frame" x="135" y="22.5" width="208" height="60"/>

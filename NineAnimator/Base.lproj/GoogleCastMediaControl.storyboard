@@ -201,19 +201,19 @@
                                                         <action selector="onSeekStart:" destination="wSC-JZ-tly" eventType="touchDown" id="sZV-S1-1rc"/>
                                                     </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-4W-vrH">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="+0:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfV-4W-vrH">
                                                     <rect key="frame" x="8" y="275" width="52" height="14"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="52" id="tBg-DM-g4l"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="cCa-sr-gWp"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-sc-ySP">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="-0:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2x-sc-ySP">
                                                     <rect key="frame" x="283" y="275" width="52" height="14"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="52" id="Mdb-Wi-TJV"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="52" id="CeI-Ep-dI2"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -299,6 +299,7 @@
                                                         <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                             <real key="value" value="2"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode - Anime Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdy-eH-wYV">
@@ -521,9 +522,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Fast Forward Icon" width="1200" height="1200"/>
+        <image name="Fast Forward Icon" width="75" height="75"/>
         <image name="Play Icon" width="1200" height="1200"/>
-        <image name="Rewind Icon" width="1200" height="1200"/>
+        <image name="Rewind Icon" width="75" height="75"/>
         <image name="Volume High" width="20" height="20"/>
         <image name="Volume Low" width="20" height="20"/>
     </resources>

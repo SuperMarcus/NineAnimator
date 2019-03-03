@@ -30,6 +30,9 @@
                                         </constraint>
                                         <constraint firstAttribute="width" secondItem="NFM-xu-DQr" secondAttribute="height" multiplier="155:200" id="zeV-Kc-Lvu"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="teX-Gc-5XX"/>
