@@ -93,25 +93,30 @@ extension Theme {
         }
     }
     
+    // swiftlint:disable cyclomatic_complexity
+    
+    /// Apply the default set of theming behaviors for the view
     private static func update(_ theme: Theme, for view: UIView?) {
-        view?.backgroundColor = theme.background
-        view?.tintColor = theme.tint
-        
-        if let view = view as? UITableView {
+        switch view {
+        case let view as Themable:
+            // If the view is Themable, update it as themable
+            view.theme(didUpdate: theme)
+        case let view as UITableView:
+            // For plane table view, set the background, seperator color, and scroll
+            // indicator color
             view.indicatorStyle = theme.scrollIndicatorStyle
             view.separatorColor = theme.seperator
             
             if view.style == .grouped {
                 view.backgroundColor = theme.secondaryBackground
             } else { view.backgroundColor = theme.background }
-        }
-        
-        if let view = view as? UICollectionView {
+        case let view as UICollectionView:
+            // For collection view, set the background and scroll indicator color
             view.backgroundColor = theme.background
             view.indicatorStyle = theme.scrollIndicatorStyle
-        }
-        
-        if let view = view as? UITableViewCell {
+        case let view as UITableViewCell:
+            // For table view cell, set the content background color to clear
+            // and the background color to the theme background color
             if view.tintText {
                 view.textLabel?.textColor = theme.tint
             } else { view.textLabel?.textColor = theme.primaryText }
@@ -119,29 +124,33 @@ extension Theme {
             view.detailTextLabel?.textColor = theme.secondaryText
             view.backgroundColor = theme.background
             view.contentView.backgroundColor = .clear
-        }
-        
-        if let view = view as? UILabel {
+            view.textLabel?.backgroundColor = .clear
+            view.detailTextLabel?.backgroundColor = .clear
+        case let view as UILabel:
+            // Set text color for UILabels
             view.textColor = view.isPrimaryText ? theme.primaryText : theme.secondaryText
             view.backgroundColor = .clear
-        }
-        
-        if let view = view as? UIActivityIndicatorView {
+        case let view as UIActivityIndicatorView:
+            // For activity indicator, set indicator style
             view.style = theme.activityIndicatorStyle
             view.backgroundColor = .clear
-        }
-        
-        if let view = view as? UITextView {
+        case let view as UITextView:
+            // For text view, set text color to primary color
             view.textColor = theme.primaryText
             view.backgroundColor = .clear
-        }
-        
-        if let view = view as? UIProgressView {
+        case let view as UIProgressView:
+            // Apply tint to the progressed area and secondaryText color
+            // to the empty area
             view.progressTintColor = theme.tint
             view.trackTintColor = theme.secondaryText.withAlphaComponent(0.6)
             view.backgroundColor = .clear
+        default:
+            // For any other views, apply background and tint color
+            view?.backgroundColor = theme.background
+            view?.tintColor = theme.tint
         }
     }
+    // swiftlint:enable cyclomatic_complexity
 }
 
 // MARK: - Definining and managing themes

@@ -39,6 +39,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         
         navigationBar.tintColor = theme.tint
         navigationBar.barTintColor = theme.translucentBackground
+        navigationBar.layoutIfNeeded()
     }
     
     func navigationController(_ navigationController: UINavigationController,
@@ -68,6 +69,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
             [navigationBar] in
             navigationBar.barTintColor = Theme.current.translucentBackground
             navigationBar.tintColor = Theme.current.tint
+            navigationBar.layoutIfNeeded()
         }
     }
 }

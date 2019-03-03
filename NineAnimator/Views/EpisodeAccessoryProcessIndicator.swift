@@ -20,7 +20,7 @@
 import UIKit
 
 @IBDesignable
-class EpisodeAccessoryProcessIndicator: UIView {
+class EpisodeAccessoryProcessIndicator: UIView, Themable {
     @IBInspectable
     lazy var indicatorColor: UIColor = tintColor
     
@@ -113,5 +113,11 @@ class EpisodeAccessoryProcessIndicator: UIView {
         
         indicatorColor.setFill()
         centerPlayIcon.fill()
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        indicatorColor = theme.tint
+        nullColor = theme.secondaryText.withAlphaComponent(0.4)
+        setNeedsDisplay()
     }
 }
