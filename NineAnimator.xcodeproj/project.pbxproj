@@ -756,12 +756,9 @@
 		2C4ABC7621B599E3009B4D47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C8536832231BC5400A5CFB9 /* Anime Source */,
 				2C3BBAAD22183BA900F1C77B /* Anime Listing Service */,
 				2C2C54F32215D38500BAA76E /* User */,
-				2C3D7BF72210AD990045D648 /* twist.moe */,
-				2CEBE90B22078AB8006A64CC /* gogoanime */,
-				2CCC746721C097410007502A /* masterani.me */,
-				2CCC745821C05F640007502A /* 9anime.to */,
 				2C91296E21BB608F00284FD0 /* ProviderParsers */,
 				2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */,
 				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
@@ -769,10 +766,6 @@
 				2C4ABC9921B88F8C009B4D47 /* Anime.swift */,
 				2C7BD23921B9B4F400B29C90 /* Episode.swift */,
 				2C66779D21BC36A5000E5ACC /* BufferedContent.swift */,
-				2CCC745921C060480007502A /* Source.swift */,
-				2CEC218D2207EC9300A30F4F /* BaseSource.swift */,
-				2CEC218F2207ED9200A30F4F /* BaseSource+Promise.swift */,
-				2CEC21912207F2D500A30F4F /* PromiseSource.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -871,6 +864,21 @@
 				2CF8912121DB39A1006D4799 /* icon_rendered.png */,
 			);
 			path = Misc;
+			sourceTree = "<group>";
+		};
+		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
+			isa = PBXGroup;
+			children = (
+				2C3D7BF72210AD990045D648 /* twist.moe */,
+				2CEBE90B22078AB8006A64CC /* gogoanime */,
+				2CCC746721C097410007502A /* masterani.me */,
+				2CCC745821C05F640007502A /* 9anime.to */,
+				2CCC745921C060480007502A /* Source.swift */,
+				2CEC218D2207EC9300A30F4F /* BaseSource.swift */,
+				2CEC218F2207ED9200A30F4F /* BaseSource+Promise.swift */,
+				2CEC21912207F2D500A30F4F /* PromiseSource.swift */,
+			);
+			path = "Anime Source";
 			sourceTree = "<group>";
 		};
 		2C91296E21BB608F00284FD0 /* ProviderParsers */ = {
