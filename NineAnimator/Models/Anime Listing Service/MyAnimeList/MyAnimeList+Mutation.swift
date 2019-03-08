@@ -47,13 +47,18 @@ extension MyAnimeList {
         _mutationTaskPool.append(task)
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
         collectMutationTaskPoolGarbage()
+        
+        guard let episodeNumber = episodeNumber else {
+            Log.info("[MyAnimeList] Not pushing states because episode number cannot be inferred.")
+            return
+        }
         
         // Send mutation request
         let task = apiRequest(
             "/anime/\(reference.uniqueIdentifier)/my_list_status",
-            body: [ "num_watched_episodes": suggestEpisodeNumber(from: episode.name) ],
+            body: [ "num_watched_episodes": episodeNumber ],
             method: .put
             ) .error {
                 [weak self] in

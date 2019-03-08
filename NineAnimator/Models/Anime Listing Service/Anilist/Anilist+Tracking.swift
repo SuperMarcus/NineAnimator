@@ -39,9 +39,12 @@ extension Anilist {
         _collections = nil
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
         // First, get the episode number
-        let episodeNumber = suggestEpisodeNumber(from: episode.name)
+        guard let episodeNumber = episodeNumber else {
+            Log.info("[AniList.co] Not pushing states because episode number cannot be inferred.")
+            return
+        }
         
         // Make GraphQL mutation request
         mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [

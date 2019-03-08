@@ -140,7 +140,7 @@ extension NativePlayerController {
             guard let self = self else { return }
             if item.status == .readyToPlay {
                 //Seek to five seconds before the persisted progress
-                item.seek(to: CMTime(seconds: max(media.progress * item.duration.seconds - 5, 0))) {
+                item.seek(to: CMTime(seconds: max(Float(media.progress) * item.duration.seconds - 5, 0))) {
                     //Remove the observer after progress has been restored
                     _ in self.mediaItemsObervations.removeValue(forKey: item)
                 }
@@ -267,7 +267,7 @@ extension NativePlayerController {
         //Using a little shortcut here
         guard isCurrentItemPlaybackProgressRestored, var media = currentMedia else { return }
         // Setting the progress will update the entry in UserDefaults
-        media.progress = currentPlaybackPercentage
+        media.progress = Double(currentPlaybackPercentage)
         
         // Last 15 seconds, fire will end events
         if case 14.0...15.0 = currentPlaybackTMinus {

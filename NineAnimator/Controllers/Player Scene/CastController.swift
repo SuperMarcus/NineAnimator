@@ -136,7 +136,7 @@ extension CastController {
                     if let deviceStatus = client.currentStatus { self.viewController.playback(update: castMedia, deviceStatus: deviceStatus) }
                     self.viewController.playback(update: castMedia, mediaStatus: status)
                     
-                    let storedPctProgress = NineAnimator.default.user.playbackProgress(for: episode.link)
+                    let storedPctProgress = Float(episode.progress)
                     
                     if storedPctProgress != 0, let duration = status.media?.duration {
                         //Restore playback progress

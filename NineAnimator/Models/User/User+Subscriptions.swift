@@ -25,9 +25,9 @@ extension NineAnimatorUser {
      Returns the list of anime currently set to be notified for updates
      */
     var subscribedAnimes: [AnimeLink] {
-        get { return decode([AnimeLink].self, from: _freezer.value(forKey: Keys.subscribedAnimeList)) ?? [] }
+        get { return decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.subscribedAnimeList)) ?? [] }
         set {
-            guard let data = encode(data: newValue) else {
+            guard let data = encodeIfPresent(data: newValue) else {
                 return Log.error("Subscribed animes failed to encode")
             }
             _freezer.set(data, forKey: Keys.subscribedAnimeList)

@@ -196,6 +196,7 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - Mp4Upload
 - Streamango
 - MyCloud (unavailable for Google Cast)
+- F5 Beta a.k.a. PrettyFast.to (unavailable for Google Cast)
 - Tiwi.Kiwi (may not be available for Google Cast)
 - Self-hosted Streaming Services ([masterani.me](//masterani.me) and [Anime Twist](//twist.moe))
 

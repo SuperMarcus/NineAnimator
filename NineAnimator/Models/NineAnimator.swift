@@ -24,12 +24,6 @@ typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
 
 extension DataRequest: NineAnimatorAsyncTask { }
 
-private struct WeakRef<T: AnyObject> {
-    weak var object: T?
-    var hasValue: Bool { return object != nil }
-    init (_ object: T) { self.object = object }
-}
-
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     

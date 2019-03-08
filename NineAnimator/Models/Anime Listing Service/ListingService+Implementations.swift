@@ -27,7 +27,7 @@ extension ListingAnimeReference {
         case state
         case name
         case artwork
-        case userInfo
+//        case userInfo
     }
     
     init(_ parent: ListingService,
@@ -61,15 +61,16 @@ extension ListingAnimeReference {
         state = try container.decodeIfPresent(ListingAnimeTrackingState.self, forKey: .state)
         
         // Decode user info
-        let encodedUserInfo = try container.decode(Data.self, forKey: .userInfo)
-        guard let decodedUserInfo = try PropertyListSerialization.propertyList(
-            from: encodedUserInfo,
-            options: [],
-            format: nil
-            ) as? [String: Any] else {
-                throw NineAnimatorError.decodeError
-        }
-        userInfo = decodedUserInfo
+//        let encodedUserInfo = try container.decode(Data.self, forKey: .userInfo)
+//        guard let decodedUserInfo = try PropertyListSerialization.propertyList(
+//            from: encodedUserInfo,
+//            options: [],
+//            format: nil
+//            ) as? [String: Any] else {
+//                throw NineAnimatorError.decodeError
+//        }
+//        userInfo = decodedUserInfo
+        userInfo = [:]
     }
     
     func encode(to encoder: Encoder) throws {
@@ -82,13 +83,13 @@ extension ListingAnimeReference {
         try container.encode(name, forKey: .name)
         try container.encodeIfPresent(state, forKey: .state)
         
-        // Encode user info
-        let encodedUserInfo = try PropertyListSerialization.data(
-            fromPropertyList: userInfo,
-            format: .binary,
-            options: 0
-        )
-        try container.encode(encodedUserInfo, forKey: .userInfo)
+        // Not encoding user info
+//        let encodedUserInfo = try PropertyListSerialization.data(
+//            fromPropertyList: userInfo,
+//            format: .binary,
+//            options: 0
+//        )
+//        try container.encode(encodedUserInfo, forKey: .userInfo)
     }
 }
 

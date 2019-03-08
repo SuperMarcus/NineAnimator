@@ -113,9 +113,9 @@ extension EpisodeLink {
 
 // Progress
 extension EpisodeLink {
-    var playbackProgress: Float {
-        get { return NineAnimator.default.user.playbackProgress(for: self) }
-        set { NineAnimator.default.user.update(progress: newValue, for: self) }
+    var playbackProgress: Double {
+        let trackingContext = NineAnimator.default.trackingContext(for: parent)
+        return trackingContext.playbackProgress(for: self)
     }
 }
 

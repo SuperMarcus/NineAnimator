@@ -38,10 +38,13 @@ extension Kitsu {
             [unowned self] matchedReference in
             NineAnimatorPromise {
                 [unowned self] callback in
-                // Look for the reference in the library entry
-                self.libraryEntry(for: matchedReference).error {
-                    _ in callback(matchedReference, nil) // If errored (or DNE), return the original reference
-                } .finally { entry in callback(matchedReference.with(libraryEntry: entry), nil) }
+                if self.didSetup && !self.didExpire {
+                    // Look for the reference in the library entry
+                    return self.libraryEntry(for: matchedReference).error {
+                        _ in callback(matchedReference, nil) // If errored (or DNE), return the original reference
+                    } .finally { entry in callback(matchedReference.with(libraryEntry: entry), nil) }
+                } else { callback(matchedReference, nil) }
+                return nil
             }
         }
     }

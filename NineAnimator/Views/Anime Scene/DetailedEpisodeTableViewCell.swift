@@ -77,7 +77,7 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
             
             // Progress
             
-            progress = NineAnimator.default.user.playbackProgress(for: info.parent)
+            progress = Float(info.parent.playbackProgress)
             
             // Listen to progress updates
             
@@ -115,7 +115,7 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     @objc private func onProgressUpdate() {
         guard let episodeLink = episodeLink else { return }
         
-        let currentProgress = NineAnimator.default.user.playbackProgress(for: episodeLink)
+        let currentProgress = Float(episodeLink.playbackProgress)
         
         DispatchQueue.main.async {
             [weak self] in

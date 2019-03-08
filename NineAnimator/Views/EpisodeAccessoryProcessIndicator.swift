@@ -63,7 +63,7 @@ class EpisodeAccessoryProcessIndicator: UIView, Themable {
         var percentage = 0 as CGFloat
         
         if let episodeLink = episodeLink {
-            percentage = CGFloat(NineAnimator.default.user.playbackProgress(for: episodeLink))
+            percentage = CGFloat(episodeLink.playbackProgress)
         }
         
         let centerPoint = CGPoint(x: rect.midX, y: rect.midY)

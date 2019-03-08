@@ -35,7 +35,7 @@ struct Episode {
         return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
-    var progress: Float { return NineAnimator.default.user.playbackProgress(for: link) }
+    var progress: Double { return parent.trackingContext.playbackProgress(for: link) }
     
     func update(progress: Float) { NineAnimator.default.user.update(progress: progress, for: link) }
     

@@ -66,11 +66,14 @@ extension Kitsu {
         _mutationTaskPool.append(task)
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
         collectMutationTaskPoolGarbage()
         
         // First, get the episode number
-        let episodeNumber = suggestEpisodeNumber(from: episode.name)
+        guard let episodeNumber = episodeNumber else {
+            Log.info("[Kitsu.io] Not pushing states because episode number cannot be inferred.")
+            return
+        }
         
         // Make the request
         let task = currentUser().thenPromise {

@@ -82,8 +82,11 @@ struct BasicPlaybackMedia: PlaybackMedia {
 
 //A shortcut for setting and retriving playback progress
 extension PlaybackMedia {
-    var progress: Float {
+    var progress: Double {
         get { return link.playbackProgress }
-        set { NineAnimator.default.user.update(progress: newValue, for: link) }
+        set {
+            let trackingContext = NineAnimator.default.trackingContext(for: link.parent)
+            trackingContext.update(progress: newValue, forEpisodeLink: link)
+        }
     }
 }

@@ -19,16 +19,8 @@
 
 import Foundation
 
-// MARK: - Serialization
-extension NineAnimatorUser {
-    func encode<T: Encodable>(data: T) -> Data? {
-        let encoder = PropertyListEncoder()
-        return try? encoder.encode(data)
-    }
-    
-    func decode<T: Decodable>(_ type: T.Type, from data: Any?) -> T? {
-        guard let data = data as? Data else { return nil }
-        let decoder = PropertyListDecoder()
-        return try? decoder.decode(type, from: data)
-    }
+struct WeakRef<T: AnyObject> {
+    weak var object: T?
+    var hasValue: Bool { return object != nil }
+    init (_ object: T) { self.object = object }
 }

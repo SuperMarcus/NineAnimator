@@ -29,7 +29,7 @@ class EpisodeTableViewCell: UITableViewCell {
             
             // Set name and progress
             titleLabel.text = "Episode \(link.name)"
-            progress = NineAnimator.default.user.playbackProgress(for: link)
+            progress = Float(link.playbackProgress)
             offlineAccessButton.episodeLink = link
             
             // Add observer for progress updates
@@ -82,7 +82,7 @@ class EpisodeTableViewCell: UITableViewCell {
     @objc private func onProgressUpdate() {
         guard let link = episodeLink else { return }
         
-        let currentProgress = NineAnimator.default.user.playbackProgress(for: link)
+        let currentProgress = Float(link.playbackProgress)
         
         DispatchQueue.main.async {
             [weak self] in

@@ -85,7 +85,7 @@ protocol ListingService: AnyObject {
     /// Update the progress of an listed anime
     ///
     /// Only called if the service returns true for `isCapableOfPersistingAnimeState`
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink)
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?)
     
     /// Retrieve the listing anime from the reference
     ///

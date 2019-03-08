@@ -98,7 +98,7 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
             updateLabels(
                 status: downloadStatus,
                 progressStatus: progressLabelText,
-                progress: playbackProgress
+                progress: Float(playbackProgress)
             )
         case .error(let error):
             updateLabels(
