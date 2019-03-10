@@ -67,6 +67,10 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
                 subtitleContents.append("Aired on \(airDate)")
             }
             
+            if let season = info.season {
+                subtitleContents.append(season)
+            }
+            
             let subtitle = subtitleContents.joined(separator: " | ")
             
             episodeSubtitleLabel.text = subtitle

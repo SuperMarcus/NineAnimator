@@ -50,6 +50,17 @@ class BaseSource {
         return endpoint.hasSuffix(host)
     }
     
+    /// Default recommendServer(for:) implementation
+    ///
+    /// The default recommendation behavior is to find the first streaming
+    /// source whose name is registered in the default VideoProviderRegistry
+    func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+        let availableServers = anime.servers
+        return availableServers.first {
+            VideoProviderRegistry.default.provider(for: $0.value) != nil
+        }?.key
+    }
+    
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         return parent.session.request(url, headers: headers).responseString {
             switch $0.result {

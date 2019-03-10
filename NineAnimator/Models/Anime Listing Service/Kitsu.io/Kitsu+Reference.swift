@@ -27,13 +27,20 @@ extension Kitsu {
             "page[offset]": "0",
             "page[limit]": "20" // Looking for the first 20 anime entries to match
         ]) .then {
-            [unowned self] matchedObjects in
-            try matchedObjects.map {
+            [unowned self] matchedObjects -> ListingAnimeReference in
+            let bestMatchOptional = try matchedObjects.map {
                 match -> (Double, ListingAnimeReference) in
                 let titles = (match.attributes["titles"] as? [String: String]) ?? [:]
                 let proximity = titles.reduce(0.0) { max($0, $1.value.proximity(to: link.title)) }
                 return (proximity, try ListingAnimeReference(self, withAnimeObject: match))
-            } .max { $0.0 < $1.0 }?.1
+            } .max { $0.0 < $1.0 }
+            guard let bestMatch = bestMatchOptional else {
+                throw NineAnimatorError.responseError("No matching reference found")
+            }
+            guard bestMatch.0 > 0.8 else {
+                throw NineAnimatorError.responseError("Failed to make a confident match: maximal proximity is only \(bestMatch.0)")
+            }
+            return bestMatch.1
         } .thenPromise { // Fetch library entry state
             [unowned self] matchedReference in
             NineAnimatorPromise {

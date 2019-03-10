@@ -19,30 +19,19 @@
 
 import Foundation
 
-extension Dictionary {
-    /// Obtain value with the provided keypath
-    func value(at path: String) -> Any? {
-        return (self as NSDictionary).value(forKeyPath: path)
-    }
-    
-    /// Obtain value at path of a specific type
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(at: path) as? T else {
-            throw NineAnimatorError.decodeError
+extension NASourceWonderfulSubs {
+    func _recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+        let recommendationPiority: [Anime.ServerIdentifier: Double] = [
+            "cr:subs": 1000,
+            "ka:subs": 900,
+            "fa:subs": 800,
+            "cr:dubs": 700
+        ]
+        let serverWithPiority = anime.servers.map {
+            server -> (Anime.ServerIdentifier, Double) in
+            let identifier = server.key
+            return (identifier, recommendationPiority[identifier.lowercased()] ?? 500)
         }
-        return v
-    }
-}
-
-extension NSDictionary {
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(forKeyPath: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
-    }
-    
-    func valueIfPresent<T>(at path: String, type: T.Type) -> T? {
-        return value(forKeyPath: path) as? T
+        return serverWithPiority.max { $0.1 < $1.1 }?.0
     }
 }

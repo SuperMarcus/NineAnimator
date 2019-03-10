@@ -43,10 +43,13 @@ extension Anilist {
                         nameProximity($0)
                     )
                 } .sorted { $0.1 > $1.1 }
-            guard let bestMatch = results.first?.0 else {
+            guard let bestMatch = results.first else {
                 throw NineAnimatorError.responseError("No results found")
             }
-            return bestMatch
+            guard bestMatch.1 > 0.8 else {
+                throw NineAnimatorError.responseError("Failed to make a confident match: maximal proximity is only \(bestMatch.1)")
+            }
+            return bestMatch.0
         }
     }
 }

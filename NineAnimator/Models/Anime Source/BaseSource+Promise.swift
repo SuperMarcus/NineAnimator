@@ -23,10 +23,12 @@ import Foundation
 // Promisified request methods
 extension PromiseSource where Self: BaseSource {
     /// Request a string content with URL using the browsing URLSession
-    func request(browseUrl: URL, headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
+    func request(browseUrl: URL,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
         return NineAnimatorPromise {
             callback in self.request(
-                browse: browseUrl,
+                browse: self.assembleQuery(query, for: browseUrl),
                 headers: headers,
                 completion: callback
             )
@@ -34,15 +36,19 @@ extension PromiseSource where Self: BaseSource {
     }
     
     /// Request a string content with path related to endpoint using the browsing URLSession
-    func request(browsePath path: String, headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
-        return request(browseUrl: URL(string: "\(endpoint)\(path)")!, headers: headers)
+    func request(browsePath path: String,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
+        return request(browseUrl: URL(string: "\(endpoint)\(path)")!, query: query, headers: headers)
     }
     
     /// Request a string content with URL using the ajax URLSesion
-    func request(ajaxUrlString: URL, headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
+    func request(ajaxUrlString: URL,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
         return NineAnimatorPromise {
             callback in self.request(
-                ajaxString: ajaxUrlString,
+                ajaxString: self.assembleQuery(query, for: ajaxUrlString),
                 headers: headers,
                 completion: callback
             )
@@ -50,10 +56,12 @@ extension PromiseSource where Self: BaseSource {
     }
     
     /// Request a JSON-encoded dictionary content with URL using the ajax URLSesion
-    func request(ajaxUrlDictionary: URL, headers: [String: String] = [:]) -> NineAnimatorPromise<NSDictionary> {
+    func request(ajaxUrlDictionary: URL,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<NSDictionary> {
         return NineAnimatorPromise {
             callback in self.request(
-                ajax: ajaxUrlDictionary,
+                ajax: self.assembleQuery(query, for: ajaxUrlDictionary),
                 headers: headers,
                 completion: callback
             )
@@ -61,12 +69,24 @@ extension PromiseSource where Self: BaseSource {
     }
     
     /// Request a string content with path related to endpoint using the ajax URLSesion
-    func request(ajaxPathString path: String, headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
+    func request(ajaxPathString path: String,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
         return request(ajaxUrlString: URL(string: "\(endpoint)\(path)")!, headers: headers)
     }
     
     /// Request a JSON-encoded dictionary with path related to endpoint using the ajax URLSesion
-    func request(ajaxPathDictionary path: String, headers: [String: String] = [:]) -> NineAnimatorPromise<NSDictionary> {
-        return request(ajaxUrlDictionary: URL(string: "\(endpoint)\(path)")!, headers: headers)
+    func request(ajaxPathDictionary path: String,
+                 query: [String: CustomStringConvertible] = [:],
+                 headers: [String: String] = [:]) -> NineAnimatorPromise<NSDictionary> {
+        return request(ajaxUrlDictionary: URL(string: "\(endpoint)\(path)")!, query: query, headers: headers)
+    }
+    
+    private func assembleQuery(_ query: [String: CustomStringConvertible], for url: URL) -> URL {
+        guard !query.isEmpty,
+            var urlBuilder = URLComponents(url: url, resolvingAgainstBaseURL: false)
+            else { return url }
+        urlBuilder.queryItems = query.map { .init(name: $0.0, value: $0.1.description) }
+        return urlBuilder.url ?? url
     }
 }

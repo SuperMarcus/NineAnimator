@@ -27,6 +27,11 @@ extension NineAnimator {
     }
 }
 
+/// Representing an retrieved anime
+///
+/// An Anime object represents a collection of information about the
+/// AnimeLink, the streaming servers and episodes, as well as the
+/// references to the tracking contexts of the AnimeLink.
 struct Anime {
     typealias ServerIdentifier = String
     typealias EpisodeIdentifier = String
@@ -35,12 +40,17 @@ struct Anime {
     typealias EpisodesCollection = [ServerIdentifier: EpisodeLinksCollection]
     typealias AttributeKey = String
     
+    static let undeterminedServer: ServerIdentifier = "com.marcuszhou.nineanimator.anime.server._builtin.undetermined"
+    
     let link: AnimeLink
     let servers: [ServerIdentifier: String]
     let episodes: EpisodesCollection
     let description: String
     let alias: String
     let episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation]
+    
+    /// The sub anime if this anime is the parent of a series of anime
+    let children: [Anime]
     
     /// The tracking context of the anime
     ///
@@ -52,10 +62,11 @@ struct Anime {
     
     let additionalAttributes: [AttributeKey: Any]
     
-    var currentServer: ServerIdentifier
-    
     var source: Source { return link.source }
     
+    private(set) var currentServer: ServerIdentifier = undeterminedServer
+    
+    /// Initialize this Anime as a conventional anime
     init(_ link: AnimeLink,
          alias: String = "",
          additionalAttributes: [AttributeKey: Any] = [:],
@@ -66,16 +77,126 @@ struct Anime {
         self.link = link
         self.servers = servers
         self.episodes = episodes
-        self.currentServer = servers.first!.key
         self.description = description
         self.alias = alias
         self.additionalAttributes = additionalAttributes
         self.episodesAttributes = episodesAttributes
         self.trackingContext = NineAnimator.default.trackingContext(for: link)
+        self.children = []
+        
+        // Determine initial server selection
+        self.determineInitialServer()
     }
     
+    /// Initialize this Anime as the parent of a series
+    init(_ link: AnimeLink,
+         alias: String = "",
+         additionalAttributes: [AttributeKey: Any] = [:],
+         description: String,
+         children: [Anime]
+        ) {
+        self.link = link
+        self.alias = alias
+        self.additionalAttributes = additionalAttributes
+        self.description = description
+        self.children = children
+        self.episodesAttributes = [:]
+        
+        // Merge the available servers from the child anime object
+        var knownServers = [ServerIdentifier: String]()
+        for child in children {
+            knownServers.merge(child.servers) { a, _ in a }
+        }
+        self.servers = knownServers
+        
+        // Merge episodes from children
+        var episodes = EpisodesCollection()
+        for child in children {
+            for (server, collection) in child.episodes {
+                let previousCollection = episodes[server] ?? []
+                episodes[server] = previousCollection + collection
+            }
+        }
+        self.episodes = episodes
+        
+        // Initialize the tracking context for the series
+        // - May never be used
+        self.trackingContext = NineAnimator.default.trackingContext(for: link)
+        
+        // Determine initial server selection
+        self.determineInitialServer()
+    }
+    
+    /// Retrieve the episode object
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         return source.episode(from: link, with: self, handler)
+    }
+    
+    /// Retrieve all available links under the current server selection
+    var episodeLinks: EpisodeLinksCollection {
+        return episodes[currentServer]!
+    }
+    
+    /// Retrieve the number of episode links under the current server selection
+    var numberOfEpisodeLinks: Int {
+        return episodeLinks.count
+    }
+    
+    /// Retrieve an episode link at index under the current server selection
+    func episodeLink(at index: Int) -> EpisodeLink {
+        return episodeLinks[index]
+    }
+    
+    /// Change the selected server
+    ///
+    /// This operation may fail
+    mutating func select(server: ServerIdentifier) {
+        if episodes[server] != nil {
+            currentServer = server
+        }
+    }
+    
+    /// Prepare the anime for tracking services
+    ///
+    /// Invoking this method also prepares the children
+    /// for tracking
+    func prepareForTracking() {
+        // Prepare our tracking context
+        trackingContext.prepareContext()
+        // Prepare children's tracking contexts
+        for child in children { child.prepareForTracking() }
+    }
+    
+    /// Obtain the attributes for the episode link
+    func attributes(for episodeLink: EpisodeLink) -> AdditionalEpisodeLinkInformation? {
+        // Search attribute in children first
+        for child in children {
+            if let attribute = child.attributes(for: episodeLink) {
+                return attribute
+            }
+        }
+        return episodesAttributes[episodeLink]
+    }
+    
+    /// Determine the initial server selection for this anime
+    ///
+    /// See: Source.recommendServer(for:)
+    private mutating func determineInitialServer() {
+        // Previously selected server
+        if let recentServer = NineAnimator.default.user.recentServer,
+            servers[recentServer] != nil {
+            select(server: recentServer)
+            return
+        }
+        
+        // Source recommended server
+        if let sourceRecommendedServer = source.recommendServer(for: self) {
+            select(server: sourceRecommendedServer)
+            return
+        }
+        
+        // Default behavior, use the first server
+        select(server: servers.first!.key)
     }
 }
 
@@ -86,14 +207,26 @@ extension Anime {
     /// information for EpisodeLink struct
     struct AdditionalEpisodeLinkInformation {
         var parent: EpisodeLink
-        
         var synopsis: String?
-        
         var airDate: String?
-        
+        var season: String?
         var episodeNumber: Int?
-        
         var title: String?
+        
+        init(parent: EpisodeLink,
+             synopsis: String? = nil,
+             airDate: String? = nil,
+             season: String? = nil,
+             episodeNumber: Int? = nil,
+             title: String? = nil
+            ) {
+            self.parent = parent
+            self.synopsis = synopsis
+            self.airDate = airDate
+            self.season = season
+            self.episodeNumber = episodeNumber
+            self.title = title
+        }
     }
 }
 

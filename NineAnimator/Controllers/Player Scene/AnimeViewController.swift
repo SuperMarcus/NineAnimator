@@ -56,63 +56,15 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     @IBOutlet private weak var moreOptionsButton: UIButton!
     
-    private var anime: Anime? {
-        didSet {
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else { return }
-                let sectionsNeededReloading = Section.indexSet(.all)
-                
-                if self.anime == nil && oldValue != nil {
-                    self.tableView.deleteSections(sectionsNeededReloading, with: .fade)
-                }
-                
-                guard let anime = self.anime else { return }
-                
-                // Prepare the tracking context
-                let trackingContext = anime.trackingContext
-                trackingContext.prepareContext()
-                
-                // Choose a server
-                if self.server == nil {
-                    if let recentlyUsedServer = NineAnimator.default.user.recentServer,
-                        anime.servers[recentlyUsedServer] != nil {
-                        self.server = recentlyUsedServer
-                    } else {
-                        self.server = anime.servers.first!.key
-                        Log.info("No server selected. Using %@", anime.servers.first!.key)
-                    }
-                }
-                
-                // Update the AnimeLink in the info cell so we get the correct poster displayed
-                self.animeLink = anime.link
-                
-                // Clean user notifications for this anime
-                UserNotificationManager.default.clearNotifications(for: anime.link)
-                
-                // Push server updates to the heading view
-                self.animeHeadingView.update(animated: true) { [weak self] in
-                    guard let self = self else { return }
-                    
-                    $0.selectedServerName = anime.servers[self.server!]
-                    $0.anime = anime
-                    
-                    self.tableView.beginUpdates()
-                    self.tableView.setNeedsLayout()
-                    self.tableView.reloadSections(sectionsNeededReloading, with: .automatic)
-                    self.tableView.endUpdates()
-                }
-                
-                // Update history
-                NineAnimator.default.user.entering(anime: anime.link)
-                NineAnimator.default.user.push()
-                
-                // Setup userActivity
-                self.prepareContinuity()
-            }
+    private var anime: Anime?
+    
+    var server: Anime.ServerIdentifier? {
+        get { return anime?.currentServer }
+        set {
+            guard let server = newValue else { return }
+            anime?.select(server: server)
         }
     }
-    
-    var server: Anime.ServerIdentifier?
     
     // Set episode will update the server identifier as well
     private var episode: Episode? {
@@ -163,7 +115,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                 }
                 return
             }
-            self?.anime = anime
+            self?.setPresenting(anime: anime)
             // Initiate playback if episodeLink is set
             if let episodeLink = self?.episodeLink {
                 // Present the cast controller if the episode is currently playing on
@@ -200,6 +152,44 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         
         //Sets episode and server to nil
         episode = nil
+    }
+}
+
+// MARK: - Receive & Present Anime
+extension AnimeViewController {
+    private func setPresenting(anime: Anime) {
+        self.anime = anime
+        
+        let sectionsNeededReloading = Section.indexSet(.all)
+        
+        // Prepare the tracking context
+        anime.prepareForTracking()
+        
+        // Update the AnimeLink in the info cell so we get the correct poster displayed
+        self.animeLink = anime.link
+        
+        // Clean user notifications for this anime
+        UserNotificationManager.default.clearNotifications(for: anime.link)
+        
+        // Push server updates to the heading view
+        self.animeHeadingView.update(animated: true) { [weak self] in
+            guard let self = self else { return }
+            
+            $0.selectedServerName = anime.servers[self.server!]
+            $0.anime = anime
+            
+            self.tableView.beginUpdates()
+            self.tableView.setNeedsLayout()
+            self.tableView.reloadSections(sectionsNeededReloading, with: .automatic)
+            self.tableView.endUpdates()
+        }
+        
+        // Update history
+        NineAnimator.default.user.entering(anime: anime.link)
+        NineAnimator.default.user.push()
+        
+        // Setup userActivity
+        self.prepareContinuity()
     }
 }
 
@@ -269,10 +259,7 @@ extension AnimeViewController {
         case .suggestion, .synopsis:
             return anime == nil ? 0 : 1
         case .episodes:
-            guard let serverIdentifier = server,
-                let episodes = anime?.episodes[serverIdentifier]
-                else { return 0 }
-            return episodes.count
+            return anime?.numberOfEpisodeLinks ?? 0
         }
     }
     
@@ -298,7 +285,7 @@ extension AnimeViewController {
             
             // Use detailed view when possible and enabled
             if NineAnimator.default.user.showEpisodeDetails,
-                let detailedEpisodeInfo = anime!.episodesAttributes[episode] {
+                let detailedEpisodeInfo = anime!.attributes(for: episode) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
                 cell.makeThemable()
                 cell.episodeLink = episode
@@ -366,8 +353,10 @@ extension AnimeViewController {
         
         let clearSelection = {
             [weak self] in
-            self?.tableView.deselectSelectedRow()
-            self?.selectedEpisodeCell = nil
+            DispatchQueue.main.async {
+                self?.tableView.deselectSelectedRow()
+                self?.selectedEpisodeCell = nil
+            }
         }
         
         // Use offline media if google cast is not setup
@@ -804,8 +793,7 @@ extension AnimeViewController {
 fileprivate extension AnimeViewController {
     /// Retrive EpisodeLink for the specific indexPath
     private func episodeLink(for indexPath: IndexPath) -> EpisodeLink? {
-        guard let server = server,
-            let episodes = anime?.episodes[server] else {
+        guard let episodes = anime?.episodeLinks else {
                 return nil
         }
         
@@ -822,7 +810,7 @@ fileprivate extension AnimeViewController {
     }
     
     private func indexPath(for episodeLink: EpisodeLink) -> IndexPath? {
-        guard let server = server, var episodes = anime?.episodes[server] else {
+        guard var episodes = anime?.episodeLinks else {
             return nil
         }
         

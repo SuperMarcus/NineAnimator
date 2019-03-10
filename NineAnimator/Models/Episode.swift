@@ -29,6 +29,7 @@ struct Episode {
     var name: String { return link.name }
     var parentLink: AnimeLink { return link.parent }
     var referer: String
+    var userInfo: [String: Any]
     
     var nativePlaybackSupported: Bool {
         guard let serverName = parent.servers[link.server] else { return false }
@@ -48,11 +49,12 @@ struct Episode {
         return parent.trackingContext
     }
     
-    init(_ link: EpisodeLink, target: URL, parent: Anime, referer: String? = nil) {
+    init(_ link: EpisodeLink, target: URL, parent: Anime, referer: String? = nil, userInfo: [String: Any] = [:]) {
         self.link = link
         self.target = target
         self.parent = parent
         self.referer = referer ?? parent.link.link.absoluteString
+        self.userInfo = userInfo
     }
     
     func retrive(onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask? {

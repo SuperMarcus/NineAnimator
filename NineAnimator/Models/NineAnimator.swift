@@ -67,6 +67,9 @@ class NineAnimator: SessionDelegate {
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
+    /// Queue for modify internal configurations
+    private let configurationQueue: DispatchQueue = .global()
+    
     override init() {
         super.init()
         
@@ -97,6 +100,7 @@ extension NineAnimator {
         register(source: NASourceMasterAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
+        register(source: NASourceWonderfulSubs(with: self))
     }
 }
 
@@ -128,17 +132,19 @@ extension NineAnimator {
     
     /// Retrieve the tracking context for the anime
     func trackingContext(for anime: AnimeLink) -> TrackingContext {
-        collectGarbage()
-        
-        // If the context has been created, use the cached one
-        if let context = trackingContextReferences[anime]?.object {
+        return await(queue: configurationQueue) {
+            collectGarbage()
+            
+            // If the context has been created, use the cached one
+            if let context = trackingContextReferences[anime]?.object {
+                return context
+            }
+            
+            // If the context does not exists, create a new one
+            let context = TrackingContext(self, link: anime)
+            trackingContextReferences[anime] = WeakRef(context)
             return context
         }
-        
-        // If the context does not exists, create a new one
-        let context = TrackingContext(self, link: anime)
-        trackingContextReferences[anime] = WeakRef(context)
-        return context
     }
     
     private func registerDefaultServices() {
@@ -149,8 +155,10 @@ extension NineAnimator {
     
     /// Remove all expired weak references
     private func collectGarbage() {
-        for (index, ref) in trackingContextReferences where !ref.hasValue {
-            trackingContextReferences[index] = nil
+        configurationQueue.async {
+            for (index, ref) in self.trackingContextReferences where !ref.hasValue {
+                self.trackingContextReferences[index] = nil
+            }
         }
     }
 }

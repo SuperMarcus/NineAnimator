@@ -41,4 +41,7 @@ protocol Source {
      Test if the url belongs to this source
      */
     func canHandle(url: URL) -> Bool
+    
+    /// Recommend a preferred server for the anime object
+    func recommendServer(for anime: Anime) -> Anime.ServerIdentifier?
 }

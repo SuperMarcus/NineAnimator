@@ -22,9 +22,12 @@ import Foundation
 /// Manages third party tracking and progress persistance for
 /// a particular AnimeLink.
 ///
-/// A `TrackingContext` is created with an Anime object,
-/// passed on to the players for further updates, and released
-/// when the user started watching another anime.
+/// A `TrackingContext` is shared across the app for the same
+/// AnimeLink, and destroyed upon reference counting release.
+/// The NineAnimator object keeps a weak reference to each
+/// TrackingContext to make sure maximal reusability. Thus,
+/// TrackingContext should not be instantiated from contexts
+/// other than the NineAnimator object.
 ///
 /// The `TrackingContext` keeps the anime listing references
 /// of the provisioned `AnimeLink` no matter if the service
@@ -172,11 +175,11 @@ class TrackingContext {
                 let task = service.reference(from: link)
                 .dispatch(on: queue)
                 .error {
-                    [weak self] error in
+                    error in
                     Log.error("[TrackingContext] Cannot fetch tracking service reference for anime \"%@\": %@", link.title, error)
-                    self?.collectGarbage()
+                    self.collectGarbage()
                 } .finally {
-                    [weak self, unowned service] reference in
+                    [unowned service] reference in
                     Log.info(
                         "[TrackingContext] Matched to service \"%@\" (reference name: \"%@\" identifier \"%@\") with state \"%@\"",
                         service.name,
@@ -184,9 +187,9 @@ class TrackingContext {
                         reference.uniqueIdentifier,
                         reference.state as Any
                     )
-                    self?.listingAnimeReferences[service.name] = reference
-                    self?.discoverRelatedLinks(with: reference)
-                    self?.collectGarbage()
+                    self.listingAnimeReferences[service.name] = reference
+                    self.discoverRelatedLinks(with: reference)
+                    self.collectGarbage()
                 }
                 self.performingTaskPool.append(task)
             }
@@ -246,15 +249,16 @@ extension TrackingContext {
     /// Find other tracking contexts with the same reference and share
     /// resources with them
     private func discoverRelatedLinks(with reference: ListingAnimeReference) {
-        let recentAnime = parent.user.recentAnimes
-        for comparingAnime in recentAnime where comparingAnime != link {
-            let comparingTrackingContext = parent.trackingContext(for: comparingAnime)
+        let recentAnime = self.parent.user.recentAnimes
+        for comparingAnime in recentAnime where comparingAnime != self.link {
+            let comparingTrackingContext = self.parent.trackingContext(for: comparingAnime)
             if comparingTrackingContext.listingAnimeReferences.contains(where: {
                 _, value in value == reference
             }) {
-                relatedLinks.insert(comparingAnime)
-                comparingTrackingContext.relatedLinks.insert(link)
-                comparingTrackingContext.save()
+                self.relatedLinks.insert(comparingAnime)
+                _ = comparingTrackingContext.queue.sync {
+                    comparingTrackingContext.relatedLinks.insert(self.link)
+                }
             }
         }
         self.save()

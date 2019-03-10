@@ -59,7 +59,13 @@ extension MyAnimeList {
                 
                 return (proximity, reference)
             }
-            return references.max { $0.proximity < $1.proximity }?.reference
+            guard let bestMatch = references.max(by: { $0.proximity < $1.proximity }) else {
+                throw NineAnimatorError.responseError("No matching reference found")
+            }
+            guard bestMatch.proximity > 0.8 else {
+                throw NineAnimatorError.responseError("Failed to make a confident match: maximal proximity is only \(bestMatch.proximity)")
+            }
+            return bestMatch.reference
         }
     }
 }

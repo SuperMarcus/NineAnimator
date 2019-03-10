@@ -34,6 +34,13 @@ struct AnimeLink {
     var link: URL
     var image: URL
     var source: Source
+    
+    init(title: String, link: URL, image: URL, source: Source) {
+        self.title = title
+        self.link = link
+        self.image = image
+        self.source = source
+    }
 }
 
 extension AnimeLink: URLConvertible {
@@ -94,6 +101,13 @@ struct EpisodeLink: Equatable, Codable, Hashable {
     let name: String
     let server: Anime.ServerIdentifier
     let parent: AnimeLink
+    
+    init(identifier: Anime.EpisodeIdentifier, name: String, server: Anime.ServerIdentifier, parent: AnimeLink) {
+        self.identifier = identifier
+        self.name = name
+        self.server = server
+        self.parent = parent
+    }
 }
 
 // Hashable
@@ -115,7 +129,8 @@ extension EpisodeLink {
 extension EpisodeLink {
     var playbackProgress: Double {
         let trackingContext = NineAnimator.default.trackingContext(for: parent)
-        return trackingContext.playbackProgress(for: self)
+        let progress = trackingContext.playbackProgress(for: self)
+        return progress
     }
 }
 

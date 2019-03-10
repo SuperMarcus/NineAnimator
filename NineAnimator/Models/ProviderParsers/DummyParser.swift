@@ -28,15 +28,34 @@ class DummyParser: VideoProviderParser {
         let dummyTask = NineAnimatorMultistepAsyncTask()
         
         DispatchQueue.main.async {
+            let options = episode.userInfo
+            var isAggregatedAsset = false
+            
+            // Infer isAggregated from mime type
+            if let contentType = options[Options.contentType] as? String {
+                switch contentType.lowercased() {
+                case "application/x-mpegurl", "vnd.apple.mpegurl": isAggregatedAsset = true
+                default: break
+                }
+            }
+            
             handler(BasicPlaybackMedia(
                 url: episode.target,
                 parent: episode,
-                contentType: "video/mp4",
+                contentType: (options[Options.contentType] as? String) ?? "video/mp4",
                 headers: [ "Referer": episode.link.parent.link.absoluteString ],
-                isAggregated: false
+                isAggregated: (options[Options.isAggregated] as? Bool) ?? isAggregatedAsset
             ), nil)
         }
         
         return dummyTask
+    }
+    
+    enum Options {
+        static let contentType: String =
+            "com.marcuszhou.nineanimator.providerparser.DummyParser.option.contentType"
+        
+        static let isAggregated: String =
+            "com.marcuszhou.nineanimator.providerparser.DummyParser.option.isAggregated"
     }
 }
