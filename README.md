@@ -198,7 +198,7 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - MyCloud (unavailable for Google Cast)
 - F5 Beta a.k.a. PrettyFast.to (unavailable for Google Cast)
 - Tiwi.Kiwi (may not be available for Google Cast)
-- Self-hosted Streaming Services ([masterani.me](//masterani.me) and [Anime Twist](//twist.moe))
+- Self-hosted Streaming Services ([masterani.me](//masterani.me), [Anime Twist](//twist.moe)), as well as [Wonderful Subs](//wonderfulsubs.com)
 
 All of the sources above support downloading. More hosts may be added later.
 Feel free to open an issue to request additional hosts.
@@ -214,6 +214,12 @@ of features:
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
+- [Wonderful Subs](//wonderfulsubs.com)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Ratings and Air Date)
+    - [x] Detailed episode synopsis
 - [masterani.me](//masterani.me)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
