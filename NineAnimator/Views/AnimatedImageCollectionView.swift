@@ -42,7 +42,7 @@ private class CollectionSectionView: UIView {
             return
         }
         
-        let bounds = await { self.bounds }
+        let bounds = DispatchQueue.main.sync { self.bounds }
         let numberOfRows = ((bounds.height - spacing) / (minimalImageHeight + spacing)).rounded(.down)
         let imageHeight = (bounds.height - spacing) / numberOfRows - spacing
         let imageWidth = imageHeight * imageSizeRatio
@@ -258,7 +258,7 @@ class AnimatedImageCollectionView: UIView {
             self.configure(frame: secondView)
             secondView.mirror(firstView)
             
-            await {
+            DispatchQueue.main.sync {
                 firstView.frame.origin.x = -firstView.overlappingWidth
                 secondView.frame.origin.x = firstView.frame.width
                 self.addSubview(firstView)

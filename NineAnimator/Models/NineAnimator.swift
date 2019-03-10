@@ -132,9 +132,7 @@ extension NineAnimator {
     
     /// Retrieve the tracking context for the anime
     func trackingContext(for anime: AnimeLink) -> TrackingContext {
-        return await(queue: configurationQueue) {
-            collectGarbage()
-            
+        return configurationQueue.sync {
             // If the context has been created, use the cached one
             if let context = trackingContextReferences[anime]?.object {
                 return context
@@ -142,7 +140,8 @@ extension NineAnimator {
             
             // If the context does not exists, create a new one
             let context = TrackingContext(self, link: anime)
-            trackingContextReferences[anime] = WeakRef(context)
+            let ephemeralReference = WeakRef(context)
+            trackingContextReferences[anime] = ephemeralReference
             return context
         }
     }
@@ -155,10 +154,8 @@ extension NineAnimator {
     
     /// Remove all expired weak references
     private func collectGarbage() {
-        configurationQueue.async {
-            for (index, ref) in self.trackingContextReferences where !ref.hasValue {
-                self.trackingContextReferences[index] = nil
-            }
+        for (index, ref) in self.trackingContextReferences where ref.object == nil {
+            self.trackingContextReferences.removeValue(forKey: index)
         }
     }
 }

@@ -19,8 +19,7 @@
 
 import Foundation
 
-struct WeakRef<T: AnyObject> {
-    weak var object: T?
-    var hasValue: Bool { return object != nil }
+class WeakRef<T: AnyObject> {
+    private(set) weak var object: T?
     init (_ object: T) { self.object = object }
 }

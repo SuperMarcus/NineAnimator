@@ -75,7 +75,7 @@ class TrackingContext {
             object: nil
         )
         
-        restore()
+        queue.sync { restore() }
     }
     
     /// Retrieve the list of references that are loaded
@@ -122,6 +122,7 @@ class TrackingContext {
             
             // At last, set the current episode link to episode
             self.current = episode
+            self.save()
         }
     }
     
@@ -193,6 +194,7 @@ class TrackingContext {
                 }
                 self.performingTaskPool.append(task)
             }
+            self.save()
         }
     }
     
@@ -236,11 +238,6 @@ class TrackingContext {
         return trackingStateDirectory
             .appendingPathComponent(link.link.uniqueHashingIdentifier, isDirectory: false)
             .appendingPathExtension("plist")
-    }
-    
-    deinit {
-        save()
-        NotificationCenter.default.removeObserver(self) // As unnecessary as this might be
     }
 }
 
