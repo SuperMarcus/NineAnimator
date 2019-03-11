@@ -110,10 +110,18 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             [weak self] anime, error in
             guard let anime = anime else {
                 Log.error(error)
-                self?.presentError(error!) {
-                    if !$0 { self?.navigationController?.popViewController(animated: true) }
+                return DispatchQueue.main.async {
+                    self?.presentError(error!) {
+                        // If not allowed to retry, dismiss the view controller
+                        guard !$0 else { return }
+                        DispatchQueue.main.async {
+                            guard let self = self else { return }
+                            if let navigationController = self.navigationController {
+                                navigationController.popViewController(animated: true)
+                            } else { self.dismiss(animated: true) }
+                        }
+                    }
                 }
-                return
             }
             self?.setPresenting(anime: anime)
             // Initiate playback if episodeLink is set
@@ -375,8 +383,13 @@ extension AnimeViewController {
             [weak self, weak trackingContext] episode, error in
             guard let self = self else { return }
             guard let episode = episode else {
-                clearSelection()
-                self.presentError(error!)
+                // Present the error in main loop
+                DispatchQueue.main.async {
+                    self.presentError(error!) {
+                        [weak self] _ in
+                        self?.tableView.deselectSelectedRow()
+                    }
+                }
                 return Log.error(error)
             }
             self.episode = episode
@@ -784,8 +797,11 @@ extension AnimeViewController {
         }
         
         let alert = UIAlertController(title: "Error", message: String(describing: error), preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        present(alert, animated: true) { completionHandler?(false) }
+        alert.addAction(UIAlertAction(title: "Ok", style: .cancel) {
+            // Call the completion handler assuming the user does not want to proceed
+            _ in completionHandler?(false)
+        })
+        present(alert, animated: true)
     }
 }
 

@@ -124,6 +124,8 @@ extension NASourceNineAnime {
                         (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
                     }
                 ) { _, new in new }
+                    
+                guard !animeServers.isEmpty else { return handler(nil, NineAnimatorError.responseError("No episodes found for this anime.")) }
                 
                 var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
                 
