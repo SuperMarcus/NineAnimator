@@ -233,9 +233,12 @@ extension RecentlyViewedTableViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        tableView.performBatchUpdates({
-            self.tableView.reloadSections(Section.indexSet(.collections), with: .none)
-            self.tableView.setNeedsLayout()
+        coordinator.animate(alongsideTransition: {
+            [tableView] _ in
+            guard let tableView = tableView else { return }
+            tableView.performBatchUpdates({
+                tableView.setNeedsLayout()
+            }, completion: nil)
         }, completion: nil)
     }
 }

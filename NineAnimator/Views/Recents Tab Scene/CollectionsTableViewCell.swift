@@ -28,6 +28,8 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
     /// References to async tasks
     private var taskReferencePool = [NineAnimatorAsyncTask]()
     
+    private var previousBounds: CGRect?
+    
     private var onLayout: (() -> Void)?
     
     private var indexOfCellBeforeDragging = 0
@@ -160,6 +162,12 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
         super.layoutSubviews()
         // Remove seperator
         separatorInset = .init(top: 0, left: bounds.width / 2, bottom: 0, right: bounds.width / 2)
+        
+        // Invalidate collection view layout if the bound changes
+        if let previousBounds = previousBounds, bounds != previousBounds {
+            collectionView.collectionViewLayout.invalidateLayout()
+        }
+        self.previousBounds = bounds
     }
 }
 
