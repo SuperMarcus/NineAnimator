@@ -226,7 +226,6 @@ class AnimatedImageCollectionView: UIView {
     }
     
     private func layoutImages() {
-        guard !collection.isEmpty else { return }
         let wasAnimating = startAnimationImmedietly || (animator?.isRunning ?? false)
         
         // Remove the animator
@@ -237,6 +236,13 @@ class AnimatedImageCollectionView: UIView {
         
         let previousFirstFrame = firstFrame
         let previousSecondFrame = secondFrame
+        
+        // Just remove the frames if the collection is empty
+        guard !collection.isEmpty else {
+            previousFirstFrame?.removeFromSuperview()
+            previousSecondFrame?.removeFromSuperview()
+            return
+        }
         
         layoutTask = NineAnimatorPromise.firstly(queue: .main) {
             [weak self] () -> (CollectionSectionView, CollectionSectionView)? in

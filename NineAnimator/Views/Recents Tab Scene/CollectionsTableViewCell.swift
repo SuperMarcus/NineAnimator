@@ -92,67 +92,66 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
             let task = service.collections().error {
                 [unowned service] in
                 Log.error("Did not load lists from service \"%@\": %@", service.name, $0)
-                } .finally {
-                    [weak self, unowned service] collections in
-                    DispatchQueue.main.async {
-                        [unowned service] in
-                        guard let self = self else { return }
+            } .finally {
+                [weak self, unowned service] collections in
+                DispatchQueue.main.async {
+                    [unowned service] in
+                    guard let self = self else { return }
+                    
+                    // Use a batch update block
+                    self.collectionView.performBatchUpdates({
+                        // First, update all collections that did not
+                        // appear again in the latest collections
+                        var variableCollections = collections
+                        var indexesToDelete = [Int]()
                         
-                        // Use a batch update block
-                        self.collectionView.performBatchUpdates({
-                            // First, update all collections that did not
-                            // appear again in the latest collections
-                            var variableCollections = collections
-                            var indexesToDelete = [Int]()
-                            
-                            for (index, collection) in self.listingServiceCollections.enumerated()
-                                where collection.parentService.name == service.name {
-                                    // If the collection exists in the presented collections,
-                                    // just update the value without notifying tableview
-                                    if let (sourceIndex, newCollection) = variableCollections
-                                        .enumerated()
-                                        .first(where: { $0.element.title == collection.title }) {
-                                        // Remove the collection from the source
-                                        _ = variableCollections.remove(at: sourceIndex)
-                                        self.listingServiceCollections[index] = newCollection
-                                    } else {
-                                        // Else, mark this row as deleted and remove it from
-                                        // the listing service collections
-                                        indexesToDelete.append(index)
-                                    }
-                            }
-                            
-                            // Remove all marked-to-remove elements
-                            self.listingServiceCollections = self.listingServiceCollections
-                                .enumerated()
-                                .filter { !indexesToDelete.contains($0.offset) }
-                                .map { $0.element }
-                            
-                            // Send remove message to table view
-                            self.collectionView.deleteItems(
-                                at: indexesToDelete.map { IndexPath(item: $0, section: 0) }
-                            )
-                            
-                            // Since the use will likely be used to have collections grouped
-                            // together by the services, find the index of the first occurance
-                            // and insert it from there
-                            let insertingIndex = self.listingServiceCollections
-                                .enumerated()
-                                .first { $0.element.parentService.name == service.name }?
-                                .offset ?? 0
-                            
-                            // Make the insertion
-                            variableCollections.forEach {
-                                self.listingServiceCollections.insert($0, at: insertingIndex)
-                            }
-                            
-                            // Tell the table view that we have made those insertions
-                            self.collectionView.insertItems(
-                                at: (insertingIndex..<(insertingIndex + variableCollections.count))
-                                    .map { IndexPath(item: $0, section: 0) }
-                            )
-                        }, completion: nil)
-                    }
+                        for (index, collection) in self.listingServiceCollections.enumerated()
+                            where collection.parentService.name == service.name {
+                                // If the collection exists in the presented collections,
+                                // just update the value without notifying tableview
+                                if let (sourceIndex, newCollection) = variableCollections
+                                    .enumerated()
+                                    .first(where: { $0.element.title == collection.title }) {
+                                    // Remove the collection from the source
+                                    _ = variableCollections.remove(at: sourceIndex)
+                                    self.listingServiceCollections[index] = newCollection
+                                } else {
+                                    // Else, mark this row as deleted and remove it from
+                                    // the listing service collections
+                                    indexesToDelete.append(index)
+                                }
+                        }
+                        // Remove all marked-to-remove elements
+                        self.listingServiceCollections = self.listingServiceCollections
+                            .enumerated()
+                            .filter { !indexesToDelete.contains($0.offset) }
+                            .map { $0.element }
+                        
+                        // Send remove message to collection view
+                        self.collectionView.deleteItems(
+                            at: indexesToDelete.map { IndexPath(item: $0, section: 0) }
+                        )
+                        
+                        // Since the use will likely be used to have collections grouped
+                        // together by the services, find the index of the first occurance
+                        // and insert it from there
+                        let insertingIndex = self.listingServiceCollections
+                            .enumerated()
+                            .first { $0.element.parentService.name == service.name }?
+                            .offset ?? 0
+                        
+                        // Make the insertion
+                        variableCollections.forEach {
+                            self.listingServiceCollections.insert($0, at: insertingIndex)
+                        }
+                        
+                        // Tell the collection view that we have made those insertions
+                        self.collectionView.insertItems(
+                            at: (insertingIndex..<(insertingIndex + variableCollections.count))
+                                .map { IndexPath(item: $0, section: 0) }
+                        )
+                    }, completion: nil)
+                }
             }
             taskReferencePool.append(task)
         }
@@ -188,7 +187,7 @@ extension CollectionsTableViewCell {
         let collectionViewItemCount = collectionView(collectionView, numberOfItemsInSection: 0)// The number of items in this section
         let proportionalOffset = collectionView.contentOffset.x / pageWidth
         let indexOfMajorCell = Int(round(proportionalOffset))
-        let swipeVelocityThreshold: CGFloat = 0.5
+        let swipeVelocityThreshold: CGFloat = 0.1
         let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < collectionViewItemCount && velocity.x > swipeVelocityThreshold
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
@@ -201,13 +200,13 @@ extension CollectionsTableViewCell {
             UIView.animate(
                 withDuration: 0.3,
                 delay: 0,
-                usingSpringWithDamping: 1,
+                usingSpringWithDamping: 0.8,
                 initialSpringVelocity: velocity.x,
                 options: .allowUserInteraction,
                 animations: {
                     scrollView.contentOffset = CGPoint(x: toValue, y: 0)
                     scrollView.layoutIfNeeded()
-            },
+                },
                 completion: nil
             )
         } else {
