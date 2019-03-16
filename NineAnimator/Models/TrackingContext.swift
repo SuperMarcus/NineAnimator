@@ -48,6 +48,7 @@ class TrackingContext {
     
     // Persisted states
     private var creationDate: Date
+    private var updateDate: Date
     private var relatedLinks: Set<AnimeLink>
     private var listingAnimeReferences = [String: ListingAnimeReference]()
     private var progressRecords = [PlaybackProgressRecord]()
@@ -60,6 +61,7 @@ class TrackingContext {
         self.stateConfigurationUrl = try! TrackingContext.stateConfigurationUrl(for: link)
         self.relatedLinks = []
         self.creationDate = Date()
+        self.updateDate = .distantPast
         
         NotificationCenter.default.addObserver(
             self,
@@ -281,6 +283,7 @@ extension TrackingContext {
                     enqueueDate: Date()
                 )
             )
+            self.updateDate = Date()
             self.save()
         }
     }
@@ -367,6 +370,7 @@ extension TrackingContext {
         static let relatedLinks = "com.marcuszhou.nineanimator.TrackingContext.related"
         static let cachedReferences = "com.marcuszhou.nineanimator.TrackingContext.references"
         static let progressRecords = "com.marcuszhou.nineanimator.TrackingContext.progresses"
+        static let updateDate = "com.marcuszhou.nineanimator.TrackingContext.lastUpdate"
     }
     
     private func save() {
@@ -374,6 +378,7 @@ extension TrackingContext {
             var persistingInformation = [String: Any]()
             persistingInformation[Keys.protocol] = 1
             persistingInformation[Keys.creationDate] = creationDate
+            persistingInformation[Keys.updateDate] = updateDate
             persistingInformation[Keys.link] = try encode(data: link)
             persistingInformation[Keys.relatedLinks] = try encode(data: relatedLinks)
             persistingInformation[Keys.cachedReferences] = try encode(data: listingAnimeReferences)
@@ -417,6 +422,7 @@ extension TrackingContext {
                 persistedInformation[Keys.creationDate] as? Date,
                 or: .decodeError
             )
+            self.updateDate = (persistedInformation[Keys.updateDate] as? Date) ?? .distantPast
         } catch {
             Log.error("Unable to decode persisted tracking context state data: %@", error)
         }
