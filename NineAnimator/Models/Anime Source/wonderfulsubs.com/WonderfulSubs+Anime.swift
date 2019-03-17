@@ -36,8 +36,7 @@ extension NASourceWonderfulSubs {
             let medias = try seasons
                 .compactMap { _, season in season as? NSDictionary }
                 .flatMap { try $0.value(at: "media", type: [NSDictionary].self) }
-                .filter { ($0["type"] as? String) == "episodes" }
-            let children = try medias.map { try self.anime(fromMediaEntry: $0, withParent: reassembledLink) }
+            let children = medias.compactMap { try? self.anime(fromMediaEntry: $0, withParent: reassembledLink) }
             
             // Handle empty children list
             guard !children.isEmpty else {
@@ -87,7 +86,9 @@ extension NASourceWonderfulSubs {
                 let episodeNumber: Double
                 if let number = episodeEntry.valueIfPresent(at: "episode_number", type: Int.self) {
                     episodeNumber = Double(number)
-                } else { episodeNumber = try episodeEntry.value(at: "episode_number", type: Double.self) }
+                } else if let number = episodeEntry.valueIfPresent(at: "episode_number", type: Double.self) {
+                    episodeNumber = number
+                } else { episodeNumber = 1 }
                 let episodeTitle = episodeEntry.valueIfPresent(at: "title", type: String.self)
                 let episodeSynopsis = episodeEntry.valueIfPresent(at: "description", type: String.self)
                 
