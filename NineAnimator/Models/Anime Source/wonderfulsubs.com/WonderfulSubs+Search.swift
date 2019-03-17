@@ -32,7 +32,7 @@ extension NASourceWonderfulSubs {
         var availablePages: Int = 1
         var results: [AnimeLink]?
         var moreAvailable: Bool { return results == nil }
-        var title: String = ""
+        var title: String { return query }
         
         func links(on page: Int) -> [AnyLink] {
             return results?.map { .anime($0) } ?? []

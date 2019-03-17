@@ -39,6 +39,11 @@ extension NASourceWonderfulSubs {
                 .filter { ($0["type"] as? String) == "episodes" }
             let children = try medias.map { try self.anime(fromMediaEntry: $0, withParent: reassembledLink) }
             
+            // Handle empty children list
+            guard !children.isEmpty else {
+                throw NineAnimatorError.responseError("No seasons found for this anime")
+            }
+            
             // Construct the parent Anime object
             return Anime(
                 reassembledLink,
@@ -171,6 +176,11 @@ extension NASourceWonderfulSubs {
                     }
                 }
             }
+        
+        // Empty retrieved episodes list
+        guard !retrievedEpisodes.isEmpty else {
+            throw NineAnimatorError.responseError("No episodes found for this anime")
+        }
         
         var episodes = Anime.EpisodesCollection()
         var episodeAdditionalInformationMap = [EpisodeLink: Anime.AdditionalEpisodeLinkInformation]()
