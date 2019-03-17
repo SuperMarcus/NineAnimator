@@ -62,44 +62,53 @@ class BaseSource {
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.session.request(url, headers: headers).responseString {
-            switch $0.result {
-            case .failure(let error):
-                Log.error("request to %@ failed - %@", url, error)
-                handler(nil, error)
-            case .success(let value):
-                handler(value, nil)
+        return parent.session
+            .request(url, headers: headers)
+            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
+            .responseString {
+                switch $0.result {
+                case .failure(let error):
+                    Log.error("request to %@ failed - %@", url, error)
+                    handler(nil, error)
+                case .success(let value):
+                    handler(value, nil)
+                }
             }
-        }
     }
     
     func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        return parent.ajaxSession.request(url, headers: headers).responseJSON {
-            response in
-            switch response.result {
-            case .failure(let error):
-                Log.error("request to %@ failed - %@", url, error)
-                handler(nil, error)
-            case .success(let value as NSDictionary):
-                handler(value, nil)
-            default:
-                Log.error("Unable to convert response value to NSDictionary")
-                handler(nil, NineAnimatorError.responseError("Invalid Response"))
+        return parent.ajaxSession
+            .request(url, headers: headers)
+            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
+            .responseJSON {
+                response in
+                switch response.result {
+                case .failure(let error):
+                    Log.error("request to %@ failed - %@", url, error)
+                    handler(nil, error)
+                case .success(let value as NSDictionary):
+                    handler(value, nil)
+                default:
+                    Log.error("Unable to convert response value to NSDictionary")
+                    handler(nil, NineAnimatorError.responseError("Invalid Response"))
+                }
             }
-        }
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.ajaxSession.request(url, headers: headers).responseString {
-            response in
-            switch response.result {
-            case .failure(let error):
-                Log.error("request to %@ failed - %@", url, error)
-                handler(nil, error)
-            case .success(let value):
-                handler(value, nil)
+        return parent.ajaxSession
+            .request(url, headers: headers)
+            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
+            .responseString {
+                response in
+                switch response.result {
+                case .failure(let error):
+                    Log.error("request to %@ failed - %@", url, error)
+                    handler(nil, error)
+                case .success(let value):
+                    handler(value, nil)
+                }
             }
-        }
     }
     
     func request(browse path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
@@ -139,5 +148,28 @@ class BaseSource {
             return nil
         }
         return request(ajaxString: url, headers: headers, completion: handler)
+    }
+    
+    /// Detects the presence of a cloudflare WAF verification page
+    fileprivate static func _cloudflareWAFVerificationMiddleware(
+        request: URLRequest?,
+        response: HTTPURLResponse,
+        body: Data?
+    ) -> Alamofire.DataRequest.ValidationResult {
+        if let requestingUrl = request?.url,
+            let serverHeaderField = response.allHeaderFields["Server"] as? String,
+            serverHeaderField.lowercased().hasPrefix("cloudflare"),
+            let body = body,
+            let bodyString = String(data: body, encoding: .utf8),
+            bodyString.contains("jschl_vc"),
+            bodyString.contains("jschl_answer") {
+            return .failure(
+                NineAnimatorError.authenticationRequiredError(
+                    "The website had asked NineAnimator to verify that you are not an attacker. Please complete the challenge in the opening page. When you are finished, close the page and NineAnimator will attempt to load the resource again.",
+                    requestingUrl
+                )
+            )
+        }
+        return .success
     }
 }
