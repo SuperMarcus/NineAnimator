@@ -19,22 +19,28 @@
 
 import Foundation
 
-protocol FeaturedContainer {
-    var featured: [AnimeLink] { get }
+extension NASourceAnimeUltima {
+    class SearchAgent: ContentProvider {
+        let query: String
+        
+        var title: String { return query }
+        var totalPages: Int?
+        var availablePages: Int = 0
+        var moreAvailable: Bool = true
+        weak var delegate: ContentProviderDelegate?
+        
+        func links(on page: Int) -> [AnyLink] {
+            return []
+        }
+        
+        func more() { }
+        
+        init(_ parent: NASourceAnimeUltima, query: String) {
+            self.query = query
+        }
+    }
     
-    var latest: [AnimeLink] { get }
-}
-
-/// A simple static featured container
-struct BasicFeaturedContainer: FeaturedContainer {
-    // The featured anime links
-    var featured: [AnimeLink]
-    
-    // Links to the latest (last updated) anime on this server
-    var latest: [AnimeLink]
-    
-    init(featured: [AnimeLink], latest: [AnimeLink]) {
-        self.featured = featured
-        self.latest = latest
+    func search(keyword: String) -> ContentProvider {
+        return SearchAgent(self, query: keyword)
     }
 }

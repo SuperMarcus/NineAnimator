@@ -10,6 +10,7 @@ disabled_rules: # rule identifiers to exclude from running
   - function_body_length
   - file_length
   - closure_end_indentation
+  - cyclomatic_complexity
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
   - closure_spacing
@@ -55,6 +56,5 @@ opt_in_rules: # some rules are only opt-in
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
   - yoda_condition
-
 trailing_whitespace:
   ignores_empty_lines: true

@@ -32,7 +32,6 @@ class NineAnimator: SessionDelegate {
     private let mainAdditionalHeaders: HTTPHeaders = {
         var headers = SessionManager.defaultHTTPHeaders
         headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
-        headers["Accept-Language"] = "en-us"
         return headers
     }()
     
@@ -101,6 +100,7 @@ extension NineAnimator {
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourceWonderfulSubs(with: self))
+//        register(source: NASourceAnimeUltima(with: self))
     }
 }
 

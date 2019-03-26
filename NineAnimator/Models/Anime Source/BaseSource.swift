@@ -23,14 +23,46 @@ import Foundation
 /**
  Class BaseSource: all the network functions that the subclasses will ever need
  */
-class BaseSource {
+class BaseSource: SessionDelegate {
     let parent: NineAnimator
     
     var endpoint: String { return "" }
     
     var endpointURL: URL { return URL(string: endpoint)! }
     
-    var retriverSession: SessionManager { return parent.ajaxSession }
+    var _cfResolverTimer: Timer?
+    var _cfPausedTasks = [Alamofire.RequestRetryCompletion]()
+    
+    /// The session used to create ajax requests
+    lazy var retriverSession: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpAdditionalHeaders = [
+            "User-Agent": sessionUserAgent,
+            "X-Requested-With": "XMLHttpRequest"
+        ]
+        let manager = SessionManager(configuration: configuration, delegate: self)
+        manager.retrier = self
+        return manager
+    }()
+    
+    /// The session used to create browsing requests
+    lazy var browseSession: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpAdditionalHeaders = [
+            "User-Agent": sessionUserAgent
+        ]
+        let manager = SessionManager(configuration: configuration, delegate: self)
+        manager.retrier = self
+        return manager
+    }()
+    
+    var sessionUserAgent: String {
+        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
+    }
     
     init(with parent: NineAnimator) {
         self.parent = parent
@@ -62,7 +94,7 @@ class BaseSource {
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.session
+        return browseSession
             .request(url, headers: headers)
             .validate(BaseSource._cloudflareWAFVerificationMiddleware)
             .responseString {
@@ -77,7 +109,7 @@ class BaseSource {
     }
     
     func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        return parent.ajaxSession
+        return retriverSession
             .request(url, headers: headers)
             .validate(BaseSource._cloudflareWAFVerificationMiddleware)
             .responseJSON {
@@ -96,7 +128,7 @@ class BaseSource {
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return parent.ajaxSession
+        return retriverSession
             .request(url, headers: headers)
             .validate(BaseSource._cloudflareWAFVerificationMiddleware)
             .responseString {
@@ -148,28 +180,5 @@ class BaseSource {
             return nil
         }
         return request(ajaxString: url, headers: headers, completion: handler)
-    }
-    
-    /// Detects the presence of a cloudflare WAF verification page
-    fileprivate static func _cloudflareWAFVerificationMiddleware(
-        request: URLRequest?,
-        response: HTTPURLResponse,
-        body: Data?
-    ) -> Alamofire.DataRequest.ValidationResult {
-        if let requestingUrl = request?.url,
-            let serverHeaderField = response.allHeaderFields["Server"] as? String,
-            serverHeaderField.lowercased().hasPrefix("cloudflare"),
-            let body = body,
-            let bodyString = String(data: body, encoding: .utf8),
-            bodyString.contains("jschl_vc"),
-            bodyString.contains("jschl_answer") {
-            return .failure(
-                NineAnimatorError.authenticationRequiredError(
-                    "The website had asked NineAnimator to verify that you are not an attacker. Please complete the challenge in the opening page. When you are finished, close the page and NineAnimator will attempt to load the resource again.",
-                    requestingUrl
-                )
-            )
-        }
-        return .success
     }
 }

@@ -19,22 +19,15 @@
 
 import Foundation
 
-protocol FeaturedContainer {
-    var featured: [AnimeLink] { get }
-    
-    var latest: [AnimeLink] { get }
+func formEncode(_ dict: [String: CustomStringConvertible]) throws -> String {
+    var encoder = URLComponents()
+    encoder.queryItems = dict.map { .init(name: $0.key, value: $0.value.description) }
+    return try some(encoder.percentEncodedQuery, or: .urlError)
 }
 
-/// A simple static featured container
-struct BasicFeaturedContainer: FeaturedContainer {
-    // The featured anime links
-    var featured: [AnimeLink]
-    
-    // Links to the latest (last updated) anime on this server
-    var latest: [AnimeLink]
-    
-    init(featured: [AnimeLink], latest: [AnimeLink]) {
-        self.featured = featured
-        self.latest = latest
-    }
+func formDecode(_ form: String) throws -> [String: String] {
+    var decoder = URLComponents()
+    decoder.percentEncodedQuery = form
+    let items = try some(decoder.queryItems, or: .urlError)
+    return Dictionary(uniqueKeysWithValues: try items.map { ($0.name, try some($0.value, or: .urlError)) })
 }

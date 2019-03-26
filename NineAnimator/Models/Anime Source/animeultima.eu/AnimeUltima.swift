@@ -19,22 +19,24 @@
 
 import Foundation
 
-protocol FeaturedContainer {
-    var featured: [AnimeLink] { get }
+class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
+    var name: String { return "animeultima.eu" }
     
-    var latest: [AnimeLink] { get }
-}
-
-/// A simple static featured container
-struct BasicFeaturedContainer: FeaturedContainer {
-    // The featured anime links
-    var featured: [AnimeLink]
+    override var endpoint: String { return "https://www10.animeultima.eu" }
     
-    // Links to the latest (last updated) anime on this server
-    var latest: [AnimeLink]
+    func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
+        return .fail(.unknownError)
+    }
     
-    init(featured: [AnimeLink], latest: [AnimeLink]) {
-        self.featured = featured
-        self.latest = latest
+    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        return .fail(.unknownError)
+    }
+    
+    func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
+        return .fail(.unknownError)
+    }
+    
+    func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        return nil
     }
 }
