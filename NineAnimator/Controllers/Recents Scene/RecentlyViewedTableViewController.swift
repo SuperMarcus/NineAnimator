@@ -246,7 +246,7 @@ extension RecentlyViewedTableViewController {
 // MARK: - Constants
 fileprivate extension RecentlyViewedTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
-    fileprivate enum Section: Int, Equatable {
+    enum Section: Int, Equatable {
         case continueWatching = 0
         
         case collections = 1

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
-		2C12EDD221BDDF320064D2BD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCE21BDDF320064D2BD /* Result.framework */; };
 		2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */; };
 		2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */; };
 		2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */; };
@@ -497,7 +496,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C12EDD221BDDF320064D2BD /* Result.framework in Frameworks */,
 				2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */,
 				2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */,
 				2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */,
@@ -1180,8 +1178,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C4ABC6D21B5881F009B4D47 /* Build configuration list for PBXNativeTarget "NineAnimator" */;
 			buildPhases = (
-				52F6A4F121DABBE60005D78D /* ShellScript */,
-				2C4ABC9621B7F55B009B4D47 /* ShellScript */,
+				52F6A4F121DABBE60005D78D /* Linting */,
+				2C4ABC9621B7F55B009B4D47 /* Copy Frameworks */,
 				2C4ABC4C21B5881E009B4D47 /* Sources */,
 				2C4ABC4D21B5881E009B4D47 /* Frameworks */,
 				2C4ABC4E21B5881E009B4D47 /* Resources */,
@@ -1225,6 +1223,7 @@
 				TargetAttributes = {
 					2C2196CD21DAC555002059D3 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 2C4ABC4F21B5881E009B4D47;
 					};
 					2C4ABC4F21B5881E009B4D47 = {
@@ -1246,6 +1245,7 @@
 					};
 					2C4ABC6321B5881F009B4D47 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 2C4ABC4F21B5881E009B4D47;
 					};
 				};
@@ -1309,7 +1309,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2C4ABC9621B7F55B009B4D47 /* ShellScript */ = {
+		2C4ABC9621B7F55B009B4D47 /* Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1321,10 +1321,10 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/OpenCastSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftProtobuf.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
+			name = "Copy Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1332,7 +1332,6 @@
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftSoup.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OpenCastSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Result.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftProtobuf.framework",
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
 			);
@@ -1340,7 +1339,7 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
-		52F6A4F121DABBE60005D78D /* ShellScript */ = {
+		52F6A4F121DABBE60005D78D /* Linting */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1349,6 +1348,7 @@
 			);
 			inputPaths = (
 			);
+			name = Linting;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -1664,7 +1664,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NineAnimator.app/NineAnimator";
 			};
@@ -1683,7 +1683,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NineAnimator.app/NineAnimator";
 			};
@@ -1826,7 +1826,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1852,7 +1852,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -1870,7 +1870,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = NineAnimator;
 			};
@@ -1889,7 +1889,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimatorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = NineAnimator;
 			};

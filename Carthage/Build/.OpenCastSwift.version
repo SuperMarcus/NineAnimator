@@ -1,9 +1,9 @@
 {
-  "commitish" : "1.1",
+  "commitish" : "46d5f0ec7353655b4b17e28922e8fcd495dbdcdc",
   "iOS" : [
     {
       "name" : "OpenCastSwift",
-      "hash" : "4f09875d840dbef1b3b7c710c1b1f055f343836a2e4615906f76ec7c25be6070"
+      "hash" : "3ba42bea7a55510b824bf250ad577937295caccd0d4f1159ab1fec0c8530e37c"
     }
   ]
 }

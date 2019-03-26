@@ -588,7 +588,7 @@ extension AnimeInformationTableViewController {
 // MARK: - Helpers
 fileprivate extension AnimeInformationTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
-    fileprivate enum Section: Int, Equatable {
+    enum Section: Int, Equatable {
         case synopsis = 0
         
         case statistics

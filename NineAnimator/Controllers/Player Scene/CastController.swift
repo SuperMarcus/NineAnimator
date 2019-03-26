@@ -120,39 +120,42 @@ extension CastController {
         
         client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
             result in
-            guard let app = result.value else { return Log.error(result.error) }
-            
-            self.currentApp = app
-            client.load(media: castMedia, with: app) {
-                mediaResult in
-                switch mediaResult {
-                case .success(let status):
-                    self.content = castMedia
-                    if let duration = status.media?.duration {
-                        Log.info("Media duration is %@", duration)
-                        self.contentDuration = duration
+            switch result {
+            case let .success(app):
+                self.currentApp = app
+                client.load(media: castMedia, with: app) {
+                    mediaResult in
+                    switch mediaResult {
+                    case .success(let status):
+                        self.content = castMedia
+                        if let duration = status.media?.duration {
+                            Log.info("Media duration is %@", duration)
+                            self.contentDuration = duration
+                        }
+                        self.viewController.playback(didStart: castMedia)
+                        if let deviceStatus = client.currentStatus { self.viewController.playback(update: castMedia, deviceStatus: deviceStatus) }
+                        self.viewController.playback(update: castMedia, mediaStatus: status)
+                        
+                        let storedPctProgress = Float(episode.progress)
+                        
+                        if storedPctProgress != 0, let duration = status.media?.duration {
+                            //Restore playback progress
+                            self.seek(to: max(storedPctProgress * Float(duration) - 5.0, 0))
+                        }
+                        
+                        self.updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: self.timerUpdateProgressTask)
+                        
+                        // Notify tracking context
+                        self.trackingContext?.beginWatching(episode: episode.link)
+                        
+                        Log.info("Playback status @%", status)
+                    case .failure(let error):
+                        self.viewController.playback(didEnd: castMedia)
+                        Log.error("Error on playback %@", error)
                     }
-                    self.viewController.playback(didStart: castMedia)
-                    if let deviceStatus = client.currentStatus { self.viewController.playback(update: castMedia, deviceStatus: deviceStatus) }
-                    self.viewController.playback(update: castMedia, mediaStatus: status)
-                    
-                    let storedPctProgress = Float(episode.progress)
-                    
-                    if storedPctProgress != 0, let duration = status.media?.duration {
-                        //Restore playback progress
-                        self.seek(to: max(storedPctProgress * Float(duration) - 5.0, 0))
-                    }
-                    
-                    self.updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: self.timerUpdateProgressTask)
-                    
-                    // Notify tracking context
-                    self.trackingContext?.beginWatching(episode: episode.link)
-                    
-                    Log.info("Playback status @%", status)
-                case .failure(let error):
-                    self.viewController.playback(didEnd: castMedia)
-                    Log.error("Error on playback %@", error)
                 }
+            case let .failure(error):
+                Log.error(error)
             }
         }
     }

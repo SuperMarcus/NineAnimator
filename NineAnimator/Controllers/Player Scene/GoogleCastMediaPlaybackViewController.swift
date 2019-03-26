@@ -282,7 +282,7 @@ extension GoogleCastMediaPlaybackViewController {
     func playback(update media: CastMedia, mediaStatus status: CastMediaStatus) {
         coverImage.kf.setImage(with: media.poster) {
             result in
-            guard let image = result.value?.image else { return }
+            guard let image = try? result.get().image else { return }
             // Set poster image but let the updater to push it to the now playing center
             self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
                 MPMediaItemArtwork(boundsSize: image.size) { _ in image }

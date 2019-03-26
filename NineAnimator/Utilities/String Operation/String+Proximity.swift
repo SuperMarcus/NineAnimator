@@ -19,7 +19,6 @@
 
 import Foundation
 
-// swiftlint:disable cyclomatic_complexity
 extension String {
     /// Calculate the distance between two strings with Jaro–Winkler
     ///
@@ -34,18 +33,16 @@ extension String {
     /// Authored by [Imizaac](https://rosettacode.org/wiki/User:Imizaac):
     /// [Jaro_distance#Swift](https://rosettacode.org/wiki/Jaro_distance#Swift)
     func proximity(to comparingString: String) -> Double {
-        let s = withoutUnicodeRomanNumerals
-        let t = comparingString.withoutUnicodeRomanNumerals
+        let s = withoutUnicodeRomanNumerals.map { $0 }
+        let t = comparingString.withoutUnicodeRomanNumerals.map { $0 }
         let s_len: Int = s.count
         let t_len: Int = t.count
         
-        if s_len == 0 && t_len == 0 {
-            return 1.0
-        }
+        // If both are empty, return 1.0
+        if s_len == 0 && t_len == 0 { return 1.0 }
         
-        if s_len == 0 || t_len == 0 {
-            return 0.0
-        }
+        // If one is empty and the other is not, return 0.0
+        if s_len == 0 || t_len == 0 { return 0.0 }
         
         var match_distance: Int = 0
         
@@ -55,36 +52,19 @@ extension String {
             match_distance = ([s_len, t_len].max()!/2) - 1
         }
         
-        var s_matches = [Bool]()
-        var t_matches = [Bool]()
-        
-        for _ in 1...s_len {
-            s_matches.append(false)
-        }
-        
-        for _ in 1...t_len {
-            t_matches.append(false)
-        }
+        var s_matches = [Bool](repeating: false, count: s_len)
+        var t_matches = [Bool](repeating: false, count: t_len)
         
         var matches: Double = 0.0
         var transpositions: Double = 0.0
         
-        for i in 0...s_len-1 {
+        for i in 0..<s_len {
             let start = [0, (i-match_distance)].max()!
             let end = [(i + match_distance), t_len-1].min()!
             
-            if start > end {
-                break
-            }
+            if start > end { break }
             
-            for j in start...end {
-                if t_matches[j] {
-                    continue
-                }
-                
-                if s[String.Index(encodedOffset: i)] != t[String.Index(encodedOffset: j)] {
-                    continue
-                }
+            for j in start...end where !t_matches[j] && s[i] == t[j] {
                 // We must have a match
                 s_matches[i] = true
                 t_matches[j] = true
@@ -93,22 +73,13 @@ extension String {
             }
         }
         
-        if matches == 0 {
-            return 0.0
-        }
+        // Return directly for zero matches
+        if matches == 0 { return 0.0 }
         
         var k = 0
-        for i in 0...s_len-1 {
-            if !s_matches[i] {
-                continue
-            }
-            while !t_matches[k] {
-                k += 1
-            }
-            if s[String.Index(encodedOffset: i)] != t[String.Index(encodedOffset: k)] {
-                transpositions += 1
-            }
-            
+        for i in 0..<s_len where s_matches[i] {
+            while !t_matches[k] { k += 1 }
+            if s[i] != t[k] { transpositions += 1 }
             k += 1
         }
         
@@ -116,4 +87,3 @@ extension String {
         return top / 3
     }
 }
-// swiftlint:enable cyclomatic_complexity

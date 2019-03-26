@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         switch scheme {
         case "nineanimator":
-            guard let resourceSpecifier = (url as NSURL).resourceSpecifier?[String.Index(encodedOffset: 2)...] else {
+            guard let resourceSpecifier = (url as NSURL).resourceSpecifier?.dropFirst(2) else {
                 Log.error("Cannot open url '%@': no resource specifier", url.absoluteString)
                 return false
             }

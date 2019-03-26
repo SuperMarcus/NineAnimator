@@ -249,6 +249,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         case .available: break
         case .denied: subscriptionEngineStatus.append("App Refresh Denied")
         case .restricted: subscriptionEngineStatus.append("App Refresh Restricted")
+        @unknown default: Log.info("Background refresh status is unknown to NineAnimator. Maybe the app needs an upgrade?")
         }
         
         UNUserNotificationCenter.current().getNotificationSettings {

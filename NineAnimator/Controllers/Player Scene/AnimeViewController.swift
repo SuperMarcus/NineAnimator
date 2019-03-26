@@ -842,7 +842,7 @@ fileprivate extension AnimeViewController {
     }
     
     // Using this enum to remind me to implement stuff when adding new sections...
-    fileprivate enum Section: Int, Equatable {
+    enum Section: Int, Equatable {
         case suggestion = 0
         
         case synopsis = 1
@@ -876,5 +876,5 @@ fileprivate extension AnimeViewController {
 }
 
 fileprivate extension Array where Element == AnimeViewController.Section {
-    fileprivate static let all: [AnimeViewController.Section] = [ .suggestion, .synopsis, .episodes ]
+    static let all: [AnimeViewController.Section] = [ .suggestion, .synopsis, .episodes ]
 }

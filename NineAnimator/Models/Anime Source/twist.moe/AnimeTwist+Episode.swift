@@ -64,12 +64,12 @@ extension NASourceAnimeTwist {
                                 CCOperation(kCCDecrypt),
                                 CCAlgorithm(kCCAlgorithmAES),
                                 CCOptions(kCCOptionPKCS7Padding),
-                                keyPointer,
+                                keyPointer.baseAddress!,
                                 kCCKeySizeAES256,
-                                ivPointer,
-                                dataPointer,
+                                ivPointer.baseAddress!,
+                                dataPointer.baseAddress!,
                                 data.count,
-                                destinationPointer,
+                                destinationPointer.baseAddress!,
                                 destinationBufferLength,
                                 &decryptedBytes
                             )
@@ -110,8 +110,12 @@ extension NASourceAnimeTwist {
         _ = digestBuffer.withUnsafeMutableBytes {
             destinationPointer in
             dataAndSalt.withUnsafeBytes {
-                pointer in
-                CC_MD5(pointer, CC_LONG(dataAndSalt.count), destinationPointer)
+                (pointer: UnsafeRawBufferPointer) in
+                CC_MD5(
+                    pointer.baseAddress!,
+                    CC_LONG(dataAndSalt.count),
+                    destinationPointer.bindMemory(to: UInt8.self).baseAddress!
+                )
             }
         }
         destinationBuffer.append(digestBuffer)
@@ -120,10 +124,14 @@ extension NASourceAnimeTwist {
         while destinationBuffer.count < totalLength {
             let combined = digestBuffer + dataAndSalt
             _ = digestBuffer.withUnsafeMutableBytes {
-                destinationPointer in
+                (destinationPointer: UnsafeMutableRawBufferPointer) in
                 combined.withUnsafeBytes {
                     pointer in
-                    CC_MD5(pointer, CC_LONG(combined.count), destinationPointer)
+                    CC_MD5(
+                        pointer.baseAddress!,
+                        CC_LONG(combined.count),
+                        destinationPointer.bindMemory(to: UInt8.self).baseAddress!
+                    )
                 }
             }
             destinationBuffer.append(digestBuffer)

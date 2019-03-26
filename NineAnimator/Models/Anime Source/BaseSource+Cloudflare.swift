@@ -152,6 +152,12 @@ extension BaseSource: Alamofire.RequestRetrier {
             case let .authenticationRequiredError(_, vUrl):
                 guard let verificationUrl = vUrl else { break }
                 
+                // Abort after 4 retries
+                if request.retryCount > 4 {
+                    Log.info("[CF_WAF] Maximal number of retry reached.")
+                    return fail()
+                }
+                
                 Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after 5 seconds")
                 
                 // Solve the challenge in 5 seconds
