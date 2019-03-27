@@ -20,7 +20,7 @@ before_script:
 
 script:
   - swiftlint
-  - xcodebuild clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
+  - xcodebuild clean build CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
 
 env:
   global:
