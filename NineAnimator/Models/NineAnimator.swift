@@ -63,11 +63,14 @@ class NineAnimator: SessionDelegate {
     /// Container for the list of tracking services
     private(set) var trackingServices = [ListingService]()
     
+    /// Accessing the global configuration queue
+    private var configurationQueue: DispatchQueue { return NineAnimator.globalConfigurationQueue }
+    
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
-    /// Queue for modify internal configurations
-    private let configurationQueue: DispatchQueue = .global()
+    /// Global queue for modify internal configurations
+    fileprivate static let globalConfigurationQueue: DispatchQueue = .global()
     
     override init() {
         super.init()
