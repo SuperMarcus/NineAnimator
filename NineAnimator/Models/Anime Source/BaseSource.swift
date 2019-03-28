@@ -66,6 +66,16 @@ class BaseSource: SessionDelegate {
     
     init(with parent: NineAnimator) {
         self.parent = parent
+        
+        super.init()
+        
+        // Prevent cloudflare check redirection
+        self.taskWillPerformHTTPRedirection = {
+            _, _, response, newRequest in
+            if response.url?.path == "/cdn-cgi/l/chk_jschl" {
+                return nil
+            } else { return newRequest }
+        }
     }
     
     /**

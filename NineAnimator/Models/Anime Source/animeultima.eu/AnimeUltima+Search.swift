@@ -33,7 +33,9 @@ extension NASourceAnimeUltima {
             return []
         }
         
-        func more() { }
+        func more() {
+            delegate?.onError(NineAnimatorError.searchError("Search is not implemented for Anime Ultima"), from: self)
+        }
         
         init(_ parent: NASourceAnimeUltima, query: String) {
             self.query = query

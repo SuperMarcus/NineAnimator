@@ -158,10 +158,10 @@ extension BaseSource: Alamofire.RequestRetrier {
                     return fail()
                 }
                 
-                Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after 5 seconds")
+                Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after 7 seconds")
                 
                 // Solve the challenge in 5 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 6) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                     guard let originalUrlString = request.request?.url?.absoluteString
                         else { return fail() }
                     
@@ -172,7 +172,7 @@ extension BaseSource: Alamofire.RequestRetrier {
                         "Referer": originalUrlString,
                         "User-Agent": self.sessionUserAgent,
                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-                    ]).responseData {
+                    ]) .responseData {
                         [weak self] value in
                         guard self != nil, case .success = value.result else { return fail() }
                         

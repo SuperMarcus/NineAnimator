@@ -24,19 +24,10 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { return "https://www10.animeultima.eu" }
     
-    func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return .fail(.unknownError)
-    }
-    
-    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return .fail(.unknownError)
-    }
+    lazy var _auEngineParser = AUEngineParser(self)
+    lazy var _fastStreamParser = FastStreamParser(self)
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         return .fail(.unknownError)
-    }
-    
-    func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return nil
     }
 }
