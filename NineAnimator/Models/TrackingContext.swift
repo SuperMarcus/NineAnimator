@@ -52,6 +52,7 @@ class TrackingContext {
     private var relatedLinks: Set<AnimeLink>
     private var listingAnimeReferences = [String: ListingAnimeReference]()
     private var progressRecords = [PlaybackProgressRecord]()
+    private(set) var previousSessionServer: Anime.ServerIdentifier?
     
     private var current: EpisodeLink?
     
@@ -335,6 +336,11 @@ extension TrackingContext {
         }
     }
     
+    /// When user selects a new streaming server
+    func update(currentSessionServer: Anime.ServerIdentifier) {
+        previousSessionServer = currentSessionServer
+    }
+    
     /// Infer the episode number based on the name of the episode
     func suggestingEpisodeNumber(for episodeLink: EpisodeLink) -> Int? {
         // Conventionally in NineAnimator, the episode number always prefixes
@@ -371,6 +377,7 @@ extension TrackingContext {
         static let cachedReferences = "com.marcuszhou.nineanimator.TrackingContext.references"
         static let progressRecords = "com.marcuszhou.nineanimator.TrackingContext.progresses"
         static let updateDate = "com.marcuszhou.nineanimator.TrackingContext.lastUpdate"
+        static let previousSessionServer = "com.marcuszhou.nineanimator.TrackingContext.previousSessionServer"
     }
     
     private func save() {
@@ -383,6 +390,7 @@ extension TrackingContext {
             persistingInformation[Keys.relatedLinks] = try encode(data: relatedLinks)
             persistingInformation[Keys.cachedReferences] = try encode(data: listingAnimeReferences)
             persistingInformation[Keys.progressRecords] = try encode(data: progressRecords)
+            persistingInformation[Keys.previousSessionServer] = previousSessionServer
             
             // Write to configuration url
             try PropertyListSerialization
@@ -423,6 +431,7 @@ extension TrackingContext {
                 or: .decodeError
             )
             self.updateDate = (persistedInformation[Keys.updateDate] as? Date) ?? .distantPast
+            self.previousSessionServer = persistedInformation[Keys.previousSessionServer] as? Anime.ServerIdentifier
         } catch {
             Log.error("Unable to decode persisted tracking context state data: %@", error)
         }

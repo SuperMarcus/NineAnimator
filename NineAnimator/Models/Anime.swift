@@ -153,6 +153,7 @@ struct Anime {
     mutating func select(server: ServerIdentifier) {
         if episodes[server] != nil {
             currentServer = server
+            trackingContext.update(currentSessionServer: server)
         }
     }
     
@@ -180,22 +181,30 @@ struct Anime {
     
     /// Determine the initial server selection for this anime
     ///
-    /// See: Source.recommendServer(for:)
+    /// Also See: Source.recommendServer(for:)
     private mutating func determineInitialServer() {
         // Previously selected server
         if let recentServer = NineAnimator.default.user.recentServer,
             servers[recentServer] != nil {
-            select(server: recentServer)
-            return
+            return select(server: recentServer)
         }
         
-        // Source recommended server
+        // If the previous server is not available, then pioritize
+        // the server used previously by the user for this anime
+        if let previousServer = trackingContext.previousSessionServer,
+            servers[previousServer] != nil {
+            return select(server: previousServer)
+        }
+        
+        // If there is no previous record of server selection or
+        // that the record had become invalid, use Source recommended
+        // server
         if let sourceRecommendedServer = source.recommendServer(for: self) {
-            select(server: sourceRecommendedServer)
-            return
+            return select(server: sourceRecommendedServer)
         }
         
-        // Default behavior, use the first server
+        // If even the source cannot recommend a server, fallback to
+        // the default behavior -- use the first available server
         select(server: servers.first!.key)
     }
 }
