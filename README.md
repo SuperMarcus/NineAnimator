@@ -7,10 +7,8 @@
 ![Platform: iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](/LICENSE)
 
-A simple yet elegant way of waching anime on your favorite anime website.
-NineAnimator is a free and open source anime watching app for iOS. Currently
-it supports [9anime.ru](//9anime.ru), [masterani.me](//masterani.me),
-[gogoanime.io](//gogoanime.io), and [Anime Twist](//twist.moe). GPLv3 Licensed.
+A simple yet elegant way of waching anime on your favorite anime websites.
+NineAnimator is a free and open source anime watching app for iOS. GPLv3 Licensed.
 
     
     Copyright © 2018-2019 Marcus Zhou. All rights reserved.
@@ -237,6 +235,12 @@ of features:
     - [ ] Open arbitrary links
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
+    - [ ] Detailed episode synopsis
+- [Anime Ultima](//animeultima.eu)
+    - [x] Basic features (featured list, notifications, and playback; search is not implemented yet, but soon)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
 
 ## Anime Listing & Tracking Websites
