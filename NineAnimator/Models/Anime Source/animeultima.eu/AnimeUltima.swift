@@ -30,4 +30,31 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         return .fail(.unknownError)
     }
+    
+    override func canHandle(url: URL) -> Bool {
+        return false
+    }
+    
+    override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+        let preferencesTable = [
+            "faststream": 1000,
+            "auengine": 900,
+            "rapid video": 800
+        ]
+        
+        let serverPreferencesMap = anime.servers.mapValues {
+            serverName -> Int in
+            let matchingKey = serverName.lowercased()
+            for (key, piority) in preferencesTable {
+                if key.lowercased().hasSuffix(matchingKey) {
+                    return piority
+                }
+            }
+            return 500
+        }
+        
+        if let preferredServer = serverPreferencesMap.max(by: { $0.value < $1.value })?.key {
+            return preferredServer
+        } else { return super.recommendServer(for: anime) }
+    }
 }
