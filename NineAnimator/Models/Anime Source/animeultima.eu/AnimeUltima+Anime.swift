@@ -95,10 +95,26 @@ extension NASourceAnimeUltima {
                 )
                 
                 // Parse episode list
-                let episodeListEntry = try some(
-                    animeInfo["episodes"] as? [NSDictionary],
-                    or: .responseError("Cannot retrieve the episode list of this anime")
-                )
+                var episodeListEntry = [NSDictionary]()
+                
+                if let episodeListEntryRaw = animeInfo["episodes"] as? [NSDictionary] {
+                    episodeListEntry = episodeListEntryRaw
+                } else if let potentialActionList = animeInfo["potentialAction"] as? NSDictionary,
+                    (potentialActionList["@type"] as? String) == "WatchAction",
+                    let targetEpisodeUrlString = potentialActionList["target"] as? String {
+                    // Assemble an episode from the watch action list
+                    let assemblingRawEpisode = NSMutableDictionary()
+                    assemblingRawEpisode["url"] = targetEpisodeUrlString
+                    assemblingRawEpisode["name"] = animeTitle
+                    
+                    // Present the type of the anime in place of the name
+                    if let animeType = animeInfo["@type"] as? String {
+                        assemblingRawEpisode["name"] = animeType
+                    }
+
+                    episodeListEntry.append(assemblingRawEpisode)
+                }
+                
                 var listOfEpisodes = [ConstructingEpisodeInformation]()
                 
                 // Iterate through the episode list

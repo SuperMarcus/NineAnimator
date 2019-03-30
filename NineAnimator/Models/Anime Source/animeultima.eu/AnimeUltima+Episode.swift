@@ -74,14 +74,38 @@ extension NASourceAnimeUltima {
                     mirrorList[mirrorIdentifier] = mirrorName
                 }
                 
-                // Make sure we at least have one mirror
-                guard let currentMirrorIdentifier = selectedMirrorIdentifier ?? mirrorList.first?.key else {
-                    throw NineAnimatorError.responseError("No available episode found for this anime")
-                }
-                
                 // Obtain the mirror's streaming frame url
                 guard let frameUrl = URL(string: try bowl.select("iframe").attr("src"), relativeTo: episodeUrl) else {
                     throw NineAnimatorError.urlError
+                }
+                
+                // If the list of mirror is empty, determine the name of the current server
+                // and add the current address to the mirror list
+                if mirrorList.isEmpty {
+                    let nameOfMirror: String
+                    switch frameUrl {
+                    case _ where try bowl.select("iframe").attr("src").hasPrefix("/e"):
+                        nameOfMirror = "AUEngine"
+                    case _ where frameUrl.host?.hasPrefix("faststream") == true:
+                        nameOfMirror = "FastStream"
+                    case _ where frameUrl.host == "animeultima.ch":
+                        nameOfMirror = "AU.ch"
+                    case _ where frameUrl.host?.hasSuffix("rapidvideo.com") == true:
+                        nameOfMirror = "Rapid Video"
+                    case _ where frameUrl.host?.hasSuffix("streamango.com") == true:
+                        nameOfMirror = "Streamango"
+                    case _ where frameUrl.host?.hasSuffix("mp4upload.com") == true:
+                        nameOfMirror = "Mp4Upload"
+                    case _ where frameUrl.host?.hasSuffix("animefever.tv") == true:
+                        nameOfMirror = "AF"
+                    default: nameOfMirror = frameUrl.host!
+                    }
+                    mirrorList[episodeUrl] = nameOfMirror
+                    selectedMirrorIdentifier = episodeUrl
+                }
+                
+                guard let currentMirrorIdentifier = selectedMirrorIdentifier ?? mirrorList.first?.key else {
+                    throw NineAnimatorError.responseError("No available episode found for this anime")
                 }
                 
                 // Construct the page information struct
