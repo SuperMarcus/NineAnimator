@@ -23,7 +23,12 @@ import SwiftSoup
 extension NASourceAnimeUltima {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         // The intermiddiate information for constructing the anime and episode links
-        typealias ConstructingEpisodeInformation = (name: String?, number: String, url: URL)
+        typealias ConstructingEpisodeInformation = (
+            name: String?,
+            number: String,
+            airDate: String?,
+            url: URL
+        )
         typealias ConstructingAnimeInformation = (
             attributes: [Anime.AttributeKey: Any],
             episodes: [ConstructingEpisodeInformation],
@@ -99,6 +104,7 @@ extension NASourceAnimeUltima {
                 // Iterate through the episode list
                 for episodeEntry in episodeListEntry {
                     var episodeName = episodeEntry["name"] as? String
+                    var episodeAirDate: String?
                     let episodeNumber = (episodeEntry["episodeNumber"] as? String) ?? "1"
                     
                     // Process the episode name -- sometimes an "Episode XX" is appended
@@ -124,6 +130,22 @@ extension NASourceAnimeUltima {
                         }
                     }
                     
+                    // Present the date published as additional episode information
+                    if let datePublished = (episodeEntry["datePublished"] as? String)?
+                        .trimmingCharacters(in: .whitespacesAndNewlines),
+                        !datePublished.isEmpty {
+                        let dateParser = DateFormatter()
+                        dateParser.dateFormat = "yyyy-MM-dd"
+                        
+                        // If the date is formattable
+                        if let date = dateParser.date(from: datePublished) {
+                            let formatter = DateFormatter()
+                            formatter.dateStyle = .long
+                            formatter.timeStyle = .none
+                            episodeAirDate = formatter.string(from: date)
+                        } else { episodeAirDate = datePublished }
+                    }
+                    
                     // The most important step: retrieve the url
                     guard let episodeUrlString = episodeEntry["url"] as? String,
                         let episodeUrl = URL(string: episodeUrlString) else {
@@ -132,7 +154,7 @@ extension NASourceAnimeUltima {
                     }
                     
                     // Enqueue the episode information
-                    listOfEpisodes.insert((episodeName, episodeNumber, episodeUrl), at: 0)
+                    listOfEpisodes.insert((episodeName, episodeNumber, episodeAirDate, episodeUrl), at: 0)
                 }
                 
                 // Check to make sure that there is at least one episode
@@ -183,6 +205,7 @@ extension NASourceAnimeUltima {
                         // Store the additional episode information
                         episodeInformationMap[episodeLink] = Anime.AdditionalEpisodeLinkInformation(
                             parent: episodeLink,
+                            airDate: episodeInformation.airDate,
                             episodeNumber: Int(episodeInformation.number),
                             title: episodeInformation.name
                         )
