@@ -58,10 +58,13 @@ extension BaseSource {
                 
                 // Reconstruct the url with cloudflare challenge value stored in the fragment
                 var urlBuilder = URLComponents(url: challengeUrl, resolvingAgainstBaseURL: false)
-                urlBuilder?.queryItems = [
-                    .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
-                    .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
-                    .init(name: "pass", value: cfPassValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
+                var cfQueryFilteredCharacters = CharacterSet.urlFragmentAllowed
+                _ = cfQueryFilteredCharacters.remove("/")
+                _ = cfQueryFilteredCharacters.remove("=")
+                urlBuilder?.percentEncodedQueryItems = [
+                    .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
+                    .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
+                    .init(name: "pass", value: cfPassValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
                     .init(name: "jschl_answer", value: cfJschlAnswerValue)
                 ]
                 
@@ -158,23 +161,40 @@ extension BaseSource: Alamofire.RequestRetrier {
                     return fail()
                 }
                 
-                Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after 7 seconds")
+                let delay = Double.random(in: 5...7)
+                Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
                 
                 // Solve the challenge in 5 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     guard let originalUrlString = request.request?.url?.absoluteString
                         else { return fail() }
                     
                     Log.info("[CF_WAF] Sending cf resolve challenge request...")
                     
                     // Make the verification request and then call the retry handler
-                    manager.request(verificationUrl, headers: [
+                    self.browseSession.request(verificationUrl, headers: [
                         "Referer": originalUrlString,
-                        "User-Agent": self.sessionUserAgent,
                         "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
                     ]) .responseData {
-                        [weak self] value in
-                        guard self != nil, case .success = value.result else { return fail() }
+                        value in
+                        guard case .success = value.result,
+                            let headerFields = value.response?.allHeaderFields as? [String: String]
+                            else { return fail() }
+                        
+                        // Check if clearance has been granted. If not, renew the current identity
+                        let verificationResponseCookies = HTTPCookie.cookies(
+                            withResponseHeaderFields: headerFields,
+                            for: verificationUrl
+                        )
+                        if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
+                            Log.info("[CF_WAF] Clearance has been granted")
+                        } else if request.retryCount == 2 {
+                            Log.info("[CF_WAF] Renewing identity")
+                            self.renewIdentity()
+                            for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
+                                HTTPCookieStorage.shared.deleteCookie(cookie)
+                            }
+                        }
                         
                         Log.info("[CF_WAF] Resuming original request...")
                         completion(true, 0.2)

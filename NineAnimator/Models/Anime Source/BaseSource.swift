@@ -32,37 +32,16 @@ class BaseSource: SessionDelegate {
     
     var _cfResolverTimer: Timer?
     var _cfPausedTasks = [Alamofire.RequestRetryCompletion]()
+    var _internalUAIdentity = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
     
     /// The session used to create ajax requests
-    lazy var retriverSession: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpShouldSetCookies = true
-        configuration.httpCookieAcceptPolicy = .always
-        configuration.httpAdditionalHeaders = [
-            "User-Agent": sessionUserAgent,
-            "X-Requested-With": "XMLHttpRequest"
-        ]
-        let manager = SessionManager(configuration: configuration, delegate: self)
-        manager.retrier = self
-        return manager
-    }()
+    lazy var retriverSession: SessionManager = createRetriverSession()
     
     /// The session used to create browsing requests
-    lazy var browseSession: SessionManager = {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpShouldSetCookies = true
-        configuration.httpCookieAcceptPolicy = .always
-        configuration.httpAdditionalHeaders = [
-            "User-Agent": sessionUserAgent
-        ]
-        let manager = SessionManager(configuration: configuration, delegate: self)
-        manager.retrier = self
-        return manager
-    }()
+    lazy var browseSession: SessionManager = createBrowseSession()
     
-    var sessionUserAgent: String {
-        return "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
-    }
+    /// The user agent that should be used with requests
+    var sessionUserAgent: String { return _internalUAIdentity }
     
     init(with parent: NineAnimator) {
         self.parent = parent
@@ -190,5 +169,54 @@ class BaseSource: SessionDelegate {
             return nil
         }
         return request(ajaxString: url, headers: headers, completion: handler)
+    }
+}
+
+extension BaseSource {
+    fileprivate func createRetriverSession() -> SessionManager {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpCookieStorage = HTTPCookieStorage.shared
+        configuration.httpAdditionalHeaders = [
+            "User-Agent": sessionUserAgent,
+            "X-Requested-With": "XMLHttpRequest"
+        ]
+        let manager = SessionManager(configuration: configuration, delegate: self)
+        manager.retrier = self
+        return manager
+    }
+    
+    fileprivate func createBrowseSession() -> SessionManager {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpShouldSetCookies = true
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.httpCookieStorage = HTTPCookieStorage.shared
+        configuration.httpAdditionalHeaders = [
+            "User-Agent": sessionUserAgent,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        ]
+        let manager = SessionManager(configuration: configuration, delegate: self)
+        manager.retrier = self
+        return manager
+    }
+    
+    func renewIdentity() {
+        let pool = [
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Safari/605.1.15",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36",
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+        ]
+        
+        // Pick a user agent
+        let randomUA = pool[Int.random(in: 0..<pool.count)]
+        _internalUAIdentity = randomUA
+        
+        // Recreate the sessions
+        browseSession = createBrowseSession()
+        retriverSession = createRetriverSession()
     }
 }
