@@ -59,9 +59,9 @@ extension BaseSource {
                 // Reconstruct the url with cloudflare challenge value stored in the fragment
                 var urlBuilder = URLComponents(url: challengeUrl, resolvingAgainstBaseURL: false)
                 urlBuilder?.queryItems = [
-                    .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)),
-                    .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)),
-                    .init(name: "pass", value: cfPassValue.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)),
+                    .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
+                    .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
+                    .init(name: "pass", value: cfPassValue.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)),
                     .init(name: "jschl_answer", value: cfJschlAnswerValue)
                 ]
                 
