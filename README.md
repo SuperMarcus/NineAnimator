@@ -239,11 +239,11 @@ of features:
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
 - [Anime Ultima](//animeultima.eu)
-    - [x] Basic features (featured list, notifications, and playback; search is not implemented yet, but soon)
+    - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
+    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
 
 ## Anime Listing & Tracking Websites
 

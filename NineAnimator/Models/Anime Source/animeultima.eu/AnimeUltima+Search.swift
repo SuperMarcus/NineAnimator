@@ -18,27 +18,74 @@
 //
 
 import Foundation
+import SwiftSoup
 
 extension NASourceAnimeUltima {
     class SearchAgent: ContentProvider {
         let query: String
-        
-        var title: String { return query }
-        var totalPages: Int?
-        var availablePages: Int = 0
-        var moreAvailable: Bool = true
         weak var delegate: ContentProviderDelegate?
         
+        // Accessing the search
+        var title: String { return query }
+        var totalPages: Int? = 1
+        var availablePages: Int { return result == nil ? 0 : 1 }
+        var moreAvailable: Bool { return result == nil }
+        
+        // The result of the search
+        private var result: [AnyLink]?
+        private var searchRequestingTask: NineAnimatorAsyncTask?
+        private let parent: NASourceAnimeUltima
+        
         func links(on page: Int) -> [AnyLink] {
-            return []
+            guard page == 0, let result = result else { return [] }
+            return result
         }
         
         func more() {
-            delegate?.onError(NineAnimatorError.searchError("Search is not implemented for Anime Ultima"), from: self)
+            guard searchRequestingTask == nil else { return }
+            searchRequestingTask = parent.request(
+                browsePath: "/search",
+                query: [ "search": query ]
+            ) .then {
+                [weak self] responseContent -> [AnimeLink]? in
+                guard let self = self else { return nil }
+                
+                var resultingAnime = [AnimeLink]()
+                let bowl = try SwiftSoup.parse(responseContent)
+                
+                // Iterate through the resulting anime
+                for resultAnimeContainer in try bowl.select("div.anime-box") {
+                    let animeUrlString = try resultAnimeContainer.select("a").attr("href")
+                    let animeUrl = try some(URL(string: animeUrlString), or: .urlError)
+                    let animeArtworkString = try resultAnimeContainer.select("img").attr("src")
+                    let animeArtworkUrl = try some(URL(string: animeArtworkString), or: .urlError)
+                    let animeTitle = try resultAnimeContainer.select("span.anime-title").text()
+                    
+                    // Construct anime link and add to list
+                    resultingAnime.append(AnimeLink(
+                        title: animeTitle,
+                        link: animeUrl,
+                        image: animeArtworkUrl,
+                        source: self.parent
+                    ))
+                }
+                
+                return resultingAnime
+            } .error {
+                [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.onError(error, from: self)
+            } .finally {
+                [weak self] resultingAnimeLinks in
+                guard let self = self else { return }
+                self.result = resultingAnimeLinks.map { .anime($0) }
+                self.delegate?.pageIncoming(0, from: self)
+            }
         }
         
         init(_ parent: NASourceAnimeUltima, query: String) {
             self.query = query
+            self.parent = parent
         }
     }
     
