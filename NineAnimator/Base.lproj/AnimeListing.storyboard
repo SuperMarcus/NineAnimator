@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rPB-zo-b7C">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rPB-zo-b7C">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -121,17 +121,17 @@
                                     <outlet property="activityIndicator" destination="bRz-8H-gGf" id="Fq1-L3-b1f"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="search.notfound" rowHeight="146" id="FjQ-a3-f5R" customClass="ContentErrorTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="321" width="375" height="146"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="search.error" rowHeight="223" id="FjQ-a3-f5R" customClass="ContentErrorTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="321" width="375" height="223"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FjQ-a3-f5R" id="ZlB-ab-SIf">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="145.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="222.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpE-eq-gRZ" userLabel="Container View">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Error" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goV-KK-D5O">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="19" translatesAutoresizingMaskIntoConstraints="NO" id="goV-KK-D5O">
                                                     <rect key="frame" x="123.5" y="113" width="128" height="26.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <nil key="textColor"/>
@@ -151,6 +151,8 @@
                                                 <constraint firstItem="hP6-y4-aJ9" firstAttribute="top" secondItem="goV-KK-D5O" secondAttribute="bottom" constant="8" id="Nqa-IO-cs3"/>
                                                 <constraint firstItem="goV-KK-D5O" firstAttribute="centerX" secondItem="kpE-eq-gRZ" secondAttribute="centerX" id="Q6Q-I3-VSD"/>
                                                 <constraint firstAttribute="height" constant="300" id="R1v-8G-XNw"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="goV-KK-D5O" secondAttribute="trailing" constant="32" id="Wih-uI-7nc"/>
+                                                <constraint firstItem="goV-KK-D5O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kpE-eq-gRZ" secondAttribute="leading" constant="32" id="Y7w-fk-RQJ"/>
                                                 <constraint firstItem="hP6-y4-aJ9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kpE-eq-gRZ" secondAttribute="leading" constant="16" id="iAr-38-fNS"/>
                                                 <constraint firstItem="goV-KK-D5O" firstAttribute="centerY" secondItem="kpE-eq-gRZ" secondAttribute="centerY" constant="-24" id="niS-oB-paX"/>
                                             </constraints>

@@ -140,12 +140,7 @@ extension TrackingServiceTableViewController {
                 .dispatch(on: .main)
                 .error {
                     [weak self] error in
-                    let message: String
-                    if let error = error as? NineAnimatorError {
-                        if case .authenticationRequiredError = error {
-                            message = "Your account name or password was incorrect"
-                        } else { message = error.description }
-                    } else { message = error.localizedDescription }
+                    let message: String = error.localizedDescription
                     
                     // Present the error message
                     let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)
@@ -241,12 +236,7 @@ extension TrackingServiceTableViewController {
             // Authenticate with the provided username and password
             self.kitsuAuthenticationTask = kitsu.authenticate(user: user, password: password).error {
                 [weak self] error in
-                let message: String
-                if let error = error as? NineAnimatorError {
-                    if case .authenticationRequiredError = error {
-                        message = "Your email or password was incorrect"
-                    } else { message = error.description }
-                } else { message = error.localizedDescription }
+                let message = error.localizedDescription
                 
                 // Present the error message
                 let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)

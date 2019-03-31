@@ -90,7 +90,7 @@ extension ContentListViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let providerError = providerError {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "search.notfound", for: indexPath) as! ContentErrorTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "search.error", for: indexPath) as! ContentErrorTableViewCell
             cell.error = providerError
             cell.makeThemable()
             return cell

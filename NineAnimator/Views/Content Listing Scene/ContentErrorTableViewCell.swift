@@ -26,15 +26,8 @@ class ContentErrorTableViewCell: UITableViewCell, Themable {
     
     var error: Error? {
         set {
-            if let providerError = newValue as? NineAnimatorError {
-                switch providerError {
-                case .searchError(let error):
-                    searchSubtitleLabel.text = error
-                default: searchSubtitleLabel.text = providerError.localizedDescription
-                }
-            } else {
-                searchSubtitleLabel.text = newValue?.localizedDescription ?? "Unknown Error"
-            }
+            searchTitleLabel.text = newValue?.localizedDescription ?? "Unknown Error"
+            searchSubtitleLabel.text = (newValue as NSError?)?.localizedFailureReason ?? "The reason of this error is unknown"
         }
         get { return nil }
     }

@@ -150,61 +150,56 @@ extension BaseSource: Alamofire.RequestRetrier {
         }
         
         // Check if there is an cloudflare authentication error
-        if let error = error as? NineAnimatorError {
-            switch error {
-            case let .authenticationRequiredError(_, vUrl):
-                guard let verificationUrl = vUrl else { break }
+        if let error = error as? NineAnimatorError.AuthenticationRequiredError,
+            let verificationUrl = error.authenticationUrl {
+            // Abort after 4 retries
+            if request.retryCount > 4 {
+                Log.info("[CF_WAF] Maximal number of retry reached.")
+                return fail()
+            }
+            
+            let delay = Double.random(in: 5...7)
+            Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
+            
+            // Solve the challenge in 5 seconds
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                guard let originalUrlString = request.request?.url?.absoluteString
+                    else { return fail() }
                 
-                // Abort after 4 retries
-                if request.retryCount > 4 {
-                    Log.info("[CF_WAF] Maximal number of retry reached.")
-                    return fail()
-                }
+                Log.info("[CF_WAF] Sending cf resolve challenge request...")
                 
-                let delay = Double.random(in: 5...7)
-                Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
-                
-                // Solve the challenge in 5 seconds
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    guard let originalUrlString = request.request?.url?.absoluteString
+                // Make the verification request and then call the retry handler
+                self.browseSession.request(verificationUrl, headers: [
+                    "Referer": originalUrlString,
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                ]) .responseData {
+                    value in
+                    guard case .success = value.result,
+                        let headerFields = value.response?.allHeaderFields as? [String: String]
                         else { return fail() }
                     
-                    Log.info("[CF_WAF] Sending cf resolve challenge request...")
-                    
-                    // Make the verification request and then call the retry handler
-                    self.browseSession.request(verificationUrl, headers: [
-                        "Referer": originalUrlString,
-                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-                    ]) .responseData {
-                        value in
-                        guard case .success = value.result,
-                            let headerFields = value.response?.allHeaderFields as? [String: String]
-                            else { return fail() }
-                        
-                        // Check if clearance has been granted. If not, renew the current identity
-                        let verificationResponseCookies = HTTPCookie.cookies(
-                            withResponseHeaderFields: headerFields,
-                            for: verificationUrl
-                        )
-                        if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
-                            Log.info("[CF_WAF] Clearance has been granted")
-                        } else if request.retryCount == 2 {
-                            Log.info("[CF_WAF] Renewing identity")
-                            self.renewIdentity()
-                            for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
-                                HTTPCookieStorage.shared.deleteCookie(cookie)
-                            }
+                    // Check if clearance has been granted. If not, renew the current identity
+                    let verificationResponseCookies = HTTPCookie.cookies(
+                        withResponseHeaderFields: headerFields,
+                        for: verificationUrl
+                    )
+                    if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
+                        Log.info("[CF_WAF] Clearance has been granted")
+                    } else if request.retryCount == 2 {
+                        Log.info("[CF_WAF] Renewing identity")
+                        self.renewIdentity()
+                        for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
+                            HTTPCookieStorage.shared.deleteCookie(cookie)
                         }
-                        
-                        Log.info("[CF_WAF] Resuming original request...")
-                        completion(true, 0.2)
                     }
+                    
+                    Log.info("[CF_WAF] Resuming original request...")
+                    completion(true, 0.2)
                 }
-                
-                // Return without calling the completion handler
-                return
-            default: break
             }
+            
+            // Return without calling the completion handler
+            return
         }
         
         // Default to no retry

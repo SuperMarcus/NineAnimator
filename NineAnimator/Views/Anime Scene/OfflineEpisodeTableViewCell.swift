@@ -102,7 +102,7 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
             )
         case .error(let error):
             updateLabels(
-                status: error is NineAnimatorError ? "\(error)" : "\(error.localizedDescription)",
+                status: (error as NSError).localizedFailureReason ?? error.localizedDescription,
                 progressStatus: "Error | Tap to Retry"
             )
         case .preservationInitiated:
