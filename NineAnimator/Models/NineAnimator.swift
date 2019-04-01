@@ -27,6 +27,11 @@ extension DataRequest: NineAnimatorAsyncTask { }
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
+    /// A dummy artwork url
+    class var placeholderArtworkUrl: URL {
+        return URL(string: "https://raw.githubusercontent.com/SuperMarcus/NineAnimator/master/Misc/Media/nineanimator_banner.jpg")!
+    }
+    
     let client = URLSession(configuration: .default)
     
     private let mainAdditionalHeaders: HTTPHeaders = {

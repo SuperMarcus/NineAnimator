@@ -78,7 +78,7 @@ extension NASourceAnimeTwist {
         return AnimeLink(
             title: animeInfo.title,
             link: endpointURL.appendingPathComponent("/a/\(animeInfo.slug)"),
-            image: URL(string: "https://raw.githubusercontent.com/SuperMarcus/NineAnimator/master/Misc/Media/nineanimator_banner.jpg")!,
+            image: NineAnimator.placeholderArtworkUrl,
             source: self
         )
     }

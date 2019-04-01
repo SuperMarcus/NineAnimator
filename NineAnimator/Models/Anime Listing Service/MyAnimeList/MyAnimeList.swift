@@ -41,7 +41,7 @@ class MyAnimeList: BaseListingService, ListingService {
 
 // MARK: - Capabilities
 extension MyAnimeList {
-    var isCapableOfListingAnimeInformation: Bool { return false }
+    var isCapableOfListingAnimeInformation: Bool { return true }
     
     var isCapableOfPersistingAnimeState: Bool { return didSetup }
     
@@ -166,13 +166,6 @@ extension MyAnimeList {
             // Return success
             return ()
         }
-    }
-}
-
-// MARK: - Unimplemented
-extension MyAnimeList {
-    func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
-        return .fail(.unknownError)
     }
 }
 

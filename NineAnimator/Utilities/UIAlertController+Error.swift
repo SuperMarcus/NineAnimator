@@ -31,7 +31,7 @@ extension UIAlertController {
         let errorMessage: String = {
             let message = error.localizedDescription
             if let reason = (error as NSError).localizedFailureReason {
-                return "\(message)\n\(reason)"
+                return "\(message): \(reason)"
             } else { return message }
         }()
         

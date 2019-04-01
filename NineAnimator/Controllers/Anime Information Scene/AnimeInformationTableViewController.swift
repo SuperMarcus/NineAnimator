@@ -475,6 +475,10 @@ extension AnimeInformationTableViewController {
 // MARK: - Handle errors
 extension AnimeInformationTableViewController {
     private func onError(_ error: Error) {
+        Log.error(error)
+        // Silence the error if the information has been loaded
+        guard self.presentingAnimeInformation == nil else { return }
+        
         let alert = UIAlertController(
             title: "Error",
             message: error is NineAnimatorError ? "\(error)" : error.localizedDescription,
