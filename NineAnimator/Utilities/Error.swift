@@ -173,7 +173,7 @@ extension NineAnimatorError {
             super.init(5,
                        message: "An authentication is required before NineAnimator can continue",
                        failiureReason: failiureReason,
-                       userInfo: userInfo)
+                       userInfo: newUserInfo)
         }
         
         // The url at which an authentication can be attempted
