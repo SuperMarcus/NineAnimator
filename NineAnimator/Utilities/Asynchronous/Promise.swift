@@ -59,6 +59,9 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     // promises will run in
     private var queue: DispatchQueue
     
+    // Additional flags to be passed to the execusion of blocks
+    private var queueFlags: DispatchWorkItemFlags
+    
     // The latest DispatchTime that the resolvers can be set
     private var creationDate: DispatchTime = .now()
     
@@ -78,6 +81,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         self.queue = queue
         self.task = task
         self.semaphore = DispatchSemaphore(value: 1)
+        self.queueFlags = []
     }
     
     /// Resolve the promise with value
@@ -99,7 +103,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         if let resolver = chainedPromiseCallback {
             // Runs the handler in another tick
-            queue.async { resolver(value) }
+            queue.async(flags: queueFlags) { resolver(value) }
         } else { Log.error("Promise has no resolver") }
     }
     
@@ -126,7 +130,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         if let handler = chainedErrorCallback {
             // Runs the handler in another tick
-            queue.async { handler(error) }
+            queue.async(flags: queueFlags) { handler(error) }
         } else {
             Log.error("No rejection handler declared for this promise")
             Log.error(error)
@@ -161,9 +165,10 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     }
     
     /// Switch the dispatch queue for the handlers
-    func dispatch(on queue: DispatchQueue) -> NineAnimatorPromise<ResultType> {
+    func dispatch(on queue: DispatchQueue, flags: DispatchWorkItemFlags = []) -> NineAnimatorPromise<ResultType> {
         let nextPromise = then { $0 }
         nextPromise.queue = queue
+        nextPromise.queueFlags = flags
         return nextPromise
     }
     
@@ -248,7 +253,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         // Run the initial task
         if let task = task {
-            queue.async {
+            queue.async(flags: queueFlags) {
                 [weak self] in
                 guard let self = self else {
                     Log.error("Reference to promise lost before the initial task can run")

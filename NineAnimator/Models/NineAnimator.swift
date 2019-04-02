@@ -68,14 +68,14 @@ class NineAnimator: SessionDelegate {
     /// Container for the list of tracking services
     private(set) var trackingServices = [ListingService]()
     
-    /// Accessing the global configuration queue
-    private var configurationQueue: DispatchQueue { return NineAnimator.globalConfigurationQueue }
-    
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
     /// Global queue for modify internal configurations
-    fileprivate static let globalConfigurationQueue: DispatchQueue = .global()
+    fileprivate static let globalConfigurationQueue = DispatchQueue(
+        label: "com.marcuszhou.nineanimator.configuration",
+        attributes: [ .concurrent ]
+    )
     
     override init() {
         super.init()
@@ -140,18 +140,32 @@ extension NineAnimator {
     
     /// Retrieve the tracking context for the anime
     func trackingContext(for anime: AnimeLink) -> TrackingContext {
-        return configurationQueue.sync {
-            // If the context has been created, use the cached one
-            if let context = trackingContextReferences[anime]?.object {
-                return context
-            }
+        // Remove dead contexts
+        collectGarbage()
+        // Return the context dirctly if it has been created
+        if let context: TrackingContext = NineAnimator.globalConfigurationQueue.sync(execute: {
+            trackingContextReferences[anime]?.object
+        }) { return context }
+        
+        // If the context does not exists, create a new one
+        let context = TrackingContext(self, link: anime)
+        let ephemeralReference = WeakRef(context)
+    
+        // Store the reference in the pool for reuse
+        NineAnimator.globalConfigurationQueue.async(flags: [ .barrier ]) {
+            [ephemeralReference, context] in
+            self.trackingContextReferences[anime] = ephemeralReference
             
-            // If the context does not exists, create a new one
-            let context = TrackingContext(self, link: anime)
-            let ephemeralReference = WeakRef(context)
-            trackingContextReferences[anime] = ephemeralReference
-            return context
+            // Hold the reference for 10 seconds, then remove the strong reference
+            // This improves the reusability of tracking contexts
+            var holdingReferenceContext: TrackingContext? = context
+            NineAnimator.globalConfigurationQueue.asyncAfter(deadline: .now() + 10) {
+                holdingReferenceContext = nil
+                _ = holdingReferenceContext // Just to silent the warning
+            }
         }
+        
+        return context
     }
     
     private func registerDefaultServices() {
@@ -162,8 +176,13 @@ extension NineAnimator {
     
     /// Remove all expired weak references
     private func collectGarbage() {
-        for (index, ref) in self.trackingContextReferences where ref.object == nil {
-            self.trackingContextReferences.removeValue(forKey: index)
+        NineAnimator.globalConfigurationQueue.sync(flags: [ .barrier ]) {
+            let before = self.trackingContextReferences.count
+            self.trackingContextReferences = self.trackingContextReferences.filter {
+                $0.value.object != nil
+            }
+            let diff = before - self.trackingContextReferences.count
+            if diff > 0 { Log.info("[NineAnimator.TrackingContextPool] %@ references removed", diff) }
         }
     }
 }

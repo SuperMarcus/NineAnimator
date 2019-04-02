@@ -486,12 +486,18 @@ extension AnimeViewController {
             }())
         } else {
             let episodesPerSection = 100
-            let totalSections = episodes.count / episodesPerSection
-            (0...totalSections).map {
+            let totalEpisodes = episodes.count
+            let totalSections = totalEpisodes / episodesPerSection
+            (0...totalSections).compactMap {
                 section in
                 let startEpisodeNumber = episodesPerSection * section
                 let endEpisodeNumber = min(startEpisodeNumber + episodesPerSection, episodes.count)
-                let index = indexPath(for: episodes[max(startEpisodeNumber, 0)])!
+                
+                // If the start episode offset is greater than or equal to the
+                // number of episodes, return nil
+                guard startEpisodeNumber < totalEpisodes else { return nil }
+                
+                let index = indexPath(for: episodes[startEpisodeNumber])!
                 return UIAlertAction(
                     title: startEpisodeNumber == endEpisodeNumber ?
                         "Episode \(startEpisodeNumber + 1)" : "Episode \(startEpisodeNumber + 1) - \(endEpisodeNumber)",

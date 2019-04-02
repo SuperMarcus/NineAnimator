@@ -54,6 +54,9 @@ class TrackingContext {
     private var progressRecords = [PlaybackProgressRecord]()
     private(set) var previousSessionServer: Anime.ServerIdentifier?
     
+    // Strong references to the related tracking contexts that is only used when playing
+    private var relatedTrackingContexts: [AnimeLink: TrackingContext]?
+    
     private var current: EpisodeLink?
     
     init(_ parent: NineAnimator, link: AnimeLink) {
@@ -107,11 +110,18 @@ class TrackingContext {
     /// persisting anime state
     func beginWatching(episode: EpisodeLink) {
         // Intentionally using a strong reference
-        queue.async {
+        queue.async(flags: [ .barrier ]) {
             guard episode.parent == self.link else {
                 Log.error("[TrackingContext] Attempting to send a beginWatching message to a TrackingContext that does not belong to the media.")
                 return
             }
+            
+            // Cache the tracking contexts
+            self.relatedTrackingContexts = Dictionary(
+                uniqueKeysWithValues: self.relatedLinks.map {
+                    ($0, NineAnimator.default.trackingContext(for: $0))
+                }
+            )
             
             // Update the value to watching
             for (key, var reference) in self.listingAnimeReferences where reference.parentService.isCapableOfPersistingAnimeState {
@@ -164,6 +174,9 @@ class TrackingContext {
                 )
             }
             
+            // Release the references to the tracking contexts
+            self.relatedTrackingContexts = nil
+            
             // Save states
             self.save()
         }
@@ -177,7 +190,7 @@ class TrackingContext {
             // Create reference fetching tasks
             for service in self.parent.trackingServices {
                 let task = service.reference(from: link)
-                .dispatch(on: queue)
+                .dispatch(on: queue, flags: [ .barrier ])
                 .error {
                     error in
                     Log.error("[TrackingContext] Cannot fetch tracking service reference for anime \"%@\": %@", link.title, error)
@@ -248,6 +261,9 @@ class TrackingContext {
 extension TrackingContext {
     /// Find other tracking contexts with the same reference and share
     /// resources with them
+    ///
+    /// - Important: This method is not thread safe. It should be run
+    ///              synchronously within the queue.
     private func discoverRelatedLinks(with reference: ListingAnimeReference) {
         let recentAnime = self.parent.user.recentAnimes
         for comparingAnime in recentAnime where comparingAnime != self.link {
@@ -256,8 +272,14 @@ extension TrackingContext {
                 _, value in value == reference
             }) {
                 self.relatedLinks.insert(comparingAnime)
-                _ = comparingTrackingContext.queue.sync {
-                    comparingTrackingContext.relatedLinks.insert(self.link)
+                // Save the related link
+                comparingTrackingContext.relatedLinks.insert(self.link)
+                
+                // Cache the tracking context if had began watching
+                if self.relatedTrackingContexts != nil,
+                    self.relatedTrackingContexts?[self.link] == nil {
+                    self.relatedTrackingContexts?[self.link] =
+                        NineAnimator.default.trackingContext(for: self.link)
                 }
             }
         }
@@ -275,7 +297,7 @@ extension TrackingContext {
     
     /// Enqueue a new record for an episode with playback progress
     func updateRecord(_ progress: Double, forEpisodeNumber episode: Int) {
-        queue.async {
+        queue.async(flags: [ .barrier ]) {
             self.progressRecords.removeAll { $0.episodeNumber == episode }
             self.progressRecords.append(
                 PlaybackProgressRecord(
@@ -291,17 +313,20 @@ extension TrackingContext {
     
     /// Retrieve the latest playback record for the specific episode
     func retrieveLatestRecord(forEpisodeNumber episode: Int) -> PlaybackProgressRecord? {
-        // Search the record in all related contexts
-        var searchingContexts = relatedLinks.map { parent.trackingContext(for: $0) }
-        searchingContexts.append(self)
-        
-        // Find the record for the episode number
-        let availableEpisodeRecords = searchingContexts.compactMap {
-            $0.progressRecords.first { $0.episodeNumber == episode }
+        return queue.sync {
+            // Search the record in all related contexts
+            var searchingContexts = relatedTrackingContexts?.map { $0.value } ??
+                relatedLinks.map { parent.trackingContext(for: $0) }
+            searchingContexts.append(self)
+            
+            // Find the record for the episode number
+            let availableEpisodeRecords = searchingContexts.compactMap {
+                $0.progressRecords.first { $0.episodeNumber == episode }
+            }
+            
+            // Return the latest record
+            return availableEpisodeRecords.max { $0.enqueueDate < $1.enqueueDate }
         }
-        
-        // Return the latest record
-        return availableEpisodeRecords.max { $0.enqueueDate < $1.enqueueDate }
     }
     
     /// Retrieve the playback progress for an episode
