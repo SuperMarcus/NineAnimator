@@ -225,6 +225,13 @@ class AnimatedImageCollectionView: UIView {
         self.setNeedsLayout()
     }
     
+    func clearPreview() {
+        self.collection = []
+        self.previousBounds = .zero
+        self.startAnimationImmedietly = false
+        self.setNeedsLayout()
+    }
+
     private func layoutImages() {
         let wasAnimating = startAnimationImmedietly || (animator?.isRunning ?? false)
         

@@ -88,6 +88,7 @@ extension Kitsu {
                 return results
             } .error {
                 [unowned self] in
+                Log.error("errored while getting %@: %@", self.identifier, $0)
                 self.delegate?.onError($0, from: self)
                 self.requestTask = nil
             } .finally {
@@ -96,9 +97,10 @@ extension Kitsu {
                 
                 if $0.isEmpty {
                     self.totalPages = page
-                    page -= 1
+                    page = max(0, page - 1)
                 } else { self.results.append($0) }
 
+                Log.info("%@ references found for list %@", self.results.count, self.identifier)
                 self.delegate?.pageIncoming(page, from: self)
                 self.requestTask = nil
             }

@@ -36,7 +36,7 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
     
     private let maxCellWidth: CGFloat = 400
     
-    private let enablePaging = true
+    private let enablePaging = false
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -74,8 +74,8 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(
-            width: min(maxCellWidth, collectionView.bounds.width),
-            height: collectionView.bounds.height
+            width: min(maxCellWidth, collectionView.bounds.width * 0.8),
+            height: collectionView.bounds.height - 30
         )
     }
 
@@ -177,13 +177,13 @@ extension CollectionsTableViewCell {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         // Disable snapping if there are more than one cells in a page
-        guard enablePaging && collectionView.bounds.width <= maxCellWidth else { return }
+        guard enablePaging && collectionView.bounds.width * 0.8 <= maxCellWidth else { return }
         
         // Stop scrolling
         targetContentOffset.pointee = scrollView.contentOffset
         
         // Calculate conditions
-        let pageWidth = collectionView.bounds.width + 40
+        let pageWidth = collectionView.bounds.width * 0.8 + 20
         let collectionViewItemCount = collectionView(collectionView, numberOfItemsInSection: 0)// The number of items in this section
         let proportionalOffset = collectionView.contentOffset.x / pageWidth
         let indexOfMajorCell = Int(round(proportionalOffset))

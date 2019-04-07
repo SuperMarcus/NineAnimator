@@ -70,21 +70,31 @@ class RecentsSceneCollectionCollectionViewCell: UICollectionViewCell, ContentPro
         // Set labels
         collectionTitleLabel.text = collection.title
         collectionServiceLabel.text = collection.parentService.name
+        
+        // Reset collection preview view
+        collectionPreviewView.clearPreview()
+        
+        // Reset loading indicators
+        statusLabel?.text = "Loading Previews"
+        statusLoadingIndicator?.isHidden = false
+        statusLoadingIndicator?.startAnimating()
     }
     
     func pageIncoming(_ page: Int, from provider: ContentProvider) {
         let references = provider.links(on: page)
         DispatchQueue.main.async {
-            [weak collectionPreviewView, weak statusContainerView, weak statusLabel, weak statusLoadingIndicator] in
+            [weak collectionPreviewView, weak statusLabel, weak statusLoadingIndicator] in
             let artworks = references.compactMap { $0.artwork }
             collectionPreviewView?.setPresenting(artworks, animateWhenReady: false)
             
             // If no artworks available, show empty collection label
             if artworks.isEmpty {
                 statusLabel?.text = "Empty Collection"
-                statusLoadingIndicator?.stopAnimating()
-                statusLoadingIndicator?.isHidden = true
-            } else { statusContainerView?.removeFromSuperview() }
+            } else { statusLabel?.text = "" }
+            
+            // Hide the load indicator
+            statusLoadingIndicator?.stopAnimating()
+            statusLoadingIndicator?.isHidden = true
         }
     }
     
