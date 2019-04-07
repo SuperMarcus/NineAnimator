@@ -20,56 +20,103 @@
 import Foundation
 
 extension Kitsu {
-    func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
-        return currentUser().thenPromise {
-            [unowned self] in
-            self.apiRequest("/library-entries", query: [
-                "fields[libraryEntries]": "progress,status,anime",
-                "fields[anime]": "canonicalTitle,posterImage",
-                "filter[userId]": $0.identifier,
-                "filter[kind]": "anime",
-                "include": "anime",
-                "page[limit]": "20",
-                "page[offset]": "0"
-            ])
-        } .then {
-            [unowned self] libraryEntries in
-            // First, parse the listing anime reference
-            var collections = [String: [ListingAnimeReference]]()
+    class KitsuAnimeCollection: ListingAnimeCollection {
+        var parentService: ListingService { return parent }
+        
+        var title: String
+        var totalPages: Int?
+        var availablePages: Int { return results.count }
+        var moreAvailable: Bool { return totalPages == nil }
+        weak var delegate: ContentProviderDelegate?
+        
+        private var identifier: String
+        private var results = [[ListingAnimeReference]]()
+        private var requestTask: NineAnimatorAsyncTask?
+        private var parent: Kitsu
+        
+        func links(on page: Int) -> [AnyLink] {
+            guard results.count > page else { return [] }
+            return results[page].map { .listingReference($0) }
+        }
+        
+        func more() {
+            guard requestTask == nil, moreAvailable else { return }
+            let offset = results.reduce(0) { $0 + $1.count }
+            let limit = 20
             
-            for entry in libraryEntries where entry.type == "libraryEntries" {
-                // Only listing anime
-                guard let status = entry.attributes["status"] as? String,
-                    let relatedAnime = entry.includedRelations["anime"] else { continue }
+            requestTask = parent.currentUser().thenPromise {
+                [unowned self] in
+                self.parent.apiRequest("/library-entries", query: [
+                    "fields[libraryEntries]": "progress,status,anime",
+                    "fields[anime]": "canonicalTitle,posterImage",
+                    "filter[userId]": $0.identifier,
+                    "filter[kind]": "anime",
+                    "filter[status]": self.identifier,
+                    "include": "anime",
+                    "page[limit]": "\(limit)",
+                    "page[offset]": "\(offset)"
+                ])
+            } .then {
+                [unowned self] libraryEntries -> [ListingAnimeReference] in
+                // First, parse the listing anime reference
+                var results = [ListingAnimeReference]()
+                var sharedStatus: ListingAnimeTrackingState?
                 
-                // Create the reference
-                var reference = try ListingAnimeReference(
-                    self,
-                    withAnimeObject: relatedAnime,
-                    libraryEntry: try LibraryEntry(from: entry)
-                )
-                
-                switch status {
-                case "completed": reference.state = .finished
-                case "current": reference.state = .watching
-                case "planned", "on_hold": reference.state = .toWatch
+                // Get the status
+                switch self.identifier {
+                case "completed": sharedStatus = .finished
+                case "current": sharedStatus = .watching
+                case "planned", "on_hold": sharedStatus = .toWatch
                 default: break
                 }
                 
-                // Add the reference to the list
-                var list = collections[status] ?? []
-                list.append(reference)
-                collections[status] = list
-            }
-            
-            return collections.map {
-                StaticListingAnimeCollection(
-                    self,
-                    name: $0.key.prefix(1).uppercased() + $0.key.lowercased().dropFirst(),
-                    identifier: $0.key,
-                    collection: $0.value
-                )
+                for entry in libraryEntries where entry.type == "libraryEntries" {
+                    // Only listing anime
+                    guard let relatedAnime = entry.includedRelations["anime"] else { continue }
+                    
+                    // Create the reference
+                    var reference = try ListingAnimeReference(
+                        self.parent,
+                        withAnimeObject: relatedAnime,
+                        libraryEntry: try LibraryEntry(from: entry)
+                    )
+                    reference.state = sharedStatus
+                    results.append(reference)
+                }
+                
+                return results
+            } .error {
+                [unowned self] in
+                self.delegate?.onError($0, from: self)
+                self.requestTask = nil
+            } .finally {
+                [unowned self] in
+                var page = self.results.count
+                
+                if $0.isEmpty {
+                    self.totalPages = page
+                    page -= 1
+                } else { self.results.append($0) }
+
+                self.delegate?.pageIncoming(page, from: self)
+                self.requestTask = nil
             }
         }
+        
+        init (_ statusIdentifier: String, readableStatus: String, parent: Kitsu) {
+            self.title = readableStatus
+            self.identifier = statusIdentifier
+            self.parent = parent
+        }
+    }
+    
+    func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
+        return .success([
+            ("dropped", "Dropped"),
+            ("completed", "Completed"),
+            ("on_hold", "On Hold"),
+            ("planned", "To Watch"),
+            ("current", "Currently Watching")
+        ] .map { KitsuAnimeCollection($0.0, readableStatus: $0.1, parent: self) })
     }
 }
