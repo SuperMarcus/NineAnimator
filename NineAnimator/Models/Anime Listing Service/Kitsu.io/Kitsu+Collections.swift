@@ -35,6 +35,7 @@ extension Kitsu {
         private var parent: Kitsu
         
         func links(on page: Int) -> [AnyLink] {
+            let results = self.results
             guard results.count > page else { return [] }
             return results[page].map { .listingReference($0) }
         }
