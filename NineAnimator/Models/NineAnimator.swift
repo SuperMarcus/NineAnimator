@@ -202,3 +202,18 @@ extension NineAnimator {
         return sources.reduce(false) { $0 || $1.canHandle(url: link) }
     }
 }
+
+// MARK: - Version information
+extension NineAnimator {
+    /// The current verision string of NineAnimator
+    var version: String {
+        return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown Version"
+    }
+    
+    /// The current build number of NineAnimator
+    var buildNumber: Int {
+        guard let buildNumberString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
+            let buildNumber = Int(buildNumberString) else { return -1 }
+        return buildNumber
+    }
+}

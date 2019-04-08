@@ -1195,6 +1195,7 @@
 			buildPhases = (
 				52F6A4F121DABBE60005D78D /* Linting */,
 				2C4ABC9621B7F55B009B4D47 /* Copy Frameworks */,
+				2CD7499C225B6409004C6C0C /* Generate Version Information */,
 				2C4ABC4C21B5881E009B4D47 /* Sources */,
 				2C4ABC4D21B5881E009B4D47 /* Frameworks */,
 				2C4ABC4E21B5881E009B4D47 /* Resources */,
@@ -1353,6 +1354,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		2CD7499C225B6409004C6C0C /* Generate Version Information */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Version Information";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "OUTPUT_RESOURCE_DIRECTORY=\"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n/usr/bin/xcrun git log --oneline --decorate > \"${OUTPUT_RESOURCE_DIRECTORY}/Changelog.txt\"\n";
 		};
 		52F6A4F121DABBE60005D78D /* Linting */ = {
 			isa = PBXShellScriptBuildPhase;

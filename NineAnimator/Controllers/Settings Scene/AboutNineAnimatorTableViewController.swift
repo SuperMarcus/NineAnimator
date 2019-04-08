@@ -31,6 +31,9 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         "about.credits": "https://github.com/SuperMarcus/NineAnimator/blob/master/README.md#credits"
     ]
     
+    @IBOutlet private weak var versionLabel: UILabel!
+    @IBOutlet private weak var buildNumberLabel: UILabel!
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectSelectedRow() }
         
@@ -51,5 +54,9 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
+        
+        // Update version information
+        versionLabel.text = NineAnimator.default.version
+        buildNumberLabel.text = "\(NineAnimator.default.buildNumber)"
     }
 }
