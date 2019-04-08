@@ -228,7 +228,9 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     /// This method is thread safe
     func cancel() {
         // Atomicy
-        semaphore.wait()
+        guard semaphore.wait(timeout: .now() + 3) == .success else {
+            return Log.error("Cannot cancel a task.")
+        }
         defer { semaphore.signal() }
         
         referenceTask?.cancel()
