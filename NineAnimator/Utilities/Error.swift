@@ -42,6 +42,8 @@ class NineAnimatorError: NSError {
         return AuthenticationRequiredError(failiureReason, authenticationUrl: authenticationUrl)
     }
     
+    var sourceOfError: Any?
+    
     init(_ code: Int,
          message: String,
          failiureReason: String? = nil,
@@ -176,7 +178,7 @@ extension NineAnimatorError {
                        userInfo: newUserInfo)
         }
         
-        // The url at which an authentication can be attempted
+        /// The url at which an authentication can be attempted
         var authenticationUrl: URL? {
             return userInfo["authenticationUrl"] as? URL
         }

@@ -43,6 +43,9 @@ class BaseSource: SessionDelegate {
     /// The user agent that should be used with requests
     var sessionUserAgent: String { return _internalUAIdentity }
     
+    /// Middlewares for verification
+    private var verificationMiddlewares = [Alamofire.DataRequest.Validation]()
+    
     init(with parent: NineAnimator) {
         self.parent = parent
         
@@ -55,6 +58,8 @@ class BaseSource: SessionDelegate {
                 return nil
             } else { return newRequest }
         }
+        // Add cloudflare middleware
+        self.addMiddleware(BaseSource._cloudflareWAFVerificationMiddleware)
     }
     
     /**
@@ -83,10 +88,9 @@ class BaseSource: SessionDelegate {
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return browseSession
-            .request(url, headers: headers)
-            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
-            .responseString {
+        return applyMiddlewares(
+                to: browseSession.request(url, headers: headers)
+            ).responseString {
                 switch $0.result {
                 case .failure(let error):
                     Log.error("request to %@ failed - %@", url, error)
@@ -98,10 +102,9 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        return retriverSession
-            .request(url, headers: headers)
-            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
-            .responseJSON {
+        return applyMiddlewares(
+                to: retriverSession.request(url, headers: headers)
+            ) .responseJSON {
                 response in
                 switch response.result {
                 case .failure(let error):
@@ -117,10 +120,9 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return retriverSession
-            .request(url, headers: headers)
-            .validate(BaseSource._cloudflareWAFVerificationMiddleware)
-            .responseString {
+        return applyMiddlewares(
+                to: retriverSession.request(url, headers: headers)
+            ) .responseString {
                 response in
                 switch response.result {
                 case .failure(let error):
@@ -169,6 +171,17 @@ class BaseSource: SessionDelegate {
             return nil
         }
         return request(ajaxString: url, headers: headers, completion: handler)
+    }
+}
+
+// MARK: - Validation middlewares
+extension BaseSource {
+    func addMiddleware(_ middleware: @escaping Alamofire.DataRequest.Validation) {
+        verificationMiddlewares.append(middleware)
+    }
+    
+    func applyMiddlewares(to request: Alamofire.DataRequest) -> Alamofire.DataRequest {
+        return verificationMiddlewares.reduce(request) { $0.validate($1) }
     }
 }
 

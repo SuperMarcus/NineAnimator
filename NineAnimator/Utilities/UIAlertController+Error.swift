@@ -53,7 +53,12 @@ extension UIAlertController {
             if let authenticationUrl = error.authenticationUrl {
                 self.addAction(UIAlertAction(title: "Open", style: .default) {
                     _ in
-                    let authenticationController = SFSafariViewController(url: authenticationUrl)
+//                    let authenticationController = SFSafariViewController(url: authenticationUrl)
+                    let authenticationController = NAAuthenticationViewController
+                        .create(
+                            authenticationUrl,
+                            withUserAgent: (error.sourceOfError as? BaseSource)?.sessionUserAgent
+                        ) { completionHandler?(true) }
                     
                     // If no source view controller is present, use the RootViewController's shared
                     // present on top method to present the authentication page

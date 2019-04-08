@@ -159,6 +159,9 @@
 		2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */; };
 		2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD552222E7AD000411CB /* Kitsu+User.swift */; };
 		2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */; };
+		2C98D66D225BE9C3001FF874 /* NineAnime+VerificationDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */; };
+		2C98D66F225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */; };
+		2C98D672225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -411,6 +414,9 @@
 		2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListingAnimeReference+Kitsu.swift"; sourceTree = "<group>"; };
 		2C93BD552222E7AD000411CB /* Kitsu+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+User.swift"; sourceTree = "<group>"; };
 		2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+LibraryEntry.swift"; sourceTree = "<group>"; };
+		2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+VerificationDetection.swift"; sourceTree = "<group>"; };
+		2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelflessAuthenticationWebViewController.storyboard; sourceTree = "<group>"; };
+		2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieExportingAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -770,6 +776,7 @@
 		2C4ABC7321B59982009B4D47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C98D670225C09C6001FF874 /* Authentication Scene */,
 				2C1C7191221B11B400760A69 /* Anime Information Scene */,
 				2C1C71692218417700760A69 /* Content List Scene */,
 				2CB004232200AEA000351B7E /* Offline Access */,
@@ -860,6 +867,7 @@
 				2C8F6E8522062BB90047798B /* OfflineAnimeViewer.storyboard */,
 				2C1C716622183FA500760A69 /* AnimeListing.storyboard */,
 				2C1C718E221B118700760A69 /* AnimeInformation.storyboard */,
+				2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1018,6 +1026,14 @@
 			path = Kitsu.io;
 			sourceTree = "<group>";
 		};
+		2C98D670225C09C6001FF874 /* Authentication Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */,
+			);
+			path = "Authentication Scene";
+			sourceTree = "<group>";
+		};
 		2C9C44FC21CD2B07004C8F0C /* Settings Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,6 +1092,7 @@
 				2CA1DD4221E18FDB009241CB /* NineAnime+LinkRetriver.swift */,
 				2CA1DD4421E1B765009241CB /* NineAnime+StreamParser.swift */,
 				2C3D7BF52210825B0045D648 /* NineAnime+Reachability.swift */,
+				2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */,
 			);
 			path = 9anime.to;
 			sourceTree = "<group>";
@@ -1299,6 +1316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */,
+				2C98D66F225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard in Resources */,
 				2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */,
 				2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
@@ -1412,6 +1430,7 @@
 				2CEC219C2207FACA00A30F4F /* GogoAnime+LinkRetriever.swift in Sources */,
 				2CEBE8FE22074401006A64CC /* UISearchBar+Themable.swift in Sources */,
 				2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */,
+				2C98D672225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift in Sources */,
 				2C66779A21BC2671000E5ACC /* ContentListViewController.swift in Sources */,
 				2C6677B921BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift in Sources */,
 				2C2C54FB2216066100BAA76E /* User+History.swift in Sources */,
@@ -1515,6 +1534,7 @@
 				2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
 				2C43315A220B380200A2E64F /* Error.swift in Sources */,
+				2C98D66D225BE9C3001FF874 /* NineAnime+VerificationDetection.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
 				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,

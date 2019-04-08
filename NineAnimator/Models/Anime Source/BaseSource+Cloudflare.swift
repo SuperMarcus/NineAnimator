@@ -143,6 +143,11 @@ extension BaseSource: Alamofire.RequestRetrier {
                 retry request: Request,
                 with error: Error,
                 completion: @escaping RequestRetryCompletion) {
+        // Assign self as the source of error
+        if let error = error as? NineAnimatorError {
+            error.sourceOfError = self
+        }
+        
         // Call the completion handler
         func fail() {
             Log.info("[CF_WAF] Failed to resolve cloudflare challenge")
@@ -153,7 +158,7 @@ extension BaseSource: Alamofire.RequestRetrier {
         if let error = error as? NineAnimatorError.AuthenticationRequiredError,
             let verificationUrl = error.authenticationUrl {
             // Abort after 4 retries
-            if request.retryCount > 4 {
+            if request.retryCount > 3 {
                 Log.info("[CF_WAF] Maximal number of retry reached.")
                 return fail()
             }

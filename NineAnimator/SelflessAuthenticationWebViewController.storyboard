@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ReJ-XW-Jqb">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="XA7-cl-Kk7">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hcn-H1-X0G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="ReJ-XW-Jqb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4uI-Em-7s1">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Cge-Ge-nQH" kind="relationship" relationship="rootViewController" id="FBO-lr-7bY"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-529" y="-125"/>
+        </scene>
+        <!--Authentication-->
+        <scene sceneID="VdC-Tu-mYR">
+            <objects>
+                <viewController id="Cge-Ge-nQH" customClass="NAAuthenticationViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CL0-b4-Ikw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MIJ-Bh-5yr">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="MIJ-Bh-5yr" firstAttribute="leading" secondItem="CL0-b4-Ikw" secondAttribute="leading" id="O5t-PJ-aHD"/>
+                            <constraint firstItem="MIJ-Bh-5yr" firstAttribute="top" secondItem="CL0-b4-Ikw" secondAttribute="top" id="eCK-JX-eOz"/>
+                            <constraint firstItem="MIJ-Bh-5yr" firstAttribute="bottom" secondItem="CL0-b4-Ikw" secondAttribute="bottom" id="lOe-BO-U1n"/>
+                            <constraint firstItem="MIJ-Bh-5yr" firstAttribute="trailing" secondItem="CL0-b4-Ikw" secondAttribute="trailing" id="vof-Oe-vnR"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qre-0T-IXh"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Authentication" id="6DY-Kh-44b">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="zya-PK-8eN">
+                            <connections>
+                                <action selector="onDismissal:" destination="Cge-Ge-nQH" id="dSD-Vh-6mY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="webView" destination="MIJ-Bh-5yr" id="4pG-eK-sll"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kX3-TN-lKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="405.79710144927537" y="-126.35869565217392"/>
+        </scene>
+    </scenes>
+</document>

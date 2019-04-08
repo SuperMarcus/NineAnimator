@@ -27,6 +27,11 @@ class NASourceNineAnime: BaseSource, Source {
     lazy var _currentHost: String = possibleHosts.first!
     var _endpointDeterminingTask: NineAnimatorAsyncTask? // Avoid multiple concurrent requests
     
+    override init(with parent: NineAnimator) {
+        super.init(with: parent)
+        addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
+    }
+    
     override func canHandle(url: URL) -> Bool {
         guard let host = url.host?.lowercased() else { return false }
         return possibleHosts.contains(host)
@@ -44,6 +49,11 @@ class NASourceNineAnime: BaseSource, Source {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
             if let value = value { return handler(value, nil) }
+            
+            // Return error directly
+            if error is NineAnimatorError.AuthenticationRequiredError {
+                return handler(value, error)
+            }
             
             Log.info("[9anime] Request failed with an error. Trying to resolve a different endpoint.")
             // Trying to determine a new endpoint if an error occurred
