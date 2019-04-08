@@ -51,7 +51,7 @@ extension UIAlertController {
             
             // If the authentication url exists, present the option to open the link
             if let authenticationUrl = error.authenticationUrl {
-                self.addAction(UIAlertAction(title: "Open", style: .cancel) {
+                self.addAction(UIAlertAction(title: "Open", style: .default) {
                     _ in
                     let authenticationController = SFSafariViewController(url: authenticationUrl)
                     
