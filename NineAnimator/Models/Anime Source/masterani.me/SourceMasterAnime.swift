@@ -42,56 +42,63 @@ class NASourceMasterAnime: BaseSource, Source {
     static let animeCompleteIdentifierRegex = try! NSRegularExpression(pattern: "\\/([\\da-zA-Z0-9-_]+)$", options: .caseInsensitive)
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
-        return request(ajax: NASourceMasterAnime.apiPathTrending) {
-            response, error in
-            guard let response = response else {
-                return handler(nil, error)
-            }
-            
-            guard let beingWatchedAnimes = response["being_watched"] as? [NSDictionary] else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no being watched animes entry found"
-                ))
-            }
-            
-            guard let popularAnimes = response["popular_today"] as? [NSDictionary] else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no trending animes entry found"
-                ))
-            }
-            
-            var watchedAnimes = [AnimeLink]()
-            
-            for anime in beingWatchedAnimes {
-                guard let title = anime["title"] as? String,
-                    let slug = anime["slug"] as? String,
-                    let posterName = anime["poster"] as? String
-                    else { continue }
-                watchedAnimes.append(AnimeLink(
-                    title: title,
-                    link: self.anime(slug: slug),
-                    image: self.poster(file: posterName),
-                    source: self
-                ))
-            }
-            
-            let alsoFeaturedAnimes: [AnimeLink] =
-                popularAnimes.compactMap { anime in
-                    guard let title = anime["title"] as? String,
-                        let slug = anime["slug"] as? String,
-                        let posterName = anime["poster"] as? String
-                        else { return nil }
-                    return AnimeLink(
-                        title: title,
-                        link: self.anime(slug: slug),
-                        image: self.poster(file: posterName),
-                        source: self
-                    )
-                }
-            
-            let featuredPage = BasicFeaturedContainer(featured: alsoFeaturedAnimes, latest: watchedAnimes)
-            handler(featuredPage, nil)
-        }
+        return NineAnimatorPromise
+            .fail(
+                NineAnimatorError.authenticationRequiredError(
+                    "Masterani.me is no longer available. Visit the website for more information.",
+                    URL(string: "https://www.masterani.me")!
+                )
+            ) .handle(handler)
+//        return request(ajax: NASourceMasterAnime.apiPathTrending) {
+//            response, error in
+//            guard let response = response else {
+//                return handler(nil, error)
+//            }
+//
+//            guard let beingWatchedAnimes = response["being_watched"] as? [NSDictionary] else {
+//                return handler(nil, NineAnimatorError.responseError(
+//                    "no being watched animes entry found"
+//                ))
+//            }
+//
+//            guard let popularAnimes = response["popular_today"] as? [NSDictionary] else {
+//                return handler(nil, NineAnimatorError.responseError(
+//                    "no trending animes entry found"
+//                ))
+//            }
+//
+//            var watchedAnimes = [AnimeLink]()
+//
+//            for anime in beingWatchedAnimes {
+//                guard let title = anime["title"] as? String,
+//                    let slug = anime["slug"] as? String,
+//                    let posterName = anime["poster"] as? String
+//                    else { continue }
+//                watchedAnimes.append(AnimeLink(
+//                    title: title,
+//                    link: self.anime(slug: slug),
+//                    image: self.poster(file: posterName),
+//                    source: self
+//                ))
+//            }
+//
+//            let alsoFeaturedAnimes: [AnimeLink] =
+//                popularAnimes.compactMap { anime in
+//                    guard let title = anime["title"] as? String,
+//                        let slug = anime["slug"] as? String,
+//                        let posterName = anime["poster"] as? String
+//                        else { return nil }
+//                    return AnimeLink(
+//                        title: title,
+//                        link: self.anime(slug: slug),
+//                        image: self.poster(file: posterName),
+//                        source: self
+//                    )
+//                }
+//
+//            let featuredPage = BasicFeaturedContainer(featured: alsoFeaturedAnimes, latest: watchedAnimes)
+//            handler(featuredPage, nil)
+//        }
     }
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
