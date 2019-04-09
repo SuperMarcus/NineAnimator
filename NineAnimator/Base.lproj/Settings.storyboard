@@ -369,9 +369,9 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Notifications and Subscriptions" id="dnn-sT-oir">
-                                <string key="footerTitle">NineAnimator uses Background App Refresh to determine if an new expisode of a subscribed anime has been released.
+                                <string key="footerTitle">Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.
 
-Without Background App Refresh, you will only receive notifications of new releases when the app launches.</string>
+NineAnimator uses Background App Refresh to determine if a new expisode of a subscribed anime has been released.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="49" id="Bf7-Pu-dBT">
                                         <rect key="frame" x="0.0" y="931" width="375" height="49"/>
@@ -480,7 +480,7 @@ Without Background App Refresh, you will only receive notifications of new relea
                             <tableViewSection headerTitle="Data and Privacy" footerTitle="Resume background suspended download tasks automatically upon app launches." id="5UB-9w-oPI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BDo-SJ-NV8" style="IBUITableViewCellStyleDefault" id="KtS-kv-Zim">
-                                        <rect key="frame" x="0.0" y="1267.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1283.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KtS-kv-Zim" id="rAq-5c-VCU">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
@@ -500,7 +500,7 @@ Without Background App Refresh, you will only receive notifications of new relea
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="49" id="j4o-9J-lBR">
-                                        <rect key="frame" x="0.0" y="1311.5" width="375" height="49"/>
+                                        <rect key="frame" x="0.0" y="1327.5" width="375" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="j4o-9J-lBR" id="EnT-ih-feq">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="48.5"/>
@@ -545,7 +545,7 @@ Without Background App Refresh, you will only receive notifications of new relea
 Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.export" textLabel="AVN-Z6-xDl" style="IBUITableViewCellStyleDefault" id="7k5-mS-bTC">
-                                        <rect key="frame" x="0.0" y="1424.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1440.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7k5-mS-bTC" id="0lt-wk-XIg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -565,7 +565,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.cache" textLabel="1VP-oc-aqz" style="IBUITableViewCellStyleDefault" id="PVj-MT-9I3">
-                                        <rect key="frame" x="0.0" y="1468.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1484.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVj-MT-9I3" id="MPd-xb-7NG">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -585,7 +585,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.download" textLabel="1X7-X7-huV" style="IBUITableViewCellStyleDefault" id="0ur-OD-NVC">
-                                        <rect key="frame" x="0.0" y="1512.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1528.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ur-OD-NVC" id="VLu-rd-6yQ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -606,7 +606,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
-                                        <rect key="frame" x="0.0" y="1556.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1572.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1L-Nj-oEr" id="GUF-UM-X8f">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -634,7 +634,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.activities" textLabel="dIG-JR-U2D" style="IBUITableViewCellStyleDefault" id="A67-qe-KDF">
-                                        <rect key="frame" x="0.0" y="1600.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1616.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A67-qe-KDF" id="ZJ4-s2-eF9">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -655,7 +655,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.reset" id="24A-0U-h1t">
-                                        <rect key="frame" x="0.0" y="1644.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1660.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24A-0U-h1t" id="tu1-Qe-wbN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>

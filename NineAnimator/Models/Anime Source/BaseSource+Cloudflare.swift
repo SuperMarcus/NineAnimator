@@ -75,9 +75,9 @@ extension BaseSource {
             } catch { Log.info("Cannot find all necessary components to solve Cloudflare challenges.") }
             
             return .failure(
-                NineAnimatorError.authenticationRequiredError(
+                NineAnimatorError.CloudflareAuthenticationChallenge(
                     "The website had asked NineAnimator to verify that you are not an attacker. Please complete the challenge in the opening page. When you are finished, close the page and NineAnimator will attempt to load the resource again.",
-                    passthroughUrl
+                    authenticationUrl: passthroughUrl
                 )
             )
         }
@@ -155,15 +155,19 @@ extension BaseSource: Alamofire.RequestRetrier {
         }
         
         // Check if there is an cloudflare authentication error
-        if let error = error as? NineAnimatorError.AuthenticationRequiredError,
+        if let error = error as? NineAnimatorError.CloudflareAuthenticationChallenge,
             let verificationUrl = error.authenticationUrl {
-            // Abort after 4 retries
-            if request.retryCount > 3 {
-                Log.info("[CF_WAF] Maximal number of retry reached.")
+            // Abort after 3 tries
+            if request.retryCount > 2 {
+                Log.info("[CF_WAF] Maximal number of retry reached, renewing identity.")
+                self.renewIdentity()
+                for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
+                    HTTPCookieStorage.shared.deleteCookie(cookie)
+                }
                 return fail()
             }
             
-            let delay = Double.random(in: 5...7)
+            let delay = 5.0
             Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
             
             // Solve the challenge in 5 seconds
@@ -188,14 +192,9 @@ extension BaseSource: Alamofire.RequestRetrier {
                         withResponseHeaderFields: headerFields,
                         for: verificationUrl
                     )
+                    
                     if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
                         Log.info("[CF_WAF] Clearance has been granted")
-                    } else if request.retryCount == 2 {
-                        Log.info("[CF_WAF] Renewing identity")
-                        self.renewIdentity()
-                        for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
-                            HTTPCookieStorage.shared.deleteCookie(cookie)
-                        }
                     }
                     
                     Log.info("[CF_WAF] Resuming original request...")

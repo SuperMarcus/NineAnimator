@@ -161,7 +161,7 @@
 		2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */; };
 		2C98D66D225BE9C3001FF874 /* NineAnime+VerificationDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */; };
 		2C98D66F225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */; };
-		2C98D672225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */; };
+		2C98D672225C09DA001FF874 /* NAAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D671225C09DA001FF874 /* NAAuthenticationViewController.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -416,7 +416,7 @@
 		2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+LibraryEntry.swift"; sourceTree = "<group>"; };
 		2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+VerificationDetection.swift"; sourceTree = "<group>"; };
 		2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelflessAuthenticationWebViewController.storyboard; sourceTree = "<group>"; };
-		2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookieExportingAuthenticationViewController.swift; sourceTree = "<group>"; };
+		2C98D671225C09DA001FF874 /* NAAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAuthenticationViewController.swift; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -1029,7 +1029,7 @@
 		2C98D670225C09C6001FF874 /* Authentication Scene */ = {
 			isa = PBXGroup;
 			children = (
-				2C98D671225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift */,
+				2C98D671225C09DA001FF874 /* NAAuthenticationViewController.swift */,
 			);
 			path = "Authentication Scene";
 			sourceTree = "<group>";
@@ -1430,7 +1430,7 @@
 				2CEC219C2207FACA00A30F4F /* GogoAnime+LinkRetriever.swift in Sources */,
 				2CEBE8FE22074401006A64CC /* UISearchBar+Themable.swift in Sources */,
 				2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */,
-				2C98D672225C09DA001FF874 /* CookieExportingAuthenticationViewController.swift in Sources */,
+				2C98D672225C09DA001FF874 /* NAAuthenticationViewController.swift in Sources */,
 				2C66779A21BC2671000E5ACC /* ContentListViewController.swift in Sources */,
 				2C6677B921BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift in Sources */,
 				2C2C54FB2216066100BAA76E /* User+History.swift in Sources */,

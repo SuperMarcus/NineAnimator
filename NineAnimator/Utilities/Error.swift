@@ -228,4 +228,8 @@ extension NineAnimatorError {
             super.init(coder: aDecoder)
         }
     }
+    
+    /// An WAF authentication challenge is present and can be automatically
+    /// completed by NineAnimator
+    class CloudflareAuthenticationChallenge: AuthenticationRequiredError { }
 }

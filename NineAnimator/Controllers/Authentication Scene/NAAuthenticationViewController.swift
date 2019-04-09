@@ -20,7 +20,7 @@
 import UIKit
 import WebKit
 
-class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKHTTPCookieStoreObserver {
     @IBOutlet private weak var webView: WKWebView!
     
     private var originalRequest: URLRequest?
@@ -33,6 +33,10 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         // Assign delegates
         webView.navigationDelegate = self
         webView.uiDelegate = self
+        
+        // Cookie changes
+        let store = webView.configuration.websiteDataStore
+        store.httpCookieStore.add(self)
     }
     
     @IBAction private func onDismissal(_ sender: Any) {
@@ -48,17 +52,13 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         webView.load(request)
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        if let response = navigationResponse.response as? HTTPURLResponse,
-            let url = response.url,
-            let responseHeaders = response.allHeaderFields as? [String: String] {
-            let cookies = HTTPCookie.cookies(withResponseHeaderFields: responseHeaders, for: url)
-            HTTPCookieStorage.shared.setCookies(cookies, for: url, mainDocumentURL: nil)
+    func cookiesDidChange(in cookieStore: WKHTTPCookieStore) {
+        cookieStore.getAllCookies {
+            cookies in cookies.forEach { HTTPCookieStorage.shared.setCookie($0) }
         }
-        decisionHandler(.allow)
     }
     
-    private func initialize(_ request: URLRequest, withUserAgent userAgent: String, onDismissal callback: @escaping () -> Void) {
+    private func initialize(_ request: URLRequest, withUserAgent userAgent: String?, onDismissal callback: @escaping () -> Void) {
         self.originalRequest = request
         self.userAgent = userAgent
         self.onDismissal = callback
@@ -73,9 +73,24 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         let request = URLRequest(url: url)
         viewController.initialize(
             request,
-            withUserAgent: userAgent ?? "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
+            withUserAgent: userAgent,
             onDismissal: callback
         )
         return rootViewController
+    }
+    
+    class func create(from error: Error, onDismissal callback: @escaping () -> Void) -> UIViewController? {
+        guard let error = error as? NineAnimatorError.AuthenticationRequiredError,
+            let authenticationUrl = error.authenticationUrl else { return nil }
+        
+        // Retrieve the recommended user agent string
+        let preferredUserAgent: String?
+        if let source = error.sourceOfError as? BaseSource {
+            preferredUserAgent = source.sessionUserAgent
+        } else { preferredUserAgent = nil }
+        
+        // Create the view controller
+        let viewController = create(authenticationUrl, withUserAgent: preferredUserAgent, onDismissal: callback)
+        return viewController
     }
 }

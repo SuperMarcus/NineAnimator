@@ -22,12 +22,13 @@ import UIKit
 class UnavailableTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var unavailableErrorTitleLabel: UILabel!
     @IBOutlet private weak var unavailableErrorMessageLabel: UILabel!
+    @IBOutlet private weak var resolveErrorButton: UIButton!
     
     var error: Error? {
-        get { return nil }
-        set {
-            guard let error = newValue else { return }
+        didSet {
+            guard let error = error else { return }
             unavailableErrorMessageLabel.text = error.localizedDescription
+            resolveErrorButton.isHidden = (error as? NineAnimatorError.AuthenticationRequiredError)?.authenticationUrl == nil
         }
     }
     

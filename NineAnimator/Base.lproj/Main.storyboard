@@ -278,11 +278,11 @@
                                     </segue>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.unavailable" rowHeight="159" id="xj6-jY-7H9" customClass="UnavailableTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="534" width="375" height="159"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.unavailable" rowHeight="228" id="xj6-jY-7H9" customClass="UnavailableTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="534" width="375" height="228"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xj6-jY-7H9" id="cA5-9h-54P">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="159"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="228"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NineAnimator is Unavailable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBh-Sa-wuU">
@@ -292,25 +292,35 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="sDJ-cG-QcG">
-                                            <rect key="frame" x="132" y="127.5" width="111" height="20.5"/>
+                                            <rect key="frame" x="132" y="119" width="111" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rp-o4-MgZ">
+                                            <rect key="frame" x="152.5" y="147.5" width="70" height="30"/>
+                                            <state key="normal" title="Open Link"/>
+                                            <connections>
+                                                <action selector="onResolveErrorButtonTapped:" destination="SPf-bx-P2k" eventType="touchUpInside" id="7N4-6f-dah"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="top" secondItem="SBh-Sa-wuU" secondAttribute="bottom" constant="4" id="ATw-Si-idk"/>
                                         <constraint firstItem="sDJ-cG-QcG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cA5-9h-54P" secondAttribute="leadingMargin" constant="32" id="Ahn-KJ-mez"/>
                                         <constraint firstItem="sDJ-cG-QcG" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="L9l-JZ-uOp"/>
-                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SBh-Sa-wuU" secondAttribute="bottom" constant="8" id="Rh7-sg-SXi"/>
                                         <constraint firstItem="SBh-Sa-wuU" firstAttribute="top" secondItem="cA5-9h-54P" secondAttribute="topMargin" constant="80" id="Wve-Az-EgT"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="sDJ-cG-QcG" secondAttribute="trailing" constant="32" id="bau-7E-LUe"/>
                                         <constraint firstItem="SBh-Sa-wuU" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="d2F-oO-SAG"/>
-                                        <constraint firstItem="sDJ-cG-QcG" firstAttribute="bottom" secondItem="cA5-9h-54P" secondAttribute="bottomMargin" id="geh-Y8-cbM"/>
+                                        <constraint firstItem="2rp-o4-MgZ" firstAttribute="top" secondItem="sDJ-cG-QcG" secondAttribute="bottom" constant="8" id="dKG-pI-px5"/>
+                                        <constraint firstItem="2rp-o4-MgZ" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="dSL-QP-biK"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="2rp-o4-MgZ" secondAttribute="bottom" constant="8" id="nmq-b2-e2Y"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="resolveErrorButton" destination="2rp-o4-MgZ" id="LGf-mA-ifs"/>
                                     <outlet property="unavailableErrorMessageLabel" destination="sDJ-cG-QcG" id="aaf-Qf-xm9"/>
                                     <outlet property="unavailableErrorTitleLabel" destination="SBh-Sa-wuU" id="cdo-Ci-v74"/>
                                 </connections>
@@ -854,7 +864,7 @@
                                 <rect key="frame" x="0.0" y="617" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="8kI-CG-O8k" id="R7X-mR-5dQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="341" height="143.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="349" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-gN-0Pw">

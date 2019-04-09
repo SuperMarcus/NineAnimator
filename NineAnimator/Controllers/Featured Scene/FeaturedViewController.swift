@@ -95,6 +95,13 @@ class FeaturedViewController: UITableViewController {
         present(alertView, animated: true)
     }
     
+    @IBAction private func onResolveErrorButtonTapped(_ sender: Any) {
+        if let error = self.error,
+            let viewController = NAAuthenticationViewController.create(from: error, onDismissal: {
+                [weak self] in self?.reload()
+            }) { self.present(viewController, animated: true) }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return featuredAnimePage == nil ? 1 : 2
     }
