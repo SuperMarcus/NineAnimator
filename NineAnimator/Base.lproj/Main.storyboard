@@ -297,9 +297,22 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rp-o4-MgZ">
-                                            <rect key="frame" x="152.5" y="147.5" width="70" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rp-o4-MgZ" customClass="ThemedBorderButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="137.5" y="155.5" width="100" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="GMD-yR-jDi"/>
+                                            </constraints>
                                             <state key="normal" title="Open Link"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="useSecondaryColorInsteadOfTint" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <action selector="onResolveErrorButtonTapped:" destination="SPf-bx-P2k" eventType="touchUpInside" id="7N4-6f-dah"/>
                                             </connections>
@@ -313,7 +326,7 @@
                                         <constraint firstItem="SBh-Sa-wuU" firstAttribute="top" secondItem="cA5-9h-54P" secondAttribute="topMargin" constant="80" id="Wve-Az-EgT"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="sDJ-cG-QcG" secondAttribute="trailing" constant="32" id="bau-7E-LUe"/>
                                         <constraint firstItem="SBh-Sa-wuU" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="d2F-oO-SAG"/>
-                                        <constraint firstItem="2rp-o4-MgZ" firstAttribute="top" secondItem="sDJ-cG-QcG" secondAttribute="bottom" constant="8" id="dKG-pI-px5"/>
+                                        <constraint firstItem="2rp-o4-MgZ" firstAttribute="top" secondItem="sDJ-cG-QcG" secondAttribute="bottom" constant="16" id="dKG-pI-px5"/>
                                         <constraint firstItem="2rp-o4-MgZ" firstAttribute="centerX" secondItem="cA5-9h-54P" secondAttribute="centerX" id="dSL-QP-biK"/>
                                         <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="2rp-o4-MgZ" secondAttribute="bottom" constant="8" id="nmq-b2-e2Y"/>
                                     </constraints>

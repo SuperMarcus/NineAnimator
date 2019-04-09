@@ -162,6 +162,7 @@
 		2C98D66D225BE9C3001FF874 /* NineAnime+VerificationDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */; };
 		2C98D66F225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */; };
 		2C98D672225C09DA001FF874 /* NAAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D671225C09DA001FF874 /* NAAuthenticationViewController.swift */; };
+		2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D673225CB525001FF874 /* ThemedBorderButton.swift */; };
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsRootTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
@@ -417,6 +418,7 @@
 		2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+VerificationDetection.swift"; sourceTree = "<group>"; };
 		2C98D66E225BFA5E001FF874 /* SelflessAuthenticationWebViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelflessAuthenticationWebViewController.storyboard; sourceTree = "<group>"; };
 		2C98D671225C09DA001FF874 /* NAAuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NAAuthenticationViewController.swift; sourceTree = "<group>"; };
+		2C98D673225CB525001FF874 /* ThemedBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedBorderButton.swift; sourceTree = "<group>"; };
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsRootTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootTableViewController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
@@ -826,6 +828,7 @@
 				2C6677B321BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift */,
 				2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */,
 				2C9383DE21FE147E008C0D01 /* ThemedSolidButton.swift */,
+				2C98D673225CB525001FF874 /* ThemedBorderButton.swift */,
 				2CD7825921FFEF2800477FC6 /* OfflineAccessButton.swift */,
 				2CD1A646222EB94C00121320 /* AnimatedImageCollectionView.swift */,
 			);
@@ -1471,6 +1474,7 @@
 				2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */,
 				2CEC218A2207E34E00A30F4F /* Promise+All.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
+				2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */,
 				2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */,
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2C23AE3E2229CFBD00512150 /* MyAnimeList+User.swift in Sources */,
