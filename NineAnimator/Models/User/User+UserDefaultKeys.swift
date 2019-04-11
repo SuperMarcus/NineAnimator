@@ -22,6 +22,7 @@ import Foundation
 extension NineAnimatorUser {
     /// Default keys of NineAnimator
     enum Keys {
+        static var version: String { return "com.marcuszhou.nineanimator.version" }
         static var recentAnimeList: String { return "anime.recent" }
         static var detectClipboardAnimeLinks: String { return "anime.links.detect" }
         static var subscribedAnimeList: String { return "anime.subscribed" }

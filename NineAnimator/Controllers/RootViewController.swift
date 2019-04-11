@@ -62,6 +62,18 @@ class RootViewController: UITabBarController, Themable {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Show setup wizard
+        if !NineAnimator.default.user.didSetupLatestVersion {
+            let storyboard = UIStoryboard(name: "Setup", bundle: Bundle.main)
+            if let viewController = storyboard.instantiateInitialViewController() {
+                presentOnTop(viewController)
+            }
+        }
+    }
+    
     deinit {
         if RootViewController.shared == self {
             Log.error("RootViewController is deinitialized.")

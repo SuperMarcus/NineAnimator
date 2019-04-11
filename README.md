@@ -371,6 +371,7 @@ There are some limitations to NineAnimator's ability to download and playback vi
 * The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
 * [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
 * ...and [scinfu](https://github.com/scinfu)'s awesome [SwiftSoup](https://github.com/scinfu/SwiftSoup)
+* [marcosgriselli](https://github.com/marcosgriselli)'s [ViewAnimator](https://github.com/marcosgriselli/ViewAnimator)
 
 ### Media & Icons
 

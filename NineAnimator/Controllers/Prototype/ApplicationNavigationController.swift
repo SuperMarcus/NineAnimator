@@ -24,6 +24,14 @@ protocol BlendInViewController { }
 protocol DontBotherViewController { }
 
 class ApplicationNavigationController: UINavigationController, UINavigationControllerDelegate, Themable {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+    }
+    
+    override var shouldAutorotate: Bool {
+        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Theme.provision(self)

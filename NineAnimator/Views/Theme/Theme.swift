@@ -52,6 +52,8 @@ struct Theme {
     let activityIndicatorStyle: UIActivityIndicatorView.Style
     
     let keyboardAppearance: UIKeyboardAppearance
+    
+    let preferredStatusBarStyle: UIStatusBarStyle
 }
 
 // MARK: - Accessing Theme object
@@ -170,7 +172,8 @@ extension Theme {
             backgroundBlurStyle: .dark,
             scrollIndicatorStyle: .black,
             activityIndicatorStyle: .gray,
-            keyboardAppearance: .light
+            keyboardAppearance: .light,
+            preferredStatusBarStyle: .default
         )
         
         let dark = Theme(
@@ -187,7 +190,8 @@ extension Theme {
             backgroundBlurStyle: .regular,
             scrollIndicatorStyle: .white,
             activityIndicatorStyle: .white,
-            keyboardAppearance: .dark
+            keyboardAppearance: .dark,
+            preferredStatusBarStyle: .lightContent
         )
         
         return [ light.name: light, dark.name: dark ]
