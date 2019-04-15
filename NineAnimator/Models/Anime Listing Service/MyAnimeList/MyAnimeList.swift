@@ -37,6 +37,13 @@ class MyAnimeList: BaseListingService, ListingService {
         ("plan_to_watch", "Plan to Watch"),
         ("watching", "Currently Watching")
     ] .map { Collection(self, key: $0.0, title: $0.1) }
+    
+    override func onRegister() {
+        super.onRegister()
+        
+        parent.register(additionalRecommendationSource: SeasonalAnimeRecommendation(self))
+        parent.register(additionalRecommendationSource: TrendingAnimeRecommendation(self))
+    }
 }
 
 // MARK: - Capabilities

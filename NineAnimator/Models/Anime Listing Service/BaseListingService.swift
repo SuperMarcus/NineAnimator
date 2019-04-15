@@ -123,4 +123,7 @@ class BaseListingService: SessionDelegate {
             return 1
         }
     }
+    
+    /// A template onRegister method
+    func onRegister() { }
 }

@@ -109,7 +109,7 @@ extension RecentlyViewedTableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var actions = [UIContextualAction]()
         
-        if indexPath.section == Section.recentAnime,
+        if Section.recentAnime.contains(indexPath),
             let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
             let animeLink = cell.animeLink {
             if NineAnimator.default.user.isSubscribing(anime: animeLink) {
@@ -147,7 +147,7 @@ extension RecentlyViewedTableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         // Recent anime section
-        if indexPath.section == Section.recentAnime {
+        if Section.recentAnime.contains(indexPath) {
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
                 _, _ in
                 guard let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
@@ -181,7 +181,7 @@ extension RecentlyViewedTableViewController {
         }
         
         // Downloads section
-        if indexPath.section == Section.statefulAnime {
+        if Section.statefulAnime.contains(indexPath) {
             let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") {
                 [weak self] _, _ in
                 guard let cell = tableView.cellForRow(at: indexPath) as? OfflineAnimeTableViewCell,
@@ -246,7 +246,7 @@ extension RecentlyViewedTableViewController {
 // MARK: - Constants
 fileprivate extension RecentlyViewedTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
-    enum Section: Int, Equatable {
+    enum Section: Int, Equatable, SectionProtocol, CaseIterable {
         case continueWatching = 0
         
         case collections = 1
@@ -254,29 +254,5 @@ fileprivate extension RecentlyViewedTableViewController {
         case statefulAnime = 2
         
         case recentAnime = 3
-        
-        subscript(_ item: Int) -> IndexPath {
-            return IndexPath(item: item, section: self.rawValue)
-        }
-        
-        static func indexSet(_ sections: [Section]) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
-        }
-        
-        static func indexSet(_ sections: Section...) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
-        }
-        
-        static func == (_ lhs: Section, _ rhs: Section) -> Bool {
-            return lhs.rawValue == rhs.rawValue
-        }
-        
-        static func == (_ lhs: Int, _ rhs: Section) -> Bool {
-            return lhs == rhs.rawValue
-        }
-        
-        static func == (_ lhs: Section, _ rhs: Int) -> Bool {
-            return lhs.rawValue == rhs
-        }
     }
 }

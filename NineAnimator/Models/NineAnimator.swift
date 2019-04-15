@@ -68,6 +68,9 @@ class NineAnimator: SessionDelegate {
     /// Container for the list of tracking services
     private(set) var trackingServices = [ListingService]()
     
+    /// A list of recommendation sources
+    private(set) var additionalRecommendationSources = [RecommendationSource]()
+    
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
@@ -83,6 +86,18 @@ class NineAnimator: SessionDelegate {
         // Register implemented sources and services
         registerDefaultSources()
         registerDefaultServices()
+    }
+}
+
+extension NineAnimator {
+    func sortedRecommendationSources() -> [RecommendationSource] {
+        let pool = additionalRecommendationSources
+        // Later will add the featured containers
+        return pool.sorted { $0.piority > $1.piority }
+    }
+    
+    func register(additionalRecommendationSource source: RecommendationSource) {
+        additionalRecommendationSources.append(source)
     }
 }
 
@@ -115,7 +130,10 @@ extension NineAnimator {
 // MARK: - Tracking & Listing services
 extension NineAnimator {
     /// Register a tracking service in NineAnimator
-    func register(service: ListingService) { trackingServices.append(service) }
+    func register(service: ListingService) {
+        trackingServices.append(service)
+        service.onRegister()
+    }
     
     /// Remove the service with name
     func remove(service: ListingService) {

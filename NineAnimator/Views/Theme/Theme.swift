@@ -146,6 +146,8 @@ extension Theme {
             view.progressTintColor = theme.tint
             view.trackTintColor = theme.secondaryText.withAlphaComponent(0.6)
             view.backgroundColor = .clear
+        case let view as UIVisualEffectView:
+            view.effect = UIBlurEffect(style: theme.blurStyle)
         default:
             // For any other views, apply background and tint color
             view?.backgroundColor = theme.background

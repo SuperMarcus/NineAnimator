@@ -17,37 +17,33 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Kingfisher
 import UIKit
 
-@IBDesignable
-class ThemedSolidButton: UIButton, Themable {
-    @IBInspectable var inverted: Bool = false
+class DiscoveryStandardCellCollectionViewCell: UICollectionViewCell {
+    @IBOutlet private weak var artworkImageView: UIImageView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    
+    private(set) var recommendingItem: RecommendingItem?
+    
+    func setPresenting(_ item: RecommendingItem) {
+        self.recommendingItem = item
+        
+        artworkImageView.kf.setImage(with: item.artwork)
+        titleLabel.text = item.title
+    }
     
     override var isHighlighted: Bool {
         get { return super.isHighlighted }
         set {
             super.isHighlighted = newValue
             if newValue {
-                backgroundColor = backgroundColor?.withAlphaComponent(0.6)
-                imageView?.alpha = 0.6
-            } else {
-                backgroundColor = backgroundColor?.withAlphaComponent(1.0)
-                imageView?.alpha = 1.0
-            }
+                alpha = 0.6
+            } else { alpha = 1.0 }
         }
     }
-    
-    func theme(didUpdate theme: Theme) {
-        if inverted {
-            backgroundColor = theme.tint
-            tintColor = theme.secondaryBackground
-            setTitleColor(theme.secondaryBackground, for: .normal)
-            setTitleColor(theme.secondaryBackground.withAlphaComponent(0.6), for: .highlighted)
-        } else {
-            backgroundColor = theme.secondaryBackground
-            tintColor = theme.primaryText
-            setTitleColor(theme.primaryText, for: .normal)
-            setTitleColor(theme.primaryText.withAlphaComponent(0.6), for: .highlighted)
-        }
-    }
+}
+
+extension DiscoveryStandardTableViewCell {
+    typealias Cell = DiscoveryStandardCellCollectionViewCell
 }

@@ -96,4 +96,7 @@ protocol ListingService: AnyObject {
     ///
     /// Only called if the service returns true for `isCapableOfRetrievingAnimeState`
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]>
+    
+    /// Called when the service is registered
+    func onRegister()
 }

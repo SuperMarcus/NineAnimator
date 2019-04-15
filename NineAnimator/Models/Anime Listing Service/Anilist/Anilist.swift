@@ -42,6 +42,14 @@ class Anilist: BaseListingService, ListingService {
     required init(_ parent: NineAnimator) {
         super.init(parent)
     }
+    
+    override func onRegister() {
+        super.onRegister()
+        
+        // Register the "This Week" recommendation row
+        let thisWeekRecommendationSource = ThisWeekRecommendationSource(self)
+        parent.register(additionalRecommendationSource: thisWeekRecommendationSource)
+    }
 }
 
 // MARK: - Exposed interface

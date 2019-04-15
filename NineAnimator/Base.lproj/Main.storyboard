@@ -196,13 +196,13 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recently Updated" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xji-1Z-Meq">
-                                                                <rect key="frame" x="8" y="67.5" width="232.5" height="21"/>
+                                                                <rect key="frame" x="8" y="67.5" width="232" height="21"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EaF-Aj-Y4A">
-                                                                <rect key="frame" x="8" y="39" width="232.5" height="20.5"/>
+                                                                <rect key="frame" x="8" y="39" width="232" height="20.5"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -1050,7 +1050,7 @@
                             <outlet property="delegate" destination="8OU-XT-7E1" id="T05-0I-Xev"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recents" id="smF-4W-Oha">
+                    <navigationItem key="navigationItem" title="Library" id="smF-4W-Oha">
                         <barButtonItem key="rightBarButtonItem" title="Google Cast" image="Chromecast Icon" id="mEy-g5-ff5">
                             <connections>
                                 <action selector="onCastButtonPressed:" destination="8OU-XT-7E1" id="tcX-Im-XFB"/>
@@ -1090,7 +1090,7 @@
         <scene sceneID="xrG-1s-UhK">
             <objects>
                 <navigationController id="rOz-Cr-EMK" userLabel="Recent Container" customClass="ApplicationNavigationController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="recents" id="o2r-J2-aqA"/>
+                    <tabBarItem key="tabBarItem" title="Library" image="Library Icon" id="o2r-J2-aqA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="oXz-KE-UZf">
                         <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1136,6 +1136,16 @@
             </objects>
             <point key="canvasLocation" x="1157" y="-331"/>
         </scene>
+        <!--AnimeDiscovery-->
+        <scene sceneID="DJS-Sx-C5g">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AnimeDiscovery" id="luB-5E-Zna" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="wrX-iI-Bgn"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="via-1y-CN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1149" y="-770"/>
+        </scene>
         <!--Root-->
         <scene sceneID="66E-C5-t73">
             <objects>
@@ -1146,6 +1156,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
+                        <segue destination="luB-5E-Zna" kind="relationship" relationship="viewControllers" id="252-OP-dKL"/>
                         <segue destination="QZv-01-MCN" kind="relationship" relationship="viewControllers" id="tJK-3I-Igt"/>
                         <segue destination="rOz-Cr-EMK" kind="relationship" relationship="viewControllers" id="kN5-gp-5nF"/>
                         <segue destination="im7-SA-Rzv" kind="relationship" relationship="viewControllers" id="cus-k2-Irs"/>
@@ -1158,6 +1169,7 @@
     </scenes>
     <resources>
         <image name="Chromecast Icon" width="25" height="25"/>
+        <image name="Library Icon" width="30" height="30"/>
         <image name="Notification Enabled" width="25" height="25"/>
         <image name="Settings Icon" width="25" height="25"/>
     </resources>

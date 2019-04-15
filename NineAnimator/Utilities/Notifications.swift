@@ -105,4 +105,10 @@ extension Notification.Name {
      */
     static let offlineAccessStateDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.offlineAccessStateDidUpdate")
+    
+    /**
+     Fired when the list of recommendation items are updated
+     */
+    static let recommendationListingDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.recommendationListingDidUpdate")
 }
