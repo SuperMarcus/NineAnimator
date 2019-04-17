@@ -25,11 +25,14 @@ class DiscoveryStandardTableViewCell: UITableViewCell, UICollectionViewDelegate,
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var viewMoreButton: UIButton!
     
+    weak var delegate: DiscoverySceneViewController?
+    
     private let scrollBarHeightInset: CGFloat = 20
     private let standardCellWidth: CGFloat = 110
     
     private var recommendation: Recommendation?
     private var selectionHandler: ((RecommendingItem) -> Void)?
+    private var viewMoreContentProvider: ContentProvider?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,6 +43,12 @@ class DiscoveryStandardTableViewCell: UITableViewCell, UICollectionViewDelegate,
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    @IBAction private func onViewMoreButtonTapped(_ sender: Any) {
+        guard let recommendation = self.recommendation,
+            let contentProvider = self.viewMoreContentProvider else { return }
+        delegate?.onViewMoreButtonTapped(recommendation, contentProvider: contentProvider, from: self)
     }
 }
 
@@ -83,5 +92,8 @@ extension DiscoveryStandardTableViewCell {
         self.titleLabel.text = recommendation.title
         self.subtitleLabel.text = recommendation.subtitle
         collectionView.reloadData()
+        
+        self.viewMoreContentProvider = recommendation.completeItemListProvider()
+        self.viewMoreButton.isHidden = self.viewMoreContentProvider == nil
     }
 }

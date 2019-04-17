@@ -110,7 +110,7 @@ struct Recommendation {
          title: String,
          subtitle: String = "",
          style: Style = .standard,
-         onGenerateCompleteListProvider: @escaping @autoclosure () -> ContentProvider? = nil) {
+         onGenerateCompleteListProvider: @escaping () -> ContentProvider? = { nil }) {
         self.source = source
         self.items = items
         self.title = title

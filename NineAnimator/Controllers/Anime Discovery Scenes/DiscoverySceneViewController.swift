@@ -82,6 +82,26 @@ class DiscoverySceneViewController: UITableViewController {
     }
 }
 
+// MARK: - Delegating actions from cells
+extension DiscoverySceneViewController {
+    func onViewMoreButtonTapped(_ recommendation: Recommendation, contentProvider: ContentProvider, from: UITableViewCell) {
+        let storyboard = UIStoryboard(name: "AnimeListing", bundle: Bundle.main)
+        guard let listingViewController = storyboard.instantiateInitialViewController() as? ContentListViewController else {
+            return Log.error("View controller instantiated from AnimeListing.storyboard is not ContentListViewController")
+        }
+        
+        // Initialize the view controller with content provider
+        listingViewController.setPresenting(
+            contentProvider: contentProvider
+        )
+        
+        // Present the listing view controller
+        if let navigationController = navigationController {
+            navigationController.pushViewController(listingViewController, animated: true)
+        } else { present(listingViewController, animated: true) }
+    }
+}
+
 // MARK: - Table view data source
 extension DiscoverySceneViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -154,6 +174,7 @@ fileprivate extension DiscoverySceneViewController {
             return cell
         case .standard:
             let cell = tableView.dequeueReusableCell(withIdentifier: "next.standard", for: indexPath) as! DiscoveryStandardTableViewCell
+            cell.delegate = self
             cell.setPresenting(recommendation, withSelectionHandler: sharedRecommendingItemCallback)
             return cell
         default: return UITableViewCell()

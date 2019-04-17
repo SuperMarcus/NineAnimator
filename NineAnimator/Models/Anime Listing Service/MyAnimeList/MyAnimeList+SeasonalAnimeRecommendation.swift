@@ -69,7 +69,16 @@ extension MyAnimeList {
                     items: items,
                     title: "Trending",
                     subtitle: formatter.string(from: Date())
-                )
+                ) {
+                    [weak self] in
+                    guard let self = self else { return nil }
+                    return GenericAnimeList(
+                        "/anime/ranking",
+                        parent: self.parent,
+                        title: "Trending",
+                        parameters: [ "ranking_type": "trend" ]
+                    )
+                }
             }
         }
     }
@@ -99,9 +108,11 @@ extension MyAnimeList {
             default: return .fail(.unknownError)
             }
             
+            let requestPath = "/anime/season/\(year)/\(season.lowercased())"
+            
             return parent
                 .apiRequest(
-                    "/anime/season/\(year)/\(season.lowercased())",
+                    requestPath,
                     query: [
                         "sort": "anime_num_list_users",
                         "limit": 50,
@@ -124,7 +135,16 @@ extension MyAnimeList {
                         items: items,
                         title: "Seasonal Anime",
                         subtitle: "\(year) \(season)"
-                    )
+                    ) {
+                        [weak self] in
+                        guard let self = self else { return nil }
+                        return GenericAnimeList(
+                            requestPath,
+                            parent: self.parent,
+                            title: "Trending",
+                            parameters: [ "sort": "anime_num_list_users" ]
+                        )
+                    }
                 }
         }
     }

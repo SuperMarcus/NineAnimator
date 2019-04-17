@@ -106,6 +106,7 @@
 		2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */; };
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
 		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
+		2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */; };
 		2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */; };
 		2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED4221B58C2002C96D4 /* AniListUser.graphql */; };
 		2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */; };
@@ -379,6 +380,7 @@
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
 		2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
+		2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+GenericPagedAnimeList.swift"; sourceTree = "<group>"; };
 		2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListListingAnimeInformation.graphql; sourceTree = "<group>"; };
 		2C60EED4221B58C2002C96D4 /* AniListUser.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUser.graphql; sourceTree = "<group>"; };
 		2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUserMediaCollections.graphql; sourceTree = "<group>"; };
@@ -1163,6 +1165,7 @@
 				2C23AE412229FE5600512150 /* MyAnimeList+Collections.swift */,
 				2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */,
 				2C0CFC442264105100EC793E /* MyAnimeList+SeasonalAnimeRecommendation.swift */,
+				2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */,
 			);
 			path = MyAnimeList;
 			sourceTree = "<group>";
@@ -1611,6 +1614,7 @@
 				2CEC21922207F2D500A30F4F /* PromiseSource.swift in Sources */,
 				2C4FDDAC22482AE90059B7D8 /* UrlFormEncoding.swift in Sources */,
 				2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */,
+				2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */,
 				2CAD375A22261C5A008AD6B4 /* MyAnimeList+Reference.swift in Sources */,
 				2CEB56D721DBE53A0018D804 /* Log.swift in Sources */,
 				2C2C54F72215D47500BAA76E /* User+Subscriptions.swift in Sources */,

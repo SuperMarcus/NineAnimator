@@ -305,6 +305,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onViewMoreButtonTapped:" destination="tUL-GN-cnA" eventType="touchUpInside" id="sfM-cY-dwJ"/>
+                                            </connections>
                                         </button>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cFI-A9-gFQ">
                                             <rect key="frame" x="20" y="68" width="394" height="277"/>
