@@ -141,7 +141,7 @@ extension MyAnimeList {
                         return GenericAnimeList(
                             requestPath,
                             parent: self.parent,
-                            title: "Trending",
+                            title: "Seasonal Anime",
                             parameters: [ "sort": "anime_num_list_users" ]
                         )
                     }

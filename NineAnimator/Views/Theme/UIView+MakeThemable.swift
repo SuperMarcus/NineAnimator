@@ -38,6 +38,15 @@ extension UIView {
         }
     }
     
+    var disableTheming: Bool {
+        get { return layer.style?["themable.disabled"] as? Bool == true }
+        set {
+            var layerStyles = layer.style ?? [:]
+            layerStyles["themable.disabled"] = newValue
+            layer.style = layerStyles
+        }
+    }
+    
     func makeThemable() {
         if let themableSelf = self as? Themable {
             Theme.provision(themableSelf)

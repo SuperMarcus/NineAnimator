@@ -23,6 +23,8 @@ import UIKit
 class DiscoveryStandardCellCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var artworkImageView: UIImageView!
     @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var captionLabel: UILabel!
+    @IBOutlet private weak var captionBackgroundView: UIVisualEffectView!
     
     private(set) var recommendingItem: RecommendingItem?
     
@@ -31,6 +33,18 @@ class DiscoveryStandardCellCollectionViewCell: UICollectionViewCell {
         
         artworkImageView.kf.setImage(with: item.artwork)
         titleLabel.text = item.title
+        captionLabel.text = item.caption
+        captionBackgroundView.isHidden = item.caption.isEmpty
+        
+        if case .highlight = item.captionStyle {
+            captionBackgroundView.contentView.backgroundColor = #colorLiteral(red: 1, green: 0.3098039216, blue: 0.2666666667, alpha: 1)
+            captionLabel.disableTheming = true
+            captionLabel.textColor = .white
+        } else {
+            captionBackgroundView.contentView.backgroundColor = .clear
+            captionLabel.disableTheming = false
+            captionLabel.makeThemable()
+        }
     }
     
     override var isHighlighted: Bool {

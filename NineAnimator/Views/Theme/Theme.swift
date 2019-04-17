@@ -99,6 +99,9 @@ extension Theme {
     
     /// Apply the default set of theming behaviors for the view
     private static func update(_ theme: Theme, for view: UIView?) {
+        // Return directly if theming is disabled
+        if view?.disableTheming == true { return }
+        
         switch view {
         case let view as Themable:
             // If the view is Themable, update it as themable

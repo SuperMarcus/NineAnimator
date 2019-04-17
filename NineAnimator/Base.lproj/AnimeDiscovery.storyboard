@@ -351,10 +351,43 @@
                                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                                 </userDefinedRuntimeAttributes>
                                                             </label>
+                                                            <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iwS-xI-Poy">
+                                                                <rect key="frame" x="8" y="109" width="85" height="23"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KF6-bB-C7g">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="85" height="23"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caption" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nnq-86-RN8">
+                                                                            <rect key="frame" x="4" y="0.0" width="77" height="23"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="nnq-86-RN8" firstAttribute="top" secondItem="KF6-bB-C7g" secondAttribute="top" id="ZWI-l0-egN"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="nnq-86-RN8" secondAttribute="bottom" id="lMk-7e-oZf"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="nnq-86-RN8" secondAttribute="trailing" constant="4" id="qHC-jl-bFq"/>
+                                                                        <constraint firstItem="nnq-86-RN8" firstAttribute="leading" secondItem="KF6-bB-C7g" secondAttribute="leading" constant="4" id="xd8-Wp-zR8"/>
+                                                                    </constraints>
+                                                                </view>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="23" id="MD2-G8-ah8"/>
+                                                                </constraints>
+                                                                <blurEffect style="light"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="8"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </visualEffectView>
                                                         </subviews>
                                                     </view>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="iwS-xI-Poy" firstAttribute="trailing" secondItem="hVE-jV-G1x" secondAttribute="trailing" constant="-8" id="6k9-MS-Rge"/>
+                                                        <constraint firstItem="iwS-xI-Poy" firstAttribute="bottom" secondItem="hVE-jV-G1x" secondAttribute="bottom" constant="-8" id="H3W-ds-HYf"/>
                                                         <constraint firstAttribute="trailing" secondItem="KvD-Us-DEE" secondAttribute="trailing" id="HLe-cD-gPh"/>
                                                         <constraint firstAttribute="trailing" secondItem="hVE-jV-G1x" secondAttribute="trailing" id="Tdi-PK-xeC"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="KvD-Us-DEE" secondAttribute="bottom" id="VkX-eh-arn"/>
@@ -362,9 +395,12 @@
                                                         <constraint firstItem="KvD-Us-DEE" firstAttribute="leading" secondItem="RB1-XX-78w" secondAttribute="leading" id="hcb-9J-3zB"/>
                                                         <constraint firstItem="KvD-Us-DEE" firstAttribute="top" secondItem="hVE-jV-G1x" secondAttribute="bottom" constant="8" id="ja2-8m-G7y"/>
                                                         <constraint firstItem="hVE-jV-G1x" firstAttribute="leading" secondItem="RB1-XX-78w" secondAttribute="leading" id="lQy-jV-ROB"/>
+                                                        <constraint firstItem="iwS-xI-Poy" firstAttribute="leading" secondItem="hVE-jV-G1x" secondAttribute="leading" constant="8" id="yV2-EH-drd"/>
                                                     </constraints>
                                                     <connections>
                                                         <outlet property="artworkImageView" destination="hVE-jV-G1x" id="HBi-Tn-h9S"/>
+                                                        <outlet property="captionBackgroundView" destination="iwS-xI-Poy" id="mMG-ce-UJf"/>
+                                                        <outlet property="captionLabel" destination="nnq-86-RN8" id="02T-Xt-wfH"/>
                                                         <outlet property="titleLabel" destination="KvD-Us-DEE" id="Sfh-RQ-q1h"/>
                                                     </connections>
                                                 </collectionViewCell>
