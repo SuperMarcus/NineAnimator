@@ -20,7 +20,7 @@
 import Foundation
 
 /// An object that can provide recommendations for users
-protocol RecommendationSource {
+protocol RecommendationSource: AnyObject {
     typealias Piority = Double
     
     /// The user-friendly name of this recommendation source
@@ -129,4 +129,12 @@ extension RecommendationSource.Piority {
     static let defaultMedium: RecommendationSource.Piority = 500
     
     static let defaultLow: RecommendationSource.Piority = 250
+}
+
+extension RecommendationSource {
+    /// Notify the observers that the contents in this recommendation
+    /// source has been updated
+    func fireDidUpdateNotification() {
+        NotificationCenter.default.post(name: .sourceDidUpdateRecommendation, object: self)
+    }
 }

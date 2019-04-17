@@ -49,6 +49,8 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     private let animeCachingDirectory: URL
     
+    private let subscriptionRecommendationSource = SubscribedAnimeRecommendationSource()
+    
     override init() {
         let fileManager = FileManager.default
         self.animeCachingDirectory = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -78,6 +80,9 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         )
         
         UNUserNotificationCenter.current().setNotificationCategories([animeUpdateCategory])
+        
+        // Add anime subscription as a recommendation source
+        NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
     }
 }
 
@@ -174,27 +179,40 @@ extension UserNotificationManager {
      
      See persist(_ watcher: WatchedAnime)
      */
-    func lazyPersist(_ link: AnimeLink) {
+    func lazyPersist(_ link: AnimeLink, shouldFireSubscriptionEvent: Bool = false) {
         lazyPersistPool.insert(link)
+        
+        if shouldFireSubscriptionEvent {
+            subscriptionRecommendationSource.fireDidUpdateNotification()
+        }
     }
     
     /**
      Update cached anime episodes
      */
-    func update(_ anime: Anime) {
+    func update(_ anime: Anime, shouldFireSubscriptionEvent: Bool = false) {
         let newWatcher = WatchedAnime(
             link: anime.link,
             episodeNames: anime.episodes.uniqueEpisodeNames,
             lastCheck: Date()
         )
         persist(newWatcher)
+        
+        if shouldFireSubscriptionEvent {
+            subscriptionRecommendationSource.fireDidUpdateNotification()
+        }
     }
     
     /**
      Clear cached anime episodes
      */
     func remove(_ anime: AnimeLink) {
+        // Fire update event
+        subscriptionRecommendationSource.fireDidUpdateNotification()
+        
+        // Check if the anime is not yet fetched
         guard lazyPersistPool.remove(anime) == nil else { return }
+        
         do {
             let fileManager = FileManager.default
             try fileManager.removeItem(at: url(for: anime))
@@ -233,12 +251,27 @@ extension UserNotificationManager {
     func hasNotifications(for anime: AnimeLink, _ handler: @escaping NineAnimatorCallback<Bool>) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getDeliveredNotifications {
-            notificaitons in
+            notifications in
             handler(
-                notificaitons.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(anime) },
+                notifications.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(anime) },
                 nil
             )
         }
+    }
+    
+    /// Retrieve the list of anime with notifications delivered to
+    func animeWithNotifications(searchIn pool: [AnimeLink] = NineAnimator.default.user.subscribedAnimes) -> NineAnimatorPromise<[AnimeLink]> {
+        let notificationCenter = UNUserNotificationCenter.current()
+        let promise = NineAnimatorPromise<[AnimeLink]>(nil)
+        notificationCenter.getDeliveredNotifications {
+            [weak promise] notifications in
+            if let promise = promise {
+                promise.resolve(pool.filter {
+                    link in notifications.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(link) }
+                })
+            }
+        }
+        return promise
     }
 }
 

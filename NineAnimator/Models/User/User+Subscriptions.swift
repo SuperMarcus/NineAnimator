@@ -51,7 +51,7 @@ extension NineAnimatorUser {
      */
     func subscribe(anime: Anime) {
         subscribe(uncached: anime.link)
-        UserNotificationManager.default.update(anime)
+        UserNotificationManager.default.update(anime, shouldFireSubscriptionEvent: true)
     }
     
     /**
@@ -61,7 +61,7 @@ extension NineAnimatorUser {
         var newWatchList = subscribedAnimes.filter { $0 != link }
         newWatchList.append(link)
         subscribedAnimes = newWatchList
-        UserNotificationManager.default.lazyPersist(link)
+        UserNotificationManager.default.lazyPersist(link, shouldFireSubscriptionEvent: true)
     }
     
     /**

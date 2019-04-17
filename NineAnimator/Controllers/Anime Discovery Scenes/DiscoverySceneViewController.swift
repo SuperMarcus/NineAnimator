@@ -21,7 +21,9 @@ import UIKit
 
 class DiscoverySceneViewController: UITableViewController {
     private var recommendationList = [(RecommendationSource, Recommendation?, Error?)]()
-    private var recommendationLoadingTasks = [NineAnimatorAsyncTask]()
+    private var recommendationLoadingTasks = [ObjectIdentifier: NineAnimatorAsyncTask]()
+    private var dirtySources = Set<ObjectIdentifier>()
+    private var shouldReloadDirtySourceImmedietly = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Theme.current.preferredStatusBarStyle
@@ -29,6 +31,14 @@ class DiscoverySceneViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Add recommendation list item
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onSourceDidUpdateRecommendation(_:)),
+            name: .sourceDidUpdateRecommendation,
+            object: nil
+        )
         
         // Remove the seperator lines
         tableView.tableFooterView = UIView()
@@ -38,10 +48,23 @@ class DiscoverySceneViewController: UITableViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        // Load dirty source as soon as the notification is received
+        shouldReloadDirtySourceImmedietly = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Disable load dirty source at the moment of notification
+        shouldReloadDirtySourceImmedietly = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Reload dirty sources when the view appears
+        reloadDirtySources()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -101,7 +124,16 @@ extension DiscoverySceneViewController {
                 return cell(for: recommendation, at: indexPath)
             } else if let error = attributes.2 {
                 // return error cell
-                return UITableViewCell()
+                let cell = tableView.dequeueReusableCell(withIdentifier: "next.error", for: indexPath) as! DiscoveryErrorTableViewCell
+                cell.setPresenting(error, withSource: attributes.0) {
+                    [weak self] error, _ in
+                    // Show authentication diaglog
+                    if let authenticationController = NAAuthenticationViewController.create(
+                        from: error,
+                        onDismissal: { self?.reloadRecommendationList() }
+                    ) { self?.present(authenticationController, animated: true) }
+                }
+                return cell
             } else {
                 // return loading cell
                 let cell = tableView.dequeueReusableCell(withIdentifier: "next.loading", for: indexPath) as! DiscoveryLoadingTableViewCell
@@ -128,9 +160,47 @@ fileprivate extension DiscoverySceneViewController {
         }
     }
     
+    @objc private func onSourceDidUpdateRecommendation(_ notification: Notification) {
+        if let source = notification.object as? RecommendationSource {
+            let identifier = ObjectIdentifier(source)
+            dirtySources.insert(identifier)
+            
+            // Reload immedietly if currently presenting
+            if shouldReloadDirtySourceImmedietly {
+                DispatchQueue.main.async { [weak self] in self?.reloadDirtySources() }
+            }
+        }
+    }
+    
+    /// Reload a particular recommendation source with identifier
+    private func reloadRecommendation(for sourceIdentifier: ObjectIdentifier) {
+        let enumeratedRecommendationList = recommendationList.enumerated()
+        for (index, (source, _, _)) in enumeratedRecommendationList where ObjectIdentifier(source) == sourceIdentifier {
+            // Set the source to loading state
+            recommendationList[index] = (source, nil, nil)
+            tableView.reloadRows(at: [Section.recommendations[index]], with: .fade)
+            
+            // Create the loading task
+            // this will cause any previously created task to abort
+            recommendationLoadingTasks[sourceIdentifier] = createTask(for: source, withItemIndex: index)
+            _ = dirtySources.remove(sourceIdentifier)
+        }
+    }
+    
+    /// Reload the recommendations from sources that are marked as dirty
+    private func reloadDirtySources() {
+        let reloadingSources = dirtySources
+        tableView.performBatchUpdates({
+            for dirtySourceIdentifier in reloadingSources {
+                reloadRecommendation(for: dirtySourceIdentifier)
+            }
+        }, completion: nil)
+    }
+    
+    /// Reload the entire recommendation list
     func reloadRecommendationList() {
         // Abort all previous tasks
-        recommendationLoadingTasks = []
+        recommendationLoadingTasks = [:]
         recommendationList = NineAnimator
             .default
             .sortedRecommendationSources()
@@ -138,13 +208,18 @@ fileprivate extension DiscoverySceneViewController {
         tableView.reloadSections(Section.indexSet(.recommendations), with: .fade)
         
         for (index, (source, _, _)) in recommendationList.enumerated() {
-            let task = source
-                .generateRecommendations()
-                .dispatch(on: .main)
-                .error { [weak self] in self?.onRecommendationLoadError(index, source: source, error: $0) }
-                .finally { [weak self] in self?.onRecommendationLoad(index, source: source, recommendation: $0) }
-            recommendationLoadingTasks.append(task)
+            let identifier = ObjectIdentifier(source)
+            let task = createTask(for: source, withItemIndex: index)
+            recommendationLoadingTasks[identifier] = task
         }
+    }
+    
+    private func createTask(for source: RecommendationSource, withItemIndex index: Int) -> NineAnimatorAsyncTask {
+        return source
+            .generateRecommendations()
+            .dispatch(on: .main)
+            .error { [weak self] in self?.onRecommendationLoadError(index, source: source, error: $0) }
+            .finally { [weak self] in self?.onRecommendationLoad(index, source: source, recommendation: $0) }
     }
     
     func onRecommendationLoad(_ index: Int, source: RecommendationSource, recommendation: Recommendation) {

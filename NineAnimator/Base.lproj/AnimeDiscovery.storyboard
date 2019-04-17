@@ -458,6 +458,88 @@
                                     <outlet property="sectionTitle" destination="yGh-oL-1cg" id="0Ey-EH-uMR"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="next.error" rowHeight="138" id="RE1-b4-bSG" customClass="DiscoveryErrorTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="859" width="414" height="138"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RE1-b4-bSG" id="SaZ-sg-LuB">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="137.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Loading Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xip-SL-kgM">
+                                            <rect key="frame" x="8" y="16" width="398" height="25.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KSu-HT-kGp">
+                                            <rect key="frame" x="8" y="41.5" width="398" height="88"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error Description" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vk8-dr-GdY">
+                                                    <rect key="frame" x="16" y="26" width="366" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Bw-Vm-E5a" customClass="ThemedBorderButton" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="154" y="52" width="90" height="27"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="Uh9-Sg-r6A"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <inset key="titleEdgeInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                    <state key="normal" title="Open Link"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="useSecondaryColorInsteadOfTint" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onReauthenticationButtonTapped:" destination="RE1-b4-bSG" eventType="touchUpInside" id="Hzp-NW-lFi"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="vk8-dr-GdY" firstAttribute="top" relation="greaterThanOrEqual" secondItem="KSu-HT-kGp" secondAttribute="top" constant="4" id="3QG-lL-9pN"/>
+                                                <constraint firstItem="vk8-dr-GdY" firstAttribute="bottom" secondItem="KSu-HT-kGp" secondAttribute="centerY" priority="750" id="6sh-hd-52i"/>
+                                                <constraint firstItem="4Bw-Vm-E5a" firstAttribute="centerX" secondItem="KSu-HT-kGp" secondAttribute="centerX" id="Btl-iq-XSU"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="4Bw-Vm-E5a" secondAttribute="bottom" id="Kit-Vc-ier"/>
+                                                <constraint firstItem="4Bw-Vm-E5a" firstAttribute="top" secondItem="vk8-dr-GdY" secondAttribute="bottom" constant="8" id="Y1p-Vk-TCA"/>
+                                                <constraint firstAttribute="trailing" secondItem="vk8-dr-GdY" secondAttribute="trailing" constant="16" id="gP7-IE-fIg"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="80" id="kn9-HF-bfU"/>
+                                                <constraint firstItem="vk8-dr-GdY" firstAttribute="leading" secondItem="KSu-HT-kGp" secondAttribute="leading" constant="16" id="vK5-6V-UVB"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="KSu-HT-kGp" firstAttribute="top" secondItem="Xip-SL-kgM" secondAttribute="bottom" id="1ny-k0-wsl"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Xip-SL-kgM" secondAttribute="trailing" id="GX5-KM-MW7"/>
+                                        <constraint firstItem="KSu-HT-kGp" firstAttribute="trailing" secondItem="SaZ-sg-LuB" secondAttribute="trailingMargin" id="P4x-Mp-5jN"/>
+                                        <constraint firstItem="Xip-SL-kgM" firstAttribute="top" secondItem="SaZ-sg-LuB" secondAttribute="topMargin" constant="8" id="Svp-za-XYh"/>
+                                        <constraint firstItem="Xip-SL-kgM" firstAttribute="leading" secondItem="SaZ-sg-LuB" secondAttribute="leadingMargin" id="UzD-qe-edX"/>
+                                        <constraint firstItem="KSu-HT-kGp" firstAttribute="leading" secondItem="SaZ-sg-LuB" secondAttribute="leadingMargin" id="cFF-RQ-3Lm"/>
+                                        <constraint firstItem="KSu-HT-kGp" firstAttribute="bottom" secondItem="SaZ-sg-LuB" secondAttribute="bottomMargin" id="kj4-px-JZ1"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="errorDescriptionLabel" destination="vk8-dr-GdY" id="zuV-eh-LxX"/>
+                                    <outlet property="openLinkButton" destination="4Bw-Vm-E5a" id="vzW-nn-bK9"/>
+                                    <outlet property="titleLabel" destination="Xip-SL-kgM" id="hOQ-WO-Ulz"/>
+                                </connections>
+                            </tableViewCell>
                         </prototypes>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>

@@ -104,6 +104,8 @@
 		2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */; };
 		2C4FDDB322485EF90059B7D8 /* AnimeUltima+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */; };
 		2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */; };
+		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
+		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
 		2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */; };
 		2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED4221B58C2002C96D4 /* AniListUser.graphql */; };
 		2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */; };
@@ -375,6 +377,8 @@
 		2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Search.swift"; sourceTree = "<group>"; };
 		2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseSource+Cloudflare.swift"; sourceTree = "<group>"; };
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
+		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
+		2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
 		2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListListingAnimeInformation.graphql; sourceTree = "<group>"; };
 		2C60EED4221B58C2002C96D4 /* AniListUser.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUser.graphql; sourceTree = "<group>"; };
 		2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUserMediaCollections.graphql; sourceTree = "<group>"; };
@@ -595,6 +599,7 @@
 				2C0CFC3E2263DE9B00EC793E /* ThisWeekTableViewCell+Cell.swift */,
 				2C0CFC4022640A1200EC793E /* DiscoveryStandardTableViewCell.swift */,
 				2C0CFC4222640B6600EC793E /* DiscoveryStandardCell+Cell.swift */,
+				2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */,
 			);
 			path = "Anime Discovery Scenes";
 			sourceTree = "<group>";
@@ -860,7 +865,7 @@
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
 				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
-				2C0E7554226230B200DF3AC4 /* SectionProtocol.swift */,
+				2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -927,6 +932,7 @@
 				2C85368A2232D8D600A5CFB9 /* Coding.swift */,
 				2C4FDDAB22482AE90059B7D8 /* UrlFormEncoding.swift */,
 				2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */,
+				2C0E7554226230B200DF3AC4 /* SectionProtocol.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1545,6 +1551,7 @@
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C3BBAAC2217635000F1C77B /* Dictionary+KeyPathAccess.swift in Sources */,
 				2C85369C22348BFF00A5CFB9 /* WonderfulSubs+ServerRecommendation.swift in Sources */,
+				2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
 				2CAD375822261BDE008AD6B4 /* MyAnimeList.swift in Sources */,
@@ -1607,6 +1614,7 @@
 				2CAD375A22261C5A008AD6B4 /* MyAnimeList+Reference.swift in Sources */,
 				2CEB56D721DBE53A0018D804 /* Log.swift in Sources */,
 				2C2C54F72215D47500BAA76E /* User+Subscriptions.swift in Sources */,
+				2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */,
 				2C8536852231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift in Sources */,
 				2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */,
 				2CCC745E21C064800007502A /* NineAnime+Search.swift in Sources */,

@@ -77,12 +77,6 @@ extension Anilist {
                 URL(string: try mediaEntry.value(at: "coverImage.extraLarge", type: String.self)),
                 or: .urlError
             )
-            self.wallpapers = [
-                try some(
-                    URL(string: try mediaEntry.value(at: "bannerImage", type: String.self)),
-                    or: .urlError
-                )
-            ]
             self.siteUrl = try some(
                 URL(string: try mediaEntry.value(at: "siteUrl", type: String.self)),
                 or: .urlError
@@ -90,6 +84,12 @@ extension Anilist {
             self.description = try SwiftSoup
                 .parse(try mediaEntry.value(at: "description", type: String.self))
                 .text()
+            
+            self.wallpapers = []
+            if let bannerImageString = mediaEntry.valueIfPresent(at: "bannerImage", type: String.self),
+                let url = URL(string: bannerImageString) {
+                self.wallpapers.append(url)
+            }
             
             // Characters
             _characters = try mediaEntry

@@ -1068,7 +1068,7 @@
                 <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvQ-c8-IjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1834" y="1112"/>
+            <point key="canvasLocation" x="1834" y="1089"/>
         </scene>
         <!--OfflineAnimeViewer-->
         <scene sceneID="RWb-rZ-98f">
@@ -1076,7 +1076,7 @@
                 <viewControllerPlaceholder storyboardName="OfflineAnimeViewer" id="Aai-c1-tKt" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ulM-S7-d4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1869" y="1179"/>
+            <point key="canvasLocation" x="1869" y="1156"/>
         </scene>
         <!--AnimeListing-->
         <scene sceneID="P1u-Vx-V0r">
@@ -1084,7 +1084,7 @@
                 <viewControllerPlaceholder storyboardName="AnimeListing" id="SHI-Va-UwC" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF2-KF-Reg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1837" y="1247"/>
+            <point key="canvasLocation" x="1837" y="1224"/>
         </scene>
         <!--Recent Container-->
         <scene sceneID="xrG-1s-UhK">
@@ -1144,7 +1144,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="via-1y-CN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1149" y="-770"/>
+            <point key="canvasLocation" x="960" y="-772"/>
         </scene>
         <!--Root-->
         <scene sceneID="66E-C5-t73">
@@ -1175,8 +1175,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="5mq-eg-8TQ"/>
-        <segue reference="fxJ-zc-HDT"/>
+        <segue reference="99S-gz-QvA"/>
         <segue reference="snt-dk-hEz"/>
-        <segue reference="Uut-Fq-hAa"/>
+        <segue reference="pnE-3F-WKs"/>
     </inferredMetricsTieBreakers>
 </document>
