@@ -388,3 +388,4 @@ Most of the resources are obtained from the open domains with their respective a
 - Kitsu icon from [kitsu.io](//kitsu.io)
 - MyAnimeList icon from [myanimelist.net](//myanimelist.net)
 - [Information Icon](https://thenounproject.com/search/?q=information&i=1281664) by [Wawan Hermawan](https://thenounproject.com/wawan3)
+- [Quick Action Cog Icon](https://thenounproject.com/search/?q=ios%20cog&i=17369) by [Melvin Salas](https://thenounproject.com/msalas10)

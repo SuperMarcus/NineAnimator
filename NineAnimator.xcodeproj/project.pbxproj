@@ -107,6 +107,7 @@
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
 		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
 		2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */; };
+		2C60EABE2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABD2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift */; };
 		2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */; };
 		2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED4221B58C2002C96D4 /* AniListUser.graphql */; };
 		2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */; };
@@ -381,6 +382,7 @@
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
 		2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
 		2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+GenericPagedAnimeList.swift"; sourceTree = "<group>"; };
+		2C60EABD2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoverySceneViewController+QuickActions.swift"; sourceTree = "<group>"; };
 		2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListListingAnimeInformation.graphql; sourceTree = "<group>"; };
 		2C60EED4221B58C2002C96D4 /* AniListUser.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUser.graphql; sourceTree = "<group>"; };
 		2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUserMediaCollections.graphql; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				2C0E755222622DD600DF3AC4 /* DiscoverySceneViewController.swift */,
+				2C60EABD2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift */,
 			);
 			path = "Anime Discovery Scenes";
 			sourceTree = "<group>";
@@ -1735,6 +1738,7 @@
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2CEC21962207F95D00A30F4F /* GogoAnime+ContentProvider.swift in Sources */,
 				2C85369A2234889F00A5CFB9 /* WonderfulSubs+LinkRetrival.swift in Sources */,
+				2C60EABE2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift in Sources */,
 				2CEC218E2207EC9300A30F4F /* BaseSource.swift in Sources */,
 				2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */,
 				2CEBE90D2207BEAD006A64CC /* GogoAnime.swift in Sources */,

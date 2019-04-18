@@ -63,8 +63,9 @@ class DiscoverySceneViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Reload dirty sources when the view appears
+        // Reload dirty and errored sources when the view appears
         reloadDirtySources()
+        reloadErroredSources()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -131,10 +132,7 @@ extension DiscoverySceneViewController {
         switch section {
         case .quickActions:
             let cell = tableView.dequeueReusableCell(withIdentifier: "next.actions", for: indexPath) as! QuickActionsTableViewCell
-            cell.updateQuickActionsList([
-                .init(icon: #imageLiteral(resourceName: "TV Icon"), title: "Continue Watching") { Log.info("continue watching button tapped") },
-                .init(icon: #imageLiteral(resourceName: "Library Icon"), title: "Downloaded") { Log.info("offline contents button tapped") }
-            ])
+            cell.updateQuickActionsList(availableQuickActions)
             return cell
         case .recommendations:
             let attributes = recommendationList[indexPath.item]
@@ -218,6 +216,23 @@ fileprivate extension DiscoverySceneViewController {
         }, completion: nil)
     }
     
+    /// Reload recommendations from sources that have previously reported errors
+    private func reloadErroredSources() {
+        tableView.performBatchUpdates({
+            let enumeratedRecommendationSourceList = recommendationList.enumerated()
+            for (index, (source, _, error)) in enumeratedRecommendationSourceList where error != nil {
+                // Set to loading state
+                recommendationList[index] = (source, nil, nil)
+                tableView.reloadRows(at: [ Section.recommendations[index] ], with: .fade)
+                
+                // Create new loading task
+                let identifier = ObjectIdentifier(source)
+                let task = createTask(for: source, withItemIndex: index)
+                recommendationLoadingTasks[identifier] = task
+            }
+        }, completion: nil)
+    }
+    
     /// Reload the entire recommendation list
     func reloadRecommendationList() {
         // Abort all previous tasks
@@ -273,14 +288,5 @@ fileprivate extension DiscoverySceneViewController {
     enum Section: Int, SectionProtocol, CaseIterable {
         case quickActions
         case recommendations
-    }
-}
-
-// MARK: - Quick action
-extension DiscoverySceneViewController {
-    struct QuickAction {
-        var icon: UIImage
-        var title: String
-        var onAction: () -> Void
     }
 }

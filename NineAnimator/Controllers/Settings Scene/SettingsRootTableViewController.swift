@@ -271,3 +271,16 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         updatePreferencesUI()
     }
 }
+
+// MARK: - Create settings table view controller
+extension SettingsRootTableViewController {
+    class func create() -> UIViewController? {
+        let storyboard = UIStoryboard(name: "Settings", bundle: .main)
+        if let viewController = storyboard.instantiateInitialViewController() {
+            // Set presentation style to form sheet
+            viewController.modalPresentationStyle = .formSheet
+            return viewController
+        }
+        return nil
+    }
+}

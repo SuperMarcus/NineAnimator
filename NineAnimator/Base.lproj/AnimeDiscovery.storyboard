@@ -26,7 +26,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pBI-rc-GMl">
-                                            <rect key="frame" x="20" y="11" width="374" height="48"/>
+                                            <rect key="frame" x="20" y="-9" width="374" height="78"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="75" id="7c6-H6-B16"/>
@@ -39,7 +39,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="action" id="Jcn-qF-jNL" customClass="QuickActionCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-0.5" width="201" height="48.5"/>
+                                                    <rect key="frame" x="0.0" y="15" width="201" height="48.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="201" height="48.5"/>
@@ -84,9 +84,9 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="pBI-rc-GMl" firstAttribute="trailing" secondItem="ywD-3E-4wh" secondAttribute="trailingMargin" id="7Z2-kl-IgN"/>
-                                        <constraint firstItem="pBI-rc-GMl" firstAttribute="bottom" secondItem="ywD-3E-4wh" secondAttribute="bottomMargin" id="VkA-ni-rgK"/>
+                                        <constraint firstItem="pBI-rc-GMl" firstAttribute="bottom" secondItem="ywD-3E-4wh" secondAttribute="bottomMargin" constant="10" id="VkA-ni-rgK"/>
                                         <constraint firstItem="pBI-rc-GMl" firstAttribute="leading" secondItem="ywD-3E-4wh" secondAttribute="leadingMargin" id="cVs-8O-yEx"/>
-                                        <constraint firstItem="pBI-rc-GMl" firstAttribute="top" secondItem="ywD-3E-4wh" secondAttribute="topMargin" id="dqe-IS-OyP"/>
+                                        <constraint firstItem="pBI-rc-GMl" firstAttribute="top" secondItem="ywD-3E-4wh" secondAttribute="topMargin" constant="-20" id="dqe-IS-OyP"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
