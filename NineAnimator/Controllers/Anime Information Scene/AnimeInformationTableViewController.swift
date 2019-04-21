@@ -406,19 +406,28 @@ extension AnimeInformationTableViewController {
                     or: .searchError("No matching anime found")
                 )
             }
-            .error(onError)
+            .dispatch(on: .main)
+            .error {
+                [weak self] error in
+                guard let self = self else { return }
+                
+                // Present the error
+                self.onError(error, isFetchingError: true)
+                
+                // Resets the episodes fetching button and indicator
+                self.showEpisodesButton.isHidden = false
+                self.fetchEpisodesActivityIndicator.stopAnimating()
+            }
             .finally {
                 [weak self] match in
                 let (confidence, link) = match
                 Log.info("Found an anime \"%@\" with %@ confidence", link.title, confidence)
-                DispatchQueue.main.async {
-                    // If we are highly confident that we got a match, open that link
-                    // ...using alpha=0.002
-                    if confidence > 0.998 {
-                        self?.onPerfectMatch(link)
-                    } else { self?.onUnconfidentMatch() }
-                    self?.didPerformEpisodeFetchingTask = true
-                }
+                // If we are highly confident that we got a match, open that link
+                // ...using alpha=0.002
+                if confidence > 0.998 {
+                    self?.onPerfectMatch(link)
+                } else { self?.onUnconfidentMatch() }
+                self?.didPerformEpisodeFetchingTask = true
             }
     }
     
@@ -467,7 +476,8 @@ extension AnimeInformationTableViewController {
         
         class func search(_ query: String, on source: Source = NineAnimator.default.user.source) -> NineAnimatorPromise<[AnyLink]> {
             let provider = source.search(keyword: query)
-            return AnimeFetchingAgent(provider: provider).promise()
+            let agent = AnimeFetchingAgent(provider: provider)
+            return agent.promise()
         }
     }
 }
@@ -475,27 +485,18 @@ extension AnimeInformationTableViewController {
 // MARK: - Handle errors
 extension AnimeInformationTableViewController {
     private func onError(_ error: Error) {
+        self.onError(error, isFetchingError: false)
+    }
+    
+    private func onError(_ error: Error, isFetchingError: Bool) {
         Log.error(error)
         // Silence the error if the information has been loaded
-        guard self.presentingAnimeInformation == nil else { return }
+        guard isFetchingError || self.presentingAnimeInformation == nil else { return }
         
-        let alert = UIAlertController(
-            title: "Error",
-            message: error is NineAnimatorError ? "\(error)" : error.localizedDescription,
-            preferredStyle: .alert
-        )
-        
-        // Add OK action
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel) {
-            [weak self] _ in
-            guard let self = self else { return }
-            
-            // If the anime information has not been loaded yet, back to previous page
-            if self.presentingAnimeInformation == nil {
-                self.isAlertPresenting = false
-                self.navigationController?.popViewController(animated: true)
-            }
-        })
+        let alert = UIAlertController(error: error, source: self) {
+            [weak self] shouldRetry in
+            if shouldRetry { self?.performEpisodeFetching() }
+        }
         
         // Present alert
         DispatchQueue.main.async {

@@ -57,7 +57,7 @@ class NineAnimeSearch: ContentProvider {
             if self._results.count > loadingIndex { return }
             
             guard let response = response else {
-                self.delegate?.onError(NineAnimatorError.searchError("Response cannot be parsed."), from: self)
+                self.delegate?.onError(error ?? NineAnimatorError.searchError("Response cannot be parsed."), from: self)
                 return Log.error(error)
             }
             
