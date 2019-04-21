@@ -27,7 +27,7 @@ protocol VideoProviderParser {
 
 extension VideoProviderParser {
     var defaultUserAgent: String {
-        return "Mozilla/5.0 (iPhone; CPU iPhone OS 11_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1"
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
     }
 }
 
@@ -41,7 +41,7 @@ class VideoProviderRegistry {
         defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
         defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
         defaultProvider.register(DummyParser(), forServer: "Dummy")
-        defaultProvider.register(PrettyFastParser(), forServer: "F5 Beta")
+        defaultProvider.register(PrettyFastParser(), forServer: "F5 - HQ")
         
         return defaultProvider
     }()

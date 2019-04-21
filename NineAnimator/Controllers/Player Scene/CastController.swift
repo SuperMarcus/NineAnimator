@@ -118,7 +118,9 @@ extension CastController {
         self.currentEpisode = episode
         self.trackingContext = episode.trackingContext
         
-        client.launch(appId: CastAppIdentifier.defaultMediaPlayer) {
+        /// NineAnimator cast application identifier
+        /// See the NineAnimatorCloud project for cast receiver sources
+        client.launch(appId: "48A09E00") {
             result in
             switch result {
             case let .success(app):

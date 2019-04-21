@@ -46,10 +46,14 @@ extension NASourceNineAnime {
         for server in try soup.select("div.server") {
             let serverIdentifier = try server.attr("data-id")
             animeEpisodes[serverIdentifier] = try server.select("li>a").map {
-                EpisodeLink(identifier: try $0.attr("data-id"),
-                            name: try $0.text(),
-                            server: serverIdentifier,
-                            parent: parent)
+                let dataIdentifier = try $0.attr("data-id")
+                let pathIdentifier = try $0.attr("href")
+                return EpisodeLink(
+                    identifier: try $0.attr("data-id"),
+                    name: "\(dataIdentifier)|\(pathIdentifier)",
+                    server: serverIdentifier,
+                    parent: parent
+                )
             }
             Log.debug("%@ episodes found on server %@", animeEpisodes[serverIdentifier]!.count, serverIdentifier)
         }

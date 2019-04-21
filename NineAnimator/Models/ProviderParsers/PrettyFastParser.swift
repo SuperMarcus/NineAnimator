@@ -22,21 +22,28 @@ import AVKit
 import Foundation
 
 class PrettyFastParser: VideoProviderParser {
-    static let videoSourceRegex = try! NSRegularExpression(pattern: "source\\ src\\=\"([^\"]+)", options: .caseInsensitive)
+    static let videoSourceRegex = try! NSRegularExpression(pattern: "file:\\s+'([^\']+)", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        let userAgent = (episode.source as? BaseSource)?.sessionUserAgent ?? defaultUserAgent
+        let episodeLinkPath = episode.link.identifier.split(separator: "|").last!
+        
+        guard let refererUrl = URL(string: String(episodeLinkPath), relativeTo: episode.parentLink.link) else {
+            return NineAnimatorPromise.fail(.urlError).handle(handler)
+        }
+        
         let additionalHeaders: HTTPHeaders = [
-            "Referer": "\(episode.parentLink.link.absoluteString)/\(episode.link.identifier)",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "User-Agnet": defaultUserAgent,
-            "Host": "prettyfast.to",
+            "Referer": refererUrl.absoluteString,
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+            "User-Agnet": userAgent,
             "accept-language": "en-us"
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString,
-            "User-Agnet": defaultUserAgent
+            "User-Agnet": userAgent
         ]
+        
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let text = response.value else {
