@@ -20,8 +20,24 @@
 import Foundation
 import SwiftSoup
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 class NASourceGogoAnime: BaseSource, Source, PromiseSource {
     var name: String { return "gogoanime.tv" }
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "GogoAnime Site Icon") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "GogoAnime Site Icon") }
+#endif
+    
+    var siteDescription: String {
+        return "GogoAnime is a free anime streaming website. NineAnimator has fairly good supports for this website."
+    }
 
     override var endpoint: String { return "https://gogoanime.io" }
 

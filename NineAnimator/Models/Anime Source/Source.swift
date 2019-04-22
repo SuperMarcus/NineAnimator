@@ -20,9 +20,30 @@
 import Alamofire
 import Foundation
 
-protocol Source {
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+/// Representing an anime source website supported by NineAnimator
+protocol Source: AnyObject {
+    /// The name of the source website
     var name: String { get }
     
+#if canImport(UIKit)
+    /// The logo of the website
+    var siteLogo: UIImage { get }
+#elseif canImport(AppKit)
+    /// The logo of the website
+    var siteLogo: NSImage { get }
+#endif
+    
+    /// A brief description of the website
+    var siteDescription: String { get }
+    
+    /// The Alamofire session manager for retriving contents
+    /// from the represented website.
     var retriverSession: SessionManager { get }
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask?
@@ -37,9 +58,8 @@ protocol Source {
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask?
     
-    /**
-     Test if the url belongs to this source
-     */
+    /// Return true if this source supports translating contents
+    /// from the provided URL
     func canHandle(url: URL) -> Bool
     
     /// Recommend a preferred server for the anime object

@@ -20,6 +20,8 @@
 		2C0E7555226230B200DF3AC4 /* SectionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E7554226230B200DF3AC4 /* SectionProtocol.swift */; };
 		2C0E7558226241A500DF3AC4 /* QuickActionsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E7557226241A500DF3AC4 /* QuickActionsTableViewCell.swift */; };
 		2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E75592262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift */; };
+		2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */; };
+		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
 		2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */; };
 		2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */; };
@@ -132,6 +134,10 @@
 		2C6CF252221C5A400009D554 /* AniListSearchReference.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C6CF251221C5A400009D554 /* AniListSearchReference.graphql */; };
 		2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF253221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift */; };
 		2C6CF256221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF255221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift */; };
+		2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C71DEBD226CF6DF004F3AC3 /* ServerSelectionCell.xib */; };
+		2C71DEC3226CF79D004F3AC3 /* ServerSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71DEC2226CF79D004F3AC3 /* ServerSelectionCell.swift */; };
+		2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C71DEC4226E0610004F3AC3 /* ServerSelectionView.swift */; };
+		2C71DEC8226E179B004F3AC3 /* ServerSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C71DEC6226E179B004F3AC3 /* ServerSelection.storyboard */; };
 		2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73A3A521FB72230080A8B2 /* Theme.swift */; };
 		2C7A1D54224C23CC00DD83A5 /* AnimeUltima+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D53224C23CC00DD83A5 /* AnimeUltima+Episode.swift */; };
 		2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */; };
@@ -282,6 +288,8 @@
 		2C0E7554226230B200DF3AC4 /* SectionProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionProtocol.swift; sourceTree = "<group>"; };
 		2C0E7557226241A500DF3AC4 /* QuickActionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsTableViewCell.swift; sourceTree = "<group>"; };
 		2C0E75592262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickActionsTableViewCell+Cell.swift"; sourceTree = "<group>"; };
+		2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionViewController.swift; sourceTree = "<group>"; };
+		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMedia.swift; sourceTree = "<group>"; };
 		2C12EDCE21BDDF320064D2BD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
@@ -412,6 +420,10 @@
 		2C6CF251221C5A400009D554 /* AniListSearchReference.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListSearchReference.graphql; sourceTree = "<group>"; };
 		2C6CF253221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneCharactersTableViewCell.swift; sourceTree = "<group>"; };
 		2C6CF255221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneCharacterCollectionViewCell.swift; sourceTree = "<group>"; };
+		2C71DEBE226CF6DF004F3AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/ServerSelectionCell.xib; sourceTree = "<group>"; };
+		2C71DEC2226CF79D004F3AC3 /* ServerSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerSelectionCell.swift; sourceTree = "<group>"; };
+		2C71DEC4226E0610004F3AC3 /* ServerSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionView.swift; sourceTree = "<group>"; };
+		2C71DEC7226E179B004F3AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ServerSelection.storyboard; sourceTree = "<group>"; };
 		2C73A3A521FB72230080A8B2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2C7A1D53224C23CC00DD83A5 /* AnimeUltima+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Episode.swift"; sourceTree = "<group>"; };
 		2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Provider.swift"; sourceTree = "<group>"; };
@@ -607,6 +619,14 @@
 				2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */,
 			);
 			path = "Anime Discovery Scenes";
+			sourceTree = "<group>";
+		};
+		2C0FA3B5226E33EC00108D27 /* Server Selection Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */,
+			);
+			path = "Server Selection Scene";
 			sourceTree = "<group>";
 		};
 		2C12EDD621BDE66E0064D2BD /* Prototype */ = {
@@ -855,6 +875,7 @@
 		2C4ABC7321B59982009B4D47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C0FA3B5226E33EC00108D27 /* Server Selection Scene */,
 				2C0E755122622DAD00DF3AC4 /* Anime Discovery Scenes */,
 				2C86C1E9225D6EA700950ABF /* Setup Scenes */,
 				2C98D670225C09C6001FF874 /* Authentication Scene */,
@@ -897,6 +918,7 @@
 		2C4ABC7721B59C95009B4D47 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2C71DEC1226CF748004F3AC3 /* Server Selection Scene */,
 				2C0E7556226240F800DF3AC4 /* Anime Discovery Scenes */,
 				2C1C7194221B1C0D00760A69 /* Anime Information Scene */,
 				2C9383C921FBE774008C0D01 /* Theme */,
@@ -956,6 +978,8 @@
 				2C86C1E3225D6D8500950ABF /* Setup.storyboard */,
 				2C86C1E6225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard */,
 				2C0E754E22621C3600DF3AC4 /* AnimeDiscovery.storyboard */,
+				2C71DEBD226CF6DF004F3AC3 /* ServerSelectionCell.xib */,
+				2C71DEC6226E179B004F3AC3 /* ServerSelection.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1016,6 +1040,15 @@
 			path = Misc;
 			sourceTree = "<group>";
 		};
+		2C71DEC1226CF748004F3AC3 /* Server Selection Scene */ = {
+			isa = PBXGroup;
+			children = (
+				2C71DEC2226CF79D004F3AC3 /* ServerSelectionCell.swift */,
+				2C71DEC4226E0610004F3AC3 /* ServerSelectionView.swift */,
+			);
+			path = "Server Selection Scene";
+			sourceTree = "<group>";
+		};
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -1056,6 +1089,7 @@
 				2C86C1EE225D7FB600950ABF /* SetupWhatsNewViewController.swift */,
 				2C211EC3225EADDD00389124 /* SetupThemeViewController.swift */,
 				2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */,
+				2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */,
 			);
 			path = "Setup Scenes";
 			sourceTree = "<group>";
@@ -1428,6 +1462,7 @@
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */,
 				2C86C1E5225D6D8500950ABF /* Setup.storyboard in Resources */,
+				2C71DEC8226E179B004F3AC3 /* ServerSelection.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
 				2C6CF252221C5A400009D554 /* AniListSearchReference.graphql in Resources */,
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
@@ -1436,6 +1471,7 @@
 				2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
+				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1580,6 +1616,7 @@
 				2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */,
 				2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */,
 				2CCC746921C0975A0007502A /* SourceMasterAnime.swift in Sources */,
+				2C71DEC3226CF79D004F3AC3 /* ServerSelectionCell.swift in Sources */,
 				2CEC219A2207FA9800A30F4F /* GogoAnime+Episode.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
 				2C0CFC392263B34300EC793E /* Anilist+Recommendation.swift in Sources */,
@@ -1591,6 +1628,7 @@
 				2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */,
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2C23AE3E2229CFBD00512150 /* MyAnimeList+User.swift in Sources */,
+				2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
@@ -1664,7 +1702,9 @@
 				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
+				2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */,
 				2C0E755322622DD600DF3AC4 /* DiscoverySceneViewController.swift in Sources */,
+				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
 				2C3D7BFB2210AE1D0045D648 /* AnimeTwist+Anime.swift in Sources */,
@@ -1827,6 +1867,22 @@
 				2C4ABC8D21B76010009B4D47 /* Base */,
 			);
 			name = AnimePlayer.storyboard;
+			sourceTree = "<group>";
+		};
+		2C71DEBD226CF6DF004F3AC3 /* ServerSelectionCell.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C71DEBE226CF6DF004F3AC3 /* Base */,
+			);
+			name = ServerSelectionCell.xib;
+			sourceTree = "<group>";
+		};
+		2C71DEC6226E179B004F3AC3 /* ServerSelection.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C71DEC7226E179B004F3AC3 /* Base */,
+			);
+			name = ServerSelection.storyboard;
 			sourceTree = "<group>";
 		};
 		2C86C1E3225D6D8500950ABF /* Setup.storyboard */ = {

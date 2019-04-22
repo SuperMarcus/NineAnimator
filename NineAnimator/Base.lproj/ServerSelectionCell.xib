@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="selection.cell" rowHeight="135" id="KGk-i7-Jjw" customClass="ServerSelectionCell" customModule="NineAnimator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="134.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7CF-fX-of5">
+                        <rect key="frame" x="20" y="27.5" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="JyW-Fp-p9N"/>
+                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="140" id="Vbr-1J-aaQ"/>
+                            <constraint firstAttribute="height" priority="752" constant="120" id="WnG-DU-a8i"/>
+                            <constraint firstAttribute="width" secondItem="7CF-fX-of5" secondAttribute="height" multiplier="1:1" priority="900" id="dLM-Oz-PDb"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Yvn-2n-QMl">
+                        <rect key="frame" x="116" y="37.5" width="188" height="23"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="A brief description of this anime website. The pros and cons, and if it is recommended." lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="kBT-xs-KgW">
+                        <rect key="frame" x="116" y="60.5" width="188" height="43"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="✓ CURRENT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-VP-RfX">
+                        <rect key="frame" x="116" y="23" width="72.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                        <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="kBT-xs-KgW" firstAttribute="top" secondItem="Yvn-2n-QMl" secondAttribute="bottom" id="3Lb-E8-ZZ9"/>
+                    <constraint firstItem="Yvn-2n-QMl" firstAttribute="leading" secondItem="7CF-fX-of5" secondAttribute="trailing" constant="16" id="LoU-nV-Lj9"/>
+                    <constraint firstItem="Yvn-2n-QMl" firstAttribute="top" secondItem="dMG-VP-RfX" secondAttribute="bottom" id="Mxl-XI-Wsc"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Yvn-2n-QMl" secondAttribute="trailing" id="QGE-Xg-koC"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="kBT-xs-KgW" secondAttribute="bottom" priority="999" constant="12" id="TVW-im-eop"/>
+                    <constraint firstItem="7CF-fX-of5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="4" id="YwD-Si-7FT"/>
+                    <constraint firstItem="7CF-fX-of5" firstAttribute="width" relation="lessThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="0.25" priority="755" id="ZdS-NT-FrP"/>
+                    <constraint firstItem="dMG-VP-RfX" firstAttribute="leading" secondItem="Yvn-2n-QMl" secondAttribute="leading" id="dWX-9o-qMH"/>
+                    <constraint firstItem="7CF-fX-of5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="fk3-0i-a6h"/>
+                    <constraint firstItem="dMG-VP-RfX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="h52-DK-SHs"/>
+                    <constraint firstItem="kBT-xs-KgW" firstAttribute="leading" secondItem="Yvn-2n-QMl" secondAttribute="leading" id="psR-go-i8R"/>
+                    <constraint firstItem="7CF-fX-of5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="slH-GK-oJI"/>
+                    <constraint firstAttribute="bottom" secondItem="7CF-fX-of5" secondAttribute="bottom" priority="750" constant="16" id="ttv-CN-vVb"/>
+                    <constraint firstItem="Yvn-2n-QMl" firstAttribute="bottom" secondItem="7CF-fX-of5" secondAttribute="centerY" multiplier="0.9" priority="730" id="uSw-J3-j7Q"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kBT-xs-KgW" secondAttribute="trailing" id="uTe-4K-d96"/>
+                    <constraint firstItem="7CF-fX-of5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" priority="750" constant="16" id="vzh-YH-7Qr"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                </userDefinedRuntimeAttributes>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="16"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="sourceDescriptionLabel" destination="kBT-xs-KgW" id="6qI-hi-1RW"/>
+                <outlet property="sourceLogoImageView" destination="7CF-fX-of5" id="YcQ-QO-hHy"/>
+                <outlet property="sourceNameLabel" destination="Yvn-2n-QMl" id="lOn-oY-S4w"/>
+                <outlet property="sourceStateLabel" destination="dMG-VP-RfX" id="MB8-JK-Ita"/>
+            </connections>
+            <point key="canvasLocation" x="47.826086956521742" y="57.254464285714285"/>
+        </tableViewCell>
+    </objects>
+</document>

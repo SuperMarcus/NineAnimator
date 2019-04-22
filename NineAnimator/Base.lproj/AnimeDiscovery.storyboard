@@ -588,11 +588,27 @@
                             <outlet property="delegate" destination="9sh-0o-xaW" id="fbA-98-oLW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Watch Next" id="AWC-Sv-NA3"/>
+                    <navigationItem key="navigationItem" title="Watch Next" id="AWC-Sv-NA3">
+                        <barButtonItem key="rightBarButtonItem" title="Select Source" id="S9D-GU-IOj">
+                            <connections>
+                                <segue destination="16P-Tr-XC2" kind="popoverPresentation" popoverAnchorBarButtonItem="S9D-GU-IOj" id="QIE-hh-9O1">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVh-m1-tjo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="192.75362318840581" y="107.8125"/>
+        </scene>
+        <!--ServerSelection-->
+        <scene sceneID="g8v-Gs-nG0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="ServerSelection" id="16P-Tr-XC2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L1C-dx-18P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="765" y="-128"/>
         </scene>
         <!--Watch Next-->
         <scene sceneID="d6G-dE-Ax4">

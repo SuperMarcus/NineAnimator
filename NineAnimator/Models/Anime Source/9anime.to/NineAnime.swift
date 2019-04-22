@@ -20,9 +20,25 @@
 import Alamofire
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 class NASourceNineAnime: BaseSource, Source {
     let name: String = "9anime.ru"
     override var endpoint: String { return "https://\(_currentHost)" }
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "9anime Site Icon") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "9anime Site Icon") }
+#endif
+    
+    var siteDescription: String {
+        return "9anime is a popular free anime streaming website and one of the first and best supported sources of NineAnimator. You may be prompt to complete CAPTCHAs occationally."
+    }
     
     lazy var _currentHost: String = possibleHosts.first!
     var _endpointDeterminingTask: NineAnimatorAsyncTask? // Avoid multiple concurrent requests

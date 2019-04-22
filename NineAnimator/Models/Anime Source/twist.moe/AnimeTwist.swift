@@ -19,8 +19,24 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
     var name = "twist.moe"
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeTwist Site Icon") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimeTwist Site Icon") }
+#endif
+    
+    var siteDescription: String {
+        return "AnimeTwist is a free & ads free anime streaming website. Anime artworks may not be displayed correctly for this website."
+    }
     
     override var endpoint: String { return "https://twist.moe" }
     

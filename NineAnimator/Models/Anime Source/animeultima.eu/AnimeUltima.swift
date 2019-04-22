@@ -19,8 +19,24 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     var name: String { return "animeultima.eu" }
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeUltima Site Logo") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimeUltima Site Logo") }
+#endif
+    
+    var siteDescription: String {
+        return "AnimeUltima is a free anime streaming website with many self-hosted servers. This website is guarded by Cloudflare; you may be require to verify your identity manually."
+    }
     
     override var endpoint: String { return "https://www10.animeultima.eu" }
     

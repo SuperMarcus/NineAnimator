@@ -19,8 +19,24 @@
 
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
     var name: String { return "Wonderful Subs" }
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "WonderfulSubs Site Logo") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "WonderfulSubs Site Logo") }
+#endif
+    
+    var siteDescription: String {
+        return "WonderfulSubs is a free anime streaming website with numerous dubs and subs of anime. NineAnimator has fairly well-rounded support for this website."
+    }
     
     override var endpoint: String { return "https://www.wonderfulsubs.com" }
     

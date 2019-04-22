@@ -20,12 +20,28 @@
 import Foundation
 import SwiftSoup
 
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
 // ---- TO BE FIXED ----
 // swiftlint:disable type_body_length
 // swiftlint:disable cyclomatic_complexity
 // swiftlint:disable function_parameter_count
 class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
+    
+#if canImport(UIKit)
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
+#elseif canImport(AppKit)
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
+#endif
+    
+    var siteDescription: String {
+        return "(Not Available) MasterAni.me was one of the best supported anime websites by NineAnimator."
+    }
     
     override var endpoint: String { return "https://www.masterani.me" }
     

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tn6-Ox-wRl">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Server Selection View Controller-->
+        <scene sceneID="KSp-Gd-jvp">
+            <objects>
+                <viewController id="Tn6-Ox-wRl" customClass="ServerSelectionViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xTX-CX-xKA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rWh-sU-Phx" customClass="ServerSelectionView" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="16" y="134" width="343" height="574"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" priority="755" constant="450" id="ect-91-Ttn"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S5g-s8-p2h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="IyY-Od-uJh">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your favorite anime website in NineAnimator." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH3-bk-avW">
+                                            <rect key="frame" x="48" y="107.66666666666667" width="279" height="14.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXv-Ek-3NM">
+                                            <rect key="frame" x="141.33333333333334" y="73" width="92.666666666666657" height="34.666666666666657"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="iXv-Ek-3NM" firstAttribute="centerX" secondItem="IyY-Od-uJh" secondAttribute="centerX" id="3dm-8Z-EeC"/>
+                                        <constraint firstItem="gH3-bk-avW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="IyY-Od-uJh" secondAttribute="leadingMargin" constant="24" id="LE7-vR-quE"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gH3-bk-avW" secondAttribute="trailingMargin" constant="24" id="Nt1-dF-uAr"/>
+                                        <constraint firstItem="gH3-bk-avW" firstAttribute="top" secondItem="iXv-Ek-3NM" secondAttribute="bottom" id="VOG-Gf-PSM"/>
+                                        <constraint firstItem="gH3-bk-avW" firstAttribute="centerX" secondItem="IyY-Od-uJh" secondAttribute="centerX" id="oIR-Im-boJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="gH3-bk-avW" secondAttribute="bottom" constant="12" id="tPW-mO-VDs"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <blurEffect style="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYZ-tE-B2b">
+                                <rect key="frame" x="0.0" y="708" width="375" height="104"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ehl-Vf-5NP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SX4-hA-3LC" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="37.666666666666657" y="16" width="300" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="8tG-O9-yjy"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="VOR-Bg-Nvt"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                            <state key="normal" title="Done"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="12"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onDoneButtonTapped:" destination="Tn6-Ox-wRl" eventType="touchUpInside" id="zNv-TS-l5a"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="SX4-hA-3LC" firstAttribute="leading" secondItem="ehl-Vf-5NP" secondAttribute="leading" priority="750" constant="16" id="7YS-TC-35G"/>
+                                        <constraint firstItem="SX4-hA-3LC" firstAttribute="top" secondItem="ehl-Vf-5NP" secondAttribute="top" constant="16" id="kqR-CJ-0lz"/>
+                                        <constraint firstItem="SX4-hA-3LC" firstAttribute="centerX" secondItem="ehl-Vf-5NP" secondAttribute="centerX" id="n7b-j2-97h"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <blurEffect style="light"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rWh-sU-Phx" firstAttribute="centerX" secondItem="xTX-CX-xKA" secondAttribute="centerX" id="AGO-OB-HrZ"/>
+                            <constraint firstItem="KYZ-tE-B2b" firstAttribute="trailing" secondItem="xTX-CX-xKA" secondAttribute="trailing" id="ToS-3p-cFZ"/>
+                            <constraint firstItem="rWh-sU-Phx" firstAttribute="leading" secondItem="RQT-iR-rdx" secondAttribute="leading" priority="755" constant="16" id="ag1-d2-AWY"/>
+                            <constraint firstItem="rWh-sU-Phx" firstAttribute="top" secondItem="S5g-s8-p2h" secondAttribute="bottom" id="cl9-X0-z8q"/>
+                            <constraint firstItem="rWh-sU-Phx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RQT-iR-rdx" secondAttribute="leading" constant="16" id="ipZ-sP-vKb"/>
+                            <constraint firstItem="RQT-iR-rdx" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="rWh-sU-Phx" secondAttribute="trailing" constant="16" id="k0k-co-Rt9"/>
+                            <constraint firstItem="S5g-s8-p2h" firstAttribute="leading" secondItem="xTX-CX-xKA" secondAttribute="leading" id="lVb-iL-zFl"/>
+                            <constraint firstItem="KYZ-tE-B2b" firstAttribute="top" secondItem="rWh-sU-Phx" secondAttribute="bottom" id="mex-7i-9fV"/>
+                            <constraint firstItem="S5g-s8-p2h" firstAttribute="top" secondItem="xTX-CX-xKA" secondAttribute="top" id="oAV-gj-lyV"/>
+                            <constraint firstAttribute="bottom" secondItem="KYZ-tE-B2b" secondAttribute="bottom" id="pfm-ab-dpz"/>
+                            <constraint firstItem="KYZ-tE-B2b" firstAttribute="top" secondItem="RQT-iR-rdx" secondAttribute="bottom" constant="-70" id="qzK-4M-S9W"/>
+                            <constraint firstItem="S5g-s8-p2h" firstAttribute="trailing" secondItem="xTX-CX-xKA" secondAttribute="trailing" id="sMk-1K-5oc"/>
+                            <constraint firstItem="KYZ-tE-B2b" firstAttribute="leading" secondItem="xTX-CX-xKA" secondAttribute="leading" id="v3E-Th-l8z"/>
+                            <constraint firstItem="RQT-iR-rdx" firstAttribute="trailing" secondItem="rWh-sU-Phx" secondAttribute="trailing" priority="755" constant="16" id="wf1-Or-PQk"/>
+                            <constraint firstItem="RQT-iR-rdx" firstAttribute="top" secondItem="S5g-s8-p2h" secondAttribute="bottom" constant="-90" id="yNU-9Z-krW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RQT-iR-rdx"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="selectionView" destination="rWh-sU-Phx" id="I8H-cm-EGU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y1H-1i-53Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128.80000000000001" y="59.11330049261084"/>
+        </scene>
+    </scenes>
+</document>

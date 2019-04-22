@@ -177,7 +177,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="M7g-u9-piU" kind="show" id="u3v-Fb-mgc"/>
+                                    <segue destination="bYt-YE-NKs" kind="show" id="M3S-4f-1XU"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-0J-JNE">
@@ -614,7 +614,119 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ir-PD-STr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="-75"/>
+            <point key="canvasLocation" x="2722" y="-75"/>
+        </scene>
+        <!--Setup Server Selection View Controller-->
+        <scene sceneID="qJF-tP-Kec">
+            <objects>
+                <viewController id="bYt-YE-NKs" customClass="SetupServerSelectionViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qy8-Wy-qnh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5A-Fz-yzu" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="696" width="311" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="EE8-vX-bQo"/>
+                                    <constraint firstAttribute="height" constant="50" id="XZa-bg-hGE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                <state key="normal" title="Continue"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="M7g-u9-piU" kind="show" id="PhW-JG-yCg"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select A Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RjP-7k-vGp">
+                                <rect key="frame" x="69" y="120" width="237" height="36"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <variation key="widthClass=compact">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                </variation>
+                                <variation key="widthClass=regular">
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="42"/>
+                                </variation>
+                            </label>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-oc-OhO" customClass="ServerSelectionView" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="16" y="206.33333333333337" width="343" height="418"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRT-ib-AcS">
+                                <rect key="frame" x="32" y="640.33333333333337" width="311" height="39.666666666666629"/>
+                                <string key="text">NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ui-C3-ly1">
+                                <rect key="frame" x="32" y="160" width="311" height="26.333333333333343"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="V5A-Fz-yzu" firstAttribute="leading" secondItem="xlg-Eb-d8P" secondAttribute="leading" priority="750" constant="32" id="40I-7Z-x9L"/>
+                            <constraint firstItem="sBz-oc-OhO" firstAttribute="trailing" secondItem="V5A-Fz-yzu" secondAttribute="trailing" priority="750" constant="64" id="5S2-Jc-ztz"/>
+                            <constraint firstItem="xlg-Eb-d8P" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sBz-oc-OhO" secondAttribute="trailing" constant="16" id="6ak-rc-WAF"/>
+                            <constraint firstItem="sBz-oc-OhO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="xlg-Eb-d8P" secondAttribute="leading" constant="16" id="Fyt-YZ-4xj"/>
+                            <constraint firstItem="sBz-oc-OhO" firstAttribute="top" secondItem="3Ui-C3-ly1" secondAttribute="bottom" constant="16" id="MdE-aF-Oh9">
+                                <variation key="heightClass=compact" constant="16"/>
+                                <variation key="heightClass=regular" constant="20"/>
+                            </constraint>
+                            <constraint firstItem="3Ui-C3-ly1" firstAttribute="leading" secondItem="V5A-Fz-yzu" secondAttribute="leading" id="RoO-ht-5rc"/>
+                            <constraint firstItem="V5A-Fz-yzu" firstAttribute="centerX" secondItem="Qy8-Wy-qnh" secondAttribute="centerX" id="XbD-th-Fgm"/>
+                            <constraint firstItem="V5A-Fz-yzu" firstAttribute="top" secondItem="MRT-ib-AcS" secondAttribute="bottom" constant="16" id="gX5-Oa-m7f"/>
+                            <constraint firstItem="RjP-7k-vGp" firstAttribute="centerX" secondItem="Qy8-Wy-qnh" secondAttribute="centerX" id="hGp-X9-RM8"/>
+                            <constraint firstItem="RjP-7k-vGp" firstAttribute="top" secondItem="xlg-Eb-d8P" secondAttribute="top" constant="32" id="jSE-vL-TQm"/>
+                            <constraint firstItem="MRT-ib-AcS" firstAttribute="top" secondItem="sBz-oc-OhO" secondAttribute="bottom" constant="16" id="pAD-nN-jnw"/>
+                            <constraint firstItem="3Ui-C3-ly1" firstAttribute="trailing" secondItem="V5A-Fz-yzu" secondAttribute="trailing" id="pTY-1L-NcP"/>
+                            <constraint firstItem="3Ui-C3-ly1" firstAttribute="top" secondItem="RjP-7k-vGp" secondAttribute="bottom" constant="4" id="qgH-El-gDu"/>
+                            <constraint firstItem="MRT-ib-AcS" firstAttribute="trailing" secondItem="V5A-Fz-yzu" secondAttribute="trailing" id="rGg-em-k54"/>
+                            <constraint firstItem="MRT-ib-AcS" firstAttribute="leading" secondItem="V5A-Fz-yzu" secondAttribute="leading" id="tsr-44-rwF"/>
+                            <constraint firstItem="xlg-Eb-d8P" firstAttribute="bottom" secondItem="V5A-Fz-yzu" secondAttribute="bottom" constant="32" id="u0z-07-m3f"/>
+                            <constraint firstItem="sBz-oc-OhO" firstAttribute="leading" secondItem="V5A-Fz-yzu" secondAttribute="leading" priority="750" constant="-64" id="yXq-Tn-FTx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xlg-Eb-d8P"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="V5A-Fz-yzu" id="2eK-71-UPP"/>
+                        <outlet property="informationLabel" destination="MRT-ib-AcS" id="pRW-YZ-BKl"/>
+                        <outlet property="selectionView" destination="sBz-oc-OhO" id="hjt-M7-x1U"/>
+                        <outlet property="subtitleLabel" destination="3Ui-C3-ly1" id="TVQ-EZ-gk6"/>
+                        <outlet property="titleLabel" destination="RjP-7k-vGp" id="YBd-2q-1v0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e7o-nR-8gl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1749.5999999999999" y="-75.369458128078819"/>
         </scene>
         <!--Setup Finishing View Controller-->
         <scene sceneID="5Vz-Sy-Uza">
@@ -697,7 +809,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vti-i1-Qs2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2709.5999999999999" y="-76.108374384236456"/>
+            <point key="canvasLocation" x="3719" y="-75"/>
         </scene>
     </scenes>
     <resources>

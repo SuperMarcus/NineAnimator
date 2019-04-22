@@ -72,27 +72,29 @@ class FeaturedViewController: UITableViewController {
     @objc func onRefreshRequested() { reload() }
     
     @IBAction private func onSourceSelectionButtonPressed(_ sender: Any) {
-        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
-        
-        if let popover = alertView.popoverPresentationController {
-            popover.barButtonItem = sourceSelectionButton
-            popover.permittedArrowDirections = .up
-        }
-        
-        for source in NineAnimator.default.sources {
-            let action = UIAlertAction(title: source.name, style: .default) {
-                [weak self] _ in
-                NineAnimator.default.user.select(source: source)
-                self?.reload()
-            }
-            if source.name == loadedSource?.name {
-                action.setValue(true, forKey: "checked")
-            }
-            alertView.addAction(action)
-        }
-        
-        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        present(alertView, animated: true)
+        return ServerSelectionViewController.presentSelectionDialog()
+//
+//        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
+//
+//        if let popover = alertView.popoverPresentationController {
+//            popover.barButtonItem = sourceSelectionButton
+//            popover.permittedArrowDirections = .up
+//        }
+//
+//        for source in NineAnimator.default.sources {
+//            let action = UIAlertAction(title: source.name, style: .default) {
+//                [weak self] _ in
+//                NineAnimator.default.user.select(source: source)
+//                self?.reload()
+//            }
+//            if source.name == loadedSource?.name {
+//                action.setValue(true, forKey: "checked")
+//            }
+//            alertView.addAction(action)
+//        }
+//
+//        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//        present(alertView, animated: true)
     }
     
     @IBAction private func onResolveErrorButtonTapped(_ sender: Any) {
