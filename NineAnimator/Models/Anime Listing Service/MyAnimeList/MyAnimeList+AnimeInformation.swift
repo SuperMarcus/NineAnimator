@@ -94,7 +94,7 @@ extension MyAnimeList {
             }()
             self.artwork = preferredArtwork
             self.wallpapers = [ preferredArtwork ]
-            self.siteUrl = URL(string: "https://myanimelist.net/anime/\(reference.uniqueIdentifier)")!
+            self.siteUrl = try URL(string: "https://myanimelist.net/anime/\(reference.uniqueIdentifier)").tryUnwrap(.urlError)
             self.description = try animeEntry.value(at: "synopsis", type: String.self)
             
             // Decode additional information

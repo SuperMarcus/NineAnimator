@@ -29,7 +29,7 @@ import UIKit
     /* The color of the shadow. Defaults to opaque black. Colors created
      * from patterns are currently NOT supported. Animatable. */
     @IBInspectable var shadowColor: UIColor? {
-        set { layer.shadowColor = newValue!.cgColor }
+        set { layer.shadowColor = newValue?.cgColor }
         get {
             if let color = layer.shadowColor {
                 return UIColor(cgColor: color)

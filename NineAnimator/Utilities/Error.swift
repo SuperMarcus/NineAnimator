@@ -209,7 +209,7 @@ extension NineAnimatorError {
     /// previously persisted file or self-generated data.
     class DecodeError: NineAnimatorError {
         init(userInfo: [String: Any]? = nil) {
-            super.init(6, message: "Cannot decode a previously encoded data", userInfo: userInfo)
+            super.init(6, message: "A required value cannot be read", userInfo: userInfo)
         }
         
         required init?(coder aDecoder: NSCoder) {

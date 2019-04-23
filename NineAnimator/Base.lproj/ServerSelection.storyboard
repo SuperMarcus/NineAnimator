@@ -79,10 +79,10 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SX4-hA-3LC" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="37.666666666666657" y="16" width="300" height="40"/>
+                                            <rect key="frame" x="16" y="16" width="343" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="8tG-O9-yjy"/>
-                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="300" id="VOR-Bg-Nvt"/>
+                                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="350" id="VOR-Bg-Nvt"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                             <state key="normal" title="Done"/>
