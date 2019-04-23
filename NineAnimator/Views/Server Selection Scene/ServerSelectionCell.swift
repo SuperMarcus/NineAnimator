@@ -46,9 +46,13 @@ class ServerSelectionCell: UITableViewCell, Themable {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
         
-        UIView.animate(withDuration: animated ? 0.2 : 0.0) {
-            self.alpha = highlighted ? 0.6 : 1.0
-        }
+        UIView.animate(
+            withDuration: animated ? 0.4 : 0,
+            delay: 0,
+            options: .curveEaseIn,
+            animations: { self.alpha = highlighted ? 0.8 : 1.0 },
+            completion: nil
+        )
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

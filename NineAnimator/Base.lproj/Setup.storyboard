@@ -716,6 +716,9 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </view>
+                    <navigationItem key="navigationItem" id="bid-Oj-tjN">
+                        <barButtonItem key="backBarButtonItem" title="Select Source" id="fPo-Vc-IV4"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="continueButton" destination="V5A-Fz-yzu" id="2eK-71-UPP"/>
                         <outlet property="informationLabel" destination="MRT-ib-AcS" id="pRW-YZ-BKl"/>

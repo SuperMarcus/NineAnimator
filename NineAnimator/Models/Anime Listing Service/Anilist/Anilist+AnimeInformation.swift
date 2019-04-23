@@ -34,7 +34,13 @@ extension Anilist {
             return .firstly { [_characters] in _characters }
         }
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
-            return .firstly { [_statistics] in _statistics }
+            return .firstly {
+                [_statistics] in
+                guard _statistics.ratingsDistribution.count > 1 else {
+                    throw NineAnimatorError.responseError("No rating distribution found.")
+                }
+                return _statistics
+            }
         }
         var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
             return .firstly { [_relations] in _relations }
