@@ -64,7 +64,6 @@ class OpenLoadParser: VideoProviderParser {
             let Key1 = context.evaluateScript(text[key1Match.range(at: 1)])
             let Key2 = context.evaluateScript(text[key2Match.range(at: 1)])
             
-            
             let streamUrl = self.openload(longstring: encryptedString, key1: (Key1?.toInt32())!, key2: (Key2?.toInt32())!)
             
             guard let sourceURL = URL(string: "\(episode.target.absoluteString[urlMatch.range(at: 1)])/stream/\(streamUrl)") else {
@@ -95,7 +94,7 @@ class OpenLoadParser: VideoProviderParser {
         while i < 72 {
             hexByteArr.append(Int(longstring[i..<i+8], radix: 16)!)
             
-            i = i + 8
+            i += 8
         }
         
         encryptString = longstring[72...]
@@ -110,15 +109,15 @@ class OpenLoadParser: VideoProviderParser {
             var byteIterator = 0
             
             while currHex >= maxHex {
-                if (iterator + 1 >= encryptString.count) {
+                if iterator + 1 >= encryptString.count {
                     maxHex = 143
                 }
                 
                 currHex = Int(encryptString[iterator..<iterator+2], radix: 16)!
-                value = value + (currHex & 63) << byteIterator
+                value += (currHex & 63) << byteIterator
                 
-                byteIterator = byteIterator + 6
-                iterator = iterator + 2
+                byteIterator += 6
+                iterator += 2
             }
             
             let bytes = value ^ hexByteArr[arrIterator % 9] ^ Int(key1) ^ Int(key2)
@@ -128,14 +127,14 @@ class OpenLoadParser: VideoProviderParser {
             while i < 4 {
                 let urlChar = String(UnicodeScalar(UInt8( ((bytes & usedBytes) >> (8 * i)) - 1 )))
                 
-                if (urlChar != "$") {
+                if urlChar != "$" {
                     streamUrl.append(urlChar)
                 }
                 
                 usedBytes = usedBytes << 8
-                i = i + 1
+                i += 1
             }
-            arrIterator = arrIterator + 1
+            arrIterator += 1
         }
         return streamUrl
     }
