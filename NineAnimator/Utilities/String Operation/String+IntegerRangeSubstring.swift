@@ -41,6 +41,11 @@ extension String {
         return self[matchResult.range(at: group)]
     }
     
+    subscript (range: PartialRangeFrom<Int>) -> String {
+        let startIndex = self.index(self.startIndex, offsetBy: range.lowerBound)
+        return String(self[startIndex..<endIndex])
+    }
+    
     var matchingRange: NSRange {
         return NSRange(location: 0, length: utf16.count)
     }
