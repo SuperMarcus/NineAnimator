@@ -42,6 +42,7 @@ class VideoProviderRegistry {
         defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
         defaultProvider.register(DummyParser(), forServer: "Dummy")
         defaultProvider.register(PrettyFastParser(), forServer: "F5 - HQ")
+        defaultProvider.register(OpenLoadParser(), forServer: "OpenLoad")
         
         return defaultProvider
     }()
