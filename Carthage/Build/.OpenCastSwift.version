@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "OpenCastSwift",
-      "hash" : "0d77d854443e66771d8482d0ae7751c0a0e327f157db67a32bc069c4dadd388b",
-      "swiftToolchainVersion" : "5.0 (swiftlang-1001.0.69.5 clang-1001.0.46.3)"
+      "hash" : "e1bcb2d7950a9f447445e582b60efa0af70581242fda851541e4fbafa07ad186",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }

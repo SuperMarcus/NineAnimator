@@ -22,6 +22,9 @@ import AVKit
 import Foundation
 import JavaScriptCore
 
+/// ProviderParser for OpenLoad
+///
+/// Contributed by [Awsomedude](https://github.com/Awsomedude)
 class OpenLoadParser: VideoProviderParser {
     static let longStringRegex = try! NSRegularExpression(pattern: "<p style=\"\" id=[^>]*>([^<]*)<\\/p>", options: .caseInsensitive)
     static let key1Regex = try! NSRegularExpression(pattern: "_0x45ae41\\[_0x5949\\('0xf'\\)\\]\\(_0x30725e,(.+)\\),_1x4bfb36", options: .caseInsensitive)

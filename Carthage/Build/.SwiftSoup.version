@@ -3,11 +3,13 @@
   "iOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "8f5520c52f664652a6077f86c71a8c0015766647925a40d7cee7d8a2171fa414"
+      "hash" : "8101b58bcba4c88e031ee13bd3e490ced6ec395dd14204558c1db3a4f4310adc",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     },
     {
       "name" : "SwiftSoup",
-      "hash" : "8f5520c52f664652a6077f86c71a8c0015766647925a40d7cee7d8a2171fa414"
+      "hash" : "8101b58bcba4c88e031ee13bd3e490ced6ec395dd14204558c1db3a4f4310adc",
+      "swiftToolchainVersion" : "5.0.1 (swiftlang-1001.0.82.4 clang-1001.0.46.5)"
     }
   ]
 }
