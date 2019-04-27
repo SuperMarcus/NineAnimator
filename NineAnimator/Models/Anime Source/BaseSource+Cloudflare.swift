@@ -157,6 +157,12 @@ extension BaseSource: Alamofire.RequestRetrier {
         // Check if there is an cloudflare authentication error
         if let error = error as? NineAnimatorError.CloudflareAuthenticationChallenge,
             let verificationUrl = error.authenticationUrl {
+            // Return fail if challenge solver is not enabled
+            if !NineAnimator.default.user.solveFirewallChalleges {
+                Log.info("[CF_WAF] Encountered a solvable challenge but the autoresolver has been disabled. Falling back to manual authentication.")
+                return fail()
+            }
+            
             // Abort after 3 tries
             if request.retryCount > 2 {
                 Log.info("[CF_WAF] Maximal number of retry reached, renewing identity.")

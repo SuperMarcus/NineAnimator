@@ -29,6 +29,7 @@ extension NineAnimatorUser {
         static var autoRestartInterruptedDownloadTasks: String { return "episode.download.autorestart" }
         static var recentEpisode: String { return "episode.recent" }
         static var recentSource: String { return "source.recent" }
+        static var sourceSolveChallenges: String { return "source.challengeSolver" }
         static var recentServer: String { return "server.recent" }
         static var persistedProgresses: String { return "episode.progress" }
         static var episodeListingOrder: String { return "episode.listing.order" }
