@@ -387,6 +387,7 @@ extension AnimeViewController {
                 DispatchQueue.main.async {
                     self.presentError(error!) {
                         [weak self] _ in
+                        self?.selectedEpisodeCell = nil
                         self?.tableView.deselectSelectedRow()
                     }
                 }

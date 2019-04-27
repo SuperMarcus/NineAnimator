@@ -57,7 +57,7 @@ struct NineAnimeFeatured: FeaturedContainer {
 
 extension NASourceNineAnime {
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
-        return request(browse: "/") {
+        return request(browse: "/home") {
             value, error in
             guard let value = value else {
                 return handler(nil, error)

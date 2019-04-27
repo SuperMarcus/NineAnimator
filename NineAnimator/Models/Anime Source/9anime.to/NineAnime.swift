@@ -45,6 +45,7 @@ class NASourceNineAnime: BaseSource, Source {
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
+        _internalUAIdentity = "Mozilla/5.0 (iPad; CPU iPhone OS 12_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1"
         addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
     }
     
