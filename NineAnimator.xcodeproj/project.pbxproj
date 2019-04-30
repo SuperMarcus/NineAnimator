@@ -1539,7 +1539,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "OUTPUT_RESOURCE_DIRECTORY=\"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n/usr/bin/xcrun git log --oneline --decorate > \"${OUTPUT_RESOURCE_DIRECTORY}/Changelog.txt\"\n";
+			shellScript = "OUTPUT_RESOURCE_DIRECTORY=\"${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"\n\nif /usr/bin/xcrun git show-ref -q --heads master; then\n/usr/bin/xcrun git log --oneline --decorate > \"${OUTPUT_RESOURCE_DIRECTORY}/Changelog.txt\"\nelse\necho \"Git repository was not found at compile time. No changelog was generated.\" > \"${OUTPUT_RESOURCE_DIRECTORY}/Changelog.txt\"\nfi\n";
 		};
 		52F6A4F121DABBE60005D78D /* Linting */ = {
 			isa = PBXShellScriptBuildPhase;

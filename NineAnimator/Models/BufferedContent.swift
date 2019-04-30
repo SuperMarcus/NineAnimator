@@ -27,7 +27,7 @@ protocol ContentProviderDelegate: AnyObject {
     func onError(_: Error, from provider: ContentProvider)
 }
 
-/// An AnimeList source
+/// An object that provides a list of links
 ///
 /// Content providers should not begin collecting anime until
 /// the more() method is called.
@@ -45,4 +45,31 @@ protocol ContentProvider {
     func links(on page: Int) -> [AnyLink]
     
     func more()
+}
+
+/// A type of content provider that provides additional
+/// attributes to each list entry
+protocol AttributedContentProvider: ContentProvider {
+    /// Retrieve the attributes
+    func attributes(for link: AnyLink, index: Int, on page: Int) -> ContentAttributes?
+}
+
+/// A type of content provider that provides release dates
+/// of the links
+protocol CalendarProvider: ContentProvider {
+    func date(for link: AnyLink) -> Date
+    
+    func airingEpisodeName(for link: AnyLink) -> String
+}
+
+/// Representing a set of attributes
+class ContentAttributes {
+    /// The title that will be used to override the link title
+    var title: String?
+    
+    /// The subtitle of the entry
+    var subtitle: String?
+    
+    /// A brief description or synopsis to be presented along with the title
+    var description: String?
 }

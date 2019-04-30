@@ -43,6 +43,16 @@ struct AnimeLink {
     }
 }
 
+extension AnyLink: Hashable {
+    func hash(into hasher: inout Hasher) {
+        switch self {
+        case let .anime(link): hasher.combine(link)
+        case let .episode(link): hasher.combine(link)
+        case let .listingReference(reference): hasher.combine(reference)
+        }
+    }
+}
+
 extension AnimeLink: URLConvertible {
     func asURL() -> URL { return link }
 }
