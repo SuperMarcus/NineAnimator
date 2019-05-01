@@ -66,6 +66,7 @@ class DiscoverySceneViewController: UITableViewController {
         // Reload dirty and errored sources when the view appears
         reloadDirtySources()
         reloadErroredSources()
+        tableView.makeThemable()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

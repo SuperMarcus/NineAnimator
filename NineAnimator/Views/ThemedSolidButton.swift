@@ -41,11 +41,13 @@ class ThemedSolidButton: UIButton, Themable {
         if inverted {
             backgroundColor = theme.tint
             tintColor = theme.secondaryBackground
+            imageView?.tintColor = theme.secondaryBackground
             setTitleColor(theme.secondaryBackground, for: .normal)
             setTitleColor(theme.secondaryBackground.withAlphaComponent(0.6), for: .highlighted)
         } else {
             backgroundColor = theme.secondaryBackground
             tintColor = theme.primaryText
+            imageView?.tintColor = theme.primaryText
             setTitleColor(theme.primaryText, for: .normal)
             setTitleColor(theme.primaryText.withAlphaComponent(0.6), for: .highlighted)
         }
