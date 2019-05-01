@@ -1,6 +1,7 @@
 ![NineAnimator](Misc/Media/nineanimator_banner.jpg)
 ==========
 
+[![Build status](https://build.appcenter.ms/v0.1/apps/3b570beb-df2c-4506-b374-9c9ffa1f048d/branches/master/badge)](https://appcenter.ms)
 [![Build Status](https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master)](https://travis-ci.org/SuperMarcus/NineAnimator)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat)](https://github.com/Carthage/Carthage)
 ![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
