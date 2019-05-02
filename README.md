@@ -326,7 +326,7 @@ There are some limitations to NineAnimator's ability to download and playback vi
 
 ### Light Appearance
 
-| Featured Animes | Recently Viewed | Search |
+| Featured Anime | Recently Viewed | Search |
 | ------------------- | ------------------- | -------- |
 | ![1](Misc/Media/Demo/Light/featured.png) | ![2](Misc/Media/Demo/Light/recents.png) | ![3](Misc/Media/Demo/Light/search.png) |
 
@@ -334,7 +334,7 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ----------------- | -------------------- | --------------- |
 | ![4](Misc/Media/Demo/Light/search_results.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
 
-| Featured Animes (iPad) | Picture in Picture (iPad) |
+| Featured Anime (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
 | ![7](Misc/Media/Demo/Light/featured_ipad.png) | ![8](Misc/Media/Demo/Light/browse_episodes_ipad.png) |
 
@@ -344,7 +344,7 @@ There are some limitations to NineAnimator's ability to download and playback vi
 
 ### Dark Appearance
 
-| Featured Animes | Recently Viewed | Search |
+| Featured Anime | Recently Viewed | Search |
 | ------------------- | ------------------- | -------- |
 | ![1](Misc/Media/Demo/Dark/featured.png) | ![2](Misc/Media/Demo/Dark/recents.png) | ![3](Misc/Media/Demo/Dark/search.png) |
 
@@ -352,7 +352,7 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ----------------- | -------------------- | --------------- |
 | ![4](Misc/Media/Demo/Dark/search_results.png) | ![5](Misc/Media/Demo/Dark/browse_episodes.png) | ![6](Misc/Media/Demo/Dark/downloads.png) |
 
-| Featured Animes (iPad) | Picture in Picture (iPad) |
+| Featured Anime (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
 | ![7](Misc/Media/Demo/Dark/featured_ipad.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
 
