@@ -217,7 +217,7 @@ extension NineAnimator {
     }
     
     func canHandle(link: URL) -> Bool {
-        return sources.reduce(false) { $0 || $1.canHandle(url: link) }
+        return sources.contains { $0.canHandle(url: link) }
     }
 }
 

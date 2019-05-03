@@ -74,28 +74,7 @@ extension NASourceNineAnime {
                     source: self
                 )
                 
-                if let episodeIdentifier = episodeIdentifier {
-                    let ajaxHeaders: [String: String] = ["Referer": reconstructedAnimeLink.absoluteString]
-                    let animeIdentifierShort = animeIdentifier.split(separator: ".")[1]
-                    
-                    task.add(
-                        self.request(
-                            ajax: "/ajax/film/servers/\(animeIdentifierShort)",
-                            with: ajaxHeaders) { responseJson, responseError in
-                                guard let responseJson = responseJson else { return handler(nil, responseError) }
-                                
-                                do {
-                                    let episodes = try self.parseAvailableEpisodes(from: responseJson, with: animeLink)
-                                    
-                                    guard let episodeLink = episodes.link(withIdentifier: episodeIdentifier) else {
-                                        return handler(nil, NineAnimatorError.responseError("The specified episode does not exist"))
-                                    }
-                                    
-                                    handler(.episode(episodeLink), nil)
-                                } catch { handler(nil, error) }
-                        }
-                    )
-                } else { handler(.anime(animeLink), nil) }
+                handler(.anime(animeLink), nil)
             } catch { handler(nil, error) }
         })
         
