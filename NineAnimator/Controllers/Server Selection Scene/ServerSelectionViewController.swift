@@ -29,6 +29,7 @@ class ServerSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         preferredContentSize = .init(width: 360, height: 500)
+        selectionView.makeThemable()
     }
     
     @IBAction private func onDoneButtonTapped(_ sender: Any) {

@@ -57,9 +57,7 @@ protocol AttributedContentProvider: ContentProvider {
 /// A type of content provider that provides release dates
 /// of the links
 protocol CalendarProvider: ContentProvider {
-    func date(for link: AnyLink) -> Date
-    
-    func airingEpisodeName(for link: AnyLink) -> String
+    func date(for link: AnyLink, on page: Int) -> Date
 }
 
 /// Representing a set of attributes
@@ -72,4 +70,10 @@ class ContentAttributes {
     
     /// A brief description or synopsis to be presented along with the title
     var description: String?
+    
+    init(title: String? = nil, subtitle: String? = nil, description: String? = nil) {
+        self.title = title
+        self.subtitle = subtitle
+        self.description = description
+    }
 }

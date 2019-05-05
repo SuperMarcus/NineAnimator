@@ -40,6 +40,11 @@ class SetupServerSelectionViewController: UIViewController {
     
     private var didShowAnimations = false
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        selectionView.makeThemable()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

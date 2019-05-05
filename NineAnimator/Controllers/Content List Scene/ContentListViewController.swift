@@ -29,6 +29,7 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 160
+        tableView.estimatedRowHeight = 160
         tableView.tableFooterView = UIView()
         tableView.makeThemable()
     }

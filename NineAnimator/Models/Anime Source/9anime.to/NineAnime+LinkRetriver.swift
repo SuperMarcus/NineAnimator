@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceNineAnime {
     static let animeLinkParsingRegex = try! NSRegularExpression(pattern: "\\/watch\\/([^/]+)", options: .caseInsensitive)
-    static let episodeLinkParsingRegex = try! NSRegularExpression(pattern: "\\/watch\\/[^/]+\\/([0-9A-Za-z]+)", options: .caseInsensitive)
+//    static let episodeLinkParsingRegex = try! NSRegularExpression(pattern: "\\/watch\\/[^/]+\\/([0-9A-Za-z]+)", options: .caseInsensitive)
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
         let urlString = url.absoluteString
@@ -37,15 +37,15 @@ extension NASourceNineAnime {
         }
         
         let animeIdentifier = urlString[animeIdentifierMatch.range(at: 1)]
-        var episodeIdentifier: String?
-        
-        if let episodeIdentifierMatch = NASourceNineAnime.episodeLinkParsingRegex.matches(
-            in: urlString,
-            options: [],
-            range: urlString.matchingRange
-            ).first {
-            episodeIdentifier = urlString[episodeIdentifierMatch.range(at: 1)]
-        }
+//        var episodeIdentifier: String?
+//
+//        if let episodeIdentifierMatch = NASourceNineAnime.episodeLinkParsingRegex.matches(
+//            in: urlString,
+//            options: [],
+//            range: urlString.matchingRange
+//            ).first {
+//            episodeIdentifier = urlString[episodeIdentifierMatch.range(at: 1)]
+//        }
         
         let reconstructedAnimePath = "/watch/\(animeIdentifier)"
         guard let reconstructedAnimeLink = URL(string: "\(endpoint)\(reconstructedAnimePath)") else {

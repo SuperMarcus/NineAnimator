@@ -19,22 +19,13 @@
 
 import Foundation
 
-extension Optional {
-    /// Try to unwrap the optional value, or throw an error
-    ///
-    /// Why? This makes chaining much easier and simpler to write & read
-    func tryUnwrap(_ error: NineAnimatorError = .decodeError) throws -> Wrapped {
-        switch self {
-        case let .some(value): return value
-        default: throw error
-        }
-    }
-    
-    /// Run the closure with the value if there is a value in this optional
-    func unwrap<ResultType>(_ ifUnwrapped: (Wrapped) -> ResultType) -> ResultType? {
-        switch self {
-        case let .some(value): return ifUnwrapped(value)
-        default: return nil
-        }
+extension Anilist {
+    struct GQLAiringSchedule: Codable {
+        var id: Int?
+        var airingAt: Int?
+        var timeUntilAiring: Int?
+        var episode: Int?
+        var mediaId: Int?
+        var media: GQLMedia?
     }
 }

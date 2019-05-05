@@ -42,6 +42,30 @@ extension ListingAnimeReference {
         
         self.init(parent, name: title, identifier: String(identifier), state: state, artwork: artwork, userInfo: [:])
     }
+    
+    init(_ parent: Anilist, withMediaObject mediaObject: Anilist.GQLMedia) throws {
+        let libraryStatus: ListingAnimeTrackingState?
+        
+        if let referenceState = mediaObject.mediaListEntry?.status {
+            switch referenceState {
+            case .current: libraryStatus = .watching
+            case .planning: libraryStatus = .toWatch
+            case .completed, .repeating: libraryStatus = .finished
+            default: libraryStatus = nil
+            }
+        } else { libraryStatus = nil }
+        
+        self.init(
+            parent,
+            name: try (mediaObject.title?.userPreferred).tryUnwrap(.decodeError),
+            identifier: String(try mediaObject.id.tryUnwrap(.decodeError)),
+            state: libraryStatus,
+            artwork: try URL(
+                string: try (mediaObject.coverImage?.extraLarge ?? mediaObject.coverImage?.large).tryUnwrap(.decodeError)
+            ).tryUnwrap(.decodeError),
+            userInfo: [:]
+        )
+    }
 }
 
 extension StaticListingAnimeCollection {

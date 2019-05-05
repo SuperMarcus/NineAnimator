@@ -25,14 +25,12 @@ class DiscoveryStandardTableViewCell: UITableViewCell, UICollectionViewDelegate,
     @IBOutlet private weak var subtitleLabel: UILabel!
     @IBOutlet private weak var viewMoreButton: UIButton!
     
-    weak var delegate: DiscoverySceneViewController?
-    
     private let scrollBarHeightInset: CGFloat = 20
     private let standardCellWidth: CGFloat = 110
     
     private var recommendation: Recommendation?
-    private var selectionHandler: ((RecommendingItem) -> Void)?
     private var viewMoreContentProvider: ContentProvider?
+    private weak var delegate: DiscoverySceneViewController?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,15 +78,15 @@ extension DiscoveryStandardTableViewCell {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? Cell,
             let item = cell.recommendingItem {
-            selectionHandler?(item)
+            delegate?.didSelect(recommendingItem: item)
         }
     }
 }
 
 extension DiscoveryStandardTableViewCell {
-    func setPresenting(_ recommendation: Recommendation, withSelectionHandler callback: @escaping (RecommendingItem) -> Void) {
+    func setPresenting(_ recommendation: Recommendation, withDelegate delegate: DiscoverySceneViewController) {
         self.recommendation = recommendation
-        self.selectionHandler = callback
+        self.delegate = delegate
         self.titleLabel.text = recommendation.title
         self.subtitleLabel.text = recommendation.subtitle
         collectionView.reloadData()

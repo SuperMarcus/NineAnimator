@@ -42,6 +42,10 @@ class NineAnimatorError: NSError {
         return AuthenticationRequiredError(failiureReason, authenticationUrl: authenticationUrl)
     }
     
+    class func contentUnavailableError(_ failiureReason: String) -> ContentUnavailableError {
+        return ContentUnavailableError(failiureReason)
+    }
+    
     var sourceOfError: Any?
     
     init(_ code: Int,
@@ -232,4 +236,15 @@ extension NineAnimatorError {
     /// An WAF authentication challenge is present and can be automatically
     /// completed by NineAnimator
     class CloudflareAuthenticationChallenge: AuthenticationRequiredError { }
+    
+    /// Representing a content or service that is no longer available.
+    class ContentUnavailableError: NineAnimatorError {
+        init(_ reason: String, userInfo: [String: Any]? = nil) {
+            super.init(8, message: "This content is no longer available", failiureReason: reason, userInfo: userInfo)
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
 }

@@ -82,11 +82,23 @@ class DiscoverySceneViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.makeThemable()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let calendarVc = segue.destination as? AnimeScheduleCollectionViewController,
+            let calendarSource = sender as? CalendarProvider {
+            calendarVc.setPresenting(calendarSource)
+        }
+    }
 }
 
 // MARK: - Delegating actions from cells
 extension DiscoverySceneViewController {
     func onViewMoreButtonTapped(_ recommendation: Recommendation, contentProvider: ContentProvider, from: UITableViewCell) {
+        // If the contentProvider is a calendar provider, use the calendar view
+        if contentProvider is CalendarProvider {
+            return performSegue(withIdentifier: "open.schedule", sender: contentProvider)
+        }
+        
         let storyboard = UIStoryboard(name: "AnimeListing", bundle: Bundle.main)
         guard let listingViewController = storyboard.instantiateInitialViewController() as? ContentListViewController else {
             return Log.error("View controller instantiated from AnimeListing.storyboard is not ContentListViewController")
@@ -101,6 +113,10 @@ extension DiscoverySceneViewController {
         if let navigationController = navigationController {
             navigationController.pushViewController(listingViewController, animated: true)
         } else { present(listingViewController, animated: true) }
+    }
+    
+    func didSelect(recommendingItem item: RecommendingItem) {
+        RootViewController.open(whenReady: item.link)
     }
 }
 
@@ -169,12 +185,11 @@ fileprivate extension DiscoverySceneViewController {
         switch recommendation.style {
         case .thisWeek:
             let cell = tableView.dequeueReusableCell(withIdentifier: "next.thisWeek", for: indexPath) as! ThisWeekTableViewCell
-            cell.setPresenting(recommendation, withSelectionHandler: sharedRecommendingItemCallback)
+            cell.setPresenting(recommendation, withDelegate: self)
             return cell
         case .standard:
             let cell = tableView.dequeueReusableCell(withIdentifier: "next.standard", for: indexPath) as! DiscoveryStandardTableViewCell
-            cell.delegate = self
-            cell.setPresenting(recommendation, withSelectionHandler: sharedRecommendingItemCallback)
+            cell.setPresenting(recommendation, withDelegate: self)
             return cell
         default: return UITableViewCell()
         }
@@ -273,14 +288,6 @@ fileprivate extension DiscoverySceneViewController {
             tableView.reloadRows(at: [ Section.recommendations[index] ], with: .fade)
             tableView.setNeedsLayout()
         }, completion: nil)
-    }
-    
-    func didSelectRecommendingItem(_ item: RecommendingItem) {
-        RootViewController.open(whenReady: item.link)
-    }
-    
-    var sharedRecommendingItemCallback: (RecommendingItem) -> Void {
-        return { [weak self] in self?.didSelectRecommendingItem($0) }
     }
 }
 

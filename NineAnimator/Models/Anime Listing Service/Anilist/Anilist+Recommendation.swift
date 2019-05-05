@@ -21,14 +21,7 @@ import Foundation
 import SwiftSoup
 
 extension Anilist {
-    struct CalendarItem {
-        var date: Date
-        var episode: Int
-        var mediaSynopsis: String
-        var reference: ListingAnimeReference
-    }
-    
-    func requestWeeklyCalendar() -> NineAnimatorPromise<[CalendarItem]> {
+    func requestWeeklyCalendar() -> NineAnimatorPromise<[Anilist.CalendarItem]> {
         // Fetch calendar items from the start of today
         let startOfToday = Calendar.current.startOfDay(for: Date())
         // to 7 days after
@@ -56,10 +49,12 @@ extension Anilist {
                 let synopsis = try SwiftSoup.parse(
                     try mediaEntry.value(at: "description", type: String.self)
                 ).text()
+                let numEpisodes = mediaEntry.valueIfPresent(at: "episodes", type: Int.self)
                 
                 let item = CalendarItem(
                     date: airingDate,
                     episode: airingEpisode,
+                    totalEpisodes: numEpisodes,
                     mediaSynopsis: synopsis,
                     reference: reference
                 )
@@ -107,7 +102,7 @@ extension Anilist {
                         items: recommendationItems,
                         title: name,
                         style: .thisWeek
-                    )
+                    ) { WeeklyCalendar(self.parent) }
                 }
         }
     }

@@ -116,6 +116,9 @@
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onViewScheduleButtonTapped:" destination="Fj6-CI-Qx6" eventType="touchUpInside" id="ez2-fg-h4N"/>
+                                            </connections>
                                         </button>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kaV-Hm-R5A">
                                             <rect key="frame" x="20" y="53" width="394" height="203"/>
@@ -267,6 +270,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="collectionView" destination="kaV-Hm-R5A" id="zVX-fh-06h"/>
+                                    <outlet property="viewFullScheduleButton" destination="WZx-eB-ztY" id="aL3-9A-jPm"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="next.standard" rowHeight="356" id="tUL-GN-cnA" customClass="DiscoveryStandardTableViewCell" customModule="NineAnimator" customModuleProvider="target">
@@ -597,10 +601,173 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="cZi-0a-hIx" kind="show" identifier="open.schedule" id="Psa-O2-3p2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVh-m1-tjo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="192.75362318840581" y="107.8125"/>
+        </scene>
+        <!--Anime Schedule Collection View Controller-->
+        <scene sceneID="Xyz-x0-EGy">
+            <objects>
+                <collectionViewController id="cZi-0a-hIx" customClass="AnimeScheduleCollectionViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" id="wbT-KN-zkT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="cda-9a-gtu">
+                            <size key="itemSize" width="394" height="118"/>
+                            <size key="headerReferenceSize" width="50" height="72"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="schedule.cell" id="l9l-yo-fk5" customClass="CalendarAnimeCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="10" y="72" width="394" height="118"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="394" height="118"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymP-9S-Bxf">
+                                            <rect key="frame" x="9" y="4" width="376" height="110"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Twb-kn-MnW">
+                                                    <rect key="frame" x="8" y="8" width="62.5" height="94"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Twb-kn-MnW" secondAttribute="height" multiplier="24:36" id="HNr-c1-CZL"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="O5c-C5-cMn">
+                                                    <rect key="frame" x="78.5" y="41.5" width="281.5" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Ep. 2/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-OB-bct">
+                                                    <rect key="frame" x="78.5" y="63" width="52" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="11:11 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sab-K2-tmC">
+                                                    <rect key="frame" x="78.5" y="27" width="51" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                                    <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="O5c-C5-cMn" firstAttribute="bottom" secondItem="Twb-kn-MnW" secondAttribute="centerY" priority="600" constant="8" id="HJm-vt-7f3"/>
+                                                <constraint firstItem="Twb-kn-MnW" firstAttribute="top" secondItem="ymP-9S-Bxf" secondAttribute="top" constant="8" id="HdV-GU-rv1"/>
+                                                <constraint firstItem="Twb-kn-MnW" firstAttribute="leading" secondItem="ymP-9S-Bxf" secondAttribute="leading" constant="8" id="Osq-Xo-ZXi"/>
+                                                <constraint firstItem="sab-K2-tmC" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="QDu-VU-Uak"/>
+                                                <constraint firstItem="O5c-C5-cMn" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="YEn-Ph-6MY"/>
+                                                <constraint firstAttribute="bottom" secondItem="Twb-kn-MnW" secondAttribute="bottom" constant="8" id="cre-Dj-6iS"/>
+                                                <constraint firstItem="i3b-OB-bct" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="dum-1b-eXB"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="i3b-OB-bct" secondAttribute="bottom" constant="12" id="eMQ-DS-G5T"/>
+                                                <constraint firstItem="O5c-C5-cMn" firstAttribute="top" secondItem="sab-K2-tmC" secondAttribute="bottom" id="iMC-52-tD6"/>
+                                                <constraint firstItem="i3b-OB-bct" firstAttribute="top" secondItem="O5c-C5-cMn" secondAttribute="bottom" id="prA-EA-RY7"/>
+                                                <constraint firstAttribute="trailing" secondItem="O5c-C5-cMn" secondAttribute="trailing" constant="16" id="tAw-of-qev"/>
+                                                <constraint firstItem="sab-K2-tmC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ymP-9S-Bxf" secondAttribute="top" constant="12" id="v1C-xN-thz"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ymP-9S-Bxf" secondAttribute="trailing" constant="9" id="JjF-79-20a"/>
+                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="leading" secondItem="l9l-yo-fk5" secondAttribute="leading" constant="9" id="cqH-3e-Rz9"/>
+                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="top" secondItem="l9l-yo-fk5" secondAttribute="top" constant="4" id="hLY-7i-iDp"/>
+                                    <constraint firstAttribute="bottom" secondItem="ymP-9S-Bxf" secondAttribute="bottom" constant="4" id="rOR-1h-22P"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="backgroundContainerView" destination="ymP-9S-Bxf" id="BMW-EV-UPC"/>
+                                    <outlet property="scheduledItemImageView" destination="Twb-kn-MnW" id="fnm-xi-77z"/>
+                                    <outlet property="subtitleLabel" destination="i3b-OB-bct" id="UNK-lq-2cS"/>
+                                    <outlet property="timeLabel" destination="sab-K2-tmC" id="W3u-Qn-Ljg"/>
+                                    <outlet property="titleLabel" destination="O5c-C5-cMn" id="ZWE-gf-BeD"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="schedule.header" id="Hp5-9h-zPc" customClass="CalendarHeaderView" customModule="NineAnimator" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Saturday" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NFy-jR-9zE">
+                                    <rect key="frame" x="16" y="27.5" width="382" height="32.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="27"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAY 4 2019" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElE-AE-Lnx">
+                                    <rect key="frame" x="16" y="13" width="382" height="14.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    </userDefinedRuntimeAttributes>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailingMargin" secondItem="ElE-AE-Lnx" secondAttribute="trailing" constant="8" id="5cT-0C-J2X"/>
+                                <constraint firstItem="NFy-jR-9zE" firstAttribute="leading" secondItem="Hp5-9h-zPc" secondAttribute="leadingMargin" constant="8" id="FDq-s6-le7"/>
+                                <constraint firstItem="NFy-jR-9zE" firstAttribute="top" secondItem="ElE-AE-Lnx" secondAttribute="bottom" id="KAn-R1-Ym3"/>
+                                <constraint firstAttribute="trailingMargin" secondItem="NFy-jR-9zE" secondAttribute="trailing" constant="8" id="LuN-8L-QNj"/>
+                                <constraint firstItem="ElE-AE-Lnx" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hp5-9h-zPc" secondAttribute="topMargin" constant="4" id="Ntr-Ix-GA1"/>
+                                <constraint firstItem="ElE-AE-Lnx" firstAttribute="leading" secondItem="Hp5-9h-zPc" secondAttribute="leadingMargin" constant="8" id="fEq-Ey-u8G"/>
+                                <constraint firstAttribute="bottomMargin" secondItem="NFy-jR-9zE" secondAttribute="bottom" constant="4" id="wBK-W9-Uz5"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <outlet property="dateLabel" destination="ElE-AE-Lnx" id="dKv-hj-OLZ"/>
+                                <outlet property="dayOfWeekLabel" destination="NFy-jR-9zE" id="f95-Zf-yNM"/>
+                            </connections>
+                        </collectionReusableView>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="cZi-0a-hIx" id="GS2-Lf-VsP"/>
+                            <outlet property="delegate" destination="cZi-0a-hIx" id="Mls-Lk-dFf"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="IQj-JE-ij5">
+                        <barButtonItem key="backBarButtonItem" title="Anime Schedule" id="iOO-54-dYf"/>
+                    </navigationItem>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xvy-Li-u1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1137.68115942029" y="107.8125"/>
         </scene>
         <!--ServerSelection-->
         <scene sceneID="g8v-Gs-nG0">
@@ -608,7 +775,7 @@
                 <viewControllerPlaceholder storyboardName="ServerSelection" id="16P-Tr-XC2" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L1C-dx-18P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="765" y="-128"/>
+            <point key="canvasLocation" x="193" y="510"/>
         </scene>
         <!--Watch Next-->
         <scene sceneID="d6G-dE-Ax4">

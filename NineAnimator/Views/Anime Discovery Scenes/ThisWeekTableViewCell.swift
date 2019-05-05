@@ -21,8 +21,11 @@ import UIKit
 
 class ThisWeekTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var viewFullScheduleButton: UIButton!
+    
     private var recommendation: Recommendation?
-    private var selectionHandler: ((RecommendingItem) -> Void)?
+    private weak var delegate: DiscoverySceneViewController?
+    private var fullScheduleCalendarProvider: CalendarProvider?
     
     private let maxItemWidth: CGFloat = 420
     private let scrollBarHeightInset: CGFloat = 20
@@ -69,16 +72,27 @@ class ThisWeekTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
 }
 
 extension ThisWeekTableViewCell {
-    func setPresenting(_ recommendation: Recommendation, withSelectionHandler callback: @escaping (RecommendingItem) -> Void) {
+    func setPresenting(_ recommendation: Recommendation, withDelegate delegate: DiscoverySceneViewController) {
         self.recommendation = recommendation
-        self.selectionHandler = callback
+        self.delegate = delegate
+        
+        self.fullScheduleCalendarProvider = recommendation.completeItemListProvider() as? CalendarProvider
+        self.viewFullScheduleButton.isHidden = self.fullScheduleCalendarProvider == nil
+        
         collectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? Cell,
             let item = cell.recommendingItem {
-            selectionHandler?(item)
+            delegate?.didSelect(recommendingItem: item)
+        }
+    }
+    
+    @IBAction private func onViewScheduleButtonTapped(_ sender: Any) {
+        if let recommendation = self.recommendation,
+            let calendarProvider = self.fullScheduleCalendarProvider {
+            delegate?.onViewMoreButtonTapped(recommendation, contentProvider: calendarProvider, from: self)
         }
     }
 }

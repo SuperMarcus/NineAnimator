@@ -65,9 +65,8 @@ class OfflineAnimeTableViewCell: UITableViewCell {
         guard let link = animeLink else { return }
         let contents = OfflineContentManager.shared.contents(for: link)
         // Check if there are any contents that are still being downloaded
-        if contents.reduce(false, {
-            if $0 { return true }
-            if case .preserving = $1.state {
+        if contents.contains(where: {
+            if case .preserving = $0.state {
                 return true
             } else { return false }
         }) {
