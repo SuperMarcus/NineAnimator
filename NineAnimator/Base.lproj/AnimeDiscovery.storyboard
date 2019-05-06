@@ -657,7 +657,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Ep. 2/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-OB-bct">
-                                                    <rect key="frame" x="78.5" y="63" width="52" height="17"/>
+                                                    <rect key="frame" x="78.5" y="63" width="281.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -667,17 +667,19 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="11:11 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sab-K2-tmC">
-                                                    <rect key="frame" x="78.5" y="27" width="51" height="14.5"/>
+                                                    <rect key="frame" x="78.5" y="27" width="281.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="sab-K2-tmC" secondAttribute="trailing" constant="16" id="EDN-Ol-wBJ"/>
                                                 <constraint firstItem="O5c-C5-cMn" firstAttribute="bottom" secondItem="Twb-kn-MnW" secondAttribute="centerY" priority="600" constant="8" id="HJm-vt-7f3"/>
                                                 <constraint firstItem="Twb-kn-MnW" firstAttribute="top" secondItem="ymP-9S-Bxf" secondAttribute="top" constant="8" id="HdV-GU-rv1"/>
                                                 <constraint firstItem="Twb-kn-MnW" firstAttribute="leading" secondItem="ymP-9S-Bxf" secondAttribute="leading" constant="8" id="Osq-Xo-ZXi"/>
                                                 <constraint firstItem="sab-K2-tmC" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="QDu-VU-Uak"/>
+                                                <constraint firstAttribute="trailing" secondItem="i3b-OB-bct" secondAttribute="trailing" constant="16" id="QVb-zS-giZ"/>
                                                 <constraint firstItem="O5c-C5-cMn" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="YEn-Ph-6MY"/>
                                                 <constraint firstAttribute="bottom" secondItem="Twb-kn-MnW" secondAttribute="bottom" constant="8" id="cre-Dj-6iS"/>
                                                 <constraint firstItem="i3b-OB-bct" firstAttribute="leading" secondItem="Twb-kn-MnW" secondAttribute="trailing" constant="8" id="dum-1b-eXB"/>
