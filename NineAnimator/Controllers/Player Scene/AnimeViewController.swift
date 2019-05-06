@@ -111,6 +111,18 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             guard let anime = anime else {
                 Log.error(error)
                 return DispatchQueue.main.async {
+                    // Allow the user to recover the anime by searching in another source
+                    if let error = error as? NineAnimatorError.ContentUnavailableError {
+                        self?.presentError(error) {
+                            if $0 {
+                                self?.presentRecoveryOptions(for: link)
+                            } else if let navigationController = self?.navigationController {
+                                _ = navigationController.popViewController(animated: true)
+                            } else { self?.dismiss(animated: true, completion: nil) }
+                        }
+                        return
+                    }
+                    
                     self?.presentError(error!) {
                         // If not allowed to retry, dismiss the view controller
                         guard !$0 else { return }
@@ -774,7 +786,67 @@ extension AnimeViewController {
     ///             `true` if the user wants to proceed.
     ///
     private func presentError(_ error: Error, completionHandler: ((Bool) -> Void)? = nil) {
-        let alert = UIAlertController(error: error, source: self, completionHandler: completionHandler)
+        let alert = UIAlertController(
+            error: error,
+            allowRetry: error is NineAnimatorError.ContentUnavailableError, // Allow recover on ContentUnavailableError
+            retryActionName: "Recover",
+            source: self,
+            completionHandler: completionHandler
+        )
+        present(alert, animated: true)
+    }
+    
+    /// Present a list of recovery options if the anime is no longer available
+    /// from this source
+    private func presentRecoveryOptions(for link: AnimeLink) {
+        // This may only work with the context of an navigation controller
+        guard let navigationController = navigationController else {
+            return dismiss(animated: true, completion: nil)
+        }
+        
+        let alert = UIAlertController(
+            title: "Recovery Options",
+            message: "This anime is no longer available on \(link.source.name) from NineAnimator. You may be able to recover the item by access the web page or search on your currently selected source.",
+            preferredStyle: .actionSheet
+        )
+        
+        // Method 1: Accessing the page directly
+        alert.addAction(UIAlertAction(
+            title: "Visit Website",
+            style: .default
+        ) { _ in
+            // Pop the current view controller
+            navigationController.popViewController(animated: true)
+            
+            // Present the website in the next tick
+            DispatchQueue.main.async {
+                let pageVc = SFSafariViewController(url: link.link)
+                navigationController.topViewController?.present(pageVc, animated: true, completion: nil)
+            }
+        })
+        
+        // Method 2: Search on the currently selected source
+        alert.addAction(UIAlertAction(
+            title: "Search on \(NineAnimator.default.user.source.name)",
+            style: .default
+        ) { _ in
+            let searchProvider = NineAnimator.default.user.source.search(keyword: link.title)
+            let searchVc = ContentListViewController.create(withProvider: searchProvider)
+            navigationController.popViewController(animated: true)
+            
+            // Present the search view controller
+            if let vc = searchVc {
+                navigationController.pushViewController(vc, animated: true)
+            }
+        })
+        
+        // Cancel action
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ) { _ in navigationController.popViewController(animated: true) })
+        
+        // Present recovery actions
         present(alert, animated: true)
     }
 }

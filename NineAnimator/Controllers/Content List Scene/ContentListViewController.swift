@@ -71,6 +71,24 @@ extension ContentListViewController {
     func setPresenting(contentProvider provider: ContentProvider) {
         self.contentSource = provider
     }
+    
+    /// Create the view controller with a provider
+    class func create(withProvider provider: ContentProvider) -> ContentListViewController? {
+        let storyboard = UIStoryboard(name: "AnimeListing", bundle: Bundle.main)
+        
+        // Instantiate the list view controller
+        guard let listingViewController = storyboard.instantiateInitialViewController() as? ContentListViewController else {
+            Log.error("View controller instantiated from AnimeListing.storyboard is not ContentListViewController")
+            return nil
+        }
+        
+        // Initialize the view controller with content provider
+        listingViewController.setPresenting(
+            contentProvider: provider
+        )
+        
+        return listingViewController
+    }
 }
 
 // MARK: - Table view data source

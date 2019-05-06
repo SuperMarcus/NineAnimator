@@ -44,13 +44,18 @@ class ServerSelectionCell: UITableViewCell, Themable {
         
         // Notice the user that this source is currently not available
         if !source.isEnabled {
-            alpha = 0.7
             sourceNameLabel.text = "\(source.name) (Not Available)"
+            alpha = 0.7
         }
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
+        
+        // Only allow highlighting effects when the source is enabled
+        guard representingSource?.isEnabled == true else {
+            return alpha = 0.7
+        }
         
         UIView.animate(
             withDuration: animated ? 0.4 : 0,
@@ -63,6 +68,11 @@ class ServerSelectionCell: UITableViewCell, Themable {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
+        // Only allow selected effects when the source is enabled
+        guard representingSource?.isEnabled == true else {
+            return alpha = 0.7
+        }
         
         UIView.animate(withDuration: 0.2) {
             // IBDesignable will fail to build if not opt chained

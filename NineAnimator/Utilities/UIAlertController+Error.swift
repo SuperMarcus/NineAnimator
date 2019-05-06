@@ -26,6 +26,7 @@ extension UIAlertController {
     convenience init(error: Error,
                      customTitle: String? = nil,
                      allowRetry: Bool = false,
+                     retryActionName: String = "Retry",
                      source: UIViewController? = nil,
                      completionHandler: ((Bool) -> Void)? = nil) {
         let errorMessage: String = {
@@ -89,7 +90,7 @@ extension UIAlertController {
             
             // Add the retry option if retry is allowed
             if allowRetry {
-                self.addAction(UIAlertAction(title: "Retry", style: .default) {
+                self.addAction(UIAlertAction(title: retryActionName, style: .default) {
                     _ in completionHandler?(true)
                 })
             }
