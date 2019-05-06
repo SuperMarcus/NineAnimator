@@ -37,10 +37,12 @@ extension NineAnimatorUser {
     /// The currently selected source website
     var source: Source {
         if let sourceName = _freezer.string(forKey: Keys.recentSource),
-            let source = NineAnimator.default.source(with: sourceName) {
+            let source = NineAnimator.default.source(with: sourceName),
+            source.isEnabled {
             return source
         } else {
-            return NineAnimator.default.sources.first!
+            // Return the first available source
+            return NineAnimator.default.sources.first { $0.isEnabled }!
         }
     }
     

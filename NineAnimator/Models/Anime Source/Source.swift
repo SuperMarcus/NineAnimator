@@ -42,6 +42,9 @@ protocol Source: AnyObject {
     /// A brief description of the website
     var siteDescription: String { get }
     
+    /// If the source is available
+    var isEnabled: Bool { get }
+    
     /// The Alamofire session manager for retriving contents
     /// from the represented website.
     var retriverSession: SessionManager { get }

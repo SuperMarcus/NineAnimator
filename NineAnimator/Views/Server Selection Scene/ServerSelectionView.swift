@@ -96,6 +96,14 @@ extension ServerSelectionView {
         
         cell.makeThemable()
     }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        // Only allow selection if the source is enabled
+        if let cell = tableView.cellForRow(at: indexPath) as? ServerSelectionCell,
+            cell.representingSource?.isEnabled == true {
+            return indexPath
+        } else { return nil }
+    }
 }
 
 // MARK: - TableView data source

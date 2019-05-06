@@ -39,8 +39,13 @@ class NASourceMasterAnime: BaseSource, Source {
     var siteLogo: NSImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
 #endif
     
+    // Masterani.me is no longer available
+    override var isEnabled: Bool {
+        return false
+    }
+    
     var siteDescription: String {
-        return "(Not Available) MasterAni.me was one of the best supported anime websites by NineAnimator."
+        return "MasterAni.me was one of the best supported anime websites by NineAnimator."
     }
     
     override var endpoint: String { return "https://www.masterani.me" }

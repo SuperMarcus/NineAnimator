@@ -41,6 +41,12 @@ class ServerSelectionCell: UITableViewCell, Themable {
         sourceLogoImageView.image = source.siteLogo
         sourceNameLabel.text = source.name
         sourceDescriptionLabel.text = source.siteDescription
+        
+        // Notice the user that this source is currently not available
+        if !source.isEnabled {
+            alpha = 0.7
+            sourceNameLabel.text = "\(source.name) (Not Available)"
+        }
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {

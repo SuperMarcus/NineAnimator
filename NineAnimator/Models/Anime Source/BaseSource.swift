@@ -30,6 +30,9 @@ class BaseSource: SessionDelegate {
     
     var endpointURL: URL { return URL(string: endpoint)! }
     
+    // Default to enabled
+    var isEnabled: Bool { return true }
+    
     var _cfResolverTimer: Timer?
     var _cfPausedTasks = [Alamofire.RequestRetryCompletion]()
     var _internalUAIdentity = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
