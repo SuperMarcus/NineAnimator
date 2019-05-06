@@ -29,6 +29,9 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
     /// References to async tasks
     private var taskReferencePool = [NineAnimatorAsyncTask]()
     
+    /// A flag to mark if the current scene is being presented
+    private var isScenePresenting = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
@@ -42,6 +45,20 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
         NineAnimator.default.user.pull()
         reloadStatefulAnime()
         tableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Mark the scene as being presented
+        isScenePresenting = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        // Mark the scene as not being presented
+        isScenePresenting = false
     }
     
     private func reloadStatefulAnime() {
@@ -233,6 +250,10 @@ extension RecentlyViewedTableViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        // Only do the layout if the scene is being presented
+        guard isScenePresenting else { return }
+        
+        // Layout the table view
         coordinator.animate(alongsideTransition: {
             [tableView] _ in
             guard let tableView = tableView else { return }
