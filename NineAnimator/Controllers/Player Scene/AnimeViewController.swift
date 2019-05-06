@@ -810,6 +810,10 @@ extension AnimeViewController {
             preferredStyle: .actionSheet
         )
         
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = moreOptionsButton
+        }
+        
         // Method 1: Accessing the page directly
         alert.addAction(UIAlertAction(
             title: "Visit Website",
