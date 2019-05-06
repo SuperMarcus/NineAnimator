@@ -74,11 +74,13 @@ extension NASourceAnimeUltima {
             } .error {
                 [weak self] error in
                 guard let self = self else { return }
+                self.searchRequestingTask = nil
                 self.delegate?.onError(error, from: self)
             } .finally {
                 [weak self] resultingAnimeLinks in
                 guard let self = self else { return }
                 self.result = resultingAnimeLinks.map { .anime($0) }
+                self.searchRequestingTask = nil
                 self.delegate?.pageIncoming(0, from: self)
             }
         }

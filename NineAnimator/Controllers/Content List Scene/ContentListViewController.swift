@@ -111,6 +111,7 @@ extension ContentListViewController {
         if let providerError = providerError {
             let cell = tableView.dequeueReusableCell(withIdentifier: "search.error", for: indexPath) as! ContentErrorTableViewCell
             cell.error = providerError
+            cell.delegate = self
             cell.makeThemable()
             return cell
         }
@@ -156,5 +157,20 @@ extension ContentListViewController {
     
     func pageIncoming(_ sectionNumber: Int, from page: ContentProvider) {
         DispatchQueue.main.async(execute: tableView.reloadData)
+    }
+}
+
+// MARK: - Delegating events from cells
+extension ContentListViewController {
+    func tryResolveError(_ error: Error, from cell: ContentErrorTableViewCell) {
+        // Create and present authentication controller
+        NAAuthenticationViewController.create(from: error) {
+            [weak self] in
+            guard let self = self else { return }
+            self.providerError = nil
+            self.tableView.reloadData()
+            self.tableView.contentOffset = .zero
+            self.contentSource?.more()
+        } .unwrap { present($0, animated: true, completion: nil) }
     }
 }

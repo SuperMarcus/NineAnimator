@@ -21,20 +21,31 @@ import UIKit
 
 class ContentErrorTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var searchSubtitleLabel: UILabel!
-    
     @IBOutlet private weak var searchTitleLabel: UILabel!
+    @IBOutlet private weak var openLinkButton: UIButton!
     
     var error: Error? {
-        set {
-            searchTitleLabel.text = newValue?.localizedDescription ?? "Unknown Error"
-            searchSubtitleLabel.text = (newValue as NSError?)?.localizedFailureReason ?? "The reason of this error is unknown"
+        didSet {
+            searchTitleLabel.text = error?.localizedDescription ?? "Unknown Error"
+            searchSubtitleLabel.text = (error as NSError?)?.localizedFailureReason ?? "The reason of this error is unknown"
+            
+            // Show the open link button
+            if let error = error as? NineAnimatorError.AuthenticationRequiredError,
+                error.authenticationUrl != nil {
+                openLinkButton.isHidden = false
+            } else { openLinkButton.isHidden = true }
         }
-        get { return nil }
     }
+    
+    weak var delegate: ContentListViewController?
     
     func theme(didUpdate theme: Theme) {
         searchSubtitleLabel.textColor = theme.secondaryText
         searchTitleLabel.textColor = theme.primaryText
         backgroundColor = theme.background
+    }
+    
+    @IBAction private func onOpenLinkButtonTapped(_ sender: Any) {
+        error.unwrap { delegate?.tryResolveError($0, from: self) }
     }
 }

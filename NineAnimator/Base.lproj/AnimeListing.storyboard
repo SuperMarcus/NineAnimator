@@ -143,18 +143,40 @@
                                                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="752" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nke-YY-kc3" customClass="ThemedBorderButton" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="144.5" y="176" width="86" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <inset key="contentEdgeInsets" minX="12" minY="6" maxX="12" maxY="6"/>
+                                                    <state key="normal" title="Open Link"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="useSecondaryColorInsteadOfTint" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="6"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="onOpenLinkButtonTapped:" destination="FjQ-a3-f5R" eventType="touchUpInside" id="CIi-R4-rcX"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hP6-y4-aJ9" secondAttribute="trailing" constant="16" id="4fP-im-ljE"/>
+                                                <constraint firstItem="Nke-YY-kc3" firstAttribute="top" secondItem="hP6-y4-aJ9" secondAttribute="bottom" constant="8" id="87p-Bg-Dz8"/>
                                                 <constraint firstItem="hP6-y4-aJ9" firstAttribute="centerX" secondItem="kpE-eq-gRZ" secondAttribute="centerX" id="92n-oa-6Uc"/>
                                                 <constraint firstItem="hP6-y4-aJ9" firstAttribute="top" secondItem="goV-KK-D5O" secondAttribute="bottom" constant="8" id="Nqa-IO-cs3"/>
                                                 <constraint firstItem="goV-KK-D5O" firstAttribute="centerX" secondItem="kpE-eq-gRZ" secondAttribute="centerX" id="Q6Q-I3-VSD"/>
                                                 <constraint firstAttribute="height" constant="300" id="R1v-8G-XNw"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="goV-KK-D5O" secondAttribute="trailing" constant="32" id="Wih-uI-7nc"/>
                                                 <constraint firstItem="goV-KK-D5O" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kpE-eq-gRZ" secondAttribute="leading" constant="32" id="Y7w-fk-RQJ"/>
+                                                <constraint firstItem="Nke-YY-kc3" firstAttribute="centerX" secondItem="kpE-eq-gRZ" secondAttribute="centerX" id="dyc-Kl-Jg1"/>
                                                 <constraint firstItem="hP6-y4-aJ9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kpE-eq-gRZ" secondAttribute="leading" constant="16" id="iAr-38-fNS"/>
                                                 <constraint firstItem="goV-KK-D5O" firstAttribute="centerY" secondItem="kpE-eq-gRZ" secondAttribute="centerY" constant="-24" id="niS-oB-paX"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Nke-YY-kc3" secondAttribute="bottom" constant="32" id="uX5-fW-le9"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -167,6 +189,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
+                                    <outlet property="openLinkButton" destination="Nke-YY-kc3" id="Uji-vh-CbY"/>
                                     <outlet property="searchSubtitleLabel" destination="hP6-y4-aJ9" id="gXX-fe-Ozn"/>
                                     <outlet property="searchTitleLabel" destination="goV-KK-D5O" id="m6B-7U-jJD"/>
                                 </connections>
