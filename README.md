@@ -210,12 +210,6 @@ Feel free to open an issue to request additional hosts.
 NineAnimator supports the following anime websites but with different sets
 of features:
 
-- [9anime.ru](//9anime.ru)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [x] Detailed anime attributes (Ratings and Air Date)
-    - [ ] Detailed episode synopsis
 - [Wonderful Subs](//wonderfulsubs.com)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
@@ -240,6 +234,12 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
+- ~~[9anime.ru](//9anime.ru)~~ (currently disabled to prevent users from getting IP banned from the website)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Ratings and Air Date)
+    - [ ] Detailed episode synopsis
 - ~~[masterani.me](//masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
