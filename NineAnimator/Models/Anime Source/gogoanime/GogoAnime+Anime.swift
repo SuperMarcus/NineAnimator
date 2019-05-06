@@ -93,7 +93,7 @@ extension NASourceGogoAnime {
                 
                 var animeSynopsis: String = "No description"
                 var releaseYear: String = "Unknown Year"
-                var animeStatus: String = "Unknwon Status"
+                var animeStatus: String = "Unknown Status"
                 
                 // Then, retrieve anime information container
                 let animeAttributesContainer = try animeBowl.select("div.anime_info_body_bg")

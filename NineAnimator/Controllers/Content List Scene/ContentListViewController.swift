@@ -51,6 +51,9 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // Do not attempt to reload until the error is cleared
+        guard providerError == nil else { return }
+        
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
@@ -167,9 +170,15 @@ extension ContentListViewController {
         NAAuthenticationViewController.create(from: error) {
             [weak self] in
             guard let self = self else { return }
+            // Reset provider error
             self.providerError = nil
-            self.tableView.reloadData()
-            self.tableView.contentOffset = .zero
+            // Reload table view data
+            self.tableView.performBatchUpdates({
+                self.tableView.reloadData()
+                self.tableView.contentOffset = .zero
+                self.tableView.layoutIfNeeded()
+            }, completion: nil)
+            // Load more resources
             self.contentSource?.more()
         } .unwrap { present($0, animated: true, completion: nil) }
     }

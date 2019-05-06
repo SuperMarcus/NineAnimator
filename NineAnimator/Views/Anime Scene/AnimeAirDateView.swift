@@ -28,6 +28,6 @@ class AnimeAirDateView: UIView {
     }
     
     func update() {
-        airDateLabel.text = "Unknwon"
+        airDateLabel.text = "Unknown"
     }
 }
