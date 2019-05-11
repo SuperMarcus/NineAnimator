@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AnimeScheduleCollectionViewController: UICollectionViewController, ContentProviderDelegate {
+class AnimeScheduleCollectionViewController: UICollectionViewController, ContentProviderDelegate, DontBotherViewController, Themable {
     // Defining constants
     
     /// The maximal cell width before increasing the number of cells in a line
@@ -26,6 +26,8 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, Content
         
         // Inset from the sides
         collectionView.contentInset = .init(top: 0, left: 8, bottom: 0, right: 8)
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?
+            .sectionHeadersPinToVisibleBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +50,9 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, Content
             loadedScheduledDays = []
             collectionView.reloadData()
         }
+        
+        // Add theming effect
+        Theme.provision(self)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -55,6 +60,12 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, Content
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
         if distanceFromBottom < height { calendarSource?.more() }
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        // This is just to make the navigation bar a bit more opaque and harder to
+        // distinquish the differences between section headers and the bar
+        navigationController?.navigationBar.backgroundColor = theme.background
     }
     
     func pageIncoming(_ page: Int, from provider: ContentProvider) {
