@@ -59,7 +59,7 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, Content
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if distanceFromBottom < height { calendarSource?.more() }
+        if distanceFromBottom < (2.5 * height) { calendarSource?.more() }
     }
     
     func theme(didUpdate theme: Theme) {
