@@ -42,9 +42,9 @@ class Mp4UploadParser: VideoProviderParser {
             let playerOptionsString = text[match.range(at: 1)]
             let playerOptions = playerOptionsString.split(separator: "|")
             
-            let serverPrefix = playerOptions[49]
-            let serverPort = playerOptions[91]
-            let mediaIdentifier = playerOptions[90]
+            let serverPrefix = playerOptions[33]
+            let serverPort = playerOptions[129]
+            let mediaIdentifier = playerOptions[128]
             
             guard let sourceURL = URL(string: "https://\(serverPrefix).mp4upload.com:\(serverPort)/d/\(mediaIdentifier)/video.mp4") else {
                 return handler(nil, NineAnimatorError.responseError(
