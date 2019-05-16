@@ -2,6 +2,7 @@
 ==========
 
 <p align="center">
+
 [![Build status](https://build.appcenter.ms/v0.1/apps/3b570beb-df2c-4506-b374-9c9ffa1f048d/branches/master/badge)](https://appcenter.ms)
 [![Build Status](https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master)](https://travis-ci.org/SuperMarcus/NineAnimator)
 [![Discord Server](https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue)](https://discord.gg/dzTVzeW)
@@ -11,6 +12,7 @@
 ![Platform: iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](/LICENSE)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_shield)
+
 </p>
 
 A simple yet elegant way of waching anime on your favorite anime websites.
