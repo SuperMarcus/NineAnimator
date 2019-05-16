@@ -1,4 +1,5 @@
 ![NineAnimator](Misc/Media/nineanimator_banner.jpg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_shield)
 ==========
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/3b570beb-df2c-4506-b374-9c9ffa1f048d/branches/master/badge)](https://appcenter.ms)
@@ -28,6 +29,9 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
     You should have received a copy of the GNU General Public License
     along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
     
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_large)
 
 ## Table of Contents
 
