@@ -2,17 +2,28 @@
 ==========
 
 <p align="center">
-
-[![Build status](https://build.appcenter.ms/v0.1/apps/3b570beb-df2c-4506-b374-9c9ffa1f048d/branches/master/badge)](https://appcenter.ms)
-[![Build Status](https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master)](https://travis-ci.org/SuperMarcus/NineAnimator)
-[![Discord Server](https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue)](https://discord.gg/dzTVzeW)
-
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat)](https://github.com/Carthage/Carthage)
-![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange.svg)
-![Platform: iOS](https://img.shields.io/badge/platform-iOS-lightgrey.svg)
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](/LICENSE)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_shield)
-
+    <a href="https://appcenter.ms">
+        <img src="https://build.appcenter.ms/v0.1/apps/3b570beb-df2c-4506-b374-9c9ffa1f048d/branches/master/badge" alt="MSAppCenter Build status"/>
+    </a>
+    <a href="https://travis-ci.org/SuperMarcus/NineAnimator">
+        <img src="https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master" alt="Travis Build status"/>
+    </a>
+    <a href="https://discord.gg/dzTVzeW">
+        <img src="https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue" alt="Discord Server"/>
+    </a>
+</p>
+<p align="center">
+    <a href="https://github.com/Carthage/Carthage">
+        <img src="https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat" alt="Carthage Compatible"/>
+    </a>
+    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" alt="Swift 5.0"/>
+    <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="Platform iOS"/>
+    <a href="/LICENSE">
+        <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"/>
+    </a>
+    <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_shield" alt="FOSSA Status">
+        <img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=shield"/>
+    </a>
 </p>
 
 A simple yet elegant way of waching anime on your favorite anime websites.
