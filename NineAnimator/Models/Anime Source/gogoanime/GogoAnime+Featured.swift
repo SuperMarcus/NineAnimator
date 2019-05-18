@@ -113,4 +113,41 @@ extension NASourceGogoAnime {
                     }
             }
     }
+    
+    /// Implementation for the new featured page
+    fileprivate func newFeatured() -> NineAnimatorPromise<FeaturedContainer> {
+        return request(browsePath: "/").then { content -> FeaturedContainer in
+            Log.info("[NASourceGogoAnime] Loading FeaturedContainer")
+            
+            // Parse html contents
+            let bowl = try SwiftSoup.parse(content)
+            
+            // Links for updated anime
+            let updatedAnimeContainer = try bowl.select(".new-latest")
+            let latestAnime = try updatedAnimeContainer.select(".nl-item").map {
+                element -> AnimeLink in
+                let urlString = try element.select("a.nli-image").attr("href")
+                let url = try URL(string: urlString).tryUnwrap(.urlError)
+                let artwork = try element.select("img").attr("src")
+                let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
+                let title = try element.select("nli-serie").text()
+                return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
+            }
+            
+            // Links for popular anime
+            let popularAnimeContainer = try bowl.select(".ci-contents .bl-box").map {
+                element -> AnimeLink in
+                let linkElement = try element.select("a.blb-title")
+                let title = try linkElement.text()
+                let urlString = try linkElement.attr("href")
+                let url = try URL(string: urlString).tryUnwrap(.urlError)
+                let artwork = try element.select(".blb-image>img").attr("src")
+                let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
+                return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
+            }
+            
+            // Construct a basic featured anime container
+            return BasicFeaturedContainer(featured: popularAnimeContainer, latest: latestAnime)
+        }
+    }
 }
