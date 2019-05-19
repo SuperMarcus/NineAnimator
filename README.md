@@ -228,6 +228,12 @@ Feel free to open an issue to request additional hosts.
 NineAnimator supports the following anime websites but with different sets
 of features:
 
+- [Anime Ultima](//animeultima.eu)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
 - [Wonderful Subs](//wonderfulsubs.com)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
@@ -240,18 +246,18 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
+- [Anime Pahe](//animepahe.com)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
 - [Anime Twist](//twist.moe)
     - [x] Basic features (featured list, notifications, search, and playback; no anime artworks)
     - [ ] Open arbitrary links
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
-- [Anime Ultima](//animeultima.eu)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
 - ~~[9anime.ru](//9anime.ru)~~ (currently disabled to prevent users from getting IP banned from the website)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
