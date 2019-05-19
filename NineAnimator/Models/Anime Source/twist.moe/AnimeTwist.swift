@@ -18,6 +18,8 @@
 //
 
 import Foundation
+import JavaScriptCore
+import SwiftSoup
 
 #if canImport(UIKit)
 import UIKit
@@ -48,6 +50,71 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
             return NineAnimatorPromise<[AnimeTwistListedAnime]> { $0(list, nil); return nil }
         } else {
             return request(browsePath: "/")
+                .thenPromise {
+                    content -> NineAnimatorPromise<String> in
+                    // Complete the verification
+                    if content.contains("You are being redirected...") {
+                        let bowl = try SwiftSoup.parse(content)
+                        
+                        // Obtain the challenge builder script
+                        var challengeScript = try bowl
+                            .select("script")
+                            .html()
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                        
+                        // Drop the evaluation part and append the dump value script
+                        let droppingEnd = "e(r);"
+                        if challengeScript.hasSuffix(droppingEnd) {
+                            challengeScript = String(challengeScript.dropLast(droppingEnd.count))
+                        }
+                        challengeScript += ";r"
+                        
+                        // Create an evaluation context
+                        let context = try JSContext().tryUnwrap(.unknownError)
+                        let resultIdentifier = "__resultVerificationCookie"
+                        
+                        // Obtain and modify the cookie assembly script
+                        let cookieAssemblyScript = try context.evaluateScript(challengeScript)
+                            .toString()
+                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe decoding script"))
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                            .replacingOccurrences(
+                                of: "document.cookie",
+                                with: resultIdentifier,
+                                options: []
+                            )
+                            .replacingOccurrences(
+                                of: "location.reload();",
+                                with: resultIdentifier,
+                                options: []
+                            )
+                        
+                        // Evaluate the script to get the final challenge response cookie line
+                        let challengeResponseSetCookie = try context.evaluateScript(cookieAssemblyScript)
+                            .toString()
+                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe cookie script"))
+                        
+                        // Evaluate set-cookie
+                        let evaluatedCookies = HTTPCookie.cookies(
+                            withResponseHeaderFields: [ "Set-Cookie": challengeResponseSetCookie ],
+                            for: self.endpointURL
+                        )
+                        
+                        guard !evaluatedCookies.isEmpty else {
+                            throw NineAnimatorError.responseError("Cannot understand the cookies sent by the server")
+                        }
+                        
+                        // Store the cookies
+                        HTTPCookieStorage.shared.setCookies(
+                            evaluatedCookies,
+                            for: self.endpointURL,
+                            mainDocumentURL: self.endpointURL
+                        )
+                        
+                        // Make the request again
+                        return self.request(browsePath: "/")
+                    } else { return .success(content) }
+                }
                 .then {
                     content -> NSDictionary? in
                     guard var serializedAnimeList = self
