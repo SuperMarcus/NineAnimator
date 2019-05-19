@@ -50,7 +50,10 @@ class NASourceAnimePahe: BaseSource, Source, PromiseSource {
         return VideoProviderRegistry.default.provider(for: name)
     }
     
-    func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return .fail()
+    override func canHandle(url: URL) -> Bool {
+        let components = url.pathComponents
+        return super.canHandle(url: url) &&
+            components.count >= 3 &&
+            (components[1] == "play" || components[1] == "anime")
     }
 }

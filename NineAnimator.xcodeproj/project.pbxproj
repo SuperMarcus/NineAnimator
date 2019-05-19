@@ -136,6 +136,7 @@
 		2C684BD02290668500E1BA35 /* AnimePahe+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C684BCF2290668500E1BA35 /* AnimePahe+Search.swift */; };
 		2C684BD2229066AD00E1BA35 /* AnimePahe+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C684BD1229066AD00E1BA35 /* AnimePahe+Anime.swift */; };
 		2C684BD4229066BB00E1BA35 /* AnimePahe+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C684BD3229066BB00E1BA35 /* AnimePahe+Episode.swift */; };
+		2C684BD62291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C684BD52291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift */; };
 		2C6984E7227D465D00C9EF0E /* Anilist+GQLPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984E6227D465D00C9EF0E /* Anilist+GQLPage.swift */; };
 		2C6984E9227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984E8227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift */; };
 		2C6984EB227D477C00C9EF0E /* Anilist+GQLMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984EA227D477C00C9EF0E /* Anilist+GQLMedia.swift */; };
@@ -441,6 +442,7 @@
 		2C684BCF2290668500E1BA35 /* AnimePahe+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimePahe+Search.swift"; sourceTree = "<group>"; };
 		2C684BD1229066AD00E1BA35 /* AnimePahe+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimePahe+Anime.swift"; sourceTree = "<group>"; };
 		2C684BD3229066BB00E1BA35 /* AnimePahe+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimePahe+Episode.swift"; sourceTree = "<group>"; };
+		2C684BD52291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimePahe+LinkRetrival.swift"; sourceTree = "<group>"; };
 		2C6984E6227D465D00C9EF0E /* Anilist+GQLPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLPage.swift"; sourceTree = "<group>"; };
 		2C6984E8227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLAiringSchedule.swift"; sourceTree = "<group>"; };
 		2C6984EA227D477C00C9EF0E /* Anilist+GQLMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLMedia.swift"; sourceTree = "<group>"; };
@@ -1090,6 +1092,7 @@
 				2C684BCF2290668500E1BA35 /* AnimePahe+Search.swift */,
 				2C684BD1229066AD00E1BA35 /* AnimePahe+Anime.swift */,
 				2C684BD3229066BB00E1BA35 /* AnimePahe+Episode.swift */,
+				2C684BD52291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift */,
 			);
 			path = animepahe;
 			sourceTree = "<group>";
@@ -1730,6 +1733,7 @@
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
+				2C684BD62291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift in Sources */,
 				2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */,
 				2C3D7C032210AE780045D648 /* AnimeTwist+LinkRetriver.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
