@@ -120,6 +120,7 @@ extension NineAnimator {
     private func registerDefaultSources() {
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceWonderfulSubs(with: self))
+        register(source: NASourceAnimePahe(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourceNineAnime(with: self))
