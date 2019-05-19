@@ -36,7 +36,7 @@ class NASourceGogoAnime: BaseSource, Source, PromiseSource {
 #endif
     
     var siteDescription: String {
-        return "GogoAnime is a free anime streaming website. NineAnimator has fairly good supports for this website."
+        return "GogoAnime is a free anime streaming website. NineAnimator has fairly good support for this website."
     }
 
     override var endpoint: String { return "https://gogoanime.io" }
