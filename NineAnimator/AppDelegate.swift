@@ -71,19 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             
             let task = NineAnimator.default.link(with: animeUrl) {
-                link, error in
-                guard let link = link else {
-                    let alert = UIAlertController(
-                        title: "Cannot open link",
-                        message: error != nil ? "\(error!)" : "Unknown Error",
-                        preferredStyle: .alert
-                    )
-                    alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
-                    RootViewController.shared?.presentOnTop(alert)
-                    return Log.error(error)
+                link, error in DispatchQueue.main.async {
+                    guard let link = link else {
+                        let alert = UIAlertController(
+                            title: "Cannot open link",
+                            message: error != nil ? "\(error!)" : "Unknown Error",
+                            preferredStyle: .alert
+                        )
+                        alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                        RootViewController.shared?.presentOnTop(alert)
+                        return Log.error(error)
+                    }
+                    
+                    // Open the link when ready
+                    RootViewController.open(whenReady: link)
                 }
-                
-                RootViewController.open(whenReady: link)
             }
             taskPool = [task]
             
