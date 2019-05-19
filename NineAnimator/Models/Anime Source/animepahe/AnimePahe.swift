@@ -47,7 +47,7 @@ class NASourceAnimePahe: BaseSource, Source, PromiseSource {
     #endif
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return nil
+        return VideoProviderRegistry.default.provider(for: name)
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {

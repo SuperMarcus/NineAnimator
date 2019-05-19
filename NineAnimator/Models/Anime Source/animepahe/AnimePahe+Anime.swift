@@ -100,7 +100,7 @@ extension NASourceAnimePahe {
             // the Episode object.
             let episodeIdentifiers = (0..<release.total).map {
                 episodeNumber -> (episodeNumber: Int, page: Int) in
-                (episodeNumber + 1, (episodeNumber % release.per_page) + 1)
+                (episodeNumber + 1, (episodeNumber / release.per_page) + 1)
             }
             
             // The three known providers
