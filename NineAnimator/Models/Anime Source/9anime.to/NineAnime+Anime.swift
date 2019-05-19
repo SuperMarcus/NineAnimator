@@ -26,19 +26,19 @@ extension NASourceNineAnime {
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        handler(nil, NineAnimatorError.contentUnavailableError("9anime.to has been temporarily disabled."))
-        return nil
-//        let taskTracker = NineAnimatorMultistepAsyncTask()
-//        taskTracker.add(request(browse: link.link, headers: [:]) {
-//            [weak taskTracker] response, error in
-//            // Return without trigger an error
-//            guard let taskTracker = taskTracker else { return }
-//            guard let response = response else {
-//                return handler(nil, error)
-//            }
-//            taskTracker.add(self.parseAnime(from: response, with: link, handler))
-//        })
-//        return taskTracker
+//        handler(nil, NineAnimatorError.contentUnavailableError("9anime.to has been temporarily disabled."))
+//        return nil
+        let taskTracker = NineAnimatorMultistepAsyncTask()
+        taskTracker.add(request(browse: link.link, headers: [:]) {
+            [weak taskTracker] response, error in
+            // Return without trigger an error
+            guard let taskTracker = taskTracker else { return }
+            guard let response = response else {
+                return handler(nil, error)
+            }
+            taskTracker.add(self.parseAnime(from: response, with: link, handler))
+        })
+        return taskTracker
     }
     
     func parseAnime(from page: String, with link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {

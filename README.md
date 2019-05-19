@@ -258,7 +258,7 @@ of features:
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
-- ~~[9anime.ru](//9anime.ru)~~ (currently disabled to prevent users from getting IP banned from the website)
+- [9anime.ru](//9anime.ru) (be careful when using this website -- 9anime has been known to ban users for using third party applications)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
