@@ -29,7 +29,6 @@ class OpenLoadParser: VideoProviderParser {
     static let longStringRegex = try! NSRegularExpression(pattern: "<p style=\"\" id=[^>]*>([^<]*)<\\/p>", options: .caseInsensitive)
     static let key1Regex = try! NSRegularExpression(pattern: "_0x45ae41\\[_0x5949\\('0xf'\\)\\]\\(_0x30725e,(.+)\\),_1x4bfb36", options: .caseInsensitive)
     static let key2Regex = try! NSRegularExpression(pattern: "_1x4bfb36=(parseInt\\(.+,\\d+\\)(-\\d+));", options: .caseInsensitive)
-    static let hostUrl = try! NSRegularExpression(pattern: "(.+)\\/embed\\/.+\\/", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         return session.request(episode.target).responseString {
@@ -56,11 +55,6 @@ class OpenLoadParser: VideoProviderParser {
                 "Couldn't find Key 2"
             )) }
             
-            let urlMatches = OpenLoadParser.hostUrl.matches(in: episode.target.absoluteString, options: [], range: episode.target.absoluteString.matchingRange)
-            guard let urlMatch = urlMatches.first else { return handler(nil, NineAnimatorError.responseError(
-                "Couldn't find url"
-            )) }
-            
             let context = JSContext()!
             
             let encryptedString = text[longStringMatch.range(at: 1)]
@@ -69,7 +63,7 @@ class OpenLoadParser: VideoProviderParser {
             
             let streamUrl = self.openload(longstring: encryptedString, key1: (Key1?.toInt32())!, key2: (Key2?.toInt32())!)
             
-            guard let sourceURL = URL(string: "\(episode.target.absoluteString[urlMatch.range(at: 1)])/stream/\(streamUrl)") else {
+            guard let sourceURL = URL(string: "/stream/\(streamUrl)", relativeTo: episode.target) else {
                 return handler(nil, NineAnimatorError.responseError(
                     "source url not recongized"
                 ))
