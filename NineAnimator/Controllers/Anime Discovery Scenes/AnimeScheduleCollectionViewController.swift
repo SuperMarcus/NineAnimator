@@ -65,7 +65,18 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, Content
     func theme(didUpdate theme: Theme) {
         // This is just to make the navigation bar a bit more opaque and harder to
         // distinquish the differences between section headers and the bar
-        navigationController?.navigationBar.backgroundColor = theme.background
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(nil, for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        // Animate navigation bar style and color
+        UIView.animate(withDuration: 0.2) {
+            [weak navigationController] in
+            navigationController?.navigationBar.barTintColor = theme.translucentBackground
+            navigationController?.navigationBar.backgroundColor = theme.background
+            navigationController?.navigationBar.tintColor = theme.tint
+            navigationController?.navigationBar.layoutIfNeeded()
+        }
     }
     
     func pageIncoming(_ page: Int, from provider: ContentProvider) {
