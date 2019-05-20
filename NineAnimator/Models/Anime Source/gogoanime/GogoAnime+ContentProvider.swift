@@ -83,22 +83,10 @@ extension NASourceGogoAnime {
                         // Save total pages
                         self.totalPages = try bowl
                             .select("ul.pagination-list a")
-                            .reduce(0) {
-                                (current: Int, element: SwiftSoup.Element) in
-                                guard let totalPage = Int(try element.attr("data-page")) else {
-                                    return current
-                                }
-                                return max(current, totalPage)
-                            }
+                            .compactMap { Int(try $0.attr("data-page")) }
+                            .max()
                         
-                        if self.totalPages == 0 {
-                            Log.info("No results found")
-                            throw NineAnimatorError.searchError("No results found for \"\(self.title)\"")
-                        }
-                        
-                        Log.info("%@ pages in total", self.totalPages!)
-                        
-                        return try bowl.select("ul.items>li").compactMap {
+                        let resultingLinks = try bowl.select("ul.items>li").compactMap {
                             item -> AnimeLink? in
                             // Fetch image poster url
                             guard let artworkUrl = URL(string: try item.select(".img img").attr("src")) else {
@@ -120,6 +108,15 @@ extension NASourceGogoAnime {
                                 source: self._parent
                             )
                         }
+                        
+                        // If no results or all of the results are on a single page
+                        if self.totalPages == nil {
+                            if resultingLinks.isEmpty {
+                                throw NineAnimatorError.searchError("No results found")
+                            } else { self.totalPages = 1 }
+                        }
+                        
+                        return resultingLinks
                     } .error {
                         [weak self] in
                         guard let self = self else { return }
