@@ -29,7 +29,7 @@ class NineAnimator: SessionDelegate {
     
     /// A dummy artwork url
     class var placeholderArtworkUrl: URL {
-        return URL(string: "https://raw.githubusercontent.com/SuperMarcus/NineAnimator/master/Misc/Media/nineanimator_banner.jpg")!
+        return URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
     }
     
     let client = URLSession(configuration: .default)

@@ -46,6 +46,12 @@ extension NASourceAnimeTwist {
                 let sourceList = try JSONSerialization.jsonObject(with: sourceListData, options: []) as? [NSDictionary] else {
                 throw NineAnimatorError.providerError("Unable to fetch sources list")
             }
+            let reconstructedLink = AnimeLink(
+                title: link.title,
+                link: link.link,
+                image: NineAnimator.placeholderArtworkUrl,
+                source: self
+            )
             let episodesList = sourceList.compactMap {
                 episode -> (EpisodeLink, String)? in
                 guard let identifier = episode["id"] as? Int,
@@ -55,12 +61,12 @@ extension NASourceAnimeTwist {
                     identifier: "\(identifier)",
                     name: "\(episodeNumber)",
                     server: "twist.moe",
-                    parent: link
+                    parent: reconstructedLink
                 ), encryptedSource)
             }
             // Construct anime object
             return Anime(
-                link,
+                reconstructedLink,
                 alias: info.alternativeTitle,
                 additionalAttributes: [
                     "twist.source": Dictionary(uniqueKeysWithValues: episodesList.map {
