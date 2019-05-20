@@ -283,7 +283,7 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-I0-KQl">
                                                 <rect key="frame" x="8.0000000000000036" y="26.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Server Large HD" translatesAutoresizingMaskIntoConstraints="NO" id="msk-98-ctr">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Clock HD" translatesAutoresizingMaskIntoConstraints="NO" id="msk-98-ctr">
                                                         <rect key="frame" x="12.333333333333336" y="12.666666666666686" width="37.333333333333336" height="37.333333333333336"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -383,7 +383,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Deprecated Sources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="New Sources" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
                                                 <rect key="frame" x="94.333333333333329" y="28" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
@@ -402,7 +402,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="9anime has been temporily disabled to account for the IP banning that the site has been conducting." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator now supports animepahe.com as an anime source. 9anime has been re-enabled." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
                                                 <rect key="frame" x="94.333333333333329" y="54" width="208.66666666666669" height="43"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -740,7 +740,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Using NineAnimator" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9M-KR-UlF">
-                                <rect key="frame" x="32" y="334.33333333333331" width="311" height="71.666666666666686"/>
+                                <rect key="frame" x="32" y="302.33333333333331" width="311" height="71.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -774,9 +774,9 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                     <action selector="onFinishButtonTapped:" destination="Rpq-aZ-KUE" eventType="touchUpInside" id="VAQ-uu-uyT"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="After setup, you can login to your Anilist, Kitsu, or MyAnimeList accounts in the preferences menu." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDo-yQ-irq">
-                                <rect key="frame" x="32" y="414" width="311" height="50.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="8" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDo-yQ-irq">
+                                <rect key="frame" x="32" y="382" width="311" height="50.333333333333314"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -784,6 +784,17 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2o-HH-QfF">
+                                <rect key="frame" x="140.66666666666666" y="440" width="94" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Open Discord"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onOpenDiscordButtonTapped:" destination="Rpq-aZ-KUE" eventType="touchUpInside" id="teK-ih-kA8"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -793,9 +804,11 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                             <constraint firstItem="MDo-yQ-irq" firstAttribute="trailing" secondItem="5eV-r3-Bap" secondAttribute="trailing" id="GBL-ou-62O"/>
                             <constraint firstItem="da4-cs-2HZ" firstAttribute="trailing" secondItem="x9M-KR-UlF" secondAttribute="trailing" constant="32" id="PTW-Y3-jcx"/>
                             <constraint firstItem="x9M-KR-UlF" firstAttribute="leading" secondItem="da4-cs-2HZ" secondAttribute="leading" constant="32" id="UHo-bq-X50"/>
-                            <constraint firstItem="x9M-KR-UlF" firstAttribute="bottom" secondItem="Lwc-Ft-87a" secondAttribute="centerY" id="W6f-sv-54f"/>
+                            <constraint firstItem="x9M-KR-UlF" firstAttribute="bottom" secondItem="Lwc-Ft-87a" secondAttribute="centerY" constant="-32" id="W6f-sv-54f"/>
                             <constraint firstItem="da4-cs-2HZ" firstAttribute="trailing" secondItem="5eV-r3-Bap" secondAttribute="trailing" priority="750" constant="32" id="XSD-YQ-YTA"/>
+                            <constraint firstItem="t2o-HH-QfF" firstAttribute="centerX" secondItem="Lwc-Ft-87a" secondAttribute="centerX" id="fAB-HL-muM"/>
                             <constraint firstItem="MDo-yQ-irq" firstAttribute="top" secondItem="x9M-KR-UlF" secondAttribute="bottom" constant="8" id="ftd-zh-Wcg"/>
+                            <constraint firstItem="t2o-HH-QfF" firstAttribute="top" secondItem="MDo-yQ-irq" secondAttribute="bottom" constant="7.6666666666666856" id="j6h-s5-X6q"/>
                             <constraint firstItem="MDo-yQ-irq" firstAttribute="leading" secondItem="5eV-r3-Bap" secondAttribute="leading" id="nMr-16-tun"/>
                             <constraint firstItem="da4-cs-2HZ" firstAttribute="bottom" secondItem="5eV-r3-Bap" secondAttribute="bottom" constant="32" id="vSP-zp-7dk"/>
                         </constraints>
@@ -808,6 +821,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                         <outlet property="finishButton" destination="5eV-r3-Bap" id="bHx-am-JLs"/>
                         <outlet property="finishSubtitleLabel" destination="MDo-yQ-irq" id="TQ0-NT-apx"/>
                         <outlet property="finishTitleLabel" destination="x9M-KR-UlF" id="bQ1-nY-Mlg"/>
+                        <outlet property="openDiscordButton" destination="t2o-HH-QfF" id="94g-DU-gHJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vti-i1-Qs2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -816,6 +830,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="Clock HD" width="1200" height="1200"/>
         <image name="High Resolution App Icon" width="2048" height="2048"/>
         <image name="Library Icon HD" width="2000" height="2000"/>
         <image name="Server Large HD" width="1200" height="1200"/>

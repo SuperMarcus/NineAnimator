@@ -32,6 +32,11 @@ class NineAnimator: SessionDelegate {
         return URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
     }
     
+    /// Join NineAnimator community on Discord
+    class var discordServerInvitationUrl: URL {
+        return URL(string: "https://discord.gg/dzTVzeW")!
+    }
+    
     let client = URLSession(configuration: .default)
     
     private let mainAdditionalHeaders: HTTPHeaders = {

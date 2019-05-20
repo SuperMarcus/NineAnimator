@@ -35,6 +35,7 @@ class SetupFinishingViewController: UIViewController {
     @IBOutlet private weak var finishTitleLabel: UILabel!
     @IBOutlet private weak var finishSubtitleLabel: UILabel!
     @IBOutlet private weak var finishButton: UIButton!
+    @IBOutlet private weak var openDiscordButton: UIButton!
     
     private var didShowAnimations = false
     
@@ -49,6 +50,7 @@ class SetupFinishingViewController: UIViewController {
             finishTitleLabel.alpha = 0
             finishSubtitleLabel.alpha = 0
             finishButton.alpha = 0
+            openDiscordButton.alpha = 0
         }
     }
     
@@ -60,6 +62,7 @@ class SetupFinishingViewController: UIViewController {
             
             finishTitleLabel.animate(animations: [ AnimationType.from(direction: .top, offset: 16) ], duration: 0.5)
             finishSubtitleLabel.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
+            openDiscordButton.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
             finishButton.animate(animations: [], delay: 0.4)
         }
     }
@@ -67,5 +70,9 @@ class SetupFinishingViewController: UIViewController {
     @IBAction private func onFinishButtonTapped(_ sender: Any) {
         NineAnimator.default.user.markDidSetupLatestVersion()
         dismiss(animated: true)
+    }
+    
+    @IBAction private func onOpenDiscordButtonTapped(_ sender: Any) {
+        UIApplication.shared.open(NineAnimator.discordServerInvitationUrl, options: [:], completionHandler: nil)
     }
 }
