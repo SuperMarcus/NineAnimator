@@ -156,6 +156,7 @@
 		2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */; };
 		2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */; };
 		2C7A1D5A2251467100DD83A5 /* MyAnimeList+AnimeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */; };
+		2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C85367E222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */; };
 		2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */; };
@@ -462,6 +463,7 @@
 		2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Provider.swift"; sourceTree = "<group>"; };
 		2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+AnimeInformation.swift"; sourceTree = "<group>"; };
+		2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackerDecoder.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsSceneCollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyFastParser.swift; sourceTree = "<group>"; };
@@ -927,7 +929,7 @@
 				2C98D670225C09C6001FF874 /* Authentication Scene */,
 				2C1C7191221B11B400760A69 /* Anime Information Scene */,
 				2C1C71692218417700760A69 /* Content List Scene */,
-				2CB004232200AEA000351B7E /* Offline Access */,
+				2CB004232200AEA000351B7E /* Asset Manager */,
 				2C9383DB21FDFBC9008C0D01 /* Recents Scene */,
 				2C9383DA21FDFBB2008C0D01 /* Search Scene */,
 				2C9383D921FDFBA6008C0D01 /* Featured Scene */,
@@ -1008,6 +1010,7 @@
 				2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */,
 				2C0E7554226230B200DF3AC4 /* SectionProtocol.swift */,
 				2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */,
+				2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1266,7 +1269,7 @@
 			path = MyAnimeList;
 			sourceTree = "<group>";
 		};
-		2CB004232200AEA000351B7E /* Offline Access */ = {
+		2CB004232200AEA000351B7E /* Asset Manager */ = {
 			isa = PBXGroup;
 			children = (
 				2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */,
@@ -1274,7 +1277,7 @@
 				2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */,
 				2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */,
 			);
-			path = "Offline Access";
+			path = "Asset Manager";
 			sourceTree = "<group>";
 		};
 		2CCC745821C05F640007502A /* 9anime.to */ = {
@@ -1850,6 +1853,7 @@
 				2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */,
 				2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
+				2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */,
 				2C8536922234041500A5CFB9 /* WonderfulSubs+LinkConstruction.swift in Sources */,
 				2C2C54F122159E4700BAA76E /* String+Proximity.swift in Sources */,
 				2C6677A021BC4664000E5ACC /* ListingEntryTableViewCell.swift in Sources */,

@@ -22,59 +22,43 @@ import AVKit
 import Foundation
 
 class Mp4UploadParser: VideoProviderParser {
-    static let playerOptionRegex = try! NSRegularExpression(pattern: "'([^']+)'\\.split", options: .caseInsensitive)
-    static let portKeyRegex = try! NSRegularExpression(pattern: "\\|video\\|(.*?)\\|(.*?)\\|", options: .caseInsensitive)
-    static let prefixRegex = try! NSRegularExpression(pattern: "\\|false\\|(.+)\\|devicePixelRatio\\|", options: .caseInsensitive)
+    static let playerSourceRegex = try! NSRegularExpression(
+        pattern: "player\\.src\\(\"([^\"]+)",
+        options: []
+    )
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         return session.request(episode.target).responseString {
             response in
-            guard let text = response.value else {
-                Log.error(response.error)
-                return handler(nil, NineAnimatorError.responseError(
-                    "response error: \(response.error?.localizedDescription ?? "Unknown")"
-                ))
-            }
-            
-            let matches = Mp4UploadParser.playerOptionRegex.matches(in: text, options: [], range: text.matchingRange)
-            guard let match = matches.first else { return handler(nil, NineAnimatorError.responseError(
-                "no matches found for player"
-            )) }
-            
-            let playerOptionsString = text[match.range(at: 1)]
-            //let playerOptions = playerOptionsString.split(separator: "|")
-            
-            let portKeyMatches = Mp4UploadParser.portKeyRegex.matches(in: playerOptionsString, options: [], range: playerOptionsString.matchingRange)
-            guard let portkey = portKeyMatches.first else { return handler(nil, NineAnimatorError.responseError(
-                "no matches found for port & key id"
-            )) }
-            
-            let prefixMatches = Mp4UploadParser.prefixRegex.matches(in: playerOptionsString, options: [], range: playerOptionsString.matchingRange)
-            guard let prefixMatch = prefixMatches.first else { return handler(nil, NineAnimatorError.responseError(
-                "no matches found for prefix"
-            )) }
-            
-            let serverPrefix = playerOptionsString[prefixMatch.range(at: 1)]
-            let serverPort = playerOptionsString[portkey.range(at: 2)]
-            let mediaIdentifier = playerOptionsString[portkey.range(at: 1)]
-            
-            guard let sourceURL = URL(string: "https://\(serverPrefix).mp4upload.com:\(serverPort)/d/\(mediaIdentifier)/video.mp4") else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "source url not recongized"
-                ))
-            }
-            
-            Log.info("(Mp4Upload Parser) found asset at %@", sourceURL.absoluteString)
-            
-            handler(BasicPlaybackMedia(
-                url: sourceURL,
-                parent: episode,
-                contentType: "video/mp4",
-                headers: [
-                    "User-Agent": self.defaultUserAgent,
-                    "Origin": episode.target.absoluteString
-                ],
-                isAggregated: false), nil)
+            do {
+                let responseContent: String
+                switch response.result {
+                case let .success(c): responseContent = c
+                case let .failure(error): throw error
+                }
+                
+                // Feed the entire webpage to the packer decoder
+                let decodedPackerScript = try PackerDecoder().decode(responseContent)
+                
+                // Find the source URL
+                let sourceUrl = try (Mp4UploadParser
+                    .playerSourceRegex
+                    .firstMatch(in: decodedPackerScript)?
+                    .firstMatchingGroup).tryUnwrap(.providerError("Unable to find the streaming resource"))
+                let sourceURL = try URL(string: sourceUrl).tryUnwrap(.urlError)
+                
+                Log.info("(Mp4Upload Parser) found asset at %@", sourceURL.absoluteString)
+                
+                handler(BasicPlaybackMedia(
+                    url: sourceURL,
+                    parent: episode,
+                    contentType: "video/mp4",
+                    headers: [
+                        "User-Agent": self.defaultUserAgent,
+                        "Origin": episode.target.absoluteString
+                    ],
+                    isAggregated: false), nil)
+            } catch { handler(nil, error) }
         }
     }
 }
