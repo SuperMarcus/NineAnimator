@@ -43,6 +43,7 @@ class VideoProviderRegistry {
         defaultProvider.register(DummyParser(), forServer: "Dummy")
         defaultProvider.register(PrettyFastParser(), forServer: "F5 - HQ")
         defaultProvider.register(OpenLoadParser(), forServer: "OpenLoad")
+        defaultProvider.register(KiwikParser(), forServer: "Kiwik")
         
         return defaultProvider
     }()
