@@ -1,0 +1,59 @@
+//
+//  This file is part of the NineAnimator project.
+//
+//  Copyright © 2018-2019 Marcus Zhou. All rights reserved.
+//
+//  NineAnimator is free software: you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License as published by
+//  the Free Software Foundation, either version 3 of the License, or
+//  (at your option) any later version.
+//
+//  NineAnimator is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
+//
+
+import Alamofire
+import AVKit
+import Foundation
+import JavaScriptCore
+
+class VidStreamingParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "VidStreaming", "VidCDN" ]
+    }
+    
+    private static let videoSourceRegex = try! NSRegularExpression(
+        pattern: "sources:\\[\\{file:\\s*'([^']+)",
+        options: []
+    )
+    
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        return session.request(episode.target).responseString {
+            response in
+            do {
+                let responseContent = try response.value.tryUnwrap(.providerError("Resource is unreachable"))
+                let resourceMatch = try VidStreamingParser
+                    .videoSourceRegex
+                    .firstMatch(in: responseContent)
+                    .tryUnwrap(.providerError("The server sent an invalid or corrupted response"))
+                let resourceUrlString = try resourceMatch.firstMatchingGroup.tryUnwrap(.unknownError)
+                let resourceUrl = try URL(string: resourceUrlString).tryUnwrap(.urlError)
+                
+                Log.info("(VidStreaming Parser) found asset at %@", resourceUrl.absoluteString)
+                
+                handler(BasicPlaybackMedia(
+                    url: resourceUrl,
+                    parent: episode,
+                    contentType: "application/vnd.apple.mpegurl",
+                    headers: [ "Referer": "https://vidstreaming.io/" ],
+                    isAggregated: true
+                ), nil)
+            } catch { handler(nil, error) }
+        }
+    }
+}

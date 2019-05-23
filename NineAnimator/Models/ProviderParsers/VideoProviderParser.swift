@@ -52,6 +52,7 @@ class VideoProviderRegistry {
         defaultProvider.register(PrettyFastParser(), forServer: "F5 - HQ")
         defaultProvider.register(OpenLoadParser(), forServer: "OpenLoad")
         defaultProvider.register(KiwikParser(), forServer: "Kiwik")
+        defaultProvider.register(VidStreamingParser(), forServer: "VidStreaming")
         
         return defaultProvider
     }()

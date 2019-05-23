@@ -60,9 +60,10 @@ extension NASourceGogoAnime {
                     // Remove the "Select this server thing"
                     try serverLinkContainer.select("span").remove()
                     let serverName = try serverLinkContainer.text().trimmingCharacters(in: .whitespaces)
-                    guard let streamUrl = URL(string: try serverLinkContainer.attr("data-video")) else {
-                        return nil
-                    }
+                    guard let streamUrl = URL(
+                        string: try serverLinkContainer.attr("data-video"),
+                        relativeTo: self.endpointURL.appendingPathComponent(episodePath)
+                    ) else { return nil }
                     return (serverName, streamUrl)
                 }
                 
