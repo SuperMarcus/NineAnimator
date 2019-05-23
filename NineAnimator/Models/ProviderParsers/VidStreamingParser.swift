@@ -43,15 +43,16 @@ class VidStreamingParser: VideoProviderParser {
                     .tryUnwrap(.providerError("The server sent an invalid or corrupted response"))
                 let resourceUrlString = try resourceMatch.firstMatchingGroup.tryUnwrap(.unknownError)
                 let resourceUrl = try URL(string: resourceUrlString).tryUnwrap(.urlError)
+                let isHLSAsset = !resourceUrl.absoluteString.contains("mime=video/mp4")
                 
                 Log.info("(VidStreaming Parser) found asset at %@", resourceUrl.absoluteString)
                 
                 handler(BasicPlaybackMedia(
                     url: resourceUrl,
                     parent: episode,
-                    contentType: "application/vnd.apple.mpegurl",
+                    contentType: isHLSAsset ? "application/vnd.apple.mpegurl" : "video/mp4",
                     headers: [ "Referer": "https://vidstreaming.io/" ],
-                    isAggregated: true
+                    isAggregated: isHLSAsset
                 ), nil)
             } catch { handler(nil, error) }
         }
