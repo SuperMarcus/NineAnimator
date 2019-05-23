@@ -26,6 +26,10 @@ import JavaScriptCore
 ///
 /// Contributed by [Awsomedude](https://github.com/Awsomedude)
 class OpenLoadParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "OpenLoad", "Open Load", "Oload" ]
+    }
+    
     static let longStringRegex = try! NSRegularExpression(pattern: "<p style=\"\" id=[^>]*>([^<]*)<\\/p>", options: .caseInsensitive)
     static let key1Regex = try! NSRegularExpression(pattern: "_0x45ae41\\[_0x5949\\('0xf'\\)\\]\\(_0x30725e,(.+)\\),_1x4bfb36", options: .caseInsensitive)
     static let key2Regex = try! NSRegularExpression(pattern: "_1x4bfb36=(parseInt\\(.+,\\d+\\)(-\\d+));", options: .caseInsensitive)

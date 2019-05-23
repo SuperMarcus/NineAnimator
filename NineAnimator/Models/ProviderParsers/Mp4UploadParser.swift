@@ -22,6 +22,10 @@ import AVKit
 import Foundation
 
 class Mp4UploadParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "Mp4Upload", "Mp4 Upload" ]
+    }
+    
     static let playerSourceRegex = try! NSRegularExpression(
         pattern: "player\\.src\\(\"([^\"]+)",
         options: []

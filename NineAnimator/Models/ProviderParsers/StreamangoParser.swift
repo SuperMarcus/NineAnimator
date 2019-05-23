@@ -22,6 +22,10 @@ import AVKit
 import Foundation
 
 class StreamangoParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "Streamango" ]
+    }
+    
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {

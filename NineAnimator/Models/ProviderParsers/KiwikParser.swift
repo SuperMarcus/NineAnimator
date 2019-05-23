@@ -22,6 +22,10 @@ import AVKit
 import Foundation
 
 class KiwikParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "Kiwik" ]
+    }
+    
     static let playerSourceRegex = try! NSRegularExpression(
         pattern: "source=\\\\'([^\\\\]+)",
         options: []

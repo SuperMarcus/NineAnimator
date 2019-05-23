@@ -21,7 +21,13 @@ import Alamofire
 import AVKit
 import Foundation
 
+/// Representing a streaming resource parser that accepts an URL to
+/// the streaming source's website and returns the resource URL.
 protocol VideoProviderParser {
+    /// Alternative names of this streaming source
+    var aliases: [String] { get }
+    
+    /// Obtain the playback media for the episode target
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
 }
 
@@ -31,7 +37,9 @@ extension VideoProviderParser {
     }
 }
 
+/// A centralized registry for all streming source parsers
 class VideoProviderRegistry {
+    /// The default streaming source parser regsitry
     static let `default`: VideoProviderRegistry = {
         let defaultProvider = VideoProviderRegistry()
         
@@ -55,7 +63,12 @@ class VideoProviderRegistry {
     }
     
     func provider(for server: String) -> VideoProviderParser? {
-        return (providers.first { $0.server.lowercased() == server.lowercased() })?.provider
+        return (providers.first {
+            // Compare server name then compare aliases
+            $0.server.lowercased() == server.lowercased() || $0.provider.aliases.contains {
+                $0.lowercased() == server.lowercased()
+            }
+        })?.provider
     }
     
     func provider<Provider: VideoProviderParser>(_ type: Provider.Type) -> Provider? {

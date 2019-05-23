@@ -23,6 +23,8 @@ import Foundation
 extension NASourceAnimeUltima {
     /// A private parser for animeultima's AUEngine server
     class AUEngineParser: VideoProviderParser {
+        var aliases: [String] { return [ "AUEngine" ] }
+        
         private var source: NASourceAnimeUltima
         
         init(_ source: NASourceAnimeUltima) {
@@ -68,6 +70,10 @@ extension NASourceAnimeUltima {
     
     /// A private parser for animeultima's FastStream server
     class FastStreamParser: VideoProviderParser {
+        var aliases: [String] {
+            return [ "FastStream" ]
+        }
+        
         private var source: NASourceAnimeUltima
         
         init(_ source: NASourceAnimeUltima) {
@@ -112,7 +118,7 @@ extension NASourceAnimeUltima {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        var possibleProviderName = server.replacingOccurrences(
+        let possibleProviderName = server.replacingOccurrences(
             of: "^[^:]+:\\s+",
             with: "", // Trim away the "Subbed: " or "Dubbed: " prefixes
             options: [ .regularExpression ]
@@ -122,13 +128,6 @@ extension NASourceAnimeUltima {
         switch server {
         case let server where server.hasSuffix("AUEngine"): return _auEngineParser
         case let server where server.hasSuffix("FastStream"): return _fastStreamParser
-        default: break
-        }
-        
-        // Replaces some common video sources that anime ultima uses with the
-        // name compatible with NineAnimator's provider registry
-        switch possibleProviderName {
-        case "Rapid Video": possibleProviderName = "RapidVideo"
         default: break
         }
         

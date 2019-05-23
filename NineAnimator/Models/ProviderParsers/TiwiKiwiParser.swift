@@ -22,6 +22,10 @@ import AVKit
 import Foundation
 
 class TiwiKiwiParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "TiwiKiwi", "Tiwi.Kiwi", "Tiwi Kiwi" ]
+    }
+    
     static let jwPlayerOptionRegex = try! NSRegularExpression(pattern: "'([^']+)'\\.split", options: .caseInsensitive)
     static let flowPlayerPropertyURLRegex = try! NSRegularExpression(pattern: "src:\\s*\"([^\"]+)\"", options: .caseInsensitive)
     static let flowPlayerBaseURLRegex = try! NSRegularExpression(pattern: "BaseURL>([^<]+)", options: .caseInsensitive)

@@ -22,6 +22,10 @@ import AVKit
 import Foundation
 
 class PrettyFastParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "PrettyFast.io", "F5 - HQ", "F5 Beta" ]
+    }
+    
     static let videoSourceRegex = try! NSRegularExpression(pattern: "file:\\s+'([^\']+)", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {

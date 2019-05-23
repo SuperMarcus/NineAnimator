@@ -23,6 +23,10 @@ import Foundation
 import SwiftSoup
 
 class RapidVideoParser: VideoProviderParser {
+    var aliases: [String] {
+        return [ "RapidVideo", "Rapid Video" ]
+    }
+    
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString
