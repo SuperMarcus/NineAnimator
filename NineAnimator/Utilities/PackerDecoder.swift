@@ -49,8 +49,7 @@ struct PackerDecoder {
         // Interate references in payload to tabs
         let iteratedPayload = traverse(payload) {
             reference in
-            let referencingOffset = ord(reference, withRadix: radix)
-            if safeReferenceRange.contains(referencingOffset) && !tabs[referencingOffset].isEmpty {
+            if let referencingOffset = ord(reference, withRadix: radix, safeRange: safeReferenceRange), !tabs[referencingOffset].isEmpty {
                 return tabs[referencingOffset]
             }
             return reference
@@ -99,9 +98,12 @@ struct PackerDecoder {
     }
     
     /// Convert payload string with the given radix to a number
-    private func ord(_ payload: String, withRadix radix: Int) -> Int {
+    private func ord(_ payload: String, withRadix radix: Int, safeRange: Range<Int>) -> Int? {
         let lookupTable = PackerDecoder.lookupTable
         var result = 0
+        
+        // Check if the safe range contains 0
+        if !safeRange.contains(result) { return nil }
         
         // Iterate through the payload
         for element in payload {
@@ -111,6 +113,11 @@ struct PackerDecoder {
             // Obtain the digit from the lookup table
             if let digit = lookupTable[element] {
                 result += digit
+            }
+            
+            // Check if the value is still within the safe range
+            if !safeRange.contains(result) {
+                return nil
             }
         }
         
