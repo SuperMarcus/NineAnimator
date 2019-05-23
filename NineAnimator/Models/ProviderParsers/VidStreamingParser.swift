@@ -20,7 +20,6 @@
 import Alamofire
 import AVKit
 import Foundation
-import JavaScriptCore
 
 class VidStreamingParser: VideoProviderParser {
     var aliases: [String] {

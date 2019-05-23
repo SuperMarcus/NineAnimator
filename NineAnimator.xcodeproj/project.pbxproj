@@ -159,6 +159,7 @@
 		2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */; };
 		2C7B7AA82296E819002EC74C /* KiwikParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA72296E819002EC74C /* KiwikParser.swift */; };
 		2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */; };
+		2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AAD229736B7002EC74C /* XStreamParser.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C85367E222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */; };
 		2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */; };
@@ -468,6 +469,7 @@
 		2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackerDecoder.swift; sourceTree = "<group>"; };
 		2C7B7AA72296E819002EC74C /* KiwikParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwikParser.swift; sourceTree = "<group>"; };
 		2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamingParser.swift; sourceTree = "<group>"; };
+		2C7B7AAD229736B7002EC74C /* XStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XStreamParser.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsSceneCollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyFastParser.swift; sourceTree = "<group>"; };
@@ -1174,6 +1176,7 @@
 				65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */,
 				2C7B7AA72296E819002EC74C /* KiwikParser.swift */,
 				2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */,
+				2C7B7AAD229736B7002EC74C /* XStreamParser.swift */,
 			);
 			path = ProviderParsers;
 			sourceTree = "<group>";
@@ -1808,6 +1811,7 @@
 				2C1C717B2219046700760A69 /* ListingAnime+InitializeFromEntry.swift in Sources */,
 				2C6984E9227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift in Sources */,
 				2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */,
+				2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */,
 				2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
 				2C211EC4225EADDD00389124 /* SetupThemeViewController.swift in Sources */,
