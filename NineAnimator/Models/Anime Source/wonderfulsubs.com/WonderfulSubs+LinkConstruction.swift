@@ -28,22 +28,32 @@ extension NASourceWonderfulSubs {
         let path = try (parent?.link.path ?? seriesEntry.value(at: "url", type: String.self))
         let link = endpointURL.appendingPathComponent(path)
         
-        // Parse artwork resource list
-        let artworkResourceList: [NSDictionary]
-        if useWidePoster {
-            artworkResourceList = try seriesEntry.value(at: "poster_wide", type: [NSDictionary].self)
-        } else { artworkResourceList = try seriesEntry.value(at: "poster_tall", type: [NSDictionary].self) }
+        // Artwork URL
+        let artworkUrl: URL
         
-        // Select the artwork with the highest resolution
-        guard let artworkResource = artworkResourceList.last else {
-            throw NineAnimatorError.responseError("No artwork found")
+        do {
+            // Parse artwork resource list
+            let artworkResourceList: [NSDictionary]
+            if useWidePoster {
+                artworkResourceList = try seriesEntry.value(at: "poster_wide", type: [NSDictionary].self)
+            } else { artworkResourceList = try seriesEntry.value(at: "poster_tall", type: [NSDictionary].self) }
+            
+            // Select the artwork with the highest resolution
+            guard let artworkResource = artworkResourceList.last else {
+                throw NineAnimatorError.responseError("No artwork found")
+            }
+            
+            // Retrieve the source URL of the artwork
+            artworkUrl = try some(
+                URL(string: artworkResource.value(at: "source", type: String.self)),
+                or: .urlError
+            )
+        } catch {
+            // Reported by [Awsomedude](https://github.com/Awsomedude)
+            // Seems some anime don't have "poster_tall, poster_wide" and sometimes they do but have null
+            Log.info("[NASourceWonderfulSubs] Poster not found for an anime entry. Using placeholder value instead.")
+            artworkUrl = NineAnimator.placeholderArtworkUrl
         }
-        
-        // Retrieve the source URL of the artwork
-        let artworkUrl = try some(
-            URL(string: artworkResource.value(at: "source", type: String.self)),
-            or: .urlError
-        )
         
         // Construct the anime link
         return AnimeLink(title: title, link: link, image: artworkUrl, source: self)
