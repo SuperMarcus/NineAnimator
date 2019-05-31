@@ -56,6 +56,7 @@ extension NASourceWonderfulSubs {
                 } .error {
                     [weak self] error in
                     guard let self = self else { return }
+                    self.results = []
                     self.delegate?.onError(error, from: self)
                     self._queryTask = nil
                 } .finally {

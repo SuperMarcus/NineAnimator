@@ -98,11 +98,14 @@ extension ContentListViewController {
 extension ContentListViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         guard contentSource != nil else { return 0 }
+        guard providerError == nil else { return 1 }
         return contentSource.availablePages + (contentSource.moreAvailable || contentSource.totalPages == 0 ? 1 : 0)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == contentSource.availablePages || contentSource.availablePages == 0 {
+        if providerError != nil ||
+            section == contentSource.availablePages ||
+            contentSource.availablePages == 0 {
             tableView.separatorStyle = .none
             return 1
         }
@@ -154,7 +157,8 @@ extension ContentListViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.tableView.rowHeight = 300
-            self.tableView.reloadSections([0], with: .automatic)
+            self.tableView.reloadData()
+            self.tableView.contentOffset = .zero
         }
     }
     
