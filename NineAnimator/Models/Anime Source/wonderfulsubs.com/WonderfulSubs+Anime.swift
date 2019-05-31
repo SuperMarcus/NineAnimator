@@ -28,7 +28,7 @@ extension NASourceWonderfulSubs {
             response in
             let detailedSeriesEntry = try response.value(at: "json", type: NSDictionary.self)
             let reassembledLink = try self.constructAnimeLink(from: detailedSeriesEntry, withParent: link)
-            let aliases = try detailedSeriesEntry.value(at: "aliases", type: [String].self)
+            let aliases = detailedSeriesEntry.valueIfPresent(at: "aliases", type: [String].self) ?? []
             let description = try detailedSeriesEntry.value(at: "description", type: String.self)
             
             // Construct child anime
