@@ -73,10 +73,15 @@ extension MyAnimeList {
 extension ListingAnimeReference {
     init(_ parent: MyAnimeList, withAnimeNode animeNode: NSDictionary) throws {
         let animeTitle = try some(animeNode["title"] as? String, or: .decodeError)
-        let artworkUrlString = try some(animeNode.value(at: "main_picture.large", type: String.self), or: .decodeError)
-        let artwork = try some(URL(string: artworkUrlString), or: .decodeError)
         let uniqueIdentifier = try some(animeNode["id"] as? Int, or: .decodeError)
         var currentState: ListingAnimeTrackingState?
+        let artwork: URL
+        
+        // Parse the artwork
+        if let artworkUrlString = animeNode.valueIfPresent(at: "main_picture.large", type: String.self),
+            let artworkUrl = URL(string: artworkUrlString) {
+            artwork = artworkUrl
+        } else { artwork = NineAnimator.placeholderArtworkUrl }
         
         // If the current status entry is present in the response object
         if let currentStatusEntry = animeNode["my_list_status"] as? NSDictionary,
