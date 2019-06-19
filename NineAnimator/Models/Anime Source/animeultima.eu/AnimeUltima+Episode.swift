@@ -45,7 +45,7 @@ extension NASourceAnimeUltima {
                 let bowl = try SwiftSoup.parse(responseContent)
                 
                 // Find the mirrors in the mirror-selector element
-                let mirrorsContainer = try bowl.select("select.mirror-selector")
+                let mirrorsContainer = try bowl.select(".is-hidden-touch select.mirror-selector")
                 var mirrorList = [EpisodePageInformation.MirrorIdentifier: String]()
                 var selectedMirrorIdentifier: EpisodePageInformation.MirrorIdentifier?
                 
