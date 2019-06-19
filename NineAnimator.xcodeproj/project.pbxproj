@@ -156,6 +156,10 @@
 		2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */; };
 		2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */; };
 		2C7A1D5A2251467100DD83A5 /* MyAnimeList+AnimeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */; };
+		2C7B519622A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B519422A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld */; };
+		2C7B519A22A41EE8008191B0 /* PersistentEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B519922A41EE8008191B0 /* PersistentEpisode.swift */; };
+		2C7B51A022A4263E008191B0 /* PersistentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B519F22A4263E008191B0 /* PersistentManager.swift */; };
+		2C7B51A422A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B51A222A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift */; };
 		2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */; };
 		2C7B7AA82296E819002EC74C /* KiwikParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA72296E819002EC74C /* KiwikParser.swift */; };
 		2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */; };
@@ -466,6 +470,10 @@
 		2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Provider.swift"; sourceTree = "<group>"; };
 		2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+AnimeInformation.swift"; sourceTree = "<group>"; };
+		2C7B519522A41285008191B0 /* NineAnimatorDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NineAnimatorDataModel.xcdatamodel; sourceTree = "<group>"; };
+		2C7B519922A41EE8008191B0 /* PersistentEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentEpisode.swift; sourceTree = "<group>"; };
+		2C7B519F22A4263E008191B0 /* PersistentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentManager.swift; sourceTree = "<group>"; };
+		2C7B51A222A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PersistentEpisode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackerDecoder.swift; sourceTree = "<group>"; };
 		2C7B7AA72296E819002EC74C /* KiwikParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwikParser.swift; sourceTree = "<group>"; };
 		2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamingParser.swift; sourceTree = "<group>"; };
@@ -953,6 +961,8 @@
 		2C4ABC7621B599E3009B4D47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C7B519822A41EBE008191B0 /* Content Persistent */,
+				2C7B519322A41231008191B0 /* CoreData */,
 				2C8536832231BC5400A5CFB9 /* Anime Source */,
 				2C3BBAAD22183BA900F1C77B /* Anime Listing Service */,
 				2C2C54F32215D38500BAA76E /* User */,
@@ -1004,13 +1014,13 @@
 				2CEB56D621DBE53A0018D804 /* Log.swift */,
 				2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */,
 				2CEA0BE721F66D49007EECC4 /* Continuity.swift */,
-				2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */,
 				2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */,
 				2C433159220B380200A2E64F /* Error.swift */,
 				2C3BBAAB2217635000F1C77B /* Dictionary+KeyPathAccess.swift */,
 				2C6CF24B221B9F1E0009D554 /* SomeOrError.swift */,
 				2C8536842231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift */,
 				2C8536862231D42C00A5CFB9 /* WeakRef.swift */,
+				2CD9B99F21FE2F1900203442 /* UIAlertAction+Properties.swift */,
 				2C85368A2232D8D600A5CFB9 /* Coding.swift */,
 				2C4FDDAB22482AE90059B7D8 /* UrlFormEncoding.swift */,
 				2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */,
@@ -1113,6 +1123,24 @@
 				2C71DEC4226E0610004F3AC3 /* ServerSelectionView.swift */,
 			);
 			path = "Server Selection Scene";
+			sourceTree = "<group>";
+		};
+		2C7B519322A41231008191B0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2C7B519422A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2C7B519822A41EBE008191B0 /* Content Persistent */ = {
+			isa = PBXGroup;
+			children = (
+				2C7B519922A41EE8008191B0 /* PersistentEpisode.swift */,
+				2C7B51A222A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift */,
+				2C7B519F22A4263E008191B0 /* PersistentManager.swift */,
+			);
+			path = "Content Persistent";
 			sourceTree = "<group>";
 		};
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
@@ -1722,6 +1750,7 @@
 				2CE5B8E0225ECAC200A2CF89 /* SetupFinishingViewController.swift in Sources */,
 				2CC2F5D2226F277B00A62A76 /* Optional+Unwrap.swift in Sources */,
 				2C0CFC3F2263DE9B00EC793E /* ThisWeekTableViewCell+Cell.swift in Sources */,
+				2C7B51A022A4263E008191B0 /* PersistentManager.swift in Sources */,
 				2C6677B021BD6DFE000E5ACC /* LastViewedEpisodeTableViewCell.swift in Sources */,
 				2C85368B2232D8D600A5CFB9 /* Coding.swift in Sources */,
 				2CCC746D21C172330007502A /* EpisodeMasterAnime.swift in Sources */,
@@ -1748,6 +1777,7 @@
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2C684BD62291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift in Sources */,
+				2C7B51A422A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift in Sources */,
 				2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */,
 				2C3D7C032210AE780045D648 /* AnimeTwist+LinkRetriver.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
@@ -1888,12 +1918,14 @@
 				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				2CEC21942207F5A100A30F4F /* Promise+Callback.swift in Sources */,
+				2C7B519A22A41EE8008191B0 /* PersistentEpisode.swift in Sources */,
 				2C23AE3C2229B17A00512150 /* MyAnimeList+Mutation.swift in Sources */,
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
 				2C1C71832219975A00760A69 /* Promise+Hashable.swift in Sources */,
 				2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */,
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
+				2C7B519622A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld in Sources */,
 				2C6677B621BD8FA1000E5ACC /* ContentErrorTableViewCell.swift in Sources */,
 				2C9383DD21FE0CE9008C0D01 /* AnimeHeadingView.swift in Sources */,
 				2C1C717F22190FF800760A69 /* Anilist+Tracking.swift in Sources */,
@@ -2336,6 +2368,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2C7B519422A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2C7B519522A41285008191B0 /* NineAnimatorDataModel.xcdatamodel */,
+			);
+			currentVersion = 2C7B519522A41285008191B0 /* NineAnimatorDataModel.xcdatamodel */;
+			path = ContentPersistentDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2C4ABC4821B5881E009B4D47 /* Project object */;
 }

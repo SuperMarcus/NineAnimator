@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="PersistentEpisode" representedClassName="PersistentEpisode" syncable="YES">
+        <attribute name="bookmarkData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="downloadTaskIdentifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="episodeLinkData" attributeType="Binary" syncable="YES"/>
+        <attribute name="isAggregatedAsset" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="resumeData" optional="YES" attributeType="Binary" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="PersistentEpisode" positionX="-63" positionY="-18" width="128" height="118"/>
+    </elements>
+</model>

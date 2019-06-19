@@ -48,9 +48,25 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     // A flag to mark if this promise has been rejected
     private(set) var isRejected = true
     
-    private var chainedPromiseCallback: ((ResultType) -> Void)?
+    // Storing the result
+    private(set) var result: Result<ResultType, Error>?
     
-    private var chainedErrorCallback: ((Error) -> Void)?
+    private var chainedPromiseCallback: ((ResultType) -> Void)? {
+        didSet {
+            // If the promise has been resolved
+            if let result = result, case let .success(value) = result {
+                chainedPromiseCallback?(value)
+            }
+        }
+    }
+    
+    private var chainedErrorCallback: ((Error) -> Void)? {
+        didSet {
+            if let result = result, case let .failure(error) = result {
+                chainedErrorCallback?(error)
+            }
+        }
+    }
     
     // Keep a reference to the previous promise
     private var chainedReference: (NineAnimatorAsyncTask & NineAnimatorPromiseProtocol)?
@@ -94,11 +110,14 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         defer { releaseAll() }
         
-        guard !isResolved else {
+        // Check if the promise has been resolved
+        guard !isResolved || result != nil else {
             Log.error("Attempting to resolve a promise twice.")
             return
         }
         
+        // Store the result
+        result = .success(value)
         defer { isResolved = true }
         
         if let resolver = chainedPromiseCallback {
@@ -118,11 +137,14 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         // Release references after reject
         defer { releaseAll() }
         
-        guard !isResolved else {
+        // Check if the promise has been resolved
+        guard !isResolved || result != nil else {
             Log.error("Attempting to resolve a promise twice.")
             return
         }
         
+        // Store the error
+        result = .failure(error)
         defer {
             isResolved = true
             isRejected = true
@@ -132,7 +154,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
             // Runs the handler in another tick
             queue.async(flags: queueFlags) { handler(error) }
         } else {
-            Log.error("No rejection handler declared for this promise")
+            Log.error("[NineAnimatorPromise] Promise is resolved with an error before an error handler is set.")
             Log.error(error)
         }
     }
@@ -207,7 +229,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     /// Promise is not executed until finally is called
     func finally(_ finalFunction: @escaping (ResultType) -> Void) -> NineAnimatorAsyncTask {
         if chainedErrorCallback == nil {
-            Log.error("Promise concluded without error handler")
+            Log.error("[NineAnimatorPromise] Concluding a promise without an error handler. This is dangerous.")
         }
         
         // Save callback and conclude the promise
@@ -229,15 +251,19 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     func cancel() {
         // Atomicy
         guard semaphore.wait(timeout: .now() + 3) == .success else {
-            return Log.error("Cannot cancel a task.")
+            return Log.error("[NineAnimatorPromise] Unable to cancel a task because it's being occupied.")
         }
         defer { semaphore.signal() }
         
+        // Cancel the reference task and release the promise
         referenceTask?.cancel()
         releaseAll()
     }
     
     /// Release references to all holding objects
+    ///
+    /// - Important: Calling this method won't release the result of the promise.
+    ///              Make sure the result doesn't reference the promise.
     private func releaseAll() {
         referenceTask = nil
         chainedPromiseCallback = nil
@@ -258,7 +284,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
             queue.async(flags: queueFlags) {
                 [weak self] in
                 guard let self = self else {
-                    Log.error("Reference to promise lost before the initial task can run")
+                    Log.error("[NineAnimatorPromise] Reference to promise lost before the initial task can run")
                     return
                 }
                 // Save the reference created by the task
@@ -288,7 +314,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     
     deinit {
         if !isResolved {
-            Log.error("Losing reference to unresolved promise")
+            Log.error("[NineAnimatorPromise] Losing reference to an unresolved promise. This cancels any executing tasks.")
         }
         cancel()
     }
