@@ -27,6 +27,7 @@ struct AnimeTwistListedAnime {
     let createdDate: Date
     let updatedDate: Date
     let isOngoing: Bool
+    let kitsuIdentifier: Int?
 }
 
 extension NASourceAnimeTwist {
@@ -49,7 +50,7 @@ extension NASourceAnimeTwist {
             let reconstructedLink = AnimeLink(
                 title: link.title,
                 link: link.link,
-                image: NineAnimator.placeholderArtworkUrl,
+                image: info.artworkUrl,
                 source: self
             )
             let episodesList = sourceList.compactMap {
@@ -84,8 +85,19 @@ extension NASourceAnimeTwist {
         return AnimeLink(
             title: animeInfo.title,
             link: endpointURL.appendingPathComponent("/a/\(animeInfo.slug)"),
-            image: NineAnimator.placeholderArtworkUrl,
+            image: animeInfo.artworkUrl,
             source: self
         )
+    }
+}
+
+extension AnimeTwistListedAnime {
+    var artworkUrl: URL {
+        let defaultArtwork = NineAnimator.placeholderArtworkUrl
+        if let kitsuId = kitsuIdentifier {
+            return URL(string: "https://media.kitsu.io/anime/poster_images/\(kitsuId)/large.jpg") ??
+                defaultArtwork
+        }
+        return defaultArtwork
     }
 }

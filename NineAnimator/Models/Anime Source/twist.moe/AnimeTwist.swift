@@ -49,97 +49,99 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
         if let list = _listedAnime {
             return NineAnimatorPromise<[AnimeTwistListedAnime]> { $0(list, nil); return nil }
         } else {
-            return request(browsePath: "/")
-                .thenPromise {
-                    content -> NineAnimatorPromise<String> in
-                    // Complete the verification
-                    if content.contains("You are being redirected...") {
-                        let bowl = try SwiftSoup.parse(content)
-                        
-                        // Obtain the challenge builder script
-                        var challengeScript = try bowl
-                            .select("script")
-                            .html()
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                        
-                        // Drop the evaluation part and append the dump value script
-                        let droppingEnd = "e(r);"
-                        if challengeScript.hasSuffix(droppingEnd) {
-                            challengeScript = String(challengeScript.dropLast(droppingEnd.count))
-                        }
-                        challengeScript += ";r"
-                        
-                        // Create an evaluation context
-                        let context = try JSContext().tryUnwrap(.unknownError)
-                        let resultIdentifier = "__resultVerificationCookie"
-                        
-                        // Obtain and modify the cookie assembly script
-                        let cookieAssemblyScript = try context.evaluateScript(challengeScript)
-                            .toString()
-                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe decoding script"))
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                            .replacingOccurrences(
-                                of: "document.cookie",
-                                with: resultIdentifier,
-                                options: []
-                            )
-                            .replacingOccurrences(
-                                of: "location.reload();",
-                                with: resultIdentifier,
-                                options: []
-                            )
-                        
-                        // Evaluate the script to get the final challenge response cookie line
-                        let challengeResponseSetCookie = try context.evaluateScript(cookieAssemblyScript)
-                            .toString()
-                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe cookie script"))
-                        
-                        // Evaluate set-cookie
-                        let evaluatedCookies = HTTPCookie.cookies(
-                            withResponseHeaderFields: [ "Set-Cookie": challengeResponseSetCookie ],
-                            for: self.endpointURL
-                        )
-                        
-                        guard !evaluatedCookies.isEmpty else {
-                            throw NineAnimatorError.responseError("Cannot understand the cookies sent by the server")
-                        }
-                        
-                        // Store the cookies
-                        HTTPCookieStorage.shared.setCookies(
-                            evaluatedCookies,
-                            for: self.endpointURL,
-                            mainDocumentURL: self.endpointURL
-                        )
-                        
-                        // Make the request again
-                        return self.request(browsePath: "/")
-                    } else { return .success(content) }
-                }
-                .then {
-                    content -> NSDictionary? in
-                    guard var serializedAnimeList = self
-                        .animeListMatchingRegex
-                        .firstMatch(in: content)?
-                        .firstMatchingGroup else {
-                        throw NineAnimatorError.providerError("No anime found")
-                    }
-                    // Remove the ';' at the end of the string
-                    if serializedAnimeList.hasSuffix(";") {
-                        serializedAnimeList.removeLast()
-                    }
-                    // Parse the anime list object
-                    return (try JSONSerialization.jsonObject(
-                        with: serializedAnimeList.data(using: .utf8)!,
-                        options: []
-                    )) as? NSDictionary
+//            return request(browsePath: "/")
+//                .thenPromise {
+//                    content -> NineAnimatorPromise<String> in
+//                    // Complete the verification
+//                    if content.contains("You are being redirected...") {
+//                        let bowl = try SwiftSoup.parse(content)
+//
+//                        // Obtain the challenge builder script
+//                        var challengeScript = try bowl
+//                            .select("script")
+//                            .html()
+//                            .trimmingCharacters(in: .whitespacesAndNewlines)
+//
+//                        // Drop the evaluation part and append the dump value script
+//                        let droppingEnd = "e(r);"
+//                        if challengeScript.hasSuffix(droppingEnd) {
+//                            challengeScript = String(challengeScript.dropLast(droppingEnd.count))
+//                        }
+//                        challengeScript += ";r"
+//
+//                        // Create an evaluation context
+//                        let context = try JSContext().tryUnwrap(.unknownError)
+//                        let resultIdentifier = "__resultVerificationCookie"
+//
+//                        // Obtain and modify the cookie assembly script
+//                        let cookieAssemblyScript = try context.evaluateScript(challengeScript)
+//                            .toString()
+//                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe decoding script"))
+//                            .trimmingCharacters(in: .whitespacesAndNewlines)
+//                            .replacingOccurrences(
+//                                of: "document.cookie",
+//                                with: resultIdentifier,
+//                                options: []
+//                            )
+//                            .replacingOccurrences(
+//                                of: "location.reload();",
+//                                with: resultIdentifier,
+//                                options: []
+//                            )
+//
+//                        // Evaluate the script to get the final challenge response cookie line
+//                        let challengeResponseSetCookie = try context.evaluateScript(cookieAssemblyScript)
+//                            .toString()
+//                            .tryUnwrap(.responseError("Unable to evaluate Twist.moe cookie script"))
+//
+//                        // Evaluate set-cookie
+//                        let evaluatedCookies = HTTPCookie.cookies(
+//                            withResponseHeaderFields: [ "Set-Cookie": challengeResponseSetCookie ],
+//                            for: self.endpointURL
+//                        )
+//
+//                        guard !evaluatedCookies.isEmpty else {
+//                            throw NineAnimatorError.responseError("Cannot understand the cookies sent by the server")
+//                        }
+//
+//                        // Store the cookies
+//                        HTTPCookieStorage.shared.setCookies(
+//                            evaluatedCookies,
+//                            for: self.endpointURL,
+//                            mainDocumentURL: self.endpointURL
+//                        )
+//
+//                        // Make the request again
+//                        return self.request(browsePath: "/")
+//                    } else { return .success(content) }
+//                } .then {
+//                    content -> NSDictionary? in
+//                    guard var serializedAnimeList = self
+//                        .animeListMatchingRegex
+//                        .firstMatch(in: content)?
+//                        .firstMatchingGroup else {
+//                            throw NineAnimatorError.providerError("No anime found")
+//                    }
+//                    // Remove the ';' at the end of the string
+//                    if serializedAnimeList.hasSuffix(";") {
+//                        serializedAnimeList.removeLast()
+//                    }
+//                    // Parse the anime list object
+//                    return (try JSONSerialization.jsonObject(
+//                        with: serializedAnimeList.data(using: .utf8)!,
+//                        options: []
+//                        )) as? NSDictionary
+//                }
+            return request(
+                    ajaxPathString: "/api/anime",
+                    headers: [ "x-access-token": "1rj2vRtegS8Y60B3w3qNZm5T2Q0TN2NR" ]
+                ) .then {
+                    $0.data(using: .utf8)
                 } .then {
-                    animeListDictionary -> [AnimeTwistListedAnime]? in
-                    guard let _state = animeListDictionary["state"] as? NSDictionary,
-                        let _anime = _state["anime"] as? NSDictionary,
-                        let allAnimeList = _anime["all"] as? [NSDictionary] else {
-                        throw NineAnimatorError.providerError("Unable to decode anime information from list")
-                    }
-                    return allAnimeList.compactMap {
+                    try JSONSerialization.jsonObject(with: $0, options: []) as? [NSDictionary]
+                } .then {
+                    allAnimeList -> [AnimeTwistListedAnime]? in
+                    allAnimeList.compactMap {
                         anime in
                         // All required components
                         guard let identifier = anime["id"] as? Int,
@@ -152,6 +154,7 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
                             return nil
                         }
                         
+                        let kitsuId = anime["hb_id"] as? Int
                         let alternativeTitle = (anime["alt_title"] as? String) ?? ""
                         let formatter = DateFormatter()
                         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -170,7 +173,8 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
                             slug: slug,
                             createdDate: createdDate,
                             updatedDate: updatedDate,
-                            isOngoing: onGoingState > 0
+                            isOngoing: onGoingState > 0,
+                            kitsuIdentifier: kitsuId
                         )
                     }
                 } .then {
