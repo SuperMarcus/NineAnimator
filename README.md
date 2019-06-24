@@ -256,7 +256,7 @@ of features:
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
 - [Anime Twist](//twist.moe)
-    - [x] Basic features (featured list, notifications, search, and playback; no anime artworks)
+    - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
