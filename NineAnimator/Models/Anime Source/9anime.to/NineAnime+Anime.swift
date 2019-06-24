@@ -103,7 +103,7 @@ extension NASourceNineAnime {
             Log.debug("- Alias: %@", alias ?? "None")
             Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
             
-            return request(
+            return signedRequest(
                 ajax: "/ajax/film/servers/\(animeResourceTags.id)",
                 with: ajaxHeaders) { response, error in
                 guard let responseJson = response else {

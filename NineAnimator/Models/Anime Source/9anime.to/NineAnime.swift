@@ -116,6 +116,89 @@ class NASourceNineAnime: BaseSource, Source {
         return task
     }
     
+    func signedRequest(
+        browse path: String,
+        parameters: [String: CustomStringConvertible] = [:],
+        with headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<String>
+        ) -> NineAnimatorAsyncTask? {
+        return signedRequest(
+            browse: endpointURL.appendingPathComponent(path),
+            parameters: parameters,
+            with: headers,
+            completion: handler
+        )
+    }
+    
+    func signedRequest(
+            browse url: URL,
+            parameters: [String: CustomStringConvertible] = [:],
+            with headers: [String: String] = [:],
+            completion handler: @escaping NineAnimatorCallback<String>
+        ) -> NineAnimatorAsyncTask? {
+        return request(browse: signRequestURL(url, withParameters: parameters), headers: headers, completion: handler)
+    }
+    
+    func signedRequest(
+            ajax path: String,
+            parameters: [String: CustomStringConvertible] = [:],
+            with headers: [String: String] = [:],
+            completion handler: @escaping NineAnimatorCallback<NSDictionary>
+        ) -> NineAnimatorAsyncTask? {
+        // Forward the call
+        return signedRequest(
+            ajax: endpointURL.appendingPathComponent(path),
+            parameters: parameters,
+            with: headers,
+            completion: handler
+        )
+    }
+    
+    func signedRequest(
+            ajax url: URL,
+            parameters: [String: CustomStringConvertible] = [:],
+            with headers: [String: String] = [:],
+            completion handler: @escaping NineAnimatorCallback<NSDictionary>
+        ) -> NineAnimatorAsyncTask? {
+        // Forward the call
+        return request(
+            ajax: signRequestURL(url, withParameters: parameters),
+            headers: headers,
+            completion: handler
+        )
+    }
+    
+    /// Make a signed request with path related to the endpoint
+    func signedRequest(
+            ajaxString path: String,
+            parameters: [String: CustomStringConvertible] = [:],
+            headers: [String: String] = [:],
+            completion handler: @escaping NineAnimatorCallback<String>
+        ) -> NineAnimatorAsyncTask? {
+        // Forward the call
+        return signedRequest(
+            ajaxString: endpointURL.appendingPathComponent(path),
+            parameters: parameters,
+            headers: headers,
+            completion: handler
+        )
+    }
+    
+    /// Make a signed request
+    func signedRequest(
+            ajaxString url: URL,
+            parameters: [String: CustomStringConvertible] = [:],
+            headers: [String: String] = [:],
+            completion handler: @escaping NineAnimatorCallback<String>
+        ) -> NineAnimatorAsyncTask? {
+        // Call the original request function with modified URL
+        return request(
+            ajaxString: signRequestURL(url, withParameters: parameters),
+            headers: headers,
+            completion: handler
+        )
+    }
+    
     override func request(
             ajaxString url: URL,
             headers: [String: String],

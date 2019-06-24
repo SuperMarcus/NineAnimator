@@ -47,9 +47,12 @@ class NineAnimeSearch: ContentProvider {
         guard moreAvailable && _lastRequest == nil else { return }
         Log.debug("Requesting page %@ for query %@", _results.count + 1, title)
         let loadingIndex = _results.count
-        let encodedKeyword = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        _lastRequest = _parent.request(browse:
-            "/search?keyword=\(encodedKeyword)&page=\(_results.count + 1)"
+        _lastRequest = _parent.signedRequest(
+            browse: "/search",
+            parameters: [
+                "keyword": title,
+                "page": _results.count + 1
+            ]
         ) { [weak self] response, error in
             guard let self = self else { return }
             defer { self._lastRequest = nil }

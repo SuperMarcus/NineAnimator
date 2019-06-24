@@ -24,8 +24,15 @@ extension NASourceNineAnime {
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         let dataIdentifier = link.identifier.split(separator: "|").first!
         let ajaxHeaders: [String: String] = ["Referer": link.parent.link.absoluteString]
-        let infoPath = "/ajax/episode/info?id=\(dataIdentifier)&server=\(link.server)"
-        return request(ajax: infoPath, with: ajaxHeaders) {
+        let infoPath = "/ajax/episode/info"
+        return signedRequest(
+            ajax: infoPath,
+            parameters: [
+                "id": dataIdentifier,
+                "server": link.server
+            ],
+            with: ajaxHeaders
+        ) {
             response, error in
             guard let responseJson = response else {
                 return handler(nil, error)
