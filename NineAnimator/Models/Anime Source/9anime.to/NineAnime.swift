@@ -102,6 +102,11 @@ class NASourceNineAnime: BaseSource, Source {
             // If the result is valid, pass it on to the handler
             if let value = value { return handler(value, nil) }
             
+            // If the website requires authentication
+            if error is NineAnimatorError.AuthenticationRequiredError {
+                return handler(nil, error)
+            }
+            
             Log.info("[9anime] Request failed with an error. Trying to resolve a different endpoint.")
             // Trying to determine a new endpoint if an error occurred
             self._endpointDeterminingTask = self.determineEndpoint(url)
@@ -209,6 +214,11 @@ class NASourceNineAnime: BaseSource, Source {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
             if let value = value { return handler(value, nil) }
+            
+            // If the website requires authentication
+            if error is NineAnimatorError.AuthenticationRequiredError {
+                return handler(nil, error)
+            }
             
             Log.info("[9anime] Request failed with an error. Trying to resolve a different endpoint.")
             // Trying to determine a new endpoint if an error occurred
