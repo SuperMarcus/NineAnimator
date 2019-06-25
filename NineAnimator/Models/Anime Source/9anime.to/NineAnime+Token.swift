@@ -19,6 +19,7 @@
 
 import Foundation
 
+/// Special thanks to github@Awsomedude
 extension NASourceNineAnime {
 //    private static let magicValue = "0a9de5a4"
 //
@@ -41,7 +42,7 @@ extension NASourceNineAnime {
     /// Retrieve the current timestamp `ts` value that should be
     /// included in the request
     private var currentNATimestamp: Int {
-        return Int(Date().timeIntervalSince1970 / 3600) * 3600
+        return Int(Date().timeIntervalSince1970 / 3600 + 12) * 3600
     }
     
     /// Sign the request url with parameters
