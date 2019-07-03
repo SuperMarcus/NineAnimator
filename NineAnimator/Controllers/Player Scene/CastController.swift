@@ -172,6 +172,9 @@ extension CastController {
         
         currentApp = nil
         
+        // Reset the native player so it doesn't interfere with the now playing center
+        NativePlayerController.default.reset()
+        
         client = CastClient(device: device)
         client?.delegate = self
         client?.connect()

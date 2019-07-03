@@ -36,11 +36,11 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     //Background DispatchQueue shared by the native player controller
     private let queue = DispatchQueue(label: "com.marcuszhou.nineanimator.player.background", qos: .background)
     
-    //AVPlayerViewController
-    private let playerViewController = AVPlayerViewController()
-    
     //AVPlayer related
     private let player = AVQueuePlayer()
+    
+    //AVPlayerViewController
+    private var playerViewController = AVPlayerViewController()
     
     private var playerRateObservation: NSKeyValueObservation?
     
@@ -96,9 +96,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
         )
         
         //Configurate AVPlayerViewController
-        playerViewController.player = player
-        playerViewController.delegate = self
-        playerViewController.allowsPictureInPicturePlayback = NineAnimator.default.user.allowPictureInPicturePlayback
+        configurePlayerViewController()
         
         //Observers
         playerRateObservation = player.observe(\.rate, changeHandler: self.onPlayerRateChange)
@@ -109,9 +107,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
 
 // MARK: - Playing medias
 extension NativePlayerController {
-    /**
-     Reset the playback queue and start playing the current item
-     */
+    /// Reset the playback queue and start playing the current item
     func play(media: PlaybackMedia) {
         //This will stop any playbacks (PiP)
         clearQueue()
@@ -129,6 +125,17 @@ extension NativePlayerController {
         
         playerViewController.userActivity = Continuity.activity(for: media)
         playerViewController.userActivity?.delegate = self
+    }
+    
+    /// Reset the player view controller
+    func reset() {
+        // Clear the queue and dismiss the old player view controller
+        clearQueue()
+        playerViewController.dismiss(animated: true, completion: nil)
+        
+        // Create and configure the new player view controller
+        playerViewController = AVPlayerViewController()
+        configurePlayerViewController()
     }
     
     func append(media: PlaybackMedia) {
@@ -168,6 +175,13 @@ extension NativePlayerController {
         mediaQueue.removeAll()
         player.removeAllItems()
         state = .idle
+    }
+    
+    private func configurePlayerViewController() {
+        // Configure the player view controller
+        playerViewController.player = player
+        playerViewController.delegate = self
+        playerViewController.allowsPictureInPicturePlayback = NineAnimator.default.user.allowPictureInPicturePlayback
     }
 }
 
