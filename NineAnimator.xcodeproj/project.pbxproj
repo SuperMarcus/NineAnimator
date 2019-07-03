@@ -166,6 +166,12 @@
 		2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */; };
 		2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AAD229736B7002EC74C /* XStreamParser.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
+		2C8519A722CC8DBD00EEF3AC /* Kissanime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */; };
+		2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */; };
+		2C8519AB22CC919800EEF3AC /* Kissanime+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519AA22CC919800EEF3AC /* Kissanime+Featured.swift */; };
+		2C8519AD22CC949500EEF3AC /* Kissanime+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519AC22CC949500EEF3AC /* Kissanime+Search.swift */; };
+		2C8519AF22CC9AAE00EEF3AC /* Kissanime+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519AE22CC9AAE00EEF3AC /* Kissanime+Anime.swift */; };
+		2C8519B122CCA03C00EEF3AC /* Kissanime+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519B022CCA03C00EEF3AC /* Kissanime+Episode.swift */; };
 		2C85367E222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */; };
 		2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */; };
 		2C8536852231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536842231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift */; };
@@ -481,6 +487,12 @@
 		2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamingParser.swift; sourceTree = "<group>"; };
 		2C7B7AAD229736B7002EC74C /* XStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XStreamParser.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
+		2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kissanime.swift; sourceTree = "<group>"; };
+		2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+RequestModifier.swift"; sourceTree = "<group>"; };
+		2C8519AA22CC919800EEF3AC /* Kissanime+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Featured.swift"; sourceTree = "<group>"; };
+		2C8519AC22CC949500EEF3AC /* Kissanime+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Search.swift"; sourceTree = "<group>"; };
+		2C8519AE22CC9AAE00EEF3AC /* Kissanime+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Anime.swift"; sourceTree = "<group>"; };
+		2C8519B022CCA03C00EEF3AC /* Kissanime+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Episode.swift"; sourceTree = "<group>"; };
 		2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsSceneCollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyFastParser.swift; sourceTree = "<group>"; };
 		2C8536842231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomStringConvertible+UniqueHashingIdentifier.swift"; sourceTree = "<group>"; };
@@ -1145,9 +1157,23 @@
 			path = "Content Persistent";
 			sourceTree = "<group>";
 		};
+		2C8519A522CC8DAB00EEF3AC /* kissanime.ru */ = {
+			isa = PBXGroup;
+			children = (
+				2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */,
+				2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */,
+				2C8519AA22CC919800EEF3AC /* Kissanime+Featured.swift */,
+				2C8519AC22CC949500EEF3AC /* Kissanime+Search.swift */,
+				2C8519AE22CC9AAE00EEF3AC /* Kissanime+Anime.swift */,
+				2C8519B022CCA03C00EEF3AC /* Kissanime+Episode.swift */,
+			);
+			path = kissanime.ru;
+			sourceTree = "<group>";
+		};
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
+				2C8519A522CC8DAB00EEF3AC /* kissanime.ru */,
 				2C684BCA2290611800E1BA35 /* animepahe.com */,
 				2C4FDDAD22483C9E0059B7D8 /* animeultima.eu */,
 				2C85368C2234006400A5CFB9 /* wonderfulsubs.com */,
@@ -1769,6 +1795,7 @@
 				2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */,
 				2CEC218A2207E34E00A30F4F /* Promise+All.swift in Sources */,
 				2C0CFC4322640B6600EC793E /* DiscoveryStandardCell+Cell.swift in Sources */,
+				2C8519B122CCA03C00EEF3AC /* Kissanime+Episode.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
 				2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */,
 				2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */,
@@ -1780,6 +1807,7 @@
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
+				2C8519AF22CC9AAE00EEF3AC /* Kissanime+Anime.swift in Sources */,
 				2C684BD62291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift in Sources */,
 				2C7B51A422A4274A008191B0 /* PersistentEpisode+CoreDataProperties.swift in Sources */,
 				2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */,
@@ -1791,12 +1819,14 @@
 				2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */,
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
+				2C8519AD22CC949500EEF3AC /* Kissanime+Search.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
 				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
 				2C3D7BF62210825B0045D648 /* NineAnime+Reachability.swift in Sources */,
 				2C684BD2229066AD00E1BA35 /* AnimePahe+Anime.swift in Sources */,
 				2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */,
+				2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */,
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
 				2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */,
 				2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */,
@@ -1890,6 +1920,7 @@
 				2C0CFC452264105100EC793E /* MyAnimeList+SeasonalAnimeRecommendation.swift in Sources */,
 				2C6CF256221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift in Sources */,
 				2CEA0BE621F54E1D007EECC4 /* StatesSerialization.swift in Sources */,
+				2C8519AB22CC919800EEF3AC /* Kissanime+Featured.swift in Sources */,
 				2CEC218C2207E3A900A30F4F /* AsyncTask.swift in Sources */,
 				2C7A1D5A2251467100DD83A5 /* MyAnimeList+AnimeInformation.swift in Sources */,
 				2C9383DF21FE147E008C0D01 /* ThemedSolidButton.swift in Sources */,
@@ -1953,6 +1984,7 @@
 				2CCC746421C07C700007502A /* NineAnime+Anime.swift in Sources */,
 				2C66779E21BC36A5000E5ACC /* BufferedContent.swift in Sources */,
 				2C93BD4C22220BE3000411CB /* Kitsu+Reference.swift in Sources */,
+				2C8519A722CC8DBD00EEF3AC /* Kissanime.swift in Sources */,
 				2C8536962234745400A5CFB9 /* WonderfulSubs+Episode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
