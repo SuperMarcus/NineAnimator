@@ -49,10 +49,15 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return nil
+        return VideoProviderRegistry.default.provider(for: name)
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         return .fail()
+    }
+    
+    override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+        // RapidVideo doesn't require verification
+        return "rapidvideo"
     }
 }
