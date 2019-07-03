@@ -146,4 +146,17 @@ extension NASourceKissanime {
             )
         }
     }
+    
+    func processArtworkUrl(_ url: URL) -> URL {
+        do {
+            var components = try URLComponents(url: url, resolvingAgainstBaseURL: true).tryUnwrap()
+            
+            // Change http to https
+            if components.scheme == "http" {
+                components.scheme = "https"
+            }
+            
+            return try components.url.tryUnwrap()
+        } catch { return url }
+    }
 }

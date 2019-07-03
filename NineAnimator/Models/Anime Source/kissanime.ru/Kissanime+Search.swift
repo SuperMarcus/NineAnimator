@@ -18,29 +18,93 @@
 //
 
 import Foundation
+import SwiftSoup
 
 extension NASourceKissanime {
     class SearchAgent: ContentProvider {
-        var title: String
+        var totalPages: Int? { return 1 }
+        var availablePages: Int { return _results == nil ? 0 : 1 }
+        var moreAvailable: Bool { return _results == nil }
         
-        var totalPages: Int?
-        var availablePages: Int = 0
-        var moreAvailable: Bool = false
+        private let parent: NASourceKissanime
+        private var requestTask: NineAnimatorAsyncTask?
+        private var _results: [AnimeLink]?
+        var title: String
         
         weak var delegate: ContentProviderDelegate?
         
         func links(on page: Int) -> [AnyLink] {
-            return []
+            return page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
-        func more() { }
+        func more() {
+            guard requestTask == nil && moreAvailable else { return }
+            requestTask = parent.request(
+                browsePath: "/Search/Anime",
+                query: [ "keyword": title ]
+            ) .then {
+                [weak self] responseContent -> [AnimeLink] in
+                guard let self = self else { throw NineAnimatorError.unknownError }
+                
+                // Parse the response content
+                let bowl = try SwiftSoup.parse(responseContent)
+                let entries = try bowl.select("table.listing td")
+                let resultingLinks = entries.compactMap {
+                    entry -> AnimeLink? in
+                    do {
+                        let linkContainer = try entry.select("a").first().tryUnwrap()
+                        let animeLinkPath = try linkContainer.attr("href")
+                        let animeUrl = try URL(
+                            string: animeLinkPath,
+                            relativeTo: self.parent.endpointURL
+                        ).tryUnwrap()
+                        let animeTitle = linkContainer
+                            .ownText()
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                        let containerTitleContent = try entry.attr("title")
+                        let tooltipContainer = try SwiftSoup.parse(containerTitleContent)
+                        let animeArtworkPath = try tooltipContainer.select("img").attr("src")
+                        let animeArtworkUrl = self.parent.processArtworkUrl(try URL(
+                            string: animeArtworkPath,
+                            relativeTo: self.parent.endpointURL
+                        ).tryUnwrap())
+                        
+                        // Construct the AnimeLink
+                        return AnimeLink(
+                            title: animeTitle,
+                            link: animeUrl,
+                            image: animeArtworkUrl,
+                            source: self.parent
+                        )
+                    } catch { return nil }
+                }
+                
+                guard !resultingLinks.isEmpty else {
+                    throw NineAnimatorError.searchError("No results found")
+                }
+                
+                return resultingLinks
+            } .error {
+                [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.onError(error, from: self)
+                self.requestTask = nil
+            } .finally {
+                [weak self] results in
+                guard let self = self else { return }
+                self._results = results
+                self.delegate?.pageIncoming(0, from: self)
+                self.requestTask = nil
+            }
+        }
         
-        init(query: String) {
+        init(query: String, parent: NASourceKissanime) {
             self.title = query
+            self.parent = parent
         }
     }
     
     func search(keyword: String) -> ContentProvider {
-        return SearchAgent(query: keyword)
+        return SearchAgent(query: keyword, parent: self)
     }
 }
