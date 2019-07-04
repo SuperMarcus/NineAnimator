@@ -57,7 +57,11 @@ func export(_ configuration: NineAnimatorUser) -> URL? {
 
 func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAnimatorUser.MergePiority) -> Bool {
     do {
+        // Read the contents of the configuration file
+        _ = fileUrl.startAccessingSecurityScopedResource()
         let serializedConfiguration = try Data(contentsOf: fileUrl)
+        fileUrl.stopAccessingSecurityScopedResource()
+        
         let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
         
         let piorityHistory = policy == .localFirst ? configuration.recentAnimes : preservedStates.history
@@ -80,7 +84,10 @@ func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAni
 
 func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) -> Bool {
     do {
+        _ = fileUrl.startAccessingSecurityScopedResource()
         let serializedConfiguration = try Data(contentsOf: fileUrl)
+        fileUrl.stopAccessingSecurityScopedResource()
+        
         let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
         
         configuration.recentAnimes = preservedStates.history
