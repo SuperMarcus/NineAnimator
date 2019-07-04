@@ -49,19 +49,20 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
 ## Table of Contents
 
 - [Features](#features)
-- [Device Compatibility](#device-compatibility)
-- [Build & Install](#build--install)
+- [Device Compatibility](docs/compatibility.md)
+- [Installation](docs/installation.md)
+- [Supported Sources](docs/supported-sources.md)
+- [Third-Party Anime Lists](docs/third-party-lists.md)
 - [Google Cast](#google-cast)
 - [Picture in Picture Playback](#picture-in-picture-playback)
 - [Notifications & Subscription](#notifications--subscription)
 - [Smart Home Integration](#smart-home-integration)
 - [Handoff & Siri Shortcuts](#handoff--siri-shortcuts)
-- [Video Sources](#video-sources)
-- [Anime Listing & Tracking Websites](#anime-listing--tracking-websites)
 - [Backup History and Playback Progresses](#backup-history-and-playback-progresses)
 - [Download Episodes](#download-episodes)
 - [Screenshots](#screenshots)
-- [Credits](#credits)
+- [Credits](docs/credits.md)
+- [Privacy Statements & Policy](docs/privacy-policy.md)
 
 ## Features
 
@@ -72,71 +73,18 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
 - [x] Picture in Picture playback on iPads
 - [x] Chromecast/Google Cast with lockscreen & control center support
 - [x] Playback History & Auto Resumes
-- [x] Support [Multiple Anime Websites](#anime-websites)
+- [x] Support [Multiple Anime Websites](docs/supported-sources.md)
 - [x] Integration with HomeKit
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
-- [x] Third party anime [listing & tracking websites](#anime-listing--tracking-websites)
+- [x] Third party anime [listing & tracking websites](docs/third-party-lists.md)
 - [ ] Custom anime lists, e.g. favorites and to-watch list (currently retrieved from tracking websites; mutations are work-in-progress)
-
-## Device Compatibility
-
-NineAnimator is theoretically compatible with all iPhone and iPads running iOS
-11.2 or later. However, the app is only tested on the following devices running
-the latest operation systems:
-
-- iPhone Xs Max
-- iPhone X
-- iPad 9.7-inch (2018)
-- iPad Pro 11-inch (2018)
-
-## Build & Install
-
-### Step One: Install Carthage
-
-To build this app, you will need [Carthage](https://github.com/Carthage/Carthage#installing-carthage) installed.
-
-The simplest way to install Carthage is to use Homebrew.
-
-```sh
-$ brew update
-$ brew install carthage
-```
-
-You can also install Carthage with the installer package, which can be found
-[here](https://github.com/Carthage/Carthage/releases).
-
-### Step Two: Build the app with Xcode
-
-You won't need any Apple Developer membership to build and install this app.
-Open this project in Xcode, connect your phone to the computer, select your
-device, and click the run button on the top left corner.
-
-![Xcode select device](Misc/Media/xcode_select_device.jpg)
-
-Xcode might prompt you that the bundle identifier cannot be used. In this case,
-select the `NineAnimator` in the Navigator, choose `NineAnimator` in the Targets,
-click the `General` tab on the top, and change the `Bundle Identifier` in the
-Identity section to whatever you like. Then, click the `Team` drawer in the Signing
-section, and choose your developer profile. You should be good to go after this.
-
-### Step Three (Optional): Update dependencies
-
-All the required binaries have been compiled and uploaded to the repository, so
-you shouldn't need to do this. But if something doesn't work out, you might want
-to try updating the dependencies.
-
-Still, you should make sure that you have a working copy of Carthage first.
-
-```sh
-$ carthage update
-```
 
 ## Google Cast
 
 NineAnimator supports playing back on both AirPlay (via iOS's native media player) and
 Chromecast/Google Cast devices. However, not all of the steaming sources are supported
-on Chromecast. Check [Video Sources](#video-sources) for details.
+on Chromecast. Check [Video Sources](docs/supported-sources.md) for details.
 
 To use Google Cast in NineAnimator, tap on the Google Cast icon on the navigation bar.
 A window will pop up to prompt you to select a playback device. Once the device is
@@ -203,106 +151,6 @@ on the icon to continue browsing or watching on the new device.
 To add a siri shortcut, navigate to the system preferences app. Find NineAnimator under
 the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
-## Video Sources
-
-### Streaming Sources
-
-Currently only a selection of video streaming hosts is supported by NineAnimator:
-
-- RapidVideo
-- Mp4Upload
-- Streamango
-- Kiwik
-- AUEngine of Anime Ultima
-- XStreamCDN
-- VidStreaming/VidCDN (unavailable for Google Cast)
-- MyCloud (unavailable for Google Cast)
-- F5 Beta a.k.a. PrettyFast.to (unavailable for Google Cast)
-- Tiwi.Kiwi (may not be available for Google Cast)
-- FastStream (unavailable for Google Cast)
-- OpenLoad (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/commit/8d1c0fc196c04c0ca30c6d3b8281ea88b54ab08a))
-- Self-hosted Streaming Services ([masterani.me](//masterani.me), [Anime Twist](//twist.moe)), as well as [Wonderful Subs](//wonderfulsubs.com)
-
-All of the sources above support downloading. More hosts may be added later.
-Feel free to open an issue to request additional hosts.
-
-### Anime Websites
-
-NineAnimator supports the following anime websites but with different sets
-of features:
-
-- [Anime Ultima](//animeultima.eu)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [Wonderful Subs](//wonderfulsubs.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Ratings and Air Date)
-    - [x] Detailed episode synopsis
-- [gogoanime.io](//gogoanime.io)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
-- [Anime Pahe](//animepahe.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
-- [Anime Twist](//twist.moe)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [ ] Anime synopsis
-    - [ ] Detailed anime attributes (Air Date is found but not displayed)
-    - [ ] Detailed episode synopsis
-- [9anime.ru](//9anime.ru) (be careful when using this website -- 9anime has been known to ban users for using third party applications)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [x] Detailed anime attributes (Ratings and Air Date)
-    - [ ] Detailed episode synopsis
-- ~~[masterani.me](//masterani.me)~~ (no longer available)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [x] Detailed anime attributes (Ratings and Air Date)
-    - [x] Detailed episode synopsis
-
-## Anime Listing & Tracking Websites
-
->
-> Third-party Listing & Tracking support is still being improved. As of now, NineAnimator can only
-> present limited amount of information (among the data retrieved) with no review & rating
-> capabilities. Later updates will bring support to those functions.
->
-
-NineAnimator can present information on a selection of third party listing websites. You can configure
-NineAnimator to push local playback history to those tracking services.
-
-The tracking services can be configured in the `Preferences` menu, under the `Anime Tracking Services`
-submenu in the `Data and Privacy` section.
-
-Supported tracking/listing services and capabilities:
-
-- [AniList.co](//anilist.co)
-    - [x] Display detailed anime information
-    - [x] Push local playback history to the remote service
-    - [x] Retrieve remote anime state and anime collections
-- [Kitsu.io](//kitsu.io)
-    - [ ] Display detailed anime information
-    - [x] Push local playback history to the remote service
-    - [x] Retrieve remote anime state and anime collections
-- [MyAnimeList](//myanimelist.net)
-    - [x] Display detailed anime information
-    - [x] Push local playback history to the remote service
-    - [x] Retrieve remote anime state and anime collections
-
 ## Backup History and Playback Progresses
 
 NineAnimator can export the recently watched anime list and the playback histories to
@@ -346,7 +194,7 @@ to initiate download tasks. Downloaded episodes will appear in the Recents tab.
 
 There are some limitations to NineAnimator's ability to download and playback videos:
 
-- NineAnimator only supports downloading videos from a selection of [streaming sources](#video-sources)
+- NineAnimator only supports downloading videos from a selection of [streaming sources](docs/supported-sources.md)
 - Downloaded videos are only available to local playback. You may encounter problems playing offline episodes on AirPlay devices, and, if you are connected to a Google Cast device, NineAnimator will still attempt to fetch online resources for playback.
 
 ## Screenshots
@@ -392,33 +240,3 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | Cast Playback Control | Cast Playback Control (iPad) |
 | ----------------- | -------------------- |
 | ![Cast](Misc/Media/Demo/google_cast.png) | ![Cast on iPad](Misc/Media/Demo/google_cast_ipad.png) |
-
-## Credits
-
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_large)
-
-[3rd-Party Software Reports](https://app.fossa.com/reports/3c67284c-8dcc-4b9f-b70b-9539c3e87377)
-* Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
-* The free and open source chromecast library [OpenCastSwift](https://github.com/mhmiles/OpenCastSwift) (slightly [modified](https://github.com/SuperMarcus/OpenCastSwift)).
-* The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
-* [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
-* ...and [scinfu](https://github.com/scinfu)'s awesome [SwiftSoup](https://github.com/scinfu/SwiftSoup)
-* [marcosgriselli](https://github.com/marcosgriselli)'s [ViewAnimator](https://github.com/marcosgriselli/ViewAnimator)
-* [elegantchaos](https://github.com/elegantchaos)'s [DictionaryCoding](https://github.com/elegantchaos/DictionaryCoding)
-
-### Media & Icons
-
-Most of the resources are obtained from the open domains with their respective authors listed below.
-
-- Cloud Download Icon by [Storm Icons](https://thenounproject.com/stormicons)
-- [Google Cast Icon](https://commons.wikimedia.org/wiki/File:Chromecast_cast_button_icon.svg): uploaded to Wikimedia Commons by Y2kcrazyjoker4
-- [Media Control Icons](https://icons8.com/icon/pack/media-controls/ios) from [Icons8](https://icons8.com/)
-- [Details Icon](https://thenounproject.com/search/?q=detail&i=408469) by [Viktor Vorobyev](https://thenounproject.com/vityavorobyev/)
-- [Action Icon](https://thenounproject.com/search/?q=share&i=1058858) by [Тимур Минвалеев](https://thenounproject.com/timur.minvaleev/)
-- [Server Icon](https://thenounproject.com/search/?q=server&i=78508) by [Hans Paul Mösl Junior](https://thenounproject.com/hansmosl)
-- [Solid Play Icon](https://thenounproject.com/search/?q=play&i=2184153) by [Eagle Eye](https://thenounproject.com/eagleeye)
-- Anilist icon from [anilist.co](//anilist.co)
-- Kitsu icon from [kitsu.io](//kitsu.io)
-- MyAnimeList icon from [myanimelist.net](//myanimelist.net)
-- [Information Icon](https://thenounproject.com/search/?q=information&i=1281664) by [Wawan Hermawan](https://thenounproject.com/wawan3)
-- [Quick Action Cog Icon](https://thenounproject.com/search/?q=ios%20cog&i=17369) by [Melvin Salas](https://thenounproject.com/msalas10)

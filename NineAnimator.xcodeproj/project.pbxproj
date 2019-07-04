@@ -493,6 +493,12 @@
 		2C8519AC22CC949500EEF3AC /* Kissanime+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Search.swift"; sourceTree = "<group>"; };
 		2C8519AE22CC9AAE00EEF3AC /* Kissanime+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Anime.swift"; sourceTree = "<group>"; };
 		2C8519B022CCA03C00EEF3AC /* Kissanime+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Episode.swift"; sourceTree = "<group>"; };
+		2C8519B422CDC7DF00EEF3AC /* privacy-policy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "privacy-policy.md"; sourceTree = "<group>"; };
+		2C8519B522CE3FCD00EEF3AC /* compatibility.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = compatibility.md; sourceTree = "<group>"; };
+		2C8519B622CE427C00EEF3AC /* installation.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = installation.md; sourceTree = "<group>"; };
+		2C8519B722CE456500EEF3AC /* supported-sources.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "supported-sources.md"; sourceTree = "<group>"; };
+		2C8519B822CE460C00EEF3AC /* third-party-lists.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "third-party-lists.md"; sourceTree = "<group>"; };
+		2C8519B922CE466B00EEF3AC /* credits.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = credits.md; sourceTree = "<group>"; };
 		2C85367D222EEC7400A5CFB9 /* RecentsSceneCollectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsSceneCollectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrettyFastParser.swift; sourceTree = "<group>"; };
 		2C8536842231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CustomStringConvertible+UniqueHashingIdentifier.swift"; sourceTree = "<group>"; };
@@ -1106,6 +1112,7 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				2C8519B322CDC50D00EEF3AC /* docs */,
 				2C4817A221DB297D0092F694 /* Media */,
 				52F6A4F221DABDB00005D78D /* .swiftlint.yml */,
 				2C6677B721BD98A8000E5ACC /* LICENSE */,
@@ -1169,6 +1176,19 @@
 			);
 			path = kissanime.ru;
 			sourceTree = "<group>";
+		};
+		2C8519B322CDC50D00EEF3AC /* docs */ = {
+			isa = PBXGroup;
+			children = (
+				2C8519B422CDC7DF00EEF3AC /* privacy-policy.md */,
+				2C8519B522CE3FCD00EEF3AC /* compatibility.md */,
+				2C8519B622CE427C00EEF3AC /* installation.md */,
+				2C8519B722CE456500EEF3AC /* supported-sources.md */,
+				2C8519B822CE460C00EEF3AC /* third-party-lists.md */,
+				2C8519B922CE466B00EEF3AC /* credits.md */,
+			);
+			path = docs;
+			sourceTree = SOURCE_ROOT;
 		};
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
