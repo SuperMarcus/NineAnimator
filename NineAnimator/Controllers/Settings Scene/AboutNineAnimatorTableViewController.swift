@@ -28,7 +28,8 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         "about.issue": "https://github.com/SuperMarcus/NineAnimator/issues/new",
         // View License
         "about.license": "https://github.com/SuperMarcus/NineAnimator/blob/master/LICENSE",
-        "about.credits": "https://github.com/SuperMarcus/NineAnimator/blob/master/README.md#credits"
+        "about.credits": "https://nineanimator.marcuszhou.com/docs/credits.html",
+        "about.privacy.policy": "https://nineanimator.marcuszhou.com/docs/privacy-policy.html"
     ]
     
     @IBOutlet private weak var versionLabel: UILabel!
