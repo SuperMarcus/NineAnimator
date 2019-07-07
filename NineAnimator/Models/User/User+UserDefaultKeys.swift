@@ -26,6 +26,7 @@ extension NineAnimatorUser {
         static var recentAnimeList: String { return "anime.recent" }
         static var detectClipboardAnimeLinks: String { return "anime.links.detect" }
         static var subscribedAnimeList: String { return "anime.subscribed" }
+        static var allowNSFWContent: String { return "anime.content.nsfw" }
         static var autoRestartInterruptedDownloadTasks: String { return "episode.download.autorestart" }
         static var recentEpisode: String { return "episode.recent" }
         static var recentSource: String { return "source.recent" }

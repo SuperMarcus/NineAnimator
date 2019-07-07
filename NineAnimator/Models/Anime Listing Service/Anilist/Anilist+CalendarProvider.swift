@@ -52,10 +52,10 @@ extension Anilist {
                 )
                 let scheduleItems = try currentPage.airingSchedules.tryUnwrap(.decodeError)
                 
-                let results = try scheduleItems.map {
-                    scheduleItem -> CalendarItem in
+                let results = try scheduleItems.compactMap {
+                    scheduleItem -> CalendarItem? in
                     let media = try scheduleItem.media.tryUnwrap(.decodeError)
-                    return CalendarItem(
+                    return media.isAdult == true ? nil : CalendarItem(
                         date: Anilist.date(fromAnilistTimestamp: try scheduleItem.airingAt.tryUnwrap(.decodeError)),
                         episode: try scheduleItem.episode.tryUnwrap(.decodeError),
                         totalEpisodes: media.episodes,

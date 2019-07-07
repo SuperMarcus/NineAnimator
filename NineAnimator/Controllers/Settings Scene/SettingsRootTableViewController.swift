@@ -49,6 +49,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBOutlet private weak var autoResumeDownloadTasksSwitch: UISwitch!
     
+    @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
@@ -90,6 +92,10 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBAction private func onShowEpisodeDetailsDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.showEpisodeDetails = sender.isOn
+    }
+    
+    @IBAction private func onAllowNSFWDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.allowNSFWContent = sender.isOn
     }
     
     @IBAction private func onDoneButtonClicked(_ sender: Any) {
@@ -221,6 +227,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         animeShowEpisodeDetailsSwitch.setOn(NineAnimator.default.user.showEpisodeDetails, animated: true)
         detectClipboardLinksSwitch.setOn(NineAnimator.default.user.detectsPasteboardLinks, animated: true)
         autoResumeDownloadTasksSwitch.setOn(NineAnimator.default.user.autoRestartInterruptedDownloads, animated: true)
+        allowNSFWContentSwitch.setOn(NineAnimator.default.user.allowNSFWContent, animated: true)
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
         pictureInPictureSwitch.setOn(AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback, animated: true)

@@ -112,4 +112,10 @@ extension NineAnimatorUser {
         get { return _freezer.bool(forKey: Keys.sourceSolveChallenges) }
         set { _freezer.set(newValue, forKey: Keys.sourceSolveChallenges) }
     }
+    
+    /// Allow sources to provide NSFW contents
+    var allowNSFWContent: Bool {
+        get { return _freezer.bool(forKey: Keys.allowNSFWContent) }
+        set { _freezer.set(newValue, forKey: Keys.allowNSFWContent) }
+    }
 }

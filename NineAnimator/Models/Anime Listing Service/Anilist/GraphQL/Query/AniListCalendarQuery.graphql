@@ -14,6 +14,7 @@ query($page: Int, $perPage: Int, $startTime: Int, $endTime: Int) {
             airingAt
             media {
                 id
+                isAdult
                 episodes
                 description(asHtml: true)
                 coverImage {
