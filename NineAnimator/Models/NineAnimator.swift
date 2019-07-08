@@ -123,11 +123,12 @@ extension NineAnimator {
     
     /// Register the default set of sources
     private func registerDefaultSources() {
-        register(source: NASourceAnimeUltima(with: self))
-        register(source: NASourceWonderfulSubs(with: self))
         register(source: NASourceAnimePahe(with: self))
+        register(source: NASourceWonderfulSubs(with: self))
+        register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
+        register(source: NASourceAnimeKisa(with: self))
         register(source: NASourceNineAnime(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceMasterAnime(with: self))
