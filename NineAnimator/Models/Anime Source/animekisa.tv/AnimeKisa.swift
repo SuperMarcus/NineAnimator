@@ -53,6 +53,7 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        if server == "adless" { return VideoProviderRegistry.default.provider(DummyParser.self) }
         return VideoProviderRegistry.default.provider(for: name)
     }
     

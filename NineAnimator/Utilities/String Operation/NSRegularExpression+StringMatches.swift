@@ -24,9 +24,15 @@ extension NSRegularExpression {
         return matches(in: content, options: options, range: content.matchingRange)
     }
     
-    // Return the groups of the first matches
+    // Return the groups of the first match
     func firstMatch(in content: String, options: NSRegularExpression.MatchingOptions = []) -> [String]? {
         guard let match = matches(in: content, options: options).first else { return nil }
+        return (0..<match.numberOfRanges).map { content[match, at: $0] }
+    }
+    
+    // Return the groups of the last match
+    func lastMatch(in content: String, options: NSRegularExpression.MatchingOptions = []) -> [String]? {
+        guard let match = matches(in: content, options: options).last else { return nil }
         return (0..<match.numberOfRanges).map { content[match, at: $0] }
     }
 }

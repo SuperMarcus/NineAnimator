@@ -31,6 +31,51 @@ extension NASourceAnimeKisa {
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return .fail()
+        return NineAnimatorPromise.firstly {
+            URL(string: link.identifier, relativeTo: link.parent.link)
+        } .thenPromise {
+            url in self.request(browseUrl: url).then { (url, $0) }
+        } .then {
+            episodeUrl, responseContent in
+            let resourceMap = try self.collectSources(fromContent: responseContent)
+            if let resourcePath = resourceMap[link.server] {
+                let targetUrl = try URL(string: resourcePath).tryUnwrap(.urlError)
+                // Construct the episode object
+                return Episode(
+                    link,
+                    target: targetUrl,
+                    parent: anime,
+                    referer: episodeUrl.absoluteString,
+                    userInfo: [:]
+                )
+            } else { throw NineAnimatorError.responseError("This episode does not exist on the selected server") }
+        }
+    }
+    
+    func collectSources(fromContent episodePage: String) throws -> [String: String] {
+        let buildExp = {
+            (needle: String) throws -> NSRegularExpression in
+            try NSRegularExpression(pattern: "var \(needle)\\s+=\\s+\\\"([^\"]+)", options: [])
+        }
+        var obtainedSources = [
+            "adless": try buildExp("GoogleVideo"),
+            "rapidvideo": try buildExp("RapidVideo"),
+            "fembed": try buildExp("Fembed"),
+            "mp4upload": try buildExp("MP4Upload"),
+            "openload": try buildExp("Openload"),
+            "streamango": try buildExp("Streamango"),
+            "vidcdn": try buildExp("VidStreaming")
+        ] .compactMapValues { $0.firstMatch(in: episodePage)?.firstMatchingGroup }
+          .compactMapValues { $0.isEmpty ? nil : $0 }
+        
+        if let adlessSource = obtainedSources["adless"] {
+            let resolutionMatch = try NSRegularExpression(pattern: "\\d+\\|([^|]+)", options: [])
+            let finalSelectedSource = resolutionMatch
+                .lastMatch(in: adlessSource)? // Select the highest quality resource
+                .firstMatchingGroup
+            obtainedSources["adless"] = finalSelectedSource ?? adlessSource
+        }
+        
+        return obtainedSources
     }
 }
