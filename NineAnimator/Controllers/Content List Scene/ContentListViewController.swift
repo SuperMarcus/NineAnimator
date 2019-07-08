@@ -25,11 +25,14 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
     
     // swiftlint:disable:next implicitly_unwrapped_optional
     private var contentSource: ContentProvider!
+    
+    /// Hight of each result cell
+    private let staticListElementHeight: CGFloat = 160
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 160
-        tableView.estimatedRowHeight = 160
+        tableView.rowHeight = staticListElementHeight
+        tableView.estimatedRowHeight = staticListElementHeight
         tableView.tableFooterView = UIView()
         tableView.makeThemable()
     }
@@ -180,7 +183,7 @@ extension ContentListViewController {
             self.tableView.performBatchUpdates({
                 self.tableView.reloadData()
                 self.tableView.contentOffset = .zero
-                self.tableView.rowHeight = UITableView.automaticDimension
+                self.tableView.rowHeight = self.staticListElementHeight
                 self.tableView.layoutIfNeeded()
             }, completion: nil)
             // Load more resources
