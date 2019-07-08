@@ -63,7 +63,7 @@ extension NASourceKissanime {
                 throw NineAnimatorError.authenticationRequiredError(
                     "KissAnime requires you to complete a verification before viewing the episode",
                     reconstructedUrl
-                )
+                ).withSourceOfError(self)
             }
             
             // Check if the currently loading episode is the selected server

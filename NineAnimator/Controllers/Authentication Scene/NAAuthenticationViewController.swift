@@ -134,6 +134,11 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         self.originalRequest = request
         self.userAgent = userAgent
         self.onDismissal = callback
+        
+        // Warn about undefined User-Agent
+        if userAgent == nil {
+            Log.info("[NAAuthenticationViewController] Authentication controller initialized without a defined User-Agent. Using default value instead.")
+        }
     }
     
     class func create(_ url: URL, withUserAgent userAgent: String?, onDismissal callback: @escaping () -> Void) -> UIViewController {

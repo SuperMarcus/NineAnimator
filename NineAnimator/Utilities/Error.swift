@@ -80,6 +80,12 @@ class NineAnimatorError: NSError {
             return "NineAnimatorError(\(code)) \(localizedDescription): \(localizedFailureReason)"
         } else { return "NineAnimatorError(\(code)) \(localizedDescription)" }
     }
+    
+    /// Bind the sourceOfError to this Error object
+    func withSourceOfError(_ bindingErrorSource: Any) -> Self {
+        sourceOfError = bindingErrorSource
+        return self
+    }
 }
 
 // MARK: - NineAnimator Errors
