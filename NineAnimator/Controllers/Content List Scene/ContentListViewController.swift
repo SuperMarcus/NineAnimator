@@ -180,6 +180,7 @@ extension ContentListViewController {
             self.tableView.performBatchUpdates({
                 self.tableView.reloadData()
                 self.tableView.contentOffset = .zero
+                self.tableView.rowHeight = UITableView.automaticDimension
                 self.tableView.layoutIfNeeded()
             }, completion: nil)
             // Load more resources
