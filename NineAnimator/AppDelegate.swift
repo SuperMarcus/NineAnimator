@@ -19,6 +19,7 @@
 
 import UIKit
 import UserNotifications
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -45,6 +46,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Recover any pending download tasks
         OfflineContentManager.shared.recoverPendingTasks()
+        
+        // Setup Kingfisher
+        setupImageCacher()
+        
         return true
     }
     
@@ -245,5 +250,13 @@ extension AppDelegate {
     
     @objc func onScreenBrightnessDidChange(_ notification: Notification) {
         updateDynamicBrightness()
+    }
+}
+
+// MARK: - Initialization
+extension AppDelegate {
+    func setupImageCacher() {
+        // Set loading failure image
+        Kingfisher.KingfisherManager.shared.defaultOptions.append(.onFailureImage(#imageLiteral(resourceName: "Artwork Load Failure")))
     }
 }
