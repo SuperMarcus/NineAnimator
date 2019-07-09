@@ -211,6 +211,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         Kingfisher.ImageCache.default.clearDiskCache()
         Kingfisher.ImageCache.default.clearMemoryCache()
         URLCache.shared.removeAllCachedResponses()
+        HTTPCookieStorage.shared.removeCookies(since: .distantPast)
         UserNotificationManager.default.removeAll()
     }
     
