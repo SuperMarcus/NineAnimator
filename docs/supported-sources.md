@@ -68,6 +68,12 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
+- [AnimeKisa](//animekisa.tv)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes
+    - [ ] Detailed episode synopsis
 - ~~[masterani.me](//masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
