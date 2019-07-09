@@ -21,6 +21,7 @@ import UIKit
 
 class ServerSelectionViewController: UIViewController {
     @IBOutlet private weak var selectionView: ServerSelectionView!
+    private var completionHandler: ((ServerSelectionViewController) -> Void)?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return Theme.current.preferredStatusBarStyle
@@ -36,10 +37,16 @@ class ServerSelectionViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    class func presentSelectionDialog(from vc: UIViewController? = nil) {
-        if let viewController = UIStoryboard(name: "ServerSelection", bundle: .main).instantiateInitialViewController() {
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        completionHandler?(self)
+    }
+    
+    class func presentSelectionDialog(from vc: UIViewController? = nil, completionHandler: ((ServerSelectionViewController) -> Void)? = nil) {
+        if let viewController = UIStoryboard(name: "ServerSelection", bundle: .main).instantiateInitialViewController() as? ServerSelectionViewController {
             // Set presentation style
             viewController.modalPresentationStyle = .formSheet
+            viewController.completionHandler = completionHandler
             
             // Present the view controller
             if let sourceVc = vc {

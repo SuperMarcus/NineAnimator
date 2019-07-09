@@ -72,7 +72,13 @@ class FeaturedViewController: UITableViewController {
     @objc func onRefreshRequested() { reload() }
     
     @IBAction private func onSourceSelectionButtonPressed(_ sender: Any) {
-        return ServerSelectionViewController.presentSelectionDialog()
+        return ServerSelectionViewController.presentSelectionDialog {
+            [weak self] _ in
+            guard let self = self else { return }
+            if self.loadedSource?.name != self.source.name {
+                self.reload()
+            }
+        }
 //
 //        let alertView = UIAlertController(title: "Select Site", message: nil, preferredStyle: .actionSheet)
 //
