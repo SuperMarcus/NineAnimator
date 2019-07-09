@@ -18,23 +18,78 @@
 //
 
 import Foundation
+import SwiftSoup
 
 extension NASourceAnimeKisa {
     class SearchAgent: ContentProvider {
         var title: String
         
-        var totalPages: Int? { return nil }
-        var availablePages: Int { return 0 }
-        var moreAvailable: Bool { return false }
+        var totalPages: Int? { return 1 }
+        var availablePages: Int { return _results == nil ? 0 : 1 }
+        var moreAvailable: Bool { return _results == nil }
         
         weak var delegate: ContentProviderDelegate?
         private var parent: NASourceAnimeKisa
+        private var performingTask: NineAnimatorAsyncTask?
+        private var _results: [AnimeLink]?
         
         func links(on page: Int) -> [AnyLink] {
-            return []
+            return page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
-        func more() { }
+        func more() {
+            guard performingTask == nil && moreAvailable else { return }
+            performingTask = parent.request(
+                browsePath: "/search",
+                query: [ "q": title ]
+            ) .then {
+                [weak self] responseContent -> [AnimeLink]? in
+                guard let self = self else { return nil }
+                let bowl = try SwiftSoup.parse(responseContent)
+                let relativeUrlBase = self.parent.endpointURL.appendingPathComponent("search")
+                let results = try bowl.select("a.an").compactMap {
+                    resultContainer -> AnimeLink? in
+                    do {
+                        let artworkPath = try resultContainer
+                            .select("div.similarpic>img.coveri")
+                            .attr("src")
+                        let artworkUrl = try URL(
+                            string: artworkPath,
+                            relativeTo: relativeUrlBase
+                        ).tryUnwrap()
+                        let animeUrl = try URL(
+                            string: try resultContainer.attr("href"),
+                            relativeTo: relativeUrlBase
+                        ).tryUnwrap()
+                        let animeTitle = try resultContainer
+                            .select("div.similard")
+                            .text()
+                            .trimmingCharacters(in: .whitespacesAndNewlines)
+                        return AnimeLink(
+                            title: animeTitle,
+                            link: animeUrl,
+                            image: artworkUrl,
+                            source: self.parent
+                        )
+                    } catch { return nil }
+                }
+                guard !results.isEmpty else {
+                    throw NineAnimatorError.searchError("No results found")
+                }
+                return results
+            } .error {
+                [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.onError(error, from: self)
+                self.performingTask = nil
+            } .finally {
+                [weak self] results in
+                guard let self = self else { return }
+                self._results = results
+                self.delegate?.pageIncoming(0, from: self)
+                self.performingTask = nil
+            }
+        }
         
         init(_ query: String, withParent parent: NASourceAnimeKisa) {
             self.parent = parent
