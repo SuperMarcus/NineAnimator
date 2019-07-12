@@ -21,7 +21,7 @@ import CommonCrypto
 import Foundation
 
 extension NASourceAnimeTwist {
-    fileprivate static let encryptionKey = "k8B$B@0L8D$tDYHGmRg98sQ7!%GOEGOX27T".data(using: .utf8)!
+    fileprivate static let encryptionKey = "LXgIVP&PorO68Rq7dTx8N^lP!Fa5sGJ^*XK".data(using: .utf8)!
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         guard let sourcePool = anime.additionalAttributes["twist.source"] as? [EpisodeLink: String],
