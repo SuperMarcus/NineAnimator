@@ -120,21 +120,22 @@
                                                 <action selector="onViewScheduleButtonTapped:" destination="Fj6-CI-Qx6" eventType="touchUpInside" id="ez2-fg-h4N"/>
                                             </connections>
                                         </button>
-                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kaV-Hm-R5A">
-                                            <rect key="frame" x="20" y="53" width="394" height="203"/>
+                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kaV-Hm-R5A">
+                                            <rect key="frame" x="0.0" y="53" width="414" height="203"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="Y5P-r6-3ZO"/>
                                             </constraints>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ajt-h4-ckQ">
+                                            <inset key="scrollIndicatorInsets" minX="18" minY="0.0" maxX="18" maxY="0.0"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="ajt-h4-ckQ">
                                                 <size key="itemSize" width="356" height="160"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="thisweek.cell" id="PJS-bE-hgi" customClass="ThisWeekCellCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="21.5" width="356" height="160"/>
+                                                <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="thisweek.cell" id="PJS-bE-hgi" customClass="ThisWeekCellCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="21.5" width="356" height="160"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="356" height="160"/>
@@ -260,7 +261,7 @@
                                         <constraint firstItem="kaV-Hm-R5A" firstAttribute="bottom" secondItem="eb3-i7-9bF" secondAttribute="bottomMargin" priority="750" id="7qk-kW-ba4"/>
                                         <constraint firstItem="BdS-bf-mCi" firstAttribute="top" secondItem="eb3-i7-9bF" secondAttribute="topMargin" constant="8" id="A2H-Sy-TEw"/>
                                         <constraint firstItem="BdS-bf-mCi" firstAttribute="leading" secondItem="eb3-i7-9bF" secondAttribute="leadingMargin" id="IAt-kf-3fs"/>
-                                        <constraint firstItem="kaV-Hm-R5A" firstAttribute="leading" secondItem="eb3-i7-9bF" secondAttribute="leadingMargin" id="MPj-sl-g95"/>
+                                        <constraint firstItem="kaV-Hm-R5A" firstAttribute="leading" secondItem="eb3-i7-9bF" secondAttribute="leading" id="MPj-sl-g95"/>
                                         <constraint firstItem="WZx-eB-ztY" firstAttribute="leading" secondItem="BdS-bf-mCi" secondAttribute="trailing" constant="8" id="eA0-YQ-I08"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="WZx-eB-ztY" secondAttribute="trailing" id="lZA-KL-tLk"/>
                                         <constraint firstItem="WZx-eB-ztY" firstAttribute="bottom" secondItem="BdS-bf-mCi" secondAttribute="bottom" id="ngT-AT-fWn"/>
@@ -313,13 +314,14 @@
                                                 <action selector="onViewMoreButtonTapped:" destination="tUL-GN-cnA" eventType="touchUpInside" id="sfM-cY-dwJ"/>
                                             </connections>
                                         </button>
-                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cFI-A9-gFQ">
-                                            <rect key="frame" x="20" y="68" width="394" height="277"/>
+                                        <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="cFI-A9-gFQ">
+                                            <rect key="frame" x="0.0" y="68" width="414" height="277"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="240" id="C05-Bu-OyN"/>
                                             </constraints>
-                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="25" minimumInteritemSpacing="10" id="oP1-PG-QnO">
+                                            <inset key="scrollIndicatorInsets" minX="18" minY="0.0" maxX="18" maxY="0.0"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="25" minimumInteritemSpacing="10" sectionInsetReference="layoutMargins" id="oP1-PG-QnO">
                                                 <size key="itemSize" width="101" height="200"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -327,7 +329,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="standard" id="RB1-XX-78w" customClass="DiscoveryStandardCellCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="38.5" width="101" height="200"/>
+                                                    <rect key="frame" x="20" y="38.5" width="101" height="200"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="101" height="200"/>
@@ -417,7 +419,7 @@
                                     <constraints>
                                         <constraint firstItem="9Fk-Gp-IGG" firstAttribute="top" secondItem="B9N-hK-IwS" secondAttribute="bottom" id="0Du-d2-esf"/>
                                         <constraint firstItem="cFI-A9-gFQ" firstAttribute="top" secondItem="9Fk-Gp-IGG" secondAttribute="bottom" constant="8" id="1MP-yb-2pu"/>
-                                        <constraint firstItem="cFI-A9-gFQ" firstAttribute="leading" secondItem="5J2-TG-Bgv" secondAttribute="leadingMargin" id="5Yg-Gd-W9V"/>
+                                        <constraint firstItem="cFI-A9-gFQ" firstAttribute="leading" secondItem="5J2-TG-Bgv" secondAttribute="leading" id="5Yg-Gd-W9V"/>
                                         <constraint firstItem="9Fk-Gp-IGG" firstAttribute="trailing" secondItem="B9N-hK-IwS" secondAttribute="trailing" id="ETr-L1-GwS"/>
                                         <constraint firstItem="B9N-hK-IwS" firstAttribute="top" secondItem="5J2-TG-Bgv" secondAttribute="topMargin" constant="4" id="MS9-qa-g23"/>
                                         <constraint firstItem="j7t-Oe-H6q" firstAttribute="bottom" secondItem="9Fk-Gp-IGG" secondAttribute="bottom" id="NSU-2G-Zfs"/>
