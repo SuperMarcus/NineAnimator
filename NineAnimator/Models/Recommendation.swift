@@ -20,6 +20,8 @@
 import Foundation
 
 /// An object that can provide recommendations for users
+///
+/// For how to trigger an update, see `DiscoverySceneViewController`
 protocol RecommendationSource: AnyObject {
     typealias Piority = Double
     
@@ -28,6 +30,9 @@ protocol RecommendationSource: AnyObject {
     
     /// The piority of this recommendation collection when sorting
     var piority: Piority { get }
+    
+    /// Check if the recommendation should be reloaded
+    func shouldReload(recommendation: Recommendation) -> Bool
     
     /// Retrieve the list of recommendations from this source
     func generateRecommendations() -> NineAnimatorPromise<Recommendation>

@@ -19,6 +19,17 @@
 
 import UIKit
 
+/// ViewController for To Watch scene
+///
+/// ### Updating the Recommendations
+///
+/// There are several ways to update the recommendations
+/// - Fire an .sourceDidUpdateRecommendation with the RecommendationSource as the object.
+///   The source will be updated as soon as the notification is received
+/// - Call the markSourceAsDirty(_:) method, the source will be updated as soon as the
+///   method is invoked
+/// - Return true on RecommendationSource.shouldReload(recommendation:). The source will
+///   be updated as soon as the To Watch scene is being (re-)presented.
 class DiscoverySceneViewController: UITableViewController {
     private var recommendationList = [(RecommendationSource, Recommendation?, Error?)]()
     private var recommendationLoadingTasks = [ObjectIdentifier: NineAnimatorAsyncTask]()
@@ -64,6 +75,7 @@ class DiscoverySceneViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         // Reload dirty and errored sources when the view appears
+        markDirtySources()
         reloadDirtySources()
         reloadErroredSources()
         tableView.makeThemable()
@@ -197,13 +209,18 @@ fileprivate extension DiscoverySceneViewController {
     
     @objc private func onSourceDidUpdateRecommendation(_ notification: Notification) {
         if let source = notification.object as? RecommendationSource {
-            let identifier = ObjectIdentifier(source)
-            dirtySources.insert(identifier)
-            
-            // Reload immedietly if currently presenting
-            if shouldReloadDirtySourceImmedietly {
-                DispatchQueue.main.async { [weak self] in self?.reloadDirtySources() }
-            }
+            markSourceAsDirty(source)
+        }
+    }
+    
+    /// Mark the source as dirty and reload the sources if needed
+    private func markSourceAsDirty(_ source: RecommendationSource) {
+        let identifier = ObjectIdentifier(source)
+        dirtySources.insert(identifier)
+        
+        // Reload immedietly if currently presenting
+        if shouldReloadDirtySourceImmedietly {
+            DispatchQueue.main.async { [weak self] in self?.reloadDirtySources() }
         }
     }
     
@@ -219,6 +236,15 @@ fileprivate extension DiscoverySceneViewController {
             // this will cause any previously created task to abort
             recommendationLoadingTasks[sourceIdentifier] = createTask(for: source, withItemIndex: index)
             _ = dirtySources.remove(sourceIdentifier)
+        }
+    }
+    
+    /// Mark the sources that request updates as dirty
+    private func markDirtySources() {
+        for (source, recommendation, error) in recommendationList where error == nil {
+            if let recommendation = recommendation, source.shouldReload(recommendation: recommendation) {
+                markSourceAsDirty(source)
+            }
         }
     }
     

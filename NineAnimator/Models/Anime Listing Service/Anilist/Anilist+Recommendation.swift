@@ -74,6 +74,10 @@ extension Anilist {
             self.parent = parent
         }
         
+        func shouldReload(recommendation: Recommendation) -> Bool {
+            return false
+        }
+        
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             if let cachedRecommendation = generatedRecommendation {
                 return .success(cachedRecommendation)

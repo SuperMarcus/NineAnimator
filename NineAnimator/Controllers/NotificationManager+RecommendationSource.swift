@@ -24,6 +24,11 @@ extension UserNotificationManager {
         var name = "Subscriptions"
         var piority: RecommendationSource.Piority = .defaultHigh
         
+        func shouldReload(recommendation: Recommendation) -> Bool {
+            // Reload subscribed recommendations every time
+            return true
+        }
+        
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             if NineAnimator.default.user.subscribedAnimes.isEmpty {
                 return .fail(.searchError("You did not subscribe to any anime."))

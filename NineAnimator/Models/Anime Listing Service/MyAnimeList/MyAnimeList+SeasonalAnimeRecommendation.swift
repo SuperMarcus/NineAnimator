@@ -30,6 +30,10 @@ extension MyAnimeList {
             self.parent = parent
         }
         
+        func shouldReload(recommendation: Recommendation) -> Bool {
+            return false
+        }
+        
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             let queue = DispatchQueue.global()
             return NineAnimatorPromise(queue: queue) {
@@ -91,6 +95,10 @@ extension MyAnimeList {
         
         init(_ parent: MyAnimeList) {
             self.parent = parent
+        }
+        
+        func shouldReload(recommendation: Recommendation) -> Bool {
+            return false
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
