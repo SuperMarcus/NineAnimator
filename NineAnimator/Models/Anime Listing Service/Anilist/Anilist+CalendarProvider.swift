@@ -39,7 +39,7 @@ extension Anilist {
             
             // Create the loading task
             self.loadingTask = parent.graphQL(fileQuery: "AniListCalendarQuery", variables: [
-                "page": availablePages,
+                "page": availablePages + 1,
                 "perPage": 50,
                 "startTime": Int(initialDate.timeIntervalSince1970)
             ]) .then {
