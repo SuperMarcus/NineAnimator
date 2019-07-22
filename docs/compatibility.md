@@ -3,7 +3,7 @@
 NineAnimator is compatible with devices running iOS 11.2 or later. This
 includes iPhones and iPads.
 
-The app is tested on the following devices running the latest operation
+The app is tested on the following devices running the latest operating
 systems:
 
 - iPhone Xs Max
@@ -13,8 +13,8 @@ systems:
 
 ### UIKit for Mac (a.k.a. Project Catalyst) Support
 
-NineAnimator does not officially supports Project Catalyst at the moment.
-However we do plan on enabling this feature as soon as the SDK matures
+NineAnimator does not officially support Project Catalyst at the moment.
+However, we do plan on enabling this feature as soon as the SDK matures
 and stabilizes.
 
 In the mean time, you are welcomed to experiment with Project Catalyst
