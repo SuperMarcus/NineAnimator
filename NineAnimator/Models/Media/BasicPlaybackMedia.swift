@@ -22,28 +22,7 @@ import AVKit
 import Foundation
 import OpenCastSwift
 
-/// Representing a playable media
-protocol PlaybackMedia {
-    /// Obtain the AVPlayerItem object for this asset
-    var avPlayerItem: AVPlayerItem { get }
-    
-    /// Obtain the CastMedia object for this asset
-    var castMedia: CastMedia? { get }
-    
-    /// Obtain the URLRequest for this asset
-    var urlRequest: URLRequest? { get }
-    
-    /// The episode link that this playback media is referring to
-    var link: EpisodeLink { get }
-    
-    /// Describing the episode
-    var name: String { get }
-    
-    /// Specify if this media uses HLS/m3u8 playlist
-    /// and should be preserved using AVAssetDownloadURLSession
-    var isAggregated: Bool { get }
-}
-
+/// A media container for retrieved media
 struct BasicPlaybackMedia: PlaybackMedia {
     let url: URL
     let parent: Episode
@@ -77,16 +56,5 @@ struct BasicPlaybackMedia: PlaybackMedia {
         
         // Construct the URLRequest from the information provided
         return try? URLRequest(url: url, method: .get, headers: headers)
-    }
-}
-
-//A shortcut for setting and retriving playback progress
-extension PlaybackMedia {
-    var progress: Double {
-        get { return link.playbackProgress }
-        set {
-            let trackingContext = NineAnimator.default.trackingContext(for: link.parent)
-            trackingContext.update(progress: newValue, forEpisodeLink: link)
-        }
     }
 }

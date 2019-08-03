@@ -17,31 +17,22 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Alamofire
+import AVKit
 import Foundation
 
-extension Optional {
-    /// Try to unwrap the optional value, or throw an error
-    ///
-    /// Why? This makes chaining much easier and simpler to write & read
-    func tryUnwrap(_ error: NineAnimatorError = .decodeError) throws -> Wrapped {
-        switch self {
-        case let .some(value): return value
-        default: throw error
-        }
-    }
+/// Representing a streaming resource parser that accepts an URL to
+/// the streaming source's website and returns the resource URL.
+protocol VideoProviderParser {
+    /// Alternative names of this streaming source
+    var aliases: [String] { get }
     
-    /// Run the closure with the value if there is a value in this optional
-    func unwrap<ResultType>(_ ifUnwrapped: (Wrapped) -> ResultType) -> ResultType? {
-        switch self {
-        case let .some(value): return ifUnwrapped(value)
-        default: return nil
-        }
-    }
+    /// Obtain the playback media for the episode target
+    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
 }
 
-// MARK: Optional<URL>
-extension Optional where Wrapped == URL {
-    func tryUnwrap() throws -> Wrapped {
-        return try tryUnwrap(.urlError)
+extension VideoProviderParser {
+    var defaultUserAgent: String {
+        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
     }
 }

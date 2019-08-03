@@ -266,6 +266,9 @@
 		2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */; };
 		2CD9B9A621FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */; };
 		2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */; };
+		2CE1F84822EEB9E6005448FF /* VideoProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */; };
+		2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */; };
+		2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */; };
 		2CE5B8E0225ECAC200A2CF89 /* SetupFinishingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */; };
 		2CE5B8E22260D7BE00A2CF89 /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5B8E12260D7BE00A2CF89 /* Recommendation.swift */; };
 		2CEA0BE621F54E1D007EECC4 /* StatesSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */; };
@@ -602,6 +605,9 @@
 		2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeAirDateView.swift; sourceTree = "<group>"; };
 		2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSynopsisCellTableViewCell.swift; sourceTree = "<group>"; };
 		2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderRegistry.swift; sourceTree = "<group>"; };
+		2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlaybackMedia.swift; sourceTree = "<group>"; };
+		2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalPlaybackMedia.swift; sourceTree = "<group>"; };
 		2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFinishingViewController.swift; sourceTree = "<group>"; };
 		2CE5B8E12260D7BE00A2CF89 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesSerialization.swift; sourceTree = "<group>"; };
@@ -1000,7 +1006,7 @@
 				2C8536832231BC5400A5CFB9 /* Anime Source */,
 				2C3BBAAD22183BA900F1C77B /* Anime Listing Service */,
 				2C2C54F32215D38500BAA76E /* User */,
-				2C91296E21BB608F00284FD0 /* ProviderParsers */,
+				2C91296E21BB608F00284FD0 /* Media */,
 				2C1C71842219AFB700760A69 /* TrackingContext.swift */,
 				2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */,
 				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
@@ -1265,25 +1271,15 @@
 			path = "Setup Scenes";
 			sourceTree = "<group>";
 		};
-		2C91296E21BB608F00284FD0 /* ProviderParsers */ = {
+		2C91296E21BB608F00284FD0 /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */,
-				2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */,
-				2C91297421BB7A4200284FD0 /* StreamangoParser.swift */,
-				2C91297621BB867300284FD0 /* MyCloudParser.swift */,
+				2CE1F84622EEB9B8005448FF /* Parser */,
 				2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */,
-				2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */,
-				2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */,
-				2C86BD0821F0169F002D876A /* DummyParser.swift */,
-				2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */,
-				65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */,
-				2C7B7AA72296E819002EC74C /* KiwikParser.swift */,
-				2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */,
-				2C7B7AAD229736B7002EC74C /* XStreamParser.swift */,
-				2C8519BB22D3173200EEF3AC /* NovaParser.swift */,
+				2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */,
+				2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */,
 			);
-			path = ProviderParsers;
+			path = Media;
 			sourceTree = "<group>";
 		};
 		2C9383C921FBE774008C0D01 /* Theme */ = {
@@ -1420,6 +1416,27 @@
 				2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */,
 			);
 			path = masterani.me;
+			sourceTree = "<group>";
+		};
+		2CE1F84622EEB9B8005448FF /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */,
+				2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */,
+				2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */,
+				2C91297421BB7A4200284FD0 /* StreamangoParser.swift */,
+				2C91297621BB867300284FD0 /* MyCloudParser.swift */,
+				2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */,
+				2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */,
+				2C86BD0821F0169F002D876A /* DummyParser.swift */,
+				2C8536812230B49000A5CFB9 /* PrettyFastParser.swift */,
+				65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */,
+				2C7B7AA72296E819002EC74C /* KiwikParser.swift */,
+				2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */,
+				2C7B7AAD229736B7002EC74C /* XStreamParser.swift */,
+				2C8519BB22D3173200EEF3AC /* NovaParser.swift */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 		2CEB56D421DBE45B0018D804 /* Anime Scene */ = {
@@ -1802,6 +1819,7 @@
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
+				2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
 				2C85368E2234008A00A5CFB9 /* WonderfulSubs.swift in Sources */,
 				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
@@ -1814,6 +1832,7 @@
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
 				2CAD375822261BDE008AD6B4 /* MyAnimeList.swift in Sources */,
 				2CCC746021C06D1B0007502A /* NineAnime+Featured.swift in Sources */,
+				2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */,
 				2C6984ED227D490900C9EF0E /* Anilist+GQLDate.swift in Sources */,
 				2C6677B221BD846A000E5ACC /* CMTime.swift in Sources */,
 				2C2C54F52215D42700BAA76E /* User+Preferences.swift in Sources */,
@@ -1855,6 +1874,7 @@
 				2C23AE3E2229CFBD00512150 /* MyAnimeList+User.swift in Sources */,
 				2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
+				2CE1F84822EEB9E6005448FF /* VideoProviderRegistry.swift in Sources */,
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,

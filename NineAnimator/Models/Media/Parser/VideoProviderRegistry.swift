@@ -17,25 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Alamofire
-import AVKit
 import Foundation
-
-/// Representing a streaming resource parser that accepts an URL to
-/// the streaming source's website and returns the resource URL.
-protocol VideoProviderParser {
-    /// Alternative names of this streaming source
-    var aliases: [String] { get }
-    
-    /// Obtain the playback media for the episode target
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
-}
-
-extension VideoProviderParser {
-    var defaultUserAgent: String {
-        return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
-    }
-}
 
 /// A centralized registry for all streming source parsers
 class VideoProviderRegistry {
