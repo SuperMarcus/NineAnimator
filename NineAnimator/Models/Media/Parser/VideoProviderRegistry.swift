@@ -31,6 +31,7 @@ class VideoProviderRegistry {
         defaultProvider.register(Mp4UploadParser(), forServer: "Mp4Upload")
         defaultProvider.register(TiwiKiwiParser(), forServer: "Tiwi.Kiwi")
         defaultProvider.register(DummyParser(), forServer: "Dummy")
+        defaultProvider.register(PassthroughParser(), forServer: "Passthrough")
         defaultProvider.register(PrettyFastParser(), forServer: "F5 - HQ")
         defaultProvider.register(OpenLoadParser(), forServer: "OpenLoad")
         defaultProvider.register(KiwikParser(), forServer: "Kiwik")

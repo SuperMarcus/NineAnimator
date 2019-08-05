@@ -35,4 +35,10 @@ extension VideoProviderParser {
     var defaultUserAgent: String {
         return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
     }
+    
+    /// Check if the content type infers an aggregated asset
+    func isAggregatedAsset(mimeType: String) -> Bool {
+        let loweredMimeType = mimeType.lowercased()
+        return loweredMimeType == "application/x-mpegurl" || loweredMimeType == "vnd.apple.mpegurl"
+    }
 }

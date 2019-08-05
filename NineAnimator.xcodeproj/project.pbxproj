@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */; };
 		2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC362263B26900EC793E /* ThisWeekTableViewCell.swift */; };
 		2C0CFC392263B34300EC793E /* Anilist+Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC382263B34300EC793E /* Anilist+Recommendation.swift */; };
 		2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C0CFC3A2263B39100EC793E /* AniListCalendarQuery.graphql */; };
@@ -320,6 +321,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughParser.swift; sourceTree = "<group>"; };
 		2C0CFC362263B26900EC793E /* ThisWeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThisWeekTableViewCell.swift; sourceTree = "<group>"; };
 		2C0CFC382263B34300EC793E /* Anilist+Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+Recommendation.swift"; sourceTree = "<group>"; };
 		2C0CFC3A2263B39100EC793E /* AniListCalendarQuery.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListCalendarQuery.graphql; sourceTree = "<group>"; };
@@ -1435,6 +1437,7 @@
 				2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */,
 				2C7B7AAD229736B7002EC74C /* XStreamParser.swift */,
 				2C8519BB22D3173200EEF3AC /* NovaParser.swift */,
+				2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -1966,6 +1969,7 @@
 				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
+				2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */,
 				2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */,
 				2C0E755322622DD600DF3AC4 /* DiscoverySceneViewController.swift in Sources */,
 				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
