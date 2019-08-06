@@ -41,4 +41,9 @@ extension VideoProviderParser {
         let loweredMimeType = mimeType.lowercased()
         return loweredMimeType == "application/x-mpegurl" || loweredMimeType == "vnd.apple.mpegurl"
     }
+    
+    /// Obtain the shared instance of this VideoProviderParser
+    static var registeredInstance: Self? {
+        return VideoProviderRegistry.default.provider(Self.self)
+    }
 }

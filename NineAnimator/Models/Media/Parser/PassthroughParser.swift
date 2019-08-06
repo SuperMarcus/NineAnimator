@@ -30,16 +30,20 @@ class PassthroughParser: VideoProviderParser {
         DispatchQueue.main.async {
             let options = episode.userInfo
             
-            if let media = options[Options.playbackMedia] as? PlaybackMedia {
-                handler(media, nil)
+            if let mediaRetriever = options[Options.playbackMediaRetriever] as? MediaRetriever {
+                do {
+                    handler(try mediaRetriever(episode).tryUnwrap(), nil)
+                } catch { handler(nil, error) }
             } else { handler(nil, NineAnimatorError.providerError("No PlaybackMedia is specified for use with a PassthroughParser")) }
         }
         
         return dummyTask
     }
     
+    typealias MediaRetriever = (Episode) throws -> PlaybackMedia?
+    
     enum Options {
-        static let playbackMedia: String =
-        "com.marcuszhou.nineanimator.providerparser.PassthroughParser.media"
+        static let playbackMediaRetriever: String =
+        "com.marcuszhou.nineanimator.providerparser.PassthroughParser.mediaRetriever"
     }
 }

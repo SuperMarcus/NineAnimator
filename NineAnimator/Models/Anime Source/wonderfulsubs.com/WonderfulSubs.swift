@@ -41,7 +41,7 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
     override var endpoint: String { return "https://www.wonderfulsubs.com" }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return VideoProviderRegistry.default.provider(DummyParser.self)
+        return PassthroughParser.registeredInstance
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {

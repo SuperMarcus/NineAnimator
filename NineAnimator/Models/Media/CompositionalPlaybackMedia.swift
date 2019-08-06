@@ -39,6 +39,9 @@ class CompositionalPlaybackMedia: NSObject, PlaybackMedia, AVAssetResourceLoader
     /// Caching requested vtt files
     private var cachedVttData = [URL: Data]()
     
+    /// The delegate queue
+    private let delegateQueue: DispatchQueue = .global()
+    
     init(url: URL, parent: Episode, contentType: String, headers: HTTPHeaders, subtitles: [SubtitleComposition]) {
         self.url = url
         self.parent = parent
@@ -93,8 +96,10 @@ class CompositionalPlaybackMedia: NSObject, PlaybackMedia, AVAssetResourceLoader
 // MARK: - Playlist modification
 extension CompositionalPlaybackMedia {
     private func loadingRequestCachedVtt(requestingResourceUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) throws -> Bool {
+        Log.info(">>>> DEBUG: Requested to load subtitle at %@", requestingResourceUrl.absoluteString)
         loadingTasks[loadingRequest] = requestVtt(requestingResourceUrl).error {
             error in loadingRequest.finishLoading(with: error)
+            Log.info(">>>> DEBUG: Sub load finished with error %@", error)
         } .finally {
             [weak self] cachedVttData in
             guard let self = self else { return }
@@ -109,6 +114,8 @@ extension CompositionalPlaybackMedia {
                 infoRequest.contentType = try? self.contentType(fromMimeType: "text/vtt")
                 infoRequest.contentLength = Int64(cachedVttData.count)
             }
+            
+            Log.info(">>>> DEBUG: finished loading vtt len %@", cachedVttData.count)
             
             // Informs that the loading has been completed
             loadingRequest.finishLoading()
@@ -160,10 +167,11 @@ extension CompositionalPlaybackMedia {
 \(vttCachedUrl.absoluteString)
 #EXT-X-ENDLIST
 """.data(using: .utf8)
-        }.error {
+        } .error {
             [weak self] in
             guard self != nil else { return }
             loadingRequest.finishLoading(with: $0)
+            Log.info(">>> DEBUG: Subtitle loading failed with error %@", $0)
         } .finally {
             [weak self] generatedPlaylist in
             guard self != nil else { return }
@@ -178,6 +186,8 @@ extension CompositionalPlaybackMedia {
                 infoRequest.contentType = "public.m3u-playlist"
                 infoRequest.contentLength = Int64(generatedPlaylist.count)
             }
+            
+            Log.info(">>> DEBUG: Responded with subtitle playlist content %@")
             
             // Informs that the loading has been completed
             loadingRequest.finishLoading()
@@ -198,7 +208,7 @@ extension CompositionalPlaybackMedia {
                 method: .get,
                 headers: headers
             ) .responseData {
-                [subtitleCompositionGroupId, injectionSubtitlePlaylistScheme, subtitles, contentType] response in
+                [subtitleCompositionGroupId, injectionSubtitlePlaylistScheme, subtitles] response in
                 do {
                     switch response.result {
                     case let .success(playlistResponse):
@@ -214,11 +224,13 @@ extension CompositionalPlaybackMedia {
                         
                         // Construct subtitle group
                         let subtitles = subtitles.map {
-                            url, name, language in "#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID=\"\(subtitleCompositionGroupId)\",NAME=\"\(name)\",DEFAULT=YES,AUTOSELECT=YES,FORCED=NO,LANGUAGE=\"\(language)\",CHARACTERISTICS=\"public.accessibility.transcribes-spoken-dialog, public.accessibility.describes-music-and-sound\",URI=\"\(injectionSubtitlePlaylistScheme)://#\(url.uniqueHashingIdentifier)\""
+                            url, name, language in "#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID=\"\(subtitleCompositionGroupId)\",NAME=\"\(name)\",DEFAULT=YES,AUTOSELECT=YES,FORCED=NO,LANGUAGE=\"\(language)\",CHARACTERISTICS=\"public.accessibility.transcribes-spoken-dialog\",URI=\"\(injectionSubtitlePlaylistScheme)://subtitle.m3u8#\(url.uniqueHashingIdentifier)\""
                         }.joined(separator: "\n")
-                            
+                        
+                        Log.info(">>>> DEBUG: Responded with playlist data")
+                        
                         // Convert to data
-                        let playlistData = "\(playlistContent)\n\(subtitles)".data(using: .utf8) ?? playlistResponse
+                        let playlistData = "\(playlistContent.trimmingCharacters(in: .whitespacesAndNewlines))\n\(subtitles)\n".data(using: .utf8) ?? playlistResponse
                         
                         // Respond with modified playlist data
                         if let dataRequest = loadingRequest.dataRequest {
@@ -227,18 +239,11 @@ extension CompositionalPlaybackMedia {
                         
                         // Fill in the request information
                         if let contentInformationRequest = loadingRequest.contentInformationRequest {
-                            let inferredContentUTI = UTTypeCreatePreferredIdentifierForTag(
-                                kUTTagClassMIMEType,
-                                contentType as CFString,
-                                nil
-                            )?.takeRetainedValue()
-                            
-                            if let inferredContentUTI = inferredContentUTI {
-                                contentInformationRequest.contentType = inferredContentUTI as String
-                            }
-                            
+                            contentInformationRequest.contentType = "public.m3u-playlist"
                             contentInformationRequest.contentLength = Int64(playlistData.count)
                         }
+                        
+                        loadingRequest.finishLoading()
                     case let .failure(error): throw error
                     }
                 } catch { loadingRequest.finishLoading(with: error) }
@@ -250,26 +255,24 @@ extension CompositionalPlaybackMedia {
                 headers: loadingRequest.request.allHTTPHeaderFields
             )
             loadingRequest.finishLoading()
-            return true
         }
         
-        return false
+        return true
     }
     
     private func requestVtt(_ url: URL) -> NineAnimatorPromise<Data> {
         do {
             // If the cache was found, return directly
             if let cachedVttData = self.cachedVttData[url] {
+                Log.info("Subtitle is cached, returning directly")
                 return .success(cachedVttData)
             }
             
             let vttUrl = try swapeScheme(forUrl: url, withNewScheme: "https")
             
             // Request and cached the vtt
-            return NineAnimatorPromise {
-                callback in Alamofire.request(vttUrl, headers: [
-                    "Accept": "text/vtt"
-                ]) .responseData {
+            return NineAnimatorPromise(queue: delegateQueue) {
+                callback in Alamofire.request(vttUrl).responseData {
                     response in
                     switch response.result {
                     case let .success(vttData): callback(vttData, nil)
@@ -283,24 +286,20 @@ extension CompositionalPlaybackMedia {
                 self.cachedVttData[url] = vttData
                 return vttData
             }
-        } catch { return NineAnimatorPromise.firstly { throw error } }
+        } catch { return NineAnimatorPromise.firstly(queue: delegateQueue) { throw error } }
     }
 }
 
 // MARK: - PlaybackMedia
 extension CompositionalPlaybackMedia {
     var avPlayerItem: AVPlayerItem {
-        let schemedUrl = {
-            originalUrl, scheme -> URL? in
-            var components = URLComponents(url: originalUrl, resolvingAgainstBaseURL: true)
-            components?.scheme = scheme
-            return components?.url
-        }(url, interceptResourceScheme) ?? url
+        let schemedUrl = (try? swapeScheme(forUrl: url, withNewScheme: interceptResourceScheme)) ?? url
+        Log.info(">>>> DEBUG: Scheme swapped for url %@", schemedUrl)
         let asset = AVURLAsset(
             url: schemedUrl,
             options: ["AVURLAssetHTTPHeaderFieldsKey": headers]
         )
-        asset.resourceLoader.setDelegate(self, queue: .global())
+        asset.resourceLoader.setDelegate(self, queue: delegateQueue)
         return AVPlayerItem(asset: asset)
     }
     
@@ -337,7 +336,7 @@ extension CompositionalPlaybackMedia {
     }
     
     private var subtitleCompositionGroupId: String {
-        return "__na_subs"
+        return "nasubs"
     }
     
     private func swapeScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {

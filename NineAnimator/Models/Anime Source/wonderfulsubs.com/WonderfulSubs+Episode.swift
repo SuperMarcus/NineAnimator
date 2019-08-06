@@ -21,36 +21,71 @@ import AVKit
 import Foundation
 
 extension NASourceWonderfulSubs {
+    struct APIStreamResponse: Codable {
+        var status: Int
+        var urls: [APIStreamURLEntry]
+    }
+    
+    struct APIStreamURLEntry: Codable {
+        var src: String
+        var type: String
+        var label: String
+        var captions: APIStreamCaptionsEntry?
+    }
+    
+    struct APIStreamCaptionsEntry: Codable {
+        var src: String
+        var srcLang: String
+        var label: String
+    }
+    
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         return request(
             ajaxPathDictionary: "/api/media/stream",
             query: [ "code": link.identifier ]
         ) .then {
             response in
-            let supportedMimeTypes = AVURLAsset.audiovisualMIMETypes().map { $0.lowercased() }
-            let availableAssets = try response
-                .value(at: "urls", type: [NSDictionary].self)
-                .compactMap {
-                    asset -> (url: URL, type: String)? in
-                    guard let url = URL(string: try asset.value(at: "src", type: String.self)) else {
-                        return nil
-                    }
-                    let type = try asset.value(at: "type", type: String.self)
-                    return (url, type)
+            let availableAssets = try DictionaryDecoder().decode(APIStreamResponse.self, from: response)
+            let selectedAsset = try availableAssets
+                .urls
+                .last
+                .tryUnwrap(.responseError("NineAnimator does not support the playback of this episode"))
+            let targetUrl = try URL(string: selectedAsset.src).tryUnwrap()
+            let mediaRetriever: PassthroughParser.MediaRetriever = {
+                episode in
+                // Assuming that all assets with external subtitles are aggregated, which may not be true
+                if let captions = selectedAsset.captions {
+                    return CompositionalPlaybackMedia(
+                        url: targetUrl,
+                        parent: episode,
+                        contentType: selectedAsset.type,
+                        headers: [:],
+                        subtitles: [
+                            (
+                                url: try URL(string: captions.src).tryUnwrap(),
+                                name: captions.label,
+                                language: captions.srcLang
+                            )
+                        ]
+                    )
+                } else {
+                    return BasicPlaybackMedia(
+                        url: targetUrl,
+                        parent: episode,
+                        contentType: selectedAsset.type,
+                        headers: [:],
+                        isAggregated: DummyParser.registeredInstance!.isAggregatedAsset(mimeType: selectedAsset.type)
+                    )
                 }
-                .filter { supportedMimeTypes.contains($0.type.lowercased()) }
-            let selectedAsset = try some(
-                availableAssets.last,
-                or: .responseError("NineAnimator does not support the playback of this episode")
-            )
+            }
             
             // Construct the episode object
             return Episode(
                 link,
-                target: selectedAsset.url,
+                target: targetUrl,
                 parent: anime,
                 referer: anime.link.link.absoluteString,
-                userInfo: [ DummyParser.Options.contentType: selectedAsset.type ]
+                userInfo: [ PassthroughParser.Options.playbackMediaRetriever: mediaRetriever ]
             )
         }
     }
