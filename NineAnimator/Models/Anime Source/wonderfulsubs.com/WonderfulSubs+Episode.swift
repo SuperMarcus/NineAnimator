@@ -45,6 +45,12 @@ extension NASourceWonderfulSubs {
             query: [ "code": link.identifier ]
         ) .then {
             response in
+            // A common error for WonderfulSubs
+            if response["status"] as? Int == 404 {
+                throw NineAnimatorError.responseError("This episode is not available on this server")
+            }
+            
+            // Decode the asset url from the response
             let availableAssets = try DictionaryDecoder().decode(APIStreamResponse.self, from: response)
             let selectedAsset = try availableAssets
                 .urls
