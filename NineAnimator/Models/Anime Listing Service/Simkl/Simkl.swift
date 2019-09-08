@@ -26,6 +26,10 @@ class Simkl: BaseListingService, ListingService {
     /// Simkl API endpoint
     let endpoint = URL(string: "https://api.simkl.com")!
     
+    var cachedReferenceEpisodes = [String: SimklEpisodeEntry]()
+    
+    var cachedCollections: [String: Collection]?
+    
     override var identifier: String {
         return "com.marcuszhou.nineanimator.service.simkl"
     }
@@ -37,11 +41,11 @@ class Simkl: BaseListingService, ListingService {
 
 // MARK: - Capabilities
 extension Simkl {
-    var isCapableOfListingAnimeInformation: Bool { return true }
+    var isCapableOfListingAnimeInformation: Bool { return false }
     
-    var isCapableOfPersistingAnimeState: Bool { return true }
+    var isCapableOfPersistingAnimeState: Bool { return didSetup }
     
-    var isCapableOfRetrievingAnimeState: Bool { return true }
+    var isCapableOfRetrievingAnimeState: Bool { return didSetup }
 }
 
 // MARK: - Request helpers

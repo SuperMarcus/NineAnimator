@@ -22,13 +22,35 @@ import Foundation
 extension Simkl {
     struct SimklIdentifierEntry: Codable {
         var simkl_id: Int
-        var slug: String
     }
     
-    struct SearchResponseEntry: Codable {
+    struct SimklMediaEntry: Codable {
         var title: String
         var ids: SimklIdentifierEntry
         var poster: String?
+    }
+    
+    struct SimklEpisodeEntry: Codable {
+        var ids: SimklIdentifierEntry
+        var watched_at: String?
+        
+        var lastWatchedDate: Date? {
+            get {
+                if let w = watched_at { return Simkl.dateFormatter.date(from: w) }
+                return nil
+            }
+            set {
+                if let d = newValue { watched_at = Simkl.dateFormatter.string(from: d) }
+            }
+        }
+    }
+    
+    private static var dateFormatter: DateFormatter {
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
+        f.timeZone = TimeZone(secondsFromGMT: 0)
+        f.locale = Locale(identifier: "en_US_POSIX")
+        return f
     }
     
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
@@ -44,7 +66,7 @@ extension Simkl {
             expectedResponseType: [[String: Any]].self
         ) .then {
             try $0.first.unwrap {
-                try DictionaryDecoder().decode(SearchResponseEntry.self, from: $0)
+                try DictionaryDecoder().decode(SimklMediaEntry.self, from: $0)
             }
         } .then {
             entry in ListingAnimeReference(
@@ -57,4 +79,6 @@ extension Simkl {
             )
         }
     }
+    
+    func episodeObjects(forReference reference: ListingAnimeReference) { }
 }
