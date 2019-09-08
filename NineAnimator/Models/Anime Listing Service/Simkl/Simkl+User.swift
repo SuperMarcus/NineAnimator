@@ -19,29 +19,18 @@
 
 import Foundation
 
-extension Optional {
-    /// Try to unwrap the optional value, or throw an error
-    ///
-    /// Why? This makes chaining much easier and simpler to write & read
-    func tryUnwrap(_ error: NineAnimatorError = .decodeError) throws -> Wrapped {
-        switch self {
-        case let .some(value): return value
-        default: throw error
-        }
+extension Simkl {
+    struct User: Codable {
+        var name: String
     }
     
-    /// Run the closure with the value if there is a value in this optional
-    func unwrap<ResultType>(_ ifUnwrapped: (Wrapped) throws -> ResultType) rethrows -> ResultType? {
-        switch self {
-        case let .some(value): return try ifUnwrapped(value)
-        default: return nil
-        }
+    struct UserSettingsResponse: Codable {
+        var user: User
     }
-}
-
-// MARK: Optional<URL>
-extension Optional where Wrapped == URL {
-    func tryUnwrap() throws -> Wrapped {
-        return try tryUnwrap(.urlError)
+    
+    func currentUser() -> NineAnimatorPromise<User> {
+        return apiRequest("/users/settings", expectedResponseType: NSDictionary.self).then {
+            try DictionaryDecoder().decode(UserSettingsResponse.self, from: $0).user
+        }
     }
 }

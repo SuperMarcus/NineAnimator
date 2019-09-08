@@ -41,6 +41,11 @@ class TrackingServiceTableViewController: UITableViewController {
     private var malAuthenticationTask: NineAnimatorAsyncTask?
     private var malAccountInfoFetchTask: NineAnimatorAsyncTask?
     
+    // Simkl
+    @IBOutlet private weak var simklStatusLabel: UILabel!
+    @IBOutlet private weak var simklActionLabel: UILabel!
+    private var simklAccountInfoFetchTask: NineAnimatorAsyncTask?
+    
     // Preserve a reference to the authentication session
     private var authenticationSessionReference: AnyObject?
     
@@ -51,6 +56,8 @@ class TrackingServiceTableViewController: UITableViewController {
         anilistUpdateStatus()
         kitsuUpdateStatus()
         malUpdateStatus()
+        simklUpdateStatus()
+        
         tableView.makeThemable()
     }
     
@@ -76,6 +83,10 @@ class TrackingServiceTableViewController: UITableViewController {
             if !mal.didSetup {
                 malPresentAuthenticationPage()
             } else { malLogout() }
+        case "service.simkl.action":
+            if !simkl.didSetup {
+                simklPresentAuthenticationPage()
+            } else { simklLogOut() }
         default:
             Log.info("An unimplemented cell with identifier \"%@\" was selected", identifier)
         }
@@ -378,5 +389,63 @@ extension TrackingServiceTableViewController {
     private func anilistLogOut() {
         anilist.deauthenticate()
         anilistUpdateStatus()
+    }
+}
+
+// MARK: - Simkl.com specifics
+extension TrackingServiceTableViewController {
+    private var simkl: Simkl { return NineAnimator.default.service(type: Simkl.self) }
+    
+    private func simklUpdateStatus() {
+        if simkl.didSetup {
+            simklActionLabel.text = "Sign Out"
+            simklStatusLabel.text = "Updating"
+            
+            let updateStatusLabel = {
+                text in
+                DispatchQueue.main.async { [weak self] in self?.simklStatusLabel.text = text }
+            }
+            
+            simklAccountInfoFetchTask = simkl.currentUser()
+                .error { _ in updateStatusLabel("Unavailable") }
+                .finally { updateStatusLabel("Signed in as \($0.name)") }
+        } else {
+            simklStatusLabel.text = "Not Setup"
+            simklActionLabel.text = "Setup Simkl.com"
+        }
+    }
+    
+    private func simklLogOut() {
+        simkl.deauthenticate()
+        simklUpdateStatus()
+    }
+    
+    private func simklPresentAuthenticationPage() {
+        let callback: NineAnimatorCallback<URL> = {
+            [simkl, weak self] url, callbackError in
+            defer { DispatchQueue.main.async { [weak self] in self?.simklUpdateStatus() } }
+            var error = callbackError
+            
+            // If callback url is provided
+            if let url = url {
+                error = simkl.authenticate(withUrl: url)
+            }
+            
+            // If an error is present
+            if let error = error {
+                Log.error("[Simkl.com] Authentication session finished with error: %@", error)
+            }
+        }
+        
+        // Open the authentication dialog/web page
+        if #available(iOS 12.0, *) {
+            let session = ASWebAuthenticationSession(url: simkl.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
+            _ = session.start()
+            authenticationSessionReference = session
+        } else {
+            let session = SFAuthenticationSession(url: simkl.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
+            _ = session.start()
+            authenticationSessionReference = session
+        }
     }
 }

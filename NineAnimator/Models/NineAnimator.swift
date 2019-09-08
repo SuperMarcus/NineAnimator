@@ -198,6 +198,7 @@ extension NineAnimator {
         register(service: Anilist(self))
         register(service: Kitsu(self))
         register(service: MyAnimeList(self))
+        register(service: Simkl(self))
     }
     
     /// Remove all expired weak references
