@@ -32,25 +32,19 @@ extension Simkl {
     
     struct SimklEpisodeEntry: Codable {
         var ids: SimklIdentifierEntry
-        var watched_at: String?
+        var episode: Int?
+        var img: String?
+        var type: String
         
-        var lastWatchedDate: Date? {
-            get {
-                if let w = watched_at { return Simkl.dateFormatter.date(from: w) }
-                return nil
-            }
-            set {
-                if let d = newValue { watched_at = Simkl.dateFormatter.string(from: d) }
-            }
+        /// Convert to standard media object
+        func toStandardEpisodeObject(_ watchDate: Date = .init()) -> SimklStdMediaEpisodeEntry {
+            var std = SimklStdMediaEpisodeEntry(
+                ids: .init(simkl: ids.simkl_id),
+                watched_at: ""
+            )
+            std.lastWatchedDate = watchDate
+            return std
         }
-    }
-    
-    private static var dateFormatter: DateFormatter {
-        let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        f.timeZone = TimeZone(secondsFromGMT: 0)
-        f.locale = Locale(identifier: "en_US_POSIX")
-        return f
     }
     
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
@@ -93,5 +87,23 @@ extension Simkl {
         }
     }
     
-    func episodeObjects(forReference reference: ListingAnimeReference) { }
+    func episodeObjects(forReference reference: ListingAnimeReference) -> NineAnimatorPromise<[SimklEpisodeEntry]> {
+        if let cachedEntries = cachedReferenceEpisodes[reference.uniqueIdentifier] {
+            return .success(cachedEntries)
+        }
+        
+        return apiRequest(
+            "/anime/episodes/\(reference.uniqueIdentifier)",
+            expectedResponseType: [[String: Any]].self
+        ) .then {
+            let decoder = DictionaryDecoder()
+            return try $0.map {
+                try decoder.decode(SimklEpisodeEntry.self, from: $0)
+            }
+        } .then {
+            (episodes: [SimklEpisodeEntry]) in
+            self.cachedReferenceEpisodes[reference.uniqueIdentifier] = episodes
+            return episodes
+        }
+    }
 }

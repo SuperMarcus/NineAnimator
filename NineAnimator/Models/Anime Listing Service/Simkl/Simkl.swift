@@ -26,7 +26,7 @@ class Simkl: BaseListingService, ListingService {
     /// Simkl API endpoint
     let endpoint = URL(string: "https://api.simkl.com")!
     
-    var cachedReferenceEpisodes = [String: SimklEpisodeEntry]()
+    var cachedReferenceEpisodes = [String: [SimklEpisodeEntry]]()
     
     var cachedCollections: [String: Collection]?
     
