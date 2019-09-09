@@ -20,30 +20,31 @@
 import Foundation
 
 extension Simkl {
-    struct SimklStdMediaIdentifierEntry: Codable {
-        var simkl: Int
-    }
-    
-    struct SimklStdMediaEntry: Codable {
-        var title: String
-        var ids: SimklStdMediaIdentifierEntry
-        var poster: String?
-    }
-    
-    struct SimklLibraryAnimeEntry: Codable {
-        var show: SimklStdMediaEntry
-        var status: String
-    }
-    
-    struct SimklLibrarySyncResponse: Codable {
-        var anime: [SimklLibraryAnimeEntry]
-    }
-    
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
-        if let cachedCollections = cachedCollections {
-            return .success(cachedCollections.map { $0.value })
-        }
+        // Check if there is an update to the collections
         return apiRequest(
+            "/sync/activities",
+            expectedResponseType: [String: Any].self
+        ) .then {
+            try DictionaryDecoder().decode(SimklActivitiesResponse.self, from: $0)
+        } .thenPromise {
+            latestActivites -> NineAnimatorPromise<[ListingAnimeCollection]> in
+            // If there hasn't been an update
+            if let activitiesAnimeEntry = latestActivites.anime?.all,
+                let lastAnimeUpdateDate = Simkl.dateFormatter.date(from: activitiesAnimeEntry),
+                lastAnimeUpdateDate > self.cachedUserCollectionsLastUpdate {
+                Log.info("[Simkl.com] Updates detected, updating cached collections")
+                return self.requestUserCollections().then { $0.map { $0.value } }
+            } else {
+                // Return cached collections list
+                Log.info("[Simkl.com] No updates to the collections since last checked. Serving cached collections instead.")
+                return .success((self.cachedUserCollections ?? [:]).map { $0.value })
+            }
+        }
+    }
+    
+    private func requestUserCollections() -> NineAnimatorPromise<[String: Collection]> {
+        return self.apiRequest(
             "/sync/all-items/anime",
             query: [ "extended": "full" ],
             method: .post,
@@ -87,37 +88,36 @@ extension Simkl {
             }
         } .then {
             collections in
-            self.cachedCollections = Dictionary(uniqueKeysWithValues: collections)
-            return collections.map { $0.1 }
+            let dict = Dictionary(uniqueKeysWithValues: collections)
+            self.updateCollectionsCache(dict)
+            return dict
         }
     }
     
-    func simklToState(_ status: String) -> ListingAnimeTrackingState? {
-        switch status {
-        case "plantowatch": return .toWatch
-        case "watching": return .watching
-        case "completed": return .finished
-        default: return nil
-        }
+    /// Removes and reset the cache
+    func resetCollectionsCache() {
+        self.persistedProperties.removeValue(forKey: PersistedKeys.cachedCollections)
+        self.cachedUserCollectionsLastUpdate = .distantPast
     }
     
-    func stateToSimkl(_ state: ListingAnimeTrackingState) -> String {
-        switch state {
-        case .toWatch: return "plantowatch"
-        case .watching: return "watching"
-        case .finished: return "completed"
-        }
+    /// Update the cache for the collections
+    func updateCollectionsCache(_ cache: [String: Collection]) {
+        self.cachedUserCollections = cache
+        self.cachedUserCollectionsLastUpdate = Date()
     }
 }
 
+// MARK: - Collection structure
 extension Simkl {
-    class Collection: ListingAnimeCollection {
+    class Collection: ListingAnimeCollection, Codable {
         private let simkl: Simkl
         private let key: String
         private let references: [ListingAnimeReference]
         private let correspondingState: ListingAnimeTrackingState?
         
         let title: String
+        
+        // MARK: Standard interfaces for ListingAnimeCollection
         
         weak var delegate: ContentProviderDelegate?
         var parentService: ListingService { return simkl }
@@ -138,5 +138,37 @@ extension Simkl {
         }
         
         func more() { }
+        
+        // MARK: Implementations for Codable
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: Keys.self)
+            try container.encode(key, forKey: .key)
+            try container.encode(title, forKey: .title)
+            try container.encode(references, forKey: .references)
+            try container.encodeIfPresent(correspondingState, forKey: .correspondingState)
+        }
+        
+        required init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: Keys.self)
+            self.simkl = NineAnimator.default.service(type: Simkl.self)
+            self.key = try container.decode(String.self, forKey: .key)
+            self.title = try container.decode(String.self, forKey: .title)
+            self.references = try container.decode(
+                [ListingAnimeReference].self,
+                forKey: .references
+            )
+            self.correspondingState = try container.decodeIfPresent(
+                ListingAnimeTrackingState.self,
+                forKey: .correspondingState
+            )
+        }
+        
+        private enum Keys: String, CodingKey {
+            case key
+            case references
+            case correspondingState
+            case title
+        }
     }
 }

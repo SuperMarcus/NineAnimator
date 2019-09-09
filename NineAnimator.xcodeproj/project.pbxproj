@@ -91,6 +91,7 @@
 		2C4257812325366E00FCCCCE /* Simkl+Mutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4257802325366E00FCCCCE /* Simkl+Mutation.swift */; };
 		2C4257832325367E00FCCCCE /* Simkl+Collections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4257822325367E00FCCCCE /* Simkl+Collections.swift */; };
 		2C425785232538A100FCCCCE /* Simkl+Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C425784232538A100FCCCCE /* Simkl+Information.swift */; };
+		2C42578723268DFD00FCCCCE /* Simkl+Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42578623268DFD00FCCCCE /* Simkl+Definitions.swift */; };
 		2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */; };
 		2C43315A220B380200A2E64F /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433159220B380200A2E64F /* Error.swift */; };
 		2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46FC8B232030E500D4206D /* LinkSerialization.swift */; };
@@ -416,6 +417,7 @@
 		2C4257802325366E00FCCCCE /* Simkl+Mutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Mutation.swift"; sourceTree = "<group>"; };
 		2C4257822325367E00FCCCCE /* Simkl+Collections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Collections.swift"; sourceTree = "<group>"; };
 		2C425784232538A100FCCCCE /* Simkl+Information.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Information.swift"; sourceTree = "<group>"; };
+		2C42578623268DFD00FCCCCE /* Simkl+Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Definitions.swift"; sourceTree = "<group>"; };
 		2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringArray+FirstMatchingGroup.swift"; sourceTree = "<group>"; };
 		2C433159220B380200A2E64F /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		2C46FC8B232030E500D4206D /* LinkSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSerialization.swift; sourceTree = "<group>"; };
@@ -891,6 +893,7 @@
 				2C4257802325366E00FCCCCE /* Simkl+Mutation.swift */,
 				2C4257822325367E00FCCCCE /* Simkl+Collections.swift */,
 				2C425784232538A100FCCCCE /* Simkl+Information.swift */,
+				2C42578623268DFD00FCCCCE /* Simkl+Definitions.swift */,
 			);
 			path = Simkl;
 			sourceTree = "<group>";
@@ -1917,6 +1920,7 @@
 				2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */,
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */,
+				2C42578723268DFD00FCCCCE /* Simkl+Definitions.swift in Sources */,
 				2C23AE3E2229CFBD00512150 /* MyAnimeList+User.swift in Sources */,
 				2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,

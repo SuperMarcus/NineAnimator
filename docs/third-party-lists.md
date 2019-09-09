@@ -26,3 +26,7 @@ Supported tracking/listing services and capabilities:
     - [x] Display detailed anime information
     - [x] Push local playback history to the remote service
     - [x] Retrieve remote anime state and anime collections
+- [Simkl.com](//simkl.com)
+    - [ ] Display detailed anime information
+    - [x] Push local playback history to the remote service
+    - [x] Retrieve remote anime state and anime collections

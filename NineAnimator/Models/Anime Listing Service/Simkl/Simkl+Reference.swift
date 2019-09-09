@@ -20,33 +20,6 @@
 import Foundation
 
 extension Simkl {
-    struct SimklIdentifierEntry: Codable {
-        var simkl_id: Int
-    }
-    
-    struct SimklMediaEntry: Codable {
-        var title: String
-        var ids: SimklIdentifierEntry
-        var poster: String?
-    }
-    
-    struct SimklEpisodeEntry: Codable {
-        var ids: SimklIdentifierEntry
-        var episode: Int?
-        var img: String?
-        var type: String
-        
-        /// Convert to standard media object
-        func toStandardEpisodeObject(_ watchDate: Date = .init()) -> SimklStdMediaEpisodeEntry {
-            var std = SimklStdMediaEpisodeEntry(
-                ids: .init(simkl: ids.simkl_id),
-                watched_at: ""
-            )
-            std.lastWatchedDate = watchDate
-            return std
-        }
-    }
-    
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
         return apiRequest(
             "/search/anime",

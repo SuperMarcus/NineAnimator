@@ -24,13 +24,40 @@ extension Simkl {
         var name: String
     }
     
-    struct UserSettingsResponse: Codable {
-        var user: User
-    }
-    
     func currentUser() -> NineAnimatorPromise<User> {
         return apiRequest("/users/settings", expectedResponseType: NSDictionary.self).then {
             try DictionaryDecoder().decode(UserSettingsResponse.self, from: $0).user
         }
+    }
+}
+
+// MARK: - Data Caching
+extension Simkl {
+    var cachedUserCollections: [String: Collection]? {
+        get {
+            do {
+                if let encodedCache = persistedProperties[PersistedKeys.cachedCollections] as? Data {
+                    return try PropertyListDecoder().decode(
+                        [String: Collection].self,
+                        from: encodedCache
+                    )
+                }
+            } catch { Log.error("[Simkl.com] Unable to decode the cached user collections (%@), returning nil instead", error) }
+            return nil
+        }
+        set {
+            do {
+                persistedProperties[PersistedKeys.cachedCollections] = try {
+                    if let newValue = newValue {
+                        return try PropertyListEncoder().encode(newValue)
+                    } else { return nil }
+                }()
+            } catch { Log.error("[Simkl.com] Unable to persist cached user collections: %@", error) }
+        }
+    }
+    
+    var cachedUserCollectionsLastUpdate: Date {
+        get { return persistedProperties[PersistedKeys.cacheLastUpdateDate] as? Date ?? .distantPast }
+        set { persistedProperties[PersistedKeys.cacheLastUpdateDate] = newValue }
     }
 }

@@ -28,8 +28,6 @@ class Simkl: BaseListingService, ListingService {
     
     var cachedReferenceEpisodes = [String: [SimklEpisodeEntry]]()
     
-    var cachedCollections: [String: Collection]?
-    
     var mutationQueues = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
@@ -38,10 +36,6 @@ class Simkl: BaseListingService, ListingService {
     
     required init(_ parent: NineAnimator) {
         super.init(parent)
-    }
-    
-    func resetCollectionsCache() {
-        cachedCollections = nil
     }
 }
 
@@ -95,13 +89,13 @@ extension Simkl {
 // MARK: - Authentications
 extension Simkl {
     private var code: String? {
-        get { return persistedProperties["code"] as? String }
-        set { persistedProperties["code"] = newValue }
+        get { return persistedProperties[PersistedKeys.authorizationCode] as? String }
+        set { persistedProperties[PersistedKeys.authorizationCode] = newValue }
     }
     
     private var accessToken: String? {
-        get { return persistedProperties["access_token"] as? String }
-        set { persistedProperties["access_token"] = newValue }
+        get { return persistedProperties[PersistedKeys.accessToken] as? String }
+        set { persistedProperties[PersistedKeys.accessToken] = newValue }
     }
     
     /// The Single-Sign-On URL for Simkl
@@ -121,9 +115,10 @@ extension Simkl {
     
     /// Remove user credentials
     func deauthenticate() {
-        Log.info("[Simkl] Removing credentials")
+        Log.info("[Simkl] Removing credentials and data")
         code = nil
         accessToken = nil
+        resetCollectionsCache()
     }
     
     /// Authenticate the user with the redirecting url

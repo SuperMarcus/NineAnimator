@@ -20,29 +20,6 @@
 import Foundation
 
 extension Simkl {
-    struct SimklStdMediaEpisodeEntry: Codable {
-        var ids: SimklStdMediaIdentifierEntry
-        var watched_at: String?
-        
-        var lastWatchedDate: Date? {
-            get {
-                if let w = watched_at { return Simkl.dateFormatter.date(from: w) }
-                return nil
-            }
-            set {
-                if let d = newValue { watched_at = Simkl.dateFormatter.string(from: d) }
-            }
-        }
-    }
-    
-    static var dateFormatter: DateFormatter {
-        let f = DateFormatter()
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
-        f.timeZone = TimeZone(secondsFromGMT: 0)
-        f.locale = Locale(identifier: "en_US_POSIX")
-        return f
-    }
-    
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         do {
             let updateTask = apiRequest(
