@@ -27,7 +27,7 @@ import JavaScriptCore
 /// Contributed by [Awsomedude](https://github.com/Awsomedude)
 class OpenLoadParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "OpenLoad", "Open Load", "Oload" ]
+        return [ "OpenLoad", "Open Load", "Oload", "OpenUpload", "Open Upload" ]
     }
     
     static let longStringRegex = try! NSRegularExpression(pattern: "<p style=\"\" id=[^>]*>([^<]*)<\\/p>", options: .caseInsensitive)
