@@ -59,16 +59,28 @@ extension Simkl {
             query: [
                 "q": link.title,
                 "page": 1,
-                "limit": 1,
+                "limit": 20,
                 "extended": "full",
                 "client_id": clientId,
                 "type": "anime"
             ],
             expectedResponseType: [[String: Any]].self
         ) .then {
-            try $0.first.unwrap {
+            response -> SimklMediaEntry? in
+            let possibleEntries = try response.map {
                 try DictionaryDecoder().decode(SimklMediaEntry.self, from: $0)
+            } .map { entry in (entry.title.proximity(to: link.title), entry) }
+            var returningItem = possibleEntries.first?.1
+            
+            if let maximalProximityItem = possibleEntries.max(by: { $0.0 < $1.0 }),
+                maximalProximityItem.0 > 0.8 {
+                returningItem = maximalProximityItem.1
+                Log.info("[Simkl.com] A match with proximity %@ was found", maximalProximityItem.0)
+            } else {
+                Log.info("[Simkl.com] Unable to find a match for the item (all items have proximity values below threshold).")
             }
+            
+            return returningItem
         } .then {
             entry in ListingAnimeReference(
                 parentService: self,
