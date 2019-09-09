@@ -20,7 +20,38 @@
 import Foundation
 
 extension Simkl {
-    func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) { }
+    func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
+        do {
+            let updateTask = apiRequest(
+                "/sync/add-to-list",
+                body: try JSONSerialization.data(
+                    withJSONObject: [
+                        "shows": [
+                            [
+                                "title": reference.name,
+                                "to": self.stateToSimkl(newState),
+                                "ids": [ "simkl": reference.uniqueIdentifier ]
+                            ]
+                        ]
+                    ],
+                    options: []
+                ),
+                method: .post,
+                expectedResponseType: [String: Any].self
+            ) .error {
+                error in Log.error(
+                    "[Simkl.com] Unable to update state for reference %@ because a communication problem: %@",
+                    reference.name,
+                    error
+                )
+            } .finally {
+                _ in Log.info("[Simkl.com] Mutation request completed")
+            }
+            mutationQueues.append(updateTask)
+        } catch {
+            Log.error("[Simkl.com] Unable to update state for reference %@: %@", reference.name, error)
+        }
+    }
     
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) { }
 }

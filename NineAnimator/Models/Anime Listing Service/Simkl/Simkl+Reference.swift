@@ -61,7 +61,8 @@ extension Simkl {
                 "page": 1,
                 "limit": 1,
                 "extended": "full",
-                "client_id": clientId
+                "client_id": clientId,
+                "type": "anime"
             ],
             expectedResponseType: [[String: Any]].self
         ) .then {

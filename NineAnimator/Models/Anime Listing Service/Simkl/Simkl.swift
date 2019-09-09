@@ -30,12 +30,18 @@ class Simkl: BaseListingService, ListingService {
     
     var cachedCollections: [String: Collection]?
     
+    var mutationQueues = [NineAnimatorAsyncTask]()
+    
     override var identifier: String {
         return "com.marcuszhou.nineanimator.service.simkl"
     }
     
     required init(_ parent: NineAnimator) {
         super.init(parent)
+    }
+    
+    func resetCollectionsCache() {
+        cachedCollections = nil
     }
 }
 

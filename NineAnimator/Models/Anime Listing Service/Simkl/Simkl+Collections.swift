@@ -92,7 +92,7 @@ extension Simkl {
         }
     }
     
-    private func simklToState(_ status: String) -> ListingAnimeTrackingState? {
+    func simklToState(_ status: String) -> ListingAnimeTrackingState? {
         switch status {
         case "plantowatch": return .toWatch
         case "watching": return .watching
@@ -101,7 +101,7 @@ extension Simkl {
         }
     }
     
-    private func stateToSimkl(_ state: ListingAnimeTrackingState) -> String {
+    func stateToSimkl(_ state: ListingAnimeTrackingState) -> String {
         switch state {
         case .toWatch: return "plantowatch"
         case .watching: return "watching"
