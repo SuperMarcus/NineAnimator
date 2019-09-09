@@ -64,7 +64,7 @@ class StreamangoParser: VideoProviderParser {
             let decodedLink = self.decode(obscured: obscuredLink, with: obscuredDecodingKey)
             
             guard let sourceURL = URL(string:
-                decodedLink.hasPrefix("//") ? "https:\(decodedLink)" : decodedLink)
+                decodedLink.hasPrefix("// ") ? "https:\(decodedLink)" : decodedLink)
                 else { return handler(nil, NineAnimatorError.responseError(
                     "source url not recongized"
                 ))

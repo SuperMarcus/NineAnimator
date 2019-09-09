@@ -170,7 +170,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         // Remove tableView selections
         tableView.deselectSelectedRow()
         
-        //Sets episode and server to nil
+        // Sets episode and server to nil
         episode = nil
     }
 }
@@ -407,7 +407,7 @@ extension AnimeViewController {
             }
             self.episode = episode
             
-            //Save episode to last playback
+            // Save episode to last playback
             NineAnimator.default.user.entering(episode: episodeLink)
             
             Log.info("Episode target retrived for '%@'", episode.name)

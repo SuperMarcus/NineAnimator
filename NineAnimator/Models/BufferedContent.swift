@@ -21,7 +21,7 @@ import Foundation
 import SwiftSoup
 
 protocol ContentProviderDelegate: AnyObject {
-    //Index of the page (starting from zero)
+    // Index of the page (starting from zero)
     func pageIncoming(_: Int, from provider: ContentProvider)
     
     func onError(_: Error, from provider: ContentProvider)

@@ -141,7 +141,7 @@ extension CastController {
                         let storedPctProgress = Float(episode.progress)
                         
                         if storedPctProgress != 0, let duration = status.media?.duration {
-                            //Restore playback progress
+                            // Restore playback progress
                             self.seek(to: max(storedPctProgress * Float(duration) - 5.0, 0))
                         }
                         

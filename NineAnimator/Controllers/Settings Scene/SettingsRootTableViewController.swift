@@ -250,7 +250,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
         
-        //Notification and fetch status
+        // Notification and fetch status
         var subscriptionEngineStatus = [String]()
         
         switch UIApplication.shared.backgroundRefreshStatus {

@@ -33,13 +33,13 @@ import UIKit
 class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserActivityDelegate {
     static let `default` = NativePlayerController()
     
-    //Background DispatchQueue shared by the native player controller
+    // Background DispatchQueue shared by the native player controller
     private let queue = DispatchQueue(label: "com.marcuszhou.nineanimator.player.background", qos: .background)
     
-    //AVPlayer related
+    // AVPlayer related
     private let player = AVQueuePlayer()
     
-    //AVPlayerViewController
+    // AVPlayerViewController
     private var playerViewController = AVPlayerViewController()
     
     private var playerRateObservation: NSKeyValueObservation?
@@ -60,7 +60,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
         return item.duration.seconds - currentPlaybackTime.seconds
     }
     
-    //Media queue and AVPlayerItem observations
+    // Media queue and AVPlayerItem observations
     private(set) var mediaQueue = [PlaybackMedia]()
     
     private var mediaItemsObervations = [AVPlayerItem: NSKeyValueObservation]()
@@ -69,13 +69,13 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     
     var currentItem: AVPlayerItem? { return player.currentItem }
     
-    //State of the player
+    // State of the player
     private(set) var state: State = .idle
     
     override private init() {
         super.init()
         
-        //Observers
+        // Observers
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onAppEntersBackground(notification:)),
@@ -95,10 +95,10 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
             object: nil
         )
         
-        //Configurate AVPlayerViewController
+        // Configurate AVPlayerViewController
         configurePlayerViewController()
         
-        //Observers
+        // Observers
         playerRateObservation = player.observe(\.rate, changeHandler: self.onPlayerRateChange)
         playerExternalPlaybackObservation =
             player.observe(\.isExternalPlaybackActive, changeHandler: self.onPlayerExternalPlaybackChange)
@@ -109,7 +109,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
 extension NativePlayerController {
     /// Reset the playback queue and start playing the current item
     func play(media: PlaybackMedia) {
-        //This will stop any playbacks (PiP)
+        // This will stop any playbacks (PiP)
         clearQueue()
         append(media: media)
         
@@ -146,9 +146,9 @@ extension NativePlayerController {
             [weak self] (_: AVPlayerItem, _: NSKeyValueObservedChange<AVPlayerItem.Status>) in
             guard let self = self else { return }
             if item.status == .readyToPlay {
-                //Seek to five seconds before the persisted progress
+                // Seek to five seconds before the persisted progress
                 item.seek(to: CMTime(seconds: max(Float(media.progress) * item.duration.seconds - 5, 0))) {
-                    //Remove the observer after progress has been restored
+                    // Remove the observer after progress has been restored
                     _ in self.mediaItemsObervations.removeValue(forKey: item)
                 }
             }
@@ -187,7 +187,7 @@ extension NativePlayerController {
 
 // MARK: - Picture in Picture playback handling
 extension NativePlayerController {
-    //Check if picture in picture is supported and enabled
+    // Check if picture in picture is supported and enabled
     private var shouldUsePictureInPicture: Bool {
         return AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback
     }
@@ -278,7 +278,7 @@ extension NativePlayerController {
     private func persistProgress() {
         // Only persist progress after progress restoration
         
-        //Using a little shortcut here
+        // Using a little shortcut here
         guard isCurrentItemPlaybackProgressRestored, var media = currentMedia else { return }
         // Setting the progress will update the entry in UserDefaults
         media.progress = Double(currentPlaybackPercentage)
@@ -313,7 +313,7 @@ extension NativePlayerController {
 extension NativePlayerController {
     @objc func onUserPreferenceDidChange(notification _: Notification) {
         playerViewController.allowsPictureInPicturePlayback = shouldUsePictureInPicture
-        //Ignoring the others since those are retrived on app state changes
+        // Ignoring the others since those are retrived on app state changes
     }
 }
 
@@ -331,7 +331,7 @@ extension NativePlayerController {
     }
     
     private func updatePlaybackSession() {
-        //Not doing anything right now
+        // Not doing anything right now
     }
     
     private func teardownPlaybackSession() {
