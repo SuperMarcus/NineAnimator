@@ -36,8 +36,8 @@ extension Simkl {
     var cachedUserCollections: [String: Collection]? {
         get {
             do {
-                if let encodedCache = persistedProperties[PersistedKeys.cachedCollections] as? Data {
-                    return try PropertyListDecoder().decode(
+                if let encodedCache = persistedProperties[PersistedKeys.cachedCollections] as? NSDictionary {
+                    return try DictionaryDecoder().decode(
                         [String: Collection].self,
                         from: encodedCache
                     )
@@ -49,7 +49,7 @@ extension Simkl {
             do {
                 persistedProperties[PersistedKeys.cachedCollections] = try {
                     if let newValue = newValue {
-                        return try PropertyListEncoder().encode(newValue)
+                        return try DictionaryEncoder().encode(newValue) as NSDictionary
                     } else { return nil }
                 }()
             } catch { Log.error("[Simkl.com] Unable to persist cached user collections: %@", error) }
