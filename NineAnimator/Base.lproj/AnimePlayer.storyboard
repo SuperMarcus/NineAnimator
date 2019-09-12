@@ -17,6 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="1RC-uj-48l" customClass="AnimeHeadingView" customModule="NineAnimator" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -662,6 +663,7 @@
                         <connections>
                             <outlet property="dataSource" destination="K93-Pu-iF1" id="U4G-c9-VyH"/>
                             <outlet property="delegate" destination="K93-Pu-iF1" id="3Hz-rm-wSa"/>
+                            <outletCollection property="gestureRecognizers" destination="WSz-2q-02E" appends="YES" id="CHX-nq-dQ9"/>
                         </connections>
                     </tableView>
                     <toolbarItems/>
@@ -675,6 +677,11 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R7V-nd-iTD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="WSz-2q-02E">
+                    <connections>
+                        <action selector="onLongPress:" destination="K93-Pu-iF1" id="2Ke-0o-ExS"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="202.40000000000001" y="133.5832083958021"/>
         </scene>

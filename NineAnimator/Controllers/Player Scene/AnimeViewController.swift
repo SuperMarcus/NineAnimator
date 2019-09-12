@@ -74,6 +74,10 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         }
     }
     
+    private var contextMenuSelectedEpisode: EpisodeLink?
+    
+    private var contextMenuSelectedIndexPath: IndexPath?
+    
     private var presentedSuggestingEpisode: EpisodeLink?
     
     private var selectedEpisodeCell: UITableViewCell?
@@ -749,6 +753,103 @@ extension AnimeViewController {
                 }
         
         return [ subscriptionAction ]
+    }
+}
+
+// MARK: - Actions for Episodes
+extension AnimeViewController {
+    @IBAction private func onLongPress(_ recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == .began {
+            // Obtain the touch position, indexPath, and cell
+            let targetTouchPosition = recognizer.location(in: tableView)
+            guard let targetIndexPath = tableView.indexPathForRow(at: targetTouchPosition),
+                let targetCell = tableView.cellForRow(at: targetIndexPath) else { return }
+            
+            // Obtain the episode link
+            var targetEpisodeLink: EpisodeLink?
+            
+            if let episodeCell = targetCell as? EpisodeTableViewCell {
+                targetEpisodeLink = episodeCell.episodeLink
+            }
+            
+            if let episodeCell = targetCell as? DetailedEpisodeTableViewCell {
+                targetEpisodeLink = episodeCell.episodeLink
+            }
+            
+            // If all components exist, present the editing menu
+            if let targetEpisodeLink = targetEpisodeLink {
+                contextMenuSelectedEpisode = targetEpisodeLink
+                contextMenuSelectedIndexPath = targetIndexPath
+                presentEditingMenu(for: targetEpisodeLink, from: targetCell)
+            }
+        }
+    }
+    
+    private func presentEditingMenu(for episodeLink: EpisodeLink, from sourceView: UIView) {
+        self.becomeFirstResponder()
+        
+        let editMenu = UIMenuController.shared
+        var availableMenuItems = [UIMenuItem]()
+        
+        switch episodeLink.playbackProgress {
+        case 0..<0.05:
+            availableMenuItems.append(UIMenuItem(
+                title: "Mark as Completed",
+                action: #selector(contextMenu(markAsWatched:))
+            ))
+        case 0.05..<0.8:
+            availableMenuItems.append(UIMenuItem(
+                title: "Unwatch",
+                action: #selector(contextMenu(markAsUnwatched:))
+            ))
+            availableMenuItems.append(UIMenuItem(
+                title: "Finished",
+                action: #selector(contextMenu(markAsWatched:))
+            ))
+        default:
+            availableMenuItems.append(UIMenuItem(
+                title: "Unwatch",
+                action: #selector(contextMenu(markAsUnwatched:))
+            ))
+        }
+        
+        // Save the available actions
+        editMenu.menuItems = availableMenuItems
+        
+        // TODO: Update this for iOS 13
+        let targetRect = tableView.convert(sourceView.frame, to: view)
+        editMenu.setTargetRect(targetRect, in: view)
+        editMenu.setMenuVisible(true, animated: true)
+    }
+    
+    @objc private func contextMenu(markAsWatched sender: UIMenuController) {
+        if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
+            tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
+        }
+        DispatchQueue.main.async { self.concludeContextMenu() }
+    }
+    
+    @objc private func contextMenu(markAsUnwatched sender: UIMenuController) {
+        if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
+            tracker.update(progress: 0.0, forEpisodeLink: episodeLink)
+        }
+        DispatchQueue.main.async { self.concludeContextMenu() }
+    }
+    
+    private func concludeContextMenu() {
+        if let targetIndexPath = contextMenuSelectedIndexPath {
+            tableView.performBatchUpdates({
+                tableView.reloadRows(at: [targetIndexPath], with: .fade)
+                tableView.setNeedsLayout()
+            }, completion: nil)
+        }
+        
+        contextMenuSelectedIndexPath = nil
+        contextMenuSelectedEpisode = nil
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
     }
 }
 
