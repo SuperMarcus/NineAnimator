@@ -22,7 +22,7 @@ import AVKit
 import Foundation
 
 class XStreamParser: VideoProviderParser {
-    var aliases: [String] { return [ "XStream", "XStreamCDN" ] }
+    var aliases: [String] { return [ "XStream", "XStreamCDN", "fembed" ] }
     
     private static let apiBaseSourceURL = URL(string: "https://www.xstreamcdn.com/api/source/")!
     
@@ -51,7 +51,7 @@ class XStreamParser: VideoProviderParser {
             return session.request(
                 XStreamParser.apiBaseSourceURL.appendingPathComponent(resourceIdentifier),
                 method: .post,
-                parameters: [ "r": "gogoanime.tv", "d": "www.xstreamcdn.com" ],
+                parameters: [ "r": "", "d": "www.xstreamcdn.com" ],
                 encoding: URLEncoding.default
             ) .responseJSON {
                 response in

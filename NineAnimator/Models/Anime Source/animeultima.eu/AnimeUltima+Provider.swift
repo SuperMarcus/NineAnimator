@@ -71,7 +71,7 @@ extension NASourceAnimeUltima {
     /// A private parser for animeultima's FastStream server
     class FastStreamParser: VideoProviderParser {
         var aliases: [String] {
-            return [ "FastStream" ]
+            return [ "FastStream", "FastStream 2" ]
         }
         
         private var source: NASourceAnimeUltima
@@ -88,7 +88,7 @@ extension NASourceAnimeUltima {
                 .then {
                     responseContent in
                     let resourceMatchingRegex = try NSRegularExpression(
-                        pattern: "file:\\s+'([^']+)",
+                        pattern: "file:\\s+\"([^\"]+)",
                         options: []
                     )
                     
@@ -127,7 +127,7 @@ extension NASourceAnimeUltima {
         // Return private provider parsers
         switch server {
         case let server where server.hasSuffix("AUEngine"): return _auEngineParser
-        case let server where server.hasSuffix("FastStream"): return _fastStreamParser
+        case let server where server.contains("FastStream"): return _fastStreamParser
         default: break
         }
         
