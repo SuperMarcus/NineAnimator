@@ -24,10 +24,22 @@ import Foundation
 class OfflineEpisodeContent: OfflineContent {
     private(set) var episodeLink: EpisodeLink
     
-    // Assign anime object if has it
+    /// The maximal number of times that NineAnimator is allowed to retry
+    /// the download
+    ///
+    /// This variable defines how many times NineAnimator should reattempt
+    /// downloading the fetched media before resetting it back to nil.
+    var maximalAllowedRetryCount: Int {
+        return 5
+    }
+    
+    /// Assign anime object if has it
     var anime: Anime?
     
-    // Retrive the playback media from the offline content
+    /// The number of times that the content retried to preserve the content
+    var retryCount = 0
+    
+    /// Retrive the playback media from the offline content
     var media: PlaybackMedia? {
         // If the asset is downloading with an AVAssetDownloadTask, try playing
         // while caching
@@ -63,14 +75,17 @@ class OfflineEpisodeContent: OfflineContent {
     
     override var identifier: String { return episodeLink.identifier }
     
-    // Hold reference to the current task
+    /// Hold reference to the current task
     private var currentTask: NineAnimatorAsyncTask?
     
-    // Set to indicate if this asset is an persisted hls asset
+    /// Set to indicate if this asset is an persisted hls asset
     private var isAggregatedAsset: Bool {
         get { return persistedProperties["aggregated"] as? Bool ?? false }
         set { persistedProperties["aggregated"] = newValue }
     }
+    
+    /// Cached retrieved playback media
+    private var retrievedOnlineMedia: PlaybackMedia?
     
     required init?(_ manager: OfflineContentManager, from properties: [String: Any], initialState: OfflineState) {
         // Decode link from properties
@@ -100,49 +115,27 @@ class OfflineEpisodeContent: OfflineContent {
 //        super.updateResourceAvailability()
 //    }
     
+    /// Collects the resource information and initiate downloads
+    ///
+    /// This method automatically tries to collect all the resources
+    /// needed for downloading the episodes.
     override func preserve() {
         super.preserve()
         
         // Return if already preserved
         if case .preserved = state { return }
         
-        if let anime = anime {
-            currentTask = anime.episode(with: episodeLink) {
-                [weak self] episode, error in
-                guard let self = self else { return }
-                
-                guard let episode = episode else {
-                    self.state = .error(error ?? NineAnimatorError.responseError("Unknown error"))
-                    return
-                }
-                
-                // Retrive content
-                self.currentTask = episode.retrive {
-                    [weak self] media, error in
-                    guard let self = self else { return }
-                    
-                    guard let media = media else {
-                        self.state = .error(error ?? NineAnimatorError.responseError("Unknown error"))
-                        return
-                    }
-                    
-                    // Preserve media if it exists
-                    self.preserve(media: media)
-                }
-            }
-        } else {
-            currentTask = episodeLink.parent.retrive {
-                [weak self] anime, error in
-                guard let self = self else { return }
-                
-                guard let anime = anime else {
-                    self.state = .error(error ?? NineAnimatorError.responseError("Unknown error"))
-                    return
-                }
-                
-                self.anime = anime
-                self.preserve()
-            }
+        // If the media has been retrieved
+        if retryCount <= maximalAllowedRetryCount,
+            let fetchedMedia = retrievedOnlineMedia {
+            return self.preserve(media: fetchedMedia)
+        }
+        
+        // Collect resource information and initiate downloads
+        currentTask = collectResourceInformation().error {
+            [weak self] in self?.onCompletion(with: $0)
+        } .finally {
+            [weak self] in self?.preserve(media: $0)
         }
         
         // Update state at last
@@ -201,6 +194,67 @@ class OfflineEpisodeContent: OfflineContent {
     
     override func onCompletion(with error: Error) {
         super.onCompletion(with: error)
+        
+        // Retry downloads
+        if retryCount < maximalAllowedRetryCount, let fetchedMedia = retrievedOnlineMedia {
+            retryCount += 1
+            Log.info("[OfflineEpisodeContent] Download finished with error: %@. Retrying...(%@/%@)", error, retryCount, maximalAllowedRetryCount)
+            preserve(media: fetchedMedia)
+        }
+    }
+}
+
+// MARK: - Fetch and Download
+private extension OfflineEpisodeContent {
+    /// Collects information about the episode without initiating
+    /// the downloads
+    ///
+    /// This method tries to gather all the necessary resources
+    /// for downloading the episode. This includes Anime, Epiosde,
+    /// as well as PlaybackMedia.
+    func collectResourceInformation() -> NineAnimatorPromise<PlaybackMedia> {
+        // Share a single queue to prevent some overhead
+        let queue = DispatchQueue.global()
+        return NineAnimatorPromise(queue: queue) {
+            [weak self] (callback: @escaping NineAnimatorCallback<Anime>) in
+            guard let self = self else { return nil }
+            
+            // If the anime has been retrieved
+            if let anime = self.anime {
+                callback(anime, nil)
+                return nil
+            }
+            
+            // If not, then retrieve the Anime object
+            return self.episodeLink.parent.retrive {
+                [weak self] anime, error in
+                guard let self = self else { return }
+                
+                guard let anime = anime else {
+                    return callback(nil, error)
+                }
+                
+                self.anime = anime
+                callback(anime, nil)
+            }
+        } .thenPromise {
+            [weak self] anime in NineAnimatorPromise(queue: queue) {
+                (callback: @escaping NineAnimatorCallback<Episode>) in
+                guard let episodeLink = self?.episodeLink else { return nil }
+                return anime.episode(with: episodeLink, onCompletion: callback)
+            }
+        } .thenPromise {
+            [weak self] episode in NineAnimatorPromise(queue: queue) {
+                (callback: @escaping NineAnimatorCallback<PlaybackMedia>) in
+                guard self != nil else { return nil }
+                return episode.retrive(onCompletion: callback)
+            }
+        } .then {
+            [weak self] media in
+            guard let self = self else { return nil }
+            self.retrievedOnlineMedia = media
+            return media
+        }
     }
 }
 
