@@ -124,8 +124,8 @@ class SetupThemeViewController: UIViewController, Themable {
                 animations: [],
                 initialAlpha: 0.0,
                 finalAlpha: 1.0,
-                delay: 0.4,
-                duration: 0.4
+                delay: 0,
+                duration: 0.5
             )
         }
     }
