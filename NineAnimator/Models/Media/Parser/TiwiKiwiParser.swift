@@ -34,7 +34,7 @@ class TiwiKiwiParser: VideoProviderParser {
                with session: SessionManager,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let headers = [
-            "User-Agents": defaultUserAgent,
+            "User-Agent": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
         let task = NineAnimatorMultistepAsyncTask()

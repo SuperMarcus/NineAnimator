@@ -39,13 +39,13 @@ class PrettyFastParser: VideoProviderParser {
         let additionalHeaders: HTTPHeaders = [
             "Referer": refererUrl.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
-            "User-Agnet": userAgent,
+            "User-Agent": userAgent,
             "accept-language": "en-us"
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString,
-            "User-Agnet": userAgent
+            "User-Agent": userAgent
         ]
         
         return session.request(episode.target, headers: additionalHeaders).responseString {
