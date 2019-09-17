@@ -67,7 +67,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     private var impactGenerator: UIImpactFeedbackGenerator?
     
-    //The amount of time (in seconds) that fast forward and rewind button seeks
+    // The amount of time (in seconds) that fast forward and rewind button seeks
     private var fastSeekAmount: Float = 15.0
     
     @IBAction private func onDoneButtonPressed(_ sender: Any) {

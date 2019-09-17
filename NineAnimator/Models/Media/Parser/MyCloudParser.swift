@@ -68,7 +68,7 @@ class MyCloudParser: VideoProviderParser {
             
             Log.info("(MyCloud Parser) found asset at %@", sourceURL.absoluteString)
             
-            //MyCloud might not support Chromecast, since it uses COR checking
+            // MyCloud might not support Chromecast, since it uses COR checking
             handler(BasicPlaybackMedia(
                 url: sourceURL,
                 parent: episode,

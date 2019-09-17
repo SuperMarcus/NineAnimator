@@ -19,7 +19,7 @@
 
 import UIKit
 
-//https://stackoverflow.com/questions/805872/how-do-i-draw-a-shadow-under-a-uiview
+// https://stackoverflow.com/questions/805872/how-do-i-draw-a-shadow-under-a-uiview
 @IBDesignable extension UIView {
     @IBInspectable var cornerRadius: Float {
         set { layer.cornerRadius = CGFloat(newValue) }

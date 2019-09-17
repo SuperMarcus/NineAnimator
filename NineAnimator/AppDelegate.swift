@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIApplication.shared.endBackgroundTask(identifier)
         }
         
-        //Perform fetch when app enters background
+        // Perform fetch when app enters background
         UserNotificationManager.default.performFetch { _ in
             UIApplication.shared.endBackgroundTask(identifier)
         }

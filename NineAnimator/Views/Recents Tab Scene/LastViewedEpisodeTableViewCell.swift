@@ -46,7 +46,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell, Themable {
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         let newTransform = highlighted ? CGAffineTransform(scaleX: 0.95, y: 0.95) : .identity
         
-        //Ignoring the animated option
+        // Ignoring the animated option
         UIView.animate(withDuration: 0.2) {
             self.transform = newTransform
         }

@@ -44,7 +44,7 @@ protocol PlaybackMedia {
     var isAggregated: Bool { get }
 }
 
-//A shortcut for setting and retriving playback progress
+// A shortcut for setting and retriving playback progress
 extension PlaybackMedia {
     var progress: Double {
         get { return link.playbackProgress }

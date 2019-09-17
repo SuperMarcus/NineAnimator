@@ -57,7 +57,7 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         
         super.init()
         
-        //Cache lazy persist data when the app resigns active
+        // Cache lazy persist data when the app resigns active
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onAppBecomesInactive(notification:)),
@@ -65,7 +65,7 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             object: nil
         )
         
-        //Register Notification categories
+        // Register Notification categories
         let openAction = UNNotificationAction(
             identifier: "com.marcuszhou.NineAnimator.notificaiton.action.open",
             title: "View",
@@ -217,10 +217,10 @@ extension UserNotificationManager {
             let fileManager = FileManager.default
             try fileManager.removeItem(at: url(for: anime))
             
-            //Not deleting the poster since it should be remvoed by the
+            // Not deleting the poster since it should be remvoed by the
             // user notification center
             
-            //try fileManager.removeItem(at: posterUrl(for: anime))
+            // try fileManager.removeItem(at: posterUrl(for: anime))
         } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
@@ -294,7 +294,7 @@ extension UserNotificationManager {
     fileprivate typealias FetchResult = (anime: AnimeLink, newEpisodeTitles: [String], availableServerNames: [String])
     
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        //Do not perform fetch if the last one is incomeplete
+        // Do not perform fetch if the last one is incomeplete
         guard taskPool == nil else {
             Log.info("Cancelling background fetch since another task is in progress.")
             return completionHandler(.failed)
@@ -326,7 +326,7 @@ extension UserNotificationManager {
         Log.info("Beginning background fetch with %@ watched anime.", watchedAnimeLinks.count)
         
         taskPool = watchedAnimeLinks.map { animeLink in
-            //Ignore the watcher that is fetched within 2 hours
+            // Ignore the watcher that is fetched within 2 hours
             if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow >= -7200 {
                 Log.info("Skipping '%@' (last checked: %@, %@ seconds since now", animeLink.title, watcher.lastCheck, watcher.lastCheck.timeIntervalSinceNow)
                 resultsPool.append(FetchResult(animeLink, [], []))
@@ -354,12 +354,12 @@ extension UserNotificationManager {
                         }
                         .compactMap { anime.servers[$0] }
                     
-                    //Post notification to user
+                    // Post notification to user
                     self.notify(result: result)
                 } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
                 
-                //If unable to retrive the persisted episodes (maybe deleted by the system)
-                //Just store the latest version without posting any notifications.
+                // If unable to retrive the persisted episodes (maybe deleted by the system)
+                // Just store the latest version without posting any notifications.
                 self.update(anime)
                 
                 resultsPool.append(result)
@@ -391,7 +391,7 @@ extension UserNotificationManager {
             content.body = "\(result.newEpisodeTitles.count) more episodes are now available on \(sourceName)."
         }
         
-        //Sometimes showing what stream the anime is on can be helpful
+        // Sometimes showing what stream the anime is on can be helpful
         if NineAnimator.default.user.notificationShowStreams {
             content.body += " Stream now from \(streamingSites)."
         }
@@ -412,7 +412,7 @@ extension UserNotificationManager {
             let cacheKey = result.anime.image.absoluteString
             let cachedPosterPath = cache.cachePath(forKey: cacheKey)
             
-            //Only show poster if the poster is cached, or an error is expected to be thrown
+            // Only show poster if the poster is cached, or an error is expected to be thrown
             let poster = UIImage(contentsOfFile: cachedPosterPath)
             try poster?.jpegData(compressionQuality: 0.8)?.write(to: posterUrl)
             
@@ -430,7 +430,7 @@ extension UserNotificationManager {
             trigger: nil
         )
         
-        //Alas, post notification to the user
+        // Alas, post notification to the user
         notificationCenter.add(request, withCompletionHandler: nil)
         
         Log.info("Notification for '%@' sent.", result.anime.title)
@@ -475,7 +475,7 @@ extension String {
     }
     
     static func animePersistFilenameComponent(_ anime: AnimeLink) -> String {
-        //As short as possible
+        // As short as possible
         let linkHashRepresentation = String(anime.link.hashValue, radix: 36, uppercase: true)
         return "com.marcuszhou.NineAnimator.anime.\(linkHashRepresentation).plist"
     }

@@ -44,7 +44,7 @@ extension NineAnimatorUser {
         static var theme: String { return "interface.theme" }
         static var brightnessBasedTheme: String { return "interface.brightnessBasedTheme" }
         
-        //Watching anime episodes persist filename
+        // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }
     }
 }

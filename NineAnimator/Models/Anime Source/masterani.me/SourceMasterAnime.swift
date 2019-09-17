@@ -276,7 +276,7 @@ class NASourceMasterAnime: BaseSource, Source {
         }
     }
     
-    //Fetch episode mirrors from link
+    // Fetch episode mirrors from link
     private func episodeInfo(from link: EpisodeLink, _ handler: @escaping NineAnimatorCallback<NAMasterAnimeEpisodeInfo>) -> NineAnimatorAsyncTask? {
         let episodeUniqueId = link.identifier.split(separator: ":")
         guard let episodeNumber = episodeUniqueId.last else {
