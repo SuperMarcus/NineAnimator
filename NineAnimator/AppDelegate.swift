@@ -231,7 +231,14 @@ extension AppDelegate {
 // MARK: - Dynamic appearance
 extension AppDelegate {
     func updateDynamicBrightness(forceUpdate: Bool = false) {
-        guard NineAnimator.default.user.brightnessBasedTheme else { return }
+        guard NineAnimator.default.user.dynamicAppearance else { return }
+        
+        if #available(iOS 13.0, *) {
+            // Not doing anything since dynamic theme
+            // synchronizes the theme with the system
+            // on iOS 13 or later
+            return
+        }
         
         let threshold: CGFloat = 0.25
         
@@ -250,6 +257,31 @@ extension AppDelegate {
     
     @objc func onScreenBrightnessDidChange(_ notification: Notification) {
         updateDynamicBrightness()
+    }
+    
+    /// Update the appearance based on system trait collection
+    ///
+    /// Only works for iOS 13.0 or later. This method does nothing
+    /// for piror systems
+    ///
+    /// This method is called by `RootViewController.traitCollectionDidChange`
+    func updateDynamicAppearance(withTraitCollection traits: UITraitCollection) {
+        guard NineAnimator.default.user.dynamicAppearance else {
+            return Theme.forceUpdate(animated: false)
+        }
+        
+        if #available(iOS 13.0, *) {
+            switch traits.userInterfaceStyle {
+            case .dark:
+                if let theme = Theme.availableThemes["dark"] {
+                    Theme.setTheme(theme, animated: true)
+                }
+            default:
+                if let theme = Theme.availableThemes["light"] {
+                    Theme.setTheme(theme, animated: true)
+                }
+            }
+        }
     }
 }
 

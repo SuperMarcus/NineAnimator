@@ -37,6 +37,13 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         }
     }
     
+    /// If the navigation bar should be presented with opaque background
+    ///
+    /// This is determined by the current scroll position of the table view
+    private var shouldPresentOpaqueNavigationBar: Bool {
+        return max(tableView.contentOffset.y, 0) > headingView.suggestedTransitionHeight
+    }
+    
     // References to tasks
     private var listingAnimeRequestTask: NineAnimatorAsyncTask?
     private var characterListRequestTask: NineAnimatorAsyncTask?
@@ -76,6 +83,11 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             name: UIApplication.didBecomeActiveNotification,
             object: nil
         )
+        
+        // Initialize the navigation bar styles
+        if #available(iOS 13.0, *) {
+            self.updateNavigationBarAppearance()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -306,37 +318,97 @@ extension AnimeInformationTableViewController {
 // MARK: - Visual effects
 extension AnimeInformationTableViewController {
     func adjustNavigationBarStyle() {
-        guard let navigationBar = navigationController?.navigationBar,
-            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            else { return }
-        let scrollPosition = max(tableView.contentOffset.y, 0)
-        let transitionPosition = headingView.suggestedTransitionHeight
-        
-        navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationBar.shadowImage = UIImage()
-        navigationBar.barTintColor = .clear
-        navigationBar.isTranslucent = true
-        
-        // If scrolled way pass the position, set the navigation bar to opaque
-        let alpha = isAlertPresenting ? 0 : min(scrollPosition / transitionPosition, 1.0)
-        statusBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
-        navigationBar.backgroundColor = Theme.current.background.withAlphaComponent(alpha)
-        navigationBar.tintColor = alpha == 1.0 ? Theme.current.tint : Theme.current.primaryText
+        if #available(iOS 13.0, *) {
+            updateNavigationBarAppearance()
+        } else { // Legacy code
+            guard let navigationBar = navigationController?.navigationBar else { return }
+            
+            let scrollPosition = max(tableView.contentOffset.y, 0)
+            let transitionPosition = headingView.suggestedTransitionHeight
+            
+            // If scrolled way pass the position, set the navigation bar to opaque
+            let alpha = isAlertPresenting ? 0 : min(scrollPosition / transitionPosition, 1.0)
+            let targetBackgroundColor = Theme.current.background.withAlphaComponent(alpha)
+            let targetTintColor = alpha == 1.0 ? Theme.current.tint : Theme.current.primaryText
+            
+            navigationBar.backgroundColor = targetBackgroundColor
+            navigationBar.tintColor = targetTintColor
+            
+            guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else { return }
+            
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.shadowImage = UIImage()
+            navigationBar.barTintColor = .clear
+            navigationBar.isTranslucent = true
+            
+            statusBar.backgroundColor = targetBackgroundColor
+        }
     }
     
     func restoreNavigationBarStyle() {
-        guard let navigationBar = navigationController?.navigationBar,
-            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
+        guard let navigationBar = navigationController?.navigationBar
             else { return }
         
-        // Animate changes
+        // Reset tint color
         UIView.animate(withDuration: 0.2) {
-            statusBar.backgroundColor = nil
-            navigationBar.setBackgroundImage(nil, for: .default)
-            navigationBar.barTintColor = nil
-            navigationBar.backgroundColor = nil
-            navigationBar.isTranslucent = true
             navigationBar.tintColor = Theme.current.tint
+            navigationBar.backgroundColor = nil
+        }
+        
+        // Animate changes only on older platforms
+        guard #available(iOS 13.0, *) else {
+            guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else {
+                return
+            }
+            
+            // Animate changes
+            UIView.animate(withDuration: 0.2) {
+                statusBar.backgroundColor = nil
+                navigationBar.setBackgroundImage(nil, for: .default)
+                navigationBar.barTintColor = nil
+                navigationBar.isTranslucent = true
+            }
+            
+            return
+        }
+    }
+    
+    /// For adjusting the appearance of the navigation bars on iOS 13 or newer
+    @available(iOS 13.0, *)
+    func updateNavigationBarAppearance() {
+        UIView.animate(withDuration: 0.2) {
+            [weak self] in
+            guard let self = self,
+                let navigationBar = self.navigationController?.navigationBar else {
+                return
+            }
+            
+            let navigationItem = self.navigationItem
+            
+            if self.shouldPresentOpaqueNavigationBar {
+                navigationItem.standardAppearance = nil
+                navigationItem.scrollEdgeAppearance = nil
+                navigationItem.compactAppearance = nil
+                navigationBar.tintColor = Theme.current.tint
+                navigationBar.backgroundColor = .clear
+            } else { // Show transparent background for scroll edge
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithTransparentBackground()
+                appearance.backgroundColor = .clear
+                appearance.shadowImage = nil
+                appearance.shadowColor = .clear
+                appearance.titleTextAttributes = [.foregroundColor: Theme.current.primaryText]
+                appearance.largeTitleTextAttributes = [.foregroundColor: Theme.current.primaryText]
+                
+                navigationItem.standardAppearance = appearance
+                navigationItem.scrollEdgeAppearance = appearance
+                navigationItem.compactAppearance = appearance
+                navigationBar.tintColor = Theme.current.primaryText
+                navigationBar.backgroundColor = .clear
+            }
+            
+            navigationBar.setNeedsLayout()
+            navigationBar.setNeedsDisplay()
         }
     }
     
@@ -368,10 +440,18 @@ extension AnimeInformationTableViewController {
     
     func theme(didUpdate theme: Theme) {
         adjustNavigationBarStyle()
+        
+        if #available(iOS 13.0, *) {
+            updateNavigationBarAppearance()
+        }
     }
     
     @objc private func onAppDidEnterForeground(_ notification: Notification) {
         adjustNavigationBarStyle()
+        
+        if #available(iOS 13.0, *) {
+            updateNavigationBarAppearance()
+        }
     }
 }
 

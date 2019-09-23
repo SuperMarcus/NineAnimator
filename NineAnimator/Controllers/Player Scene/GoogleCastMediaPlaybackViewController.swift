@@ -401,7 +401,10 @@ extension GoogleCastMediaPlaybackViewController {
         self.sharedNowPlayingInfo[MPMediaItemPropertyAlbumTitle] = episode.parentLink.title
         
         infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
-        infoCenter.playbackState = .playing
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = .playing
+        }
         
         // Setup command center
         let commandCenter = MPRemoteCommandCenter.shared()
@@ -478,7 +481,10 @@ extension GoogleCastMediaPlaybackViewController {
         
         let infoCenter = MPNowPlayingInfoCenter.default()
         infoCenter.nowPlayingInfo = nil
-        infoCenter.playbackState = .stopped
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = .stopped
+        }
         
         // Remove volume change observer
         NotificationCenter.default.removeObserver(self, name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
@@ -495,7 +501,10 @@ extension GoogleCastMediaPlaybackViewController {
             NSNumber(value: Double(playbackProgressSlider.maximumValue))
         
         infoCenter.nowPlayingInfo = sharedNowPlayingInfo
-        infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
+        }
     }
     
     @objc private func systemVolumeDidChange(notification: Notification) {

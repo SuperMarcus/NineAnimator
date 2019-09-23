@@ -113,6 +113,7 @@ extension CompositionalPlaybackMedia {
             if let infoRequest = loadingRequest.contentInformationRequest {
                 infoRequest.contentType = try? self.contentType(fromMimeType: "text/vtt")
                 infoRequest.contentLength = Int64(cachedVttData.count)
+                infoRequest.isByteRangeAccessSupported = false
             }
             
             Log.info(">>>> DEBUG: finished loading vtt len %@", cachedVttData.count)
@@ -130,7 +131,7 @@ extension CompositionalPlaybackMedia {
             $0.url.uniqueHashingIdentifier == requestingResourceUrl.fragment
         }) else { return false }
         
-        let vttCachedUrl = try swapeScheme(
+        let vttCachedUrl = try swapScheme(
             forUrl: subtitleTrackInformation.url,
             withNewScheme: injectionCachedVttScheme
         )
@@ -185,9 +186,10 @@ extension CompositionalPlaybackMedia {
             if let infoRequest = loadingRequest.contentInformationRequest {
                 infoRequest.contentType = "public.m3u-playlist"
                 infoRequest.contentLength = Int64(generatedPlaylist.count)
+                infoRequest.isByteRangeAccessSupported = false
             }
             
-            Log.info(">>> DEBUG: Responded with subtitle playlist content %@")
+            Log.info(">>> DEBUG: Responded with subtitle playlist content %@", String(data: generatedPlaylist, encoding: .utf8)!)
             
             // Informs that the loading has been completed
             loadingRequest.finishLoading()
@@ -199,7 +201,7 @@ extension CompositionalPlaybackMedia {
     /// Intercept and modify the master playlist request
     private func loadingRequestInterception(requestingResourceUrl: URL, loadingRequest: AVAssetResourceLoadingRequest) throws -> Bool {
         // Redirect to original url
-        let originalUrl = try swapeScheme(forUrl: requestingResourceUrl, withNewScheme: "https")
+        let originalUrl = try swapScheme(forUrl: requestingResourceUrl, withNewScheme: "https")
         
         // Master playlist
         if originalUrl == url {
@@ -241,6 +243,7 @@ extension CompositionalPlaybackMedia {
                         if let contentInformationRequest = loadingRequest.contentInformationRequest {
                             contentInformationRequest.contentType = "public.m3u-playlist"
                             contentInformationRequest.contentLength = Int64(playlistData.count)
+                            contentInformationRequest.isByteRangeAccessSupported = false
                         }
                         
                         loadingRequest.finishLoading()
@@ -268,7 +271,7 @@ extension CompositionalPlaybackMedia {
                 return .success(cachedVttData)
             }
             
-            let vttUrl = try swapeScheme(forUrl: url, withNewScheme: "https")
+            let vttUrl = try swapScheme(forUrl: url, withNewScheme: "https")
             
             // Request and cached the vtt
             return NineAnimatorPromise(queue: delegateQueue) {
@@ -293,7 +296,7 @@ extension CompositionalPlaybackMedia {
 // MARK: - PlaybackMedia
 extension CompositionalPlaybackMedia {
     var avPlayerItem: AVPlayerItem {
-        let schemedUrl = (try? swapeScheme(forUrl: url, withNewScheme: interceptResourceScheme)) ?? url
+        let schemedUrl = (try? swapScheme(forUrl: url, withNewScheme: interceptResourceScheme)) ?? url
         Log.info(">>>> DEBUG: Scheme swapped for url %@", schemedUrl)
         let asset = AVURLAsset(
             url: schemedUrl,
@@ -339,7 +342,7 @@ extension CompositionalPlaybackMedia {
         return "nasubs"
     }
     
-    private func swapeScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {
+    private func swapScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {
         var components = try URLComponents(
             url: originalUrl,
             resolvingAgainstBaseURL: true

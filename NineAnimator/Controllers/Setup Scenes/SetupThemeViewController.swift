@@ -43,7 +43,7 @@ class SetupThemeViewController: UIViewController, Themable {
     func theme(didUpdate theme: Theme) {
         let themeName: String
         
-        if NineAnimator.default.user.brightnessBasedTheme {
+        if NineAnimator.default.user.dynamicAppearance {
             themeName = "Dynamic"
             themeSelectionSegmentedControl.selectedSegmentIndex = 2
         } else if theme.name == "dark" {
@@ -61,16 +61,16 @@ class SetupThemeViewController: UIViewController, Themable {
         switch themeSelectionSegmentedControl.selectedSegmentIndex {
         case 0:
             if let theme = Theme.availableThemes["light"] {
-                NineAnimator.default.user.brightnessBasedTheme = false
+                NineAnimator.default.user.dynamicAppearance = false
                 Theme.setTheme(theme)
             }
         case 1:
             if let theme = Theme.availableThemes["dark"] {
-                NineAnimator.default.user.brightnessBasedTheme = false
+                NineAnimator.default.user.dynamicAppearance = false
                 Theme.setTheme(theme)
             }
         case 2:
-            NineAnimator.default.user.brightnessBasedTheme = true
+            NineAnimator.default.user.dynamicAppearance = true
             (UIApplication.shared.delegate as? AppDelegate)?.updateDynamicBrightness(forceUpdate: true)
         default: break
         }

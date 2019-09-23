@@ -95,6 +95,10 @@ extension Theme {
         }
     }
     
+    static func forceUpdate(animated: Bool = false) {
+        setTheme(current, animated: animated)
+    }
+    
     // swiftlint:disable cyclomatic_complexity
     
     /// Apply the default set of theming behaviors for the view
