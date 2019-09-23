@@ -69,6 +69,7 @@ class RootViewController: UITabBarController, Themable {
         if !NineAnimator.default.user.didSetupLatestVersion {
             let storyboard = UIStoryboard(name: "Setup", bundle: Bundle.main)
             if let viewController = storyboard.instantiateInitialViewController() {
+                viewController.modalPresentationStyle = .fullScreen
                 presentOnTop(viewController)
             }
         }

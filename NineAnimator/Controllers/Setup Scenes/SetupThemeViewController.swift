@@ -44,7 +44,9 @@ class SetupThemeViewController: UIViewController, Themable {
         let themeName: String
         
         if NineAnimator.default.user.dynamicAppearance {
-            themeName = "Dynamic"
+            if #available(iOS 13.0, *) {
+                themeName = "System"
+            } else { themeName = "Dynamic" }
             themeSelectionSegmentedControl.selectedSegmentIndex = 2
         } else if theme.name == "dark" {
             themeName = "Dark"
@@ -71,7 +73,13 @@ class SetupThemeViewController: UIViewController, Themable {
             }
         case 2:
             NineAnimator.default.user.dynamicAppearance = true
-            (UIApplication.shared.delegate as? AppDelegate)?.updateDynamicBrightness(forceUpdate: true)
+            
+            if #available(iOS 13.0, *) {
+                RootViewController.shared?.updateDynamicTheme()
+            } else {
+                (UIApplication.shared.delegate as? AppDelegate)?
+                    .updateDynamicBrightness(forceUpdate: true)
+            }
         default: break
         }
     }
@@ -92,6 +100,13 @@ class SetupThemeViewController: UIViewController, Themable {
             continueButton.alpha = 0
             themeDescriptionLabel.alpha = 0
             themeSelectionSegmentedControl.alpha = 0
+        }
+        
+        if #available(iOS 13.0, *) {
+            themeDescriptionLabel.text = """
+Select Light or Dark to use an appearance independent from the system.
+After setup, you can change the theme settings in the Preferences menu.
+"""
         }
     }
     
