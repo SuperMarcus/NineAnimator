@@ -77,6 +77,11 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if #available(iOS 13.0, *) {
+            // Not yet implemented for the cast controller
+            overrideUserInterfaceStyle = .light
+        }
+        
         deviceListTableView.dataSource = self
         deviceListTableView.rowHeight = 48
         deviceListTableView.tableFooterView = UIView()
