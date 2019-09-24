@@ -47,4 +47,27 @@ extension NineAnimatorUser {
         // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }
     }
+    
+    /// A property wrapper for an entry in the UserDefaults
+    @propertyWrapper
+    struct Entry<ValueType> {
+        private let key: String
+        private unowned var store: UserDefaults
+        private let defaultValue: ValueType
+        
+        var wrappedValue: ValueType {
+            get {
+                if let value = store.value(forKey: key) as? ValueType {
+                    return value
+                } else { return defaultValue }
+            }
+            set { store.set(newValue, forKey: key) }
+        }
+        
+        init(_ key: String, store: UserDefaults, default: ValueType) {
+            self.key = key
+            self.store = store
+            self.defaultValue = `default`
+        }
+    }
 }

@@ -139,14 +139,18 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
                     }
                 }
             }
-            self?.setPresenting(anime: anime)
-            // Initiate playback if episodeLink is set
-            if let episodeLink = self?.episodeLink {
-                // Present the cast controller if the episode is currently playing on
-                // an attached cast device
-                if CastController.default.isAttached(to: episodeLink) {
-                    CastController.default.presentPlaybackController()
-                } else { self?.retriveAndPlay() }
+            
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.setPresenting(anime: anime)
+                // Initiate playback if episodeLink is set
+                if let episodeLink = self.episodeLink {
+                    // Present the cast controller if the episode is currently playing on
+                    // an attached cast device
+                    if CastController.default.isAttached(to: episodeLink) {
+                        CastController.default.presentPlaybackController()
+                    } else { self.retriveAndPlay() }
+                }
             }
         }
     }
@@ -437,7 +441,9 @@ extension AnimeViewController {
                         return
                     }
                     
-                    self.onPlaybackMediaRetrieved(media, episode: episode)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.onPlaybackMediaRetrieved(media, episode: episode)
+                    }
                 }
             } else {
                 // Always stall unsupported episodes and update the progress to 1.0
