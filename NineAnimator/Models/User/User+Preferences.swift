@@ -104,12 +104,14 @@ extension NineAnimatorUser {
     /// Allow NineAnimator to solve WAF challenges (e.g. Cloudflare's I'm Under
     /// Attack verification) automatically.
     ///
-    /// This is disabled by default as of 1.1b2 since the WAF resolver is unstable
+    /// This was disabled by default as of 1.1b2 since the WAF resolver is unstable
     /// and usually takes a long time to fallback to manual authentication.
     /// Until the challenge resolver has stablized, there will be no preferences
     /// menu option to enable this functionality.
+    ///
+    /// Re-enabled on 1.1b8 thanks to [Awsomedude](https://github.com/Awsomedude)
     var solveFirewallChalleges: Bool {
-        get { return _freezer.bool(forKey: Keys.sourceSolveChallenges) }
+        get { return _freezer.value(forKey: Keys.sourceSolveChallenges) as? Bool ?? true }
         set { _freezer.set(newValue, forKey: Keys.sourceSolveChallenges) }
     }
     

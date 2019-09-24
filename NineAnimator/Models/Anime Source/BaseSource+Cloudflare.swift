@@ -163,8 +163,8 @@ extension BaseSource: Alamofire.RequestRetrier {
                 return fail()
             }
             
-            // Abort after 3 tries
-            if request.retryCount > 2 {
+            // Abort after 2 tries
+            if request.retryCount > 1 {
                 Log.info("[CF_WAF] Maximal number of retry reached, renewing identity.")
                 self.renewIdentity()
                 for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
