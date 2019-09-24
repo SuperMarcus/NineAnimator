@@ -22,5 +22,6 @@ import UIKit
 extension UISearchBar: Themable {
     func theme(didUpdate theme: Theme) {
         keyboardAppearance = theme.keyboardAppearance
+        barStyle = theme.barStyle
     }
 }

@@ -32,6 +32,10 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         return topViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return Theme.current.preferredStatusBarStyle
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         Theme.provision(self)
@@ -43,11 +47,20 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         view.backgroundColor = theme.background
         navigationBar.barStyle = theme.barStyle
         
+        setNeedsStatusBarAppearanceUpdate()
+        
         guard !(topViewController is DontBotherViewController) else { return }
+        
+        if #available(iOS 13.0, *) {
+            updateAppearance(withTheme: theme)
+        }
         
         navigationBar.tintColor = theme.tint
         navigationBar.barTintColor = theme.translucentBackground
         navigationBar.layoutIfNeeded()
+        
+        // Configure the proper overriding style for the conents
+        configureStyleOverride(self, withTheme: theme)
     }
     
     func navigationController(_ navigationController: UINavigationController,
@@ -68,6 +81,8 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
 //            navigationBar.tintColor = Theme.current.tint
 //        }
         
+        let theme = Theme.current
+        
         navigationBar.shadowImage = UIImage()
         navigationBar.isTranslucent = true
         navigationBar.setBackgroundImage(nil, for: .default)
@@ -75,9 +90,34 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         
         UIView.animate(withDuration: 0.2) {
             [navigationBar] in
-            navigationBar.barTintColor = Theme.current.translucentBackground
-            navigationBar.tintColor = Theme.current.tint
+            if #available(iOS 13.0, *) {
+                self.updateAppearance(withTheme: theme)
+            }
+            
+            navigationBar.barTintColor = theme.translucentBackground
+            navigationBar.tintColor = theme.tint
             navigationBar.layoutIfNeeded()
         }
+    }
+    
+    @available(iOS 13.0, *)
+    private func updateAppearance(withTheme theme: Theme) {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = theme.background
+        appearance.titleTextAttributes = [.foregroundColor: theme.primaryText]
+        appearance.largeTitleTextAttributes = [.foregroundColor: theme.primaryText]
+        appearance.shadowColor = theme.background
+        appearance.shadowImage = nil
+        
+        navigationBar.standardAppearance = appearance
+        navigationBar.compactAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
+        navigationBar.barStyle = theme.barStyle
+    }
+    
+    @available(iOS 13.0, *)
+    func resetNavigationBarStyle() {
+        updateAppearance(withTheme: Theme.current)
     }
 }

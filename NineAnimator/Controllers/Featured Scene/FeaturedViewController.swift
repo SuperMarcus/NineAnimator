@@ -154,7 +154,7 @@ class FeaturedViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        var pools = [
+        let pools = [
             featuredAnimePage?.featured,
             featuredAnimePage?.latest
         ]

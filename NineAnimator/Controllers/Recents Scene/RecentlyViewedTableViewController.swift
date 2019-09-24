@@ -41,7 +41,7 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //Pull any updates from the cloud
+        // Pull any updates from the cloud
         NineAnimator.default.user.pull()
         reloadStatefulAnime()
         tableView.reloadData()

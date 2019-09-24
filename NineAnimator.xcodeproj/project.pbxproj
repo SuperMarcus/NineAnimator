@@ -118,6 +118,7 @@
 		2C4FDDAF22483CBB0059B7D8 /* AnimeUltima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */; };
 		2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */; };
 		2C4FDDB322485EF90059B7D8 /* AnimeUltima+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */; };
+		2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54FF5C233967A0007669BB /* UIStyleOverride.swift */; };
 		2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */; };
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
 		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
@@ -208,6 +209,7 @@
 		2C86C1ED225D792C00950ABF /* User+SetupInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EC225D792C00950ABF /* User+SetupInfo.swift */; };
 		2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EE225D7FB600950ABF /* SetupWhatsNewViewController.swift */; };
 		2C8DD30B224B0B9A001D9A16 /* AnimeUltima+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DD30A224B0B9A001D9A16 /* AnimeUltima+Anime.swift */; };
+		2C8E1655232BEE5900DBC761 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8E1653232BEE5900DBC761 /* Library.storyboard */; };
 		2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */; };
 		2C8F6E8222061CE30047798B /* OfflineAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */; };
 		2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8522062BB90047798B /* OfflineAnimeViewer.storyboard */; };
@@ -453,6 +455,7 @@
 		2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUltima.swift; sourceTree = "<group>"; };
 		2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Featured.swift"; sourceTree = "<group>"; };
 		2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Search.swift"; sourceTree = "<group>"; };
+		2C54FF5C233967A0007669BB /* UIStyleOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyleOverride.swift; sourceTree = "<group>"; };
 		2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseSource+Cloudflare.swift"; sourceTree = "<group>"; };
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
@@ -556,6 +559,7 @@
 		2C86C1EE225D7FB600950ABF /* SetupWhatsNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupWhatsNewViewController.swift; sourceTree = "<group>"; };
 		2C8BCB5521E2EB7600430598 /* homekit.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homekit.jpg; sourceTree = "<group>"; };
 		2C8DD30A224B0B9A001D9A16 /* AnimeUltima+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Anime.swift"; sourceTree = "<group>"; };
+		2C8E1654232BEE5900DBC761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Library.storyboard; sourceTree = "<group>"; };
 		2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimePredictedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAnimeTableViewCell.swift; sourceTree = "<group>"; };
 		2C8F6E8622062BB90047798B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OfflineAnimeViewer.storyboard; sourceTree = "<group>"; };
@@ -1132,6 +1136,7 @@
 				2C0E754E22621C3600DF3AC4 /* AnimeDiscovery.storyboard */,
 				2C71DEBD226CF6DF004F3AC3 /* ServerSelectionCell.xib */,
 				2C71DEC6226E179B004F3AC3 /* ServerSelection.storyboard */,
+				2C8E1653232BEE5900DBC761 /* Library.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1335,6 +1340,7 @@
 				2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */,
 				2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */,
 				2CEBE8FD22074401006A64CC /* UISearchBar+Themable.swift */,
+				2C54FF5C233967A0007669BB /* UIStyleOverride.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -1748,6 +1754,7 @@
 				2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
+				2C8E1655232BEE5900DBC761 /* Library.storyboard in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2046,6 +2053,7 @@
 				2C684BCE2290665900E1BA35 /* AnimePahe+Featured.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
 				2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */,
+				2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */,
 				2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */,
 				2C0CFC452264105100EC793E /* MyAnimeList+SeasonalAnimeRecommendation.swift in Sources */,
 				2C6CF256221CA40E0009D554 /* InformationSceneCharacterCollectionViewCell.swift in Sources */,
@@ -2233,6 +2241,14 @@
 			name = SelflessAuthenticationWebViewController.storyboard;
 			sourceTree = "<group>";
 		};
+		2C8E1653232BEE5900DBC761 /* Library.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2C8E1654232BEE5900DBC761 /* Base */,
+			);
+			name = Library.storyboard;
+			sourceTree = "<group>";
+		};
 		2C8F6E8522062BB90047798B /* OfflineAnimeViewer.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -2413,6 +2429,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2439,6 +2456,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

@@ -37,6 +37,8 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         // Assign delegates
         webView.navigationDelegate = self
         webView.uiDelegate = self
+        webView.makeThemable()
+        
         loadingProgressObserver = webView.observe(\.estimatedProgress) {
             [weak self] _, _ in
             DispatchQueue.main.async { self?.updateProgressIndicator() }
@@ -60,6 +62,7 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         loadingProgressIndicator.progressTintColor = theme.tint
         tipLabel.textColor = theme.primaryText
         tipContainerView.effect = UIBlurEffect(style: theme.blurStyle)
+        configureStyleOverride(self, withTheme: theme)
     }
     
     @IBAction private func onDismissal(_ sender: Any) {

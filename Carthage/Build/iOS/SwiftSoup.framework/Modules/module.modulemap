@@ -1,5 +1,5 @@
 framework module SwiftSoup {
-  umbrella header "SwiftSoup-umbrella.h"
+  umbrella header "SwiftSoup.h"
 
   export *
   module * { export * }

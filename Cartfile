@@ -1,5 +1,5 @@
 github "onevcat/Kingfisher" ~> 5.6.0
 github "Alamofire/Alamofire" ~> 4.8.1
-github "scinfu/SwiftSoup" ~> 2.2.0
+github "scinfu/SwiftSoup" ~> 2.2.1
 github "SuperMarcus/OpenCastSwift" "master"
 github "marcosgriselli/ViewAnimator" ~> 2.5.1

@@ -62,8 +62,6 @@ class SetupServerSelectionViewController: UIViewController {
         
         if !didShowAnimations {
             didShowAnimations = true
-            let animatingViews = [ selectionView! ] + selectionView.visibleCells
-            
             UIView.animate(
                 views: [ titleLabel ],
                 animations: [ AnimationType.from(direction: .top, offset: 16) ],
@@ -83,20 +81,29 @@ class SetupServerSelectionViewController: UIViewController {
                 duration: 0.5
             )
             UIView.animate(
-                views: animatingViews,
+                views: [ selectionView ],
                 animations: [],
                 initialAlpha: 0,
                 finalAlpha: 1,
                 delay: 0,
-                animationInterval: 0.2,
+                animationInterval: 0,
                 duration: 0.4
+            )
+            UIView.animate(
+                views: selectionView.visibleCells,
+                animations: [ AnimationType.from(direction: .bottom, offset: 32) ],
+                initialAlpha: 0,
+                finalAlpha: 1,
+                delay: 0,
+                animationInterval: 0,
+                duration: 0.6
             )
             UIView.animate(
                 views: [ informationLabel, continueButton ],
                 animations: [],
                 initialAlpha: 0,
                 finalAlpha: 1,
-                delay: Double(animatingViews.count) * 0.2,
+                delay: 0,
                 animationInterval: 0,
                 duration: 0.5
             )

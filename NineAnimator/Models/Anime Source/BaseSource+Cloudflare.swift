@@ -61,6 +61,7 @@ extension BaseSource {
                 var cfQueryFilteredCharacters = CharacterSet.urlFragmentAllowed
                 _ = cfQueryFilteredCharacters.remove("/")
                 _ = cfQueryFilteredCharacters.remove("=")
+                _ = cfQueryFilteredCharacters.remove("+")
                 urlBuilder?.percentEncodedQueryItems = [
                     .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
                     .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
@@ -91,7 +92,7 @@ extension BaseSource {
     /// [2] [cloudscraper](https://github.com/codemanki/cloudscraper/blob/master/index.js)
     fileprivate static func _cloudflareWAFSolveChallenge(_ challengePageContent: String, requestingUrl: URL) -> String? {
         let jsMatchingRegex = try! NSRegularExpression(
-            pattern: "(var\\s+s,t,o,p,b,r,e[^}]+\\}[^}]+)",
+            pattern: "getElementById\\('cf-content'\\)[\\s\\S]+?setTimeout.+?\\r?\\n([\\s\\S]+?a\\.value\\s*=.+?)\\r?\\n(?:[^{<>]*\\},\\s*(\\d{4,}))?",
             options: []
         )
         
@@ -105,21 +106,14 @@ extension BaseSource {
         
         // Directly return the resolved value instead of assigning it to the form
         solveJs = solveJs.replacingOccurrences(
-            of: "a\\.value = (.+ \\+ t\\.length(\\).toFixed\\(10\\))?).+",
-            with: "$1",
-            options: [ .regularExpression ]
-        )
-        
-        // Remove the submit form statements
-        solveJs = solveJs.replacingOccurrences(
-            of: "f.action(?:.+|\\s)+$",
+            of: " '; 121'",
             with: "",
             options: [ .regularExpression ]
         )
         
-        // Remove all form assignments
+        // Remove some form assignments
         solveJs = solveJs.replacingOccurrences(
-            of: "\\s{3,}[a-z](?: = |\\.).+",
+            of: "\\s{3,}(?:t|f)(?: = |\\.).+",
             with: "",
             options: [ .regularExpression ]
         )
@@ -128,6 +122,12 @@ extension BaseSource {
         solveJs = solveJs.replacingOccurrences(
             of: "t.length",
             with: "\(hostLength)"
+        )
+        
+        solveJs = solveJs.replacingOccurrences(
+            of: "document\\.getElementById\\('jschl-answer'\\);",
+            with: "{ value: 0 }",
+            options: [ .regularExpression ]
         )
         
         // Evaluate the javascript and return the value

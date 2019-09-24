@@ -34,7 +34,7 @@ class TiwiKiwiParser: VideoProviderParser {
                with session: SessionManager,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let headers = [
-            "User-Agents": defaultUserAgent,
+            "User-Agent": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
         let task = NineAnimatorMultistepAsyncTask()
@@ -89,7 +89,7 @@ class TiwiKiwiParser: VideoProviderParser {
                     
                     Log.info("(Tiwi.Kiwi Parser) found asset at %@", sourceURL.absoluteString)
                     
-                    //This also doen't work with chromecast
+                    // This also doen't work with chromecast
                     handler(BasicPlaybackMedia(
                         url: sourceURL,
                         parent: episode,
@@ -107,7 +107,7 @@ class TiwiKiwiParser: VideoProviderParser {
             
             Log.info("(Tiwi.Kiwi Parser) found asset at %@", sourceURL.absoluteString)
             
-            //This also doen't work with chromecast
+            // This also doen't work with chromecast
             handler(BasicPlaybackMedia(
                 url: sourceURL,
                 parent: episode,

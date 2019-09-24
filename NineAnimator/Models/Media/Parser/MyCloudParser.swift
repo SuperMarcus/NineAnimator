@@ -33,13 +33,13 @@ class MyCloudParser: VideoProviderParser {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "User-Agnet": defaultUserAgent,
+            "User-Agent": defaultUserAgent,
             "Host": "mcloud.to"
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString,
-            "User-Agnet": defaultUserAgent
+            "User-Agent": defaultUserAgent
         ]
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
@@ -68,7 +68,7 @@ class MyCloudParser: VideoProviderParser {
             
             Log.info("(MyCloud Parser) found asset at %@", sourceURL.absoluteString)
             
-            //MyCloud might not support Chromecast, since it uses COR checking
+            // MyCloud might not support Chromecast, since it uses COR checking
             handler(BasicPlaybackMedia(
                 url: sourceURL,
                 parent: episode,

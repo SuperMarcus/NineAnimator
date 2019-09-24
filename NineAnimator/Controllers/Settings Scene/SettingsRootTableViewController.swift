@@ -43,6 +43,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
     
+    @IBOutlet private weak var dynamicAppearanceSwitchLabel: UILabel!
+    
     @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
     
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
@@ -110,7 +112,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBAction private func onDynamicAppearanceDidChange(_ sender: UISwitch) {
         // Dynamic appearance is managed by the AppDelegate
-        NineAnimator.default.user.brightnessBasedTheme = sender.isOn
+        NineAnimator.default.user.dynamicAppearance = sender.isOn
+        RootViewController.shared?.updateDynamicTheme() // Sync with the current theme
         updatePreferencesUI()
     }
     
@@ -238,8 +241,12 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         
         // Appearance settings
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
-        appearanceSegmentControl.isEnabled = !NineAnimator.default.user.brightnessBasedTheme
-        dynamicAppearanceSwitch.setOn(NineAnimator.default.user.brightnessBasedTheme, animated: true)
+        appearanceSegmentControl.isEnabled = !NineAnimator.default.user.dynamicAppearance
+        dynamicAppearanceSwitch.setOn(NineAnimator.default.user.dynamicAppearance, animated: true)
+        
+        if #available(iOS 13.0, *) {
+            dynamicAppearanceSwitchLabel.text = "Sync with System"
+        } else { dynamicAppearanceSwitchLabel.text = "Dynamic Appearance" }
         
         // To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
@@ -250,7 +257,7 @@ class SettingsRootTableViewController: UITableViewController, Themable {
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
         
-        //Notification and fetch status
+        // Notification and fetch status
         var subscriptionEngineStatus = [String]()
         
         switch UIApplication.shared.backgroundRefreshStatus {

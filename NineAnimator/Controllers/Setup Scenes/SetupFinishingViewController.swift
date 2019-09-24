@@ -63,7 +63,7 @@ class SetupFinishingViewController: UIViewController {
             finishTitleLabel.animate(animations: [ AnimationType.from(direction: .top, offset: 16) ], duration: 0.5)
             finishSubtitleLabel.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
             openDiscordButton.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
-            finishButton.animate(animations: [], delay: 0.4)
+            finishButton.animate(animations: [], delay: 0)
         }
     }
     

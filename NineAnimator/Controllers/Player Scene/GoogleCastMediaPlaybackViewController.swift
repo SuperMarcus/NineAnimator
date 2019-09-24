@@ -67,7 +67,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     private var impactGenerator: UIImpactFeedbackGenerator?
     
-    //The amount of time (in seconds) that fast forward and rewind button seeks
+    // The amount of time (in seconds) that fast forward and rewind button seeks
     private var fastSeekAmount: Float = 15.0
     
     @IBAction private func onDoneButtonPressed(_ sender: Any) {
@@ -76,6 +76,11 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            // Not yet implemented for the cast controller
+            overrideUserInterfaceStyle = .light
+        }
         
         deviceListTableView.dataSource = self
         deviceListTableView.rowHeight = 48
@@ -401,7 +406,10 @@ extension GoogleCastMediaPlaybackViewController {
         self.sharedNowPlayingInfo[MPMediaItemPropertyAlbumTitle] = episode.parentLink.title
         
         infoCenter.nowPlayingInfo = self.sharedNowPlayingInfo
-        infoCenter.playbackState = .playing
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = .playing
+        }
         
         // Setup command center
         let commandCenter = MPRemoteCommandCenter.shared()
@@ -478,7 +486,10 @@ extension GoogleCastMediaPlaybackViewController {
         
         let infoCenter = MPNowPlayingInfoCenter.default()
         infoCenter.nowPlayingInfo = nil
-        infoCenter.playbackState = .stopped
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = .stopped
+        }
         
         // Remove volume change observer
         NotificationCenter.default.removeObserver(self, name: .init(rawValue: "AVSystemController_SystemVolumeDidChangeNotification"), object: nil)
@@ -495,7 +506,10 @@ extension GoogleCastMediaPlaybackViewController {
             NSNumber(value: Double(playbackProgressSlider.maximumValue))
         
         infoCenter.nowPlayingInfo = sharedNowPlayingInfo
-        infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
+        
+        if #available(iOS 13.0, *) {
+            infoCenter.playbackState = status.playerState == .paused ? .paused : .playing
+        }
     }
     
     @objc private func systemVolumeDidChange(notification: Notification) {
