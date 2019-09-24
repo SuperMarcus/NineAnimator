@@ -788,6 +788,7 @@ extension AnimeViewController {
     private func presentEditingMenu(for episodeLink: EpisodeLink, from sourceView: UIView) {
         self.becomeFirstResponder()
         
+        let targetRect = tableView.convert(sourceView.frame, to: view)
         let editMenu = UIMenuController.shared
         var availableMenuItems = [UIMenuItem]()
         
@@ -816,10 +817,13 @@ extension AnimeViewController {
         // Save the available actions
         editMenu.menuItems = availableMenuItems
         
-        // TODO: Update this for iOS 13
-        let targetRect = tableView.convert(sourceView.frame, to: view)
-        editMenu.setTargetRect(targetRect, in: view)
-        editMenu.setMenuVisible(true, animated: true)
+        if #available(iOS 13.0, *) {
+            editMenu.showMenu(from: view, rect: targetRect)
+        } else {
+            // Fallback on earlier versions
+            editMenu.setTargetRect(targetRect, in: view)
+            editMenu.setMenuVisible(true, animated: true)
+        }
     }
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
