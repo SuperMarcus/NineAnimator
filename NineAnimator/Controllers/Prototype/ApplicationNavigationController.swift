@@ -107,7 +107,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         appearance.backgroundColor = theme.background
         appearance.titleTextAttributes = [.foregroundColor: theme.primaryText]
         appearance.largeTitleTextAttributes = [.foregroundColor: theme.primaryText]
-        appearance.shadowColor = Theme.current.background
+        appearance.shadowColor = theme.background
         appearance.shadowImage = nil
         
         navigationBar.standardAppearance = appearance
