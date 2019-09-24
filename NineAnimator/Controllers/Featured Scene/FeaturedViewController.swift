@@ -46,7 +46,7 @@ class FeaturedViewController: UITableViewController {
         didSet { sourceSelectionButton.isEnabled = requestTask == nil }
     }
     
-    var loadedSource: Source?
+    var loadingSource: Source?
     
     var source: Source { return NineAnimator.default.user.source }
     
@@ -54,6 +54,8 @@ class FeaturedViewController: UITableViewController {
         featuredAnimePage = nil
         refresher.beginRefreshing()
         tableView.reloadData()
+        loadingSource = source
+        
         requestTask = source.featured {
             [source] page, error in
             DispatchQueue.main.async { [weak self] in
@@ -62,7 +64,6 @@ class FeaturedViewController: UITableViewController {
                     self?.refresher.endRefreshing()
                 }
                 self?.error = error
-                self?.loadedSource = source
                 self?.sourceSelectionButton.title = source.name
                 self?.featuredAnimePage = page
             }
@@ -75,7 +76,7 @@ class FeaturedViewController: UITableViewController {
         return ServerSelectionViewController.presentSelectionDialog {
             [weak self] _ in
             guard let self = self else { return }
-            if self.loadedSource?.name != self.source.name {
+            if self.loadingSource?.name != self.source.name {
                 self.reload()
             }
         }
@@ -173,7 +174,7 @@ extension FeaturedViewController {
         super.viewWillAppear(animated)
         
         NineAnimator.default.user.pull()
-        if loadedSource?.name != source.name {
+        if loadingSource?.name != source.name {
             reload()
         }
     }
