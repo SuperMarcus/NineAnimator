@@ -374,15 +374,11 @@ extension TrackingServiceTableViewController {
         }
         
         // Open the authentication dialog/web page
-        if #available(iOS 12.0, *) {
-            let session = ASWebAuthenticationSession(url: anilist.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
-            _ = session.start()
-            authenticationSessionReference = session
-        } else {
-            let session = SFAuthenticationSession(url: anilist.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
-            _ = session.start()
-            authenticationSessionReference = session
-        }
+        beginWebAuthenticationSession(
+            ssoUrl: anilist.ssoUrl,
+            callbackScheme: anilist.ssoCallbackScheme,
+            completion: callback
+        )
     }
     
     // Tell AniList service to logout
@@ -438,14 +434,57 @@ extension TrackingServiceTableViewController {
         }
         
         // Open the authentication dialog/web page
+        beginWebAuthenticationSession(
+            ssoUrl: simkl.ssoUrl,
+            callbackScheme: simkl.ssoCallbackScheme,
+            completion: callback
+        )
+    }
+}
+
+// MARK: - Web Authentication Presentation
+extension TrackingServiceTableViewController {
+    /// Present the Single-Sign-On authentication page
+    ///
+    /// This method creates the authentication session suitable for the version
+    /// of the system and preserves the reference to the session.
+    private func beginWebAuthenticationSession(ssoUrl: URL, callbackScheme: String, completion callback: @escaping NineAnimatorCallback<URL>) {
+        // Open the authentication dialog/web page
         if #available(iOS 12.0, *) {
-            let session = ASWebAuthenticationSession(url: simkl.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
+            let session = ASWebAuthenticationSession(
+                url: ssoUrl,
+                callbackURLScheme: anilist.ssoCallbackScheme,
+                completionHandler: callback
+            )
+            
+            // Set presentation context provider for authentication
+            // session
+            if #available(iOS 13.0, *) {
+                session.presentationContextProvider = self
+            }
+            
+            // Start the authentication session a`nd store the
+            // references
             _ = session.start()
             authenticationSessionReference = session
         } else {
-            let session = SFAuthenticationSession(url: simkl.ssoUrl, callbackURLScheme: anilist.ssoCallbackScheme, completionHandler: callback)
+            let session = SFAuthenticationSession(
+                url: ssoUrl,
+                callbackURLScheme: anilist.ssoCallbackScheme,
+                completionHandler: callback
+            )
+            
+            // Start the authentication session and store the
+            // references
             _ = session.start()
             authenticationSessionReference = session
         }
+    }
+}
+
+@available(iOS 12.0, *)
+extension TrackingServiceTableViewController: ASWebAuthenticationPresentationContextProviding {
+    func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
+        return view.window!
     }
 }
