@@ -34,6 +34,10 @@ class RootViewController: UITabBarController, Themable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Update appearance at launch
+        updateDynamicTheme()
+        
         RootViewController.shared = self
         Theme.provision(self)
         
