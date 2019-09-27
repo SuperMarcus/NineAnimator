@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -159,10 +157,10 @@
                                     <rect key="frame" x="24" y="176.5" width="343" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" horizontalHuggingPriority="500" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="zNL-Js-WKN" userLabel="Ratings" customClass="AnimeRatingView" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="112" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="☆ ☆ ☆ ☆ ☆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nu-af-HRp">
-                                                    <rect key="frame" x="8" y="4" width="93" height="20.5"/>
+                                                    <rect key="frame" x="8" y="4" width="102.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -172,7 +170,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Ratings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCq-le-ZsX">
-                                                    <rect key="frame" x="8" y="24.5" width="93" height="13.5"/>
+                                                    <rect key="frame" x="8" y="24.5" width="102.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -186,7 +184,7 @@
                                             <constraints>
                                                 <constraint firstItem="jCq-le-ZsX" firstAttribute="trailing" secondItem="6Nu-af-HRp" secondAttribute="trailing" id="2SQ-EX-N7s"/>
                                                 <constraint firstItem="jCq-le-ZsX" firstAttribute="top" secondItem="6Nu-af-HRp" secondAttribute="bottom" id="75n-hw-fVn"/>
-                                                <constraint firstAttribute="width" constant="112" id="DVc-kd-shj"/>
+                                                <constraint firstAttribute="width" constant="125" id="DVc-kd-shj"/>
                                                 <constraint firstItem="jCq-le-ZsX" firstAttribute="leading" secondItem="6Nu-af-HRp" secondAttribute="leading" id="OHc-nt-m89"/>
                                                 <constraint firstItem="6Nu-af-HRp" firstAttribute="top" secondItem="zNL-Js-WKN" secondAttribute="top" constant="4" id="gWM-Xs-mGx"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="jCq-le-ZsX" secondAttribute="bottom" id="m1i-hM-joZ"/>
@@ -199,10 +197,10 @@
                                             </connections>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTe-W7-LEe" userLabel="Air Date" customClass="AnimeAirDateView" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="112" y="0.0" width="231" height="50"/>
+                                            <rect key="frame" x="125" y="0.0" width="218" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KNz-kA-xO5">
-                                                    <rect key="frame" x="159" y="4" width="64" height="20.5"/>
+                                                    <rect key="frame" x="146" y="4" width="64" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -212,7 +210,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Air Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sy-Go-eMO">
-                                                    <rect key="frame" x="180.5" y="24.5" width="42.5" height="13.5"/>
+                                                    <rect key="frame" x="167.5" y="24.5" width="42.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -315,7 +313,7 @@
                                 <rect key="frame" x="0.0" y="255" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zIJ-Zt-7Jc" id="ELY-ri-KMl">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Solid Play Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10S-Cq-F4m">
@@ -386,7 +384,7 @@
                                 <rect key="frame" x="0.0" y="321" width="375" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C8r-ap-OkD" id="hTI-uy-sG6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxU-lU-8me">
@@ -450,7 +448,7 @@
                                 <rect key="frame" x="0.0" y="456" width="375" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uk-RM-2XQ" id="rZ2-du-FqS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="61.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-zz-Opg">
@@ -537,7 +535,7 @@
                                 <rect key="frame" x="0.0" y="518" width="375" height="113"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aDw-5S-Pc5" id="Iex-hH-e25">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="112.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-ZF-O7B">
@@ -571,7 +569,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="REM-IJ-4Ku" userLabel="Anime Progress Container">
-                                            <rect key="frame" x="16" y="82" width="343" height="18.5"/>
+                                            <rect key="frame" x="16" y="82" width="343" height="19"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="500" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-hm-aqK">
                                                     <rect key="frame" x="0.0" y="8.5" width="120" height="2"/>
@@ -584,7 +582,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaV-Q7-TKT">
-                                                    <rect key="frame" x="128" y="0.0" width="215" height="18.5"/>
+                                                    <rect key="frame" x="128" y="0.0" width="215" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>

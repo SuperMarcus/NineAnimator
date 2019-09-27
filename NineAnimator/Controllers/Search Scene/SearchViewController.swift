@@ -89,7 +89,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
                 // If errored, set requestingSource to nil so
                 // we'll retry next time
                 guard let page = page else {
-                    requestingSource = nil
+                    self.requestingSource = nil
                     return Log.error(error)
                 }
                 
