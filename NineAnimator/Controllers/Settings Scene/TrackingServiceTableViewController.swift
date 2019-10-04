@@ -76,7 +76,7 @@ class TrackingServiceTableViewController: UITableViewController {
                 anilistPresentAuthenticationPage()
             } else { anilistLogOut() }
         case "service.kitsu.action":
-            if kitsu.didExpire || !kitsu.didSetup {
+            if !kitsu.didSetup {
                 kitsuPresentAuthenticationPage()
             } else { kitsuLogout() }
         case "service.mal.action":
@@ -286,22 +286,17 @@ extension TrackingServiceTableViewController {
         kitsuPushNineAnimatorUpdatesSwitch.setOn(kitsu.didSetup && !kitsu.didExpire, animated: true)
         
         if kitsu.didSetup {
-            if kitsu.didExpire {
-                kitsuStatusLabel.text = "Expired"
-                kitsuActionLabel.text = "Authenticate Kitsu.io"
-            } else {
-                kitsuStatusLabel.text = "Updating"
-                kitsuActionLabel.text = "Sign Out"
-                
-                // Fetch current user info
-                kitsuAccountInfoFetchTask = kitsu.currentUser().error {
-                    [weak kitsuStatusLabel] _ in DispatchQueue.main.async {
-                        kitsuStatusLabel?.text = "Error"
-                    }
-                } .finally {
-                    [weak kitsuStatusLabel] user in DispatchQueue.main.async {
-                        kitsuStatusLabel?.text = "Signed in as \(user.name)"
-                    }
+            kitsuStatusLabel.text = "Updating"
+            kitsuActionLabel.text = "Sign Out"
+            
+            // Fetch current user info
+            kitsuAccountInfoFetchTask = kitsu.currentUser().error {
+                [weak kitsuStatusLabel] _ in DispatchQueue.main.async {
+                    kitsuStatusLabel?.text = "Error"
+                }
+            } .finally {
+                [weak kitsuStatusLabel] user in DispatchQueue.main.async {
+                    kitsuStatusLabel?.text = "Signed in as \(user.name)"
                 }
             }
         } else if kitsuAuthenticationTask != nil {
