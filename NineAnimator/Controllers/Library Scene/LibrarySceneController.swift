@@ -19,7 +19,7 @@
 
 import UIKit
 
-class LibrarySceneController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class LibrarySceneController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MinFilledLayoutDelegate {
     /// List of collection providers
     private lazy var collectionProviders: [CollectionSource] = NineAnimator.default.trackingServices
     
@@ -38,7 +38,7 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
         count: self.collectionProviders.count
     )
     
-    private lazy var layoutHelper = MinFilledFlowLayoutDelegate(
+    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
         dataSource: self,
         alwaysFillLine: true,
         minimalSize: .init(width: 140, height: 90),
@@ -188,6 +188,13 @@ extension LibrarySceneController {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        switch Section.from(section) {
+        case .categories: return .init(top: 10, left: 10, bottom: 10, right: 10)
+        case .collection: return .init(top: 8, left: 10, bottom: 5, right: 10)
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let cell = collectionView.dequeueReusableSupplementaryView(
             ofKind: kind,
@@ -206,6 +213,12 @@ extension LibrarySceneController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? LibraryCollectionCell {
+            if let cellParameters = layoutHelper.layoutParameters(forIndex: indexPath) {
+                cell.updateApperance(baseOff: cellParameters)
+            }
+        }
+        
         cell.makeThemable()
     }
     
@@ -213,6 +226,12 @@ extension LibrarySceneController {
         if elementKind == UICollectionView.elementKindSectionHeader,
             let view = view as? LibraryCollectionsHeaderView {
             view.updateState(collectionState(forSection: indexPath.section))
+        }
+    }
+    
+    func minFilledLayout(_ collectionView: UICollectionView, didLayout indexPath: IndexPath, withParameters parameters: MinFilledFlowLayoutHelper.LayoutParameters) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionCell {
+            cell.updateApperance(baseOff: parameters)
         }
     }
 }

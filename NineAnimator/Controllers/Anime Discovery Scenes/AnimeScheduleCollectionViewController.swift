@@ -32,7 +32,7 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, UIColle
     private(set) var calendarSource: CalendarProvider?
     private var loadedScheduledDays = [ScheduledDay]()
     
-    private lazy var layoutHelper = MinFilledFlowLayoutDelegate(
+    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
         dataSource: self,
         alwaysFillLine: false,
         minimalSize: .init(width: 300, height: 100)

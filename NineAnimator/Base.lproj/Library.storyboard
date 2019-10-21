@@ -131,13 +131,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="322" height="58"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FOJ-vv-URh">
-                                                    <rect key="frame" x="10" y="10" width="38" height="38"/>
+                                                    <rect key="frame" x="10" y="12" width="34" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="FOJ-vv-URh" secondAttribute="height" multiplier="1:1" id="WWB-Gm-fmm"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Collection Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd7-dn-WhG">
-                                                    <rect key="frame" x="58" y="18.5" width="202" height="21"/>
+                                                    <rect key="frame" x="54" y="18.5" width="206" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -153,18 +153,28 @@
                                                         <constraint firstAttribute="width" secondItem="oaP-M9-kL5" secondAttribute="height" multiplier="1:1" id="m5j-hW-EXI"/>
                                                     </constraints>
                                                 </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PH4-TR-9T0">
+                                                    <rect key="frame" x="54" y="57" width="268" height="1"/>
+                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="mGS-he-mNR"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="oaP-M9-kL5" firstAttribute="top" secondItem="NHx-jk-hTq" secondAttribute="top" constant="8" id="8dG-79-Fq4"/>
-                                                <constraint firstAttribute="bottom" secondItem="FOJ-vv-URh" secondAttribute="bottom" constant="10" id="HUl-Mj-sG6"/>
+                                                <constraint firstAttribute="bottom" secondItem="FOJ-vv-URh" secondAttribute="bottom" constant="12" id="HUl-Mj-sG6"/>
+                                                <constraint firstItem="PH4-TR-9T0" firstAttribute="leading" secondItem="gd7-dn-WhG" secondAttribute="leading" id="HhG-x5-XXs"/>
+                                                <constraint firstAttribute="bottom" secondItem="PH4-TR-9T0" secondAttribute="bottom" id="JqH-yf-MSl"/>
                                                 <constraint firstItem="gd7-dn-WhG" firstAttribute="centerY" secondItem="NHx-jk-hTq" secondAttribute="centerY" id="WA6-Og-x6W"/>
-                                                <constraint firstItem="FOJ-vv-URh" firstAttribute="top" secondItem="NHx-jk-hTq" secondAttribute="top" constant="10" id="WO9-d7-vzm"/>
+                                                <constraint firstItem="FOJ-vv-URh" firstAttribute="top" secondItem="NHx-jk-hTq" secondAttribute="top" constant="12" id="WO9-d7-vzm"/>
                                                 <constraint firstAttribute="bottom" secondItem="oaP-M9-kL5" secondAttribute="bottom" constant="8" id="ZKb-UT-j8f"/>
                                                 <constraint firstItem="oaP-M9-kL5" firstAttribute="leading" secondItem="gd7-dn-WhG" secondAttribute="trailing" constant="10" id="bs5-If-bpK"/>
                                                 <constraint firstAttribute="trailing" secondItem="oaP-M9-kL5" secondAttribute="trailing" constant="10" id="fIN-BC-d0p"/>
                                                 <constraint firstItem="gd7-dn-WhG" firstAttribute="leading" secondItem="FOJ-vv-URh" secondAttribute="trailing" constant="10" id="haU-jz-rav"/>
                                                 <constraint firstItem="FOJ-vv-URh" firstAttribute="leading" secondItem="NHx-jk-hTq" secondAttribute="leading" constant="10" id="ig5-ye-nw8"/>
+                                                <constraint firstAttribute="trailing" secondItem="PH4-TR-9T0" secondAttribute="trailing" id="yVh-8N-4Vs"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -179,6 +189,7 @@
                                 <connections>
                                     <outlet property="collectionIconView" destination="FOJ-vv-URh" id="8N8-YL-cPX"/>
                                     <outlet property="collectionLabel" destination="gd7-dn-WhG" id="jpi-TN-pOE"/>
+                                    <outlet property="seperatorLine" destination="PH4-TR-9T0" id="F9w-dL-Nup"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

@@ -177,7 +177,7 @@
 		2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */; };
 		2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AAD229736B7002EC74C /* XStreamParser.swift */; };
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
-		2C7FD5822359060800E37A89 /* MinFilledFlowLayoutDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD5812359060800E37A89 /* MinFilledFlowLayoutDelegate.swift */; };
+		2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */; };
 		2C7FD584235909B300E37A89 /* ClosedRange+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */; };
 		2C8519A722CC8DBD00EEF3AC /* Kissanime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */; };
 		2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */; };
@@ -526,7 +526,7 @@
 		2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamingParser.swift; sourceTree = "<group>"; };
 		2C7B7AAD229736B7002EC74C /* XStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XStreamParser.swift; sourceTree = "<group>"; };
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
-		2C7FD5812359060800E37A89 /* MinFilledFlowLayoutDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledFlowLayoutDelegate.swift; sourceTree = "<group>"; };
+		2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledFlowLayoutHelper.swift; sourceTree = "<group>"; };
 		2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+Clamp.swift"; sourceTree = "<group>"; };
 		2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kissanime.swift; sourceTree = "<group>"; };
 		2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+RequestModifier.swift"; sourceTree = "<group>"; };
@@ -774,7 +774,7 @@
 				2C12EDDA21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift */,
 				2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */,
 				2C12EDDF21BDE7960064D2BD /* ApplicationNavigationController.swift */,
-				2C7FD5812359060800E37A89 /* MinFilledFlowLayoutDelegate.swift */,
+				2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */,
 			);
 			path = Prototype;
 			sourceTree = "<group>";
@@ -2121,7 +2121,7 @@
 				2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */,
 				2CEC219E22088B4900A30F4F /* Promise+Queue.swift in Sources */,
 				2C0CFC4122640A1200EC793E /* DiscoveryStandardTableViewCell.swift in Sources */,
-				2C7FD5822359060800E37A89 /* MinFilledFlowLayoutDelegate.swift in Sources */,
+				2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */,
 				2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */,
 				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
 				2C8519C822D3252600EEF3AC /* AnimeKisa+RequestModifier.swift in Sources */,

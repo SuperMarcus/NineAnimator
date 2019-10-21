@@ -19,15 +19,53 @@
 
 import UIKit
 
-class LibraryCollectionCell: UICollectionViewCell {
+class LibraryCollectionCell: UICollectionViewCell, Themable {
     @IBOutlet private weak var collectionIconView: UIImageView!
     @IBOutlet private weak var collectionLabel: UILabel!
+    @IBOutlet private weak var seperatorLine: UIView!
     
     private(set) var collection: LibrarySceneController.Collection?
+    private let defaultCornerRadius: CGFloat = 10
     
     func setPresenting(_ collection: LibrarySceneController.Collection) {
         self.collection = collection
         self.collectionLabel.text = collection.title
         self.collectionIconView.image = #imageLiteral(resourceName: "List Icon HD")
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        backgroundColor = theme.secondaryBackground
+        seperatorLine.backgroundColor = theme.seperator
+    }
+    
+    func updateApperance(baseOff layoutParameters: MinFilledFlowLayoutHelper.LayoutParameters) {
+        var maskedCorners = CACornerMask()
+        
+        // First Row
+        if layoutParameters.line == 0 {
+            if layoutParameters.item == 0 {
+                maskedCorners.insert(.layerMinXMinYCorner)
+            }
+            
+            if layoutParameters.item == (layoutParameters.itemsInLine - 1) {
+                maskedCorners.insert(.layerMaxXMinYCorner)
+            }
+        }
+        
+        // Last Row
+        if layoutParameters.line == (layoutParameters.numberOfLines - 1) {
+            if layoutParameters.item == 0 {
+                maskedCorners.insert(.layerMinXMaxYCorner)
+            }
+            
+            if layoutParameters.item == (layoutParameters.itemsInLine - 1) {
+                maskedCorners.insert(.layerMaxXMaxYCorner)
+            }
+            
+            seperatorLine.alpha = 0
+        } else { seperatorLine.alpha = 1 }
+        
+        layer.maskedCorners = maskedCorners
+        layer.cornerRadius = defaultCornerRadius
     }
 }
