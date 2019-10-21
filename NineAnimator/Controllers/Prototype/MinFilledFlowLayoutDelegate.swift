@@ -25,7 +25,7 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
     private weak var dataSource: UICollectionViewDataSource?
     
     /// Minimal size for a given cell
-    private var minimalSize: CGSize
+    private var minimalSizes: [CGSize]
     
     /// Bounds for the cached layouts
     private var previousSpace: CGSize
@@ -36,15 +36,21 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
     /// If the cells should always fill the line space
     private var alwaysFillLine: Bool
     
-    init(dataSource: UICollectionViewDataSource, minimalSize: CGSize, alwaysFillLine: Bool) {
+    init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSize: CGSize...) {
         // Store parameters
         self.dataSource = dataSource
-        self.minimalSize = minimalSize
+        self.minimalSizes = minimalSize
         self.previousSpace = .zero
         self.cachedLayoutParameters = [:]
         self.alwaysFillLine = alwaysFillLine
         
         super.init()
+    }
+    
+    func configure(collectionView: UICollectionView) {
+        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.estimatedItemSize = .zero
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -103,9 +109,9 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
             layout.scrollDirection == .vertical ? \.height : \.width
         
         let totalLength = availableSpace[keyPath: variableParameter]
-        let unitMinimal = minimalSize[keyPath: variableParameter]
+        let unitMinimal = minimalSize(for: section)[keyPath: variableParameter]
         let availableUnits = dataSource.collectionView(view, numberOfItemsInSection: section)
-        let interitemSpace = layout.minimumInteritemSpacing
+        let interitemSpace = interitemSpacing(for: view, layout: layout, section: section)
         
         // Calculate unit length
         let ordinalLineUnits = ordinalCellsPerLine(
@@ -128,7 +134,7 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
         
         // Create three different sizes
         var resultingSize = CGSize()
-        resultingSize[keyPath: fixedParameter] = minimalSize[keyPath: fixedParameter]
+        resultingSize[keyPath: fixedParameter] = minimalSize(for: section)[keyPath: fixedParameter]
         
         var ordinalSize = resultingSize
         ordinalSize[keyPath: variableParameter] = ordinalLength
@@ -146,7 +152,7 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
     private func unitParameter(minimal: CGFloat, available: Int, totalLength: CGFloat, interitemSpace: CGFloat) -> (count: Int, length: CGFloat) {
         let realisticMinimal = (0.00001...totalLength).clamp(value: minimal)
         let count = min(floor((totalLength + interitemSpace) / (realisticMinimal + interitemSpace)), CGFloat(available))
-        let length = totalLength / count
+        let length = (totalLength - count * interitemSpace + interitemSpace) / count
         return (Int(count), length)
     }
     
@@ -158,5 +164,22 @@ class MinFilledFlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout 
             totalLength: totalLength,
             interitemSpace: interitemSpace
         ).count
+    }
+    
+    /// Minimal Size
+    private func minimalSize(for section: Int) -> CGSize {
+        return minimalSizes[min(section, minimalSizes.count - 1)]
+    }
+    
+    private func interitemSpacing(for collectionView: UICollectionView, layout: UICollectionViewFlowLayout, section: Int) -> CGFloat {
+        var result = layout.minimumInteritemSpacing
+        if let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout {
+            result = delegate.collectionView?(
+                collectionView,
+                layout: layout,
+                minimumInteritemSpacingForSectionAt: section
+            ) ?? result
+        }
+        return result
     }
 }

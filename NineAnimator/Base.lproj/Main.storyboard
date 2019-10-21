@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fPS-uI-lY6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fPS-uI-lY6">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -420,7 +420,9 @@
         <!--AnimeListing-->
         <scene sceneID="Jdf-2a-3Cm">
             <objects>
-                <viewControllerPlaceholder storyboardName="AnimeListing" id="gid-x1-TYZ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AnimeListing" id="gid-x1-TYZ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="zd9-VS-MwJ"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ocg-ub-rBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2768" y="392"/>
@@ -428,7 +430,9 @@
         <!--AnimePlayer-->
         <scene sceneID="qrR-zZ-1G7">
             <objects>
-                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Tfh-b4-7gh" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Tfh-b4-7gh" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PD6-p0-NMp"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNo-bS-fYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2765" y="439"/>
@@ -600,11 +604,11 @@
                                 <rect key="frame" x="0.0" y="222" width="375" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="56Y-bH-HlN" id="wUM-Qv-QgJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="347.5" height="45"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Listing Service - Current Anime" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rn2-Is-RZS">
-                                            <rect key="frame" x="16" y="0.0" width="323.5" height="45"/>
+                                            <rect key="frame" x="16" y="0.0" width="324" height="45"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                             <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -866,11 +870,11 @@
                                 <rect key="frame" x="0.0" y="617" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" tableViewCell="8kI-CG-O8k" id="R7X-mR-5dQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="347.5" height="144"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TMG-gN-0Pw">
-                                            <rect key="frame" x="16" y="11" width="323.5" height="122"/>
+                                            <rect key="frame" x="16" y="11" width="324" height="122"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eEe-9a-Fgq">
                                                     <rect key="frame" x="0.0" y="0.0" width="94.5" height="122"/>
@@ -885,19 +889,19 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g7r-tP-s31">
-                                                    <rect key="frame" x="110.5" y="59" width="189" height="20.5"/>
+                                                    <rect key="frame" x="110.5" y="59" width="189.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You recently watched..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cty-4k-jCy">
-                                                    <rect key="frame" x="110.5" y="38" width="205" height="17"/>
+                                                    <rect key="frame" x="110.5" y="38" width="205.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Notification Enabled" translatesAutoresizingMaskIntoConstraints="NO" id="NEt-AQ-iJq">
-                                                    <rect key="frame" x="307.5" y="53" width="16" height="16"/>
+                                                    <rect key="frame" x="308" y="53" width="16" height="16"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <constraints>
@@ -947,11 +951,11 @@
                                 <rect key="frame" x="0.0" y="761" width="375" height="144"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xLx-7Q-mg8" id="tDW-Uv-3vr">
-                                    <rect key="frame" x="0.0" y="0.0" width="347.5" height="144"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="348" height="144"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LEc-zC-0Z2" userLabel="Container">
-                                            <rect key="frame" x="16" y="11" width="323.5" height="122"/>
+                                            <rect key="frame" x="16" y="11" width="324" height="122"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ubo-OB-a5H">
                                                     <rect key="frame" x="0.0" y="0.0" width="94.5" height="122"/>
@@ -966,7 +970,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Downloading from 9anime.ru..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="9jV-g1-31m">
-                                                    <rect key="frame" x="110.5" y="30" width="213" height="17"/>
+                                                    <rect key="frame" x="110.5" y="30" width="213.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -976,7 +980,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 Episodes Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKi-LU-Eem">
-                                                    <rect key="frame" x="110.5" y="75.5" width="213" height="14.5"/>
+                                                    <rect key="frame" x="110.5" y="75.5" width="213.5" height="14.5"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -997,7 +1001,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MpQ-a2-wLE">
-                                            <rect key="frame" x="126.5" y="62" width="213" height="20.5"/>
+                                            <rect key="frame" x="126.5" y="62" width="213.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1054,7 +1058,9 @@
         <!--AnimePlayer-->
         <scene sceneID="LiF-NM-f4b">
             <objects>
-                <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AnimePlayer" id="fnc-Z3-OPF" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="QYG-30-56h"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zvQ-c8-IjA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1834" y="1089"/>
@@ -1062,7 +1068,9 @@
         <!--OfflineAnimeViewer-->
         <scene sceneID="RWb-rZ-98f">
             <objects>
-                <viewControllerPlaceholder storyboardName="OfflineAnimeViewer" id="Aai-c1-tKt" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="OfflineAnimeViewer" id="Aai-c1-tKt" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="6Mu-2i-2oy"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ulM-S7-d4U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1869" y="1156"/>
@@ -1070,7 +1078,9 @@
         <!--AnimeListing-->
         <scene sceneID="P1u-Vx-V0r">
             <objects>
-                <viewControllerPlaceholder storyboardName="AnimeListing" id="SHI-Va-UwC" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AnimeListing" id="SHI-Va-UwC" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="dpQ-1O-aeH"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aF2-KF-Reg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1837" y="1224"/>
@@ -1103,7 +1113,9 @@
         <!--AnimePlayer-->
         <scene sceneID="fxf-kY-AKA">
             <objects>
-                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Vey-hc-6Z0" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Vey-hc-6Z0" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="D3B-XR-8Xx"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWR-t2-rZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2765" y="-283"/>
@@ -1135,6 +1147,16 @@
             </objects>
             <point key="canvasLocation" x="960" y="-772"/>
         </scene>
+        <!--Library-->
+        <scene sceneID="23O-Pl-jwg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Library" id="a6a-cK-5CU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="8xQ-RX-hel"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ydY-iH-KxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="198" y="-464"/>
+        </scene>
         <!--Root-->
         <scene sceneID="66E-C5-t73">
             <objects>
@@ -1147,6 +1169,7 @@
                     <connections>
                         <segue destination="luB-5E-Zna" kind="relationship" relationship="viewControllers" id="252-OP-dKL"/>
                         <segue destination="QZv-01-MCN" kind="relationship" relationship="viewControllers" id="tJK-3I-Igt"/>
+                        <segue destination="a6a-cK-5CU" kind="relationship" relationship="viewControllers" id="eqe-SH-8m8"/>
                         <segue destination="rOz-Cr-EMK" kind="relationship" relationship="viewControllers" id="kN5-gp-5nF"/>
                         <segue destination="im7-SA-Rzv" kind="relationship" relationship="viewControllers" id="cus-k2-Irs"/>
                     </connections>

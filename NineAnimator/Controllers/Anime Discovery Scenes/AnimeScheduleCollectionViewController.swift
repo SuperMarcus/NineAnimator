@@ -34,8 +34,8 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, UIColle
     
     private lazy var layoutHelper = MinFilledFlowLayoutDelegate(
         dataSource: self,
-        minimalSize: .init(width: 300, height: 100),
-        alwaysFillLine: false
+        alwaysFillLine: false,
+        minimalSize: .init(width: 300, height: 100)
     )
     
     override func viewDidLoad() {

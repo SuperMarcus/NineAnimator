@@ -27,3 +27,6 @@ Most of the resources are obtained from the open domains with their respective a
 - MyAnimeList icon from [myanimelist.net](//myanimelist.net)
 - [Information Icon](https://thenounproject.com/search/?q=information&i=1281664) by [Wawan Hermawan](https://thenounproject.com/wawan3)
 - [Quick Action Cog Icon](https://thenounproject.com/search/?q=ios%20cog&i=17369) by [Melvin Salas](https://thenounproject.com/msalas10)
+- [Notification Icon](https://thenounproject.com/search/?q=notification&i=2918254)
+- [Download Icon](https://thenounproject.com/search/?q=download&i=2644467)
+- [History Icon](https://thenounproject.com/search/?q=history&i=2712044)
