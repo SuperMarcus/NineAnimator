@@ -48,6 +48,7 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        collectionView.delaysContentTouches = false
         layoutHelper.configure(collectionView: collectionView)
         initializeCategories()
         loadCollections(failedOnly: false)
@@ -191,7 +192,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch Section.from(section) {
         case .categories: return .init(top: 10, left: 10, bottom: 10, right: 10)
-        case .collection: return .init(top: 8, left: 10, bottom: 5, right: 10)
+        case .collection: return .init(top: 0, left: 10, bottom: 5, right: 10)
         }
     }
     

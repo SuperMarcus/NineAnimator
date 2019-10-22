@@ -23,6 +23,7 @@ class LibraryCollectionCell: UICollectionViewCell, Themable {
     @IBOutlet private weak var collectionIconView: UIImageView!
     @IBOutlet private weak var collectionLabel: UILabel!
     @IBOutlet private weak var seperatorLine: UIView!
+    @IBOutlet private weak var detailAccessoryImageView: UIImageView!
     
     private(set) var collection: LibrarySceneController.Collection?
     private let defaultCornerRadius: CGFloat = 10
@@ -36,6 +37,7 @@ class LibraryCollectionCell: UICollectionViewCell, Themable {
     func theme(didUpdate theme: Theme) {
         backgroundColor = theme.secondaryBackground
         seperatorLine.backgroundColor = theme.seperator
+        detailAccessoryImageView.tintColor = theme.secondaryText
     }
     
     func updateApperance(baseOff layoutParameters: MinFilledFlowLayoutHelper.LayoutParameters) {
@@ -67,5 +69,13 @@ class LibraryCollectionCell: UICollectionViewCell, Themable {
         
         layer.maskedCorners = maskedCorners
         layer.cornerRadius = defaultCornerRadius
+    }
+    
+    override var isHighlighted: Bool {
+        get { return super.isHighlighted }
+        set {
+            alpha = newValue ? 0.6 : 1.0
+            super.isHighlighted = newValue
+        }
     }
 }

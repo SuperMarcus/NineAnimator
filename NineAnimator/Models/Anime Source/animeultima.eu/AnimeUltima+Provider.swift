@@ -56,13 +56,15 @@ extension NASourceAnimeUltima {
                     
                     Log.info("(AnimeUltima.AUEngine Parser) Found asset at %@", resourceUrlString)
                     
+                    let aggregated = resourceUrl.pathExtension.lowercased() == "m3u8"
+                    
                     // Construct playback media
                     return BasicPlaybackMedia(
                         url: resourceUrl,
                         parent: episode,
-                        contentType: "application/vnd.apple.mpegurl",
+                        contentType: aggregated ? "application/vnd.apple.mpegurl" : "video/mp4",
                         headers: [:],
-                        isAggregated: true
+                        isAggregated: aggregated
                     )
                 } .handle(handler)
         }
