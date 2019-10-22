@@ -38,7 +38,7 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         return "AnimeUltima is a free anime streaming website with many self-hosted servers. This website is guarded by Cloudflare; you may be require to verify your identity manually."
     }
     
-    override var endpoint: String { return "https://www10.animeultima.eu" }
+    override var endpoint: String { return "https://www15.animeultima.eu" }
     
     lazy var _auEngineParser = AUEngineParser(self)
     lazy var _fastStreamParser = FastStreamParser(self)
