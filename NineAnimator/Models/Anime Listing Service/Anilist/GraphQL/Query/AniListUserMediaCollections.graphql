@@ -12,7 +12,10 @@ query ($userId: Int) {
                     id,
                     coverImage { extraLarge },
                     title { userPreferred },
-                    mediaListEntry { status }
+                    mediaListEntry {
+                        status
+                        progress
+                    }
                 }
             }
         }

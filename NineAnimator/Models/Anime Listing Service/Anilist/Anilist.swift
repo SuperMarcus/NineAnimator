@@ -35,6 +35,9 @@ class Anilist: BaseListingService, ListingService {
     /// Hold reference to mutation requests
     var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
     
+    /// A map for the `ListingAnimeTracking` corresponding to the `ListingAnimeReference`
+    var _mediaTrackingMap = [ListingAnimeReference: ListingAnimeTracking]()
+    
     override var identifier: String {
         return "com.marcuszhou.nineanimator.service.anilist"
     }

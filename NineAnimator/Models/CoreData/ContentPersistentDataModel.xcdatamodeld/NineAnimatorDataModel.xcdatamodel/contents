@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15400" systemVersion="19A602" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PersistentEpisode" representedClassName="PersistentEpisode" syncable="YES">
-        <attribute name="bookmarkData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="downloadTaskIdentifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="episodeLinkData" attributeType="Binary" syncable="YES"/>
-        <attribute name="isAggregatedAsset" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="resumeData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="bookmarkData" optional="YES" attributeType="Binary"/>
+        <attribute name="downloadTaskIdentifier" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="episodeLinkData" attributeType="Binary"/>
+        <attribute name="isAggregatedAsset" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="resumeData" optional="YES" attributeType="Binary"/>
     </entity>
+    <entity name="TrackingAnimeReference" representedClassName="TrackingAnimeReference" syncable="YES" codeGenerationType="class"/>
+    <entity name="UnifiedAnimeObject" representedClassName="UnifiedAnimeObject" syncable="YES" codeGenerationType="class">
+        <attribute name="artwork" optional="YES" attributeType="URI"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <entity name="WebsiteAnimeReference" representedClassName="WebsiteAnimeReference" syncable="YES" codeGenerationType="class"/>
     <elements>
         <element name="PersistentEpisode" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="TrackingAnimeReference" positionX="-9" positionY="54" width="128" height="43"/>
+        <element name="UnifiedAnimeObject" positionX="9" positionY="63" width="128" height="73"/>
+        <element name="WebsiteAnimeReference" positionX="-36" positionY="45" width="128" height="43"/>
     </elements>
 </model>

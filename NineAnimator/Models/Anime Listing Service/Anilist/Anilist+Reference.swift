@@ -21,11 +21,10 @@ import Foundation
 
 extension Anilist {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        func nameProximity(_ mediaEntry: NSDictionary) -> Double {
-            guard let titleEntry = mediaEntry["title"] as? NSDictionary else { return 0 }
-            return titleEntry
-                .allValues
-                .compactMap { $0 as? String }
+        func nameProximity(_ mediaEntry: GQLMedia) -> Double {
+            let titles = mediaEntry.title
+            return [titles?.english, titles?.native, titles?.romaji, titles?.userPreferred]
+                .compactMap { $0 }
                 .reduce(0.0) { max($0, $1.proximity(to: link.title)) }
         }
         
@@ -33,16 +32,21 @@ extension Anilist {
             "search": link.title
         ]) .then {
             responseDictionary in
-            guard let mediaEntries = responseDictionary.value(forKeyPath: "Page.media") as? [NSDictionary] else {
-                throw NineAnimatorError.responseError("Media entry not found")
-            }
-            let results = try mediaEntries
-                .map {
-                    (
-                        try ListingAnimeReference(self, withMediaEntry: $0),
-                        nameProximity($0)
-                    )
-                } .sorted { $0.1 > $1.1 }
+            let decodedMediaObjects = try responseDictionary.value(
+                at: "Page.media",
+                type: [NSDictionary].self
+            ) .map { try DictionaryDecoder().decode(GQLMedia.self, from: $0) }
+            let results = try decodedMediaObjects.map {
+                mediaObject -> (ListingAnimeReference, Double) in
+                let reference = try ListingAnimeReference(self, withMediaObject: mediaObject)
+                
+                // Obtain and contribute tracking
+                if let tracking = self.createReferenceTracking(from: mediaObject.mediaListEntry, withSupplementalMedia: mediaObject) {
+                    self.contributeReferenceTracking(tracking, forReference: reference)
+                }
+                
+                return (reference, nameProximity(mediaObject))
+            } .sorted { $0.1 > $1.1 }
             guard let bestMatch = results.first else {
                 throw NineAnimatorError.responseError("No results found")
             }

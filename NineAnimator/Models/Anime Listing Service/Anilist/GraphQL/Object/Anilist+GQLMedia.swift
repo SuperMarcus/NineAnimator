@@ -112,6 +112,28 @@ extension Anilist {
         var userId: Int?
         var mediaId: Int?
         var status: GQLMediaListStatus?
+        var progress: Int?
+    }
+    
+    /// An alias of `GQLMediaList`
+    struct GQLMediaCollectionItem: Codable {
+        var id: Int?
+        var userId: Int?
+        var mediaId: Int?
+        var status: GQLMediaListStatus?
+        var progress: Int?
+        var media: GQLMedia?
+        
+        /// Bridge into `GQLMediaList`
+        var mediaList: GQLMediaList {
+            return GQLMediaList(
+                id: id,
+                userId: userId,
+                mediaId: mediaId,
+                status: status,
+                progress: progress
+            )
+        }
     }
     
     enum GQLMediaListStatus: String, Codable {
@@ -121,5 +143,19 @@ extension Anilist {
         case dropped = "DROPPED"
         case paused = "PAUSED"
         case repeating = "REPEATING"
+    }
+    
+    struct GQLMediaListGroup: Codable {
+        var entries: [GQLMediaCollectionItem]?
+        var name: String?
+        var isCustomList: Bool?
+        var isSplitCompletedList: Bool?
+        var status: GQLMediaListStatus?
+    }
+    
+    struct GQLMediaListCollection: Codable {
+        var lists: [GQLMediaListGroup]?
+//        var user: GQLUser?
+        var hasNextChunk: Bool?
     }
 }

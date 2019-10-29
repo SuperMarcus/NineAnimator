@@ -28,6 +28,7 @@ query($page: Int, $perPage: Int, $startTime: Int, $endTime: Int) {
                 }
                 mediaListEntry {
                     status
+                    progress
                 }
             }
         }
