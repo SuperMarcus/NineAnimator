@@ -200,7 +200,7 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
         let realisticMinimal = (0.00001...totalLength).clamp(value: minimal)
         let count = min(floor((totalLength + interitemSpace) / (realisticMinimal + interitemSpace)), CGFloat(available))
         let length = (totalLength - count * interitemSpace + interitemSpace) / count
-        return (Int(count), length)
+        return (Int(count), length - 0.001)
     }
     
     /// Calculate the number of cells per line assuming the remaining cells are enough to fill the entire space

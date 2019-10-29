@@ -42,11 +42,18 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
         dataSource: self,
         alwaysFillLine: true,
         minimalSize: .init(width: 140, height: 90),
-        .init(width: 300, height: 60)
+        .init(width: 300, height: 56)
     )
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Configure scroll edge appearance so it looks a little better?
+        if #available(iOS 13.0, *) {
+            let edgeAppearance = UINavigationBarAppearance()
+            edgeAppearance.configureWithTransparentBackground()
+            navigationItem.scrollEdgeAppearance = edgeAppearance
+        }
         
 //        collectionView.delaysContentTouches = false
         layoutHelper.configure(collectionView: collectionView)
@@ -177,14 +184,14 @@ extension LibrarySceneController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
-        case .categories: return 10
+        case .categories: return 15
         case .collection: return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
-        case .categories: return 10
+        case .categories: return 15
         case .collection: return 0
         }
     }

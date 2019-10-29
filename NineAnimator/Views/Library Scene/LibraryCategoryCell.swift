@@ -45,6 +45,6 @@ class LibraryCategoryCell: UICollectionViewCell, Themable {
     }
     
     func theme(didUpdate theme: Theme) {
-        backgroundColor = theme.secondaryBackground
+        backgroundColor = theme.background
     }
 }

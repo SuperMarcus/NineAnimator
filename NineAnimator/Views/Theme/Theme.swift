@@ -160,6 +160,11 @@ extension Theme {
             view?.backgroundColor = theme.background
             view?.tintColor = theme.tint
         }
+        
+        // Background color override
+        if let backgroundIsSecondary = view?.overridingBackgroundSecondaryColor {
+            view?.backgroundColor = backgroundIsSecondary ? theme.secondaryBackground : theme.background
+        }
     }
     // swiftlint:enable cyclomatic_complexity
 }
@@ -186,7 +191,7 @@ extension Theme {
             secondaryBackground: UIColor.groupTableViewBackground,
             translucentBackground: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             tint: #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1),
-            seperator: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
+            seperator: #colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1),
             blurStyle: .extraLight,
             barStyle: .default,
             backgroundBlurStyle: .dark,

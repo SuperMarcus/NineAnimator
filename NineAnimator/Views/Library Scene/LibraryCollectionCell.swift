@@ -35,7 +35,7 @@ class LibraryCollectionCell: UICollectionViewCell, Themable {
     }
     
     func theme(didUpdate theme: Theme) {
-        backgroundColor = theme.secondaryBackground
+        backgroundColor = theme.background
         seperatorLine.backgroundColor = theme.seperator
         detailAccessoryImageView.tintColor = theme.secondaryText
     }
