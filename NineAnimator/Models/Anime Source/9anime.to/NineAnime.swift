@@ -52,6 +52,18 @@ class NASourceNineAnime: BaseSource, Source {
         super.init(with: parent)
         _internalUAIdentity = "Mozilla/5.0 (iPad; CPU iPhone OS 12_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0 Mobile/15E148 Safari/604.1"
         addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
+        
+        // Process Redirections - Enforce HTTPS
+        self.taskWillPerformHTTPRedirection = {
+            _, _, _, request -> URLRequest? in
+            var newRequest = request
+            if let url = request.url,
+                var urlBuilder = URLComponents(url: url, resolvingAgainstBaseURL: false) {
+                urlBuilder.scheme = "https"
+                newRequest.url = urlBuilder.url ?? url
+            }
+            return newRequest
+        }
     }
     
     override func canHandle(url: URL) -> Bool {
