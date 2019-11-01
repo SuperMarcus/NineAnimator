@@ -1,0 +1,270 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target arm64-apple-ios11.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OpenCastSwift
+import Foundation
+import Swift
+import SwiftProtobuf
+import SwiftyJSON
+public struct CastAppIdentifier {
+  public static let defaultMediaPlayer: Swift.String
+  public static let youTube: Swift.String
+  public static let googleAssistant: Swift.String
+}
+@objc final public class CastApp : ObjectiveC.NSObject {
+  final public var id: Swift.String
+  final public var displayName: Swift.String
+  final public var isIdleScreen: Swift.Bool
+  final public var sessionId: Swift.String
+  final public var statusText: Swift.String
+  final public var transportId: Swift.String
+  final public var namespaces: [Swift.String]
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum CastPayload {
+  case json([Swift.String : Any])
+  case data(Foundation.Data)
+}
+public typealias CastResponseHandler = (Swift.Result<SwiftyJSON.JSON, OpenCastSwift.CastError>) -> Swift.Void
+public enum CastError : Swift.Error {
+  case connection(Swift.String)
+  case write(Swift.String)
+  case session(Swift.String)
+  case request(Swift.String)
+  case launch(Swift.String)
+  case load(Swift.String)
+}
+@objc public class CastRequest : ObjectiveC.NSObject {
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public protocol CastClientDelegate : AnyObject {
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, willConnectTo device: OpenCastSwift.CastDevice)
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, didConnectTo device: OpenCastSwift.CastDevice)
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, didDisconnectFrom device: OpenCastSwift.CastDevice)
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, connectionTo device: OpenCastSwift.CastDevice, didFailWith error: Swift.Error?)
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, deviceStatusDidChange status: OpenCastSwift.CastStatus)
+  @objc optional func castClient(_ client: OpenCastSwift.CastClient, mediaStatusDidChange status: OpenCastSwift.CastMediaStatus)
+}
+@objc final public class CastClient : ObjectiveC.NSObject {
+  final public let device: OpenCastSwift.CastDevice
+  weak final public var delegate: OpenCastSwift.CastClientDelegate?
+  final public var connectedApp: OpenCastSwift.CastApp?
+  final public var currentStatus: OpenCastSwift.CastStatus? {
+    get
+  }
+  final public var currentMediaStatus: OpenCastSwift.CastMediaStatus? {
+    get
+  }
+  final public var currentMultizoneStatus: OpenCastSwift.CastMultizoneStatus? {
+    get
+    }
+  final public var statusDidChange: ((OpenCastSwift.CastStatus) -> Swift.Void)?
+  final public var mediaStatusDidChange: ((OpenCastSwift.CastMediaStatus) -> Swift.Void)?
+  public init(device: OpenCastSwift.CastDevice)
+  @objc deinit
+  final public var isConnected: Swift.Bool {
+    get
+    set
+  }
+  final public func connect()
+  final public func disconnect()
+  final public func getAppAvailability(apps: [OpenCastSwift.CastApp], completion: @escaping (Swift.Result<OpenCastSwift.AppAvailability, OpenCastSwift.CastError>) -> Swift.Void)
+  final public func join(app: OpenCastSwift.CastApp? = nil, completion: @escaping (Swift.Result<OpenCastSwift.CastApp, OpenCastSwift.CastError>) -> Swift.Void)
+  final public func launch(appId: Swift.String, completion: @escaping (Swift.Result<OpenCastSwift.CastApp, OpenCastSwift.CastError>) -> Swift.Void)
+  final public func stopCurrentApp()
+  final public func leave(_ app: OpenCastSwift.CastApp)
+  final public func load(media: OpenCastSwift.CastMedia, with app: OpenCastSwift.CastApp, completion: @escaping (Swift.Result<OpenCastSwift.CastMediaStatus, OpenCastSwift.CastError>) -> Swift.Void)
+  final public func requestMediaStatus(for app: OpenCastSwift.CastApp, completion: ((Swift.Result<OpenCastSwift.CastMediaStatus, OpenCastSwift.CastError>) -> Swift.Void)? = nil)
+  final public func pause()
+  final public func play()
+  final public func stop()
+  final public func seek(to currentTime: Swift.Float)
+  final public func setVolume(_ volume: Swift.Float)
+  final public func setMuted(_ muted: Swift.Bool)
+  final public func setVolume(_ volume: Swift.Float, for device: OpenCastSwift.CastMultizoneDevice)
+  final public func setMuted(_ isMuted: Swift.Bool, for device: OpenCastSwift.CastMultizoneDevice)
+  @objc override dynamic public init()
+}
+extension CastClient : Foundation.StreamDelegate {
+  @objc final public func stream(_ aStream: Foundation.Stream, handle eventCode: Foundation.Stream.Event)
+}
+public class CastMultizoneDevice {
+  final public let name: Swift.String
+  final public let volume: Swift.Float
+  final public let isMuted: Swift.Bool
+  final public let capabilities: OpenCastSwift.DeviceCapabilities
+  final public let id: Swift.String
+  public init(name: Swift.String, volume: Swift.Float, isMuted: Swift.Bool, capabilitiesMask: Swift.Int, id: Swift.String)
+  @objc deinit
+}
+@objc final public class CastStatus : ObjectiveC.NSObject {
+  final public var volume: Swift.Double
+  final public var muted: Swift.Bool
+  final public var apps: [OpenCastSwift.CastApp]
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+open class CastChannel {
+  open func handleResponse(_ json: SwiftyJSON.JSON, sourceId: Swift.String)
+  open func handleResponse(_ data: Foundation.Data, sourceId: Swift.String)
+  public func send(_ request: OpenCastSwift.CastRequest, response: OpenCastSwift.CastResponseHandler? = nil)
+  @objc deinit
+}
+public struct DeviceCapabilities : Swift.OptionSet {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let none: OpenCastSwift.DeviceCapabilities
+  public static let videoOut: OpenCastSwift.DeviceCapabilities
+  public static let videoIn: OpenCastSwift.DeviceCapabilities
+  public static let audioOut: OpenCastSwift.DeviceCapabilities
+  public static let audioIn: OpenCastSwift.DeviceCapabilities
+  public static let multizoneGroup: OpenCastSwift.DeviceCapabilities
+  public static let masterVolume: OpenCastSwift.DeviceCapabilities
+  public static let attenuationVolume: OpenCastSwift.DeviceCapabilities
+  public typealias Element = OpenCastSwift.DeviceCapabilities
+  public typealias ArrayLiteralElement = OpenCastSwift.DeviceCapabilities
+  public typealias RawValue = Swift.Int
+}
+@objc final public class CastDevice : ObjectiveC.NSObject, Foundation.NSCopying {
+  final public var id: Swift.String {
+    get
+    }
+  final public var name: Swift.String {
+    get
+    }
+  final public var modelName: Swift.String {
+    get
+    }
+  final public var hostName: Swift.String {
+    get
+    }
+  final public var ipAddress: Swift.String {
+    get
+    }
+  final public var port: Swift.Int {
+    get
+    }
+  final public var capabilities: OpenCastSwift.DeviceCapabilities {
+    get
+    }
+  final public var status: Swift.String {
+    get
+    }
+  final public var iconPath: Swift.String {
+    get
+    }
+  @objc final public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class AppAvailability : ObjectiveC.NSObject {
+  public var availability: [Swift.String : Swift.Bool]
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class CastMultizoneStatus {
+  final public let devices: [OpenCastSwift.CastMultizoneDevice]
+  public init(devices: [OpenCastSwift.CastMultizoneDevice])
+  @objc deinit
+}
+@objc final public class CastDeviceScanner : ObjectiveC.NSObject {
+  weak final public var delegate: OpenCastSwift.CastDeviceScannerDelegate?
+  public static let deviceListDidChange: Foundation.Notification.Name
+  final public var isScanning: Swift.Bool
+  final public var devices: [OpenCastSwift.CastDevice] {
+    get
+  }
+  final public func startScanning()
+  final public func stopScanning()
+  final public func reset()
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension CastDeviceScanner : Foundation.NetServiceBrowserDelegate {
+  @objc final public func netServiceBrowserWillSearch(_ browser: Foundation.NetServiceBrowser)
+  @objc final public func netServiceBrowserDidStopSearch(_ browser: Foundation.NetServiceBrowser)
+  @objc final public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didFind service: Foundation.NetService, moreComing: Swift.Bool)
+  @objc final public func netServiceBrowser(_ browser: Foundation.NetServiceBrowser, didRemove service: Foundation.NetService, moreComing: Swift.Bool)
+}
+extension CastDeviceScanner : Foundation.NetServiceDelegate {
+  @objc final public func netServiceDidResolveAddress(_ sender: Foundation.NetService)
+  @objc final public func netService(_ sender: Foundation.NetService, didNotResolve errorDict: [Swift.String : Foundation.NSNumber])
+}
+public protocol CastDeviceScannerDelegate : AnyObject {
+  func deviceDidComeOnline(_ device: OpenCastSwift.CastDevice)
+  func deviceDidChange(_ device: OpenCastSwift.CastDevice)
+  func deviceDidGoOffline(_ device: OpenCastSwift.CastDevice)
+}
+public enum CastMediaPlayerState : Swift.String {
+  case buffering
+  case playing
+  case paused
+  case stopped
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc final public class CastMediaStatus : ObjectiveC.NSObject {
+  public struct MediaStatusMedia {
+    public let duration: Swift.Double
+  }
+  final public let mediaSessionId: Swift.Int
+  final public let playbackRate: Swift.Int
+  final public let playerState: OpenCastSwift.CastMediaPlayerState
+  final public let currentTime: Swift.Double
+  final public let metadata: SwiftyJSON.JSON?
+  final public let contentID: Swift.String?
+  final public let media: OpenCastSwift.CastMediaStatus.MediaStatusMedia?
+  final public var adjustedCurrentTime: Swift.Double {
+    get
+  }
+  final public var state: Swift.String {
+    get
+  }
+  @objc override final public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+public let CastMediaStreamTypeBuffered: Swift.String
+public let CastMediaStreamTypeLive: Swift.String
+public enum CastMediaStreamType : Swift.String {
+  case buffered
+  case live
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc final public class CastMedia : ObjectiveC.NSObject {
+  final public let title: Swift.String
+  final public let url: Foundation.URL
+  final public let poster: Foundation.URL?
+  final public let autoplay: Swift.Bool
+  final public let currentTime: Swift.Double
+  final public let contentType: Swift.String
+  final public let streamType: OpenCastSwift.CastMediaStreamType
+  public init(title: Swift.String, url: Foundation.URL, poster: Foundation.URL? = nil, contentType: Swift.String, streamType: OpenCastSwift.CastMediaStreamType = .buffered, autoplay: Swift.Bool = true, currentTime: Swift.Double = 0)
+  @objc override dynamic public init()
+  @objc deinit
+}
+extension OpenCastSwift.CastMediaPlayerState : Swift.Equatable {}
+extension OpenCastSwift.CastMediaPlayerState : Swift.Hashable {}
+extension OpenCastSwift.CastMediaPlayerState : Swift.RawRepresentable {}
+extension OpenCastSwift.CastMediaStreamType : Swift.Equatable {}
+extension OpenCastSwift.CastMediaStreamType : Swift.Hashable {}
+extension OpenCastSwift.CastMediaStreamType : Swift.RawRepresentable {}
