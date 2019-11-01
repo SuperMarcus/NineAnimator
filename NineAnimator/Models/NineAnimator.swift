@@ -119,7 +119,7 @@ extension NineAnimator {
     /// Find the source with name
     func source(with name: String) -> Source? {
         return sources.first {
-            $0.name == name || $0.aliases.contains($0)
+            $0.name == name || $0.aliases.contains(name)
         }
     }
     
