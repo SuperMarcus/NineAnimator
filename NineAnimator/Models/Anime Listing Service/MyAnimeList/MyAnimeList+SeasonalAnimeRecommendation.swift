@@ -109,10 +109,10 @@ extension MyAnimeList {
             let season: String
             
             switch month {
-            case 1...3: season = "Spring"
-            case 4...6: season = "Summer"
-            case 7...9: season = "Fall"
-            case 10...12: season = "Winter"
+            case 1...3: season = "Winter"
+            case 4...6: season = "Spring"
+            case 7...9: season = "Summer"
+            case 10...12: season = "Fall"
             default: return .fail(.unknownError)
             }
             

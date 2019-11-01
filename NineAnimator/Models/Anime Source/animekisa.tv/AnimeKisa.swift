@@ -29,6 +29,8 @@ import AppKit
 class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     var name: String { return "animekisa.tv" }
     
+    var aliases: [String] { return [] }
+    
     #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeKisa Site Icon") }
     #elseif canImport(AppKit)

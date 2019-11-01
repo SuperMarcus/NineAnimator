@@ -26,10 +26,20 @@ enum ListingAnimeTrackingState: String, Codable {
     case finished
 }
 
-/// Representing a reference that can be used to construct
-/// `ListingAnimeInformation`
+/// The current tracking state of the user if the state is watching
+struct ListingAnimeTracking {
+    /// The user's current progress
+    var currentProgress: Int
+    
+    /// Total number of episodes available
+    var episdoes: Int?
+}
+
+/// Representing a reference that can be used to identify a particular anime on the `Listing Service`
+///
+/// Hash is calculated based on the `ListingService` and the `uniqueIdentifier`
 struct ListingAnimeReference: Codable, Hashable {
-    let parentService: ListingService
+    unowned let parentService: ListingService
     
     /// An identifier of this reference (and the referencing anime
     /// information) that is unique within this service
@@ -77,13 +87,24 @@ protocol ListingService: AnyObject {
     /// Should be implemented by all listing services
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference>
     
+    /// Obtain the tracking information for the current user associated with the `ListingAnimeReference`
+    ///
+    /// `ListingService`s should obtain and cache the `ListingAnimeTracking` objects when fetching and
+    /// updating user collections.
+    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking?
+    
     /// Update the state of an listed anime
     ///
     /// Only called if the service returns true for `isCapableOfPersistingAnimeState`
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState)
     
+    /// The new tracking state that the user intends to update on the tracking website.
+    func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking)
+    
     /// Update the progress of an listed anime
     ///
+    /// The episodeNumber passed in as parameter is not guarenteed to be the furtherest epiosde
+    /// that the user has completed. It is the episode that the user has just finished watching.
     /// Only called if the service returns true for `isCapableOfPersistingAnimeState`
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?)
     

@@ -13,7 +13,10 @@ query ($search: String) {
                 english
                 native
             }
-            mediaListEntry { status }
+            mediaListEntry {
+                status
+                progress
+            }
         }
     }
 }

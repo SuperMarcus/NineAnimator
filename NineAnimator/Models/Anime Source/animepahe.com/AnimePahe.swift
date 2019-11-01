@@ -28,6 +28,8 @@ import AppKit
 class NASourceAnimePahe: BaseSource, Source, PromiseSource {
     var name: String { return "animepahe.com" }
     
+    var aliases: [String] { return [] }
+    
     var siteDescription: String {
         return "AnimePahe is a free, donation based website that provides ad-less experience of streaming anime. NineAnimator has experimental support with this website."
     }

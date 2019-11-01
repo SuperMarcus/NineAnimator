@@ -32,10 +32,13 @@ extension Anilist {
             ])
         } .then {
             [unowned self] responseDictionary in
-            guard let collectionEntries = responseDictionary.value(forKeyPath: "MediaListCollection.lists") as? [NSDictionary] else {
-                throw NineAnimatorError.responseError("No anime collection found")
+            let collections = try DictionaryDecoder().decode(
+                GQLMediaListCollection.self,
+                from: try responseDictionary.value(at: "MediaListCollection", type: NSDictionary.self)
+            )
+            return try collections.lists?.map {
+                try StaticListingAnimeCollection(self, withCollectionObject: $0)
             }
-            return try collectionEntries.map { try StaticListingAnimeCollection(self, withCollectionEntry: $0) }
         }
     }
 }

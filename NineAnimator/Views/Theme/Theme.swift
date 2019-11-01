@@ -160,6 +160,11 @@ extension Theme {
             view?.backgroundColor = theme.background
             view?.tintColor = theme.tint
         }
+        
+        // Background color override
+        if let backgroundIsSecondary = view?.overridingBackgroundSecondaryColor {
+            view?.backgroundColor = backgroundIsSecondary ? theme.secondaryBackground : theme.background
+        }
     }
     // swiftlint:enable cyclomatic_complexity
 }
@@ -167,6 +172,17 @@ extension Theme {
 // MARK: - Definining and managing themes
 extension Theme {
     private(set) static var availableThemes: [String: Theme] = {
+        let lightActivityIndicatorStyle: UIActivityIndicatorView.Style
+        let darkActivityIndicatorStyle: UIActivityIndicatorView.Style
+        
+        if #available(iOS 13.0, *) {
+            lightActivityIndicatorStyle = .medium
+            darkActivityIndicatorStyle = .medium
+        } else {
+            lightActivityIndicatorStyle = .gray
+            darkActivityIndicatorStyle = .white
+        }
+        
         let light = Theme(
             name: "light",
             primaryText: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
@@ -175,12 +191,12 @@ extension Theme {
             secondaryBackground: UIColor.groupTableViewBackground,
             translucentBackground: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             tint: #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1),
-            seperator: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1),
+            seperator: #colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1),
             blurStyle: .extraLight,
             barStyle: .default,
             backgroundBlurStyle: .dark,
             scrollIndicatorStyle: .black,
-            activityIndicatorStyle: .gray,
+            activityIndicatorStyle: lightActivityIndicatorStyle,
             keyboardAppearance: .light,
             preferredStatusBarStyle: .default
         )
@@ -198,7 +214,7 @@ extension Theme {
             barStyle: .black,
             backgroundBlurStyle: .regular,
             scrollIndicatorStyle: .white,
-            activityIndicatorStyle: .white,
+            activityIndicatorStyle: darkActivityIndicatorStyle,
             keyboardAppearance: .dark,
             preferredStatusBarStyle: .lightContent
         )

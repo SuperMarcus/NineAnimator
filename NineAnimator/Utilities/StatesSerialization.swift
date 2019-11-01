@@ -20,11 +20,20 @@
 import Foundation
 
 private struct StateSerializationFile: Codable {
-    let history: [AnimeLink]
+    /// Recent anime list
+    var history: [AnimeLink]
     
-    let progresses: [String: Float]
+    /// Progress persistence
+    var progresses: [String: Float]
     
-    let exportedDate: Date
+    /// Date of generation
+    var exportedDate: Date
+    
+    /// Serialzied `TrackingContext`
+    var trackingData: [AnimeLink: Data]?
+    
+    /// Subscriptions
+    var subscriptions: [AnimeLink]?
 }
 
 /**
@@ -36,7 +45,16 @@ func export(_ configuration: NineAnimatorUser) -> URL? {
         let file = StateSerializationFile(
             history: configuration.recentAnimes,
             progresses: configuration.persistedProgresses,
-            exportedDate: Date()
+            exportedDate: Date(),
+            trackingData: Dictionary(uniqueKeysWithValues: configuration.recentAnimes.compactMap {
+                anime in do {
+                    let context = NineAnimator.default.trackingContext(for: anime)
+                    let data = try context.export()
+                    return (anime, data)
+                } catch { Log.error("[Model.export] Unable to serialize tracking data for %@: %@", anime, error) }
+                return nil
+            }),
+            subscriptions: configuration.subscribedAnimes
         )
         
         let formatter = DateFormatter()
@@ -77,6 +95,14 @@ func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAni
         configuration.persistedProgresses = piroityPersistedProgresses
             .merging(secondaryPersistedProgresses) { piority, _ in piority }
         
+        // Merge subscription list
+        if let backupSubscriptions = preservedStates.subscriptions {
+            var finalSubscriptionsSet = Set<AnimeLink>()
+            configuration.subscribedAnimes.forEach { finalSubscriptionsSet.insert($0) }
+            backupSubscriptions.forEach { finalSubscriptionsSet.insert($0) }
+            configuration.subscribedAnimes = finalSubscriptionsSet.map { $0 }
+        }
+        
         return true
     } catch { Log.error(error) }
     return false
@@ -92,6 +118,22 @@ func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) -> Bool {
         
         configuration.recentAnimes = preservedStates.history
         configuration.persistedProgresses = preservedStates.progresses
+        
+        // Restoring subscription list
+        if let subscriptions = preservedStates.subscriptions {
+            configuration.subscribedAnimes = subscriptions
+        }
+        
+        // Restoring the tracking data
+        if let trackingData = preservedStates.trackingData {
+            for (anime, data) in trackingData {
+                do {
+                    let context = NineAnimator.default.trackingContext(for: anime)
+                    try context.restore(from: data)
+                    context.save()
+                } catch { Log.error("[Model.replace] Unable to restore %@: %@", anime, data) }
+            }
+        }
         
         return true
     } catch { Log.error(error) }

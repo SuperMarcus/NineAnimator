@@ -30,6 +30,8 @@ import AppKit
 class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
     var name = "twist.moe"
     
+    var aliases: [String] { return [] }
+    
 #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeTwist Site Icon") }
 #elseif canImport(AppKit)

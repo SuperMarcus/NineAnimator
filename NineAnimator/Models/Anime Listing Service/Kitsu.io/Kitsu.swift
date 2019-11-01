@@ -44,11 +44,11 @@ extension Kitsu {
     }
     
     var isCapableOfPersistingAnimeState: Bool {
-        return didSetup && !didExpire
+        return didSetup
     }
     
     var isCapableOfRetrievingAnimeState: Bool {
-        return didSetup && !didExpire
+        return didSetup
     }
 }
 
@@ -59,6 +59,11 @@ extension Kitsu {
         set { persistedProperties["access_token"] = newValue }
     }
     
+    private var refreshToken: String? {
+        get { return persistedProperties["refresh_token"] as? String }
+        set { persistedProperties["refresh_token"] = newValue }
+    }
+    
     private var accessTokenExpirationDate: Date {
         get { return (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
         set { return persistedProperties["access_token_expiration"] = newValue }
@@ -66,7 +71,7 @@ extension Kitsu {
     
     var oauthUrl: URL { return URL(string: "https://kitsu.io/api/oauth/token")! }
     
-    var didSetup: Bool { return accessToken != nil }
+    var didSetup: Bool { return accessToken != nil && refreshToken != nil }
     
     var didExpire: Bool { return accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
@@ -88,44 +93,82 @@ extension Kitsu {
                 method: .post,
                 data: $0
             )
-        } .then {
-            try JSONSerialization.jsonObject(with: $0, options: []) as? NSDictionary
-        } .then {
-            [weak self] response in
-            guard let self = self else { return nil }
-            
-            // Retrieve the token from the json response
-            guard let token = response["access_token"] as? String,
-                let tokenType = response["token_type"] as? String,
-                let expiration = response["expires_in"] as? Int else {
-                if let errorMessage = response["error_description"] as? String {
-                    throw NineAnimatorError.authenticationRequiredError(errorMessage, nil)
-                }
-                throw NineAnimatorError.unknownError
-            }
-            
-            // Check token type
-            guard tokenType == "Bearer" else {
-                throw NineAnimatorError.responseError("Unsupported token type: \(tokenType)")
-            }
-            
-            // Store tokens
-            self.authenticate(token: token, until: Date().addingTimeInterval(TimeInterval(expiration)))
-            
-            return ()
-        }
+        } .then(onAuthenticationResponse)
     }
     // swiftlint:enable closure_end_indentation
     
-    private func authenticate(token: String, until expirationDate: Date) {
+    /// Re-authenticate an expired session with the refresh token
+    private func reauthenticate() -> NineAnimatorPromise<Void> {
+        return NineAnimatorPromise.firstly {
+            () -> Data? in
+            guard let refreshToken = self.refreshToken else {
+                throw NineAnimatorError.authenticationRequiredError("Cannot refresh an unauthenticated session")
+            }
+            return try formEncode([
+                "grant_type": "refresh_token",
+                "refresh_token": refreshToken
+            ]).data(using: .utf8)
+        } .thenPromise {
+            self.request(
+                self.oauthUrl,
+                method: .post,
+                data: $0
+            )
+        } .then(onAuthenticationResponse)
+    }
+    
+    /// Reauthenticate the session if it is setup and expired
+    func reauthenticateIfNeeded() -> NineAnimatorPromise<Void> {
+        return didSetup && didExpire ? reauthenticate() : .success(())
+    }
+    
+    /// Handles the authentication responses
+    private func onAuthenticationResponse(_ responseData: Data) throws {
+        let response = try (JSONSerialization.jsonObject(
+            with: responseData,
+            options: []) as? NSDictionary
+        ).tryUnwrap(.responseError("Server sent an invalid response"))
+        
+        // If the error entry is present and an error message is provided
+        if response["error"] is String, let errorMessage = response.valueIfPresent(
+                at: "error_description",
+                type: String.self
+            ) {
+            throw NineAnimatorError.authenticationRequiredError(errorMessage, nil)
+        }
+        
+        // Retrieve the token from the json response
+        let token = try response.value(at: "access_token", type: String.self)
+        let refreshToken = try response.value(at: "refresh_token", type: String.self)
+        let tokenType = try response.value(at: "token_type", type: String.self)
+        let expiration = try response.value(at: "expires_in", type: Int.self)
+        
+        // Check token type
+        guard tokenType == "Bearer" else {
+            throw NineAnimatorError.responseError("Unsupported token type: \(tokenType)")
+        }
+        
+        // Store tokens
+        self.authenticate(
+            token: token,
+            refreshToken: refreshToken,
+            until: Date().addingTimeInterval(TimeInterval(expiration))
+        )
+    }
+    
+    /// Store credentials
+    private func authenticate(token: String, refreshToken: String, until expirationDate: Date) {
         Log.info("[Kitsu.io] Authenticated until %@", expirationDate)
         self.accessToken = token
+        self.refreshToken = refreshToken
         self.accessTokenExpirationDate = expirationDate
     }
     
+    /// Remove credentials
     func deauthenticate() {
         Log.info("[Kitsu.io] Removing credentials")
         accessToken = nil
+        refreshToken = nil
         accessTokenExpirationDate = Date.distantPast
         _cachedUser = nil
     }
@@ -164,40 +207,50 @@ extension Kitsu {
     }
     
     func apiRequest(_ path: String, query: [String: String] = [:], body: [String: Any] = [:], method: HTTPMethod = .get) -> NineAnimatorPromise<[APIObject]> {
-        // Headers for JSON: API
-        var headers = [
-            "Accept": "application/vnd.api+json",
-            "Content-Type": "application/vnd.api+json"
-        ]
-        
-        // Add oauth token to headers
-        if let token = accessToken {
-            headers["Authorization"] = "Bearer \(token)"
-        }
-        
-        // Encode body data
-        var bodyData: Data?
-        if !body.isEmpty {
-            bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
-        }
-        
-        return NineAnimatorPromise.firstly {
-            [endpoint] in // First and foremost, build the request URL
-            let requestingUrl = endpoint.appendingPathComponent(path)
-            guard !query.isEmpty else { return requestingUrl }
+        return reauthenticateIfNeeded().then {
+            [endpoint, unowned self] in // First and foremost, build the request URL
+            // Headers for JSON: API
+            var headers = [
+                "Accept": "application/vnd.api+json",
+                "Content-Type": "application/vnd.api+json"
+            ]
             
-            guard var urlBuilder = URLComponents(url: requestingUrl, resolvingAgainstBaseURL: false) else {
-                throw NineAnimatorError.urlError
+            // Add oauth token to headers
+            if let token = self.accessToken {
+                headers["Authorization"] = "Bearer \(token)"
             }
             
-            // Assign query items
-            urlBuilder.queryItems = query.map { URLQueryItem(name: $0.key, value: $0.value) }
+            // Encode body data
+            var bodyData: Data?
+            if !body.isEmpty {
+                bodyData = try? JSONSerialization.data(withJSONObject: body, options: [])
+            }
+            
+            var requestingUrl = endpoint.appendingPathComponent(path)
+            
+            // Encode query parameters
+            if !query.isEmpty {
+                guard var urlBuilder = URLComponents(url: requestingUrl, resolvingAgainstBaseURL: false) else {
+                    throw NineAnimatorError.urlError
+                }
+                
+                // Assign query items
+                urlBuilder.queryItems = query.map {
+                    URLQueryItem(name: $0.key, value: $0.value)
+                }
+                
+                requestingUrl = try urlBuilder.url.tryUnwrap()
+            }
             
             // Generate request url
-            return try some(urlBuilder.url, or: NineAnimatorError.urlError)
+            return (
+                requestingUrl,
+                bodyData,
+                headers
+            )
         } .thenPromise {
-            [unowned self] in // Then request
-            self.request($0, method: method, data: bodyData, headers: headers)
+            [unowned self] url, bodyData, headers in // Then request
+            self.request(url, method: method, data: bodyData, headers: headers)
         } .then {
             data -> NSDictionary in
             try some(

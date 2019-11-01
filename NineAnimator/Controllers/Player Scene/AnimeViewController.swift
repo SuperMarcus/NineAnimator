@@ -110,45 +110,8 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         animeHeadingView.sizeToFit()
         view.setNeedsLayout()
         
-        animeRequestTask = NineAnimator.default.anime(with: link) {
-            [weak self] anime, error in
-            guard let anime = anime else {
-                Log.error(error)
-                return DispatchQueue.main.async {
-                    // Allow the user to recover the anime by searching in another source
-                    if let error = error as? NineAnimatorError.ContentUnavailableError {
-                        self?.presentError(error) {
-                            if $0 {
-                                self?.presentRecoveryOptions(for: link)
-                            } else if let navigationController = self?.navigationController {
-                                _ = navigationController.popViewController(animated: true)
-                            } else { self?.dismiss(animated: true, completion: nil) }
-                        }
-                        return
-                    }
-                    
-                    self?.presentError(error!) {
-                        // If not allowed to retry, dismiss the view controller
-                        guard !$0 else { return }
-                        DispatchQueue.main.async {
-                            guard let self = self else { return }
-                            if let navigationController = self.navigationController {
-                                navigationController.popViewController(animated: true)
-                            } else { self.dismiss(animated: true) }
-                        }
-                    }
-                }
-            }
-            self?.setPresenting(anime: anime)
-            // Initiate playback if episodeLink is set
-            if let episodeLink = self?.episodeLink {
-                // Present the cast controller if the episode is currently playing on
-                // an attached cast device
-                if CastController.default.isAttached(to: episodeLink) {
-                    CastController.default.presentPlaybackController()
-                } else { self?.retriveAndPlay() }
-            }
-        }
+        // Load Anime object
+        retrieveAnime()
     }
     
     override func viewDidLoad() {
@@ -181,6 +144,66 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
 
 // MARK: - Receive & Present Anime
 extension AnimeViewController {
+    /// Retrieve the Anime object given that the animeLink variable has been set
+    ///
+    /// This method may be called from another thread
+    private func retrieveAnime() {
+        // Abort if the link does not exists or the Anime object has already been retrieved
+        guard let link = animeLink, anime == nil else { return }
+        
+        // Store the reference in animeRequestTask
+        animeRequestTask = NineAnimator.default.anime(with: link) {
+            [weak self] anime, error in
+            guard let anime = anime else {
+                Log.error(error)
+                return DispatchQueue.main.async {
+                    // Allow the user to recover the anime by searching in another source
+                    if let error = error as? NineAnimatorError.ContentUnavailableError {
+                        self?.presentError(error) {
+                            if $0 {
+                                self?.presentRecoveryOptions(for: link)
+                            } else if let navigationController = self?.navigationController {
+                                _ = navigationController.popViewController(animated: true)
+                            } else { self?.dismiss(animated: true, completion: nil) }
+                        }
+                        return
+                    }
+                    
+                    self?.presentError(error!) {
+                        // If not allowed to retry, dismiss the view controller
+                        guard let self = self else { return }
+                        
+                        // Retry loading the anime
+                        if $0 {
+                            self.retrieveAnime()
+                        } else {
+                            DispatchQueue.main.async {
+                                if let navigationController = self.navigationController {
+                                    navigationController.popViewController(animated: true)
+                                } else { self.dismiss(animated: true) }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Asynchronically load the anime in the main thread
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.setPresenting(anime: anime)
+                // Initiate playback if episodeLink is set
+                if let episodeLink = self.episodeLink {
+                    // Present the cast controller if the episode is currently playing on
+                    // an attached cast device
+                    if CastController.default.isAttached(to: episodeLink) {
+                        CastController.default.presentPlaybackController()
+                    } else { self.retriveAndPlay() }
+                }
+            }
+        }
+    }
+    
+    /// Called when the Anime is retrieved
     private func setPresenting(anime: Anime) {
         self.anime = anime
         
@@ -437,7 +460,9 @@ extension AnimeViewController {
                         return
                     }
                     
-                    self.onPlaybackMediaRetrieved(media, episode: episode)
+                    DispatchQueue.main.async { [weak self] in
+                        self?.onPlaybackMediaRetrieved(media, episode: episode)
+                    }
                 }
             } else {
                 // Always stall unsupported episodes and update the progress to 1.0
@@ -788,6 +813,7 @@ extension AnimeViewController {
     private func presentEditingMenu(for episodeLink: EpisodeLink, from sourceView: UIView) {
         self.becomeFirstResponder()
         
+        let targetRect = tableView.convert(sourceView.frame, to: view)
         let editMenu = UIMenuController.shared
         var availableMenuItems = [UIMenuItem]()
         
@@ -816,10 +842,13 @@ extension AnimeViewController {
         // Save the available actions
         editMenu.menuItems = availableMenuItems
         
-        // TODO: Update this for iOS 13
-        let targetRect = tableView.convert(sourceView.frame, to: view)
-        editMenu.setTargetRect(targetRect, in: view)
-        editMenu.setMenuVisible(true, animated: true)
+        if #available(iOS 13.0, *) {
+            editMenu.showMenu(from: view, rect: targetRect)
+        } else {
+            // Fallback on earlier versions
+            editMenu.setTargetRect(targetRect, in: view)
+            editMenu.setMenuVisible(true, animated: true)
+        }
     }
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {

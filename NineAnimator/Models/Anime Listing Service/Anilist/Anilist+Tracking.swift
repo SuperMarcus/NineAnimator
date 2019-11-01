@@ -46,10 +46,48 @@ extension Anilist {
             return
         }
         
+        var updatedTracking = progressTracking(for: reference) ?? ListingAnimeTracking(
+            currentProgress: episodeNumber,
+            episdoes: nil
+        )
+        
+        updatedTracking.currentProgress = episodeNumber
+        update(reference, newTracking: updatedTracking)
+    }
+    
+    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
+        return _mediaTrackingMap[reference]
+    }
+    
+    func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
         // Make GraphQL mutation request
         mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
-            "progress": episodeNumber
+            "progress": newTracking.currentProgress
         ])
+    }
+    
+    /// Update a tracking state for a particular reference
+    ///
+    /// Sources of `ListingAnimeTracking`:
+    /// - `init` of `StaticListingAnimeCollection`
+    /// - `Anilist.reference(from: AnimeLink)`
+    func contributeReferenceTracking(_ tracking: ListingAnimeTracking, forReference reference: ListingAnimeReference) {
+        var newTracking = tracking
+        if let existingTracking = _mediaTrackingMap[reference] {
+            newTracking.episdoes = newTracking.episdoes ?? existingTracking.episdoes
+        }
+        _mediaTrackingMap[reference] = newTracking
+    }
+    
+    /// Create the `ListingAnimeTracking` from query results
+    func createReferenceTracking(from mediaList: GQLMediaList?, withSupplementalMedia media: GQLMedia) -> ListingAnimeTracking? {
+        // Supposingly it's only valid for a currently watching anime
+        if /* mediaList?.status == .current, */let progress = mediaList?.progress {
+            return ListingAnimeTracking(
+                currentProgress: progress,
+                episdoes: media.episodes
+            )
+        } else { return nil }
     }
 }

@@ -76,4 +76,12 @@ extension MyAnimeList {
         // Remove all resolved promises
         _mutationTaskPool.removeAll { ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true }
     }
+    
+    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
+        return nil
+    }
+    
+    func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
+        // New
+    }
 }

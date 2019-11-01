@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
-    <device id="retina5_9" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -361,9 +359,8 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keW-rL-lk1">
                                                 <rect key="frame" x="8.0000000000000036" y="28.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Library Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Phone Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
                                                         <rect key="frame" x="12.333333333333336" y="12.666666666666686" width="37.333333333333336" height="37"/>
-                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="4tt-2A-VQU" secondAttribute="height" id="fDS-no-lOe"/>
@@ -383,8 +380,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Watched Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
-                                                <rect key="frame" x="94.333333333333329" y="26" width="200.66666666666669" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Compatibility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
+                                                <rect key="frame" x="94.333333333333329" y="30" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
                                                 </constraints>
@@ -402,9 +399,9 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="Press and hold on any episodes in an anime to mark it as watched or not watched." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
-                                                <rect key="frame" x="94.333333333333329" y="52" width="208.66666666666669" height="43"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator is now compatible with the latest iOS 13. Appearances is now capable of being synced with the system." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                                <rect key="frame" x="94.333333333333329" y="56" width="208.66666666666669" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -412,10 +409,10 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <variation key="widthClass=compact">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 </variation>
                                                 <variation key="widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -424,7 +421,7 @@
                                             <constraint firstAttribute="trailing" secondItem="7Kf-LC-01q" secondAttribute="trailing" constant="16" id="A8E-rc-K8b"/>
                                             <constraint firstAttribute="trailing" secondItem="f1Q-9Z-lK6" secondAttribute="trailing" constant="8" id="DtM-h5-439"/>
                                             <constraint firstItem="7Kf-LC-01q" firstAttribute="bottom" secondItem="keW-rL-lk1" secondAttribute="centerY" priority="500" id="KEd-gC-r5V"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f1Q-9Z-lK6" secondAttribute="bottom" constant="24" id="Otk-np-MPE"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f1Q-9Z-lK6" secondAttribute="bottom" constant="27" id="Otk-np-MPE"/>
                                             <constraint firstItem="keW-rL-lk1" firstAttribute="width" secondItem="07v-sr-Jlp" secondAttribute="width" multiplier="0.2" id="cBL-pd-0cP"/>
                                             <constraint firstItem="f1Q-9Z-lK6" firstAttribute="leading" secondItem="keW-rL-lk1" secondAttribute="trailing" constant="24" id="gMr-tC-Weq"/>
                                             <constraint firstItem="keW-rL-lk1" firstAttribute="leading" secondItem="07v-sr-Jlp" secondAttribute="leading" constant="8" id="jdL-cx-Qke"/>
@@ -567,7 +564,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yQX-1k-GWU">
-                                <rect key="frame" x="86" y="570.33333333333337" width="203" height="29"/>
+                                <rect key="frame" x="78.666666666666686" y="567.33333333333337" width="218" height="32"/>
                                 <segments>
                                     <segment title="Light"/>
                                     <segment title="Dark"/>
@@ -833,5 +830,6 @@ After setup, you can change the theme settings in the Preferences menu.</string>
         <image name="Cloud Sync HD" width="1200" height="1200"/>
         <image name="High Resolution App Icon" width="2048" height="2048"/>
         <image name="Library Icon HD" width="2000" height="2000"/>
+        <image name="Phone Icon HD" width="1970" height="1970"/>
     </resources>
 </document>

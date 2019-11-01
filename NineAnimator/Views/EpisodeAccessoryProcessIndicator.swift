@@ -25,7 +25,6 @@ class EpisodeAccessoryProcessIndicator: UIView, Themable {
     lazy var indicatorColor: UIColor = tintColor
     
     @IBInspectable
-    // swiftlint:disable:next redundant_type_annotation
     var nullColor: UIColor = UIColor.lightGray.withAlphaComponent(0.4)
     
     @IBInspectable

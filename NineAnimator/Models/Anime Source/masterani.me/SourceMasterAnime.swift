@@ -33,6 +33,8 @@ import AppKit
 class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
     
+    var aliases: [String] { return [] }
+    
 #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
 #elseif canImport(AppKit)

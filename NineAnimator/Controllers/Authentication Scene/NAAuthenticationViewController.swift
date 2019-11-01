@@ -57,6 +57,13 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         Theme.provision(self)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Call dismissal handler
+        self.onDismissal?()
+    }
+    
     func theme(didUpdate theme: Theme) {
         loadingProgressIndicator.trackTintColor = theme.secondaryBackground
         loadingProgressIndicator.progressTintColor = theme.tint
@@ -75,7 +82,7 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
             
             // Dismiss the view controller
             DispatchQueue.main.async {
-                self?.dismiss(animated: true, completion: self?.onDismissal)
+                self?.dismiss(animated: true)
             }
         }
     }

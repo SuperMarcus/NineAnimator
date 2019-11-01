@@ -76,6 +76,10 @@ $completedAt: FuzzyDateInput
             startDate {
                 year
             }
+            mediaListEntry {
+                status
+                progress
+            }
         }
     }
 }

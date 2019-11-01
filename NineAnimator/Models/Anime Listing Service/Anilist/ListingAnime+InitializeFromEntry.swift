@@ -69,23 +69,23 @@ extension ListingAnimeReference {
 }
 
 extension StaticListingAnimeCollection {
-    init(_ parent: Anilist, withCollectionEntry collectionEntry: NSDictionary) throws {
-        guard let name = collectionEntry["name"] as? String,
-            let entries = collectionEntry["entries"] as? [NSDictionary] else {
-            throw NineAnimatorError.decodeError
-        }
+    init(_ parent: Anilist, withCollectionObject collection: Anilist.GQLMediaListGroup) throws {
         self.init(
             parent,
-            name: name,
-            identifier: name,
-            collection: try entries.map {
-                entry in
-                guard let mediaEntry = entry["media"] as? NSDictionary else {
-                    throw NineAnimatorError.decodeError
+            name: try collection.name.tryUnwrap(),
+            identifier: try collection.name.tryUnwrap(),
+            collection: try collection.entries.tryUnwrap().map {
+                listItem in
+                let media = try listItem.media.tryUnwrap()
+                let reference = try ListingAnimeReference(parent, withMediaObject: media)
+                
+                // Obtain the tracking state and contribute it to the parent
+                if let tracking = parent.createReferenceTracking(from: listItem.mediaList, withSupplementalMedia: media) {
+                    parent.contributeReferenceTracking(tracking, forReference: reference)
                 }
-                return try ListingAnimeReference(parent, withMediaEntry: mediaEntry)
-            },
-            userInfo: collectionEntry as! [String: Any]
+                
+                return reference
+            }
         )
     }
 }

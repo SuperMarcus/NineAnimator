@@ -38,7 +38,7 @@ func configureStyleOverride(_ view: UIView, withTheme theme: Theme = .current) {
 
 /// Obtain the appropriate `UIUserInterfaceStyle` value for the theme
 @available(iOS 13.0, *)
-fileprivate func interfaceStyle(for theme: Theme) -> UIUserInterfaceStyle {
+private func interfaceStyle(for theme: Theme) -> UIUserInterfaceStyle {
     switch theme.name {
     case "dark": return .dark
     case "light": return .light

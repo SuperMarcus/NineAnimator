@@ -29,7 +29,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         return searchController
     }()
     
-    var popularAnimeLinks: [AnimeLink]? {
+    var searchLinksPool: [AnimeLink]? {
         didSet {
             DispatchQueue.main.async { [weak self] in
                 self?.tableView.reloadSections([0], with: .fade)
@@ -41,6 +41,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     
     var requestTask: NineAnimatorAsyncTask?
     
+    var requestingSource: Source?
+    
     var source: Source { return NineAnimator.default.user.source }
 
     @IBOutlet private weak var selectSiteBarButton: UIBarButtonItem!
@@ -49,6 +51,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         super.viewWillAppear(animated)
         NineAnimator.default.user.pull()
         selectSiteBarButton.title = NineAnimator.default.user.source.name
+        updateSearchPool()
     }
     
     override func viewDidLoad() {
@@ -72,13 +75,50 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         
         tableView.makeThemable()
         searchController.searchBar.makeThemable()
-        
-        requestTask = source.featured {
-            [weak self] page, error in
-            defer { self?.requestTask = nil }
-            guard let page = page else { return Log.error(error) }
-            self?.popularAnimeLinks = page.featured + page.latest
+    }
+    
+    private func updateSearchPool() {
+        if requestingSource?.name != source.name {
+            resetSearchPool()
+            requestingSource = source
+            requestTask = source.featured {
+                [weak self] page, error in
+                guard let self = self else { return }
+                defer { self.requestTask = nil }
+                
+                // If errored, set requestingSource to nil so
+                // we'll retry next time
+                guard let page = page else {
+                    self.requestingSource = nil
+                    return Log.error(error)
+                }
+                
+                let additionalContent = page.featured + page.latest
+                
+                // Store the requested contents
+                if let originalContent = self.searchLinksPool {
+                    self.searchLinksPool = originalContent + additionalContent
+                } else { self.searchLinksPool = additionalContent }
+                
+                // Remove duplicated links
+                self.processSearchPoolDuplicates()
+                
+                // Update the search results
+                self.updateSearchResults()
+            }
         }
+    }
+    
+    /// Removes duplicated `AnimeLink` in the search pool
+    private func processSearchPoolDuplicates() {
+        if let list = searchLinksPool {
+            searchLinksPool = Set(list).map { $0 }
+        }
+    }
+    
+    /// Reset the search pool back to the original values
+    private func resetSearchPool() {
+        searchLinksPool = NineAnimator.default.user.recentAnimes
     }
 }
 
@@ -104,12 +144,17 @@ extension SearchViewController {
 
 // MARK: - Search events handler
 extension SearchViewController {
+    func updateSearchResults() {
+        updateSearchResults(for: searchController)
+    }
+    
     func updateSearchResults(for searchController: UISearchController) {
-        guard let all = popularAnimeLinks else { return }
+        guard let all = searchLinksPool else { return }
         
         if let text = searchController.searchBar.text {
             filteredAnimeLinks = all.filter {
-                $0.title.contains(text) || $0.link.absoluteString.contains(text)
+                $0.title.localizedCaseInsensitiveContains(text)
+                    || $0.link.absoluteString.localizedCaseInsensitiveContains(text)
             }
         } else { filteredAnimeLinks = all }
         
@@ -161,14 +206,7 @@ extension SearchViewController {
                 guard let self = self else { return }
                 
                 self.selectSiteBarButton.title = source.name
-                
-                self.requestTask?.cancel()
-                self.requestTask = source.featured {
-                    [weak self] page, error in
-                    defer { self?.requestTask = nil }
-                    guard let page = page else { return Log.error(error) }
-                    self?.popularAnimeLinks = page.featured + page.latest
-                }
+                self.updateSearchPool()
             }
             if source.name == currentSource.name {
                 action.setValue(true, forKey: "checked")

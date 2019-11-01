@@ -29,6 +29,8 @@ import AppKit
 class NASourceKissanime: BaseSource, Source, PromiseSource {
     var name: String { return "kissanime.ru" }
     
+    var aliases: [String] { return [] }
+    
     #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "Kissanime Site Icon") }
     #elseif canImport(AppKit)
