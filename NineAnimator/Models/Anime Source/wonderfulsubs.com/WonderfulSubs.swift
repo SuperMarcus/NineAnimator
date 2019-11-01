@@ -26,7 +26,7 @@ import AppKit
 #endif
 
 class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
-    var name: String { return "WonderfulSubs" }
+    var name: String { return "wonderfulsubs.com" }
     
 #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "WonderfulSubs Site Logo") }

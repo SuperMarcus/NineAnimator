@@ -32,7 +32,7 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [Wonderful Subs](//wonderfulsubs.com)
+- [WonderfulSubs](//wonderfulsubs.com)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
