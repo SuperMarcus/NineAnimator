@@ -59,6 +59,7 @@ class TrackingContext {
     
     private var current: EpisodeLink?
     
+    /// Create the TrackingContext for the AnimeLink
     init(_ parent: NineAnimator, link: AnimeLink) {
         self.parent = parent
         self.link = link
@@ -82,6 +83,34 @@ class TrackingContext {
         )
         
         queue.sync { restore() }
+    }
+    
+    /// Try to create the `TrackingContext` by deserializing the data
+    /// - Important: Don't perform any save operations in this initializer as it is used for creating a temporary `TrackingContext` for merging.
+    init(_ parent: NineAnimator, link: AnimeLink, deserializingFrom data: Data) throws {
+        self.parent = parent
+        self.link = link
+        self.stateConfigurationUrl = try! TrackingContext.stateConfigurationUrl(for: link)
+        self.relatedLinks = []
+        self.creationDate = Date()
+        self.updateDate = .distantPast
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackDidStart(_:)),
+            name: .playbackDidStart,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackDidEnd(_:)),
+            name: .playbackDidEnd,
+            object: nil
+        )
+        
+        // Try to restore from the data provided
+        try queue.sync { try restore(from: data) }
     }
     
     /// Retrieve the list of references that are loaded
@@ -405,28 +434,36 @@ extension TrackingContext {
         static let previousSessionServer = "com.marcuszhou.nineanimator.TrackingContext.previousSessionServer"
     }
     
-    private func save() {
+    /// Save the `TrackingContext` into the persistence location
+    func save() {
         do {
-            var persistingInformation = [String: Any]()
-            persistingInformation[Keys.protocol] = 1
-            persistingInformation[Keys.creationDate] = creationDate
-            persistingInformation[Keys.updateDate] = updateDate
-            persistingInformation[Keys.link] = try encode(data: link)
-            persistingInformation[Keys.relatedLinks] = try encode(data: relatedLinks)
-            persistingInformation[Keys.cachedReferences] = try encode(data: listingAnimeReferences)
-            persistingInformation[Keys.progressRecords] = try encode(data: progressRecords)
-            persistingInformation[Keys.previousSessionServer] = previousSessionServer
-            
             // Write to configuration url
-            try PropertyListSerialization
-                .data(fromPropertyList: persistingInformation, format: .binary, options: 0)
-                .write(to: stateConfigurationUrl)
+            try export().write(to: stateConfigurationUrl)
         } catch {
             Log.error("Unable to persist tracking context state data: %@", error)
         }
     }
     
-    private func restore() {
+    /// Serialize this `TrackingContext` into `Data`
+    func export() throws -> Data {
+        var persistingInformation = [String: Any]()
+        persistingInformation[Keys.protocol] = 1
+        persistingInformation[Keys.creationDate] = creationDate
+        persistingInformation[Keys.updateDate] = updateDate
+        persistingInformation[Keys.link] = try encode(data: link)
+        persistingInformation[Keys.relatedLinks] = try encode(data: relatedLinks)
+        persistingInformation[Keys.cachedReferences] = try encode(data: listingAnimeReferences)
+        persistingInformation[Keys.progressRecords] = try encode(data: progressRecords)
+        persistingInformation[Keys.previousSessionServer] = previousSessionServer
+        
+        // Encode to Data
+        return try PropertyListSerialization
+            .data(fromPropertyList: persistingInformation, format: .binary, options: 0)
+    }
+    
+    /// Restore the `TrackingContext` from the configuration file
+    /// - Important: Performing this operation will override any unsaved changes
+    func restore() {
         // Only restore if file exists
         guard FileManager.default.fileExists(atPath: stateConfigurationUrl.path) else {
             return
@@ -435,30 +472,56 @@ extension TrackingContext {
         do {
             // Decode from configuration file
             let persistedInformationData = try Data(contentsOf: stateConfigurationUrl)
-            guard let persistedInformation = try PropertyListSerialization.propertyList(
-                from: persistedInformationData,
-                options: [],
-                format: nil
-            ) as? [String: Any] else { throw NineAnimatorError.decodeError }
-            
-            // Check protocol version
-            guard (persistedInformation[Keys.protocol] as? Int) == 1 else {
-                Log.error("Cannot restore persisted tracking context: Unsupported protocol %@", String(describing: persistedInformation[Keys.protocol]))
-                throw NineAnimatorError.decodeError
-            }
-            
-            // Restore persisted links
-            self.relatedLinks = try decode(Set<AnimeLink>.self, from: persistedInformation[Keys.relatedLinks])
-            self.listingAnimeReferences = try decode([String: ListingAnimeReference].self, from: persistedInformation[Keys.cachedReferences])
-            self.progressRecords = try decode([PlaybackProgressRecord].self, from: persistedInformation[Keys.progressRecords])
-            self.creationDate = try some(
-                persistedInformation[Keys.creationDate] as? Date,
-                or: .decodeError
-            )
-            self.updateDate = (persistedInformation[Keys.updateDate] as? Date) ?? .distantPast
-            self.previousSessionServer = persistedInformation[Keys.previousSessionServer] as? Anime.ServerIdentifier
+            try restore(from: persistedInformationData)
         } catch {
             Log.error("Unable to decode persisted tracking context state data: %@", error)
         }
+    }
+    
+    /// Restoring the tracking data from the serialized information
+    /// - Important: Performing this operation will override any information previously stored in the `TrackingContext`
+    func restore(from persistedInformationData: Data) throws {
+        guard let persistedInformation = try PropertyListSerialization.propertyList(
+            from: persistedInformationData,
+            options: [],
+            format: nil
+        ) as? [String: Any] else { throw NineAnimatorError.decodeError }
+        
+        // Check protocol version
+        guard (persistedInformation[Keys.protocol] as? Int) == 1 else {
+            Log.error("Cannot restore persisted tracking context: Unsupported protocol %@", String(describing: persistedInformation[Keys.protocol]))
+            throw NineAnimatorError.decodeError
+        }
+        
+        // Restore persisted links
+        self.relatedLinks = try decode(Set<AnimeLink>.self, from: persistedInformation[Keys.relatedLinks])
+        self.listingAnimeReferences = try decode([String: ListingAnimeReference].self, from: persistedInformation[Keys.cachedReferences])
+        self.progressRecords = try decode([PlaybackProgressRecord].self, from: persistedInformation[Keys.progressRecords])
+        self.creationDate = try some(
+            persistedInformation[Keys.creationDate] as? Date,
+            or: .decodeError
+        )
+        self.updateDate = (persistedInformation[Keys.updateDate] as? Date) ?? .distantPast
+        self.previousSessionServer = persistedInformation[Keys.previousSessionServer] as? Anime.ServerIdentifier
+    }
+    
+    /// Deserialize the persistedInformation and attempt to perform a merge operation
+    /// - Important: Caller must make sure that the data belongs to the same AnimeLink
+    func merge(from persistedInformationData: Data) throws {
+        let mergingContext = try TrackingContext(
+            parent,
+            link: link,
+            deserializingFrom: persistedInformationData
+        )
+        
+        // For related links, save the one that is fetched the first
+        self.relatedLinks = mergingContext.updateDate > updateDate
+            ? mergingContext.relatedLinks : relatedLinks
+        // Same goes for the listingAnimeReferences
+        self.listingAnimeReferences = mergingContext.updateDate > updateDate
+            ? mergingContext.listingAnimeReferences : listingAnimeReferences
+        
+        // Lastly, update the updateDate
+        self.updateDate = max(mergingContext.updateDate, updateDate)
     }
 }

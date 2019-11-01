@@ -311,6 +311,7 @@
 		2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */; };
 		2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC21A1220917D200A30F4F /* Promise+Fail.swift */; };
 		2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */; };
+		2CFDDFA0236B1DF000C2D89A /* ModelMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */; };
 		2CFE2D98227D379200030B1F /* Anilist+CalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */; };
 		2CFE2DA0227D441700030B1F /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D9A227D441700030B1F /* DictionaryDecoder.swift */; };
 		2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D9C227D441700030B1F /* DictionaryEncoder.swift */; };
@@ -688,6 +689,7 @@
 		2CEC21A1220917D200A30F4F /* Promise+Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Promise+Fail.swift"; sourceTree = "<group>"; };
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
+		2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMigrator.swift; sourceTree = "<group>"; };
 		2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+CalendarProvider.swift"; sourceTree = "<group>"; };
 		2CFE2D9A227D441700030B1F /* DictionaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
 		2CFE2D9B227D441700030B1F /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
@@ -1067,6 +1069,7 @@
 		2C4ABC7621B599E3009B4D47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2CFDDF9E236B1DCA00C2D89A /* Migrator */,
 				2C46FC8A2320309E00D4206D /* NineAnimatorCloud */,
 				2C7B519822A41EBE008191B0 /* Content Persistent */,
 				2C7B519322A41231008191B0 /* CoreData */,
@@ -1608,6 +1611,14 @@
 			path = gogoanime;
 			sourceTree = "<group>";
 		};
+		2CFDDF9E236B1DCA00C2D89A /* Migrator */ = {
+			isa = PBXGroup;
+			children = (
+				2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */,
+			);
+			path = Migrator;
+			sourceTree = "<group>";
+		};
 		2CFE2D99227D441700030B1F /* DictionaryCoding */ = {
 			isa = PBXGroup;
 			children = (
@@ -2107,6 +2118,7 @@
 				2CEC218C2207E3A900A30F4F /* AsyncTask.swift in Sources */,
 				2C7A1D5A2251467100DD83A5 /* MyAnimeList+AnimeInformation.swift in Sources */,
 				2C9383DF21FE147E008C0D01 /* ThemedSolidButton.swift in Sources */,
+				2CFDDFA0236B1DF000C2D89A /* ModelMigrator.swift in Sources */,
 				2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */,
 				2CE5B8E22260D7BE00A2CF89 /* Recommendation.swift in Sources */,
 				2C3BBAAF22183BCF00F1C77B /* ListingService.swift in Sources */,

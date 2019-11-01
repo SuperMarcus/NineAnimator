@@ -28,6 +28,9 @@ import AppKit
 
 class NASourceNineAnime: BaseSource, Source {
     let name: String = "9anime.ru"
+    
+    var aliases: [String] { return [] }
+    
     override var endpoint: String { return "https://\(_currentHost)" }
     
 #if canImport(UIKit)

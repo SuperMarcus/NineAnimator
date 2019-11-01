@@ -31,6 +31,9 @@ protocol Source: AnyObject {
     /// The name of the source website
     var name: String { get }
     
+    /// Aliases of the source
+    var aliases: [String] { get }
+    
 #if canImport(UIKit)
     /// The logo of the website
     var siteLogo: UIImage { get }

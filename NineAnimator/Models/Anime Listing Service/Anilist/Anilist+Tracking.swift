@@ -50,6 +50,7 @@ extension Anilist {
             currentProgress: episodeNumber,
             episdoes: nil
         )
+        
         updatedTracking.currentProgress = episodeNumber
         update(reference, newTracking: updatedTracking)
     }

@@ -28,6 +28,8 @@ import AppKit
 class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     var name: String { return "animeultima.eu" }
     
+    var aliases: [String] { return [] }
+    
 #if canImport(UIKit)
     var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeUltima Site Logo") }
 #elseif canImport(AppKit)
