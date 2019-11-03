@@ -120,6 +120,7 @@
 		2C4FDDB322485EF90059B7D8 /* AnimeUltima+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */; };
 		2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54FF5C233967A0007669BB /* UIStyleOverride.swift */; };
 		2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */; };
+		2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */; };
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
 		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
 		2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */; };
@@ -466,6 +467,7 @@
 		2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Search.swift"; sourceTree = "<group>"; };
 		2C54FF5C233967A0007669BB /* UIStyleOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyleOverride.swift; sourceTree = "<group>"; };
 		2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseSource+Cloudflare.swift"; sourceTree = "<group>"; };
+		2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydraXParser.swift; sourceTree = "<group>"; };
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
 		2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
@@ -1530,6 +1532,7 @@
 				2C8519BB22D3173200EEF3AC /* NovaParser.swift */,
 				2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */,
 				65E1D9BB235FC12200234409 /* VeryStreamParser.swift */,
+				2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2158,6 +2161,7 @@
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2C7B519622A41285008191B0 /* ContentPersistentDataModel.xcdatamodeld in Sources */,
+				2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */,
 				2C6677B621BD8FA1000E5ACC /* ContentErrorTableViewCell.swift in Sources */,
 				2C9383DD21FE0CE9008C0D01 /* AnimeHeadingView.swift in Sources */,
 				2C1C717F22190FF800760A69 /* Anilist+Tracking.swift in Sources */,

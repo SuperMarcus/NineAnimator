@@ -34,7 +34,9 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
     var siteLogo: NSImage { return #imageLiteral(resourceName: "WonderfulSubs Site Logo") }
 #endif
     
-    var aliases: [String] { return [ "Wonderful Subs" ] }
+    var aliases: [String] { return [
+        "Wonderful Subs", "WonderfulSubs"
+    ] }
     
     var siteDescription: String {
         return "WonderfulSubs is a free anime streaming website with numerous dubs and subs of anime. NineAnimator has fairly well-rounded support for this website."
@@ -48,9 +50,14 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
         }
         
         if let host = episode.target.host {
-            switch host {
-            case _ where host.contains("fembed"): return VideoProviderRegistry.default.provider(for: "fembed")
-            default: Log.error("[NASourceWonderfulSubs] Unknown video provider %@", host)
+            if let provider = VideoProviderRegistry.default.provider(for: host) {
+                return provider
+            } else {
+                switch host {
+                case _ where host.contains("fembed"):
+                    return VideoProviderRegistry.default.provider(for: "fembed")
+                default: Log.error("[NASourceWonderfulSubs] Unknown video provider %@", host)
+                }
             }
         }
         

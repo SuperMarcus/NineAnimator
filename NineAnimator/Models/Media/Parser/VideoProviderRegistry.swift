@@ -39,6 +39,7 @@ class VideoProviderRegistry {
         defaultProvider.register(XStreamParser(), forServer: "XStream")
         defaultProvider.register(NovaParser(), forServer: "Nova")
         defaultProvider.register(VeryStream(), forServer: "VeryStream")
+        defaultProvider.register(HydraXParser(), forServer: "HydraX")
         
         return defaultProvider
     }()
