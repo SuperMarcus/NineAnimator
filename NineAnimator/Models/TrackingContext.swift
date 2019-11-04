@@ -59,6 +59,14 @@ class TrackingContext {
     
     private var current: EpisodeLink?
     
+    /// Retrieve the most recent playback record for the anime
+    ///
+    /// The most recent record is always appended to the back of the list, so
+    /// this getter is an alias of progressRecords.last
+    var mostRecentRecord: PlaybackProgressRecord? {
+        return progressRecords.last
+    }
+    
     /// Create the TrackingContext for the AnimeLink
     init(_ parent: NineAnimator, link: AnimeLink) {
         self.parent = parent

@@ -196,6 +196,18 @@ extension NineAnimator {
         return context
     }
     
+    /// Returning the list of TrackingContexts containing this reference
+    func trackingContexts(containingReference reference: ListingAnimeReference) -> [TrackingContext] {
+        var trackingContexts = [TrackingContext]()
+        for recentAnime in user.recentAnimes {
+            let context = trackingContext(for: recentAnime)
+            if context.availableReferences.contains(reference) {
+                trackingContexts.append(context)
+            }
+        }
+        return trackingContexts
+    }
+    
     private func registerDefaultServices() {
         register(service: Anilist(self))
         register(service: Kitsu(self))

@@ -48,7 +48,7 @@ extension Anilist {
         
         var updatedTracking = progressTracking(for: reference) ?? ListingAnimeTracking(
             currentProgress: episodeNumber,
-            episdoes: nil
+            episodes: nil
         )
         
         updatedTracking.currentProgress = episodeNumber
@@ -75,7 +75,7 @@ extension Anilist {
     func contributeReferenceTracking(_ tracking: ListingAnimeTracking, forReference reference: ListingAnimeReference) {
         var newTracking = tracking
         if let existingTracking = _mediaTrackingMap[reference] {
-            newTracking.episdoes = newTracking.episdoes ?? existingTracking.episdoes
+            newTracking.episodes = newTracking.episodes ?? existingTracking.episodes
         }
         _mediaTrackingMap[reference] = newTracking
     }
@@ -86,7 +86,7 @@ extension Anilist {
         if /* mediaList?.status == .current, */let progress = mediaList?.progress {
             return ListingAnimeTracking(
                 currentProgress: progress,
-                episdoes: media.episodes
+                episodes: media.episodes
             )
         } else { return nil }
     }

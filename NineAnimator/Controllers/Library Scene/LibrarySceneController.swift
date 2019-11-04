@@ -45,6 +45,12 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
         .init(width: 300, height: 56)
     )
     
+    /// The category that is currently selected by the user
+    private var selectedCategory: Category?
+    
+    /// The collection that is currently being selected
+    private var selectedCollection: Collection?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -237,9 +243,36 @@ extension LibrarySceneController {
         }
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else {
+            return Log.error("[LibrarySceneController] Index %@ does not correspond to a visible cell", indexPath)
+        }
+
+        switch Section.from(indexPath.section) {
+        case .categories:
+            let category = categories[indexPath.item]
+            self.selectedCategory = category
+            performSegue(withIdentifier: category.segueIdentifier, sender: cell)
+        case .collection:
+            let collection = self.collection(atPath: indexPath)
+            self.selectedCollection = collection
+            performSegue(withIdentifier: "library.collection", sender: cell)
+        }
+    }
+    
     func minFilledLayout(_ collectionView: UICollectionView, didLayout indexPath: IndexPath, withParameters parameters: MinFilledFlowLayoutHelper.LayoutParameters) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionCell {
             cell.updateApperance(baseOff: parameters)
+        }
+    }
+}
+
+// MARK: - Segue
+extension LibrarySceneController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? LibraryTrackingCollectionController,
+            let collection = self.selectedCollection {
+            destination.setPresenting(collection)
         }
     }
 }

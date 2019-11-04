@@ -32,7 +32,12 @@ struct ListingAnimeTracking {
     var currentProgress: Int
     
     /// Total number of episodes available
-    var episdoes: Int?
+    var episodes: Int?
+    
+    /// Obtain the next tracking state with the updated progress
+    func newTracking(withUpdatedProgress progress: Int) -> ListingAnimeTracking {
+        return ListingAnimeTracking(currentProgress: progress, episodes: episodes)
+    }
 }
 
 /// Representing a reference that can be used to identify a particular anime on the `Listing Service`
