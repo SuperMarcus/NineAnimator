@@ -81,14 +81,7 @@ class LibraryTrackingReferenceCell: UICollectionViewCell, Themable {
         
         if let mostRecentRecord = mostRecentRecord {
             let interval = Date().timeIntervalSince(mostRecentRecord.enqueueDate)
-            let intervalLabel: String
-            
-            switch interval {
-            case ..<60: intervalLabel = "within a minute"
-            case 60..<(60 * 60): intervalLabel = "\(Int(interval / 60)) minutes ago"
-            case (60 * 60)..<(60 * 60 * 24): intervalLabel = "\(Int(interval / (60 * 60))) hours ago"
-            default: intervalLabel = "\(Int(interval / (60 * 60 * 24))) days ago"
-            }
+            let intervalLabel = interval.durationDescription
             
             // Update label
             accessorySubtitleLabel.text = "ep. \(mostRecentRecord.episodeNumber) streamed \(intervalLabel)".uppercased()

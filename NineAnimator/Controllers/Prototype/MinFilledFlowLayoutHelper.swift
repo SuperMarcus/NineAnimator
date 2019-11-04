@@ -58,6 +58,8 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     func configure(collectionView: UICollectionView) {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
+            layout.sectionInsetReference = .fromLayoutMargins
+            collectionView.contentInsetAdjustmentBehavior = .always
         }
     }
     

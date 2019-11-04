@@ -67,6 +67,13 @@ class TrackingContext {
         return progressRecords.last
     }
     
+    /// Latest record of the furtherest episode
+    var furtherestEpisodeRecord: PlaybackProgressRecord? {
+        return progressRecords.max {
+            $0.episodeNumber < $1.episodeNumber
+        }
+    }
+    
     /// Create the TrackingContext for the AnimeLink
     init(_ parent: NineAnimator, link: AnimeLink) {
         self.parent = parent

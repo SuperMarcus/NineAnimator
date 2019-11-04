@@ -19,55 +19,89 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class LibraryRecentsCategoryController: UICollectionViewController, LibraryCategoryReceiverController {
+class LibraryRecentsCategoryController: UICollectionViewController, LibraryCategoryReceiverController, UICollectionViewDelegateFlowLayout {
+    /// Cached recent anime from `NineAnimatorUser`
+    private var cachedRecentAnime = [AnimeLink]()
+    
+    /// The `AnimeLink` that was selected by the user in the collection view
+    private var selectedAnimeLink: AnimeLink?
+    
+    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
+        dataSource: self,
+        alwaysFillLine: false,
+        minimalSize: .init(width: 300, height: 110)
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        layoutHelper.configure(collectionView: collectionView)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Load Recent Links
+        self.reloadRecentLinks()
     }
-    */
+}
 
-    // MARK: UICollectionViewDataSource
+// MARK: - Data Loading
+extension LibraryRecentsCategoryController {
+    private func reloadRecentLinks() {
+        self.cachedRecentAnime = NineAnimator.default.user.recentAnimes
+        self.collectionView.reloadData()
+    }
+}
 
+// MARK: - Data Source & Delegate
+extension LibraryRecentsCategoryController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return section == 0 ? cachedRecentAnime.count : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "recents.item",
+            for: indexPath
+        ) as! LibraryRecentAnimeCell
+        cell.setPresenting(cachedRecentAnime[indexPath.item])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return layoutHelper.collectionView(collectionView, layout: layout, sizeForItemAt: indexPath)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        selectedAnimeLink = cachedRecentAnime[indexPath.item]
+        performSegue(withIdentifier: "recents.player", sender: cell)
     }
 }
 
 // MARK: - Initialization
 extension LibraryRecentsCategoryController {
     func setPresenting(_ category: LibrarySceneController.Category) {
-        // Init
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.largeTitleTextAttributes[.foregroundColor] = category.tintColor
+            navigationItem.scrollEdgeAppearance = appearance
+        }
+    }
+}
+
+// MARK: - Navigation
+extension LibraryRecentsCategoryController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Initialize the anime viewer
+        if let destination = segue.destination as? AnimeViewController,
+            let selectedAnimeLink = selectedAnimeLink {
+            destination.setPresenting(anime: selectedAnimeLink)
+        }
     }
 }

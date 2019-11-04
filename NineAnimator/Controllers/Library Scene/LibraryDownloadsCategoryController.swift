@@ -99,6 +99,11 @@ class LibraryDownloadsCategoryController: UICollectionViewController, LibraryCat
 // MARK: - Initialization
 extension LibraryDownloadsCategoryController {
     func setPresenting(_ category: LibrarySceneController.Category) {
-        // Init
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.configureWithTransparentBackground()
+            appearance.largeTitleTextAttributes[.foregroundColor] = category.tintColor
+            navigationItem.scrollEdgeAppearance = appearance
+        }
     }
 }
