@@ -74,7 +74,16 @@ extension LibraryTrackingCollectionController {
         self.title = trackingCollection.title
     }
     
+    /// Handling page available event
+    ///
+    /// This method redirects the message to `onPageAvailable` on the main thread.
     func pageIncoming(_ page: Int, from provider: ContentProvider) {
+        DispatchQueue.main.async {
+            [weak self] in self?.onPageAvailable(page, from: provider)
+        }
+    }
+    
+    private func onPageAvailable(_ page: Int, from provider: ContentProvider) {
         // Cache collection references
         let cachedPageReferences = provider.links(on: page).compactMap {
             genericLink -> ListingAnimeReference? in
