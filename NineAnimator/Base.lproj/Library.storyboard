@@ -262,17 +262,96 @@
                     <connections>
                         <segue destination="fya-FZ-XHf" kind="show" identifier="library.collection" id="955-KE-hGC"/>
                         <segue destination="W06-UW-09j" kind="show" identifier="library.category.recents" id="a7q-Rj-31B"/>
+                        <segue destination="KUO-fX-keh" kind="show" identifier="library.category.subscribed" id="8vp-hq-wbv"/>
+                        <segue destination="SqH-eG-50b" kind="show" identifier="library.category.downloads" id="wOK-SC-10P"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f0v-Zf-Cei" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1013.0434782608696" y="28.794642857142854"/>
         </scene>
+        <!--Downloads-->
+        <scene sceneID="Xeb-ha-gIa">
+            <objects>
+                <collectionViewController id="SqH-eG-50b" customClass="LibraryDownloadsCategoryController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" id="WOB-ok-7kz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uNP-8K-Xb9">
+                            <size key="itemSize" width="375" height="160"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vNS-jd-ckp">
+                                <rect key="frame" x="19.5" y="0.0" width="375" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="zGE-wc-N0c">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="375" height="160"/>
+                            </collectionViewCell>
+                        </cells>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="SqH-eG-50b" id="snn-Sk-LND"/>
+                            <outlet property="delegate" destination="SqH-eG-50b" id="Ole-rs-8FU"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Downloads" id="xJb-B5-ZuH"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pSR-8o-kLM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1013.0434782608696" y="756.69642857142856"/>
+        </scene>
+        <!--Subscribed-->
+        <scene sceneID="eFK-Wp-5oc">
+            <objects>
+                <collectionViewController id="KUO-fX-keh" customClass="LibrarySubscriptionCategoryController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" id="Zct-d6-LRv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="U5e-Di-70s">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="8bB-Hf-VKd">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jhi-pa-tuk">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </collectionViewCellContentView>
+                            </collectionViewCell>
+                        </cells>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="KUO-fX-keh" id="ZlI-Wv-KLX"/>
+                            <outlet property="delegate" destination="KUO-fX-keh" id="yUV-HW-fK2"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Subscribed" id="zAd-pj-0qt"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KLr-Lp-CkX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-188" y="758"/>
+        </scene>
         <!--Recents-->
         <scene sceneID="PgL-TK-j0D">
             <objects>
-                <collectionViewController id="W06-UW-09j" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="ZtO-Ec-sdQ">
+                <collectionViewController id="W06-UW-09j" customClass="LibraryRecentsCategoryController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="always" dataMode="prototypes" id="ZtO-Ec-sdQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -293,6 +372,9 @@
                                 <size key="customSize" width="365" height="146"/>
                             </collectionViewCell>
                         </cells>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                         <connections>
                             <outlet property="dataSource" destination="W06-UW-09j" id="cXC-dN-TQJ"/>
                             <outlet property="delegate" destination="W06-UW-09j" id="o1t-wZ-py5"/>
@@ -443,7 +525,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="J09-fp-cbv">
-                                            <rect key="frame" x="104.5" y="41.5" width="214.5" height="21.5"/>
+                                            <rect key="frame" x="104.5" y="31" width="214.5" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -515,7 +597,7 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EP. 13 STREAMED 5 MINUTES AGO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ao6-Pk-Lp9">
-                                            <rect key="frame" x="104.5" y="65" width="214.5" height="12"/>
+                                            <rect key="frame" x="104.5" y="54.5" width="214.5" height="12"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="10"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -539,7 +621,7 @@
                                         <constraint firstItem="H74-1V-kGL" firstAttribute="leading" secondItem="QtI-OX-xAI" secondAttribute="trailing" constant="8" id="QZR-ij-WQW"/>
                                         <constraint firstAttribute="bottom" secondItem="H74-1V-kGL" secondAttribute="bottom" id="Qbn-YH-1vC"/>
                                         <constraint firstAttribute="trailing" secondItem="zHf-LW-p0t" secondAttribute="trailing" id="S7b-nh-2Up"/>
-                                        <constraint firstItem="J09-fp-cbv" firstAttribute="bottom" secondItem="QtI-OX-xAI" secondAttribute="centerY" multiplier="0.9" priority="500" id="XAq-WO-InN"/>
+                                        <constraint firstItem="J09-fp-cbv" firstAttribute="bottom" secondItem="QtI-OX-xAI" secondAttribute="centerY" multiplier="0.75" priority="500" id="XAq-WO-InN"/>
                                         <constraint firstAttribute="bottom" secondItem="QtI-OX-xAI" secondAttribute="bottom" constant="8" id="dQ7-8Z-8DK"/>
                                         <constraint firstItem="zHf-LW-p0t" firstAttribute="leading" secondItem="J09-fp-cbv" secondAttribute="trailing" constant="14" id="fQL-gO-Bwo"/>
                                         <constraint firstItem="J09-fp-cbv" firstAttribute="leading" secondItem="QtI-OX-xAI" secondAttribute="trailing" constant="10" id="fUh-V7-YxX"/>

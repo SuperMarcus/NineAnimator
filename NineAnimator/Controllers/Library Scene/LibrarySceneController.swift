@@ -61,13 +61,9 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
             navigationItem.scrollEdgeAppearance = edgeAppearance
         }
         
-//        collectionView.delaysContentTouches = false
         layoutHelper.configure(collectionView: collectionView)
         initializeCategories()
         loadCollections(failedOnly: false)
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 }
 
@@ -270,9 +266,16 @@ extension LibrarySceneController {
 // MARK: - Segue
 extension LibrarySceneController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Initialize the dst controller with the selected collection
         if let destination = segue.destination as? LibraryTrackingCollectionController,
             let collection = self.selectedCollection {
             destination.setPresenting(collection)
+        }
+        
+        // Initialize the dst controller with the selected
+        if let destination = segue.destination as? LibraryCategoryReceiverController,
+            let category = self.selectedCategory {
+            destination.setPresenting(category)
         }
     }
 }
@@ -419,4 +422,10 @@ fileprivate extension LibrarySceneController.CollectionSource {
     var shouldPresentInLibrary: Bool {
         return self.isCapableOfRetrievingAnimeState
     }
+}
+
+/// Controllers that are linked by `LibrarySceneController`'s categories
+protocol LibraryCategoryReceiverController {
+    /// Initialize the controller with the category
+    func setPresenting(_ category: LibrarySceneController.Category)
 }

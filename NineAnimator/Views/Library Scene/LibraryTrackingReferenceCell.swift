@@ -99,5 +99,19 @@ class LibraryTrackingReferenceCell: UICollectionViewCell, Themable {
         seperatorLineView.backgroundColor = theme.seperator
         progressBar.progressTintColor = theme.secondaryText
         progressBar.trackTintColor = theme.secondaryBackground
+        updateTouchReactionTint()
+    }
+    
+    override var isHighlighted: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    override var isSelected: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    private func updateTouchReactionTint() {
+        let shouldTint = isHighlighted || isSelected
+        alpha = shouldTint ? 0.4 : 1
     }
 }
