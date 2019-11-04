@@ -19,6 +19,12 @@
 
 import UIKit
 
+/// A layout helper for building a minimal size based line filled collection view
+///
+/// A few steps to adapt this helper
+/// - Add the class variable `var layoutHelper = MinFilledFlowLayoutHelper(...)`
+/// - Configure the collection view using `layoutHelper.configure(collectionView: collectionView)` on `viewDidLoad`
+/// - Forward `viewWillTransition()` and `viewWillAppear()` events to the helper
 class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     typealias LineLayoutParameters = (
         ordinary: CGSize,
@@ -44,10 +50,18 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     /// If the cells should always fill the line space
     private var alwaysFillLine: Bool
     
-    init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSize: CGSize...) {
+    convenience init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSize: CGSize...) {
+        self.init(
+            dataSource: dataSource,
+            alwaysFillLine: alwaysFillLine,
+            minimalSizes: minimalSize
+        )
+    }
+    
+    init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSizes: [CGSize]) {
         // Store parameters
         self.dataSource = dataSource
-        self.minimalSizes = minimalSize
+        self.minimalSizes = minimalSizes
         self.previousSpace = .zero
         self.cachedLayoutParameters = [:]
         self.alwaysFillLine = alwaysFillLine
@@ -61,6 +75,23 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
             layout.sectionInsetReference = .fromLayoutMargins
             collectionView.contentInsetAdjustmentBehavior = .always
         }
+    }
+    
+    /// Call from `viewWillTransition`
+    func viewWillTransition(coordinator: UIViewControllerTransitionCoordinator, in collectionView: UICollectionView) {
+        coordinator.animate(alongsideTransition: {
+            _ in
+            collectionView.performBatchUpdates({
+                collectionView.collectionViewLayout.invalidateLayout()
+                collectionView.setNeedsLayout()
+            }, completion: nil)
+            collectionView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    /// Call from `viewWillAppear`
+    func viewWillAppear(_ collectionView: UICollectionView) {
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     func collectionView(_ collectionView: UICollectionView,

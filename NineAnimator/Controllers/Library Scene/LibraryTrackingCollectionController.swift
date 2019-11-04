@@ -19,23 +19,21 @@
 
 import UIKit
 
-class LibraryTrackingCollectionController: UICollectionViewController, ContentProviderDelegate, UICollectionViewDelegateFlowLayout {
+class LibraryTrackingCollectionController: MinFilledCollectionViewController, ContentProviderDelegate {
     private var collection: LibrarySceneController.Collection?
     private var cachedCollectionReferences = [Int: [ListingAnimeReference]]()
     private var selectedReference: ListingAnimeReference?
     private var referencesToContextsMap = [ListingAnimeReference: [TrackingContext]]()
     private var referencesMappingQueue = DispatchQueue.global()
-    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
-        dataSource: self,
-        alwaysFillLine: false,
-        minimalSize: .init(width: 300, height: 130)
-    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Configure the collection view with approperite settigns
-        layoutHelper.configure(collectionView: collectionView)
+        // Initialize Min Filled Layout
+        setLayoutParameters(
+            alwaysFillLine: false,
+            minimalSize: .init(width: 300, height: 130)
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -231,10 +229,6 @@ extension LibraryTrackingCollectionController {
             
             return cell
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return layoutHelper.collectionView(collectionView, layout: layout, sizeForItemAt: indexPath)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

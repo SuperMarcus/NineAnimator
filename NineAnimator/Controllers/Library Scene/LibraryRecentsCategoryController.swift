@@ -19,22 +19,21 @@
 
 import UIKit
 
-class LibraryRecentsCategoryController: UICollectionViewController, LibraryCategoryReceiverController, UICollectionViewDelegateFlowLayout {
+class LibraryRecentsCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
     /// Cached recent anime from `NineAnimatorUser`
     private var cachedRecentAnime = [AnimeLink]()
     
     /// The `AnimeLink` that was selected by the user in the collection view
     private var selectedAnimeLink: AnimeLink?
     
-    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
-        dataSource: self,
-        alwaysFillLine: false,
-        minimalSize: .init(width: 300, height: 110)
-    )
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        layoutHelper.configure(collectionView: collectionView)
+        
+        // Initialize Min Filled Layout
+        setLayoutParameters(
+            alwaysFillLine: false,
+            minimalSize: .init(width: 300, height: 110)
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,10 +69,6 @@ extension LibraryRecentsCategoryController {
         ) as! LibraryRecentAnimeCell
         cell.setPresenting(cachedRecentAnime[indexPath.item])
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return layoutHelper.collectionView(collectionView, layout: layout, sizeForItemAt: indexPath)
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

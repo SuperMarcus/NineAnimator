@@ -21,9 +21,15 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class LibrarySubscriptionCategoryController: UICollectionViewController, LibraryCategoryReceiverController {
+class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize Min Filled Layout
+        setLayoutParameters(
+            alwaysFillLine: false,
+            minimalSize: .init(width: 300, height: 110)
+        )
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,17 +39,13 @@ class LibrarySubscriptionCategoryController: UICollectionViewController, Library
 
         // Do any additional setup after loading the view.
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+//        layoutHelper.viewWillTransition(coordinator: coordinator, in: collectionView)
     }
-    */
-
+    
+    // TODO: Add `self.layoutHelper.viewWillAppear(collectionView)`
+    
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

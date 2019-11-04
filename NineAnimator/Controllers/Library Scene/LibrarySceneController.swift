@@ -19,7 +19,7 @@
 
 import UIKit
 
-class LibrarySceneController: UICollectionViewController, UICollectionViewDelegateFlowLayout, MinFilledLayoutDelegate {
+class LibrarySceneController: MinFilledCollectionViewController {
     /// List of collection providers
     private lazy var collectionProviders: [CollectionSource] = NineAnimator.default.trackingServices
     
@@ -38,13 +38,6 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
         count: self.collectionProviders.count
     )
     
-    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
-        dataSource: self,
-        alwaysFillLine: true,
-        minimalSize: .init(width: 140, height: 90),
-        .init(width: 300, height: 56)
-    )
-    
     /// The category that is currently selected by the user
     private var selectedCategory: Category?
     
@@ -54,6 +47,13 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Initialize the Min Filled Layout
+        setLayoutParameters(
+            alwaysFillLine: true,
+            minimalSize: .init(width: 140, height: 90),
+            .init(width: 300, height: 56)
+        )
+        
         // Configure scroll edge appearance so it looks a little better?
         if #available(iOS 13.0, *) {
             let edgeAppearance = UINavigationBarAppearance()
@@ -61,7 +61,6 @@ class LibrarySceneController: UICollectionViewController, UICollectionViewDelega
             navigationItem.scrollEdgeAppearance = edgeAppearance
         }
         
-        layoutHelper.configure(collectionView: collectionView)
         initializeCategories()
         loadCollections(failedOnly: false)
     }
@@ -160,14 +159,6 @@ extension LibrarySceneController {
 
 // MARK: - Delegate
 extension LibrarySceneController {
-    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return layoutHelper.collectionView(
-            collectionView,
-            layout: layout,
-            sizeForItemAt: indexPath
-        )
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         switch Section.from(section) {
         case .categories: return .zero
