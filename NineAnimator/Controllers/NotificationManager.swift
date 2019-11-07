@@ -489,7 +489,6 @@ extension String {
     }
     
     static func cachedPosterFilenameComponent(_ anime: AnimeLink) -> String {
-        
         let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.poster.\(linkHashRepresentation).jpg"
     }

@@ -26,7 +26,8 @@ class HydraXParser: VideoProviderParser {
         return [ "HydraX", "replay.watch" ]
     }
     
-    private static let resourceRequestUrl = URL(string: "https://multi.idocdn.com/vip")!
+    private static let vipChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/vip")!
+    private static let guestChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/guest")!
     
     private static let resourceInfoRegex = try! NSRegularExpression(
         pattern: "options\\s+=\\s+(\\{[^}]+\\})",
@@ -41,14 +42,48 @@ class HydraXParser: VideoProviderParser {
     }
     
     private struct ResourceResponse: Codable {
-        var status: Bool
-        var hash: String
+//        var status: Bool
+//        var hash: String
         var link: String
-        var thumbnail: String
+//        var thumbnail: String
     }
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return NineAnimatorPromise<String> {
+        if episode.target.host?.lowercased() == "replay.watch" {
+            return parseReplay(episode: episode, with: session, onCompletion: handler)
+        } else {
+            return parseGeneric(episode: episode, with: session, onCompletion: handler)
+        }
+    }
+    
+    private func parseGeneric(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        return NineAnimatorPromise.firstly {
+            () -> String? in
+            let queryParameters = try formDecode(episode.target.query ?? "")
+            let fragmentParameters = try formDecode(episode.target.fragment ?? "")
+            let parameters = queryParameters.merging(fragmentParameters) { $1 }
+            return parameters["slug"] ?? parameters["v"]
+        } .thenPromise {
+            slug in NineAnimatorPromise {
+                callback in session.request(
+                    HydraXParser.guestChannelResourceRequestUrl,
+                    method: .post,
+                    parameters: [
+                        "slug": slug,
+                        "dataType": "m3u8"
+                    ],
+                    encoding: URLEncoding.default,
+                    headers: nil
+                ) .responseData { callback($0.value, $0.error) }
+            }
+        } .then {
+            try self.decodePlaybackMedia(withResponseData: $0, episode: episode)
+        } .handle(handler)
+    }
+    
+    /// Replay.watch uses HydraX's vip channel
+    private func parseReplay(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        NineAnimatorPromise<String> {
             callback in session.request(episode.target).responseString {
                 callback($0.value, $0.error)
             }
@@ -73,7 +108,7 @@ class HydraXParser: VideoProviderParser {
             
             return NineAnimatorPromise {
                 callback in session.request(
-                    HydraXParser.resourceRequestUrl,
+                    HydraXParser.vipChannelResourceRequestUrl,
                     method: .post,
                     parameters: [
                         "key": resourceOptions.key,
@@ -86,19 +121,24 @@ class HydraXParser: VideoProviderParser {
                 ) .responseData { callback($0.value, $0.error) }
             }
         } .then {
-            resourceResponseData in
-            let resource = try JSONDecoder().decode(
-                ResourceResponse.self,
-                from: resourceResponseData
-            )
-            let target = try URL(string: resource.link).tryUnwrap()
-            return BasicPlaybackMedia(
-                url: target,
-                parent: episode,
-                contentType: "application/vnd.apple.mpegurl",
-                headers: [:],
-                isAggregated: true
-            )
+            try self.decodePlaybackMedia(withResponseData: $0, episode: episode)
         } .handle(handler)
+    }
+    
+    /// Decode the generic resource response data into a valid `BasicPlaybackMedia`
+    private func decodePlaybackMedia(withResponseData resourceResponseData: Data, episode: Episode) throws -> PlaybackMedia {
+        let resource = try JSONDecoder().decode(
+            ResourceResponse.self,
+            from: resourceResponseData
+        )
+        let target = try URL(string: resource.link).tryUnwrap()
+        Log.info("(HydraX Parser) found asset at %@", target.absoluteString)
+        return BasicPlaybackMedia(
+            url: target,
+            parent: episode,
+            contentType: "application/vnd.apple.mpegurl",
+            headers: [:],
+            isAggregated: true
+        )
     }
 }

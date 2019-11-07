@@ -208,7 +208,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.collections.collection" id="onp-Fz-weq" customClass="LibraryCollectionCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="18" y="248" width="339" height="55"/>
+                                <rect key="frame" x="37.5" y="248" width="339" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UJz-wg-fb4">
                                     <rect key="frame" x="0.0" y="0.0" width="339" height="55"/>
@@ -287,6 +287,73 @@
                                     <outlet property="collectionLabel" destination="gd7-dn-WhG" id="jpi-TN-pOE"/>
                                     <outlet property="detailAccessoryImageView" destination="V5d-ET-uTx" id="Ona-o5-QoM"/>
                                     <outlet property="seperatorLine" destination="PH4-TR-9T0" id="F9w-dL-Nup"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.tips.subscribed" id="itV-Wi-XJX" customClass="LibraryTipSubscriptionAvailableCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="18" y="313" width="379" height="139"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="T1p-Qo-2Aq">
+                                    <rect key="frame" x="0.0" y="0.0" width="379" height="139"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="New Episodes Available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-2p-G89">
+                                            <rect key="frame" x="12" y="20" width="355" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="2 anime you're subscribing have new episodes available. Stream now in your subscription list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-ad-XH8">
+                                            <rect key="frame" x="12" y="44.5" width="355" height="37.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-pC-tBH" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                            <rect key="frame" x="159.5" y="94" width="60" height="29"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="7Hc-q9-Bx6"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <state key="normal" title="View"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="inverted" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="15"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="cPt-ad-XH8" firstAttribute="trailing" secondItem="AKI-2p-G89" secondAttribute="trailing" id="DX5-wo-Nwi"/>
+                                        <constraint firstItem="cPt-ad-XH8" firstAttribute="leading" secondItem="AKI-2p-G89" secondAttribute="leading" id="H3o-uX-xg1"/>
+                                        <constraint firstItem="Q1L-pC-tBH" firstAttribute="top" secondItem="cPt-ad-XH8" secondAttribute="bottom" constant="12" id="IRq-Sx-iRX"/>
+                                        <constraint firstItem="Q1L-pC-tBH" firstAttribute="centerX" secondItem="T1p-Qo-2Aq" secondAttribute="centerX" id="L8J-R1-IUY"/>
+                                        <constraint firstAttribute="bottom" secondItem="Q1L-pC-tBH" secondAttribute="bottom" constant="16" id="RxL-6A-7JL"/>
+                                        <constraint firstItem="AKI-2p-G89" firstAttribute="leading" secondItem="T1p-Qo-2Aq" secondAttribute="leading" constant="12" id="aBq-PM-ttP"/>
+                                        <constraint firstItem="AKI-2p-G89" firstAttribute="top" secondItem="T1p-Qo-2Aq" secondAttribute="top" constant="20" id="ggg-p0-vX4"/>
+                                        <constraint firstItem="cPt-ad-XH8" firstAttribute="top" secondItem="AKI-2p-G89" secondAttribute="bottom" constant="4" id="i0u-F8-3bQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="AKI-2p-G89" secondAttribute="trailing" constant="12" id="mlg-Zb-Pa5"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="379" height="139"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="descriptionLabel" destination="cPt-ad-XH8" id="39y-kT-H4z"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
