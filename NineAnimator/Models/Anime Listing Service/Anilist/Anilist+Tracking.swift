@@ -60,11 +60,14 @@ extension Anilist {
     }
     
     func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
-        // Make GraphQL mutation request
+        // Make GraphQL mutation request and save the new tracking state if
+        // succeeded.
+        // swiftlint:disable multiline_arguments
         mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
             "progress": newTracking.currentProgress
-        ])
+        ]) { if $0 { self._mediaTrackingMap[reference] = newTracking } }
+        // swiftlint:enable multiline_arguments
     }
     
     /// Update a tracking state for a particular reference

@@ -47,8 +47,13 @@ class LibraryRecentsCategoryController: MinFilledCollectionViewController, Libra
 // MARK: - Data Loading
 extension LibraryRecentsCategoryController {
     private func reloadRecentLinks() {
+        let shouldAnimate = self.cachedRecentAnime.isEmpty
         self.cachedRecentAnime = NineAnimator.default.user.recentAnimes
-        self.collectionView.reloadData()
+        
+        // Send message to the collection view
+        if shouldAnimate {
+            self.collectionView.reloadSections([ 0 ])
+        } else { self.collectionView.reloadData() }
     }
 }
 

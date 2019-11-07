@@ -19,9 +19,11 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class LibraryDownloadsCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
+    private var statefulAnimeMap = [AnimeLink]()
+    
+    private var selectedAnimeLink: AnimeLink?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,34 +32,92 @@ class LibraryDownloadsCategoryController: MinFilledCollectionViewController, Lib
             alwaysFillLine: false,
             minimalSize: .init(width: 300, height: 110)
         )
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
+        
+        // Listen to state update
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onOfflineProgressUpdate(_:)),
+            name: .offlineAccessStateDidUpdate,
+            object: nil
+        )
     }
     
-    // MARK: UICollectionViewDataSource
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Initialize stateful anime pool
+        let currentStatefulLinks = OfflineContentManager.shared.statefulAnime
+        let shouldAnimate = statefulAnimeMap.count != currentStatefulLinks.count
+        statefulAnimeMap = currentStatefulLinks
+        
+        // Animate/reload collection view
+        if shouldAnimate {
+            collectionView.reloadSections([ 0 ])
+        } else { collectionView.reloadData() }
+    }
+}
 
+// MARK: - Data Fetching
+extension LibraryDownloadsCategoryController {
+    func updateStatefulAnime() {
+        statefulAnimeMap = OfflineContentManager.shared.statefulAnime
+    }
+    
+    @objc private func onOfflineProgressUpdate(_ notification: Notification) {
+        DispatchQueue.main.async {
+            [weak self] in
+            // Obtain the `OfflineEpisodeContent` object
+            guard let content = notification.object as? OfflineEpisodeContent,
+                let self = self else {
+                return
+            }
+            
+            // Only updating cells that are visible
+            let correspondingStatefulAnimeLink = content.episodeLink.parent
+            for cell in self.collectionView.visibleCells {
+                if let cell = cell as? LibraryDownloadingAnimeCell,
+                    cell.animeLink == correspondingStatefulAnimeLink {
+                    cell.updateStates()
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Data Source & Delegate
+extension LibraryDownloadsCategoryController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return section == 0 ? statefulAnimeMap.count : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "downloads.cell",
+            for: indexPath
+        ) as! LibraryDownloadingAnimeCell
+        cell.setPresenting(statefulAnimeMap[indexPath.item])
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        selectedAnimeLink = statefulAnimeMap[indexPath.item]
+        performSegue(withIdentifier: "downloads.show", sender: cell)
+    }
+}
+
+// MARK: - Navigation
+extension LibraryDownloadsCategoryController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Initialize the OfflineAnimeViewController
+        if let destination = segue.destination as? OfflineAnimeViewController,
+            let selectedAnimeLink = selectedAnimeLink {
+            destination.setPresenting(anime: selectedAnimeLink)
+        }
     }
 }
 

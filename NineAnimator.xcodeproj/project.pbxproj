@@ -101,6 +101,7 @@
 		2C480017237072A000ADB03F /* LibraryRecentAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480016237072A000ADB03F /* LibraryRecentAnimeCell.swift */; };
 		2C480019237078C500ADB03F /* TimeInterval+DurationDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C480018237078C500ADB03F /* TimeInterval+DurationDescription.swift */; };
 		2C48001D2370B9CC00ADB03F /* MinFilledCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48001C2370B9CC00ADB03F /* MinFilledCollectionViewController.swift */; };
+		2C48001F2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C48001E2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift */; };
 		2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */; };
 		2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5721B5881E009B4D47 /* Main.storyboard */; };
 		2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */; };
@@ -448,6 +449,7 @@
 		2C480016237072A000ADB03F /* LibraryRecentAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRecentAnimeCell.swift; sourceTree = "<group>"; };
 		2C480018237078C500ADB03F /* TimeInterval+DurationDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+DurationDescription.swift"; sourceTree = "<group>"; };
 		2C48001C2370B9CC00ADB03F /* MinFilledCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledCollectionViewController.swift; sourceTree = "<group>"; };
+		2C48001E2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryDownloadingAnimeCell.swift; sourceTree = "<group>"; };
 		2C4817A421DB2A210092F694 /* notification_example.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = notification_example.jpg; sourceTree = "<group>"; };
 		2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = subscribe_recent_tab.jpg; sourceTree = "<group>"; };
 		2C4817A721DB2F320092F694 /* xcode_select_device.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xcode_select_device.jpg; sourceTree = "<group>"; };
@@ -1233,6 +1235,7 @@
 				2C90C6A5236F98C600C18620 /* LibraryTrackingReferenceCell.swift */,
 				2C90C6A3236F988100C18620 /* LibraryUntrackedReferenceCell.swift */,
 				2C480016237072A000ADB03F /* LibraryRecentAnimeCell.swift */,
+				2C48001E2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift */,
 			);
 			path = "Library Scene";
 			sourceTree = "<group>";
@@ -2074,6 +2077,7 @@
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2CA1DD4521E1B765009241CB /* NineAnime+StreamParser.swift in Sources */,
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,
+				2C48001F2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift in Sources */,
 				2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */,
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,

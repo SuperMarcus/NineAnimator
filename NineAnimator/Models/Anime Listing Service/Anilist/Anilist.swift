@@ -210,16 +210,18 @@ extension Anilist {
         }
     }
     
-    func mutationGraphQL(fileQuery name: String, variables: [String: CustomStringConvertible]) {
+    func mutationGraphQL(fileQuery name: String, variables: [String: CustomStringConvertible], onCompletion: ((Bool) -> Void)? = nil) {
         let task = graphQL(fileQuery: name, variables: variables)
         .error {
             [unowned self] in
             Log.error("[AniList.co] Unable to update: %@", $0)
             self.cleanupReferencePool()
+            onCompletion?(false)
         } .finally {
             [unowned self] _ in
             Log.info("[AniList.co] Mutation made")
             self.cleanupReferencePool()
+            onCompletion?(true)
         }
         _mutationRequestReferencePool.append(task)
     }
