@@ -19,20 +19,16 @@
 
 import UIKit
 
-class LibraryCollectionsHeaderView: UICollectionReusableView {
-    /// The source that this section is presenting
-    private(set) unowned var source: LibrarySceneController.CollectionSource?
-    
+class LibraryHeaderView: UICollectionReusableView {
     @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private weak var sourceTitleLabel: UILabel!
     
-    func setPresenting(_ source: LibrarySceneController.CollectionSource) {
-        self.source = source
-        sourceTitleLabel.text = source.name
+    func setPresenting(_ title: String) {
+        self.sourceTitleLabel.text = title
     }
     
-    func updateState(_ result: Result<[LibrarySceneController.Collection], Error>?) {
-        if result == nil {
+    func updateState(isLoading: Bool) {
+        if isLoading {
             activityIndicator.isHidden = false
             activityIndicator.startAnimating()
         } else {

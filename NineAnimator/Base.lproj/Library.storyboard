@@ -42,7 +42,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.categories.category" id="Sah-kO-SHB" customClass="LibraryCategoryCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="109" y="68" width="196" height="111"/>
+                                <rect key="frame" x="18" y="97.5" width="196" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QW1-Rv-UJB">
                                     <rect key="frame" x="0.0" y="0.0" width="196" height="111"/>
@@ -120,8 +120,95 @@
                                     <outlet property="categoryNameLabel" destination="Hqe-wC-5AE" id="nyN-44-WO3"/>
                                 </connections>
                             </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.visited" id="Os7-ql-d1e" customClass="LibraryRecentlyWatchedCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="296" y="68" width="100" height="170"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="9Me-aR-kjw">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="170"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="uAD-2A-9ga">
+                                            <rect key="frame" x="4" y="130" width="92" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="WPr-Ow-qZ3"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-pm-gnC">
+                                            <rect key="frame" x="5" y="0.0" width="90" height="122"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="sWf-pm-gnC" secondAttribute="height" multiplier="85:115" id="jnD-wr-sp3"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <visualEffectView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ER-sy-EUC">
+                                            <rect key="frame" x="13" y="94" width="74" height="20"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mEZ-gZ-LjC">
+                                                <rect key="frame" x="0.0" y="0.0" width="74" height="20"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ep. 13" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bWz-e8-tcA">
+                                                        <rect key="frame" x="0.0" y="0.0" width="74" height="20"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="bWz-e8-tcA" secondAttribute="trailing" id="12h-hg-orD"/>
+                                                    <constraint firstItem="bWz-e8-tcA" firstAttribute="leading" secondItem="mEZ-gZ-LjC" secondAttribute="leading" id="PDr-Zn-toU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="bWz-e8-tcA" secondAttribute="bottom" id="oN1-E8-a3p"/>
+                                                    <constraint firstItem="bWz-e8-tcA" firstAttribute="top" secondItem="mEZ-gZ-LjC" secondAttribute="top" id="vCC-lG-c2d"/>
+                                                </constraints>
+                                            </view>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="20" id="maJ-CK-yoK"/>
+                                            </constraints>
+                                            <blurEffect style="regular"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="8"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="9ER-sy-EUC" firstAttribute="leading" secondItem="sWf-pm-gnC" secondAttribute="leading" constant="8" id="0kL-zE-Zks"/>
+                                        <constraint firstAttribute="bottom" secondItem="uAD-2A-9ga" secondAttribute="bottom" constant="4" id="1t4-Tv-dCI"/>
+                                        <constraint firstAttribute="trailing" secondItem="uAD-2A-9ga" secondAttribute="trailing" constant="4" id="989-g3-DOF"/>
+                                        <constraint firstItem="sWf-pm-gnC" firstAttribute="centerX" secondItem="9Me-aR-kjw" secondAttribute="centerX" id="Iq0-r9-BAK"/>
+                                        <constraint firstItem="sWf-pm-gnC" firstAttribute="top" secondItem="9Me-aR-kjw" secondAttribute="top" id="PJw-Hz-TSF"/>
+                                        <constraint firstItem="uAD-2A-9ga" firstAttribute="top" secondItem="sWf-pm-gnC" secondAttribute="bottom" constant="8" id="dJ2-eW-Z4D"/>
+                                        <constraint firstItem="9ER-sy-EUC" firstAttribute="trailing" secondItem="sWf-pm-gnC" secondAttribute="trailing" constant="-8" id="ocR-B2-gwB"/>
+                                        <constraint firstItem="uAD-2A-9ga" firstAttribute="leading" secondItem="9Me-aR-kjw" secondAttribute="leading" constant="4" id="uYw-YO-yw8"/>
+                                        <constraint firstItem="9ER-sy-EUC" firstAttribute="bottom" secondItem="sWf-pm-gnC" secondAttribute="bottom" constant="-8" id="z0u-ZY-jb6"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="100" height="170"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="animeTitleLabel" destination="uAD-2A-9ga" id="hdS-y2-hrW"/>
+                                    <outlet property="artworkImageView" destination="sWf-pm-gnC" id="KGq-NH-78L"/>
+                                    <outlet property="progressLabel" destination="bWz-e8-tcA" id="Z4F-4t-L9A"/>
+                                </connections>
+                            </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.collections.collection" id="onp-Fz-weq" customClass="LibraryCollectionCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="37.5" y="189" width="339" height="55"/>
+                                <rect key="frame" x="18" y="248" width="339" height="55"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="UJz-wg-fb4">
                                     <rect key="frame" x="0.0" y="0.0" width="339" height="55"/>
@@ -203,7 +290,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.collections.header" id="JES-47-qea" customClass="LibraryCollectionsHeaderView" customModule="NineAnimator" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.collections.header" id="JES-47-qea" customClass="LibraryHeaderView" customModule="NineAnimator" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="8" width="414" height="50"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>

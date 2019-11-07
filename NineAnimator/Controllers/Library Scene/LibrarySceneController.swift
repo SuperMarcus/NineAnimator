@@ -26,6 +26,9 @@ class LibrarySceneController: MinFilledCollectionViewController {
     /// List of categories
     private(set) var categories = [Category]()
     
+    /// List of recently watched anime
+    private var cachedRecentlyWatchedList = [AnimeLink]()
+    
     /// States of each collections
     private lazy var collectionStates = [Result<[Collection], Error>?](
         repeating: nil,
@@ -44,14 +47,18 @@ class LibrarySceneController: MinFilledCollectionViewController {
     /// The collection that is currently being selected
     private var selectedCollection: Collection?
     
+    /// Background task for loading the most recently watched anime list
+    private var recentlyWatchedListLoadingTask: NineAnimatorAsyncTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Initialize the Min Filled Layout
         setLayoutParameters(
             alwaysFillLine: true,
-            minimalSize: .init(width: 140, height: 90),
-            .init(width: 300, height: 56)
+            minimalSize: .init(width: 140, height: 90), // Categories
+            .init(width: 100, height: 170), // Recently Watched
+            .init(width: 300, height: 56) // Collections
         )
         
         // Configure scroll edge appearance so it looks a little better?
@@ -63,6 +70,20 @@ class LibrarySceneController: MinFilledCollectionViewController {
         
         initializeCategories()
         loadCollections(failedOnly: false)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Update category cells labbels
+        for visibleCell in collectionView.visibleCells {
+            if let visibleCell = visibleCell as? LibraryCategoryCell {
+                visibleCell.updateLabels()
+            }
+        }
+        
+        // Update the quick access list to the recently watched anime
+        self.reloadRecentAnime()
     }
 }
 
@@ -110,6 +131,39 @@ extension LibrarySceneController {
             sectionIndex(forCollectionSource: offset)
         ])
     }
+    
+    /// Load the set of recently watched anime
+    private func reloadRecentAnime() {
+        // Do not attempt to reload if there's an unfinished task
+        guard recentlyWatchedListLoadingTask == nil else { return }
+        
+        // Run the task in the background so it doesn't block the main thread
+        recentlyWatchedListLoadingTask = NineAnimatorPromise.firstly {
+            [maximalNumberOfRecentlyWatched] () -> [AnimeLink] in
+            // Load 6 recently watch anime
+            let browsingHistory = NineAnimator.default.user.recentAnimes
+            let sortedRecordMap = browsingHistory.compactMap {
+                anime -> (AnimeLink, TrackingContext.PlaybackProgressRecord)? in
+                let context = NineAnimator.default.trackingContext(for: anime)
+                if let record = context.mostRecentRecord {
+                    return (anime, record)
+                } else { return nil }
+            } .sorted { $0.1.enqueueDate > $1.1.enqueueDate }
+            return sortedRecordMap[0..<min(maximalNumberOfRecentlyWatched, sortedRecordMap.count)].map {
+                $0.0
+            }
+        } .dispatch(on: .main).error {
+            [weak self] error in
+            Log.error("[LibrarySceneController] THIS SHOULD NOT HAPPEN - Finished loading recently watched list with an error: %@", error)
+            self?.recentlyWatchedListLoadingTask = nil
+        } .finally {
+            [weak self] results in
+            guard let self = self else { return }
+            self.cachedRecentlyWatchedList = results
+            self.collectionView.reloadSections([ Section.recentlyWatched.rawValue ])
+            self.recentlyWatchedListLoadingTask = nil
+        }
+    }
 }
 
 // MARK: - Data Source
@@ -121,6 +175,7 @@ extension LibrarySceneController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.from(section) {
         case .categories: return categories.count
+        case .recentlyWatched: return cachedRecentlyWatchedList.count
         case .collection:
             if let state = collectionState(forSection: section) {
                 switch state {
@@ -142,6 +197,13 @@ extension LibrarySceneController {
             ) as! LibraryCategoryCell
             cell.setPresenting(categories[indexPath.item])
             return cell
+        case .recentlyWatched:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "library.visited",
+                for: indexPath
+            ) as! LibraryRecentlyWatchedCell
+            cell.setPresenting(cachedRecentlyWatchedList[indexPath.item])
+            return cell
         case .collection:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "library.collections.collection",
@@ -162,6 +224,11 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         switch Section.from(section) {
         case .categories: return .zero
+        case .recentlyWatched:
+            return cachedRecentlyWatchedList.isEmpty ? .zero : .init(
+                width: collectionView.bounds.width,
+                height: defaultCollectionHeaderHeight
+            )
         case .collection:
             let provider = collectionSource(forSection: section)
             return provider.shouldPresentInLibrary ? .init(
@@ -178,6 +245,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
         case .categories: return 15
+        case .recentlyWatched: return 10
         case .collection: return 0
         }
     }
@@ -185,6 +253,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
         case .categories: return 15
+        case .recentlyWatched: return 10
         case .collection: return 0
         }
     }
@@ -192,6 +261,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch Section.from(section) {
         case .categories: return .init(top: 10, left: 10, bottom: 10, right: 10)
+        case .recentlyWatched: return .init(top: 0, left: 10, bottom: 10, right: 10)
         case .collection: return .init(top: 0, left: 10, bottom: 5, right: 10)
         }
     }
@@ -201,13 +271,18 @@ extension LibrarySceneController {
             ofKind: kind,
             withReuseIdentifier: "library.collections.header",
             for: indexPath
-        ) as! LibraryCollectionsHeaderView
+        ) as! LibraryHeaderView
         
         switch Section.from(indexPath.section) {
         case .categories: break
+        case .recentlyWatched:
+            if !cachedRecentlyWatchedList.isEmpty {
+                cell.setPresenting("Recently Watched")
+                cell.updateState(isLoading: false)
+            }
         case .collection:
             let collectionProvider = collectionSource(forSection: indexPath.section)
-            cell.setPresenting(collectionProvider)
+            cell.setPresenting(collectionProvider.name)
         }
         
         return cell
@@ -215,7 +290,7 @@ extension LibrarySceneController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if let cell = cell as? LibraryCollectionCell {
-            if let cellParameters = layoutHelper.layoutParameters(forIndex: indexPath) {
+            if let cellParameters = layoutHelper.layoutParameters(forIndex: indexPath, inCollection: collectionView) {
                 cell.updateApperance(baseOff: cellParameters)
             }
         }
@@ -225,8 +300,11 @@ extension LibrarySceneController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
         if elementKind == UICollectionView.elementKindSectionHeader,
-            let view = view as? LibraryCollectionsHeaderView {
-            view.updateState(collectionState(forSection: indexPath.section))
+            Section.from(indexPath.section) == .collection,
+            let view = view as? LibraryHeaderView {
+            view.updateState(
+                isLoading: collectionState(forSection: indexPath.section) == nil
+            )
         }
     }
     
@@ -240,6 +318,12 @@ extension LibrarySceneController {
             let category = categories[indexPath.item]
             self.selectedCategory = category
             performSegue(withIdentifier: category.segueIdentifier, sender: cell)
+        case .recentlyWatched:
+            let anime = cachedRecentlyWatchedList[indexPath.item]
+            RootViewController.shared?.open(
+                immedietly: .anime(anime),
+                in: self
+            )
         case .collection:
             let collection = self.collection(atPath: indexPath)
             self.selectedCollection = collection
@@ -250,6 +334,13 @@ extension LibrarySceneController {
     func minFilledLayout(_ collectionView: UICollectionView, didLayout indexPath: IndexPath, withParameters parameters: MinFilledFlowLayoutHelper.LayoutParameters) {
         if let cell = collectionView.cellForItem(at: indexPath) as? LibraryCollectionCell {
             cell.updateApperance(baseOff: parameters)
+        }
+    }
+    
+    func minFilledLayout(_ collectionView: UICollectionView, shouldFillLineForSection section: Int) -> Bool {
+        switch Section.from(section) {
+        case .recentlyWatched: return false
+        default: return true
         }
     }
 }
@@ -286,6 +377,9 @@ extension LibrarySceneController {
     enum Section: Int {
         /// The categories listed at the first section of the Library
         case categories
+        
+        /// A number of recently watched anime
+        case recentlyWatched
         
         /// Collections from the `TrackingService`s
         case collection
@@ -346,6 +440,9 @@ extension LibrarySceneController {
     
     /// Hight for the collections headers
     var defaultCollectionHeaderHeight: CGFloat { return 50 }
+    
+    /// Number of recently watched anime to be shown
+    var maximalNumberOfRecentlyWatched: Int { return 6 }
     
     /// Retrieve the CollectionSource for the section
     func collectionSource(forSection section: Int) -> CollectionSource {
