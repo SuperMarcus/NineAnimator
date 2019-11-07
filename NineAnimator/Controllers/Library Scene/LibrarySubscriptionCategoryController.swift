@@ -19,9 +19,9 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
+    private var cachedWatchedAnimeItems = [AnyLink]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,34 +30,48 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
             alwaysFillLine: false,
             minimalSize: .init(width: 300, height: 110)
         )
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
     }
     
-    // MARK: UICollectionViewDataSource
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        cachedWatchedAnimeItems = NineAnimator.default.user.subscribedAnimes.map {
+            .anime($0)
+        }
+        collectionView.reloadData()
+    }
+}
 
+// MARK: - Delegate and Data Source
+extension LibrarySubscriptionCategoryController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        return cachedWatchedAnimeItems.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "subscribed.cell",
+            for: indexPath
+        ) as! LibrarySubscriptionCell
+        let link = cachedWatchedAnimeItems[indexPath.item]
+        cell.setPresenting(link)
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let cell = cell as? LibrarySubscriptionCell {
+            cell.updateSubtitleInformation()
+        }
+        cell.makeThemable()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let link = cachedWatchedAnimeItems[indexPath.item]
+        RootViewController.shared?.open(immedietly: link, in: self)
     }
 }
 

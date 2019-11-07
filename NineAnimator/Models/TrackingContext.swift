@@ -410,13 +410,19 @@ extension TrackingContext {
         previousSessionServer = currentSessionServer
     }
     
-    /// Infer the episode number based on the name of the episode
+    /// Infer the episode number from the `EpisodeLink`
     func suggestingEpisodeNumber(for episodeLink: EpisodeLink) -> Int? {
         // Conventionally in NineAnimator, the episode number always prefixes
         // the episode name with the rest of the name seperated by a space and
         // a dash (e.g. 01 - Episode Name)
         let episodeName = episodeLink.name
         
+        // Call the name-based infer method
+        return suggestingEpisodeNumber(forEpisodeName: episodeName)
+    }
+    
+    /// Infer the episode number based on the name of the episode
+    func suggestingEpisodeNumber(forEpisodeName episodeName: String) -> Int? {
         // Get the prefix section
         guard let episodeNamePrefixSection = episodeName.split(separator: " ").first else {
             return nil
