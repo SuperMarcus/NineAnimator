@@ -151,7 +151,8 @@ extension UserNotificationManager {
     func retrive(for anime: AnimeLink) -> WatchedAnime? {
         do {
             let persistUrl = self.url(for: anime)
-            if try persistUrl.checkResourceIsReachable() {
+            if FileManager.default.fileExists(atPath: persistUrl.path),
+                try persistUrl.checkResourceIsReachable() {
                 let serializedWatcher = try Data(contentsOf: persistUrl)
                 let decoer = PropertyListDecoder()
                 return try decoer.decode(WatchedAnime.self, from: serializedWatcher)
@@ -478,17 +479,18 @@ extension UserNotificationManager {
 // MARK: - Notification identifiers/File Name paths
 extension String {
     static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
-        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(anime.link.hashValue)"
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
+        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(linkHashRepresentation)"
     }
     
     static func animePersistFilenameComponent(_ anime: AnimeLink) -> String {
-        // As short as possible
-        let linkHashRepresentation = String(anime.link.hashValue, radix: 36, uppercase: true)
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.anime.\(linkHashRepresentation).plist"
     }
     
     static func cachedPosterFilenameComponent(_ anime: AnimeLink) -> String {
-        let linkHashRepresentation = String(anime.link.hashValue, radix: 36, uppercase: true)
+        
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.poster.\(linkHashRepresentation).jpg"
     }
 }
