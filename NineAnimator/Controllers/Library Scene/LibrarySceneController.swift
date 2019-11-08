@@ -175,9 +175,10 @@ extension LibrarySceneController {
     
     /// Add and present the tip
     func addTip(_ tip: Tip) {
-        let insertingIndex = IndexPath(item: tips.count, section: Section.tips.rawValue)
-        tips.append(tip)
-        collectionView.insertItems(at: [ insertingIndex ])
+        tips.insert(tip, at: 0)
+        collectionView.insertItems(at: [
+            .init(item: 0, section: Section.tips.rawValue)
+        ])
     }
     
     /// Remove the tip with the predicate
@@ -412,6 +413,7 @@ extension LibrarySceneController {
     func minFilledLayout(_ collectionView: UICollectionView, shouldFillLineForSection section: Int) -> Bool {
         switch Section.from(section) {
         case .recentlyWatched: return false
+        case .tips: return false
         default: return true
         }
     }

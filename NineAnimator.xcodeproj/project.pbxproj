@@ -298,7 +298,7 @@
 		2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */; };
 		2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */; };
 		2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */; };
-		2CE18B102374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0F2374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift */; };
+		2CE18B102374C7ED00771A16 /* LibraryTipGenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */; };
 		2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */; };
 		2CE1F84822EEB9E6005448FF /* VideoProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */; };
 		2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */; };
@@ -326,6 +326,7 @@
 		2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */; };
 		2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC21A1220917D200A30F4F /* Promise+Fail.swift */; };
 		2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */; };
+		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
 		2CFDDFA0236B1DF000C2D89A /* ModelMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */; };
 		2CFE2D98227D379200030B1F /* Anilist+CalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */; };
 		2CFE2DA0227D441700030B1F /* DictionaryDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D9A227D441700030B1F /* DictionaryDecoder.swift */; };
@@ -673,7 +674,7 @@
 		2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorCloud.swift; sourceTree = "<group>"; };
 		2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySubscriptionCell.swift; sourceTree = "<group>"; };
 		2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRecentlyWatchedCell.swift; sourceTree = "<group>"; };
-		2CE18B0F2374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipSubscriptionAvailableCell.swift; sourceTree = "<group>"; };
+		2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipGenericCell.swift; sourceTree = "<group>"; };
 		2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibrarySceneController+Tips.swift"; sourceTree = "<group>"; };
 		2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderRegistry.swift; sourceTree = "<group>"; };
 		2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlaybackMedia.swift; sourceTree = "<group>"; };
@@ -718,6 +719,7 @@
 		2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+StringMatches.swift"; sourceTree = "<group>"; };
 		2CEC21A1220917D200A30F4F /* Promise+Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Promise+Fail.swift"; sourceTree = "<group>"; };
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
+		2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipImagedCell.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
 		2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMigrator.swift; sourceTree = "<group>"; };
 		2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+CalendarProvider.swift"; sourceTree = "<group>"; };
@@ -1246,7 +1248,8 @@
 				2C48001E2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift */,
 				2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */,
 				2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */,
-				2CE18B0F2374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift */,
+				2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */,
+				2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */,
 			);
 			path = "Library Scene";
 			sourceTree = "<group>";
@@ -2113,7 +2116,7 @@
 				2C8536872231D42C00A5CFB9 /* WeakRef.swift in Sources */,
 				2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */,
 				2C3D7BFD2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift in Sources */,
-				2CE18B102374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift in Sources */,
+				2CE18B102374C7ED00771A16 /* LibraryTipGenericCell.swift in Sources */,
 				2C1C717B2219046700760A69 /* ListingAnime+InitializeFromEntry.swift in Sources */,
 				2C6984E9227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift in Sources */,
 				2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */,
@@ -2140,6 +2143,7 @@
 				2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */,
 				2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */,
 				2C0E755322622DD600DF3AC4 /* DiscoverySceneViewController.swift in Sources */,
+				2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */,
 				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */,

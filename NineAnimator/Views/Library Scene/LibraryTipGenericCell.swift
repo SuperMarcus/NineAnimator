@@ -20,20 +20,17 @@
 import Kingfisher
 import UIKit
 
-class LibraryTipSubscriptionAvailableCell: UICollectionViewCell {
+class LibraryTipGenericCell: UICollectionViewCell {
     @IBOutlet private weak var descriptionLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
     
     private(set) var presentingLinks: [AnimeLink]?
     
-    func setPresenting(_ updatedAnimeLinks: [AnimeLink]) {
-        self.presentingLinks = updatedAnimeLinks
-        let updatedCount = updatedAnimeLinks.count
-        if updatedCount == 1,
-            let updatedAnime = updatedAnimeLinks.first {
-            descriptionLabel.text = "A new episode of \(updatedAnime.title) is now available. Stream now from \(updatedAnime.source.name)."
-        } else {
-            descriptionLabel.text = "\(updatedAnimeLinks.count) anime you've subscribed have new episodes available and \(updatedCount > 1 ? "are" : "is") now available for streaming."
-        }
+    static let reuseIdentifier = "library.tips.generic"
+    
+    func setPresenting(title: String, description: String) {
+        descriptionLabel.text = description
+        titleLabel.text = title
     }
     
     override var isHighlighted: Bool {

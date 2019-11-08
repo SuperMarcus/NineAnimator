@@ -39,7 +39,8 @@ class BaseListingService: SessionDelegate {
                     .appendingPathComponent("\(identifier).plist")
                 
                 // Unserialize if the file exists
-                if (try? propertyPersistentFile.checkResourceIsReachable()) == true {
+                if FileManager.default.fileExists(atPath: propertyPersistentFile.path),
+                    (try? propertyPersistentFile.checkResourceIsReachable()) == true {
                     let persistedPropertiesData = try Data(contentsOf: propertyPersistentFile)
                     if let decodedProperties = try PropertyListSerialization.propertyList(
                             from: persistedPropertiesData,

@@ -26,6 +26,10 @@ class NineAnimatorError: NSError {
     class var lastItemInQueueError: LastItemInQueueError { return LastItemInQueueError() }
     class var unknownError: UnknownError { return UnknownError() }
     
+    class func decodeError(_ info: String? = nil) -> DecodeError {
+        return DecodeError(info)
+    }
+    
     class func responseError(_ failiureReason: String) -> ResponseError {
         return ResponseError(failiureReason)
     }
@@ -218,8 +222,12 @@ extension NineAnimatorError {
     /// Representing an error which NineAnimator cannot decode a
     /// previously persisted file or self-generated data.
     class DecodeError: NineAnimatorError {
-        init(userInfo: [String: Any]? = nil) {
-            super.init(6, message: "A required value cannot be read", userInfo: userInfo)
+        init(_ info: String? = nil, userInfo: [String: Any]? = nil) {
+            let message: String
+            if let info = info {
+                message = "A required value (\(info)) cannot be read"
+            } else { message = "A required value cannot be read" }
+            super.init(6, message: message, userInfo: userInfo)
         }
         
         required init?(coder aDecoder: NSCoder) {

@@ -289,16 +289,16 @@
                                     <outlet property="seperatorLine" destination="PH4-TR-9T0" id="F9w-dL-Nup"/>
                                 </connections>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.tips.subscribed" id="itV-Wi-XJX" customClass="LibraryTipSubscriptionAvailableCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="18" y="313" width="379" height="139"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.tips.generic" id="itV-Wi-XJX" customClass="LibraryTipGenericCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="57" y="313" width="300" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="T1p-Qo-2Aq">
-                                    <rect key="frame" x="0.0" y="0.0" width="379" height="139"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="New Episodes Available" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-2p-G89">
-                                            <rect key="frame" x="12" y="20" width="355" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Tip Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKI-2p-G89">
+                                            <rect key="frame" x="12" y="20" width="276" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                             <userDefinedRuntimeAttributes>
@@ -306,8 +306,9 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="2 anime you're subscribing have new episodes available. Stream now from your subscription list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-ad-XH8">
-                                            <rect key="frame" x="12" y="44.5" width="355" height="37.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-ad-XH8">
+                                            <rect key="frame" x="12" y="44.5" width="276" height="48.5"/>
+                                            <string key="text">This tip helps you with common things in the NineAnimator application, such as viewing a newly available episode or reviewing downloading tasks.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -317,7 +318,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-pC-tBH" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="159.5" y="94" width="60" height="29"/>
+                                            <rect key="frame" x="120" y="105" width="60" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="7Hc-q9-Bx6"/>
                                             </constraints>
@@ -344,7 +345,7 @@
                                         <constraint firstAttribute="trailing" secondItem="AKI-2p-G89" secondAttribute="trailing" constant="12" id="mlg-Zb-Pa5"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="379" height="139"/>
+                                <size key="customSize" width="300" height="150"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -354,6 +355,55 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="descriptionLabel" destination="cPt-ad-XH8" id="39y-kT-H4z"/>
+                                    <outlet property="titleLabel" destination="AKI-2p-G89" id="CH8-Ji-ey4"/>
+                                </connections>
+                            </collectionViewCell>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="library.tips.imaged" id="1e5-jA-o7u" customClass="LibraryTipImagedCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="18" y="473" width="300" height="150"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Mz6-qS-COT">
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" horizontalCompressionResistancePriority="500" image="NineAnimator Lists Tip" translatesAutoresizingMaskIntoConstraints="NO" id="3ri-wM-rho">
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="105"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sX1-Bt-afy">
+                                            <rect key="frame" x="0.0" y="105" width="300" height="45"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="9CD-05-hIz"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="sX1-Bt-afy" secondAttribute="trailing" id="NkD-ho-tlH"/>
+                                        <constraint firstItem="3ri-wM-rho" firstAttribute="top" secondItem="Mz6-qS-COT" secondAttribute="top" id="VGq-s4-UTQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="sX1-Bt-afy" secondAttribute="bottom" id="cKr-Kz-tMv"/>
+                                        <constraint firstItem="sX1-Bt-afy" firstAttribute="leading" secondItem="Mz6-qS-COT" secondAttribute="leading" id="gkh-W3-ODG"/>
+                                        <constraint firstAttribute="trailing" secondItem="3ri-wM-rho" secondAttribute="trailing" id="l8z-Qc-jkd"/>
+                                        <constraint firstItem="3ri-wM-rho" firstAttribute="leading" secondItem="Mz6-qS-COT" secondAttribute="leading" id="pzB-hV-g5R"/>
+                                        <constraint firstItem="sX1-Bt-afy" firstAttribute="top" secondItem="3ri-wM-rho" secondAttribute="bottom" id="u24-8c-BGJ"/>
+                                    </constraints>
+                                </collectionViewCellContentView>
+                                <size key="customSize" width="300" height="150"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="tipTitleView" destination="sX1-Bt-afy" id="cHH-nq-w1v"/>
+                                    <outlet property="topImageView" destination="3ri-wM-rho" id="VaZ-LZ-CSy"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -1271,5 +1321,6 @@
     <resources>
         <image name="Expand Icon HD" width="1200" height="1200"/>
         <image name="Library Icon" width="30" height="30"/>
+        <image name="NineAnimator Lists Tip" width="800" height="600"/>
     </resources>
 </document>

@@ -30,6 +30,18 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
             alwaysFillLine: false,
             minimalSize: .init(width: 300, height: 110)
         )
+        
+        // Perform fetch request and update cells
+        UserNotificationManager.default.performFetch {
+            [weak self] _ in DispatchQueue.main.async {
+                guard let self = self else { return }
+                for cell in self.collectionView.visibleCells {
+                    if let cell = cell as? LibrarySubscriptionCell {
+                        cell.updateSubtitleInformation()
+                    }
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

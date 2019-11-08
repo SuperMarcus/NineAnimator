@@ -17,32 +17,24 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import Kingfisher
+import UIKit
 
-extension Dictionary {
-    /// Obtain value with the provided keypath
-    func value(at path: String) -> Any? {
-        return (self as NSDictionary).value(forKeyPath: path)
+class LibraryTipImagedCell: UICollectionViewCell {
+    @IBOutlet private weak var topImageView: UIImageView!
+    @IBOutlet private weak var tipTitleView: UILabel!
+    
+    static let reuseIdentifier = "library.tips.imaged"
+    
+    func setPresenting(imageResource: Kingfisher.Resource, title: String, imageFillMode: UIView.ContentMode = .scaleAspectFill) {
+        topImageView.kf.setImage(with: imageResource)
+        topImageView.contentMode = imageFillMode
+        tipTitleView.text = title
     }
     
-    /// Obtain value at path of a specific type
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(at: path) as? T else {
-            throw NineAnimatorError.decodeError
-        }
-        return v
-    }
-}
-
-extension NSDictionary {
-    func value<T>(at path: String, type: T.Type) throws -> T {
-        guard let v = value(forKeyPath: path) as? T else {
-            throw NineAnimatorError.decodeError(path)
-        }
-        return v
-    }
-    
-    func valueIfPresent<T>(at path: String, type: T.Type) -> T? {
-        return value(forKeyPath: path) as? T
+    func setPresenting(image: UIImage, title: String, imageFillMode: UIView.ContentMode = .scaleAspectFill) {
+        topImageView.image = image
+        topImageView.contentMode = imageFillMode
+        tipTitleView.text = title
     }
 }

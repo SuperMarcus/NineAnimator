@@ -20,22 +20,23 @@
 import UIKit
 
 extension LibrarySceneController {
+    // MARK: - Updated Episode Tip
     class SubscriptionAvailableTip: Tip {
-        private var subscribedAnime: [AnimeLink]
+        private var updatedAnimeLinks: [AnimeLink]
         
         fileprivate init(_ updatedAnime: [AnimeLink]) {
-            self.subscribedAnime = updatedAnime
+            self.updatedAnimeLinks = updatedAnime
             super.init()
         }
         
         fileprivate func updateCollection(_ updated: [AnimeLink]) {
-            self.subscribedAnime = updated
+            self.updatedAnimeLinks = updated
         }
         
         override func onSelection(_ collectionView: UICollectionView, at indexPath: IndexPath, selectedCell: UICollectionViewCell, parent: LibrarySceneController) {
             // Open the anime if there's only one that's updated
-            if subscribedAnime.count == 1,
-                let anime = subscribedAnime.first {
+            if updatedAnimeLinks.count == 1,
+                let anime = updatedAnimeLinks.first {
                 RootViewController.shared?.open(
                     immedietly: .anime(anime),
                     in: parent
@@ -47,11 +48,42 @@ extension LibrarySceneController {
         }
         
         override func setupCell(_ collectionView: UICollectionView, at indexPath: IndexPath, parent: LibrarySceneController) -> UICollectionViewCell {
+            // Obtain a generic cell from the collection view
             let cell =  collectionView.dequeueReusableCell(
-                withReuseIdentifier: "library.tips.subscribed",
+                withReuseIdentifier: LibraryTipGenericCell.reuseIdentifier,
                 for: indexPath
-            ) as! LibraryTipSubscriptionAvailableCell
-            cell.setPresenting(subscribedAnime)
+            ) as! LibraryTipGenericCell
+            
+            // Generate description based on the number of updated anime available
+            let updatedCount = updatedAnimeLinks.count
+            let description: String
+            if updatedCount == 1,
+                let updatedAnime = updatedAnimeLinks.first {
+                description = "A new episode of \(updatedAnime.title) is now available. Stream now from \(updatedAnime.source.name)."
+            } else {
+                description = "\(updatedAnimeLinks.count) anime you've subscribed have new episodes available and \(updatedCount > 1 ? "are" : "is") now available for streaming."
+            }
+            
+            // Initialize the cell with title and description
+            cell.setPresenting(title: "New Episodes Available", description: description)
+            return cell
+        }
+    }
+    
+    // MARK: - Connect with Tracking Services
+    class ConnectWithTrackingServiceTip: Tip {
+        override func onSelection(_ collectionView: UICollectionView, at indexPath: IndexPath, selectedCell: UICollectionViewCell, parent: LibrarySceneController) { }
+        
+        override func setupCell(_ collectionView: UICollectionView, at indexPath: IndexPath, parent: LibrarySceneController) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: LibraryTipImagedCell.reuseIdentifier,
+                for: indexPath
+            ) as! LibraryTipImagedCell
+            cell.setPresenting(
+                image: #imageLiteral(resourceName: "NineAnimator Lists Tip"),
+                title: "Connect with Anime Lists",
+                imageFillMode: .scaleAspectFill
+            )
             return cell
         }
     }
@@ -86,5 +118,15 @@ extension LibrarySceneController {
                     self._subscribedAnimeNotificationRetrivalTask = nil
                 }
         }
+        
+        // Connect with tracking service tip
+        if NineAnimator.default.trackingServices.reduce(0, {
+            $0 + ($1.isCapableOfRetrievingAnimeState ? 1 : 0)
+        }) == 0 {
+            if self.getTip(ofType: ConnectWithTrackingServiceTip.self) == nil {
+                let tip = ConnectWithTrackingServiceTip()
+                self.addTip(tip)
+            }
+        } else { self.removeTips { $0 is ConnectWithTrackingServiceTip } }
     }
 }

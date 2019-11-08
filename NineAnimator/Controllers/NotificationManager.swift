@@ -309,6 +309,7 @@ extension UserNotificationManager {
             return completionHandler(.failed)
         }
         
+        let synchronizingQueue = DispatchQueue.global()
         let watchedAnimeLinks = NineAnimator.default.user.subscribedAnimes
         var resultsPool = [FetchResult?]()
         
@@ -342,41 +343,46 @@ extension UserNotificationManager {
                 return nil
             }
             
-            return animeLink.retrive { anime, _ in
-                defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
-                
-                guard let anime = anime else { return resultsPool.append(nil) }
-                
-                var result = FetchResult(animeLink, [], [])
-                
-                if let currentWatcher = self.retrive(for: animeLink) {
-                    result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
-                        !currentWatcher.episodeNames.contains($0)
-                    }
-                    result.availableServerNames = result
-                        .newEpisodeTitles
-                        .flatMap(anime.episodes.links)
-                        .reduce(into: [Anime.ServerIdentifier]()) {
-                            if !$0.contains($1.server) {
-                                $0.append($1.server)
-                            }
-                        }
-                        .compactMap { anime.servers[$0] }
+            return animeLink.retrive { [weak self] anime, _ in
+                synchronizingQueue.async {
+                    guard let self = self else { return }
                     
-                    // Post notification to user
-                    self.notify(result: result)
-                } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
-                
-                // If unable to retrive the persisted episodes (maybe deleted by the system)
-                // Just store the latest version without posting any notifications.
-                self.update(anime)
-                
-                resultsPool.append(result)
+                    defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
+                    
+                    guard let anime = anime else { return resultsPool.append(nil) }
+                    
+                    var result = FetchResult(animeLink, [], [])
+                    
+                    if let currentWatcher = self.retrive(for: animeLink) {
+                        result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
+                            !currentWatcher.episodeNames.contains($0)
+                        }
+                        result.availableServerNames = result
+                            .newEpisodeTitles
+                            .flatMap(anime.episodes.links)
+                            .reduce(into: [Anime.ServerIdentifier]()) {
+                                if !$0.contains($1.server) {
+                                    $0.append($1.server)
+                                }
+                            }
+                            .compactMap { anime.servers[$0] }
+                        
+                        // Post notification to user
+                        self.notify(result: result)
+                    } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
+                    
+                    // If unable to retrive the persisted episodes (maybe deleted by the system)
+                    // Just store the latest version without posting any notifications.
+                    self.update(anime)
+                    
+                    // Add the results to the pool
+                    resultsPool.append(result)
+                    
+                    // This is just in case we skipped everything
+                    if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
+                }
             }
         }
-        
-        // This is just in case we skipped everything
-        if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
     }
     
     /**
