@@ -26,6 +26,9 @@ class LibrarySceneController: MinFilledCollectionViewController {
     /// List of categories
     private(set) var categories = [Category]()
     
+    /// List of tips
+    private(set) var tips = [Tip]()
+    
     /// List of recently watched anime
     private var cachedRecentlyWatchedList = [AnimeLink]()
     
@@ -50,6 +53,9 @@ class LibrarySceneController: MinFilledCollectionViewController {
     /// Background task for loading the most recently watched anime list
     private var recentlyWatchedListLoadingTask: NineAnimatorAsyncTask?
     
+    /// Background task for retriving the updated anime
+    var _subscribedAnimeNotificationRetrivalTask: NineAnimatorAsyncTask?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +63,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         setLayoutParameters(
             alwaysFillLine: true,
             minimalSize: .init(width: 140, height: 90), // Categories
+            .init(width: 300, height: 150), // Tips
             .init(width: 100, height: 170), // Recently Watched
             .init(width: 300, height: 56) // Collections
         )
@@ -84,6 +91,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         
         // Update the quick access list to the recently watched anime
         self.reloadRecentAnime()
+        self.reloadTips()
     }
 }
 
@@ -164,6 +172,59 @@ extension LibrarySceneController {
             self.recentlyWatchedListLoadingTask = nil
         }
     }
+    
+    /// Add and present the tip
+    func addTip(_ tip: Tip) {
+        let insertingIndex = IndexPath(item: tips.count, section: Section.tips.rawValue)
+        tips.append(tip)
+        collectionView.insertItems(at: [ insertingIndex ])
+    }
+    
+    /// Remove the tip with the predicate
+    func removeTips(where predicate: (Tip) throws -> Bool) rethrows {
+        let (
+            newTips,
+            removingIndices
+        ) = try tips.enumerated().reduce(into: ([Tip](), [Int]())) {
+            results, tip in
+            if try predicate(tip.element) {
+                results.1.append(tip.offset)
+            } else { results.0.append(tip.element) }
+        }
+        
+        // Update the value and notify the collection view
+        self.tips = newTips
+        self.collectionView.deleteItems(at: removingIndices.map {
+            IndexPath(item: $0, section: Section.tips.rawValue)
+        })
+    }
+    
+    /// Remove the tip
+    func removeTip(_ tip: Tip) {
+        removeTips { $0 == tip }
+    }
+    
+    /// Updating every tip of type T
+    ///
+    /// - Returns: Number of Tips updated
+    func updateTip<T: Tip>(ofType type: T.Type, updating: (T) throws -> Void) rethrows -> Int {
+        var reloadingTips = [Int]()
+        for (index, tip) in tips.enumerated() {
+            if let tip = tip as? T {
+                try updating(tip)
+                reloadingTips.append(index)
+            }
+        }
+        collectionView.reloadItems(at: reloadingTips.map {
+            IndexPath(item: $0, section: Section.tips.rawValue)
+        })
+        return reloadingTips.count
+    }
+    
+    /// Return the first tip of type T
+    func getTip<T: Tip>(ofType type: T.Type) -> T? {
+        return tips.first { $0 is T } as? T
+    }
 }
 
 // MARK: - Data Source
@@ -175,6 +236,7 @@ extension LibrarySceneController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch Section.from(section) {
         case .categories: return categories.count
+        case .tips: return tips.count
         case .recentlyWatched: return cachedRecentlyWatchedList.count
         case .collection:
             if let state = collectionState(forSection: section) {
@@ -197,6 +259,9 @@ extension LibrarySceneController {
             ) as! LibraryCategoryCell
             cell.setPresenting(categories[indexPath.item])
             return cell
+        case .tips:
+            let tip = tips[indexPath.item]
+            return tip.setupCell(collectionView, at: indexPath, parent: self)
         case .recentlyWatched:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: "library.visited",
@@ -224,6 +289,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         switch Section.from(section) {
         case .categories: return .zero
+        case .tips: return .zero
         case .recentlyWatched:
             return cachedRecentlyWatchedList.isEmpty ? .zero : .init(
                 width: collectionView.bounds.width,
@@ -245,6 +311,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
         case .categories: return 15
+        case .tips: return 10
         case .recentlyWatched: return 10
         case .collection: return 0
         }
@@ -253,6 +320,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         switch Section.from(section) {
         case .categories: return 15
+        case .tips: return 10
         case .recentlyWatched: return 10
         case .collection: return 0
         }
@@ -261,6 +329,7 @@ extension LibrarySceneController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         switch Section.from(section) {
         case .categories: return .init(top: 10, left: 10, bottom: 10, right: 10)
+        case .tips: return .init(top: 5, left: 10, bottom: 10, right: 10)
         case .recentlyWatched: return .init(top: 0, left: 10, bottom: 10, right: 10)
         case .collection: return .init(top: 0, left: 10, bottom: 5, right: 10)
         }
@@ -274,6 +343,7 @@ extension LibrarySceneController {
         ) as! LibraryHeaderView
         
         switch Section.from(indexPath.section) {
+        case .tips: break
         case .categories: break
         case .recentlyWatched:
             if !cachedRecentlyWatchedList.isEmpty {
@@ -316,8 +386,10 @@ extension LibrarySceneController {
         switch Section.from(indexPath.section) {
         case .categories:
             let category = categories[indexPath.item]
-            self.selectedCategory = category
-            performSegue(withIdentifier: category.segueIdentifier, sender: cell)
+            present(category: category)
+        case .tips:
+            let tip = tips[indexPath.item]
+            tip.onSelection(collectionView, at: indexPath, selectedCell: cell, parent: self)
         case .recentlyWatched:
             let anime = cachedRecentlyWatchedList[indexPath.item]
             RootViewController.shared?.open(
@@ -347,6 +419,12 @@ extension LibrarySceneController {
 
 // MARK: - Segue
 extension LibrarySceneController {
+    /// Present the category
+    func present(category: Category, sender: Any? = nil) {
+        selectedCategory = category
+        performSegue(withIdentifier: category.segueIdentifier, sender: sender)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Initialize the dst controller with the selected collection
         if let destination = segue.destination as? LibraryTrackingCollectionController,
@@ -378,6 +456,10 @@ extension LibrarySceneController {
         /// The categories listed at the first section of the Library
         case categories
         
+        /// The section where download progress preview, subscription notifications
+        /// and the other tips are located.
+        case tips
+        
         /// A number of recently watched anime
         case recentlyWatched
         
@@ -389,6 +471,20 @@ extension LibrarySceneController {
             if let eSection = Section(rawValue: section) {
                 return eSection
             } else { return .collection }
+        }
+    }
+    
+    /// A tip that can be shown in the tips section
+    class Tip: NSObject {
+        /// Setup the tip at the indexPath
+        func setupCell(_ collectionView: UICollectionView, at indexPath: IndexPath, parent: LibrarySceneController) -> UICollectionViewCell {
+            Log.error("[LibrarySceneController.Tip] Unimplemented method")
+            return UICollectionViewCell()
+        }
+        
+        /// Do something when the tip has been selected
+        func onSelection(_ collectionView: UICollectionView, at indexPath: IndexPath, selectedCell: UICollectionViewCell, parent: LibrarySceneController) {
+            Log.error("[LibrarySceneController.Tip] Unimplemented method")
         }
     }
     
@@ -468,6 +564,11 @@ extension LibrarySceneController {
     /// Retrieve the corresponding section index of the collection source offset
     func sectionIndex(forCollectionSource offset: Int) -> Int {
         return collectionsOffset + offset
+    }
+    
+    /// Return the category with the segue identifier
+    func category(withIdentifier segueIdentifier: String) -> Category? {
+        return categories.first { $0.segueIdentifier == segueIdentifier }
     }
     
     /// Initialize the categories collection

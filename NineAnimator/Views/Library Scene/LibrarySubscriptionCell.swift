@@ -85,7 +85,12 @@ class LibrarySubscriptionCell: UICollectionViewCell {
                     
                     // Update the accessory label
                     if hasNewEpisode {
+                        // A known problem for this is that once the appearance changes
+                        // the Theme might override this text color
+                        self.accessorySubtitleLabel.textColor = UIColor.orange
                         self.accessorySubtitleLabel.text = "New episode available"
+                    } else {
+                        self.accessorySubtitleLabel.textColor = Theme.current.secondaryText
                     }
                 }
         default:

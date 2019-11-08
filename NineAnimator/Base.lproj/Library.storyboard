@@ -306,7 +306,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="2 anime you're subscribing have new episodes available. Stream now in your subscription list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-ad-XH8">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="2 anime you're subscribing have new episodes available. Stream now from your subscription list." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPt-ad-XH8">
                                             <rect key="frame" x="12" y="44.5" width="355" height="37.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -316,7 +316,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-pC-tBH" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                        <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="800" verticalCompressionResistancePriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1L-pC-tBH" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="159.5" y="94" width="60" height="29"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="7Hc-q9-Bx6"/>
@@ -346,10 +346,10 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="379" height="139"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="NO"/>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="8"/>
+                                        <real key="value" value="16"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -678,7 +678,7 @@
                                                 <constraint firstItem="aLK-08-hfH" firstAttribute="leading" secondItem="knX-Zs-oM5" secondAttribute="leading" id="opY-UM-eNG"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7N-uF-V2o">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="d7N-uF-V2o">
                                             <rect key="frame" x="93" y="26.5" width="247" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
@@ -757,6 +757,7 @@
                                         <constraint firstItem="96g-Qz-36O" firstAttribute="leading" secondItem="jhi-pa-tuk" secondAttribute="leading" constant="8" id="drR-pq-Imt"/>
                                         <constraint firstAttribute="trailing" secondItem="knX-Zs-oM5" secondAttribute="trailing" id="gA4-hs-jEi"/>
                                         <constraint firstItem="z6V-sw-mhd" firstAttribute="leading" secondItem="R3t-x9-Aoh" secondAttribute="leading" id="hke-pG-FnA"/>
+                                        <constraint firstItem="z6V-sw-mhd" firstAttribute="top" relation="greaterThanOrEqual" secondItem="R3t-x9-Aoh" secondAttribute="bottom" constant="4" id="jh0-fE-qw8"/>
                                         <constraint firstItem="knX-Zs-oM5" firstAttribute="leading" secondItem="d7N-uF-V2o" secondAttribute="trailing" constant="10" id="kNx-Qa-Yi7"/>
                                         <constraint firstItem="knX-Zs-oM5" firstAttribute="leading" secondItem="z6V-sw-mhd" secondAttribute="trailing" id="kbm-m7-BrA"/>
                                         <constraint firstItem="d7N-uF-V2o" firstAttribute="top" relation="greaterThanOrEqual" secondItem="jhi-pa-tuk" secondAttribute="top" constant="14" id="qqD-6l-5nX"/>

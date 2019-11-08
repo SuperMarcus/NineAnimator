@@ -35,4 +35,17 @@ class LibraryTipSubscriptionAvailableCell: UICollectionViewCell {
             descriptionLabel.text = "\(updatedAnimeLinks.count) anime you've subscribed have new episodes available and \(updatedCount > 1 ? "are" : "is") now available for streaming."
         }
     }
+    
+    override var isHighlighted: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    override var isSelected: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    private func updateTouchReactionTint() {
+        let shouldTint = isHighlighted || isSelected
+        alpha = shouldTint ? 0.4 : 1
+    }
 }

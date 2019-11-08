@@ -299,6 +299,7 @@
 		2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */; };
 		2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */; };
 		2CE18B102374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0F2374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift */; };
+		2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */; };
 		2CE1F84822EEB9E6005448FF /* VideoProviderRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */; };
 		2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */; };
 		2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */; };
@@ -673,6 +674,7 @@
 		2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySubscriptionCell.swift; sourceTree = "<group>"; };
 		2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRecentlyWatchedCell.swift; sourceTree = "<group>"; };
 		2CE18B0F2374C7ED00771A16 /* LibraryTipSubscriptionAvailableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipSubscriptionAvailableCell.swift; sourceTree = "<group>"; };
+		2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibrarySceneController+Tips.swift"; sourceTree = "<group>"; };
 		2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProviderRegistry.swift; sourceTree = "<group>"; };
 		2CE1F84922EEBA6A005448FF /* BasicPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicPlaybackMedia.swift; sourceTree = "<group>"; };
 		2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalPlaybackMedia.swift; sourceTree = "<group>"; };
@@ -1462,6 +1464,7 @@
 				2C480012237061C400ADB03F /* LibraryDownloadsCategoryController.swift */,
 				2C4800102370618D00ADB03F /* LibrarySubscriptionCategoryController.swift */,
 				2C979F19235A17E100BC8699 /* LibrarySceneController.swift */,
+				2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */,
 				2C90C69F236F8BF900C18620 /* LibraryTrackingCollectionController.swift */,
 			);
 			path = "Library Scene";
@@ -1977,6 +1980,7 @@
 				2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */,
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C3BBAAC2217635000F1C77B /* Dictionary+KeyPathAccess.swift in Sources */,
+				2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */,
 				2C90C6A0236F8BF900C18620 /* LibraryTrackingCollectionController.swift in Sources */,
 				2C85369C22348BFF00A5CFB9 /* WonderfulSubs+ServerRecommendation.swift in Sources */,
 				2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */,

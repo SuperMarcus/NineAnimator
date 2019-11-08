@@ -269,17 +269,18 @@ extension UserNotificationManager {
     
     /// Retrieve the list of anime with notifications delivered to
     func animeWithNotifications(searchIn pool: [AnimeLink] = NineAnimator.default.user.subscribedAnimes) -> NineAnimatorPromise<[AnimeLink]> {
-        let notificationCenter = UNUserNotificationCenter.current()
-        let promise = NineAnimatorPromise<[AnimeLink]>(nil)
-        notificationCenter.getDeliveredNotifications {
-            [weak promise] notifications in
-            if let promise = promise {
-                promise.resolve(pool.filter {
-                    link in notifications.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(link) }
-                })
+        return NineAnimatorPromise<[UNNotification]> {
+            callback in
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.getDeliveredNotifications { callback($0, nil) }
+            return nil
+        } .then {
+            notifications in pool.filter {
+                link in notifications.contains {
+                    $0.request.identifier == .episodeUpdateNotificationIdentifier(link)
+                }
             }
         }
-        return promise
     }
 }
 
