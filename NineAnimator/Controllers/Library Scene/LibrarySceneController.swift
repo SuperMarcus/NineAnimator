@@ -415,6 +415,13 @@ extension LibrarySceneController {
         default: return true
         }
     }
+    
+    func minFilledLayout(_ collectionView: UICollectionView, shouldAlignLastLineItemsInSection section: Int) -> Bool {
+        switch Section.from(section) {
+        case .collection: return true
+        default: return false
+        }
+    }
 }
 
 // MARK: - Segue
