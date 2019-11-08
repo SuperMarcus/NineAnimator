@@ -27,20 +27,24 @@ extension NASourceWonderfulSubs {
     }
     
     private var retrieveFeaturedAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        return request(ajaxPathDictionary: "/api/media/popular?count=12")
-            .then {
-                response in
-                let series = try response.value(at: "json.series", type: [NSDictionary].self)
-                return try series.map { try self.constructAnimeLink(from: $0, useWidePoster: true) }
-            }
+        return request(
+            ajaxPathDictionary: "/api/media/popular?count=12",
+            headers: [ "Referer": endpoint ]
+        ) .then {
+            response in
+            let series = try response.value(at: "json.series", type: [NSDictionary].self)
+            return try series.map { try self.constructAnimeLink(from: $0, useWidePoster: true) }
+        }
     }
     
     private var retrieveLatestAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        return request(ajaxPathDictionary: "/api/media/latest?count=12")
-            .then {
-                response in
-                let series = try response.value(at: "json.series", type: [NSDictionary].self)
-                return try series.map { try self.constructAnimeLink(from: $0) }
-            }
+        return request(
+            ajaxPathDictionary: "/api/media/latest?count=12",
+            headers: [ "Referer": endpoint ]
+        ) .then {
+            response in
+            let series = try response.value(at: "json.series", type: [NSDictionary].self)
+            return try series.map { try self.constructAnimeLink(from: $0) }
+        }
     }
 }

@@ -23,7 +23,8 @@ extension NASourceWonderfulSubs {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         return request(
             ajaxPathDictionary: "/api/media/series",
-            query: [ "series": link.link.lastPathComponent ]
+            query: [ "series": link.link.lastPathComponent ],
+            headers: [ "Referer": link.link.absoluteString ]
         ) .then {
             response in
             let detailedSeriesEntry = try response.value(at: "json", type: NSDictionary.self)
@@ -59,7 +60,7 @@ extension NASourceWonderfulSubs {
             throw NineAnimatorError.urlError
         }
         
-        let title = try mediaEntry.value(at: "title", type: String.self)
+        let title = mediaEntry.valueIfPresent(at: "title", type: String.self) ?? parent.title
         let alias: String
         let description = "No synopsis found for this season"
         

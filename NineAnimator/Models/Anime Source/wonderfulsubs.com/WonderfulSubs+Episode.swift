@@ -48,7 +48,8 @@ extension NASourceWonderfulSubs {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         return request(
             ajaxPathDictionary: "/api/media/stream",
-            query: [ "code": link.identifier ]
+            query: [ "code": link.identifier ],
+            headers: [ "Referer": link.parent.link.absoluteString ]
         ) .then {
             [weak self] response in
             guard let self = self else { return nil }
