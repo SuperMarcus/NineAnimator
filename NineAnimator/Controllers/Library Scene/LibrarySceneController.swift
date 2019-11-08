@@ -76,7 +76,6 @@ class LibrarySceneController: MinFilledCollectionViewController {
         }
         
         initializeCategories()
-        loadCollections(failedOnly: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,23 +91,31 @@ class LibrarySceneController: MinFilledCollectionViewController {
         // Update the quick access list to the recently watched anime
         self.reloadRecentAnime()
         self.reloadTips()
+        self.reloadCollections(failedOnly: true)
     }
 }
 
 // MARK: - Data Loading
 extension LibrarySceneController {
     /// Load either all collections or those that needs reloading
-    private func loadCollections(failedOnly: Bool = true) {
-        for i in 0..<collectionProviders.count where collectionProviders[i].shouldPresentInLibrary {
-            if !failedOnly {
-                reloadFromSource(atOffset: i)
-            } else if let currentState = collectionStates[i] {
-                switch currentState {
-                case .failure: reloadFromSource(atOffset: i)
-                default: continue
+    func reloadCollections(failedOnly: Bool = true) {
+        for i in 0..<collectionProviders.count {
+            if collectionProviders[i].shouldPresentInLibrary {
+                // Try to load the collection if it should be present
+                if !failedOnly {
+                    reloadFromSource(atOffset: i)
+                } else if let currentState = collectionStates[i] {
+                    switch currentState {
+                    case .failure: reloadFromSource(atOffset: i)
+                    default: continue
+                    }
+                } else if collectionLoadingTasks[i] == nil {
+                    reloadFromSource(atOffset: i)
                 }
-            } else if collectionLoadingTasks[i] == nil {
-                reloadFromSource(atOffset: i)
+            } else if collectionStates[i] != nil {
+                collectionStates[i] = nil
+                collectionLoadingTasks[i] = nil
+                collectionView.reloadSections([ Section.collection.rawValue ])
             }
         }
     }

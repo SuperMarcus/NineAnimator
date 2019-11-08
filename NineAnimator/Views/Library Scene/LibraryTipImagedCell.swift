@@ -37,4 +37,17 @@ class LibraryTipImagedCell: UICollectionViewCell {
         topImageView.contentMode = imageFillMode
         tipTitleView.text = title
     }
+    
+    override var isHighlighted: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    override var isSelected: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    private func updateTouchReactionTint() {
+        let shouldTint = isHighlighted || isSelected
+        alpha = shouldTint ? 0.4 : 1
+    }
 }
