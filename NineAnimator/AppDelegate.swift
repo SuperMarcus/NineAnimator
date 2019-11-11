@@ -337,6 +337,14 @@ fileprivate extension AppDelegate {
             userInfo: nil
         ))
         
+        availableShortcutItems.append(.init(
+            type: AppShortcutType.search.rawValue,
+            localizedTitle: "Search",
+            localizedSubtitle: nil,
+            icon: .init(systemImageName: "magnifyingglass"),
+            userInfo: nil
+        ))
+        
         if let lastWatchedEpisode = NineAnimator.default.user.lastEpisode {
             availableShortcutItems.append(.init(
                 type: AppShortcutType.resumeLastWatched.rawValue,
@@ -361,6 +369,9 @@ fileprivate extension AppDelegate {
         case .library:
             // Navigate to the library scene
             RootViewController.navigateWhenReady(toScene: .library)
+        case .search:
+            // Search scene
+            RootViewController.navigateWhenReady(toScene: .search)
         case .resumeLastWatched:
             // Resume the last watched episode
             if let episodeLink = NineAnimator.default.user.lastEpisode {
@@ -373,5 +384,6 @@ fileprivate extension AppDelegate {
     enum AppShortcutType: String {
         case library = "com.marcuszhou.nineanimator.shortcut.library"
         case resumeLastWatched = "com.marcuszhou.nineanimator.shortcut.resumeLast"
+        case search = "com.marcuszhou.nineanimator.shortcut.search"
     }
 }
