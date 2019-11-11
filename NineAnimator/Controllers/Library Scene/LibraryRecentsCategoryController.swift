@@ -174,7 +174,7 @@ extension LibraryRecentsCategoryController {
         if #available(iOS 13.0, *) {
             // Not doing anything for iOS 13.0+ since
             // actions are presented with context menus
-        } else {
+        } else if sender.state == .began {
             let location = sender.location(in: collectionView)
             // Obtain the cell
             if let indexPath = collectionView.indexPathForItem(at: location),
@@ -195,14 +195,8 @@ extension LibraryRecentsCategoryController {
                 
                 // Save the available actions
                 editMenu.menuItems = availableMenuItems
-                
-                if #available(iOS 13.0, *) {
-                    editMenu.showMenu(from: view, rect: targetRect)
-                } else {
-                    // Fallback on earlier versions
-                    editMenu.setTargetRect(targetRect, in: view)
-                    editMenu.setMenuVisible(true, animated: true)
-                }
+                editMenu.setTargetRect(targetRect, in: view)
+                editMenu.setMenuVisible(true, animated: true)
             }
         }
     }
