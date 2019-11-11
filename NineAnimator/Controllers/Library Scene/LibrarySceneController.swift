@@ -87,6 +87,10 @@ class LibrarySceneController: MinFilledCollectionViewController {
                 visibleCell.updateLabels()
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         // Update the quick access list to the recently watched anime
         self.reloadRecentAnime()

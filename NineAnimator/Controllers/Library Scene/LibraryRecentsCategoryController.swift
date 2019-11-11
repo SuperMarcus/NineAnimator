@@ -181,8 +181,7 @@ extension LibraryRecentsCategoryController {
                 let cell = collectionView.cellForItem(at: indexPath) as? LibraryRecentAnimeCell {
                 self.becomeFirstResponder()
                 
-                let selectedLink = cachedRecentAnime[indexPath.item]
-                self.selectedAnimeLink = selectedLink
+                self.menuIndexPath = indexPath
                 let targetRect = collectionView.convert(cell.frame, to: view)
                 let editMenu = UIMenuController.shared
                 var availableMenuItems = [UIMenuItem]()

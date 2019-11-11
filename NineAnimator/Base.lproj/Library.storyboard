@@ -854,6 +854,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="14" minimumInteritemSpacing="14" id="ZXy-0E-Cit">
                             <size key="itemSize" width="365" height="111"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1009,6 +1010,7 @@
                         <connections>
                             <outlet property="dataSource" destination="W06-UW-09j" id="cXC-dN-TQJ"/>
                             <outlet property="delegate" destination="W06-UW-09j" id="o1t-wZ-py5"/>
+                            <outletCollection property="gestureRecognizers" destination="3d4-aJ-ZpJ" appends="YES" id="AuH-tF-2le"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Recents" id="QFq-wf-q5V"/>
