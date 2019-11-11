@@ -191,6 +191,7 @@ extension RootViewController {
         self.selectedIndex = scene.rawValue
     }
     
+    /// Declaration of the available scenes in the `RootViewController`
     enum NineAnimatorRootScene: Int {
         case toWatch = 0
         case featured = 1

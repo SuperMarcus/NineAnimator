@@ -1017,6 +1017,11 @@
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eZ-uQ-aVv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="3d4-aJ-ZpJ">
+                    <connections>
+                        <action selector="onLongPressGestureRegconized:" destination="W06-UW-09j" id="Pdb-JC-ea9"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-188.40579710144928" y="-664.28571428571422"/>
         </scene>

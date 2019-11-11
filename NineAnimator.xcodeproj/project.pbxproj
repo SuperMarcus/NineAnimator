@@ -438,6 +438,8 @@
 		2C3D7BFE2210AE540045D648 /* AnimeTwist+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Featured.swift"; sourceTree = "<group>"; };
 		2C3D7C002210AE640045D648 /* AnimeTwist+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Episode.swift"; sourceTree = "<group>"; };
 		2C3D7C022210AE780045D648 /* AnimeTwist+LinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+LinkRetriver.swift"; sourceTree = "<group>"; };
+		2C3F456123798B77007410B6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		2C3F456323798B84007410B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		2C42577A23241D2B00FCCCCE /* Simkl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simkl.swift; sourceTree = "<group>"; };
 		2C42577C2325365100FCCCCE /* Simkl+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+User.swift"; sourceTree = "<group>"; };
 		2C42577E2325366000FCCCCE /* Simkl+Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Reference.swift"; sourceTree = "<group>"; };
@@ -1201,6 +1203,8 @@
 		2C4ABC9321B7F53E009B4D47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2C3F456323798B84007410B6 /* AVKit.framework */,
+				2C3F456123798B77007410B6 /* AVFoundation.framework */,
 				2C211EC1225E9BB400389124 /* ViewAnimator.framework */,
 				2CA1DD5D21E2B423009241CB /* HomeKit.framework */,
 				2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */,

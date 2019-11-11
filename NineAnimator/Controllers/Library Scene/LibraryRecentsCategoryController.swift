@@ -26,6 +26,12 @@ class LibraryRecentsCategoryController: MinFilledCollectionViewController, Libra
     /// The `AnimeLink` that was selected by the user in the collection view
     private var selectedAnimeLink: AnimeLink?
     
+    /// The `IndexPath` that is currently used by the menu controller
+    private var menuIndexPath: IndexPath?
+    
+    /// Needs to be able to become the first responder
+    override var canBecomeFirstResponder: Bool { return true }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,6 +60,15 @@ extension LibraryRecentsCategoryController {
         if shouldAnimate {
             self.collectionView.reloadSections([ 0 ])
         } else { self.collectionView.reloadData() }
+    }
+    
+    /// Remove the anime from the recents anime list
+    private func removeAnime(atIndex indexPath: IndexPath) {
+        DispatchQueue.main.async {
+            self.cachedRecentAnime.remove(at: indexPath.item)
+            self.collectionView.deleteItems(at: [ indexPath ])
+            NineAnimator.default.user.recentAnimes = self.cachedRecentAnime
+        }
     }
 }
 
@@ -102,6 +117,99 @@ extension LibraryRecentsCategoryController {
         if let destination = segue.destination as? AnimeViewController,
             let selectedAnimeLink = selectedAnimeLink {
             destination.setPresenting(anime: selectedAnimeLink)
+        }
+    }
+}
+
+// MARK: - Context Menu & Editing
+extension LibraryRecentsCategoryController {
+    /// For iOS 13.0 and higher, use the built-in `UIContextMenu` for operations
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let relatedAnimeLink = cachedRecentAnime[indexPath.item]
+        let configuration = UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil) {
+                _ -> UIMenu? in
+                var menuItems = [UIAction]()
+                
+                // Subscription
+                if NineAnimator.default.user.isSubscribing(anime: relatedAnimeLink) {
+                    menuItems.append(.init(
+                        title: "Unsubscribe",
+                        image: UIImage(systemName: "bell.slash.fill"),
+                        identifier: nil
+                    ) { _ in NineAnimator.default.user.unsubscribe(anime: relatedAnimeLink) })
+                } else {
+                    menuItems.append(.init(
+                        title: "Subscribe",
+                        image: UIImage(systemName: "bell.fill"),
+                        identifier: nil
+                    ) { _ in
+                        // Request permission first
+                        UserNotificationManager.default.requestNotificationPermissions()
+                        NineAnimator.default.user.subscribe(uncached: relatedAnimeLink)
+                    })
+                }
+                
+                // Remove
+                menuItems.append(.init(
+                    title: "Remove from Recents",
+                    image: UIImage(systemName: "trash.fill"),
+                    identifier: nil,
+                    attributes: [ .destructive ]
+                ) { [weak self] _ in self?.removeAnime(atIndex: indexPath) })
+                
+                return UIMenu(
+                    title: "Selected Anime",
+                    identifier: nil,
+                    options: [],
+                    children: menuItems
+                )
+            }
+        return configuration
+    }
+    
+    @IBAction private func onLongPressGestureRegconized(_ sender: UILongPressGestureRecognizer) {
+        if #available(iOS 13.0, *) {
+            // Not doing anything for iOS 13.0+ since
+            // actions are presented with context menus
+        } else {
+            let location = sender.location(in: collectionView)
+            // Obtain the cell
+            if let indexPath = collectionView.indexPathForItem(at: location),
+                let cell = collectionView.cellForItem(at: indexPath) as? LibraryRecentAnimeCell {
+                self.becomeFirstResponder()
+                
+                let selectedLink = cachedRecentAnime[indexPath.item]
+                self.selectedAnimeLink = selectedLink
+                let targetRect = collectionView.convert(cell.frame, to: view)
+                let editMenu = UIMenuController.shared
+                var availableMenuItems = [UIMenuItem]()
+                
+                // Remove operation
+                availableMenuItems.append(.init(
+                    title: "Remove",
+                    action: #selector(menuController(removeLink:))
+                ))
+                
+                // Save the available actions
+                editMenu.menuItems = availableMenuItems
+                
+                if #available(iOS 13.0, *) {
+                    editMenu.showMenu(from: view, rect: targetRect)
+                } else {
+                    // Fallback on earlier versions
+                    editMenu.setTargetRect(targetRect, in: view)
+                    editMenu.setMenuVisible(true, animated: true)
+                }
+            }
+        }
+    }
+    
+    @objc private func menuController(removeLink sender: UIMenuController) {
+        if let menuIndexPath = menuIndexPath {
+            removeAnime(atIndex: menuIndexPath)
         }
     }
 }
