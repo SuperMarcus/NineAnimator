@@ -105,8 +105,8 @@ extension NASourceAnimePahe {
             
             // The three known providers
             let staticProviders = [
-                "openload": "OpenLoad",
-                "streamango": "Streamango",
+//                "openload": "OpenLoad",
+//                "streamango": "Streamango",
                 "kwik": "Kiwik"
             ]
             
