@@ -12,7 +12,7 @@
         <scene sceneID="viO-Z0-ltj">
             <objects>
                 <navigationController id="9DC-dJ-9BF" userLabel="Library Navigator" customClass="ApplicationNavigationController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Library" image="Library Icon" badgeValue="New" id="tJd-18-v6P"/>
+                    <tabBarItem key="tabBarItem" title="Library" image="Library Icon" id="tJd-18-v6P"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hvX-Bu-0tK">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
