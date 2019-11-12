@@ -25,7 +25,7 @@ extension MyAnimeList {
             "q": link.title, // Search with the link's title
             "limit": 50,
             "offset": 0,
-            "fields": "alternative_titles,media_type,my_list_status{start_date,finish_date}"
+            "fields": "alternative_titles,media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
         ]) .then {
             response in
             let references: [(proximity: Double, reference: ListingAnimeReference)] = try response.data.compactMap {
@@ -37,6 +37,8 @@ extension MyAnimeList {
                 
                 // Construct the reference
                 let reference = try ListingAnimeReference(self, withAnimeNode: animeNode)
+                let tracking = self.constructTracking(fromAnimeNode: animeNode)
+                self.donateTracking(tracking, forReference: reference)
                 
                 // Calculate the 'closeness' of title
                 var allTitles = [ reference.name ]
@@ -84,13 +86,20 @@ extension ListingAnimeReference {
         } else { artwork = NineAnimator.placeholderArtworkUrl }
         
         // If the current status entry is present in the response object
-        if let currentStatusEntry = animeNode["my_list_status"] as? NSDictionary,
-            let status = currentStatusEntry["status"] as? String {
-            switch status {
-            case "watching": currentState = .watching
-            case "plan_to_watch": currentState = .toWatch
-            case "completed": currentState = .finished
-            default: break
+        animeNode.valueIfPresent(
+            at: "my_list_status",
+            type: NSDictionary.self
+        ) .unwrap { // my_list_status: MyListStatusObject
+            currentStatusEntry in
+            // status: ListStatusEnum
+            currentStatusEntry.valueIfPresent(at: "status", type: String.self).unwrap {
+                status in
+                switch status {
+                case "watching": currentState = .watching
+                case "plan_to_watch": currentState = .toWatch
+                case "completed": currentState = .finished
+                default: break
+                }
             }
         }
         

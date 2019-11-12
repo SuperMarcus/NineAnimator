@@ -55,10 +55,34 @@ extension MyAnimeList {
             return
         }
         
+        // No need for update if the previous progress is higher than the current
+        if let previousTracking = progressTracking(for: reference),
+            previousTracking.currentProgress >= episodeNumber {
+            return
+        }
+        
+        // Obtain the new tracking and push
+        let newTracking = progressTracking(
+            for: reference,
+            withUpdatedEpisodeProgress: episodeNumber
+        )
+        update(reference, newTracking: newTracking)
+    }
+    
+    func collectMutationTaskPoolGarbage() {
+        // Remove all resolved promises
+        _mutationTaskPool.removeAll {
+            ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
+        }
+    }
+    
+    func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
+        collectMutationTaskPoolGarbage()
+        
         // Send mutation request
         let task = apiRequest(
             "/anime/\(reference.uniqueIdentifier)/my_list_status",
-            body: [ "num_watched_episodes": episodeNumber ],
+            body: [ "num_watched_episodes": newTracking.currentProgress ],
             method: .put
             ) .error {
                 [weak self] in
@@ -66,22 +90,25 @@ extension MyAnimeList {
                 self?.collectMutationTaskPoolGarbage()
             } .finally {
                 [weak self] _ in
+                guard let self = self else { return }
                 Log.info("[MyAnimeList] Mutation made")
-                self?.collectMutationTaskPoolGarbage()
+                self.collectMutationTaskPoolGarbage()
+                self.donateTracking(newTracking, forReference: reference)
         }
         _mutationTaskPool.append(task)
     }
     
-    func collectMutationTaskPoolGarbage() {
-        // Remove all resolved promises
-        _mutationTaskPool.removeAll { ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true }
-    }
-    
-    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
+    /// Construct the `ListingAnimeTracking` from the AnimeObject's `node` dictionary
+    func constructTracking(fromAnimeNode node: NSDictionary) -> ListingAnimeTracking? {
+        if let currentProgress = node.valueIfPresent(
+            at: "my_list_status.num_episodes_watched",
+            type: Int.self
+        ) {
+            return ListingAnimeTracking(
+                currentProgress: currentProgress,
+                episodes: node.valueIfPresent(at: "num_episodes", type: Int.self)
+            )
+        }
         return nil
-    }
-    
-    func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
-        // New
     }
 }

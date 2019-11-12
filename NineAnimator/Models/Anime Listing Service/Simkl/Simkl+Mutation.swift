@@ -94,10 +94,6 @@ extension Simkl {
         mutationQueues.append(task)
     }
     
-    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
-        return nil
-    }
-    
     func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
         // New
     }

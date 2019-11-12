@@ -46,17 +46,13 @@ extension Anilist {
             return
         }
         
-        var updatedTracking = progressTracking(for: reference) ?? ListingAnimeTracking(
-            currentProgress: episodeNumber,
-            episodes: nil
+        // Obtain the new tracking
+        let updatedTracking = progressTracking(
+            for: reference,
+            withUpdatedEpisodeProgress: episodeNumber
         )
         
-        updatedTracking.currentProgress = episodeNumber
         update(reference, newTracking: updatedTracking)
-    }
-    
-    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
-        return _mediaTrackingMap[reference]
     }
     
     func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
@@ -66,7 +62,7 @@ extension Anilist {
         mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
             "progress": newTracking.currentProgress
-        ]) { if $0 { self._mediaTrackingMap[reference] = newTracking } }
+        ]) { if $0 { self.donateTracking(newTracking, forReference: reference) } }
         // swiftlint:enable multiline_arguments
     }
     
@@ -76,11 +72,7 @@ extension Anilist {
     /// - `init` of `StaticListingAnimeCollection`
     /// - `Anilist.reference(from: AnimeLink)`
     func contributeReferenceTracking(_ tracking: ListingAnimeTracking, forReference reference: ListingAnimeReference) {
-        var newTracking = tracking
-        if let existingTracking = _mediaTrackingMap[reference] {
-            newTracking.episodes = newTracking.episodes ?? existingTracking.episodes
-        }
-        _mediaTrackingMap[reference] = newTracking
+        donateTracking(tracking, forReference: reference)
     }
     
     /// Create the `ListingAnimeTracking` from query results

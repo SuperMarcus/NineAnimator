@@ -29,7 +29,6 @@ class MyAnimeList: BaseListingService, ListingService {
     let endpoint = URL(string: "https://api.myanimelist.net/v0.21")!
     
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
-//    var _referenceToTrackingMap = [TrackingAnimeReference: ListingAnimeTracking]()
     
     lazy var _allCollections: [Collection] = [
         ("dropped", "Dropped"),
