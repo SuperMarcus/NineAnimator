@@ -210,9 +210,9 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ------------- | -------- | -------- |
 | ![1](Misc/Media/Demo/Dark/watch_next.dark.png) | ![2](Misc/Media/Demo/Dark/library.dark.png) | ![3](Misc/Media/Demo/Dark/search.png) |
 
-| Search Results | Choose Episodes | Downloads |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/Media/Demo/Dark/search_results.png) | ![5](Misc/Media/Demo/Dark/browse_episodes.png) | ![6](Misc/Media/Demo/Dark/downloads.png) |
+| Edit Lists | Choose Episodes | Downloads |
+| ----------- | -------------------- | --------------- |
+| ![4](Misc/Media/Demo/Dark/listing_edit.dark.png) | ![5](Misc/Media/Demo/Dark/browse_episodes.png) | ![6](Misc/Media/Demo/Dark/downloads.png) |
 
 | Recents Anime (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
@@ -228,9 +228,9 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ------------- | -------- | -------- |
 | ![1](Misc/Media/Demo/Light/watch_next.light.png) | ![2](Misc/Media/Demo/Light/library.light.png) | ![3](Misc/Media/Demo/Light/search.png) |
 
-| Search Results | Choose Episodes | Downloads |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/Media/Demo/Light/search_results.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
+| Edit Lists | Choose Episodes | Downloads |
+| ----------- | -------------------- | --------------- |
+| ![4](Misc/Media/Demo/Light/listing_edit.light.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
 
 | Recents Anime (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
