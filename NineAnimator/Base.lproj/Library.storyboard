@@ -462,7 +462,13 @@
                             <outlet property="delegate" destination="nIX-bZ-XBM" id="HNP-4S-XOk"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Library" id="3cY-pg-E77"/>
+                    <navigationItem key="navigationItem" title="Library" id="3cY-pg-E77">
+                        <barButtonItem key="rightBarButtonItem" image="Chromecast Icon" id="D29-SK-oQD">
+                            <connections>
+                                <action selector="onCastButtonPressed:" destination="nIX-bZ-XBM" id="lC4-b0-juk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="fya-FZ-XHf" kind="show" identifier="library.collection" id="955-KE-hGC"/>
                         <segue destination="W06-UW-09j" kind="show" identifier="library.category.recents" id="a7q-Rj-31B"/>
@@ -1326,6 +1332,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Chromecast Icon" width="25" height="25"/>
         <image name="Expand Icon HD" width="1200" height="1200"/>
         <image name="Library Icon" width="30" height="30"/>
         <image name="NineAnimator Lists Tip" width="800" height="600"/>

@@ -298,6 +298,10 @@ extension LibrarySceneController {
 
 // MARK: - Delegate
 extension LibrarySceneController {
+    @IBAction private func onCastButtonPressed(_ sender: Any) {
+        RootViewController.shared?.showCastController()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         switch Section.from(section) {
         case .categories: return .zero
