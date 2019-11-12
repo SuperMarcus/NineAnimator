@@ -86,7 +86,8 @@ extension MyAnimeList.Collection {
     func more() {
         // Make sure no current fetch task is in progress
         guard currentFetchTask == nil,
-            let requestingPage = nextPageOffset else { return }
+            let requestingPage = nextPageOffset,
+            let parent = parentService as? MyAnimeList else { return }
         
         Log.info("[MyAnimeList] Requesting page %@ in list %@", requestingPage, title)
         
@@ -98,14 +99,22 @@ extension MyAnimeList.Collection {
                 "sort": "anime_title",
                 "limit": 5,
                 "offset": requestingPage,
-                "fields": "alternative_titles,media_type,my_list_status{start_date,finish_date}"
+                "fields": "alternative_titles,media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
             ]
         ) .then {
-            [unowned myAnimeList, unowned self] response -> [ListingAnimeReference] in
+            [unowned myAnimeList, unowned self] response -> [(ListingAnimeReference, ListingAnimeTracking?)] in
             // Parse the references
             let references = try response.data.compactMap {
-                $0["node"] as? NSDictionary
-            } .map { try ListingAnimeReference(myAnimeList, withAnimeNode: $0) }
+                $0.valueIfPresent(at: "node", type: NSDictionary.self)
+            } .map {
+                animeNode -> (ListingAnimeReference, ListingAnimeTracking?) in
+                let reference = try ListingAnimeReference(
+                    myAnimeList,
+                    withAnimeNode: animeNode
+                )
+                let tracking = parent.constructTracking(fromAnimeNode: animeNode)
+                return (reference, tracking)
+            }
             
             // Save the offset to the next page
             self.nextPageOffset = response.nextPageOffset
@@ -117,7 +126,12 @@ extension MyAnimeList.Collection {
             self.currentFetchTask = nil
         } .finally {
             [unowned self] section in
-            self.references.append(section)
+            self.references.append(section.reduce(
+                into: []
+            ) { // Construct the refrence list while donating the tracking to the parent
+                $0.append($1.0)
+                parent.donateTracking($1.1, forReference: $1.0)
+            })
             self.delegate?.pageIncoming(self.references.count - 1, from: self)
             self.currentFetchTask = nil
         }

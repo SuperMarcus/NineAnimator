@@ -8,10 +8,12 @@ query ($userId: Int) {
             isCustomList,
             status,
             entries {
+                progress,
                 media {
                     id,
                     coverImage { extraLarge },
                     title { userPreferred },
+                    episodes,
                     mediaListEntry {
                         status
                         progress

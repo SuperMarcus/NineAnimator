@@ -19,7 +19,7 @@
 
 import UIKit
 
-class AnimeScheduleCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, ContentProviderDelegate, DontBotherViewController, Themable {
+class AnimeScheduleCollectionViewController: MinFilledCollectionViewController, ContentProviderDelegate, DontBotherViewController, Themable {
     // Defining constants
     
     /// The maximal cell width before increasing the number of cells in a line
@@ -32,14 +32,14 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, UIColle
     private(set) var calendarSource: CalendarProvider?
     private var loadedScheduledDays = [ScheduledDay]()
     
-    private lazy var layoutHelper = MinFilledFlowLayoutHelper(
-        dataSource: self,
-        alwaysFillLine: false,
-        minimalSize: .init(width: 300, height: 100)
-    )
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize Min Filled Layout
+        setLayoutParameters(
+            alwaysFillLine: false,
+            minimalSize: .init(width: 300, height: 100)
+        )
         
         // Inset from the sides
         collectionView.contentInset = .init(top: 0, left: 8, bottom: 0, right: 8)
@@ -138,10 +138,6 @@ class AnimeScheduleCollectionViewController: UICollectionViewController, UIColle
             let item = view.representingScheduledAnime {
             RootViewController.shared?.open(immedietly: item.link, in: self)
         }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return layoutHelper.collectionView(collectionView, layout: layout, sizeForItemAt: indexPath)
     }
 }
 

@@ -24,7 +24,7 @@ import UIKit
 import UserNotifications
 
 // swiftlint:disable cyclomatic_complexity
-class SettingsRootTableViewController: UITableViewController, Themable {
+class SettingsRootTableViewController: UITableViewController, Themable, UIAdaptivePresentationControllerDelegate {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     
     @IBOutlet private weak var detectClipboardLinksSwitch: UISwitch!
@@ -53,6 +53,12 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     
+    /// The path that the Settings view controller will be navigating to
+    private var navigatingTo: EntryPath?
+    
+    /// Dismissal handler
+    private var onDismissal: (() -> Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
@@ -61,7 +67,35 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Settings scene controller should be present in its own containing
+        // navigation controller
+        if let navigationController = navigationController {
+            navigationController.presentationController?.delegate = self
+        } else { presentationController?.delegate = self }
+        
+        // Updates the UI based off the saved settings
         updatePreferencesUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Jump to segue
+        if let navigatingTo = self.navigatingTo {
+            self.navigatingTo = nil
+            
+            // Perform segue
+            if let segue = navigatingTo.segueIdentifier {
+                self.performSegue(withIdentifier: segue, sender: self)
+            } else if let indexPath = navigatingTo.itemIndex {
+                self.tableView.scrollToRow(
+                    at: indexPath,
+                    at: .middle,
+                    animated: true
+                )
+            }
+        }
     }
     
     @IBAction private func onDetectClipboardLinksChange(_ sender: UISwitch) {
@@ -101,7 +135,8 @@ class SettingsRootTableViewController: UITableViewController, Themable {
     }
     
     @IBAction private func onDoneButtonClicked(_ sender: Any) {
-        dismiss(animated: true)
+        dismiss(animated: true, completion: onDismissal)
+        onDismissal = nil
     }
     
     @IBAction private func onAppearanceDidChange(_ sender: UISegmentedControl) {
@@ -289,13 +324,52 @@ class SettingsRootTableViewController: UITableViewController, Themable {
 
 // MARK: - Create settings table view controller
 extension SettingsRootTableViewController {
-    class func create() -> UIViewController? {
+    class func create(navigatingTo: EntryPath? = nil, onDismissal: (() -> Void)? = nil) -> UIViewController? {
         let storyboard = UIStoryboard(name: "Settings", bundle: .main)
         if let viewController = storyboard.instantiateInitialViewController() {
             // Set presentation style to form sheet
             viewController.modalPresentationStyle = .formSheet
+            
+            // Initialize the preferences scene controller
+            if let viewController = viewController as? ApplicationNavigationController,
+                let preferencesController = viewController.viewControllers.first as? SettingsRootTableViewController {
+                preferencesController.navigatingTo = navigatingTo
+                preferencesController.onDismissal = onDismissal
+            } else { Log.error("[SettingsRootTableViewController] The first view controller initiated from the storyboard is not an instance of SettingsRootTableViewController.") }
+            
             return viewController
         }
         return nil
+    }
+}
+
+// MARK: - Miscs & Handlers
+extension SettingsRootTableViewController {
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        onDismissal?()
+        onDismissal = nil
+    }
+}
+
+// MARK: - Navigating to Items
+extension SettingsRootTableViewController {
+    struct EntryPath {
+        /// Navigating to the `About` entry
+        static var about: EntryPath {
+            return EntryPath(segueIdentifier: "about", itemIndex: nil)
+        }
+        
+        /// Navigating to the `Home` entry
+        static var home: EntryPath {
+            return EntryPath(segueIdentifier: "homekit", itemIndex: nil)
+        }
+        
+        /// Navigating to the `Tracking Service` entry
+        static var trackingService: EntryPath {
+            return EntryPath(segueIdentifier: "trackingService", itemIndex: nil)
+        }
+        
+        fileprivate let segueIdentifier: String?
+        fileprivate let itemIndex: IndexPath?
     }
 }

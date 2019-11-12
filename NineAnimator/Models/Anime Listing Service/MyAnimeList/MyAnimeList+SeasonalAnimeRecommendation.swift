@@ -125,7 +125,7 @@ extension MyAnimeList {
                         "sort": "anime_num_list_users",
                         "limit": 50,
                         "offset": 0,
-                        "fields": "media_type,my_list_status{start_date,finish_date}"
+                        "fields": "media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
                     ]
                 ) .then {
                     [weak self] responseObject in
@@ -133,7 +133,15 @@ extension MyAnimeList {
                     let references = try responseObject.data.compactMap {
                         entry -> ListingAnimeReference? in
                         let referenceNode = try entry.value(at: "node", type: NSDictionary.self)
-                        return try? ListingAnimeReference(self.parent, withAnimeNode: referenceNode)
+                        let reference = try? ListingAnimeReference(self.parent, withAnimeNode: referenceNode)
+                        
+                        // Try to construct the reference and donate the tracking
+                        if let reference = reference {
+                            let tracking = self.parent.constructTracking(fromAnimeNode: referenceNode)
+                            self.parent.donateTracking(tracking, forReference: reference)
+                        }
+                        
+                        return reference
                     }
                     let items = references.map {
                         RecommendingItem(.listingReference($0))

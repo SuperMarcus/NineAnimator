@@ -2,9 +2,14 @@
 
 To install NineAnimator, you have the following options:
 
+- TestFlight Beta Testing
 - Install from Third-Party App Stores
 - Install via Cydia Impactor with Compiled IPAs
 - Build from Source Code
+
+## TestFlight Beta Testing
+
+NineAnimator is now available via TestFlight. Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w).
 
 ## Third-Party App Stores
 

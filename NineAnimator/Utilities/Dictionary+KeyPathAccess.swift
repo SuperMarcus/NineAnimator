@@ -37,7 +37,7 @@ extension Dictionary {
 extension NSDictionary {
     func value<T>(at path: String, type: T.Type) throws -> T {
         guard let v = value(forKeyPath: path) as? T else {
-            throw NineAnimatorError.decodeError
+            throw NineAnimatorError.decodeError(path)
         }
         return v
     }

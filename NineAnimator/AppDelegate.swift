@@ -23,6 +23,8 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    private var shortcutItem: UIApplicationShortcutItem?
+    
     var window: UIWindow?
     
     var trackedPasteboardChangeTimes: Int = 0
@@ -44,6 +46,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
         
+        // Store the booting shortcut item
+        if let shortcutItem = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+            self.shortcutItem = shortcutItem
+        }
+        
         // Recover any pending download tasks
         OfflineContentManager.shared.recoverPendingTasks()
         
@@ -51,6 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupImageCacher()
         
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        // The refernece implementation didn't say to call the completionHandler,
+        // so leaving it out for now.
+        self.shortcutItem = shortcutItem
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
@@ -111,14 +124,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserNotificationManager.default.performFetch { _ in
             UIApplication.shared.endBackgroundTask(identifier)
         }
+        
+        // Update quick actions
+        updateHomescreenQuickActions(application)
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
         
+        // If a shortcut item has been invoked
+        if let shortcutItem = shortcutItem {
+            Log.info("[AppDelegate] Performing Homescreen Shortcut %@", shortcutItem.type)
+            self.shortcutItem = nil // Remove the stored quick action
+            self.performQuickAction(shortcutItem)
+        }
+        
         // Also updates dynamic appearance
         updateDynamicBrightness()
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Update quick actions
+        updateHomescreenQuickActions(application)
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
@@ -285,10 +313,77 @@ extension AppDelegate {
     }
 }
 
-// MARK: - Initialization
-extension AppDelegate {
+// MARK: - Initialization & Setups
+fileprivate extension AppDelegate {
+    /// Initialize Kingfisher
     func setupImageCacher() {
         // Set loading failure image
         Kingfisher.KingfisherManager.shared.defaultOptions.append(.onFailureImage(#imageLiteral(resourceName: "Artwork Load Failure")))
+    }
+}
+
+// MARK: - Quick Actions
+fileprivate extension AppDelegate {
+    /// Update the dynamic home actions
+    func updateHomescreenQuickActions(_ application: UIApplication) {
+        var availableShortcutItems = [UIApplicationShortcutItem]()
+        
+        // Common Quick Actions
+        availableShortcutItems.append(.init(
+            type: AppShortcutType.library.rawValue,
+            localizedTitle: "Library",
+            localizedSubtitle: nil,
+            icon: .init(templateImageName: "Library Icon"),
+            userInfo: nil
+        ))
+        
+        availableShortcutItems.append(.init(
+            type: AppShortcutType.search.rawValue,
+            localizedTitle: "Search",
+            localizedSubtitle: nil,
+            icon: .init(type: .search),
+            userInfo: nil
+        ))
+        
+        if let lastWatchedEpisode = NineAnimator.default.user.lastEpisode {
+            availableShortcutItems.append(.init(
+                type: AppShortcutType.resumeLastWatched.rawValue,
+                localizedTitle: "Resume Episode",
+                localizedSubtitle: "\(lastWatchedEpisode.name) - \(lastWatchedEpisode.parent.title)",
+                icon: .init(type: .play),
+                userInfo: nil
+            ))
+        }
+        
+        // Update the shortcut items
+        application.shortcutItems = availableShortcutItems
+    }
+    
+    /// Perform the quick action
+    func performQuickAction(_ shortcutItem: UIApplicationShortcutItem) {
+        guard let shortcutType = AppShortcutType(rawValue: shortcutItem.type) else {
+            return
+        }
+        
+        switch shortcutType {
+        case .library:
+            // Navigate to the library scene
+            RootViewController.navigateWhenReady(toScene: .library)
+        case .search:
+            // Search scene
+            RootViewController.navigateWhenReady(toScene: .search)
+        case .resumeLastWatched:
+            // Resume the last watched episode
+            if let episodeLink = NineAnimator.default.user.lastEpisode {
+                RootViewController.open(whenReady: .episode(episodeLink))
+            }
+        }
+    }
+    
+    /// Declaration of shortcut types
+    enum AppShortcutType: String {
+        case library = "com.marcuszhou.nineanimator.shortcut.library"
+        case resumeLastWatched = "com.marcuszhou.nineanimator.shortcut.resumeLast"
+        case search = "com.marcuszhou.nineanimator.shortcut.search"
     }
 }

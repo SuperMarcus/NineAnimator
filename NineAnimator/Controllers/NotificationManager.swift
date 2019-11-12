@@ -151,7 +151,8 @@ extension UserNotificationManager {
     func retrive(for anime: AnimeLink) -> WatchedAnime? {
         do {
             let persistUrl = self.url(for: anime)
-            if try persistUrl.checkResourceIsReachable() {
+            if FileManager.default.fileExists(atPath: persistUrl.path),
+                try persistUrl.checkResourceIsReachable() {
                 let serializedWatcher = try Data(contentsOf: persistUrl)
                 let decoer = PropertyListDecoder()
                 return try decoer.decode(WatchedAnime.self, from: serializedWatcher)
@@ -259,19 +260,27 @@ extension UserNotificationManager {
         }
     }
     
+    func hasNotifications(for anime: AnimeLink) -> NineAnimatorPromise<Bool> {
+        return NineAnimatorPromise {
+            self.hasNotifications(for: anime, $0)
+            return nil
+        }
+    }
+    
     /// Retrieve the list of anime with notifications delivered to
     func animeWithNotifications(searchIn pool: [AnimeLink] = NineAnimator.default.user.subscribedAnimes) -> NineAnimatorPromise<[AnimeLink]> {
-        let notificationCenter = UNUserNotificationCenter.current()
-        let promise = NineAnimatorPromise<[AnimeLink]>(nil)
-        notificationCenter.getDeliveredNotifications {
-            [weak promise] notifications in
-            if let promise = promise {
-                promise.resolve(pool.filter {
-                    link in notifications.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(link) }
-                })
+        return NineAnimatorPromise<[UNNotification]> {
+            callback in
+            let notificationCenter = UNUserNotificationCenter.current()
+            notificationCenter.getDeliveredNotifications { callback($0, nil) }
+            return nil
+        } .then {
+            notifications in pool.filter {
+                link in notifications.contains {
+                    $0.request.identifier == .episodeUpdateNotificationIdentifier(link)
+                }
             }
         }
-        return promise
     }
 }
 
@@ -300,6 +309,7 @@ extension UserNotificationManager {
             return completionHandler(.failed)
         }
         
+        let synchronizingQueue = DispatchQueue.global()
         let watchedAnimeLinks = NineAnimator.default.user.subscribedAnimes
         var resultsPool = [FetchResult?]()
         
@@ -333,41 +343,46 @@ extension UserNotificationManager {
                 return nil
             }
             
-            return animeLink.retrive { anime, _ in
-                defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
-                
-                guard let anime = anime else { return resultsPool.append(nil) }
-                
-                var result = FetchResult(animeLink, [], [])
-                
-                if let currentWatcher = self.retrive(for: animeLink) {
-                    result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
-                        !currentWatcher.episodeNames.contains($0)
-                    }
-                    result.availableServerNames = result
-                        .newEpisodeTitles
-                        .flatMap(anime.episodes.links)
-                        .reduce(into: [Anime.ServerIdentifier]()) {
-                            if !$0.contains($1.server) {
-                                $0.append($1.server)
-                            }
-                        }
-                        .compactMap { anime.servers[$0] }
+            return animeLink.retrive { [weak self] anime, _ in
+                synchronizingQueue.async {
+                    guard let self = self else { return }
                     
-                    // Post notification to user
-                    self.notify(result: result)
-                } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
-                
-                // If unable to retrive the persisted episodes (maybe deleted by the system)
-                // Just store the latest version without posting any notifications.
-                self.update(anime)
-                
-                resultsPool.append(result)
+                    defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
+                    
+                    guard let anime = anime else { return resultsPool.append(nil) }
+                    
+                    var result = FetchResult(animeLink, [], [])
+                    
+                    if let currentWatcher = self.retrive(for: animeLink) {
+                        result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
+                            !currentWatcher.episodeNames.contains($0)
+                        }
+                        result.availableServerNames = result
+                            .newEpisodeTitles
+                            .flatMap(anime.episodes.links)
+                            .reduce(into: [Anime.ServerIdentifier]()) {
+                                if !$0.contains($1.server) {
+                                    $0.append($1.server)
+                                }
+                            }
+                            .compactMap { anime.servers[$0] }
+                        
+                        // Post notification to user
+                        self.notify(result: result)
+                    } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
+                    
+                    // If unable to retrive the persisted episodes (maybe deleted by the system)
+                    // Just store the latest version without posting any notifications.
+                    self.update(anime)
+                    
+                    // Add the results to the pool
+                    resultsPool.append(result)
+                    
+                    // This is just in case we skipped everything
+                    if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
+                }
             }
         }
-        
-        // This is just in case we skipped everything
-        if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
     }
     
     /**
@@ -471,17 +486,17 @@ extension UserNotificationManager {
 // MARK: - Notification identifiers/File Name paths
 extension String {
     static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
-        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(anime.link.hashValue)"
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
+        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(linkHashRepresentation)"
     }
     
     static func animePersistFilenameComponent(_ anime: AnimeLink) -> String {
-        // As short as possible
-        let linkHashRepresentation = String(anime.link.hashValue, radix: 36, uppercase: true)
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.anime.\(linkHashRepresentation).plist"
     }
     
     static func cachedPosterFilenameComponent(_ anime: AnimeLink) -> String {
-        let linkHashRepresentation = String(anime.link.hashValue, radix: 36, uppercase: true)
+        let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.poster.\(linkHashRepresentation).jpg"
     }
 }

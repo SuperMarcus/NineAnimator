@@ -420,57 +420,55 @@ extension AnimeViewController {
         
         episodeRequestTask = anime!.episode(with: episodeLink) {
             [weak self, weak trackingContext] episode, error in
-            guard let self = self else { return }
-            guard let episode = episode else {
-                // Present the error in main loop
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                guard let episode = episode else {
+                    // Present the error in main loop
                     self.presentError(error!) {
                         [weak self] _ in
                         self?.selectedEpisodeCell = nil
                         self?.tableView.deselectSelectedRow()
                     }
+                    return Log.error(error)
                 }
-                return Log.error(error)
-            }
-            self.episode = episode
-            
-            // Save episode to last playback
-            NineAnimator.default.user.entering(episode: episodeLink)
-            
-            Log.info("Episode target retrived for '%@'", episode.name)
-            Log.debug("- Playback target: %@", episode.target)
-            
-            if episode.nativePlaybackSupported {
-                // Prime the HMHomeManager
-                HomeController.shared.primeIfNeeded()
+                self.episode = episode
                 
-                self.episodeRequestTask = episode.retrive {
-                    [weak self] media, error in
-                    guard let self = self else { return }
+                // Save episode to last playback
+                NineAnimator.default.user.entering(episode: episodeLink)
+                
+                Log.info("Episode target retrived for '%@'", episode.name)
+                Log.debug("- Playback target: %@", episode.target)
+                
+                if episode.nativePlaybackSupported {
+                    // Prime the HMHomeManager
+                    HomeController.shared.primeIfNeeded()
                     
-                    defer { clearSelection() }
-                    
-                    self.episodeRequestTask = nil
-                    
-                    guard let media = media else {
-                        Log.error("Item not retrived: \"%@\"", error!)
-                        DispatchQueue.main.async { [weak self] in
-                            self?.onPlaybackMediaStall(episode.target)
+                    self.episodeRequestTask = episode.retrive {
+                        [weak self] media, error in DispatchQueue.main.async {
+                            guard let self = self else { return }
+                            
+                            defer { clearSelection() }
+                            
+                            self.episodeRequestTask = nil
+                            
+                            guard let media = media else {
+                                Log.error("Item not retrived: \"%@\"", error!)
+                                self.onPlaybackMediaStall(episode.target)
+                                return
+                            }
+                            
+                            // Call media retrieved handler
+                            self.onPlaybackMediaRetrieved(media, episode: episode)
                         }
-                        return
                     }
-                    
-                    DispatchQueue.main.async { [weak self] in
-                        self?.onPlaybackMediaRetrieved(media, episode: episode)
-                    }
+                } else {
+                    // Always stall unsupported episodes and update the progress to 1.0
+                    self.onPlaybackMediaStall(episode.target)
+                    episode.update(progress: 1.0)
+                    // Update tracking state
+                    trackingContext?.endWatching(episode: episode.link)
+                    clearSelection()
                 }
-            } else {
-                // Always stall unsupported episodes and update the progress to 1.0
-                self.onPlaybackMediaStall(episode.target)
-                episode.update(progress: 1.0)
-                // Update tracking state
-                trackingContext?.endWatching(episode: episode.link)
-                clearSelection()
             }
         }
     }

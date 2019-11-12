@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fPS-uI-lY6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fPS-uI-lY6">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -425,7 +425,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ocg-ub-rBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2768" y="392"/>
+            <point key="canvasLocation" x="2768" y="573"/>
         </scene>
         <!--AnimePlayer-->
         <scene sceneID="qrR-zZ-1G7">
@@ -435,7 +435,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BNo-bS-fYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765" y="439"/>
+            <point key="canvasLocation" x="2765" y="256"/>
         </scene>
         <!--Search Page Container-->
         <scene sceneID="MXd-JU-4RM">
@@ -1088,7 +1088,7 @@
         <!--Recent Container-->
         <scene sceneID="xrG-1s-UhK">
             <objects>
-                <navigationController id="rOz-Cr-EMK" userLabel="Recent Container" customClass="ApplicationNavigationController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="library.old" id="rOz-Cr-EMK" userLabel="Recent Container" customClass="ApplicationNavigationController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Library" image="Library Icon" id="o2r-J2-aqA"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="oXz-KE-UZf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
@@ -1108,7 +1108,7 @@
                 <viewControllerPlaceholder storyboardName="Settings" id="z0H-w6-yJK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5n-Nk-8CA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2745" y="-457"/>
+            <point key="canvasLocation" x="2745" y="-500"/>
         </scene>
         <!--AnimePlayer-->
         <scene sceneID="fxf-kY-AKA">
@@ -1118,7 +1118,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oWR-t2-rZp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2765" y="-283"/>
+            <point key="canvasLocation" x="2765" y="-225"/>
         </scene>
         <!--Featured Page Container-->
         <scene sceneID="tgu-Qd-uUb">
@@ -1145,7 +1145,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="via-1y-CN0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="960" y="-772"/>
+            <point key="canvasLocation" x="395" y="514"/>
         </scene>
         <!--Library-->
         <scene sceneID="23O-Pl-jwg">
@@ -1155,7 +1155,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ydY-iH-KxA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="198" y="-464"/>
+            <point key="canvasLocation" x="-40" y="514"/>
         </scene>
         <!--Root-->
         <scene sceneID="66E-C5-t73">
@@ -1170,7 +1170,6 @@
                         <segue destination="luB-5E-Zna" kind="relationship" relationship="viewControllers" id="252-OP-dKL"/>
                         <segue destination="QZv-01-MCN" kind="relationship" relationship="viewControllers" id="tJK-3I-Igt"/>
                         <segue destination="a6a-cK-5CU" kind="relationship" relationship="viewControllers" id="eqe-SH-8m8"/>
-                        <segue destination="rOz-Cr-EMK" kind="relationship" relationship="viewControllers" id="kN5-gp-5nF"/>
                         <segue destination="im7-SA-Rzv" kind="relationship" relationship="viewControllers" id="cus-k2-Irs"/>
                     </connections>
                 </tabBarController>

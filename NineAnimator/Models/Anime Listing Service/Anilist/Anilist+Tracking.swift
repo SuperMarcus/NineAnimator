@@ -46,25 +46,24 @@ extension Anilist {
             return
         }
         
-        var updatedTracking = progressTracking(for: reference) ?? ListingAnimeTracking(
-            currentProgress: episodeNumber,
-            episdoes: nil
+        // Obtain the new tracking
+        let updatedTracking = progressTracking(
+            for: reference,
+            withUpdatedEpisodeProgress: episodeNumber
         )
         
-        updatedTracking.currentProgress = episodeNumber
         update(reference, newTracking: updatedTracking)
     }
     
-    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
-        return _mediaTrackingMap[reference]
-    }
-    
     func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {
-        // Make GraphQL mutation request
+        // Make GraphQL mutation request and save the new tracking state if
+        // succeeded.
+        // swiftlint:disable multiline_arguments
         mutationGraphQL(fileQuery: "AniListTrackingMutation", variables: [
             "mediaId": Int(reference.uniqueIdentifier)!,
             "progress": newTracking.currentProgress
-        ])
+        ]) { if $0 { self.donateTracking(newTracking, forReference: reference) } }
+        // swiftlint:enable multiline_arguments
     }
     
     /// Update a tracking state for a particular reference
@@ -73,11 +72,7 @@ extension Anilist {
     /// - `init` of `StaticListingAnimeCollection`
     /// - `Anilist.reference(from: AnimeLink)`
     func contributeReferenceTracking(_ tracking: ListingAnimeTracking, forReference reference: ListingAnimeReference) {
-        var newTracking = tracking
-        if let existingTracking = _mediaTrackingMap[reference] {
-            newTracking.episdoes = newTracking.episdoes ?? existingTracking.episdoes
-        }
-        _mediaTrackingMap[reference] = newTracking
+        donateTracking(tracking, forReference: reference)
     }
     
     /// Create the `ListingAnimeTracking` from query results
@@ -86,7 +81,7 @@ extension Anilist {
         if /* mediaList?.status == .current, */let progress = mediaList?.progress {
             return ListingAnimeTracking(
                 currentProgress: progress,
-                episdoes: media.episodes
+                episodes: media.episodes
             )
         } else { return nil }
     }

@@ -48,19 +48,27 @@ extension MyAnimeList {
             var parameters = self.additionalQueryParameters
             parameters["limit"] = 5
             parameters["offset"] = requestingPage
-            parameters["fields"] = "media_type,my_list_status{start_date,finish_date}"
+            parameters["fields"] = "media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
             
             // Initiate the request
             currentFetchTask = parent.apiRequest(
                     apiPath,
                     query: parameters
                 ) .then {
-                    [unowned parent, weak self] response -> [ListingAnimeReference]? in
+                    [unowned parent, weak self] response -> [(ListingAnimeReference, ListingAnimeTracking?)]? in
                     guard let self = self else { return nil }
                     // Parse the references
                     let references = try response.data.compactMap {
-                        $0["node"] as? NSDictionary
-                    } .map { try ListingAnimeReference(parent, withAnimeNode: $0) }
+                        $0.valueIfPresent(at: "node", type: NSDictionary.self)
+                    } .map {
+                        animeNode -> (ListingAnimeReference, ListingAnimeTracking?) in
+                        let reference = try ListingAnimeReference(
+                            parent,
+                            withAnimeNode: animeNode
+                        )
+                        let tracking = parent.constructTracking(fromAnimeNode: animeNode)
+                        return (reference, tracking)
+                    }
                     
                     // Save the offset to the next page
                     self.nextPageOffset = response.nextPageOffset
@@ -72,9 +80,14 @@ extension MyAnimeList {
                     self.delegate?.onError($0, from: self)
                     self.currentFetchTask = nil
                 } .finally {
-                    [weak self] section in
+                    [weak self, unowned parent] section in
                     guard let self = self else { return }
-                    self.loadedPages.append(section)
+                    self.loadedPages.append(section.reduce(
+                        into: []
+                    ) { // Construct the refrence list while donating the tracking to the parent
+                        $0.append($1.0)
+                        parent.donateTracking($1.1, forReference: $1.0)
+                    })
                     self.delegate?.pageIncoming(self.availablePages - 1, from: self)
                     self.currentFetchTask = nil
                 }

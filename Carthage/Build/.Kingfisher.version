@@ -3,12 +3,12 @@
   "iOS" : [
     {
       "name" : "KingfisherSwiftUI",
-      "hash" : "afcaf3f00aa75b1ae37e364d55174cea784373842550565339a6758216ab4bde",
+      "hash" : "8cbc8a10536067ff2f84068e5d5fd3f896413053d8d16f791dafcad348f14485",
       "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
     },
     {
       "name" : "Kingfisher",
-      "hash" : "f3ae9d52bbaad22cfe9b1e4edcf3a91954c9a3fccd7330e3b87cd992c7bdc2c6",
+      "hash" : "75c321e92855e08cabff93f00e9e6102f5fd8923d6694fe396928162dd4d9c8f",
       "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
     }
   ]

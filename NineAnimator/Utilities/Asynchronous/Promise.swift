@@ -170,7 +170,8 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         // Set resolve callback
         chainedPromiseCallback = {
-            result in
+            [weak promise] result in
+            guard let promise = promise else { return }
             do {
                 if let nextResult = try nextFunction(result) {
                     promise.resolve(nextResult)
@@ -180,7 +181,11 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         // Pass on the error if no handler is set
         if chainedErrorCallback == nil {
-            chainedErrorCallback = { error in promise.reject(error) }
+            chainedErrorCallback = {
+                [weak promise] error in
+                guard let promise = promise else { return }
+                promise.reject(error)
+            }
         }
         
         return promise
@@ -201,7 +206,8 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         untilThenPromise.chainedReference = self
         
         chainedPromiseCallback = {
-            result in
+            [weak untilThenPromise] result in
+            guard let untilThenPromise = untilThenPromise else { return }
             do {
                 if let promise = try nextPromise(result) {
                     // Run the promise and save the reference in the
@@ -218,7 +224,10 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
         
         // Pass on the error if no handler is set
         if chainedErrorCallback == nil {
-            chainedErrorCallback = { error in untilThenPromise.reject(error) }
+            chainedErrorCallback = {
+                [weak untilThenPromise] error in
+                untilThenPromise?.reject(error)
+            }
         }
         
         return untilThenPromise

@@ -23,6 +23,9 @@ import Foundation
 class BaseListingService: SessionDelegate {
     var identifier: String { return "" }
     
+    /// An internal structure that stores and maps the `ListingAnimeReference` to the `ListingAnimeTracking`
+    private var referenceToTrackingMap = [ListingAnimeReference: ListingAnimeTracking]()
+    
     var persistedProperties: [String: Any] {
         get {
             do {
@@ -39,7 +42,8 @@ class BaseListingService: SessionDelegate {
                     .appendingPathComponent("\(identifier).plist")
                 
                 // Unserialize if the file exists
-                if (try? propertyPersistentFile.checkResourceIsReachable()) == true {
+                if FileManager.default.fileExists(atPath: propertyPersistentFile.path),
+                    (try? propertyPersistentFile.checkResourceIsReachable()) == true {
                     let persistedPropertiesData = try Data(contentsOf: propertyPersistentFile)
                     if let decodedProperties = try PropertyListSerialization.propertyList(
                             from: persistedPropertiesData,
@@ -126,4 +130,35 @@ class BaseListingService: SessionDelegate {
     
     /// A template onRegister method
     func onRegister() { }
+    
+    /// Retrieve the corresponding `ListingAnimeTracking` for the reference
+    func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
+        return referenceToTrackingMap[reference]
+    }
+    
+    /// Obtain the corresponding `ListingAnimeTracking` for the reference with an updated progress.
+    ///
+    /// - Note: If no previous `ListingAnimeTracking` is found, a new one is created with only the progress.
+    /// - Important: Calling this method does not update the `ListingAnimeTracking` in the internal map.
+    func progressTracking(for reference: ListingAnimeReference, withUpdatedEpisodeProgress newProgress: Int) -> ListingAnimeTracking {
+        return progressTracking(for: reference)?.newTracking(withUpdatedProgress: newProgress)
+            ?? ListingAnimeTracking(currentProgress: newProgress, episodes: nil)
+    }
+    
+    /// Update the tracking state for the reference
+    ///
+    /// - Important: If the new tracking's `episodes` property is nil, the previous `episodes` value is used and stored.
+    func donateTracking(_ tracking: ListingAnimeTracking?, forReference reference: ListingAnimeReference) {
+        // Obtain a mutable tracking
+        var processedTracking = tracking
+        
+        // If the episodes of the new tracking is not set, use the previous value
+        if let tracking = tracking,
+            let existingTracking = self.referenceToTrackingMap[reference] {
+            processedTracking?.episodes = tracking.episodes ?? existingTracking.episodes
+        }
+        
+        // Store the new tracking value in the interval structure
+        self.referenceToTrackingMap[reference] = processedTracking
+    }
 }

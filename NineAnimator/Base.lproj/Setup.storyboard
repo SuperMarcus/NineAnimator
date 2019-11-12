@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -179,7 +179,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-0J-JNE">
-                                <rect key="frame" x="104" y="179" width="167" height="36"/>
+                                <rect key="frame" x="104.00000000000001" y="179" width="167.33333333333337" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -225,8 +225,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Watch Next" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-B2-M5f">
-                                                <rect key="frame" x="94.333333333333329" y="22.666666666666657" width="200.66666666666669" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-B2-M5f">
+                                                <rect key="frame" x="94.333333333333329" y="22.333333333333343" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="eAS-am-UIV"/>
                                                 </constraints>
@@ -244,9 +244,9 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator now includes a Watch Next tab for you to discover new anime." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
-                                                <rect key="frame" x="94.333333333333329" y="48.666666666666686" width="208.66666666666669" height="43"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned from the ground up, tuned to present you with the most useful information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
+                                                <rect key="frame" x="94.333333333333329" y="48.333333333333314" width="208.66666666666669" height="52.666666666666657"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                                 <userDefinedRuntimeAttributes>
@@ -254,10 +254,10 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <variation key="widthClass=compact">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 </variation>
                                                 <variation key="widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -269,9 +269,9 @@
                                             <constraint firstItem="xwc-kf-mgL" firstAttribute="top" secondItem="ouh-B2-M5f" secondAttribute="bottom" constant="2" id="Z15-xy-mS3"/>
                                             <constraint firstItem="8DS-lO-J59" firstAttribute="width" secondItem="Es9-cv-aHe" secondAttribute="width" multiplier="0.2" id="gRj-62-erO"/>
                                             <constraint firstAttribute="trailing" secondItem="xwc-kf-mgL" secondAttribute="trailing" constant="8" id="gxj-JT-u5i"/>
-                                            <constraint firstItem="ouh-B2-M5f" firstAttribute="bottom" secondItem="8DS-lO-J59" secondAttribute="centerY" priority="500" id="kcM-Vc-Qec"/>
+                                            <constraint firstItem="ouh-B2-M5f" firstAttribute="bottom" secondItem="8DS-lO-J59" secondAttribute="centerY" multiplier="0.8" priority="500" id="kcM-Vc-Qec"/>
                                             <constraint firstAttribute="trailing" secondItem="ouh-B2-M5f" secondAttribute="trailing" constant="16" id="noh-t7-mpW"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xwc-kf-mgL" secondAttribute="bottom" constant="24" id="qTP-Ox-ol5"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xwc-kf-mgL" secondAttribute="bottom" constant="12" id="qTP-Ox-ol5"/>
                                             <constraint firstItem="ouh-B2-M5f" firstAttribute="leading" secondItem="8DS-lO-J59" secondAttribute="trailing" constant="24" id="wdN-YH-4y3"/>
                                         </constraints>
                                     </view>
@@ -303,8 +303,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Tracking Service" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
-                                                <rect key="frame" x="94.333333333333329" y="21.666666666666629" width="200.66666666666669" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
+                                                <rect key="frame" x="94.333333333333329" y="22" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="F5o-pt-dez"/>
                                                 </constraints>
@@ -322,8 +322,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator now has experimental support for Simkl as a tracking service. Sign in available in the Preference menu." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
-                                                <rect key="frame" x="94.333333333333329" y="47.666666666666629" width="208.66666666666669" height="52.666666666666657"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator now includes built-in progress editing capability for some anime lists (Anilist and MyAnimeList)." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
+                                                <rect key="frame" x="94.333333333333329" y="48" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -335,7 +335,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 </variation>
                                                 <variation key="widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -343,11 +343,11 @@
                                         <constraints>
                                             <constraint firstItem="JH6-I0-KQl" firstAttribute="leading" secondItem="XD8-rz-uSl" secondAttribute="leading" constant="8" id="Aq3-Op-ecn"/>
                                             <constraint firstItem="V1d-j4-fS2" firstAttribute="leading" secondItem="JH6-I0-KQl" secondAttribute="trailing" constant="24" id="EBA-fl-Fe4"/>
-                                            <constraint firstItem="TMt-Pq-6FS" firstAttribute="bottom" secondItem="JH6-I0-KQl" secondAttribute="centerY" priority="500" id="KeK-dA-kW5"/>
+                                            <constraint firstItem="TMt-Pq-6FS" firstAttribute="bottom" secondItem="JH6-I0-KQl" secondAttribute="centerY" multiplier="0.8" priority="500" id="KeK-dA-kW5"/>
                                             <constraint firstItem="TMt-Pq-6FS" firstAttribute="leading" secondItem="JH6-I0-KQl" secondAttribute="trailing" constant="24" id="Smr-ao-iji"/>
                                             <constraint firstAttribute="trailing" secondItem="TMt-Pq-6FS" secondAttribute="trailing" constant="16" id="ZTi-dQ-wfo"/>
                                             <constraint firstAttribute="trailing" secondItem="V1d-j4-fS2" secondAttribute="trailing" constant="8" id="dJa-WK-uAb"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1d-j4-fS2" secondAttribute="bottom" constant="15" id="foc-lL-iXX"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="V1d-j4-fS2" secondAttribute="bottom" constant="12" id="foc-lL-iXX"/>
                                             <constraint firstItem="V1d-j4-fS2" firstAttribute="top" secondItem="TMt-Pq-6FS" secondAttribute="bottom" constant="2" id="kix-Hi-gp2"/>
                                             <constraint firstItem="JH6-I0-KQl" firstAttribute="width" secondItem="XD8-rz-uSl" secondAttribute="width" multiplier="0.2" id="oh6-L4-KWr"/>
                                             <constraint firstItem="JH6-I0-KQl" firstAttribute="centerY" secondItem="XD8-rz-uSl" secondAttribute="centerY" id="sla-QH-Ze3"/>
@@ -381,7 +381,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Compatibility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
-                                                <rect key="frame" x="94.333333333333329" y="30" width="200.66666666666669" height="24"/>
+                                                <rect key="frame" x="94.333333333333329" y="23.666666666666686" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
                                                 </constraints>
@@ -399,8 +399,9 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator is now compatible with the latest iOS 13. Appearances is now capable of being synced with the system." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
-                                                <rect key="frame" x="94.333333333333329" y="56" width="208.66666666666669" height="36"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                                <rect key="frame" x="94.333333333333329" y="49.666666666666686" width="208.66666666666669" height="52.666666666666657"/>
+                                                <string key="text">This version of NineAnimator improves the compatibility with the new iOS 13 while maintaining support for older systems and devices.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -409,10 +410,10 @@
                                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <variation key="widthClass=compact">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                 </variation>
                                                 <variation key="widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 </variation>
                                             </label>
                                         </subviews>
@@ -420,8 +421,8 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="7Kf-LC-01q" secondAttribute="trailing" constant="16" id="A8E-rc-K8b"/>
                                             <constraint firstAttribute="trailing" secondItem="f1Q-9Z-lK6" secondAttribute="trailing" constant="8" id="DtM-h5-439"/>
-                                            <constraint firstItem="7Kf-LC-01q" firstAttribute="bottom" secondItem="keW-rL-lk1" secondAttribute="centerY" priority="500" id="KEd-gC-r5V"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f1Q-9Z-lK6" secondAttribute="bottom" constant="27" id="Otk-np-MPE"/>
+                                            <constraint firstItem="7Kf-LC-01q" firstAttribute="bottom" secondItem="keW-rL-lk1" secondAttribute="centerY" multiplier="0.8" priority="500" id="KEd-gC-r5V"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f1Q-9Z-lK6" secondAttribute="bottom" constant="12" id="Otk-np-MPE"/>
                                             <constraint firstItem="keW-rL-lk1" firstAttribute="width" secondItem="07v-sr-Jlp" secondAttribute="width" multiplier="0.2" id="cBL-pd-0cP"/>
                                             <constraint firstItem="f1Q-9Z-lK6" firstAttribute="leading" secondItem="keW-rL-lk1" secondAttribute="trailing" constant="24" id="gMr-tC-Weq"/>
                                             <constraint firstItem="keW-rL-lk1" firstAttribute="leading" secondItem="07v-sr-Jlp" secondAttribute="leading" constant="8" id="jdL-cx-Qke"/>
@@ -641,7 +642,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select A Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RjP-7k-vGp">
-                                <rect key="frame" x="69" y="120" width="237" height="36"/>
+                                <rect key="frame" x="69.333333333333314" y="120" width="236.66666666666669" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>

@@ -19,6 +19,12 @@
 
 import UIKit
 
+/// A layout helper for building a minimal size based line filled collection view
+///
+/// A few steps to adapt this helper
+/// - Add the class variable `var layoutHelper = MinFilledFlowLayoutHelper(...)`
+/// - Configure the collection view using `layoutHelper.configure(collectionView: collectionView)` on `viewDidLoad`
+/// - Forward `viewWillTransition()` and `viewWillAppear()` events to the helper
 class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     typealias LineLayoutParameters = (
         ordinary: CGSize,
@@ -44,10 +50,18 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     /// If the cells should always fill the line space
     private var alwaysFillLine: Bool
     
-    init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSize: CGSize...) {
+    convenience init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSize: CGSize...) {
+        self.init(
+            dataSource: dataSource,
+            alwaysFillLine: alwaysFillLine,
+            minimalSizes: minimalSize
+        )
+    }
+    
+    init(dataSource: UICollectionViewDataSource, alwaysFillLine: Bool, minimalSizes: [CGSize]) {
         // Store parameters
         self.dataSource = dataSource
-        self.minimalSizes = minimalSize
+        self.minimalSizes = minimalSizes
         self.previousSpace = .zero
         self.cachedLayoutParameters = [:]
         self.alwaysFillLine = alwaysFillLine
@@ -58,7 +72,26 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     func configure(collectionView: UICollectionView) {
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.estimatedItemSize = .zero
+            layout.sectionInsetReference = .fromLayoutMargins
+            collectionView.contentInsetAdjustmentBehavior = .always
         }
+    }
+    
+    /// Call from `viewWillTransition`
+    func viewWillTransition(coordinator: UIViewControllerTransitionCoordinator, in collectionView: UICollectionView) {
+        coordinator.animate(alongsideTransition: {
+            _ in
+            collectionView.performBatchUpdates({
+                collectionView.collectionViewLayout.invalidateLayout()
+                collectionView.setNeedsLayout()
+            }, completion: nil)
+            collectionView.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    /// Call from `viewWillAppear`
+    func viewWillAppear(_ collectionView: UICollectionView) {
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -89,17 +122,34 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
             section: indexPath.section
         )
         
+        // Obtain the unit parameters
+        let unitParameters = layoutParameters(
+            forIndex: indexPath,
+            inCollection: collectionView,
+            parameters: parameters
+        )
+        let resultingSize: CGSize
+        
+        // If the item is not in the last line or the fill line option is not enabled,
+        // always returns the ordinal size
+        if indexPath.item < parameters.lastLineOffset
+            || !shouldFillLine(collectionView, for: indexPath.section) {
+            resultingSize = parameters.ordinary
+        } else if shouldAlignLastLine(collectionView, for: indexPath.section) {
+            // If the alignment option is enabled, return normal size for all except
+            // the last cell in the last line
+            if unitParameters.item == unitParameters.itemsInLine - 1 {
+                resultingSize = .init(
+                    width: (parameters.lastLine.width * CGFloat(unitParameters.itemsInLine))
+                        - parameters.ordinary.width * CGFloat(unitParameters.itemsInLine - 1),
+                    height: (parameters.lastLine.height * CGFloat(unitParameters.itemsInLine))
+                        - parameters.ordinary.height * CGFloat(unitParameters.itemsInLine - 1)
+                )
+            } else { resultingSize = parameters.ordinary }
+        } else { resultingSize = parameters.lastLine } // Else returns the last line size
+        
         // Make delegate calls
         if let minFilledDelegate = collectionView.delegate as? MinFilledLayoutDelegate {
-            let unitParameters = LayoutParameters(
-                item: indexPath.item % parameters.ordinaryLineUnitCount,
-                line: indexPath.item / parameters.ordinaryLineUnitCount,
-                itemsInLine: alwaysFillLine ? (indexPath.item < parameters.lastLineOffset
-                    ? parameters.ordinaryLineUnitCount : parameters.lastLineOffset)
-                    : parameters.ordinaryLineUnitCount,
-                numberOfLines: parameters.numberOfLines
-            )
-            
             // Call the delegate method
             minFilledDelegate.minFilledLayout?(
                 collectionView,
@@ -108,24 +158,35 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
             )
         }
         
-        return !alwaysFillLine || indexPath.item < parameters.lastLineOffset
-            ? parameters.ordinary : parameters.lastLine
+        return resultingSize
     }
     
     /// Obtain the cached layout attributes for `indexPath`
-    func layoutParameters(forIndex indexPath: IndexPath) -> LayoutParameters? {
+    func layoutParameters(forIndex indexPath: IndexPath, inCollection collectionView: UICollectionView) -> LayoutParameters? {
         if let parameters = cachedLayoutParameters[indexPath.section] {
-            return LayoutParameters(
-                item: indexPath.item % parameters.ordinaryLineUnitCount,
-                line: indexPath.item / parameters.ordinaryLineUnitCount,
-                itemsInLine: alwaysFillLine ? (indexPath.item < parameters.lastLineOffset
-                    ? parameters.ordinaryLineUnitCount : parameters.lastLineOffset)
-                    : parameters.ordinaryLineUnitCount,
-                numberOfLines: parameters.numberOfLines
+            return layoutParameters(
+                forIndex: indexPath,
+                inCollection: collectionView,
+                parameters: parameters
             )
         }
         
         return nil
+    }
+    
+    /// Obtain the unit layout parameters calculated based on line parameters
+    private func layoutParameters(forIndex indexPath: IndexPath, inCollection collectionView: UICollectionView, parameters: LineLayoutParameters) -> LayoutParameters {
+        let parameterItemsCount = shouldFillLine(collectionView, for: indexPath.section)
+            ? ( // Filling line, returning the last line unit count for last line
+                indexPath.item < parameters.lastLineOffset
+                    ? parameters.ordinaryLineUnitCount : parameters.lastLineUnitCount
+            ) : parameters.ordinaryLineUnitCount
+        return LayoutParameters(
+            item: indexPath.item % parameters.ordinaryLineUnitCount,
+            line: indexPath.item / parameters.ordinaryLineUnitCount,
+            itemsInLine: parameterItemsCount,
+            numberOfLines: parameters.numberOfLines
+        )
     }
     
     /// Forcefully clear the cached layouts for each element
@@ -218,6 +279,21 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
         return minimalSizes[min(section, minimalSizes.count - 1)]
     }
     
+    private func shouldFillLine(_ collectionView: UICollectionView, for section: Int) -> Bool {
+        var result = alwaysFillLine
+        if let delegate = collectionView.delegate as? MinFilledLayoutDelegate {
+            result = delegate.minFilledLayout?(collectionView, shouldFillLineForSection: section) ?? result
+        }
+        return result
+    }
+    
+    private func shouldAlignLastLine(_ collectionView: UICollectionView, for section: Int) -> Bool {
+        return (collectionView.delegate as? MinFilledLayoutDelegate)?.minFilledLayout?(
+            collectionView,
+            shouldAlignLastLineItemsInSection: section
+        ) ?? false
+    }
+    
     private func interitemSpacing(for collectionView: UICollectionView, layout: UICollectionViewFlowLayout, section: Int) -> CGFloat {
         var result = layout.minimumInteritemSpacing
         if let delegate = collectionView.delegate as? UICollectionViewDelegateFlowLayout {
@@ -271,4 +347,8 @@ extension MinFilledFlowLayoutHelper {
 
 @objc protocol MinFilledLayoutDelegate {
     @objc optional func minFilledLayout(_ collectionView: UICollectionView, didLayout indexPath: IndexPath, withParameters: MinFilledFlowLayoutHelper.LayoutParameters)
+    
+    @objc optional func minFilledLayout(_ collectionView: UICollectionView, shouldFillLineForSection section: Int) -> Bool
+    
+    @objc optional func minFilledLayout(_ collectionView: UICollectionView, shouldAlignLastLineItemsInSection section: Int) -> Bool
 }

@@ -45,6 +45,20 @@ class LibraryCategoryCell: UICollectionViewCell, Themable {
     }
     
     func theme(didUpdate theme: Theme) {
-        backgroundColor = theme.background
+        updateTouchReactionTint()
+    }
+    
+    override var isHighlighted: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    override var isSelected: Bool {
+        didSet { updateTouchReactionTint() }
+    }
+    
+    private func updateTouchReactionTint() {
+        let shouldTint = isHighlighted || isSelected
+        backgroundColor = shouldTint
+            ? category.tintColor.withAlphaComponent(0.6) : Theme.current.background
     }
 }

@@ -36,7 +36,8 @@ extension NASourceWonderfulSubs {
                 .appendingPathComponent(series)
             return self.request(
                 ajaxPathDictionary: "/api/media/series",
-                query: [ "series": series ]
+                query: [ "series": series ],
+                headers: [ "Referer": url.absoluteString ]
             ) .then { ($0, reconstructedLink) }
         } .then {
             [endpointURL] response, link in

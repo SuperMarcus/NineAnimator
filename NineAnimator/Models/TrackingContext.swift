@@ -59,6 +59,21 @@ class TrackingContext {
     
     private var current: EpisodeLink?
     
+    /// Retrieve the most recent playback record for the anime
+    ///
+    /// The most recent record is always appended to the back of the list, so
+    /// this getter is an alias of progressRecords.last
+    var mostRecentRecord: PlaybackProgressRecord? {
+        return progressRecords.last
+    }
+    
+    /// Latest record of the furtherest episode
+    var furtherestEpisodeRecord: PlaybackProgressRecord? {
+        return progressRecords.max {
+            $0.episodeNumber < $1.episodeNumber
+        }
+    }
+    
     /// Create the TrackingContext for the AnimeLink
     init(_ parent: NineAnimator, link: AnimeLink) {
         self.parent = parent
@@ -395,13 +410,19 @@ extension TrackingContext {
         previousSessionServer = currentSessionServer
     }
     
-    /// Infer the episode number based on the name of the episode
+    /// Infer the episode number from the `EpisodeLink`
     func suggestingEpisodeNumber(for episodeLink: EpisodeLink) -> Int? {
         // Conventionally in NineAnimator, the episode number always prefixes
         // the episode name with the rest of the name seperated by a space and
         // a dash (e.g. 01 - Episode Name)
         let episodeName = episodeLink.name
         
+        // Call the name-based infer method
+        return suggestingEpisodeNumber(forEpisodeName: episodeName)
+    }
+    
+    /// Infer the episode number based on the name of the episode
+    func suggestingEpisodeNumber(forEpisodeName episodeName: String) -> Int? {
         // Get the prefix section
         guard let episodeNamePrefixSection = episodeName.split(separator: " ").first else {
             return nil

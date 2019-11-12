@@ -43,7 +43,8 @@ extension NASourceWonderfulSubs {
             _queryTask = parent
                 .request(
                     ajaxPathDictionary: "/api/media/search",
-                    query: [ "q": query ]
+                    query: [ "q": query ],
+                    headers: [ "Referer": parent.endpoint ]
                 )
                 .then {
                     [unowned parent] response -> [AnimeLink] in
