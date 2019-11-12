@@ -341,7 +341,7 @@ fileprivate extension AppDelegate {
             type: AppShortcutType.search.rawValue,
             localizedTitle: "Search",
             localizedSubtitle: nil,
-            icon: .init(systemImageName: "magnifyingglass"),
+            icon: .init(type: .search),
             userInfo: nil
         ))
         
