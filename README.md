@@ -11,6 +11,9 @@
     <a href="https://discord.gg/dzTVzeW">
         <img src="https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue" alt="Discord Server"/>
     </a>
+    <a href="https://testflight.apple.com/join/SzIVhF6w">
+        <img src="https://img.shields.io/badge/join-TestFlight-blue.svg" alt="Join TestFlight"/>
+    </a>
 </p>
 <p align="center">
     <a href="https://github.com/Carthage/Carthage">
@@ -113,9 +116,9 @@ locally cached episodes.
 
 <img src="Misc/Media/notification_example.jpg" width="320" />
 
-To subscribe an anime, swipe on the anime from left to right in the Recents tab.
+To subscribe an anime, long press on the anime in the Recents category of your Library.
 
-<img src="Misc/Media/subscribe_recent_tab.jpg" width="320" />
+<img src="Misc/Media/recents_long_press.jpeg" width="320" />
 
 Or simply tap on the subscribe button when you are viewing any anime.
 
@@ -183,6 +186,8 @@ entries:
 - `history`: A list of serialized `AnimeLink` objects from the recently watched tab.
 - `progresses`: A dictionary keyed by the episode identifier for the persisted playback progresses.
 - `exportedDate`: The `Date` that this file is generated.
+- `trackingData`: A dictionary keyed by `AnimeLink` for the serialized `TrackingContext`.
+- `subscriptions`: A list of serialized `AnimeLink` for your subscribed anime.
 
 See [StatesSerialization.swift](NineAnimator/Utilities/StatesSerialization.swift) for
 implementation details.
@@ -199,41 +204,41 @@ There are some limitations to NineAnimator's ability to download and playback vi
 
 ## Screenshots
 
-### Light Appearance
-
-| Featured Anime | Recently Viewed | Search |
-| ------------------- | ------------------- | -------- |
-| ![1](Misc/Media/Demo/Light/featured.png) | ![2](Misc/Media/Demo/Light/recents.png) | ![3](Misc/Media/Demo/Light/search.png) |
-
-| Search Results | Choose Episodes | Downloads |
-| ----------------- | -------------------- | --------------- |
-| ![4](Misc/Media/Demo/Light/search_results.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
-
-| Featured Anime (iPad) | Picture in Picture (iPad) |
-| ----------------- | -------------------- |
-| ![7](Misc/Media/Demo/Light/featured_ipad.png) | ![8](Misc/Media/Demo/Light/browse_episodes_ipad.png) |
-
-| Anime Information | Anime Information (iPad) |
-| ----------------- | -------------------- |
-| ![9](Misc/Media/Demo/Light/information.png) | ![10](Misc/Media/Demo/Light/information_ipad.png) |
-
 ### Dark Appearance
 
-| Featured Anime | Recently Viewed | Search |
-| ------------------- | ------------------- | -------- |
-| ![1](Misc/Media/Demo/Dark/featured.png) | ![2](Misc/Media/Demo/Dark/recents.png) | ![3](Misc/Media/Demo/Dark/search.png) |
+| Watch Next | Library | Search |
+| ------------- | -------- | -------- |
+| ![1](Misc/Media/Demo/Dark/watch_next.dark.png) | ![2](Misc/Media/Demo/Dark/library.dark.png) | ![3](Misc/Media/Demo/Dark/search.png) |
 
 | Search Results | Choose Episodes | Downloads |
 | ----------------- | -------------------- | --------------- |
 | ![4](Misc/Media/Demo/Dark/search_results.png) | ![5](Misc/Media/Demo/Dark/browse_episodes.png) | ![6](Misc/Media/Demo/Dark/downloads.png) |
 
-| Featured Anime (iPad) | Picture in Picture (iPad) |
+| Recents Anime (iPad) | Picture in Picture (iPad) |
 | ----------------- | -------------------- |
-| ![7](Misc/Media/Demo/Dark/featured_ipad.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
+| ![7](Misc/Media/Demo/Dark/recents_ipad.dark.png) | ![8](Misc/Media/Demo/Dark/browse_episodes_ipad.png) |
 
-| Anime Information | Anime Information (iPad) |
+| Anime Information | Airing Schedule (iPad) |
 | ----------------- | -------------------- |
-| ![9](Misc/Media/Demo/Dark/information.png) | ![10](Misc/Media/Demo/Dark/information_ipad.png) |
+| ![9](Misc/Media/Demo/Dark/information.png) | ![10](Misc/Media/Demo/Dark/calendar_ipad.dark.png) |
+
+### Light Appearance
+
+| Watch Next | Library | Search |
+| ------------- | -------- | -------- |
+| ![1](Misc/Media/Demo/Light/watch_next.light.png) | ![2](Misc/Media/Demo/Light/library.light.png) | ![3](Misc/Media/Demo/Light/search.png) |
+
+| Search Results | Choose Episodes | Downloads |
+| ----------------- | -------------------- | --------------- |
+| ![4](Misc/Media/Demo/Light/search_results.png) | ![5](Misc/Media/Demo/Light/browse_episodes.png) | ![6](Misc/Media/Demo/Light/downloads.png) |
+
+| Recents Anime (iPad) | Picture in Picture (iPad) |
+| ----------------- | -------------------- |
+| ![7](Misc/Media/Demo/Light/recents_ipad.light.png) | ![8](Misc/Media/Demo/Light/browse_episodes_ipad.png) |
+
+| Anime Information | Airing Schedule (iPad) |
+| ----------------- | -------------------- |
+| ![9](Misc/Media/Demo/Light/information.png) | ![10](Misc/Media/Demo/Light/calendar_ipad.light.png) |
 
 ### Google Cast
 
