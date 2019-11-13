@@ -48,7 +48,9 @@ class MinFilledCollectionViewController: UICollectionViewController, MinFilledLa
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        layoutHelper.viewWillTransition(coordinator: coordinator, in: collectionView)
+        if let layoutHelper = layoutHelper {
+            layoutHelper.viewWillTransition(coordinator: coordinator, in: collectionView)
+        } else { Log.error("[MinFilledCollectionViewController] View changing bounds while the layout helper has not been initialized") }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
