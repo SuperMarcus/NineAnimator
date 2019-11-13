@@ -97,7 +97,7 @@ extension MyAnimeList.Collection {
             query: [
                 "status": key,
                 "sort": "anime_title",
-                "limit": 5,
+                "limit": 15,
                 "offset": requestingPage,
                 "fields": "alternative_titles,media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
             ]
