@@ -116,11 +116,11 @@ extension Kitsu {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
         return reauthenticateIfNeeded().then {
             [
-                ("dropped", "Dropped"),
+                ("current", "Currently Watching"),
+                ("planned", "To Watch"),
                 ("completed", "Completed"),
                 ("on_hold", "On Hold"),
-                ("planned", "To Watch"),
-                ("current", "Currently Watching")
+                ("dropped", "Dropped")
             ] .map { KitsuAnimeCollection($0.0, readableStatus: $0.1, parent: self) }
         }
     }

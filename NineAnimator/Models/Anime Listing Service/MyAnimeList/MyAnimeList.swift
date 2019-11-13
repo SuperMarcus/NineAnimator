@@ -31,11 +31,11 @@ class MyAnimeList: BaseListingService, ListingService {
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     lazy var _allCollections: [Collection] = [
-        ("dropped", "Dropped"),
-        ("on_hold", "On Hold"),
-        ("completed", "Completed"),
+        ("watching", "Currently Watching"),
         ("plan_to_watch", "Plan to Watch"),
-        ("watching", "Currently Watching")
+        ("completed", "Completed"),
+        ("on_hold", "On Hold"),
+        ("dropped", "Dropped")
     ] .map { Collection(self, key: $0.0, title: $0.1) }
     
     override func onRegister() {
