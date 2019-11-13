@@ -21,7 +21,7 @@ import UIKit
 
 class LibraryTrackingCollectionController: MinFilledCollectionViewController, ContentProviderDelegate {
     private var collection: LibrarySceneController.Collection?
-    private var cachedCollectionReferences = [Int: [ListingAnimeReference]]()
+    private var cachedCollectionReferences = [ListingAnimeReference]()
     private var selectedReference: ListingAnimeReference?
     private var referencesToContextsMap = [ListingAnimeReference: [TrackingContext]]()
     private var referencesMappingQueue = DispatchQueue.global()
@@ -49,16 +49,16 @@ class LibraryTrackingCollectionController: MinFilledCollectionViewController, Co
         // Start loading pages
         if collection!.availablePages == 0 {
             collection!.more()
-        } else if cachedCollectionReferences.count != collection!.availablePages {
+        } else {
             // Update the collection references
-            cachedCollectionReferences = Dictionary(uniqueKeysWithValues: (0..<collection!.availablePages).map {
-                ($0, collection!.links(on: $0).compactMap {
+            cachedCollectionReferences = (0..<collection!.availablePages).flatMap {
+                collection!.links(on: $0).compactMap {
                     switch $0 {
                     case let .listingReference(reference): return reference
                     default: return nil
                     }
-                })
-            })
+                }
+            }
             collectionView.reloadData()
         }
     }
@@ -91,45 +91,24 @@ extension LibraryTrackingCollectionController {
             }
         }
         
-        // Send the approperiate messages to the collection view
-        collectionView.performBatchUpdates({
-            // Check whether there are sections before the incoming sections
-            // that hasn't been loaded
-            var insertingSections = [Int]()
-            for section in (0..<page) where cachedCollectionReferences[section] == nil {
-                cachedCollectionReferences[section] = []
-                insertingSections.append(section)
-            }
-            
-            if cachedCollectionReferences[page] == nil {
-                insertingSections.append(page)
-                cachedCollectionReferences[page] = cachedPageReferences
-                collectionView.insertSections(IndexSet(insertingSections))
-            } else {
-                // Send insert sections message first
-                if !insertingSections.isEmpty {
-                    collectionView.insertSections(IndexSet(insertingSections))
-                }
-                
-                // Then reload the section
-                cachedCollectionReferences[page] = cachedPageReferences
-                collectionView.reloadSections([ page ])
-            }
-        }, completion: nil)
+        // Insert to the cachedReferences and notify the collection view
+        let startingIndex = cachedCollectionReferences.count
+        let endingIndex = startingIndex + cachedPageReferences.count
+        cachedCollectionReferences.append(contentsOf: cachedPageReferences)
+        collectionView.insertItems(at: (startingIndex..<(endingIndex)).map {
+            .init(item: $0, section: 0)
+        })
         
         // Load related contexts
-        fetchTrackingContexts(forReferencesOnPage: page)
+        fetchTrackingContexts(forReferences: cachedPageReferences)
+        loadMoreIfNeeded() // Load more if still at the bottom of the page
     }
     
     func onError(_ error: Error, from provider: ContentProvider) {
         Log.error("[LibraryTrackingCollectionController] Received error from Collection Source: @%", error)
     }
     
-    private func fetchTrackingContexts(forReferencesOnPage page: Int) {
-        guard let references = cachedCollectionReferences[page] else {
-            return
-        }
-        
+    private func fetchTrackingContexts(forReferences references: [ListingAnimeReference]) {
         // Asynchronously execute the mapping task to prevent blocking the main thread
         referencesMappingQueue.async {
             [weak self] in
@@ -173,24 +152,15 @@ extension LibraryTrackingCollectionController {
 // MARK: - Data Source & Delegate
 extension LibraryTrackingCollectionController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return cachedCollectionReferences.count
+        return 1
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if let collection = collection, collection.moreAvailable {
-            let height = scrollView.frame.size.height
-            let contentYoffset = scrollView.contentOffset.y
-            let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-            
-            // Try to load more pages if we're too close to the bottom
-            if distanceFromBottom < (2.5 * height) {
-                collection.more()
-            }
-        }
+        loadMoreIfNeeded()
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cachedCollectionReferences[section]?.count ?? 0
+        return section == 0 ? cachedCollectionReferences.count : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -244,6 +214,21 @@ extension LibraryTrackingCollectionController {
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         cell.makeThemable()
     }
+    
+    /// Loat more if the view has already been scrolled to the bottom
+    private func loadMoreIfNeeded() {
+        if let collection = collection, collection.moreAvailable {
+            let height = collectionView.frame.size.height
+            let contentYoffset = collectionView.contentOffset.y
+            let distanceFromBottom = collectionView.contentSize.height - contentYoffset
+            
+            // Try to load more pages if we're too close to the bottom
+            if distanceFromBottom < (2.5 * height) {
+                // Calling load more on the original collection reference
+                self.collection?.more()
+            }
+        }
+    }
 }
 
 extension LibraryTrackingCollectionController {
@@ -258,6 +243,7 @@ extension LibraryTrackingCollectionController {
 // MARK: - Helper Methods
 extension LibraryTrackingCollectionController {
     func reference(at indexPath: IndexPath) -> ListingAnimeReference? {
-        return cachedCollectionReferences[indexPath.section]?[indexPath.item]
+        return indexPath.section == 0 && indexPath.item < cachedCollectionReferences.count
+            ? cachedCollectionReferences[indexPath.item] : nil
     }
 }
