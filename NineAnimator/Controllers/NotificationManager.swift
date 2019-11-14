@@ -288,11 +288,12 @@ extension UserNotificationManager {
     func requestNotificationPermissions() {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.requestAuthorization(options: [.badge]) {
-            success, _ in
-            if !success {
-                let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                RootViewController.shared?.presentOnTop(alertController, animated: true)
+            success, _ in DispatchQueue.main.async {
+                if !success {
+                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    RootViewController.shared?.presentOnTop(alertController, animated: true)
+                }
             }
         }
     }
