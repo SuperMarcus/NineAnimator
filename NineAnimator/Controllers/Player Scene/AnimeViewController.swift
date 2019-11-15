@@ -664,14 +664,18 @@ extension AnimeViewController {
             }())
         }
         
-        actionSheet.addAction({
-            let action = UIAlertAction(title: "Select Server", style: .default) {
-                [weak self] _ in self?.showSelectServerDialog()
-            }
-            action.image = #imageLiteral(resourceName: "Server")
-            action.textAlignment = .left
-            return action
-        }())
+        
+        // Show the option to change server only if the anime has been loaded
+        if anime != nil {
+            actionSheet.addAction({
+                let action = UIAlertAction(title: "Select Server", style: .default) {
+                    [weak self] _ in self?.showSelectServerDialog()
+                }
+                action.image = #imageLiteral(resourceName: "Server")
+                action.textAlignment = .left
+                return action
+            }())
+        }
         
         actionSheet.addAction({
             let action = UIAlertAction(title: "Share", style: .default) {
