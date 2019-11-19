@@ -126,11 +126,12 @@ extension LibraryRecentsCategoryController {
     /// For iOS 13.0 and higher, use the built-in `UIContextMenu` for operations
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let animationWaitTime: DispatchTimeInterval = .milliseconds(500)
         let relatedAnimeLink = cachedRecentAnime[indexPath.item]
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) {
-                _ -> UIMenu? in
+                [weak self] _ -> UIMenu? in
                 var menuItems = [UIAction]()
                 
                 // Subscription
@@ -146,11 +147,35 @@ extension LibraryRecentsCategoryController {
                         image: UIImage(systemName: "bell.fill"),
                         identifier: nil
                     ) { _ in
-                        // Request permission first
-                        UserNotificationManager.default.requestNotificationPermissions()
-                        NineAnimator.default.user.subscribe(uncached: relatedAnimeLink)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + animationWaitTime) {
+                            // Request permission first
+                            UserNotificationManager.default.requestNotificationPermissions()
+                            NineAnimator.default.user.subscribe(uncached: relatedAnimeLink)
+                        }
                     })
                 }
+                
+                // Share
+                menuItems.append(.init(
+                    title: "Share",
+                    image: UIImage(systemName: "square.and.arrow.up"),
+                    identifier: nil
+                ) { _ in
+                    // Wait for 0.5 second until presenting
+                    DispatchQueue.main.asyncAfter(deadline: .now() + animationWaitTime) {
+                        guard let self = self,
+                            let cell = self.collectionView.cellForItem(at: indexPath) else {
+                                return
+                        }
+                        
+                        // Present the share sheet
+                        RootViewController.shared?.presentShareSheet(
+                            forLink: .anime(relatedAnimeLink),
+                            from: cell,
+                            inViewController: self
+                        )
+                    }
+                })
                 
                 // Remove
                 menuItems.append(.init(
@@ -158,7 +183,11 @@ extension LibraryRecentsCategoryController {
                     image: UIImage(systemName: "trash.fill"),
                     identifier: nil,
                     attributes: [ .destructive ]
-                ) { [weak self] _ in self?.removeAnime(atIndex: indexPath) })
+                ) { _ in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + animationWaitTime) {
+                        self?.removeAnime(atIndex: indexPath)
+                    }
+                })
                 
                 return UIMenu(
                     title: "Selected Anime",

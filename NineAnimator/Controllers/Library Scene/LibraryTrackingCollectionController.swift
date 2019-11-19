@@ -25,6 +25,7 @@ class LibraryTrackingCollectionController: MinFilledCollectionViewController, Co
     private var selectedReference: ListingAnimeReference?
     private var referencesToContextsMap = [ListingAnimeReference: [TrackingContext]]()
     private var referencesMappingQueue = DispatchQueue.global()
+    private var loadedReferencesPages = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,12 +84,29 @@ extension LibraryTrackingCollectionController {
     
     private func onPageAvailable(_ page: Int, from provider: ContentProvider) {
         // Cache collection references
-        let cachedPageReferences = provider.links(on: page).compactMap {
-            genericLink -> ListingAnimeReference? in
-            switch genericLink {
-            case let .listingReference(reference): return reference
-            default: return nil
+        let cachedPageReferences = provider
+            .links(on: page)
+            .compactMap(asListingReference)
+        
+        // If this page has already been loaded, reload and dedupe all pages
+        if page < loadedReferencesPages {
+            Log.info("[LibraryTrackingCollectionController] Attempting to load page %@ when it has been loaded. Reloading all pages.", page)
+            cachedCollectionReferences = (0..<provider.availablePages).reduce(into: []) {
+                $0.append( // Append the links in the page
+                    contentsOf: provider.links(on: $1).compactMap(asListingReference)
+                )
             }
+            collectionView.reloadSections([ 0 ])
+            loadedReferencesPages = provider.availablePages // Update page variable
+        } else { // Else just append this to the end
+            // Insert to the cachedReferences and notify the collection view
+            let startingIndex = cachedCollectionReferences.count
+            let endingIndex = startingIndex + cachedPageReferences.count
+            cachedCollectionReferences.append(contentsOf: cachedPageReferences)
+            collectionView.insertItems(at: (startingIndex..<(endingIndex)).map {
+                .init(item: $0, section: 0)
+            })
+            loadedReferencesPages = page + 1
         }
         
         // Insert to the cachedReferences and notify the collection view
@@ -245,5 +263,12 @@ extension LibraryTrackingCollectionController {
     func reference(at indexPath: IndexPath) -> ListingAnimeReference? {
         return indexPath.section == 0 && indexPath.item < cachedCollectionReferences.count
             ? cachedCollectionReferences[indexPath.item] : nil
+    }
+    
+    func asListingReference(_ genericLink: AnyLink) -> ListingAnimeReference? {
+        switch genericLink {
+        case let .listingReference(reference): return reference
+        default: return nil
+        }
     }
 }
