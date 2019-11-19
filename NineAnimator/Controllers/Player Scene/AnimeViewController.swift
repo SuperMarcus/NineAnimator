@@ -742,13 +742,13 @@ extension AnimeViewController {
     
     private func showShareDiaglog() {
         guard let link = animeLink else { return }
-        let activityViewController = UIActivityViewController(activityItems: [link.link], applicationActivities: nil)
         
-        if let popover = activityViewController.popoverPresentationController {
-            popover.sourceView = moreOptionsButton
-        }
-        
-        present(activityViewController, animated: true)
+        // Present the share sheet from this view controller
+        RootViewController.shared?.presentShareSheet(
+            forLink: .anime(link),
+            from: moreOptionsButton,
+            inViewController: self
+        )
     }
     
     // Update the heading view and reload the list of episodes for the server

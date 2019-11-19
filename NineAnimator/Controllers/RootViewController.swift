@@ -102,6 +102,31 @@ extension RootViewController {
         self.castControllerDelegate = CastController.default.present(from: topViewController)
     }
     
+    /// Present the activity sheet for sharing the `AnyLink`
+    func presentShareSheet(forLink link: AnyLink, from sourceView: UIView, inViewController vc: UIViewController? = nil) {
+        // Sharing the redirection link from NineAnimatorCloud
+        let sharingLink = link.cloudRedirectionUrl
+        let activityViewController = UIActivityViewController(
+            activityItems: [ sharingLink ],
+            applicationActivities: nil
+        )
+        
+        // Configure appearance for iOS 13+
+        if #available(iOS 13.0, *) {
+            activityViewController.overrideUserInterfaceStyle = overrideUserInterfaceStyle
+        }
+        
+        // Set Source view
+        if let popover = activityViewController.popoverPresentationController {
+            popover.sourceView = sourceView
+        }
+        
+        // Present the activity controller
+        if let vc = vc {
+            vc.present(activityViewController, animated: true)
+        } else { presentOnTop(activityViewController) }
+    }
+    
     /// Open an `AnyLink` struct
     static func open(whenReady link: AnyLink) {
         if let sharedRootViewController = shared {
