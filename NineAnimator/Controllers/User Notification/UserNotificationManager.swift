@@ -30,9 +30,10 @@ struct WatchedAnime: Codable {
     let lastCheck: Date
 }
 
-/**
- A standalone class used to manage fetch requests and updates
- */
+/// A standalone class used to manage fetch requests and updates
+///
+/// This class manages the persisted anime watchers, perform fetches for updates, and sends notifications
+/// to the user related to events happening in NineAnimator.
 class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     // Exposed properties
     static let `default` = UserNotificationManager()

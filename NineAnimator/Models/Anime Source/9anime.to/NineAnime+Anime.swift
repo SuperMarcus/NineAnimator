@@ -28,7 +28,7 @@ extension NASourceNineAnime {
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
 //        handler(nil, NineAnimatorError.contentUnavailableError("9anime.to has been temporarily disabled."))
 //        return nil
-        let taskTracker = NineAnimatorMultistepAsyncTask()
+        let taskTracker = AsyncTaskContainer()
         taskTracker.add(request(browse: link.link, headers: [:]) {
             [weak taskTracker] response, error in
             // Return without trigger an error

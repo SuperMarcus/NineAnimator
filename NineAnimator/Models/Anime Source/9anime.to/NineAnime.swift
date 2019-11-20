@@ -81,7 +81,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(browse: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
@@ -111,7 +111,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<NSDictionary>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(ajax: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
@@ -224,7 +224,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(ajaxString: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler

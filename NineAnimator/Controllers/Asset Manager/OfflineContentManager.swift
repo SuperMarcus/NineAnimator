@@ -130,9 +130,12 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         return typeRegistry
     }()
     
-    // An array to store references to contents
+    /// An array to store references to contents
     private lazy var contentPool = persistedContentPool
-    
+}
+
+// MARK: - Accessing Tasks
+extension OfflineContentManager {
     /// Retrieve a list of preserved contents
     var preservedContents: [OfflineContent] {
         return contentPool.filter {
@@ -159,56 +162,26 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         }
     }
     
-    /// Called upon app launch to fetch any incomplete tasks
-    func recoverPendingTasks() {
-        // Restore persisted session tasks
-        sharedSession.getAllTasks {
-            tasks in
-            let contents = self.contentPool.filter { $0.persistedDownloadSessionType == "common" }
-            
-            // Assign tasks to the contents
-            for task in tasks {
-                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
-                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found", task.taskIdentifier)
-                    content.task = task
-                } else {
-                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
-                    task.cancel()
-                }
-            }
-            
-            // Trying to resume the tasks
-            if NineAnimator.default.user.autoRestartInterruptedDownloads {
-                Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared URLSession")
-                for content in contents {
-                    content.resumeInterruption()
-                }
-            }
+    /// A list of anime that have episodes being preserved
+    var statefulAnime: [AnimeLink] {
+        let listOfAnime = statefulContents
+            .compactMap { $0 as? OfflineEpisodeContent }
+            .map { $0.episodeLink.parent }
+        var uniqueAnime = [AnimeLink]()
+        for anime in listOfAnime where !uniqueAnime.contains(anime) {
+            uniqueAnime.append(anime)
         }
-        
-        sharedAssetSession.getAllTasks {
-            tasks in
-            let contents = self.contentPool.filter { $0.persistedDownloadSessionType == "avasset" }
-            
-            // Assign tasks to the contents
-            for task in tasks {
-                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
-                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
-                    content.task = task
-                } else {
-                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
-                    task.cancel()
-                }
-            }
-            
-            // Trying to resume the tasks
-            if NineAnimator.default.user.autoRestartInterruptedDownloads {
-                Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared asset session")
-                contents.forEach { $0.resumeInterruption() }
-            }
-        }
+        return uniqueAnime
     }
     
+    /// Obtain the list of episode content under the anime
+    func contents(for anime: AnimeLink) -> [OfflineEpisodeContent] {
+        return statefulContents
+            .compactMap { $0 as? OfflineEpisodeContent }
+            .filter { $0.episodeLink.parent == anime }
+    }
+    
+    /// Obtain the corresponding `OfflineEpisodeContent` for the episodeLink
     func content(for episodeLink: EpisodeLink) -> OfflineEpisodeContent {
         if let content = contentPool
             .compactMap({ $0 as? OfflineEpisodeContent })
@@ -243,10 +216,11 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     }
 }
 
-// MARK: - URLSessionDownloadDelegate
+// MARK: - URLSession Delegate
 extension OfflineContentManager {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        guard session == sharedSession, let content = content(for: downloadTask) else {
+        guard session == sharedSession,
+            let content = content(for: downloadTask, inSession: session) else {
             return
         }
         
@@ -314,7 +288,7 @@ extension OfflineContentManager {
         }
         
         // Obtain the content
-        guard let content = content(for: task) else { return }
+        guard let content = content(for: task, inSession: session) else { return }
         
         if let error = error {
             // Save the resume data if possible
@@ -333,7 +307,8 @@ extension OfflineContentManager {
                     didWriteData bytesWritten: Int64,
                     totalBytesWritten: Int64,
                     totalBytesExpectedToWrite: Int64) {
-        guard session == sharedSession, let content = content(for: downloadTask) else {
+        guard session == sharedSession,
+            let content = content(for: downloadTask, inSession: session) else {
             return
         }
         
@@ -342,15 +317,27 @@ extension OfflineContentManager {
         content._onProgress(session, progress: progress)
     }
     
-    private func content(for task: URLSessionTask) -> OfflineContent? {
-        return contentPool.first { $0.task == task }
+    private func content(for task: URLSessionTask, inSession session: URLSession) -> OfflineContent? {
+        let searchForAggregated: Bool
+        if session == sharedAssetSession {
+            searchForAggregated = true
+        } else if session == sharedSession {
+            searchForAggregated = false
+        } else { return nil }
+        
+        // Looking for the content with the matching task identifier
+        return contentPool.first {
+            $0.isAggregatedAsset == searchForAggregated
+                && $0.persistedTaskIdentifier == task.taskIdentifier
+        }
     }
 }
 
-// MARK: - AVAssetDownloadDelegate
+// MARK: - AVAssetSession Delegate
 extension OfflineContentManager {
     func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL) {
-        guard session == sharedAssetSession, let content = content(for: assetDownloadTask) else {
+        guard session == sharedAssetSession,
+            let content = content(for: assetDownloadTask, inSession: session) else {
             return
         }
         
@@ -370,7 +357,8 @@ extension OfflineContentManager {
                     didLoad timeRange: CMTimeRange,
                     totalTimeRangesLoaded loadedTimeRanges: [NSValue],
                     timeRangeExpectedToLoad: CMTimeRange) {
-        guard session == sharedAssetSession, let content = content(for: assetDownloadTask) else {
+        guard session == sharedAssetSession,
+            let content = content(for: assetDownloadTask, inSession: session) else {
             return
         }
         
@@ -386,7 +374,7 @@ extension OfflineContentManager {
     func assetDownloadTask(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         guard session == sharedAssetSession,
             let assetDownloadTask = task as? AVAssetDownloadTask,
-            let content = content(for: assetDownloadTask) else {
+            let content = content(for: assetDownloadTask, inSession: session) else {
             return
         }
         
@@ -396,29 +384,88 @@ extension OfflineContentManager {
     }
 }
 
-// MARK: - Navigating through contents
+// MARK: - Restoring Pending Tasks
 extension OfflineContentManager {
-    /// A list of anime that have episodes being preserved
-    var statefulAnime: [AnimeLink] {
-        let listOfAnime = statefulContents
-            .compactMap { $0 as? OfflineEpisodeContent }
-            .map { $0.episodeLink.parent }
-        var uniqueAnime = [AnimeLink]()
-        for anime in listOfAnime where !uniqueAnime.contains(anime) {
-            uniqueAnime.append(anime)
-        }
-        return uniqueAnime
+    /// Called upon app launch to fetch any incomplete tasks
+    func recoverPendingTasks() {
+        recoverSharedSessionPendingTasks()
+        recoverSharedAssetSessionPendingTasks()
     }
     
-    /// Obtain the list of episode content under the anime
-    func contents(for anime: AnimeLink) -> [OfflineEpisodeContent] {
-        return statefulContents
-            .compactMap { $0 as? OfflineEpisodeContent }
-            .filter { $0.episodeLink.parent == anime }
+    /// Restore pending tasks in the shared URL session
+    private func recoverSharedSessionPendingTasks() {
+        // Restore persisted session tasks
+        sharedSession.getAllTasks {
+            tasks in
+            let contents = self.contentPool.filter {
+                $0.persistedDownloadSessionType == "common"
+            }
+            
+            // Assign tasks to the contents
+            for task in tasks {
+                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
+                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.task = task
+                } else {
+                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    task.cancel()
+                }
+            }
+            
+            // Trying to resume the tasks
+            if NineAnimator.default.user.autoRestartInterruptedDownloads {
+                Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared URLSession")
+                for content in contents {
+                    content.isPendingRestoration = false
+                    content.resumeInterruption()
+                }
+            } else {
+                contents.forEach { // Mark all contents as restored
+                    $0.isPendingRestoration = false
+                }
+            }
+        }
+    }
+    
+    /// Restore pending tasks in the shared AVAsset download session
+    private func recoverSharedAssetSessionPendingTasks() {
+        sharedAssetSession.getAllTasks {
+            tasks in
+            let contents = self.contentPool.filter {
+                $0.persistedDownloadSessionType == "avasset"
+            }
+            
+            // Assign tasks to the contents
+            for task in tasks {
+                if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
+                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.task = task
+                } else {
+                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    task.cancel()
+                }
+            }
+            
+            // Trying to resume the tasks
+            if NineAnimator.default.user.autoRestartInterruptedDownloads {
+                // Wait for 3 seconds until restoring the tasks
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000)) {
+                    Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared asset session")
+                    contents.forEach {
+                        $0.isPendingRestoration = false
+                        $0.resumeInterruption()
+                    }
+                }
+            } else {
+                contents.forEach { // Mark all contents as restored
+                    $0.isPendingRestoration = false
+                }
+            }
+        }
     }
 }
 
-// MARK: - Managing persisted assets
+// MARK: - Managing Assets
 extension OfflineContentManager {
     /// Parse OfflineContent from file system
     private var persistedContentPool: [OfflineContent] {
@@ -498,7 +545,7 @@ extension OfflineContentManager {
     }
 }
 
-// MARK: - Exposed APIs to offline content from parent
+// MARK: - Exposed to Assets
 extension OfflineContent {
     var assetDownloadingSession: AVAssetDownloadURLSession { return parent.sharedAssetSession }
     
@@ -514,8 +561,10 @@ extension OfflineContent {
         
         let path = resourceIdentifier.relativePath
         switch resourceIdentifier.relativeTo {
-        case "home": return parent.homeDirectory.appendingPathComponent(path)
-        case "persist": return parent.persistentDirectory.appendingPathComponent(path)
+        case "home":
+            return URL(fileURLWithPath: path, relativeTo: parent.homeDirectory)
+        case "persist":
+            return URL(fileURLWithPath: path, relativeTo: parent.persistentDirectory)
         default: return nil
         }
     }
@@ -538,7 +587,7 @@ extension OfflineContent {
             return
         }
         
-        guard (try? location.checkResourceIsReachable()) == true else {
+        guard FileManager.default.fileExists(atPath: location.path) else {
             persistentResourceIdentifier = nil
             Log.error("Downloaded resource is unreachable")
             state = .error(NineAnimatorError.providerError("Unreachable offline content"))

@@ -27,16 +27,29 @@ protocol NineAnimatorAsyncTask: AnyObject {
 /// A container class used to hold strong references to the
 /// contained NineAnimatorAsyncTask and cancel them when
 /// needed.
-class NineAnimatorMultistepAsyncTask: NineAnimatorAsyncTask {
+class AsyncTaskContainer: NineAnimatorAsyncTask {
     private var tasks: [NineAnimatorAsyncTask]
     
     init() { tasks = [] }
     
-    func add(_ task: NineAnimatorAsyncTask?) { if let task = task { tasks.append(task) } }
+    func add(_ task: NineAnimatorAsyncTask?) {
+        if let task = task {
+            tasks.append(task)
+        }
+    }
     
-    func cancel() { for task in tasks { task.cancel() } }
+    func cancel() {
+        for task in tasks {
+            task.cancel()
+        }
+    }
     
-    static func += (left: NineAnimatorMultistepAsyncTask, right: NineAnimatorAsyncTask?) { left.add(right) }
+    static func += (left: AsyncTaskContainer, right: NineAnimatorAsyncTask?) {
+        left.add(right)
+    }
     
-    deinit { cancel(); tasks = [] }
+    deinit {
+        cancel()
+        tasks = []
+    }
 }

@@ -53,7 +53,7 @@ extension NASourceNineAnime {
             return nil
         }
         
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         
         task.add(request(browse: url, headers: [:]) {
             [weak self] content, requestError in

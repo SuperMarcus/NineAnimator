@@ -165,15 +165,19 @@ class OfflineEpisodeContent: OfflineContent {
         // Update hls flag
         isAggregatedAsset = media.isAggregated
         
+        // Delete any previously downloaded content
+        delete(shouldUpdateState: false)
+        
         // Call the start method
         startResourceRequest()
     }
     
-    override func cancel() {
+    override func cancel(shouldUpdateState flag: Bool = true) {
         // Cleanup current task
         currentTask?.cancel()
         currentTask = nil
-        super.cancel()
+        
+        super.cancel(shouldUpdateState: flag)
     }
     
     override func suggestName(for url: URL) -> String {

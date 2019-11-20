@@ -72,7 +72,7 @@
 		2C2C54FB2216066100BAA76E /* User+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FA2216066100BAA76E /* User+History.swift */; };
 		2C2C54FD221606CA00BAA76E /* User+Synchronize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FC221606CA00BAA76E /* User+Synchronize.swift */; };
 		2C2C54FF221606F800BAA76E /* User+UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FE221606F800BAA76E /* User+UserDefaultKeys.swift */; };
-		2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* NotificationManager.swift */; };
+		2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* UserNotificationManager.swift */; };
 		2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */; };
 		2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */; };
 		2C35C968227F223700D469E6 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C967227F223700D469E6 /* CalendarHeaderView.swift */; };
@@ -129,7 +129,7 @@
 		2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* BaseSource+Cloudflare.swift */; };
 		2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */; };
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
-		2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */; };
+		2C60EABA2266A22400280637 /* UserNotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* UserNotificationManager+RecommendationSource.swift */; };
 		2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */; };
 		2C60EABE2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EABD2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift */; };
 		2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */; };
@@ -425,7 +425,7 @@
 		2C2C54FA2216066100BAA76E /* User+History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+History.swift"; sourceTree = "<group>"; };
 		2C2C54FC221606CA00BAA76E /* User+Synchronize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Synchronize.swift"; sourceTree = "<group>"; };
 		2C2C54FE221606F800BAA76E /* User+UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+UserDefaultKeys.swift"; sourceTree = "<group>"; };
-		2C3545A421DA84F500321B18 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		2C3545A421DA84F500321B18 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCell.swift; sourceTree = "<group>"; };
 		2C35C967227F223700D469E6 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
@@ -494,7 +494,7 @@
 		2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydraXParser.swift; sourceTree = "<group>"; };
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
-		2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
+		2C60EAB92266A22400280637 /* UserNotificationManager+RecommendationSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserNotificationManager+RecommendationSource.swift"; sourceTree = "<group>"; };
 		2C60EABB22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+GenericPagedAnimeList.swift"; sourceTree = "<group>"; };
 		2C60EABD2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoverySceneViewController+QuickActions.swift"; sourceTree = "<group>"; };
 		2C60EED2221B56C6002C96D4 /* AniListListingAnimeInformation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListListingAnimeInformation.graphql; sourceTree = "<group>"; };
@@ -1081,6 +1081,7 @@
 		2C4ABC7321B59982009B4D47 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2CEF40912385ACB5000391C7 /* User Notification */,
 				2C979F18235A17BA00BC8699 /* Library Scene */,
 				2C0FA3B5226E33EC00108D27 /* Server Selection Scene */,
 				2C0E755122622DAD00DF3AC4 /* Anime Discovery Scenes */,
@@ -1097,8 +1098,6 @@
 				2C12EDD621BDE66E0064D2BD /* Prototype */,
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
-				2C3545A421DA84F500321B18 /* NotificationManager.swift */,
-				2C60EAB92266A22400280637 /* NotificationManager+RecommendationSource.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1665,6 +1664,15 @@
 			path = gogoanime;
 			sourceTree = "<group>";
 		};
+		2CEF40912385ACB5000391C7 /* User Notification */ = {
+			isa = PBXGroup;
+			children = (
+				2C3545A421DA84F500321B18 /* UserNotificationManager.swift */,
+				2C60EAB92266A22400280637 /* UserNotificationManager+RecommendationSource.swift */,
+			);
+			path = "User Notification";
+			sourceTree = "<group>";
+		};
 		2CFDDF9E236B1DCA00C2D89A /* Migrator */ = {
 			isa = PBXGroup;
 			children = (
@@ -1992,7 +2000,7 @@
 				2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */,
 				2C90C6A0236F8BF900C18620 /* LibraryTrackingCollectionController.swift in Sources */,
 				2C85369C22348BFF00A5CFB9 /* WonderfulSubs+ServerRecommendation.swift in Sources */,
-				2C60EABA2266A22400280637 /* NotificationManager+RecommendationSource.swift in Sources */,
+				2C60EABA2266A22400280637 /* UserNotificationManager+RecommendationSource.swift in Sources */,
 				2C42577B23241D2B00FCCCCE /* Simkl.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
@@ -2167,7 +2175,7 @@
 				2CD7825A21FFEF2800477FC6 /* OfflineAccessButton.swift in Sources */,
 				2C1C717D22190FAD00760A69 /* Anilist+Reference.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
-				2C3545A521DA84F500321B18 /* NotificationManager.swift in Sources */,
+				2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */,
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,
 				2C8536982234856100A5CFB9 /* WonderfulSubs+Search.swift in Sources */,

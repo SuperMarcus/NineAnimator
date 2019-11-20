@@ -137,7 +137,7 @@ class NASourceMasterAnime: BaseSource, Source {
         }
         let identifier = animeLinkString[match.range(at: 1)]
         let path = String(format: NASourceMasterAnime.apiPathAnimeDetailed, identifier)
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         
         Log.info("Requesting episodes of anime %@ on masterani.me", identifier)
         
@@ -380,7 +380,7 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task.add(episodeInfo(from: link) {
             info, error in
             guard let info = info else { return handler(nil, error) }

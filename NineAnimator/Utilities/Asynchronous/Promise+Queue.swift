@@ -32,7 +32,7 @@ extension NineAnimatorPromise {
             callback in
             var mutableQueue = promises
             var results = [GroupedResultType]()
-            let taskPool = NineAnimatorMultistepAsyncTask()
+            let taskPool = AsyncTaskContainer()
             
             func executeNext() {
                 if mutableQueue.isEmpty {

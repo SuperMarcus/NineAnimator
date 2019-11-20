@@ -18,7 +18,7 @@
 //
 
 import Foundation
-import os.log
+import os
 
 /**
  The logger class that is used to wrap around the os unified logging system

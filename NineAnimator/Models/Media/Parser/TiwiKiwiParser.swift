@@ -37,7 +37,7 @@ class TiwiKiwiParser: VideoProviderParser {
             "User-Agent": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task.add(session.request(episode.target, headers: headers).responseString {
             [weak task, session] response in
             guard let task = task else { return }

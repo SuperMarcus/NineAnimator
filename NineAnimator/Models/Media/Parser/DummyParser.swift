@@ -25,7 +25,7 @@ class DummyParser: VideoProviderParser {
     var aliases: [String] { return [] }
     
     func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        let dummyTask = NineAnimatorMultistepAsyncTask()
+        let dummyTask = AsyncTaskContainer()
         
         DispatchQueue.main.async {
             let options = episode.userInfo

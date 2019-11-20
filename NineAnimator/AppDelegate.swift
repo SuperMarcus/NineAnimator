@@ -34,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// A flag to represent if the app is currently active
     var isActive = false
     
-    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Shared AppDelegate reference
         AppDelegate.shared = self
         return true
@@ -157,7 +157,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Also updates dynamic appearance
         updateDynamicBrightness()
     }
-    
     
     func applicationWillResignActive(_ application: UIApplication) {
         // Mark the app as inactive
