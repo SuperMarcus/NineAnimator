@@ -77,8 +77,7 @@ class SetupThemeViewController: UIViewController, Themable {
             if #available(iOS 13.0, *) {
                 RootViewController.shared?.updateDynamicTheme()
             } else {
-                (UIApplication.shared.delegate as? AppDelegate)?
-                    .updateDynamicBrightness(forceUpdate: true)
+                AppDelegate.shared?.updateDynamicBrightness(forceUpdate: true)
             }
         default: break
         }

@@ -54,3 +54,6 @@ extension PlaybackMedia {
         }
     }
 }
+
+/// Key for options in AVAsset to pass in request headers
+let AVURLAssetHTTPHeaderFieldsKey = "AVURLAssetHTTPHeaderFieldsKey"

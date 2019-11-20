@@ -54,7 +54,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             do {
                 try PropertyListSerialization
                     .data(fromPropertyList: newValue, format: .binary, options: 0)
-                    .write(to: persistedContentIndexURL)
+                    .write(to: persistedContentIndexURL, options: [ .atomic ])
             } catch { Log.error(error) }
         }
     }
@@ -109,7 +109,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             
             return persistentDirectory
         } catch {
-            Log.error("Cannot obtain persistent directory: %@. This is an fatal error and the app cannot continue.", error)
+            Log.error("[OfflineContentManager] Cannot obtain persistent directory: %@. This is an fatal error and the app cannot continue.", error)
             // Should I handle this error?
             fatalError("Cannot obtain OfflineContents directory")
         }
@@ -169,19 +169,19 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             // Assign tasks to the contents
             for task in tasks {
                 if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
-                    Log.info("URLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found", task.taskIdentifier)
                     content.task = task
                 } else {
-                    Log.info("URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
                     task.cancel()
                 }
             }
             
             // Trying to resume the tasks
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
-                Log.info("Automatically resuming any unfinished downloads for the shared URLSession")
+                Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared URLSession")
                 for content in contents {
-                    if case .interrupted = content.state { content.resumeInterruption() }
+                    content.resumeInterruption()
                 }
             }
         }
@@ -193,20 +193,18 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             // Assign tasks to the contents
             for task in tasks {
                 if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
-                    Log.info("AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
                     content.task = task
                 } else {
-                    Log.info("AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
+                    Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
                     task.cancel()
                 }
             }
             
             // Trying to resume the tasks
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
-                Log.info("Automatically resuming any unfinished downloads for the shared asset session")
-                for content in contents {
-                    if case .interrupted = content.state { content.resumeInterruption() }
-                }
+                Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared asset session")
+                contents.forEach { $0.resumeInterruption() }
             }
         }
     }
@@ -278,7 +276,7 @@ extension OfflineContentManager {
             }
             
             if (try? destinationUrl.checkResourceIsReachable()) == true {
-                Log.error("Duplicated file detected, removing.")
+                Log.error("[OfflineContentManager] Duplicated file detected, removing.")
                 try fs.removeItem(at: destinationUrl)
             }
             
@@ -290,10 +288,12 @@ extension OfflineContentManager {
             resourceValues.isExcludedFromBackup = true
             try destinationUrl.setResourceValues(resourceValues)
             
-            // Call the internal completion handler
-            content._onCompletion(session)
+            // Update: The internal completion handler is now called within
+            // didCompleteWithError
+            // # Call the internal completion handler
+            // content._onCompletion(session)
         } catch {
-            Log.error("Failed to rename the downloaded asset: %@", error)
+            Log.error("[OfflineContentManager] Failed to move the downloaded asset for task (%@): %@", downloadTask.taskIdentifier, error)
             content.persistentResourceIdentifier = nil
             content._onCompletion(session, error: error)
             try? fs.removeItem(at: location) // Remove the item
@@ -301,17 +301,31 @@ extension OfflineContentManager {
     }
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        guard session == sharedSession, let content = content(for: task), let error = error else {
-            return
+        Log.info(
+            "[OfflineContentManager] Downlaod task (%@) for session %@ has completed.",
+            task.taskIdentifier,
+            session.configuration.identifier ?? "[Unknown Identifier]"
+        )
+        
+        // If the task does not belong to the normal session, call the AVAssetDownloadSession's
+        // delegated method
+        guard session == sharedSession else {
+            return assetDownloadTask(session, task: task, didCompleteWithError: error)
         }
         
-        // Save the resume data if possible
-        if let resumeData = (error as NSError).userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
-            Log.info("The task is possibilly resumable")
-            content.resumeData = resumeData
-        }
+        // Obtain the content
+        guard let content = content(for: task) else { return }
         
-        content._onCompletion(session, error: error)
+        if let error = error {
+            // Save the resume data if possible
+            if let resumeData = (error as NSError).userInfo[NSURLSessionDownloadTaskResumeData] as? Data {
+                Log.info("[OfflineContentManager] The failed task (%@) may be resumable", task.taskIdentifier)
+                content.resumeData = resumeData
+            }
+            
+            // Call the handler method
+            content._onCompletion(session, error: error)
+        } else { content._onCompletion(session) }
     }
     
     func urlSession(_ session: URLSession,
@@ -347,9 +361,8 @@ extension OfflineContentManager {
             backgroundSessionCompletionHandler = nil
         }
         
-        // Set resource identifier
+        // Save the resource location
         content.persistentResourceIdentifier = (location.relativePath, "home")
-        content._onCompletion(session)
     }
     
     func urlSession(_ session: URLSession,
@@ -367,6 +380,19 @@ extension OfflineContentManager {
             .reduce(0.0, +) / timeRangeExpectedToLoad.duration.seconds
         
         content._onProgress(session, progress: Double(progress))
+    }
+    
+    /// Delegated from `urlSession(_ session:, task:, didCompleteWithError:)`
+    func assetDownloadTask(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        guard session == sharedAssetSession,
+            let assetDownloadTask = task as? AVAssetDownloadTask,
+            let content = content(for: assetDownloadTask) else {
+            return
+        }
+        
+        if let error = error { // If the download failed
+            content._onCompletion(session, error: error)
+        } else { content._onCompletion(session) }
     }
 }
 
@@ -435,10 +461,10 @@ extension OfflineContentManager {
             }
             
             return content
-        }.filter {
+        } .filter {
             // Only return contents that are not 'ready' nor 'error'
             switch $0.state {
-            case .error, .ready: return false
+            case .ready: return false
             default: return true
             }
         }

@@ -41,8 +41,7 @@ class OfflineEpisodeContent: OfflineContent {
     
     /// Retrive the playback media from the offline content
     var media: PlaybackMedia? {
-        // If the asset is downloading with an AVAssetDownloadTask, try playing
-        // while caching
+        // Reuse the urlAsset as much as possible
         if isAggregatedAsset,
             let aggregateAssetDownloadTask = task as? AVAssetDownloadTask,
             aggregateAssetDownloadTask.urlAsset.isPlayable {
@@ -60,7 +59,10 @@ class OfflineEpisodeContent: OfflineContent {
         guard (try? url.checkResourceIsReachable()) == true else { return nil }
         
         // Construct url asset
-        let asset = AVURLAsset(url: url)
+        let asset = AVURLAsset(
+            url: url,
+            options: [ AVURLAssetHTTPHeaderFieldsKey: sourceRequestHeaders ]
+        )
         
         // Check if the asset is playable
         guard asset.isPlayable else { return nil }
@@ -73,16 +75,14 @@ class OfflineEpisodeContent: OfflineContent {
         )
     }
     
+    override var localizedDescription: String {
+        return "Ep. \(episodeLink.name) - \(episodeLink.parent.title)"
+    }
+    
     override var identifier: String { return episodeLink.identifier }
     
     /// Hold reference to the current task
     private var currentTask: NineAnimatorAsyncTask?
-    
-    /// Set to indicate if this asset is an persisted hls asset
-    private var isAggregatedAsset: Bool {
-        get { return persistedProperties["aggregated"] as? Bool ?? false }
-        set { persistedProperties["aggregated"] = newValue }
-    }
     
     /// Cached retrieved playback media
     private var retrievedOnlineMedia: PlaybackMedia?
@@ -120,8 +120,6 @@ class OfflineEpisodeContent: OfflineContent {
     /// This method automatically tries to collect all the resources
     /// needed for downloading the episodes.
     override func preserve() {
-        super.preserve()
-        
         // Return if already preserved
         if case .preserved = state { return }
         
@@ -149,32 +147,26 @@ class OfflineEpisodeContent: OfflineContent {
         // Return if already preserved
         if case .preserved = state { return }
         
+        if let basicMedia = media as? BasicPlaybackMedia {
+            sourceRequestHeaders = basicMedia.headers
+            sourceRequestUrl = basicMedia.url
+        } else if let compositionalMedia = media as? CompositionalPlaybackMedia {
+            sourceRequestHeaders = compositionalMedia.headers
+            sourceRequestUrl = compositionalMedia.url
+        } else {
+            // Set state to error
+            state = .error(NineAnimatorError.unknownError)
+            return Log.error(
+                "[OfflineEpisodeContent] Cannot preserve unsupported media: %@",
+                media
+            )
+        }
+        
         // Update hls flag
         isAggregatedAsset = media.isAggregated
         
-        // Preserve using the AVAssetDownloadURLSession
-        if media.isAggregated {
-            guard let episodeAsset = media.avPlayerItem.asset as? AVURLAsset else {
-                state = .error(NineAnimatorError.providerError("The asset is invalid"))
-                return
-            }
-            let artworkData = artwork(for: episodeLink.parent)?.jpegData(compressionQuality: 0.8)
-            task = assetDownloadingSession.makeAssetDownloadTask(
-                asset: episodeAsset,
-                assetTitle: "\(episodeLink.parent.title) - Episode \(episodeLink.name)",
-                assetArtworkData: artworkData,
-                options: nil
-            )
-        } else {
-            guard let episodeAssetRequest = media.urlRequest else {
-                state = .error(NineAnimatorError.providerError("This episode does not support offline access"))
-                return
-            }
-            task = downloadingSession.downloadTask(with: episodeAssetRequest)
-        }
-        
-        // Resumes the task
-        task?.resume()
+        // Call the start method
+        startResourceRequest()
     }
     
     override func cancel() {
@@ -189,12 +181,10 @@ class OfflineEpisodeContent: OfflineContent {
     }
     
     override func onCompletion(with url: URL) {
-        super.onCompletion(with: url)
+        Log.info("[OfflineEpisodeContent] Downloaded to %@", url.absoluteString)
     }
     
     override func onCompletion(with error: Error) {
-        super.onCompletion(with: error)
-        
         // Retry downloads
         if retryCount < maximalAllowedRetryCount, let fetchedMedia = retrievedOnlineMedia {
             retryCount += 1

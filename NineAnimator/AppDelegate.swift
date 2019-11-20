@@ -23,11 +23,22 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    static weak var shared: AppDelegate?
+    
     private var shortcutItem: UIApplicationShortcutItem?
     
     var window: UIWindow?
     
     var trackedPasteboardChangeTimes: Int = 0
+    
+    /// A flag to represent if the app is currently active
+    var isActive = false
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        // Shared AppDelegate reference
+        AppDelegate.shared = self
+        return true
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Fetch for generating episode update notifications once in two hours
@@ -130,6 +141,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        // Update isActive flag
+        isActive = true
+        
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
         
@@ -144,7 +158,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         updateDynamicBrightness()
     }
     
+    
     func applicationWillResignActive(_ application: UIApplication) {
+        // Mark the app as inactive
+        isActive = false
+        
         // Update quick actions
         updateHomescreenQuickActions(application)
     }

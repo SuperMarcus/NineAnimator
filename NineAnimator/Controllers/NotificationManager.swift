@@ -65,24 +65,77 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
             object: nil
         )
         
-        // Register Notification categories
-        let openAction = UNNotificationAction(
-            identifier: "com.marcuszhou.NineAnimator.notificaiton.action.open",
-            title: "View",
-            options: [.foreground]
+        // Add observer for downloading task update
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onDownloadingTaskUpdate(_:)),
+            name: .offlineAccessStateDidUpdate,
+            object: nil
         )
         
+        // Tell the system what categories of notifications this app supports
+        registerNotificationCategories()
+        
+        // Add anime subscription as a recommendation source
+        NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
+    }
+}
+
+// MARK: - Initialization
+extension UserNotificationManager {
+    enum NotificationCategory {
+        /// Notifications for updated anime
+        static let animeUpdate = "com.marcuszhou.NineAnimator.notificaiton.category.animeUpdates"
+        
+        /// Notifications for downloads
+        static let downloads = "com.marcuszhou.NineAnimator.notificaiton.category.downloads"
+    }
+    
+    enum NotificationAction {
+        /// Open NineAnimator and view the notification
+        static let open = "com.marcuszhou.NineAnimator.notificaiton.action.open"
+    }
+    
+    private func registerNotificationCategories() {
+        // Available Actions
+        let openAction = UNNotificationAction(
+            identifier: NotificationAction.open,
+            title: "View",
+            options: [ .foreground ]
+        )
+        
+        // Available Categories
         let animeUpdateCategory = UNNotificationCategory(
-            identifier: "com.marcuszhou.NineAnimator.notificaiton.category.animeUpdates",
-            actions: [openAction],
+            identifier: NotificationCategory.animeUpdate,
+            actions: [ openAction ],
             intentIdentifiers: [],
             options: []
         )
         
-        UNUserNotificationCenter.current().setNotificationCategories([animeUpdateCategory])
+        let downloadsCategory = UNNotificationCategory(
+            identifier: NotificationCategory.downloads,
+            actions: [ openAction ],
+            intentIdentifiers: [],
+            options: []
+        )
         
-        // Add anime subscription as a recommendation source
-        NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
+        UNUserNotificationCenter.current().setNotificationCategories([
+            animeUpdateCategory, downloadsCategory
+        ])
+    }
+    
+    /// Request User's permission for pushing notifications
+    func requestNotificationPermissions() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.badge]) {
+            success, _ in DispatchQueue.main.async {
+                if !success {
+                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    RootViewController.shared?.presentOnTop(alertController, animated: true)
+                }
+            }
+        }
     }
 }
 
@@ -134,10 +187,12 @@ extension UserNotificationManager {
 
 // MARK: - File path helpers
 extension UserNotificationManager {
+    /// Returns the location where the anime watcher is being persisted
     private func url(for anime: AnimeLink) -> URL {
         return self.animeCachingDirectory.appendingPathComponent(.animePersistFilenameComponent(anime))
     }
     
+    /// Returns the location where the copied poster image is located at
     private func posterUrl(for anime: AnimeLink) -> URL {
         return self.animeCachingDirectory.appendingPathComponent(.cachedPosterFilenameComponent(anime))
     }
@@ -145,9 +200,7 @@ extension UserNotificationManager {
 
 // MARK: - Watcher Persistent
 extension UserNotificationManager {
-    /**
-     Retrive the watcher for the anime from the file system
-     */
+    /// Retrive the watcher for the anime from the file system
     func retrive(for anime: AnimeLink) -> WatchedAnime? {
         do {
             let persistUrl = self.url(for: anime)
@@ -161,9 +214,7 @@ extension UserNotificationManager {
         return nil
     }
     
-    /**
-     Persist the watcher for the anime to the file system
-     */
+    /// Persist the watcher for the anime to the file system
     func persist(_ watcher: WatchedAnime) {
         do {
             let persistUrl = self.url(for: watcher.link)
@@ -174,12 +225,9 @@ extension UserNotificationManager {
         } catch { Log.error("Unable to persist watcher - %@", error) }
     }
     
-    /**
-     Add the anime but do not cache the episodes until the app becomes inactive
-     or the user enters the anime.
-     
-     See persist(_ watcher: WatchedAnime)
-     */
+    /// Add the anime but do not cache the episodes until the app becomes inactive or the user enters the anime.
+    ///
+    /// - Note: See persist(_ watcher: WatchedAnime)
     func lazyPersist(_ link: AnimeLink, shouldFireSubscriptionEvent: Bool = false) {
         lazyPersistPool.insert(link)
         
@@ -188,9 +236,7 @@ extension UserNotificationManager {
         }
     }
     
-    /**
-     Update cached anime episodes
-     */
+    /// Update cached anime episodes
     func update(_ anime: Anime, shouldFireSubscriptionEvent: Bool = false) {
         let newWatcher = WatchedAnime(
             link: anime.link,
@@ -204,9 +250,7 @@ extension UserNotificationManager {
         }
     }
     
-    /**
-     Clear cached anime episodes
-     */
+    /// Update cached anime episodes
     func remove(_ anime: AnimeLink) {
         // Fire update event
         subscriptionRecommendationSource.fireDidUpdateNotification()
@@ -225,9 +269,7 @@ extension UserNotificationManager {
         } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
-    /**
-     Clear all cached anime
-     */
+    /// Clear all cached anime
     func removeAll() {
         do {
             let fileManager = FileManager.default
@@ -240,15 +282,14 @@ extension UserNotificationManager {
         } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
-    /**
-     Remove posted notifications about this anime
-     */
+    /// Remove posted notifications about this anime
     func clearNotifications(for anime: AnimeLink) {
         let notificationCenter = UNUserNotificationCenter.current()
         let viewedAnimeNotificationIdentifiers: [String] = [.episodeUpdateNotificationIdentifier(anime)]
         notificationCenter.removeDeliveredNotifications(withIdentifiers: viewedAnimeNotificationIdentifiers)
     }
     
+    /// Check whether a notification was sent to the user for the specified anime link
     func hasNotifications(for anime: AnimeLink, _ handler: @escaping NineAnimatorCallback<Bool>) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getDeliveredNotifications {
@@ -260,6 +301,7 @@ extension UserNotificationManager {
         }
     }
     
+    /// An alias of `hasNotifications(for anime:, _ handler:)` that returns a promise
     func hasNotifications(for anime: AnimeLink) -> NineAnimatorPromise<Bool> {
         return NineAnimatorPromise {
             self.hasNotifications(for: anime, $0)
@@ -284,25 +326,11 @@ extension UserNotificationManager {
     }
 }
 
-extension UserNotificationManager {
-    func requestNotificationPermissions() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.requestAuthorization(options: [.badge]) {
-            success, _ in DispatchQueue.main.async {
-                if !success {
-                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    RootViewController.shared?.presentOnTop(alertController, animated: true)
-                }
-            }
-        }
-    }
-}
-
-// MARK: - Perform episodes fetching
+// MARK: - Episode fetching
 extension UserNotificationManager {
     fileprivate typealias FetchResult = (anime: AnimeLink, newEpisodeTitles: [String], availableServerNames: [String])
     
+    /// Perform the fetch operation
     func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // Do not perform fetch if the last one is incomeplete
         guard taskPool == nil else {
@@ -369,7 +397,7 @@ extension UserNotificationManager {
                             .compactMap { anime.servers[$0] }
                         
                         // Post notification to user
-                        self.notify(result: result)
+                        self.sendAnimeUpdateNotification(result: result)
                     } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
                     
                     // If unable to retrive the persisted episodes (maybe deleted by the system)
@@ -385,18 +413,19 @@ extension UserNotificationManager {
             }
         }
     }
-    
-    /**
-     Post notification to user
-     */
-    private func notify(result: FetchResult) {
+}
+
+// MARK: - Presenting Notifications
+extension UserNotificationManager {
+    /// Post anime update notification to user
+    private func sendAnimeUpdateNotification(result: FetchResult) {
         guard !result.newEpisodeTitles.isEmpty else { return }
         
         let notificationCenter = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
         
         content.title = "\(result.anime.title)"
-        content.categoryIdentifier = "com.marcuszhou.NineAnimator.notificaiton.category.animeUpdates"
+        content.categoryIdentifier = NotificationCategory.animeUpdate
     
         let streamingSites = result.availableServerNames.joined(separator: ", ")
         let sourceName = result.anime.source.name
@@ -421,24 +450,10 @@ extension UserNotificationManager {
             return
         }
         
-        do {
-            let posterUrl = self.posterUrl(for: result.anime)
-            
-            let cache = Kingfisher.ImageCache.default
-            let cacheKey = result.anime.image.absoluteString
-            let cachedPosterPath = cache.cachePath(forKey: cacheKey)
-            
-            // Only show poster if the poster is cached, or an error is expected to be thrown
-            let poster = UIImage(contentsOfFile: cachedPosterPath)
-            try poster?.jpegData(compressionQuality: 0.8)?.write(to: posterUrl)
-            
-            let posterAttachment = try UNNotificationAttachment(
-                identifier: "",
-                url: posterUrl,
-                options: nil
-            )
+        // Generate to poster attachement
+        if let posterAttachment = self.generateNotificationAttachment(for: result.anime) {
             content.attachments.append(posterAttachment)
-        } catch { Log.error("Unable to attach poster to notification - %@", error) }
+        }
         
         let request = UNNotificationRequest(
             identifier: .episodeUpdateNotificationIdentifier(result.anime),
@@ -451,10 +466,44 @@ extension UserNotificationManager {
         
         Log.info("Notification for '%@' sent.", result.anime.title)
     }
-}
-
-// MARK: - Present notification
-extension UserNotificationManager {
+    
+    /// Send a download status update notification
+    func sendDownloadsNotification(_ content: OfflineContent) {
+        let notificationCenter = UNUserNotificationCenter.current()
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.categoryIdentifier = NotificationCategory.downloads
+        
+        switch content.state {
+        case .error:
+            notificationContent.title = "Download Failed"
+            notificationContent.body = "Downloading task for \(content.localizedDescription) has failed."
+            
+            if NineAnimator.default.user.autoRestartInterruptedDownloads {
+                notificationContent.body += " NineAnimator will resume the download when possible."
+            }
+        case .preserved:
+            notificationContent.title = "Download Finished"
+            notificationContent.body = "\(content.localizedDescription) is now available for offline viewing."
+        default: return
+        }
+        
+        // If the OfflineContent is an instance of OfflineEpisodeContent,
+        // generate the attachment from the artwork of its parent AnimeLink
+        if let episodeContent = content as? OfflineEpisodeContent,
+            let generatedAttachment = generateNotificationAttachment(for: episodeContent.episodeLink.parent) {
+            notificationContent.attachments.append(generatedAttachment)
+        }
+        
+        let request = UNNotificationRequest(
+            identifier: .downloadUpdateNotificationIdentifier(content),
+            content: notificationContent,
+            trigger: nil
+        )
+        
+        // Enqueue the notification
+        notificationCenter.add(request, withCompletionHandler: nil)
+    }
+    
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -467,20 +516,66 @@ extension UserNotificationManager {
         _ center: UNUserNotificationCenter,
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Obtain the content of the notification
         let content = response.notification.request.content
         let decoder = PropertyListDecoder()
         
-        guard let serializedAnimeLink = content.userInfo["link"] as? Data,
-            let animeLink = try? decoder.decode(AnimeLink.self, from: serializedAnimeLink) else {
-                Log.error("Unable to deserialize AnimeLink. Won't present notification.")
-                return
+        switch content.categoryIdentifier {
+        case NotificationCategory.animeUpdate:
+            guard let serializedAnimeLink = content.userInfo["link"] as? Data,
+                let animeLink = try? decoder.decode(AnimeLink.self, from: serializedAnimeLink) else {
+                    Log.error("Unable to deserialize AnimeLink. Won't present notification.")
+                    return
+            }
+            
+            Log.info("[UserNotificationManager] Presenting notification with link %@", animeLink)
+            RootViewController.open(whenReady: .anime(animeLink))
+            completionHandler()
+        case NotificationCategory.downloads:
+            // Navigate to library for downloads
+            RootViewController.navigateWhenReady(toScene: .library)
+            completionHandler()
+        default:
+            Log.error("[UserNotificationManager] Unknown notification category: %@", content.categoryIdentifier)
+            completionHandler()
         }
+    }
+    
+    @objc private func onDownloadingTaskUpdate(_ notification: Notification) {
+        guard AppDelegate.shared?.isActive != true,
+            let content = notification.object as? OfflineContent else { return }
         
-        Log.info("Presenting notification with link %@", animeLink)
-        
-        RootViewController.open(whenReady: .anime(animeLink))
-        
-        completionHandler()
+        // Notify the user when the downloads have finished/errored
+        switch content.state {
+        case .error, .preserved: sendDownloadsNotification(content)
+        default: return
+        }
+    }
+    
+    /// Copy the cached artwork for the anime to a temporary location and generate a
+    /// `UNNotificationAttachment` for that artwork
+    private func generateNotificationAttachment(for animeLink: AnimeLink) -> UNNotificationAttachment? {
+        do {
+            let posterUrl = self.posterUrl(for: animeLink)
+            
+            // Copy from Kingfisher image cache
+            let cache = Kingfisher.ImageCache.default
+            let cacheKey = animeLink.image.absoluteString
+            let cachedPosterPath = cache.cachePath(forKey: cacheKey)
+            
+            // Only show poster if the poster is cached, or an error is expected to be thrown
+            let poster = UIImage(contentsOfFile: cachedPosterPath)
+            try poster?.jpegData(compressionQuality: 0.8)?.write(to: posterUrl)
+            
+            return try UNNotificationAttachment(
+                identifier: "", // Let the framework create the identifier
+                url: posterUrl,
+                options: nil
+            )
+        } catch {
+            Log.error("[UserNotificationManager] Unable to create notifiction attachment: %@", error)
+            return nil
+        }
     }
 }
 
@@ -489,6 +584,10 @@ extension String {
     static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
         let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(linkHashRepresentation)"
+    }
+    
+    static func downloadUpdateNotificationIdentifier(_ content: OfflineContent) -> String {
+        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(content.identifier.uniqueHashingIdentifier)"
     }
     
     static func animePersistFilenameComponent(_ anime: AnimeLink) -> String {

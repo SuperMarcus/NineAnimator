@@ -25,7 +25,7 @@ extension AVPlayerItem {
     convenience init(url: URL, headers: HTTPHeaders) {
         let asset = AVURLAsset(
             url: url,
-            options: ["AVURLAssetHTTPHeaderFieldsKey": headers]
+            options: [ AVURLAssetHTTPHeaderFieldsKey: headers ]
         )
         self.init(asset: asset)
     }
