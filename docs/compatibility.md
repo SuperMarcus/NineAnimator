@@ -7,7 +7,7 @@ The app is tested on the following devices running the latest operating
 systems:
 
 - iPhone Xs Max
-- iPhone X
+- iPhone 11
 - iPad 9.7-inch (2018)
 - iPad Pro 11-inch (2018)
 

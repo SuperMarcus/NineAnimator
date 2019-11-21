@@ -21,12 +21,6 @@ import Alamofire
 import Foundation
 import SwiftSoup
 
-extension NineAnimator {
-    func anime(with link: AnimeLink, onCompletion handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return link.source.anime(from: link, handler)
-    }
-}
-
 /// Representing an retrieved anime
 ///
 /// An Anime object represents a collection of information about the
