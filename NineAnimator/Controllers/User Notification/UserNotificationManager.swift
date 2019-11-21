@@ -525,7 +525,7 @@ extension UserNotificationManager {
         case NotificationCategory.animeUpdate:
             guard let serializedAnimeLink = content.userInfo["link"] as? Data,
                 let animeLink = try? decoder.decode(AnimeLink.self, from: serializedAnimeLink) else {
-                    Log.error("Unable to deserialize AnimeLink. Won't present notification.")
+                    Log.error("[UserNotificationManager] Unable to deserialize AnimeLink. Won't present notification.")
                     return
             }
             
