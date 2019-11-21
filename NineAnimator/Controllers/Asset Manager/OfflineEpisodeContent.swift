@@ -220,7 +220,7 @@ private extension OfflineEpisodeContent {
             }
             
             // If not, then retrieve the Anime object
-            return self.episodeLink.parent.retrive {
+            return NineAnimator.default.anime(with: self.episodeLink.parent) {
                 [weak self] anime, error in
                 guard let self = self else { return }
                 
