@@ -480,10 +480,10 @@ extension UserNotificationManager {
             notificationContent.body = "Downloading task for \(content.localizedDescription) has failed."
             
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
-                notificationContent.body += " NineAnimator will resume the download when possible."
+                notificationContent.body += " NineAnimator will retry when possible."
             }
         case .preserved:
-            notificationContent.title = "Download Finished"
+            notificationContent.title = "Episode Now Available Offline"
             notificationContent.body = "\(content.localizedDescription) is now available for offline viewing."
         default: return
         }

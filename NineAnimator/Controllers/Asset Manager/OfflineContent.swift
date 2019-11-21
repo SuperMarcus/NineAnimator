@@ -67,7 +67,10 @@ class OfflineContent: NSObject {
     var isPendingRestoration: Bool
     
     /// The provisioned downloading task of this OfflineContent
-    var task: URLSessionTask?
+    var task: URLSessionTask? {
+        // Observe changes to the task property
+        didSet { taskPropertyDidChange(current: task, previous: oldValue) }
+    }
     
     /// Access the date that the content is preserved
     var datePreserved: Date?

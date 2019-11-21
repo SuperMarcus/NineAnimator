@@ -325,11 +325,22 @@ extension OfflineContentManager {
             searchForAggregated = false
         } else { return nil }
         
-        // Looking for the content with the matching task identifier
-        return contentPool.first {
-            $0.isAggregatedAsset == searchForAggregated
-                && $0.persistedTaskIdentifier == task.taskIdentifier
+        var matchingIdentifierContent: OfflineContent?
+        
+        for content in contentPool where content.isAggregatedAsset == searchForAggregated {
+            // If the same task is found, return the content that owns the task
+            if content.task == task {
+                return content
+            }
+            
+            // Stores the content that has the same task identifier
+            if content.persistedTaskIdentifier == task.taskIdentifier {
+                matchingIdentifierContent = content
+            }
         }
+        
+        // Returning the content with the matching identifier
+        return matchingIdentifierContent
     }
 }
 
@@ -495,9 +506,10 @@ extension OfflineContentManager {
                     }
                 }
                 
-                Log.info("A preserved resource is unrestorable. Resetting to ready state.")
+                Log.error("[OfflineContentManager] A preserved resource is unrestorable. Resetting to ready state.")
                 
                 // If the url cannot be restored, reset state to ready
+                content.delete(shouldUpdateState: false)
                 content.persistentResourceIdentifier = nil
                 content.state = .ready
             }
@@ -543,6 +555,22 @@ extension OfflineContentManager {
             contentPool = []
         } catch { Log.error("Faild to clean persist directory: %@", error) }
     }
+    
+    /// Listening on new task creation
+    fileprivate func contentDidCreateNewTask(_ task: URLSessionTask, fromContent source: OfflineContent) {
+        // If the newly created task has the same identifier as one of the old content,
+        // remove the duplicated task identifier of the old content
+        for content in contentPool where content != source
+            && content.isAggregatedAsset == source.isAggregatedAsset
+            && content.persistedTaskIdentifier == task.taskIdentifier {
+            Log.info(
+                "[OfflineContentManager] Removing duplicated content identifier (%@) from content %@",
+                task.taskIdentifier,
+                content.localizedDescription
+            )
+            content.removePersistedTaskIdentifier()
+        }
+    }
 }
 
 // MARK: - Exposed to Assets
@@ -577,6 +605,11 @@ extension OfflineContent {
     /// The persisted session type
     var persistedDownloadSessionType: String? {
         return parent.persistedContentList[identifier]?["session"] as? String
+    }
+    
+    /// Remove the persisted task identifier
+    fileprivate func removePersistedTaskIdentifier() {
+        parent.persistedContentList[identifier]?["taskIdentifier"] = nil
     }
     
     fileprivate func _onCompletion(_ session: URLSession) {
@@ -657,6 +690,16 @@ extension OfflineContent {
             // Persist the data to parent
             parent.persistedContentList[identifier] = entry
         }
+    }
+    
+    /// Updates the persisted tasks
+    func taskPropertyDidChange(current: URLSessionTask?, previous: URLSessionTask?) {
+        if let current = current, current != previous {
+            parent.contentDidCreateNewTask(current, fromContent: self)
+        }
+        
+        // Save the new task identifier to the persisted property list
+        persistedLocalProperties()
     }
 }
 
