@@ -209,33 +209,43 @@ extension NativePlayerController {
 // MARK: - AVPlayer & AVPlayerItem observers
 extension NativePlayerController {
     private func onPlayerRateChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Float>) {
-        updatePlaybackSession()
-        persistProgress()
-        
-        if let observation = playerPeriodicObservation {
-            player.removeTimeObserver(observation)
-            playerPeriodicObservation = nil
-        }
-        
-        if player.rate > 0 {
-            playerPeriodicObservation = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0), queue: queue) { [weak self] _ in self?.updatePlaybackSession(); self?.persistProgress() }
-        }
-        
-        // Check if the video playback has stopped
-        if player.rate == 0 && (
-                (!playerViewController.isFirstResponder && state == .fullscreen) || // Fullscreen dismiss
-                (state == .idle) // PiP dismiss
-            ) {
-            state = .idle
-            guard !mediaQueue.isEmpty else {
-                return Log.error("A playback end action was detected, but there are no media in the queue.")
+        DispatchQueue.main.async {
+            self.updatePlaybackSession()
+            self.persistProgress()
+            
+            if let observation = self.playerPeriodicObservation {
+                self.player.removeTimeObserver(observation)
+                self.playerPeriodicObservation = nil
             }
             
-            // Post playback did end notification
-            let media = mediaQueue.removeFirst()
-            NotificationCenter.default.post(name: .playbackDidEnd, object: self, userInfo: [
-                "media": media
-            ])
+            if self.player.rate > 0 {
+                self.playerPeriodicObservation = self.player.addPeriodicTimeObserver(
+                    forInterval: CMTime(seconds: 1.0),
+                    queue: self.queue) {
+                    [weak self] _ in
+                    self?.updatePlaybackSession()
+                    self?.persistProgress()
+                }
+            }
+            
+            // Check if the video playback has stopped
+            if self.player.rate == 0 && (
+                (!self.playerViewController.isFirstResponder && self.state == .fullscreen) || // Fullscreen dismiss
+                    (self.state == .idle) // PiP dismiss
+                ) {
+                self.state = .idle
+                guard !self.mediaQueue.isEmpty else {
+                    return Log.error("A playback end action was detected, but there are no media in the queue.")
+                }
+                
+                // Post playback did end notification
+                let media = self.mediaQueue.removeFirst()
+                NotificationCenter.default.post(
+                    name: .playbackDidEnd,
+                    object: self,
+                    userInfo: [ "media": media ]
+                )
+            }
         }
     }
     
