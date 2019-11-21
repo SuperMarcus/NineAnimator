@@ -37,6 +37,13 @@ class NineAnimator: SessionDelegate {
         return URL(string: "https://discord.gg/dzTVzeW")!
     }
     
+    /// Specify how long the retrieved anime cache stays in the memory
+    ///
+    /// By default this is set to 30 minutes
+    class var animeCacheExpirationInterval: TimeInterval {
+        return 60 * 30
+    }
+    
     let client = URLSession(configuration: .default)
     
     private let mainAdditionalHeaders: HTTPHeaders = {
@@ -78,6 +85,9 @@ class NineAnimator: SessionDelegate {
     
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
+    
+    /// An in-memory cache of all the loaded anime
+    fileprivate var cachedAnimeMap = [AnimeLink: (Date, Anime)]()
     
     /// Global queue for modify internal configurations
     fileprivate static let globalConfigurationQueue = DispatchQueue(
@@ -256,5 +266,53 @@ extension NineAnimator {
         guard let buildNumberString = Bundle.main.infoDictionary?["CFBundleVersion"] as? String,
             let buildNumber = Int(buildNumberString) else { return -1 }
         return buildNumber
+    }
+}
+
+// MARK: - Retrieving & Caching Anime
+extension NineAnimator {
+    /// Retrieve the `Anime` object for the `AnimeLink`
+    ///
+    /// - Note: This method uses the internal cache whenever possible.
+    func anime(with link: AnimeLink, onCompletion handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
+        // If the anime has been cached and the cache is not expired
+        let cachedVersion = cachedAnimeMap[link]
+        if let (cachedDate, cachedAnime) = cachedVersion,
+            (cachedDate.timeIntervalSinceNow + NineAnimator.animeCacheExpirationInterval) > 0 {
+            Log.info(
+                "[NineAnimator] Valid cache for anime \"%@\" was found and is selected. Cache for this anime will expire at %@.",
+                link.title,
+                cachedDate + NineAnimator.animeCacheExpirationInterval
+            )
+            handler(cachedAnime, nil)
+            return nil
+        }
+        
+        // Retrieve the anime with source
+        return link.source.anime(from: link) {
+            result, error in // Doesn't care about strong reference to self
+            // If the result is not nil, cache the retrieved anime
+            if let result = result {
+                self.cachedAnimeMap[link] = (Date(), result)
+                // Call the original handler
+                handler(result, nil)
+            } else if let cachedAnime = cachedVersion?.1 {
+                Log.error(
+                    "[NineAnimator] Unable to retrieve an up-to-date Anime object for \"%@\" (%@). A cached version will be returned.",
+                    link.title,
+                    error.debugDescription
+                )
+                // Call the handler with the cached version
+                handler(cachedAnime, nil)
+            } else {
+                Log.error(
+                    "[NineAnimator] Unable to retrieve the Anime object for \"%@\" (%@).",
+                    link.title,
+                    error.debugDescription
+                )
+                // Call the original handler
+                handler(result, error)
+            }
+        }
     }
 }

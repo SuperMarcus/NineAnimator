@@ -93,9 +93,7 @@ extension AnimeLink: Codable {
         try values.encode(source.name, forKey: .source)
     }
     
-    /**
-     A shortcut for source.anime(from:handler:)
-     */
+    /// A shortcut for source.anime(from:handler:)
     func retrive(_ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
         return source.anime(from: self, handler)
     }

@@ -663,8 +663,7 @@ extension AnimeViewController {
                 return action
             }())
         }
-        
-        
+         
         // Show the option to change server only if the anime has been loaded
         if anime != nil {
             actionSheet.addAction({
