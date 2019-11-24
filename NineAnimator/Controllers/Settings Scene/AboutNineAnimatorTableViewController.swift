@@ -55,6 +55,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
+        configureForTransparentScrollEdge()
         
         // Update version information
         versionLabel.text = NineAnimator.default.version

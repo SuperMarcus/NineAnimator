@@ -69,12 +69,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         )
         
         // Configure scroll edge appearance so it looks a little better?
-        if #available(iOS 13.0, *) {
-            let edgeAppearance = UINavigationBarAppearance()
-            edgeAppearance.configureWithTransparentBackground()
-            navigationItem.scrollEdgeAppearance = edgeAppearance
-        }
-        
+        configureForTransparentScrollEdge()
         initializeCategories()
     }
     
