@@ -175,5 +175,6 @@ extension HomeIntegrationTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
+        configureForTransparentScrollEdge()
     }
 }

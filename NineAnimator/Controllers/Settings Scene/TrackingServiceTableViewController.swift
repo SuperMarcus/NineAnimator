@@ -61,6 +61,11 @@ class TrackingServiceTableViewController: UITableViewController {
         tableView.makeThemable()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureForTransparentScrollEdge()
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectSelectedRow() }
         

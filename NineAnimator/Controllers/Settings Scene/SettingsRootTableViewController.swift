@@ -62,6 +62,7 @@ class SettingsRootTableViewController: UITableViewController, Themable, UIAdapti
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.makeThemable()
+        configureForTransparentScrollEdge()
         Theme.provision(self)
     }
     

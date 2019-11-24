@@ -116,9 +116,18 @@ extension Theme {
             view.indicatorStyle = theme.scrollIndicatorStyle
             view.separatorColor = theme.seperator
             
-            if view.style == .grouped {
-                view.backgroundColor = theme.secondaryBackground
-            } else { view.backgroundColor = theme.background }
+            let backgroundShouldBeSecondary: Bool
+            
+            // There's also the .insetGrouped on iOS 13+
+            if #available(iOS 13.0, *) {
+                backgroundShouldBeSecondary = view.style == .insetGrouped
+                    || view.style == .grouped
+            } else {
+                backgroundShouldBeSecondary = view.style == .grouped
+            }
+            
+            view.backgroundColor = backgroundShouldBeSecondary
+                ? theme.secondaryBackground : theme.background
         case let view as UICollectionView:
             // For collection view, set the background and scroll indicator color
             view.backgroundColor = theme.background

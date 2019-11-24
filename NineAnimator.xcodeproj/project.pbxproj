@@ -326,6 +326,8 @@
 		2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */; };
 		2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC21A1220917D200A30F4F /* Promise+Fail.swift */; };
 		2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */; };
+		2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0C51F238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift */; };
+		2CF0C522238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */; };
 		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
 		2CFDDFA0236B1DF000C2D89A /* ModelMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */; };
 		2CFE2D98227D379200030B1F /* Anilist+CalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */; };
@@ -722,6 +724,8 @@
 		2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+StringMatches.swift"; sourceTree = "<group>"; };
 		2CEC21A1220917D200A30F4F /* Promise+Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Promise+Fail.swift"; sourceTree = "<group>"; };
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
+		2CF0C51F238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulator+AVAssetDownloadTask.swift"; sourceTree = "<group>"; };
+		2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationAppearanceTools.swift"; sourceTree = "<group>"; };
 		2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipImagedCell.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
 		2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMigrator.swift; sourceTree = "<group>"; };
@@ -817,6 +821,7 @@
 				2C12EDDF21BDE7960064D2BD /* ApplicationNavigationController.swift */,
 				2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */,
 				2C48001C2370B9CC00ADB03F /* MinFilledCollectionViewController.swift */,
+				2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */,
 			);
 			path = Prototype;
 			sourceTree = "<group>";
@@ -989,6 +994,7 @@
 			children = (
 				526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */,
 				2C6677B121BD846A000E5ACC /* CMTime.swift */,
+				2CF0C51F238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift */,
 			);
 			path = AVFoundation;
 			sourceTree = "<group>";
@@ -2192,6 +2198,7 @@
 				2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */,
 				2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */,
 				2C480013237061C400ADB03F /* LibraryDownloadsCategoryController.swift in Sources */,
+				2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
 				2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */,
 				2C8536922234041500A5CFB9 /* WonderfulSubs+LinkConstruction.swift in Sources */,
@@ -2233,6 +2240,7 @@
 				2C1C717F22190FF800760A69 /* Anilist+Tracking.swift in Sources */,
 				2C4FDDB322485EF90059B7D8 /* AnimeUltima+Search.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
+				2CF0C522238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift in Sources */,
 				2C979F1A235A17E100BC8699 /* LibrarySceneController.swift in Sources */,
 				2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */,
 				2CD1A64E222EE32000121320 /* CollectionsTableViewCell.swift in Sources */,
