@@ -679,9 +679,13 @@ extension OfflineContent {
     }
     
     fileprivate func _onCompletion(_ session: URLSession, error: Error) {
-        Log.info("Content persistence finished with error: %@", error)
-        onCompletion(with: error)
-        state = .error(error)
+        switch state {
+        case .ready: break
+        default:
+            Log.info("Content persistence finished with error: %@", error)
+            onCompletion(with: error)
+            state = .error(error)
+        }
     }
     
     fileprivate func _onProgress(_ session: URLSession, progress: Double) {

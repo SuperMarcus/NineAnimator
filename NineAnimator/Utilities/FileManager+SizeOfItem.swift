@@ -38,10 +38,10 @@ extension FileManager {
     
     fileprivate func sizeOfItem(atUrl url: URL, queue: DispatchQueue = .global(), withAttributes attributes: URLResourceValues) -> NineAnimatorPromise<Int> {
         do {
-            if attributes.isRegularFile == true {
+            if let allocatedSize = attributes.fileAllocatedSize {
                 return .success(
                     queue: queue,
-                    try attributes.totalFileAllocatedSize.tryUnwrap()
+                    allocatedSize
                 )
             } else if attributes.isDirectory == true {
                 let fs = FileManager.default
@@ -78,7 +78,9 @@ extension FileManager {
                     queue: queue,
                     listOfPromises: tasks
                 ).then { $0.reduce(0, +) }
-            } else { throw NineAnimatorError.decodeError("Invalid url attributes") }
+            } else {
+                throw NineAnimatorError.decodeError("Invalid url attributes")
+            }
         } catch {
             return .firstly(queue: queue) { throw error }
         }

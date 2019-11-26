@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -85,7 +85,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-ty-bvP" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-ty-bvP" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="67.5" width="120" height="30"/>
                                             <color key="backgroundColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                             <constraints>
@@ -144,7 +144,7 @@
                                         <constraint firstAttribute="trailing" secondItem="wRU-Fx-6li" secondAttribute="trailing" constant="12" id="HhR-Yr-wHa"/>
                                         <constraint firstItem="XG2-wy-XRz" firstAttribute="leading" secondItem="e4R-Hb-xRk" secondAttribute="leading" id="N7K-lp-R6R"/>
                                         <constraint firstAttribute="trailing" secondItem="XG2-wy-XRz" secondAttribute="trailingMargin" priority="500" constant="8" id="XTZ-g9-PyT"/>
-                                        <constraint firstItem="wRU-Fx-6li" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TAP-ty-bvP" secondAttribute="trailing" id="bQi-om-GYX"/>
+                                        <constraint firstItem="wRU-Fx-6li" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TAP-ty-bvP" secondAttribute="trailing" constant="4" id="bQi-om-GYX"/>
                                         <constraint firstAttribute="bottom" secondItem="wRU-Fx-6li" secondAttribute="bottom" id="c4i-Lp-2FY"/>
                                         <constraint firstAttribute="trailing" secondItem="WA8-YI-xRl" secondAttribute="trailing" id="f8M-Tb-4Z4"/>
                                         <constraint firstItem="WA8-YI-xRl" firstAttribute="top" secondItem="e4R-Hb-xRk" secondAttribute="top" id="hB3-J2-Nue"/>

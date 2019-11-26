@@ -149,16 +149,18 @@ extension SearchViewController {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        guard let all = searchLinksPool else { return }
-        
-        if let text = searchController.searchBar.text {
-            filteredAnimeLinks = all.filter {
-                $0.title.localizedCaseInsensitiveContains(text)
-                    || $0.link.absoluteString.localizedCaseInsensitiveContains(text)
-            }
-        } else { filteredAnimeLinks = all }
-        
-        tableView.reloadSections([0], with: .fade)
+        DispatchQueue.main.async {
+            guard let all = self.searchLinksPool else { return }
+            
+            if let text = self.searchController.searchBar.text {
+                self.filteredAnimeLinks = all.filter {
+                    $0.title.localizedCaseInsensitiveContains(text)
+                        || $0.link.absoluteString.localizedCaseInsensitiveContains(text)
+                }
+            } else { self.filteredAnimeLinks = all }
+            
+            self.tableView.reloadSections([0], with: .fade)
+        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
