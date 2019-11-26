@@ -410,7 +410,12 @@ extension OfflineState {
             switch type {
             case "ready": self = .ready
             // The following states are all handled as interrupted
-            case "error", "interrupted", "preserving": self = .interrupted
+            case "interrupted", "preserving": self = .interrupted
+            case "error": self = .error(
+                NineAnimatorError.contentUnavailableError(
+                    dict["message", typedDefault: "Unknown Error"]
+                )
+            )
             case "preserved": self = .preserved
             default: break
             }
@@ -424,7 +429,10 @@ extension OfflineState {
         case .preserving(let progress):
             dict["type"] = "preserving"
             dict["progress"] = progress
-        case .interrupted, .error: dict["type"] = "interrupted"
+        case .interrupted: dict["type"] = "interrupted"
+        case let .error(error):
+            dict["type"] = "error"
+            dict["message"] = error.localizedDescription
         case .preserved: dict["type"] = "preserved"
         }
         return dict
