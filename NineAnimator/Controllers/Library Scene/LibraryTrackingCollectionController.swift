@@ -52,7 +52,8 @@ class LibraryTrackingCollectionController: MinFilledCollectionViewController, Co
             collection!.more()
         } else {
             // Update the collection references
-            cachedCollectionReferences = (0..<collection!.availablePages).flatMap {
+            loadedReferencesPages = collection!.availablePages
+            cachedCollectionReferences = (0..<loadedReferencesPages).flatMap {
                 collection!.links(on: $0).compactMap {
                     switch $0 {
                     case let .listingReference(reference): return reference
