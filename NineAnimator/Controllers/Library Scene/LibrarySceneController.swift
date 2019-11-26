@@ -71,6 +71,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         // Configure scroll edge appearance so it looks a little better?
         configureForTransparentScrollEdge()
         initializeCategories()
+        collectionView.makeThemable()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -44,7 +44,10 @@ class LibraryDownloadsCategoryController: MinFilledCollectionViewController, Lib
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        self.reloadStatefulAnime()
+    }
+    
+    fileprivate func reloadStatefulAnime() {
         // Initialize stateful anime pool
         let currentStatefulLinks = OfflineContentManager.shared.statefulAnime
         let shouldAnimate = statefulAnimeMap.count != currentStatefulLinks.count
@@ -117,6 +120,15 @@ extension LibraryDownloadsCategoryController {
         if let destination = segue.destination as? OfflineAnimeViewController,
             let selectedAnimeLink = selectedAnimeLink {
             destination.setPresenting(anime: selectedAnimeLink)
+        }
+    }
+    
+    @IBAction private func onManageButtonDidPressed(_ sender: Any) {
+        let vc = SettingsSceneController.create(navigatingTo: .storage) {
+            [weak self] in self?.reloadStatefulAnime()
+        }
+        if let vc = vc {
+            present(vc, animated: true)
         }
     }
 }

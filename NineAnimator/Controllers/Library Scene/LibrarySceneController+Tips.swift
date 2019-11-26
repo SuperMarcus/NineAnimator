@@ -73,7 +73,7 @@ extension LibrarySceneController {
     // MARK: - Connect with Tracking Services
     class ConnectWithTrackingServiceTip: Tip {
         override func onSelection(_ collectionView: UICollectionView, at indexPath: IndexPath, selectedCell: UICollectionViewCell, parent: LibrarySceneController) {
-            if let settingsController = SettingsRootTableViewController.create(
+            if let settingsController = SettingsSceneController.create(
                 navigatingTo: .trackingService,
                 onDismissal: { // This closure should be running in the main thread
                     [weak collectionView, weak parent] in // Needs to handle dismissal by ourself

@@ -391,7 +391,10 @@ extension OfflineContentManager {
         
         if let error = error { // If the download failed
             content._onCompletion(session, error: error)
-        } else { content._onCompletion(session) }
+        } else {
+            content._onCompletion(session)
+            content.didAssignStoragePolicy(storagePolicy)
+        }
     }
 }
 
@@ -556,6 +559,16 @@ extension OfflineContentManager {
         } catch { Log.error("Faild to clean persist directory: %@", error) }
     }
     
+    /// Update the preserved contents' storage policy
+    func updateStoragePolicies() {
+        let policy = storagePolicy
+        for content in contentPool where content.isAggregatedAsset {
+            if case .preserved = content.state {
+                content.didAssignStoragePolicy(policy)
+            }
+        }
+    }
+    
     /// Listening on new task creation
     fileprivate func contentDidCreateNewTask(_ task: URLSessionTask, fromContent source: OfflineContent) {
         // If the newly created task has the same identifier as one of the old content,
@@ -569,6 +582,36 @@ extension OfflineContentManager {
                 content.localizedDescription
             )
             content.removePersistedTaskIdentifier()
+        }
+    }
+    
+    /// Obtain the storage policy for each AVAsset download items
+    fileprivate var storagePolicy: AVAssetDownloadStorageManagementPolicy {
+        let mutablePolicy = AVMutableAssetDownloadStorageManagementPolicy()
+        mutablePolicy.expirationDate = .distantFuture
+        mutablePolicy.priority = NineAnimator.default.user.preventAVAssetPurge
+            ? .important : .default
+        return mutablePolicy
+    }
+}
+
+// MARK: - Usage Statistics
+extension OfflineContentManager {
+    struct DownloadStorageStatistics {
+        var totalBytes: Int = 0
+        var numberOfAssets: Int = 0
+    }
+    
+    /// Fetch the storage usage of all downloaded contents
+    func fetchDownloadStorageStatistics() -> NineAnimatorPromise<DownloadStorageStatistics> {
+        let fs = FileManager.default
+        return NineAnimatorPromise<[Int]>.queue(listOfPromises: contentPool.compactMap {
+            $0.preservedContentURL
+        } .map { fs.sizeOfItem(atUrl: $0) }).then {
+            $0.reduce(into: DownloadStorageStatistics()) {
+                $0.totalBytes += $1
+                $0.numberOfAssets += 1
+            }
         }
     }
 }

@@ -29,27 +29,29 @@ protocol NineAnimatorAsyncTask: AnyObject {
 /// needed.
 class AsyncTaskContainer: NineAnimatorAsyncTask {
     private var tasks: [NineAnimatorAsyncTask]
+    private var lock = NSLock()
     
     init() { tasks = [] }
     
     func add(_ task: NineAnimatorAsyncTask?) {
         if let task = task {
+            lock.lock()
             tasks.append(task)
+            lock.unlock()
         }
     }
     
     func cancel() {
+        lock.lock()
         for task in tasks {
             task.cancel()
         }
+        lock.unlock()
     }
     
     static func += (left: AsyncTaskContainer, right: NineAnimatorAsyncTask?) {
         left.add(right)
     }
     
-    deinit {
-        cancel()
-        tasks = []
-    }
+    deinit { cancel() }
 }

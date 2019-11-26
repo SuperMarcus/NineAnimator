@@ -32,6 +32,11 @@ extension Dictionary {
         }
         return v
     }
+    
+    /// Obtain the value at key with a typed default value T
+    subscript<T>(_ key: Key, typedDefault defaultValue: T) -> T {
+        return (self[key] as? T) ?? defaultValue
+    }
 }
 
 extension NSDictionary {

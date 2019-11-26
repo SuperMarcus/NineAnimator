@@ -152,6 +152,15 @@ class OfflineContent: NSObject {
     /// Called when the resource is successfully downloaded to url
     func onCompletion(with url: URL) { }
     
+    /// Called when the content should update the resource management policy for a system-managed asset
+    func didAssignStoragePolicy(_ policy: AVAssetDownloadStorageManagementPolicy) {
+        if isAggregatedAsset, let resourceUrl = preservedContentURL {
+            AVAssetDownloadStorageManager
+                .shared()
+                .setStorageManagementPolicy(policy, for: resourceUrl)
+        }
+    }
+    
     /// Called when an error from the downloading task is caught
     func onCompletion(with error: Error) { }
     

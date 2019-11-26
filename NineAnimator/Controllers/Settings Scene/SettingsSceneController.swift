@@ -24,33 +24,19 @@ import UIKit
 import UserNotifications
 
 // swiftlint:disable cyclomatic_complexity
-class SettingsRootTableViewController: UITableViewController, Themable, UIAdaptivePresentationControllerDelegate {
+class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresentationControllerDelegate {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
-    
     @IBOutlet private weak var detectClipboardLinksSwitch: UISwitch!
-    
     @IBOutlet private weak var viewingHistoryStatsLabel: UILabel!
-    
     @IBOutlet private weak var backgroundPlaybackSwitch: UISwitch!
-    
     @IBOutlet private weak var pictureInPictureSwitch: UISwitch!
-    
     @IBOutlet private weak var subscriptionStatsLabel: UILabel!
-    
     @IBOutlet private weak var subscriptionStatusLabel: UILabel!
-    
     @IBOutlet private weak var subscriptionShowStreamsSwitch: UISwitch!
-    
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
-    
     @IBOutlet private weak var dynamicAppearanceSwitchLabel: UILabel!
-    
     @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
-    
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
-    
-    @IBOutlet private weak var autoResumeDownloadTasksSwitch: UISwitch!
-    
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     
     /// The path that the Settings view controller will be navigating to
@@ -153,10 +139,6 @@ class SettingsRootTableViewController: UITableViewController, Themable, UIAdapti
         updatePreferencesUI()
     }
     
-    @IBAction private func onAutoResumeDidChange(_ sender: UISwitch) {
-        NineAnimator.default.user.autoRestartInterruptedDownloads = true
-    }
-    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.makeThemable()
     }
@@ -171,6 +153,7 @@ class SettingsRootTableViewController: UITableViewController, Themable, UIAdapti
                                 continueActionName: String,
                                 proceed: @escaping () -> Void) {
             let alertView = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
+            configureStyleOverride(alertView)
             
             if let popover = alertView.popoverPresentationController {
                 popover.sourceView = cell.contentView
@@ -266,7 +249,7 @@ class SettingsRootTableViewController: UITableViewController, Themable, UIAdapti
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
         animeShowEpisodeDetailsSwitch.setOn(NineAnimator.default.user.showEpisodeDetails, animated: true)
         detectClipboardLinksSwitch.setOn(NineAnimator.default.user.detectsPasteboardLinks, animated: true)
-        autoResumeDownloadTasksSwitch.setOn(NineAnimator.default.user.autoRestartInterruptedDownloads, animated: true)
+        
         allowNSFWContentSwitch.setOn(NineAnimator.default.user.allowNSFWContent, animated: true)
         
         pictureInPictureSwitch.isEnabled = AVPictureInPictureController.isPictureInPictureSupported()
@@ -324,7 +307,7 @@ class SettingsRootTableViewController: UITableViewController, Themable, UIAdapti
 }
 
 // MARK: - Create settings table view controller
-extension SettingsRootTableViewController {
+extension SettingsSceneController {
     class func create(navigatingTo: EntryPath? = nil, onDismissal: (() -> Void)? = nil) -> UIViewController? {
         let storyboard = UIStoryboard(name: "Settings", bundle: .main)
         if let viewController = storyboard.instantiateInitialViewController() {
@@ -333,10 +316,10 @@ extension SettingsRootTableViewController {
             
             // Initialize the preferences scene controller
             if let viewController = viewController as? ApplicationNavigationController,
-                let preferencesController = viewController.viewControllers.first as? SettingsRootTableViewController {
+                let preferencesController = viewController.viewControllers.first as? SettingsSceneController {
                 preferencesController.navigatingTo = navigatingTo
                 preferencesController.onDismissal = onDismissal
-            } else { Log.error("[SettingsRootTableViewController] The first view controller initiated from the storyboard is not an instance of SettingsRootTableViewController.") }
+            } else { Log.error("[SettingsSceneController] The first view controller initiated from the storyboard is not an instance of SettingsSceneController.") }
             
             return viewController
         }
@@ -345,7 +328,7 @@ extension SettingsRootTableViewController {
 }
 
 // MARK: - Miscs & Handlers
-extension SettingsRootTableViewController {
+extension SettingsSceneController {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         onDismissal?()
         onDismissal = nil
@@ -353,7 +336,7 @@ extension SettingsRootTableViewController {
 }
 
 // MARK: - Navigating to Items
-extension SettingsRootTableViewController {
+extension SettingsSceneController {
     struct EntryPath {
         /// Navigating to the `About` entry
         static var about: EntryPath {
@@ -368,6 +351,11 @@ extension SettingsRootTableViewController {
         /// Navigating to the `Tracking Service` entry
         static var trackingService: EntryPath {
             return EntryPath(segueIdentifier: "trackingService", itemIndex: nil)
+        }
+        
+        /// Navigating to the `Storage` entry
+        static var storage: EntryPath {
+            return EntryPath(segueIdentifier: "storage", itemIndex: nil)
         }
         
         fileprivate let segueIdentifier: String?
