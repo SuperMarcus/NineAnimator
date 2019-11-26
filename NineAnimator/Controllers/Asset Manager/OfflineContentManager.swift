@@ -606,7 +606,8 @@ extension OfflineContentManager {
     func fetchDownloadStorageStatistics() -> NineAnimatorPromise<DownloadStorageStatistics> {
         let fs = FileManager.default
         return NineAnimatorPromise<[Int]>.queue(listOfPromises: contentPool.compactMap {
-            $0.preservedContentURL
+            $0.updateResourceAvailability()
+            return $0.preservedContentURL
         } .map { fs.sizeOfItem(atUrl: $0) }).then {
             $0.reduce(into: DownloadStorageStatistics()) {
                 $0.totalBytes += $1

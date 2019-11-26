@@ -176,6 +176,12 @@ class OfflineContent: NSObject {
             resumeData = nil
             task?.cancel()
             task = nil
+            
+            // Delete the files as well if it exists
+            if persistentResourceIdentifier != nil {
+                delete(shouldUpdateState: false)
+            }
+            
             state = .ready
         }
         
@@ -220,6 +226,7 @@ class OfflineContent: NSObject {
         if let url = preservedContentURL {
             do {
                 try FileManager.default.removeItem(at: url)
+                persistentResourceIdentifier = nil
             } catch { Log.error("[OfflineContent] Unable to remove content: %@", error) }
         }
         
