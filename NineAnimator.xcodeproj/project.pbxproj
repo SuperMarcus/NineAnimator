@@ -140,6 +140,7 @@
 		2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED4221B58C2002C96D4 /* AniListUser.graphql */; };
 		2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */; };
 		2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 2C60EEDC221B5AC8002C96D4 /* AniListTrackingMutation.graphql */; };
+		2C643326238D7928006447D5 /* SettingsStorageTipCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C643325238D7928006447D5 /* SettingsStorageTipCell.swift */; };
 		2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */; };
 		2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */; };
 		2C64FAB8236889F500AD0F45 /* UIView+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C64FAB7236889F500AD0F45 /* UIView+StyleAttributes.swift */; };
@@ -513,6 +514,7 @@
 		2C60EED4221B58C2002C96D4 /* AniListUser.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUser.graphql; sourceTree = "<group>"; };
 		2C60EED6221B5965002C96D4 /* AniListUserMediaCollections.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListUserMediaCollections.graphql; sourceTree = "<group>"; };
 		2C60EEDC221B5AC8002C96D4 /* AniListTrackingMutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AniListTrackingMutation.graphql; sourceTree = "<group>"; };
+		2C643325238D7928006447D5 /* SettingsStorageTipCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorageTipCell.swift; sourceTree = "<group>"; };
 		2C646F8921C3125A00957A72 /* Mp4UploadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mp4UploadParser.swift; sourceTree = "<group>"; };
 		2C646F8B21C3245B00957A72 /* TiwiKiwiParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiwiKiwiParser.swift; sourceTree = "<group>"; };
 		2C64FAB7236889F500AD0F45 /* UIView+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+StyleAttributes.swift"; sourceTree = "<group>"; };
@@ -794,6 +796,7 @@
 				2C0DA2DF238B10E4002C6447 /* PortionBarView.swift */,
 				2C0DA2E1238B1CCF002C6447 /* PortionBarLabels.swift */,
 				2C0DA2E4238B27B0002C6447 /* SettingsStorageGraphCell.swift */,
+				2C643325238D7928006447D5 /* SettingsStorageTipCell.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2299,6 +2302,7 @@
 				2CEC218E2207EC9300A30F4F /* BaseSource.swift in Sources */,
 				2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */,
 				2CEBE90D2207BEAD006A64CC /* GogoAnime.swift in Sources */,
+				2C643326238D7928006447D5 /* SettingsStorageTipCell.swift in Sources */,
 				2CCC746421C07C700007502A /* NineAnime+Anime.swift in Sources */,
 				2C66779E21BC36A5000E5ACC /* BufferedContent.swift in Sources */,
 				2C93BD4C22220BE3000411CB /* Kitsu+Reference.swift in Sources */,

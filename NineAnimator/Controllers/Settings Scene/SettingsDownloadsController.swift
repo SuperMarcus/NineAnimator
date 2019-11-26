@@ -22,6 +22,7 @@ import UIKit
 
 class SettingsDownloadsController: UITableViewController {
     @IBOutlet private weak var storageUsageGraphCell: SettingsStorageGraphCell!
+    @IBOutlet private weak var storageUsageTipCell: SettingsStorageTipCell!
     @IBOutlet private weak var downloadsUsageLabel: UILabel!
     @IBOutlet private weak var cachedImageUsageLabel: UILabel!
     @IBOutlet private weak var autoRetrySwitch: UISwitch!
@@ -29,6 +30,9 @@ class SettingsDownloadsController: UITableViewController {
     
     private var usageLoadingTask: NineAnimatorAsyncTask?
     private var statistics: UsageStatistics?
+    private var criticalStorageThreshold: Int {
+        return 3_221_225_472 // 3 Gigabytes
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,8 +153,27 @@ class SettingsDownloadsController: UITableViewController {
                 fromByteCount: Int64(statistics.imageCacheSpace),
                 countStyle: .file
             )
+            
+            if statistics.availableSpace > criticalStorageThreshold {
+                storageUsageTipCell.updateMessages(
+                    .normal,
+                    title: "You have enough storage left.",
+                    message: "The system may delete downloaded contents when disk space is low."
+                )
+            } else {
+                storageUsageTipCell.updateMessages(
+                    .saturated,
+                    title: "Your storage is almost full.",
+                    message: "The system may delete downloaded contents when disk space is low."
+                )
+            }
         } else { // Set every compoennt to updating state
             storageUsageGraphCell.setPresentingUpdateState()
+            storageUsageTipCell.updateMessages(
+                .unknown,
+                title: "Calculating Storage Usage...",
+                message: "The system may delete downloaded contents when disk space is low."
+            )
             [ downloadsUsageLabel, cachedImageUsageLabel ].forEach {
                 $0.text = "Updating..."
             }

@@ -287,7 +287,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="4td-cI-giU">
-                                        <rect key="frame" x="16" y="633" width="343" height="50"/>
+                                        <rect key="frame" x="0.0" y="633" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4td-cI-giU" id="FXE-v7-8hA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -375,7 +375,7 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
-                                                    <rect key="frame" x="15" y="14" width="256" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -385,7 +385,7 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
-                                                    <rect key="frame" x="279" y="8" width="51" height="33"/>
+                                                    <rect key="frame" x="286" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onBackgroundPlaybackDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Thu-pY-uHV"/>
                                                     </connections>
@@ -1368,7 +1368,7 @@ NineAnimator is not affiliated with simkl.com.</string>
         <scene sceneID="zsp-A0-a07">
             <objects>
                 <tableViewController id="ewc-lA-d04" customClass="SettingsDownloadsController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="XJj-l7-8v2">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="XJj-l7-8v2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
@@ -1456,10 +1456,54 @@ NineAnimator is not affiliated with simkl.com.</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection id="Qlr-p0-gtf">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Cfa-ts-6im" imageView="swj-rA-7Bk" rowHeight="85" style="IBUITableViewCellStyleDefault" id="cE6-ss-oU2" customClass="SettingsStorageTipCell" customModule="NineAnimator" customModuleProvider="target">
+                                        <rect key="frame" x="16" y="185.5" width="343" height="85"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cE6-ss-oU2" id="4bK-gc-BOx">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="85"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cfa-ts-6im">
+                                                    <rect key="frame" x="65" y="0.0" width="263" height="85"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="You have enough storage left.">
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="systemBold" size="14"/>
+                                                                <font key="NSOriginalFont" metaFont="systemBold" size="14"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                        <fragment>
+                                                            <string key="content">
+The system may delete downloaded contents when disk space is low.</string>
+                                                            <attributes>
+                                                                <font key="NSFont" metaFont="menu" size="14"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Green Checkmark" id="swj-rA-7Bk">
+                                                    <rect key="frame" x="15" y="25" width="35" height="35"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImageView" destination="swj-rA-7Bk" id="O9M-IU-hC7"/>
+                                            <outlet property="tipLabel" destination="Cfa-ts-6im" id="kaf-tk-30c"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="7gS-Cm-r7T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="KjW-mL-37B" detailTextLabel="uIR-9j-Tzk" style="IBUITableViewCellStyleValue1" id="zGH-eX-iyI">
-                                        <rect key="frame" x="16" y="186.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="305.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zGH-eX-iyI" id="umT-IS-mrF">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1491,7 +1535,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="xUc-BH-HNC" detailTextLabel="lcW-Lk-ZTP" style="IBUITableViewCellStyleValue1" id="PCW-Ht-50w">
-                                        <rect key="frame" x="16" y="230.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="349.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PCW-Ht-50w" id="uWd-7t-Be8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1529,8 +1573,8 @@ NineAnimator is not affiliated with simkl.com.</string>
 
 Enable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="aIA-VG-GwS">
-                                        <rect key="frame" x="16" y="310.5" width="343" height="48"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="aIA-VG-GwS">
+                                        <rect key="frame" x="16" y="428.5" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aIA-VG-GwS" id="iqM-wb-NSX">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -1559,8 +1603,8 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="7lb-jp-r5i">
-                                        <rect key="frame" x="16" y="358.5" width="343" height="48"/>
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="7lb-jp-r5i">
+                                        <rect key="frame" x="16" y="476.5" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7lb-jp-r5i" id="gXT-mD-eJQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -1594,7 +1638,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                             <tableViewSection id="Auk-8G-CGc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.images.remove" textLabel="hNx-wP-LZ9" style="IBUITableViewCellStyleDefault" id="zF4-ge-HAm">
-                                        <rect key="frame" x="16" y="534.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="652" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zF4-ge-HAm" id="k6t-lg-aXA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1614,7 +1658,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.downloads.remove" textLabel="Zaa-23-f0r" style="IBUITableViewCellStyleDefault" id="dIB-SF-EyU">
-                                        <rect key="frame" x="0.0" y="578.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="696" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dIB-SF-EyU" id="giq-mE-1A8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1648,6 +1692,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                         <outlet property="downloadsUsageLabel" destination="uIR-9j-Tzk" id="fOm-ah-jyP"/>
                         <outlet property="preventPurgingSwitch" destination="bLb-RU-sAA" id="KNQ-6p-6Ka"/>
                         <outlet property="storageUsageGraphCell" destination="FJK-Ua-Tzg" id="zm2-NU-EBA"/>
+                        <outlet property="storageUsageTipCell" destination="cE6-ss-oU2" id="LCR-yi-nFB"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMU-Yl-w08" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1944,6 +1989,7 @@ See the complete credit list in the "Credits" page.</string>
     </scenes>
     <resources>
         <image name="Anilist Icon" width="1024" height="1024"/>
+        <image name="Green Checkmark" width="35" height="35"/>
         <image name="Kitsu Icon" width="2048" height="573"/>
         <image name="MyAnimeList Icon" width="2000" height="339"/>
         <image name="Simkl Icon" width="990" height="163"/>

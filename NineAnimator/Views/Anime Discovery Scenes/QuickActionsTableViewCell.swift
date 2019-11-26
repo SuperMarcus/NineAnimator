@@ -51,4 +51,8 @@ class QuickActionsTableViewCell: UITableViewCell, UICollectionViewDataSource, UI
         self.quickActions = list
         self.collectionView.reloadData()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        cell.makeThemable()
+    }
 }
