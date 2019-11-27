@@ -27,6 +27,7 @@ class SettingsDownloadsController: UITableViewController {
     @IBOutlet private weak var cachedImageUsageLabel: UILabel!
     @IBOutlet private weak var autoRetrySwitch: UISwitch!
     @IBOutlet private weak var preventPurgingSwitch: UISwitch!
+    @IBOutlet private weak var sendNotificationsSwitch: UISwitch!
     
     private var usageLoadingTask: NineAnimatorAsyncTask?
     private var statistics: UsageStatistics?
@@ -188,6 +189,10 @@ class SettingsDownloadsController: UITableViewController {
             NineAnimator.default.user.preventAVAssetPurge,
             animated: true
         )
+        sendNotificationsSwitch.setOn(
+            NineAnimator.default.user.sendDownloadsNotifications,
+            animated: true
+        )
     }
     
     @IBAction private func onAutoRetrySwitchDidChange(_ sender: UISwitch) {
@@ -197,6 +202,14 @@ class SettingsDownloadsController: UITableViewController {
     @IBAction private func onPreventPurgeSwitchDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.preventAVAssetPurge = sender.isOn
         OfflineContentManager.shared.updateStoragePolicies()
+    }
+    
+    @IBAction private func onSendNotificationSwitchDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.sendDownloadsNotifications = sender.isOn
+        
+        if sender.isOn { // Request notification permissions
+            UserNotificationManager.default.requestNotificationPermissions()
+        }
     }
 }
 

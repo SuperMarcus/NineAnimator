@@ -246,7 +246,7 @@ class OfflineContent: NSObject {
         }
     }
     
-    /// Resume the interruption if possible
+    /// Resume the interruption if possible, restart the task if not
     func resumeInterruption() {
         // Only resume a task that is suspended or errored
         switch state {
@@ -263,8 +263,8 @@ class OfflineContent: NSObject {
             } else if let task = task as? URLSessionDownloadTask {
                 resumeInterruptedTask(task)
             }
-        case .error: resumeFailedTask()
-        default: return
+        case .preserved: break
+        default: resumeFailedTask()
         }
     }
     
@@ -298,7 +298,7 @@ private extension OfflineContent {
     func resumeInterruptedTask(_ task: URLSessionDownloadTask) {
         Log.info("[OfflineContent] Resuming task (%@)", task.taskIdentifier)
         task.resume()
-        state = .preservationInitiated
+        state = .preserving(0.0)
     }
     
     /// Resume an errored task
@@ -311,17 +311,21 @@ private extension OfflineContent {
         // If the resume data is present
         if let resumeData = resumeData {
             // Create and resume task with resume data
-            task = downloadingSession.downloadTask(withResumeData: resumeData)
+            self.task = downloadingSession.downloadTask(withResumeData: resumeData)
+            self.resumeData = nil
         } else if let loadingUrl = sourceRequestUrl {
-            delete(shouldUpdateState: false) // Remove the downloaded content
-            task = downloadingSession.downloadTask(with: loadingUrl)
+            self.delete(shouldUpdateState: false) // Remove the downloaded content
+            self.task = downloadingSession.downloadTask(with: loadingUrl)
         } else {
-            Log.error("[OfflineContent] Resuming is not possible. Trying to reinitiate preservation.")
+            Log.info(
+                "[OfflineContent] (Re)initiating preservation for '%@'.",
+                localizedDescription
+            )
             return preserve()
         }
         
         // Update state and attempt to resume the task
-        state = .preservationInitiated
+        state = .preserving(0.0)
         task?.resume()
     }
     
@@ -341,7 +345,7 @@ private extension OfflineContent {
         // Using the AVAsset which indicates where the preserved parts are stored
         initAggregatedTask(withAsset: recreatedUrlAsset)
         task?.resume()
-        state = .preservationInitiated
+        state = .preserving(0.0)
     }
 }
 
@@ -405,7 +409,7 @@ extension OfflineContent {
         }
         
         // Update the state and resume the task
-        state = .preservationInitiated
+        state = .preserving(0.0)
         task?.resume()
     }
 }
@@ -424,6 +428,7 @@ extension OfflineState {
                 )
             )
             case "preserved": self = .preserved
+            case "queued": self = .preservationInitiated
             default: break
             }
         }
@@ -432,7 +437,8 @@ extension OfflineState {
     var export: [String: Any] {
         var dict = [String: Any]()
         switch self {
-        case .ready, .preservationInitiated: dict["type"] = "ready"
+        case .ready: dict["type"] = "ready"
+        case .preservationInitiated: dict["type"] = "queued"
         case .preserving(let progress):
             dict["type"] = "preserving"
             dict["progress"] = progress

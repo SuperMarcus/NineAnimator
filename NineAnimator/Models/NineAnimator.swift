@@ -44,7 +44,8 @@ class NineAnimator: SessionDelegate {
         return 60 * 30
     }
     
-    let client = URLSession(configuration: .default)
+    /// Reachability manager
+    private(set) var reachability: NetworkReachabilityManager?
     
     private let mainAdditionalHeaders: HTTPHeaders = {
         var headers = SessionManager.defaultHTTPHeaders
@@ -97,6 +98,9 @@ class NineAnimator: SessionDelegate {
     
     override init() {
         super.init()
+        
+        // Init reachability manager
+        reachability = NetworkReachabilityManager()
         
         // Register implemented sources and services
         registerDefaultSources()
@@ -233,7 +237,7 @@ extension NineAnimator {
                 $0.value.object != nil
             }
             let diff = before - self.trackingContextReferences.count
-            if diff > 0 { Log.info("[NineAnimator.TrackingContextPool] %@ references removed", diff) }
+            if diff > 0 { Log.error("[NineAnimator.TrackingContextPool] %@ references removed", diff) }
         }
     }
 }

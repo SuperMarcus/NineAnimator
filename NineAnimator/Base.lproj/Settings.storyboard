@@ -1573,8 +1573,42 @@ The system may delete downloaded contents when disk space is low.</string>
 
 Enable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="aIA-VG-GwS">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="PT7-bd-o7u">
                                         <rect key="frame" x="16" y="428.5" width="343" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PT7-bd-o7u" id="SW9-2x-sla">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Send Notifications" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c84-vM-Uf0">
+                                                    <rect key="frame" x="15" y="11" width="256" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qql-nZ-Cnl">
+                                                    <rect key="frame" x="279" y="8.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onSendNotificationSwitchDidChange:" destination="ewc-lA-d04" eventType="valueChanged" id="fBZ-En-jmB"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="c84-vM-Uf0" firstAttribute="top" secondItem="SW9-2x-sla" secondAttribute="topMargin" id="2ce-Wc-tLC"/>
+                                                <constraint firstItem="c84-vM-Uf0" firstAttribute="bottom" secondItem="SW9-2x-sla" secondAttribute="bottomMargin" id="F1A-3Q-qHq"/>
+                                                <constraint firstItem="Qql-nZ-Cnl" firstAttribute="centerY" secondItem="SW9-2x-sla" secondAttribute="centerY" id="HSz-9l-BHm"/>
+                                                <constraint firstItem="Qql-nZ-Cnl" firstAttribute="leading" secondItem="c84-vM-Uf0" secondAttribute="trailing" constant="8" id="J7X-qZ-zub"/>
+                                                <constraint firstItem="c84-vM-Uf0" firstAttribute="leading" secondItem="SW9-2x-sla" secondAttribute="leadingMargin" id="JKk-j1-Mkc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qql-nZ-Cnl" secondAttribute="trailing" id="ZI8-XM-td4"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="aIA-VG-GwS">
+                                        <rect key="frame" x="16" y="476.5" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aIA-VG-GwS" id="iqM-wb-NSX">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -1604,7 +1638,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="7lb-jp-r5i">
-                                        <rect key="frame" x="16" y="476.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="524.5" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7lb-jp-r5i" id="gXT-mD-eJQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -1638,7 +1672,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                             <tableViewSection id="Auk-8G-CGc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.images.remove" textLabel="hNx-wP-LZ9" style="IBUITableViewCellStyleDefault" id="zF4-ge-HAm">
-                                        <rect key="frame" x="0.0" y="652" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="700" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zF4-ge-HAm" id="k6t-lg-aXA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1658,7 +1692,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.downloads.remove" textLabel="Zaa-23-f0r" style="IBUITableViewCellStyleDefault" id="dIB-SF-EyU">
-                                        <rect key="frame" x="0.0" y="696" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="744" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dIB-SF-EyU" id="giq-mE-1A8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1691,6 +1725,7 @@ Enable Prevent Purging to protect episodes from being deleted by the system. The
                         <outlet property="cachedImageUsageLabel" destination="lcW-Lk-ZTP" id="UVv-6o-A2x"/>
                         <outlet property="downloadsUsageLabel" destination="uIR-9j-Tzk" id="fOm-ah-jyP"/>
                         <outlet property="preventPurgingSwitch" destination="bLb-RU-sAA" id="KNQ-6p-6Ka"/>
+                        <outlet property="sendNotificationsSwitch" destination="Qql-nZ-Cnl" id="PQY-Kk-4VT"/>
                         <outlet property="storageUsageGraphCell" destination="FJK-Ua-Tzg" id="zm2-NU-EBA"/>
                         <outlet property="storageUsageTipCell" destination="cE6-ss-oU2" id="LCR-yi-nFB"/>
                     </connections>

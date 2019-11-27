@@ -31,6 +31,14 @@ import Foundation
 class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownloadDelegate {
     static let shared = OfflineContentManager()
     
+    /// The queue used to execute `OfflineContentManager` tasks
+    private(set) var taskQueue = DispatchQueue(label: "com.marcuszhou.nineanimator.OfflineContent")
+    
+    /// The maximal number of concurrent tasks
+    fileprivate var maximalConcurrentTasks: Int { return 3 }
+    
+    fileprivate var screenOnRequestHandler: AppDelegate.ScreenOnRequestHandler?
+    
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
     fileprivate var persistedContentIndexURL: URL {
@@ -131,7 +139,16 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     }()
     
     /// An array to store references to contents
-    private lazy var contentPool = persistedContentPool
+    private lazy var contentPool = persistedContentPool.map {
+        content -> OfflineContent in
+        if case .preservationInitiated = content.state {
+            preservationContentQueue.append(content)
+        }
+        return content
+    }
+    
+    /// A FIFO queue for preservation tasks
+    private(set) var preservationContentQueue = [OfflineContent]()
 }
 
 // MARK: - Accessing Tasks
@@ -200,19 +217,106 @@ extension OfflineContentManager {
         return content(for: episodeLink).state
     }
     
-    /// Start preserving the episode
-    func initiatePreservation(for episodeLink: EpisodeLink) {
-        content(for: episodeLink).preserve()
+    /// Cancel and remove the preservation (if in progress) for episode
+    func cancelPreservation(for episodeLink: EpisodeLink) {
+        cancelPreservation(content: content(for: episodeLink))
     }
     
-    /// Cancel the preservation (if in progress) for episode
-    func cancelPreservation(for episodeLink: EpisodeLink) {
-        content(for: episodeLink).cancel()
+    /// Cancel and remove the content from the storage
+    func cancelPreservation(content: OfflineContent) {
+        content.delete()
     }
     
     /// Remove all preserved content under the anime link
     func removeContents(under animeLink: AnimeLink) {
         contents(for: animeLink).forEach { $0.delete() }
+    }
+}
+
+// MARK: - Task Queue Management
+extension OfflineContentManager {
+    /// The number of downloading tasks that is currently running
+    var numberOfPreservingTasks: Int {
+        return contentPool.reduce(0) {
+            if case .preserving = $1.state {
+                return $0 + 1
+            } else { return $0 }
+        }
+    }
+    
+    /// Start preserving the episode
+    func initiatePreservation(for episodeLink: EpisodeLink) {
+        let content = self.content(for: episodeLink)
+        initiatePreservation(content: content)
+    }
+    
+    /// Start preserving the content, resume if possible
+    func initiatePreservation(content: OfflineContent) {
+        if preservationContentQueue.contains(content) { return }
+        content.updateResourceAvailability()
+        
+        switch content.state {
+        case .preservationInitiated, .preserving, .preserved: break
+        default:
+            // Enqueue the content
+            preservationContentQueue.append(content)
+            content.state = .preservationInitiated
+            preserveContentIfNeeded()
+        }
+    }
+    
+    /// Pause the downloading content
+    func suspendPreservation(content: OfflineContent) {
+        content.suspend()
+    }
+    
+    /// Dequeue a content that is going to be preserved and start its prepservation
+    private func preserveQueuedContents(maximalCount: Int = 1) {
+        if !preservationContentQueue.isEmpty {
+            let realisticCount = min(
+                preservationContentQueue.count,
+                maximalCount
+            )
+            var startDelay = DispatchTime.now() + .milliseconds(100)
+            for content in preservationContentQueue[0..<realisticCount] {
+                taskQueue.asyncAfter(deadline: startDelay) {
+                    content.resumeInterruption()
+                }
+                // swiftlint:disable shorthand_operator
+                startDelay = startDelay + .milliseconds(100)
+                // swiftlint:enable shorthand_operator
+            }
+            preservationContentQueue.removeFirst(realisticCount)
+            
+            // Request the screen to be kept on while there are items in the queue
+            screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
+        } else { screenOnRequestHandler = nil }
+    }
+    
+    /// Preserve the next queued contents if the number of tasks drop to below the threshold
+    func preserveContentIfNeeded() {
+        taskQueue.async {
+            guard NineAnimator.default.reachability?.isReachable == true else {
+                return Log.info("[OfflineContentManager] Network currently unreachable. Contents will be preserved later.")
+            }
+            
+            guard AppDelegate.shared?.isActive == true else {
+                return Log.info("[OfflineContentManager] App not in foreground. More contents will be preserved later.")
+            }
+            
+            let availableSpots = self.maximalConcurrentTasks - self.numberOfPreservingTasks
+            if availableSpots > 0 {
+                self.preserveQueuedContents(maximalCount: availableSpots)
+            }
+        }
+    }
+    
+    /// Called when the download has failed for an OfflineContent and it is requesting to be
+    /// re-enqueued into the download queue
+    fileprivate func enqueueFailedDownloadingContent(content: OfflineContent) {
+        preservationContentQueue.insert(content, at: 0)
+        content.state = .preservationInitiated
+        preserveContentIfNeeded()
     }
 }
 
@@ -660,15 +764,17 @@ extension OfflineContent {
         guard let location = preservedContentURL else {
             persistentResourceIdentifier = nil
             Log.error("Location cannot be retrived after resource identifier has been set")
-            state = .error(NineAnimatorError.providerError("Location cannot be identified"))
-            return
+            return onCompletion(
+                with: NineAnimatorError.providerError("Location cannot be identified")
+            )
         }
         
         guard FileManager.default.fileExists(atPath: location.path) else {
             persistentResourceIdentifier = nil
             Log.error("Downloaded resource is unreachable")
-            state = .error(NineAnimatorError.providerError("Unreachable offline content"))
-            return
+            return onCompletion(
+                with: NineAnimatorError.providerError("Unreachable offline content")
+            )
         }
         
         Log.info("Content persisted to %@", location.absoluteString)
@@ -677,15 +783,19 @@ extension OfflineContent {
         datePreserved = Date()
         state = .preserved
         onCompletion(with: location)
+        parent.preserveContentIfNeeded()
     }
     
     fileprivate func _onCompletion(_ session: URLSession, error: Error) {
         switch state {
         case .ready: break
         default:
-            Log.info("Content persistence finished with error: %@", error)
+            Log.info("[OfflineContent] Content persistence finished with error: %@", error)
             onCompletion(with: error)
-            state = .error(error)
+            
+            if NineAnimator.default.user.autoRestartInterruptedDownloads, !isPendingRestoration {
+                parent.enqueueFailedDownloadingContent(content: self)
+            } else { state = .error(error) }
         }
     }
     

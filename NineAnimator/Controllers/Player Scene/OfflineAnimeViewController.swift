@@ -170,15 +170,12 @@ extension OfflineAnimeViewController {
         let content = contents[indexPath.item]
         
         switch content.state {
-        case .interrupted: content.resumeInterruption()
-        case .error, .ready: content.preserve()
-        case .preservationInitiated: content.cancel()
+        case .interrupted, .error, .ready:
+            OfflineContentManager.shared.initiatePreservation(content: content)
+        case .preservationInitiated:
+            OfflineContentManager.shared.cancelPreservation(content: content)
         case .preserving:
-            // If media is available for playback, play directly
-            if let media = content.media {
-                NativePlayerController.default.play(media: media)
-                return
-            } else { content.suspend() }
+            OfflineContentManager.shared.suspendPreservation(content: content)
         case .preserved:
             if let media = content.media {
                 NativePlayerController.default.play(media: media)
@@ -191,7 +188,9 @@ extension OfflineAnimeViewController {
                     preferredStyle: .alert
                 )
                 alert.addAction(UIAlertAction(title: "Ok", style: .cancel) {
-                    _ in content.delete()
+                    _ in OfflineContentManager
+                        .shared
+                        .cancelPreservation(content: content)
                 })
                 present(alert, animated: true)
             }

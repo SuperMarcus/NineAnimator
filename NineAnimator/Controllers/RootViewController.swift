@@ -316,7 +316,13 @@ extension RootViewController {
                 error: error,
                 customTitle: "Download Error",
                 allowRetry: true
-            ) { retry in if retry { content.preserve() } }
+            ) { retry in
+                if retry {
+                    OfflineContentManager
+                        .shared
+                        .initiatePreservation(content: content)
+                }
+            }
             DispatchQueue.main.async { [weak self] in self?.presentOnTop(alert) }
         default: break
         }

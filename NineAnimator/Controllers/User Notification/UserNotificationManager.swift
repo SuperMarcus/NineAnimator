@@ -543,7 +543,8 @@ extension UserNotificationManager {
     }
     
     @objc private func onDownloadingTaskUpdate(_ notification: Notification) {
-        guard AppDelegate.shared?.isActive != true,
+        guard NineAnimator.default.user.sendDownloadsNotifications,
+            AppDelegate.shared?.isActive != true,
             let content = notification.object as? OfflineContent else { return }
         
         // Notify the user when the downloads have finished/errored

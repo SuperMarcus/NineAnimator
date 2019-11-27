@@ -24,20 +24,8 @@ import Foundation
 class OfflineEpisodeContent: OfflineContent {
     private(set) var episodeLink: EpisodeLink
     
-    /// The maximal number of times that NineAnimator is allowed to retry
-    /// the download
-    ///
-    /// This variable defines how many times NineAnimator should reattempt
-    /// downloading the fetched media before resetting it back to nil.
-    var maximalAllowedRetryCount: Int {
-        return 5
-    }
-    
     /// Assign anime object if has it
     var anime: Anime?
-    
-    /// The number of times that the content retried to preserve the content
-    var retryCount = 0
     
     /// Retrive the playback media from the offline content
     var media: PlaybackMedia? {
@@ -123,12 +111,6 @@ class OfflineEpisodeContent: OfflineContent {
         // Return if already preserved
         if case .preserved = state { return }
         
-        // If the media has been retrieved
-        if retryCount <= maximalAllowedRetryCount,
-            let fetchedMedia = retrievedOnlineMedia {
-            return self.preserve(media: fetchedMedia)
-        }
-        
         // Collect resource information and initiate downloads
         currentTask = collectResourceInformation().error {
             [weak self] in self?.onCompletion(with: $0)
@@ -137,7 +119,7 @@ class OfflineEpisodeContent: OfflineContent {
         }
         
         // Update state at last
-        state = .preservationInitiated
+        state = .preserving(0.0)
     }
     
     /// Preserve playback media
@@ -189,12 +171,13 @@ class OfflineEpisodeContent: OfflineContent {
     }
     
     override func onCompletion(with error: Error) {
+        // Let the OfflineContentManager handle the retry for now
         // Retry downloads
-        if retryCount < maximalAllowedRetryCount, let fetchedMedia = retrievedOnlineMedia {
-            retryCount += 1
-            Log.info("[OfflineEpisodeContent] Download finished with error: %@. Retrying...(%@/%@)", error, retryCount, maximalAllowedRetryCount)
-            preserve(media: fetchedMedia)
-        }
+//        if retryCount < maximalAllowedRetryCount, let fetchedMedia = retrievedOnlineMedia {
+//            retryCount += 1
+//            Log.info("[OfflineEpisodeContent] Download finished with error: %@. Retrying...(%@/%@)", error, retryCount, maximalAllowedRetryCount)
+//            preserve(media: fetchedMedia)
+//        }
     }
 }
 

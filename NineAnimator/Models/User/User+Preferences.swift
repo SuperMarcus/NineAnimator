@@ -98,6 +98,17 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.preventAVAssetPurge) }
     }
     
+    /// If NineAnimator should send a user notification when a download completes
+    var sendDownloadsNotifications: Bool {
+        get {
+            return _freezer.typedValue(
+                forKey: Keys.sendDownloadNotifications,
+                default: false
+            )
+        }
+        set { _freezer.set(newValue, forKey: Keys.sendDownloadNotifications) }
+    }
+    
     /// The name of the current theme
     var theme: String {
         get { return _freezer.string(forKey: Keys.theme) ?? "light" }

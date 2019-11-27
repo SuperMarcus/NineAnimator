@@ -325,7 +325,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     
     deinit {
         if !isResolved {
-            Log.error("[NineAnimatorPromise] Losing reference to an unresolved promise. This cancels any executing tasks.")
+            Log.debug("[NineAnimatorPromise] Losing reference to an unresolved promise. This cancels any executing tasks.")
         }
         cancel()
     }
