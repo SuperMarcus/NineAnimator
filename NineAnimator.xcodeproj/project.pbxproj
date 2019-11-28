@@ -167,6 +167,7 @@
 		2C6984E9227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984E8227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift */; };
 		2C6984EB227D477C00C9EF0E /* Anilist+GQLMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984EA227D477C00C9EF0E /* Anilist+GQLMedia.swift */; };
 		2C6984ED227D490900C9EF0E /* Anilist+GQLDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6984EC227D490900C9EF0E /* Anilist+GQLDate.swift */; };
+		2C6C47322390311B001E723C /* OfflineContent+CacheStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */; };
 		2C6CF24C221B9F1E0009D554 /* SomeOrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF24B221B9F1E0009D554 /* SomeOrError.swift */; };
 		2C6CF24E221C2E090009D554 /* InformationSceneHeadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF24D221C2E080009D554 /* InformationSceneHeadingTableViewCell.swift */; };
 		2C6CF250221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF24F221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift */; };
@@ -560,6 +561,7 @@
 		2C6984EA227D477C00C9EF0E /* Anilist+GQLMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLMedia.swift"; sourceTree = "<group>"; };
 		2C6984EC227D490900C9EF0E /* Anilist+GQLDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLDate.swift"; sourceTree = "<group>"; };
 		2C6C472D238E1E00001E723C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
+		2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineContent+CacheStrategy.swift"; sourceTree = "<group>"; };
 		2C6CF24B221B9F1E0009D554 /* SomeOrError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeOrError.swift; sourceTree = "<group>"; };
 		2C6CF24D221C2E080009D554 /* InformationSceneHeadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneHeadingTableViewCell.swift; sourceTree = "<group>"; };
 		2C6CF24F221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneSynopsisTableViewCell.swift; sourceTree = "<group>"; };
@@ -1579,6 +1581,7 @@
 			children = (
 				2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */,
 				2CB004242200AEBC00351B7E /* OfflineContent.swift */,
+				2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */,
 				2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */,
 				2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */,
 			);
@@ -2024,6 +2027,7 @@
 				2CCC745C21C063EC0007502A /* NineAnime.swift in Sources */,
 				2CEC219C2207FACA00A30F4F /* GogoAnime+LinkRetriever.swift in Sources */,
 				2C4257832325367E00FCCCCE /* Simkl+Collections.swift in Sources */,
+				2C6C47322390311B001E723C /* OfflineContent+CacheStrategy.swift in Sources */,
 				2C8519BE22D31C0E00EEF3AC /* AnimeKisa.swift in Sources */,
 				2CEBE8FE22074401006A64CC /* UISearchBar+Themable.swift in Sources */,
 				2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */,

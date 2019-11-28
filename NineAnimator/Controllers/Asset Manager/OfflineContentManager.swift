@@ -314,6 +314,10 @@ extension OfflineContentManager {
     /// Called when the download has failed for an OfflineContent and it is requesting to be
     /// re-enqueued into the download queue
     fileprivate func enqueueFailedDownloadingContent(content: OfflineContent) {
+        Log.info(
+            "[OfflineContentManager] Re-enqueued failed content '%@' to the download queue",
+            content.localizedDescription
+        )
         preservationContentQueue.insert(content, at: 0)
         content.state = .preservationInitiated
         preserveContentIfNeeded()
@@ -403,7 +407,10 @@ extension OfflineContentManager {
             
             // Call the handler method
             content._onCompletion(session, error: error)
-        } else { content._onCompletion(session) }
+        } else {
+            content._onCompletion(session)
+            preserveContentIfNeeded()
+        }
     }
     
     func urlSession(_ session: URLSession,
@@ -463,6 +470,13 @@ extension OfflineContentManager {
             backgroundSessionCompletionHandler = nil
         }
         
+        Log.info(
+            "[OfflineContentManager] AVAsset '%@' (%@) did download to '%@'",
+            content.localizedDescription,
+            assetDownloadTask.taskIdentifier,
+            location.relativePath
+        )
+        
         // Save the resource location
         content.persistentResourceIdentifier = (location.relativePath, "home")
     }
@@ -498,6 +512,7 @@ extension OfflineContentManager {
         } else {
             content._onCompletion(session)
             content.didAssignStoragePolicy(storagePolicy)
+            preserveContentIfNeeded()
         }
     }
 }
@@ -761,29 +776,48 @@ extension OfflineContent {
     }
     
     fileprivate func _onCompletion(_ session: URLSession) {
+        // Check if preserved content location is saved
         guard let location = preservedContentURL else {
             persistentResourceIdentifier = nil
             Log.error("Location cannot be retrived after resource identifier has been set")
-            return onCompletion(
-                with: NineAnimatorError.providerError("Location cannot be identified")
+            return _onCompletion(
+                session,
+                error: NineAnimatorError.providerError("Location cannot be identified")
             )
         }
         
+        // Check if download file exists
         guard FileManager.default.fileExists(atPath: location.path) else {
             persistentResourceIdentifier = nil
-            Log.error("Downloaded resource is unreachable")
-            return onCompletion(
-                with: NineAnimatorError.providerError("Unreachable offline content")
+            Log.error("[OfflineContent] Downloaded resource is unreachable")
+            return _onCompletion(
+                session,
+                error: NineAnimatorError.providerError("Unreachable offline content")
             )
         }
         
-        Log.info("Content persisted to %@", location.absoluteString)
+        // Check the validity of the downloaded avasset
+        if let task = task as? AVAssetDownloadTask,
+            task.urlAsset.assetCache?.isPlayableOffline != true {
+            return _onCompletion(
+                session,
+                error: NineAnimatorError.providerError("Asset downloaded without an error but is marked as not playable offline")
+            )
+        }
+        
+        do {
+            try onCompletion(with: location)
+        } catch { return _onCompletion(session, error: error) }
+        
+        if isAggregatedAsset { // For aggregated assets, update the cache flags
+            adjustCacheStrategy(forPackagedResource: location)
+        }
+        
+        Log.info("[OfflineContent] Content persisted to %@", location.absoluteString)
         
         // Update state and call completion handler
         datePreserved = Date()
         state = .preserved
-        onCompletion(with: location)
-        parent.preserveContentIfNeeded()
     }
     
     fileprivate func _onCompletion(_ session: URLSession, error: Error) {
