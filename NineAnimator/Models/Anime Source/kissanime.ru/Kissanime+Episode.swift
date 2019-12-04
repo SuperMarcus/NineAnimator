@@ -22,13 +22,14 @@ import SwiftSoup
 
 extension NASourceKissanime {
     static let knownServers = [
-        "rapidvideo": "RapidVideo",
-        "openload": "OpenLoad",
+//        "rapidvideo": "RapidVideo",
+//        "openload": "OpenLoad",
         "mp4upload": "Mp4Upload",
-        "streamango": "Streamango",
+//        "streamango": "Streamango",
         "nova": "Nova Server",
         "beta": "Beta Server",
-        "beta2": "Beta2 Server"
+        "beta2": "Beta2 Server",
+        "hydrax": "HydraX"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
