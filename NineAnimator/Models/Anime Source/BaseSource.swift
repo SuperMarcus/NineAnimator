@@ -35,7 +35,7 @@ class BaseSource: SessionDelegate {
     
     var _cfResolverTimer: Timer?
     var _cfPausedTasks = [Alamofire.RequestRetryCompletion]()
-    var _internalUAIdentity = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
+    var _internalUAIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
     
     /// The session used to create ajax requests
     lazy var retriverSession: SessionManager = createRetriverSession()

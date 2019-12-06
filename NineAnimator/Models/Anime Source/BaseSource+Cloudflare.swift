@@ -39,46 +39,46 @@ extension BaseSource {
             bodyString.contains("jschl_answer") {
             // Save the requestingUrl for modification
             var passthroughUrl: URL?
+            var responseParameters: [String: String]?
             
             // Parse the necessary components and include that in the error
             do {
                 let bowl = try SwiftSoup.parse(bodyString)
-                let cfJschlVcValue = try bowl.select("input[name=jschl_vc]").attr("value")
-                let cfPassValue = try bowl.select("input[name=pass]").attr("value")
-                let cfSValue = try bowl.select("input[name=s]").attr("value")
-                let cfJschlAnswerValue = try some(
-                    _cloudflareWAFSolveChallenge(bodyString, requestingUrl: requestingUrl),
-                    or: .decodeError
-                )
+                let challengeForm = try bowl.select("#challenge-form")
+                let challengeResponsePath = try challengeForm.attr("action")
                 
-                guard let challengeScheme = requestingUrl.scheme,
-                    let challengeHost = requestingUrl.host,
-                    let challengeUrl = URL(string: "\(challengeScheme)://\(challengeHost)/cdn-cgi/l/chk_jschl")
-                    else { throw NineAnimatorError.urlError }
+                let cfJschlVcValue = try challengeForm.select("input[name=jschl_vc]").attr("value")
+                let cfPassValue = try challengeForm.select("input[name=pass]").attr("value")
+                let cfRValue = try challengeForm.select("input[name=r]").attr("value")
+                let cfJschlAnswerValue = try _cloudflareWAFSolveChallenge(
+                    bodyString,
+                    requestingUrl: requestingUrl
+                ).tryUnwrap(.decodeError("unable to resolve cloudflare challenge"))
                 
-                // Reconstruct the url with cloudflare challenge value stored in the fragment
-                var urlBuilder = URLComponents(url: challengeUrl, resolvingAgainstBaseURL: false)
-                var cfQueryFilteredCharacters = CharacterSet.urlFragmentAllowed
-                _ = cfQueryFilteredCharacters.remove("/")
-                _ = cfQueryFilteredCharacters.remove("=")
-                _ = cfQueryFilteredCharacters.remove("+")
-                urlBuilder?.percentEncodedQueryItems = [
-                    .init(name: "s", value: cfSValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
-                    .init(name: "jschl_vc", value: cfJschlVcValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
-                    .init(name: "pass", value: cfPassValue.addingPercentEncoding(withAllowedCharacters: cfQueryFilteredCharacters)),
-                    .init(name: "jschl_answer", value: cfJschlAnswerValue)
+                passthroughUrl = try URL(
+                    string: challengeResponsePath,
+                    relativeTo: requestingUrl
+                ).tryUnwrap()
+                
+                responseParameters = [
+                    "r": cfRValue,
+                    "jschl_vc": cfJschlVcValue,
+                    "pass": cfPassValue,
+                    "jschl_answer": cfJschlAnswerValue
                 ]
                 
                 Log.info("[CF_WAF] Detected a potentially solvable WAF challenge")
-                
-                // Store passthrough url
-                passthroughUrl = try some(urlBuilder?.url, or: .urlError)
-            } catch { Log.info("Cannot find all necessary components to solve Cloudflare challenges.") }
+            } catch {
+                Log.info(
+                    "[CF_WAF] Cannot find all necessary components to solve Cloudflare challenges: %@",
+                    error
+                )
+            }
             
             return .failure(
                 NineAnimatorError.CloudflareAuthenticationChallenge(
-                    "The website had asked NineAnimator to verify that you are not an attacker. Please complete the challenge in the opening page. When you are finished, close the page and NineAnimator will attempt to load the resource again.",
-                    authenticationUrl: passthroughUrl
+                    authenticationUrl: passthroughUrl,
+                    responseParameters: responseParameters
                 )
             )
         }
@@ -150,7 +150,6 @@ extension BaseSource: Alamofire.RequestRetrier {
         
         // Call the completion handler
         func fail() {
-            Log.info("[CF_WAF] Failed to resolve cloudflare challenge")
             completion(false, 0)
         }
         
@@ -173,21 +172,38 @@ extension BaseSource: Alamofire.RequestRetrier {
                 return fail()
             }
             
-            let delay = 5.0
+            let delay: DispatchTimeInterval = .seconds(4)
             Log.info("[CF_WAF] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
             
             // Solve the challenge in 5 seconds
             DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                guard let originalUrlString = request.request?.url?.absoluteString
+                guard let originalUrl = request.request?.url,
+                    let urlScheme = originalUrl.scheme,
+                    let urlHost = originalUrl.host
                     else { return fail() }
+                let originalUrlString = originalUrl.absoluteString
+                var originUrl = "\(urlScheme)://\(urlHost)"
+                
+                if let port = originalUrl.port {
+                    originUrl += ":\(port)"
+                }
                 
                 Log.info("[CF_WAF] Sending cf resolve challenge request...")
                 
                 // Make the verification request and then call the retry handler
-                self.browseSession.request(verificationUrl, headers: [
-                    "Referer": originalUrlString,
-                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-                ]) .responseData {
+                self.browseSession.request(
+                    verificationUrl,
+                    method: .post,
+                    parameters: error.authenticationResponse,
+                    encoding: CFResponseEncoder.shared,
+                    headers: [
+                        "Referer": originalUrlString,
+//                        "Pragma": "no-cache",
+//                        "Cache-Control": "no-cache",
+                        "Origin": originUrl,
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+                    ]
+                ) .responseData {
                     value in
                     guard case .success = value.result,
                         let headerFields = value.response?.allHeaderFields as? [String: String]
@@ -214,5 +230,54 @@ extension BaseSource: Alamofire.RequestRetrier {
         
         // Default to no retry
         fail()
+    }
+}
+
+// MARK: - Response Encoder
+private extension BaseSource {
+    class CFResponseEncoder: Alamofire.ParameterEncoding {
+        static let shared = CFResponseEncoder()
+        
+        func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+            var encodedUrlRequest = try urlRequest.asURLRequest()
+            
+            var cfFilteredCharacters = CharacterSet.urlFragmentAllowed
+            _ = cfFilteredCharacters.remove("/")
+            _ = cfFilteredCharacters.remove("=")
+            _ = cfFilteredCharacters.remove("+")
+            
+            if let parameters = parameters {
+                let encodedParameters = parameters.compactMap {
+                    key, value -> String? in
+                    let encodedKey = key
+                        .removingPercentEncoding?
+                        .addingPercentEncoding(
+                            withAllowedCharacters: cfFilteredCharacters
+                        )
+                    let encodedValue = String(describing: value)
+                        .removingPercentEncoding?
+                        .addingPercentEncoding(
+                            withAllowedCharacters: cfFilteredCharacters
+                        )
+                    
+                    if let encodedKey = encodedKey, let encodedValue = encodedValue {
+                        return encodedKey + "=" + encodedValue
+                    } else { return nil }
+                } .joined(separator: "&")
+                
+                encodedUrlRequest.httpBody = try encodedParameters
+                    .data(using: .utf8)
+                    .tryUnwrap()
+                
+                if encodedUrlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+                    encodedUrlRequest.setValue(
+                        "application/x-www-form-urlencoded",
+                        forHTTPHeaderField: "Content-Type"
+                    )
+                }
+            }
+            
+            return encodedUrlRequest
+        }
     }
 }
