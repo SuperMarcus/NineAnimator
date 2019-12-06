@@ -249,7 +249,30 @@ extension NineAnimatorError {
     
     /// An WAF authentication challenge is present and can be automatically
     /// completed by NineAnimator
-    class CloudflareAuthenticationChallenge: AuthenticationRequiredError { }
+    class CloudflareAuthenticationChallenge: AuthenticationRequiredError {
+        /// The resolved authentication response
+        var authenticationResponse: [String: String]? {
+            return userInfo["cloudflare_answer"] as? [String: String]
+        }
+        
+        init(authenticationUrl: URL?, responseParameters: [String: String]?) {
+            var userInfo = [String: Any]()
+            
+            if let parameters = responseParameters {
+                userInfo["cloudflare_answer"] = parameters
+            }
+            
+            super.init(
+                "this website asks NineAnimator to verify the identity of the user",
+                authenticationUrl: authenticationUrl,
+                userInfo: userInfo
+            )
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
     
     /// Representing a content or service that is no longer available.
     class ContentUnavailableError: NineAnimatorError {
