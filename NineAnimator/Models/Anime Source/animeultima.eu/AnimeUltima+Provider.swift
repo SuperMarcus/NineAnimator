@@ -23,7 +23,9 @@ import Foundation
 extension NASourceAnimeUltima {
     /// A private parser for animeultima's AUEngine server
     class AUEngineParser: VideoProviderParser {
-        var aliases: [String] { return [ "AUEngine" ] }
+        var aliases: [String] {
+            return [ "AUEngine" ]
+        }
         
         private var source: NASourceAnimeUltima
         
@@ -38,32 +40,29 @@ extension NASourceAnimeUltima {
                 .request(browseUrl: episode.target)
                 .then {
                     responseContent in
-                    let fone = try! NSRegularExpression(pattern: "fone=\"([^\"]+)", options: .caseInsensitive)
-                    let ftwo = try! NSRegularExpression(pattern: "ftwo=\"([^\"]+)", options: .caseInsensitive)
-                    
+                    let fone = try NSRegularExpression(
+                        pattern: "fone=\"([^\"]+)",
+                        options: .caseInsensitive
+                    )
+                    let ftwo = try NSRegularExpression(
+                        pattern: "ftwo=\"([^\"]+)",
+                        options: .caseInsensitive
+                    )
                     let decodedPackerScript = try PackerDecoder().decode(responseContent)
-                    
-                    var resourceUrlString: String?
-                    
-                    if let match = fone.matches(in: decodedPackerScript, range: decodedPackerScript.matchingRange).first {
-                        resourceUrlString = decodedPackerScript[match.range(at: 1)]
-                    }
-                    
-                    if (resourceUrlString ?? "").isEmpty, let match = ftwo.matches(in: decodedPackerScript, range: decodedPackerScript.matchingRange).first {
-                        resourceUrlString = decodedPackerScript[match.range(at: 1)]
-                    }
-                    
-                    if (resourceUrlString ?? "").isEmpty {
-                        throw NineAnimatorError.providerError("Cannot find a streambale resource in the selected page")
-                    }
-                    
-                    guard let sourceURL = URL(string: resourceUrlString!) else {
-                        throw NineAnimatorError.urlError
-                    }
-                    
-                    Log.info("(AnimeUltima.AUEngine Parser) Found asset at %@", sourceURL.absoluteString)
-                    
+                    let resourceUrlString = try (
+                        fone.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
+                        ?? ftwo.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
+                    ) .tryUnwrap(
+                        .providerError("Cannot find a streambale resource in the selected page")
+                    )
+                    let sourceURL = try URL(string: resourceUrlString).tryUnwrap()
                     let aggregated = sourceURL.pathExtension.lowercased() == "m3u8"
+                    
+                    Log.info(
+                        "(AnimeUltima.AUEngine Parser) Found asset at %@ (HLS: %@)",
+                        sourceURL.absoluteString,
+                        aggregated
+                    )
                     
                     // Construct playback media
                     return BasicPlaybackMedia(
