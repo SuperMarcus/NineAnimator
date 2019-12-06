@@ -59,7 +59,7 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        // RapidVideo doesn't require verification
-        return "rapidvideo"
+        // HydraX doesn't require verification
+        return "hydrax"
     }
 }
