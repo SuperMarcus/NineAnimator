@@ -37,6 +37,12 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     /// The maximal number of concurrent tasks
     fileprivate var maximalConcurrentTasks: Int { return 3 }
     
+    /// The time between each download attempts
+    fileprivate var minimalRetryInterval: TimeInterval { return 30 }
+    
+    /// A delay timer used for delaying download retries
+    fileprivate var dequeueDelayTimer: Timer?
+    
     fileprivate var screenOnRequestHandler: AppDelegate.ScreenOnRequestHandler?
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
@@ -272,24 +278,56 @@ extension OfflineContentManager {
     
     /// Dequeue a content that is going to be preserved and start its prepservation
     private func preserveQueuedContents(maximalCount: Int = 1) {
+        // First invalidate any previous delay timers
+        dequeueDelayTimer?.invalidate()
+        dequeueDelayTimer = nil
+        
         if !preservationContentQueue.isEmpty {
             let realisticCount = min(
                 preservationContentQueue.count,
                 maximalCount
             )
+            
             var startDelay = DispatchTime.now() + .milliseconds(100)
+            var reEnqueuingContents = [OfflineContent]()
+            
             for content in preservationContentQueue[0..<realisticCount] {
+                // If the download was attempted within the minimal retry interval
+                if let lastDownloadAttempt = content.lastDownloadAttempt,
+                    lastDownloadAttempt.timeIntervalSinceNow < -minimalRetryInterval {
+                    reEnqueuingContents.append(content)
+                    continue
+                }
+                
                 taskQueue.asyncAfter(deadline: startDelay) {
                     content.resumeInterruption()
+                    content.lastDownloadAttempt = Date()
                 }
                 // swiftlint:disable shorthand_operator
                 startDelay = startDelay + .milliseconds(100)
                 // swiftlint:enable shorthand_operator
             }
-            preservationContentQueue.removeFirst(realisticCount)
+            
+            // Remove the contents that have been restarted
+            preservationContentQueue = reEnqueuingContents + preservationContentQueue[realisticCount...]
             
             // Request the screen to be kept on while there are items in the queue
             screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
+            
+            // If there are items in the delay list, schedule a timer
+            if let largestInterval = reEnqueuingContents.compactMap ({
+                    $0.lastDownloadAttempt?.timeIntervalSinceNow
+                }).min(), minimalRetryInterval + largestInterval > 0 {
+                // Delay interval+1s
+                let delayInterval = minimalRetryInterval + largestInterval + 1
+                
+                // Schedule the retry timer
+                dequeueDelayTimer = Timer.scheduledTimer(withTimeInterval: delayInterval, repeats: false) {
+                    [weak self] _ in self?.taskQueue.async {
+                        self?.preserveContentIfNeeded()
+                    }
+                }
+            }
         } else { screenOnRequestHandler = nil }
     }
     

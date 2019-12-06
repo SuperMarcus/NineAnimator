@@ -122,6 +122,10 @@ class OfflineContent: NSObject {
         return "A Content"
     }
     
+    /// Date at which the download was last attempted
+    /// - Note: Although the property is stored by the `OfflineContent`, its value is maintained by the asset manager.
+    var lastDownloadAttempt: Date?
+    
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
         parent = manager
