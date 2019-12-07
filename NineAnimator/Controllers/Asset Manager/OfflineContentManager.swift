@@ -315,7 +315,7 @@ extension OfflineContentManager {
             screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
             
             // If there are items in the delay list, schedule a timer
-            if let largestInterval = reEnqueuingContents.compactMap ({
+            if let largestInterval = reEnqueuingContents.compactMap({
                     $0.lastDownloadAttempt?.timeIntervalSinceNow
                 }).min(), minimalRetryInterval + largestInterval > 0 {
                 // Delay interval+1s
