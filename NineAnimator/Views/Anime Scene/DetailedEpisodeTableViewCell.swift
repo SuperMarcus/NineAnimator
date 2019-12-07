@@ -36,63 +36,11 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var offlineAccessButton: OfflineAccessButton!
     
     // Callback that is invoked when the progress view is becoming hidden/presented
-    var onStateChange: ((DetailedEpisodeTableViewCell) -> Void)?
+    private var onStateChange: ((DetailedEpisodeTableViewCell) -> Void)?
     
-    var episodeLink: EpisodeLink? {
-        didSet { offlineAccessButton.episodeLink = episodeLink }
-    }
+    private(set) var episodeLink: EpisodeLink?
     
-    var episodeInformation: Anime.AdditionalEpisodeLinkInformation? {
-        didSet {
-            // Remove observation first
-            NotificationCenter.default.removeObserver(self)
-            
-            guard let info = episodeInformation else { return }
-            
-            if episodeLink == nil { episodeLink = info.parent }
-            
-            // Title
-            
-            episodeNameLabel.text = info.title ?? "Untitled"
-            
-            // Subtitle
-            
-            var subtitleContents = [String]()
-            
-            if let episodeNumber = info.episodeNumber {
-                subtitleContents.append("Episode \(episodeNumber)")
-            }
-            
-            if let airDate = info.airDate {
-                subtitleContents.append("Aired on \(airDate)")
-            }
-            
-            if let season = info.season {
-                subtitleContents.append(season)
-            }
-            
-            let subtitle = subtitleContents.joined(separator: " | ")
-            
-            episodeSubtitleLabel.text = subtitle
-            
-            // Synopsis
-            
-            episodeSynopsisLabel.text = info.synopsis ?? "No synoposis found for this episode."
-            
-            // Progress
-            
-            progress = Float(info.parent.playbackProgress)
-            
-            // Listen to progress updates
-            
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(onProgressUpdate),
-                name: .playbackProgressDidUpdate,
-                object: nil
-            )
-        }
-    }
+    private(set) var episodeInformation: Anime.AdditionalEpisodeLinkInformation?
     
     private var progress: Float {
         get { return episodePlaybackProgressView.progress }
@@ -114,6 +62,61 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
                 "\(formatter.string(from: NSNumber(value: 1.0 - newValue)) ?? "Unknown percentage") left"
             } else { episodePlaybackProgressLabel.text = "Completed" }
         }
+    }
+    
+    /// Initialize this cell
+    func setPresenting(_ episodeLink: EpisodeLink,
+                       additionalInformation info: Anime.AdditionalEpisodeLinkInformation,
+                       parent: AnimeViewController,
+                       didResizeCell: @escaping (DetailedEpisodeTableViewCell) -> Void) {
+        self.episodeLink = episodeLink
+        self.offlineAccessButton.episodeLink = episodeLink
+        self.offlineAccessButton.delegate = parent
+        self.onStateChange = didResizeCell
+        
+        // Remove observation first
+        NotificationCenter.default.removeObserver(self)
+        
+        // Title
+        
+        episodeNameLabel.text = info.title ?? "Untitled"
+        
+        // Subtitle
+        
+        var subtitleContents = [String]()
+        
+        if let episodeNumber = info.episodeNumber {
+            subtitleContents.append("Episode \(episodeNumber)")
+        }
+        
+        if let airDate = info.airDate {
+            subtitleContents.append("Aired on \(airDate)")
+        }
+        
+        if let season = info.season {
+            subtitleContents.append(season)
+        }
+        
+        let subtitle = subtitleContents.joined(separator: " | ")
+        
+        episodeSubtitleLabel.text = subtitle
+        
+        // Synopsis
+        
+        episodeSynopsisLabel.text = info.synopsis ?? "No synoposis found for this episode."
+        
+        // Progress
+        
+        progress = Float(info.parent.playbackProgress)
+        
+        // Listen to progress updates
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onProgressUpdate),
+            name: .playbackProgressDidUpdate,
+            object: nil
+        )
     }
     
     @objc private func onProgressUpdate() {

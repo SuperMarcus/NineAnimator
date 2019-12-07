@@ -147,4 +147,16 @@ extension NineAnimatorUser {
         get { return _freezer.bool(forKey: Keys.allowNSFWContent) }
         set { _freezer.set(newValue, forKey: Keys.allowNSFWContent) }
     }
+    
+    /// Silence warnings about a specific purpose of a server
+    func silenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) {
+        var listOfSilencedPurposes = _silencedUnrecommendedServerPurposes[server] ?? []
+        listOfSilencedPurposes.insert(purpose)
+        _silencedUnrecommendedServerPurposes[server] = listOfSilencedPurposes
+    }
+    
+    /// Check if a warning realted to a specific purpose on a server should be silenced
+    func shouldSilenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) -> Bool {
+        return _silencedUnrecommendedServerPurposes[server]?.contains(purpose) == true
+    }
 }

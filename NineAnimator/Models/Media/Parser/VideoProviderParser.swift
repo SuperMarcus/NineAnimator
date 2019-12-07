@@ -55,7 +55,7 @@ extension VideoProviderParser {
 }
 
 /// Annotate the purpose of parsing
-enum VideoProviderParserParsingPurpose: Int, CaseIterable, Equatable {
+enum VideoProviderParserParsingPurpose: Int, CaseIterable, Equatable, Hashable {
     /// Mark the parsing as for local playback purpose
     case playback
     

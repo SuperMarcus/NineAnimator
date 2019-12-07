@@ -23,7 +23,7 @@ import Foundation
 
 class KiwikParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "Kiwik" ]
+        return [ "Kiwik", "kwik" ]
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
@@ -71,6 +71,11 @@ class KiwikParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        if #available(iOS 13.0, *) {
+            // Kwik also only provides an event playlist
+            return purpose != .download
+        }
+        
         return true
     }
 }

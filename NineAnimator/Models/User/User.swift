@@ -31,6 +31,9 @@ import Foundation
 class NineAnimatorUser {
     let _freezer = UserDefaults.standard
     
+    /// A list of server identifiers that has been silenced from presenting warnings regarding unrecommended use
+    var _silencedUnrecommendedServerPurposes = [Anime.ServerIdentifier: Set<VideoProviderParser.Purpose>]()
+    
     /// Remove all anime viewing history
     func clearRecents() {
         recentAnimes = []

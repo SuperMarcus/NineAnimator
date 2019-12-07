@@ -158,7 +158,7 @@ class OfflineAccessButton: UIButton, Themable {
             OfflineContentManager.shared.cancelPreservation(for: episodeLink)
         case .error, .ready:
             if let delegate = delegate {
-                delegate.offlineAccessButton(shouldProceedDownload: self, forEpisodeLink: episodeLink) {
+                delegate.offlineAccessButton(shouldProceedWithDownload: self, forEpisodeLink: episodeLink) {
                     // The closure does not have a self reference
                     if $0 {
                         OfflineContentManager.shared.initiatePreservation(
@@ -187,7 +187,7 @@ protocol OfflineAccessButtonDelegate: AnyObject {
     /// Asynchronously check if the download should be proceeded
     /// - Note: There's no need to keep a reference of the source `OfflineAccessButton`. The Calling the `completionHandler` with a result of `true` will start the preservation regardless of the source button.
     func offlineAccessButton(
-        shouldProceedDownload source: OfflineAccessButton,
+        shouldProceedWithDownload source: OfflineAccessButton,
         forEpisodeLink episodeLink: EpisodeLink,
         completionHandler: @escaping (Bool, Anime?) -> Void
     )
