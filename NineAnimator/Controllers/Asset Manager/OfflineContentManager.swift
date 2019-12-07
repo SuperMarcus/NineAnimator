@@ -251,8 +251,9 @@ extension OfflineContentManager {
     }
     
     /// Start preserving the episode
-    func initiatePreservation(for episodeLink: EpisodeLink) {
+    func initiatePreservation(for episodeLink: EpisodeLink, withLoadedAnime anime: Anime? = nil) {
         let content = self.content(for: episodeLink)
+        content.anime = anime ?? content.anime
         initiatePreservation(content: content)
     }
     

@@ -22,6 +22,9 @@ import UIKit
 /// A self-contained view to handle download initiating and monitoring tasks
 @IBDesignable
 class OfflineAccessButton: UIButton, Themable {
+    /// Delegate for this button
+    weak var delegate: OfflineAccessButtonDelegate?
+    
     var episodeLink: EpisodeLink? {
         didSet {
             NotificationCenter.default.removeObserver(self)
@@ -154,7 +157,20 @@ class OfflineAccessButton: UIButton, Themable {
         case .preservationInitiated, .preserving:
             OfflineContentManager.shared.cancelPreservation(for: episodeLink)
         case .error, .ready:
-            OfflineContentManager.shared.initiatePreservation(for: episodeLink)
+            if let delegate = delegate {
+                delegate.offlineAccessButton(shouldProceedDownload: self, forEpisodeLink: episodeLink) {
+                    // The closure does not have a self reference
+                    if $0 {
+                        OfflineContentManager.shared.initiatePreservation(
+                            for: episodeLink,
+                            withLoadedAnime: $1
+                        )
+                    }
+                }
+            } else {
+                // Initiate the preservation directly if no delegate has been set
+                OfflineContentManager.shared.initiatePreservation(for: episodeLink)
+            }
         case .interrupted:
             OfflineContentManager.shared.content(for: episodeLink).resumeInterruption()
         case .preserved: break // Do nothing if preserved
@@ -164,4 +180,15 @@ class OfflineAccessButton: UIButton, Themable {
     func theme(didUpdate theme: Theme) { updateContent() }
     
     deinit { NotificationCenter.default.removeObserver(self) }
+}
+
+/// Delegate for offline access button
+protocol OfflineAccessButtonDelegate: AnyObject {
+    /// Asynchronously check if the download should be proceeded
+    /// - Note: There's no need to keep a reference of the source `OfflineAccessButton`. The Calling the `completionHandler` with a result of `true` will start the preservation regardless of the source button.
+    func offlineAccessButton(
+        shouldProceedDownload source: OfflineAccessButton,
+        forEpisodeLink episodeLink: EpisodeLink,
+        completionHandler: @escaping (Bool, Anime?) -> Void
+    )
 }
