@@ -34,7 +34,7 @@ class OpenLoadParser: VideoProviderParser {
     static let key1Regex = try! NSRegularExpression(pattern: "_0x45ae41\\[_0x5949\\('0xf'\\)\\]\\(_0x30725e,(.+)\\),_1x4bfb36", options: .caseInsensitive)
     static let key2Regex = try! NSRegularExpression(pattern: "_1x4bfb36=(parseInt\\(.+,\\d+\\)(-\\d+));", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         return session.request(episode.target).responseString {
             response in
             guard let text = response.value else {
@@ -138,5 +138,9 @@ class OpenLoadParser: VideoProviderParser {
             arrIterator += 1
         }
         return streamUrl
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return false // No longer available
     }
 }

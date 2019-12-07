@@ -31,7 +31,7 @@ class KiwikParser: VideoProviderParser {
         options: []
     )
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalResourceRequestHeaders: HTTPHeaders = [
             "Referer": episode.parent.link.link.absoluteString
         ]
@@ -68,5 +68,9 @@ class KiwikParser: VideoProviderParser {
                 ), nil)
             } catch { handler(nil, error) }
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

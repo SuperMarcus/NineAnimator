@@ -224,7 +224,10 @@ private extension OfflineEpisodeContent {
             [weak self] episode in NineAnimatorPromise(queue: queue) {
                 (callback: @escaping NineAnimatorCallback<PlaybackMedia>) in
                 guard self != nil else { return nil }
-                return episode.retrive(onCompletion: callback)
+                return episode.retrive(
+                    forPurpose: .download,
+                    onCompletion: callback
+                )
             }
         } .then {
             [weak self] media in

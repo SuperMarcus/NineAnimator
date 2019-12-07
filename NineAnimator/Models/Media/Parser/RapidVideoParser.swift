@@ -27,7 +27,7 @@ class RapidVideoParser: VideoProviderParser {
         return [ "RapidVideo", "Rapid Video" ]
     }
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString
         ]
@@ -58,5 +58,11 @@ class RapidVideoParser: VideoProviderParser {
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
         }
+    }
+    
+    func isParserRecommended(forPurpose _: Purpose) -> Bool {
+        // Return false for all purposes since RapidVideo
+        // is no longer available
+        return false
     }
 }

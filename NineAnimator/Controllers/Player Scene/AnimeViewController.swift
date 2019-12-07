@@ -443,8 +443,10 @@ extension AnimeViewController {
                     // Prime the HMHomeManager
                     HomeController.shared.primeIfNeeded()
                     
-                    self.episodeRequestTask = episode.retrive {
-                        [weak self] media, error in DispatchQueue.main.async {
+                    self.episodeRequestTask = episode.retrive(
+                        forPurpose: CastController.default.isReady
+                            ? .googleCast : .playback
+                    ) { [weak self] media, error in DispatchQueue.main.async {
                             guard let self = self else { return }
                             
                             defer { clearSelection() }

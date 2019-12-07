@@ -35,6 +35,7 @@ extension NASourceAnimeUltima {
         
         func parse(episode: Episode,
                    with session: SessionManager,
+                   forPurpose _: Purpose,
                    onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
             return source
                 .request(browseUrl: episode.target)
@@ -74,6 +75,10 @@ extension NASourceAnimeUltima {
                     )
                 } .handle(handler)
         }
+        
+        func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+            return true
+        }
     }
     
     /// A private parser for animeultima's FastStream server
@@ -90,6 +95,7 @@ extension NASourceAnimeUltima {
         
         func parse(episode: Episode,
                    with session: SessionManager,
+                   forPurpose _: Purpose,
                    onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
             return source
                 .request(browseUrl: episode.target)
@@ -122,6 +128,10 @@ extension NASourceAnimeUltima {
                         isAggregated: true
                     )
                 } .handle(handler)
+        }
+        
+        func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+            return true
         }
     }
     

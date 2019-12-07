@@ -24,7 +24,7 @@ import Foundation
 class PassthroughParser: VideoProviderParser {
     var aliases: [String] { return [] }
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let dummyTask = AsyncTaskContainer()
         
         DispatchQueue.main.async {
@@ -45,5 +45,9 @@ class PassthroughParser: VideoProviderParser {
     enum Options {
         static let playbackMediaRetriever: String =
         "com.marcuszhou.nineanimator.providerparser.PassthroughParser.mediaRetriever"
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

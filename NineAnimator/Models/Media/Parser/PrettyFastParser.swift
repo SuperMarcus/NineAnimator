@@ -28,7 +28,7 @@ class PrettyFastParser: VideoProviderParser {
     
     static let videoSourceRegex = try! NSRegularExpression(pattern: "hlsUrl\\s=\\s'([^\']+)", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let userAgent = (episode.source as? BaseSource)?.sessionUserAgent ?? defaultUserAgent
         let episodeLinkPath = episode.link.identifier.split(separator: "|").last!
         
@@ -83,5 +83,15 @@ class PrettyFastParser: VideoProviderParser {
                 headers: playerAdditionalHeaders,
                 isAggregated: true), nil)
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        if #available(iOS 13, *) {
+            // F5 is not available for download as well since it only provides a
+            // event playlist
+            return purpose == .playback
+        }
+        
+        return purpose != .googleCast
     }
 }
