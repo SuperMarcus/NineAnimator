@@ -25,6 +25,7 @@ class VideoProviderRegistry {
     static let `default`: VideoProviderRegistry = {
         let defaultProvider = VideoProviderRegistry()
         
+        // A list of public parsers
         defaultProvider.register(MyCloudParser(), forServer: "MyCloud")
         defaultProvider.register(RapidVideoParser(), forServer: "RapidVideo")
         defaultProvider.register(StreamangoParser(), forServer: "Streamango")
@@ -41,6 +42,7 @@ class VideoProviderRegistry {
         defaultProvider.register(VeryStream(), forServer: "VeryStream")
         defaultProvider.register(HydraXParser(), forServer: "HydraX")
         
+        // Private parsers are registered from their own source instances
         return defaultProvider
     }()
     

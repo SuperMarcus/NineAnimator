@@ -42,9 +42,6 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { return "https://www16.animeultima.eu" }
     
-    lazy var _auEngineParser = AUEngineParser(self)
-    lazy var _fastStreamParser = FastStreamParser(self)
-    
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         return .fail(.unknownError)
     }
@@ -74,5 +71,10 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         if let preferredServer = serverPreferencesMap.max(by: { $0.value < $1.value })?.key {
             return preferredServer
         } else { return super.recommendServer(for: anime) }
+    }
+    
+    override init(with parent: NineAnimator) {
+        super.init(with: parent)
+        registerPrivateParsers()
     }
 }

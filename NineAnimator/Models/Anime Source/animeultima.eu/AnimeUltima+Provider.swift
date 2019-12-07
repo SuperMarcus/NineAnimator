@@ -21,120 +21,6 @@ import Alamofire
 import Foundation
 
 extension NASourceAnimeUltima {
-    /// A private parser for animeultima's AUEngine server
-    class AUEngineParser: VideoProviderParser {
-        var aliases: [String] {
-            return [ "AUEngine" ]
-        }
-        
-        private var source: NASourceAnimeUltima
-        
-        init(_ source: NASourceAnimeUltima) {
-            self.source = source
-        }
-        
-        func parse(episode: Episode,
-                   with session: SessionManager,
-                   forPurpose _: Purpose,
-                   onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-            return source
-                .request(browseUrl: episode.target)
-                .then {
-                    responseContent in
-                    let fone = try NSRegularExpression(
-                        pattern: "fone=\"([^\"]+)",
-                        options: .caseInsensitive
-                    )
-                    let ftwo = try NSRegularExpression(
-                        pattern: "ftwo=\"([^\"]+)",
-                        options: .caseInsensitive
-                    )
-                    let decodedPackerScript = try PackerDecoder().decode(responseContent)
-                    let resourceUrlString = try (
-                        fone.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
-                        ?? ftwo.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
-                    ) .tryUnwrap(
-                        .providerError("Cannot find a streambale resource in the selected page")
-                    )
-                    let sourceURL = try URL(string: resourceUrlString).tryUnwrap()
-                    let aggregated = sourceURL.pathExtension.lowercased() == "m3u8"
-                    
-                    Log.info(
-                        "(AnimeUltima.AUEngine Parser) Found asset at %@ (HLS: %@)",
-                        sourceURL.absoluteString,
-                        aggregated
-                    )
-                    
-                    // Construct playback media
-                    return BasicPlaybackMedia(
-                        url: sourceURL,
-                        parent: episode,
-                        contentType: aggregated ? "application/vnd.apple.mpegurl" : "video/mp4",
-                        headers: [:],
-                        isAggregated: aggregated
-                    )
-                } .handle(handler)
-        }
-        
-        func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-            return true
-        }
-    }
-    
-    /// A private parser for animeultima's FastStream server
-    class FastStreamParser: VideoProviderParser {
-        var aliases: [String] {
-            return [ "FastStream", "FastStream 2" ]
-        }
-        
-        private var source: NASourceAnimeUltima
-        
-        init(_ source: NASourceAnimeUltima) {
-            self.source = source
-        }
-        
-        func parse(episode: Episode,
-                   with session: SessionManager,
-                   forPurpose _: Purpose,
-                   onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-            return source
-                .request(browseUrl: episode.target)
-                .then {
-                    responseContent in
-                    let resourceMatchingRegex = try NSRegularExpression(
-                        pattern: "file:\\s+\"([^\"]+)",
-                        options: []
-                    )
-                    
-                    // Match the first file url
-                    guard let resourceUrlString = resourceMatchingRegex
-                        .firstMatch(in: responseContent)?
-                        .firstMatchingGroup else {
-                            throw NineAnimatorError.providerError("Cannot find a streambale resource in the selected page")
-                    }
-                    
-                    guard let resourceUrl = URL(string: resourceUrlString) else {
-                        throw NineAnimatorError.urlError
-                    }
-                    
-                    Log.info("(AnimeUltima.FastStream Parser) Found asset at %@", resourceUrlString)
-                    
-                    // Construct playback media
-                    return BasicPlaybackMedia(
-                        url: resourceUrl,
-                        parent: episode,
-                        contentType: "application/x-mpegURL",
-                        headers: [:],
-                        isAggregated: true
-                    )
-                } .handle(handler)
-        }
-        
-        func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-            return true
-        }
-    }
-    
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
         let possibleProviderName = server.replacingOccurrences(
             of: "^[^:]+:\\s+",
@@ -142,13 +28,12 @@ extension NASourceAnimeUltima {
             options: [ .regularExpression ]
         )
         
-        // Return private provider parsers
-        switch server {
-        case let server where server.hasSuffix("AUEngine"): return _auEngineParser
-        case let server where server.contains("FastStream"): return _fastStreamParser
-        default: break
-        }
-        
         return VideoProviderRegistry.default.provider(for: possibleProviderName)
+    }
+    
+    func registerPrivateParsers() {
+        let registry = VideoProviderRegistry.default
+        registry.register(AUEngineParser(self), forServer: "AUEngine")
+        registry.register(FastStreamParser(self), forServer: "FastStream")
     }
 }
