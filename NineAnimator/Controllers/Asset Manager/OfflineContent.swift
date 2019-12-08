@@ -255,7 +255,7 @@ class OfflineContent: NSObject {
         // Only resume a task that is suspended or errored
         switch state {
         case _ where task?.state == .suspended:
-            if let task = task as? URLSessionDownloadTask {
+            if let task = task {
                 resumeInterruptedTask(task)
             }
         case _ where task?.state == .running:
@@ -264,9 +264,7 @@ class OfflineContent: NSObject {
         case .interrupted:
             if task == nil || task is AVAssetDownloadTask {
                 fallthrough // Treat interrupted download task as failed
-            } else if let task = task as? URLSessionDownloadTask {
-                resumeInterruptedTask(task)
-            }
+            } else if let task = task { resumeInterruptedTask(task) }
         case .preserved: break
         default: resumeFailedTask()
         }
@@ -299,7 +297,7 @@ class OfflineContent: NSObject {
 // MARK: - Resuming Tasks
 private extension OfflineContent {
     /// Resume a paused task
-    func resumeInterruptedTask(_ task: URLSessionDownloadTask) {
+    func resumeInterruptedTask(_ task: URLSessionTask) {
         Log.info("[OfflineContent] Resuming task (%@)", task.taskIdentifier)
         task.resume()
         state = .preserving(0.0)

@@ -259,7 +259,9 @@ extension OfflineContentManager {
     
     /// Start preserving the content, resume if possible
     func initiatePreservation(content: OfflineContent) {
-        if preservationContentQueue.contains(content) { return }
+        if preservationContentQueue.contains(content) {
+            return preserveContentIfNeeded()
+        }
         content.updateResourceAvailability()
         
         switch content.state {
@@ -275,6 +277,7 @@ extension OfflineContentManager {
     /// Pause the downloading content
     func suspendPreservation(content: OfflineContent) {
         content.suspend()
+        preserveContentIfNeeded()
     }
     
     /// Dequeue a content that is going to be preserved and start its prepservation
@@ -294,7 +297,8 @@ extension OfflineContentManager {
             
             for content in preservationContentQueue[0..<realisticCount] {
                 // If the download was attempted within the minimal retry interval
-                if let lastDownloadAttempt = content.lastDownloadAttempt,
+                if !content.shouldIgnoreMinimalRetryInterval,
+                    let lastDownloadAttempt = content.lastDownloadAttempt,
                     lastDownloadAttempt.timeIntervalSinceNow < -minimalRetryInterval {
                     reEnqueuingContents.append(content)
                     continue
@@ -499,7 +503,13 @@ extension OfflineContentManager {
     func urlSession(_ session: URLSession, assetDownloadTask: AVAssetDownloadTask, didFinishDownloadingTo location: URL) {
         guard session == sharedAssetSession,
             let content = content(for: assetDownloadTask, inSession: session) else {
-            return
+            // To prevent possible storage leak, remove the item
+            _ = try? FileManager.default.removeItem(at: location)
+            return Log.error(
+                "[OfflineContentManager] AVAssetDownloadTask(%@) didFinishDownloadingTo %@, but no OfflineContent is available to handle this task. Deleting downloaded asset.",
+                assetDownloadTask.taskIdentifier,
+                location.relativePath
+            )
         }
         
         defer {
@@ -527,7 +537,12 @@ extension OfflineContentManager {
                     timeRangeExpectedToLoad: CMTimeRange) {
         guard session == sharedAssetSession,
             let content = content(for: assetDownloadTask, inSession: session) else {
-            return
+            // If there's no record of this task, cancel it
+            assetDownloadTask.cancel()
+            return Log.error(
+                "[OfflineContentManager] Received progress update from AVAssetDownloadTask(%@), but no OfflineContent is available to handle this task. Canceling this task.",
+                assetDownloadTask.taskIdentifier
+            )
         }
         
         // Calculate the progress
@@ -543,7 +558,11 @@ extension OfflineContentManager {
         guard session == sharedAssetSession,
             let assetDownloadTask = task as? AVAssetDownloadTask,
             let content = content(for: assetDownloadTask, inSession: session) else {
-            return
+            return Log.error(
+                "[OfflineContentManager] AVAssetDownloadTask(%@) didCompleteWithError(%@) called but no OfflineContent is available to handle it.",
+                task.taskIdentifier,
+                error ?? "<nil>"
+            )
         }
         
         if let error = error { // If the download failed
@@ -809,6 +828,11 @@ extension OfflineContent {
         return parent.persistedContentList[identifier]?["session"] as? String
     }
     
+    /// Specify if minimal retry interval should be ignored for this content
+    fileprivate var shouldIgnoreMinimalRetryInterval: Bool {
+        return task?.state == .suspended
+    }
+    
     /// Remove the persisted task identifier
     fileprivate func removePersistedTaskIdentifier() {
         parent.persistedContentList[identifier]?["taskIdentifier"] = nil
@@ -873,7 +897,16 @@ extension OfflineContent {
     }
     
     fileprivate func _onProgress(_ session: URLSession, progress: Double) {
-        state = .preserving(Float(progress))
+        if case .preserving = state {
+            state = .preserving(Float(progress))
+        } else {
+            Log.error(
+                "[OfflineContent] Progress for %@ updated to %@ while the current state is %@.",
+                self.localizedDescription,
+                progress,
+                state
+            )
+        }
     }
     
     // Encode and stores the persistent information for this content on the file system

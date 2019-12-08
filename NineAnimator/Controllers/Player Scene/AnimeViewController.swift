@@ -917,14 +917,14 @@ extension AnimeViewController {
             ) {
             completionHandler(true, anime)
         } else {
-            var alertMessage = "Downloads from \(anime.servers[episodeLink.server] ?? "the current server") may fail or may not be playable after completion. "
+            var alertMessage = "Downloads from \(anime.servers[episodeLink.server] ?? "the current server") may fail or become unplayable after completion. "
             
             if alternativeEpisodeLinks.isEmpty {
                 alertMessage += "You may want to consider switching to another anime source."
             } else { alertMessage += "You may want to consider one of the following alternatives." }
             
             let alert = UIAlertController(
-                title: "Unrecommended Server",
+                title: "Not Recommended Server",
                 message: alertMessage,
                 preferredStyle: .actionSheet
             )
