@@ -20,7 +20,7 @@
 import UIKit
 import WebKit
 
-class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKHTTPCookieStoreObserver, Themable {
+class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, WKHTTPCookieStoreObserver, Themable, UIAdaptivePresentationControllerDelegate {
     @IBOutlet private weak var webView: WKWebView!
     @IBOutlet private weak var loadingProgressIndicator: UIProgressView!
     @IBOutlet private weak var tipContainerView: UIVisualEffectView!
@@ -46,22 +46,38 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         
         // Cookie changes
         let store = webView.configuration.websiteDataStore
-        store.httpCookieStore.add(self)
+        var removingDataTypes: Set<String> = [
+            WKWebsiteDataTypeDiskCache,
+            WKWebsiteDataTypeOfflineWebApplicationCache,
+            WKWebsiteDataTypeMemoryCache,
+            WKWebsiteDataTypeLocalStorage,
+            WKWebsiteDataTypeCookies,
+            WKWebsiteDataTypeSessionStorage,
+            WKWebsiteDataTypeIndexedDBDatabases,
+            WKWebsiteDataTypeWebSQLDatabases
+        ]
         
-        // Copy cookies
-        HTTPCookieStorage.shared.cookies?.forEach {
-            store.httpCookieStore.setCookie($0, completionHandler: nil)
+        if #available(iOS 11.3, *) {
+            removingDataTypes.insert(WKWebsiteDataTypeFetchCache)
+            removingDataTypes.insert(WKWebsiteDataTypeServiceWorkerRegistrations)
+        }
+        
+        // Remove all data
+        store.removeData(ofTypes: removingDataTypes, modifiedSince: .distantPast) {
+            [weak self] in
+            guard let self = self else { return }
+            
+            // Copy over cookies
+            HTTPCookieStorage.shared.cookies?.forEach {
+                store.httpCookieStore.setCookie($0, completionHandler: nil)
+            }
+            
+            // Add observer
+            store.httpCookieStore.add(self)
         }
         
         // Make themable
         Theme.provision(self)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Call dismissal handler
-        self.onDismissal?()
     }
     
     func theme(didUpdate theme: Theme) {
@@ -72,23 +88,42 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         configureStyleOverride(self, withTheme: theme)
     }
     
+    /// Tap on the done button
     @IBAction private func onDismissal(_ sender: Any) {
-        let store = webView.configuration.websiteDataStore
-        store.httpCookieStore.getAllCookies {
-            [weak self] cookies in
-            let sharedCookieStore = HTTPCookieStorage.shared
-            sharedCookieStore.removeCookies(since: .distantPast)
-            cookies.forEach { sharedCookieStore.setCookie($0) }
-            
-            // Dismiss the view controller
-            DispatchQueue.main.async {
-                self?.dismiss(animated: true)
-            }
+        transferWebkitCookies {
+            [weak self] in
+            guard let self = self else { return }
+            self.dismiss(animated: true, completion: self.onDismissal)
+        }
+    }
+    
+    /// Interactively dismissing the authentication controller
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        transferWebkitCookies {
+            [weak self] in self?.onDismissal?()
         }
     }
     
     @IBAction private func onReloadButtonTapped(_ sender: Any) {
         self.webView.reloadFromOrigin()
+    }
+    
+    /// Copy the cookies from the webview to the app's shared cookie storage
+    private func transferWebkitCookies(completionHandler: (() -> Void)? = nil) {
+        let store = webView.configuration.websiteDataStore
+        store.httpCookieStore.getAllCookies {
+            cookies in
+            let sharedCookieStore = HTTPCookieStorage.shared
+            sharedCookieStore.removeCookies(since: .distantPast)
+            cookies.forEach { sharedCookieStore.setCookie($0) }
+            
+            // Run completion handler in main queue
+            if let completionHandler = completionHandler {
+                DispatchQueue.main.async {
+                    completionHandler()
+                }
+            }
+        }
     }
     
     private func updateProgressIndicator() {

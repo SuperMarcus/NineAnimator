@@ -40,10 +40,9 @@ class NASourceNineAnime: BaseSource, Source {
 #endif
     
     var siteDescription: String {
-        return "9anime is a popular free anime streaming website and one of the first supported sources of NineAnimator. You may encounter frequent verfication requests when using this site."
+        return "9anime is a popular free anime streaming website and one of the best supported anime sources in NineAnimator."
     }
     
-    // 9anime has been disabled due to IP banning issue
     override var isEnabled: Bool {
         return true
     }
