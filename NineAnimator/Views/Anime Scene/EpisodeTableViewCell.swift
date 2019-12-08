@@ -62,8 +62,7 @@ class EpisodeTableViewCell: UITableViewCell {
     /// Initialize the current cell
     func setPresenting(_ episodeLink: EpisodeLink, parent: AnimeViewController) {
         self.episodeLink = episodeLink
-        self.offlineAccessButton.episodeLink = episodeLink
-        self.offlineAccessButton.delegate = parent
+        self.offlineAccessButton.setPresenting(episodeLink, delegate: parent)
         
         // Remove observer first
         NotificationCenter.default.removeObserver(self)

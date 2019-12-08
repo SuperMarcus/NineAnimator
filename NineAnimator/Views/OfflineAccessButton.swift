@@ -25,23 +25,8 @@ class OfflineAccessButton: UIButton, Themable {
     /// Delegate for this button
     weak var delegate: OfflineAccessButtonDelegate?
     
-    var episodeLink: EpisodeLink? {
-        didSet {
-            NotificationCenter.default.removeObserver(self)
-            guard let link = episodeLink, link != oldValue else { return }
-            setTitle(nil, for: .normal)
-            
-            // Add observer to listen to update notification
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(onOfflineAccessStateUpdates(_:)),
-                name: .offlineAccessStateDidUpdate,
-                object: nil
-            )
-            
-            updateContent()
-        }
-    }
+    private(set) var episodeLink: EpisodeLink?
+    private(set) var offlineContent: OfflineEpisodeContent?
     
     @IBInspectable var insetSpace: CGFloat = 6 {
         didSet { updateContent() }
@@ -66,9 +51,42 @@ class OfflineAccessButton: UIButton, Themable {
         addTarget(self, action: #selector(onTapped(_:)), for: .touchUpInside)
     }
     
+    func setPresenting(_ episodeLink: EpisodeLink, delegate: OfflineAccessButtonDelegate? = nil) {
+        let offlineContent = OfflineContentManager
+            .shared
+            .content(for: episodeLink)
+        
+        self.episodeLink = episodeLink
+        self.offlineContent = offlineContent
+        self.delegate = delegate
+        
+        NotificationCenter.default.removeObserver(self)
+        setTitle(nil, for: .normal)
+        
+        // Add observer to listen to update notification
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onOfflineAccessStateUpdates(_:)),
+            name: .offlineAccessStateDidUpdate,
+            object: offlineContent
+        )
+        
+        updateContent()
+    }
+    
     private func updateContent() {
-        guard let link = episodeLink else { return }
-        switch OfflineContentManager.shared.state(for: link) {
+        func removeActivityIndicator() {
+            preservationInitiatedActivityIndicator?.stopAnimating()
+            preservationInitiatedActivityIndicator?.removeFromSuperview()
+            preservationInitiatedActivityIndicator = nil
+        }
+        
+        guard let content = offlineContent else {
+            self.isHidden = true
+            return removeActivityIndicator()
+        }
+        
+        switch content.state {
         case .preservationInitiated:
             // Use an empty image and add activity indicator to it
             setImage(UIImage(), for: .normal)
@@ -80,21 +98,18 @@ class OfflineAccessButton: UIButton, Themable {
                 newIndicator.frame = bounds
                 newIndicator.autoresizingMask = [.flexibleHeight, .flexibleWidth]
                 newIndicator.hidesWhenStopped = true
+                newIndicator.isUserInteractionEnabled = false
                 addSubview(newIndicator)
                 preservationInitiatedActivityIndicator = newIndicator
                 newIndicator.startAnimating()
             }
         case .error, .ready, .interrupted:
             setImage(#imageLiteral(resourceName: "Cloud Download"), for: .normal)
-            preservationInitiatedActivityIndicator?.stopAnimating()
-            preservationInitiatedActivityIndicator?.removeFromSuperview()
-            preservationInitiatedActivityIndicator = nil
+            removeActivityIndicator()
             isHidden = false
         case .preserved:
             setImage(UIImage(), for: .normal)
-            preservationInitiatedActivityIndicator?.stopAnimating()
-            preservationInitiatedActivityIndicator?.removeFromSuperview()
-            preservationInitiatedActivityIndicator = nil
+            removeActivityIndicator()
             isHidden = true
         case .preserving(let progress):
             let size = bounds.size
@@ -138,9 +153,7 @@ class OfflineAccessButton: UIButton, Themable {
                 centerRect.fill()
             }
             setImage(image, for: .normal)
-            preservationInitiatedActivityIndicator?.stopAnimating()
-            preservationInitiatedActivityIndicator?.removeFromSuperview()
-            preservationInitiatedActivityIndicator = nil
+            removeActivityIndicator()
             isHidden = false
         }
     }
@@ -151,28 +164,32 @@ class OfflineAccessButton: UIButton, Themable {
     }
     
     @objc private func onTapped(_ sender: Any) {
-        guard let episodeLink = episodeLink else { return }
+        guard let episodeLink = episodeLink,
+            let content = offlineContent else { return }
         
-        switch OfflineContentManager.shared.state(for: episodeLink) {
+        switch content.state {
         case .preservationInitiated, .preserving:
-            OfflineContentManager.shared.cancelPreservation(for: episodeLink)
+            OfflineContentManager.shared.cancelPreservation(content: content)
         case .error, .ready:
             if let delegate = delegate {
                 delegate.offlineAccessButton(shouldProceedWithDownload: self, forEpisodeLink: episodeLink) {
                     // The closure does not have a self reference
                     if $0 {
                         OfflineContentManager.shared.initiatePreservation(
-                            for: episodeLink,
+                            episodeContent: content,
                             withLoadedAnime: $1
                         )
                     }
                 }
             } else {
                 // Initiate the preservation directly if no delegate has been set
-                OfflineContentManager.shared.initiatePreservation(for: episodeLink)
+                OfflineContentManager
+                    .shared
+                    .initiatePreservation(episodeContent: content)
             }
         case .interrupted:
-            OfflineContentManager.shared.content(for: episodeLink).resumeInterruption()
+            // If the download is just interrupted, initiate without consulting the delegate
+            OfflineContentManager.shared.initiatePreservation(episodeContent: content)
         case .preserved: break // Do nothing if preserved
         }
     }

@@ -139,7 +139,7 @@ class OfflineContent: NSObject {
         state = initialState
         parent = manager
         persistedProperties = properties
-        isPendingRestoration = true // Mark pending restoration as true
+        isPendingRestoration = false
         
         super.init()
     }
@@ -223,8 +223,13 @@ class OfflineContent: NSObject {
     
     /// Delete the preserved offline content
     func delete(shouldUpdateState: Bool = true) {
+        if shouldUpdateState {
+            // Update state to ready
+            state = .ready
+        }
+        
         // Cancel the task first
-        cancel(shouldUpdateState: shouldUpdateState)
+        cancel(shouldUpdateState: false)
         
         // If the file exists, remove it
         if let url = preservedContentURL {
@@ -233,21 +238,16 @@ class OfflineContent: NSObject {
                 persistentResourceIdentifier = nil
             } catch { Log.error("[OfflineContent] Unable to remove content: %@", error) }
         }
-        
-        if shouldUpdateState {
-            // Update state to ready
-            state = .ready
-        }
     }
     
     /// Cancel preservation
     func cancel(shouldUpdateState: Bool = true) {
-        task?.cancel()
-        task = nil
-        
         if shouldUpdateState {
             state = .ready
         }
+        
+        task?.cancel()
+        task = nil
     }
     
     /// Resume the interruption if possible, restart the task if not
@@ -261,11 +261,11 @@ class OfflineContent: NSObject {
         case _ where task?.state == .running:
             // Update state to preserving if the task is actually running
             state = .preserving(0.0)
+        case .preserved: break
         case .interrupted:
             if task == nil || task is AVAssetDownloadTask {
                 fallthrough // Treat interrupted download task as failed
             } else if let task = task { resumeInterruptedTask(task) }
-        case .preserved: break
         default: resumeFailedTask()
         }
     }

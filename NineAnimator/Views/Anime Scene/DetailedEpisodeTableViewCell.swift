@@ -70,7 +70,7 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
                        parent: AnimeViewController,
                        didResizeCell: @escaping (DetailedEpisodeTableViewCell) -> Void) {
         self.episodeLink = episodeLink
-        self.offlineAccessButton.episodeLink = episodeLink
+        self.offlineAccessButton.setPresenting(episodeLink, delegate: parent)
         self.offlineAccessButton.delegate = parent
         self.onStateChange = didResizeCell
         

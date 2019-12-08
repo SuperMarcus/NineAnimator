@@ -228,11 +228,6 @@ extension OfflineContentManager {
         cancelPreservation(content: content(for: episodeLink))
     }
     
-    /// Cancel and remove the content from the storage
-    func cancelPreservation(content: OfflineContent) {
-        content.delete()
-    }
-    
     /// Remove all preserved content under the anime link
     func removeContents(under animeLink: AnimeLink) {
         contents(for: animeLink).forEach { $0.delete() }
@@ -253,8 +248,21 @@ extension OfflineContentManager {
     /// Start preserving the episode
     func initiatePreservation(for episodeLink: EpisodeLink, withLoadedAnime anime: Anime? = nil) {
         let content = self.content(for: episodeLink)
-        content.anime = anime ?? content.anime
-        initiatePreservation(content: content)
+        initiatePreservation(episodeContent: content, withLoadedAnime: anime)
+    }
+    
+    /// Cancel and remove the content from the storage
+    func cancelPreservation(content: OfflineContent) {
+        // Remove from queue
+        preservationContentQueue.removeAll { $0 == content }
+        content.delete()
+        preserveContentIfNeeded()
+    }
+    
+    /// Start the preservation of the episode with an optional cached anime
+    func initiatePreservation(episodeContent: OfflineEpisodeContent, withLoadedAnime anime: Anime? = nil) {
+        episodeContent.anime = anime
+        initiatePreservation(content: episodeContent)
     }
     
     /// Start preserving the content, resume if possible
@@ -299,7 +307,7 @@ extension OfflineContentManager {
                 // If the download was attempted within the minimal retry interval
                 if !content.shouldIgnoreMinimalRetryInterval,
                     let lastDownloadAttempt = content.lastDownloadAttempt,
-                    lastDownloadAttempt.timeIntervalSinceNow < -minimalRetryInterval {
+                    lastDownloadAttempt.timeIntervalSinceNow > -minimalRetryInterval {
                     reEnqueuingContents.append(content)
                     continue
                 }
@@ -324,7 +332,7 @@ extension OfflineContentManager {
                     $0.lastDownloadAttempt?.timeIntervalSinceNow
                 }).min(), minimalRetryInterval + largestInterval > 0 {
                 // Delay interval+1s
-                let delayInterval = minimalRetryInterval + largestInterval + 1
+                let delayInterval = max(minimalRetryInterval + largestInterval + 1, 1)
                 
                 // Schedule the retry timer
                 dequeueDelayTimer = Timer.scheduledTimer(withTimeInterval: delayInterval, repeats: false) {
@@ -596,6 +604,7 @@ extension OfflineContentManager {
             for task in tasks {
                 if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
                     Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.isPendingRestoration = true
                     content.task = task
                 } else {
                     Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
@@ -606,10 +615,12 @@ extension OfflineContentManager {
             // Trying to resume the tasks
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
                 Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared URLSession")
-                for content in contents {
+                for content in contents where content.isPendingRestoration {
                     content.isPendingRestoration = false
-                    content.resumeInterruption()
+                    content.state = .preservationInitiated
+                    self.preservationContentQueue.append(content)
                 }
+                self.preserveContentIfNeeded()
             } else {
                 contents.forEach { // Mark all contents as restored
                     $0.isPendingRestoration = false
@@ -630,6 +641,7 @@ extension OfflineContentManager {
             for task in tasks {
                 if let content = contents.first(where: { $0.persistedTaskIdentifier == task.taskIdentifier }) {
                     Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found", task.taskIdentifier)
+                    content.isPendingRestoration = true
                     content.task = task
                 } else {
                     Log.info("[OfflineContentManager] AVAssetDownloadingURLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
@@ -640,12 +652,15 @@ extension OfflineContentManager {
             // Trying to resume the tasks
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
                 // Wait for 3 seconds until restoring the tasks
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000)) {
+                self.taskQueue.asyncAfter(deadline: .now() + .milliseconds(3000)) {
                     Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared asset session")
-                    contents.forEach {
-                        $0.isPendingRestoration = false
-                        $0.resumeInterruption()
+                    for content in contents where content.isPendingRestoration {
+                        content.isPendingRestoration = false
+                        content.state = .preservationInitiated
+                        content.task?.suspend()
+                        self.preservationContentQueue.append(content)
                     }
+                    self.preserveContentIfNeeded()
                 }
             } else {
                 contents.forEach { // Mark all contents as restored

@@ -109,8 +109,10 @@ extension OfflineAnimeViewController {
         return UISwipeActionsConfiguration(actions: [
             UIContextualAction(style: .destructive, title: "Delete") {
                 [weak self] _, _, handler in
-                self?.contents.remove(at: indexPath.item).delete()
-                self?.tableView.deleteRows(at: [ indexPath ], with: .fade)
+                guard let self = self else { return }
+                let content = self.contents.remove(at: indexPath.item)
+                OfflineContentManager.shared.cancelPreservation(content: content)
+                self.tableView.deleteRows(at: [ indexPath ], with: .fade)
                 handler(true)
             }
         ])
