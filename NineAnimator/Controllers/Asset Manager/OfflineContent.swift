@@ -272,9 +272,10 @@ class OfflineContent: NSObject {
     
     /// Temporarily pause the content preservation
     func suspend() {
-        // Only suspend a task that is preserving
-        guard case .preserving = state else {
-            return Log.error("Trying to suspend a task that is not preserving. Aborting.")
+        // Only suspend a task that is preserving or initiated
+        switch state {
+        case .preservationInitiated, .preserving: break
+        default: return Log.error("Trying to suspend a task that is not preserving. Aborting.")
         }
         
         // Tell the task to suspend

@@ -223,6 +223,13 @@ extension OfflineContentManager {
         return content(for: episodeLink).state
     }
     
+    /// Cancel all preservations of episodes under this anime link
+    func cancelPreservations(forEpisodesOf animeLink: AnimeLink) {
+        contents(for: animeLink).forEach {
+            cancelPreservation(content: $0)
+        }
+    }
+    
     /// Cancel and remove the preservation (if in progress) for episode
     func cancelPreservation(for episodeLink: EpisodeLink) {
         cancelPreservation(content: content(for: episodeLink))
@@ -282,9 +289,21 @@ extension OfflineContentManager {
         }
     }
     
-    /// Pause the downloading content
+    /// Pause the downloading content and remove it from the preserving queue
     func suspendPreservation(content: OfflineContent) {
+        // Remove from queue
+        preservationContentQueue.removeAll { $0 == content }
         content.suspend()
+        preserveContentIfNeeded()
+    }
+    
+    /// Pause the specified downloading contents and remove them from the preserving queue
+    func suspendPreservations(contents: [OfflineContent]) {
+        let contentsSet = Set(contents)
+        preservationContentQueue.removeAll {
+            contentsSet.contains($0)
+        }
+        contents.forEach { $0.suspend() }
         preserveContentIfNeeded()
     }
     

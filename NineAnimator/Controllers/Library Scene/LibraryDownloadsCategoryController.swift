@@ -144,3 +144,117 @@ extension LibraryDownloadsCategoryController {
         }
     }
 }
+
+// MARK: - Context Menu & Editing
+extension LibraryDownloadsCategoryController {
+    /// For iOS 13.0 and higher, use the built-in `UIContextMenu` for operations
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let sourceCell = collectionView.cellForItem(at: indexPath) else {
+            return nil
+        }
+        
+        let relatedAnimeLink = statefulAnimeMap[indexPath.item]
+        return UIContextMenuConfiguration(
+            identifier: nil,
+            previewProvider: nil
+        ) { [weak self, weak sourceCell] _ -> UIMenu? in
+            var menuItems = [UIAction]()
+            
+            // Obtain the contents
+            let contents = OfflineContentManager.shared.contents(for: relatedAnimeLink)
+            let animationDelay = DispatchTimeInterval.seconds(1)
+            
+            menuItems.append(.init(
+                title: "Remove Downloads",
+                image: UIImage(systemName: "trash.fill"),
+                identifier: nil,
+                attributes: [.destructive]
+            ) { _ in DispatchQueue.main.asyncAfter(deadline: .now() + animationDelay) {
+                    self?.confirmRemovingEpisodes(
+                        ofAnimeLink: relatedAnimeLink,
+                        from: sourceCell
+                    )
+                }
+            })
+            
+            let isPreservingFilter: (OfflineContent) -> Bool = {
+                switch $0.state {
+                case .preserving, .preservationInitiated: return true
+                default: return false
+                }
+            }
+            
+            let isSuspendedFilter: (OfflineContent) -> Bool = {
+                switch $0.state {
+                case .interrupted: return true
+                default: return false
+                }
+            }
+            
+            // Suspend preserving downloads
+            if contents.contains(where: isPreservingFilter) {
+                menuItems.append(.init(
+                    title: "Pause Downloads",
+                    image: UIImage(systemName: "pause.fill"),
+                    identifier: nil
+                ) { _ in
+                    // Only suspend preserving and queued contents
+                    let preservingContents = contents.filter(isPreservingFilter)
+                    OfflineContentManager.shared.suspendPreservations(contents: preservingContents)
+                })
+            }
+            
+            // Resume suspended downloads
+            if contents.contains(where: isSuspendedFilter) {
+                menuItems.append(.init(
+                    title: "Resume Downloads",
+                    image: UIImage(systemName: "play.fill"),
+                    identifier: nil
+                ) { _ in
+                    // Only suspend preserving and queued contents
+                    let preservingContents = contents.filter(isSuspendedFilter)
+                    preservingContents.forEach {
+                        OfflineContentManager.shared.initiatePreservation(content: $0)
+                    }
+                })
+            }
+
+            return UIMenu(
+                title: "Selected Anime",
+                identifier: nil,
+                options: [],
+                children: menuItems
+            )
+        }
+    }
+    
+    private func confirmRemovingEpisodes(ofAnimeLink animeLink: AnimeLink, from sourceView: UIView?) {
+        let presentationStyle: UIAlertController.Style = sourceView == nil
+            ? .alert : .actionSheet
+        let alert = UIAlertController(
+            title: "Delete Downloaded Episodes",
+            message: "Confirm you want to delete all downloads of \(animeLink.title). You won't be able to recover any of the episodes unless you re-download them.",
+            preferredStyle: presentationStyle
+        )
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = sourceView
+        }
+        
+        alert.addAction(.init(
+            title: "Delete Episodes",
+            style: .destructive
+        ) { [weak self] _ in
+            OfflineContentManager.shared.cancelPreservations(forEpisodesOf: animeLink)
+            DispatchQueue.main.async { self?.reloadStatefulAnime() }
+        })
+        
+        alert.addAction(.init(
+            title: "Cancel",
+            style: .cancel
+        ))
+        
+        present(alert, animated: true)
+    }
+}
