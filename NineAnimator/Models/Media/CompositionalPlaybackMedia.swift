@@ -226,7 +226,7 @@ extension CompositionalPlaybackMedia {
                         
                         // Construct subtitle group
                         let subtitles = subtitles.map {
-                            url, name, language in "#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID=\"\(subtitleCompositionGroupId)\",NAME=\"\(name)\",DEFAULT=YES,AUTOSELECT=YES,FORCED=NO,LANGUAGE=\"\(language)\",CHARACTERISTICS=\"public.accessibility.transcribes-spoken-dialog\",URI=\"\(injectionSubtitlePlaylistScheme)://subtitle.m3u8#\(url.uniqueHashingIdentifier)\""
+                            url, name, language in "#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID=\"\(subtitleCompositionGroupId)\",NAME=\"\(name)\",DEFAULT=YES,AUTOSELECT=YES,FORCED=NO,LANGUAGE=\"\(language)\",URI=\"\(injectionSubtitlePlaylistScheme)://subtitle.m3u8#\(url.uniqueHashingIdentifier)\""
                         }.joined(separator: "\n")
                         
                         Log.info(">>>> DEBUG: Responded with playlist data")
@@ -339,7 +339,7 @@ extension CompositionalPlaybackMedia {
     }
     
     private var subtitleCompositionGroupId: String {
-        return "nasubs"
+        return "nasub1"
     }
     
     private func swapScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {

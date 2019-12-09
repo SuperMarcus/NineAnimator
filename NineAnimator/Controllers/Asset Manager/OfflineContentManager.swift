@@ -354,10 +354,16 @@ extension OfflineContentManager {
                 let delayInterval = max(minimalRetryInterval + largestInterval + 1, 1)
                 
                 // Schedule the retry timer
-                dequeueDelayTimer = Timer.scheduledTimer(withTimeInterval: delayInterval, repeats: false) {
-                    [weak self] _ in self?.taskQueue.async {
-                        self?.preserveContentIfNeeded()
+                DispatchQueue.main.async {
+                    [weak self] in
+                    self?.dequeueDelayTimer = Timer.scheduledTimer(withTimeInterval: delayInterval, repeats: false) {
+                        _ in
+                        Log.debug("[OfflineContentManager] Dequeue delay timer fired.")
+                        self?.taskQueue.async {
+                            self?.preserveContentIfNeeded()
+                        }
                     }
+                    Log.debug("[OfflineContentManager] Scheduling a delay timer for an interval of %@ seconds for the next dequeue.", delayInterval)
                 }
             }
         } else { screenOnRequestHandler = nil }

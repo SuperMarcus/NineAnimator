@@ -329,6 +329,7 @@ private extension OfflineContent {
         
         // Update state and attempt to resume the task
         state = .preserving(0.0)
+        task?.taskDescription = localizedDescription
         task?.resume()
     }
     
@@ -375,6 +376,7 @@ extension OfflineContent {
             assetArtworkData: artworkData,
             options: nil
         )
+        task?.taskDescription = localizedDescription
     }
     
     /// Start the downloading tasks
