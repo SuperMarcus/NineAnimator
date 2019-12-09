@@ -902,10 +902,10 @@ extension OfflineContent {
         // Check the validity of the downloaded avasset
         if let task = task as? AVAssetDownloadTask,
             task.urlAsset.assetCache?.isPlayableOffline != true {
-            return _onCompletion(
-                session,
-                error: NineAnimatorError.providerError("Asset downloaded without an error but is marked as not playable offline")
-            )
+            // For some reason, isPlayableOffline may be set to false after
+            // a successful download. Downloads seem to be playing fine so
+            // ignoring this for now.
+            Log.error("[OfflineContent] This is weired. Asset finished downloading without an error but is marked as not playable offline. Expecting problems with offline playback.")
         }
         
         do {
