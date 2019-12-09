@@ -67,4 +67,8 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
         return _recommendServer(for: anime)
     }
+    
+    override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
+        return _recommendServer(for: anime, ofPurpose: purpose)
+    }
 }

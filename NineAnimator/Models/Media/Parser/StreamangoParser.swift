@@ -28,7 +28,7 @@ class StreamangoParser: VideoProviderParser {
     
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString
         ]
@@ -133,5 +133,10 @@ class StreamangoParser: VideoProviderParser {
         }
         
         return _0x59b81a
+    }
+    
+    func isParserRecommended(forPurpose _: Purpose) -> Bool {
+        // Streamango is no longer available
+        return false
     }
 }

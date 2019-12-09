@@ -52,7 +52,7 @@ extension DiscoverySceneViewController {
             ) {
                 [weak self] in
                 guard let self = self else { return }
-                if let viewController = SettingsRootTableViewController.create() {
+                if let viewController = SettingsSceneController.create() {
                     self.present(viewController, animated: true)
                 }
             }

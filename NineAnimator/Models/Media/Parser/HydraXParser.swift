@@ -48,7 +48,7 @@ class HydraXParser: VideoProviderParser {
 //        var thumbnail: String
     }
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         if episode.target.host?.lowercased() == "replay.watch" {
             return parseReplay(episode: episode, with: session, onCompletion: handler)
         } else {
@@ -140,5 +140,11 @@ class HydraXParser: VideoProviderParser {
             headers: [:],
             isAggregated: true
         )
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        // Download is not supported, since HydraX uses AES-128 encryption,
+        // `AVAssetDownloadURLSession` does not cache encryption keys
+        return purpose != .download
     }
 }

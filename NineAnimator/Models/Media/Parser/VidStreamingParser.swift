@@ -31,7 +31,7 @@ class VidStreamingParser: VideoProviderParser {
         options: []
     )
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         return session.request(episode.target).responseString {
             response in
             do {
@@ -55,5 +55,9 @@ class VidStreamingParser: VideoProviderParser {
                 ), nil)
             } catch { handler(nil, error) }
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

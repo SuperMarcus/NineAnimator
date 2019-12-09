@@ -294,21 +294,20 @@ extension RootViewController {
     /// For dynamic appearances on iOS 13 or later, which syncs with
     /// the system appearance
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        (UIApplication.shared.delegate as? AppDelegate)?
-        .updateDynamicAppearance(withTraitCollection: traitCollection)
+        AppDelegate.shared?.updateDynamicAppearance(withTraitCollection: traitCollection)
     }
     
     /// Force update the dynamic theme settings
     func updateDynamicTheme() {
-        (UIApplication.shared.delegate as? AppDelegate)?
-        .updateDynamicAppearance(withTraitCollection: traitCollection)
+        AppDelegate.shared?.updateDynamicAppearance(withTraitCollection: traitCollection)
     }
 }
 
 // MARK: - Display error for downloading task
 extension RootViewController {
     @objc func onDownloadingTaskUpdate(_ notification: Notification) {
-        guard let content = notification.object as? OfflineContent else { return }
+        guard AppDelegate.shared?.isActive == true,
+            let content = notification.object as? OfflineContent else { return }
         
         switch content.state {
         case .error(let error):
@@ -317,7 +316,13 @@ extension RootViewController {
                 error: error,
                 customTitle: "Download Error",
                 allowRetry: true
-            ) { retry in if retry { content.preserve() } }
+            ) { retry in
+                if retry {
+                    OfflineContentManager
+                        .shared
+                        .initiatePreservation(content: content)
+                }
+            }
             DispatchQueue.main.async { [weak self] in self?.presentOnTop(alert) }
         default: break
         }

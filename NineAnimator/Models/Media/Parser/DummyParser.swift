@@ -24,8 +24,8 @@ import Foundation
 class DummyParser: VideoProviderParser {
     var aliases: [String] { return [] }
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        let dummyTask = NineAnimatorMultistepAsyncTask()
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        let dummyTask = AsyncTaskContainer()
         
         DispatchQueue.main.async {
             let options = episode.userInfo
@@ -54,5 +54,9 @@ class DummyParser: VideoProviderParser {
         
         static let isAggregated: String =
             "com.marcuszhou.nineanimator.providerparser.DummyParser.option.isAggregated"
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

@@ -665,7 +665,13 @@
                             <outlet property="delegate" destination="SqH-eG-50b" id="Ole-rs-8FU"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Downloads" id="xJb-B5-ZuH"/>
+                    <navigationItem key="navigationItem" title="Downloads" id="xJb-B5-ZuH">
+                        <barButtonItem key="rightBarButtonItem" title="Manage" id="crY-oZ-PX1">
+                            <connections>
+                                <action selector="onManageButtonDidPressed:" destination="SqH-eG-50b" id="ToG-GO-q75"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="U9O-EJ-eHh" kind="show" identifier="downloads.show" id="eN1-NU-27V"/>
                     </connections>

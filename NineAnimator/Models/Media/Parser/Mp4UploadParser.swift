@@ -31,7 +31,7 @@ class Mp4UploadParser: VideoProviderParser {
         options: []
     )
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         return session.request(episode.target).responseString {
             response in
             do {
@@ -64,5 +64,9 @@ class Mp4UploadParser: VideoProviderParser {
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true // Mp4Upload seems to work for all purposes
     }
 }

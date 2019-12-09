@@ -39,7 +39,7 @@ import WebKit
  4. Initialize the `AnimeViewController` with either `setPresenting(_: AnimeLink)` or
     `setPresenting(episode: EpisodeLink)`.
  */
-class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate, BlendInViewController {
+class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate, BlendInViewController, OfflineAccessButtonDelegate {
     // MARK: - Set either one of the following item to initialize the anime view
     private var animeLink: AnimeLink?
     
@@ -335,10 +335,11 @@ extension AnimeViewController {
                 let detailedEpisodeInfo = anime!.attributes(for: episode) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode.detailed", for: indexPath) as! DetailedEpisodeTableViewCell
                 cell.makeThemable()
-                cell.episodeLink = episode
-                cell.episodeInformation = detailedEpisodeInfo
-                cell.onStateChange = {
-                    [weak self] _ in
+                cell.setPresenting(
+                    episode,
+                    additionalInformation: detailedEpisodeInfo,
+                    parent: self
+                ) { [weak self] _ in
                     self?.tableView.beginUpdates()
                     self?.tableView.layoutIfNeeded()
                     self?.tableView.endUpdates()
@@ -347,7 +348,7 @@ extension AnimeViewController {
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode", for: indexPath) as! EpisodeTableViewCell
                 cell.makeThemable()
-                cell.episodeLink = episode
+                cell.setPresenting(episode, parent: self)
                 return cell
             }
         }
@@ -443,8 +444,10 @@ extension AnimeViewController {
                     // Prime the HMHomeManager
                     HomeController.shared.primeIfNeeded()
                     
-                    self.episodeRequestTask = episode.retrive {
-                        [weak self] media, error in DispatchQueue.main.async {
+                    self.episodeRequestTask = episode.retrive(
+                        forPurpose: CastController.default.isReady
+                            ? .googleCast : .playback
+                    ) { [weak self] media, error in DispatchQueue.main.async {
                             guard let self = self else { return }
                             
                             defer { clearSelection() }
@@ -663,7 +666,7 @@ extension AnimeViewController {
                 return action
             }())
         }
-         
+        
         // Show the option to change server only if the anime has been loaded
         if anime != nil {
             actionSheet.addAction({
@@ -753,7 +756,11 @@ extension AnimeViewController {
     // Update the heading view and reload the list of episodes for the server
     private func didSelectServer(_ server: Anime.ServerIdentifier) {
         self.server = server
-        tableView.reloadSections(Section.indexSet(.episodes, .suggestion), with: .automatic)
+        
+        tableView.reloadSections(
+            Section.indexSet(.episodes, .suggestion),
+            with: .automatic
+        )
         
         NineAnimator.default.user.recentServer = server
         
@@ -880,6 +887,96 @@ extension AnimeViewController {
     
     override var canBecomeFirstResponder: Bool {
         return true
+    }
+    
+    func offlineAccessButton(
+        shouldProceedWithDownload source: OfflineAccessButton,
+        forEpisodeLink episodeLink: EpisodeLink,
+        completionHandler: @escaping (Bool, Anime?) -> Void
+    ) {
+        guard let anime = anime else {
+            return completionHandler(false, nil)
+        }
+        
+        // Obtain a list of recommended download source
+        let recommendedServers = anime.source.recommendServers(
+            for: anime,
+            ofPurpose: .download
+        )
+        
+        // Find a list of equivalent episode links on the recommended servers
+        // for downloading
+        let alternativeEpisodeLinks = recommendedServers.compactMap {
+            anime.equivalentEpisodeLinks(of: episodeLink, onServer: $0)
+        }
+        
+        // Check if the selected server is recommended by the source for downloading
+        if recommendedServers.contains(episodeLink.server) || NineAnimator.default.user.shouldSilenceUnrecommendedWarnings(
+                forServer: episodeLink.server,
+                ofPurpose: .download
+            ) {
+            completionHandler(true, anime)
+        } else {
+            var alertMessage = "Downloads from \(anime.servers[episodeLink.server] ?? "the current server") may fail or become unplayable after completion. "
+            
+            if alternativeEpisodeLinks.isEmpty {
+                alertMessage += "You may want to consider switching to another anime source."
+            } else { alertMessage += "You may want to consider one of the following alternatives." }
+            
+            let alert = UIAlertController(
+                title: "Not Recommended Server",
+                message: alertMessage,
+                preferredStyle: .actionSheet
+            )
+            
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = source
+            }
+            
+            // Alternative download options
+            alternativeEpisodeLinks.forEach {
+                alternativeLink in
+                let alternativeServer = alternativeLink.server
+                let serverName = anime.servers[alternativeServer] ?? alternativeServer
+                
+                alert.addAction(UIAlertAction(
+                    title: "\(serverName)",
+                    style: .default
+                ) { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    // Mark the alternative server as selected
+                    self.didSelectServer(alternativeServer)
+                    
+                    // Initiate download on the selected server
+                    OfflineContentManager.shared.initiatePreservation(
+                        for: alternativeLink,
+                        withLoadedAnime: self.anime
+                    )
+                })
+            }
+            
+            // Proceed action
+            alert.addAction(UIAlertAction(
+                title: "Proceed Anyways",
+                style: .destructive
+            ) { _ in
+                // Silence the warnings and proceed with the download
+                NineAnimator.default.user.silenceUnrecommendedWarnings(
+                    forServer: episodeLink.server,
+                    ofPurpose: .download
+                )
+                completionHandler(true, anime)
+            })
+            
+            // Cancel action
+            alert.addAction(UIAlertAction(
+                title: "Cancel",
+                style: .cancel
+            ) { _ in completionHandler(false, nil) })
+            
+            present(alert, animated: true)
+        }
     }
 }
 

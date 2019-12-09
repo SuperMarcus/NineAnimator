@@ -166,7 +166,9 @@ extension ContentListViewController {
     }
     
     func pageIncoming(_ sectionNumber: Int, from page: ContentProvider) {
-        DispatchQueue.main.async(execute: tableView.reloadData)
+        DispatchQueue.main.async {
+            [weak self] in self?.tableView.reloadData()
+        }
     }
 }
 

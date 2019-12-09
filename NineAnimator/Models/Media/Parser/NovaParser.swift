@@ -37,7 +37,7 @@ class NovaParser: VideoProviderParser {
         var type: String
     }
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion callback: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion callback: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let videoIdentifier = episode.target.lastPathComponent
         guard let sourceInfoUrl = URL(string: "https://www.novelplanet.me/api/source/\(videoIdentifier)")
             else { return NineAnimatorPromise.fail(NineAnimatorError.urlError).handle(callback) }
@@ -71,5 +71,9 @@ class NovaParser: VideoProviderParser {
             default: callback(nil, response.error ?? NineAnimatorError.unknownError)
             }
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

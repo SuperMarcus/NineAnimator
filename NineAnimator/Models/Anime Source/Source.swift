@@ -70,4 +70,7 @@ protocol Source: AnyObject {
     
     /// Recommend a preferred server for the anime object
     func recommendServer(for anime: Anime) -> Anime.ServerIdentifier?
+    
+    /// Recommend a list of servers (ordered from the best to the worst) for a particular purpose
+    func recommendServers(for anime: Anime, ofPurpose: VideoProviderParser.Purpose) -> [Anime.ServerIdentifier]
 }

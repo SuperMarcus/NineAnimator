@@ -23,11 +23,25 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    static weak var shared: AppDelegate?
+    
     private var shortcutItem: UIApplicationShortcutItem?
     
     var window: UIWindow?
     
     var trackedPasteboardChangeTimes: Int = 0
+    
+    /// A flag to represent if the app is currently active
+    var isActive = false
+    
+    /// Number of objects that has requested to disable the screen idle timer
+    private(set) var screenOnRequestCount = 0
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // Shared AppDelegate reference
+        AppDelegate.shared = self
+        return true
+    }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Fetch for generating episode update notifications once in two hours
@@ -130,6 +144,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        // Update isActive flag
+        isActive = true
+        
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
         
@@ -142,9 +159,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Also updates dynamic appearance
         updateDynamicBrightness()
+        
+        // Continue download tasks
+        OfflineContentManager.shared.preserveContentIfNeeded()
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
+        // Mark the app as inactive
+        isActive = false
+        
         // Update quick actions
         updateHomescreenQuickActions(application)
     }
@@ -385,5 +408,38 @@ fileprivate extension AppDelegate {
         case library = "com.marcuszhou.nineanimator.shortcut.library"
         case resumeLastWatched = "com.marcuszhou.nineanimator.shortcut.resumeLast"
         case search = "com.marcuszhou.nineanimator.shortcut.search"
+    }
+}
+
+// MARK: - Screen On Requests
+extension AppDelegate {
+    /// An object to keep reference to in order to request the device to be kept on
+    class ScreenOnRequestHandler {
+        private weak var parent: AppDelegate?
+        
+        fileprivate init(_ parent: AppDelegate) {
+            self.parent = parent
+        }
+        
+        deinit { parent?.didLoseReferenceToScreenOnHelper() }
+    }
+    
+    fileprivate func didLoseReferenceToScreenOnHelper() {
+        DispatchQueue.main.async {
+            self.screenOnRequestCount -= 1
+            if self.screenOnRequestCount <= 0 {
+                self.screenOnRequestCount = 0
+                UIApplication.shared.isIdleTimerDisabled = false
+            }
+        }
+    }
+    
+    /// Request the screen to be kept on
+    func requestScreenOn() -> ScreenOnRequestHandler? {
+        DispatchQueue.main.async {
+            self.screenOnRequestCount += 1
+            UIApplication.shared.isIdleTimerDisabled = true
+        }
+        return ScreenOnRequestHandler(self)
     }
 }

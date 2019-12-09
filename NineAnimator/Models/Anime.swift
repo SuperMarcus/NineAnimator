@@ -141,6 +141,34 @@ struct Anime {
         return episodeLinks[index]
     }
     
+    /// Find episodes on alternative different servers with the same name
+    func equivalentEpisodeLinks(of episodeLink: EpisodeLink) -> Set<EpisodeLink> {
+        let results = episodes.filter {
+            $0.key != episodeLink.server
+        } .flatMap {
+            $0.value.filter {
+                $0.name == episodeLink.name && $0.parent == episodeLink.parent
+            }
+        }
+        
+        return Set(results + children.flatMap {
+            $0.equivalentEpisodeLinks(of: episodeLink)
+        })
+    }
+    
+    /// Find episodes on the specified server with the same name
+    func equivalentEpisodeLinks(of episodeLink: EpisodeLink, onServer server: ServerIdentifier) -> EpisodeLink? {
+        let result = episodes[server]?.first {
+            $0.name == episodeLink.name && $0.parent == episodeLink.parent
+        }
+        
+        if result == nil {
+            return children.reduce(nil) {
+                $0 ?? $1.equivalentEpisodeLinks(of: episodeLink, onServer: server)
+            }
+        } else { return result }
+    }
+    
     /// Change the selected server
     ///
     /// This operation may fail

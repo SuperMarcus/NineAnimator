@@ -35,7 +35,7 @@ extension NineAnimatorPromise {
             var isRejected = false
             
             // Use NineAnimatorMultistepAsyncTask to hold references to all the tasks
-            let containerTask = NineAnimatorMultistepAsyncTask()
+            let containerTask = AsyncTaskContainer()
             
             // Only reject once. If one task fails, cancel all other tasks
             let rejectOnce: (Error) -> Void = {

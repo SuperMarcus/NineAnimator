@@ -106,9 +106,11 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     func resolve(_ value: ResultType) {
         // Atomicy
         semaphore.wait()
-        defer { semaphore.signal() }
         
-        defer { releaseAll() }
+        defer {
+            releaseAll()
+            semaphore.signal()
+        }
         
         // Check if the promise has been resolved
         guard !isResolved || result != nil else {
@@ -259,7 +261,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     /// This method is thread safe
     func cancel() {
         // Atomicy
-        guard semaphore.wait(timeout: .now() + 3) == .success else {
+        guard semaphore.wait(timeout: .now() + .microseconds(50)) == .success else {
             return Log.error("[NineAnimatorPromise] Unable to cancel a task because it's being occupied.")
         }
         defer { semaphore.signal() }
@@ -323,7 +325,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     
     deinit {
         if !isResolved {
-            Log.error("[NineAnimatorPromise] Losing reference to an unresolved promise. This cancels any executing tasks.")
+            Log.debug("[NineAnimatorPromise] Losing reference to an unresolved promise. This cancels any executing tasks.")
         }
         cancel()
     }

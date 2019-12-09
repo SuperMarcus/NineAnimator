@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AVFoundation
 import Foundation
 
 /// Representing the state of the object
@@ -45,8 +46,14 @@ class OfflineContent: NSObject {
             // Save the new state
             persistedLocalProperties()
             
-            // Fire notification
-            NotificationCenter.default.post(name: .offlineAccessStateDidUpdate, object: self)
+            // Send state update notification
+            if !isPendingRestoration {
+                // Fire notification
+                NotificationCenter.default.post(
+                    name: .offlineAccessStateDidUpdate,
+                    object: self
+                )
+            }
         }
     }
     
@@ -54,8 +61,16 @@ class OfflineContent: NSObject {
     
     var identifier: String { return "" }
     
-    // The provisioned downloading task of this OfflineContent
-    var task: URLSessionTask?
+    /// This property marks if this asset is still pending restoration
+    ///
+    /// - Note: Notifications for state changes are only sent after the asset has been restored
+    var isPendingRestoration: Bool
+    
+    /// The provisioned downloading task of this OfflineContent
+    var task: URLSessionTask? {
+        // Observe changes to the task property
+        didSet { taskPropertyDidChange(current: task, previous: oldValue) }
+    }
     
     /// Access the date that the content is preserved
     var datePreserved: Date?
@@ -64,6 +79,12 @@ class OfflineContent: NSObject {
     var persistedProperties: [String: Any] {
         // Save local properties when updated
         didSet { persistedLocalProperties() }
+    }
+    
+    /// Set to indicate if this asset is an persisted hls asset
+    var isAggregatedAsset: Bool {
+        get { return persistedProperties["aggregated"] as? Bool ?? false }
+        set { persistedProperties["aggregated"] = newValue }
     }
     
     /// Used to recreate the persistent url
@@ -76,10 +97,41 @@ class OfflineContent: NSObject {
     /// The data to resume the download task
     var resumeData: Data?
     
+    /// Specify where to download the asset
+    ///
+    /// Subclasses should update the value of this variable and then let the `OfflineContent` class
+    /// download and manage this asset
+    var sourceRequestUrl: URL? {
+        get {
+            if let urlString = persistedProperties["sourceRequestUrl"] as? String {
+                return URL(string: urlString)
+            }
+            return nil
+        }
+        set { persistedProperties["sourceRequestUrl"] = newValue?.absoluteString }
+    }
+    
+    /// The request headers that should be sent along with the requests
+    var sourceRequestHeaders: [String: String] {
+        get { return persistedProperties["sourceRequestHeaders"] as? [String: String] ?? [:] }
+        set { persistedProperties["sourceRequestHeaders"] = newValue }
+    }
+    
+    /// Description of the downloading asset
+    var localizedDescription: String {
+        return "A Content"
+    }
+    
+    /// Date at which the download was last attempted
+    /// - Note: Although the property is stored by the `OfflineContent`, its value is maintained by the asset manager.
+    var lastDownloadAttempt: Date?
+    
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
         parent = manager
         persistedProperties = [:]
+        isPendingRestoration = false
+        
         super.init()
     }
     
@@ -87,6 +139,8 @@ class OfflineContent: NSObject {
         state = initialState
         parent = manager
         persistedProperties = properties
+        isPendingRestoration = false
+        
         super.init()
     }
     
@@ -100,13 +154,24 @@ class OfflineContent: NSObject {
     }
     
     /// Called when the resource is successfully downloaded to url
-    func onCompletion(with url: URL) { }
+    func onCompletion(with url: URL) throws { }
+    
+    /// Called when the content should update the resource management policy for a system-managed asset
+    func didAssignStoragePolicy(_ policy: AVAssetDownloadStorageManagementPolicy) {
+        if isAggregatedAsset, let resourceUrl = preservedContentURL {
+            AVAssetDownloadStorageManager
+                .shared()
+                .setStorageManagementPolicy(policy, for: resourceUrl)
+        }
+    }
     
     /// Called when an error from the downloading task is caught
     func onCompletion(with error: Error) { }
     
     /// Initiate preservation
-    func preserve() { }
+    func preserve() {
+        Log.error("[OfflineContent] Concrete classes did not inherit the preserve() method. Download may not work.")
+    }
     
     /// Checks if the content still exists on file system and
     /// update the states accordingly.
@@ -115,6 +180,12 @@ class OfflineContent: NSObject {
             resumeData = nil
             task?.cancel()
             task = nil
+            
+            // Delete the files as well if it exists
+            if persistentResourceIdentifier != nil {
+                delete(shouldUpdateState: false)
+            }
+            
             state = .ready
         }
         
@@ -151,69 +222,60 @@ class OfflineContent: NSObject {
     }
     
     /// Delete the preserved offline content
-    func delete() {
+    func delete(shouldUpdateState: Bool = true) {
+        if shouldUpdateState {
+            // Update state to ready
+            state = .ready
+        }
+        
         // Cancel the task first
-        cancel()
+        cancel(shouldUpdateState: false)
         
         // If the file exists, remove it
         if let url = preservedContentURL {
             do {
                 try FileManager.default.removeItem(at: url)
-            } catch { Log.error(error) }
+                persistentResourceIdentifier = nil
+            } catch { Log.error("[OfflineContent] Unable to remove content: %@", error) }
         }
-        
-        // Update state to ready
-        state = .ready
     }
     
     /// Cancel preservation
-    func cancel() {
-        guard case .preserving = state else { return }
+    func cancel(shouldUpdateState: Bool = true) {
+        if shouldUpdateState {
+            state = .ready
+        }
+        
         task?.cancel()
         task = nil
-        state = .ready
     }
     
-    /// Resume the interruption if possible
+    /// Resume the interruption if possible, restart the task if not
     func resumeInterruption() {
         // Only resume a task that is suspended or errored
         switch state {
-        case .interrupted, .error: break
-        default:
-            Log.error("Trying to resume a task that is neither suspended nor errored. Aborting.")
-            return
-        }
-        
-        // Resume the task
-        if let task = task {
-            if case .suspended = task.state {
-                Log.info("Trying to resume a suspended download task")
-                task.resume()
-                state = .preservationInitiated
-            } else { state = .error(NineAnimatorError.providerError("Task is not resumable")) }
-            return
-        } else if let resumeData = resumeData {
-            Log.info("Trying to resume a download task with resume data")
-            
-            // Resuming with resume data is only possible with common session
-            if persistedDownloadSessionType == "common" {
-                task = downloadingSession.downloadTask(withResumeData: resumeData)
-                state = .preservationInitiated
-                return
+        case _ where task?.state == .suspended:
+            if let task = task {
+                resumeInterruptedTask(task)
             }
-            
-            Log.error("Cannot resume task. No supported session found, only %@", persistedDownloadSessionType ?? "Unknown Type (nil)")
+        case _ where task?.state == .running:
+            // Update state to preserving if the task is actually running
+            state = .preserving(0.0)
+        case .preserved: break
+        case .interrupted:
+            if task == nil || task is AVAssetDownloadTask {
+                fallthrough // Treat interrupted download task as failed
+            } else if let task = task { resumeInterruptedTask(task) }
+        default: resumeFailedTask()
         }
-        
-        // Update state to error
-        state = .error(NineAnimatorError.providerError("Cannot resume downloading task"))
     }
     
     /// Temporarily pause the content preservation
     func suspend() {
-        // Only suspend a task that is preserving
-        guard case .preserving = state else {
-            return Log.error("Trying to suspend a task that is not preserving. Aborting.")
+        // Only suspend a task that is preserving or initiated
+        switch state {
+        case .preservationInitiated, .preserving: break
+        default: return Log.error("Trying to suspend a task that is not preserving. Aborting.")
         }
         
         // Tell the task to suspend
@@ -233,6 +295,130 @@ class OfflineContent: NSObject {
     }
 }
 
+// MARK: - Resuming Tasks
+private extension OfflineContent {
+    /// Resume a paused task
+    func resumeInterruptedTask(_ task: URLSessionTask) {
+        Log.info("[OfflineContent] Resuming task (%@)", task.taskIdentifier)
+        task.resume()
+        state = .preserving(0.0)
+    }
+    
+    /// Resume an errored task
+    func resumeFailedTask() {
+        // Delegate to `resumeFailedAggregatedTask()`
+        if isAggregatedAsset {
+            return resumeFailedAggregatedTask()
+        }
+        
+        // If the resume data is present
+        if let resumeData = resumeData {
+            // Create and resume task with resume data
+            self.task = downloadingSession.downloadTask(withResumeData: resumeData)
+            self.resumeData = nil
+        } else if let loadingUrl = sourceRequestUrl {
+            self.delete(shouldUpdateState: false) // Remove the downloaded content
+            self.task = downloadingSession.downloadTask(with: loadingUrl)
+        } else {
+            Log.info(
+                "[OfflineContent] (Re)initiating preservation for '%@'.",
+                localizedDescription
+            )
+            return preserve()
+        }
+        
+        // Update state and attempt to resume the task
+        state = .preserving(0.0)
+        task?.taskDescription = localizedDescription
+        task?.resume()
+    }
+    
+    /// Retry a failed aggregated asset task
+    func resumeFailedAggregatedTask() {
+        guard let downloadPackageLocation = preservedContentURL else {
+            Log.error("[OfflineState] Cannot resume an aggregated task that does not contain a valid partially downloaded package.")
+            return preserve()
+        }
+        
+        // Create the URL Asset pointing to the downloaded package
+        let recreatedUrlAsset = AVURLAsset(
+            url: downloadPackageLocation,
+            options: [ AVURLAssetHTTPHeaderFieldsKey: sourceRequestHeaders ]
+        )
+        
+        // Using the AVAsset which indicates where the preserved parts are stored
+        initAggregatedTask(withAsset: recreatedUrlAsset)
+        task?.resume()
+        state = .preserving(0.0)
+    }
+}
+
+// MARK: - Initializing & Starting Tasks
+extension OfflineContent {
+    /// Create but not resume the download task for an aggregated asset
+    ///
+    /// - Important: Aggregated tasks should only be initiated with a `OfflineEpisodeContent`
+    func initAggregatedTask(withAsset urlAsset: AVURLAsset) {
+        guard let episodeContentSelf = self as? OfflineEpisodeContent else {
+            return Log.error("[OfflineState] Aggregated content downloads should only be intiated by OfflineEpisodeContent.")
+        }
+        
+        // Obtain task information
+        let episodeLink = episodeContentSelf.episodeLink
+        let artworkData = artwork(for: episodeLink.parent)?
+            .jpegData(compressionQuality: 0.8)
+        let episodeTitle = "\(episodeLink.parent.title) - Episode \(episodeLink.name)"
+        
+        // Initiate the download task with episodeLink
+        task = assetDownloadingSession.makeAssetDownloadTask(
+            asset: urlAsset,
+            assetTitle: episodeTitle,
+            assetArtworkData: artworkData,
+            options: nil
+        )
+        task?.taskDescription = localizedDescription
+    }
+    
+    /// Start the downloading tasks
+    ///
+    /// - Important: Must be called after resource request parameters has been set
+    func startResourceRequest() {
+        guard let targetUrl = sourceRequestUrl else {
+            return Log.error("[OfflineContent] Trying to start resource resources without setting sourceRequestUrl.")
+        }
+        
+        if isAggregatedAsset {
+            // Create the asset and init the task with `initAggregatedTask`
+            let avAsset = AVURLAsset(
+                url: targetUrl,
+                options: [ AVURLAssetHTTPHeaderFieldsKey: sourceRequestHeaders ]
+            )
+            initAggregatedTask(withAsset: avAsset)
+        } else {
+            do {
+                // Construct the URLRequest and persist with the normal download session
+                let urlRequest = try URLRequest(
+                    url: targetUrl,
+                    method: .get,
+                    headers: sourceRequestHeaders
+                )
+                task = downloadingSession.downloadTask(with: urlRequest)
+            } catch {
+                // Update state to error
+                state = .error(error)
+                return Log.error(
+                    "[OfflineContent] Unable to construct URLRequest for content: %@",
+                    error
+                )
+            }
+        }
+        
+        // Update the state and resume the task
+        state = .preserving(0.0)
+        task?.resume()
+    }
+}
+
 extension OfflineState {
     init(from dict: [String: Any]) {
         self = .ready
@@ -240,8 +426,14 @@ extension OfflineState {
             switch type {
             case "ready": self = .ready
             // The following states are all handled as interrupted
-            case "error", "interrupted", "preserving": self = .interrupted
+            case "interrupted", "preserving": self = .interrupted
+            case "error": self = .error(
+                NineAnimatorError.contentUnavailableError(
+                    dict["message", typedDefault: "Unknown Error"]
+                )
+            )
             case "preserved": self = .preserved
+            case "queued": self = .preservationInitiated
             default: break
             }
         }
@@ -250,11 +442,15 @@ extension OfflineState {
     var export: [String: Any] {
         var dict = [String: Any]()
         switch self {
-        case .ready, .preservationInitiated: dict["type"] = "ready"
+        case .ready: dict["type"] = "ready"
+        case .preservationInitiated: dict["type"] = "queued"
         case .preserving(let progress):
             dict["type"] = "preserving"
             dict["progress"] = progress
-        case .interrupted, .error: dict["type"] = "interrupted"
+        case .interrupted: dict["type"] = "interrupted"
+        case let .error(error):
+            dict["type"] = "error"
+            dict["message"] = error.localizedDescription
         case .preserved: dict["type"] = "preserved"
         }
         return dict

@@ -40,10 +40,9 @@ class NASourceNineAnime: BaseSource, Source {
 #endif
     
     var siteDescription: String {
-        return "9anime is a popular free anime streaming website and one of the first supported sources of NineAnimator. You may encounter frequent verfication requests when using this site."
+        return "9anime is a popular free anime streaming website and one of the best supported anime sources in NineAnimator."
     }
     
-    // 9anime has been disabled due to IP banning issue
     override var isEnabled: Bool {
         return true
     }
@@ -81,7 +80,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(browse: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
@@ -111,7 +110,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<NSDictionary>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(ajax: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
@@ -224,7 +223,7 @@ class NASourceNineAnime: BaseSource, Source {
             headers: [String: String],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task += super.request(ajaxString: _process(url: url), headers: headers) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler

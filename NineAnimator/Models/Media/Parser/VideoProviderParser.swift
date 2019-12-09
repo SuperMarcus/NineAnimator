@@ -24,13 +24,19 @@ import Foundation
 /// Representing a streaming resource parser that accepts an URL to
 /// the streaming source's website and returns the resource URL.
 protocol VideoProviderParser {
+    typealias Purpose = VideoProviderParserParsingPurpose
+    
     /// Alternative names of this streaming source
     var aliases: [String] { get }
     
     /// Obtain the playback media for the episode target
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
+    func parse(episode: Episode, with session: SessionManager, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
+    
+    /// Check if the result from this parser is recommended for the given purpose
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool
 }
 
+// MARK: - Definitions & Helpers
 extension VideoProviderParser {
     var defaultUserAgent: String {
         return "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36"
@@ -46,4 +52,16 @@ extension VideoProviderParser {
     static var registeredInstance: Self? {
         return VideoProviderRegistry.default.provider(Self.self)
     }
+}
+
+/// Annotate the purpose of parsing
+enum VideoProviderParserParsingPurpose: Int, CaseIterable, Equatable, Hashable {
+    /// Mark the parsing as for local playback purpose
+    case playback
+    
+    /// Mark the parsing as for external Google Cast playback purpose
+    case googleCast
+    
+    /// Mark the parsing as for downloading purpose
+    case download
 }

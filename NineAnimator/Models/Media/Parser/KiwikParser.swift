@@ -23,7 +23,7 @@ import Foundation
 
 class KiwikParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "Kiwik" ]
+        return [ "Kiwik", "kwik" ]
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
@@ -31,7 +31,7 @@ class KiwikParser: VideoProviderParser {
         options: []
     )
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalResourceRequestHeaders: HTTPHeaders = [
             "Referer": episode.parent.link.link.absoluteString
         ]
@@ -68,5 +68,14 @@ class KiwikParser: VideoProviderParser {
                 ), nil)
             } catch { handler(nil, error) }
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        if #available(iOS 13.0, *) {
+            // Kwik also only provides an event playlist
+            return purpose != .download
+        }
+        
+        return true
     }
 }

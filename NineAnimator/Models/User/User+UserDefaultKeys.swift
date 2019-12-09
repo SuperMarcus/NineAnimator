@@ -28,6 +28,8 @@ extension NineAnimatorUser {
         static var subscribedAnimeList: String { return "anime.subscribed" }
         static var allowNSFWContent: String { return "anime.content.nsfw" }
         static var autoRestartInterruptedDownloadTasks: String { return "episode.download.autorestart" }
+        static var preventAVAssetPurge: String { return "episode.download.preventPurge" }
+        static var sendDownloadNotifications: String { return "episode.download.sendDownloadNotifications" }
         static var recentEpisode: String { return "episode.recent" }
         static var recentSource: String { return "source.recent" }
         static var sourceSolveChallenges: String { return "source.challengeSolver" }

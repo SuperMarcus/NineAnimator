@@ -450,7 +450,7 @@
                                     <constraint firstItem="XD8-rz-uSl" firstAttribute="leading" secondItem="y2j-NB-Fkv" secondAttribute="leading" id="zcx-4i-4Xy"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-aH-85Y">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-aH-85Y">
                                 <rect key="frame" x="32" y="640.33333333333337" width="311" height="39.666666666666629"/>
                                 <string key="text">NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -478,6 +478,7 @@
                             <constraint firstItem="ikj-0J-JNE" firstAttribute="centerX" secondItem="nII-mF-i9B" secondAttribute="centerX" id="diV-kb-ajh"/>
                             <constraint firstItem="ikj-0J-JNE" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5kK-AM-XJg" secondAttribute="top" constant="16" id="pa6-32-0UQ"/>
                             <constraint firstItem="Ier-uY-wii" firstAttribute="top" secondItem="YWE-aH-85Y" secondAttribute="bottom" constant="16" id="rtW-Um-Jdm"/>
+                            <constraint firstItem="YWE-aH-85Y" firstAttribute="top" relation="greaterThanOrEqual" secondItem="y2j-NB-Fkv" secondAttribute="bottom" constant="8" id="trC-RO-WbJ"/>
                             <constraint firstItem="Ier-uY-wii" firstAttribute="centerX" secondItem="nII-mF-i9B" secondAttribute="centerX" id="ycJ-4b-3ji"/>
                             <constraint firstItem="y2j-NB-Fkv" firstAttribute="centerY" secondItem="nII-mF-i9B" secondAttribute="centerY" priority="750" id="zn6-Pi-VDv"/>
                         </constraints>
@@ -642,7 +643,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select A Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RjP-7k-vGp">
-                                <rect key="frame" x="69.333333333333314" y="120" width="236.66666666666669" height="36"/>
+                                <rect key="frame" x="69.333333333333329" y="120" width="236.66666666666669" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -697,6 +698,7 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                                 <variation key="heightClass=regular" constant="20"/>
                             </constraint>
                             <constraint firstItem="3Ui-C3-ly1" firstAttribute="leading" secondItem="V5A-Fz-yzu" secondAttribute="leading" id="RoO-ht-5rc"/>
+                            <constraint firstItem="RjP-7k-vGp" firstAttribute="top" secondItem="xlg-Eb-d8P" secondAttribute="top" constant="16" id="SDx-D5-qJ2"/>
                             <constraint firstItem="V5A-Fz-yzu" firstAttribute="centerX" secondItem="Qy8-Wy-qnh" secondAttribute="centerX" id="XbD-th-Fgm"/>
                             <constraint firstItem="V5A-Fz-yzu" firstAttribute="top" secondItem="MRT-ib-AcS" secondAttribute="bottom" constant="16" id="gX5-Oa-m7f"/>
                             <constraint firstItem="RjP-7k-vGp" firstAttribute="centerX" secondItem="Qy8-Wy-qnh" secondAttribute="centerX" id="hGp-X9-RM8"/>
@@ -713,6 +715,22 @@ After setup, you can change the theme settings in the Preferences menu.</string>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SDx-D5-qJ2"/>
+                                <exclude reference="jSE-vL-TQm"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="SDx-D5-qJ2"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="constraints">
+                                <include reference="jSE-vL-TQm"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bid-Oj-tjN">
                         <barButtonItem key="backBarButtonItem" title="Select Source" id="fPo-Vc-IV4"/>

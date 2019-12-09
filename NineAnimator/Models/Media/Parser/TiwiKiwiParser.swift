@@ -32,12 +32,13 @@ class TiwiKiwiParser: VideoProviderParser {
     
     func parse(episode: Episode,
                with session: SessionManager,
+               forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let headers = [
             "User-Agent": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
-        let task = NineAnimatorMultistepAsyncTask()
+        let task = AsyncTaskContainer()
         task.add(session.request(episode.target, headers: headers).responseString {
             [weak task, session] response in
             guard let task = task else { return }
@@ -125,5 +126,9 @@ class TiwiKiwiParser: VideoProviderParser {
         let mediaIdentifier = playerOptions[118]
         
         return URL(string: "https://\(serverPrefix).tiwicdn.net/\(mediaIdentifier)/v.mp4")
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        return true
     }
 }

@@ -78,8 +78,35 @@ extension NineAnimatorUser {
     
     /// Attempt to resume downloading tasks from URLSessions after the app launches
     var autoRestartInterruptedDownloads: Bool {
-        get { return _freezer.bool(forKey: Keys.autoRestartInterruptedDownloadTasks) }
+        get {
+            return _freezer.typedValue(
+                forKey: Keys.autoRestartInterruptedDownloadTasks,
+                default: true
+            )
+        }
         set { _freezer.set(newValue, forKey: Keys.autoRestartInterruptedDownloadTasks) }
+    }
+    
+    /// Preventing the system from purging downloaded episodes by marking each episodes as important
+    var preventAVAssetPurge: Bool {
+        get {
+            return _freezer.typedValue(
+                forKey: Keys.preventAVAssetPurge,
+                default: false
+            )
+        }
+        set { _freezer.set(newValue, forKey: Keys.preventAVAssetPurge) }
+    }
+    
+    /// If NineAnimator should send a user notification when a download completes
+    var sendDownloadsNotifications: Bool {
+        get {
+            return _freezer.typedValue(
+                forKey: Keys.sendDownloadNotifications,
+                default: false
+            )
+        }
+        set { _freezer.set(newValue, forKey: Keys.sendDownloadNotifications) }
     }
     
     /// The name of the current theme
@@ -119,5 +146,17 @@ extension NineAnimatorUser {
     var allowNSFWContent: Bool {
         get { return _freezer.bool(forKey: Keys.allowNSFWContent) }
         set { _freezer.set(newValue, forKey: Keys.allowNSFWContent) }
+    }
+    
+    /// Silence warnings about a specific purpose of a server
+    func silenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) {
+        var listOfSilencedPurposes = _silencedUnrecommendedServerPurposes[server] ?? []
+        listOfSilencedPurposes.insert(purpose)
+        _silencedUnrecommendedServerPurposes[server] = listOfSilencedPurposes
+    }
+    
+    /// Check if a warning realted to a specific purpose on a server should be silenced
+    func shouldSilenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) -> Bool {
+        return _silencedUnrecommendedServerPurposes[server]?.contains(purpose) == true
     }
 }

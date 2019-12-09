@@ -62,7 +62,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         // Initialize the Min Filled Layout
         setLayoutParameters(
             alwaysFillLine: true,
-            minimalSize: .init(width: 140, height: 90), // Categories
+            minimalSize: .init(width: 130, height: 90), // Categories
             .init(width: 300, height: 150), // Tips
             .init(width: 100, height: 170), // Recently Watched
             .init(width: 300, height: 56) // Collections
@@ -71,6 +71,7 @@ class LibrarySceneController: MinFilledCollectionViewController {
         // Configure scroll edge appearance so it looks a little better?
         configureForTransparentScrollEdge()
         initializeCategories()
+        collectionView.makeThemable()
     }
     
     override func viewWillAppear(_ animated: Bool) {

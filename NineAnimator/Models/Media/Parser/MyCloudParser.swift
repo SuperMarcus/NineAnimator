@@ -29,7 +29,7 @@ class MyCloudParser: VideoProviderParser {
     static let videoIdentifierRegex = try! NSRegularExpression(pattern: "videoId:\\s*'([^']+)", options: .caseInsensitive)
     static let videoSourceRegex = try! NSRegularExpression(pattern: "\"file\":\"([^\"]+)", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
@@ -76,5 +76,10 @@ class MyCloudParser: VideoProviderParser {
                 headers: playerAdditionalHeaders,
                 isAggregated: true), nil)
         }
+    }
+    
+    func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
+        // MyCloud may not work for GoogleCast
+        return purpose != .googleCast
     }
 }

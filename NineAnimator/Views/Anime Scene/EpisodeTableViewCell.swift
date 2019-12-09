@@ -20,27 +20,7 @@
 import UIKit
 
 class EpisodeTableViewCell: UITableViewCell {
-    var episodeLink: EpisodeLink? {
-        didSet {
-            // Remove observer first
-            NotificationCenter.default.removeObserver(self)
-            
-            guard let link = episodeLink else { return }
-            
-            // Set name and progress
-            titleLabel.text = "Episode \(link.name)"
-            progress = Float(link.playbackProgress)
-            offlineAccessButton.episodeLink = link
-            
-            // Add observer for progress updates
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(onProgressUpdate),
-                name: .playbackProgressDidUpdate,
-                object: nil
-            )
-        }
-    }
+    private(set) var episodeLink: EpisodeLink?
     
     var onStateChange: ((EpisodeTableViewCell) -> Void)?
     
@@ -77,6 +57,27 @@ class EpisodeTableViewCell: UITableViewCell {
                 "\(formatter.string(from: NSNumber(value: 1.0 - newValue)) ?? "Unknown percentage") left"
             } else { episodeProgressLabel.text = "Completed" }
         }
+    }
+    
+    /// Initialize the current cell
+    func setPresenting(_ episodeLink: EpisodeLink, parent: AnimeViewController) {
+        self.episodeLink = episodeLink
+        self.offlineAccessButton.setPresenting(episodeLink, delegate: parent)
+        
+        // Remove observer first
+        NotificationCenter.default.removeObserver(self)
+        
+        // Set name and progress
+        titleLabel.text = "Episode \(episodeLink.name)"
+        progress = Float(episodeLink.playbackProgress)
+        
+        // Add observer for progress updates
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onProgressUpdate),
+            name: .playbackProgressDidUpdate,
+            object: nil
+        )
     }
     
     @objc private func onProgressUpdate() {

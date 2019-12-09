@@ -110,6 +110,14 @@ extension LibraryTrackingCollectionController {
             loadedReferencesPages = page + 1
         }
         
+        // Insert to the cachedReferences and notify the collection view
+        let startingIndex = cachedCollectionReferences.count
+        let endingIndex = startingIndex + cachedPageReferences.count
+        cachedCollectionReferences.append(contentsOf: cachedPageReferences)
+        collectionView.insertItems(at: (startingIndex..<(endingIndex)).map {
+            .init(item: $0, section: 0)
+        })
+        
         // Load related contexts
         fetchTrackingContexts(forReferences: cachedPageReferences)
         loadMoreIfNeeded() // Load more if still at the bottom of the page

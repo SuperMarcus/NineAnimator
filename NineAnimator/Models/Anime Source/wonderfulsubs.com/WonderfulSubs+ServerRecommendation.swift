@@ -21,17 +21,62 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func _recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        let recommendationPiority: [Anime.ServerIdentifier: Double] = [
-            "cr:subs": 1000,
-            "ka:subs": 900,
-            "fa:subs": 800,
-            "cr:dubs": 700
-        ]
-        let serverWithPiority = anime.servers.map {
+        return _recommendServer(for: anime, ofPurpose: .playback).first
+    }
+    
+    func _recommendServer(for anime: Anime, ofPurpose purpose: VideoProviderParser.Purpose) -> [Anime.ServerIdentifier] {
+        var knownPiorities = [Anime.ServerIdentifier: Double]()
+        var fallbackPiority: Double = 500
+        var cutoffPiority: Double = 0
+
+        // More research is needed to figure out what works and what doesn't
+        switch purpose {
+        case .playback:
+            knownPiorities = [
+                "cr:subs": 1000,
+                "ka:subs": 900,
+                "fa:subs": 800,
+                "cr:dubs": 700
+            ]
+            fallbackPiority = 500
+            cutoffPiority = -1 // Do not cutoff
+        case .download:
+            knownPiorities = [
+                "cr:subs": 1000,
+                "ka:subs": 900,
+                "fa:subs": 800,
+                "cr:dubs": 700
+            ]
+            fallbackPiority = 100
+            cutoffPiority = 0
+        case .googleCast:
+            knownPiorities = [
+                "cr:subs": 1000,
+                "ka:subs": 900,
+                "fa:subs": 800,
+                "cr:dubs": 700
+            ]
+            fallbackPiority = 100
+            cutoffPiority = 0
+        }
+        
+        return _recommendServers(
+            for: anime,
+            withPiorities: knownPiorities,
+            fallbackPiority: fallbackPiority,
+            cutoffPiority: cutoffPiority
+        )
+    }
+    
+    fileprivate func _recommendServers(for anime: Anime, withPiorities piorities: [Anime.ServerIdentifier: Double], fallbackPiority: Double, cutoffPiority: Double) -> [Anime.ServerIdentifier] {
+        return anime.servers.map {
             server -> (Anime.ServerIdentifier, Double) in
             let identifier = server.key
-            return (identifier, recommendationPiority[identifier.lowercased()] ?? 500)
-        }
-        return serverWithPiority.max { $0.1 < $1.1 }?.0
+            return (identifier, piorities[identifier.lowercased()] ?? fallbackPiority)
+        } .filter {
+            $0.1 > cutoffPiority
+        } .sorted {
+            $0.1 > $1.1
+        } .map { $0.0 }
     }
 }
