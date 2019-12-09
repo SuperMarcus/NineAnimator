@@ -182,7 +182,7 @@ extension FeaturedViewController {
     // turn off highlighting effect when users can't see this happening
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.deselectSelectedRow()
+        tableView.deselectSelectedRows()
     }
     
     override func viewDidLoad() {

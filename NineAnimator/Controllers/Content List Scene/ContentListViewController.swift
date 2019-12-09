@@ -142,7 +142,7 @@ extension ContentListViewController {
 // MARK: - Delegate taps
 extension ContentListViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectSelectedRow() }
+        defer { tableView.deselectSelectedRows() }
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         // Open the link if it exists

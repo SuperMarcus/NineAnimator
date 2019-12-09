@@ -32,9 +32,23 @@ class HomeController: NSObject, HMHomeManagerDelegate {
     
     private var _isReady: Bool = false
     
+    /// Cached instance of HMHomeManagerAuthorizationStatus
+    /// - Note: Annotated as Any? for backwards-compatibility
+    private var _currentAuthorizationStatus: Any?
+    
     var isReady: Bool {
         primeIfNeeded()
         return _isReady
+    }
+    
+    /// Check if the user has denied NineAnimator's access to HomeKit data
+    var isPermissionDenied: Bool {
+        if #available(iOS 13.0, *) {
+            // Use cached permission status to check if the permission is denied
+            if let status = _currentAuthorizationStatus as? HMHomeManagerAuthorizationStatus {
+                return status.contains(.determined) && !status.contains(.authorized)
+            } else { return false }
+        } else { return false }
     }
     
     private lazy var manager: HMHomeManager = {
@@ -85,7 +99,17 @@ class HomeController: NSObject, HMHomeManagerDelegate {
 extension HomeController {
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
         _isReady = true
+        
+        if #available(iOS 13.0, *) {
+            updateAuthorizationStatus()
+        }
+        
         NotificationCenter.default.post(name: .homeDidUpdate, object: self)
+    }
+    
+    @available(iOS 13.0, *)
+    func homeManager(_ manager: HMHomeManager, didUpdate status: HMHomeManagerAuthorizationStatus) {
+        updateAuthorizationStatus()
     }
     
     @objc private func onPlaybackStart(notification: Notification) {
@@ -166,7 +190,32 @@ extension HomeController {
     /**
      Initialize the HMHomeManager
      */
-    func prime() { _ = manager }
+    func prime() {
+        // Init lazy variable
+        _ = self.manager
+        
+        if #available(iOS 13.0, *) {
+            updateAuthorizationStatus()
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    private func updateAuthorizationStatus() {
+        let oldStatus = _currentAuthorizationStatus as? HMHomeManagerAuthorizationStatus
+        let newStatus = manager.authorizationStatus
+        
+        if newStatus != oldStatus {
+            _currentAuthorizationStatus = newStatus
+            Log.info(
+                "[HomeController] Authorization status changed to %@",
+                newStatus.rawValue
+            )
+            NotificationCenter.default.post(
+                name: .homeDidReceiveAuthroizationStatus,
+                object: self
+            )
+        }
+    }
 }
 
 // MARK: - Run Scenes

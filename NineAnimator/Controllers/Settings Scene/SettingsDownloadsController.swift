@@ -47,7 +47,7 @@ class SettingsDownloadsController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectSelectedRow() }
+        defer { tableView.deselectSelectedRows() }
         
         guard let cell = tableView.cellForRow(at: indexPath) else {
             return

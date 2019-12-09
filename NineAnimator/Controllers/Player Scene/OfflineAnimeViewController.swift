@@ -165,7 +165,7 @@ extension OfflineAnimeViewController {
 // MARK: - Playback
 extension OfflineAnimeViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectSelectedRow() }
+        defer { tableView.deselectSelectedRows() }
         
         guard indexPath.section == 0 else { return }
         // Grab the content

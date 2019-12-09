@@ -43,6 +43,13 @@ class HomeIntegrationTableViewController: UITableViewController {
             object: nil
         )
         
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(homeDidReceiveAuthorizationStatus(notification:)),
+            name: .homeDidReceiveAuthroizationStatus,
+            object: nil
+        )
+        
         updatePreferences()
     }
     
@@ -74,13 +81,27 @@ extension HomeIntegrationTableViewController {
 
 // MARK: - Observers
 extension HomeIntegrationTableViewController {
-    @objc func homeDidUpdate(notification: Notification) {
+    @objc private func homeDidUpdate(notification: Notification) {
         DispatchQueue.main.async { [weak self] in self?.updatePreferences() }
         
         // Open deferred selection menu
         if let queuedEvent = queuedSelectionEvent {
             queuedSelectionEvent = nil
             _openSelectionMenu(for: queuedEvent)
+        }
+    }
+    
+    @objc private func homeDidReceiveAuthorizationStatus(notification: Notification) {
+        if HomeController.shared.isPermissionDenied,
+            self.queuedSelectionEvent != nil {
+            self.queuedSelectionEvent = nil
+            
+            DispatchQueue.main.async {
+                [weak self] in
+                guard let self = self else { return }
+                self.updatePreferences()
+                self.showUnauthorizedAlert()
+            }
         }
     }
 }
@@ -90,20 +111,23 @@ extension HomeIntegrationTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let reuseIdentifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
             Log.error("Unable to retrive cell reuse identifier")
-            tableView.deselectSelectedRow()
+            tableView.deselectSelectedRows()
             return
         }
         
         switch reuseIdentifier {
         case "home.scene.start": openSelectionMenu(for: .startScene)
         case "home.scene.end": openSelectionMenu(for: .endScene)
-        default: tableView.deselectSelectedRow()
+        default: tableView.deselectSelectedRows()
         }
     }
     
     private func openSelectionMenu(for event: DeferredSelectSceneEvent) {
         HomeController.shared.prime()
-        if HomeController.shared.isReady == true {
+        
+        if HomeController.shared.isPermissionDenied {
+            showUnauthorizedAlert()
+        } else if HomeController.shared.isReady == true {
             _openSelectionMenu(for: event)
         } else { queuedSelectionEvent = event }
     }
@@ -166,6 +190,21 @@ extension HomeIntegrationTableViewController {
         DispatchQueue.main.async {
             [weak self] in self?.present(alert, animated: true, completion: nil)
         }
+    }
+    
+    private func showUnauthorizedAlert() {
+        let alert = UIAlertController(
+            title: "Permission Denied",
+            message: "NineAnimator does not have permission to access your HomeKit data. Please allow HomeKit access from your Settings app.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(
+            title: "Ok",
+            style: .cancel
+        ) { [weak self] _ in self?.tableView.deselectSelectedRows() })
+        
+        present(alert, animated: true)
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

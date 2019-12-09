@@ -36,7 +36,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     @IBOutlet private weak var buildNumberLabel: UILabel!
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectSelectedRow() }
+        defer { tableView.deselectSelectedRows() }
         
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         if let url = urlForIdentifier[cell.reuseIdentifier] {

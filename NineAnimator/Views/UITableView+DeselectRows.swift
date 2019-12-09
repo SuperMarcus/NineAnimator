@@ -20,9 +20,11 @@
 import UIKit
 
 extension UITableView {
-    func deselectSelectedRow() {
-        if let selected = indexPathForSelectedRow {
-            deselectRow(at: selected, animated: false)
+    func deselectSelectedRows(animated: Bool = true) {
+        if let selectedRows = indexPathsForSelectedRows {
+            for row in selectedRows {
+                deselectRow(at: row, animated: animated)
+            }
         }
     }
 }

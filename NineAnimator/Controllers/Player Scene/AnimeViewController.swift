@@ -135,7 +135,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
         episodeRequestTask = nil
         
         // Remove tableView selections
-        tableView.deselectSelectedRow()
+        tableView.deselectSelectedRows()
         
         // Sets episode and server to nil
         episode = nil
@@ -356,7 +356,7 @@ extension AnimeViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == Section.episodes || indexPath.section == Section.suggestion else {
-            tableView.deselectSelectedRow()
+            tableView.deselectSelectedRows()
             return Log.info("A non-episode cell has been selected")
         }
         
@@ -365,19 +365,19 @@ extension AnimeViewController {
             episodeRequestTask?.cancel()
             episodeRequestTask = nil
             selectedEpisodeCell = nil
-            tableView.deselectSelectedRow()
+            tableView.deselectSelectedRows()
             return
         }
         
         guard let episodeLink = episodeLink(for: indexPath) else {
-            tableView.deselectSelectedRow()
+            tableView.deselectSelectedRows()
             return Log.error("Unable to retrive episode link from pool")
         }
         
         // Scroll and highlight the cell in the episodes section
         if cell is AnimePredictedEpisodeTableViewCell,
             let destinationIndexPath = self.indexPath(for: episodeLink) {
-            tableView.deselectSelectedRow()
+            tableView.deselectSelectedRows()
             tableView.selectRow(at: destinationIndexPath, animated: true, scrollPosition: .middle)
         }
         
@@ -402,7 +402,7 @@ extension AnimeViewController {
         let clearSelection = {
             [weak self] in
             DispatchQueue.main.async {
-                self?.tableView.deselectSelectedRow()
+                self?.tableView.deselectSelectedRows()
                 self?.selectedEpisodeCell = nil
             }
         }
@@ -428,7 +428,7 @@ extension AnimeViewController {
                     self.presentError(error!) {
                         [weak self] _ in
                         self?.selectedEpisodeCell = nil
-                        self?.tableView.deselectSelectedRow()
+                        self?.tableView.deselectSelectedRows()
                     }
                     return Log.error(error)
                 }
