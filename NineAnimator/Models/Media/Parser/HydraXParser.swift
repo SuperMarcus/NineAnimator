@@ -143,12 +143,8 @@ class HydraXParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        // Download doesn't work on iOS 13+ since no master playlist is provided
-        // by HydraX
-        if #available(iOS 13, *) {
-            return purpose != .download
-        }
-        
-        return true
+        // Download is not supported, since HydraX uses AES-128 encryption,
+        // `AVAssetDownloadURLSession` does not cache encryption keys
+        return purpose != .download
     }
 }
