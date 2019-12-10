@@ -111,11 +111,10 @@ extension BaseSource {
             options: [ .regularExpression ]
         )
         
-        // Remove some form assignments
+        // Fix dead code
         solveJs = solveJs.replacingOccurrences(
-            of: "\\s{3,}(?:t|f)(?: = |\\.).+",
-            with: "",
-            options: [ .regularExpression ]
+            of: "document.createElement('div')",
+            with: "{ innerHTML: \"\", firstChild: { href: \"https://\(requestingUrl.host ?? "doesnotmatter.com")/\" } }"
         )
         
         // Replace `t.length` with the length of the host string
@@ -132,8 +131,35 @@ extension BaseSource {
         
         // Evaluate the javascript and return the value
         // JSContext is a safe and sandboxed environment, so no need to run in vm like node
-        let context = JSContext()
-        return context?.evaluateScript(solveJs)?.toString()
+        if let context = JSContext() {
+            let definingDocumentContext = NSMutableDictionary()
+            let domDocumentKey: NSString = "document"
+            
+            let domGetElementById: @convention(block) (String, String) -> Any = {
+                [challengePageContent] domId, second in
+                do {
+                    Log.debug("[CF_WAF] Get DOM Element %@", domId)
+                    let bowl = try SwiftSoup.parse(challengePageContent)
+                    let element = try bowl.select("#\(domId)")
+                    if !element.isEmpty() {
+                        return [ "innerHTML": try element.html() ]
+                    } else { throw NineAnimatorError.responseError("Key \(domId) doesn't exists") }
+                } catch { Log.error("[CF_WAF] Error running challenge script: %@", error) }
+                
+                // Return null for not found
+                return NSNull()
+            }
+            definingDocumentContext["getElementById"] = domGetElementById
+            
+            context.setObject(
+                definingDocumentContext,
+                forKeyedSubscript: domDocumentKey
+            )
+            
+            return context.evaluateScript(solveJs)?.toString()
+        }
+        
+        return nil
     }
 }
 
