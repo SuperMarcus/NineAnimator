@@ -58,6 +58,15 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
             ? DummyParser.registeredInstance : nil
     }
     
+    override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+        return recommendServers(for: anime, ofPurpose: .playback).first
+    }
+    
+    override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
+        return anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
+            ? [NASourceFourAnime.FourAnimeStream] : []
+    }
+    
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         return .fail()
     }
