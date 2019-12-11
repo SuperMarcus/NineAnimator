@@ -26,4 +26,11 @@ extension UITableViewCell {
         get { return themableOptionsStore["cell.tintText"] as? Bool ?? false }
         set { themableOptionsStore["cell.tintText"] = newValue }
     }
+    
+    /// Mark the color of the labels in this cell as predetermined
+    /// - Note: This prevents `Theme` from updating the foreground colors of the labels in the cell.
+    @IBInspectable var determinedLabelColors: Bool {
+        get { return themableOptionsStore["cell.determinedLabelColors"] as? Bool ?? false }
+        set { themableOptionsStore["cell.determinedLabelColors"] = newValue }
+    }
 }

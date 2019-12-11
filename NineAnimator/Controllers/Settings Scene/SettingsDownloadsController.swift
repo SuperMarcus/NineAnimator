@@ -43,6 +43,7 @@ class SettingsDownloadsController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.makeThemable()
         self.reloadUsage()
     }
     

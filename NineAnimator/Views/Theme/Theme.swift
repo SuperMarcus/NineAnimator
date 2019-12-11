@@ -133,13 +133,17 @@ extension Theme {
             view.backgroundColor = theme.background
             view.indicatorStyle = theme.scrollIndicatorStyle
         case let view as UITableViewCell:
-            // For table view cell, set the content background color to clear
-            // and the background color to the theme background color
-            if view.tintText {
-                view.textLabel?.textColor = theme.tint
-            } else { view.textLabel?.textColor = theme.primaryText }
+            // Update label colors
+            if !view.determinedLabelColors {
+                // For table view cell, set the content background color to clear
+                // and the background color to the theme background color
+                if view.tintText {
+                    view.textLabel?.textColor = theme.tint
+                } else { view.textLabel?.textColor = theme.primaryText }
+                
+                view.detailTextLabel?.textColor = theme.secondaryText
+            }
             
-            view.detailTextLabel?.textColor = theme.secondaryText
             view.backgroundColor = theme.background
             view.contentView.backgroundColor = .clear
             view.textLabel?.backgroundColor = .clear
