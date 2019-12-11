@@ -491,6 +491,14 @@ extension AnimeViewController {
             CastController.default.presentPlaybackController()
         } else { NativePlayerController.default.play(media: media) }
     }
+    
+    /// Cancels the episode retrival task
+    /// - Important: This method must be called from the main thread
+    private func cancelEpisodeRetrival() {
+        episodeRequestTask?.cancel()
+        episodeRequestTask = nil
+        tableView.deselectSelectedRows()
+    }
 }
 
 // MARK: - Suggesting To Watch episode
@@ -717,6 +725,10 @@ extension AnimeViewController {
             return action
         }())
         
+        // Cancel the current loading task if there are any
+        // This prevents the 'NSGenericException' runtime exception
+        cancelEpisodeRetrival()
+        
         present(actionSheet, animated: true, completion: nil)
     }
     
@@ -739,11 +751,19 @@ extension AnimeViewController {
         
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
+        // Cancel the current loading task if there are any
+        // This prevents the 'NSGenericException' runtime exception
+        cancelEpisodeRetrival()
+        
         present(alertView, animated: true)
     }
     
     private func showShareDiaglog() {
         guard let link = animeLink else { return }
+        
+        // Cancel the current loading task if there are any
+        // This prevents the 'NSGenericException' runtime exception
+        cancelEpisodeRetrival()
         
         // Present the share sheet from this view controller
         RootViewController.shared?.presentShareSheet(
@@ -974,6 +994,10 @@ extension AnimeViewController {
                 title: "Cancel",
                 style: .cancel
             ) { _ in completionHandler(false, nil) })
+            
+            // Cancel the current loading task if there are any
+            // This prevents the 'NSGenericException' runtime exception
+            cancelEpisodeRetrival()
             
             present(alert, animated: true)
         }
