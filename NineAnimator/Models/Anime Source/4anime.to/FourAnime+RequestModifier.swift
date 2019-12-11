@@ -20,7 +20,7 @@
 import Foundation
 import Kingfisher
 
-extension NASourceAnimeKisa: Kingfisher.ImageDownloadRequestModifier {
+extension NASourceFourAnime: Kingfisher.ImageDownloadRequestModifier {
     /// Setup Kingfisher modifier for verified requests to resources
     func setupGlobalRequestModifier() {
         parent.registerAdditionalImageModifier(self)

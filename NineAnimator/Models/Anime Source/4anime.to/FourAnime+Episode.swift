@@ -18,19 +18,25 @@
 //
 
 import Foundation
-import Kingfisher
+import SwiftSoup
 
-extension NASourceAnimeKisa: Kingfisher.ImageDownloadRequestModifier {
-    /// Setup Kingfisher modifier for verified requests to resources
-    func setupGlobalRequestModifier() {
-        parent.registerAdditionalImageModifier(self)
-    }
-    
-    func modified(for request: URLRequest) -> URLRequest? {
-        var modifiedRequest: URLRequest? = request
-        if let requestingUrl = request.url, requestingUrl.host == endpointURL.host {
-            modifiedRequest?.setValue(sessionUserAgent, forHTTPHeaderField: "User-Agent")
+extension NASourceFourAnime {
+    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        return NineAnimatorPromise.firstly {
+            try URL(string: link.identifier).tryUnwrap()
+        } .thenPromise {
+            episodePageUrl in self.request(browseUrl: episodePageUrl)
+        } .then {
+            episodePageContent in
+            let bowl = try SwiftSoup.parse(episodePageContent)
+            let videoElement = try bowl.select("video")
+            let videoSource = try URL(string: videoElement.attr("src")).tryUnwrap()
+            
+            return Episode(
+                link,
+                target: videoSource,
+                parent: anime
+            )
         }
-        return modifiedRequest
     }
 }

@@ -19,6 +19,7 @@
 
 import Alamofire
 import Foundation
+import Kingfisher
 
 typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
 
@@ -96,6 +97,9 @@ class NineAnimator: SessionDelegate {
         attributes: [ .concurrent ]
     )
     
+    /// Chained image modifiers
+    var _imageResourceModifiers = [Kingfisher.ImageDownloadRequestModifier]()
+    
     override init() {
         super.init()
         
@@ -105,6 +109,7 @@ class NineAnimator: SessionDelegate {
         // Register implemented sources and services
         registerDefaultSources()
         registerDefaultServices()
+        setupGlobalImageRequestModifiers()
     }
 }
 
@@ -143,9 +148,10 @@ extension NineAnimator {
         register(source: NASourceAnimePahe(with: self))
         register(source: NASourceWonderfulSubs(with: self))
         register(source: NASourceAnimeUltima(with: self))
+        register(source: NASourceAnimeKisa(with: self))
+        register(source: NASourceFourAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
-        register(source: NASourceAnimeKisa(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceMasterAnime(with: self))
     }

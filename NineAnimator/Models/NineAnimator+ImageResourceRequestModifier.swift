@@ -20,17 +20,21 @@
 import Foundation
 import Kingfisher
 
-extension NASourceAnimeKisa: Kingfisher.ImageDownloadRequestModifier {
-    /// Setup Kingfisher modifier for verified requests to resources
-    func setupGlobalRequestModifier() {
-        parent.registerAdditionalImageModifier(self)
+extension NineAnimator: Kingfisher.ImageDownloadRequestModifier {
+    func modified(for request: URLRequest) -> URLRequest? {
+        return _imageResourceModifiers.reduce(request as URLRequest?) {
+            request, modifier in if let request = request {
+                return modifier.modified(for: request)
+            } else { return nil }
+        }
     }
     
-    func modified(for request: URLRequest) -> URLRequest? {
-        var modifiedRequest: URLRequest? = request
-        if let requestingUrl = request.url, requestingUrl.host == endpointURL.host {
-            modifiedRequest?.setValue(sessionUserAgent, forHTTPHeaderField: "User-Agent")
-        }
-        return modifiedRequest
+    func registerAdditionalImageModifier(_ modifier: ImageDownloadRequestModifier) {
+        _imageResourceModifiers.append(modifier)
+    }
+    
+    func setupGlobalImageRequestModifiers() {
+        KingfisherManager.shared.downloader.sessionConfiguration = URLSessionConfiguration.default
+        KingfisherManager.shared.defaultOptions.append(.requestModifier(self))
     }
 }
