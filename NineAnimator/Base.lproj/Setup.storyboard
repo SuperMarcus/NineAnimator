@@ -244,7 +244,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned from the ground up, tuned to present you with the most useful information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
                                                 <rect key="frame" x="94.333333333333329" y="48.333333333333314" width="208.66666666666669" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -303,7 +303,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
                                                 <rect key="frame" x="94.333333333333329" y="22" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="F5o-pt-dez"/>
@@ -322,7 +322,7 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="NineAnimator now includes built-in progress editing capability for some anime lists (Anilist and MyAnimeList)." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator includes experimental support for 4anime as a built-in anime source." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
                                                 <rect key="frame" x="94.333333333333329" y="48" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -359,8 +359,8 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keW-rL-lk1">
                                                 <rect key="frame" x="8.0000000000000036" y="28.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Phone Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
-                                                        <rect key="frame" x="12.333333333333336" y="12.666666666666686" width="37.333333333333336" height="37"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Down Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
+                                                        <rect key="frame" x="9.3333333333333357" y="9.3333333333333712" width="43.666666666666664" height="43.666666666666664"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="4tt-2A-VQU" secondAttribute="height" id="fDS-no-lOe"/>
@@ -369,7 +369,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
-                                                    <constraint firstItem="4tt-2A-VQU" firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="width" multiplier="0.6" id="Egh-sj-Ak3"/>
+                                                    <constraint firstItem="4tt-2A-VQU" firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="width" multiplier="0.7" id="Egh-sj-Ak3"/>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="centerX" secondItem="keW-rL-lk1" secondAttribute="centerX" id="Ldd-hp-gu9"/>
                                                     <constraint firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="height" multiplier="1:1" id="jKB-E3-Vz3"/>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="centerY" secondItem="keW-rL-lk1" secondAttribute="centerY" id="y3T-so-GMn"/>
@@ -380,7 +380,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Compatibility" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Downloads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
                                                 <rect key="frame" x="94.333333333333329" y="23.666666666666686" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
@@ -399,9 +399,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator includes an updated download system that is optimized for performance and reliability." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
                                                 <rect key="frame" x="94.333333333333329" y="49.666666666666686" width="208.66666666666669" height="52.666666666666657"/>
-                                                <string key="text">This version of NineAnimator improves the compatibility with the new iOS 13 while maintaining support for older systems and devices.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -847,8 +846,8 @@ After setup, you can change the theme settings in the Preferences menu.</string>
     </scenes>
     <resources>
         <image name="Cloud Sync HD" width="1200" height="1200"/>
+        <image name="Down Icon HD" width="117" height="117"/>
         <image name="High Resolution App Icon" width="2048" height="2048"/>
         <image name="Library Icon HD" width="2000" height="2000"/>
-        <image name="Phone Icon HD" width="1970" height="1970"/>
     </resources>
 </document>
