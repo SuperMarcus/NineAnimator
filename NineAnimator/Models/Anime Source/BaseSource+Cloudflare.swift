@@ -179,6 +179,11 @@ extension BaseSource: Alamofire.RequestRetrier {
             completion(false, 0)
         }
         
+        // We will not retry this since app is not actively running in the foreground
+        if AppDelegate.shared?.isActive != true {
+            return fail()
+        }
+        
         // Check if there is an cloudflare authentication error
         if let error = error as? NineAnimatorError.CloudflareAuthenticationChallenge,
             let verificationUrl = error.authenticationUrl {

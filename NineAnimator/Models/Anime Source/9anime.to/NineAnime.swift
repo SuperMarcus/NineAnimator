@@ -234,16 +234,21 @@ class NASourceNineAnime: BaseSource, Source {
                 return handler(nil, error)
             }
             
-            Log.info("[9anime] Request failed with an error. Trying to resolve a different endpoint.")
-            // Trying to determine a new endpoint if an error occurred
-            self._endpointDeterminingTask = self.determineEndpoint(url)
-                .error { _ in handler(nil, error) }
-                .finally {
-                    [weak task] newUrl in
-                    guard let task = task else { return }
-                    Log.info("[9anime] New endpoint found, resuming original task.")
-                    task += super.request(ajaxString: newUrl, headers: headers, completion: handler)
-                }
+            Log.info("[9anime] Request failed with an error: %@", String(describing: error))
+            
+            // Only try to resolve new hosts when in foreground
+            if AppDelegate.shared?.isActive == true {
+                Log.info("[9anime] Trying to resolve a new host for 9anime...")
+                // Trying to determine a new endpoint if an error occurred
+                self._endpointDeterminingTask = self.determineEndpoint(url)
+                    .error { _ in handler(nil, error) }
+                    .finally {
+                        [weak task] newUrl in
+                        guard let task = task else { return }
+                        Log.info("[9anime] New endpoint found, resuming original task.")
+                        task += super.request(ajaxString: newUrl, headers: headers, completion: handler)
+                    }
+            } else { handler(nil, error) }
         }
         return task
     }
