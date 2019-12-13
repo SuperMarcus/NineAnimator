@@ -21,7 +21,7 @@ import UIKit
 
 class LibraryTrackingCollectionController: MinFilledCollectionViewController, ContentProviderDelegate {
     private var collection: LibrarySceneController.Collection?
-    private var cachedCollectionReferences = [ListingAnimeReference]()
+    private var cachedCollectionReferences = NSMutableOrderedSet()
     private var selectedReference: ListingAnimeReference?
     private var referencesToContextsMap = [ListingAnimeReference: [TrackingContext]]()
     private var referencesMappingQueue = DispatchQueue.global()
@@ -53,13 +53,10 @@ class LibraryTrackingCollectionController: MinFilledCollectionViewController, Co
         } else {
             // Update the collection references
             loadedReferencesPages = collection!.availablePages
-            cachedCollectionReferences = (0..<loadedReferencesPages).flatMap {
-                collection!.links(on: $0).compactMap {
-                    switch $0 {
-                    case let .listingReference(reference): return reference
-                    default: return nil
-                    }
-                }
+            cachedCollectionReferences = (0..<loadedReferencesPages).reduce(into: NSMutableOrderedSet()) {
+                cache, page in cache.addObjects(
+                    from: collection!.links(on: page).compactMap(asListingReference)
+                )
             }
             collectionView.reloadData()
         }
@@ -92,31 +89,28 @@ extension LibraryTrackingCollectionController {
         // If this page has already been loaded, reload and dedupe all pages
         if page < loadedReferencesPages {
             Log.info("[LibraryTrackingCollectionController] Attempting to load page %@ when it has been loaded. Reloading all pages.", page)
-            cachedCollectionReferences = (0..<provider.availablePages).reduce(into: []) {
-                $0.append( // Append the links in the page
-                    contentsOf: provider.links(on: $1).compactMap(asListingReference)
+            cachedCollectionReferences = (0..<provider.availablePages).reduce(into: NSMutableOrderedSet()) {
+                cache, page in cache.addObjects(
+                    from: provider.links(on: page).map(asListingReference)
                 )
             }
             collectionView.reloadSections([ 0 ])
             loadedReferencesPages = provider.availablePages // Update page variable
         } else { // Else just append this to the end
             // Insert to the cachedReferences and notify the collection view
-            let startingIndex = cachedCollectionReferences.count
-            let endingIndex = startingIndex + cachedPageReferences.count
-            cachedCollectionReferences.append(contentsOf: cachedPageReferences)
-            collectionView.insertItems(at: (startingIndex..<(endingIndex)).map {
-                .init(item: $0, section: 0)
-            })
+            let additionalIndicies = cachedPageReferences.reduce(into: [IndexPath]()) {
+                results, reference in
+                if !cachedCollectionReferences.contains(reference) {
+                    results.append(.init(
+                        item: cachedCollectionReferences.count,
+                        section: 0
+                    ))
+                    cachedCollectionReferences.add(reference)
+                }
+            }
+            collectionView.insertItems(at: additionalIndicies)
             loadedReferencesPages = page + 1
         }
-        
-        // Insert to the cachedReferences and notify the collection view
-        let startingIndex = cachedCollectionReferences.count
-        let endingIndex = startingIndex + cachedPageReferences.count
-        cachedCollectionReferences.append(contentsOf: cachedPageReferences)
-        collectionView.insertItems(at: (startingIndex..<(endingIndex)).map {
-            .init(item: $0, section: 0)
-        })
         
         // Load related contexts
         fetchTrackingContexts(forReferences: cachedPageReferences)
@@ -263,7 +257,7 @@ extension LibraryTrackingCollectionController {
 extension LibraryTrackingCollectionController {
     func reference(at indexPath: IndexPath) -> ListingAnimeReference? {
         return indexPath.section == 0 && indexPath.item < cachedCollectionReferences.count
-            ? cachedCollectionReferences[indexPath.item] : nil
+            ? cachedCollectionReferences.object(at: indexPath.item) as? ListingAnimeReference : nil
     }
     
     func asListingReference(_ genericLink: AnyLink) -> ListingAnimeReference? {
