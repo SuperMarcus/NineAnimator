@@ -21,10 +21,6 @@ import Alamofire
 import Foundation
 import Kingfisher
 
-typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
-
-extension DataRequest: NineAnimatorAsyncTask { }
-
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
@@ -94,7 +90,7 @@ class NineAnimator: SessionDelegate {
     /// Global queue for modify internal configurations
     fileprivate static let globalConfigurationQueue = DispatchQueue(
         label: "com.marcuszhou.nineanimator.configuration",
-        attributes: [ .concurrent ]
+        attributes: []
     )
     
     /// Chained image modifiers

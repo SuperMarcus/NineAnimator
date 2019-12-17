@@ -345,6 +345,7 @@
 		2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */; };
 		2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEC21A1220917D200A30F4F /* Promise+Fail.swift */; };
 		2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */; };
+		2CEFD96D23A894C00064075E /* Alamofire+Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEFD96C23A894C00064075E /* Alamofire+Promise.swift */; };
 		2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0C51F238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift */; };
 		2CF0C522238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */; };
 		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
@@ -776,6 +777,7 @@
 		2CEC219F22089CF300A30F4F /* NSRegularExpression+StringMatches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSRegularExpression+StringMatches.swift"; sourceTree = "<group>"; };
 		2CEC21A1220917D200A30F4F /* Promise+Fail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Promise+Fail.swift"; sourceTree = "<group>"; };
 		2CED3A4D22039C9200318D49 /* OfflinePlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflinePlaybackMedia.swift; sourceTree = "<group>"; };
+		2CEFD96C23A894C00064075E /* Alamofire+Promise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Promise.swift"; sourceTree = "<group>"; };
 		2CF0C51F238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simulator+AVAssetDownloadTask.swift"; sourceTree = "<group>"; };
 		2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationAppearanceTools.swift"; sourceTree = "<group>"; };
 		2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipImagedCell.swift; sourceTree = "<group>"; };
@@ -1036,6 +1038,7 @@
 				2C23AE392229912100512150 /* Promise+Success.swift */,
 				2C1C71822219975A00760A69 /* Promise+Hashable.swift */,
 				2CEC218B2207E3A900A30F4F /* AsyncTask.swift */,
+				2CEFD96C23A894C00064075E /* Alamofire+Promise.swift */,
 			);
 			path = Asynchronous;
 			sourceTree = "<group>";
@@ -2283,6 +2286,7 @@
 				2CD7825A21FFEF2800477FC6 /* OfflineAccessButton.swift in Sources */,
 				2C1C717D22190FAD00760A69 /* Anilist+Reference.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
+				2CEFD96D23A894C00064075E /* Alamofire+Promise.swift in Sources */,
 				2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */,
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,

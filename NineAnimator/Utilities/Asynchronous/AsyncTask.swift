@@ -19,6 +19,9 @@
 
 import Foundation
 
+/// Generic type for a callback closure
+typealias NineAnimatorCallback<T> = (T?, Error?) -> Void
+
 /// Representing an asynchronized task that can be cancelled
 protocol NineAnimatorAsyncTask: AnyObject {
     func cancel()
