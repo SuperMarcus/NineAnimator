@@ -68,13 +68,13 @@ class TiwiKiwiParser: VideoProviderParser {
                     response in
                     guard case .success(let playbackPropertyList) = response.result else {
                         return handler(nil, NineAnimatorError.responseError(
-                            "unable to retrive playback media property list"
+                            "unable to retrieve playback media property list"
                         ))
                     }
                     let matches = TiwiKiwiParser.flowPlayerBaseURLRegex.matches(in: playbackPropertyList, range: playbackPropertyList.matchingRange)
                     guard let baseUrl = matches.first else {
                         return handler(nil, NineAnimatorError.responseError(
-                            "unable to retrive media base url from property list"
+                            "unable to retrieve media base url from property list"
                         ))
                     }
                     guard let propertyUrlBaseStopIndex = propertyListUrl.lastIndex(of: "/")

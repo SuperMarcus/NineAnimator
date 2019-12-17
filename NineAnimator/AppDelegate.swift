@@ -129,18 +129,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // swiftlint:disable implicitly_unwrapped_optional
         var identifier: UIBackgroundTaskIdentifier!
+        backgroundTaskContainer = StatefulAsyncTaskContainer {
+            state in
+            Log.info("[AppDelegate] Background task ended with state %@", state)
+            UIApplication.shared.endBackgroundTask(identifier)
+        }
         
         identifier = UIApplication.shared.beginBackgroundTask {
+            Log.info("[AppDelegate] Background task %@ will expire. Cancelling all running tasks...", identifier.rawValue)
+            self.backgroundTaskContainer?.cancel()
+            self.backgroundTaskContainer = nil
             UIApplication.shared.endBackgroundTask(identifier)
         }
         
+        Log.info("[AppDelegate] Beginning background tasks with identifier %@...", identifier.rawValue)
+        
         // Perform fetch when app enters background
-        UserNotificationManager.default.performFetch { _ in
-            UIApplication.shared.endBackgroundTask(identifier)
-        }
+        UserNotificationManager.default.performFetch(within: backgroundTaskContainer!)
         
         // Update quick actions
         updateHomescreenQuickActions(application)
+        
+        // Mark the task container as ready for collection
+        backgroundTaskContainer?.collect()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -173,10 +184,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     var taskPool: [NineAnimatorAsyncTask?]?
+    var backgroundTaskContainer: StatefulAsyncTaskContainer?
     
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Log.info("Received background fetch notification.")
-        UserNotificationManager.default.performFetch(with: completionHandler)
+        Log.info("[AppDelegate] Beginning background fetching activities...")
+        
+        backgroundTaskContainer = StatefulAsyncTaskContainer {
+            let finishedState = $0.state
+            Log.error("[AppDelegate] Background fetching activities completed (%@)", finishedState)
+            switch finishedState {
+            case .failed: completionHandler(.failed)
+            case .succeeded: completionHandler(.newData)
+            case .unknown: completionHandler(.noData)
+            }
+        }
+        
+        UserNotificationManager.default.performFetch(within: backgroundTaskContainer!)
+        
+        // Mark as ready for collection
+        backgroundTaskContainer?.collect()
     }
 }
 

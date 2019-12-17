@@ -75,11 +75,42 @@ class AsyncTaskContainer: NineAnimatorAsyncTask {
 }
 
 /// A task container that preserves a state property which represents the overall state of the execution
+///
+/// `StatefulAsyncTaskContainer` is designed for the cases when centralized management of the
+/// asynchronous tasks are required (such as background refresh). Instead of executing the promises and
+/// handling the errors by your own, you delegate those responsibilities to the `StatefulAsyncTaskContainer`.
+///
+/// After setting up and executed all the tasks in `StatefulAsyncTaskContainer`, call the `collect()`
+/// method to mark the `StatefulAsyncTaskContainer` as complete.
+/// The `onFinishCollectingStates` will only be called if the container has been marked as ready for
+/// collection.
+///
+/// - Note: `StatefulAsyncTaskContainer` is a subclass of `AsyncTaskContainer`,
+///         but `execute(_:)` and `execute(promiseWithState:)` should be used to execute
+///         asynchronous promises in the container instead.
 class StatefulAsyncTaskContainer: AsyncTaskContainer {
+    /// Indicates whether all the tasks have been added to the container
+    @AtomicProperty private(set) var isReadyForCollection = false
+    
+    /// The final state of task executions
     @AtomicProperty private(set) var state: TaskState = .unknown
     
-    /// Execute a promise and preserve the reference to the async task that it creates
+    @AtomicProperty private var numberOfStatesContributed: Int = 0
+    
+    private var didFinishCollectingStates: (StatefulAsyncTaskContainer) -> Void
+    
+    init(onFinishCollectingStates: @escaping (StatefulAsyncTaskContainer) -> Void) {
+        self.didFinishCollectingStates = onFinishCollectingStates
+        super.init()
+    }
+    
+    /// Execute a promise within the container
     func execute(_ promise: NineAnimatorPromise<Void>) {
+        // Check the `isReadyForCollection` flag
+        if isReadyForCollection {
+            return Log.error("[StatefulAsyncTaskContainer] execute(_:) called after the container has been marked as ready for collection. This promise will not be executed.")
+        }
+        
         let task = promise.error {
             [weak self] in
             Log.error("[StatefulAsyncTaskContainer] Task finished with error: %@", $0)
@@ -90,12 +121,74 @@ class StatefulAsyncTaskContainer: AsyncTaskContainer {
         add(task)
     }
     
+    /// Execute a promise within the container and save the `TaskState` it creates
+    func execute(promiseWithState: NineAnimatorPromise<TaskState>) {
+        // Check the `isReadyForCollection` flag
+        if isReadyForCollection {
+            return Log.error("[StatefulAsyncTaskContainer] execute(promiseWithState:) called after the container has been marked as ready for collection. This promise will not be executed.")
+        }
+        
+        let task = promiseWithState.error {
+            [weak self] in
+            Log.error("[StatefulAsyncTaskContainer] Task finished with error: %@", $0)
+            self?.contributeState(.failed)
+        } .finally {
+            [weak self] in self?.contributeState($0)
+        }
+        add(task)
+    }
+    
     /// Contribute to the overall state of the cluster of tasks
     func contributeState(_ newState: TaskState?) {
+        var shouldCallDidFinishCollectingStates = false
+        
+        // Update states
         _state.mutate {
             if let newState = newState, $0.rawValue < newState.rawValue {
                 $0 = newState
             }
+            
+            // Get the ready for collection flag
+            let readyForCollectionFlag = isReadyForCollection
+            
+            // Make sure the tasks are not changed during this period
+            $tasks.synchronize {
+                tasks in _numberOfStatesContributed.mutate {
+                    $0 += 1
+                    shouldCallDidFinishCollectingStates =
+                        readyForCollectionFlag && $0 == tasks.count
+                }
+            }
+        }
+        
+        // Call the did finish handler
+        if shouldCallDidFinishCollectingStates {
+            didFinishCollectingStates(self)
+        }
+    }
+    
+    /// Mark the container as ready for task state collection
+    func collect() {
+        var shouldCallDidFinishCollectingStates = false
+        
+        _state.synchronize {
+            _ in // This blocks the execution of `contributeState(_:)`
+            shouldCallDidFinishCollectingStates =
+                tasks.count == numberOfStatesContributed
+            
+            // Set the flag
+            _isReadyForCollection.mutate {
+                // Mark shouldCallDidFinishCollectingStates as false if the
+                // isReadyForCollection flag is already true
+                shouldCallDidFinishCollectingStates =
+                    !$0 && shouldCallDidFinishCollectingStates
+                $0 = true
+            }
+        }
+        
+        // If tasks has finished before
+        if shouldCallDidFinishCollectingStates {
+            didFinishCollectingStates(self)
         }
     }
     

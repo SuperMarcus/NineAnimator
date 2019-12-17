@@ -251,7 +251,7 @@ extension AnimeViewController {
                 initialize this `AnimeViewController`
      
      By calling this method, `AnimeViewController` will use the
-     Source object from this link to retrive the `Anime` object.
+     Source object from this link to retrieve the `Anime` object.
      */
     func setPresenting(anime link: AnimeLink) {
         self.episodeLink = nil
@@ -267,7 +267,7 @@ extension AnimeViewController {
         - episode: The `EpisodeLink` object that is used to
                    initialize this `AnimeViewController`
      
-     `AnimeViewController` will first retrive the Anime object from
+     `AnimeViewController` will first retrieve the Anime object from
      the Source in `AnimeViewController.viewWillAppear`
      */
     func setPresenting(episode link: EpisodeLink) {
@@ -371,7 +371,7 @@ extension AnimeViewController {
         
         guard let episodeLink = episodeLink(for: indexPath) else {
             tableView.deselectSelectedRows()
-            return Log.error("Unable to retrive episode link from pool")
+            return Log.error("Unable to retrieve episode link from pool")
         }
         
         // Scroll and highlight the cell in the episodes section

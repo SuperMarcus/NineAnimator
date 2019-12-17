@@ -110,7 +110,7 @@ extension HomeIntegrationTableViewController {
 extension HomeIntegrationTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let reuseIdentifier = tableView.cellForRow(at: indexPath)?.reuseIdentifier else {
-            Log.error("Unable to retrive cell reuse identifier")
+            Log.error("Unable to retrieve cell reuse identifier")
             tableView.deselectSelectedRows()
             return
         }

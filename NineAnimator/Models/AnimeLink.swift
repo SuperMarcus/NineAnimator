@@ -94,8 +94,15 @@ extension AnimeLink: Codable {
     }
     
     /// A shortcut for source.anime(from:handler:)
-    func retrive(_ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return source.anime(from: self, handler)
+    @available(*, deprecated, message: "Use NineAnimator.anime(_:) instead")
+    func retrieve(_ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
+        return NineAnimator.default.anime(with: self, onCompletion: handler)
+    }
+    
+    /// Return a `NineAnimatorPromise` for retrieving the `Anime` object
+    @available(*, deprecated, message: "Use NineAnimator.anime() instead")
+    func retrieve() -> NineAnimatorPromise<Anime> {
+        return NineAnimator.default.anime(with: self)
     }
 }
 

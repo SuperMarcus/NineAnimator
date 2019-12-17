@@ -24,7 +24,7 @@ extension NASourceNineAnime {
     func parseAvailableEpisodes(from responseJson: NSDictionary, with parent: AnimeLink) throws -> Anime.EpisodesCollection {
         guard let htmlList = responseJson["html"] as? String else {
             Log.error("Invalid response")
-            throw NineAnimatorError.responseError("unable to retrive episode list from responses")
+            throw NineAnimatorError.responseError("unable to retrieve episode list from responses")
         }
         
         let matches = NASourceNineAnime.animeServerListRegex.matches(

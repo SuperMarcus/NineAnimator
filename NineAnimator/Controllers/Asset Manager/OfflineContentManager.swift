@@ -430,7 +430,7 @@ extension OfflineContentManager {
             content.persistentResourceIdentifier = (resourceIdentifierPath, "persist")
             
             guard var destinationUrl = content.preservedContentURL else {
-                throw NineAnimatorError.providerError("Cannot retrive url when resource identifier has been set")
+                throw NineAnimatorError.providerError("Cannot retrieve url when resource identifier has been set")
             }
             
             if (try? destinationUrl.checkResourceIsReachable()) == true {

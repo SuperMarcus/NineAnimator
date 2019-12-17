@@ -33,6 +33,10 @@ struct AtomicProperty<Value> {
         return value
     }
     
+    var projectedValue: Self {
+        return self
+    }
+    
     init(wrappedValue value: Value) {
         self._value = value
         self._lock = NSLock()

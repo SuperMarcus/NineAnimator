@@ -58,14 +58,6 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         
         super.init()
         
-        // Cache lazy persist data when the app resigns active
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onAppBecomesInactive(notification:)),
-            name: UIApplication.willResignActiveNotification,
-            object: nil
-        )
-        
         // Add observer for downloading task update
         NotificationCenter.default.addObserver(
             self,
@@ -136,52 +128,6 @@ extension UserNotificationManager {
                     RootViewController.shared?.presentOnTop(alertController, animated: true)
                 }
             }
-        }
-    }
-}
-
-// MARK: - App state handling
-extension UserNotificationManager {
-    @objc func onAppBecomesInactive(notification: Notification) {
-        // Don't do anything if another background task is running
-        guard taskPool == nil else { return }
-        
-        if !lazyPersistPool.isEmpty {
-            Log.info("Caching subscribed anime.")
-            
-            let concludeLazyPersist = {
-                [weak self] () -> Void in
-                Log.info("Finish caching subscribed anime.")
-                guard let identifier = self?.persistentTaskIdentifier else { return }
-                UIApplication.shared.endBackgroundTask(identifier)
-                self?.persistentTaskIdentifier = nil
-                self?.taskPool = nil
-            }
-            
-            persistentTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: concludeLazyPersist)
-            
-            var counter = 0
-            
-            taskPool = lazyPersistPool.compactMap {
-                // Retrieve each lazy persist anime
-                $0.retrive { [weak self] anime, error in
-                    defer {
-                        counter -= 1
-                        if counter == 0, let identifier = self?.persistentTaskIdentifier {
-                            concludeLazyPersist()
-                        }
-                    }
-                
-                    guard let anime = anime else {
-                        Log.error("Unable to persist data - %@", error!)
-                        return
-                    }
-                    
-                    self?.update(anime)
-                }
-            }
-            counter = taskPool!.count
-            lazyPersistPool.removeAll()
         }
     }
 }
@@ -331,86 +277,58 @@ extension UserNotificationManager {
 extension UserNotificationManager {
     fileprivate typealias FetchResult = (anime: AnimeLink, newEpisodeTitles: [String], availableServerNames: [String])
     
-    /// Perform the fetch operation
-    func performFetch(with completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        // Do not perform fetch if the last one is incomeplete
-        guard taskPool == nil else {
-            Log.info("Cancelling background fetch since another task is in progress.")
-            return completionHandler(.failed)
-        }
-        
-        let synchronizingQueue = DispatchQueue.global()
+    /// Perform an update on the anime watchers in the taskContainers
+    func performFetch(within taskContainer: StatefulAsyncTaskContainer) {
         let watchedAnimeLinks = NineAnimator.default.user.subscribedAnimes
-        var resultsPool = [FetchResult?]()
         
-        guard !watchedAnimeLinks.isEmpty else {
-            return completionHandler(.noData)
-        }
-        
-        let onFinalTask = { [weak self] () -> Void in
-            let succeededResultsCount = resultsPool
-                .compactMap { $0 }
-                .count
-            let newResultsCount = resultsPool
-                .filter { ($0?.newEpisodeTitles.count ?? 0) > 0 }
-                .count
-            let finalFetchResult: UIBackgroundFetchResult =
-                succeededResultsCount == watchedAnimeLinks.count ?
-                ( newResultsCount > 0 ? .newData : .noData )
-                : .failed
-            Log.info("Background fetch finished with result: %@", finalFetchResult.rawValue)
-            self?.taskPool = nil
-            completionHandler(finalFetchResult)
-        }
-        
-        Log.info("Beginning background fetch with %@ watched anime.", watchedAnimeLinks.count)
-        
-        taskPool = watchedAnimeLinks.map { animeLink in
-            // Ignore the watcher that is fetched within 2 hours
-            if let watcher = self.retrive(for: animeLink), watcher.lastCheck.timeIntervalSinceNow >= -7200 {
-                Log.info("Skipping '%@' (last checked: %@, %@ seconds since now", animeLink.title, watcher.lastCheck, watcher.lastCheck.timeIntervalSinceNow)
-                resultsPool.append(FetchResult(animeLink, [], []))
-                return nil
-            }
-            
-            return animeLink.retrive { [weak self] anime, _ in
-                synchronizingQueue.async {
-                    guard let self = self else { return }
-                    
-                    defer { if resultsPool.count == watchedAnimeLinks.count { onFinalTask() } }
-                    
-                    guard let anime = anime else { return resultsPool.append(nil) }
-                    
-                    var result = FetchResult(animeLink, [], [])
-                    
-                    if let currentWatcher = self.retrive(for: animeLink) {
-                        result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
-                            !currentWatcher.episodeNames.contains($0)
-                        }
-                        result.availableServerNames = result
-                            .newEpisodeTitles
-                            .flatMap(anime.episodes.links)
-                            .reduce(into: [Anime.ServerIdentifier]()) {
-                                if !$0.contains($1.server) {
-                                    $0.append($1.server)
-                                }
-                            }
-                            .compactMap { anime.servers[$0] }
-                        
-                        // Post notification to user
-                        self.sendAnimeUpdateNotification(result: result)
-                    } else { Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title) }
-                    
-                    // If unable to retrive the persisted episodes (maybe deleted by the system)
-                    // Just store the latest version without posting any notifications.
-                    self.update(anime)
-                    
-                    // Add the results to the pool
-                    resultsPool.append(result)
-                    
-                    // This is just in case we skipped everything
-                    if resultsPool.count == watchedAnimeLinks.count { onFinalTask() }
+        if watchedAnimeLinks.isEmpty {
+            // If there's no watching anime, run a promise that returns success
+            taskContainer.execute(promiseWithState: .success(.succeeded))
+        } else {
+            // Execute the update task in queue
+            let sharedTaskQueue = DispatchQueue.global()
+            taskContainer.execute(promiseWithState: NineAnimatorPromise<[StatefulAsyncTaskContainer.TaskState]>.queue(
+                queue: sharedTaskQueue,
+                listOfPromises: watchedAnimeLinks.map {
+                    updateWatcher(forAnime: $0, inQueue: sharedTaskQueue)
                 }
+            ).then {
+                $0.reduce(.unknown) { $0.rawValue < $1.rawValue ? $1 : $0 }
+            })
+        }
+    }
+    
+    private func updateWatcher(forAnime animeLink: AnimeLink, inQueue queue: DispatchQueue) -> NineAnimatorPromise<StatefulAsyncTaskContainer.TaskState> {
+        return NineAnimator.default.anime(with: animeLink).dispatch(on: queue).then {
+            anime in
+            // Update the anime watcher
+            self.update(anime)
+            
+            if let currentWatcher = self.retrive(for: animeLink) {
+                var result = FetchResult(animeLink, [], [])
+                result.newEpisodeTitles = anime.episodes.uniqueEpisodeNames.filter {
+                    !currentWatcher.episodeNames.contains($0)
+                }
+                result.availableServerNames = result
+                    .newEpisodeTitles
+                    .flatMap(anime.episodes.links)
+                    .reduce(into: [Anime.ServerIdentifier]()) {
+                        if !$0.contains($1.server) {
+                            $0.append($1.server)
+                        }
+                    }
+                    .compactMap { anime.servers[$0] }
+                
+                if result.newEpisodeTitles.isEmpty {
+                    return .unknown
+                } else {
+                    // Post notification to user
+                    self.sendAnimeUpdateNotification(result: result)
+                    return .succeeded
+                }
+            } else {
+                Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title)
+                return .succeeded
             }
         }
     }

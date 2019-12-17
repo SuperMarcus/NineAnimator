@@ -21,6 +21,7 @@ import UIKit
 
 class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
     private var cachedWatchedAnimeItems = [AnyLink]()
+    private var subscriptionUpdateContainer: StatefulAsyncTaskContainer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
         )
         
         // Perform fetch request and update cells
-        UserNotificationManager.default.performFetch {
+        subscriptionUpdateContainer = StatefulAsyncTaskContainer {
             [weak self] _ in DispatchQueue.main.async {
                 guard let self = self else { return }
                 for cell in self.collectionView.visibleCells {
@@ -42,6 +43,8 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
                 }
             }
         }
+        UserNotificationManager.default.performFetch(within: subscriptionUpdateContainer!)
+        subscriptionUpdateContainer?.collect()
     }
     
     override func viewWillAppear(_ animated: Bool) {

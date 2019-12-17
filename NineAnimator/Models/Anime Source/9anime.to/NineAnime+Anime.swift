@@ -113,7 +113,7 @@ extension NASourceNineAnime {
                 guard let htmlList = responseJson["html"] as? String else {
                     Log.error("Invalid response")
                     return handler(nil, NineAnimatorError.responseError(
-                        "unable to retrive episode list from responses"
+                        "unable to retrieve episode list from responses"
                     ))
                 }
                 

@@ -282,7 +282,6 @@ extension NineAnimator {
 // MARK: - Retrieving & Caching Anime
 extension NineAnimator {
     /// Retrieve the `Anime` object for the `AnimeLink`
-    ///
     /// - Note: This method uses the internal cache whenever possible.
     func anime(with link: AnimeLink, onCompletion handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
         // If the anime has been cached and the cache is not expired
@@ -324,5 +323,10 @@ extension NineAnimator {
                 handler(result, error)
             }
         }
+    }
+    
+    /// Return a promise that would retrieve the `Anime` object for the `AnimeLink`
+    func anime(with link: AnimeLink) -> NineAnimatorPromise<Anime> {
+        return .init { self.anime(with: link, onCompletion: $0) }
     }
 }
