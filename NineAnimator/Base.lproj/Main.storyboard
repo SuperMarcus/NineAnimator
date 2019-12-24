@@ -375,7 +375,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.container.simple" textLabel="AlL-vB-QNW" style="IBUITableViewCellStyleDefault" id="pFO-Lf-NT7" customClass="SimpleAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.container.simple" textLabel="AlL-vB-QNW" imageView="bzi-b5-Vok" style="IBUITableViewCellStyleDefault" id="pFO-Lf-NT7" customClass="SimpleAnimeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pFO-Lf-NT7" id="JoX-CD-bJQ">
@@ -383,17 +383,26 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AlL-vB-QNW">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                            <rect key="frame" x="61" y="0.0" width="298" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Clock Icon" id="bzi-b5-Vok">
+                                            <rect key="frame" x="16" y="6.5" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Tfh-b4-7gh" kind="show" id="YsF-0g-E8f"/>
-                                </connections>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="tintText" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="determinedLabelColors" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -425,17 +434,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ocg-ub-rBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2768" y="573"/>
-        </scene>
-        <!--AnimePlayer-->
-        <scene sceneID="qrR-zZ-1G7">
-            <objects>
-                <viewControllerPlaceholder storyboardName="AnimePlayer" id="Tfh-b4-7gh" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="PD6-p0-NMp"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BNo-bS-fYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2765" y="256"/>
+            <point key="canvasLocation" x="2674" y="416"/>
         </scene>
         <!--Search Page Container-->
         <scene sceneID="MXd-JU-4RM">
@@ -1180,6 +1179,7 @@
     </scenes>
     <resources>
         <image name="Chromecast Icon" width="25" height="25"/>
+        <image name="Clock Icon" width="30" height="30"/>
         <image name="Library Icon" width="30" height="30"/>
         <image name="Notification Enabled" width="25" height="25"/>
         <image name="Settings Icon" width="25" height="25"/>

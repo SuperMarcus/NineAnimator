@@ -19,8 +19,53 @@
 
 import UIKit
 
-class SimpleAnimeTableViewCell: UITableViewCell {
-    var animeLink: AnimeLink? {
-        didSet { textLabel?.text = animeLink?.title }
+class SimpleAnimeTableViewCell: UITableViewCell, Themable {
+    private(set) var item: SearchViewController.Item?
+    
+    /// Initialize the cell with a result item
+    func setPresenting(_ item: SearchViewController.Item) {
+        self.item = item
+        self.imageView?.image = item.type.icon
+        self.updateText()
+    }
+    
+    func theme(didUpdate theme: Theme) {
+        self.imageView?.tintColor = theme.secondaryText
+        self.backgroundColor = .clear
+        updateText()
+    }
+    
+    func updateText() {
+        if let item = item {
+            let label = NSMutableAttributedString(
+                string: item.link.name,
+                attributes: [
+                    .foregroundColor: Theme.current.primaryText,
+                    .font: UIFont.systemFont(
+                        ofSize: UIFont.systemFontSize,
+                        weight: .light
+                    )
+                ]
+            )
+            
+            switch item.link {
+            case let .anime(animeLink):
+                let sourceName = animeLink.source.name
+                label.append(.init(
+                    string: " from \(sourceName)",
+                    attributes: [
+                        .foregroundColor: Theme.current.secondaryText,
+                        .font: UIFont.systemFont(
+                            ofSize: UIFont.systemFontSize,
+                            weight: .light
+                        )
+                    ]
+                ))
+            default: break
+            }
+            
+            // Update label contents
+            textLabel?.attributedText = label
+        }
     }
 }

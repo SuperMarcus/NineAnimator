@@ -3,7 +3,7 @@
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FSuperMarcus%2FNineAnimator?ref=badge_large)
 
 [3rd-Party Software Reports](https://app.fossa.com/reports/3c67284c-8dcc-4b9f-b70b-9539c3e87377)
-* Thanks [ApolloZhu](https://github.com/ApolloZhu) for helping out!
+* Thanks [ApolloZhu](https://github.com/ApolloZhu) and [Awsomedude](https://github.com/Awsomedude) for helping out!
 * The free and open source chromecast library [OpenCastSwift](https://github.com/mhmiles/OpenCastSwift) (slightly [modified](https://github.com/SuperMarcus/OpenCastSwift)).
 * The amazing [Alamofire](https://github.com/Alamofire/Alamofire) framework
 * [onevcat](https://github.com/onevcat)'s couldn't-be-more-convenient [Kingfisher](https://github.com/onevcat/Kingfisher) framework
