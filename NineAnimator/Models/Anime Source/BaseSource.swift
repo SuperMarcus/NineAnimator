@@ -57,9 +57,24 @@ class BaseSource: SessionDelegate {
         // Prevent cloudflare check redirection
         self.taskWillPerformHTTPRedirection = {
             _, _, response, newRequest in
+            var modifiedNewRequest = newRequest
+            
+            // If the request is redirected to a http schemed url, make the
+            // scheme https in order to conform to ATS.
+            if modifiedNewRequest.url?.scheme == "http" {
+                var urlBuilder = URLComponents(
+                    url: modifiedNewRequest.url!,
+                    resolvingAgainstBaseURL: true
+                )
+                urlBuilder?.scheme = "https"
+                
+                Log.info("[BaseSource] Received a redirection that points to a non-secure location (%@). Modifying the scheme to https.", modifiedNewRequest.url!.absoluteString)
+                modifiedNewRequest.url = urlBuilder?.url ?? modifiedNewRequest.url
+            }
+            
             if response.url?.path == "/cdn-cgi/l/chk_jschl" {
                 return nil
-            } else { return newRequest }
+            } else { return modifiedNewRequest }
         }
         // Add cloudflare middleware
         self.addMiddleware(BaseSource._cloudflareWAFVerificationMiddleware)

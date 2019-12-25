@@ -284,4 +284,43 @@ extension NineAnimatorError {
             super.init(coder: aDecoder)
         }
     }
+    
+    /// Representing that an episode is not available on the specified server. Optionally
+    /// providing a list of alternative `EpisodeLink`.
+    class EpisodeServerNotAvailableError: ContentUnavailableError {
+        /// A list of alternative episodes that are available for streaming
+        var alternativeEpisodes: [EpisodeLink]? {
+            return userInfo["alternative_episodes"] as? [EpisodeLink]
+        }
+        
+        /// An updated server map that includes the human readable name for the alternative episodes
+        var updatedServerMap: [Anime.ServerIdentifier: String]? {
+            return userInfo["alternative_server_map"] as? [Anime.ServerIdentifier: String]
+        }
+        
+        init(unavailableEpisode: EpisodeLink,
+             alternativeEpisodes: [EpisodeLink]? = nil,
+             updatedServerMap: [Anime.ServerIdentifier: String]? = nil,
+             userInfo: [String: Any]? = nil) {
+            var updatingUserInfo = userInfo ?? [:]
+            let unavailableServerName = updatedServerMap?[unavailableEpisode.server]
+            
+            if let alternativeEpisodes = alternativeEpisodes {
+                updatingUserInfo["alternative_episodes"] = alternativeEpisodes
+            }
+            
+            if let updatedServerMap = updatedServerMap {
+                updatingUserInfo["alternative_server_map"] = updatedServerMap
+            }
+            
+            super.init(
+                "This episode is not available on \(unavailableServerName ?? "the selected server").",
+                userInfo: updatingUserInfo
+            )
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
 }
