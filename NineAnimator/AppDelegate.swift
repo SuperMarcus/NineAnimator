@@ -127,12 +127,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidEnterBackground(_ application: UIApplication) {
-        // swiftlint:disable implicitly_unwrapped_optional
-        var identifier: UIBackgroundTaskIdentifier!
+        var identifier: UIBackgroundTaskIdentifier = .invalid
         backgroundTaskContainer = StatefulAsyncTaskContainer {
-            state in
-            Log.info("[AppDelegate] Background task ended with state %@", state)
+            container in
+            Log.info("[AppDelegate] Background task ended with state %@", container.state)
             UIApplication.shared.endBackgroundTask(identifier)
+            identifier = .invalid
         }
         
         identifier = UIApplication.shared.beginBackgroundTask {
@@ -140,6 +140,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.backgroundTaskContainer?.cancel()
             self.backgroundTaskContainer = nil
             UIApplication.shared.endBackgroundTask(identifier)
+            identifier = .invalid
         }
         
         Log.info("[AppDelegate] Beginning background tasks with identifier %@...", identifier.rawValue)

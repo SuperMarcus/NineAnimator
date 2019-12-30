@@ -83,13 +83,15 @@ class DiscoverySceneViewController: UITableViewController {
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        coordinator.animate(alongsideTransition: {
-            [tableView] _ in
-            guard let tableView = tableView else { return }
-            tableView.performBatchUpdates({
-                tableView.setNeedsLayout()
+        if isBeingPresented {
+            coordinator.animate(alongsideTransition: {
+                [tableView] _ in
+                guard let tableView = tableView else { return }
+                tableView.performBatchUpdates({
+                    tableView.setNeedsLayout()
+                }, completion: nil)
             }, completion: nil)
-        }, completion: nil)
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
