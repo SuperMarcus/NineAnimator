@@ -37,6 +37,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Number of objects that has requested to disable the screen idle timer
     private(set) var screenOnRequestCount = 0
     
+    fileprivate var taskPool = Set<HashingTaskWrapper>()
+    
+    var backgroundTaskContainer: StatefulAsyncTaskContainer?
+    
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Shared AppDelegate reference
         AppDelegate.shared = self
@@ -44,10 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        // Fetch for generating episode update notifications once in two hours
-        UIApplication.shared.setMinimumBackgroundFetchInterval(
-            UserNotificationManager.default.suggestedFetchInterval
-        )
+        // Register background refresh tasks
+        self.registerBackgroundUpdateTasks()
         
         // Update UserNotification delegate
         UNUserNotificationCenter.current().delegate = UserNotificationManager.default
@@ -119,7 +121,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     RootViewController.open(whenReady: link)
                 }
             }
-            taskPool = [task]
+            
+            // Hold reference
+            self.submitTask(task)
             
             return true
         default: return false
@@ -128,6 +132,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         var identifier: UIBackgroundTaskIdentifier = .invalid
+        
         backgroundTaskContainer = StatefulAsyncTaskContainer {
             container in
             Log.info("[AppDelegate] Background task ended with state %@", container.state)
@@ -150,6 +155,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Update quick actions
         updateHomescreenQuickActions(application)
+        
+        // Schedule the next background refresh tasks
+        scheduleBackgroundUpdateTasks()
         
         // Mark the task container as ready for collection
         backgroundTaskContainer?.collect()
@@ -183,27 +191,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Update quick actions
         updateHomescreenQuickActions(application)
     }
-    
-    var taskPool: [NineAnimatorAsyncTask?]?
-    var backgroundTaskContainer: StatefulAsyncTaskContainer?
-    
-    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Log.info("[AppDelegate] Beginning background fetching activities...")
+}
+
+// MARK: - Task Pool Management
+extension AppDelegate {
+    fileprivate struct HashingTaskWrapper: Hashable {
+        private let wrappedObject: NineAnimatorAsyncTask
+        private let identifier: ObjectIdentifier
         
-        backgroundTaskContainer = StatefulAsyncTaskContainer {
-            let finishedState = $0.state
-            Log.error("[AppDelegate] Background fetching activities completed (%@)", finishedState)
-            switch finishedState {
-            case .failed: completionHandler(.failed)
-            case .succeeded: completionHandler(.newData)
-            case .unknown: completionHandler(.noData)
-            }
+        init(wrapped: NineAnimatorAsyncTask) {
+            self.wrappedObject = wrapped
+            self.identifier = ObjectIdentifier(wrapped)
         }
         
-        UserNotificationManager.default.performFetch(within: backgroundTaskContainer!)
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(identifier)
+        }
         
-        // Mark as ready for collection
-        backgroundTaskContainer?.collect()
+        static func == (lhs: AppDelegate.HashingTaskWrapper, rhs: AppDelegate.HashingTaskWrapper) -> Bool {
+            return lhs.identifier == rhs.identifier
+        }
+    }
+    
+    /// Submit the task to the AppDelegate's internal task pool
+    func submitTask(_ task: NineAnimatorAsyncTask?) {
+        if let task = task {
+            let wrapper = HashingTaskWrapper(wrapped: task)
+            taskPool.insert(wrapper)
+        }
+    }
+    
+    /// Remove the task from the AppDelegate's internal task pool
+    func removeTask(_ task: NineAnimatorAsyncTask?) {
+        if let task = task {
+            let wrapper = HashingTaskWrapper(wrapped: task)
+            taskPool.remove(wrapper)
+        }
     }
 }
 
@@ -254,7 +277,9 @@ extension AppDelegate {
                                 RootViewController.open(whenReady: link)
                             }
                         }
-                        self.taskPool = [task]
+                        
+                        // Save reference to task
+                        self.submitTask(task)
                     }
                     
                     let noOption = UIAlertAction(title: "No", style: .cancel, handler: nil)

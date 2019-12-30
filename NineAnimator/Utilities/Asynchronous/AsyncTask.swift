@@ -102,6 +102,8 @@ class StatefulAsyncTaskContainer: AsyncTaskContainer {
     
     private var didFinishCollectingStates: (StatefulAsyncTaskContainer) -> Void
     
+    /// Initiate the `StatefulAsyncTaskContainer` with a state collector closure
+    /// - Note: The closure is not called when the task is cancelled
     init(onFinishCollectingStates: @escaping (StatefulAsyncTaskContainer) -> Void) {
         self.didFinishCollectingStates = onFinishCollectingStates
         super.init()
