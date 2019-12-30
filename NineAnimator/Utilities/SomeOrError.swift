@@ -19,9 +19,9 @@
 
 import Foundation
 
-func some<T>(_ optionalValue: T?, or error: NineAnimatorError) throws -> T {
+func some<T>(_ optionalValue: T?, or error: @autoclosure () -> NineAnimatorError) throws -> T {
     guard let value = optionalValue else {
-        throw error
+        throw error()
     }
     return value
 }

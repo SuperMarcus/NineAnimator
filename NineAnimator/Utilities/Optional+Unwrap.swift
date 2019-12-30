@@ -23,10 +23,10 @@ extension Optional {
     /// Try to unwrap the optional value, or throw an error
     ///
     /// Why? This makes chaining much easier and simpler to write & read
-    func tryUnwrap(_ error: NineAnimatorError = .decodeError) throws -> Wrapped {
+    func tryUnwrap(_ error: @autoclosure () -> NineAnimatorError = .decodeError) throws -> Wrapped {
         switch self {
         case let .some(value): return value
-        default: throw error
+        default: throw error()
         }
     }
     
