@@ -33,6 +33,15 @@ class ServerSelectionViewController: UIViewController {
         selectionView.makeThemable()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        selectionView.scrollToCurrentSource()
+    }
+    
     @IBAction private func onDoneButtonTapped(_ sender: Any) {
         dismiss(animated: true)
     }

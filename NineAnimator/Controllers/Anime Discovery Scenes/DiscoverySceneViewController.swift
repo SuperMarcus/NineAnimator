@@ -43,6 +43,9 @@ class DiscoverySceneViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load recommendations
+        reloadRecommendationList(shouldInformTableView: false)
+        
         // Add recommendation list item
         NotificationCenter.default.addObserver(
             self,
@@ -53,8 +56,6 @@ class DiscoverySceneViewController: UITableViewController {
         
         // Remove the seperator lines
         tableView.tableFooterView = UIView()
-        
-        reloadRecommendationList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,6 +63,11 @@ class DiscoverySceneViewController: UITableViewController {
         
         // Load dirty source as soon as the notification is received
         shouldReloadDirtySourceImmedietly = true
+        
+        // Reload dirty and errored sources when the view appears
+        markDirtySources()
+        reloadDirtySources()
+        reloadErroredSources()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -73,11 +79,6 @@ class DiscoverySceneViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Reload dirty and errored sources when the view appears
-        markDirtySources()
-        reloadDirtySources()
-        reloadErroredSources()
         tableView.makeThemable()
     }
     
@@ -276,14 +277,17 @@ fileprivate extension DiscoverySceneViewController {
     }
     
     /// Reload the entire recommendation list
-    func reloadRecommendationList() {
+    func reloadRecommendationList(shouldInformTableView: Bool = true) {
         // Abort all previous tasks
         recommendationLoadingTasks = [:]
         recommendationList = NineAnimator
             .default
             .sortedRecommendationSources()
             .map { ($0, nil, nil) }
-        tableView.reloadSections(Section.indexSet(.recommendations), with: .fade)
+        
+        if shouldInformTableView {
+            tableView.reloadSections(Section.indexSet(.recommendations), with: .fade)
+        }
         
         for (index, (source, _, _)) in recommendationList.enumerated() {
             let identifier = ObjectIdentifier(source)

@@ -66,6 +66,34 @@ class ServerSelectionView: UITableView, UITableViewDelegate, UITableViewDataSour
     }
 }
 
+extension ServerSelectionView {
+    /// Scroll to the current source selected in `NineAnimator.default.user`
+    func scrollToCurrentSource(animated: Bool = true) {
+        // Current source
+        let selectedSource = NineAnimator.default.user.source
+        scrollToSource(selectedSource, animated: animated)
+    }
+    
+    /// Scroll to a specified source
+    func scrollToSource(_ source: Source, animated: Bool = true) {
+        guard let sourcePool = serverDataSource?.sources else {
+            return
+        }
+        
+        let sourceIndex = sourcePool.enumerated().first {
+            $0.1.name == source.name
+        }?.0
+        
+        if let itemIndex = sourceIndex {
+            scrollToRow(
+                at: .init(row: itemIndex, section: 0),
+                at: .middle,
+                animated: animated
+            )
+        }
+    }
+}
+
 // MARK: - TableView delegate
 extension ServerSelectionView {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
