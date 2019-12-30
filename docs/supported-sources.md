@@ -57,7 +57,7 @@ of features:
     - [ ] Anime synopsis
     - [ ] Detailed anime attributes (Air Date is found but not displayed)
     - [ ] Detailed episode synopsis
-- [9anime.ru](//9anime.ru) (be careful when using this website -- 9anime has been known to ban users for using third party applications)
+- [9anime.ru](//9anime.ru)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
@@ -81,6 +81,12 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
+- [AnimeDao](//animedao.com)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (No Ratings)
+    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
 - ~~[masterani.me](//masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
