@@ -30,7 +30,31 @@ extension NASourceFourAnime {
             episodePageContent in
             let bowl = try SwiftSoup.parse(episodePageContent)
             let videoElement = try bowl.select("video")
-            let videoSource = try URL(string: videoElement.attr("src")).tryUnwrap()
+            let videoSource: URL
+            
+            if videoElement.isEmpty() {
+                // If no video element is present, try decoding the video asset url
+                // from the PACKER script
+                let decodedScript = try PackerDecoder().decode(episodePageContent)
+                let sourceMatchingExpr = try NSRegularExpression(
+                    pattern: "src=\\\\*\"([^\"\\\\]+)",
+                    options: []
+                )
+                let videoSourcePath = sourceMatchingExpr
+                    .firstMatch(in: decodedScript)?
+                    .firstMatchingGroup
+                videoSource = try URL(
+                    string: try videoSourcePath.tryUnwrap(
+                        .responseError("Unable to find the video asset associated with this episode.")
+                    ),
+                    relativeTo: link.parent.link
+                ).tryUnwrap()
+                Log.info("[NASourceFourAnime] Resource found from packed scripts.")
+            } else {
+                // Video element was found, using the presented one
+                videoSource = try URL(string: videoElement.attr("src")).tryUnwrap()
+                Log.info("[NASourceFourAnime] Resource found from page source.")
+            }
             
             return Episode(
                 link,
