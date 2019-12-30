@@ -54,9 +54,9 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        var modifyingServerIdentifier = server
-        _ = modifyingServerIdentifier.removeFirst()
-        return VideoProviderRegistry.default.provider(for: modifyingServerIdentifier)
+        if let info = NASourceAnimeDao.knownServerMap[server] {
+            return VideoProviderRegistry.default.provider(for: info.name)
+        } else { return nil }
     }
     
     override func canHandle(url: URL) -> Bool {
