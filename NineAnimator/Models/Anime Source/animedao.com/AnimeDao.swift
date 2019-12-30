@@ -31,13 +31,13 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     var aliases: [String] { return [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeDao Site Logo") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimeDao Site Logo") }
     #endif
     
     var siteDescription: String {
-        return "animedao.com allows you to freely stream anime and movies with subtitles in SD and HD. NineAnimator has experimental support for this website."
+        return "animedao.com allows you to stream subtitled anime and movies in SD and HD. NineAnimator has experimental support for this website."
     }
     
     override var endpoint: String { return "https://animedao.com" }
