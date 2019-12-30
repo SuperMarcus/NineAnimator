@@ -237,6 +237,7 @@
 		2C8DD30B224B0B9A001D9A16 /* AnimeUltima+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8DD30A224B0B9A001D9A16 /* AnimeUltima+Anime.swift */; };
 		2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */; };
 		2C8E962523B9E3A400415F92 /* ProxyDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E962423B9E3A400415F92 /* ProxyDataParser.swift */; };
+		2C8E962723B9EDED00415F92 /* GoUnlimitedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E962623B9EDED00415F92 /* GoUnlimitedParser.swift */; };
 		2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */; };
 		2C8F6E8222061CE30047798B /* OfflineAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */; };
 		2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8522062BB90047798B /* OfflineAnimeViewer.storyboard */; };
@@ -658,6 +659,7 @@
 		2C8DD30A224B0B9A001D9A16 /* AnimeUltima+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Anime.swift"; sourceTree = "<group>"; };
 		2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+BackgroundRefreshTasks.swift"; sourceTree = "<group>"; };
 		2C8E962423B9E3A400415F92 /* ProxyDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyDataParser.swift; sourceTree = "<group>"; };
+		2C8E962623B9EDED00415F92 /* GoUnlimitedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoUnlimitedParser.swift; sourceTree = "<group>"; };
 		2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimePredictedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineAnimeTableViewCell.swift; sourceTree = "<group>"; };
 		2C8F6E8622062BB90047798B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/OfflineAnimeViewer.storyboard; sourceTree = "<group>"; };
@@ -1712,6 +1714,7 @@
 				2CA3E274239C4F5300AAC4D1 /* AUEngineParser.swift */,
 				2CA3E276239C4FA300AAC4D1 /* FastStreamParser.swift */,
 				2C8E962423B9E3A400415F92 /* ProxyDataParser.swift */,
+				2C8E962623B9EDED00415F92 /* GoUnlimitedParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2301,6 +2304,7 @@
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
 				2C480017237072A000ADB03F /* LibraryRecentAnimeCell.swift in Sources */,
+				2C8E962723B9EDED00415F92 /* GoUnlimitedParser.swift in Sources */,
 				2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */,
 				2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */,
 				2C0E755322622DD600DF3AC4 /* DiscoverySceneViewController.swift in Sources */,

@@ -20,7 +20,7 @@
 import Alamofire
 import Foundation
 
-/// Parser for animeultima's FastStream server
+/// Parser for animedao's ProxyData server
 class ProxyDataParser: VideoProviderParser {
     var aliases: [String] { return [] }
     
