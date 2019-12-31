@@ -44,13 +44,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Shared AppDelegate reference
         AppDelegate.shared = self
+        
+        // Register background refresh tasks
+        self.registerBackgroundUpdateTasks()
+        
         return true
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        // Register background refresh tasks
-        self.registerBackgroundUpdateTasks()
-        
         // Update UserNotification delegate
         UNUserNotificationCenter.current().delegate = UserNotificationManager.default
         
