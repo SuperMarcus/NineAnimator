@@ -207,7 +207,11 @@ extension UserNotificationManager {
         
         do {
             let fileManager = FileManager.default
-            try fileManager.removeItem(at: url(for: anime))
+            let watcherUrl = url(for: anime)
+            
+            if fileManager.fileExists(atPath: watcherUrl.path) {
+                try fileManager.removeItem(at: watcherUrl)
+            }
             
             // Not deleting the poster since it should be remvoed by the
             // user notification center
@@ -220,12 +224,12 @@ extension UserNotificationManager {
     func removeAll() {
         do {
             let fileManager = FileManager.default
-            let enumeratedItems = try fileManager.contentsOfDirectory(
-                at: animeCachingDirectory,
-                includingPropertiesForKeys: nil,
-                options: [.skipsSubdirectoryDescendants]
-            )
-            try enumeratedItems.forEach(fileManager.removeItem)
+            for subscribedAnimeLink in NineAnimator.default.user.subscribedAnimes {
+                let watcherUrl = url(for: subscribedAnimeLink)
+                if fileManager.fileExists(atPath: watcherUrl.path) {
+                    try fileManager.removeItem(at: watcherUrl)
+                }
+            }
         } catch { Log.error("Unable to remove persisted watcher - %@", error) }
     }
     
