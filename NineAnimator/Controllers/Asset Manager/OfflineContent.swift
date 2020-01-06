@@ -126,6 +126,9 @@ class OfflineContent: NSObject {
     /// - Note: Although the property is stored by the `OfflineContent`, its value is maintained by the asset manager.
     var lastDownloadAttempt: Date?
     
+    /// A counter used to store download information for the retry mechanism
+    var counter = RetryCounter()
+    
     init(_ manager: OfflineContentManager, initialState: OfflineState) {
         state = initialState
         parent = manager
@@ -311,14 +314,26 @@ private extension OfflineContent {
             return resumeFailedAggregatedTask()
         }
         
+        // Record the download attempt
+        counter.recordDownloadInitiation()
+        
         // If the resume data is present
         if let resumeData = resumeData {
             // Create and resume task with resume data
             self.task = downloadingSession.downloadTask(withResumeData: resumeData)
             self.resumeData = nil
-        } else if let loadingUrl = sourceRequestUrl {
+        } else if let loadingUrl = sourceRequestUrl,
+                let request = try? URLRequest(
+                    url: loadingUrl,
+                    method: .get,
+                    headers: sourceRequestHeaders
+                ) {
+            Log.info(
+                "[OfflineContent] (Re)initiating preservation from fetched resource identifiers for '%@'.",
+                localizedDescription
+            )
             self.delete(shouldUpdateState: false) // Remove the downloaded content
-            self.task = downloadingSession.downloadTask(with: loadingUrl)
+            self.task = downloadingSession.downloadTask(with: request)
         } else {
             Log.info(
                 "[OfflineContent] (Re)initiating preservation for '%@'.",
@@ -387,6 +402,9 @@ extension OfflineContent {
             return Log.error("[OfflineContent] Trying to start resource resources without setting sourceRequestUrl.")
         }
         
+        // Record the attempt
+        counter.recordResourceRetrival()
+        
         if isAggregatedAsset {
             // Create the asset and init the task with `initAggregatedTask`
             let avAsset = AVURLAsset(
@@ -416,6 +434,50 @@ extension OfflineContent {
         // Update the state and resume the task
         state = .preserving(0.0)
         task?.resume()
+    }
+}
+
+// MARK: - Retry Mechanism
+extension OfflineContent {
+    /// A counter object used for storing retrying information
+    struct RetryCounter {
+        /// Date that the download was initiated
+        var lastDownloadInitiation: Date = .distantPast
+        
+        /// Number of times that the download has been attempted
+        var downloadAttempts = 0
+        
+        /// Last attempt when the resource was retrieved with the `preserve` method
+        var lastResourceRetrivalAttempt = 0
+        
+        /// Suggest the next download attempt no later than the maximal delay
+        func nextDownloadAttempt(maximalDelay: TimeInterval) -> Date {
+            return lastDownloadInitiation + min(TimeInterval(downloadAttempts) * 15, maximalDelay)
+        }
+        
+        /// Suggest if the content should re-attempt to obtain the resource URL
+        func shouldRetryRequestResource(maximalResourceFailiureCount: Int) -> Bool {
+            return (downloadAttempts - lastResourceRetrivalAttempt) > maximalResourceFailiureCount
+        }
+        
+        /// - Note: Called from `resumeFailedTask()`
+        mutating func recordDownloadInitiation() {
+            downloadAttempts += 1
+            lastDownloadInitiation = .init()
+        }
+        
+        /// Record an resource retrival
+        /// - Note: Called from `startResourceRequest`
+        mutating func recordResourceRetrival() {
+            lastResourceRetrivalAttempt = downloadAttempts
+        }
+        
+        /// Reset the retry counter
+        /// - Note: This method is used only in `OfflineContentManager`
+        mutating func resetCounter() {
+            lastDownloadInitiation = .distantPast
+            downloadAttempts = 0
+        }
     }
 }
 

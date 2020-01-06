@@ -166,7 +166,12 @@ class OfflineEpisodeContent: OfflineContent {
         return "\(episodeLink.parent.title) - Episode \(episodeLink.name)"
     }
     
-    override func onCompletion(with url: URL) {
+    override func onCompletion(with url: URL) throws {
+        // Verify that the url asset is playable
+        if !isAggregatedAsset && !AVAsset(url: url).isPlayable {
+            throw NineAnimatorError.providerError("Downloaded episode is invalid")
+        }
+        
         Log.info("[OfflineEpisodeContent] Downloaded to %@", url.absoluteString)
     }
     

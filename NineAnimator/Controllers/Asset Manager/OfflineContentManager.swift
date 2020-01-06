@@ -263,6 +263,7 @@ extension OfflineContentManager {
         // Remove from queue
         preservationContentQueue.removeAll { $0 == content }
         content.delete()
+        content.counter.resetCounter() // Reset retry counter
         preserveContentIfNeeded()
     }
     
@@ -331,7 +332,7 @@ extension OfflineContentManager {
                     continue
                 }
                 
-                taskQueue.asyncAfter(deadline: startDelay) {
+                taskQueue.asyncAfter(deadline: startDelay, flags: [ .barrier ]) {
                     content.resumeInterruption()
                     content.lastDownloadAttempt = Date()
                 }
@@ -356,12 +357,11 @@ extension OfflineContentManager {
                 // Schedule the retry timer
                 DispatchQueue.main.async {
                     [weak self] in
+                    self?.dequeueDelayTimer?.invalidate()
                     self?.dequeueDelayTimer = Timer.scheduledTimer(withTimeInterval: delayInterval, repeats: false) {
                         _ in
                         Log.debug("[OfflineContentManager] Dequeue delay timer fired.")
-                        self?.taskQueue.async {
-                            self?.preserveContentIfNeeded()
-                        }
+                        self?.preserveContentIfNeeded()
                     }
                     Log.debug("[OfflineContentManager] Scheduling a delay timer for an interval of %@ seconds for the next dequeue.", delayInterval)
                 }
@@ -371,7 +371,7 @@ extension OfflineContentManager {
     
     /// Preserve the next queued contents if the number of tasks drop to below the threshold
     func preserveContentIfNeeded() {
-        taskQueue.async {
+        taskQueue.async(flags: [ .barrier ]) {
             guard NineAnimator.default.reachability?.isReachable == true else {
                 return Log.info("[OfflineContentManager] Network currently unreachable. Contents will be preserved later.")
             }
@@ -631,6 +631,8 @@ extension OfflineContentManager {
                     Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found", task.taskIdentifier)
                     content.isPendingRestoration = true
                     content.task = task
+                    // Suspend the task so it doesn't resume until we wants it to
+                    task.suspend()
                 } else {
                     Log.info("[OfflineContentManager] URLSession download task with identifeir %@ is found, but no content is availble to hanlde it. Cancelling task.", task.taskIdentifier)
                     task.cancel()
@@ -677,7 +679,7 @@ extension OfflineContentManager {
             // Trying to resume the tasks
             if NineAnimator.default.user.autoRestartInterruptedDownloads {
                 // Wait for 3 seconds until restoring the tasks
-                self.taskQueue.asyncAfter(deadline: .now() + .milliseconds(3000)) {
+                self.taskQueue.asyncAfter(deadline: .now() + .milliseconds(3000), flags: [ .barrier ]) {
                     Log.info("[OfflineContentManager] Automatically resuming any unfinished downloads for the shared asset session")
                     for content in contents where content.isPendingRestoration {
                         content.isPendingRestoration = false
