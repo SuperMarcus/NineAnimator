@@ -27,7 +27,7 @@ class KiwikParser: VideoProviderParser {
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "source=\\\\'([^\\\\]+)",
+        pattern: "'src\\\\':\\\\'([^\\\\']+)",
         options: []
     )
     
@@ -57,14 +57,16 @@ class KiwikParser: VideoProviderParser {
                     .firstMatchingGroup).tryUnwrap(.providerError("Unable to find the streaming resource"))
                 let sourceURL = try URL(string: sourceUrl).tryUnwrap(.urlError)
                 
-                Log.info("(Kiwik Parser) found asset at %@", sourceURL.absoluteString)
+                let aggregated = sourceURL.pathExtension.lowercased() == "m3u8"
+                
+                Log.info("(Kiwik Parser) found asset at %@ (HLS: %@)", sourceURL.absoluteString, aggregated)
                 
                 handler(BasicPlaybackMedia(
                     url: sourceURL,
                     parent: episode,
-                    contentType: "application/vnd.apple.mpegurl",
-                    headers: [:],
-                    isAggregated: true
+                    contentType: aggregated ? "application/vnd.apple.mpegurl" : "video/mp4",
+                    headers: [ "Referer": "https://kwik.cx/" ],
+                    isAggregated: aggregated
                 ), nil)
             } catch { handler(nil, error) }
         }
