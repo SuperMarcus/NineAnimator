@@ -504,7 +504,7 @@ extension UserNotificationManager {
 }
 
 // MARK: - Notification identifiers/File Name paths
-extension String {
+fileprivate extension String {
     static func episodeUpdateNotificationIdentifier(_ anime: AnimeLink) -> String {
         let linkHashRepresentation = anime.link.uniqueHashingIdentifier
         return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(linkHashRepresentation)"
