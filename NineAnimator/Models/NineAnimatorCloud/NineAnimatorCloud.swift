@@ -20,7 +20,7 @@
 import Foundation
 
 class NineAnimatorCloud {
-    static let baseUrl = URL(string: "https://nineanimator.marcuszhou.com")!
+    static let baseUrl = URL(string: "https://nineanimator-api.marcuszhou.com")!
     
     func dummy() { }
 }

@@ -309,12 +309,14 @@ extension AppDelegate {
                 return false
             }
             RootViewController.open(whenReady: .anime(link))
+            return true
         case Continuity.activityTypeResumePlayback: // Resume last watched episode
             guard let episodeLink = NineAnimator.default.user.lastEpisode else {
                 Log.info("Will not resume anime playback because no last watched anime record was found.")
                 return false
             }
             RootViewController.open(whenReady: .episode(episodeLink))
+            return true
         case Continuity.activityTypeContinueEpisode: // Handoff episode progress
             guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
                 let progress = info["progress"] as? Float,
@@ -325,6 +327,26 @@ extension AppDelegate {
             // Save progress so it will resume once we starts it
             NineAnimator.default.user.update(progress: progress, for: link)
             RootViewController.open(whenReady: .episode(link))
+            return true
+        case NSUserActivityTypeBrowsingWeb:
+            // Handle Universal Links
+            if let redirectionUrl = userActivity.webpageURL {
+                let task = AnyLink.create(fromCloudRedirectionLink: redirectionUrl).dispatch(on: .main).error {
+                    error in
+                    let alert = UIAlertController(
+                        title: "Cannot open link",
+                        message: error.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "Done", style: .default, handler: nil))
+                    RootViewController.shared?.presentOnTop(alert)
+                    return Log.error(error)
+                } .finally {
+                    link in RootViewController.open(whenReady: link)
+                }
+                self.submitTask(task)
+                return true
+            }
         default: Log.error("Trying to restore unkown activity type %@. Aborting.", userActivity.activityType)
         }
         
