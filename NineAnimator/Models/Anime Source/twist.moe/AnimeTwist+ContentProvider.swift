@@ -48,7 +48,7 @@ extension NASourceAnimeTwist {
                 [weak self] list -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 return list
-                    .filter { $0.title.contains(self.title) }
+                    .filter { $0.title.localizedCaseInsensitiveContains(self.title) }
                     .map(self.parent.anime)
             } .then {
                 [weak self] list -> [AnimeLink]? in
