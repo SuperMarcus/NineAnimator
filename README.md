@@ -8,11 +8,14 @@
     <a href="https://travis-ci.org/SuperMarcus/NineAnimator">
         <img src="https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master" alt="Travis Build status"/>
     </a>
+    <a href="https://testflight.apple.com/join/SzIVhF6w">
+        <img src="https://img.shields.io/badge/join-TestFlight-blue.svg" alt="Join TestFlight"/>
+    </a>
     <a href="https://discord.gg/dzTVzeW">
         <img src="https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue" alt="Discord Server"/>
     </a>
-    <a href="https://testflight.apple.com/join/SzIVhF6w">
-        <img src="https://img.shields.io/badge/join-TestFlight-blue.svg" alt="Join TestFlight"/>
+    <a href="https://www.reddit.com/r/NineAnimator/">
+        <img src="https://img.shields.io/reddit/subreddit-subscribers/NineAnimator?style=social" alt="NineAnimator Subreddit"/>
     </a>
 </p>
 <p align="center">

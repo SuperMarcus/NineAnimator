@@ -124,8 +124,8 @@ extension AppDelegate {
         
         UserNotificationManager.default.performFetch(within: container)
         
-        // Mark as ready for collection
-        container.collect()
+        // Submit task and mark container as ready for collection
         submitTask(container)
+        container.collect()
     }
 }
