@@ -3,7 +3,7 @@ query ($search: String) {
         media (
             search: $search
             type: ANIME
-            sort: [TITLE_ENGLISH, TITLE_ROMAJI, TITLE_NATIVE]
+            sort: [SEARCH_MATCH]
         ) {
             id
             coverImage { extraLarge }
