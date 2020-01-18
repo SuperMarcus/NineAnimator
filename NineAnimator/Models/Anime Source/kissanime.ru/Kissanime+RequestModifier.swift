@@ -23,8 +23,7 @@ import Kingfisher
 extension NASourceKissanime: Kingfisher.ImageDownloadRequestModifier {
     /// Setup Kingfisher modifier for verified requests to resources
     func setupGlobalRequestModifier() {
-        KingfisherManager.shared.downloader.sessionConfiguration = URLSessionConfiguration.default
-        KingfisherManager.shared.defaultOptions.append(.requestModifier(self))
+        parent.registerAdditionalImageModifier(self)
     }
     
     func modified(for request: URLRequest) -> URLRequest? {
