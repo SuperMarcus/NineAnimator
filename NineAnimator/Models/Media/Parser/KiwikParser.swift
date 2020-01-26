@@ -31,6 +31,11 @@ class KiwikParser: VideoProviderParser {
         options: []
     )
     
+    static let playerSourceRegex2 = try! NSRegularExpression(
+        pattern: "source=\\\\'([^\\\\]+)",
+        options: []
+    )
+    
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalResourceRequestHeaders: HTTPHeaders = [
             "Referer": episode.parent.link.link.absoluteString
@@ -51,13 +56,16 @@ class KiwikParser: VideoProviderParser {
                 let decodedPackerScript = try PackerDecoder().decode(responseContent)
                 
                 // Find the source URL
-                let sourceUrl = try (KiwikParser
-                    .playerSourceRegex
-                    .firstMatch(in: decodedPackerScript)?
-                    .firstMatchingGroup).tryUnwrap(.providerError("Unable to find the streaming resource"))
+                let sourceUrl = try (
+                    KiwikParser.playerSourceRegex.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
+                    ?? KiwikParser.playerSourceRegex2.firstMatch(in: decodedPackerScript)?.firstMatchingGroup
+                ).tryUnwrap(
+                    .providerError("Cannot find a streambale resource in the selected page")
+                )
+                
                 let sourceURL = try URL(string: sourceUrl).tryUnwrap(.urlError)
                 
-                let aggregated = sourceURL.pathExtension.lowercased() == "m3u8"
+                let aggregated = sourceURL.pathExtension.lowercased().components(separatedBy: "?")[0] == "m3u8"
                 
                 Log.info("(Kiwik Parser) found asset at %@ (HLS: %@)", sourceURL.absoluteString, aggregated)
                 
@@ -65,7 +73,7 @@ class KiwikParser: VideoProviderParser {
                     url: sourceURL,
                     parent: episode,
                     contentType: aggregated ? "application/vnd.apple.mpegurl" : "video/mp4",
-                    headers: [ "Referer": "https://kwik.cx/" ],
+                    headers: [ "Referer": episode.target.absoluteString ],
                     isAggregated: aggregated
                 ), nil)
             } catch { handler(nil, error) }
