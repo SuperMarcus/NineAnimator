@@ -37,7 +37,7 @@ class DiscoverySceneViewController: UITableViewController {
     private var shouldReloadDirtySourceImmedietly = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Theme.current.preferredStatusBarStyle
+        Theme.current.preferredStatusBarStyle
     }
     
     override func viewDidLoad() {
@@ -138,7 +138,7 @@ extension DiscoverySceneViewController {
 // MARK: - Table view data source
 extension DiscoverySceneViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Section.numberOfSections
+        Section.numberOfSections
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection _section: Int) -> Int {
@@ -299,7 +299,7 @@ fileprivate extension DiscoverySceneViewController {
     }
     
     private func createTask(for source: RecommendationSource, withItemIndex index: Int) -> NineAnimatorAsyncTask {
-        return source
+        source
             .generateRecommendations()
             .dispatch(on: .main)
             .error { [weak self] in self?.onRecommendationLoadError(index, source: source, error: $0) }

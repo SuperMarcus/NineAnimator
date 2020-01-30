@@ -27,17 +27,17 @@ extension UIAlertAction {
     }
     
     var image: UIImage? {
-        get { return self.value(forKey: "image") as? UIImage }
-        set { return self.setValue(newValue, forKey: "image") }
+        get { self.value(forKey: "image") as? UIImage }
+        set { self.setValue(newValue, forKey: "image") }
     }
     
     var textAlignment: CATextLayerAlignmentMode {
-        get { return self.value(forKey: "titleTextAlignment") as? CATextLayerAlignmentMode ?? .center }
+        get { self.value(forKey: "titleTextAlignment") as? CATextLayerAlignmentMode ?? .center }
         set { self.setValue(newValue, forKey: "titleTextAlignment") }
     }
     
     var isChecked: Bool {
-        get { return self.value(forKey: "checked") as? Bool ?? false }
+        get { self.value(forKey: "checked") as? Bool ?? false }
         set { self.setValue(newValue, forKey: "checked") }
     }
 }

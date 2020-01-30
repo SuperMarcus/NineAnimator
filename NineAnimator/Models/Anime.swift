@@ -56,7 +56,7 @@ struct Anime {
     
     let additionalAttributes: [AttributeKey: Any]
     
-    var source: Source { return link.source }
+    var source: Source { link.source }
     
     private(set) var currentServer: ServerIdentifier = undeterminedServer
     
@@ -123,22 +123,22 @@ struct Anime {
     
     /// Retrieve the episode object
     func episode(with link: EpisodeLink, onCompletion handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        return source.episode(from: link, with: self, handler)
+        source.episode(from: link, with: self, handler)
     }
     
     /// Retrieve all available links under the current server selection
     var episodeLinks: EpisodeLinksCollection {
-        return episodes[currentServer]!
+        episodes[currentServer]!
     }
     
     /// Retrieve the number of episode links under the current server selection
     var numberOfEpisodeLinks: Int {
-        return episodeLinks.count
+        episodeLinks.count
     }
     
     /// Retrieve an episode link at index under the current server selection
     func episodeLink(at index: Int) -> EpisodeLink {
-        return episodeLinks[index]
+        episodeLinks[index]
     }
     
     /// Find episodes on alternative different servers with the same name
@@ -282,12 +282,12 @@ extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.Episode
     }
     
     func links(withName episodeName: String) -> [EpisodeLink] {
-        return self.flatMap { $0.value }
+        self.flatMap { $0.value }
             .filter { $0.name == episodeName }
     }
     
     func link(withIdentifier episodeIdentifier: String) -> EpisodeLink? {
-        return self.flatMap { $0.value }
+        self.flatMap { $0.value }
             .first { $0.identifier == episodeIdentifier }
     }
 }

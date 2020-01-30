@@ -23,7 +23,7 @@ import Foundation
 
 class KiwikParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "Kiwik", "kwik" ]
+        [ "Kiwik", "kwik" ]
     }
     
     static let playerSourceRegex = try! NSRegularExpression(

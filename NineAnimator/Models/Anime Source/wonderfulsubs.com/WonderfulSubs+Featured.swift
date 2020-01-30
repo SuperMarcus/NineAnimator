@@ -21,13 +21,13 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return NineAnimatorPromise<[AnimeLink]>
+        NineAnimatorPromise<[AnimeLink]>
             .queue(listOfPromises: [ retrieveFeaturedAnimePromise, retrieveLatestAnimePromise ])
             .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
     }
     
     private var retrieveFeaturedAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        return request(
+        request(
             ajaxPathDictionary: "/api/media/popular?count=12",
             headers: [ "Referer": endpoint ]
         ) .then {
@@ -38,7 +38,7 @@ extension NASourceWonderfulSubs {
     }
     
     private var retrieveLatestAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        return request(
+        request(
             ajaxPathDictionary: "/api/media/latest?count=12",
             headers: [ "Referer": endpoint ]
         ) .then {

@@ -116,7 +116,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
 
 // MARK: - User Interface
 extension GoogleCastMediaPlaybackViewController {
-    var needsTopInset: Bool { return false }
+    var needsTopInset: Bool { false }
     
     func circle(ofSideLength length: CGFloat, color: UIColor) -> UIImage {
         let size = CGSize(width: length, height: length)
@@ -131,11 +131,11 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     var normalThumbImage: UIImage? {
-        return circle(ofSideLength: 8, color: .gray)
+        circle(ofSideLength: 8, color: .gray)
     }
     
     var highlightedThumbImage: UIImage? {
-        return circle(ofSideLength: 12, color: .gray)
+        circle(ofSideLength: 12, color: .gray)
     }
     
     func format(seconds input: Int) -> String {
@@ -201,7 +201,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        return touch.view == self.view
+        touch.view == self.view
     }
     
     @IBAction private func onBackgroundTapGestureRecognizer(sender: UITapGestureRecognizer) {
@@ -346,10 +346,10 @@ extension GoogleCastMediaPlaybackViewController {
 
 // MARK: - Table view data source
 extension GoogleCastMediaPlaybackViewController {
-    func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return castController.devices.count
+        castController.devices.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

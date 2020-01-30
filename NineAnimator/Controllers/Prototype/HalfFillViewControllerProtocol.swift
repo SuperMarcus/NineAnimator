@@ -23,7 +23,7 @@ public protocol HalfFillViewControllerProtocol { }
 
 extension HalfFillViewControllerProtocol where Self: UIViewController {
     var transitionController: HalfFillPresentationController? {
-        return presentationController as? HalfFillPresentationController
+        presentationController as? HalfFillPresentationController
     }
 }
 

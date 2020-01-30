@@ -43,11 +43,11 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return characters.count
+        characters.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -61,7 +61,7 @@ class InformationSceneCharactersTableViewCell: UITableViewCell, UICollectionView
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return CGSize(
+        CGSize(
             width: size.width,
             height: 170
         )

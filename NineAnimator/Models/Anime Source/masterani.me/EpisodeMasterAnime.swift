@@ -51,14 +51,14 @@ struct NAMasterAnimeEpisodeInfo {
     var servers: [NAMasterAnimeStreamingInfo]
     
     var availableHosts: [Anime.ServerIdentifier: String] {
-        return Dictionary(
+        Dictionary(
             servers.map { ($0.hostName, $0.hostName) }
         ) { oldValue, _ in oldValue }
     }
     
     func select(server hostIdentifier: Anime.ServerIdentifier, option: SelectOption) -> NAMasterAnimeStreamingInfo? {
         var sorted: [NAMasterAnimeStreamingInfo] {
-            return servers
+            servers
                 .filter { $0.hostName == hostIdentifier }
                 .sorted { $0.quality > $1.quality }
         }

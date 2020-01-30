@@ -52,6 +52,6 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
                 } else { self.backgroundColor = .clear }
             }
         }
-        get { return super.isSelected }
+        get { super.isSelected }
     }
 }

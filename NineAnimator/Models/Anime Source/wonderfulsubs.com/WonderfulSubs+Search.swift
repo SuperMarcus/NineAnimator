@@ -31,11 +31,11 @@ extension NASourceWonderfulSubs {
         var totalPages: Int? = 1
         var availablePages: Int = 1
         var results: [AnimeLink]?
-        var moreAvailable: Bool { return results == nil }
-        var title: String { return query }
+        var moreAvailable: Bool { results == nil }
+        var title: String { query }
         
         func links(on page: Int) -> [AnyLink] {
-            return results?.map { .anime($0) } ?? []
+            results?.map { .anime($0) } ?? []
         }
         
         func more() {
@@ -76,6 +76,6 @@ extension NASourceWonderfulSubs {
     }
     
     func search(keyword: String) -> ContentProvider {
-        return SearchAgent(keyword, parent: self)
+        SearchAgent(keyword, parent: self)
     }
 }

@@ -22,32 +22,32 @@ import Foundation
 extension NineAnimatorUser {
     /// Default keys of NineAnimator
     enum Keys {
-        static var version: String { return "com.marcuszhou.nineanimator.version" }
-        static var recentAnimeList: String { return "anime.recent" }
-        static var detectClipboardAnimeLinks: String { return "anime.links.detect" }
-        static var subscribedAnimeList: String { return "anime.subscribed" }
-        static var allowNSFWContent: String { return "anime.content.nsfw" }
-        static var autoRestartInterruptedDownloadTasks: String { return "episode.download.autorestart" }
-        static var preventAVAssetPurge: String { return "episode.download.preventPurge" }
-        static var sendDownloadNotifications: String { return "episode.download.sendDownloadNotifications" }
-        static var recentEpisode: String { return "episode.recent" }
-        static var recentSource: String { return "source.recent" }
-        static var sourceSolveChallenges: String { return "source.challengeSolver" }
-        static var recentServer: String { return "server.recent" }
-        static var persistedProgresses: String { return "episode.progress" }
-        static var episodeListingOrder: String { return "episode.listing.order" }
-        static var episodeDetails: String { return "episode.details" }
-        static var backgroundPlayback: String { return "playback.background" }
-        static var pictureInPicturePlayback: String { return "playback.pip" }
-        static var notificationShowStream: String { return "notification.showStreams" }
-        static var homeExternalOnly: String { return "home.externalOnly" }
-        static var homeUUIDStart: String { return "home.actionset.uuid.start" }
-        static var homeUUIDEnd: String { return "home.actionset.uuid.end" }
-        static var theme: String { return "interface.theme" }
-        static var brightnessBasedTheme: String { return "interface.brightnessBasedTheme" }
+        static var version: String { "com.marcuszhou.nineanimator.version" }
+        static var recentAnimeList: String { "anime.recent" }
+        static var detectClipboardAnimeLinks: String { "anime.links.detect" }
+        static var subscribedAnimeList: String { "anime.subscribed" }
+        static var allowNSFWContent: String { "anime.content.nsfw" }
+        static var autoRestartInterruptedDownloadTasks: String { "episode.download.autorestart" }
+        static var preventAVAssetPurge: String { "episode.download.preventPurge" }
+        static var sendDownloadNotifications: String { "episode.download.sendDownloadNotifications" }
+        static var recentEpisode: String { "episode.recent" }
+        static var recentSource: String { "source.recent" }
+        static var sourceSolveChallenges: String { "source.challengeSolver" }
+        static var recentServer: String { "server.recent" }
+        static var persistedProgresses: String { "episode.progress" }
+        static var episodeListingOrder: String { "episode.listing.order" }
+        static var episodeDetails: String { "episode.details" }
+        static var backgroundPlayback: String { "playback.background" }
+        static var pictureInPicturePlayback: String { "playback.pip" }
+        static var notificationShowStream: String { "notification.showStreams" }
+        static var homeExternalOnly: String { "home.externalOnly" }
+        static var homeUUIDStart: String { "home.actionset.uuid.start" }
+        static var homeUUIDEnd: String { "home.actionset.uuid.end" }
+        static var theme: String { "interface.theme" }
+        static var brightnessBasedTheme: String { "interface.brightnessBasedTheme" }
         
         // Watching anime episodes persist filename
-        static var watchedAnimesFileName: String { return "com.marcuszhou.NineAnimator.anime.watching.plist" }
+        static var watchedAnimesFileName: String { "com.marcuszhou.NineAnimator.anime.watching.plist" }
     }
     
     /// A property wrapper for an entry in the UserDefaults

@@ -165,7 +165,7 @@ class AnimatedImageCollectionView: UIView {
     var cycleDuration: TimeInterval = automaticCycleDuration
     
     /// Set cycle duration automatically based on the number of columns
-    class var automaticCycleDuration: TimeInterval { return -1 }
+    class var automaticCycleDuration: TimeInterval { -1 }
     
     /// The maximal allowed displacement of frames without truncating
     var maximalDisplacement: CGFloat {
@@ -201,7 +201,7 @@ class AnimatedImageCollectionView: UIView {
     
     /// Set the content offset of the images
     var contentOffset: CGFloat {
-        get { return adjustingContentOffset }
+        get { adjustingContentOffset }
         set {
             var newDisplacement = newValue == maximalDisplacement ? newValue : newValue.truncatingRemainder(dividingBy: maximalDisplacement)
             if newDisplacement < 0 {

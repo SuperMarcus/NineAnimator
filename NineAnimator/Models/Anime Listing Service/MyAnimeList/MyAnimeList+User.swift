@@ -31,7 +31,7 @@ extension MyAnimeList {
     }
     
     func currentUser() -> NineAnimatorPromise<User> {
-        return apiRequest("/users/@me").then {
+        apiRequest("/users/@me").then {
             response in
             guard let firstObject = response.data.first else {
                 throw NineAnimatorError.responseError("User object not found")

@@ -22,13 +22,13 @@ import Foundation
 
 /// Parser for animedao's ProxyData server
 class ProxyDataParser: VideoProviderParser {
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     func parse(episode: Episode,
                with session: SessionManager,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             episode.source as? BaseSource
         } .thenPromise {
             source in NineAnimatorPromise<URL> {

@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceAnimeUltima {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return request(browsePath: "/")
+        request(browsePath: "/")
             .then {
                 result -> FeaturedContainer? in
                 // Parse and select the sections
@@ -48,7 +48,7 @@ extension NASourceAnimeUltima {
     }
     
     fileprivate func retrieveFeaturedLinks(from featuredAnimeSectionContainer: SwiftSoup.Element) throws -> [AnimeLink] {
-        return try featuredAnimeSectionContainer
+        try featuredAnimeSectionContainer
             .select("div.anime-box")
             .map {
                 animeContainer -> AnimeLink in

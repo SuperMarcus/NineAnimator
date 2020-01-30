@@ -54,7 +54,7 @@ extension AnyLink {
     
     /// Parse the redirection link and
     static func create(fromCloudRedirectionLink link: URL) -> NineAnimatorPromise<AnyLink> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             // For parsing the query parameters
             let components = try URLComponents(
                 url: link,

@@ -23,13 +23,13 @@ import Foundation
 
 class VeryStream: VideoProviderParser {
     var aliases: [String] {
-        return [ "VeryStream" ]
+        [ "VeryStream" ]
     }
     
     static let tokenRegex = try! NSRegularExpression(pattern: "<p style=\"\" class=\"\" id=\"videolink\">(.+)<\\/p>", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return session.request(episode.target).responseString {
+        session.request(episode.target).responseString {
             response in
             guard let text = response.value else {
                 Log.error(response.error)
@@ -65,6 +65,6 @@ class VeryStream: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

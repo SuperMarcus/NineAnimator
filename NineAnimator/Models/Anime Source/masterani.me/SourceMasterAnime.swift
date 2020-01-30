@@ -33,24 +33,24 @@ import AppKit
 class NASourceMasterAnime: BaseSource, Source {
     var name: String = "masterani.me"
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
 #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "MasterAni.me Site Icon") }
 #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "MasterAni.me Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "MasterAni.me Site Icon") }
 #endif
     
     // Masterani.me is no longer available
     override var isEnabled: Bool {
-        return false
+        false
     }
     
     var siteDescription: String {
-        return "MasterAni.me was one of the best supported anime websites by NineAnimator."
+        "MasterAni.me was one of the best supported anime websites by NineAnimator."
     }
     
-    override var endpoint: String { return "https://www.masterani.me" }
+    override var endpoint: String { "https://www.masterani.me" }
     
     static let cdnEndpoint = "https://cdn.masterani.me"
     
@@ -65,7 +65,7 @@ class NASourceMasterAnime: BaseSource, Source {
     static let animeCompleteIdentifierRegex = try! NSRegularExpression(pattern: "\\/([\\da-zA-Z0-9-_]+)$", options: .caseInsensitive)
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
-        return NineAnimatorPromise
+        NineAnimatorPromise
             .fail(
                 NineAnimatorError.authenticationRequiredError(
                     "Masterani.me is no longer available. Visit the website for more information.",
@@ -125,7 +125,7 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return anime(from: link.link, handler)
+        anime(from: link.link, handler)
     }
     
     func anime(from url: URL, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
@@ -217,7 +217,7 @@ class NASourceMasterAnime: BaseSource, Source {
     
     // Parse the episodes available from the response json object
     private func episodes(from animeEpisodes: [NSDictionary], with parentLink: AnimeLink) -> [Anime.AdditionalEpisodeLinkInformation] {
-        return animeEpisodes.compactMap { episode in
+        animeEpisodes.compactMap { episode in
             guard let episodeInfo = episode["info"] as? NSDictionary,
                 // let episodeIdentifier = episodeInfo["id"] as? Int,
                 let episodeNumber = episodeInfo["episode"] as? String,
@@ -253,7 +253,7 @@ class NASourceMasterAnime: BaseSource, Source {
                                episodes: [Anime.AdditionalEpisodeLinkInformation],
                                attributes: [Anime.AttributeKey: Any],
                                _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return self.episodeInfo(from: link) { info, error in
+        self.episodeInfo(from: link) { info, error in
             guard let hosts = info?.availableHosts
                 else { return handler(nil, error) }
             handler(Anime(
@@ -405,11 +405,11 @@ class NASourceMasterAnime: BaseSource, Source {
     }
     
     func poster(file name: String) -> URL {
-        return URL(string: "\(NASourceMasterAnime.cdnEndpoint)/poster/1/\(name)")!
+        URL(string: "\(NASourceMasterAnime.cdnEndpoint)/poster/1/\(name)")!
     }
     
     func anime(slug: String) -> URL {
-        return URL(string: "\(endpoint)\(NASourceMasterAnime.animePathInfo)\(slug)")!
+        URL(string: "\(endpoint)\(NASourceMasterAnime.animePathInfo)\(slug)")!
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {

@@ -24,7 +24,7 @@ import SwiftSoup
 
 class RapidVideoParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "RapidVideo", "Rapid Video" ]
+        [ "RapidVideo", "Rapid Video" ]
     }
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {

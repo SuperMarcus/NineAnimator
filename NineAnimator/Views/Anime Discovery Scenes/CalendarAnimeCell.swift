@@ -31,7 +31,7 @@ class CalendarAnimeCell: UICollectionViewCell, Themable {
     private(set) weak var delegate: AnimeScheduleCollectionViewController?
     
     override var isHighlighted: Bool {
-        get { return super.isHighlighted }
+        get { super.isHighlighted }
         set {
             super.isHighlighted = newValue
             

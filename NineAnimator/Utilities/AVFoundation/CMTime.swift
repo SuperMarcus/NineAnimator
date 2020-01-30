@@ -20,7 +20,7 @@
 import AVKit
 
 extension CMTime {
-    var seconds: Float { return Float(CMTimeGetSeconds(self)) }
+    var seconds: Float { Float(CMTimeGetSeconds(self)) }
     
     init(seconds: Float) {
         self.init(seconds: Double(seconds), preferredTimescale: CMTimeScale(NSEC_PER_SEC))

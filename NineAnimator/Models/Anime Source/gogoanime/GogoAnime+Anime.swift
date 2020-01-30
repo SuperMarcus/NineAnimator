@@ -26,11 +26,11 @@ extension NASourceGogoAnime {
         try! NSRegularExpression(pattern: "id\\s+=\\s+(\\d+)", options: [])
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return anime(url: link.link)
+        anime(url: link.link)
     }
     
     func anime(url: URL) -> NineAnimatorPromise<Anime> {
-        return request(browseUrl: url)
+        request(browseUrl: url)
             .thenPromise { content -> NineAnimatorPromise<(String, String)> in
                 guard let animeIdentifier = NASourceGogoAnime
                     .animeIdentifierRegex

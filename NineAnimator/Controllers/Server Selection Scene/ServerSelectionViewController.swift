@@ -24,7 +24,7 @@ class ServerSelectionViewController: UIViewController {
     private var completionHandler: ((ServerSelectionViewController) -> Void)?
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Theme.current.preferredStatusBarStyle
+        Theme.current.preferredStatusBarStyle
     }
     
     override func viewDidLoad() {

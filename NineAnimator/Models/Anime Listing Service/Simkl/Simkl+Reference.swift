@@ -21,7 +21,7 @@ import Foundation
 
 extension Simkl {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        return apiRequest(
+        apiRequest(
             "/search/anime",
             query: [
                 "q": link.title,

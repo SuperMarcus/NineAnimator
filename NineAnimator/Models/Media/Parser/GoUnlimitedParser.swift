@@ -22,13 +22,13 @@ import Foundation
 
 /// Parser for animedao's GoUnlimited server
 class GoUnlimitedParser: VideoProviderParser {
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     func parse(episode: Episode,
                with session: SessionManager,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return NineAnimatorPromise {
+        NineAnimatorPromise {
             callback in session.request(episode.target).responseString {
                 callback($0.value, $0.error)
             }
@@ -57,6 +57,6 @@ class GoUnlimitedParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

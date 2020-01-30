@@ -33,7 +33,7 @@ extension NASourceKissanime {
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> URL? in
             let episodeRawUrl = try URL(
                 string: link.identifier,

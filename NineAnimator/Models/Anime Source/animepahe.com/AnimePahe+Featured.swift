@@ -31,7 +31,7 @@ extension NASourceAnimePahe {
     }
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return request(
+        request(
             ajaxPathDictionary: "/api",
             query: [ "m": "airing", "l": 32, "page": 1 ]
         ) .then {

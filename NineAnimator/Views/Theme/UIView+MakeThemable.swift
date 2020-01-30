@@ -26,11 +26,11 @@ extension UIView {
         set {
             if newValue { makeThemable() }
         }
-        get { return false }
+        get { false }
     }
     
     var themableOptionsStore: [String: Any] {
-        get { return layer.style?["themable.options"] as? [String: Any] ?? [:] }
+        get { layer.style?["themable.options"] as? [String: Any] ?? [:] }
         set {
             var layerStyles = layer.style ?? [:]
             layerStyles["themable.options"] = newValue
@@ -39,7 +39,7 @@ extension UIView {
     }
     
     var disableTheming: Bool {
-        get { return layer.style?["themable.disabled"] as? Bool == true }
+        get { layer.style?["themable.disabled"] as? Bool == true }
         set {
             var layerStyles = layer.style ?? [:]
             layerStyles["themable.disabled"] = newValue

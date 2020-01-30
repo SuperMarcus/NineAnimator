@@ -22,7 +22,7 @@ import Foundation
 extension NineAnimatorPromise {
     /// Return directly upon success
     static func success(queue: DispatchQueue = .global(), _ value: ResultType) -> NineAnimatorPromise<ResultType> {
-        return NineAnimatorPromise(queue: queue) {
+        NineAnimatorPromise(queue: queue) {
             $0(value, nil)
             return nil
         }

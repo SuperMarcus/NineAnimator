@@ -26,21 +26,21 @@ import AppKit
 #endif
 
 class NASourceAnimeDao: BaseSource, Source, PromiseSource {
-    var name: String { return "animedao.com" }
+    var name: String { "animedao.com" }
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeDao Site Logo") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeDao Site Logo") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimeDao Site Logo") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "AnimeDao Site Logo") }
     #endif
     
     var siteDescription: String {
-        return "animedao.com allows you to stream subtitled anime and movies in SD and HD. NineAnimator has experimental support for this website."
+        "animedao.com allows you to stream subtitled anime and movies in SD and HD. NineAnimator has experimental support for this website."
     }
     
-    override var endpoint: String { return "https://animedao.com" }
+    override var endpoint: String { "https://animedao.com" }
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
@@ -50,7 +50,7 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return .fail()
+        .fail()
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
@@ -60,6 +60,6 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     }
     
     override func canHandle(url: URL) -> Bool {
-        return false
+        false
     }
 }

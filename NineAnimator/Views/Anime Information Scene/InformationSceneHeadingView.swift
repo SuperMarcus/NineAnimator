@@ -38,7 +38,7 @@ class InformationSceneHeadingView: UIView, Themable {
     /// Suggested navigation bar transitioning height in the parent view's
     /// coordinate system
     var suggestedTransitionHeight: CGFloat {
-        return frame.origin.y + (topImageView.frame.height / 2)
+        frame.origin.y + (topImageView.frame.height / 2)
     }
     
     /// A negative value indicating how much the user had scrolled passed
@@ -126,7 +126,7 @@ class InformationSceneHeadingView: UIView, Themable {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return systemLayoutSizeFitting(size)
+        systemLayoutSizeFitting(size)
     }
     
     override func layoutSubviews() {

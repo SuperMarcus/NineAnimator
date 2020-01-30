@@ -21,7 +21,7 @@ import Foundation
 
 extension MyAnimeList {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
-        return .success(_allCollections)
+        .success(_allCollections)
     }
 }
 
@@ -57,23 +57,23 @@ extension MyAnimeList {
 
 extension MyAnimeList.Collection {
     /// If there is a next page
-    var moreAvailable: Bool { return nextPageOffset != nil }
+    var moreAvailable: Bool { nextPageOffset != nil }
     
     /// Alias of type erased self.myAnimeList
-    var parentService: ListingService { return myAnimeList }
+    var parentService: ListingService { myAnimeList }
     
     /// Total pages is technically undefined
     var totalPages: Int? {
-        return nextPageOffset == nil ? availablePages : nil
+        nextPageOffset == nil ? availablePages : nil
     }
     
     /// Return the number of loaded references sections
     var availablePages: Int {
-        return references.count
+        references.count
     }
     
     /// Access the refrences in the section
-    func links(on page: Int) -> [AnyLink] { return references[page].map { .listingReference($0) } }
+    func links(on page: Int) -> [AnyLink] { references[page].map { .listingReference($0) } }
 }
 
 extension MyAnimeList.Collection {

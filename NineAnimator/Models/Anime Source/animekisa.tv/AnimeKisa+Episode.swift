@@ -31,7 +31,7 @@ extension NASourceAnimeKisa {
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             URL(string: link.identifier, relativeTo: link.parent.link)
         } .thenPromise {
             url in self.request(browseUrl: url).then { (url, $0) }

@@ -38,7 +38,7 @@ extension String {
     }
     
     subscript (_ matchResult: NSTextCheckingResult, at group: Int) -> String {
-        return self[matchResult.range(at: group)]
+        self[matchResult.range(at: group)]
     }
     
     subscript (range: PartialRangeFrom<Int>) -> String {
@@ -47,6 +47,6 @@ extension String {
     }
     
     var matchingRange: NSRange {
-        return NSRange(location: 0, length: utf16.count)
+        NSRange(location: 0, length: utf16.count)
     }
 }

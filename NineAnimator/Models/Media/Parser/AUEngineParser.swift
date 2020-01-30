@@ -23,7 +23,7 @@ import Foundation
 /// Parser for animeultima's AUEngine server
 class AUEngineParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "AUEngine" ]
+        [ "AUEngine" ]
     }
     
     private var source: NASourceAnimeUltima
@@ -36,7 +36,7 @@ class AUEngineParser: VideoProviderParser {
                with session: SessionManager,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return source
+        source
             .request(browseUrl: episode.target)
             .then {
                 responseContent in
@@ -76,6 +76,6 @@ class AUEngineParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

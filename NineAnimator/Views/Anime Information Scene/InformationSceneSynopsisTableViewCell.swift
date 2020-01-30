@@ -41,7 +41,7 @@ class InformationSceneSynopsisTableViewCell: UITableViewCell {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return systemLayoutSizeFitting(size)
+        systemLayoutSizeFitting(size)
     }
     
     override func layoutSubviews() {

@@ -62,6 +62,6 @@ extension NASourceNineAnime {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return VideoProviderRegistry.default.provider(for: name)
+        VideoProviderRegistry.default.provider(for: name)
     }
 }

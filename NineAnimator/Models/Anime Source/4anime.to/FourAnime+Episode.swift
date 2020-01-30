@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             try URL(string: link.identifier).tryUnwrap()
         } .thenPromise {
             episodePageUrl in self.request(browseUrl: episodePageUrl)

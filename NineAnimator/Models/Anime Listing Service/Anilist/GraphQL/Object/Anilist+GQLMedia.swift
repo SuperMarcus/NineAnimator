@@ -126,7 +126,7 @@ extension Anilist {
         
         /// Bridge into `GQLMediaList`
         var mediaList: GQLMediaList {
-            return GQLMediaList(
+            GQLMediaList(
                 id: id,
                 userId: userId,
                 mediaId: mediaId,

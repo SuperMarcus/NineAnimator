@@ -23,7 +23,7 @@ import Foundation
 // Implementations for 9anime endpoint switching
 extension NASourceNineAnime/*: Alamofire.RequestAdapter*/ {
     var possibleHosts: [String] {
-        return [
+        [
             // A list of hosts that 9anime uses
             "9anime.ru",
             "www2.9anime.to",

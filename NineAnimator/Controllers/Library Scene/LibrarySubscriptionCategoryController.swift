@@ -60,11 +60,11 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
 // MARK: - Delegate and Data Source
 extension LibrarySubscriptionCategoryController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cachedWatchedAnimeItems.count
+        cachedWatchedAnimeItems.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

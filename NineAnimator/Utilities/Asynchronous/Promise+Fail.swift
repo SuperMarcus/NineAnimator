@@ -22,7 +22,7 @@ import Foundation
 extension NineAnimatorPromise {
     /// Fail directly when executed
     static func fail(queue: DispatchQueue = .global(), _ error: NineAnimatorError = .unknownError) -> NineAnimatorPromise<ResultType> {
-        return NineAnimatorPromise(queue: queue) {
+        NineAnimatorPromise(queue: queue) {
             $0(nil, error)
             return nil
         }

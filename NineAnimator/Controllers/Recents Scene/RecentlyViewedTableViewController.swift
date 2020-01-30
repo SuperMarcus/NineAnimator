@@ -76,7 +76,7 @@ extension RecentlyViewedTableViewController {
 // MARK: - Table view data source
 extension RecentlyViewedTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        4
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

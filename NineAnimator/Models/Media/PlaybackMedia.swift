@@ -47,7 +47,7 @@ protocol PlaybackMedia {
 // A shortcut for setting and retriving playback progress
 extension PlaybackMedia {
     var progress: Double {
-        get { return link.playbackProgress }
+        get { link.playbackProgress }
         set {
             let trackingContext = NineAnimator.default.trackingContext(for: link.parent)
             trackingContext.update(progress: newValue, forEpisodeLink: link)

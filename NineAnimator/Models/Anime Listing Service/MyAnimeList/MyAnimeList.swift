@@ -21,9 +21,9 @@ import Alamofire
 import Foundation
 
 class MyAnimeList: BaseListingService, ListingService {
-    var name: String { return "MyAnimeList.net" }
+    var name: String { "MyAnimeList.net" }
     
-    override var identifier: String { return "com.marcuszhou.nineanimator.service.mal" }
+    override var identifier: String { "com.marcuszhou.nineanimator.service.mal" }
     
     /// MAL api endpoint
     let endpoint = URL(string: "https://api.myanimelist.net/v0.21")!
@@ -48,36 +48,36 @@ class MyAnimeList: BaseListingService, ListingService {
 
 // MARK: - Capabilities
 extension MyAnimeList {
-    var isCapableOfListingAnimeInformation: Bool { return true }
+    var isCapableOfListingAnimeInformation: Bool { true }
     
-    var isCapableOfPersistingAnimeState: Bool { return didSetup }
+    var isCapableOfPersistingAnimeState: Bool { didSetup }
     
-    var isCapableOfRetrievingAnimeState: Bool { return didSetup }
+    var isCapableOfRetrievingAnimeState: Bool { didSetup }
 }
 
 // MARK: - Authentications
 extension MyAnimeList {
     private var accessToken: String? {
-        get { return persistedProperties["access_token"] as? String }
+        get { persistedProperties["access_token"] as? String }
         set { persistedProperties["access_token"] = newValue }
     }
     
     private var accessTokenExpirationDate: Date {
-        get { return (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
-        set { return persistedProperties["access_token_expiration"] = newValue }
+        get { (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
+        set { persistedProperties["access_token_expiration"] = newValue }
     }
     
     private var refreshToken: String? {
-        get { return persistedProperties["restore_token"] as? String }
+        get { persistedProperties["restore_token"] as? String }
         set { persistedProperties["restore_token"] = newValue }
     }
     
     /// MAL Android app's client identifier
-    private var clientIdentifier: String { return "6114d00ca681b7701d1e15fe11a4987e" }
+    private var clientIdentifier: String { "6114d00ca681b7701d1e15fe11a4987e" }
     
-    var didSetup: Bool { return accessToken != nil }
+    var didSetup: Bool { accessToken != nil }
     
-    var didExpire: Bool { return accessTokenExpirationDate.timeIntervalSinceNow < 0 }
+    var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
     func deauthenticate() {
         Log.info("[MyAnimeList] Removing credentials")
@@ -88,7 +88,7 @@ extension MyAnimeList {
     
     /// Authenticate the session with username and password
     func authenticate(withUser user: String, password: String) -> NineAnimatorPromise<Void> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             [clientIdentifier] in
             var formBuilder = URLComponents()
             formBuilder.queryItems = [
@@ -114,7 +114,7 @@ extension MyAnimeList {
     
     /// Refresh the expired token with the stored refresh token
     private func authenticateWithRefreshToken() -> NineAnimatorPromise<Void> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             self.refreshToken // Retrieve the refresh token
         } .thenPromise {
             [clientIdentifier] token in
@@ -144,7 +144,7 @@ extension MyAnimeList {
     
     /// Authenticate the session with the response from MyAnimeList
     private func authenticate(withResponseObject responseObject: NSDictionary) -> NineAnimatorPromise<Void> {
-        return .firstly {
+        .firstly {
             // If the error entry is present in the response object
             if let error = responseObject["error"] as? String,
                 let message = responseObject["message"] as? String {

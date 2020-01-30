@@ -27,7 +27,7 @@ extension NASourceAnimePahe {
     }
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return request(browseUrl: link.link).thenPromise {
+        request(browseUrl: link.link).thenPromise {
             responseContent -> NineAnimatorPromise<(ReleaseResponse, String, String, [Anime.AttributeKey: Any], AnimeLink)> in
             let bowl = try SwiftSoup.parse(responseContent)
             

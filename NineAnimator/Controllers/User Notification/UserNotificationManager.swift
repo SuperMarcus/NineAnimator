@@ -136,12 +136,12 @@ extension UserNotificationManager {
 extension UserNotificationManager {
     /// Returns the location where the anime watcher is being persisted
     private func url(for anime: AnimeLink) -> URL {
-        return self.animeCachingDirectory.appendingPathComponent(.animePersistFilenameComponent(anime))
+        self.animeCachingDirectory.appendingPathComponent(.animePersistFilenameComponent(anime))
     }
     
     /// Returns the location where the copied poster image is located at
     private func posterUrl(for anime: AnimeLink) -> URL {
-        return self.animeCachingDirectory.appendingPathComponent(.cachedPosterFilenameComponent(anime))
+        self.animeCachingDirectory.appendingPathComponent(.cachedPosterFilenameComponent(anime))
     }
 }
 
@@ -254,7 +254,7 @@ extension UserNotificationManager {
     
     /// An alias of `hasNotifications(for anime:, _ handler:)` that returns a promise
     func hasNotifications(for anime: AnimeLink) -> NineAnimatorPromise<Bool> {
-        return NineAnimatorPromise {
+        NineAnimatorPromise {
             self.hasNotifications(for: anime, $0)
             return nil
         }
@@ -262,7 +262,7 @@ extension UserNotificationManager {
     
     /// Retrieve the list of anime with notifications delivered to
     func animeWithNotifications(searchIn pool: [AnimeLink] = NineAnimator.default.user.subscribedAnimes) -> NineAnimatorPromise<[AnimeLink]> {
-        return NineAnimatorPromise<[UNNotification]> {
+        NineAnimatorPromise<[UNNotification]> {
             callback in
             let notificationCenter = UNUserNotificationCenter.current()
             notificationCenter.getDeliveredNotifications { callback($0, nil) }
@@ -303,7 +303,7 @@ extension UserNotificationManager {
     }
     
     private func updateWatcher(forAnime animeLink: AnimeLink, inQueue queue: DispatchQueue) -> NineAnimatorPromise<StatefulAsyncTaskContainer.TaskState> {
-        return NineAnimator.default.anime(with: animeLink).dispatch(on: queue).then {
+        NineAnimator.default.anime(with: animeLink).dispatch(on: queue).then {
             anime in
             // Update the anime watcher
             self.update(anime)
@@ -511,7 +511,7 @@ fileprivate extension String {
     }
     
     static func downloadUpdateNotificationIdentifier(_ content: OfflineContent) -> String {
-        return "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(content.identifier.uniqueHashingIdentifier)"
+        "com.marcuszhou.NineAnimator.notification.episodeUpdates.\(content.identifier.uniqueHashingIdentifier)"
     }
     
     static func animePersistFilenameComponent(_ anime: AnimeLink) -> String {

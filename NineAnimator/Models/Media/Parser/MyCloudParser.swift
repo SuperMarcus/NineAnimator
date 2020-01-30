@@ -23,7 +23,7 @@ import Foundation
 
 class MyCloudParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "MyCloud" ]
+        [ "MyCloud" ]
     }
     
     static let videoIdentifierRegex = try! NSRegularExpression(pattern: "videoId:\\s*'([^']+)", options: .caseInsensitive)

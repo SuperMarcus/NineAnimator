@@ -306,12 +306,12 @@ extension CompositionalPlaybackMedia {
         return AVPlayerItem(asset: asset)
     }
     
-    var link: EpisodeLink { return parent.link }
+    var link: EpisodeLink { parent.link }
     
-    var name: String { return parent.name }
+    var name: String { parent.name }
     
     var castMedia: CastMedia? {
-        return CastMedia(
+        CastMedia(
             title: parent.name,
             url: url,
             poster: parent.link.parent.image,
@@ -323,23 +323,23 @@ extension CompositionalPlaybackMedia {
     }
     
     // SubtitledPlaybackMedia only works with HLS contents
-    var isAggregated: Bool { return true }
-    var urlRequest: URLRequest? { return nil }
+    var isAggregated: Bool { true }
+    var urlRequest: URLRequest? { nil }
     
     private var interceptResourceScheme: String {
-        return "na-compositional-media"
+        "na-compositional-media"
     }
     
     private var injectionSubtitlePlaylistScheme: String {
-        return "na-inject-subtitle"
+        "na-inject-subtitle"
     }
     
     private var injectionCachedVttScheme: String {
-        return "na-inject-cached-vtt"
+        "na-inject-cached-vtt"
     }
     
     private var subtitleCompositionGroupId: String {
-        return "nasub1"
+        "nasub1"
     }
     
     private func swapScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {

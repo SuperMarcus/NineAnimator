@@ -29,37 +29,37 @@ protocol SectionProtocol {
 
 extension SectionProtocol {
     subscript(_ item: Int) -> IndexPath {
-        return IndexPath(item: item, section: self.rawValue)
+        IndexPath(item: item, section: self.rawValue)
     }
     
     func `is`(_ integerSectionNumber: Int) -> Bool {
-        return rawValue == integerSectionNumber
+        rawValue == integerSectionNumber
     }
     
     func `is`(_ anotherSection: Self) -> Bool {
-        return anotherSection.rawValue == rawValue
+        anotherSection.rawValue == rawValue
     }
     
     func contains(_ indexPath: IndexPath) -> Bool {
-        return self.is(indexPath.section)
+        self.is(indexPath.section)
     }
     
     static func indexSet(_ sections: [Self]) -> IndexSet {
-        return IndexSet(sections.map { $0.rawValue })
+        IndexSet(sections.map { $0.rawValue })
     }
     
     static func indexSet(_ sections: Self...) -> IndexSet {
-        return IndexSet(sections.map { $0.rawValue })
+        IndexSet(sections.map { $0.rawValue })
     }
 }
 
 extension SectionProtocol where Self: CaseIterable {
     static var allSections: [Self] {
-        return Self.allCases.map { $0 }
+        Self.allCases.map { $0 }
     }
     
     static var numberOfSections: Int {
-        return Self.allCases.count
+        Self.allCases.count
     }
 }
 

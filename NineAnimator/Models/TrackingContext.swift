@@ -64,12 +64,12 @@ class TrackingContext {
     /// The most recent record is always appended to the back of the list, so
     /// this getter is an alias of progressRecords.last
     var mostRecentRecord: PlaybackProgressRecord? {
-        return progressRecords.last
+        progressRecords.last
     }
     
     /// Latest record of the furtherest episode
     var furtherestEpisodeRecord: PlaybackProgressRecord? {
-        return progressRecords.max {
+        progressRecords.max {
             $0.episodeNumber < $1.episodeNumber
         }
     }
@@ -130,7 +130,7 @@ class TrackingContext {
     
     /// Retrieve the list of references that are loaded
     var availableReferences: [ListingAnimeReference] {
-        return listingAnimeReferences.map { $0.1 }
+        listingAnimeReferences.map { $0.1 }
     }
     
     /// Prepare this tracking context for updates
@@ -357,7 +357,7 @@ extension TrackingContext {
     
     /// Retrieve the latest playback record for the specific episode
     func retrieveLatestRecord(forEpisodeNumber episode: Int) -> PlaybackProgressRecord? {
-        return queue.sync {
+        queue.sync {
             // Search the record in all related contexts
             var searchingContexts = relatedTrackingContexts?.map { $0.value } ??
                 relatedLinks.map { parent.trackingContext(for: $0) }
@@ -376,7 +376,7 @@ extension TrackingContext {
     /// Retrieve the playback progress for an episode
     func playbackProgress(for episodeLink: EpisodeLink) -> Double {
         // Using the conventional progress storage
-        var fallbackProgress: Double { return Double(parent.user.playbackProgress(for: episodeLink)) }
+        var fallbackProgress: Double { Double(parent.user.playbackProgress(for: episodeLink)) }
         
         // Make sure that this tracking context owns the link
         guard episodeLink.parent == link else {

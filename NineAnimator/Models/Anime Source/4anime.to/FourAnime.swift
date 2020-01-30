@@ -26,25 +26,25 @@ import AppKit
 #endif
 
 class NASourceFourAnime: BaseSource, Source, PromiseSource {
-    var name: String { return "4anime.to" }
+    var name: String { "4anime.to" }
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "4anime Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "4anime Site Icon") }
     #endif
     
     var siteDescription: String {
-        return "4anime is a popular free anime streaming website funded by donations. This website is guarded by Cloudflare; you may be asked to verify your identity."
+        "4anime is a popular free anime streaming website funded by donations. This website is guarded by Cloudflare; you may be asked to verify your identity."
     }
     
     class var FourAnimeStream: Anime.ServerIdentifier {
-        return "4anime"
+        "4anime"
     }
     
-    override var endpoint: String { return "https://4anime.to" }
+    override var endpoint: String { "https://4anime.to" }
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
@@ -54,20 +54,20 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return server == NASourceFourAnime.FourAnimeStream
+        server == NASourceFourAnime.FourAnimeStream
             ? DummyParser.registeredInstance : nil
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        return recommendServers(for: anime, ofPurpose: .playback).first
+        recommendServers(for: anime, ofPurpose: .playback).first
     }
     
     override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
-        return anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
+        anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
             ? [NASourceFourAnime.FourAnimeStream] : []
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return .fail()
+        .fail()
     }
 }

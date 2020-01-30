@@ -32,7 +32,7 @@ class RecentsSceneCollectionCollectionViewCell: UICollectionViewCell, ContentPro
     private(set) var collection: ListingAnimeCollection?
     
     override var isHighlighted: Bool {
-        get { return super.isHighlighted }
+        get { super.isHighlighted }
         set {
             super.isHighlighted = newValue
             

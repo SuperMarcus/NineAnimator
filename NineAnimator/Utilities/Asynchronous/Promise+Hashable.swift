@@ -26,6 +26,6 @@ extension NineAnimatorPromise {
     }
     
     static func == (lhs: NineAnimatorPromise<ResultType>, rhs: NineAnimatorPromise<ResultType>) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        lhs.hashValue == rhs.hashValue
     }
 }

@@ -59,7 +59,7 @@ class OfflineContent: NSObject {
     
     var parent: OfflineContentManager
     
-    var identifier: String { return "" }
+    var identifier: String { "" }
     
     /// This property marks if this asset is still pending restoration
     ///
@@ -83,7 +83,7 @@ class OfflineContent: NSObject {
     
     /// Set to indicate if this asset is an persisted hls asset
     var isAggregatedAsset: Bool {
-        get { return persistedProperties["aggregated"] as? Bool ?? false }
+        get { persistedProperties["aggregated"] as? Bool ?? false }
         set { persistedProperties["aggregated"] = newValue }
     }
     
@@ -113,13 +113,13 @@ class OfflineContent: NSObject {
     
     /// The request headers that should be sent along with the requests
     var sourceRequestHeaders: [String: String] {
-        get { return persistedProperties["sourceRequestHeaders"] as? [String: String] ?? [:] }
+        get { persistedProperties["sourceRequestHeaders"] as? [String: String] ?? [:] }
         set { persistedProperties["sourceRequestHeaders"] = newValue }
     }
     
     /// Description of the downloading asset
     var localizedDescription: String {
-        return "A Content"
+        "A Content"
     }
     
     /// Date at which the download was last attempted
@@ -153,7 +153,7 @@ class OfflineContent: NSObject {
     /// The url passed into this function may not be the url
     /// that is persisted.
     func suggestName(for url: URL) -> String {
-        return url.deletingPathExtension().lastPathComponent
+        url.deletingPathExtension().lastPathComponent
     }
     
     /// Called when the resource is successfully downloaded to url
@@ -452,12 +452,12 @@ extension OfflineContent {
         
         /// Suggest the next download attempt no later than the maximal delay
         func nextDownloadAttempt(maximalDelay: TimeInterval) -> Date {
-            return lastDownloadInitiation + min(TimeInterval(downloadAttempts) * 15, maximalDelay)
+            lastDownloadInitiation + min(TimeInterval(downloadAttempts) * 15, maximalDelay)
         }
         
         /// Suggest if the content should re-attempt to obtain the resource URL
         func shouldRetryRequestResource(maximalResourceFailiureCount: Int) -> Bool {
-            return (downloadAttempts - lastResourceRetrivalAttempt) > maximalResourceFailiureCount
+            (downloadAttempts - lastResourceRetrivalAttempt) > maximalResourceFailiureCount
         }
         
         /// - Note: Called from `resumeFailedTask()`

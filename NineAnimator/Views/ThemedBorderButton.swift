@@ -23,7 +23,7 @@ import UIKit
 class ThemedBorderButton: UIButton, Themable {
     @IBInspectable var borderWidth: CGFloat {
         set { layer.borderWidth = newValue }
-        get { return layer.borderWidth }
+        get { layer.borderWidth }
     }
     
     @IBInspectable var useSecondaryColorInsteadOfTint: Bool = false

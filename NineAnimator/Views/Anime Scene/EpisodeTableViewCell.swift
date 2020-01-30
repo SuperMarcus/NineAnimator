@@ -35,7 +35,7 @@ class EpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var offlineAccessButton: OfflineAccessButton!
     
     private var progress: Float {
-        get { return episodeProgressView.progress }
+        get { episodeProgressView.progress }
         set {
             let newPiority: UILayoutPriority = (newValue > 0.01) ? .defaultLow : .defaultHigh
             if newPiority != hidesProgressLayoutConstraint.priority {

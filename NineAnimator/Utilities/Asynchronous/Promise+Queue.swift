@@ -28,7 +28,7 @@ extension NineAnimatorPromise {
             queue: DispatchQueue = .global(),
             listOfPromises promises: [NineAnimatorPromise<GroupedResultType>]
         ) -> NineAnimatorPromise<[GroupedResultType]> {
-        return NineAnimatorPromise<[GroupedResultType]>(queue: queue) {
+        NineAnimatorPromise<[GroupedResultType]>(queue: queue) {
             callback in
             var mutableQueue = promises
             var results = [GroupedResultType]()

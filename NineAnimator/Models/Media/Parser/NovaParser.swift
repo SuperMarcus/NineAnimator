@@ -23,7 +23,7 @@ import Foundation
 
 class NovaParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "Nova", "Nova Server" ]
+        [ "Nova", "Nova Server" ]
     }
     
     private struct SourcesAPIResponse: Codable {
@@ -74,6 +74,6 @@ class NovaParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

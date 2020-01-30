@@ -21,7 +21,7 @@ import Foundation
 
 extension NASourceAnimeTwist {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return reloadAnimeList().then {
+        reloadAnimeList().then {
             list in
             let latestAnime = list.filter {
                 // Look for ongoing anime

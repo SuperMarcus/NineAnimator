@@ -22,7 +22,7 @@ import Foundation
 
 extension PersistentEpisode {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<PersistentEpisode> {
-        return NSFetchRequest<PersistentEpisode>(entityName: "PersistentEpisode")
+        NSFetchRequest<PersistentEpisode>(entityName: "PersistentEpisode")
     }
 
     @NSManaged public var resumeData: Data?

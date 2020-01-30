@@ -36,13 +36,13 @@ extension NASourceNineAnime {
     ///
     /// - Returns: The request signature (`_`) value
     private func sign(_ dict: [String: CustomStringConvertible]) -> Int {
-        return 636 + (dict.count * 48)
+        636 + (dict.count * 48)
     }
     
     /// Retrieve the current timestamp `ts` value that should be
     /// included in the request
     private var currentNATimestamp: Int {
-        return Int(Date().timeIntervalSince1970 / 3600 + 12) * 3600
+        Int(Date().timeIntervalSince1970 / 3600 + 12) * 3600
     }
     
     /// Sign the request url with parameters

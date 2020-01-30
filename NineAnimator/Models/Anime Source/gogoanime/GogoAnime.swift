@@ -27,29 +27,29 @@ import AppKit
 #endif
 
 class NASourceGogoAnime: BaseSource, Source, PromiseSource {
-    var name: String { return "gogoanime.tv" }
+    var name: String { "gogoanime.tv" }
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
 #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "GogoAnime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "GogoAnime Site Icon") }
 #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "GogoAnime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "GogoAnime Site Icon") }
 #endif
     
     var siteDescription: String {
-        return "GogoAnime is a free anime streaming website. NineAnimator has fairly good support for this website."
+        "GogoAnime is a free anime streaming website. NineAnimator has fairly good support for this website."
     }
 
-    override var endpoint: String { return "https://gogoanime.io" }
+    override var endpoint: String { "https://gogoanime.io" }
 
     let ajaxEndpoint = URL(string: "https://ajax.apimovie.xyz")!
 
     func search(keyword: String) -> ContentProvider {
-        return GogoContentProvider(query: keyword, parent: self)
+        GogoContentProvider(query: keyword, parent: self)
     }
 
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return VideoProviderRegistry.default.provider(for: name)
+        VideoProviderRegistry.default.provider(for: name)
     }
 }

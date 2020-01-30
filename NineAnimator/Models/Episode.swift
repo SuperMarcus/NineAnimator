@@ -26,8 +26,8 @@ struct Episode {
     let link: EpisodeLink
     let target: URL
     
-    var name: String { return link.name }
-    var parentLink: AnimeLink { return link.parent }
+    var name: String { link.name }
+    var parentLink: AnimeLink { link.parent }
     var referer: String
     var userInfo: [String: Any]
     
@@ -36,17 +36,17 @@ struct Episode {
         return source.suggestProvider(episode: self, forServer: link.server, withServerName: serverName) != nil
     }
     
-    var progress: Double { return parent.trackingContext.playbackProgress(for: link) }
+    var progress: Double { parent.trackingContext.playbackProgress(for: link) }
     
     func update(progress: Float) { NineAnimator.default.user.update(progress: progress, for: link) }
     
-    var source: Source { return parent.source }
+    var source: Source { parent.source }
     
     let parent: Anime
     
     /// The tracking content for the episode
     var trackingContext: TrackingContext {
-        return parent.trackingContext
+        parent.trackingContext
     }
     
     init(_ link: EpisodeLink, target: URL, parent: Anime, referer: String? = nil, userInfo: [String: Any] = [:]) {

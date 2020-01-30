@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceAnimeKisa {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return request(browsePath: "/").then {
+        request(browsePath: "/").then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             let updatedAnime = try bowl.select("div.episode-box").map {

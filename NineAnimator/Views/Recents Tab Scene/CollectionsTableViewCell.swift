@@ -50,7 +50,7 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -73,7 +73,7 @@ class CollectionsTableViewCell: UITableViewCell, Themable, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(
+        CGSize(
             width: min(maxCellWidth, collectionView.bounds.width * 0.8),
             height: collectionView.bounds.height - 30
         )

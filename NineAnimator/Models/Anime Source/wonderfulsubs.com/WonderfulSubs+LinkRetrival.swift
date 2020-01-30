@@ -21,7 +21,7 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> String in
             let components = url.pathComponents
             // Make sure this is an url pointing to an anime

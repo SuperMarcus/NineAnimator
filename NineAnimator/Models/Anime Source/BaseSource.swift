@@ -26,12 +26,12 @@ import Foundation
 class BaseSource: SessionDelegate {
     let parent: NineAnimator
     
-    var endpoint: String { return "" }
+    var endpoint: String { "" }
     
-    var endpointURL: URL { return URL(string: endpoint)! }
+    var endpointURL: URL { URL(string: endpoint)! }
     
     // Default to enabled
-    var isEnabled: Bool { return true }
+    var isEnabled: Bool { true }
     
     var _cfResolverTimer: Timer?
     var _cfPausedTasks = [Alamofire.RequestRetryCompletion]()
@@ -44,7 +44,7 @@ class BaseSource: SessionDelegate {
     lazy var browseSession: SessionManager = createBrowseSession()
     
     /// The user agent that should be used with requests
-    var sessionUserAgent: String { return _internalUAIdentity }
+    var sessionUserAgent: String { _internalUAIdentity }
     
     /// Middlewares for verification
     private var verificationMiddlewares = [Alamofire.DataRequest.Validation]()
@@ -125,7 +125,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return applyMiddlewares(
+        applyMiddlewares(
                 to: browseSession.request(url, headers: headers)
             ).responseString {
                 switch $0.result {
@@ -139,7 +139,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        return applyMiddlewares(
+        applyMiddlewares(
                 to: retriverSession.request(url, headers: headers)
             ) .responseJSON {
                 response in
@@ -157,7 +157,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return applyMiddlewares(
+        applyMiddlewares(
                 to: retriverSession.request(url, headers: headers)
             ) .responseString {
                 response in
@@ -172,7 +172,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(browse path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return request(browse: path, with: [:], completion: handler)
+        request(browse: path, with: [:], completion: handler)
     }
     
     func request(browse path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
@@ -185,7 +185,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajax path: String, completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        return request(ajax: path, with: [:], completion: handler)
+        request(ajax: path, with: [:], completion: handler)
     }
     
     func request(ajax path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
@@ -198,7 +198,7 @@ class BaseSource: SessionDelegate {
     }
     
     func request(ajaxString path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        return request(ajaxString: path, with: [:], completion: handler)
+        request(ajaxString: path, with: [:], completion: handler)
     }
     
     func request(ajaxString path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
@@ -218,7 +218,7 @@ extension BaseSource {
     }
     
     func applyMiddlewares(to request: Alamofire.DataRequest) -> Alamofire.DataRequest {
-        return verificationMiddlewares.reduce(request) { $0.validate($1) }
+        verificationMiddlewares.reduce(request) { $0.validate($1) }
     }
 }
 

@@ -165,7 +165,7 @@ extension LibraryTrackingCollectionController {
 // MARK: - Data Source & Delegate
 extension LibraryTrackingCollectionController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -173,7 +173,7 @@ extension LibraryTrackingCollectionController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 ? cachedCollectionReferences.count : 0
+        section == 0 ? cachedCollectionReferences.count : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -256,7 +256,7 @@ extension LibraryTrackingCollectionController {
 // MARK: - Helper Methods
 extension LibraryTrackingCollectionController {
     func reference(at indexPath: IndexPath) -> ListingAnimeReference? {
-        return indexPath.section == 0 && indexPath.item < cachedCollectionReferences.count
+        indexPath.section == 0 && indexPath.item < cachedCollectionReferences.count
             ? cachedCollectionReferences.object(at: indexPath.item) as? ListingAnimeReference : nil
     }
     

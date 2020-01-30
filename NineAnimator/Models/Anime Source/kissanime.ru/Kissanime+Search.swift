@@ -22,9 +22,9 @@ import SwiftSoup
 
 extension NASourceKissanime {
     class SearchAgent: ContentProvider {
-        var totalPages: Int? { return 1 }
-        var availablePages: Int { return _results == nil ? 0 : 1 }
-        var moreAvailable: Bool { return _results == nil }
+        var totalPages: Int? { 1 }
+        var availablePages: Int { _results == nil ? 0 : 1 }
+        var moreAvailable: Bool { _results == nil }
         
         private let parent: NASourceKissanime
         private var requestTask: NineAnimatorAsyncTask?
@@ -34,7 +34,7 @@ extension NASourceKissanime {
         weak var delegate: ContentProviderDelegate?
         
         func links(on page: Int) -> [AnyLink] {
-            return page == 0 ? _results?.map { .anime($0) } ?? [] : []
+            page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
         func more() {
@@ -105,6 +105,6 @@ extension NASourceKissanime {
     }
     
     func search(keyword: String) -> ContentProvider {
-        return SearchAgent(query: keyword, parent: self)
+        SearchAgent(query: keyword, parent: self)
     }
 }

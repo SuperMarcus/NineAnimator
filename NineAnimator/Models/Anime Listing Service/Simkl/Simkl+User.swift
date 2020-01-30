@@ -25,7 +25,7 @@ extension Simkl {
     }
     
     func currentUser() -> NineAnimatorPromise<User> {
-        return apiRequest("/users/settings", expectedResponseType: NSDictionary.self).then {
+        apiRequest("/users/settings", expectedResponseType: NSDictionary.self).then {
             try DictionaryDecoder().decode(UserSettingsResponse.self, from: $0).user
         }
     }
@@ -57,7 +57,7 @@ extension Simkl {
     }
     
     var cachedUserCollectionsLastUpdate: Date {
-        get { return persistedProperties[PersistedKeys.cacheLastUpdateDate] as? Date ?? .distantPast }
+        get { persistedProperties[PersistedKeys.cacheLastUpdateDate] as? Date ?? .distantPast }
         set { persistedProperties[PersistedKeys.cacheLastUpdateDate] = newValue }
     }
 }

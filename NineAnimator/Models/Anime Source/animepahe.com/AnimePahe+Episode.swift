@@ -45,7 +45,7 @@ extension NASourceAnimePahe {
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> (animeIdentifier: String, episodeNumber: Int, page: String) in
             let decodedEpisodeIdentifiers = try formDecode(link.identifier)
             return (

@@ -47,17 +47,17 @@ struct StaticListingAnimeCollection: ListingAnimeCollection {
 }
 
 extension StaticListingAnimeCollection {
-    var totalPages: Int? { return 1 }
-    var availablePages: Int { return 1 }
-    var moreAvailable: Bool { return false }
+    var totalPages: Int? { 1 }
+    var availablePages: Int { 1 }
+    var moreAvailable: Bool { false }
     
     var delegate: ContentProviderDelegate? {
-        get { return nil }
+        get { nil }
         set { newValue?.pageIncoming(0, from: self) }
     }
     
     func links(on page: Int) -> [AnyLink] {
-        return collection.map { .listingReference($0) }
+        collection.map { .listingReference($0) }
     }
     
     func more() { }

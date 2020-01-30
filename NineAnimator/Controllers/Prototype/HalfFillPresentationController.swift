@@ -43,7 +43,7 @@ public class HalfFillPresentationController: UIPresentationController {
     }
     
     public var viewController: HalfFillViewControllerProtocol {
-        return super.presentedViewController as! HalfFillViewControllerProtocol
+        super.presentedViewController as! HalfFillViewControllerProtocol
     }
     
     private func presentAsFullScreen() {

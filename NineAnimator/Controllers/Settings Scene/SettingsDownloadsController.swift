@@ -32,7 +32,7 @@ class SettingsDownloadsController: UITableViewController {
     private var usageLoadingTask: NineAnimatorAsyncTask?
     private var statistics: UsageStatistics?
     private var criticalStorageThreshold: Int {
-        return 3_221_225_472 // 3 Gigabytes
+        3_221_225_472 // 3 Gigabytes
     }
     
     override func viewDidLoad() {
@@ -225,7 +225,7 @@ extension SettingsDownloadsController {
     }
     
     fileprivate func fetchStorageUsage() -> NineAnimatorPromise<UsageStatistics> {
-        return OfflineContentManager.shared.fetchDownloadStorageStatistics().thenPromise {
+        OfflineContentManager.shared.fetchDownloadStorageStatistics().thenPromise {
             [unowned self] stats in self.fetchImageCacheUsage().then {
                 (stats, $0)
             }

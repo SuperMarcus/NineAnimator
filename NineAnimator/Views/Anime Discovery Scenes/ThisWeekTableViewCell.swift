@@ -43,7 +43,7 @@ class ThisWeekTableViewCell: UITableViewCell, UICollectionViewDataSource, UIColl
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceAnimePahe {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             let components = url.pathComponents
             return self.animeBaseUrl.appendingPathComponent(components[2])
         } .thenPromise {

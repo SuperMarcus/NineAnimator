@@ -231,14 +231,14 @@ extension LibrarySceneController {
     
     /// Return the first tip of type T
     func getTip<T: Tip>(ofType type: T.Type) -> T? {
-        return tips.first { $0 is T } as? T
+        tips.first { $0 is T } as? T
     }
 }
 
 // MARK: - Data Source
 extension LibrarySceneController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return numberOfSections
+        numberOfSections
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -317,7 +317,7 @@ extension LibrarySceneController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return .zero
+        .zero
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -529,7 +529,7 @@ extension LibrarySceneController {
         let tintColor: UIColor
         
         /// Getter of the marker. An alias of the marker retriever
-        var marker: String { return markerRetriever() }
+        var marker: String { markerRetriever() }
         
         init(offset: Int, name: String, segueIdentifier: String, tintColor: UIColor, icon: UIImage, markerRetriever: @escaping () -> String) {
             self.offset = offset
@@ -541,33 +541,33 @@ extension LibrarySceneController {
         }
         
         static func == (lhs: Category, rhs: Category) -> Bool {
-            return lhs.offset == rhs.offset
+            lhs.offset == rhs.offset
         }
     }
     
     /// Number of sections before the list collections
-    var collectionsOffset: Int { return Section.collection.rawValue }
+    var collectionsOffset: Int { Section.collection.rawValue }
     
     /// The total number of sections
-    var numberOfSections: Int { return collectionsOffset + collectionProviders.count }
+    var numberOfSections: Int { collectionsOffset + collectionProviders.count }
     
     /// Default row height for cells
-    var defaultRowHeight: CGFloat { return 80 }
+    var defaultRowHeight: CGFloat { 80 }
     
     /// Hight for the collections headers
-    var defaultCollectionHeaderHeight: CGFloat { return 50 }
+    var defaultCollectionHeaderHeight: CGFloat { 50 }
     
     /// Number of recently watched anime to be shown
-    var maximalNumberOfRecentlyWatched: Int { return 6 }
+    var maximalNumberOfRecentlyWatched: Int { 6 }
     
     /// Retrieve the CollectionSource for the section
     func collectionSource(forSection section: Int) -> CollectionSource {
-        return collectionProviders[section - collectionsOffset]
+        collectionProviders[section - collectionsOffset]
     }
     
     /// Retrieve the collection's state of loading
     func collectionState(forSection section: Int) -> Result<[Collection], Error>? {
-        return collectionStates[section - collectionsOffset]
+        collectionStates[section - collectionsOffset]
     }
     
     /// Retrieve the collection at the `indexPath`
@@ -583,12 +583,12 @@ extension LibrarySceneController {
     
     /// Retrieve the corresponding section index of the collection source offset
     func sectionIndex(forCollectionSource offset: Int) -> Int {
-        return collectionsOffset + offset
+        collectionsOffset + offset
     }
     
     /// Return the category with the segue identifier
     func category(withIdentifier segueIdentifier: String) -> Category? {
-        return categories.first { $0.segueIdentifier == segueIdentifier }
+        categories.first { $0.segueIdentifier == segueIdentifier }
     }
     
     /// Initialize the categories collection
@@ -629,7 +629,7 @@ extension LibrarySceneController {
 
 fileprivate extension LibrarySceneController.CollectionSource {
     var shouldPresentInLibrary: Bool {
-        return self.isCapableOfRetrievingAnimeState
+        self.isCapableOfRetrievingAnimeState
     }
 }
 

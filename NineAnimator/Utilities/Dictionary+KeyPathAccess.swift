@@ -22,7 +22,7 @@ import Foundation
 extension Dictionary {
     /// Obtain value with the provided keypath
     func value(at path: String) -> Any? {
-        return (self as NSDictionary).value(forKeyPath: path)
+        (self as NSDictionary).value(forKeyPath: path)
     }
     
     /// Obtain value at path of a specific type
@@ -35,7 +35,7 @@ extension Dictionary {
     
     /// Obtain the value at key with a typed default value T
     subscript<T>(_ key: Key, typedDefault defaultValue: T) -> T {
-        return (self[key] as? T) ?? defaultValue
+        (self[key] as? T) ?? defaultValue
     }
 }
 
@@ -48,6 +48,6 @@ extension NSDictionary {
     }
     
     func valueIfPresent<T>(at path: String, type: T.Type) -> T? {
-        return value(forKeyPath: path) as? T
+        value(forKeyPath: path) as? T
     }
 }

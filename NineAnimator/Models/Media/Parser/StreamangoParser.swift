@@ -23,7 +23,7 @@ import Foundation
 
 class StreamangoParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "Streamango" ]
+        [ "Streamango" ]
     }
     
     static let obscuredVideoSourceRegex = try! NSRegularExpression(pattern: "src:\\s*d\\('([^']+)',\\s*([^)]+)\\)", options: .caseInsensitive)
@@ -88,7 +88,7 @@ class StreamangoParser: VideoProviderParser {
         }
         
         func chr(_ c: Int) -> Character {
-            return Character(UnicodeScalar(c)!)
+            Character(UnicodeScalar(c)!)
         }
         
         var _0x59b81a = ""

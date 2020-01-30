@@ -48,7 +48,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     
     private var playerPeriodicObservation: Any?
     
-    var currentPlaybackTime: CMTime { return player.currentTime() }
+    var currentPlaybackTime: CMTime { player.currentTime() }
     
     var currentPlaybackPercentage: Float {
         guard let item = currentItem else { return 0 }
@@ -65,9 +65,9 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     
     private var mediaItemsObervations = [AVPlayerItem: NSKeyValueObservation]()
     
-    var currentMedia: PlaybackMedia? { return mediaQueue.first }
+    var currentMedia: PlaybackMedia? { mediaQueue.first }
     
-    var currentItem: AVPlayerItem? { return player.currentItem }
+    var currentItem: AVPlayerItem? { player.currentItem }
     
     // State of the player
     private(set) var state: State = .idle
@@ -189,7 +189,7 @@ extension NativePlayerController {
 extension NativePlayerController {
     // Check if picture in picture is supported and enabled
     private var shouldUsePictureInPicture: Bool {
-        return AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback
+        AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback
     }
     
     func playerViewController(_ playerViewController: AVPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {

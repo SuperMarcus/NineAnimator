@@ -26,30 +26,30 @@ import AppKit
 #endif
 
 class NASourceAnimePahe: BaseSource, Source, PromiseSource {
-    var name: String { return "animepahe.com" }
+    var name: String { "animepahe.com" }
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     var siteDescription: String {
-        return "AnimePahe is a free, donation based website that provides ad-less experience of streaming anime. NineAnimator has experimental support with this website."
+        "AnimePahe is a free, donation based website that provides ad-less experience of streaming anime. NineAnimator has experimental support with this website."
     }
     
     override var endpoint: String {
-        return "https://animepahe.com"
+        "https://animepahe.com"
     }
     
     var animeBaseUrl: URL {
-        return endpointURL.appendingPathComponent("anime")
+        endpointURL.appendingPathComponent("anime")
     }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimePahe Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "AnimePahe Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimePahe Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "AnimePahe Site Icon") }
     #endif
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        return VideoProviderRegistry.default.provider(for: name)
+        VideoProviderRegistry.default.provider(for: name)
     }
     
     override func canHandle(url: URL) -> Bool {

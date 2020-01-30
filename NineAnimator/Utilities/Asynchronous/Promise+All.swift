@@ -78,7 +78,7 @@ extension NineAnimatorPromise {
             queue: DispatchQueue = .global(),
             listOfTasks: [() throws -> GroupedResultType?]
         ) -> NineAnimatorPromise<[GroupedResultType]> {
-        return all(queue: queue, listOfPromises: listOfTasks.map { NineAnimatorPromise<GroupedResultType>.firstly($0) })
+        all(queue: queue, listOfPromises: listOfTasks.map { NineAnimatorPromise<GroupedResultType>.firstly($0) })
     }
     
     /// Alias
@@ -86,7 +86,7 @@ extension NineAnimatorPromise {
             queue: DispatchQueue = .global(),
             _ tasks: (() throws -> GroupedResultType?)...
         ) -> NineAnimatorPromise<[GroupedResultType]> {
-        return all(queue: queue, listOfTasks: tasks)
+        all(queue: queue, listOfTasks: tasks)
     }
     
     /// Alias
@@ -94,6 +94,6 @@ extension NineAnimatorPromise {
             queue: DispatchQueue = .global(),
             promises: NineAnimatorPromise<GroupedResultType>...
         ) -> NineAnimatorPromise<[GroupedResultType]> {
-        return all(queue: queue, listOfPromises: promises)
+        all(queue: queue, listOfPromises: promises)
     }
 }

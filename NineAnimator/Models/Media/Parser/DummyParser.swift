@@ -22,7 +22,7 @@ import Foundation
 
 /// A passthrough parser that passes the target url of the anime as the playback media
 class DummyParser: VideoProviderParser {
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let dummyTask = AsyncTaskContainer()
@@ -57,6 +57,6 @@ class DummyParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

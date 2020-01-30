@@ -34,7 +34,7 @@ struct AtomicProperty<Value> {
     }
     
     var projectedValue: Self {
-        return self
+        self
     }
     
     init(wrappedValue value: Value) {

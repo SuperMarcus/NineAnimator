@@ -26,9 +26,9 @@ extension MyAnimeList {
         var additionalQueryParameters: [String: CustomStringConvertible]
         var apiPath: String
         
-        var moreAvailable: Bool { return nextPageOffset != nil }
-        var availablePages: Int { return loadedPages.count }
-        var totalPages: Int? { return moreAvailable ? nil : availablePages }
+        var moreAvailable: Bool { nextPageOffset != nil }
+        var availablePages: Int { loadedPages.count }
+        var totalPages: Int? { moreAvailable ? nil : availablePages }
         
         let parent: MyAnimeList
         private(set) var loadedPages = [[ListingAnimeReference]]()
@@ -36,7 +36,7 @@ extension MyAnimeList {
         private var currentFetchTask: NineAnimatorAsyncTask?
         
         func links(on page: Int) -> [AnyLink] {
-            return loadedPages[page].map { .listingReference($0) }
+            loadedPages[page].map { .listingReference($0) }
         }
         
         func more() {

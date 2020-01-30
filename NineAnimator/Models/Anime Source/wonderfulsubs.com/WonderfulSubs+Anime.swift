@@ -21,7 +21,7 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return request(
+        request(
             ajaxPathDictionary: "/api/media/series",
             query: [ "series": link.link.lastPathComponent ],
             headers: [ "Referer": link.link.absoluteString ]

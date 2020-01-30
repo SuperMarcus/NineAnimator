@@ -118,7 +118,7 @@ class TrackingServiceTableViewController: UITableViewController {
 
 // MARK: - MAL specifics
 extension TrackingServiceTableViewController {
-    private var mal: MyAnimeList { return NineAnimator.default.service(type: MyAnimeList.self) }
+    private var mal: MyAnimeList { NineAnimator.default.service(type: MyAnimeList.self) }
     
     private func malPresentAuthenticationPage() {
         let alert = UIAlertController(
@@ -217,7 +217,7 @@ extension TrackingServiceTableViewController {
 
 // MARK: - Kitsu specifics
 extension TrackingServiceTableViewController {
-    private var kitsu: Kitsu { return NineAnimator.default.service(type: Kitsu.self) }
+    private var kitsu: Kitsu { NineAnimator.default.service(type: Kitsu.self) }
     
     private func kitsuPresentAuthenticationPage() {
         let alert = UIAlertController(
@@ -317,7 +317,7 @@ extension TrackingServiceTableViewController {
 
 // MARK: - AniList.co specifics
 extension TrackingServiceTableViewController {
-    private var anilist: Anilist { return NineAnimator.default.service(type: Anilist.self) }
+    private var anilist: Anilist { NineAnimator.default.service(type: Anilist.self) }
     
     private func anilistUpdateStatus() {
         // Disable switch by default
@@ -390,7 +390,7 @@ extension TrackingServiceTableViewController {
 
 // MARK: - Simkl.com specifics
 extension TrackingServiceTableViewController {
-    private var simkl: Simkl { return NineAnimator.default.service(type: Simkl.self) }
+    private var simkl: Simkl { NineAnimator.default.service(type: Simkl.self) }
     
     private func simklUpdateStatus() {
         if simkl.didSetup {
@@ -485,6 +485,6 @@ extension TrackingServiceTableViewController {
 @available(iOS 12.0, *)
 extension TrackingServiceTableViewController: ASWebAuthenticationPresentationContextProviding {
     func presentationAnchor(for session: ASWebAuthenticationSession) -> ASPresentationAnchor {
-        return view.window!
+        view.window!
     }
 }

@@ -95,10 +95,10 @@ extension ListingAnimeReference {
 
 // ListingAnimeName+CustomStringConvertible
 extension ListingAnimeName {
-    var description: String { return self.default }
+    var description: String { self.default }
     
     func proximity(to anime: AnimeLink) -> Double {
-        return [ native, english, romaji, `default` ].reduce(0.0) {
+        [ native, english, romaji, `default` ].reduce(0.0) {
             max($0, $1.proximity(to: anime.title))
         }
     }
@@ -111,7 +111,7 @@ extension ListingAnimeReference {
     }
     
     static func == (_ lhs: ListingAnimeReference, _ rhs: ListingAnimeReference) -> Bool {
-        return (lhs.parentService.name == rhs.parentService.name) &&
+        (lhs.parentService.name == rhs.parentService.name) &&
             (lhs.uniqueIdentifier == rhs.uniqueIdentifier)
     }
 }

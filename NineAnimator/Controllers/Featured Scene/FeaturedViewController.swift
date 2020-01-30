@@ -48,7 +48,7 @@ class FeaturedViewController: UITableViewController {
     
     var loadingSource: Source?
     
-    var source: Source { return NineAnimator.default.user.source }
+    var source: Source { NineAnimator.default.user.source }
     
     func reload() {
         featuredAnimePage = nil
@@ -73,7 +73,7 @@ class FeaturedViewController: UITableViewController {
     @objc func onRefreshRequested() { reload() }
     
     @IBAction private func onSourceSelectionButtonPressed(_ sender: Any) {
-        return ServerSelectionViewController.presentSelectionDialog {
+        ServerSelectionViewController.presentSelectionDialog {
             [weak self] _ in
             guard let self = self else { return }
             if self.loadingSource?.name != self.source.name {
@@ -112,7 +112,7 @@ class FeaturedViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return featuredAnimePage == nil ? 1 : 2
+        featuredAnimePage == nil ? 1 : 2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -30,7 +30,7 @@ import Foundation
 /// A dummmy class for AVAssetDownloadTask
 class AVAssetDownloadTask: URLSessionTask {
     var urlAsset: AVURLAsset {
-        return AVURLAsset(url: URL(fileURLWithPath: "/tmp/doesnotexists"))
+        AVURLAsset(url: URL(fileURLWithPath: "/tmp/doesnotexists"))
     }
     
     override init() {

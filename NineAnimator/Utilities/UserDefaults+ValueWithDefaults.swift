@@ -22,6 +22,6 @@ import Foundation
 extension UserDefaults {
     /// Return a value with type T, use typedDefault if not found
     func typedValue<T>(forKey key: String, default defaultValue: T) -> T {
-        return (value(forKey: key) as? T) ?? defaultValue
+        (value(forKey: key) as? T) ?? defaultValue
     }
 }

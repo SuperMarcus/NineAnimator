@@ -33,6 +33,6 @@ public class HalfFillTransitionAnimator: NSObject, UIViewControllerAnimatedTrans
     }
     
     @objc public func transitionDuration(using: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.5
+        0.5
     }
 }

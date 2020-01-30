@@ -21,12 +21,12 @@ import Foundation
 
 extension Kitsu {
     class KitsuAnimeCollection: ListingAnimeCollection {
-        var parentService: ListingService { return parent }
+        var parentService: ListingService { parent }
         
         var title: String
         var totalPages: Int?
-        var availablePages: Int { return results.count }
-        var moreAvailable: Bool { return totalPages == nil }
+        var availablePages: Int { results.count }
+        var moreAvailable: Bool { totalPages == nil }
         weak var delegate: ContentProviderDelegate?
         
         private var identifier: String
@@ -114,7 +114,7 @@ extension Kitsu {
     }
     
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
-        return reauthenticateIfNeeded().then {
+        reauthenticateIfNeeded().then {
             [
                 ("current", "Currently Watching"),
                 ("planned", "To Watch"),

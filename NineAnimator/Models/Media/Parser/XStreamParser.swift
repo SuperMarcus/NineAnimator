@@ -22,7 +22,7 @@ import AVKit
 import Foundation
 
 class XStreamParser: VideoProviderParser {
-    var aliases: [String] { return [ "XStream", "XStreamCDN", "fembed" ] }
+    var aliases: [String] { [ "XStream", "XStreamCDN", "fembed" ] }
     
     private static let apiBaseSourceURL = URL(string: "https://www.xstreamcdn.com/api/source/")!
     
@@ -38,7 +38,7 @@ class XStreamParser: VideoProviderParser {
     }
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return NineAnimatorPromise<PlaybackMedia> {
+        NineAnimatorPromise<PlaybackMedia> {
             callback in
             let episodeComponents = episode.target.pathComponents
             guard episodeComponents.count == 3 else {
@@ -86,6 +86,6 @@ class XStreamParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

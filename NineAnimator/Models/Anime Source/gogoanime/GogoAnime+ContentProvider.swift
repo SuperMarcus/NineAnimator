@@ -27,7 +27,7 @@ extension NASourceGogoAnime {
         
         var totalPages: Int?
         
-        var availablePages: Int { return _results.count }
+        var availablePages: Int { _results.count }
         
         var moreAvailable: Bool {
             guard let pages = totalPages else { return true }
@@ -48,7 +48,7 @@ extension NASourceGogoAnime {
         }
         
         func links(on page: Int) -> [AnyLink] {
-            return _results[page].map { .anime($0) }
+            _results[page].map { .anime($0) }
         }
         
         func more() {

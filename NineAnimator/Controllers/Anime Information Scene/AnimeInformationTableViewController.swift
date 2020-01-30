@@ -41,7 +41,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     ///
     /// This is determined by the current scroll position of the table view
     private var shouldPresentOpaqueNavigationBar: Bool {
-        return max(tableView.contentOffset.y, 0) > headingView.suggestedTransitionHeight
+        max(tableView.contentOffset.y, 0) > headingView.suggestedTransitionHeight
     }
     
     // References to tasks
@@ -220,7 +220,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        5
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -685,27 +685,27 @@ fileprivate extension AnimeInformationTableViewController {
         case relatedReferences
         
         subscript(_ item: Int) -> IndexPath {
-            return IndexPath(item: item, section: self.rawValue)
+            IndexPath(item: item, section: self.rawValue)
         }
         
         static func indexSet(_ sections: [Section]) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
+            IndexSet(sections.map { $0.rawValue })
         }
         
         static func indexSet(_ sections: Section...) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
+            IndexSet(sections.map { $0.rawValue })
         }
         
         static func == (_ lhs: Section, _ rhs: Section) -> Bool {
-            return lhs.rawValue == rhs.rawValue
+            lhs.rawValue == rhs.rawValue
         }
         
         static func == (_ lhs: Int, _ rhs: Section) -> Bool {
-            return lhs == rhs.rawValue
+            lhs == rhs.rawValue
         }
         
         static func == (_ lhs: Section, _ rhs: Int) -> Bool {
-            return lhs.rawValue == rhs
+            lhs.rawValue == rhs
         }
     }
 }

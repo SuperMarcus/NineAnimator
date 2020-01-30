@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 class Simkl: BaseListingService, ListingService {
-    var name: String { return "Simkl" }
+    var name: String { "Simkl" }
     
     /// Simkl API endpoint
     let endpoint = URL(string: "https://api.simkl.com")!
@@ -31,7 +31,7 @@ class Simkl: BaseListingService, ListingService {
     var mutationQueues = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
-        return "com.marcuszhou.nineanimator.service.simkl"
+        "com.marcuszhou.nineanimator.service.simkl"
     }
     
     required init(_ parent: NineAnimator) {
@@ -41,11 +41,11 @@ class Simkl: BaseListingService, ListingService {
 
 // MARK: - Capabilities
 extension Simkl {
-    var isCapableOfListingAnimeInformation: Bool { return false }
+    var isCapableOfListingAnimeInformation: Bool { false }
     
-    var isCapableOfPersistingAnimeState: Bool { return didSetup }
+    var isCapableOfPersistingAnimeState: Bool { didSetup }
     
-    var isCapableOfRetrievingAnimeState: Bool { return didSetup }
+    var isCapableOfRetrievingAnimeState: Bool { didSetup }
 }
 
 // MARK: - Request helpers
@@ -89,29 +89,29 @@ extension Simkl {
 // MARK: - Authentications
 extension Simkl {
     private var code: String? {
-        get { return persistedProperties[PersistedKeys.authorizationCode] as? String }
+        get { persistedProperties[PersistedKeys.authorizationCode] as? String }
         set { persistedProperties[PersistedKeys.authorizationCode] = newValue }
     }
     
     private var accessToken: String? {
-        get { return persistedProperties[PersistedKeys.accessToken] as? String }
+        get { persistedProperties[PersistedKeys.accessToken] as? String }
         set { persistedProperties[PersistedKeys.accessToken] = newValue }
     }
     
     /// The Single-Sign-On URL for Simkl
     var ssoUrl: URL {
-        return URL(string: "https://simkl.com/oauth/authorize?response_type=code&client_id=\(clientId)&redirect_uri=https%3A%2F%2Fnineanimator-api.marcuszhou.com%2Fapi%2Flink_simkl%2Fauthorize")!
+        URL(string: "https://simkl.com/oauth/authorize?response_type=code&client_id=\(clientId)&redirect_uri=https%3A%2F%2Fnineanimator-api.marcuszhou.com%2Fapi%2Flink_simkl%2Fauthorize")!
     }
     
     /// Single-Sign-On Callback Scheme
-    var ssoCallbackScheme: String { return "nineanimator-list-auth" }
+    var ssoCallbackScheme: String { "nineanimator-list-auth" }
     
     /// NineAnimator Simkl Client Identifier
     var clientId: String {
-        return "d90575da9e8e76005f9148b981885c4f051dbb2634ccb67cca01f87bcbeb1ecf"
+        "d90575da9e8e76005f9148b981885c4f051dbb2634ccb67cca01f87bcbeb1ecf"
     }
     
-    var didSetup: Bool { return accessToken != nil && code != nil }
+    var didSetup: Bool { accessToken != nil && code != nil }
     
     /// Remove user credentials
     func deauthenticate() {

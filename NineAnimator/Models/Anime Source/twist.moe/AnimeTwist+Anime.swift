@@ -82,7 +82,7 @@ extension NASourceAnimeTwist {
     }
     
     func anime(_ animeInfo: AnimeTwistListedAnime) -> AnimeLink {
-        return AnimeLink(
+        AnimeLink(
             title: animeInfo.title,
             link: endpointURL.appendingPathComponent("/a/\(animeInfo.slug)"),
             image: animeInfo.artworkUrl,

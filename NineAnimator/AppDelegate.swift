@@ -210,7 +210,7 @@ extension AppDelegate {
         }
         
         static func == (lhs: AppDelegate.HashingTaskWrapper, rhs: AppDelegate.HashingTaskWrapper) -> Bool {
-            return lhs.identifier == rhs.identifier
+            lhs.identifier == rhs.identifier
         }
     }
     

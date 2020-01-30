@@ -31,7 +31,7 @@ extension Anilist {
         private let initialDate: Date
         
         func links(on page: Int) -> [AnyLink] {
-            return loadedItems[page].map { .listingReference($0.reference) }
+            loadedItems[page].map { .listingReference($0.reference) }
         }
         
         func more() {
@@ -130,12 +130,12 @@ extension Anilist {
     }
     
     static func date(fromAnilistTimestamp timestamp: Int) -> Date {
-        return Date(timeIntervalSince1970: TimeInterval(timestamp))
+        Date(timeIntervalSince1970: TimeInterval(timestamp))
     }
 }
 
 extension Anilist.WeeklyCalendar {
-    var availablePages: Int { return loadedItems.count }
-    var moreAvailable: Bool { return totalPages == nil }
-    var title: String { return "This Week" }
+    var availablePages: Int { loadedItems.count }
+    var moreAvailable: Bool { totalPages == nil }
+    var title: String { "This Week" }
 }

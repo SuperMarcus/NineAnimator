@@ -27,7 +27,7 @@ extension NASourceAnimeDao {
     )
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return request(browseUrl: link.link).then {
+        request(browseUrl: link.link).then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             

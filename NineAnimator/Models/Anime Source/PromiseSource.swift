@@ -32,18 +32,18 @@ protocol PromiseSource {
 // Implement the Source methods
 extension PromiseSource {
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
-        return featured().handle(handler)
+        featured().handle(handler)
     }
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return anime(from: link).handle(handler)
+        anime(from: link).handle(handler)
     }
     
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
-        return episode(from: link, with: anime).handle(handler)
+        episode(from: link, with: anime).handle(handler)
     }
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
-        return link(from: url).handle(handler)
+        link(from: url).handle(handler)
     }
 }

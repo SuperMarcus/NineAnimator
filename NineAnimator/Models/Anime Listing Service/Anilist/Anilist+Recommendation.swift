@@ -75,7 +75,7 @@ extension Anilist {
         }
         
         func shouldReload(recommendation: Recommendation) -> Bool {
-            return false
+            false
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {

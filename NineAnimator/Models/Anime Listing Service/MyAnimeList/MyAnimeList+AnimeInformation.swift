@@ -34,12 +34,12 @@ extension MyAnimeList {
         private var _relatedAnimeReferences: [ListingAnimeReference]
         private var _numEpisodes: Int?
 
-        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> { return .fail(.unknownError) }
-        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { return .fail(.unknownError) }
-        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { return .success(_relatedAnimeReferences) }
+        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> { .fail(.unknownError) }
+        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
+        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { .success(_relatedAnimeReferences) }
         
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
-            return NineAnimatorPromise.firstly {
+            NineAnimatorPromise.firstly {
                 [weak self] in
                 guard let self = self,
                     let mean = self._meanRatings,
@@ -133,7 +133,7 @@ extension MyAnimeList {
     }
     
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
-        return apiRequest("/anime/\(reference.uniqueIdentifier)", query: [
+        apiRequest("/anime/\(reference.uniqueIdentifier)", query: [
             "fields": "alternative_titles,average_episode_duration,broadcast,created_at,end_date,main_picture,mean,media_type,nsfw,num_scoring_users,popularity,rank,synopsis,title,background,related_anime,related_anime{node{my_list_status{start_date,finish_date}}},num_episodes,start_date"
         ]).then {
             response in

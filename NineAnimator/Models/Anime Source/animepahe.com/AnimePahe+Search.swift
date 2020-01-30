@@ -40,11 +40,11 @@ extension NASourceAnimePahe {
         private(set) var totalPages: Int?
         private let parent: NASourceAnimePahe
         
-        var availablePages: Int { return searchResults == nil ? 0 : 1 }
-        var moreAvailable: Bool { return searchResults == nil }
+        var availablePages: Int { searchResults == nil ? 0 : 1 }
+        var moreAvailable: Bool { searchResults == nil }
         
         func links(on page: Int) -> [AnyLink] {
-            return searchResults?.map { .anime($0) } ?? []
+            searchResults?.map { .anime($0) } ?? []
         }
         
         func more() {
@@ -87,6 +87,6 @@ extension NASourceAnimePahe {
     }
     
     func search(keyword: String) -> ContentProvider {
-        return SearchAgent(self, keywords: keyword)
+        SearchAgent(self, keywords: keyword)
     }
 }

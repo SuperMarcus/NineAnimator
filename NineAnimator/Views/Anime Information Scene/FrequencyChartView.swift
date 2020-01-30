@@ -147,7 +147,7 @@ class FrequencyChartView: UIView, Themable {
     
     private struct HistogramBlock {
         var range: ClosedRange<Double> {
-            return upperBound...lowerBound
+            upperBound...lowerBound
         }
         
         var value: Double
@@ -167,7 +167,7 @@ class FrequencyChartView: UIView, Themable {
         
         // Calculate area under the closed range
         subscript (_ range: ClosedRange<Double>) -> Double {
-            return (range.upperBound - range.lowerBound) / (upperBound - lowerBound) * value
+            (range.upperBound - range.lowerBound) / (upperBound - lowerBound) * value
         }
         
         init(_ x: Double, height: Double) {

@@ -36,7 +36,7 @@ class AnimeSynopsisCellTableViewCell: UITableViewCell {
     
     /// The synopsis itself
     var synopsisText: String? {
-        get { return synopsisContainerTextView.text }
+        get { synopsisContainerTextView.text }
         set {
             guard let text = newValue?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
             synopsisContainerTextView.text = text.isEmpty ? "No synopsis found for this anime" : text

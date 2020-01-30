@@ -21,6 +21,6 @@ import Foundation
 
 extension NASourceAnimeTwist {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return .fail(NineAnimatorError.providerError("Unimplemented"))
+        .fail(NineAnimatorError.providerError("Unimplemented"))
     }
 }

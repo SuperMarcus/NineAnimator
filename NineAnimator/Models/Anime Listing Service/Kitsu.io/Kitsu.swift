@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 class Kitsu: BaseListingService, ListingService {
-    var name: String { return "Kitsu.io" }
+    var name: String { "Kitsu.io" }
     
     /// Anilist API endpoint
     let endpoint = URL(string: "https://kitsu.io/api/edge")!
@@ -30,7 +30,7 @@ class Kitsu: BaseListingService, ListingService {
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
-        return "com.marcuszhou.nineanimator.service.kitsu"
+        "com.marcuszhou.nineanimator.service.kitsu"
     }
     
     required init(_ parent: NineAnimator) {
@@ -40,44 +40,44 @@ class Kitsu: BaseListingService, ListingService {
 
 extension Kitsu {
     var isCapableOfListingAnimeInformation: Bool {
-        return false
+        false
     }
     
     var isCapableOfPersistingAnimeState: Bool {
-        return didSetup
+        didSetup
     }
     
     var isCapableOfRetrievingAnimeState: Bool {
-        return didSetup
+        didSetup
     }
 }
 
 // MARK: - Authentication
 extension Kitsu {
     private var accessToken: String? {
-        get { return persistedProperties["access_token"] as? String }
+        get { persistedProperties["access_token"] as? String }
         set { persistedProperties["access_token"] = newValue }
     }
     
     private var refreshToken: String? {
-        get { return persistedProperties["refresh_token"] as? String }
+        get { persistedProperties["refresh_token"] as? String }
         set { persistedProperties["refresh_token"] = newValue }
     }
     
     private var accessTokenExpirationDate: Date {
-        get { return (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
-        set { return persistedProperties["access_token_expiration"] = newValue }
+        get { (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
+        set { persistedProperties["access_token_expiration"] = newValue }
     }
     
-    var oauthUrl: URL { return URL(string: "https://kitsu.io/api/oauth/token")! }
+    var oauthUrl: URL { URL(string: "https://kitsu.io/api/oauth/token")! }
     
-    var didSetup: Bool { return accessToken != nil && refreshToken != nil }
+    var didSetup: Bool { accessToken != nil && refreshToken != nil }
     
-    var didExpire: Bool { return accessTokenExpirationDate.timeIntervalSinceNow < 0 }
+    var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
     // swiftlint:disable closure_end_indentation
     func authenticate(user: String, password: String) -> NineAnimatorPromise<Void> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> Data? in
             var queryBuilder = URLComponents()
             queryBuilder.queryItems = [
@@ -99,7 +99,7 @@ extension Kitsu {
     
     /// Re-authenticate an expired session with the refresh token
     private func reauthenticate() -> NineAnimatorPromise<Void> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> Data? in
             guard let refreshToken = self.refreshToken else {
                 throw NineAnimatorError.authenticationRequiredError("Cannot refresh an unauthenticated session")
@@ -119,7 +119,7 @@ extension Kitsu {
     
     /// Reauthenticate the session if it is setup and expired
     func reauthenticateIfNeeded() -> NineAnimatorPromise<Void> {
-        return didSetup && didExpire ? reauthenticate() : .success(())
+        didSetup && didExpire ? reauthenticate() : .success(())
     }
     
     /// Handles the authentication responses
@@ -207,7 +207,7 @@ extension Kitsu {
     }
     
     func apiRequest(_ path: String, query: [String: String] = [:], body: [String: Any] = [:], method: HTTPMethod = .get) -> NineAnimatorPromise<[APIObject]> {
-        return reauthenticateIfNeeded().then {
+        reauthenticateIfNeeded().then {
             [endpoint, unowned self] in // First and foremost, build the request URL
             // Headers for JSON: API
             var headers = [

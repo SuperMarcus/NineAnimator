@@ -43,7 +43,7 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     private(set) var episodeInformation: Anime.AdditionalEpisodeLinkInformation?
     
     private var progress: Float {
-        get { return episodePlaybackProgressView.progress }
+        get { episodePlaybackProgressView.progress }
         set {
             let newPiority: UILayoutPriority = (newValue > 0.01) ? .defaultLow : .defaultHigh
             if newPiority != hideProgressViewConstraint.priority {

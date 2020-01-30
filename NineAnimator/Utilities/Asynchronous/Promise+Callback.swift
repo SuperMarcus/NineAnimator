@@ -23,7 +23,7 @@ import Foundation
 extension NineAnimatorPromise {
     /// Transfer all handler to callback
     func handle(_ callback: @escaping NineAnimatorPromiseCallback) -> NineAnimatorAsyncTask {
-        return self
+        self
             .error { callback(nil, $0) }
             .finally {
                 callback($0, nil)

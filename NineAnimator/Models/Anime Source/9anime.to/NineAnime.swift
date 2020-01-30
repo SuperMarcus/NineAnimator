@@ -29,22 +29,22 @@ import AppKit
 class NASourceNineAnime: BaseSource, Source {
     let name: String = "9anime.ru"
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
-    override var endpoint: String { return "https://\(_currentHost)" }
+    override var endpoint: String { "https://\(_currentHost)" }
     
 #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "9anime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "9anime Site Icon") }
 #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "9anime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "9anime Site Icon") }
 #endif
     
     var siteDescription: String {
-        return "9anime is a popular free anime streaming website and one of the best supported anime sources in NineAnimator."
+        "9anime is a popular free anime streaming website and one of the best supported anime sources in NineAnimator."
     }
     
     override var isEnabled: Bool {
-        return true
+        true
     }
     
     lazy var _currentHost: String = possibleHosts.first!
@@ -141,7 +141,7 @@ class NASourceNineAnime: BaseSource, Source {
         with headers: [String: String] = [:],
         completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        return signedRequest(
+        signedRequest(
             browse: endpointURL.appendingPathComponent(path),
             parameters: parameters,
             with: headers,
@@ -155,7 +155,7 @@ class NASourceNineAnime: BaseSource, Source {
             with headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
-        return request(browse: signRequestURL(url, withParameters: parameters), headers: headers, completion: handler)
+        request(browse: signRequestURL(url, withParameters: parameters), headers: headers, completion: handler)
     }
     
     func signedRequest(

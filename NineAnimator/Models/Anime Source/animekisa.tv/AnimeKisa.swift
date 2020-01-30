@@ -27,21 +27,21 @@ import AppKit
 #endif
 
 class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
-    var name: String { return "animekisa.tv" }
+    var name: String { "animekisa.tv" }
     
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { return #imageLiteral(resourceName: "AnimeKisa Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeKisa Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { return #imageLiteral(resourceName: "AnimeKisa Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "AnimeKisa Site Icon") }
     #endif
     
     var siteDescription: String {
-        return "AnimeKisa is a free, ads-free, and HD anime streaming platform. NineAnimator has experimental support for this website."
+        "AnimeKisa is a free, ads-free, and HD anime streaming platform. NineAnimator has experimental support for this website."
     }
     
-    override var endpoint: String { return "https://animekisa.tv" }
+    override var endpoint: String { "https://animekisa.tv" }
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
@@ -51,7 +51,7 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        return "adless"
+        "adless"
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
@@ -60,6 +60,6 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        return .fail()
+        .fail()
     }
 }

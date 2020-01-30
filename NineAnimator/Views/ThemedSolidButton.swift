@@ -24,7 +24,7 @@ class ThemedSolidButton: UIButton, Themable {
     @IBInspectable var inverted: Bool = false
     
     override var isHighlighted: Bool {
-        get { return super.isHighlighted }
+        get { super.isHighlighted }
         set {
             super.isHighlighted = newValue
             if newValue {

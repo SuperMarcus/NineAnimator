@@ -22,7 +22,7 @@ import Kingfisher
 
 extension NineAnimator: Kingfisher.ImageDownloadRequestModifier {
     func modified(for request: URLRequest) -> URLRequest? {
-        return _imageResourceModifiers.reduce(request as URLRequest?) {
+        _imageResourceModifiers.reduce(request as URLRequest?) {
             request, modifier in if let request = request {
                 return modifier.modified(for: request)
             } else { return nil }

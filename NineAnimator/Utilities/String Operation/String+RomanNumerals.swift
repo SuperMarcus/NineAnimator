@@ -60,10 +60,10 @@ extension String {
     ]
     
     var withUnicodeRomanNumerals: String {
-        return String.romanNumeralMap.reduce(self) { $0.replacingOccurrences(of: $1.letters, with: $1.unicode) }
+        String.romanNumeralMap.reduce(self) { $0.replacingOccurrences(of: $1.letters, with: $1.unicode) }
     }
     
     var withoutUnicodeRomanNumerals: String {
-        return String.romanNumeralMap.reduce(self) { $0.replacingOccurrences(of: $1.unicode, with: $1.letters) }
+        String.romanNumeralMap.reduce(self) { $0.replacingOccurrences(of: $1.unicode, with: $1.letters) }
     }
 }

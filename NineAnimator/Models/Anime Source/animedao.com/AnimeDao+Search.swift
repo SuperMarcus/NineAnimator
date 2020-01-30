@@ -24,9 +24,9 @@ extension NASourceAnimeDao {
     class SearchAgent: ContentProvider {
         var title: String
         
-        var totalPages: Int? { return 1 }
-        var availablePages: Int { return _results == nil ? 0 : 1 }
-        var moreAvailable: Bool { return _results == nil }
+        var totalPages: Int? { 1 }
+        var availablePages: Int { _results == nil ? 0 : 1 }
+        var moreAvailable: Bool { _results == nil }
         
         weak var delegate: ContentProviderDelegate?
         private var parent: NASourceAnimeDao
@@ -34,7 +34,7 @@ extension NASourceAnimeDao {
         private var _results: [AnimeLink]?
         
         func links(on page: Int) -> [AnyLink] {
-            return page == 0 ? _results?.map { .anime($0) } ?? [] : []
+            page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
         func more() {
@@ -103,6 +103,6 @@ extension NASourceAnimeDao {
     }
     
     func search(keyword: String) -> ContentProvider {
-        return SearchAgent(keyword, withParent: self)
+        SearchAgent(keyword, withParent: self)
     }
 }

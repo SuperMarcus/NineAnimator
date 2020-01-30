@@ -23,7 +23,7 @@ import Foundation
 
 class PrettyFastParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "PrettyFast.io", "F5 - HQ", "F5 Beta" ]
+        [ "PrettyFast.io", "F5 - HQ", "F5 Beta" ]
     }
     
     static let videoSourceRegex = try! NSRegularExpression(pattern: "hlsUrl\\s=\\s'([^\']+)", options: .caseInsensitive)

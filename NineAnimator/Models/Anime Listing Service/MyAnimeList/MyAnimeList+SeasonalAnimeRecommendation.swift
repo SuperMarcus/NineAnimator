@@ -31,7 +31,7 @@ extension MyAnimeList {
         }
         
         func shouldReload(recommendation: Recommendation) -> Bool {
-            return false
+            false
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
@@ -98,7 +98,7 @@ extension MyAnimeList {
         }
         
         func shouldReload(recommendation: Recommendation) -> Bool {
-            return false
+            false
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {

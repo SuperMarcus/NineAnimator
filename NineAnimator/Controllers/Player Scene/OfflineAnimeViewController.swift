@@ -80,7 +80,7 @@ class OfflineAnimeViewController: UITableViewController, BlendInViewController {
 // MARK: - Table view data source and delegate
 extension OfflineAnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

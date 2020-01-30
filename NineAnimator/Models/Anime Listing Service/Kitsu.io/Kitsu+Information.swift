@@ -21,6 +21,6 @@ import Foundation
 
 extension Kitsu {
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
-        return .fail(.unknownError)
+        .fail(.unknownError)
     }
 }

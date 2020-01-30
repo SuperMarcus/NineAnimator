@@ -137,7 +137,7 @@ extension ServerSelectionView {
 // MARK: - TableView data source
 extension ServerSelectionView {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -168,6 +168,6 @@ private class DefaultSelectionAgent: ServerSelectionViewDelegate {
     }
     
     func serverSelectionView(_ view: ServerSelectionView, isSourceSelected source: Source) -> Bool {
-        return NineAnimator.default.user.source.name == source.name
+        NineAnimator.default.user.source.name == source.name
     }
 }

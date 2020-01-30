@@ -33,10 +33,10 @@ public class HalfFillTransitionDelegate: NSObject, UIViewControllerTransitioning
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return HalfFillTransitionAnimator()
+        HalfFillTransitionAnimator()
     }
     
     public func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return HalfFillPresentationController(presentedViewController: presented, presenting: presenting)
+        HalfFillPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

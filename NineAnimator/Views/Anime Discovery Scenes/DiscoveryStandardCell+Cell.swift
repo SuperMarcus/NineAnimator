@@ -48,7 +48,7 @@ class DiscoveryStandardCellCollectionViewCell: UICollectionViewCell {
     }
     
     override var isHighlighted: Bool {
-        get { return super.isHighlighted }
+        get { super.isHighlighted }
         set {
             super.isHighlighted = newValue
             if newValue {

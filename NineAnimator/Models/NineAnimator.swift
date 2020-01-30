@@ -26,19 +26,19 @@ class NineAnimator: SessionDelegate {
     
     /// A dummy artwork url
     class var placeholderArtworkUrl: URL {
-        return URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
+        URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
     }
     
     /// Join NineAnimator community on Discord
     class var discordServerInvitationUrl: URL {
-        return URL(string: "https://discord.gg/dzTVzeW")!
+        URL(string: "https://discord.gg/dzTVzeW")!
     }
     
     /// Specify how long the retrieved anime cache stays in the memory
     ///
     /// By default this is set to 30 minutes
     class var animeCacheExpirationInterval: TimeInterval {
-        return 60 * 30
+        60 * 30
     }
     
     /// Reachability manager
@@ -133,7 +133,7 @@ extension NineAnimator {
     
     /// Find the source with name
     func source(with name: String) -> Source? {
-        return sources.first {
+        sources.first {
             $0.name == name || $0.aliases.contains(name)
         }
     }
@@ -169,7 +169,7 @@ extension NineAnimator {
     
     /// Retrieve the service with name
     func service(with name: String) -> ListingService? {
-        return trackingServices.first { $0.name == name }
+        trackingServices.first { $0.name == name }
     }
     
     /// Retrieve the service with the specific type
@@ -257,7 +257,7 @@ extension NineAnimator {
     }
     
     func canHandle(link: URL) -> Bool {
-        return sources.contains { $0.canHandle(url: link) }
+        sources.contains { $0.canHandle(url: link) }
     }
 }
 
@@ -265,7 +265,7 @@ extension NineAnimator {
 extension NineAnimator {
     /// The current verision string of NineAnimator
     var version: String {
-        return (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown Version"
+        (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "Unknown Version"
     }
     
     /// The current build number of NineAnimator
@@ -324,6 +324,6 @@ extension NineAnimator {
     
     /// Return a promise that would retrieve the `Anime` object for the `AnimeLink`
     func anime(with link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return .init { self.anime(with: link, onCompletion: $0) }
+        .init { self.anime(with: link, onCompletion: $0) }
     }
 }

@@ -36,7 +36,7 @@ struct ListingAnimeTracking {
     
     /// Obtain the next tracking state with the updated progress
     func newTracking(withUpdatedProgress progress: Int) -> ListingAnimeTracking {
-        return ListingAnimeTracking(currentProgress: progress, episodes: episodes)
+        ListingAnimeTracking(currentProgress: progress, episodes: episodes)
     }
 }
 

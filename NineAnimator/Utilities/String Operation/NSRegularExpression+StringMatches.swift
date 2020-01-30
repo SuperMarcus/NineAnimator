@@ -21,7 +21,7 @@ import Foundation
 
 extension NSRegularExpression {
     func matches(in content: String, options: NSRegularExpression.MatchingOptions = []) -> [NSTextCheckingResult] {
-        return matches(in: content, options: options, range: content.matchingRange)
+        matches(in: content, options: options, range: content.matchingRange)
     }
     
     // Return the groups of the first match

@@ -38,7 +38,7 @@ extension NASourceAnimeTwist {
         private var results: [AnimeLink]?
         
         func links(on page: Int) -> [AnyLink] {
-            return results?.map { .anime($0) } ?? []
+            results?.map { .anime($0) } ?? []
         }
         
         // swiftlint:disable closure_end_indentation
@@ -77,6 +77,6 @@ extension NASourceAnimeTwist {
     }
     
     func search(keyword: String) -> ContentProvider {
-        return TwistContentProvider(keyword, parent: self)
+        TwistContentProvider(keyword, parent: self)
     }
 }

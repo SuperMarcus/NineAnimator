@@ -21,7 +21,7 @@ import Foundation
 
 extension MyAnimeList {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        return apiRequest("/anime", query: [
+        apiRequest("/anime", query: [
             "q": link.title, // Search with the link's title
             "limit": 50,
             "offset": 0,

@@ -22,13 +22,13 @@ import Foundation
 extension NineAnimatorUser {
     /// Store the version of NineAnimator that has been setup
     var setupVersion: String? {
-        get { return _freezer.string(forKey: Keys.version) }
+        get { _freezer.string(forKey: Keys.version) }
         set { _freezer.set(newValue, forKey: Keys.version) }
     }
     
     /// Check if the setup wizard was shown
     var didSetupLatestVersion: Bool {
-        return setupVersion == "\(NineAnimator.default.version) (\(NineAnimator.default.buildNumber))"
+        setupVersion == "\(NineAnimator.default.version) (\(NineAnimator.default.buildNumber))"
     }
     
     /// Mark setup as completed

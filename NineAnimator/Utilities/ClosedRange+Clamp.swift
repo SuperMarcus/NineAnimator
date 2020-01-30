@@ -22,7 +22,7 @@ import Foundation
 /// Credits: https://stackoverflow.com/a/36111464
 extension ClosedRange {
     func clamp(value: Bound) -> Bound {
-        return lowerBound > value ? lowerBound
+        lowerBound > value ? lowerBound
             : upperBound < value ? upperBound
             : value
     }

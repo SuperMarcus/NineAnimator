@@ -59,7 +59,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     private var anime: Anime?
     
     var server: Anime.ServerIdentifier? {
-        get { return anime?.currentServer }
+        get { anime?.currentServer }
         set {
             guard let server = newValue else { return }
             anime?.select(server: server)
@@ -298,7 +298,7 @@ extension AnimeViewController {
 // MARK: - Table view data source
 extension AnimeViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return [Section].all.count
+        [Section].all.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -906,7 +906,7 @@ extension AnimeViewController {
     }
     
     override var canBecomeFirstResponder: Bool {
-        return true
+        true
     }
     
     func offlineAccessButton(
@@ -1152,27 +1152,27 @@ fileprivate extension AnimeViewController {
         case episodes = 2
         
         subscript(_ item: Int) -> IndexPath {
-            return IndexPath(item: item, section: self.rawValue)
+            IndexPath(item: item, section: self.rawValue)
         }
         
         static func indexSet(_ sections: [Section]) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
+            IndexSet(sections.map { $0.rawValue })
         }
         
         static func indexSet(_ sections: Section...) -> IndexSet {
-            return IndexSet(sections.map { $0.rawValue })
+            IndexSet(sections.map { $0.rawValue })
         }
         
         static func == (_ lhs: Section, _ rhs: Section) -> Bool {
-            return lhs.rawValue == rhs.rawValue
+            lhs.rawValue == rhs.rawValue
         }
         
         static func == (_ lhs: Int, _ rhs: Section) -> Bool {
-            return lhs == rhs.rawValue
+            lhs == rhs.rawValue
         }
         
         static func == (_ lhs: Section, _ rhs: Int) -> Bool {
-            return lhs.rawValue == rhs
+            lhs.rawValue == rhs
         }
     }
 }

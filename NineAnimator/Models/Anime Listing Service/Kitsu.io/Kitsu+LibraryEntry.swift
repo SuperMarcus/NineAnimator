@@ -38,7 +38,7 @@ extension Kitsu {
     }
     
     func libraryEntry(with animeIdentifier: String) -> NineAnimatorPromise<LibraryEntry> {
-        return currentUser().thenPromise {
+        currentUser().thenPromise {
             [unowned self] user in
             self.apiRequest("/library-entries", query: [
                 "filter[animeId]": animeIdentifier,

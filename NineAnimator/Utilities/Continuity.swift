@@ -136,6 +136,6 @@ enum Continuity {
     }
     
     private static func identifier(for url: URL) -> String {
-        return String(url.hashValue, radix: 36, uppercase: true)
+        String(url.hashValue, radix: 36, uppercase: true)
     }
 }

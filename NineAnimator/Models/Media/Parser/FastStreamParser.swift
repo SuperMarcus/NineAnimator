@@ -23,7 +23,7 @@ import Foundation
 /// Parser for animeultima's FastStream server
 class FastStreamParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "FastStream", "FastStream 2" ]
+        [ "FastStream", "FastStream 2" ]
     }
     
     private var source: NASourceAnimeUltima
@@ -36,7 +36,7 @@ class FastStreamParser: VideoProviderParser {
                with session: SessionManager,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return source
+        source
             .request(browseUrl: episode.target)
             .then {
                 responseContent in
@@ -70,6 +70,6 @@ class FastStreamParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

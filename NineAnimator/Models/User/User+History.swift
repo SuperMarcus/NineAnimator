@@ -25,7 +25,7 @@ extension NineAnimatorUser {
     /// Direct modification outside the scope of NineAnimatorUser should
     /// be prevented. Always use available methods when possible.
     var recentAnimes: [AnimeLink] {
-        get { return decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
+        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
         set {
             guard let data = encodeIfPresent(data: newValue) else {
                 return Log.error("Recent animes failed to encode")
@@ -48,12 +48,12 @@ extension NineAnimatorUser {
     
     /// The `EpisodeLink` to the last viewed episode
     var lastEpisode: EpisodeLink? {
-        return decodeIfPresent(EpisodeLink.self, from: _freezer.value(forKey: Keys.recentEpisode))
+        decodeIfPresent(EpisodeLink.self, from: _freezer.value(forKey: Keys.recentEpisode))
     }
     
     /// Recently accessed server identifier
     var recentServer: Anime.ServerIdentifier? {
-        get { return _freezer.string(forKey: Keys.recentServer) }
+        get { _freezer.string(forKey: Keys.recentServer) }
         set { _freezer.set(newValue as String?, forKey: Keys.recentServer) }
     }
     

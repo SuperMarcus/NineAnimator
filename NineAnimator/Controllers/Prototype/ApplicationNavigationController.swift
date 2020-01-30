@@ -25,15 +25,15 @@ protocol DontBotherViewController { }
 
 class ApplicationNavigationController: UINavigationController, UINavigationControllerDelegate, Themable {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
+        topViewController?.supportedInterfaceOrientations ?? super.supportedInterfaceOrientations
     }
     
     override var shouldAutorotate: Bool {
-        return topViewController?.shouldAutorotate ?? super.shouldAutorotate
+        topViewController?.shouldAutorotate ?? super.shouldAutorotate
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Theme.current.preferredStatusBarStyle
+        Theme.current.preferredStatusBarStyle
     }
     
     override func viewDidLoad() {

@@ -33,7 +33,7 @@ class SetupWelcomeViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return Theme.current.preferredStatusBarStyle
+        Theme.current.preferredStatusBarStyle
     }
     
     @IBOutlet private weak var appIconImageView: UIImageView!

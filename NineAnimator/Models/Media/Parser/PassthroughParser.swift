@@ -22,7 +22,7 @@ import Foundation
 
 /// A passthrough parser that holds the reference to the PlaybackMedia
 class PassthroughParser: VideoProviderParser {
-    var aliases: [String] { return [] }
+    var aliases: [String] { [] }
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let dummyTask = AsyncTaskContainer()
@@ -48,6 +48,6 @@ class PassthroughParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

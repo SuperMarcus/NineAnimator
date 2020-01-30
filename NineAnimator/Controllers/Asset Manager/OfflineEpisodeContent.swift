@@ -64,10 +64,10 @@ class OfflineEpisodeContent: OfflineContent {
     }
     
     override var localizedDescription: String {
-        return "Ep. \(episodeLink.name) - \(episodeLink.parent.title)"
+        "Ep. \(episodeLink.name) - \(episodeLink.parent.title)"
     }
     
-    override var identifier: String { return episodeLink.identifier }
+    override var identifier: String { episodeLink.identifier }
     
     /// Hold reference to the current task
     private var currentTask: NineAnimatorAsyncTask?
@@ -163,7 +163,7 @@ class OfflineEpisodeContent: OfflineContent {
     }
     
     override func suggestName(for url: URL) -> String {
-        return "\(episodeLink.parent.title) - Episode \(episodeLink.name)"
+        "\(episodeLink.parent.title) - Episode \(episodeLink.name)"
     }
     
     override func onCompletion(with url: URL) throws {
@@ -244,9 +244,9 @@ private extension OfflineEpisodeContent {
 }
 
 private func decode(episodeLink data: Data) -> EpisodeLink? {
-    return try? PropertyListDecoder().decode(EpisodeLink.self, from: data)
+    try? PropertyListDecoder().decode(EpisodeLink.self, from: data)
 }
 
 private func encode(_ link: EpisodeLink) -> Data? {
-    return try? PropertyListEncoder().encode(link)
+    try? PropertyListEncoder().encode(link)
 }

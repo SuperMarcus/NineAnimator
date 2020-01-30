@@ -41,7 +41,7 @@ class InformationSceneCharacterCollectionViewCell: UICollectionViewCell {
     }
     
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        return systemLayoutSizeFitting(size)
+        systemLayoutSizeFitting(size)
     }
 }
 // swiftlint:enable type_name

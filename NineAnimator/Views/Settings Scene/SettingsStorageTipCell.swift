@@ -53,9 +53,9 @@ class SettingsStorageTipCell: UITableViewCell {
     }
     
     // Icons corresponding to the states
-    private var saturatedStateIcon: UIImage { return #imageLiteral(resourceName: "Yellow Warning") }
-    private var normalStateIcon: UIImage { return #imageLiteral(resourceName: "Green Checkmark") }
-    private var unknownStateIcon: UIImage { return #imageLiteral(resourceName: "Green Checkmark") }
+    private var saturatedStateIcon: UIImage { #imageLiteral(resourceName: "Yellow Warning") }
+    private var normalStateIcon: UIImage { #imageLiteral(resourceName: "Green Checkmark") }
+    private var unknownStateIcon: UIImage { #imageLiteral(resourceName: "Green Checkmark") }
     
     enum StorageState {
         case saturated

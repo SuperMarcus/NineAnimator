@@ -23,7 +23,7 @@ import Foundation
 
 class HydraXParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "HydraX", "replay.watch" ]
+        [ "HydraX", "replay.watch" ]
     }
     
     private static let vipChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/vip")!
@@ -57,7 +57,7 @@ class HydraXParser: VideoProviderParser {
     }
     
     private func parseGeneric(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             () -> String? in
             let queryParameters = try formDecode(episode.target.query ?? "")
             let fragmentParameters = try formDecode(episode.target.fragment ?? "")

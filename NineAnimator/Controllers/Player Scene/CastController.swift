@@ -75,14 +75,14 @@ class CastController: CastDeviceScannerDelegate, CastClientDelegate {
 
 // MARK: - Accessing CastController
 extension CastController {
-    var isReady: Bool { return client?.isConnected ?? false }
+    var isReady: Bool { client?.isConnected ?? false }
     
-    var isAttached: Bool { return isReady && currentApp != nil }
+    var isAttached: Bool { isReady && currentApp != nil }
     
-    var isPaused: Bool { return client?.currentMediaStatus?.playerState == .paused }
+    var isPaused: Bool { client?.currentMediaStatus?.playerState == .paused }
     
     func isAttached(to link: EpisodeLink) -> Bool {
-        return isAttached && currentEpisode?.link == link
+        isAttached && currentEpisode?.link == link
     }
     
     /**
@@ -197,8 +197,7 @@ extension CastController {
 
 // MARK: - Media State Delegate
 extension CastController {
-    var timerUpdateProgressTask: ((Timer) -> Void) {
-        return {
+    var timerUpdateProgressTask: ((Timer) -> Void) { {
             [weak self] timer in
             guard let self = self else {
                 return timer.invalidate()

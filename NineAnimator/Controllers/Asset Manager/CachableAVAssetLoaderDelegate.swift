@@ -68,16 +68,16 @@ private extension CachableAVAssetLoaderDelegate {
     /// Definition of the private schemes used in the loader delegate
     enum Scheme {
         /// A link that contains a event playlist and needs a generated master playlist
-        static var generateMasterPlaylist: String { return "na-genmaster" }
+        static var generateMasterPlaylist: String { "na-genmaster" }
         
         /// A link that points to a master playlist
-        static var masterPlaylist: String { return "na-master" }
+        static var masterPlaylist: String { "na-master" }
         
         /// A link that points to an event playlist
-        static var eventPlaylist: String { return "na-event" }
+        static var eventPlaylist: String { "na-event" }
         
         /// A link that points to an encryption key
-        static var encryptionKey: String { return "na-cryptkey" }
+        static var encryptionKey: String { "na-cryptkey" }
     }
     
     func swapScheme(forUrl originalUrl: URL, withNewScheme newScheme: String) throws -> URL {

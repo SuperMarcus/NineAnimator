@@ -54,7 +54,7 @@ extension AnyLink: Hashable {
 }
 
 extension AnimeLink: URLConvertible {
-    func asURL() -> URL { return link }
+    func asURL() -> URL { link }
 }
 
 extension AnimeLink: Hashable {
@@ -96,19 +96,19 @@ extension AnimeLink: Codable {
     /// A shortcut for source.anime(from:handler:)
     @available(*, deprecated, message: "Use NineAnimator.anime(_:) instead")
     func retrieve(_ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        return NineAnimator.default.anime(with: self, onCompletion: handler)
+        NineAnimator.default.anime(with: self, onCompletion: handler)
     }
     
     /// Return a `NineAnimatorPromise` for retrieving the `Anime` object
     @available(*, deprecated, message: "Use NineAnimator.anime() instead")
     func retrieve() -> NineAnimatorPromise<Anime> {
-        return NineAnimator.default.anime(with: self)
+        NineAnimator.default.anime(with: self)
     }
 }
 
 extension AnimeLink: Equatable {
     static func == (lhs: AnimeLink, rhs: AnimeLink) -> Bool {
-        return lhs.link == rhs.link
+        lhs.link == rhs.link
     }
 }
 
@@ -137,7 +137,7 @@ extension EpisodeLink {
 // Equatable
 extension EpisodeLink {
     static func == (lhs: EpisodeLink, rhs: EpisodeLink) -> Bool {
-        return lhs.identifier == rhs.identifier
+        lhs.identifier == rhs.identifier
     }
 }
 

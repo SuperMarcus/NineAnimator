@@ -21,7 +21,7 @@ import Foundation
 
 extension Kitsu {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        return apiRequest("/anime", query: [
+        apiRequest("/anime", query: [
             "fields[anime]": "canonicalTitle,posterImage,titles",
             "filter[text]": link.title,
             "page[offset]": "0",

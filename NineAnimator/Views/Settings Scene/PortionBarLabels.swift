@@ -39,7 +39,7 @@ import UIKit
     var textInsets = UIEdgeInsets(top: 0, left: 2, bottom: 0, right: 6)
     
     var drawingTextAttributes: [NSAttributedString.Key: Any] {
-        return [
+        [
             .foregroundColor: Theme.current.primaryText,
             .font: textFont
         ]

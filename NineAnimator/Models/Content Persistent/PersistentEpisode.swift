@@ -25,7 +25,7 @@ import Foundation
 public class PersistentEpisode: NSManagedObject {
     /// Get the episode link for this persistent episode
     var episodeLink: EpisodeLink {
-        get { return try! PropertyListDecoder().decode(EpisodeLink.self, from: self.episodeLinkData!) }
+        get { try! PropertyListDecoder().decode(EpisodeLink.self, from: self.episodeLinkData!) }
         set { self.episodeLinkData = try! PropertyListEncoder().encode(newValue) }
     }
     

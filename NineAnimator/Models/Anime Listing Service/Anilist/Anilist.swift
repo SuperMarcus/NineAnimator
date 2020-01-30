@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 class Anilist: BaseListingService, ListingService {
-    var name: String { return "AniList.co" }
+    var name: String { "AniList.co" }
     
     /// Anilist API endpoint
     let endpoint = URL(string: "https://graphql.anilist.co")!
@@ -36,7 +36,7 @@ class Anilist: BaseListingService, ListingService {
     var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
-        return "com.marcuszhou.nineanimator.service.anilist"
+        "com.marcuszhou.nineanimator.service.anilist"
     }
     
     required init(_ parent: NineAnimator) {
@@ -55,35 +55,35 @@ class Anilist: BaseListingService, ListingService {
 // MARK: - Exposed interface
 extension Anilist {
     var isCapableOfListingAnimeInformation: Bool {
-        return true
+        true
     }
     
     var isCapableOfPersistingAnimeState: Bool {
-        return didSetup && !didExpire && isTrackingEnabled
+        didSetup && !didExpire && isTrackingEnabled
     }
     
     var isCapableOfRetrievingAnimeState: Bool {
-        return didSetup && !didExpire
+        didSetup && !didExpire
     }
     
     /// Retrieve if Anilist has been setup
-    var didSetup: Bool { return accessToken != nil }
+    var didSetup: Bool { accessToken != nil }
     
     /// Retrieve if the OAuth token has expired
-    var didExpire: Bool { return accessTokenExpirationDate.timeIntervalSinceNow < 0 }
+    var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
     /// Single-Sign-On URL for AniList
-    var ssoUrl: URL { return URL(string: "https://anilist.co/api/v2/oauth/authorize?client_id=1623&response_type=token")! }
+    var ssoUrl: URL { URL(string: "https://anilist.co/api/v2/oauth/authorize?client_id=1623&response_type=token")! }
     
     /// Single-Sign-On Callback Scheme
-    var ssoCallbackScheme: String { return "nineanimator-list-auth" }
+    var ssoCallbackScheme: String { "nineanimator-list-auth" }
     
     /// If the user wants NineAnimator to push updates of current
     /// watching prgoress to AniList
     ///
     /// Default to true
     var isTrackingEnabled: Bool {
-        get { return (persistedProperties["enable_tracking"] as? Bool) ?? true }
+        get { (persistedProperties["enable_tracking"] as? Bool) ?? true }
         set { persistedProperties["enable_tracking"] = newValue }
     }
 }
@@ -91,13 +91,13 @@ extension Anilist {
 // MARK: - Tokens & authentication data
 extension Anilist {
     private var accessToken: String? {
-        get { return persistedProperties["access_token"] as? String }
+        get { persistedProperties["access_token"] as? String }
         set { persistedProperties["access_token"] = newValue }
     }
     
     private var accessTokenExpirationDate: Date {
-        get { return (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
-        set { return persistedProperties["access_token_expiration"] = newValue }
+        get { (persistedProperties["access_token_expiration"] as? Date) ?? .distantPast }
+        set { persistedProperties["access_token_expiration"] = newValue }
     }
     
     /// Handle authentication event with the callback URL
@@ -142,7 +142,7 @@ extension Anilist {
 // MARK: - Making requests
 extension Anilist {
     func graphQL(fileQuery bundleResourceName: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
-        return NineAnimatorPromise.firstly {
+        NineAnimatorPromise.firstly {
             guard let resourceUrl = Bundle.main.url(
                     forResource: bundleResourceName,
                     withExtension: "graphql"

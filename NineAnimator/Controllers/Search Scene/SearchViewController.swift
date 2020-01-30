@@ -29,7 +29,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         return searchController
     }()
     
-    var source: Source { return NineAnimator.default.user.source }
+    var source: Source { NineAnimator.default.user.source }
     
     /// List of items which the quick search results are listed from
     private var quickSearchPool = Set<Item>()
@@ -148,11 +148,11 @@ extension SearchViewController {
 // MARK: - Table view data source
 extension SearchViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredItems.count
+        filteredItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

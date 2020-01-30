@@ -266,7 +266,7 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     
     /// Calculate the number of cells per line assuming the remaining cells are enough to fill the entire space
     private func ordinalCellsPerLine(minimal: CGFloat, totalLength: CGFloat, interitemSpace: CGFloat) -> Int {
-        return unitParameter(
+        unitParameter(
             minimal: minimal,
             available: .max,
             totalLength: totalLength,
@@ -276,7 +276,7 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     
     /// Minimal Size
     private func minimalSize(for section: Int) -> CGSize {
-        return minimalSizes[min(section, minimalSizes.count - 1)]
+        minimalSizes[min(section, minimalSizes.count - 1)]
     }
     
     private func shouldFillLine(_ collectionView: UICollectionView, for section: Int) -> Bool {
@@ -288,7 +288,7 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     }
     
     private func shouldAlignLastLine(_ collectionView: UICollectionView, for section: Int) -> Bool {
-        return (collectionView.delegate as? MinFilledLayoutDelegate)?.minFilledLayout?(
+        (collectionView.delegate as? MinFilledLayoutDelegate)?.minFilledLayout?(
             collectionView,
             shouldAlignLastLineItemsInSection: section
         ) ?? false

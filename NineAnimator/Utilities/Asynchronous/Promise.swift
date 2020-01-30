@@ -312,7 +312,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     /// Make a promise with a closure that will be executed asynchronously
     /// in the speicified queue
     static func firstly(queue: DispatchQueue = .global(), _ executingFunction: @escaping () throws -> ResultType?) -> NineAnimatorPromise {
-        return NineAnimatorPromise(queue: queue) {
+        NineAnimatorPromise(queue: queue) {
             callback in
             do {
                 if let result = try executingFunction() {

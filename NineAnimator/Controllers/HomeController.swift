@@ -167,7 +167,7 @@ extension HomeController {
     }
     
     func name(forScene uuid: UUID) -> String? {
-        return actionSet(for: uuid)?.name
+        actionSet(for: uuid)?.name
     }
     
     func actionSet(for uuid: UUID) -> HMActionSet? {

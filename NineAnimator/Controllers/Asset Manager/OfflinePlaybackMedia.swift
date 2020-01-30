@@ -33,17 +33,17 @@ struct OfflinePlaybackMedia: PlaybackMedia {
     
     // All of the followings are generated from the above content
     
-    var name: String { return link.name }
+    var name: String { link.name }
     
     // AVPlayerItem
     var avPlayerItem: AVPlayerItem
     
     // Google Cast is not supported by offline playback media
     // May be implemented later
-    var castMedia: CastMedia? { return nil }
+    var castMedia: CastMedia? { nil }
     
     // Do not re-download OfflinePlaybackMedia
-    var urlRequest: URLRequest? { return nil }
+    var urlRequest: URLRequest? { nil }
     
     /// Initialize the offline playback media with url
     init(link: EpisodeLink, isAggregated: Bool, url: URL) {

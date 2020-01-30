@@ -340,22 +340,22 @@ extension SettingsSceneController {
     struct EntryPath {
         /// Navigating to the `About` entry
         static var about: EntryPath {
-            return EntryPath(segueIdentifier: "about", itemIndex: nil)
+            EntryPath(segueIdentifier: "about", itemIndex: nil)
         }
         
         /// Navigating to the `Home` entry
         static var home: EntryPath {
-            return EntryPath(segueIdentifier: "homekit", itemIndex: nil)
+            EntryPath(segueIdentifier: "homekit", itemIndex: nil)
         }
         
         /// Navigating to the `Tracking Service` entry
         static var trackingService: EntryPath {
-            return EntryPath(segueIdentifier: "trackingService", itemIndex: nil)
+            EntryPath(segueIdentifier: "trackingService", itemIndex: nil)
         }
         
         /// Navigating to the `Storage` entry
         static var storage: EntryPath {
-            return EntryPath(segueIdentifier: "storage", itemIndex: nil)
+            EntryPath(segueIdentifier: "storage", itemIndex: nil)
         }
         
         fileprivate let segueIdentifier: String?

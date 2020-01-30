@@ -54,7 +54,7 @@ class MinFilledCollectionViewController: UICollectionViewController, MinFilledLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return layoutHelper.collectionView(
+        layoutHelper.collectionView(
             collectionView,
             layout: layout,
             sizeForItemAt: indexPath

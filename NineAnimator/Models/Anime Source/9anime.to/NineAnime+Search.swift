@@ -25,9 +25,9 @@ class NineAnimeSearch: ContentProvider {
     private(set) var totalPages: Int?
     weak var delegate: ContentProviderDelegate?
     
-    var moreAvailable: Bool { return totalPages == nil || _results.count < totalPages! }
+    var moreAvailable: Bool { totalPages == nil || _results.count < totalPages! }
     
-    var availablePages: Int { return _results.count }
+    var availablePages: Int { _results.count }
     
     private var _results: [[AnimeLink]]
     private var _lastRequest: NineAnimatorAsyncTask?
@@ -41,7 +41,7 @@ class NineAnimeSearch: ContentProvider {
     
     deinit { _lastRequest?.cancel() }
     
-    func links(on page: Int) -> [AnyLink] { return _results[page].map { .anime($0) } }
+    func links(on page: Int) -> [AnyLink] { _results[page].map { .anime($0) } }
     
     func more() {
         guard moreAvailable && _lastRequest == nil else { return }
@@ -110,6 +110,6 @@ class NineAnimeSearch: ContentProvider {
 
 extension NASourceNineAnime {
     func search(keyword: String) -> ContentProvider {
-        return NineAnimeSearch(self, query: keyword)
+        NineAnimeSearch(self, query: keyword)
     }
 }

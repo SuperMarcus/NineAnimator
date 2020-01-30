@@ -23,7 +23,7 @@ import Foundation
 
 class VidStreamingParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "VidStreaming", "VidCDN" ]
+        [ "VidStreaming", "VidCDN" ]
     }
     
     private static let videoSourceRegex = try! NSRegularExpression(
@@ -32,7 +32,7 @@ class VidStreamingParser: VideoProviderParser {
     )
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return session.request(episode.target).responseString {
+        session.request(episode.target).responseString {
             response in
             do {
                 let responseContent = try response.value.tryUnwrap(.providerError("Resource is unreachable"))
@@ -58,6 +58,6 @@ class VidStreamingParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

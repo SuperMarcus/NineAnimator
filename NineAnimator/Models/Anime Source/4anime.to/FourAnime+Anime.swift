@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return request(browseUrl: link.link).then {
+        request(browseUrl: link.link).then {
             responseContent -> Anime in
             let bowl = try SwiftSoup.parse(responseContent)
             let animeTitle = try bowl.select(".content p").text()

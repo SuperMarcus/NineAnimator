@@ -22,7 +22,7 @@ import Foundation
 extension FileManager {
     /// Obtain the size of the items at a particular path, accounting its children
     func sizeOfItem(atUrl url: URL, queue: DispatchQueue = .global()) -> NineAnimatorPromise<Int> {
-        return NineAnimatorPromise.firstly(queue: queue) {
+        NineAnimatorPromise.firstly(queue: queue) {
             try url.resourceValues(forKeys: [
                 .fileAllocatedSizeKey,
                 .isDirectoryKey

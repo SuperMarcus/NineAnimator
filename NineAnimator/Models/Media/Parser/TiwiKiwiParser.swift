@@ -23,7 +23,7 @@ import Foundation
 
 class TiwiKiwiParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "TiwiKiwi", "Tiwi.Kiwi", "Tiwi Kiwi" ]
+        [ "TiwiKiwi", "Tiwi.Kiwi", "Tiwi Kiwi" ]
     }
     
     static let jwPlayerOptionRegex = try! NSRegularExpression(pattern: "'([^']+)'\\.split", options: .caseInsensitive)
@@ -129,6 +129,6 @@ class TiwiKiwiParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return true
+        true
     }
 }

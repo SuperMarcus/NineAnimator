@@ -21,7 +21,7 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func _recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        return _recommendServer(for: anime, ofPurpose: .playback).first
+        _recommendServer(for: anime, ofPurpose: .playback).first
     }
     
     func _recommendServer(for anime: Anime, ofPurpose purpose: VideoProviderParser.Purpose) -> [Anime.ServerIdentifier] {
@@ -69,7 +69,7 @@ extension NASourceWonderfulSubs {
     }
     
     fileprivate func _recommendServers(for anime: Anime, withPiorities piorities: [Anime.ServerIdentifier: Double], fallbackPiority: Double, cutoffPiority: Double) -> [Anime.ServerIdentifier] {
-        return anime.servers.map {
+        anime.servers.map {
             server -> (Anime.ServerIdentifier, Double) in
             let identifier = server.key
             return (identifier, piorities[identifier.lowercased()] ?? fallbackPiority)

@@ -27,7 +27,7 @@ import JavaScriptCore
 /// Contributed by [Awsomedude](https://github.com/Awsomedude)
 class OpenLoadParser: VideoProviderParser {
     var aliases: [String] {
-        return [ "OpenLoad", "Open Load", "Oload", "OpenUpload", "Open Upload" ]
+        [ "OpenLoad", "Open Load", "Oload", "OpenUpload", "Open Upload" ]
     }
     
     static let longStringRegex = try! NSRegularExpression(pattern: "<p style=\"\" id=[^>]*>([^<]*)<\\/p>", options: .caseInsensitive)
@@ -35,7 +35,7 @@ class OpenLoadParser: VideoProviderParser {
     static let key2Regex = try! NSRegularExpression(pattern: "_1x4bfb36=(parseInt\\(.+,\\d+\\)(-\\d+));", options: .caseInsensitive)
     
     func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        return session.request(episode.target).responseString {
+        session.request(episode.target).responseString {
             response in
             guard let text = response.value else {
                 Log.error(response.error)
@@ -141,6 +141,6 @@ class OpenLoadParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        return false // No longer available
+        false // No longer available
     }
 }

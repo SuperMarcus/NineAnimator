@@ -31,10 +31,10 @@ extension Anilist {
         var information: [String: String]
         
         var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
-            return .firstly { [_characters] in _characters }
+            .firstly { [_characters] in _characters }
         }
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
-            return .firstly {
+            .firstly {
                 [_statistics] in
                 guard _statistics.ratingsDistribution.count > 1 else {
                     throw NineAnimatorError.responseError("No rating distribution found.")
@@ -43,9 +43,9 @@ extension Anilist {
             }
         }
         var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
-            return .firstly { [_relations] in _relations }
+            .firstly { [_relations] in _relations }
         }
-        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { return .fail(.unknownError) }
+        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
         
         // For now, all optional properties are fetched with other values
         var _characters: [ListingAnimeCharacter]
@@ -180,7 +180,7 @@ extension Anilist {
     }
     
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
-        return graphQL(fileQuery: "AniListListingAnimeInformation", variables: [
+        graphQL(fileQuery: "AniListListingAnimeInformation", variables: [
             "mediaId": reference.uniqueIdentifier
         ]) .then {
             responseDictionary in

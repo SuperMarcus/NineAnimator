@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        return request(browseUrl: endpointURL).then {
+        request(browseUrl: endpointURL).then {
             responseContent in
             let endpointURL = self.endpointURL
             let bowl = try SwiftSoup.parse(responseContent)

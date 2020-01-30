@@ -109,11 +109,11 @@ class AnimeScheduleCollectionViewController: MinFilledCollectionViewController, 
     // MARK: - Data source
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return loadedScheduledDays.count
+        loadedScheduledDays.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return loadedScheduledDays[section].collection.count
+        loadedScheduledDays[section].collection.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -240,7 +240,7 @@ extension AnimeScheduleCollectionViewController {
         }
         
         subscript(_ item: Int) -> IndexPath {
-            return IndexPath(item: item, section: section)
+            IndexPath(item: item, section: section)
         }
     }
 }

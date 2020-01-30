@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceKissanime {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        return request(browseUrl: link.link).then {
+        request(browseUrl: link.link).then {
             content in
             let bowl = try SwiftSoup.parse(content)
             

@@ -258,7 +258,7 @@ extension Theme {
         }
         
         static func == (_ lhs: Theme.ThemableContainer, _ rhs: Theme.ThemableContainer) -> Bool {
-            return lhs.hashValue == rhs.hashValue
+            lhs.hashValue == rhs.hashValue
         }
     }
 }
@@ -266,6 +266,6 @@ extension Theme {
 // MARK: - Theme: Equatable
 extension Theme: Equatable {
     static func == (_ lhs: Theme, _ rhs: Theme) -> Bool {
-        return lhs.name == rhs.name
+        lhs.name == rhs.name
     }
 }

@@ -22,7 +22,7 @@ import UIKit
 @IBDesignable
 extension UILabel {
     @IBInspectable var isPrimaryText: Bool {
-        get { return themableOptionsStore["label.primary"] as? Bool ?? true }
+        get { themableOptionsStore["label.primary"] as? Bool ?? true }
         set { themableOptionsStore["label.primary"] = newValue }
     }
 }
