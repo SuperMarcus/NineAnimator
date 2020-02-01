@@ -101,8 +101,9 @@ playground.xcworkspace
 
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots/**/*.png
+screenshots/**/*.png
 fastlane/test_output
+fastlane/derived_data
 
 # Code Injection
 #

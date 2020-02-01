@@ -76,7 +76,8 @@ class RootViewController: UITabBarController, Themable {
         super.viewDidAppear(animated)
         
         // Show setup wizard
-        if !NineAnimator.default.user.didSetupLatestVersion {
+        if ProcessInfo.processInfo.environment["NINEANIMATOR_NO_SETUP_SCENE"] == nil,
+            !NineAnimator.default.user.didSetupLatestVersion {
             let storyboard = UIStoryboard(name: "Setup", bundle: Bundle.main)
             if let viewController = storyboard.instantiateInitialViewController() {
                 viewController.modalPresentationStyle = .fullScreen

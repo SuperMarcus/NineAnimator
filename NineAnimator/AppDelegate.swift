@@ -47,6 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Register background refresh tasks
         self.registerBackgroundUpdateTasks()
+        self.configureEnvironment()
         
         return true
     }

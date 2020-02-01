@@ -57,6 +57,16 @@
                ReferencedContainer = "container:NineAnimator.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "2C45F73A23E4FC9D009916DB"
+               BuildableName = "NineAnimatorScreenshotAutomation.xctest"
+               BlueprintName = "NineAnimatorScreenshotAutomation"
+               ReferencedContainer = "container:NineAnimator.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
