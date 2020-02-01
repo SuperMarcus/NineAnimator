@@ -69,6 +69,7 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
 - [Screenshots](#screenshots)
 - [Credits](docs/credits.md)
 - [Privacy Statements & Policy](docs/privacy-policy.md)
+- [Advanced Configurations](docs/runtime.md)
 
 ## Features
 
