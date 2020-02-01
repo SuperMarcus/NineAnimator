@@ -102,6 +102,7 @@ playground.xcworkspace
 fastlane/report.xml
 fastlane/Preview.html
 screenshots/**/*.png
+screenshots/screenshots.html
 fastlane/test_output
 fastlane/derived_data
 

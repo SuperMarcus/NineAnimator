@@ -5,9 +5,9 @@ devices([
   "iPhone 11 Pro Max",
   "iPhone 8 Plus",
   "iPhone 8",
-  "iPad (7th generation)",
   "iPad Pro (9.7-inch)",
   "iPad Pro (11-inch)",
+  "iPad Pro (12.9-inch) (2nd generation)",
   "iPad Pro (12.9-inch) (3rd generation)"
 ])
 

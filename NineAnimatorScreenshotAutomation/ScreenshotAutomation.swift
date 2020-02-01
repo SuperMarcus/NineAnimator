@@ -26,6 +26,8 @@ class ScreenshotAutomation: XCTestCase {
         let tabBarsQuery = app.tabBars
         tabBarsQuery.buttons["Watch Next"].tap()
         tabBarsQuery.buttons["Library"].tap()
+        
+        sleep(5) // Wait for 5 seconds until the pictures are loaded
         snapshot("Library")
     }
     
@@ -34,10 +36,12 @@ class ScreenshotAutomation: XCTestCase {
         
         app.tabBars.buttons["Watch Next"].tap()
         
-        app.tables/*@START_MENU_TOKEN@*/.buttons["Show Schedule"]/*[[".cells.buttons[\"Show Schedule\"]",".buttons[\"Show Schedule\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.buttons["Show Schedule"].tap()
+        sleep(5) // Wait for 5 seconds until the pictures are loaded
         snapshot("AnimeSchedule", waitForLoadingIndicator: true)
         
         app.collectionViews.cells.firstMatch.tap()
+        sleep(5) // Wait for 5 seconds until the pictures are loaded
         snapshot("AnimeInformation", waitForLoadingIndicator: true)
     }
     

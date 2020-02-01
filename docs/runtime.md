@@ -1,5 +1,10 @@
 ## Runtime Configurations
 
+> 
+> Note: Runtime configurations are designed for developing, testing, and debugging purposes. You shouldn't
+> need to change anything mentioned in this page in order for NineAnimator to run.
+> 
+
 It's possible to tweak some of NineAnimator's behaviors through changing environment
 variables. This is particularly useful for unit testing and debugging purposes.
 

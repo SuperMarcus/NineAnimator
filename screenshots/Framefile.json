@@ -1,0 +1,39 @@
+{
+  "default": {
+    "keyword": {
+      "fonts": [
+        {
+          "font": "./fonts/SF-Pro-Text-Light.otf",
+          "supported": ["en-US"]
+        }
+      ],
+      "color": "#f0f0f0"
+    },
+    "title": {
+      "fonts": [
+        {
+          "font": "./fonts/SF-Pro-Text-Regular.otf",
+          "supported": ["en-US"]
+        }
+      ],
+      "color": "#ffffff"
+    },
+    "background": "./background_gradient.jpg",
+    "padding": 65,
+    "frame": "BLACK"
+  },
+  "data": [
+    {
+      "filter": "Library"
+    },
+    {
+      "filter": "AnimeSchedule"
+    },
+    {
+      "filter": "AnimeInformation"
+    },
+    {
+      "filter": "TrackingServices"
+    }
+  ]
+}

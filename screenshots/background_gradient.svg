@@ -1,0 +1,15 @@
+<svg width="2048" height="1536" viewBox="0 0 2048 1536" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient y2="1" x2="0.5" y1="0" x1="0.5" id="svg_1">
+   <stop offset="0" stop-color="#512da8"/>
+   <stop offset="1" stop-color="#8559da"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="url(#svg_1)" id="canvas_background" height="1536" width="2048" y="0" x="0"/>
+  <g display="none" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" id="svg_2"/>
+  </g>
+ </g> 
+</svg>
