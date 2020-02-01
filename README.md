@@ -36,7 +36,7 @@ A simple yet elegant way of waching anime on your favorite anime websites.
 NineAnimator is a free and open source anime watching app for iOS. GPLv3 Licensed.
 
     
-    Copyright © 2018-2019 Marcus Zhou. All rights reserved.
+    Copyright © 2018-2020 Marcus Zhou. All rights reserved.
     
     NineAnimator is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
