@@ -121,9 +121,10 @@ class SettingsDownloadsController: UITableViewController {
             let otherPct = (1.0 - Double(statistics.availableSpace)
                 / Double(statistics.totalSpace)) - totalAccountedPct
             
-            // Scale NineAnimator's usage to 80% of the bar
-            let componentStretchFactor = 0.8 / totalAccountedPct
-            let componentCompressFactor = 0.2 / (1 - totalAccountedPct)
+            // Scale NineAnimator's usage to a minimal of 60% of the bar
+            let stretchToPct = max(totalAccountedPct, 0.6)
+            let componentStretchFactor = stretchToPct / totalAccountedPct
+            let componentCompressFactor = (1.0 - stretchToPct) / (1.0 - totalAccountedPct)
             
             storageUsageGraphCell.setPresenting(
                 [

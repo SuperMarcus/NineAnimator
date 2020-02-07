@@ -128,6 +128,20 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.notificationShowStream) }
     }
     
+    /// The default source to present anime information
+    var preferredAnimeInformationService: ListingService? {
+        get {
+            if let serviceName = _freezer.string(forKey: Keys.animeInformationSource),
+                let listingService = NineAnimator.default.service(with: serviceName),
+                listingService.isCapableOfListingAnimeInformation {
+                return listingService
+            }
+            
+            return nil
+        }
+        set { _freezer.set(newValue?.name, forKey: Keys.animeInformationSource) }
+    }
+    
     /// Allow NineAnimator to solve WAF challenges (e.g. Cloudflare's I'm Under
     /// Attack verification) automatically.
     ///

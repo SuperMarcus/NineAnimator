@@ -27,6 +27,7 @@ extension NineAnimatorUser {
         static var detectClipboardAnimeLinks: String { "anime.links.detect" }
         static var subscribedAnimeList: String { "anime.subscribed" }
         static var allowNSFWContent: String { "anime.content.nsfw" }
+        static var animeInformationSource: String { "anime.details.source" }
         static var autoRestartInterruptedDownloadTasks: String { "episode.download.autorestart" }
         static var preventAVAssetPurge: String { "episode.download.preventPurge" }
         static var sendDownloadNotifications: String { "episode.download.sendDownloadNotifications" }

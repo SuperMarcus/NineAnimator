@@ -32,6 +32,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var pictureInPictureSwitch: UISwitch!
     @IBOutlet private weak var subscriptionStatsLabel: UILabel!
     @IBOutlet private weak var subscriptionStatusLabel: UILabel!
+    @IBOutlet private weak var preferredAnimeDetailsSourceLabel: UILabel!
     @IBOutlet private weak var subscriptionShowStreamsSwitch: UISwitch!
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
     @IBOutlet private weak var dynamicAppearanceSwitchLabel: UILabel!
@@ -276,6 +277,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
         
+        preferredAnimeDetailsSourceLabel.text =
+            NineAnimator.default.user.preferredAnimeInformationService?.name
+            ?? "Automatic"
+        
         // Notification and fetch status
         var subscriptionEngineStatus = [String]()
         
@@ -302,6 +307,13 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     
     // Register this class as themable to update the segment control value when theme changes
     func theme(didUpdate _: Theme) {
+        updatePreferencesUI()
+    }
+}
+
+// MARK: - Navigations & Segues
+extension SettingsSceneController {
+    @IBAction private func onUnwindingFromPreferredAnimeDetailsSource(segue: UIStoryboardSegue) {
         updatePreferencesUI()
     }
 }

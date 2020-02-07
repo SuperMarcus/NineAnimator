@@ -17,12 +17,21 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
+import UIKit
 
-class Fastfile: LaneFile {
-	func screenshotsLane() {
-        desc("Generate new localized screenshots")
-		captureScreenshots(scheme: "ScreenshotAutomation")
-        frameScreenshots(path: "./screenshots")
-	}
+class SettingsPreferredSourceCell: UITableViewCell {
+    private(set) weak var source: ListingService?
+    
+    func setPresenting(_ source: ListingService?) {
+        self.source = source
+        self.textLabel?.text = source?.name ?? "Automatic"
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        UIView.animate(withDuration: 0.2) {
+            self.accessoryType = selected ? .checkmark : .none
+        }
+    }
 }

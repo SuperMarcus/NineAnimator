@@ -1009,12 +1009,28 @@ extension AnimeViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // If we are presenting a reference
         if let informationViewController = segue.destination as? AnimeInformationTableViewController {
-            guard let reference = anime?.trackingContext.availableReferences.first(where: { $0.parentService.isCapableOfListingAnimeInformation }) else {
-                return Log.error("Attempting to present a information page without any references")
+            guard let availableReferences = anime?.trackingContext.availableReferences else { return Log.error("[AnimeViewController] Cannot prepare for a Show Information segue without a capable reference.") }
+            
+            let selectedReference: ListingAnimeReference
+            
+            if let preferredService = NineAnimator.default.user.preferredAnimeInformationService,
+                let preferredReference = availableReferences.first(where: {
+                    $0.parentService.name == preferredService.name
+                }) {
+                selectedReference = preferredReference
+            } else if let firstCapableReference = availableReferences.first(where: {
+                $0.parentService.isCapableOfListingAnimeInformation
+            }) {
+                selectedReference = firstCapableReference
+            } else {
+                return Log.error(
+                    "[AnimeViewController] No reference from list service that supports anime information was found."
+                )
             }
+            
             // Set reference and mark the parent view controller as matching the anime
             informationViewController.setPresenting(
-                reference: reference,
+                reference: selectedReference,
                 isPreviousViewControllerMatchingAnime: true
             )
         }

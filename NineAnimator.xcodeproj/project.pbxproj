@@ -264,6 +264,8 @@
 		2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */; };
 		2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD552222E7AD000411CB /* Kitsu+User.swift */; };
 		2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */; };
+		2C95C1DC23E9FD0500430B19 /* SettingsPreferredSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */; };
+		2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */; };
 		2C979F17235A16C400BC8699 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C979F15235A16C400BC8699 /* Library.storyboard */; };
 		2C979F1A235A17E100BC8699 /* LibrarySceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C979F19235A17E100BC8699 /* LibrarySceneController.swift */; };
 		2C98D66D225BE9C3001FF874 /* NineAnime+VerificationDetection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */; };
@@ -695,6 +697,8 @@
 		2C93BD5322221A43000411CB /* ListingAnimeReference+Kitsu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ListingAnimeReference+Kitsu.swift"; sourceTree = "<group>"; };
 		2C93BD552222E7AD000411CB /* Kitsu+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+User.swift"; sourceTree = "<group>"; };
 		2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+LibraryEntry.swift"; sourceTree = "<group>"; };
+		2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferredSourceController.swift; sourceTree = "<group>"; };
+		2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferredSourceCell.swift; sourceTree = "<group>"; };
 		2C979F16235A16C400BC8699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Library.storyboard; sourceTree = "<group>"; };
 		2C979F19235A17E100BC8699 /* LibrarySceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySceneController.swift; sourceTree = "<group>"; };
 		2C98D66C225BE9C3001FF874 /* NineAnime+VerificationDetection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+VerificationDetection.swift"; sourceTree = "<group>"; };
@@ -873,6 +877,7 @@
 				2C0DA2E1238B1CCF002C6447 /* PortionBarLabels.swift */,
 				2C0DA2E4238B27B0002C6447 /* SettingsStorageGraphCell.swift */,
 				2C643325238D7928006447D5 /* SettingsStorageTipCell.swift */,
+				2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -1620,6 +1625,7 @@
 				2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */,
 				2C1C717222186EC900760A69 /* TrackingServiceTableViewController.swift */,
 				2C0DA2DD238B09C3002C6447 /* SettingsDownloadsController.swift */,
+				2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2191,6 +2197,7 @@
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
 				2C85368E2234008A00A5CFB9 /* WonderfulSubs.swift in Sources */,
 				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
+				2C95C1DC23E9FD0500430B19 /* SettingsPreferredSourceController.swift in Sources */,
 				2C0DA2E5238B27B0002C6447 /* SettingsStorageGraphCell.swift in Sources */,
 				2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */,
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
@@ -2444,6 +2451,7 @@
 				2C1C71772218EFB700760A69 /* Anilist+AnimeInformation.swift in Sources */,
 				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
+				2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */,
 				2CEC21942207F5A100A30F4F /* Promise+Callback.swift in Sources */,
 				2C23AE3C2229B17A00512150 /* MyAnimeList+Mutation.swift in Sources */,
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
