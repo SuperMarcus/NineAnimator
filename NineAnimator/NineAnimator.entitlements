@@ -7,6 +7,9 @@
 		<string>webcredentials:nineanimator-api.marcuszhou.com</string>
 		<string>applinks:nineanimator-api.marcuszhou.com</string>
 		<string>activitycontinuation:nineanimator-api.marcuszhou.com</string>
+		<string>webcredentials:9ani.app</string>
+		<string>applinks:9ani.app</string>
+		<string>activitycontinuation:9ani.app</string>
 	</array>
 	<key>com.apple.developer.homekit</key>
 	<true/>
