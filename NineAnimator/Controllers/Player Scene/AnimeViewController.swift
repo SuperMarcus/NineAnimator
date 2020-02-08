@@ -576,6 +576,10 @@ extension AnimeViewController {
         
         quickJumpSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        // Cancel the current loading task if there are any
+        // This prevents the 'NSGenericException' runtime exception
+        cancelEpisodeRetrival()
+        
         present(quickJumpSheet, animated: true, completion: nil)
     }
     
@@ -633,7 +637,12 @@ extension AnimeViewController {
     
     // Update suggestion when playback did end
     @objc private func onPlaybackDidEnd(_ notification: Notification) {
-        tableView.reloadSections(Section.indexSet(.suggestion), with: .automatic)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
+            [weak self] in self?.tableView?.reloadSections(
+                Section.indexSet(.suggestion),
+                with: .automatic
+            )
+        }
     }
 }
 
