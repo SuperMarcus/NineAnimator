@@ -18,7 +18,7 @@
                             <tableViewSection headerTitle="About NineAnimator" id="20X-06-AJb">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Wu1-sV-neO" style="IBUITableViewCellStyleDefault" id="9rc-5k-bvB">
-                                        <rect key="frame" x="0.0" y="55.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="55.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9rc-5k-bvB" id="XnV-ia-ExR">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -38,7 +38,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settings.viewrepo" textLabel="OUZ-2Z-Nei" style="IBUITableViewCellStyleDefault" id="7XN-yH-KRf">
-                                        <rect key="frame" x="0.0" y="99.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="99.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7XN-yH-KRf" id="fye-lH-13N">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -282,7 +282,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="FzX-Wm-E1l">
-                                        <rect key="frame" x="16" y="633" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="633" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FzX-Wm-E1l" id="c69-Wg-t4z">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -317,7 +317,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="4td-cI-giU">
-                                        <rect key="frame" x="16" y="677" width="343" height="50"/>
+                                        <rect key="frame" x="0.0" y="677" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4td-cI-giU" id="FXE-v7-8hA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -364,7 +364,7 @@
 Enabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.pip" id="qhX-cq-vU4">
-                                        <rect key="frame" x="16" y="834.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="834.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qhX-cq-vU4" id="OSj-kC-9rq">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -398,7 +398,7 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.background" rowHeight="49" id="n4D-7A-fGL">
-                                        <rect key="frame" x="16" y="878.5" width="343" height="49"/>
+                                        <rect key="frame" x="0.0" y="878.5" width="343" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n4D-7A-fGL" id="YQZ-Ov-IMJ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
@@ -436,11 +436,11 @@ Enabling Background Playback will allow audios to be played while the app is in 
                                         <rect key="frame" x="0.0" y="927.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="30T-PY-VFY" id="eTQ-k1-6uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eR-hu-Qxf">
-                                                    <rect key="frame" x="15" y="0.0" width="294" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="301" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>

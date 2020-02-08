@@ -117,7 +117,12 @@ extension NineAnimatorUser {
     
     /// Adjust brightness based on current screen brightness
     var dynamicAppearance: Bool {
-        get { _freezer.bool(forKey: Keys.brightnessBasedTheme) }
+        get {
+            _freezer.typedValue(
+                forKey: Keys.brightnessBasedTheme,
+                default: true
+            )
+        }
         set { _freezer.set(newValue, forKey: Keys.brightnessBasedTheme) }
     }
     
