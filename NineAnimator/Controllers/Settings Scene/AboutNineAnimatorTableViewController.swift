@@ -21,7 +21,7 @@ import SafariServices
 import UIKit
 
 class AboutNineAnimatorTableViewController: UITableViewController {
-    let urlForIdentifier: [String?: String] = [
+    private let urlForIdentifier: [String?: String] = [
         // View GitHub Repository
         "about.viewrepo": "https://github.com/SuperMarcus/NineAnimator",
         // Report issue
@@ -32,6 +32,8 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         "about.privacy.policy": "https://nineanimator.marcuszhou.com/docs/privacy-policy.html"
     ]
     
+    private let discordInvitationUrl = URL(string: "https://discord.gg/dzTVzeW")!
+    
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var buildNumberLabel: UILabel!
     
@@ -39,12 +41,21 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         defer { tableView.deselectSelectedRows() }
         
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        
         if let url = urlForIdentifier[cell.reuseIdentifier] {
             let safariViewController = SFSafariViewController(url: URL(string: url)!)
             present(safariViewController, animated: true)
         } else { // "about.privacy"
-            // Manage persisted data (on the previous page)
-            navigationController?.popViewController(animated: true)
+            switch cell.reuseIdentifier {
+            case "about.privacy":
+                // Manage persisted data (on the previous page)
+                navigationController?.popViewController(animated: true)
+            case "about.discord":
+                // Open discord invitation url
+                UIApplication.shared.open(discordInvitationUrl)
+            default:
+                Log.error("[AboutNineAnimatorTableViewController] Unknwon cell with identitier %@ selected.", cell.reuseIdentifier ?? "<Unknown>")
+            }
         }
     }
     

@@ -1932,7 +1932,24 @@ Remaining disk capacity displayed in this screen may be different from the Setti
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Help &amp; Report Issues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZK-F2-4cA">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Report Issues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZK-F2-4cA">
+                                                    <rect key="frame" x="15" y="0.0" width="294" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.discord" textLabel="zQD-NZ-dqC" style="IBUITableViewCellStyleDefault" id="xIS-4R-LGx">
+                                        <rect key="frame" x="16" y="231.5" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xIS-4R-LGx" id="xRs-ka-vm0">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Discuss on Discord" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zQD-NZ-dqC">
                                                     <rect key="frame" x="15" y="0.0" width="294" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1954,7 +1971,7 @@ By setting up third party tracking services, you agree NineAnimator to upload yo
 Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
-                                        <rect key="frame" x="16" y="403" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="447" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RYb-Co-2vy" id="WHo-EJ-bRd">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -1971,7 +1988,7 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy" textLabel="N8M-Jf-n7k" style="IBUITableViewCellStyleDefault" id="V5E-7b-5XW">
-                                        <rect key="frame" x="16" y="447" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="491" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5E-7b-5XW" id="lJY-c3-1ET">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -1999,7 +2016,7 @@ NineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.license" textLabel="p2c-ro-yj3" style="IBUITableViewCellStyleDefault" id="3WC-jV-54E">
-                                        <rect key="frame" x="0.0" y="822.5" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="866.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3WC-jV-54E" id="OKY-Es-GnJ">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -2087,7 +2104,7 @@ This software is covered by Elegant Chaos' liberal license: http://elegantchaos.
 See the complete credit list in the "Credits" page.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
-                                        <rect key="frame" x="0.0" y="1214" width="343" height="44"/>
+                                        <rect key="frame" x="0.0" y="1258" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="edi-Jf-1sC" id="02i-0k-mmN">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
