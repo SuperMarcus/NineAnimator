@@ -79,14 +79,15 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     
     /// Call from `viewWillTransition`
     func viewWillTransition(coordinator: UIViewControllerTransitionCoordinator, in collectionView: UICollectionView) {
-        coordinator.animate(alongsideTransition: {
-            _ in
-            collectionView.performBatchUpdates({
-                collectionView.collectionViewLayout.invalidateLayout()
-                collectionView.setNeedsLayout()
-            }, completion: nil)
-            collectionView.layoutIfNeeded()
-        }, completion: nil)
+        collectionView.collectionViewLayout.invalidateLayout()
+//        coordinator.animate(alongsideTransition: {
+//            _ in
+//            collectionView.performBatchUpdates({
+//                collectionView.collectionViewLayout.invalidateLayout()
+//                collectionView.setNeedsLayout()
+//            }, completion: nil)
+//            collectionView.layoutIfNeeded()
+//        }, completion: nil)
     }
     
     /// Call from `viewWillAppear`

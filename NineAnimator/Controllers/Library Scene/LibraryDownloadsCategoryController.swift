@@ -25,6 +25,9 @@ class LibraryDownloadsCategoryController: MinFilledCollectionViewController, Lib
     private var selectedAnimeLink: AnimeLink?
     
     override func viewDidLoad() {
+        // Load stateful anime list
+        reloadStatefulAnime(shouldNotifyCollectionView: false)
+        
         super.viewDidLoad()
         
         // Initialize Min Filled Layout
@@ -47,16 +50,21 @@ class LibraryDownloadsCategoryController: MinFilledCollectionViewController, Lib
         self.reloadStatefulAnime()
     }
     
-    fileprivate func reloadStatefulAnime() {
+    fileprivate func reloadStatefulAnime(shouldNotifyCollectionView: Bool = true) {
         // Initialize stateful anime pool
         let currentStatefulLinks = OfflineContentManager.shared.statefulAnime
         let shouldAnimate = statefulAnimeMap.count != currentStatefulLinks.count
-        statefulAnimeMap = currentStatefulLinks
         
-        // Animate/reload collection view
-        if shouldAnimate {
-            collectionView.reloadSections([ 0 ])
-        } else { collectionView.reloadData() }
+        if currentStatefulLinks != statefulAnimeMap {
+            statefulAnimeMap = currentStatefulLinks
+            
+            if shouldNotifyCollectionView {
+                // Animate/reload collection view
+                if shouldAnimate {
+                    collectionView.reloadSections([ 0 ])
+                } else { collectionView.reloadData() }
+            }
+        }
     }
 }
 
