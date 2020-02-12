@@ -2,13 +2,13 @@
 "4Bw-Vm-E5a.normalTitle" = "Open Link";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "4kp-IB-7Yg"; */
-"4kp-IB-7Yg.text" = "Loading";
+"4kp-IB-7Yg.text" = "Cargando";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
 "AWC-Sv-NA3.title" = "Watch Next";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
-"BdS-bf-mCi.text" = "This Week";
+"BdS-bf-mCi.text" = "Esta semana";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
 "S9D-GU-IOj.title" = "Select Source";
@@ -20,7 +20,7 @@
 "iOO-54-dYf.title" = "Anime Schedule";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
-"j7t-Oe-H6q.normalTitle" = "View More";
+"j7t-Oe-H6q.normalTitle" = "Ver más";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
 "lSV-Fp-1Cb.title" = "Watch Next";
