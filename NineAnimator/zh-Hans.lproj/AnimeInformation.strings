@@ -1,14 +1,14 @@
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "LsK-7T-IdR"; */
-"LsK-7T-IdR.normalTitle" = "Expand";
+"LsK-7T-IdR.normalTitle" = "展开";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "nFA-pP-lRy"; */
-"nFA-pP-lRy.text" = "Synopsis";
+"nFA-pP-lRy.text" = "简介";
 
 /* Class = "UIButton"; normalTitle = "VIEW EPISODES"; ObjectID = "nNy-wE-HN7"; */
-"nNy-wE-HN7.normalTitle" = "VIEW EPISODES";
+"nNy-wE-HN7.normalTitle" = "查看剧集";
 
 /* Class = "UILabel"; text = "Average Score"; ObjectID = "wYE-AE-4tO"; */
-"wYE-AE-4tO.text" = "Average Score";
+"wYE-AE-4tO.text" = "平均评分";
 
 /* Class = "UILabel"; text = "Character Name"; ObjectID = "zLy-V6-RBp"; */
-"zLy-V6-RBp.text" = "Character Name";
+"zLy-V6-RBp.text" = "角色名称";
