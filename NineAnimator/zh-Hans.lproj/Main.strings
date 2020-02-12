@@ -1,17 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "2rp-o4-MgZ"; */
-"2rp-o4-MgZ.normalTitle" = "Open Link";
+"2rp-o4-MgZ.normalTitle" = "打开链接";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
-"8OU-XT-7E1.title" = "Recents";
+"8OU-XT-7E1.title" = "最近";
 
 /* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
-"EeQ-yb-72U.text" = "Loading Previews";
+"EeQ-yb-72U.text" = "正在加载预览";
 
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
-"SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
+"SBh-Sa-wuU.text" = "NineAnimator 不可用";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
-"W9q-Ho-7mv.title" = "Search";
+"W9q-Ho-7mv.title" = "搜索​​​​";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
 "Xji-1Z-Meq.text" = "Recently Updated";
