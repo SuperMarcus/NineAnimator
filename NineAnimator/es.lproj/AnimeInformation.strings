@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "LsK-7T-IdR"; */
-"LsK-7T-IdR.normalTitle" = "Expand";
+"LsK-7T-IdR.normalTitle" = "Expandir";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "nFA-pP-lRy"; */
 "nFA-pP-lRy.text" = "Sinopsis";
@@ -11,4 +11,4 @@
 "wYE-AE-4tO.text" = "Puntuación Promedio";
 
 /* Class = "UILabel"; text = "Character Name"; ObjectID = "zLy-V6-RBp"; */
-"zLy-V6-RBp.text" = "Character Name";
+"zLy-V6-RBp.text" = "Nombre del Personaje";
