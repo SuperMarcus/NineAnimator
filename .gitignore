@@ -103,8 +103,11 @@ fastlane/report.xml
 fastlane/Preview.html
 screenshots/**/*.png
 screenshots/screenshots.html
+fastlane/screenshots/**/*.png
+fastlane/screenshots/screenshots.html
 fastlane/test_output
 fastlane/derived_data
+fastlane/metadata
 
 # Code Injection
 #

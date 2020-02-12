@@ -750,7 +750,6 @@
 		2CCD952C23E50446005D4402 /* fastlane */ = {isa = PBXFileReference; lastKnownFileType = text; path = fastlane; sourceTree = SOURCE_ROOT; };
 		2CCD952D23E5239E005D4402 /* runtime.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = runtime.md; sourceTree = "<group>"; };
 		2CCD952E23E53776005D4402 /* AppDelegate+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Environment.swift"; sourceTree = "<group>"; };
-		2CCD953023E5BCCD005D4402 /* screenshots */ = {isa = PBXFileReference; lastKnownFileType = text; path = screenshots; sourceTree = SOURCE_ROOT; };
 		2CD1A646222EB94C00121320 /* AnimatedImageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedImageCollectionView.swift; sourceTree = "<group>"; };
 		2CD1A64D222EE32000121320 /* CollectionsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionsTableViewCell.swift; sourceTree = "<group>"; };
 		2CD7825721FFE4DA00477FC6 /* OfflineContentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineContentManager.swift; sourceTree = "<group>"; };
@@ -1393,7 +1392,6 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				2CCD953023E5BCCD005D4402 /* screenshots */,
 				2CCD952C23E50446005D4402 /* fastlane */,
 				2C8519B322CDC50D00EEF3AC /* docs */,
 				2C4817A221DB297D0092F694 /* Media */,

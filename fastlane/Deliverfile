@@ -1,0 +1,7 @@
+app_identifier "com.marcuszhou.NineAnimator"
+overwrite_screenshots true
+submit_for_review false
+skip_app_version_update true
+skip_metadata true
+skip_screenshots false
+screenshots_path "fastlane/screenshots"

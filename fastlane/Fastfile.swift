@@ -22,7 +22,10 @@ import Foundation
 class Fastfile: LaneFile {
 	func screenshotsLane() {
         desc("Generate new localized screenshots")
-		captureScreenshots(scheme: "ScreenshotAutomation")
-        frameScreenshots(path: "./screenshots")
+		captureScreenshots(
+            outputDirectory: "fastlane/screenshots",
+            scheme: "ScreenshotAutomation"
+        )
+        frameScreenshots(path: "./fastlane/screenshots")
 	}
 }
