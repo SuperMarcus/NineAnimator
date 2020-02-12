@@ -778,6 +778,20 @@
 		2CB71E6D23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ServerSelectionCell.strings; sourceTree = "<group>"; };
 		2CB71E6E23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ServerSelection.strings; sourceTree = "<group>"; };
 		2CB71E6F23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Library.strings; sourceTree = "<group>"; };
+		2CB71EB923F44D130029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		2CB71EBB23F44D180029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CB71EBD23F44D1E0029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimePlayer.strings; sourceTree = "<group>"; };
+		2CB71EBF23F44D500029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/GoogleCastMediaControl.strings; sourceTree = "<group>"; };
+		2CB71EC123F44D5D0029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Settings.strings; sourceTree = "<group>"; };
+		2CB71EC323F44D620029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/OfflineAnimeViewer.strings; sourceTree = "<group>"; };
+		2CB71EC523F44D660029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimeListing.strings; sourceTree = "<group>"; };
+		2CB71EC723F44D6C0029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimeInformation.strings; sourceTree = "<group>"; };
+		2CB71EC923F44D720029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Setup.strings; sourceTree = "<group>"; };
+		2CB71ECB23F44D790029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SelflessAuthenticationWebViewController.strings; sourceTree = "<group>"; };
+		2CB71ECD23F44D820029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AnimeDiscovery.strings; sourceTree = "<group>"; };
+		2CB71ECF23F44D830029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ServerSelectionCell.strings; sourceTree = "<group>"; };
+		2CB71ED123F44D880029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ServerSelection.strings; sourceTree = "<group>"; };
+		2CB71ED323F44D8E0029A1FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Library.strings; sourceTree = "<group>"; };
 		2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Unwrap.swift"; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -2577,6 +2591,7 @@
 				2CB71E4F23F4418A0029A1FB /* zh-Hans */,
 				2CB71E5E23F444E70029A1FB /* ja */,
 				2CB71E6C23F445440029A1FB /* es */,
+				2CB71ECD23F44D820029A1FB /* en */,
 			);
 			name = AnimeDiscovery.storyboard;
 			sourceTree = "<group>";
@@ -2588,6 +2603,7 @@
 				2CB71E4823F441890029A1FB /* zh-Hans */,
 				2CB71E5723F444E60029A1FB /* ja */,
 				2CB71E6523F445430029A1FB /* es */,
+				2CB71EBF23F44D500029A1FB /* en */,
 			);
 			name = GoogleCastMediaControl.storyboard;
 			sourceTree = "<group>";
@@ -2599,6 +2615,7 @@
 				2CB71E4B23F441890029A1FB /* zh-Hans */,
 				2CB71E5A23F444E60029A1FB /* ja */,
 				2CB71E6823F445430029A1FB /* es */,
+				2CB71EC523F44D660029A1FB /* en */,
 			);
 			name = AnimeListing.storyboard;
 			sourceTree = "<group>";
@@ -2610,6 +2627,7 @@
 				2CB71E4C23F441890029A1FB /* zh-Hans */,
 				2CB71E5B23F444E60029A1FB /* ja */,
 				2CB71E6923F445430029A1FB /* es */,
+				2CB71EC723F44D6C0029A1FB /* en */,
 			);
 			name = AnimeInformation.storyboard;
 			sourceTree = "<group>";
@@ -2621,6 +2639,7 @@
 				2CB71E4523F441880029A1FB /* zh-Hans */,
 				2CB71E5423F444E50029A1FB /* ja */,
 				2CB71E6223F445420029A1FB /* es */,
+				2CB71EB923F44D130029A1FB /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2632,6 +2651,7 @@
 				2CB71E4623F441880029A1FB /* zh-Hans */,
 				2CB71E5523F444E50029A1FB /* ja */,
 				2CB71E6323F445430029A1FB /* es */,
+				2CB71EBB23F44D180029A1FB /* en */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2643,6 +2663,7 @@
 				2CB71E4723F441880029A1FB /* zh-Hans */,
 				2CB71E5623F444E60029A1FB /* ja */,
 				2CB71E6423F445430029A1FB /* es */,
+				2CB71EBD23F44D1E0029A1FB /* en */,
 			);
 			name = AnimePlayer.storyboard;
 			sourceTree = "<group>";
@@ -2654,6 +2675,7 @@
 				2CB71E5023F4418A0029A1FB /* zh-Hans */,
 				2CB71E5F23F444E70029A1FB /* ja */,
 				2CB71E6D23F445440029A1FB /* es */,
+				2CB71ECF23F44D830029A1FB /* en */,
 			);
 			name = ServerSelectionCell.xib;
 			sourceTree = "<group>";
@@ -2665,6 +2687,7 @@
 				2CB71E5123F4418A0029A1FB /* zh-Hans */,
 				2CB71E6023F444E70029A1FB /* ja */,
 				2CB71E6E23F445440029A1FB /* es */,
+				2CB71ED123F44D880029A1FB /* en */,
 			);
 			name = ServerSelection.storyboard;
 			sourceTree = "<group>";
@@ -2676,6 +2699,7 @@
 				2CB71E4D23F4418A0029A1FB /* zh-Hans */,
 				2CB71E5C23F444E70029A1FB /* ja */,
 				2CB71E6A23F445440029A1FB /* es */,
+				2CB71EC923F44D720029A1FB /* en */,
 			);
 			name = Setup.storyboard;
 			sourceTree = "<group>";
@@ -2687,6 +2711,7 @@
 				2CB71E4E23F4418A0029A1FB /* zh-Hans */,
 				2CB71E5D23F444E70029A1FB /* ja */,
 				2CB71E6B23F445440029A1FB /* es */,
+				2CB71ECB23F44D790029A1FB /* en */,
 			);
 			name = SelflessAuthenticationWebViewController.storyboard;
 			sourceTree = "<group>";
@@ -2698,6 +2723,7 @@
 				2CB71E4A23F441890029A1FB /* zh-Hans */,
 				2CB71E5923F444E60029A1FB /* ja */,
 				2CB71E6723F445430029A1FB /* es */,
+				2CB71EC323F44D620029A1FB /* en */,
 			);
 			name = OfflineAnimeViewer.storyboard;
 			sourceTree = "<group>";
@@ -2709,6 +2735,7 @@
 				2CB71E5223F4418A0029A1FB /* zh-Hans */,
 				2CB71E6123F444E70029A1FB /* ja */,
 				2CB71E6F23F445440029A1FB /* es */,
+				2CB71ED323F44D8E0029A1FB /* en */,
 			);
 			name = Library.storyboard;
 			sourceTree = "<group>";
@@ -2720,6 +2747,7 @@
 				2CB71E4923F441890029A1FB /* zh-Hans */,
 				2CB71E5823F444E60029A1FB /* ja */,
 				2CB71E6623F445430029A1FB /* es */,
+				2CB71EC123F44D5D0029A1FB /* en */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
