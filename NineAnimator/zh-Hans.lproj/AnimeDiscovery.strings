@@ -1,26 +1,26 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "4Bw-Vm-E5a"; */
-"4Bw-Vm-E5a.normalTitle" = "Open Link";
+"4Bw-Vm-E5a.normalTitle" = "打开链接";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "4kp-IB-7Yg"; */
-"4kp-IB-7Yg.text" = "Loading";
+"4kp-IB-7Yg.text" = "载入中";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
-"AWC-Sv-NA3.title" = "Watch Next";
+"AWC-Sv-NA3.title" = "探索";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
-"BdS-bf-mCi.text" = "This Week";
+"BdS-bf-mCi.text" = "本周新番";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
-"S9D-GU-IOj.title" = "Select Source";
+"S9D-GU-IOj.title" = "选择来源";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
-"WZx-eB-ztY.normalTitle" = "Show Schedule";
+"WZx-eB-ztY.normalTitle" = "显示日程表";
 
 /* Class = "UIBarButtonItem"; title = "Anime Schedule"; ObjectID = "iOO-54-dYf"; */
-"iOO-54-dYf.title" = "Anime Schedule";
+"iOO-54-dYf.title" = "动漫日历";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
-"j7t-Oe-H6q.normalTitle" = "View More";
+"j7t-Oe-H6q.normalTitle" = "查看更多";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Watch Next";
+"lSV-Fp-1Cb.title" = "探索";
