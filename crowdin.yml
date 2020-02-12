@@ -1,0 +1,3 @@
+files:
+  - source: /NineAnimator/en.lproj/*.strings
+    translation: /NineAnimator/%osx_code%/%original_file_name%
