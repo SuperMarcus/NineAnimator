@@ -1,0 +1,21 @@
+
+/* Class = "UILabel"; text = "Loading Progress"; ObjectID = "4mp-09-F5N"; */
+"4mp-09-F5N.text" = "Loading Progress";
+
+/* Class = "UILabel"; text = "Download Statistics"; ObjectID = "7US-lL-eqn"; */
+"7US-lL-eqn.text" = "Download Statistics";
+
+/* Class = "UILabel"; text = "Loading Download Information"; ObjectID = "FLh-Zr-rat"; */
+"FLh-Zr-rat.text" = "Loading Download Information";
+
+/* Class = "UILabel"; text = "Loading Episode Name"; ObjectID = "QKz-J0-kb0"; */
+"QKz-J0-kb0.text" = "Loading Episode Name";
+
+/* Class = "UILabel"; text = "Downloaded Anime Title"; ObjectID = "eFs-rr-t1A"; */
+"eFs-rr-t1A.text" = "Downloaded Anime Title";
+
+/* Class = "UILabel"; text = "More Episodes"; ObjectID = "fzM-YT-Gfw"; */
+"fzM-YT-Gfw.text" = "More Episodes";
+
+/* Class = "UIButton"; normalTitle = "VIEW ANIME"; ObjectID = "oHE-Da-4Bi"; */
+"oHE-Da-4Bi.normalTitle" = "VIEW ANIME";

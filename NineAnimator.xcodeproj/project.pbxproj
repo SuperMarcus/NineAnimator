@@ -736,6 +736,48 @@
 		2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAnimeArtworkRetriver.swift; sourceTree = "<group>"; };
 		2CB2D556237A3255009D91D1 /* recents_long_press.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recents_long_press.jpeg; sourceTree = "<group>"; };
 		2CB4AF95239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachableAVAssetLoaderDelegate.swift; sourceTree = "<group>"; };
+		2CB71E4523F441880029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		2CB71E4623F441880029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		2CB71E4723F441880029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AnimePlayer.strings"; sourceTree = "<group>"; };
+		2CB71E4823F441890029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/GoogleCastMediaControl.strings"; sourceTree = "<group>"; };
+		2CB71E4923F441890029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Settings.strings"; sourceTree = "<group>"; };
+		2CB71E4A23F441890029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/OfflineAnimeViewer.strings"; sourceTree = "<group>"; };
+		2CB71E4B23F441890029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AnimeListing.strings"; sourceTree = "<group>"; };
+		2CB71E4C23F441890029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AnimeInformation.strings"; sourceTree = "<group>"; };
+		2CB71E4D23F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Setup.strings"; sourceTree = "<group>"; };
+		2CB71E4E23F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SelflessAuthenticationWebViewController.strings"; sourceTree = "<group>"; };
+		2CB71E4F23F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AnimeDiscovery.strings"; sourceTree = "<group>"; };
+		2CB71E5023F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ServerSelectionCell.strings"; sourceTree = "<group>"; };
+		2CB71E5123F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/ServerSelection.strings"; sourceTree = "<group>"; };
+		2CB71E5223F4418A0029A1FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Library.strings"; sourceTree = "<group>"; };
+		2CB71E5423F444E50029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
+		2CB71E5523F444E50029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CB71E5623F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AnimePlayer.strings; sourceTree = "<group>"; };
+		2CB71E5723F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/GoogleCastMediaControl.strings; sourceTree = "<group>"; };
+		2CB71E5823F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Settings.strings; sourceTree = "<group>"; };
+		2CB71E5923F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/OfflineAnimeViewer.strings; sourceTree = "<group>"; };
+		2CB71E5A23F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AnimeListing.strings; sourceTree = "<group>"; };
+		2CB71E5B23F444E60029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AnimeInformation.strings; sourceTree = "<group>"; };
+		2CB71E5C23F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Setup.strings; sourceTree = "<group>"; };
+		2CB71E5D23F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/SelflessAuthenticationWebViewController.strings; sourceTree = "<group>"; };
+		2CB71E5E23F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AnimeDiscovery.strings; sourceTree = "<group>"; };
+		2CB71E5F23F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ServerSelectionCell.strings; sourceTree = "<group>"; };
+		2CB71E6023F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/ServerSelection.strings; sourceTree = "<group>"; };
+		2CB71E6123F444E70029A1FB /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Library.strings; sourceTree = "<group>"; };
+		2CB71E6223F445420029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		2CB71E6323F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2CB71E6423F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AnimePlayer.strings; sourceTree = "<group>"; };
+		2CB71E6523F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/GoogleCastMediaControl.strings; sourceTree = "<group>"; };
+		2CB71E6623F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Settings.strings; sourceTree = "<group>"; };
+		2CB71E6723F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/OfflineAnimeViewer.strings; sourceTree = "<group>"; };
+		2CB71E6823F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AnimeListing.strings; sourceTree = "<group>"; };
+		2CB71E6923F445430029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AnimeInformation.strings; sourceTree = "<group>"; };
+		2CB71E6A23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Setup.strings; sourceTree = "<group>"; };
+		2CB71E6B23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/SelflessAuthenticationWebViewController.strings; sourceTree = "<group>"; };
+		2CB71E6C23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AnimeDiscovery.strings; sourceTree = "<group>"; };
+		2CB71E6D23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ServerSelectionCell.strings; sourceTree = "<group>"; };
+		2CB71E6E23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/ServerSelection.strings; sourceTree = "<group>"; };
+		2CB71E6F23F445440029A1FB /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Library.strings; sourceTree = "<group>"; };
 		2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Unwrap.swift"; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
@@ -2005,6 +2047,9 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
+				ja,
+				es,
 			);
 			mainGroup = 2C4ABC4721B5881E009B4D47;
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
@@ -2529,6 +2574,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C0E754F22621C3600DF3AC4 /* Base */,
+				2CB71E4F23F4418A0029A1FB /* zh-Hans */,
+				2CB71E5E23F444E70029A1FB /* ja */,
+				2CB71E6C23F445440029A1FB /* es */,
 			);
 			name = AnimeDiscovery.storyboard;
 			sourceTree = "<group>";
@@ -2537,6 +2585,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C12EDE221BDE9230064D2BD /* Base */,
+				2CB71E4823F441890029A1FB /* zh-Hans */,
+				2CB71E5723F444E60029A1FB /* ja */,
+				2CB71E6523F445430029A1FB /* es */,
 			);
 			name = GoogleCastMediaControl.storyboard;
 			sourceTree = "<group>";
@@ -2545,6 +2596,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C1C716722183FA500760A69 /* Base */,
+				2CB71E4B23F441890029A1FB /* zh-Hans */,
+				2CB71E5A23F444E60029A1FB /* ja */,
+				2CB71E6823F445430029A1FB /* es */,
 			);
 			name = AnimeListing.storyboard;
 			sourceTree = "<group>";
@@ -2553,6 +2607,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C1C718F221B118700760A69 /* Base */,
+				2CB71E4C23F441890029A1FB /* zh-Hans */,
+				2CB71E5B23F444E60029A1FB /* ja */,
+				2CB71E6923F445430029A1FB /* es */,
 			);
 			name = AnimeInformation.storyboard;
 			sourceTree = "<group>";
@@ -2561,6 +2618,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C4ABC5821B5881E009B4D47 /* Base */,
+				2CB71E4523F441880029A1FB /* zh-Hans */,
+				2CB71E5423F444E50029A1FB /* ja */,
+				2CB71E6223F445420029A1FB /* es */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2569,6 +2629,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C4ABC5D21B5881F009B4D47 /* Base */,
+				2CB71E4623F441880029A1FB /* zh-Hans */,
+				2CB71E5523F444E50029A1FB /* ja */,
+				2CB71E6323F445430029A1FB /* es */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2577,6 +2640,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C4ABC8D21B76010009B4D47 /* Base */,
+				2CB71E4723F441880029A1FB /* zh-Hans */,
+				2CB71E5623F444E60029A1FB /* ja */,
+				2CB71E6423F445430029A1FB /* es */,
 			);
 			name = AnimePlayer.storyboard;
 			sourceTree = "<group>";
@@ -2585,6 +2651,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C71DEBE226CF6DF004F3AC3 /* Base */,
+				2CB71E5023F4418A0029A1FB /* zh-Hans */,
+				2CB71E5F23F444E70029A1FB /* ja */,
+				2CB71E6D23F445440029A1FB /* es */,
 			);
 			name = ServerSelectionCell.xib;
 			sourceTree = "<group>";
@@ -2593,6 +2662,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C71DEC7226E179B004F3AC3 /* Base */,
+				2CB71E5123F4418A0029A1FB /* zh-Hans */,
+				2CB71E6023F444E70029A1FB /* ja */,
+				2CB71E6E23F445440029A1FB /* es */,
 			);
 			name = ServerSelection.storyboard;
 			sourceTree = "<group>";
@@ -2601,6 +2673,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C86C1E4225D6D8500950ABF /* Base */,
+				2CB71E4D23F4418A0029A1FB /* zh-Hans */,
+				2CB71E5C23F444E70029A1FB /* ja */,
+				2CB71E6A23F445440029A1FB /* es */,
 			);
 			name = Setup.storyboard;
 			sourceTree = "<group>";
@@ -2609,6 +2684,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C86C1E7225D6DC800950ABF /* Base */,
+				2CB71E4E23F4418A0029A1FB /* zh-Hans */,
+				2CB71E5D23F444E70029A1FB /* ja */,
+				2CB71E6B23F445440029A1FB /* es */,
 			);
 			name = SelflessAuthenticationWebViewController.storyboard;
 			sourceTree = "<group>";
@@ -2617,6 +2695,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C8F6E8622062BB90047798B /* Base */,
+				2CB71E4A23F441890029A1FB /* zh-Hans */,
+				2CB71E5923F444E60029A1FB /* ja */,
+				2CB71E6723F445430029A1FB /* es */,
 			);
 			name = OfflineAnimeViewer.storyboard;
 			sourceTree = "<group>";
@@ -2625,6 +2706,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C979F16235A16C400BC8699 /* Base */,
+				2CB71E5223F4418A0029A1FB /* zh-Hans */,
+				2CB71E6123F444E70029A1FB /* ja */,
+				2CB71E6F23F445440029A1FB /* es */,
 			);
 			name = Library.storyboard;
 			sourceTree = "<group>";
@@ -2633,6 +2717,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				2C9C44FA21CD2405004C8F0C /* Base */,
+				2CB71E4923F441890029A1FB /* zh-Hans */,
+				2CB71E5823F444E60029A1FB /* ja */,
+				2CB71E6623F445430029A1FB /* es */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -2722,6 +2809,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2783,6 +2871,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
