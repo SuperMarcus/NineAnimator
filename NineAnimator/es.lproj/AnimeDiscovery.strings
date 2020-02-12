@@ -11,7 +11,7 @@
 "BdS-bf-mCi.text" = "Esta semana";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
-"S9D-GU-IOj.title" = "Select Source";
+"S9D-GU-IOj.title" = "Seleccione fuente";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
 "WZx-eB-ztY.normalTitle" = "Show Schedule";
