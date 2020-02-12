@@ -2,10 +2,10 @@
 "LsK-7T-IdR.normalTitle" = "Expand";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "nFA-pP-lRy"; */
-"nFA-pP-lRy.text" = "Synopsis";
+"nFA-pP-lRy.text" = "Sinopsis";
 
 /* Class = "UIButton"; normalTitle = "VIEW EPISODES"; ObjectID = "nNy-wE-HN7"; */
-"nNy-wE-HN7.normalTitle" = "VIEW EPISODES";
+"nNy-wE-HN7.normalTitle" = "VER EPISODIOS";
 
 /* Class = "UILabel"; text = "Average Score"; ObjectID = "wYE-AE-4tO"; */
 "wYE-AE-4tO.text" = "Average Score";
