@@ -1,44 +1,17 @@
-/* Class = "UILabel"; text = "wonderfulsubs.com"; ObjectID = "0mS-DR-Wqg"; */
-"0mS-DR-Wqg.text" = "wonderfulsubs.com";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "26L-cp-crm"; */
-"26L-cp-crm.text" = "Anime Title";
-
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "3cY-pg-E77"; */
 "3cY-pg-E77.title" = "Library";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "5tH-iz-rIn"; */
-"5tH-iz-rIn.text" = "Anime Title";
-
-/* Class = "UILabel"; text = "1 of 5"; ObjectID = "ABz-wY-Jai"; */
-"ABz-wY-Jai.text" = "1 of 5";
-
-/* Class = "UILabel"; text = "Tip Title"; ObjectID = "AKI-2p-G89"; */
-"AKI-2p-G89.text" = "Tip Title";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "Ao6-Pk-Lp9"; */
 "Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
 
-/* Class = "UILabel"; text = "Downloads"; ObjectID = "Hqe-wC-5AE"; */
-"Hqe-wC-5AE.text" = "Downloads";
-
 /* Class = "UILabel"; text = "?"; ObjectID = "HvO-MC-MZh"; */
 "HvO-MC-MZh.text" = "?";
-
-/* Class = "UILabel"; text = "wonderfulsubs.com"; ObjectID = "I37-TF-k9k"; */
-"I37-TF-k9k.text" = "wonderfulsubs.com";
 
 /* Class = "UILabel"; text = "?"; ObjectID = "IFs-GB-oZN"; */
 "IFs-GB-oZN.text" = "?";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "IoV-MJ-BXG"; */
 "IoV-MJ-BXG.title" = "Back";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "J09-fp-cbv"; */
-"J09-fp-cbv.text" = "Anime Title";
-
-/* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "KJ2-qg-Cba"; */
-"KJ2-qg-Cba.text" = "Tracking Service Name";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "Q1L-pC-tBH"; */
 "Q1L-pC-tBH.normalTitle" = "View";
@@ -52,50 +25,17 @@
 /* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "R3t-x9-Aoh"; */
 "R3t-x9-Aoh.text" = "LOADING STREAMING HISTORY";
 
-/* Class = "UILabel"; text = "wonderfulsubs.com"; ObjectID = "Sf3-RD-28s"; */
-"Sf3-RD-28s.text" = "wonderfulsubs.com";
-
-/* Class = "UILabel"; text = "Ep. 13"; ObjectID = "bWz-e8-tcA"; */
-"bWz-e8-tcA.text" = "Ep. 13";
-
-/* Class = "UILabel"; text = "This tip helps you with common things in the NineAnimator application, such as viewing a newly available episode or reviewing downloading tasks."; ObjectID = "cPt-ad-XH8"; */
-"cPt-ad-XH8.text" = "This tip helps you with common things in the NineAnimator application, such as viewing a newly available episode or reviewing downloading tasks.";
-
 /* Class = "UIBarButtonItem"; title = "Manage"; ObjectID = "crY-oZ-PX1"; */
 "crY-oZ-PX1.title" = "Manage";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "d7N-uF-V2o"; */
-"d7N-uF-V2o.text" = "Anime Title";
-
-/* Class = "UINavigationItem"; title = "Collection"; ObjectID = "dUT-On-84v"; */
-"dUT-On-84v.title" = "Collection";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "ea1-Tz-3qf"; */
 "ea1-Tz-3qf.text" = "FINDING LOCAL RECORDS...";
 
-/* Class = "UILabel"; text = "Collection Name"; ObjectID = "gd7-dn-WhG"; */
-"gd7-dn-WhG.text" = "Collection Name";
-
-/* Class = "UILabel"; text = "0"; ObjectID = "gic-fO-U3I"; */
-"gic-fO-U3I.text" = "0";
-
 /* Class = "UILabel"; text = "LOADING DOWNLOAD STATUS"; ObjectID = "kex-EV-a5h"; */
 "kex-EV-a5h.text" = "LOADING DOWNLOAD STATUS";
 
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "lHs-WO-vPO"; */
-"lHs-WO-vPO.text" = "Anime Title";
-
-/* Class = "UILabel"; text = "available"; ObjectID = "sJN-1O-lwl"; */
-"sJN-1O-lwl.text" = "available";
-
-/* Class = "UILabel"; text = "Tip Title"; ObjectID = "sX1-Bt-afy"; */
-"sX1-Bt-afy.text" = "Tip Title";
-
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "tJd-18-v6P"; */
 "tJd-18-v6P.title" = "Library";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "uAD-2A-9ga"; */
-"uAD-2A-9ga.text" = "Anime Title";
 
 /* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "xJb-B5-ZuH"; */
 "xJb-B5-ZuH.title" = "Downloads";
