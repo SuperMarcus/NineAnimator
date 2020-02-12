@@ -1,0 +1,44 @@
+/* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "2rp-o4-MgZ"; */
+"2rp-o4-MgZ.normalTitle" = "Open Link";
+
+/* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
+"8OU-XT-7E1.title" = "Recents";
+
+/* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
+"EeQ-yb-72U.text" = "Loading Previews";
+
+/* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
+"SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
+
+/* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
+"W9q-Ho-7mv.title" = "Search";
+
+/* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
+"Xji-1Z-Meq.text" = "Recently Updated";
+
+/* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
+"Xx9-4a-rNT.title" = "Featured";
+
+/* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
+"Y8g-si-rdv.title" = "Search";
+
+/* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
+"bTY-yy-a3Z.text" = "Contents are loading...";
+
+/* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
+"cty-4k-jCy.text" = "You recently watched...";
+
+/* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
+"g8T-nX-rcs.title" = "Settings";
+
+/* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
+"mEy-g5-ff5.title" = "Google Cast";
+
+/* Class = "UITabBarItem"; title = "Library"; ObjectID = "o2r-J2-aqA"; */
+"o2r-J2-aqA.title" = "Library";
+
+/* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
+"rUB-Iw-liv.normalTitle" = "View";
+
+/* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
+"smF-4W-Oha.title" = "Library";
