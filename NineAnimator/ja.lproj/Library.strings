@@ -1,5 +1,5 @@
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "3cY-pg-E77"; */
-"3cY-pg-E77.title" = "Library";
+"3cY-pg-E77.title" = "ライブラリ";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "Ao6-Pk-Lp9"; */
 "Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
@@ -38,7 +38,7 @@
 "tJd-18-v6P.title" = "Library";
 
 /* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "xJb-B5-ZuH"; */
-"xJb-B5-ZuH.title" = "Downloads";
+"xJb-B5-ZuH.title" = "ダウンロード";
 
 /* Class = "UINavigationItem"; title = "Subscribed"; ObjectID = "zAd-pj-0qt"; */
 "zAd-pj-0qt.title" = "Subscribed";
