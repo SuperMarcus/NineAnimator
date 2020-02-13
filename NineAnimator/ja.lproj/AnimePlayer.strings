@@ -17,10 +17,10 @@
 "QaR-tX-zXn.text" = "Start Watching";
 
 /* Class = "UIButton"; normalTitle = "SUBSCRIBE"; ObjectID = "TAP-ty-bvP"; */
-"TAP-ty-bvP.normalTitle" = "SUBSCRIBE";
+"TAP-ty-bvP.normalTitle" = "登録";
 
 /* Class = "UILabel"; text = "Subscribed"; ObjectID = "WA8-YI-xRl"; */
-"WA8-YI-xRl.text" = "Subscribed";
+"WA8-YI-xRl.text" = "登録済み";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "Wev-7V-WQ7"; */
 "Wev-7V-WQ7.normalTitle" = "Offline Access";
