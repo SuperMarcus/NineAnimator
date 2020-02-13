@@ -5,7 +5,7 @@
 "5eV-r3-Bap.normalTitle" = "Finish";
 
 /* Class = "UILabel"; text = "Downloads"; ObjectID = "7Kf-LC-01q"; */
-"7Kf-LC-01q.text" = "Downloads";
+"7Kf-LC-01q.text" = "ダウンロード";
 
 /* Class = "UILabel"; text = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites."; ObjectID = "8VJ-Os-i4X"; */
 "8VJ-Os-i4X.text" = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites.";
@@ -14,7 +14,7 @@
 "Ier-uY-wii.normalTitle" = "Continue";
 
 /* Class = "UILabel"; text = "Welcome to NineAnimator"; ObjectID = "JGR-Zv-VIj"; */
-"JGR-Zv-VIj.text" = "Welcome to NineAnimator";
+"JGR-Zv-VIj.text" = "ようこそNineAnimatorへ";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
 "JGW-3m-qyq.text" = "ライト";
@@ -41,7 +41,7 @@
 "YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "Appearance";
+"aVI-dM-rv8.text" = "テーマ";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
 "eYj-Vw-fYO.normalTitle" = "Skip Setup";
@@ -65,13 +65,13 @@
 "ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
 
 /* Class = "UILabel"; text = "Library"; ObjectID = "ouh-B2-M5f"; */
-"ouh-B2-M5f.text" = "Library";
+"ouh-B2-M5f.text" = "ライブラリ";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "rtk-Cw-RXt"; */
 "rtk-Cw-RXt.normalTitle" = "Continue";
 
 /* Class = "UIButton"; normalTitle = "Open Discord"; ObjectID = "t2o-HH-QfF"; */
-"t2o-HH-QfF.normalTitle" = "Open Discord";
+"t2o-HH-QfF.normalTitle" = "Discordを開く";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
 "uka-Zy-Cuf.title" = "What's New";
@@ -80,7 +80,7 @@
 "x9M-KR-UlF.text" = "Start Using NineAnimator";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
-"xUo-iY-fAt.title" = "Welcome";
+"xUo-iY-fAt.title" = "ようこそ";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
 "xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
