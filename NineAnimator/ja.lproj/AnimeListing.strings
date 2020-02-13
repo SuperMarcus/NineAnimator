@@ -2,7 +2,7 @@
 "Nke-YY-kc3.normalTitle" = "リンクを開く";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "OOI-8A-BkV"; */
-"OOI-8A-BkV.text" = "Loading";
+"OOI-8A-BkV.text" = "読み込み中…";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
 "goV-KK-D5O.text" = "検索エラー";
