@@ -14,31 +14,31 @@
 "W9q-Ho-7mv.title" = "搜索​​​​";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
-"Xji-1Z-Meq.text" = "Recently Updated";
+"Xji-1Z-Meq.text" = "最近更新";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
-"Xx9-4a-rNT.title" = "Featured";
+"Xx9-4a-rNT.title" = "精选";
 
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
-"Y8g-si-rdv.title" = "Search";
+"Y8g-si-rdv.title" = "搜索​​​​";
 
 /* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
-"bTY-yy-a3Z.text" = "Contents are loading...";
+"bTY-yy-a3Z.text" = "内容正在加载中...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "You recently watched...";
+"cty-4k-jCy.text" = "您最近观看了...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
-"g8T-nX-rcs.title" = "Settings";
+"g8T-nX-rcs.title" = "设置";
 
 /* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
 "mEy-g5-ff5.title" = "Google Cast";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "o2r-J2-aqA"; */
-"o2r-J2-aqA.title" = "Library";
+"o2r-J2-aqA.title" = "库";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
-"rUB-Iw-liv.normalTitle" = "View";
+"rUB-Iw-liv.normalTitle" = "查看";
 
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
-"smF-4W-Oha.title" = "Library";
+"smF-4W-Oha.title" = "库";
