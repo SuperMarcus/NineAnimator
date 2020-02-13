@@ -2,7 +2,7 @@
 "4Bw-Vm-E5a.normalTitle" = "リンクを開く";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "4kp-IB-7Yg"; */
-"4kp-IB-7Yg.text" = "Loading";
+"4kp-IB-7Yg.text" = "読み込み中…";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
 "AWC-Sv-NA3.title" = "次を見る";
@@ -20,7 +20,7 @@
 "iOO-54-dYf.title" = "Anime Schedule";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
-"j7t-Oe-H6q.normalTitle" = "View More";
+"j7t-Oe-H6q.normalTitle" = "もっと見る";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Watch Next";
+"lSV-Fp-1Cb.title" = "次を見る";
