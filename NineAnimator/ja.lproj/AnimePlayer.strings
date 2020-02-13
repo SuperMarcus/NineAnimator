@@ -11,7 +11,7 @@
 "K1G-eG-Vkn.text" = "No synopsis for this episode.";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "KNz-kA-xO5"; */
-"KNz-kA-xO5.text" = "Loading";
+"KNz-kA-xO5.text" = "読み込み中…";
 
 /* Class = "UILabel"; text = "Start Watching"; ObjectID = "QaR-tX-zXn"; */
 "QaR-tX-zXn.text" = "Start Watching";
