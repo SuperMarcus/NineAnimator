@@ -8,13 +8,13 @@
 "EeQ-yb-72U.text" = "Loading Previews";
 
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
-"SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
+"SBh-Sa-wuU.text" = "NineAnimator no está disponible";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
 "W9q-Ho-7mv.title" = "Search";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
-"Xji-1Z-Meq.text" = "Recently Updated";
+"Xji-1Z-Meq.text" = "Recientemente Actualizado";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
 "Xx9-4a-rNT.title" = "Featured";
@@ -26,7 +26,7 @@
 "bTY-yy-a3Z.text" = "Contents are loading...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "You recently watched...";
+"cty-4k-jCy.text" = "Has visto recientemente...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
 "g8T-nX-rcs.title" = "Settings";
