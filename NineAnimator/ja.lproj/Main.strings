@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "2rp-o4-MgZ"; */
-"2rp-o4-MgZ.normalTitle" = "Open Link";
+"2rp-o4-MgZ.normalTitle" = "リンクを開く";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
 "8OU-XT-7E1.title" = "Recents";
@@ -29,16 +29,16 @@
 "cty-4k-jCy.text" = "You recently watched...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
-"g8T-nX-rcs.title" = "Settings";
+"g8T-nX-rcs.title" = "設定";
 
 /* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
 "mEy-g5-ff5.title" = "Google Cast";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "o2r-J2-aqA"; */
-"o2r-J2-aqA.title" = "Library";
+"o2r-J2-aqA.title" = "ライブラリ";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
 "rUB-Iw-liv.normalTitle" = "View";
 
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
-"smF-4W-Oha.title" = "Library";
+"smF-4W-Oha.title" = "ライブラリ";
