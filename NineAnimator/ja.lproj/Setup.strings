@@ -17,7 +17,7 @@
 "JGR-Zv-VIj.text" = "Welcome to NineAnimator";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
-"JGW-3m-qyq.text" = "Light";
+"JGW-3m-qyq.text" = "ライト";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
 "MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
@@ -59,7 +59,7 @@
 "hCU-cE-SPT.title" = "Appearance";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
-"ikj-0J-JNE.text" = "What's New";
+"ikj-0J-JNE.text" = "アップデート";
 
 /* Class = "UILabel"; text = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu."; ObjectID = "ok1-aG-zqs"; */
 "ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
@@ -86,10 +86,10 @@
 "xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[0]" = "Light";
+"yQX-1k-GWU.segmentTitles[0]" = "ライト";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[1] = "Dark"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[1]" = "Dark";
+"yQX-1k-GWU.segmentTitles[1]" = "ダーク";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[2] = "Dynamic"; ObjectID = "yQX-1k-GWU"; */
 "yQX-1k-GWU.segmentTitles[2]" = "Dynamic";
