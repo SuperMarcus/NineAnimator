@@ -5,7 +5,7 @@
 "OOI-8A-BkV.text" = "Loading";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
-"goV-KK-D5O.text" = "Search Error";
+"goV-KK-D5O.text" = "検索エラー";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
 "hP6-y4-aJ9.text" = "No results found for \"Search\"";
@@ -14,4 +14,4 @@
 "lFR-07-AK0.text" = "アニメタイトル";
 
 /* Class = "UITableViewController"; title = "List"; ObjectID = "rPB-zo-b7C"; */
-"rPB-zo-b7C.title" = "List";
+"rPB-zo-b7C.title" = "リスト";
