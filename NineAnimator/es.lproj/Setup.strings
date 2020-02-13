@@ -14,10 +14,10 @@
 "Ier-uY-wii.normalTitle" = "Continue";
 
 /* Class = "UILabel"; text = "Welcome to NineAnimator"; ObjectID = "JGR-Zv-VIj"; */
-"JGR-Zv-VIj.text" = "Welcome to NineAnimator";
+"JGR-Zv-VIj.text" = "Bienvenido a NineAnimator";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
-"JGW-3m-qyq.text" = "Light";
+"JGW-3m-qyq.text" = "Claro";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
 "MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
@@ -41,7 +41,7 @@
 "YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "Appearance";
+"aVI-dM-rv8.text" = "Apariencia";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
 "eYj-Vw-fYO.normalTitle" = "Skip Setup";
@@ -56,7 +56,7 @@
 "h82-lJ-xk8.normalTitle" = "Continue";
 
 /* Class = "UIBarButtonItem"; title = "Appearance"; ObjectID = "hCU-cE-SPT"; */
-"hCU-cE-SPT.title" = "Appearance";
+"hCU-cE-SPT.title" = "Apariencia";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
 "ikj-0J-JNE.text" = "What's New";
@@ -71,13 +71,13 @@
 "rtk-Cw-RXt.normalTitle" = "Continue";
 
 /* Class = "UIButton"; normalTitle = "Open Discord"; ObjectID = "t2o-HH-QfF"; */
-"t2o-HH-QfF.normalTitle" = "Open Discord";
+"t2o-HH-QfF.normalTitle" = "Abrir Discord";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
 "uka-Zy-Cuf.title" = "What's New";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
-"x9M-KR-UlF.text" = "Start Using NineAnimator";
+"x9M-KR-UlF.text" = "Comience a usar NineAnimator";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
 "xUo-iY-fAt.title" = "Welcome";
@@ -86,10 +86,10 @@
 "xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[0]" = "Light";
+"yQX-1k-GWU.segmentTitles[0]" = "Claro";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[1] = "Dark"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[1]" = "Dark";
+"yQX-1k-GWU.segmentTitles[1]" = "Obscuro";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[2] = "Dynamic"; ObjectID = "yQX-1k-GWU"; */
 "yQX-1k-GWU.segmentTitles[2]" = "Dynamic";
