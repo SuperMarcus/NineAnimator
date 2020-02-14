@@ -2,10 +2,10 @@
 "0eR-hu-Qxf.text" = "Home";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "Repositorio GitHub";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
-"1D4-d4-eg5.text" = "Checking...";
+"1D4-d4-eg5.text" = "Comprobando...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
 "1VP-oc-aqz.text" = "Clear Cached Data";
@@ -62,7 +62,7 @@
 "8Lj-r1-12t.title" = "Preferred Source";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
-"A3J-Ya-mRo.text" = "Version";
+"A3J-Ya-mRo.text" = "Versión";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
 "AVN-Z6-xDl.text" = "Export History";
@@ -89,7 +89,7 @@
 "Ips-J8-mzS.footerTitle" = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account.";
 
 /* Class = "UITableViewSection"; headerTitle = "Privacy"; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.headerTitle" = "Privacy";
+"Ips-J8-mzS.headerTitle" = "Privacidad";
 
 /* Class = "UILabel"; text = "KITSU.IO"; ObjectID = "JZU-9o-boH"; */
 "JZU-9o-boH.text" = "KITSU.IO";
@@ -107,10 +107,10 @@
 "KjW-mL-37B.text" = "Episodes";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
-"Kql-zU-bRq.text" = "Setup AniList.co";
+"Kql-zU-bRq.text" = "Configurar AniList.co";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "LfV-dW-fu4"; */
-"LfV-dW-fu4.text" = "Credits";
+"LfV-dW-fu4.text" = "Créditos";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
 "LoF-UE-Pdv.text" = "Not Setup";
@@ -131,7 +131,7 @@
 "Nrj-vR-ORT.text" = "Allow NSFW Content";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
-"OUZ-2Z-Nei.text" = "GitHub Repository";
+"OUZ-2Z-Nei.text" = "Repositorio GitHub";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[0] = "Reversed"; ObjectID = "QFr-Ue-S7z"; */
 "QFr-Ue-S7z.segmentTitles[0]" = "Reversed";
