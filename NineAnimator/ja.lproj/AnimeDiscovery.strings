@@ -1,45 +1,14 @@
-
-/* Class = "UILabel"; text = "Ep. 1"; ObjectID = "42u-0c-QcG"; */
-"42u-0c-QcG.text" = "Ep. 1";
-
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "4Bw-Vm-E5a"; */
-"4Bw-Vm-E5a.normalTitle" = "Open Link";
+"4Bw-Vm-E5a.normalTitle" = "リンクを開く";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "4kp-IB-7Yg"; */
-"4kp-IB-7Yg.text" = "Loading";
-
-/* Class = "UILabel"; text = "Anime Synopsis"; ObjectID = "4p0-Da-qXx"; */
-"4p0-Da-qXx.text" = "Anime Synopsis";
-
-/* Class = "UILabel"; text = "Collection Subtitle"; ObjectID = "9Fk-Gp-IGG"; */
-"9Fk-Gp-IGG.text" = "Collection Subtitle";
+"4kp-IB-7Yg.text" = "読み込み中…";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
-"AWC-Sv-NA3.title" = "Watch Next";
-
-/* Class = "UILabel"; text = "Standard"; ObjectID = "B9N-hK-IwS"; */
-"B9N-hK-IwS.text" = "Standard";
+"AWC-Sv-NA3.title" = "次を見る";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
-"BdS-bf-mCi.text" = "This Week";
-
-/* Class = "UILabel"; text = "MAY 4 2019"; ObjectID = "ElE-AE-Lnx"; */
-"ElE-AE-Lnx.text" = "MAY 4 2019";
-
-/* Class = "UIButton"; normalTitle = "Action Name"; ObjectID = "Ifh-MG-Mxr"; */
-"Ifh-MG-Mxr.normalTitle" = "Action Name";
-
-/* Class = "UILabel"; text = "Anime Name"; ObjectID = "JrB-u1-UqK"; */
-"JrB-u1-UqK.text" = "Anime Name";
-
-/* Class = "UILabel"; text = "Label"; ObjectID = "KvD-Us-DEE"; */
-"KvD-Us-DEE.text" = "Label";
-
-/* Class = "UILabel"; text = "Saturday"; ObjectID = "NFy-jR-9zE"; */
-"NFy-jR-9zE.text" = "Saturday";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "O5c-C5-cMn"; */
-"O5c-C5-cMn.text" = "Anime Title";
+"BdS-bf-mCi.text" = "今週";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
 "S9D-GU-IOj.title" = "Select Source";
@@ -47,32 +16,11 @@
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
 "WZx-eB-ztY.normalTitle" = "Show Schedule";
 
-/* Class = "UILabel"; text = "Loading Section Title"; ObjectID = "Xip-SL-kgM"; */
-"Xip-SL-kgM.text" = "Loading Section Title";
-
-/* Class = "UILabel"; text = "Ep. 2/12"; ObjectID = "i3b-OB-bct"; */
-"i3b-OB-bct.text" = "Ep. 2/12";
-
 /* Class = "UIBarButtonItem"; title = "Anime Schedule"; ObjectID = "iOO-54-dYf"; */
 "iOO-54-dYf.title" = "Anime Schedule";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
-"j7t-Oe-H6q.normalTitle" = "View More";
+"j7t-Oe-H6q.normalTitle" = "もっと見る";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Watch Next";
-
-/* Class = "UILabel"; text = "BROADCAST TIME"; ObjectID = "m8K-Nz-rdb"; */
-"m8K-Nz-rdb.text" = "BROADCAST TIME";
-
-/* Class = "UILabel"; text = "Caption"; ObjectID = "nnq-86-RN8"; */
-"nnq-86-RN8.text" = "Caption";
-
-/* Class = "UILabel"; text = "11:11 PM"; ObjectID = "sab-K2-tmC"; */
-"sab-K2-tmC.text" = "11:11 PM";
-
-/* Class = "UILabel"; text = "Error Description"; ObjectID = "vk8-dr-GdY"; */
-"vk8-dr-GdY.text" = "Error Description";
-
-/* Class = "UILabel"; text = "Loading Section Title"; ObjectID = "yGh-oL-1cg"; */
-"yGh-oL-1cg.text" = "Loading Section Title";
+"lSV-Fp-1Cb.title" = "次を見る";

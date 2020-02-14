@@ -1,5 +1,5 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "2rp-o4-MgZ"; */
-"2rp-o4-MgZ.normalTitle" = "Abrir Enlace";
+"2rp-o4-MgZ.normalTitle" = "Open Link";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
 "8OU-XT-7E1.title" = "Recents";
@@ -8,13 +8,13 @@
 "EeQ-yb-72U.text" = "Loading Previews";
 
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
-"SBh-Sa-wuU.text" = "NineAnimator no está disponible";
+"SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
 "W9q-Ho-7mv.title" = "Search";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
-"Xji-1Z-Meq.text" = "Recientemente Actualizado";
+"Xji-1Z-Meq.text" = "Recently Updated";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
 "Xx9-4a-rNT.title" = "Featured";
@@ -26,7 +26,7 @@
 "bTY-yy-a3Z.text" = "Contents are loading...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "Has visto recientemente...";
+"cty-4k-jCy.text" = "You recently watched...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
 "g8T-nX-rcs.title" = "Settings";

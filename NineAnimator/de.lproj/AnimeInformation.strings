@@ -1,14 +1,14 @@
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "LsK-7T-IdR"; */
-"LsK-7T-IdR.normalTitle" = "Expandir";
+"LsK-7T-IdR.normalTitle" = "Expand";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "nFA-pP-lRy"; */
-"nFA-pP-lRy.text" = "Sinopsis";
+"nFA-pP-lRy.text" = "Synopsis";
 
 /* Class = "UIButton"; normalTitle = "VIEW EPISODES"; ObjectID = "nNy-wE-HN7"; */
-"nNy-wE-HN7.normalTitle" = "VER EPISODIOS";
+"nNy-wE-HN7.normalTitle" = "VIEW EPISODES";
 
 /* Class = "UILabel"; text = "Average Score"; ObjectID = "wYE-AE-4tO"; */
-"wYE-AE-4tO.text" = "Puntuación Promedio";
+"wYE-AE-4tO.text" = "Average Score";
 
 /* Class = "UILabel"; text = "Character Name"; ObjectID = "zLy-V6-RBp"; */
-"zLy-V6-RBp.text" = "Nombre del Personaje";
+"zLy-V6-RBp.text" = "Character Name";

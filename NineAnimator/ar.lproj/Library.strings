@@ -1,5 +1,5 @@
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "3cY-pg-E77"; */
-"3cY-pg-E77.title" = "ライブラリ";
+"3cY-pg-E77.title" = "Library";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "Ao6-Pk-Lp9"; */
 "Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
@@ -11,7 +11,7 @@
 "IFs-GB-oZN.text" = "?";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "IoV-MJ-BXG"; */
-"IoV-MJ-BXG.title" = "戻る";
+"IoV-MJ-BXG.title" = "Back";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "Q1L-pC-tBH"; */
 "Q1L-pC-tBH.normalTitle" = "View";
@@ -35,10 +35,10 @@
 "kex-EV-a5h.text" = "LOADING DOWNLOAD STATUS";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "tJd-18-v6P"; */
-"tJd-18-v6P.title" = "ライブラリ";
+"tJd-18-v6P.title" = "Library";
 
 /* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "xJb-B5-ZuH"; */
-"xJb-B5-ZuH.title" = "ダウンロード";
+"xJb-B5-ZuH.title" = "Downloads";
 
 /* Class = "UINavigationItem"; title = "Subscribed"; ObjectID = "zAd-pj-0qt"; */
-"zAd-pj-0qt.title" = "登録済み";
+"zAd-pj-0qt.title" = "Subscribed";

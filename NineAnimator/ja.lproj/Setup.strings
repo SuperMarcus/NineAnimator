@@ -1,12 +1,11 @@
-
 /* Class = "UILabel"; text = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you."; ObjectID = "3Ui-C3-ly1"; */
 "3Ui-C3-ly1.text" = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you.";
 
 /* Class = "UIButton"; normalTitle = "Finish"; ObjectID = "5eV-r3-Bap"; */
-"5eV-r3-Bap.normalTitle" = "Finish";
+"5eV-r3-Bap.normalTitle" = "完了";
 
 /* Class = "UILabel"; text = "Downloads"; ObjectID = "7Kf-LC-01q"; */
-"7Kf-LC-01q.text" = "Downloads";
+"7Kf-LC-01q.text" = "ダウンロード";
 
 /* Class = "UILabel"; text = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites."; ObjectID = "8VJ-Os-i4X"; */
 "8VJ-Os-i4X.text" = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites.";
@@ -15,10 +14,10 @@
 "Ier-uY-wii.normalTitle" = "Continue";
 
 /* Class = "UILabel"; text = "Welcome to NineAnimator"; ObjectID = "JGR-Zv-VIj"; */
-"JGR-Zv-VIj.text" = "Welcome to NineAnimator";
+"JGR-Zv-VIj.text" = "ようこそNineAnimatorへ";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
-"JGW-3m-qyq.text" = "Light";
+"JGW-3m-qyq.text" = "ライト";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
 "MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
@@ -42,7 +41,7 @@
 "YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "Appearance";
+"aVI-dM-rv8.text" = "外観";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
 "eYj-Vw-fYO.normalTitle" = "Skip Setup";
@@ -57,40 +56,40 @@
 "h82-lJ-xk8.normalTitle" = "Continue";
 
 /* Class = "UIBarButtonItem"; title = "Appearance"; ObjectID = "hCU-cE-SPT"; */
-"hCU-cE-SPT.title" = "Appearance";
+"hCU-cE-SPT.title" = "外観";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
-"ikj-0J-JNE.text" = "What's New";
+"ikj-0J-JNE.text" = "アップデート";
 
 /* Class = "UILabel"; text = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu."; ObjectID = "ok1-aG-zqs"; */
 "ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
 
 /* Class = "UILabel"; text = "Library"; ObjectID = "ouh-B2-M5f"; */
-"ouh-B2-M5f.text" = "Library";
+"ouh-B2-M5f.text" = "ライブラリ";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "rtk-Cw-RXt"; */
 "rtk-Cw-RXt.normalTitle" = "Continue";
 
 /* Class = "UIButton"; normalTitle = "Open Discord"; ObjectID = "t2o-HH-QfF"; */
-"t2o-HH-QfF.normalTitle" = "Open Discord";
+"t2o-HH-QfF.normalTitle" = "Discordを開く";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
-"uka-Zy-Cuf.title" = "What's New";
+"uka-Zy-Cuf.title" = "アップデート";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
 "x9M-KR-UlF.text" = "Start Using NineAnimator";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
-"xUo-iY-fAt.title" = "Welcome";
+"xUo-iY-fAt.title" = "ようこそ";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
 "xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[0]" = "Light";
+"yQX-1k-GWU.segmentTitles[0]" = "ライト";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[1] = "Dark"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[1]" = "Dark";
+"yQX-1k-GWU.segmentTitles[1]" = "ダーク";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[2] = "Dynamic"; ObjectID = "yQX-1k-GWU"; */
 "yQX-1k-GWU.segmentTitles[2]" = "Dynamic";
