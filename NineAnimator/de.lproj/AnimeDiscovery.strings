@@ -5,22 +5,22 @@
 "4kp-IB-7Yg.text" = "Laden";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
-"AWC-Sv-NA3.title" = "Watch Next";
+"AWC-Sv-NA3.title" = "Nächstes Ansehen";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
-"BdS-bf-mCi.text" = "This Week";
+"BdS-bf-mCi.text" = "Diese Woche";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
-"S9D-GU-IOj.title" = "Select Source";
+"S9D-GU-IOj.title" = "Quelle auswählen";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
-"WZx-eB-ztY.normalTitle" = "Show Schedule";
+"WZx-eB-ztY.normalTitle" = "Zeitplan anzeigen";
 
 /* Class = "UIBarButtonItem"; title = "Anime Schedule"; ObjectID = "iOO-54-dYf"; */
-"iOO-54-dYf.title" = "Anime Schedule";
+"iOO-54-dYf.title" = "Anime-Zeitplan";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
-"j7t-Oe-H6q.normalTitle" = "View More";
+"j7t-Oe-H6q.normalTitle" = "Mehr ansehen";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Watch Next";
+"lSV-Fp-1Cb.title" = "Nächstes Ansehen";
