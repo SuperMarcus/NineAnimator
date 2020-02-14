@@ -149,7 +149,7 @@
 "SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.";
 
 /* Class = "UITableViewSection"; headerTitle = "GNU General Public License version 3"; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.headerTitle" = "GNU General Public License version 3";
+"SRm-Su-TD8.headerTitle" = "Licencia Pública General de GNU versión 3";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com."; ObjectID = "Sei-S4-MPn"; */
 "Sei-S4-MPn.footerTitle" = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com.";
