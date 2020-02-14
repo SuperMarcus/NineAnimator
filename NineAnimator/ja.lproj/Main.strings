@@ -11,7 +11,7 @@
 "SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
-"W9q-Ho-7mv.title" = "Search";
+"W9q-Ho-7mv.title" = "検索";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
 "Xji-1Z-Meq.text" = "Recently Updated";
@@ -20,7 +20,7 @@
 "Xx9-4a-rNT.title" = "Featured";
 
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
-"Y8g-si-rdv.title" = "Search";
+"Y8g-si-rdv.title" = "検索";
 
 /* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
 "bTY-yy-a3Z.text" = "Contents are loading...";
