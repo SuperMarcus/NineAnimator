@@ -2,7 +2,7 @@
 "3Ui-C3-ly1.text" = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you.";
 
 /* Class = "UIButton"; normalTitle = "Finish"; ObjectID = "5eV-r3-Bap"; */
-"5eV-r3-Bap.normalTitle" = "Finish";
+"5eV-r3-Bap.normalTitle" = "完了";
 
 /* Class = "UILabel"; text = "Downloads"; ObjectID = "7Kf-LC-01q"; */
 "7Kf-LC-01q.text" = "ダウンロード";
@@ -41,7 +41,7 @@
 "YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "テーマ";
+"aVI-dM-rv8.text" = "外観";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
 "eYj-Vw-fYO.normalTitle" = "Skip Setup";
@@ -56,7 +56,7 @@
 "h82-lJ-xk8.normalTitle" = "Continue";
 
 /* Class = "UIBarButtonItem"; title = "Appearance"; ObjectID = "hCU-cE-SPT"; */
-"hCU-cE-SPT.title" = "Appearance";
+"hCU-cE-SPT.title" = "外観";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
 "ikj-0J-JNE.text" = "アップデート";
@@ -74,7 +74,7 @@
 "t2o-HH-QfF.normalTitle" = "Discordを開く";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
-"uka-Zy-Cuf.title" = "What's New";
+"uka-Zy-Cuf.title" = "アップデート";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
 "x9M-KR-UlF.text" = "Start Using NineAnimator";
