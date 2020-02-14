@@ -5,7 +5,7 @@
 "nFA-pP-lRy.text" = "Synopsis";
 
 /* Class = "UIButton"; normalTitle = "VIEW EPISODES"; ObjectID = "nNy-wE-HN7"; */
-"nNy-wE-HN7.normalTitle" = "VIEW EPISODES";
+"nNy-wE-HN7.normalTitle" = "エピソードを見る";
 
 /* Class = "UILabel"; text = "Average Score"; ObjectID = "wYE-AE-4tO"; */
 "wYE-AE-4tO.text" = "Average Score";
