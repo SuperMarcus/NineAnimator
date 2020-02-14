@@ -179,13 +179,13 @@
 "W4K-f9-Rrg.text" = "Preferred Source";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[0]" = "Dark";
+"WSB-go-EfB.segmentTitles[0]" = "Obscuro";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[1] = "Light"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[1]" = "Light";
+"WSB-go-EfB.segmentTitles[1]" = "Claro";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "WoO-zh-kDF"; */
-"WoO-zh-kDF.text" = "Appearance";
+"WoO-zh-kDF.text" = "Apariencia";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "Wu1-sV-neO"; */
 "Wu1-sV-neO.text" = "About";
