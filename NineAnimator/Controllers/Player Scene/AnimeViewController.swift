@@ -515,7 +515,7 @@ extension AnimeViewController {
             return
         }
         
-        let quickJumpSheet = UIAlertController(title: "Qucik Jump", message: nil, preferredStyle: .actionSheet)
+        let quickJumpSheet = UIAlertController(title: "Quick Jump", message: nil, preferredStyle: .actionSheet)
         
         if let popoverController = quickJumpSheet.popoverPresentationController {
             popoverController.sourceView = sender
