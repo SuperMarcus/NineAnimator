@@ -242,8 +242,7 @@ extension AppDelegate {
             
             var pasteboardUrl: URL?
             
-            if pasteboard.hasStrings {
-                let pasteboardContent = pasteboard.string!
+            if pasteboard.hasStrings, let pasteboardContent = pasteboard.string {
                 if let urlFromString = URL(string: pasteboardContent) {
                     pasteboardUrl = urlFromString
                 }
