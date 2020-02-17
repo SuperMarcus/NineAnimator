@@ -603,6 +603,8 @@
 		2C6A390B23A0889E00FC00A9 /* FourAnime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+RequestModifier.swift"; sourceTree = "<group>"; };
 		2C6A390D23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimator+ImageResourceRequestModifier.swift"; sourceTree = "<group>"; };
 		2C6C20C623FADD19009FAFF5 /* UserDefaults+CodableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+CodableValue.swift"; sourceTree = "<group>"; };
+		2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_white.svg; sourceTree = "<group>"; };
+		2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_black.svg; sourceTree = "<group>"; };
 		2C6C472D238E1E00001E723C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineContent+CacheStrategy.swift"; sourceTree = "<group>"; };
 		2C6C47352394491F001E723C /* AtomicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicProperty.swift; sourceTree = "<group>"; };
@@ -1151,6 +1153,8 @@
 				2CEBE90A22074826006A64CC /* subscribe_button.jpg */,
 				2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */,
 				2C4817A421DB2A210092F694 /* notification_example.jpg */,
+				2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */,
+				2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */,
 			);
 			path = Media;
 			sourceTree = "<group>";
