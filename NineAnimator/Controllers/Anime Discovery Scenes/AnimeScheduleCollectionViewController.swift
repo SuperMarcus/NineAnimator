@@ -145,7 +145,7 @@ class AnimeScheduleCollectionViewController: MinFilledCollectionViewController, 
 extension AnimeScheduleCollectionViewController {
     func loadCalendarItems(on page: Int) {
         guard let source = calendarSource, source.availablePages > page else {
-            return Log.error("[Weekly Schedule] Trying to load page %@ of the schedule while it doesn't exists", page)
+            return Log.error("[Weekly Schedule] Trying to load page %@ of the schedule while it doesn't exist", page)
         }
         
         collectionView.performBatchUpdates({

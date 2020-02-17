@@ -143,7 +143,7 @@ extension BaseSource {
                     let element = try bowl.select("#\(domId)")
                     if !element.isEmpty() {
                         return [ "innerHTML": try element.html() ]
-                    } else { throw NineAnimatorError.responseError("Key \(domId) doesn't exists") }
+                    } else { throw NineAnimatorError.responseError("Key \(domId) doesn't exist") }
                 } catch { Log.error("[CF_WAF] Error running challenge script: %@", error) }
                 
                 // Return null for not found

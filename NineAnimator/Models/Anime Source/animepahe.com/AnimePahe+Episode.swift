@@ -77,7 +77,7 @@ extension NASourceAnimePahe {
             let episodeEntry = try release.data
                 .tryUnwrap(.responseError("No episodes were found in this anime"))
                 .first { Int($0.episode) == episodeNumber }
-                .tryUnwrap(.responseError("This episode does not exists"))
+                .tryUnwrap(.responseError("This episode does not exist"))
             let selectedProvider = link.server
             
             // Retrieve streming target
