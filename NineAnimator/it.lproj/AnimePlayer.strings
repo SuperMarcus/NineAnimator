@@ -1,0 +1,38 @@
+/* Class = "UILabel"; text = "Air Date"; ObjectID = "0sy-Go-eMO"; */
+"0sy-Go-eMO.text" = "Air Date";
+
+/* Class = "UILabel"; text = "No Suggesting Episode"; ObjectID = "AVT-Pg-Bdx"; */
+"AVT-Pg-Bdx.text" = "No Suggesting Episode";
+
+/* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "B2n-TQ-hy9"; */
+"B2n-TQ-hy9.normalTitle" = "Offline Access";
+
+/* Class = "UILabel"; text = "No synopsis for this episode."; ObjectID = "K1G-eG-Vkn"; */
+"K1G-eG-Vkn.text" = "No synopsis for this episode.";
+
+/* Class = "UILabel"; text = "Loading"; ObjectID = "KNz-kA-xO5"; */
+"KNz-kA-xO5.text" = "Loading";
+
+/* Class = "UILabel"; text = "Start Watching"; ObjectID = "QaR-tX-zXn"; */
+"QaR-tX-zXn.text" = "Start Watching";
+
+/* Class = "UIButton"; normalTitle = "SUBSCRIBE"; ObjectID = "TAP-ty-bvP"; */
+"TAP-ty-bvP.normalTitle" = "SUBSCRIBE";
+
+/* Class = "UILabel"; text = "Subscribed"; ObjectID = "WA8-YI-xRl"; */
+"WA8-YI-xRl.text" = "Subscribed";
+
+/* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "Wev-7V-WQ7"; */
+"Wev-7V-WQ7.normalTitle" = "Offline Access";
+
+/* Class = "UILabel"; text = "Loading anime information"; ObjectID = "XG2-wy-XRz"; */
+"XG2-wy-XRz.text" = "Loading anime information";
+
+/* Class = "UILabel"; text = "Loading Ratings"; ObjectID = "jCq-le-ZsX"; */
+"jCq-le-ZsX.text" = "Loading Ratings";
+
+/* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "mFd-Ay-cFU"; */
+"mFd-Ay-cFU.normalTitle" = "Expand";
+
+/* Class = "UILabel"; text = "Synopsis"; ObjectID = "oxU-lU-8me"; */
+"oxU-lU-8me.text" = "Synopsis";
