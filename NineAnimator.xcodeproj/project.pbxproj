@@ -176,6 +176,7 @@
 		2C6A390A23A0180B00FC00A9 /* FourAnime+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6A390923A0180B00FC00A9 /* FourAnime+Episode.swift */; };
 		2C6A390C23A0889E00FC00A9 /* FourAnime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6A390B23A0889E00FC00A9 /* FourAnime+RequestModifier.swift */; };
 		2C6A390E23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6A390D23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift */; };
+		2C6C20C723FADD19009FAFF5 /* UserDefaults+CodableValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C20C623FADD19009FAFF5 /* UserDefaults+CodableValue.swift */; };
 		2C6C47322390311B001E723C /* OfflineContent+CacheStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */; };
 		2C6C47362394491F001E723C /* AtomicProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6C47352394491F001E723C /* AtomicProperty.swift */; };
 		2C6CF24C221B9F1E0009D554 /* SomeOrError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6CF24B221B9F1E0009D554 /* SomeOrError.swift */; };
@@ -601,6 +602,9 @@
 		2C6A390923A0180B00FC00A9 /* FourAnime+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+Episode.swift"; sourceTree = "<group>"; };
 		2C6A390B23A0889E00FC00A9 /* FourAnime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+RequestModifier.swift"; sourceTree = "<group>"; };
 		2C6A390D23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimator+ImageResourceRequestModifier.swift"; sourceTree = "<group>"; };
+		2C6C20C623FADD19009FAFF5 /* UserDefaults+CodableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+CodableValue.swift"; sourceTree = "<group>"; };
+		2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_white.svg; sourceTree = "<group>"; };
+		2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_black.svg; sourceTree = "<group>"; };
 		2C6C472D238E1E00001E723C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineContent+CacheStrategy.swift"; sourceTree = "<group>"; };
 		2C6C47352394491F001E723C /* AtomicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicProperty.swift; sourceTree = "<group>"; };
@@ -1205,6 +1209,8 @@
 				2CEBE90A22074826006A64CC /* subscribe_button.jpg */,
 				2C4817A521DB2C120092F694 /* subscribe_recent_tab.jpg */,
 				2C4817A421DB2A210092F694 /* notification_example.jpg */,
+				2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */,
+				2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -1360,6 +1366,7 @@
 				2C480018237078C500ADB03F /* TimeInterval+DurationDescription.swift */,
 				2CEB0DF9238C30800022B30D /* FileManager+SizeOfItem.swift */,
 				2CEB0DFB238C80B20022B30D /* UserDefaults+ValueWithDefaults.swift */,
+				2C6C20C623FADD19009FAFF5 /* UserDefaults+CodableValue.swift */,
 				2C6C47352394491F001E723C /* AtomicProperty.swift */,
 			);
 			path = Utilities;
@@ -2334,6 +2341,7 @@
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
 				2C8519AD22CC949500EEF3AC /* Kissanime+Search.swift in Sources */,
+				2C6C20C723FADD19009FAFF5 /* UserDefaults+CodableValue.swift in Sources */,
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,

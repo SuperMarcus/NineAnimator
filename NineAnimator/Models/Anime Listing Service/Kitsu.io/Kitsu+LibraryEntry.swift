@@ -48,7 +48,7 @@ extension Kitsu {
         } .then {
             response in
             guard let entry = response.first else {
-                throw NineAnimatorError.responseError("The library entry of this anime does not exists")
+                throw NineAnimatorError.responseError("The library entry of this anime does not exist")
             }
             return try LibraryEntry(from: entry)
         }

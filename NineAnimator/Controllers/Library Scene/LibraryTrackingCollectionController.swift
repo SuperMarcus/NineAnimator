@@ -179,7 +179,7 @@ extension LibraryTrackingCollectionController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Obtain the reference from the cached pool
         guard let reference = reference(at: indexPath) else {
-            Log.error("[LibraryTrackingCollectionController] UI component tried to load a reference that does not exists: %@", indexPath)
+            Log.error("[LibraryTrackingCollectionController] UI component tried to load a reference that does not exist: %@", indexPath)
             return UICollectionViewCell()
         }
         let relatedContexts = referencesToContextsMap[reference]
@@ -217,7 +217,7 @@ extension LibraryTrackingCollectionController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let reference = self.reference(at: indexPath),
             let cell = collectionView.cellForItem(at: indexPath) else {
-            return Log.error("[LibraryTrackingCollectionController] Reference does not exists at %@", indexPath)
+            return Log.error("[LibraryTrackingCollectionController] Reference does not exist at %@", indexPath)
         }
         
         self.selectedReference = reference

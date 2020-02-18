@@ -2,30 +2,47 @@
 
 To install NineAnimator, you have the following options:
 
+- AppStore (Recommended)
 - TestFlight Beta Testing
-- Install from Third-Party App Stores
-- Install via Cydia Impactor with Compiled IPAs
-- Build from Source Code
+- Legacy Methods
+    - Install from Third-Party App Stores
+    - Install via Cydia Impactor with Compiled IPAs
+    - Build from Source Code
+
+## AppStore
+
+[![Download on the AppStore](../Misc/Media/download_from_appstore_black.svg)](https://apps.apple.com/app/nineanimator-the-anime-app/id1470033405)
+
+NineAnimator is now available on the AppStore. We recommand you to install NineAnimator
+from the AppStore.
 
 ## TestFlight Beta Testing
 
-NineAnimator is now available via TestFlight. Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w).
+> [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w) is currently
+> reaching full capacity. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
 
-## Third-Party App Stores
+We're constantly adding supports for new websites and implementing additional features.
+Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w)
+to be the first ones to try out those updates:
+[https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)
+
+## Legacy Methods
+
+### Third-Party App Stores
 
 NineAnimator is available on the following third-party app stores:
 
 - [Ignition](//app.ignition.fun)
 - [Build Store](//builds.io)
 
-## Cydia Impactor
+### Cydia Impactor
 
 Download the latest compiled IPA file from the [release page](https://github.com/SuperMarcus/NineAnimator/releases/latest)
 and install the app with Cydia Impactor.
 
 For detailed instructions please view the **#installation** channel on our Discord server.
 
-## Build from Source Code
+### Build from Source Code
 
 #### Step One: Install Carthage
 
