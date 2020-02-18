@@ -1,0 +1,44 @@
+/* Class = "UINavigationItem"; title = "Library"; ObjectID = "3cY-pg-E77"; */
+"3cY-pg-E77.title" = "Library";
+
+/* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "Ao6-Pk-Lp9"; */
+"Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
+
+/* Class = "UILabel"; text = "?"; ObjectID = "HvO-MC-MZh"; */
+"HvO-MC-MZh.text" = "?";
+
+/* Class = "UILabel"; text = "?"; ObjectID = "IFs-GB-oZN"; */
+"IFs-GB-oZN.text" = "?";
+
+/* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "IoV-MJ-BXG"; */
+"IoV-MJ-BXG.title" = "Back";
+
+/* Class = "UIButton"; normalTitle = "View"; ObjectID = "Q1L-pC-tBH"; */
+"Q1L-pC-tBH.normalTitle" = "View";
+
+/* Class = "UINavigationItem"; title = "Recents"; ObjectID = "QFq-wf-q5V"; */
+"QFq-wf-q5V.title" = "Recents";
+
+/* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "QTm-Pg-SyT"; */
+"QTm-Pg-SyT.text" = "LOADING STREAMING HISTORY";
+
+/* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "R3t-x9-Aoh"; */
+"R3t-x9-Aoh.text" = "LOADING STREAMING HISTORY";
+
+/* Class = "UIBarButtonItem"; title = "Manage"; ObjectID = "crY-oZ-PX1"; */
+"crY-oZ-PX1.title" = "Manage";
+
+/* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "ea1-Tz-3qf"; */
+"ea1-Tz-3qf.text" = "FINDING LOCAL RECORDS...";
+
+/* Class = "UILabel"; text = "LOADING DOWNLOAD STATUS"; ObjectID = "kex-EV-a5h"; */
+"kex-EV-a5h.text" = "LOADING DOWNLOAD STATUS";
+
+/* Class = "UITabBarItem"; title = "Library"; ObjectID = "tJd-18-v6P"; */
+"tJd-18-v6P.title" = "Library";
+
+/* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "xJb-B5-ZuH"; */
+"xJb-B5-ZuH.title" = "Downloads";
+
+/* Class = "UINavigationItem"; title = "Subscribed"; ObjectID = "zAd-pj-0qt"; */
+"zAd-pj-0qt.title" = "Subscribed";
