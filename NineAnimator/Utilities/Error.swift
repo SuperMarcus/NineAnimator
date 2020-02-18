@@ -97,7 +97,8 @@ extension NineAnimatorError {
     /// Representing an unexpexted or unclassified error that had occurred
     /// within NineAnimator
     class UnknownError: NineAnimatorError {
-        init(_ failiureReason: String = "Unknown reason", userInfo: [String: Any]? = nil) {
+        init(_ failiureReason: String = NSLocalizedString("Unknown reason", comment: "NineAnimatorError UnknownError Message: This error message is shown when an unknown error had occurred internally."),
+             userInfo: [String: Any]? = nil) {
             super.init(0,
                        message: "An unknown error had occurred",
                        failiureReason: failiureReason,
@@ -113,7 +114,7 @@ extension NineAnimatorError {
     /// or cannot decode/encode the URL.
     class URLError: NineAnimatorError {
         init(userInfo: [String: Any]? = nil) {
-            super.init(1, message: "There is something wrong with the url", userInfo: userInfo)
+            super.init(1, message: NSLocalizedString("There is something wrong with the url", comment: "NineAnimatorError URLError Message: This error message is shown when an URL is malformed, broken, or unexpected."), userInfo: userInfo)
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -126,7 +127,7 @@ extension NineAnimatorError {
     class ResponseError: NineAnimatorError {
         init(_ failiureReason: String, userInfo: [String: Any]? = nil) {
             super.init(2,
-                       message: "NineAnimator cannot understand a response sent by the server",
+                       message: NSLocalizedString("NineAnimator cannot understand a response sent by the server", comment: "NineAnimatorError ResponseError Message: This error message is shown when NineAnimator cannot understand a response sent by the server."),
                        failiureReason: failiureReason,
                        userInfo: userInfo)
         }
@@ -146,7 +147,7 @@ extension NineAnimatorError {
     class ProviderError: NineAnimatorError {
         init(_ failiureReason: String, userInfo: [String: Any]? = nil) {
             super.init(3,
-                       message: "NineAnimator cannot fetch a resource on the streaming server",
+                       message: NSLocalizedString("NineAnimator cannot fetch a resource on the streaming server", comment: "NineAnimatorError ProviderError Message: This error message is shown when NineAnimator failed to fetch a resource on a streaming server."),
                        failiureReason: failiureReason,
                        userInfo: userInfo)
         }
@@ -163,7 +164,7 @@ extension NineAnimatorError {
     class SearchError: NineAnimatorError {
         init(_ failiureReason: String, userInfo: [String: Any]? = nil) {
             super.init(4,
-                       message: "Search Completed",
+                       message: NSLocalizedString("Search Completed", comment: "NineAnimatorError SearchError Message: A search error represents a non-fatal error thrown by the Source when searching."),
                        failiureReason: failiureReason,
                        userInfo: userInfo)
         }
@@ -187,7 +188,7 @@ extension NineAnimatorError {
             
             // Call the parent constructor
             super.init(5,
-                       message: "An authentication is required before NineAnimator can continue",
+                       message: NSLocalizedString("An authentication is required before NineAnimator can continue", comment: "NineAnimatorError AuthenticationRequiredError Message: Representing an error which NineAnimator cannot continute until an authentication action is performed."),
                        failiureReason: failiureReason,
                        userInfo: newUserInfo)
         }
@@ -204,7 +205,10 @@ extension NineAnimatorError {
         override var localizedRecoverySuggestion: String? {
             // If the recovery url exists
             if userInfo["authenticationUrl"] is URL {
-                return "You may perform the authentication with the opening link, after which NineAnimator may re-attempt the request."
+                return NSLocalizedString(
+                    "You may perform the authentication with the opening link, after which NineAnimator may re-attempt the request.",
+                    comment: "NineAnimatorError AuthenticationRequiredError Recovery Suggestion: This message is shown when an AuthenticationRequiredError happens to be resolvable manually (ex. a CAPTCHA request)."
+                )
             }
             
             return nil
@@ -212,7 +216,7 @@ extension NineAnimatorError {
         
         override var localizedRecoveryOptions: [String]? {
             if userInfo["authenticationUrl"] is URL {
-                return [ "Open Link" ]
+                return [ NSLocalizedString("Open Link", comment: "NineAnimatorError AuthenticationRequiredError Recovery Option: This text is shown on the Open Link button of an alert that prompts the user to solve an CAPTCHA manually.") ]
             }
             
             return nil
@@ -225,8 +229,17 @@ extension NineAnimatorError {
         init(_ info: String? = nil, userInfo: [String: Any]? = nil) {
             let message: String
             if let info = info {
-                message = "A required value (\(info)) cannot be read"
-            } else { message = "A required value cannot be read" }
+                let messageTemplate = NSLocalizedString(
+                    "A required value (%@) cannot be read",
+                    comment: "NineAnimatorError DecodeError Message: This message is shown with the DecodeError error alert. The parameter inside the parenthesis is an identifier of the value that failed to be decoded. A DecodeError means that NineAnimator failed to deserialize or interpret a previously encoded data."
+                )
+                message = String.localizedStringWithFormat(messageTemplate, info)
+            } else {
+                message = NSLocalizedString(
+                    "A required value cannot be read",
+                    comment: "NineAnimatorError DecodeError Message: This message is shown with the DecodeError error alert. A DecodeError means that NineAnimator failed to deserialize or interpret a previously encoded data."
+                )
+            }
             super.init(6, message: message, userInfo: userInfo)
         }
         
@@ -239,7 +252,14 @@ extension NineAnimatorError {
     /// item in a list or there are no elements in the list.
     class LastItemInQueueError: NineAnimatorError {
         init(userInfo: [String: Any]? = nil) {
-            super.init(7, message: "There are no more items in the selected list", userInfo: userInfo)
+            super.init(
+                7,
+                message: NSLocalizedString(
+                    "There are no more items in the selected list",
+                    comment: "NineAnimatorError LastItemInQueueError Message: This message is shown when the user has reached the last item in the list."
+                ),
+                userInfo: userInfo
+            )
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -263,7 +283,10 @@ extension NineAnimatorError {
             }
             
             super.init(
-                "this website asks NineAnimator to verify the identity of the user",
+                NSLocalizedString(
+                    "this website asks NineAnimator to verify the identity of the user",
+                    comment: "NineAnimatorError CloudflareAuthenticationChallenge Message: This message is shown when a website that uses Cloudflare is requesting additional WAF (Web Application Firewall) verifications. This can typically be handled internally by NineAnimator, but if NineAnimator failed to resolve the challenges this error message will be presented to the user."
+                ),
                 authenticationUrl: authenticationUrl,
                 userInfo: userInfo
             )
@@ -277,7 +300,15 @@ extension NineAnimatorError {
     /// Representing a content or service that is no longer available.
     class ContentUnavailableError: NineAnimatorError {
         init(_ reason: String, userInfo: [String: Any]? = nil) {
-            super.init(8, message: "This content is no longer available", failiureReason: reason, userInfo: userInfo)
+            super.init(
+                8,
+                message: NSLocalizedString(
+                    "This content is no longer available",
+                    comment: "NineAnimatorError ContentUnavailableError Message: This error is shown when the content that the user is requesting is no longer available."
+                ),
+                failiureReason: reason,
+                userInfo: userInfo
+            )
         }
         
         required init?(coder aDecoder: NSCoder) {
@@ -313,10 +344,24 @@ extension NineAnimatorError {
                 updatingUserInfo["alternative_server_map"] = updatedServerMap
             }
             
-            super.init(
-                "This episode is not available on \(unavailableServerName ?? "the selected server").",
-                userInfo: updatingUserInfo
-            )
+            let errorMessage: String
+            
+            if let unavailableServerName = unavailableServerName {
+                let messageTemplate = NSLocalizedString(
+                    "This episode is not available on %@",
+                    comment: "NineAnimatorError EpisodeServerNotAvailableError Message: This error message is shown to the user when an episode selected is not available on the selected server. The parameter is the name of the server that is selected by the user."
+                )
+                errorMessage = String.localizedStringWithFormat(
+                    messageTemplate,
+                    unavailableServerName
+                )
+            } else {
+                errorMessage = NSLocalizedString(
+                    "This episode is not available on the selected server",
+                    comment: "NineAnimatorError EpisodeServerNotAvailableError Message: This error message is shown to the user when an episode selected is not available on the selected server.")
+            }
+            
+            super.init(errorMessage, userInfo: updatingUserInfo)
         }
         
         required init?(coder aDecoder: NSCoder) {
