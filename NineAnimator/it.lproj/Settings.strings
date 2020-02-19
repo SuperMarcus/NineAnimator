@@ -233,13 +233,13 @@
 "dnn-sT-oir.headerTitle" = "Notifiche e sottoscrizioni";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ehk-8y-ZWC"; */
-"ehk-8y-ZWC.text" = "Push NineAnimator Updates";
+"ehk-8y-ZWC.text" = "Applica aggiornamenti NineAnimator";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
 "ejU-pt-NEy.title" = "Home";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
-"ekC-7m-AFc.text" = "Push NineAnimator Updates";
+"ekC-7m-AFc.text" = "Applica aggiornamenti NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
 "fhT-FK-ILc.text" = "Stato";
@@ -263,7 +263,7 @@
 "hZK-F2-4cA.text" = "Segnala un problema";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
-"jGy-CK-BGd.text" = "Tracking Service Name";
+"jGy-CK-BGd.text" = "Nome servizio di tracciamento";
 
 /* Class = "UILabel"; text = "Clear Recently Watched"; ObjectID = "jcd-Wl-m61"; */
 "jcd-Wl-m61.text" = "Cancella visti di recente";
