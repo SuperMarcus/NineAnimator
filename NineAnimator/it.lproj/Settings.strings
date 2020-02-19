@@ -230,7 +230,7 @@
 "dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.headerTitle" = "Notifications and Subscriptions";
+"dnn-sT-oir.headerTitle" = "Notifiche e sottoscrizioni";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ehk-8y-ZWC"; */
 "ehk-8y-ZWC.text" = "Push NineAnimator Updates";
@@ -242,88 +242,88 @@
 "ekC-7m-AFc.text" = "Push NineAnimator Updates";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
-"fhT-FK-ILc.text" = "Status";
+"fhT-FK-ILc.text" = "Stato";
 
 /* Class = "UITableViewSection"; footerTitle = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app."; ObjectID = "fjl-9Y-6m1"; */
-"fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
+"fjl-9Y-6m1.footerTitle" = "Riprovare automaticamente i download non riusciti.\n\nAbilita il blocco per proteggere gli episodi dall'eliminazione dal sistema. Il sistema cercherà di rimuovere altre risorse prima di eliminare gli episodi scaricati.\n\nLo spazio rimanente visualizzato in questa schermata potrebbe essere diverso da quella delle impostazioni.";
 
 /* Class = "UILabel"; text = "Background Playback"; ObjectID = "gAn-bf-I7y"; */
-"gAn-bf-I7y.text" = "Background Playback";
+"gAn-bf-I7y.text" = "Riproduzione in background";
 
 /* Class = "UILabel"; text = "External Playback Only"; ObjectID = "hDj-6B-Nou"; */
-"hDj-6B-Nou.text" = "External Playback Only";
+"hDj-6B-Nou.text" = "Solo riproduzione esterna";
 
 /* Class = "UILabel"; text = "Unsubscribe All"; ObjectID = "hGc-BW-frZ"; */
-"hGc-BW-frZ.text" = "Unsubscribe All";
+"hGc-BW-frZ.text" = "Cancella tutte le iscrizioni";
 
 /* Class = "UILabel"; text = "Delete Cached Images"; ObjectID = "hNx-wP-LZ9"; */
-"hNx-wP-LZ9.text" = "Delete Cached Images";
+"hNx-wP-LZ9.text" = "Svuota la cache delle immagini";
 
 /* Class = "UILabel"; text = "Report Issues"; ObjectID = "hZK-F2-4cA"; */
-"hZK-F2-4cA.text" = "Report Issues";
+"hZK-F2-4cA.text" = "Segnala un problema";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
 "jGy-CK-BGd.text" = "Tracking Service Name";
 
 /* Class = "UILabel"; text = "Clear Recently Watched"; ObjectID = "jcd-Wl-m61"; */
-"jcd-Wl-m61.text" = "Clear Recently Watched";
+"jcd-Wl-m61.text" = "Cancella visti di recente";
 
 /* Class = "UITableViewSection"; headerTitle = "Storage"; ObjectID = "jtv-aO-g6G"; */
-"jtv-aO-g6G.headerTitle" = "Storage";
+"jtv-aO-g6G.headerTitle" = "Archivio";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net."; ObjectID = "k58-8v-meo"; */
-"k58-8v-meo.footerTitle" = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net.";
+"k58-8v-meo.footerTitle" = "Solo gli eventi di riproduzione dopo che hai effettuato l'accesso verranno inviati a MyAnimeList.\n\nMyAnimeList. et è una proprietà di MyAnimeList, LLC. © 2015 Tutti i diritti riservati.\n\nNineAnimator non è affiliato con MyAnimeList.net.";
 
 /* Class = "UITableViewSection"; headerTitle = "MyAnimeList"; ObjectID = "k58-8v-meo"; */
 "k58-8v-meo.headerTitle" = "MyAnimeList";
 
 /* Class = "UILabel"; text = "Show Episode Details"; ObjectID = "lOR-rE-gEZ"; */
-"lOR-rE-gEZ.text" = "Show Episode Details";
+"lOR-rE-gEZ.text" = "Mostra dettagli episodio";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "lcW-Lk-ZTP"; */
-"lcW-Lk-ZTP.text" = "Updating...";
+"lcW-Lk-ZTP.text" = "Aggiornando...";
 
 /* Class = "UILabel"; text = "Downloads & Storage"; ObjectID = "m9r-kn-kk7"; */
-"m9r-kn-kk7.text" = "Downloads & Storage";
+"m9r-kn-kk7.text" = "Download & archiviazione";
 
 /* Class = "UILabel"; text = "MyAnimeList.net"; ObjectID = "oJY-Uv-hLj"; */
 "oJY-Uv-hLj.text" = "MyAnimeList.net";
 
 /* Class = "UILabel"; text = "License"; ObjectID = "p2c-ro-yj3"; */
-"p2c-ro-yj3.text" = "License";
+"p2c-ro-yj3.text" = "Licenza";
 
 /* Class = "UITableViewController"; title = "Tracking Services"; ObjectID = "pGu-In-KWa"; */
-"pGu-In-KWa.title" = "Tracking Services";
+"pGu-In-KWa.title" = "Servizi di tracciamento";
 
 /* Class = "UILabel"; text = "Ends Playing"; ObjectID = "q0P-aj-Wkc"; */
-"q0P-aj-Wkc.text" = "Ends Playing";
+"q0P-aj-Wkc.text" = "Termina riproduzione";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
-"qV5-lV-yLf.text" = "Setup Kitsu.io";
+"qV5-lV-yLf.text" = "Imposta Kitsu.io";
 
 /* Class = "UILabel"; text = "SIMKL.COM"; ObjectID = "qwG-xM-EqT"; */
 "qwG-xM-EqT.text" = "SIMKL.COM";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "uIR-9j-Tzk"; */
-"uIR-9j-Tzk.text" = "Updating...";
+"uIR-9j-Tzk.text" = "Aggiornando...";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "uZi-hX-u8x"; */
-"uZi-hX-u8x.text" = "Status";
+"uZi-hX-u8x.text" = "Stato";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
-"xLV-v6-fh9.text" = "Setup Simkl.com";
+"xLV-v6-fh9.text" = "Imposta Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
-"xP9-AS-NPt.text" = "Dynamic Appearance";
+"xP9-AS-NPt.text" = "Aspetto dinamico";
 
 /* Class = "UILabel"; text = "Images"; ObjectID = "xUc-BH-HNC"; */
-"xUc-BH-HNC.text" = "Images";
+"xUc-BH-HNC.text" = "Immagini";
 
 /* Class = "UILabel"; text = "Build"; ObjectID = "xjp-AG-MX5"; */
 "xjp-AG-MX5.text" = "Build";
 
 /* Class = "UILabel"; text = "Discuss on Discord"; ObjectID = "zQD-NZ-dqC"; */
-"zQD-NZ-dqC.text" = "Discuss on Discord";
+"zQD-NZ-dqC.text" = "Discuti su Discord";
 
 /* Class = "UILabel"; text = "Reset"; ObjectID = "zWP-wL-Vag"; */
-"zWP-wL-Vag.text" = "Reset";
+"zWP-wL-Vag.text" = "Ripristina";
