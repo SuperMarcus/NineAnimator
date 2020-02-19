@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you."; ObjectID = "3Ui-C3-ly1"; */
-"3Ui-C3-ly1.text" = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you.";
+"3Ui-C3-ly1.text" = "Trova il tuo sito web di anime preferito e NineAnimator lo utilizzerà per fornire contenuti, solo per te.";
 
 /* Class = "UIButton"; normalTitle = "Finish"; ObjectID = "5eV-r3-Bap"; */
 "5eV-r3-Bap.normalTitle" = "Fine";
@@ -83,7 +83,7 @@
 "xUo-iY-fAt.title" = "Benvenuto";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
-"xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
+"xwc-kf-mgL.text" = "L'interfaccia della Libreria è stata riprogettata da cima a fondo, regolata per fornirti le informazioni più pertinenti.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
 "yQX-1k-GWU.segmentTitles[0]" = "Chiaro";
