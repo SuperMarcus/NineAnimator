@@ -25,7 +25,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         // View GitHub Repository
         "about.viewrepo": "https://github.com/SuperMarcus/NineAnimator",
         // Report issue
-        "about.issue": "https://github.com/SuperMarcus/NineAnimator/issues/new",
+        "about.issue": "https://github.com/SuperMarcus/NineAnimator/issues/new/choose",
         // View License
         "about.license": "https://github.com/SuperMarcus/NineAnimator/blob/master/LICENSE",
         "about.credits": "https://nineanimator.marcuszhou.com/docs/credits.html",
