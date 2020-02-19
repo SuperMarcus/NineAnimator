@@ -227,7 +227,7 @@
 "dNx-EX-rHK.headerTitle" = "Dati e Privacy";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
+"dnn-sT-oir.footerTitle" = "Attiva Mostra Stream disponibili per includere nelle notifiche la sorgente in cui viene caricato l'ultimo episodio\n\nNineAnimator usa l'aggiornamento dell'app in background per determinare se è stato rilasciato un nuovo episodio di un anime sottoscritto.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.headerTitle" = "Notifiche e sottoscrizioni";
