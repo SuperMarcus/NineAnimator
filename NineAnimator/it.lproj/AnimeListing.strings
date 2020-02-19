@@ -8,10 +8,10 @@
 "goV-KK-D5O.text" = "Errore nella ricerca";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
-"hP6-y4-aJ9.text" = "No results found for \"Search\"";
+"hP6-y4-aJ9.text" = "Nessun risultato trovato per \"{0}\"";
 
 /* Class = "UILabel"; text = "AnimeTitle"; ObjectID = "lFR-07-AK0"; */
-"lFR-07-AK0.text" = "AnimeTitle";
+"lFR-07-AK0.text" = "Titolo";
 
 /* Class = "UITableViewController"; title = "List"; ObjectID = "rPB-zo-b7C"; */
-"rPB-zo-b7C.title" = "List";
+"rPB-zo-b7C.title" = "Elenco";
