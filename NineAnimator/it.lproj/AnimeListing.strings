@@ -1,11 +1,11 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "Nke-YY-kc3"; */
-"Nke-YY-kc3.normalTitle" = "Open Link";
+"Nke-YY-kc3.normalTitle" = "Apri Link";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "OOI-8A-BkV"; */
-"OOI-8A-BkV.text" = "Loading";
+"OOI-8A-BkV.text" = "Caricamento";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
-"goV-KK-D5O.text" = "Search Error";
+"goV-KK-D5O.text" = "Errore nella ricerca";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
 "hP6-y4-aJ9.text" = "No results found for \"Search\"";
