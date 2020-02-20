@@ -5,7 +5,7 @@
 "4kp-IB-7Yg.text" = "Caricamento";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
-"AWC-Sv-NA3.title" = "Guarda successivo";
+"AWC-Sv-NA3.title" = "Guarda il prossimo";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
 "BdS-bf-mCi.text" = "Questa settimana";
@@ -23,4 +23,4 @@
 "j7t-Oe-H6q.normalTitle" = "Mostra altro";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Guarda successivo";
+"lSV-Fp-1Cb.title" = "Guarda il prossimo";
