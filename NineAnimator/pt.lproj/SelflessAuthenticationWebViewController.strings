@@ -1,0 +1,8 @@
+/* Class = "UINavigationItem"; title = "Complete Authentication"; ObjectID = "6DY-Kh-44b"; */
+"6DY-Kh-44b.title" = "Complete Authentication";
+
+/* Class = "UILabel"; text = "Complete the authentication in this website, then tap on Done."; ObjectID = "GLu-gF-Nmk"; */
+"GLu-gF-Nmk.text" = "Complete the authentication in this website, then tap on Done.";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "zya-PK-8eN"; */
+"zya-PK-8eN.title" = "Done";
