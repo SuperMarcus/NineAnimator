@@ -80,7 +80,7 @@
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites."; ObjectID = "EzJ-Ri-uNU"; */
-"EzJ-Ri-uNU.footerTitle" = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.";
+"EzJ-Ri-uNU.footerTitle" = "NineAnimator es una aplicación gratuita y de código abierto iOS para la visualización de animes desarrollada por Marcus Zhou (other.marcus@icloud. om) bajo la Licencia Pública General de GNU versión 3.NineAnimator no está diseñado para promover la piratería, ni para apoyar los sitios web de piratería de anime.";
 
 /* Class = "UITableViewSection"; headerTitle = "About NineAnimator"; ObjectID = "EzJ-Ri-uNU"; */
 "EzJ-Ri-uNU.headerTitle" = "Sobre NineAnimator";
