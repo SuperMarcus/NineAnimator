@@ -278,52 +278,52 @@
 "k58-8v-meo.headerTitle" = "MyAnimeList";
 
 /* Class = "UILabel"; text = "Show Episode Details"; ObjectID = "lOR-rE-gEZ"; */
-"lOR-rE-gEZ.text" = "Show Episode Details";
+"lOR-rE-gEZ.text" = "إظهار تفاصيل حلقة";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "lcW-Lk-ZTP"; */
-"lcW-Lk-ZTP.text" = "Updating...";
+"lcW-Lk-ZTP.text" = "تحديث...";
 
 /* Class = "UILabel"; text = "Downloads & Storage"; ObjectID = "m9r-kn-kk7"; */
-"m9r-kn-kk7.text" = "Downloads & Storage";
+"m9r-kn-kk7.text" = "التنزيلات والتخزين";
 
 /* Class = "UILabel"; text = "MyAnimeList.net"; ObjectID = "oJY-Uv-hLj"; */
 "oJY-Uv-hLj.text" = "MyAnimeList.net";
 
 /* Class = "UILabel"; text = "License"; ObjectID = "p2c-ro-yj3"; */
-"p2c-ro-yj3.text" = "License";
+"p2c-ro-yj3.text" = "ترخيص";
 
 /* Class = "UITableViewController"; title = "Tracking Services"; ObjectID = "pGu-In-KWa"; */
-"pGu-In-KWa.title" = "Tracking Services";
+"pGu-In-KWa.title" = "مواقع التتبع";
 
 /* Class = "UILabel"; text = "Ends Playing"; ObjectID = "q0P-aj-Wkc"; */
-"q0P-aj-Wkc.text" = "Ends Playing";
+"q0P-aj-Wkc.text" = "ينتهي اللعب";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
-"qV5-lV-yLf.text" = "Setup Kitsu.io";
+"qV5-lV-yLf.text" = "الاجهزة Kitsu.io";
 
 /* Class = "UILabel"; text = "SIMKL.COM"; ObjectID = "qwG-xM-EqT"; */
 "qwG-xM-EqT.text" = "SIMKL.COM";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "uIR-9j-Tzk"; */
-"uIR-9j-Tzk.text" = "Updating...";
+"uIR-9j-Tzk.text" = "تحديث...";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "uZi-hX-u8x"; */
-"uZi-hX-u8x.text" = "Status";
+"uZi-hX-u8x.text" = "الحالة";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
-"xLV-v6-fh9.text" = "Setup Simkl.com";
+"xLV-v6-fh9.text" = "الاجهزة Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
-"xP9-AS-NPt.text" = "Dynamic Appearance";
+"xP9-AS-NPt.text" = "المظهر الديناميكي";
 
 /* Class = "UILabel"; text = "Images"; ObjectID = "xUc-BH-HNC"; */
-"xUc-BH-HNC.text" = "Images";
+"xUc-BH-HNC.text" = "الصور";
 
 /* Class = "UILabel"; text = "Build"; ObjectID = "xjp-AG-MX5"; */
-"xjp-AG-MX5.text" = "Build";
+"xjp-AG-MX5.text" = "بناء";
 
 /* Class = "UILabel"; text = "Discuss on Discord"; ObjectID = "zQD-NZ-dqC"; */
-"zQD-NZ-dqC.text" = "Discuss on Discord";
+"zQD-NZ-dqC.text" = "ناقش على تطبيق (discord)";
 
 /* Class = "UILabel"; text = "Reset"; ObjectID = "zWP-wL-Vag"; */
-"zWP-wL-Vag.text" = "Reset";
+"zWP-wL-Vag.text" = "إعادة تعيين";
