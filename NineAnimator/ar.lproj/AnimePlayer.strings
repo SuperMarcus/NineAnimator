@@ -1,8 +1,8 @@
 /* Class = "UILabel"; text = "Air Date"; ObjectID = "0sy-Go-eMO"; */
-"0sy-Go-eMO.text" = "Air Date";
+"0sy-Go-eMO.text" = "تاريخ العرض";
 
 /* Class = "UILabel"; text = "No Suggesting Episode"; ObjectID = "AVT-Pg-Bdx"; */
-"AVT-Pg-Bdx.text" = "No Suggesting Episode";
+"AVT-Pg-Bdx.text" = "لا حلقلت المقترحة";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "B2n-TQ-hy9"; */
 "B2n-TQ-hy9.normalTitle" = "Offline Access";
