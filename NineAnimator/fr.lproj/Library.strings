@@ -1,8 +1,8 @@
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "3cY-pg-E77"; */
-"3cY-pg-E77.title" = "Library";
+"3cY-pg-E77.title" = "Bibliothèque";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "Ao6-Pk-Lp9"; */
-"Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
+"Ao6-Pk-Lp9.text" = "RECHERCHE DE DOSSIERS LOCAL...";
 
 /* Class = "UILabel"; text = "?"; ObjectID = "HvO-MC-MZh"; */
 "HvO-MC-MZh.text" = "?";
@@ -11,34 +11,34 @@
 "IFs-GB-oZN.text" = "?";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "IoV-MJ-BXG"; */
-"IoV-MJ-BXG.title" = "Back";
+"IoV-MJ-BXG.title" = "Précédent";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "Q1L-pC-tBH"; */
-"Q1L-pC-tBH.normalTitle" = "View";
+"Q1L-pC-tBH.normalTitle" = "Afficher";
 
 /* Class = "UINavigationItem"; title = "Recents"; ObjectID = "QFq-wf-q5V"; */
-"QFq-wf-q5V.title" = "Recents";
+"QFq-wf-q5V.title" = "Récents";
 
 /* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "QTm-Pg-SyT"; */
-"QTm-Pg-SyT.text" = "LOADING STREAMING HISTORY";
+"QTm-Pg-SyT.text" = "CHARGEMENT DE L'HISTOIRE DE STREAMING";
 
 /* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "R3t-x9-Aoh"; */
-"R3t-x9-Aoh.text" = "LOADING STREAMING HISTORY";
+"R3t-x9-Aoh.text" = "CHARGEMENT DE L'HISTOIRE DE STREAMING";
 
 /* Class = "UIBarButtonItem"; title = "Manage"; ObjectID = "crY-oZ-PX1"; */
-"crY-oZ-PX1.title" = "Manage";
+"crY-oZ-PX1.title" = "Gérer";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "ea1-Tz-3qf"; */
-"ea1-Tz-3qf.text" = "FINDING LOCAL RECORDS...";
+"ea1-Tz-3qf.text" = "RECHERCHE DE DOSSIERS LOCAL...";
 
 /* Class = "UILabel"; text = "LOADING DOWNLOAD STATUS"; ObjectID = "kex-EV-a5h"; */
-"kex-EV-a5h.text" = "LOADING DOWNLOAD STATUS";
+"kex-EV-a5h.text" = "CHARGEMENT DU STATUT DE TÉLÉCHARGEMENT";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "tJd-18-v6P"; */
-"tJd-18-v6P.title" = "Library";
+"tJd-18-v6P.title" = "Bibliothèque";
 
 /* Class = "UINavigationItem"; title = "Downloads"; ObjectID = "xJb-B5-ZuH"; */
-"xJb-B5-ZuH.title" = "Downloads";
+"xJb-B5-ZuH.title" = "Téléchargements";
 
 /* Class = "UINavigationItem"; title = "Subscribed"; ObjectID = "zAd-pj-0qt"; */
-"zAd-pj-0qt.title" = "Subscribed";
+"zAd-pj-0qt.title" = "Abonnements";
