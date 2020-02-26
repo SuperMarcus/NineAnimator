@@ -1,5 +1,5 @@
 /* Class = "UILabel"; text = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you."; ObjectID = "3Ui-C3-ly1"; */
-"3Ui-C3-ly1.text" = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you.";
+"3Ui-C3-ly1.text" = "اختار موقع الأنمي المفضل لديك وسوف يستخدمه التطبيق ناين انيماتور لتوفير المحتويات ، فقط لأجلك.";
 
 /* Class = "UIButton"; normalTitle = "Finish"; ObjectID = "5eV-r3-Bap"; */
 "5eV-r3-Bap.normalTitle" = "النهاية";
@@ -8,16 +8,16 @@
 "7Kf-LC-01q.text" = "التحميلات";
 
 /* Class = "UILabel"; text = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites."; ObjectID = "8VJ-Os-i4X"; */
-"8VJ-Os-i4X.text" = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites.";
+"8VJ-Os-i4X.text" = "التطبيق ناين انيماتور هو برنامج تصفح مفتوح المصدر تم تطويره بواسطة (Marcus Zhou) ، مرخص بموجب رخصة جنو العمومية العامة الإصدار 3. التطبيق ناين انيماتور غير مصمم لتشجيع القرصنة ولا لدعم أي مواقع ويب لأطراف ثالثة.";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Ier-uY-wii"; */
-"Ier-uY-wii.normalTitle" = "Continue";
+"Ier-uY-wii.normalTitle" = "استمر";
 
 /* Class = "UILabel"; text = "Welcome to NineAnimator"; ObjectID = "JGR-Zv-VIj"; */
-"JGR-Zv-VIj.text" = "Welcome to NineAnimator";
+"JGR-Zv-VIj.text" = "مرحبا بك في التطبيق ناين انيماتور";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
-"JGW-3m-qyq.text" = "Light";
+"JGW-3m-qyq.text" = "ضوء";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
 "MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
