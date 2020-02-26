@@ -38,58 +38,58 @@
 "V5A-Fz-yzu.normalTitle" = "استمر";
 
 /* Class = "UILabel"; text = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date."; ObjectID = "YWE-aH-85Y"; */
-"YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
+"YWE-aH-85Y.text" = "‎التطبيق ناين انيماتور قيد التطوير النشط. يتم طرح ميزات جديدة وإصلاح الأخطاء على أساس أسبوعي. من المستحسن أن تبقي التطبيق محدثًا.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "Appearance";
+"aVI-dM-rv8.text" = "المظهر";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
-"eYj-Vw-fYO.normalTitle" = "Skip Setup";
+"eYj-Vw-fYO.normalTitle" = "تخطي الإعداد";
 
 /* Class = "UILabel"; text = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability."; ObjectID = "f1Q-9Z-lK6"; */
-"f1Q-9Z-lK6.text" = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability.";
+"f1Q-9Z-lK6.text" = "هذا الإصدار من ‎التطبيق ناين انيماتور يتضمن نظام تنزيل محدث مُحسن للأداء والموثوقية.";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "fPo-Vc-IV4"; */
-"fPo-Vc-IV4.title" = "Select Source";
+"fPo-Vc-IV4.title" = "تحديد المصدر";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "h82-lJ-xk8"; */
-"h82-lJ-xk8.normalTitle" = "Continue";
+"h82-lJ-xk8.normalTitle" = "استمر";
 
 /* Class = "UIBarButtonItem"; title = "Appearance"; ObjectID = "hCU-cE-SPT"; */
-"hCU-cE-SPT.title" = "Appearance";
+"hCU-cE-SPT.title" = "المظهر";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
-"ikj-0J-JNE.text" = "What's New";
+"ikj-0J-JNE.text" = "ما الجديد";
 
 /* Class = "UILabel"; text = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu."; ObjectID = "ok1-aG-zqs"; */
-"ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
+"ok1-aG-zqs.text" = "ضبط المظهر على (Dynamic) يسم ‎التطبيق ناين انيماتور لتغيير الموضوع وفقا لسطوع الشاشة.\nبعد الإعداد ، يمكنك تغيير إعدادات السمة في قائمة التفضيلات.";
 
 /* Class = "UILabel"; text = "Library"; ObjectID = "ouh-B2-M5f"; */
-"ouh-B2-M5f.text" = "Library";
+"ouh-B2-M5f.text" = "المكتبة";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "rtk-Cw-RXt"; */
-"rtk-Cw-RXt.normalTitle" = "Continue";
+"rtk-Cw-RXt.normalTitle" = "استمر";
 
 /* Class = "UIButton"; normalTitle = "Open Discord"; ObjectID = "t2o-HH-QfF"; */
-"t2o-HH-QfF.normalTitle" = "Open Discord";
+"t2o-HH-QfF.normalTitle" = "فتح تطبيق (Discord)";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
-"uka-Zy-Cuf.title" = "What's New";
+"uka-Zy-Cuf.title" = "ما الجديد";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
-"x9M-KR-UlF.text" = "Start Using NineAnimator";
+"x9M-KR-UlF.text" = "البدء في استخدام ‎التطبيق ناين انيماتور";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
-"xUo-iY-fAt.title" = "Welcome";
+"xUo-iY-fAt.title" = "مرحبًا";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
-"xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
+"xwc-kf-mgL.text" = "تمت إعادة تصميم واجهة المكتبة من الألف إلى الياء ، وتم ضبطها لتزويدك بالمعلومات الأكثر صلة.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[0]" = "Light";
+"yQX-1k-GWU.segmentTitles[0]" = "ضوء";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[1] = "Dark"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[1]" = "Dark";
+"yQX-1k-GWU.segmentTitles[1]" = "المظهر المظلم";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[2] = "Dynamic"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[2]" = "Dynamic";
+"yQX-1k-GWU.segmentTitles[2]" = "ديناميكية";
