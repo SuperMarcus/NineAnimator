@@ -1,17 +1,17 @@
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "Nke-YY-kc3"; */
-"Nke-YY-kc3.normalTitle" = "Open Link";
+"Nke-YY-kc3.normalTitle" = "Ouvrir le lien";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "OOI-8A-BkV"; */
-"OOI-8A-BkV.text" = "Loading";
+"OOI-8A-BkV.text" = "Téléchargement";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
-"goV-KK-D5O.text" = "Search Error";
+"goV-KK-D5O.text" = "Erreur de Recherche";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
-"hP6-y4-aJ9.text" = "No results found for \"Search\"";
+"hP6-y4-aJ9.text" = "Aucun resultats pour \"%s\"";
 
 /* Class = "UILabel"; text = "AnimeTitle"; ObjectID = "lFR-07-AK0"; */
-"lFR-07-AK0.text" = "AnimeTitle";
+"lFR-07-AK0.text" = "Titre de l'anime";
 
 /* Class = "UITableViewController"; title = "List"; ObjectID = "rPB-zo-b7C"; */
-"rPB-zo-b7C.title" = "List";
+"rPB-zo-b7C.title" = "Liste";
