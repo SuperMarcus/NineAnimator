@@ -1,80 +1,80 @@
 /* Class = "UILabel"; text = "Home"; ObjectID = "0eR-hu-Qxf"; */
-"0eR-hu-Qxf.text" = "Home";
+"0eR-hu-Qxf.text" = "Page d’accueil";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "Répertoire GitHub";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
-"1D4-d4-eg5.text" = "Checking...";
+"1D4-d4-eg5.text" = "Vérification en cours...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
-"1VP-oc-aqz.text" = "Clear Cached Data";
+"1VP-oc-aqz.text" = "Effacer le cache de données";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Clear Downloads";
+"1X7-X7-huV.text" = "Effacer les téléchargements";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
+"2US-vI-tzZ.headerTitle" = "Logiciels et sites Web tiers";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
-"2ol-44-Ha5.text" = "Status";
+"2ol-44-Ha5.text" = "Statut";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
-"3bY-Q0-VOr.text" = "Privacy Policy";
+"3bY-Q0-VOr.text" = "Politique de Confidentialité";
 
 /* Class = "UILabel"; text = "ANILIST.CO"; ObjectID = "4rr-C0-0zN"; */
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Not Setup";
+"4vz-rG-dvA.text" = "Non configuré";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
-"4ye-Yb-8qS.title" = "Storage";
+"4ye-Yb-8qS.title" = "Sauvegarde";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
-"5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
+"5UB-9w-oPI.footerTitle" = "Parcourez les anime que vous avez ajoutés à vos collections et connectez avec les services de suivi de progression.";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
-"5k7-hs-FeH.text" = "Prevents Purging";
+"5k7-hs-FeH.text" = "Empêche le purgement";
 
 /* Class = "UILabel"; text = "NineAnimator"; ObjectID = "6cg-cg-vWl"; */
 "6cg-cg-vWl.text" = "NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "6ow-N9-6M8"; */
-"6ow-N9-6M8.text" = "Status";
+"6ow-N9-6M8.text" = "Statut";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
-"6wJ-Cg-cKO.text" = "Not Setup";
+"6wJ-Cg-cKO.text" = "Non configuré";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
-"74T-HL-SF3.text" = "Calculating Usage...";
+"74T-HL-SF3.text" = "Calcul de l'utilisation...";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
-"7gK-el-Ee1.text" = "Open Cast Controller";
+"7gK-el-Ee1.text" = "Ouvrir le contrôleur de projection";
 
 /* Class = "UITableViewSection"; footerTitle = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay."; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.footerTitle" = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.";
+"7nJ-6V-9oy.footerTitle" = "La lecture des images dans les images (PiP) n'est compatible que sur les iPads. Activer PiP activera également la lecture en arrière-plan.\n\nL'activation de la lecture en arrière-plan permettra de lire des sons tant que l'application est en arrière-plan. Ce paramètre n'affectera pas Google Cast ou AirPlay.";
 
 /* Class = "UITableViewSection"; headerTitle = "Playback Controls"; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.headerTitle" = "Playback Controls";
+"7nJ-6V-9oy.headerTitle" = "Contrôles de lecture";
 
 /* Class = "UINavigationItem"; title = "Preferred Source"; ObjectID = "8Lj-r1-12t"; */
-"8Lj-r1-12t.title" = "Preferred Source";
+"8Lj-r1-12t.title" = "Source préférée";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
 "A3J-Ya-mRo.text" = "Version";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
-"AVN-Z6-xDl.text" = "Export History";
+"AVN-Z6-xDl.text" = "Exporter l'historique d’animés";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "Avi-8B-KpP"; */
-"Avi-8B-KpP.text" = "Not Setup";
+"Avi-8B-KpP.text" = "Non configuré";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
-"BDo-SJ-NV8.text" = "Third-Party Anime Lists";
+"BDo-SJ-NV8.text" = "Listage d’animés tiers";
 
 /* Class = "UILabel"; text = "Current Subscriptions"; ObjectID = "CDE-MG-fiI"; */
-"CDE-MG-fiI.text" = "Current Subscriptions";
+"CDE-MG-fiI.text" = "Abonnements en cours";
 
 /* Class = "UILabel"; text = "MYANIMELIST.NET"; ObjectID = "CXa-yX-XOv"; */
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
