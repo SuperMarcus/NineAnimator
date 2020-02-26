@@ -32,7 +32,7 @@
 "jCq-le-ZsX.text" = "Chargements des notes";
 
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "mFd-Ay-cFU"; */
-"mFd-Ay-cFU.normalTitle" = "Expand";
+"mFd-Ay-cFU.normalTitle" = "Agrandir";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "oxU-lU-8me"; */
 "oxU-lU-8me.text" = "Synopsis";
