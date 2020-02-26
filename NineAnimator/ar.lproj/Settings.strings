@@ -1,35 +1,35 @@
 /* Class = "UILabel"; text = "Home"; ObjectID = "0eR-hu-Qxf"; */
-"0eR-hu-Qxf.text" = "Home";
+"0eR-hu-Qxf.text" = "الصفحة الرئيسية";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "مستودع (Github)";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
-"1D4-d4-eg5.text" = "Checking...";
+"1D4-d4-eg5.text" = "جارٍ التحقق...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
-"1VP-oc-aqz.text" = "Clear Cached Data";
+"1VP-oc-aqz.text" = "هل تريد محو البيانات المؤقتة";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Clear Downloads";
+"1X7-X7-huV.text" = "مسح التنزيلات";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
+"2US-vI-tzZ.headerTitle" = "برامج ومواقع الطرف الثالث";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
-"2ol-44-Ha5.text" = "Status";
+"2ol-44-Ha5.text" = "الحالة";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
-"3bY-Q0-VOr.text" = "Privacy Policy";
+"3bY-Q0-VOr.text" = "سياسة الخصوصية";
 
 /* Class = "UILabel"; text = "ANILIST.CO"; ObjectID = "4rr-C0-0zN"; */
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Not Setup";
+"4vz-rG-dvA.text" = "ليس الإعداد";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
-"4ye-Yb-8qS.title" = "Storage";
+"4ye-Yb-8qS.title" = "التخزين";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
 "5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
@@ -62,7 +62,7 @@
 "8Lj-r1-12t.title" = "Preferred Source";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
-"A3J-Ya-mRo.text" = "Version";
+"A3J-Ya-mRo.text" = "الإصدار";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
 "AVN-Z6-xDl.text" = "Export History";
