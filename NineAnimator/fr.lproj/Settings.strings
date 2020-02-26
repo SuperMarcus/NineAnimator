@@ -95,7 +95,7 @@
 "JZU-9o-boH.text" = "KITSU.IO";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co."; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.footerTitle" = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co.";
+"KLV-mK-zbJ.footerTitle" = "Seuls les événements de lecture après votre connexion seront ajoutés sur AniList. Par défaut, NineAnimator utilise AniList pour fournir des informations de contenu.\n\nNineAnimator n'est pas affilié à AniList.co.";
 
 /* Class = "UITableViewSection"; headerTitle = "Anilist"; ObjectID = "KLV-mK-zbJ"; */
 "KLV-mK-zbJ.headerTitle" = "Anilist";
@@ -167,7 +167,7 @@
 "Tre-aJ-ohc.text" = "Effacer les téléchargements";
 
 /* Class = "UITableViewSection"; footerTitle = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed)."; ObjectID = "UxF-RW-Y6p"; */
-"UxF-RW-Y6p.footerTitle" = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed).";
+"UxF-RW-Y6p.footerTitle" = "Lister l'épisode du premier au dernier (En Ordre) ou du plus récent au plus vieux (Inversé).";
 
 /* Class = "UILabel"; text = "Starts Playing"; ObjectID = "V91-yy-Rkb"; */
 "V91-yy-Rkb.text" = "Jouer";
@@ -197,10 +197,10 @@
 "ZJI-L3-7zk.headerTitle" = "Général";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
-"ZKK-PI-ugJ.text" = "Show Available Streams";
+"ZKK-PI-ugJ.text" = "Montrer les Streams disponibles";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app."; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.footerTitle" = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.";
+"ZPg-j7-wjg.footerTitle" = "NineAnimator peut être configuré pour exécuter certaines scènes lorsque la lecture démarre ou se termine. Par exemple, NineAnimator peut assombrir les lumières et préparer les environnements au démarrage d'AirPlay.\n\nPour que l'intégration de la maison fonctionne, au moins un accessoire compatible HomeKit doit être connecté dans l'application Home et au moins une scène doit être disponible. Vous pouvez ajouter plus de scènes dans l'application Home.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
 "ZPg-j7-wjg.headerTitle" = "Intégration de l'Accueil";
@@ -209,7 +209,7 @@
 "Zaa-23-f0r.text" = "Effacer tous les téléchargements";
 
 /* Class = "UILabel"; text = "Setup MyAnimeList.net"; ObjectID = "bH1-Rj-cxO"; */
-"bH1-Rj-cxO.text" = "Setup MyAnimeList.net";
+"bH1-Rj-cxO.text" = "Connecter MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
 "c84-vM-Uf0.text" = "Envoyer les notifications";
@@ -221,31 +221,31 @@
 "dIG-JR-U2D.text" = "Effacer les raccourcis et les éléments de Spotlight";
 
 /* Class = "UITableViewSection"; footerTitle = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries."; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.footerTitle" = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.";
+"dNx-EX-rHK.footerTitle" = "Effacer les données mises en cache supprimera les images en cache, les requêtes, les cookies et les informations sur les épisodes.\n\nEffacer les raccourcis et les objets Spotlight supprimera tous les raccourcis de NineAnimator et les entrées de recherche Spotlight.";
 
 /* Class = "UITableViewSection"; headerTitle = "Data and Privacy"; ObjectID = "dNx-EX-rHK"; */
 "dNx-EX-rHK.headerTitle" = "Données et Confidentialité";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
+"dnn-sT-oir.footerTitle" = "Activez Afficher les Streams Disponibles pour comprendre les sources de diffusion vers lesquelles le dernier épisode est téléchargé dans la notification.\n\nNineAnimator utilise l'Actualisation d'Application en arrière-plan pour déterminer si un nouvel épisode d'un anime abonné a été publié.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.headerTitle" = "Notifications et Abonnements";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ehk-8y-ZWC"; */
-"ehk-8y-ZWC.text" = "Push NineAnimator Updates";
+"ehk-8y-ZWC.text" = "Forcer les mises à jour de NineAnimator";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
 "ejU-pt-NEy.title" = "Page d’accueil";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
-"ekC-7m-AFc.text" = "Push NineAnimator Updates";
+"ekC-7m-AFc.text" = "Forcer les mises à jour de NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
 "fhT-FK-ILc.text" = "Statut";
 
 /* Class = "UITableViewSection"; footerTitle = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app."; ObjectID = "fjl-9Y-6m1"; */
-"fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
+"fjl-9Y-6m1.footerTitle" = "Réessayer automatiquement les téléchargements échoués.\n\nActivez la prévention d'effacement d'épisodes pour les protéger d'être supprimés par le système. Le système essaiera de supprimer d'autres ressources avant d'effacer les épisodes téléchargés.\n\nLa capacité de disque restante affichée dans cet écran peut être différente de l'application Paramètres.";
 
 /* Class = "UILabel"; text = "Background Playback"; ObjectID = "gAn-bf-I7y"; */
 "gAn-bf-I7y.text" = "Lecture en arrière-plan";
@@ -263,7 +263,7 @@
 "hZK-F2-4cA.text" = "Remonter un Bug";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
-"jGy-CK-BGd.text" = "Tracking Service Name";
+"jGy-CK-BGd.text" = "Nom du service de traçage";
 
 /* Class = "UILabel"; text = "Clear Recently Watched"; ObjectID = "jcd-Wl-m61"; */
 "jcd-Wl-m61.text" = "Effacer les épisodes récemment regardés";
@@ -272,7 +272,7 @@
 "jtv-aO-g6G.headerTitle" = "Sauvegarde";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net."; ObjectID = "k58-8v-meo"; */
-"k58-8v-meo.footerTitle" = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net.";
+"k58-8v-meo.footerTitle" = "Seuls les événements de lecture après votre connexion seront ajoutés sur MyAnimeList.\n\nMyAnimeList. et est une propriété de MyAnimeList, LLC. ©2015 Tous droits réservés.\n\nNineAnimator n'est pas affilié à MyAnimeList.net.";
 
 /* Class = "UITableViewSection"; headerTitle = "MyAnimeList"; ObjectID = "k58-8v-meo"; */
 "k58-8v-meo.headerTitle" = "MyAnimeList";
@@ -296,10 +296,10 @@
 "pGu-In-KWa.title" = "Services de traçage";
 
 /* Class = "UILabel"; text = "Ends Playing"; ObjectID = "q0P-aj-Wkc"; */
-"q0P-aj-Wkc.text" = "Ends Playing";
+"q0P-aj-Wkc.text" = "Fin de la lecture";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
-"qV5-lV-yLf.text" = "Setup Kitsu.io";
+"qV5-lV-yLf.text" = "Connecter Kitsu.io";
 
 /* Class = "UILabel"; text = "SIMKL.COM"; ObjectID = "qwG-xM-EqT"; */
 "qwG-xM-EqT.text" = "SIMKL.COM";
@@ -311,7 +311,7 @@
 "uZi-hX-u8x.text" = "Statut";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
-"xLV-v6-fh9.text" = "Setup Simkl.com";
+"xLV-v6-fh9.text" = "Connecter Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
 "xP9-AS-NPt.text" = "Apparence dynamique";
