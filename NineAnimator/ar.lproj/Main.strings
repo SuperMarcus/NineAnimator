@@ -2,7 +2,7 @@
 "2rp-o4-MgZ.normalTitle" = "فتح الرابط";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
-"8OU-XT-7E1.title" = "Recents";
+"8OU-XT-7E1.title" = "الاحدث";
 
 /* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
 "EeQ-yb-72U.text" = "جاري تحميل المعاينة";
@@ -26,19 +26,19 @@
 "bTY-yy-a3Z.text" = "جاري التحميل...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "You recently watched...";
+"cty-4k-jCy.text" = "انت شاهدت مؤخرا...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
-"g8T-nX-rcs.title" = "Settings";
+"g8T-nX-rcs.title" = "الإعدادات";
 
 /* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
-"mEy-g5-ff5.title" = "Google Cast";
+"mEy-g5-ff5.title" = "غوغل كاست";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "o2r-J2-aqA"; */
-"o2r-J2-aqA.title" = "Library";
+"o2r-J2-aqA.title" = "مكتبة";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
-"rUB-Iw-liv.normalTitle" = "View";
+"rUB-Iw-liv.normalTitle" = "المشاهدة";
 
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
-"smF-4W-Oha.title" = "Library";
+"smF-4W-Oha.title" = "المكتبة";
