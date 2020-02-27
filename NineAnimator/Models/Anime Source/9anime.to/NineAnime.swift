@@ -167,10 +167,15 @@ class NASourceNineAnime: BaseSource, Source {
             with headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<NSDictionary>
         ) -> NineAnimatorAsyncTask? {
+        // Additional verification headers
+        let modifiedRequestHeaders = headers.merging([
+            "Age": "0"
+        ]) { override, _ in override }
+        
         // Forward the call
         return request(
             ajax: signRequestURL(url, withParameters: parameters),
-            headers: headers,
+            headers: modifiedRequestHeaders,
             completion: handler
         )
     }
