@@ -146,37 +146,37 @@
 "Rvs-DG-kmr.title" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>."; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.";
+"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. Todos los derechos reservados.\n\nNineAnimator es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, o bien la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.\n\nNineAnimator se distribuye con la esperanza de que sea útil, pero SIN CUALQUIER PRECIO; sin la garantía implícita de crear mercancía o ADECUACIÓN PARA UN PROPÓSITO PARTICULAR. Consulte la Licencia Pública General de GNU para más detalles.\n\nDebería haber recibido una copia de la Licencia Pública General de GNU junto con NineAnimator. Si no, vea <http://www.gnu.org/licenses/>.";
 
 /* Class = "UITableViewSection"; headerTitle = "GNU General Public License version 3"; ObjectID = "SRm-Su-TD8"; */
 "SRm-Su-TD8.headerTitle" = "Licencia Pública General de GNU versión 3";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com."; ObjectID = "Sei-S4-MPn"; */
-"Sei-S4-MPn.footerTitle" = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com.";
+"Sei-S4-MPn.footerTitle" = "Solo los eventos de reproducción después de haber iniciado sesión serán añadidos a Simkl.\n\nNineAnimator no está afiliado con simkl.com.";
 
 /* Class = "UITableViewSection"; headerTitle = "Simkl"; ObjectID = "Sei-S4-MPn"; */
 "Sei-S4-MPn.headerTitle" = "Simkl";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "SkT-L9-D11"; */
-"SkT-L9-D11.text" = "Not Setup";
+"SkT-L9-D11.text" = "Sin configurar";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
-"SsL-fL-doX.title" = "Preferences";
+"SsL-fL-doX.title" = "Preferencias";
 
 /* Class = "UILabel"; text = "Retry Downloads"; ObjectID = "Tre-aJ-ohc"; */
-"Tre-aJ-ohc.text" = "Retry Downloads";
+"Tre-aJ-ohc.text" = "Reintentar la Descarga";
 
 /* Class = "UITableViewSection"; footerTitle = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed)."; ObjectID = "UxF-RW-Y6p"; */
-"UxF-RW-Y6p.footerTitle" = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed).";
+"UxF-RW-Y6p.footerTitle" = "Listar episodio desde el primero hasta el último (ordenado) o desde el más reciente hasta el más distante (invertido).";
 
 /* Class = "UILabel"; text = "Starts Playing"; ObjectID = "V91-yy-Rkb"; */
-"V91-yy-Rkb.text" = "Starts Playing";
+"V91-yy-Rkb.text" = "Empezar reproducción";
 
 /* Class = "UILabel"; text = "Detect Clipboard Links"; ObjectID = "VBZ-pE-vXV"; */
-"VBZ-pE-vXV.text" = "Detect Clipboard Links";
+"VBZ-pE-vXV.text" = "Detectar enlaces del portapapeles";
 
 /* Class = "UILabel"; text = "Preferred Source"; ObjectID = "W4K-f9-Rrg"; */
-"W4K-f9-Rrg.text" = "Preferred Source";
+"W4K-f9-Rrg.text" = "Fuente preferida";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
 "WSB-go-EfB.segmentTitles[0]" = "Obscuro";
@@ -188,22 +188,22 @@
 "WoO-zh-kDF.text" = "Apariencia";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "Wu1-sV-neO"; */
-"Wu1-sV-neO.text" = "About";
+"Wu1-sV-neO.text" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Set appearance dynamically."; ObjectID = "ZJI-L3-7zk"; */
-"ZJI-L3-7zk.footerTitle" = "Set appearance dynamically.";
+"ZJI-L3-7zk.footerTitle" = "Definir apariencia dinámicamente.";
 
 /* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "ZJI-L3-7zk"; */
 "ZJI-L3-7zk.headerTitle" = "General";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
-"ZKK-PI-ugJ.text" = "Show Available Streams";
+"ZKK-PI-ugJ.text" = "Mostrar streams disponibles";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app."; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.footerTitle" = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.";
+"ZPg-j7-wjg.footerTitle" = "NineAnimator puede ser configurado para ejecutar ciertas escenas cuando la reproducción comienza o termina. Por ejemplo, NineAnimator puede oscurecer las luces y preparar el ambiente cuando se inicia AirPlay.\n\nPara que funcione la integración con el hogar, mínimo un accesorio compatible con HomeKit tiene que configurarse en la aplicación Home y mínimo una escena tiene que estar disponible. Puedes añadir más escenas en la aplicación Inicio.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.headerTitle" = "Home Integration";
+"ZPg-j7-wjg.headerTitle" = "Integración Home";
 
 /* Class = "UILabel"; text = "Delete All Downloads"; ObjectID = "Zaa-23-f0r"; */
 "Zaa-23-f0r.text" = "Delete All Downloads";
