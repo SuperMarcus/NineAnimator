@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Alamofire
 import AVFoundation
 import Foundation
 

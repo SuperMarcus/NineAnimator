@@ -48,7 +48,7 @@ class HydraXParser: VideoProviderParser {
 //        var thumbnail: String
     }
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         if episode.target.host?.lowercased() == "replay.watch" {
             return parseReplay(episode: episode, with: session, onCompletion: handler)
         } else {
@@ -56,7 +56,7 @@ class HydraXParser: VideoProviderParser {
         }
     }
     
-    private func parseGeneric(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    private func parseGeneric(episode: Episode, with session: Session, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         NineAnimatorPromise.firstly {
             () -> String? in
             let queryParameters = try formDecode(episode.target.query ?? "")
@@ -82,7 +82,7 @@ class HydraXParser: VideoProviderParser {
     }
     
     /// Replay.watch uses HydraX's vip channel
-    private func parseReplay(episode: Episode, with session: SessionManager, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    private func parseReplay(episode: Episode, with session: Session, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         NineAnimatorPromise<String> {
             callback in session.request(episode.target).responseString {
                 callback($0.value, $0.error)

@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "ViewAnimator",
-      "hash" : "fa14a085a23a2be46fa5577c1edf7595ea2f62986625d3a5720c3ba1ff15d1d4",
-      "swiftToolchainVersion" : "5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)"
+      "hash" : "7331fe66e984facbea190c76dbb46e48fd4653f28f0e454ca8c2ca04b18e46ad",
+      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
     }
   ]
 }

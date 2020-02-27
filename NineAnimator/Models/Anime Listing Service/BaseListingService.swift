@@ -80,11 +80,11 @@ class BaseListingService: SessionDelegate {
     
     unowned var parent: NineAnimator
     
-    private(set) lazy var session: Alamofire.SessionManager = {
+    private(set) lazy var session: Alamofire.Session = {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
-        return SessionManager(configuration: configuration, delegate: self)
+        return Session(configuration: configuration, delegate: self)
     }()
     
     required init(_ parent: NineAnimator) {
@@ -96,7 +96,10 @@ class BaseListingService: SessionDelegate {
     func request(_ url: URL, method: HTTPMethod = .get, data: Data? = nil, headers: HTTPHeaders = [:]) -> NineAnimatorPromise<Data> {
         NineAnimatorPromise.firstly {
             var request = try URLRequest(url: url, method: method)
-            headers.forEach { request.setValue($0.value, forHTTPHeaderField: $0.key) }
+            // Copy headers from HTTPHeaders to URLRequest
+            headers.dictionary.forEach {
+                request.setValue($0.value, forHTTPHeaderField: $0.key)
+            }
             request.httpBody = data
             return request
         } .thenPromise {

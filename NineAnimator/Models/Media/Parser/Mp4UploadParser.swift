@@ -31,7 +31,7 @@ class Mp4UploadParser: VideoProviderParser {
         options: []
     )
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         session.request(episode.target).responseString {
             response in
             do {

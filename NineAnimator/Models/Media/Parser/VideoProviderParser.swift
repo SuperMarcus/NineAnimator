@@ -30,7 +30,7 @@ protocol VideoProviderParser {
     var aliases: [String] { get }
     
     /// Obtain the playback media for the episode target
-    func parse(episode: Episode, with session: SessionManager, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
+    func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask
     
     /// Check if the result from this parser is recommended for the given purpose
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool

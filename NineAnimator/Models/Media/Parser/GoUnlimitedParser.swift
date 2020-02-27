@@ -25,7 +25,7 @@ class GoUnlimitedParser: VideoProviderParser {
     var aliases: [String] { [] }
     
     func parse(episode: Episode,
-               with session: SessionManager,
+               with session: Session,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         NineAnimatorPromise {

@@ -30,7 +30,7 @@ class CompositionalPlaybackMedia: NSObject, PlaybackMedia, AVAssetResourceLoader
     let url: URL
     let parent: Episode
     let contentType: String
-    let headers: HTTPHeaders
+    let headers: [String: String]
     let subtitles: [SubtitleComposition]
     
     /// Strong references to the loading tasks/promises
@@ -42,7 +42,7 @@ class CompositionalPlaybackMedia: NSObject, PlaybackMedia, AVAssetResourceLoader
     /// The delegate queue
     private let delegateQueue: DispatchQueue = .global()
     
-    init(url: URL, parent: Episode, contentType: String, headers: HTTPHeaders, subtitles: [SubtitleComposition]) {
+    init(url: URL, parent: Episode, contentType: String, headers: [String: String], subtitles: [SubtitleComposition]) {
         self.url = url
         self.parent = parent
         self.contentType = contentType
@@ -205,10 +205,10 @@ extension CompositionalPlaybackMedia {
         
         // Master playlist
         if originalUrl == url {
-            loadingTasks[loadingRequest] = Alamofire.request(
+            loadingTasks[loadingRequest] = AF.request(
                 originalUrl,
                 method: .get,
-                headers: headers
+                headers: HTTPHeaders(headers)
             ) .responseData {
                 [subtitleCompositionGroupId, injectionSubtitlePlaylistScheme, subtitles] response in
                 do {
@@ -255,7 +255,7 @@ extension CompositionalPlaybackMedia {
             loadingRequest.redirect = try URLRequest(
                 url: originalUrl,
                 method: .get,
-                headers: loadingRequest.request.allHTTPHeaderFields
+                headers: loadingRequest.request.allHTTPHeaderFields ?? [:]
             )
             loadingRequest.finishLoading()
         }
@@ -275,7 +275,7 @@ extension CompositionalPlaybackMedia {
             
             // Request and cached the vtt
             return NineAnimatorPromise(queue: delegateQueue) {
-                callback in Alamofire.request(vttUrl).responseData {
+                callback in AF.request(vttUrl).responseData {
                     response in
                     switch response.result {
                     case let .success(vttData): callback(vttData, nil)

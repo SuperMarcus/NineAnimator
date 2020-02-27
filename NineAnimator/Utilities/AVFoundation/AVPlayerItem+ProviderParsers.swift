@@ -22,7 +22,7 @@ import AVKit
 import Foundation
 
 extension AVPlayerItem {
-    convenience init(url: URL, headers: HTTPHeaders) {
+    convenience init(url: URL, headers: [String: String]) {
         let asset = AVURLAsset(
             url: url,
             options: [ AVURLAssetHTTPHeaderFieldsKey: headers ]

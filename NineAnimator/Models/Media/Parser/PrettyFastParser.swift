@@ -28,7 +28,7 @@ class PrettyFastParser: VideoProviderParser {
     
     static let videoSourceRegex = try! NSRegularExpression(pattern: "hlsUrl\\s=\\s'([^\']+)", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let userAgent = (episode.source as? BaseSource)?.sessionUserAgent ?? defaultUserAgent
         let episodeLinkPath = episode.link.identifier.split(separator: "|").last!
         
@@ -80,7 +80,7 @@ class PrettyFastParser: VideoProviderParser {
                 url: sourceURL,
                 parent: episode,
                 contentType: "application/x-mpegURL",
-                headers: playerAdditionalHeaders,
+                headers: playerAdditionalHeaders.dictionary,
                 isAggregated: true), nil)
         }
     }

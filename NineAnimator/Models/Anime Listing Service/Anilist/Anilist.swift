@@ -156,7 +156,7 @@ extension Anilist {
     }
     
     func graphQL(query: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
-        var headers = [
+        var headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "Accept": "application/json"
         ]

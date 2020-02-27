@@ -37,7 +37,7 @@ class XStreamParser: VideoProviderParser {
         var type: String
     }
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         NineAnimatorPromise<PlaybackMedia> {
             callback in
             let episodeComponents = episode.target.pathComponents

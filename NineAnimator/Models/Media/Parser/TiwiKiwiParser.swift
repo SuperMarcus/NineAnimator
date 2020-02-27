@@ -31,10 +31,10 @@ class TiwiKiwiParser: VideoProviderParser {
     static let flowPlayerBaseURLRegex = try! NSRegularExpression(pattern: "BaseURL>([^<]+)", options: .caseInsensitive)
     
     func parse(episode: Episode,
-               with session: SessionManager,
+               with session: Session,
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        let headers = [
+        let headers: HTTPHeaders = [
             "User-Agent": defaultUserAgent,
             "Origin": episode.target.absoluteString
         ]
