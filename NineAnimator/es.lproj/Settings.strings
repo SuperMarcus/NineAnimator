@@ -14,7 +14,7 @@
 "1X7-X7-huV.text" = "Borrar descargas";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
+"2US-vI-tzZ.headerTitle" = "Sitios web y software de terceros";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
 "2ol-44-Ha5.text" = "Estado";
@@ -71,7 +71,7 @@
 "Avi-8B-KpP.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
-"BDo-SJ-NV8.text" = "Third-Party Anime Lists";
+"BDo-SJ-NV8.text" = "Listas de anime de terceros";
 
 /* Class = "UILabel"; text = "Current Subscriptions"; ObjectID = "CDE-MG-fiI"; */
 "CDE-MG-fiI.text" = "Suscripciones actuales";
@@ -86,7 +86,7 @@
 "EzJ-Ri-uNU.headerTitle" = "Sobre NineAnimator";
 
 /* Class = "UITableViewSection"; footerTitle = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account."; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.footerTitle" = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account.";
+"Ips-J8-mzS.footerTitle" = "Puede borrar su historial de reproducción y restablecer sus preferencias personales en el menú Preferencias.\n\nNineAnimator nunca cargará su información personal o historial de reproducción a ningún servicio de terceros o sitios web sin su consentimiento. Sin embargo, NineAnimator no está diseñado para prevenir servicios (p. ej. 9anime, MyCloud, MyAnimeList) o su proveedor de servicios de Internet desde su seguimiento.\n\nConfigurando servicios de rastreo de terceros aceptas que NineAnimator suba tu historial de reproducción y progrese sólo a los servicios de terceros que has configurado.\n\nSu historial de reproducción y preferencias pueden almacenarse en su cuenta de iCloud.";
 
 /* Class = "UITableViewSection"; headerTitle = "Privacy"; ObjectID = "Ips-J8-mzS"; */
 "Ips-J8-mzS.headerTitle" = "Privacidad";
@@ -95,16 +95,16 @@
 "JZU-9o-boH.text" = "KITSU.IO";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co."; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.footerTitle" = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co.";
+"KLV-mK-zbJ.footerTitle" = "Sólo los eventos de reproducción después de que hayas iniciado sesión serán empujados a AniLista. Por defecto, NineAnimator utiliza AniList para proporcionar información de contenido.\n\nNineAnimator no está afiliado con AniList.co.";
 
 /* Class = "UITableViewSection"; headerTitle = "Anilist"; ObjectID = "KLV-mK-zbJ"; */
 "KLV-mK-zbJ.headerTitle" = "Anilist";
 
 /* Class = "UILabel"; text = "Picture in Picture Playback"; ObjectID = "KSq-np-Dks"; */
-"KSq-np-Dks.text" = "Picture in Picture Playback";
+"KSq-np-Dks.text" = "Reproducción picture-in-picture";
 
 /* Class = "UILabel"; text = "Episodes"; ObjectID = "KjW-mL-37B"; */
-"KjW-mL-37B.text" = "Episodes";
+"KjW-mL-37B.text" = "Episodios";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
 "Kql-zU-bRq.text" = "Configurar AniList.co";
@@ -113,37 +113,37 @@
 "LfV-dW-fu4.text" = "Créditos";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
-"LoF-UE-Pdv.text" = "Not Setup";
+"LoF-UE-Pdv.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
-"Mhg-Wl-1ep.text" = "List Episodes";
+"Mhg-Wl-1ep.text" = "Lista de episodios";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io."; ObjectID = "Mk4-hl-YHD"; */
-"Mk4-hl-YHD.footerTitle" = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io.";
+"Mk4-hl-YHD.footerTitle" = "Solo los eventos de reproducción después de haber iniciado sesión serán añadidos a Kitsu.\n\nNineAnimator no está afiliado con Kitsu.io.";
 
 /* Class = "UITableViewSection"; headerTitle = "Kitsu"; ObjectID = "Mk4-hl-YHD"; */
 "Mk4-hl-YHD.headerTitle" = "Kitsu";
 
 /* Class = "UILabel"; text = "Manage Personal Information"; ObjectID = "N8M-Jf-n7k"; */
-"N8M-Jf-n7k.text" = "Manage Personal Information";
+"N8M-Jf-n7k.text" = "Administrar mis datos personales";
 
 /* Class = "UILabel"; text = "Allow NSFW Content"; ObjectID = "Nrj-vR-ORT"; */
-"Nrj-vR-ORT.text" = "Allow NSFW Content";
+"Nrj-vR-ORT.text" = "Permitir contenido NSFW";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
 "OUZ-2Z-Nei.text" = "Repositorio GitHub";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[0] = "Reversed"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[0]" = "Reversed";
+"QFr-Ue-S7z.segmentTitles[0]" = "Invertido";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[1] = "Ordered"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[1]" = "Ordered";
+"QFr-Ue-S7z.segmentTitles[1]" = "Ordenado";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "Rbz-Nj-bSj"; */
-"Rbz-Nj-bSj.text" = "Status";
+"Rbz-Nj-bSj.text" = "Estado";
 
 /* Class = "UITableViewController"; title = "About"; ObjectID = "Rvs-DG-kmr"; */
-"Rvs-DG-kmr.title" = "About";
+"Rvs-DG-kmr.title" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>."; ObjectID = "SRm-Su-TD8"; */
 "SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.";
