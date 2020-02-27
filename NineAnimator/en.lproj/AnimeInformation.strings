@@ -1,39 +1,12 @@
 
-/* Class = "UILabel"; text = "Information Value"; ObjectID = "16a-OX-bbP"; */
-"16a-OX-bbP.text" = "Information Value";
-
-/* Class = "UILabel"; text = "Voice Actor Name"; ObjectID = "6Nj-hm-d7s"; */
-"6Nj-hm-d7s.text" = "Voice Actor Name";
-
-/* Class = "UILabel"; text = "Alternative anime title"; ObjectID = "CGQ-fc-eQZ"; */
-"CGQ-fc-eQZ.text" = "Alternative anime title";
-
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "LsK-7T-IdR"; */
 "LsK-7T-IdR.normalTitle" = "Expand";
-
-/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "PKq-Il-hhv"; */
-"PKq-Il-hhv.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
-
-/* Class = "UILabel"; text = "5.0"; ObjectID = "Y1d-9b-682"; */
-"Y1d-9b-682.text" = "5.0";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "dKd-8l-exf"; */
-"dKd-8l-exf.text" = "Anime Title";
-
-/* Class = "UILabel"; text = "Anime Name"; ObjectID = "lQW-cW-z7d"; */
-"lQW-cW-z7d.text" = "Anime Name";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "nFA-pP-lRy"; */
 "nFA-pP-lRy.text" = "Synopsis";
 
 /* Class = "UIButton"; normalTitle = "VIEW EPISODES"; ObjectID = "nNy-wE-HN7"; */
 "nNy-wE-HN7.normalTitle" = "VIEW EPISODES";
-
-/* Class = "UILabel"; text = "Section Title"; ObjectID = "pv7-K0-NCl"; */
-"pv7-K0-NCl.text" = "Section Title";
-
-/* Class = "UILabel"; text = "Information Name"; ObjectID = "rEQ-Pw-ii4"; */
-"rEQ-Pw-ii4.text" = "Information Name";
 
 /* Class = "UILabel"; text = "Average Score"; ObjectID = "wYE-AE-4tO"; */
 "wYE-AE-4tO.text" = "Average Score";
