@@ -21,13 +21,71 @@ import Alamofire
 import Foundation
 
 // Making all `DataRequest`s conforming to the `NineAnimatorAsyncTask` protocol
-extension DataRequest: NineAnimatorAsyncTask { }
+extension Alamofire.DataRequest: NineAnimatorAsyncTask {
+    func cancel() {
+        _ = super.cancel()
+    }
+}
 
-extension Alamofire.SessionManager {
-//    func asyncRequest<Parameters: Encodable>(_ convertible: URLConvertible,
-//                                             method: HTTPMethod = .get,
-//                                             parameters: Parameters? = nil,
-//                                             encoder: Alamofire.ParameterEncoder = URLEncodedFormParameterEncoder.default,
-//                                             headers: HTTPHeaders? = nil,
-//                                             interceptor: Alamofire.RequestInterceptor? = nil) { }
+/// A network request helper that construct `NineAnimatorPromise` for Alamofire network requests
+struct AsyncRequestHelper {
+    private let initRequest: () throws -> Alamofire.DataRequest
+    
+    init(_ initRequest: @escaping @autoclosure () throws -> Alamofire.DataRequest) {
+        self.initRequest = initRequest
+    }
+    
+    /// Construct a `NineAnimatorPromise` for the current request that resolves to a JSON decoable type
+    func decodableResponse<T: Decodable>(_ type: T.Type) -> NineAnimatorPromise<T> {
+        dataResponse().then { try JSONDecoder().decode(T.self, from: $0) }
+    }
+    
+    /// Construct a `NineAnimatorPromise` for the current request
+    func dataResponse() -> NineAnimatorPromise<Data> {
+        NineAnimatorPromise {
+            [initRequest] cb in AsyncRequestHelper.pipeError(cb) {
+                try initRequest().responseData(
+                    completionHandler: AsyncRequestHelper.handler(cb)
+                )
+            }
+        }
+    }
+    
+    /// Construct a `NineAnimatorPromise` for the current request that resolves to a `String`
+    func stringResponse() -> NineAnimatorPromise<String> {
+        NineAnimatorPromise {
+            [initRequest] cb in AsyncRequestHelper.pipeError(cb) {
+                try initRequest().responseString(
+                    completionHandler: AsyncRequestHelper.handler(cb)
+                )
+            }
+        }
+    }
+    
+    /// Construct a `NineAnimatorPromise` for the current request that expects and parses a JSON response
+    func jsonResponse() -> NineAnimatorPromise<Any> {
+        NineAnimatorPromise {
+            [initRequest] cb in AsyncRequestHelper.pipeError(cb) {
+                try initRequest().responseJSON(
+                    completionHandler: AsyncRequestHelper.handler(cb)
+                )
+            }
+        }
+    }
+    
+    private static func handler<T>(_ callback: @escaping NineAnimatorCallback<T>) -> (AFDataResponse<T>) -> Void {
+        let block: (AFDataResponse<T>) -> Void = {
+            callback($0.value, $0.error)
+        }
+        return block
+    }
+    
+    private static func pipeError<T>(_ callback: NineAnimatorCallback<T>, perform: () throws -> NineAnimatorAsyncTask) -> NineAnimatorAsyncTask? {
+        do {
+            return try perform()
+        } catch {
+            callback(nil, error)
+            return nil
+        }
+    }
 }

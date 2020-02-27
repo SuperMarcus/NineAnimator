@@ -27,7 +27,7 @@ struct BasicPlaybackMedia: PlaybackMedia {
     let url: URL
     let parent: Episode
     let contentType: String
-    let headers: HTTPHeaders
+    let headers: [String: String]
     let isAggregated: Bool
     
     var avPlayerItem: AVPlayerItem {

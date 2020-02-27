@@ -246,7 +246,7 @@ extension Kitsu {
             return (
                 requestingUrl,
                 bodyData,
-                headers
+                HTTPHeaders(headers)
             )
         } .thenPromise {
             [unowned self] url, bodyData, headers in // Then request

@@ -50,7 +50,7 @@ protocol Source: AnyObject {
     
     /// The Alamofire session manager for retriving contents
     /// from the represented website.
-    var retriverSession: SessionManager { get }
+    var retriverSession: Session { get }
     
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask?
     

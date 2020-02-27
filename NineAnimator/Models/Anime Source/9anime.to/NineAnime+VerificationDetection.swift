@@ -36,6 +36,6 @@ extension NASourceNineAnime {
                     url
                 )
             )
-        } else { return .success }
+        } else { return .success(()) }
     }
 }

@@ -27,11 +27,11 @@ class RapidVideoParser: VideoProviderParser {
         [ "RapidVideo", "Rapid Video" ]
     }
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        let additionalHeaders: HTTPHeaders = [
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+        let additionalHeaders = [
             "Referer": episode.target.absoluteString
         ]
-        return session.request(episode.target, headers: additionalHeaders).responseString {
+        return session.request(episode.target, headers: HTTPHeaders(additionalHeaders)).responseString {
             response in
             guard let value = response.value else {
                 Log.error(response.error)

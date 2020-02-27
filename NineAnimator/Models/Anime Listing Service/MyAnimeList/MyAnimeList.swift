@@ -243,9 +243,9 @@ extension MyAnimeList {
             firstPromise = authenticateWithRefreshToken()
         }
         return firstPromise.then {
-            [endpoint, clientIdentifier, weak self] () -> (URL, [String: String], Data?) in
+            [endpoint, clientIdentifier, weak self] () -> (URL, HTTPHeaders, Data?) in
             var url = endpoint.appendingPathComponent(path)
-            var headers = [ "X-MAL-Client-ID": clientIdentifier ]
+            var headers: HTTPHeaders = [ "X-MAL-Client-ID": clientIdentifier ]
             var encodedBodyContent: Data?
             
             // Build GET parameters

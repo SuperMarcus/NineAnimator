@@ -45,29 +45,29 @@ class NineAnimator: SessionDelegate {
     private(set) var reachability: NetworkReachabilityManager?
     
     private let mainAdditionalHeaders: HTTPHeaders = {
-        var headers = SessionManager.defaultHTTPHeaders
+        var headers = HTTPHeaders.default
         headers["User-Agent"] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.0.1 Safari/605.1.15"
         return headers
     }()
     
-    private(set) lazy var session: SessionManager = {
-        let configuration = URLSessionConfiguration.default
+    private(set) lazy var session: Session = {
+        let configuration = URLSessionConfiguration.af.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
-        configuration.httpAdditionalHeaders = mainAdditionalHeaders
-        return SessionManager(configuration: configuration, delegate: self)
+        configuration.httpAdditionalHeaders = mainAdditionalHeaders.dictionary
+        return Session(configuration: configuration, delegate: self)
     }()
     
-    private(set) lazy var ajaxSession: SessionManager = {
+    private(set) lazy var ajaxSession: Session = {
         var ajaxAdditionalHeaders = mainAdditionalHeaders
         ajaxAdditionalHeaders["X-Requested-With"] = "XMLHttpRequest"
         ajaxAdditionalHeaders["Accept"] = "application/json, text/javascript, */*; q=0.01"
         
-        let configuration = URLSessionConfiguration.default
+        let configuration = URLSessionConfiguration.af.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
-        configuration.httpAdditionalHeaders = ajaxAdditionalHeaders
-        return SessionManager(configuration: configuration, delegate: self)
+        configuration.httpAdditionalHeaders = ajaxAdditionalHeaders.dictionary
+        return Session(configuration: configuration, delegate: self)
     }()
     
     private(set) var user = NineAnimatorUser()
@@ -96,8 +96,8 @@ class NineAnimator: SessionDelegate {
     /// Chained image modifiers
     var _imageResourceModifiers = [Kingfisher.ImageDownloadRequestModifier]()
     
-    override init() {
-        super.init()
+    init() {
+        super.init(fileManager: .default)
         
         // Init reachability manager
         reachability = NetworkReachabilityManager()

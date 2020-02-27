@@ -28,7 +28,7 @@ class VeryStream: VideoProviderParser {
     
     static let tokenRegex = try! NSRegularExpression(pattern: "<p style=\"\" class=\"\" id=\"videolink\">(.+)<\\/p>", options: .caseInsensitive)
     
-    func parse(episode: Episode, with session: SessionManager, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         session.request(episode.target).responseString {
             response in
             guard let text = response.value else {
