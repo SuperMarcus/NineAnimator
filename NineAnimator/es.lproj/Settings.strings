@@ -203,28 +203,28 @@
 "ZPg-j7-wjg.footerTitle" = "NineAnimator puede ser configurado para ejecutar ciertas escenas cuando la reproducción comienza o termina. Por ejemplo, NineAnimator puede oscurecer las luces y preparar el ambiente cuando se inicia AirPlay.\n\nPara que funcione la integración con el hogar, mínimo un accesorio compatible con HomeKit tiene que configurarse en la aplicación Home y mínimo una escena tiene que estar disponible. Puedes añadir más escenas en la aplicación Inicio.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.headerTitle" = "Integración Home";
+"ZPg-j7-wjg.headerTitle" = "Integración de Home";
 
 /* Class = "UILabel"; text = "Delete All Downloads"; ObjectID = "Zaa-23-f0r"; */
-"Zaa-23-f0r.text" = "Delete All Downloads";
+"Zaa-23-f0r.text" = "Eliminar todas las descargas";
 
 /* Class = "UILabel"; text = "Setup MyAnimeList.net"; ObjectID = "bH1-Rj-cxO"; */
-"bH1-Rj-cxO.text" = "Setup MyAnimeList.net";
+"bH1-Rj-cxO.text" = "Configurar MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
-"c84-vM-Uf0.text" = "Send Notifications";
+"c84-vM-Uf0.text" = "Enviar notificaciones";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
-"d3R-vQ-52G.text" = "Not Setup";
+"d3R-vQ-52G.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "Clear Shortcuts and Spotlight Items"; ObjectID = "dIG-JR-U2D"; */
-"dIG-JR-U2D.text" = "Clear Shortcuts and Spotlight Items";
+"dIG-JR-U2D.text" = "Eliminar accesos directos y elementos de resaltado";
 
 /* Class = "UITableViewSection"; footerTitle = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries."; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.footerTitle" = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.";
+"dNx-EX-rHK.footerTitle" = "Borrar datos almacenados en caché eliminará imágenes, peticiones, cookies e información de episodios.\n\nBorrar Shortcuts y elementos de Spotlight eliminará todos los atajos y entradas de búsqueda NineAnimator y Spotlight.";
 
 /* Class = "UITableViewSection"; headerTitle = "Data and Privacy"; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.headerTitle" = "Data and Privacy";
+"dNx-EX-rHK.headerTitle" = "Datos y Privacidad";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
