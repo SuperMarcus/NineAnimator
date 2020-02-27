@@ -1,21 +1,17 @@
-
-/* Class = "UINavigationItem"; title = "Content Listing Title"; ObjectID = "7hx-GT-e5v"; */
-"7hx-GT-e5v.title" = "Content Listing Title";
-
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "Nke-YY-kc3"; */
-"Nke-YY-kc3.normalTitle" = "Open Link";
+"Nke-YY-kc3.normalTitle" = "打开链接";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "OOI-8A-BkV"; */
-"OOI-8A-BkV.text" = "Loading";
+"OOI-8A-BkV.text" = "载入中";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
-"goV-KK-D5O.text" = "Search Error";
+"goV-KK-D5O.text" = "搜索错误";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
-"hP6-y4-aJ9.text" = "No results found for \"Search\"";
+"hP6-y4-aJ9.text" = "没有找到“{0}”的结果";
 
 /* Class = "UILabel"; text = "AnimeTitle"; ObjectID = "lFR-07-AK0"; */
-"lFR-07-AK0.text" = "AnimeTitle";
+"lFR-07-AK0.text" = "动漫名称";
 
 /* Class = "UITableViewController"; title = "List"; ObjectID = "rPB-zo-b7C"; */
-"rPB-zo-b7C.title" = "List";
+"rPB-zo-b7C.title" = "列表";

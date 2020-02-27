@@ -1,9 +1,2 @@
-
-/* Class = "UILabel"; text = "Anime Source"; ObjectID = "Yvn-2n-QMl"; */
-"Yvn-2n-QMl.text" = "Anime Source";
-
 /* Class = "UILabel"; text = "✓ CURRENT"; ObjectID = "dMG-VP-RfX"; */
-"dMG-VP-RfX.text" = "✓ CURRENT";
-
-/* Class = "UILabel"; text = "A brief description of this anime website. The pros and cons, and if it is recommended."; ObjectID = "kBT-xs-KgW"; */
-"kBT-xs-KgW.text" = "A brief description of this anime website. The pros and cons, and if it is recommended.";
+"dMG-VP-RfX.text" = "✓ الحالية";

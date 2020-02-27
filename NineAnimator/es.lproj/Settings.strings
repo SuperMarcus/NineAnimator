@@ -1,249 +1,230 @@
-
 /* Class = "UILabel"; text = "Home"; ObjectID = "0eR-hu-Qxf"; */
-"0eR-hu-Qxf.text" = "Home";
+"0eR-hu-Qxf.text" = "Inicio";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "Repositorio GitHub";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
-"1D4-d4-eg5.text" = "Checking...";
+"1D4-d4-eg5.text" = "Comprobando...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
-"1VP-oc-aqz.text" = "Clear Cached Data";
+"1VP-oc-aqz.text" = "Borrar datos del caché";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Clear Downloads";
-
-/* Class = "UITableViewSection"; headerTitle = "About NineAnimator"; ObjectID = "20X-06-AJb"; */
-"20X-06-AJb.headerTitle" = "About NineAnimator";
-
-/* Class = "UITableViewSection"; footerTitle = "NineAnimator is developed with the help of the open source community.\n\nNineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.\n\n- OpenCast Swift\n\nMIT License\n\nCopyright (c) 2018 Miles Hollingsworth\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- Alamofire\n\nCopyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- Kingfisher\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 Wei Wang\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- SwiftSoup\n\nMIT License\n\nCopyright (c) 2016 Nabil Chatbi\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- ViewAnimator\n\nCopyright (c) 2018 marcosgriselli@gmail.com <marcosgriselli@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- DictionaryCoding\n\nThis software is covered by Elegant Chaos' liberal license: http://elegantchaos.com/license/liberal.\n\n- Other Media and Frameworks\n\nSee the complete credit list in the \"Credits\" page."; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.footerTitle" = "NineAnimator is developed with the help of the open source community.\n\nNineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.\n\n- OpenCast Swift\n\nMIT License\n\nCopyright (c) 2018 Miles Hollingsworth\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- Alamofire\n\nCopyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- Kingfisher\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 Wei Wang\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- SwiftSoup\n\nMIT License\n\nCopyright (c) 2016 Nabil Chatbi\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- ViewAnimator\n\nCopyright (c) 2018 marcosgriselli@gmail.com <marcosgriselli@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- DictionaryCoding\n\nThis software is covered by Elegant Chaos' liberal license: http://elegantchaos.com/license/liberal.\n\n- Other Media and Frameworks\n\nSee the complete credit list in the \"Credits\" page.";
+"1X7-X7-huV.text" = "Borrar descargas";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
+"2US-vI-tzZ.headerTitle" = "Sitios web y software de terceros";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
-"2ol-44-Ha5.text" = "Status";
+"2ol-44-Ha5.text" = "Estado";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
-"3bY-Q0-VOr.text" = "Privacy Policy";
+"3bY-Q0-VOr.text" = "Política de Privacidad";
 
 /* Class = "UILabel"; text = "ANILIST.CO"; ObjectID = "4rr-C0-0zN"; */
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Not Setup";
+"4vz-rG-dvA.text" = "Sin configurar";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
-"4ye-Yb-8qS.title" = "Storage";
+"4ye-Yb-8qS.title" = "Almacenamiento";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
-"5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
+"5UB-9w-oPI.footerTitle" = "Navega anime que has agregado a tus colecciones y conéctese con su servicio de rastreo.";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
-"5k7-hs-FeH.text" = "Prevents Purging";
+"5k7-hs-FeH.text" = "Previene purgas";
 
 /* Class = "UILabel"; text = "NineAnimator"; ObjectID = "6cg-cg-vWl"; */
 "6cg-cg-vWl.text" = "NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "6ow-N9-6M8"; */
-"6ow-N9-6M8.text" = "Status";
+"6ow-N9-6M8.text" = "Estado";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
-"6wJ-Cg-cKO.text" = "Not Setup";
+"6wJ-Cg-cKO.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
-"74T-HL-SF3.text" = "Calculating Usage...";
-
-/* Class = "UILabel"; text = "0 Item"; ObjectID = "7Ky-4E-HeC"; */
-"7Ky-4E-HeC.text" = "0 Item";
+"74T-HL-SF3.text" = "Calculando uso...";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
-"7gK-el-Ee1.text" = "Open Cast Controller";
+"7gK-el-Ee1.text" = "Abrir Controles de Cast";
 
 /* Class = "UITableViewSection"; footerTitle = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay."; ObjectID = "7nJ-6V-9oy"; */
 "7nJ-6V-9oy.footerTitle" = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.";
 
 /* Class = "UITableViewSection"; headerTitle = "Playback Controls"; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.headerTitle" = "Playback Controls";
+"7nJ-6V-9oy.headerTitle" = "Controles de Reproducción";
 
 /* Class = "UINavigationItem"; title = "Preferred Source"; ObjectID = "8Lj-r1-12t"; */
-"8Lj-r1-12t.title" = "Preferred Source";
+"8Lj-r1-12t.title" = "Fuente preferida";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
-"A3J-Ya-mRo.text" = "Version";
+"A3J-Ya-mRo.text" = "Versión";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
-"AVN-Z6-xDl.text" = "Export History";
+"AVN-Z6-xDl.text" = "Exportar Historial";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "Avi-8B-KpP"; */
-"Avi-8B-KpP.text" = "Not Setup";
+"Avi-8B-KpP.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
-"BDo-SJ-NV8.text" = "Third-Party Anime Lists";
+"BDo-SJ-NV8.text" = "Listas de anime de terceros";
 
 /* Class = "UILabel"; text = "Current Subscriptions"; ObjectID = "CDE-MG-fiI"; */
-"CDE-MG-fiI.text" = "Current Subscriptions";
+"CDE-MG-fiI.text" = "Suscripciones actuales";
 
 /* Class = "UILabel"; text = "MYANIMELIST.NET"; ObjectID = "CXa-yX-XOv"; */
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
 
-/* Class = "UILabel"; text = "1"; ObjectID = "Dt8-B6-aD6"; */
-"Dt8-B6-aD6.text" = "1";
-
-/* Class = "UILabel"; text = "1.0"; ObjectID = "EeO-5U-kPF"; */
-"EeO-5U-kPF.text" = "1.0";
-
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites."; ObjectID = "EzJ-Ri-uNU"; */
-"EzJ-Ri-uNU.footerTitle" = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.";
+"EzJ-Ri-uNU.footerTitle" = "NineAnimator es una aplicación gratuita y de código abierto iOS para la visualización de animes desarrollada por Marcus Zhou (other.marcus@icloud. om) bajo la Licencia Pública General de GNU versión 3.NineAnimator no está diseñado para promover la piratería, ni para apoyar los sitios web de piratería de anime.";
 
 /* Class = "UITableViewSection"; headerTitle = "About NineAnimator"; ObjectID = "EzJ-Ri-uNU"; */
-"EzJ-Ri-uNU.headerTitle" = "About NineAnimator";
+"EzJ-Ri-uNU.headerTitle" = "Sobre NineAnimator";
 
 /* Class = "UITableViewSection"; footerTitle = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account."; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.footerTitle" = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account.";
+"Ips-J8-mzS.footerTitle" = "Puede borrar su historial de reproducción y restablecer sus preferencias personales en el menú Preferencias.\n\nNineAnimator nunca cargará su información personal o historial de reproducción a ningún servicio de terceros o sitios web sin su consentimiento. Sin embargo, NineAnimator no está diseñado para prevenir servicios (p. ej. 9anime, MyCloud, MyAnimeList) o su proveedor de servicios de Internet desde su seguimiento.\n\nConfigurando servicios de rastreo de terceros aceptas que NineAnimator suba tu historial de reproducción y progrese sólo a los servicios de terceros que has configurado.\n\nSu historial de reproducción y preferencias pueden almacenarse en su cuenta de iCloud.";
 
 /* Class = "UITableViewSection"; headerTitle = "Privacy"; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.headerTitle" = "Privacy";
+"Ips-J8-mzS.headerTitle" = "Privacidad";
 
 /* Class = "UILabel"; text = "KITSU.IO"; ObjectID = "JZU-9o-boH"; */
 "JZU-9o-boH.text" = "KITSU.IO";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co."; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.footerTitle" = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co.";
+"KLV-mK-zbJ.footerTitle" = "Sólo los eventos de reproducción después de que hayas iniciado sesión serán empujados a AniLista. Por defecto, NineAnimator utiliza AniList para proporcionar información de contenido.\n\nNineAnimator no está afiliado con AniList.co.";
 
 /* Class = "UITableViewSection"; headerTitle = "Anilist"; ObjectID = "KLV-mK-zbJ"; */
 "KLV-mK-zbJ.headerTitle" = "Anilist";
 
 /* Class = "UILabel"; text = "Picture in Picture Playback"; ObjectID = "KSq-np-Dks"; */
-"KSq-np-Dks.text" = "Picture in Picture Playback";
+"KSq-np-Dks.text" = "Reproducción picture-in-picture";
 
 /* Class = "UILabel"; text = "Episodes"; ObjectID = "KjW-mL-37B"; */
-"KjW-mL-37B.text" = "Episodes";
+"KjW-mL-37B.text" = "Episodios";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
-"Kql-zU-bRq.text" = "Setup AniList.co";
+"Kql-zU-bRq.text" = "Configurar AniList.co";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "LfV-dW-fu4"; */
-"LfV-dW-fu4.text" = "Credits";
+"LfV-dW-fu4.text" = "Créditos";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
-"LoF-UE-Pdv.text" = "Not Setup";
+"LoF-UE-Pdv.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
-"Mhg-Wl-1ep.text" = "List Episodes";
+"Mhg-Wl-1ep.text" = "Lista de episodios";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io."; ObjectID = "Mk4-hl-YHD"; */
-"Mk4-hl-YHD.footerTitle" = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io.";
+"Mk4-hl-YHD.footerTitle" = "Solo los eventos de reproducción después de haber iniciado sesión serán añadidos a Kitsu.\n\nNineAnimator no está afiliado con Kitsu.io.";
 
 /* Class = "UITableViewSection"; headerTitle = "Kitsu"; ObjectID = "Mk4-hl-YHD"; */
 "Mk4-hl-YHD.headerTitle" = "Kitsu";
 
 /* Class = "UILabel"; text = "Manage Personal Information"; ObjectID = "N8M-Jf-n7k"; */
-"N8M-Jf-n7k.text" = "Manage Personal Information";
+"N8M-Jf-n7k.text" = "Administrar mis datos personales";
 
 /* Class = "UILabel"; text = "Allow NSFW Content"; ObjectID = "Nrj-vR-ORT"; */
-"Nrj-vR-ORT.text" = "Allow NSFW Content";
+"Nrj-vR-ORT.text" = "Permitir contenido NSFW";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
-"OUZ-2Z-Nei.text" = "GitHub Repository";
+"OUZ-2Z-Nei.text" = "Repositorio GitHub";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[0] = "Reversed"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[0]" = "Reversed";
+"QFr-Ue-S7z.segmentTitles[0]" = "Invertido";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[1] = "Ordered"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[1]" = "Ordered";
+"QFr-Ue-S7z.segmentTitles[1]" = "Ordenado";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "Rbz-Nj-bSj"; */
-"Rbz-Nj-bSj.text" = "Status";
-
-/* Class = "UILabel"; text = "0 Item"; ObjectID = "Rns-aJ-RlM"; */
-"Rns-aJ-RlM.text" = "0 Item";
+"Rbz-Nj-bSj.text" = "Estado";
 
 /* Class = "UITableViewController"; title = "About"; ObjectID = "Rvs-DG-kmr"; */
-"Rvs-DG-kmr.title" = "About";
+"Rvs-DG-kmr.title" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>."; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.";
+"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. Todos los derechos reservados.\n\nNineAnimator es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, o bien la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.\n\nNineAnimator se distribuye con la esperanza de que sea útil, pero SIN CUALQUIER PRECIO; sin la garantía implícita de crear mercancía o ADECUACIÓN PARA UN PROPÓSITO PARTICULAR. Consulte la Licencia Pública General de GNU para más detalles.\n\nDebería haber recibido una copia de la Licencia Pública General de GNU junto con NineAnimator. Si no, vea <http://www.gnu.org/licenses/>.";
 
 /* Class = "UITableViewSection"; headerTitle = "GNU General Public License version 3"; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.headerTitle" = "GNU General Public License version 3";
+"SRm-Su-TD8.headerTitle" = "Licencia Pública General de GNU versión 3";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com."; ObjectID = "Sei-S4-MPn"; */
-"Sei-S4-MPn.footerTitle" = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com.";
+"Sei-S4-MPn.footerTitle" = "Solo los eventos de reproducción después de haber iniciado sesión serán añadidos a Simkl.\n\nNineAnimator no está afiliado con simkl.com.";
 
 /* Class = "UITableViewSection"; headerTitle = "Simkl"; ObjectID = "Sei-S4-MPn"; */
 "Sei-S4-MPn.headerTitle" = "Simkl";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "SkT-L9-D11"; */
-"SkT-L9-D11.text" = "Not Setup";
+"SkT-L9-D11.text" = "Sin configurar";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
-"SsL-fL-doX.title" = "Preferences";
+"SsL-fL-doX.title" = "Preferencias";
 
 /* Class = "UILabel"; text = "Retry Downloads"; ObjectID = "Tre-aJ-ohc"; */
-"Tre-aJ-ohc.text" = "Retry Downloads";
+"Tre-aJ-ohc.text" = "Reintentar la Descarga";
 
 /* Class = "UITableViewSection"; footerTitle = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed)."; ObjectID = "UxF-RW-Y6p"; */
-"UxF-RW-Y6p.footerTitle" = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed).";
+"UxF-RW-Y6p.footerTitle" = "Listar episodio desde el primero hasta el último (ordenado) o desde el más reciente hasta el más distante (invertido).";
 
 /* Class = "UILabel"; text = "Starts Playing"; ObjectID = "V91-yy-Rkb"; */
-"V91-yy-Rkb.text" = "Starts Playing";
+"V91-yy-Rkb.text" = "Empezar reproducción";
 
 /* Class = "UILabel"; text = "Detect Clipboard Links"; ObjectID = "VBZ-pE-vXV"; */
-"VBZ-pE-vXV.text" = "Detect Clipboard Links";
+"VBZ-pE-vXV.text" = "Detectar enlaces del portapapeles";
 
 /* Class = "UILabel"; text = "Preferred Source"; ObjectID = "W4K-f9-Rrg"; */
-"W4K-f9-Rrg.text" = "Preferred Source";
+"W4K-f9-Rrg.text" = "Fuente preferida";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[0]" = "Dark";
+"WSB-go-EfB.segmentTitles[0]" = "Obscuro";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[1] = "Light"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[1]" = "Light";
+"WSB-go-EfB.segmentTitles[1]" = "Claro";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "WoO-zh-kDF"; */
-"WoO-zh-kDF.text" = "Appearance";
+"WoO-zh-kDF.text" = "Apariencia";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "Wu1-sV-neO"; */
-"Wu1-sV-neO.text" = "About";
+"Wu1-sV-neO.text" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Set appearance dynamically."; ObjectID = "ZJI-L3-7zk"; */
-"ZJI-L3-7zk.footerTitle" = "Set appearance dynamically.";
+"ZJI-L3-7zk.footerTitle" = "Definir apariencia dinámicamente.";
 
 /* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "ZJI-L3-7zk"; */
 "ZJI-L3-7zk.headerTitle" = "General";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
-"ZKK-PI-ugJ.text" = "Show Available Streams";
+"ZKK-PI-ugJ.text" = "Mostrar streams disponibles";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app."; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.footerTitle" = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.";
+"ZPg-j7-wjg.footerTitle" = "NineAnimator puede ser configurado para ejecutar ciertas escenas cuando la reproducción comienza o termina. Por ejemplo, NineAnimator puede oscurecer las luces y preparar el ambiente cuando se inicia AirPlay.\n\nPara que funcione la integración con el hogar, mínimo un accesorio compatible con HomeKit tiene que configurarse en la aplicación Home y mínimo una escena tiene que estar disponible. Puedes añadir más escenas en la aplicación Inicio.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.headerTitle" = "Home Integration";
+"ZPg-j7-wjg.headerTitle" = "Integración de Home";
 
 /* Class = "UILabel"; text = "Delete All Downloads"; ObjectID = "Zaa-23-f0r"; */
-"Zaa-23-f0r.text" = "Delete All Downloads";
+"Zaa-23-f0r.text" = "Eliminar todas las descargas";
 
 /* Class = "UILabel"; text = "Setup MyAnimeList.net"; ObjectID = "bH1-Rj-cxO"; */
-"bH1-Rj-cxO.text" = "Setup MyAnimeList.net";
+"bH1-Rj-cxO.text" = "Configurar MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
-"c84-vM-Uf0.text" = "Send Notifications";
+"c84-vM-Uf0.text" = "Enviar notificaciones";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
-"d3R-vQ-52G.text" = "Not Setup";
+"d3R-vQ-52G.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "Clear Shortcuts and Spotlight Items"; ObjectID = "dIG-JR-U2D"; */
-"dIG-JR-U2D.text" = "Clear Shortcuts and Spotlight Items";
+"dIG-JR-U2D.text" = "Eliminar accesos directos y elementos de resaltado";
 
 /* Class = "UITableViewSection"; footerTitle = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries."; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.footerTitle" = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.";
+"dNx-EX-rHK.footerTitle" = "Borrar datos almacenados en caché eliminará imágenes, peticiones, cookies e información de episodios.\n\nBorrar Shortcuts y elementos de Spotlight eliminará todos los atajos y entradas de búsqueda NineAnimator y Spotlight.";
 
 /* Class = "UITableViewSection"; headerTitle = "Data and Privacy"; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.headerTitle" = "Data and Privacy";
+"dNx-EX-rHK.headerTitle" = "Datos y Privacidad";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";

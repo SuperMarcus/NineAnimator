@@ -1,5 +1,9 @@
+
 /* Class = "UILabel"; text = "Air Date"; ObjectID = "0sy-Go-eMO"; */
 "0sy-Go-eMO.text" = "Air Date";
+
+/* Class = "UILabel"; text = "☆ ☆ ☆ ☆ ☆"; ObjectID = "6Nu-af-HRp"; */
+"6Nu-af-HRp.text" = "☆ ☆ ☆ ☆ ☆";
 
 /* Class = "UILabel"; text = "No Suggesting Episode"; ObjectID = "AVT-Pg-Bdx"; */
 "AVT-Pg-Bdx.text" = "No Suggesting Episode";
@@ -7,8 +11,14 @@
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "B2n-TQ-hy9"; */
 "B2n-TQ-hy9.normalTitle" = "Offline Access";
 
+/* Class = "UILabel"; text = "50% left to watch"; ObjectID = "GaV-Q7-TKT"; */
+"GaV-Q7-TKT.text" = "50% left to watch";
+
 /* Class = "UILabel"; text = "No synopsis for this episode."; ObjectID = "K1G-eG-Vkn"; */
 "K1G-eG-Vkn.text" = "No synopsis for this episode.";
+
+/* Class = "UILabel"; text = "50% left to watch"; ObjectID = "K5w-32-GEP"; */
+"K5w-32-GEP.text" = "50% left to watch";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "KNz-kA-xO5"; */
 "KNz-kA-xO5.text" = "Loading";
@@ -16,8 +26,20 @@
 /* Class = "UILabel"; text = "Start Watching"; ObjectID = "QaR-tX-zXn"; */
 "QaR-tX-zXn.text" = "Start Watching";
 
+/* Class = "UILabel"; text = "Anime Alias 1, Anime Alias 2"; ObjectID = "Qv3-4i-naJ"; */
+"Qv3-4i-naJ.text" = "Anime Alias 1, Anime Alias 2";
+
+/* Class = "UITextView"; text = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."; ObjectID = "Qx1-Ur-pF8"; */
+"Qx1-Ur-pF8.text" = "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+
 /* Class = "UIButton"; normalTitle = "SUBSCRIBE"; ObjectID = "TAP-ty-bvP"; */
 "TAP-ty-bvP.normalTitle" = "SUBSCRIBE";
+
+/* Class = "UILabel"; text = "Episode 1"; ObjectID = "TMT-ZF-O7B"; */
+"TMT-ZF-O7B.text" = "Episode 1";
+
+/* Class = "UILabel"; text = "Episode Name"; ObjectID = "Vsi-eC-jxx"; */
+"Vsi-eC-jxx.text" = "Episode Name";
 
 /* Class = "UILabel"; text = "Subscribed"; ObjectID = "WA8-YI-xRl"; */
 "WA8-YI-xRl.text" = "Subscribed";
@@ -28,6 +50,9 @@
 /* Class = "UILabel"; text = "Loading anime information"; ObjectID = "XG2-wy-XRz"; */
 "XG2-wy-XRz.text" = "Loading anime information";
 
+/* Class = "UILabel"; text = "Anime Title"; ObjectID = "Y2p-cA-dMW"; */
+"Y2p-cA-dMW.text" = "Anime Title";
+
 /* Class = "UILabel"; text = "Loading Ratings"; ObjectID = "jCq-le-ZsX"; */
 "jCq-le-ZsX.text" = "Loading Ratings";
 
@@ -36,3 +61,6 @@
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "oxU-lU-8me"; */
 "oxU-lU-8me.text" = "Synopsis";
+
+/* Class = "UILabel"; text = "Anime Episode Name"; ObjectID = "wtb-zz-Opg"; */
+"wtb-zz-Opg.text" = "Anime Episode Name";

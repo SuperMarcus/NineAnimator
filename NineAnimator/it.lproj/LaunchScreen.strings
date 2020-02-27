@@ -1,12 +1,2 @@
-
-/* Class = "UILabel"; text = "Nine Animator"; ObjectID = "3nG-uJ-LDR"; */
-"3nG-uJ-LDR.text" = "Nine Animator";
-
-/* Class = "UILabel"; text = "Marcus Zhou"; ObjectID = "Lcc-cd-si4"; */
-"Lcc-cd-si4.text" = "Marcus Zhou";
-
 /* Class = "UILabel"; text = "An elegant way of watching anime"; ObjectID = "Td0-eW-T7H"; */
-"Td0-eW-T7H.text" = "An elegant way of watching anime";
-
-/* Class = "UILabel"; text = "https://marcuszhou.com"; ObjectID = "xbN-iE-qYz"; */
-"xbN-iE-qYz.text" = "https://marcuszhou.com";
+"Td0-eW-T7H.text" = "Un modo elegante per guardare anime";

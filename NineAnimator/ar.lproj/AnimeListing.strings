@@ -1,21 +1,17 @@
-
-/* Class = "UINavigationItem"; title = "Content Listing Title"; ObjectID = "7hx-GT-e5v"; */
-"7hx-GT-e5v.title" = "Content Listing Title";
-
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "Nke-YY-kc3"; */
-"Nke-YY-kc3.normalTitle" = "Open Link";
+"Nke-YY-kc3.normalTitle" = "فتح الرابط";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "OOI-8A-BkV"; */
-"OOI-8A-BkV.text" = "Loading";
+"OOI-8A-BkV.text" = "جار التحميل";
 
 /* Class = "UILabel"; text = "Search Error"; ObjectID = "goV-KK-D5O"; */
-"goV-KK-D5O.text" = "Search Error";
+"goV-KK-D5O.text" = "خطأ في البحث";
 
 /* Class = "UILabel"; text = "No results found for \"Search\""; ObjectID = "hP6-y4-aJ9"; */
-"hP6-y4-aJ9.text" = "No results found for \"Search\"";
+"hP6-y4-aJ9.text" = "لم يتم العثور على نتائج لـ \"بحث\"";
 
 /* Class = "UILabel"; text = "AnimeTitle"; ObjectID = "lFR-07-AK0"; */
-"lFR-07-AK0.text" = "AnimeTitle";
+"lFR-07-AK0.text" = "عنوان الأنيمي";
 
 /* Class = "UITableViewController"; title = "List"; ObjectID = "rPB-zo-b7C"; */
-"rPB-zo-b7C.title" = "List";
+"rPB-zo-b7C.title" = "قائمة";

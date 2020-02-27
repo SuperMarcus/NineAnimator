@@ -1,21 +1,5 @@
-
 /* Class = "UILabel"; text = "Google Cast"; ObjectID = "8lZ-LQ-fSn"; */
 "8lZ-LQ-fSn.text" = "Google Cast";
-
-/* Class = "UILabel"; text = "Device Model"; ObjectID = "Epq-MY-bLT"; */
-"Epq-MY-bLT.text" = "Device Model";
-
-/* Class = "UILabel"; text = "Episode - Anime Title"; ObjectID = "Kdy-eH-wYV"; */
-"Kdy-eH-wYV.text" = "Episode - Anime Title";
-
-/* Class = "UILabel"; text = "+0:00:00"; ObjectID = "cfV-4W-vrH"; */
-"cfV-4W-vrH.text" = "+0:00:00";
-
-/* Class = "UILabel"; text = "Device Name"; ObjectID = "dYe-go-Ibx"; */
-"dYe-go-Ibx.text" = "Device Name";
-
-/* Class = "UILabel"; text = "-0:00:00"; ObjectID = "k2x-sc-ySP"; */
-"k2x-sc-ySP.text" = "-0:00:00";
 
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "nCq-UB-A8A"; */
 "nCq-UB-A8A.normalTitle" = "Done";

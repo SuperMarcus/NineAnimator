@@ -1,6 +1,5 @@
-
 /* Class = "UILabel"; text = "Home"; ObjectID = "0eR-hu-Qxf"; */
-"0eR-hu-Qxf.text" = "Home";
+"0eR-hu-Qxf.text" = "ホーム";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
 "0ne-Hh-nMP.text" = "GitHub Repository";
@@ -14,17 +13,11 @@
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
 "1X7-X7-huV.text" = "Clear Downloads";
 
-/* Class = "UITableViewSection"; headerTitle = "About NineAnimator"; ObjectID = "20X-06-AJb"; */
-"20X-06-AJb.headerTitle" = "About NineAnimator";
-
-/* Class = "UITableViewSection"; footerTitle = "NineAnimator is developed with the help of the open source community.\n\nNineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.\n\n- OpenCast Swift\n\nMIT License\n\nCopyright (c) 2018 Miles Hollingsworth\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- Alamofire\n\nCopyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- Kingfisher\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 Wei Wang\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- SwiftSoup\n\nMIT License\n\nCopyright (c) 2016 Nabil Chatbi\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- ViewAnimator\n\nCopyright (c) 2018 marcosgriselli@gmail.com <marcosgriselli@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- DictionaryCoding\n\nThis software is covered by Elegant Chaos' liberal license: http://elegantchaos.com/license/liberal.\n\n- Other Media and Frameworks\n\nSee the complete credit list in the \"Credits\" page."; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.footerTitle" = "NineAnimator is developed with the help of the open source community.\n\nNineAnimator is not associated or affiliated with third party websites and services such as 9anime.ru, rapidvideo.com, or anilist.co.\n\n- OpenCast Swift\n\nMIT License\n\nCopyright (c) 2018 Miles Hollingsworth\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- Alamofire\n\nCopyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- Kingfisher\n\nThe MIT License (MIT)\n\nCopyright (c) 2018 Wei Wang\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- SwiftSoup\n\nMIT License\n\nCopyright (c) 2016 Nabil Chatbi\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in allcopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THESOFTWARE.\n\n- ViewAnimator\n\nCopyright (c) 2018 marcosgriselli@gmail.com <marcosgriselli@gmail.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copyof this software and associated documentation files (the \"Software\"), to dealin the Software without restriction, including without limitation the rightsto use, copy, modify, merge, publish, distribute, sublicense, and/or sellcopies of the Software, and to permit persons to whom the Software isfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included inall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS ORIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THEAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHERLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS INTHE SOFTWARE.\n\n- DictionaryCoding\n\nThis software is covered by Elegant Chaos' liberal license: http://elegantchaos.com/license/liberal.\n\n- Other Media and Frameworks\n\nSee the complete credit list in the \"Credits\" page.";
-
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
 "2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
-"2ol-44-Ha5.text" = "Status";
+"2ol-44-Ha5.text" = "ステータス";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
 "3bY-Q0-VOr.text" = "Privacy Policy";
@@ -48,16 +41,13 @@
 "6cg-cg-vWl.text" = "NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "6ow-N9-6M8"; */
-"6ow-N9-6M8.text" = "Status";
+"6ow-N9-6M8.text" = "ステータス";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
 "6wJ-Cg-cKO.text" = "Not Setup";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
 "74T-HL-SF3.text" = "Calculating Usage...";
-
-/* Class = "UILabel"; text = "0 Item"; ObjectID = "7Ky-4E-HeC"; */
-"7Ky-4E-HeC.text" = "0 Item";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
 "7gK-el-Ee1.text" = "Open Cast Controller";
@@ -72,7 +62,7 @@
 "8Lj-r1-12t.title" = "Preferred Source";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
-"A3J-Ya-mRo.text" = "Version";
+"A3J-Ya-mRo.text" = "バージョン";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
 "AVN-Z6-xDl.text" = "Export History";
@@ -89,12 +79,6 @@
 /* Class = "UILabel"; text = "MYANIMELIST.NET"; ObjectID = "CXa-yX-XOv"; */
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
 
-/* Class = "UILabel"; text = "1"; ObjectID = "Dt8-B6-aD6"; */
-"Dt8-B6-aD6.text" = "1";
-
-/* Class = "UILabel"; text = "1.0"; ObjectID = "EeO-5U-kPF"; */
-"EeO-5U-kPF.text" = "1.0";
-
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites."; ObjectID = "EzJ-Ri-uNU"; */
 "EzJ-Ri-uNU.footerTitle" = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.";
 
@@ -105,7 +89,7 @@
 "Ips-J8-mzS.footerTitle" = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account.";
 
 /* Class = "UITableViewSection"; headerTitle = "Privacy"; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.headerTitle" = "Privacy";
+"Ips-J8-mzS.headerTitle" = "プライバシー";
 
 /* Class = "UILabel"; text = "KITSU.IO"; ObjectID = "JZU-9o-boH"; */
 "JZU-9o-boH.text" = "KITSU.IO";
@@ -120,7 +104,7 @@
 "KSq-np-Dks.text" = "Picture in Picture Playback";
 
 /* Class = "UILabel"; text = "Episodes"; ObjectID = "KjW-mL-37B"; */
-"KjW-mL-37B.text" = "Episodes";
+"KjW-mL-37B.text" = "エピソード";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
 "Kql-zU-bRq.text" = "Setup AniList.co";
@@ -156,10 +140,7 @@
 "QFr-Ue-S7z.segmentTitles[1]" = "Ordered";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "Rbz-Nj-bSj"; */
-"Rbz-Nj-bSj.text" = "Status";
-
-/* Class = "UILabel"; text = "0 Item"; ObjectID = "Rns-aJ-RlM"; */
-"Rns-aJ-RlM.text" = "0 Item";
+"Rbz-Nj-bSj.text" = "ステータス";
 
 /* Class = "UITableViewController"; title = "About"; ObjectID = "Rvs-DG-kmr"; */
 "Rvs-DG-kmr.title" = "About";

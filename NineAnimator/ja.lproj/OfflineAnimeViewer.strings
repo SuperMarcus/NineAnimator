@@ -1,4 +1,3 @@
-
 /* Class = "UILabel"; text = "Loading Progress"; ObjectID = "4mp-09-F5N"; */
 "4mp-09-F5N.text" = "Loading Progress";
 
@@ -9,13 +8,13 @@
 "FLh-Zr-rat.text" = "Loading Download Information";
 
 /* Class = "UILabel"; text = "Loading Episode Name"; ObjectID = "QKz-J0-kb0"; */
-"QKz-J0-kb0.text" = "Loading Episode Name";
+"QKz-J0-kb0.text" = "エピソードネームをロード中";
 
 /* Class = "UILabel"; text = "Downloaded Anime Title"; ObjectID = "eFs-rr-t1A"; */
-"eFs-rr-t1A.text" = "Downloaded Anime Title";
+"eFs-rr-t1A.text" = "アニメをダウンロードしました";
 
 /* Class = "UILabel"; text = "More Episodes"; ObjectID = "fzM-YT-Gfw"; */
-"fzM-YT-Gfw.text" = "More Episodes";
+"fzM-YT-Gfw.text" = "もっとエピソード";
 
 /* Class = "UIButton"; normalTitle = "VIEW ANIME"; ObjectID = "oHE-Da-4Bi"; */
-"oHE-Da-4Bi.normalTitle" = "VIEW ANIME";
+"oHE-Da-4Bi.normalTitle" = "アニメを見る";

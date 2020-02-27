@@ -1,54 +1,20 @@
-
 /* Class = "UIButton"; normalTitle = "Open Link"; ObjectID = "2rp-o4-MgZ"; */
-"2rp-o4-MgZ.normalTitle" = "Open Link";
-
-/* Class = "UILabel"; text = "Continue Watching..."; ObjectID = "663-rl-gtc"; */
-"663-rl-gtc.text" = "Continue Watching...";
+"2rp-o4-MgZ.normalTitle" = "Abrir Enlace";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
 "8OU-XT-7E1.title" = "Recents";
 
-/* Class = "UITabBarItem"; title = "Item"; ObjectID = "8xQ-RX-hel"; */
-"8xQ-RX-hel.title" = "Item";
-
-/* Class = "UILabel"; text = "Downloading from 9anime.ru..."; ObjectID = "9jV-g1-31m"; */
-"9jV-g1-31m.text" = "Downloading from 9anime.ru...";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "AlL-vB-QNW"; */
-"AlL-vB-QNW.text" = "Title";
-
-/* Class = "UILabel"; text = "Title"; ObjectID = "EaF-Aj-Y4A"; */
-"EaF-Aj-Y4A.text" = "Title";
-
 /* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
 "EeQ-yb-72U.text" = "Loading Previews";
 
-/* Class = "UILabel"; text = "Episode Name"; ObjectID = "IId-s4-5QI"; */
-"IId-s4-5QI.text" = "Episode Name";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "MpQ-a2-wLE"; */
-"MpQ-a2-wLE.text" = "Anime Title";
-
-/* Class = "UILabel"; text = "Listing Service - Current Anime"; ObjectID = "Rn2-Is-RZS"; */
-"Rn2-Is-RZS.text" = "Listing Service - Current Anime";
-
-/* Class = "UILabel"; text = "Collection Name"; ObjectID = "S4m-fZ-yGP"; */
-"S4m-fZ-yGP.text" = "Collection Name";
-
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
-"SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
-
-/* Class = "UIBarButtonItem"; title = "Select Site"; ObjectID = "Tll-ir-ZZq"; */
-"Tll-ir-ZZq.title" = "Select Site";
-
-/* Class = "UIBarButtonItem"; title = "Select Site"; ObjectID = "Ukz-aW-wFy"; */
-"Ukz-aW-wFy.title" = "Select Site";
+"SBh-Sa-wuU.text" = "NineAnimator no está disponible";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
 "W9q-Ho-7mv.title" = "Search";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
-"Xji-1Z-Meq.text" = "Recently Updated";
+"Xji-1Z-Meq.text" = "Recientemente Actualizado";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
 "Xx9-4a-rNT.title" = "Featured";
@@ -56,26 +22,14 @@
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
 "Y8g-si-rdv.title" = "Search";
 
-/* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "ayD-jb-7VC"; */
-"ayD-jb-7VC.text" = "Tracking Service Name";
-
 /* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
 "bTY-yy-a3Z.text" = "Contents are loading...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "You recently watched...";
-
-/* Class = "UILabel"; text = "3 Episodes Available"; ObjectID = "fKi-LU-Eem"; */
-"fKi-LU-Eem.text" = "3 Episodes Available";
-
-/* Class = "UILabel"; text = "Anime Title"; ObjectID = "g7r-tP-s31"; */
-"g7r-tP-s31.text" = "Anime Title";
+"cty-4k-jCy.text" = "Has visto recientemente...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
 "g8T-nX-rcs.title" = "Settings";
-
-/* Class = "UILabel"; text = "Title: an anime that has a very very long name"; ObjectID = "m7Z-Ws-s51"; */
-"m7Z-Ws-s51.text" = "Title: an anime that has a very very long name";
 
 /* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
 "mEy-g5-ff5.title" = "Google Cast";
@@ -86,14 +40,5 @@
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
 "rUB-Iw-liv.normalTitle" = "View";
 
-/* Class = "UILabel"; text = "Error Message"; ObjectID = "sDJ-cG-QcG"; */
-"sDJ-cG-QcG.text" = "Error Message";
-
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
 "smF-4W-Oha.title" = "Library";
-
-/* Class = "UILabel"; text = "Title of the anime"; ObjectID = "tdo-VB-Wsl"; */
-"tdo-VB-Wsl.text" = "Title of the anime";
-
-/* Class = "UITabBarItem"; title = "Item"; ObjectID = "wrX-iI-Bgn"; */
-"wrX-iI-Bgn.title" = "Item";
