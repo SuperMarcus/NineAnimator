@@ -32,7 +32,7 @@
 "4ye-Yb-8qS.title" = "存储空间";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
-"5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
+"5UB-9w-oPI.footerTitle" = "浏览您收集的动画并连接到进度追踪服务器";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
 "5k7-hs-FeH.text" = "防止清除";
