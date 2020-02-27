@@ -493,6 +493,21 @@
 		2C2408102408599200028842 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/ServerSelection.strings; sourceTree = "<group>"; };
 		2C2408112408599200028842 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Library.strings; sourceTree = "<group>"; };
 		2C2408122408599200028842 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		2C24081324085F2E00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Main.strings; sourceTree = "<group>"; };
+		2C24081424085F2E00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		2C24081524085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AnimePlayer.strings; sourceTree = "<group>"; };
+		2C24081624085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/GoogleCastMediaControl.strings; sourceTree = "<group>"; };
+		2C24081724085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Settings.strings; sourceTree = "<group>"; };
+		2C24081824085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/OfflineAnimeViewer.strings; sourceTree = "<group>"; };
+		2C24081924085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AnimeListing.strings; sourceTree = "<group>"; };
+		2C24081A24085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AnimeInformation.strings; sourceTree = "<group>"; };
+		2C24081B24085F2F00028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Setup.strings; sourceTree = "<group>"; };
+		2C24081C24085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/SelflessAuthenticationWebViewController.strings; sourceTree = "<group>"; };
+		2C24081D24085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AnimeDiscovery.strings; sourceTree = "<group>"; };
+		2C24081E24085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/ServerSelectionCell.strings; sourceTree = "<group>"; };
+		2C24081F24085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/ServerSelection.strings; sourceTree = "<group>"; };
+		2C24082024085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Library.strings; sourceTree = "<group>"; };
+		2C24082124085F3000028842 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2C2C54F022159E4700BAA76E /* String+Proximity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Proximity.swift"; sourceTree = "<group>"; };
 		2C2C54F42215D42700BAA76E /* User+Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Preferences.swift"; sourceTree = "<group>"; };
 		2C2C54F62215D47500BAA76E /* User+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Subscriptions.swift"; sourceTree = "<group>"; };
@@ -2156,6 +2171,7 @@
 				de,
 				it,
 				fr,
+				pt,
 			);
 			mainGroup = 2C4ABC4721B5881E009B4D47;
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
@@ -2692,6 +2708,7 @@
 				2C6FDF8423FC34270084243B /* de */,
 				2C6FDF9223FC34480084243B /* it */,
 				2C24080E2408599200028842 /* fr */,
+				2C24081D24085F3000028842 /* pt */,
 			);
 			name = AnimeDiscovery.storyboard;
 			sourceTree = "<group>";
@@ -2708,6 +2725,7 @@
 				2C6FDF7D23FC34260084243B /* de */,
 				2C6FDF8B23FC34470084243B /* it */,
 				2C2408072408599100028842 /* fr */,
+				2C24081624085F2F00028842 /* pt */,
 			);
 			name = GoogleCastMediaControl.storyboard;
 			sourceTree = "<group>";
@@ -2724,6 +2742,7 @@
 				2C6FDF8023FC34260084243B /* de */,
 				2C6FDF8E23FC34470084243B /* it */,
 				2C24080A2408599100028842 /* fr */,
+				2C24081924085F2F00028842 /* pt */,
 			);
 			name = AnimeListing.storyboard;
 			sourceTree = "<group>";
@@ -2740,6 +2759,7 @@
 				2C6FDF8123FC34270084243B /* de */,
 				2C6FDF8F23FC34470084243B /* it */,
 				2C24080B2408599100028842 /* fr */,
+				2C24081A24085F2F00028842 /* pt */,
 			);
 			name = AnimeInformation.storyboard;
 			sourceTree = "<group>";
@@ -2756,6 +2776,7 @@
 				2C6FDF7A23FC34210084243B /* de */,
 				2C6FDF8823FC34460084243B /* it */,
 				2C2408042408599000028842 /* fr */,
+				2C24081324085F2E00028842 /* pt */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -2772,6 +2793,7 @@
 				2C6FDF7B23FC34210084243B /* de */,
 				2C6FDF8923FC34470084243B /* it */,
 				2C2408052408599000028842 /* fr */,
+				2C24081424085F2E00028842 /* pt */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -2788,6 +2810,7 @@
 				2C6FDF7C23FC34210084243B /* de */,
 				2C6FDF8A23FC34470084243B /* it */,
 				2C2408062408599100028842 /* fr */,
+				2C24081524085F2F00028842 /* pt */,
 			);
 			name = AnimePlayer.storyboard;
 			sourceTree = "<group>";
@@ -2804,6 +2827,7 @@
 				2C6FDF9F23FC35CA0084243B /* ja */,
 				2C6FDFA023FC35CA0084243B /* es */,
 				2C2408122408599200028842 /* fr */,
+				2C24082124085F3000028842 /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -2820,6 +2844,7 @@
 				2C6FDF8523FC34270084243B /* de */,
 				2C6FDF9323FC34480084243B /* it */,
 				2C24080F2408599200028842 /* fr */,
+				2C24081E24085F3000028842 /* pt */,
 			);
 			name = ServerSelectionCell.xib;
 			sourceTree = "<group>";
@@ -2836,6 +2861,7 @@
 				2C6FDF8623FC34270084243B /* de */,
 				2C6FDF9423FC34480084243B /* it */,
 				2C2408102408599200028842 /* fr */,
+				2C24081F24085F3000028842 /* pt */,
 			);
 			name = ServerSelection.storyboard;
 			sourceTree = "<group>";
@@ -2852,6 +2878,7 @@
 				2C6FDF8223FC34270084243B /* de */,
 				2C6FDF9023FC34480084243B /* it */,
 				2C24080C2408599100028842 /* fr */,
+				2C24081B24085F2F00028842 /* pt */,
 			);
 			name = Setup.storyboard;
 			sourceTree = "<group>";
@@ -2868,6 +2895,7 @@
 				2C6FDF8323FC34270084243B /* de */,
 				2C6FDF9123FC34480084243B /* it */,
 				2C24080D2408599200028842 /* fr */,
+				2C24081C24085F3000028842 /* pt */,
 			);
 			name = SelflessAuthenticationWebViewController.storyboard;
 			sourceTree = "<group>";
@@ -2884,6 +2912,7 @@
 				2C6FDF7F23FC34260084243B /* de */,
 				2C6FDF8D23FC34470084243B /* it */,
 				2C2408092408599100028842 /* fr */,
+				2C24081824085F2F00028842 /* pt */,
 			);
 			name = OfflineAnimeViewer.storyboard;
 			sourceTree = "<group>";
@@ -2900,6 +2929,7 @@
 				2C6FDF8723FC34270084243B /* de */,
 				2C6FDF9523FC34480084243B /* it */,
 				2C2408112408599200028842 /* fr */,
+				2C24082024085F3000028842 /* pt */,
 			);
 			name = Library.storyboard;
 			sourceTree = "<group>";
@@ -2916,6 +2946,7 @@
 				2C6FDF7E23FC34260084243B /* de */,
 				2C6FDF8C23FC34470084243B /* it */,
 				2C2408082408599100028842 /* fr */,
+				2C24081724085F2F00028842 /* pt */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
