@@ -14,10 +14,10 @@
 "S9D-GU-IOj.title" = "Select Source";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
-"WZx-eB-ztY.normalTitle" = "Show Schedule";
+"WZx-eB-ztY.normalTitle" = "スケジュールを表示する";
 
 /* Class = "UIBarButtonItem"; title = "Anime Schedule"; ObjectID = "iOO-54-dYf"; */
-"iOO-54-dYf.title" = "Anime Schedule";
+"iOO-54-dYf.title" = "アニメスケジュール";
 
 /* Class = "UIButton"; normalTitle = "View More"; ObjectID = "j7t-Oe-H6q"; */
 "j7t-Oe-H6q.normalTitle" = "もっと見る";
