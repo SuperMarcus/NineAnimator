@@ -23,7 +23,7 @@ import Foundation
 /**
  Class BaseSource: all the network functions that the subclasses will ever need
  */
-class BaseSource: SessionDelegate {
+class BaseSource {
     let parent: NineAnimator
     
     var endpoint: String { "" }
@@ -66,8 +66,6 @@ class BaseSource: SessionDelegate {
     
     init(with parent: NineAnimator) {
         self.parent = parent
-        
-        super.init()
         
         // Add cloudflare middleware
         self.cloudflareChallengeResolver = CloudflareWAFResolver(self)
@@ -217,7 +215,7 @@ extension BaseSource {
 
 extension BaseSource {
     fileprivate func createRetriverSession() -> Session {
-        let configuration = URLSessionConfiguration.af.default
+        let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
         configuration.httpCookieStorage = HTTPCookieStorage.shared
@@ -227,14 +225,14 @@ extension BaseSource {
         ]
         let manager = Session(
             configuration: configuration,
-            delegate: self,
-            interceptor: self // Doesn't care about reference looping here b/c Source objects never get destroyed
+            interceptor: self,
+            redirectHandler: self // Doesn't care about reference looping here b/c Source objects never get destroyed
         )
         return manager
     }
     
     fileprivate func createBrowseSession() -> Session {
-        let configuration = URLSessionConfiguration.af.default
+        let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
         configuration.httpCookieStorage = HTTPCookieStorage.shared
@@ -244,8 +242,8 @@ extension BaseSource {
         ]
         let manager = Session(
             configuration: configuration,
-            delegate: self,
-            interceptor: self
+            interceptor: self,
+            redirectHandler: self
         )
         return manager
     }
