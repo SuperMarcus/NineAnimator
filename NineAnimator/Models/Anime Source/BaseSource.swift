@@ -119,49 +119,49 @@ class BaseSource: SessionDelegate {
     
     func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         applyMiddlewares(
-                to: browseSession.request(url, headers: HTTPHeaders(headers))
-            ).responseString {
-                switch $0.result {
-                case .failure(let error):
-                    Log.error("request to %@ failed - %@", url, error)
-                    handler(nil, error)
-                case .success(let value):
-                    handler(value, nil)
-                }
+            to: browseSession.request(url, headers: HTTPHeaders(headers))
+        ).responseString {
+            switch $0.result {
+            case .failure(let error):
+                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
+            case .success(let value):
+                handler(value, nil)
             }
+        }
     }
     
     func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
         applyMiddlewares(
-                to: retriverSession.request(url, headers: HTTPHeaders(headers))
-            ) .responseJSON {
-                response in
-                switch response.result {
-                case .failure(let error):
-                    Log.error("request to %@ failed - %@", url, error)
-                    handler(nil, error)
-                case .success(let value as NSDictionary):
-                    handler(value, nil)
-                default:
-                    Log.error("Unable to convert response value to NSDictionary")
-                    handler(nil, NineAnimatorError.responseError("Invalid Response"))
-                }
+            to: retriverSession.request(url, headers: HTTPHeaders(headers))
+        ) .responseJSON {
+            response in
+            switch response.result {
+            case .failure(let error):
+                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
+            case .success(let value as NSDictionary):
+                handler(value, nil)
+            default:
+                Log.error("[BaseSource] Unable to convert response value to NSDictionary")
+                handler(nil, NineAnimatorError.responseError("Invalid Response"))
             }
+        }
     }
     
     func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         applyMiddlewares(
-                to: retriverSession.request(url, headers: HTTPHeaders(headers))
-            ) .responseString {
-                response in
-                switch response.result {
-                case .failure(let error):
-                    Log.error("request to %@ failed - %@", url, error)
-                    handler(nil, error)
-                case .success(let value):
-                    handler(value, nil)
-                }
+            to: retriverSession.request(url, headers: HTTPHeaders(headers))
+        ) .responseString {
+            response in
+            switch response.result {
+            case .failure(let error):
+                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
+            case .success(let value):
+                handler(value, nil)
             }
+        }
     }
     
     func request(browse path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {

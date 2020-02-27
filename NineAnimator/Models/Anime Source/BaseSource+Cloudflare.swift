@@ -101,10 +101,8 @@ extension CloudflareWAFResolver {
         
         if let retryError = inputError as? NineAnimatorError.CloudflareAuthenticationChallenge {
             error = retryError
-        } else if let afError = inputError as? AFError,
-            case let .responseValidationFailed(reason: afReason) = afError,
-            case let .customValidationFailed(error: customError) = afReason,
-            let challengeError = customError as? NineAnimatorError.CloudflareAuthenticationChallenge {
+        } else if let afError = inputError as? AFError, // Extract the underlying error
+            let challengeError = afError.underlyingError as? NineAnimatorError.CloudflareAuthenticationChallenge {
             error = challengeError
         } else {
             return .success(.evaluateNext)
