@@ -184,6 +184,11 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             }
         case "settings.history.cache":
             clearCache()
+        case "settings.history.search":
+            askForConfirmation(title: "Clear Search History",
+                               message: "This action is irreversible. All of your search history will be removed. Your recent anime list will not be affected.",
+                               continueActionName: "Clear Search History"
+            ) { NineAnimator.default.user.clearSearchHistory() }
         case "settings.history.download":
             askForConfirmation(title: "Remove all Downloads",
                                message: "This action is irreversible. All downloaded episodes and contents will be removed.",

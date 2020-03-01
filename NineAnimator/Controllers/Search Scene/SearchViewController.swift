@@ -32,8 +32,9 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     var source: Source { NineAnimator.default.user.source }
     
     /// List of items which the quick search results are listed from
-    private var quickSearchPool = Set<Item>()
+    private var quickSearchPool = [Item]()
     private var filteredItems = [Item]()
+    private var searchingKeywords = ""
 
     @IBOutlet private weak var selectSiteBarButton: UIBarButtonItem!
     
@@ -69,10 +70,24 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     }
     
     private func updateSearchPool() {
-        // Links from recents
-        for recent in NineAnimator.default.user.recentAnimes {
-            quickSearchPool.insert(.init(.anime(recent), ofType: .recents))
+        // Search history
+        let searchHistoryItems: [Item] = NineAnimator.default.user.searchHistory.map {
+            history in .init(keywords: history, ofType: .history)
         }
+        
+        // Links from recents
+        var recentAnimeList = NineAnimator.default.user.recentAnimes
+        
+        if recentAnimeList.count > 50 { // Limit to the 50 most recent items
+            recentAnimeList = Array(recentAnimeList[0..<50])
+        }
+        
+        let recentAnimeItems: [Item] = Set(recentAnimeList).map {
+            recent in .init(.anime(recent), ofType: .recents)
+        } .sorted { $0.keywords < $1.keywords }
+        
+        // Concatenate results to form the items pool
+        quickSearchPool = searchHistoryItems + recentAnimeItems
     }
 }
 
@@ -83,8 +98,8 @@ extension SearchViewController {
         
         // If the segue is pointing towards search results container, show that
         if let resultsViewController = segue.destination as? ContentListViewController,
-            let query = (sender as? UISearchBar)?.text {
-            let contentProvider = NineAnimator.default.user.source.search(keyword: query)
+            !searchingKeywords.isEmpty {
+            let contentProvider = NineAnimator.default.user.source.search(keyword: searchingKeywords)
             resultsViewController.setPresenting(contentProvider: contentProvider)
         }
     }
@@ -104,7 +119,9 @@ extension SearchViewController {
                 self.filteredItems = pool.filter {
                     item in
                     // General matching for all: compare name and type
-                    var result = item.link.name
+                    var result = item.link?.name
+                        .localizedCaseInsensitiveContains(text) == true
+                    result = result || item.keywords
                         .localizedCaseInsensitiveContains(text)
                     result = result || item.type.rawValue
                         .localizedCaseInsensitiveContains(text)
@@ -121,6 +138,7 @@ extension SearchViewController {
                     case let .listingReference(reference):
                         result = result || reference.parentService.name
                             .localizedCaseInsensitiveContains(text)
+                    case .none: break
                     }
                     
                     return result
@@ -132,15 +150,41 @@ extension SearchViewController {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchKeywords = searchBar.text else { return }
+        
         searchController.dismiss(animated: true) { [weak self] in
-            self?.performSegue(withIdentifier: "search.result.show", sender: searchBar)
+            guard let self = self else { return }
+            self.performSearch(keywords: searchKeywords)
         }
+    }
+    
+    /// Perform the search with keywords
+    func performSearch(keywords: String) {
+        searchingKeywords = keywords.trimmingCharacters(in: .whitespacesAndNewlines)
+        NineAnimator.default.user.enqueueSearchHistory(keywords)
+        self.updateSearchPool()
+        self.updateSearchResults()
+        self.performSegue(withIdentifier: "search.result.show", sender: self)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? SimpleAnimeTableViewCell,
             let item = cell.item {
-            RootViewController.shared?.open(immedietly: item.link, in: self)
+            if let link = item.link {
+                // A little special treatment for AnimeLinks
+                if case let .anime(animeLink) = link {
+                    // Open the anime link directly if the current source is the link's source
+                    if animeLink.source.name == source.name {
+                        RootViewController.shared?.open(immedietly: link, in: self)
+                    } else {
+                        performSearch(keywords: item.keywords)
+                    }
+                } else {
+                    RootViewController.shared?.open(immedietly: link, in: self)
+                }
+            } else { // For keywords, just search directly
+                performSearch(keywords: item.keywords)
+            }
         }
     }
 }
@@ -207,7 +251,8 @@ extension SearchViewController {
 extension SearchViewController {
     /// Definitions of the type of items
     struct ItemType: Hashable {
-        static let recents = ItemType(icon: #imageLiteral(resourceName: "Clock Icon"), rawValue: "Recents")
+        static let recents = ItemType(icon: #imageLiteral(resourceName: "Playlist Icon"), rawValue: "Recents")
+        static let history = ItemType(icon: #imageLiteral(resourceName: "Clock Icon"), rawValue: "History")
         
         /// Icon of this type presented to the user
         var icon: UIImage
@@ -223,13 +268,22 @@ extension SearchViewController {
     /// Representing an item in the quick search results
     struct Item: Hashable {
         /// The link that this item is referenced to
-        var link: AnyLink
+        var link: AnyLink?
+        
+        /// Keywords of the item
+        var keywords: String
         
         /// Type of the item
         var type: ItemType
         
         init(_ link: AnyLink, ofType type: ItemType) {
             self.link = link
+            self.type = type
+            self.keywords = link.name
+        }
+        
+        init(keywords: String, ofType type: ItemType) {
+            self.keywords = keywords
             self.type = type
         }
         

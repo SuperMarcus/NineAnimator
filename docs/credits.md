@@ -30,4 +30,5 @@ Most of the resources are obtained from the open domains with their respective a
 - [Notification Icon](https://thenounproject.com/search/?q=notification&i=2918254)
 - [Download Icon](https://thenounproject.com/search/?q=download&i=2644467)
 - [History Icon](https://thenounproject.com/search/?q=history&i=2712044)
+- [Playlist Icon](https://thenounproject.com/search/?q=playlist&i=598334)
 - Apple's SF Symbols

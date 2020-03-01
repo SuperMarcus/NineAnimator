@@ -20,43 +20,6 @@
 import Foundation
 
 extension NineAnimatorUser {
-    /// A list of AnimeLink ordered from recently viewed to distant
-    ///
-    /// Direct modification outside the scope of NineAnimatorUser should
-    /// be prevented. Always use available methods when possible.
-    var recentAnimes: [AnimeLink] {
-        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
-        set {
-            guard let data = encodeIfPresent(data: newValue) else {
-                return Log.error("Recent animes failed to encode")
-            }
-            _freezer.set(data, forKey: Keys.recentAnimeList)
-        }
-    }
-    
-    /// The currently selected source website
-    var source: Source {
-        if let sourceName = _freezer.string(forKey: Keys.recentSource),
-            let source = NineAnimator.default.source(with: sourceName),
-            source.isEnabled {
-            return source
-        } else {
-            // Return the first available source
-            return NineAnimator.default.sources.first { $0.isEnabled }!
-        }
-    }
-    
-    /// The `EpisodeLink` to the last viewed episode
-    var lastEpisode: EpisodeLink? {
-        decodeIfPresent(EpisodeLink.self, from: _freezer.value(forKey: Keys.recentEpisode))
-    }
-    
-    /// Recently accessed server identifier
-    var recentServer: Anime.ServerIdentifier? {
-        get { _freezer.string(forKey: Keys.recentServer) }
-        set { _freezer.set(newValue as String?, forKey: Keys.recentServer) }
-    }
-    
     /// A list of persisted progresses
     var persistedProgresses: [String: Float] {
         get {
@@ -72,12 +35,6 @@ extension NineAnimatorUser {
         var animes = recentAnimes.filter { $0 != anime }
         animes.insert(anime, at: 0)
         recentAnimes = animes
-    }
-    
-    /// Select a new source
-    func select(source: Source) {
-        _freezer.set(source.name, forKey: Keys.recentSource)
-        push()
     }
     
     /// Triggered when the playback is about to start
@@ -116,5 +73,89 @@ extension NineAnimatorUser {
     func playbackProgress(for episode: EpisodeLink) -> Float {
         let persistedProgress = persistedProgresses["\(episode.parent.source.name)+\(episode.identifier)"] ?? 0
         return max(min(persistedProgress, 1.0), 0.0)
+    }
+}
+
+// MARK: - Search History
+extension NineAnimatorUser {
+    /// The user's search history listed from the most recent to distant
+    private(set) var searchHistory: [String] {
+        get { _freezer.typedValue(forKey: Keys.searchHistory, default: []) }
+        set { _freezer.set(newValue, forKey: Keys.searchHistory) }
+    }
+    
+    /// Enqueue a search history item
+    func enqueueSearchHistory(_ keywords: String) {
+        var mutatingHistory = searchHistory
+        
+        mutatingHistory.removeAll {
+            $0.caseInsensitiveCompare(keywords) == .orderedSame
+        }
+        mutatingHistory.insert(keywords, at: 0)
+        
+        if mutatingHistory.count > 10 {
+            mutatingHistory = Array(mutatingHistory[0...9])
+        }
+        
+        searchHistory = mutatingHistory
+    }
+    
+    /// Clear the search history
+    func clearSearchHistory() {
+        _freezer.removeObject(forKey: Keys.searchHistory)
+    }
+}
+
+// MARK: - Recents
+extension NineAnimatorUser {
+    /// A list of AnimeLink ordered from recently viewed to distant
+    ///
+    /// Direct modification outside the scope of NineAnimatorUser should
+    /// be prevented. Always use available methods when possible.
+    var recentAnimes: [AnimeLink] {
+        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
+        set {
+            guard let data = encodeIfPresent(data: newValue) else {
+                return Log.error("Recent animes failed to encode")
+            }
+            _freezer.set(data, forKey: Keys.recentAnimeList)
+        }
+    }
+    
+    /// The `EpisodeLink` to the last viewed episode
+    var lastEpisode: EpisodeLink? {
+        decodeIfPresent(EpisodeLink.self, from: _freezer.value(forKey: Keys.recentEpisode))
+    }
+    
+    /// Recently accessed server identifier
+    var recentServer: Anime.ServerIdentifier? {
+        get { _freezer.string(forKey: Keys.recentServer) }
+        set { _freezer.set(newValue as String?, forKey: Keys.recentServer) }
+    }
+    
+    /// Remove all anime viewing history
+    func clearRecents() {
+        _freezer.removeObject(forKey: Keys.recentEpisode)
+    }
+}
+
+// MARK: - Source
+extension NineAnimatorUser {
+    /// The currently selected source website
+    var source: Source {
+        if let sourceName = _freezer.string(forKey: Keys.recentSource),
+            let source = NineAnimator.default.source(with: sourceName),
+            source.isEnabled {
+            return source
+        } else {
+            // Return the first available source
+            return NineAnimator.default.sources.first { $0.isEnabled }!
+        }
+    }
+    
+    /// Select a new source
+    func select(source: Source) {
+        _freezer.set(source.name, forKey: Keys.recentSource)
+        push()
     }
 }
