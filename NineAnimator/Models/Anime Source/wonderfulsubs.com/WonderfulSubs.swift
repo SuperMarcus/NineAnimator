@@ -42,6 +42,9 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
         "WonderfulSubs is a free anime streaming website with numerous dubs and subs of anime. NineAnimator has fairly well-rounded support for this website."
     }
     
+    /// Disabled due to requests from the website's owner
+    override var isEnabled: Bool { false }
+    
     override var endpoint: String { "https://www.wonderfulsubs.com" }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {

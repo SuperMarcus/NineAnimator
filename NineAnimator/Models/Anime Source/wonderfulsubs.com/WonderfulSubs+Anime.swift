@@ -21,7 +21,15 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        request(
+        if !isEnabled {
+            return NineAnimatorPromise.fail(
+                NineAnimatorError.contentUnavailableError(
+                    "WonderfulSubs is no longer available on NineAnimator. Please consider using other sources."
+                )
+            )
+        }
+        
+        return request(
             ajaxPathDictionary: "/api/media/series",
             query: [ "series": link.link.lastPathComponent ],
             headers: [ "Referer": link.link.absoluteString ]
