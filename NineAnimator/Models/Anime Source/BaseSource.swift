@@ -122,6 +122,13 @@ class BaseSource {
             switch $0.result {
             case .failure(let error):
                 Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                
+                // Set source of error
+                if let naError = (error.underlyingError as? NineAnimatorError)
+                    ?? error as? NineAnimatorError {
+                    naError.sourceOfError = self
+                }
+                
                 handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
             case .success(let value):
                 handler(value, nil)
@@ -137,6 +144,13 @@ class BaseSource {
             switch response.result {
             case .failure(let error):
                 Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                
+                // Set source of error
+                if let naError = (error.underlyingError as? NineAnimatorError)
+                    ?? error as? NineAnimatorError {
+                    naError.sourceOfError = self
+                }
+                
                 handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
             case .success(let value as NSDictionary):
                 handler(value, nil)
@@ -155,6 +169,13 @@ class BaseSource {
             switch response.result {
             case .failure(let error):
                 Log.error("[BaseSource] Request to %@ failed - %@", url, error)
+                
+                // Set source of error
+                if let naError = (error.underlyingError as? NineAnimatorError)
+                    ?? error as? NineAnimatorError {
+                    naError.sourceOfError = self
+                }
+                
                 handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
             case .success(let value):
                 handler(value, nil)
