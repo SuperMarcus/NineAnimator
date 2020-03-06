@@ -1,11 +1,11 @@
 /* Class = "UILabel"; text = "Air Date"; ObjectID = "0sy-Go-eMO"; */
-"0sy-Go-eMO.text" = "Air Date";
+"0sy-Go-eMO.text" = "Sendedatum";
 
 /* Class = "UILabel"; text = "No Suggesting Episode"; ObjectID = "AVT-Pg-Bdx"; */
-"AVT-Pg-Bdx.text" = "No Suggesting Episode";
+"AVT-Pg-Bdx.text" = "Keine Vorgeschlagene Episode";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "B2n-TQ-hy9"; */
-"B2n-TQ-hy9.normalTitle" = "Offline Access";
+"B2n-TQ-hy9.normalTitle" = "Offline-Zugang";
 
 /* Class = "UILabel"; text = "No synopsis for this episode."; ObjectID = "K1G-eG-Vkn"; */
 "K1G-eG-Vkn.text" = "No synopsis for this episode.";
