@@ -8,31 +8,31 @@
 "B2n-TQ-hy9.normalTitle" = "Offline-Zugang";
 
 /* Class = "UILabel"; text = "No synopsis for this episode."; ObjectID = "K1G-eG-Vkn"; */
-"K1G-eG-Vkn.text" = "No synopsis for this episode.";
+"K1G-eG-Vkn.text" = "Keine Synopse für diese Episode.";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "KNz-kA-xO5"; */
-"KNz-kA-xO5.text" = "Loading";
+"KNz-kA-xO5.text" = "Lädt";
 
 /* Class = "UILabel"; text = "Start Watching"; ObjectID = "QaR-tX-zXn"; */
-"QaR-tX-zXn.text" = "Start Watching";
+"QaR-tX-zXn.text" = "Starten";
 
 /* Class = "UIButton"; normalTitle = "SUBSCRIBE"; ObjectID = "TAP-ty-bvP"; */
-"TAP-ty-bvP.normalTitle" = "SUBSCRIBE";
+"TAP-ty-bvP.normalTitle" = "ABONNIEREN";
 
 /* Class = "UILabel"; text = "Subscribed"; ObjectID = "WA8-YI-xRl"; */
-"WA8-YI-xRl.text" = "Subscribed";
+"WA8-YI-xRl.text" = "Abonniert";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "Wev-7V-WQ7"; */
-"Wev-7V-WQ7.normalTitle" = "Offline Access";
+"Wev-7V-WQ7.normalTitle" = "Offline-Zugang";
 
 /* Class = "UILabel"; text = "Loading anime information"; ObjectID = "XG2-wy-XRz"; */
-"XG2-wy-XRz.text" = "Loading anime information";
+"XG2-wy-XRz.text" = "Animeinformationen werden geladen";
 
 /* Class = "UILabel"; text = "Loading Ratings"; ObjectID = "jCq-le-ZsX"; */
-"jCq-le-ZsX.text" = "Loading Ratings";
+"jCq-le-ZsX.text" = "Bewertungen werden geladen";
 
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "mFd-Ay-cFU"; */
-"mFd-Ay-cFU.normalTitle" = "Expand";
+"mFd-Ay-cFU.normalTitle" = "Mehr";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "oxU-lU-8me"; */
-"oxU-lU-8me.text" = "Synopsis";
+"oxU-lU-8me.text" = "Übersicht";
