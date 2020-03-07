@@ -1,38 +1,38 @@
 /* Class = "UILabel"; text = "Air Date"; ObjectID = "0sy-Go-eMO"; */
-"0sy-Go-eMO.text" = "Air Date";
+"0sy-Go-eMO.text" = "Fecha de Emisión";
 
 /* Class = "UILabel"; text = "No Suggesting Episode"; ObjectID = "AVT-Pg-Bdx"; */
-"AVT-Pg-Bdx.text" = "No Suggesting Episode";
+"AVT-Pg-Bdx.text" = "Sin Episodio Sugerente";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "B2n-TQ-hy9"; */
-"B2n-TQ-hy9.normalTitle" = "Offline Access";
+"B2n-TQ-hy9.normalTitle" = "Accesso Sin Conexión";
 
 /* Class = "UILabel"; text = "No synopsis for this episode."; ObjectID = "K1G-eG-Vkn"; */
-"K1G-eG-Vkn.text" = "No synopsis for this episode.";
+"K1G-eG-Vkn.text" = "No hay sinopsis para este episodio.";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "KNz-kA-xO5"; */
-"KNz-kA-xO5.text" = "Loading";
+"KNz-kA-xO5.text" = "Cargando";
 
 /* Class = "UILabel"; text = "Start Watching"; ObjectID = "QaR-tX-zXn"; */
-"QaR-tX-zXn.text" = "Start Watching";
+"QaR-tX-zXn.text" = "Empezar a Ver";
 
 /* Class = "UIButton"; normalTitle = "SUBSCRIBE"; ObjectID = "TAP-ty-bvP"; */
-"TAP-ty-bvP.normalTitle" = "SUBSCRIBE";
+"TAP-ty-bvP.normalTitle" = "SUSCRIBIRSE";
 
 /* Class = "UILabel"; text = "Subscribed"; ObjectID = "WA8-YI-xRl"; */
-"WA8-YI-xRl.text" = "Subscribed";
+"WA8-YI-xRl.text" = "Suscrito";
 
 /* Class = "UIButton"; normalTitle = "Offline Access"; ObjectID = "Wev-7V-WQ7"; */
-"Wev-7V-WQ7.normalTitle" = "Offline Access";
+"Wev-7V-WQ7.normalTitle" = "Acceso Sin Conexión";
 
 /* Class = "UILabel"; text = "Loading anime information"; ObjectID = "XG2-wy-XRz"; */
-"XG2-wy-XRz.text" = "Loading anime information";
+"XG2-wy-XRz.text" = "Cargando información del anime";
 
 /* Class = "UILabel"; text = "Loading Ratings"; ObjectID = "jCq-le-ZsX"; */
-"jCq-le-ZsX.text" = "Loading Ratings";
+"jCq-le-ZsX.text" = "Cargando Calificaciones";
 
 /* Class = "UIButton"; normalTitle = "Expand"; ObjectID = "mFd-Ay-cFU"; */
-"mFd-Ay-cFU.normalTitle" = "Expand";
+"mFd-Ay-cFU.normalTitle" = "Expandir";
 
 /* Class = "UILabel"; text = "Synopsis"; ObjectID = "oxU-lU-8me"; */
-"oxU-lU-8me.text" = "Synopsis";
+"oxU-lU-8me.text" = "Sinopsis";
