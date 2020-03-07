@@ -2,7 +2,7 @@
 "6DY-Kh-44b.title" = "Completar Autenticación";
 
 /* Class = "UILabel"; text = "Complete the authentication in this website, then tap on Done."; ObjectID = "GLu-gF-Nmk"; */
-"GLu-gF-Nmk.text" = "Complete la autenticación en este sitio, luego toque en Listo.";
+"GLu-gF-Nmk.text" = "Completa la autenticación en este sitio web, luego pulsa en Hecho.";
 
 /* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "zya-PK-8eN"; */
-"zya-PK-8eN.title" = "Listo";
+"zya-PK-8eN.title" = "Hecho";
