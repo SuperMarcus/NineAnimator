@@ -1,8 +1,8 @@
 /* Class = "UIButton"; normalTitle = "Done"; ObjectID = "SX4-hA-3LC"; */
-"SX4-hA-3LC.normalTitle" = "Listo";
+"SX4-hA-3LC.normalTitle" = "Hecho";
 
 /* Class = "UILabel"; text = "Find your favorite anime website in NineAnimator."; ObjectID = "gH3-bk-avW"; */
-"gH3-bk-avW.text" = "Encuentre su sitio web favorito de anime en NineAnimator.";
+"gH3-bk-avW.text" = "Encuentra tu sitio web de anime favorito en NineAnimator.";
 
 /* Class = "UILabel"; text = "Sources"; ObjectID = "iXv-Ek-3NM"; */
 "iXv-Ek-3NM.text" = "Fuentes";
