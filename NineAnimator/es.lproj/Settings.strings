@@ -11,10 +11,10 @@
 "1VP-oc-aqz.text" = "Borrar datos del caché";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Borrar descargas";
+"1X7-X7-huV.text" = "Borrar Descargas";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Sitios web y software de terceros";
+"2US-vI-tzZ.headerTitle" = "Software y Sitios Web de Terceros";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
 "2ol-44-Ha5.text" = "Estado";
@@ -35,7 +35,7 @@
 "5UB-9w-oPI.footerTitle" = "Navega anime que has agregado a tus colecciones y conéctese con su servicio de rastreo.";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
-"5k7-hs-FeH.text" = "Previene purgas";
+"5k7-hs-FeH.text" = "Previene Purgas";
 
 /* Class = "UILabel"; text = "NineAnimator"; ObjectID = "6cg-cg-vWl"; */
 "6cg-cg-vWl.text" = "NineAnimator";
@@ -236,13 +236,13 @@
 "ehk-8y-ZWC.text" = "Push NineAnimator Updates";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
-"ejU-pt-NEy.title" = "Home";
+"ejU-pt-NEy.title" = "Inicio";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
 "ekC-7m-AFc.text" = "Push NineAnimator Updates";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
-"fhT-FK-ILc.text" = "Status";
+"fhT-FK-ILc.text" = "Estado";
 
 /* Class = "UITableViewSection"; footerTitle = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app."; ObjectID = "fjl-9Y-6m1"; */
 "fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
@@ -260,7 +260,7 @@
 "hNx-wP-LZ9.text" = "Delete Cached Images";
 
 /* Class = "UILabel"; text = "Report Issues"; ObjectID = "hZK-F2-4cA"; */
-"hZK-F2-4cA.text" = "Report Issues";
+"hZK-F2-4cA.text" = "Informar Problemas";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
 "jGy-CK-BGd.text" = "Tracking Service Name";
@@ -269,7 +269,7 @@
 "jcd-Wl-m61.text" = "Clear Recently Watched";
 
 /* Class = "UITableViewSection"; headerTitle = "Storage"; ObjectID = "jtv-aO-g6G"; */
-"jtv-aO-g6G.headerTitle" = "Storage";
+"jtv-aO-g6G.headerTitle" = "Almacenamiento";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net."; ObjectID = "k58-8v-meo"; */
 "k58-8v-meo.footerTitle" = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net.";
@@ -278,19 +278,19 @@
 "k58-8v-meo.headerTitle" = "MyAnimeList";
 
 /* Class = "UILabel"; text = "Show Episode Details"; ObjectID = "lOR-rE-gEZ"; */
-"lOR-rE-gEZ.text" = "Show Episode Details";
+"lOR-rE-gEZ.text" = "Mostrar Detalles del Episodio";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "lcW-Lk-ZTP"; */
-"lcW-Lk-ZTP.text" = "Updating...";
+"lcW-Lk-ZTP.text" = "Actualizando...";
 
 /* Class = "UILabel"; text = "Downloads & Storage"; ObjectID = "m9r-kn-kk7"; */
-"m9r-kn-kk7.text" = "Downloads & Storage";
+"m9r-kn-kk7.text" = "Descargas y Almacenamiento";
 
 /* Class = "UILabel"; text = "MyAnimeList.net"; ObjectID = "oJY-Uv-hLj"; */
 "oJY-Uv-hLj.text" = "MyAnimeList.net";
 
 /* Class = "UILabel"; text = "License"; ObjectID = "p2c-ro-yj3"; */
-"p2c-ro-yj3.text" = "License";
+"p2c-ro-yj3.text" = "Licencia";
 
 /* Class = "UITableViewController"; title = "Tracking Services"; ObjectID = "pGu-In-KWa"; */
 "pGu-In-KWa.title" = "Tracking Services";
@@ -305,25 +305,25 @@
 "qwG-xM-EqT.text" = "SIMKL.COM";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "uIR-9j-Tzk"; */
-"uIR-9j-Tzk.text" = "Updating...";
+"uIR-9j-Tzk.text" = "Actualizando...";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "uZi-hX-u8x"; */
-"uZi-hX-u8x.text" = "Status";
+"uZi-hX-u8x.text" = "Estado";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
 "xLV-v6-fh9.text" = "Setup Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
-"xP9-AS-NPt.text" = "Dynamic Appearance";
+"xP9-AS-NPt.text" = "Apariencia Dinámica";
 
 /* Class = "UILabel"; text = "Images"; ObjectID = "xUc-BH-HNC"; */
-"xUc-BH-HNC.text" = "Images";
+"xUc-BH-HNC.text" = "Imágenes";
 
 /* Class = "UILabel"; text = "Build"; ObjectID = "xjp-AG-MX5"; */
 "xjp-AG-MX5.text" = "Build";
 
 /* Class = "UILabel"; text = "Discuss on Discord"; ObjectID = "zQD-NZ-dqC"; */
-"zQD-NZ-dqC.text" = "Discuss on Discord";
+"zQD-NZ-dqC.text" = "Debatir en Discord";
 
 /* Class = "UILabel"; text = "Reset"; ObjectID = "zWP-wL-Vag"; */
-"zWP-wL-Vag.text" = "Reset";
+"zWP-wL-Vag.text" = "Resetear";
