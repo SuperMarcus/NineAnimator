@@ -2,43 +2,43 @@
 "2rp-o4-MgZ.normalTitle" = "Abrir Enlace";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
-"8OU-XT-7E1.title" = "Recents";
+"8OU-XT-7E1.title" = "Recientes";
 
 /* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
-"EeQ-yb-72U.text" = "Loading Previews";
+"EeQ-yb-72U.text" = "Cargando Previsualizaciones";
 
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
 "SBh-Sa-wuU.text" = "NineAnimator no está disponible";
 
 /* Class = "UITableViewController"; title = "Search"; ObjectID = "W9q-Ho-7mv"; */
-"W9q-Ho-7mv.title" = "Search";
+"W9q-Ho-7mv.title" = "Buscar";
 
 /* Class = "UILabel"; text = "Recently Updated"; ObjectID = "Xji-1Z-Meq"; */
-"Xji-1Z-Meq.text" = "Recientemente Actualizado";
+"Xji-1Z-Meq.text" = "Actualizado Recientemente";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
-"Xx9-4a-rNT.title" = "Featured";
+"Xx9-4a-rNT.title" = "Destacado";
 
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
-"Y8g-si-rdv.title" = "Search";
+"Y8g-si-rdv.title" = "Buscar";
 
 /* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
-"bTY-yy-a3Z.text" = "Contents are loading...";
+"bTY-yy-a3Z.text" = "Los contenidos están cargando...";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
-"cty-4k-jCy.text" = "Has visto recientemente...";
+"cty-4k-jCy.text" = "Recientemente viste...";
 
 /* Class = "UIBarButtonItem"; title = "Settings"; ObjectID = "g8T-nX-rcs"; */
-"g8T-nX-rcs.title" = "Settings";
+"g8T-nX-rcs.title" = "Configuraciones";
 
 /* Class = "UIBarButtonItem"; title = "Google Cast"; ObjectID = "mEy-g5-ff5"; */
 "mEy-g5-ff5.title" = "Google Cast";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "o2r-J2-aqA"; */
-"o2r-J2-aqA.title" = "Library";
+"o2r-J2-aqA.title" = "Biblioteca";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
-"rUB-Iw-liv.normalTitle" = "View";
+"rUB-Iw-liv.normalTitle" = "Ver";
 
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
-"smF-4W-Oha.title" = "Library";
+"smF-4W-Oha.title" = "Biblioteca";
