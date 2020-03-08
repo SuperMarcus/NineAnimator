@@ -87,9 +87,3 @@ of features:
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [x] Detailed episode synopsis
-- ~~[WonderfulSubs](//wonderfulsubs.com)~~ (no longer available)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Ratings and Air Date)
-    - [x] Detailed episode synopsis
