@@ -8,7 +8,7 @@
 "1D4-d4-eg5.text" = "Comprobando...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
-"1VP-oc-aqz.text" = "Borrar datos del caché";
+"1VP-oc-aqz.text" = "Borrar Datos en Caché";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
 "1X7-X7-huV.text" = "Borrar Descargas";
@@ -26,7 +26,7 @@
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Sin configurar";
+"4vz-rG-dvA.text" = "Sin Configurar";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
 "4ye-Yb-8qS.title" = "Almacenamiento";
@@ -44,22 +44,22 @@
 "6ow-N9-6M8.text" = "Estado";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
-"6wJ-Cg-cKO.text" = "Sin configurar";
+"6wJ-Cg-cKO.text" = "Sin Configurar";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
-"74T-HL-SF3.text" = "Calculando uso...";
+"74T-HL-SF3.text" = "Calculando Uso...";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
 "7gK-el-Ee1.text" = "Abrir Controles de Cast";
 
 /* Class = "UITableViewSection"; footerTitle = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay."; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.footerTitle" = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.";
+"7nJ-6V-9oy.footerTitle" = "La reproducción de Imagen en Imagen (PiP) solo es compatible con iPads. Habilitar PiP también habilitará la reproducción en segundo plano.\n\nHabilitar la reproducción en segundo plano permitirá reproducir audios mientras la aplicación está en segundo plano. Esta configuración no afectará a Google Cast o AirPlay.";
 
 /* Class = "UITableViewSection"; headerTitle = "Playback Controls"; ObjectID = "7nJ-6V-9oy"; */
 "7nJ-6V-9oy.headerTitle" = "Controles de Reproducción";
 
 /* Class = "UINavigationItem"; title = "Preferred Source"; ObjectID = "8Lj-r1-12t"; */
-"8Lj-r1-12t.title" = "Fuente preferida";
+"8Lj-r1-12t.title" = "Fuente Preferida";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
 "A3J-Ya-mRo.text" = "Versión";
@@ -68,13 +68,13 @@
 "AVN-Z6-xDl.text" = "Exportar Historial";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "Avi-8B-KpP"; */
-"Avi-8B-KpP.text" = "Sin configurar";
+"Avi-8B-KpP.text" = "Sin Configurar";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
-"BDo-SJ-NV8.text" = "Listas de anime de terceros";
+"BDo-SJ-NV8.text" = "Listas de Anime de Terceros";
 
 /* Class = "UILabel"; text = "Current Subscriptions"; ObjectID = "CDE-MG-fiI"; */
-"CDE-MG-fiI.text" = "Suscripciones actuales";
+"CDE-MG-fiI.text" = "Suscripciones Actuales";
 
 /* Class = "UILabel"; text = "MYANIMELIST.NET"; ObjectID = "CXa-yX-XOv"; */
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
@@ -113,7 +113,7 @@
 "LfV-dW-fu4.text" = "Créditos";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
-"LoF-UE-Pdv.text" = "Sin configurar";
+"LoF-UE-Pdv.text" = "Sin Configurar";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
 "Mhg-Wl-1ep.text" = "Listar Episodios";
@@ -158,7 +158,7 @@
 "Sei-S4-MPn.headerTitle" = "Simkl";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "SkT-L9-D11"; */
-"SkT-L9-D11.text" = "Sin configurar";
+"SkT-L9-D11.text" = "Sin Configurar";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
 "SsL-fL-doX.title" = "Preferencias";
@@ -215,7 +215,7 @@
 "c84-vM-Uf0.text" = "Enviar Notificaciones";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
-"d3R-vQ-52G.text" = "Sin configurar";
+"d3R-vQ-52G.text" = "Sin Configurar";
 
 /* Class = "UILabel"; text = "Clear Shortcuts and Spotlight Items"; ObjectID = "dIG-JR-U2D"; */
 "dIG-JR-U2D.text" = "Eliminar accesos directos y elementos de resaltado";
@@ -227,7 +227,7 @@
 "dNx-EX-rHK.headerTitle" = "Datos y Privacidad";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
+"dnn-sT-oir.footerTitle" = "Activa Mostrar Transmisiones Disponibles para incluir las fuentes de transmisión en las que se carga el último episodio en la notificación.\n\nNineAnimator utiliza Background App Refresh para determinar si se ha lanzado un nuevo episodio de un anime suscrito.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.headerTitle" = "Notificaciones y Suscripciones";
@@ -245,7 +245,7 @@
 "fhT-FK-ILc.text" = "Estado";
 
 /* Class = "UITableViewSection"; footerTitle = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app."; ObjectID = "fjl-9Y-6m1"; */
-"fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
+"fjl-9Y-6m1.footerTitle" = "Vuelva a intentar automáticamente las descargas fallidas.\n\nActiva Prevenir Purgas para evitar que el sistema elimine los episodios. El sistema intentará eliminar otros recursos antes de purgar los episodios descargados.\n\nLa capacidad restante del disco que se muestra en esta pantalla puede ser diferente de la aplicación de Ajustes.";
 
 /* Class = "UILabel"; text = "Background Playback"; ObjectID = "gAn-bf-I7y"; */
 "gAn-bf-I7y.text" = "Reproducción en Segundo Plano";
@@ -272,7 +272,7 @@
 "jtv-aO-g6G.headerTitle" = "Almacenamiento";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net."; ObjectID = "k58-8v-meo"; */
-"k58-8v-meo.footerTitle" = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net.";
+"k58-8v-meo.footerTitle" = "Solo los eventos de reproducción después de que hayas iniciado sesión se enviarán a MyAnimeList.\n\nMyAnimeList.net es propiedad de MyAnimeList, LLC. © 2015 Todos los derechos reservados.\n\nNineAnimator no está afiliado con MyAnimeList.net.";
 
 /* Class = "UITableViewSection"; headerTitle = "MyAnimeList"; ObjectID = "k58-8v-meo"; */
 "k58-8v-meo.headerTitle" = "MyAnimeList";
@@ -299,7 +299,7 @@
 "q0P-aj-Wkc.text" = "Reproducción Finalizada";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
-"qV5-lV-yLf.text" = "Setup Kitsu.io";
+"qV5-lV-yLf.text" = "Configurar Kitsu.io";
 
 /* Class = "UILabel"; text = "SIMKL.COM"; ObjectID = "qwG-xM-EqT"; */
 "qwG-xM-EqT.text" = "SIMKL.COM";
@@ -311,7 +311,7 @@
 "uZi-hX-u8x.text" = "Estado";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
-"xLV-v6-fh9.text" = "Setup Simkl.com";
+"xLV-v6-fh9.text" = "Configurar Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
 "xP9-AS-NPt.text" = "Apariencia Dinámica";
