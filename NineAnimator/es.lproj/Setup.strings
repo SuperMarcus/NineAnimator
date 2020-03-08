@@ -38,7 +38,7 @@
 "V5A-Fz-yzu.normalTitle" = "Continuar";
 
 /* Class = "UILabel"; text = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date."; ObjectID = "YWE-aH-85Y"; */
-"YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
+"YWE-aH-85Y.text" = "NineAnimator está en desarrollo activo. Nuevas funciones y correcciones de errores se implementan semanalmente. Se recomienda que mantengas la aplicación actualizada.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
 "aVI-dM-rv8.text" = "Apariencia";
@@ -47,7 +47,7 @@
 "eYj-Vw-fYO.normalTitle" = "Saltar Configuración";
 
 /* Class = "UILabel"; text = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability."; ObjectID = "f1Q-9Z-lK6"; */
-"f1Q-9Z-lK6.text" = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability.";
+"f1Q-9Z-lK6.text" = "Esta versión de NineAnimator incluye un sistema de descarga actualizado que está optimizado para el rendimiento y la confiabilidad.";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "fPo-Vc-IV4"; */
 "fPo-Vc-IV4.title" = "Seleccionar Fuente";
@@ -62,7 +62,7 @@
 "ikj-0J-JNE.text" = "Novedades";
 
 /* Class = "UILabel"; text = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu."; ObjectID = "ok1-aG-zqs"; */
-"ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
+"ok1-aG-zqs.text" = "Establecer la apariencia en Dinámico permite a NineAnimator cambiar el tema de acuerdo con el brillo de la pantalla.\nDespués de la configuración, puedes cambiar la configuración del tema en el menú Preferencias.";
 
 /* Class = "UILabel"; text = "Library"; ObjectID = "ouh-B2-M5f"; */
 "ouh-B2-M5f.text" = "Biblioteca";
@@ -83,7 +83,7 @@
 "xUo-iY-fAt.title" = "Bienvenido";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
-"xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
+"xwc-kf-mgL.text" = "La interfaz de la Biblioteca se ha rediseñado desde cero, ajustada para presentarte la información más relevante.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
 "yQX-1k-GWU.segmentTitles[0]" = "Claro";
