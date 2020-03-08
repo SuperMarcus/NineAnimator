@@ -32,7 +32,7 @@
 "4ye-Yb-8qS.title" = "Almacenamiento";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
-"5UB-9w-oPI.footerTitle" = "Navega anime que has agregado a tus colecciones y conéctese con su servicio de rastreo.";
+"5UB-9w-oPI.footerTitle" = "Explora anime que has agregado a tus colecciones y conecta con los servicios de seguimiento de progreso.";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
 "5k7-hs-FeH.text" = "Previene Purgas";
@@ -101,7 +101,7 @@
 "KLV-mK-zbJ.headerTitle" = "Anilist";
 
 /* Class = "UILabel"; text = "Picture in Picture Playback"; ObjectID = "KSq-np-Dks"; */
-"KSq-np-Dks.text" = "Reproducción picture-in-picture";
+"KSq-np-Dks.text" = "Reproducción de Imagen en Imagen";
 
 /* Class = "UILabel"; text = "Episodes"; ObjectID = "KjW-mL-37B"; */
 "KjW-mL-37B.text" = "Episodios";
@@ -116,7 +116,7 @@
 "LoF-UE-Pdv.text" = "Sin configurar";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
-"Mhg-Wl-1ep.text" = "Lista de episodios";
+"Mhg-Wl-1ep.text" = "Listar Episodios";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io."; ObjectID = "Mk4-hl-YHD"; */
 "Mk4-hl-YHD.footerTitle" = "Solo los eventos de reproducción después de haber iniciado sesión serán añadidos a Kitsu.\n\nNineAnimator no está afiliado con Kitsu.io.";
@@ -125,10 +125,10 @@
 "Mk4-hl-YHD.headerTitle" = "Kitsu";
 
 /* Class = "UILabel"; text = "Manage Personal Information"; ObjectID = "N8M-Jf-n7k"; */
-"N8M-Jf-n7k.text" = "Administrar mis datos personales";
+"N8M-Jf-n7k.text" = "Administrar Información Personal";
 
 /* Class = "UILabel"; text = "Allow NSFW Content"; ObjectID = "Nrj-vR-ORT"; */
-"Nrj-vR-ORT.text" = "Permitir contenido NSFW";
+"Nrj-vR-ORT.text" = "Permitir Contenido NSFW";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
 "OUZ-2Z-Nei.text" = "Repositorio GitHub";
@@ -146,7 +146,7 @@
 "Rvs-DG-kmr.title" = "Acerca de";
 
 /* Class = "UITableViewSection"; footerTitle = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>."; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. Todos los derechos reservados.\n\nNineAnimator es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, o bien la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.\n\nNineAnimator se distribuye con la esperanza de que sea útil, pero SIN CUALQUIER PRECIO; sin la garantía implícita de crear mercancía o ADECUACIÓN PARA UN PROPÓSITO PARTICULAR. Consulte la Licencia Pública General de GNU para más detalles.\n\nDebería haber recibido una copia de la Licencia Pública General de GNU junto con NineAnimator. Si no, vea <http://www.gnu.org/licenses/>.";
+"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. Todos los derechos reservados.\n\nNineAnimator es software libre: puede redistribuirlo y/o modificarlo bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, o bien la versión 3 de la Licencia, o (a su elección) cualquier versión posterior.\n\nNineAnimator se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA; sin la garantía implícita de crear COMERCIABILIDAD o APTITUD PARA UN PROPÓSITO EN PARTICULAR. Consulte la Licencia Pública General de GNU para más detalles.\n\nDebería haber recibido una copia de la Licencia Pública General de GNU junto con NineAnimator.  Si no, vea <http://www.gnu.org/licenses/>.";
 
 /* Class = "UITableViewSection"; headerTitle = "GNU General Public License version 3"; ObjectID = "SRm-Su-TD8"; */
 "SRm-Su-TD8.headerTitle" = "Licencia Pública General de GNU versión 3";
@@ -164,7 +164,7 @@
 "SsL-fL-doX.title" = "Preferencias";
 
 /* Class = "UILabel"; text = "Retry Downloads"; ObjectID = "Tre-aJ-ohc"; */
-"Tre-aJ-ohc.text" = "Reintentar la Descarga";
+"Tre-aJ-ohc.text" = "Reintentar Descargas";
 
 /* Class = "UITableViewSection"; footerTitle = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed)."; ObjectID = "UxF-RW-Y6p"; */
 "UxF-RW-Y6p.footerTitle" = "Listar episodio desde el primero hasta el último (ordenado) o desde el más reciente hasta el más distante (invertido).";
@@ -179,7 +179,7 @@
 "W4K-f9-Rrg.text" = "Fuente preferida";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[0]" = "Obscuro";
+"WSB-go-EfB.segmentTitles[0]" = "Oscuro";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[1] = "Light"; ObjectID = "WSB-go-EfB"; */
 "WSB-go-EfB.segmentTitles[1]" = "Claro";
@@ -197,22 +197,22 @@
 "ZJI-L3-7zk.headerTitle" = "General";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
-"ZKK-PI-ugJ.text" = "Mostrar streams disponibles";
+"ZKK-PI-ugJ.text" = "Mostrar Streams Disponibles";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app."; ObjectID = "ZPg-j7-wjg"; */
 "ZPg-j7-wjg.footerTitle" = "NineAnimator puede ser configurado para ejecutar ciertas escenas cuando la reproducción comienza o termina. Por ejemplo, NineAnimator puede oscurecer las luces y preparar el ambiente cuando se inicia AirPlay.\n\nPara que funcione la integración con el hogar, mínimo un accesorio compatible con HomeKit tiene que configurarse en la aplicación Home y mínimo una escena tiene que estar disponible. Puedes añadir más escenas en la aplicación Inicio.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.headerTitle" = "Integración de Home";
+"ZPg-j7-wjg.headerTitle" = "Integración de Inicio";
 
 /* Class = "UILabel"; text = "Delete All Downloads"; ObjectID = "Zaa-23-f0r"; */
-"Zaa-23-f0r.text" = "Eliminar todas las descargas";
+"Zaa-23-f0r.text" = "Eliminar Todas las Descargas";
 
 /* Class = "UILabel"; text = "Setup MyAnimeList.net"; ObjectID = "bH1-Rj-cxO"; */
 "bH1-Rj-cxO.text" = "Configurar MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
-"c84-vM-Uf0.text" = "Enviar notificaciones";
+"c84-vM-Uf0.text" = "Enviar Notificaciones";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
 "d3R-vQ-52G.text" = "Sin configurar";
@@ -230,16 +230,16 @@
 "dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.headerTitle" = "Notifications and Subscriptions";
+"dnn-sT-oir.headerTitle" = "Notificaciones y Suscripciones";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ehk-8y-ZWC"; */
-"ehk-8y-ZWC.text" = "Push NineAnimator Updates";
+"ehk-8y-ZWC.text" = "Forzar Actualizaciones de NineAnimator";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
 "ejU-pt-NEy.title" = "Inicio";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
-"ekC-7m-AFc.text" = "Push NineAnimator Updates";
+"ekC-7m-AFc.text" = "Forzar Actualizaciones de NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
 "fhT-FK-ILc.text" = "Estado";
@@ -248,25 +248,25 @@
 "fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
 
 /* Class = "UILabel"; text = "Background Playback"; ObjectID = "gAn-bf-I7y"; */
-"gAn-bf-I7y.text" = "Background Playback";
+"gAn-bf-I7y.text" = "Reproducción en Segundo Plano";
 
 /* Class = "UILabel"; text = "External Playback Only"; ObjectID = "hDj-6B-Nou"; */
-"hDj-6B-Nou.text" = "External Playback Only";
+"hDj-6B-Nou.text" = "Solo Reproducción Externa";
 
 /* Class = "UILabel"; text = "Unsubscribe All"; ObjectID = "hGc-BW-frZ"; */
-"hGc-BW-frZ.text" = "Unsubscribe All";
+"hGc-BW-frZ.text" = "Cancelar Suscripción en Todo";
 
 /* Class = "UILabel"; text = "Delete Cached Images"; ObjectID = "hNx-wP-LZ9"; */
-"hNx-wP-LZ9.text" = "Delete Cached Images";
+"hNx-wP-LZ9.text" = "Eliminar Imágenes en Caché";
 
 /* Class = "UILabel"; text = "Report Issues"; ObjectID = "hZK-F2-4cA"; */
 "hZK-F2-4cA.text" = "Informar Problemas";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
-"jGy-CK-BGd.text" = "Tracking Service Name";
+"jGy-CK-BGd.text" = "Nombre del Servicio de Seguimiento";
 
 /* Class = "UILabel"; text = "Clear Recently Watched"; ObjectID = "jcd-Wl-m61"; */
-"jcd-Wl-m61.text" = "Clear Recently Watched";
+"jcd-Wl-m61.text" = "Borrar Visto Recientemente";
 
 /* Class = "UITableViewSection"; headerTitle = "Storage"; ObjectID = "jtv-aO-g6G"; */
 "jtv-aO-g6G.headerTitle" = "Almacenamiento";
@@ -293,10 +293,10 @@
 "p2c-ro-yj3.text" = "Licencia";
 
 /* Class = "UITableViewController"; title = "Tracking Services"; ObjectID = "pGu-In-KWa"; */
-"pGu-In-KWa.title" = "Tracking Services";
+"pGu-In-KWa.title" = "Servicios de Seguimiento";
 
 /* Class = "UILabel"; text = "Ends Playing"; ObjectID = "q0P-aj-Wkc"; */
-"q0P-aj-Wkc.text" = "Ends Playing";
+"q0P-aj-Wkc.text" = "Reproducción Finalizada";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
 "qV5-lV-yLf.text" = "Setup Kitsu.io";
@@ -320,7 +320,7 @@
 "xUc-BH-HNC.text" = "Imágenes";
 
 /* Class = "UILabel"; text = "Build"; ObjectID = "xjp-AG-MX5"; */
-"xjp-AG-MX5.text" = "Build";
+"xjp-AG-MX5.text" = "Construir";
 
 /* Class = "UILabel"; text = "Discuss on Discord"; ObjectID = "zQD-NZ-dqC"; */
 "zQD-NZ-dqC.text" = "Debatir en Discord";
