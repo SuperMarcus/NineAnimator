@@ -33,12 +33,6 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [WonderfulSubs](//wonderfulsubs.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Ratings and Air Date)
-    - [x] Detailed episode synopsis
 - [gogoanime.io](//gogoanime.io)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
@@ -92,4 +86,10 @@ of features:
     - [x] Open arbitrary links
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
+    - [x] Detailed episode synopsis
+- ~~[WonderfulSubs](//wonderfulsubs.com)~~ (no longer available)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Ratings and Air Date)
     - [x] Detailed episode synopsis
