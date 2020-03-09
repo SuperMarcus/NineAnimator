@@ -85,7 +85,7 @@ extension StaticListingAnimeCollection {
                 }
                 
                 return reference
-            }
+            } .sorted { $0.name < $1.name }
         )
     }
 }

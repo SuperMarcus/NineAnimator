@@ -2,8 +2,7 @@ query ($userId: Int, $userName: String) {
     MediaListCollection(
         userId: $userId,
         userName: $userName,
-        type: ANIME,
-        sort: [ MEDIA_TITLE_ENGLISH, MEDIA_TITLE_ROMAJI, MEDIA_TITLE_NATIVE ]
+        type: ANIME
     ) {
         lists {
             name,
