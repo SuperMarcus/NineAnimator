@@ -55,7 +55,7 @@ extension Anilist {
                 let results = try scheduleItems.compactMap {
                     scheduleItem -> CalendarItem? in
                     let media = try scheduleItem.media.tryUnwrap(.decodeError)
-                    return media.isAdult == true ? nil : CalendarItem(
+                    return !NineAnimator.default.user.allowNSFWContent && media.isAdult == true ? nil : CalendarItem(
                         date: Anilist.date(fromAnilistTimestamp: try scheduleItem.airingAt.tryUnwrap(.decodeError)),
                         episode: try scheduleItem.episode.tryUnwrap(.decodeError),
                         totalEpisodes: media.episodes,
