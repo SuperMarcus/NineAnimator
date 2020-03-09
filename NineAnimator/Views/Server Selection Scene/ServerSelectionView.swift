@@ -39,6 +39,8 @@ class ServerSelectionView: UITableView, UITableViewDelegate, UITableViewDataSour
     // swiftlint:disable weak_delegate
     private var _defaultSelectionDelegate = DefaultSelectionAgent()
     
+    private var _sources = [Source]()
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         _commonInit()
@@ -63,6 +65,14 @@ class ServerSelectionView: UITableView, UITableViewDelegate, UITableViewDataSour
         tableFooterView = UIView()
         
         reloadData()
+    }
+    
+    /// Reload the list of available sources form the `serverDataSource`
+    override func reloadData() {
+        self._sources = serverDataSource?.sources.filter {
+            $0.isEnabled
+        } ?? []
+        super.reloadData()
     }
 }
 
@@ -125,30 +135,27 @@ extension ServerSelectionView {
         cell.makeThemable()
     }
     
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        // Only allow selection if the source is enabled
-        if let cell = tableView.cellForRow(at: indexPath) as? ServerSelectionCell,
-            cell.representingSource?.isEnabled == true {
-            return indexPath
-        } else { return nil }
-    }
+    // This is no longer necessary as only enabled sources will be loaded
+//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        // Only allow selection if the source is enabled
+//        if let cell = tableView.cellForRow(at: indexPath) as? ServerSelectionCell,
+//            cell.representingSource?.isEnabled == true {
+//            return indexPath
+//        } else { return nil }
+//    }
 }
 
 // MARK: - TableView data source
 extension ServerSelectionView {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        1
-    }
+    func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return serverDataSource?.sources.count ?? 0
-        } else { return 0 }
+        section == 0 ? _sources.count : 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let sources = serverDataSource?.sources, indexPath.section == 0 {
-            let presentingSource = sources[indexPath.item]
+        if indexPath.section == 0 {
+            let presentingSource = _sources[indexPath.item]
             let cell = tableView.dequeueReusableCell(withIdentifier: "selection.cell", for: indexPath) as! ServerSelectionCell
             cell.setPresenting(presentingSource)
             return cell

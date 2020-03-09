@@ -1,7 +1,9 @@
-query ($userId: Int) {
+query ($userId: Int, $userName: String) {
     MediaListCollection(
         userId: $userId,
-        type: ANIME
+        userName: $userName,
+        type: ANIME,
+        sort: [ MEDIA_TITLE_ENGLISH, MEDIA_TITLE_ROMAJI, MEDIA_TITLE_NATIVE ]
     ) {
         lists {
             name,
