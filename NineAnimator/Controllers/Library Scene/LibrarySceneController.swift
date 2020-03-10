@@ -167,16 +167,23 @@ extension LibrarySceneController {
             return sortedRecordMap[0..<min(maximalNumberOfRecentlyWatched, sortedRecordMap.count)].map {
                 $0.0
             }
-        } .dispatch(on: .main).error {
+        } .dispatch(on: .main) .error {
             [weak self] error in
             Log.error("[LibrarySceneController] THIS SHOULD NOT HAPPEN - Finished loading recently watched list with an error: %@", error)
+            self?.recentlyWatchedListLoadingTask = nil
+        } .defer {
+            [weak self] _ in
             self?.recentlyWatchedListLoadingTask = nil
         } .finally {
             [weak self] results in
             guard let self = self else { return }
-            self.cachedRecentlyWatchedList = results
-            self.collectionView.reloadSections([ Section.recentlyWatched.rawValue ])
-            self.recentlyWatchedListLoadingTask = nil
+            
+            if self.cachedRecentlyWatchedList != results {
+                self.cachedRecentlyWatchedList = results
+                self.collectionView.reloadSections([
+                    Section.recentlyWatched.rawValue
+                ])
+            }
         }
     }
     
