@@ -27,18 +27,35 @@ extension Anilist {
         }
         
         return currentUser().thenPromise {
-            [unowned self] user in self.graphQL(fileQuery: "AniListUserMediaCollections", variables: [
-                "userId": user.id
-            ])
+            [unowned self] user -> NineAnimatorPromise<(NSDictionary, User)> in
+            self.graphQL(fileQuery: "AniListUserMediaCollections", variables: [
+                "userId": user.id,
+                "usernName": user.name
+            ]).then { ($0, user) }
         } .then {
-            [unowned self] responseDictionary in
+            [unowned self] responseDictionary, user in
             let collections = try DictionaryDecoder().decode(
                 GQLMediaListCollection.self,
-                from: try responseDictionary.value(at: "MediaListCollection", type: NSDictionary.self)
+                from: try responseDictionary.value(
+                    at: "MediaListCollection",
+                    type: NSDictionary.self
+                )
             )
-            return try collections.lists?.map {
+            let mappedCollections = try collections.lists?.map {
                 try StaticListingAnimeCollection(self, withCollectionObject: $0)
             }
+            
+            // List the collections in the user's preferred order
+            if let mediaListSortingOrder = user.mediaListOptions.animeList?.sectionOrder,
+                let mappedCollections = mappedCollections {
+                return mappedCollections.map {
+                    (mediaListSortingOrder.firstIndex(of: $0.title) ?? 100, $0)
+                } .sorted {
+                    $0.0 < $1.0
+                } .map { $1 }
+            }
+            
+            return mappedCollections
         }
     }
 }

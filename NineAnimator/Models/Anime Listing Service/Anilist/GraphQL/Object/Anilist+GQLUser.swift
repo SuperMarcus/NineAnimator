@@ -19,13 +19,26 @@
 
 import Foundation
 
-class Fastfile: LaneFile {
-	func screenshotsLane() {
-        desc("Generate new localized screenshots")
-		captureScreenshots(
-            outputDirectory: "fastlane/screenshots",
-            scheme: "ScreenshotAutomation"
-        )
-        frameScreenshots(path: "./fastlane/screenshots")
-	}
+// swiftlint:disable discouraged_optional_boolean
+
+extension Anilist {
+    struct GQLUser: Codable {
+        var id: Int?
+        var name: String?
+        var siteUrl: String?
+        var mediaListOptions: GQLMediaListOptions?
+    }
+    
+    struct GQLMediaListOptions: Codable {
+        var animeList: GQLMediaListTypeOptions?
+        var mangaList: GQLMediaListTypeOptions?
+    }
+    
+    struct GQLMediaListTypeOptions: Codable {
+        var sectionOrder: [String]?
+        var splitCompletedSectionByFormat: Bool?
+        var customLists: [String]?
+        var advancedScoring: [String]?
+        var advancedScoringEnabled: Bool?
+    }
 }

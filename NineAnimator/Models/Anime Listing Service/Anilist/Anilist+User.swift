@@ -24,6 +24,16 @@ extension Anilist {
         let id: Int
         let name: String
         let siteUrl: URL
+        let mediaListOptions: GQLMediaListOptions
+        
+        init(_ gqlUser: GQLUser) throws {
+            self.id = try gqlUser.id.tryUnwrap()
+            self.name = try gqlUser.name.tryUnwrap()
+            self.siteUrl = try URL(
+                string: try gqlUser.siteUrl.tryUnwrap()
+            ).tryUnwrap()
+            self.mediaListOptions = try gqlUser.mediaListOptions.tryUnwrap()
+        }
     }
     
     func currentUser() -> NineAnimatorPromise<User> {
@@ -34,14 +44,16 @@ extension Anilist {
         
         return graphQL(fileQuery: "AniListUser", variables: [:])
             .then {
-                results -> User in
-                guard let id = results.value(forKeyPath: "Viewer.id") as? Int,
-                    let name = results.value(forKeyPath: "Viewer.name") as? String,
-                    let siteUrlString = results.value(forKeyPath: "Viewer.siteUrl") as? String,
-                    let siteUrl = URL(string: siteUrlString) else {
-                    throw NineAnimatorError.responseError("Cannot find all entries required for the response")
-                }
-                return User(id: id, name: name, siteUrl: siteUrl)
+                response -> User in
+                let gqlUserEntry = try response.value(
+                    at: "Viewer",
+                    type: [String: Any].self
+                )
+                let gqlUser = try DictionaryDecoder().decode(
+                    GQLUser.self,
+                    from: gqlUserEntry
+                )
+                return try .init(gqlUser)
             } .then {
                 [unowned self] in
                 self._currentUser = $0

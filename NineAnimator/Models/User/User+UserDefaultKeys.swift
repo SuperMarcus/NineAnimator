@@ -33,6 +33,7 @@ extension NineAnimatorUser {
         static var sendDownloadNotifications: String { "episode.download.sendDownloadNotifications" }
         static var recentEpisode: String { "episode.recent" }
         static var recentSource: String { "source.recent" }
+        static var searchHistory: String { "history.search" }
         static var sourceSolveChallenges: String { "source.challengeSolver" }
         static var recentServer: String { "server.recent" }
         static var persistedProgresses: String { "episode.progress" }

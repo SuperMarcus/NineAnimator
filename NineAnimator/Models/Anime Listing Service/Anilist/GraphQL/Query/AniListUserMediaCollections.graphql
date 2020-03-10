@@ -1,6 +1,7 @@
-query ($userId: Int) {
+query ($userId: Int, $userName: String) {
     MediaListCollection(
         userId: $userId,
+        userName: $userName,
         type: ANIME
     ) {
         lists {

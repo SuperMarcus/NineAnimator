@@ -33,32 +33,27 @@ extension Anilist {
             "startTime": Int(startOfToday.timeIntervalSince1970),
             "endTime": Int(sevenDaysFromToday.timeIntervalSince1970)
         ]) .then {
-            responseDictionary in
-            let animeScheduleEntities = try responseDictionary.value(
-                at: "Page.airingSchedules",
-                type: [NSDictionary].self
-            )
+            [weak self] responseDictionary in
+            guard let self = self else {
+                return nil
+            }
             
-            return try animeScheduleEntities.map {
-                animeScheduleEntry in
-                let airingEpisode = try animeScheduleEntry.value(at: "episode", type: Int.self)
-                let mediaEntry = try animeScheduleEntry.value(at: "media", type: NSDictionary.self)
-                let reference = try ListingAnimeReference(self, withMediaEntry: mediaEntry)
-                let airingTimestamp = try animeScheduleEntry.value(at: "airingAt", type: Int.self)
-                let airingDate = Date(timeIntervalSince1970: TimeInterval(airingTimestamp))
-                let synopsis = try SwiftSoup.parse(
-                    try mediaEntry.value(at: "description", type: String.self)
-                ).text()
-                let numEpisodes = mediaEntry.valueIfPresent(at: "episodes", type: Int.self)
-                
-                let item = CalendarItem(
-                    date: airingDate,
-                    episode: airingEpisode,
-                    totalEpisodes: numEpisodes,
-                    mediaSynopsis: synopsis,
-                    reference: reference
+            let currentPage = try DictionaryDecoder().decode(
+                GQLPage.self,
+                from: try responseDictionary.value(at: "Page", type: [String: Any].self)
+            )
+            let scheduleItems = try currentPage.airingSchedules.tryUnwrap(.decodeError)
+            
+            return try scheduleItems.compactMap {
+                scheduleItem -> CalendarItem? in
+                let media = try scheduleItem.media.tryUnwrap(.decodeError)
+                return !NineAnimator.default.user.allowNSFWContent && media.isAdult == true ? nil : CalendarItem(
+                    date: Anilist.date(fromAnilistTimestamp: try scheduleItem.airingAt.tryUnwrap(.decodeError)),
+                    episode: try scheduleItem.episode.tryUnwrap(.decodeError),
+                    totalEpisodes: media.episodes,
+                    mediaSynopsis: try media.description.tryUnwrap(.decodeError),
+                    reference: try ListingAnimeReference(self, withMediaObject: try scheduleItem.media.tryUnwrap(.decodeError))
                 )
-                return item
             }
         }
     }

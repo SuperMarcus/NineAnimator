@@ -891,6 +891,7 @@ extension AnimeViewController {
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
         if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
             tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
+            tracker.endWatching(episode: episodeLink)
         }
         DispatchQueue.main.async { self.concludeContextMenu() }
     }

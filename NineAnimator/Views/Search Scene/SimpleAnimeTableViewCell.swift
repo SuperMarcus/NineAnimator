@@ -37,35 +37,48 @@ class SimpleAnimeTableViewCell: UITableViewCell, Themable {
     
     func updateText() {
         if let item = item {
-            let label = NSMutableAttributedString(
-                string: item.link.name,
-                attributes: [
-                    .foregroundColor: Theme.current.primaryText,
-                    .font: UIFont.systemFont(
-                        ofSize: UIFont.systemFontSize,
-                        weight: .light
-                    )
-                ]
-            )
-            
-            switch item.link {
-            case let .anime(animeLink):
-                let sourceName = animeLink.source.name
-                label.append(.init(
-                    string: " from \(sourceName)",
+            if let link = item.link {
+                let label = NSMutableAttributedString(
+                    string: link.name,
                     attributes: [
-                        .foregroundColor: Theme.current.secondaryText,
+                        .foregroundColor: Theme.current.primaryText,
                         .font: UIFont.systemFont(
                             ofSize: UIFont.systemFontSize,
                             weight: .light
                         )
                     ]
-                ))
-            default: break
+                )
+                
+                switch item.link {
+                case let .anime(animeLink):
+                    let sourceName = animeLink.source.name
+                    label.append(.init(
+                        string: " from \(sourceName)",
+                        attributes: [
+                            .foregroundColor: Theme.current.secondaryText,
+                            .font: UIFont.systemFont(
+                                ofSize: UIFont.systemFontSize,
+                                weight: .light
+                            )
+                        ]
+                    ))
+                default: break
+                }
+                
+                // Update label contents
+                textLabel?.attributedText = label
+            } else { // Set label to keywords
+                textLabel?.attributedText = .init(
+                    string: item.keywords,
+                    attributes: [
+                        .foregroundColor: Theme.current.primaryText,
+                        .font: UIFont.systemFont(
+                            ofSize: UIFont.systemFontSize,
+                            weight: .light
+                        )
+                    ]
+                )
             }
-            
-            // Update label contents
-            textLabel?.attributedText = label
         }
     }
 }

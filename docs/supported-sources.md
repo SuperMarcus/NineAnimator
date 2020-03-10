@@ -17,7 +17,7 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - FastStream (unavailable for Google Cast)
 - OpenLoad (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/commit/8d1c0fc196c04c0ca30c6d3b8281ea88b54ab08a))
 - HydraX (and replay.watch)
-- Self-hosted Streaming Services ([masterani.me](//masterani.me), [4anime](//4anime.to), [Anime Twist](//twist.moe)), as well as [Wonderful Subs](//wonderfulsubs.com)
+- Self-hosted Streaming Services ([4anime](//4anime.to), [Anime Twist](//twist.moe))
 
 All of the sources above support downloading. More hosts may be added later.
 Feel free to open an issue to request additional hosts.
@@ -33,12 +33,6 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [WonderfulSubs](//wonderfulsubs.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Ratings and Air Date)
-    - [x] Detailed episode synopsis
 - [gogoanime.io](//gogoanime.io)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links

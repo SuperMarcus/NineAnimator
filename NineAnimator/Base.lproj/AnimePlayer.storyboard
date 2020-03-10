@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -12,12 +12,12 @@
             <objects>
                 <tableViewController id="K93-Pu-iF1" customClass="AnimeViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FZe-Ek-Brt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="1RC-uj-48l" customClass="AnimeHeadingView" customModule="NineAnimator" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="227"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="227"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NFM-xu-DQr" userLabel="Anime Poster">
@@ -50,7 +50,7 @@
                                     </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Y2p-cA-dMW">
-                                    <rect key="frame" x="152" y="16" width="207" height="30"/>
+                                    <rect key="frame" x="152" y="16" width="246" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="9g2-RM-j4c"/>
                                     </constraints>
@@ -63,7 +63,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="600" text="Anime Alias 1, Anime Alias 2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="Qv3-4i-naJ">
-                                    <rect key="frame" x="152" y="46" width="183" height="17"/>
+                                    <rect key="frame" x="152" y="46" width="222" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
@@ -73,10 +73,10 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <view contentMode="scaleToFill" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="e4R-Hb-xRk" userLabel="Actions Container">
-                                    <rect key="frame" x="152" y="63" width="215" height="97.5"/>
+                                    <rect key="frame" x="152" y="63" width="254" height="97.5"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="Subscribed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WA8-YI-xRl">
-                                            <rect key="frame" x="0.0" y="0.0" width="215" height="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="254" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                             <nil key="highlightedColor"/>
@@ -106,7 +106,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRU-Fx-6li" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="173" y="67.5" width="30" height="30"/>
+                                            <rect key="frame" x="212" y="67.5" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="PuN-A6-gAW"/>
                                                 <constraint firstAttribute="height" constant="30" id="ttn-dt-NOa"/>
@@ -124,7 +124,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="251" text="Loading anime information" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="XG2-wy-XRz">
-                                            <rect key="frame" x="0.0" y="31.5" width="169" height="30"/>
+                                            <rect key="frame" x="0.0" y="31.5" width="208" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -154,7 +154,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AO8-O4-tRP" userLabel="Extra Information Container">
-                                    <rect key="frame" x="24" y="176.5" width="343" height="50"/>
+                                    <rect key="frame" x="24" y="176.5" width="382" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" horizontalHuggingPriority="500" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="zNL-Js-WKN" userLabel="Ratings" customClass="AnimeRatingView" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
@@ -197,10 +197,10 @@
                                             </connections>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hTe-W7-LEe" userLabel="Air Date" customClass="AnimeAirDateView" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="125" y="0.0" width="218" height="50"/>
+                                            <rect key="frame" x="125" y="0.0" width="257" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="KNz-kA-xO5">
-                                                    <rect key="frame" x="146" y="4" width="64" height="20.5"/>
+                                                    <rect key="frame" x="185" y="4" width="64" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -210,7 +210,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Air Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0sy-Go-eMO">
-                                                    <rect key="frame" x="167.5" y="24.5" width="42.5" height="13.5"/>
+                                                    <rect key="frame" x="206.5" y="24.5" width="42.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -310,14 +310,14 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.suggestion" rowHeight="66" id="zIJ-Zt-7Jc" customClass="AnimePredictedEpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="255" width="375" height="66"/>
+                                <rect key="frame" x="0.0" y="255" width="414" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zIJ-Zt-7Jc" id="ELY-ri-KMl">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="66"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Solid Play Icon" translatesAutoresizingMaskIntoConstraints="NO" id="10S-Cq-F4m">
-                                            <rect key="frame" x="16" y="15.5" width="35" height="35"/>
+                                            <rect key="frame" x="20" y="15.5" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" priority="800" constant="35" id="Ti8-1r-qO9"/>
                                                 <constraint firstAttribute="width" secondItem="10S-Cq-F4m" secondAttribute="height" multiplier="1:1" id="VGY-lg-1aw"/>
@@ -325,7 +325,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="No Suggesting Episode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="AVT-Pg-Bdx">
-                                            <rect key="frame" x="59" y="30" width="265" height="19.5"/>
+                                            <rect key="frame" x="63" y="30" width="296" height="19.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -335,7 +335,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="500" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bBA-Ks-wXf">
-                                            <rect key="frame" x="324" y="15.5" width="35" height="35"/>
+                                            <rect key="frame" x="359" y="15.5" width="35" height="35"/>
                                             <state key="normal" image="Compass"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -345,7 +345,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Start Watching" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QaR-tX-zXn">
-                                            <rect key="frame" x="59" y="15.5" width="265" height="14.5"/>
+                                            <rect key="frame" x="63" y="15.5" width="296" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -381,14 +381,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.synopsis" rowHeight="135" id="C8r-ap-OkD" customClass="AnimeSynopsisCellTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="321" width="375" height="135"/>
+                                <rect key="frame" x="0.0" y="321" width="414" height="135"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C8r-ap-OkD" id="hTI-uy-sG6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Synopsis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxU-lU-8me">
-                                            <rect key="frame" x="16" y="17" width="284" height="22"/>
+                                            <rect key="frame" x="20" y="17" width="319" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="cVr-Vc-zwl"/>
                                             </constraints>
@@ -401,7 +401,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="700" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qx1-Ur-pF8">
-                                            <rect key="frame" x="12" y="39" width="351" height="85"/>
+                                            <rect key="frame" x="16" y="39" width="382" height="85"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" priority="250" constant="96" id="U2Q-Fj-ZRu"/>
@@ -414,7 +414,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </textView>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFd-Ay-cFU">
-                                            <rect key="frame" x="308" y="0.0" width="51" height="39"/>
+                                            <rect key="frame" x="347" y="0.0" width="51" height="39"/>
                                             <state key="normal" title="Expand"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -445,14 +445,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" rowHeight="62" id="0Uk-RM-2XQ" customClass="EpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="456" width="375" height="62"/>
+                                <rect key="frame" x="0.0" y="456" width="414" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uk-RM-2XQ" id="rZ2-du-FqS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Episode Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="wtb-zz-Opg">
-                                            <rect key="frame" x="16" y="11" width="300" height="20.5"/>
+                                            <rect key="frame" x="20" y="11" width="331" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -462,7 +462,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="xsl-vp-f0K" userLabel="Anime Progress Container">
-                                            <rect key="frame" x="16" y="31.5" width="308" height="19.5"/>
+                                            <rect key="frame" x="20" y="31.5" width="339" height="19.5"/>
                                             <subviews>
                                                 <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yQy-Cx-TTd">
                                                     <rect key="frame" x="0.0" y="9" width="120" height="2"/>
@@ -476,7 +476,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K5w-32-GEP">
-                                                    <rect key="frame" x="128" y="0.0" width="180" height="19.5"/>
+                                                    <rect key="frame" x="128" y="0.0" width="211" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -498,7 +498,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="752" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B2n-TQ-hy9" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="324" y="13.5" width="35" height="35"/>
+                                            <rect key="frame" x="359" y="13.5" width="35" height="35"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="35" id="GLx-iq-W6a"/>
                                                 <constraint firstAttribute="width" secondItem="B2n-TQ-hy9" secondAttribute="height" multiplier="1:1" id="n7q-1R-Ncn"/>
@@ -532,14 +532,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode.detailed" rowHeight="113" id="aDw-5S-Pc5" customClass="DetailedEpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="518" width="375" height="113"/>
+                                <rect key="frame" x="0.0" y="518" width="414" height="113"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aDw-5S-Pc5" id="Iex-hH-e25">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMT-ZF-O7B">
-                                            <rect key="frame" x="16" y="19" width="300" height="16"/>
+                                            <rect key="frame" x="20" y="19" width="331" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -549,7 +549,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Episode Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Vsi-eC-jxx">
-                                            <rect key="frame" x="16" y="36" width="300" height="21.5"/>
+                                            <rect key="frame" x="20" y="36" width="331" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -559,7 +559,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No synopsis for this episode." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="K1G-eG-Vkn">
-                                            <rect key="frame" x="16" y="63.5" width="343" height="14.5"/>
+                                            <rect key="frame" x="20" y="63.5" width="374" height="14.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -569,7 +569,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="REM-IJ-4Ku" userLabel="Anime Progress Container">
-                                            <rect key="frame" x="16" y="82" width="343" height="19"/>
+                                            <rect key="frame" x="20" y="82" width="374" height="19"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="500" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-hm-aqK">
                                                     <rect key="frame" x="0.0" y="8.5" width="120" height="2"/>
@@ -582,7 +582,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </progressView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" text="50% left to watch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GaV-Q7-TKT">
-                                                    <rect key="frame" x="128" y="0.0" width="215" height="19"/>
+                                                    <rect key="frame" x="128" y="0.0" width="246" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -605,7 +605,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qsN-rZ-dbV">
-                                            <rect key="frame" x="324" y="11" width="35" height="52.5"/>
+                                            <rect key="frame" x="359" y="11" width="35" height="52.5"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wev-7V-WQ7" customClass="OfflineAccessButton" customModule="NineAnimator" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="9" width="35" height="35"/>

@@ -17,25 +17,25 @@
 #  along with NineAnimator.  If not, see <http:#www.gnu.org/licenses/>.
 #
 
-# A list of devices you want to take the screenshots from
-devices([
-  "iPhone 11",
-  "iPhone 11 Pro",
-  "iPhone 11 Pro Max",
-  "iPhone 8 Plus",
-  "iPhone 8",
-  "iPad Pro (9.7-inch)",
-  "iPad Pro (11-inch)",
-  "iPad Pro (12.9-inch) (2nd generation)",
-  "iPad Pro (12.9-inch) (3rd generation)"
-])
+default_platform :ios
 
-languages([
-  "en-US"
-])
-
-scheme "ScreenshotAutomation"
-project "./NineAnimator.xcodeproj"
-clear_previous_screenshots true
-dark_mode true
-derived_data_path "./fastlane/derived_data"
+platform :ios do
+    
+    ### Screenshot Automation Lane
+    desc "Generate new localized screenshots"
+    lane :screenshots do
+        capture_screenshots(
+            output_directory: "fastlane/screenshots",
+            scheme: "ScreenshotAutomation"
+        )
+        frame_screenshots(path: "./fastlane/screenshots")
+    end
+    
+    desc "Remove inactive users on TestFlight"
+    lane :clean_testers do
+        clean_testflight_testers(
+            days_of_inactivity: 120
+        )
+    end
+    
+end

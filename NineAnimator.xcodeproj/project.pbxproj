@@ -76,6 +76,7 @@
 		2C2C54FB2216066100BAA76E /* User+History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FA2216066100BAA76E /* User+History.swift */; };
 		2C2C54FD221606CA00BAA76E /* User+Synchronize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FC221606CA00BAA76E /* User+Synchronize.swift */; };
 		2C2C54FF221606F800BAA76E /* User+UserDefaultKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2C54FE221606F800BAA76E /* User+UserDefaultKeys.swift */; };
+		2C2EACB22415FBFF007C9BAC /* Anilist+GQLUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2EACB12415FBFF007C9BAC /* Anilist+GQLUser.swift */; };
 		2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* UserNotificationManager.swift */; };
 		2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */; };
 		2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */; };
@@ -516,6 +517,7 @@
 		2C2C54FC221606CA00BAA76E /* User+Synchronize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Synchronize.swift"; sourceTree = "<group>"; };
 		2C2C54FE221606F800BAA76E /* User+UserDefaultKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+UserDefaultKeys.swift"; sourceTree = "<group>"; };
 		2C2D4C6223E5F9A400B43D0A /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Snapfile; path = fastlane/Snapfile; sourceTree = SOURCE_ROOT; };
+		2C2EACB12415FBFF007C9BAC /* Anilist+GQLUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLUser.swift"; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCell.swift; sourceTree = "<group>"; };
@@ -2032,6 +2034,7 @@
 				2C6984E8227D46FD00C9EF0E /* Anilist+GQLAiringSchedule.swift */,
 				2C6984EA227D477C00C9EF0E /* Anilist+GQLMedia.swift */,
 				2C6984EC227D490900C9EF0E /* Anilist+GQLDate.swift */,
+				2C2EACB12415FBFF007C9BAC /* Anilist+GQLUser.swift */,
 			);
 			path = Object;
 			sourceTree = "<group>";
@@ -2390,6 +2393,7 @@
 				2CCC746B21C098860007502A /* SearchMasterAnime.swift in Sources */,
 				2C684BD4229066BB00E1BA35 /* AnimePahe+Episode.swift in Sources */,
 				2C8536942234093A00A5CFB9 /* WonderfulSubs+Anime.swift in Sources */,
+				2C2EACB22415FBFF007C9BAC /* Anilist+GQLUser.swift in Sources */,
 				2C1C716F221853AD00760A69 /* Anilist.swift in Sources */,
 				2C6CF24E221C2E090009D554 /* InformationSceneHeadingTableViewCell.swift in Sources */,
 				2C0CFC3D2263D9AB00EC793E /* DiscoveryLoadingTableViewCell.swift in Sources */,
@@ -3157,7 +3161,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3170,7 +3174,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3187,7 +3191,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 2;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3200,7 +3204,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
