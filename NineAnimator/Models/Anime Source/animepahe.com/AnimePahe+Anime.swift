@@ -21,14 +21,18 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimePahe {
-    fileprivate struct ReleaseResponse: Codable {
+    struct ReleaseResponse: Codable {
         var total: Int
         var per_page: Int
+        var last_page: Int
+        var from: Int?
+        var to: Int?
+        var data: [ReleaseEpisodeItem]?
     }
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         request(browseUrl: link.link).thenPromise {
-            responseContent -> NineAnimatorPromise<(ReleaseResponse, String, String, [Anime.AttributeKey: Any], AnimeLink)> in
+            responseContent -> NineAnimatorPromise<(ClosedRange<Int>, Int, String, String, [Anime.AttributeKey: Any], AnimeLink)> in
             let bowl = try SwiftSoup.parse(responseContent)
             
             // Find the anime identifier with a regex
@@ -75,33 +79,23 @@ extension NASourceAnimePahe {
             }
             
             // Request the episodes on the first page in ascending order
-            return self.request(
-                ajaxPathDictionary: "/api",
-                query: [
-                    "m": "release",
-                    "id": animeIdentifier,
-                    "l": 30,
-                    "sort": "episode_asc",
-                    "page": 1
-                ]
-            ) .then { response in (
-                try DictionaryDecoder().decode(ReleaseResponse.self, from: response),
+            return self.lookupEpisodeRange(animeIdentifier: animeIdentifier).then { range, perPageEntries in (
+                range,
+                perPageEntries,
                 animeIdentifier,
                 animeSynopsis,
                 animeAttributes,
                 reconstructedAnimeLink
             ) }
         } .then {
-            release, animeIdentifier, animeSynopsis, animeAttributes, reconstructedAnimeLink -> Anime in
+            episodeRange, perPageEntries, animeIdentifier, animeSynopsis, animeAttributes, reconstructedAnimeLink -> Anime in
             // Using a little trick here: since animepahe lists episodes in pages, it is
             // slow and quite unreasonable to interate through all pages. Therefore, stores
             // the episode number and page number in the episode identifeir, and then
             // uses that information to request the real episode identifier when requesting
             // the Episode object.
-            let episodeIdentifiers = (0..<release.total).map {
-                episodeNumber -> (episodeNumber: Int, page: Int) in
-                (episodeNumber + 1, (episodeNumber / release.per_page) + 1)
-            }
+            let episodeIdentifiers: [(episodeNumber: Int, page: Int)] = episodeRange
+                .map { ($0, ($0 / perPageEntries) + 1) }
             
             // The three known providers
             let staticProviders = [
@@ -133,6 +127,76 @@ extension NASourceAnimePahe {
                     }
                 )
             )
+        }
+    }
+    
+    /// Lookup anime episode range and the per-page parameter
+    fileprivate func lookupEpisodeRange(animeIdentifier: String) -> NineAnimatorPromise<(range: ClosedRange<Int>, perPage: Int)> {
+        self.request(
+            ajaxPathDictionary: "/api",
+            query: [
+                "m": "release",
+                "id": animeIdentifier,
+                "l": 30,
+                "sort": "episode_asc",
+                "page": 1
+            ]
+        ) .then {
+            try DictionaryDecoder().decode(
+                ReleaseResponse.self,
+                from: $0
+            )
+        } .thenPromise {
+            releaseFirstPage in
+            let firstPageData = try releaseFirstPage.data
+                .tryUnwrap(.responseError("No episodes were found in this anime"))
+            let firstEpisodeNumber = try firstPageData.first
+                .tryUnwrap(.responseError("No episodes were found in this anime"))
+                .episode
+            
+            // Release only contains one page
+            if releaseFirstPage.last_page == 1 {
+                let lastEpisodeItem = try firstPageData.last
+                    .tryUnwrap(.responseError("No episodes were found in this anime"))
+                let lastEpisodeNumber = max(
+                    lastEpisodeItem.episode,
+                    lastEpisodeItem.episode2 ?? 0
+                )
+                return .success((
+                    (firstEpisodeNumber...lastEpisodeNumber),
+                    releaseFirstPage.per_page
+                ))
+            }
+            
+            return self.request(
+                ajaxPathDictionary: "/api",
+                query: [
+                    "m": "release",
+                    "id": animeIdentifier,
+                    "l": 30,
+                    "sort": "episode_asc",
+                    "page": releaseFirstPage.last_page
+                ]
+            ) .then {
+                try DictionaryDecoder().decode(
+                    ReleaseResponse.self,
+                    from: $0
+                )
+            } .then {
+                releaseLastPage in
+                let lastPageData = try releaseLastPage.data
+                    .tryUnwrap(.responseError("No episodes were found in this anime"))
+                let lastEpisodeItem = try lastPageData.last
+                    .tryUnwrap(.responseError("No episodes were found in this anime"))
+                let lastEpisodeNumber = max(
+                    lastEpisodeItem.episode,
+                    lastEpisodeItem.episode2 ?? 0
+                )
+                return (
+                    firstEpisodeNumber...lastEpisodeNumber,
+                    releaseFirstPage.per_page
+                )
+            }
         }
     }
 }
