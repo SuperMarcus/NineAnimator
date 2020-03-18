@@ -151,6 +151,7 @@ extension NineAnimator {
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceMasterAnime(with: self))
+        register(source: NASourceAnimeUnity(with: self))
     }
 }
 
