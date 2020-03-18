@@ -283,6 +283,18 @@ extension BaseSource {
         let randomUA = pool[Int.random(in: 0..<pool.count)]
         _internalUAIdentity = randomUA
         
+        // Hold references to old sessions
+        var oldBrowseSession: Session? = browseSession
+        var oldRetriverSession: Session? = retriverSession
+        
+        oldBrowseSession?.cancelAllRequests {
+            oldBrowseSession = nil
+        }
+        
+        oldRetriverSession?.cancelAllRequests {
+            oldRetriverSession = nil
+        }
+        
         // Recreate the sessions
         browseSession = createBrowseSession()
         retriverSession = createRetriverSession()

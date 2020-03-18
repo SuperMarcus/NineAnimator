@@ -130,10 +130,10 @@ extension CloudflareWAFResolver {
         // Abort after 2 tries
         if request.retryCount > 1 {
             Log.info("[CloudflareWAFResolver] Maximal number of retry reached, renewing identity.")
-            self.parent?.renewIdentity()
             for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
             }
+            self.parent?.renewIdentity()
             return .success(.evaluateNext)
         }
         
