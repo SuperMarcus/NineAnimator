@@ -38,8 +38,6 @@ extension NASourceAnimeUnity {
                 } else { return nil }
             } .reduce(into: [AnimeLink]()) {
                 container, elements in
-                print("--------")
-                print(try elements.a.text())
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
                     let animeTitle = try? elements.a.text(),//try? elements.img.attr("title"),
@@ -64,8 +62,6 @@ extension NASourceAnimeUnity {
                 } else { return nil }
             } .reduce(into: [AnimeLink]()) {
                 container, elements in
-                print("--------")
-                print(try elements.a.text())
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
                     let animeTitle = try? elements.a.text(),// try? elements.img.attr("title"),
