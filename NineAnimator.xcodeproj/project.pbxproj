@@ -195,6 +195,7 @@
 		2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */; };
 		2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */; };
 		2C7A1D5A2251467100DD83A5 /* MyAnimeList+AnimeInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */; };
+		2C7B27D62423D22A00DF1337 /* NineAnimator+Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B27D52423D22A00DF1337 /* NineAnimator+Environment.swift */; };
 		2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */; };
 		2C7B7AA82296E819002EC74C /* KiwikParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA72296E819002EC74C /* KiwikParser.swift */; };
 		2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */; };
@@ -627,6 +628,7 @@
 		2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Provider.swift"; sourceTree = "<group>"; };
 		2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
 		2C7A1D592251467100DD83A5 /* MyAnimeList+AnimeInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+AnimeInformation.swift"; sourceTree = "<group>"; };
+		2C7B27D52423D22A00DF1337 /* NineAnimator+Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimator+Environment.swift"; sourceTree = "<group>"; };
 		2C7B7AA42295A57E002EC74C /* PackerDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackerDecoder.swift; sourceTree = "<group>"; };
 		2C7B7AA72296E819002EC74C /* KiwikParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KiwikParser.swift; sourceTree = "<group>"; };
 		2C7B7AA92296F8CA002EC74C /* VidStreamingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamingParser.swift; sourceTree = "<group>"; };
@@ -1252,6 +1254,7 @@
 				2C1C71842219AFB700760A69 /* TrackingContext.swift */,
 				2C4ABC7821B59CC8009B4D47 /* NineAnimator.swift */,
 				2C6A390D23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift */,
+				2C7B27D52423D22A00DF1337 /* NineAnimator+Environment.swift */,
 				2C4ABC8221B7401B009B4D47 /* AnimeLink.swift */,
 				2C4ABC8421B74A51009B4D47 /* Featured.swift */,
 				2C4ABC9921B88F8C009B4D47 /* Anime.swift */,
@@ -2386,6 +2389,7 @@
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
 				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,
 				2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */,
+				2C7B27D62423D22A00DF1337 /* NineAnimator+Environment.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
 				2C480017237072A000ADB03F /* LibraryRecentAnimeCell.swift in Sources */,
