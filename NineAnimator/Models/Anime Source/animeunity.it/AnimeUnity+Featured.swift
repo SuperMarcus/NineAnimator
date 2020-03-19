@@ -22,12 +22,41 @@ import SwiftSoup
 
 extension NASourceAnimeUnity {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browseUrl: endpointURL).then {_ in
-            /*
-            responseContent in
+        request(browseUrl: endpointURL).then { responseContent in
+            //div.text-center>div.text-center>div a
+            //div.current-anime>div.row>div a
             let endpointURL = self.endpointURL
             let bowl = try SwiftSoup.parse(responseContent)
-            let popularLinkElements = try bowl.select("#populartodaycontent>div a")
+            let popularLinkElements = try bowl.select("div.current-anime>div.row>div>div.text-center a")//"div.current-anime>div.row>div a")
+            let recentadded = try bowl.select("div.text-center>div.text-center>div a")
+            
+            
+            let recentAnimeLinks = try recentadded.compactMap {
+                aElement -> (a: Element, img: Element)? in
+                if let imageElement = try aElement.select("img").first() {
+                    return (aElement, imageElement)
+                } else { return nil }
+            } .reduce(into: [AnimeLink]()) {
+                container, elements in
+                print("--------")
+                print(try elements.a.text())
+                if let artworkPath = try? elements.img.attr("src"),
+                    let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
+                    let animeTitle = try? elements.a.text(),//try? elements.img.attr("title"),
+                    let animePath = try? elements.a.attr("href"),
+                    
+                    let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
+                    // Construct and add anime link
+                    container.append(.init(
+                        title: animeTitle,
+                        link: animeUrl,
+                        image: artworkUrl,
+                        source: self
+                    ))
+                }
+            }
+            
+            
             let popularAnimeLinks = try popularLinkElements.compactMap {
                 aElement -> (a: Element, img: Element)? in
                 if let imageElement = try aElement.select("img").first() {
@@ -35,10 +64,11 @@ extension NASourceAnimeUnity {
                 } else { return nil }
             } .reduce(into: [AnimeLink]()) {
                 container, elements in
-
+                print("--------")
+                print(try elements.a.text())
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = try? elements.img.attr("title"),
+                    let animeTitle = try? elements.a.text(),// try? elements.img.attr("title"),
                     let animePath = try? elements.a.attr("href"),
                     let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
                     // Construct and add anime link
@@ -50,10 +80,9 @@ extension NASourceAnimeUnity {
                     ))
                 }
             }
-            */
             return BasicFeaturedContainer(
-                featured:[],
-                latest: []
+                featured:popularAnimeLinks,
+                latest:recentAnimeLinks
             )
         }
     }

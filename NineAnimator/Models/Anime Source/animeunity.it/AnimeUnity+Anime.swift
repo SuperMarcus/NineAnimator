@@ -49,25 +49,16 @@ extension NASourceAnimeUnity {
             let episodes = try bowl.select("div.text-center div").reduce(into: [EpisodeLink]()) {
                 collection, container in
                 x += 1
-                let episodeName = String(x)/*try container
-                    .text()
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
- */
+                let episodeName = String(x)
                 var episodeLink = try container.select("a").attr("href")
-                print(episodeLink)
                 episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
-                print(episodeLink)
-                print("-----------")
                 if (!episodeLink.isEmpty){
-                    print(episodeLink)
                     let newString = episodeLink.replacingOccurrences(of: "\'", with: "%27")
-                    print("--")
-                    print(newString)
                     episodeLink = "https://animeunity.it/" + newString
                 collection.append(.init(
                     identifier: episodeLink,
                     name: episodeName,
-                    server: NASourceAnimeUnity.FourAnimeStream,
+                    server: NASourceAnimeUnity.AnimeUnityStream,
                     parent: reconstructedAnimeLink
                 ))
             }
@@ -80,24 +71,19 @@ extension NASourceAnimeUnity {
                 if (try entry.text().contains("TRAMA")){
                     let trama = try entry.text()
                     animeSynopsis = String(trama.dropFirst(7))
-//                     = try entry.text()
                 }
-                                if (try entry.text().contains("TITOLO")){
-                                    let title = try entry.text()
-                                    animeTitle = String(title.dropFirst(8))
-                //                     = try entry.text()
-                                }
+                if (try entry.text().contains("TITOLO")){
+                    let title = try entry.text()
+                    animeTitle = String(title.dropFirst(8))
+                }
                 return trama
             }
-//            animeSynopsis = anime.first ?? ""
             // Attributes
             var additionalAttributes = [Anime.AttributeKey: Any]()
             let detailContainers = try bowl.select("div.info div.detail")
             
             for container in detailContainers {
-                _ = "ciao"//= try container.select(".title-side")
-                let attributeName = ""//try attributeNameContainer.text()
-//                try attributeNameContainer.remove()
+                let attributeName = ""
                 let attributeValue = try container
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
@@ -112,12 +98,10 @@ extension NASourceAnimeUnity {
                 alias: animeTitle,
                 additionalAttributes: additionalAttributes,
                 description: animeSynopsis,
-                on: [ NASourceAnimeUnity.FourAnimeStream: "4anime" ],
-                episodes: [ NASourceAnimeUnity.FourAnimeStream: episodes ],
+                on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],
+                episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodes ],
                 episodesAttributes: [:]
             )
         }
-        
     }
-    
 }

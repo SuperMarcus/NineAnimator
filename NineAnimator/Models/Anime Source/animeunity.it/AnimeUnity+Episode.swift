@@ -52,25 +52,11 @@ extension NASourceAnimeUnity {
                 ).tryUnwrap()
                 Log.info("[NASourceAnimeUnity] Resource found from packed scripts.")
             } else {
-                print("else")
-                
-                print(videoElement)
-//                let newString = oldString.replacingOccurrences(of: "\'", with: "%27")
-                // Video element was found, using the presented one
-//                videoSource = try URL(string: videoElement.attr("src")).tryUnwrap()
-                let str = try videoElement.attr(("src"))
-//                let newString = str.replacingOccurrences(of: "\'", with: "%27")
                 let videourl = try videoElement.attr("src")
-                print("")
-                print("altro")
                 let newString = videourl.replacingOccurrences(of: "’", with: "%E2%80%99")
-                print(newString)
                 videoSource = try URL(string: newString) .tryUnwrap()
-                print("ciO")
                 Log.info("[NASourceAnimeUnity] Resource found from page source.")
-                print("else finito")
             }
-            print("ciao")
             return Episode(
                 link,
                 target: videoSource,

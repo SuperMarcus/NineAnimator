@@ -26,7 +26,7 @@ extension NASourceAnimeUnity {
             var totalPages: Int? { 1 }
             var availablePages: Int { _results == nil ? 0 : 1 }
             var moreAvailable: Bool { _results == nil }
-            var stringa:String!
+            var stringa:String = ""
             private let parent: NASourceAnimeUnity
             private var requestTask: NineAnimatorAsyncTask?
             private var _results: [AnimeLink]?
@@ -39,7 +39,7 @@ extension NASourceAnimeUnity {
             }
             
             func func_real() {
-                
+            
                 _ = [
                   "query": title
                 ]
@@ -74,7 +74,7 @@ extension NASourceAnimeUnity {
                         do {
                             let animeTitle = try entry.select("div>h6.card-title>b"/*"h6.card-title>b"*/)
                             let title = try animeTitle.text()
-                            if(title.isEmpty) {return nil}
+                            if (title.isEmpty) {return nil}
                             let animeLinkPath = try entry.select("div>a")
                             let url = try animeLinkPath.attr("href")
                             let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)

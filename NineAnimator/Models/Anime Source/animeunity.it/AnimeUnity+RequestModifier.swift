@@ -21,8 +21,6 @@ import Foundation
 import Kingfisher
 
 extension NASourceAnimeUnity: Kingfisher.ImageDownloadRequestModifier {
-    
-    
     /// Setup Kingfisher modifier for verified requests to resources
     func setupGlobalRequestModifier() {
         parent.registerAdditionalImageModifier(self)
