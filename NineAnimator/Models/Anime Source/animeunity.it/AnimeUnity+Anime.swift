@@ -61,11 +61,13 @@ extension NASourceAnimeUnity {
                     server: NASourceAnimeUnity.AnimeUnityStream,
                     parent: reconstructedAnimeLink
                 ))
-            }
+                }
             }
             
             // Information
             var animeSynopsis = ""
+            var anno = ""
+            var additionalAttributes = [Anime.AttributeKey: Any]()
             _ = try bowl.select("div.card-body p").compactMap {entry -> String in
                 let trama = ""
                 if (try entry.text().contains("TRAMA")){
@@ -76,10 +78,14 @@ extension NASourceAnimeUnity {
                     let title = try entry.text()
                     animeTitle = String(title.dropFirst(8))
                 }
+                if (try entry.text().contains("ANNO DI USCITA:")){
+                    let airdate = try entry.text()
+                    additionalAttributes[.airDate] = String(airdate.dropFirst(16))
+                }
                 return trama
             }
             // Attributes
-            var additionalAttributes = [Anime.AttributeKey: Any]()
+            
             let detailContainers = try bowl.select("div.info div.detail")
             
             for container in detailContainers {
@@ -87,7 +93,6 @@ extension NASourceAnimeUnity {
                 let attributeValue = try container
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
-                
                 if attributeName.lowercased().contains("release date") {
                     additionalAttributes[.airDate] = attributeValue
                 }
