@@ -32,7 +32,7 @@
 "ea1-Tz-3qf.text" = "FINDING LOCAL RECORDS...";
 
 /* Class = "UILabel"; text = "LOADING DOWNLOAD STATUS"; ObjectID = "kex-EV-a5h"; */
-"kex-EV-a5h.text" = "LOADING DOWNLOAD STATUS";
+"kex-EV-a5h.text" = "ダウンロードステータスをロード中";
 
 /* Class = "UITabBarItem"; title = "Library"; ObjectID = "tJd-18-v6P"; */
 "tJd-18-v6P.title" = "ライブラリ";
