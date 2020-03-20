@@ -2,7 +2,7 @@
 "4Bw-Vm-E5a.normalTitle" = "リンクを開く";
 
 /* Class = "UILabel"; text = "Loading"; ObjectID = "4kp-IB-7Yg"; */
-"4kp-IB-7Yg.text" = "読み込み中…";
+"4kp-IB-7Yg.text" = "読み込み中";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
 "AWC-Sv-NA3.title" = "次を見る";
