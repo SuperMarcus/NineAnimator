@@ -28,7 +28,7 @@ extension NASourceAnimeUnity {
             var animeTitle = try bowl.select(".content p").text()
             _ = try bowl.select("div.card-body p").compactMap {entry -> String in
                 let trama = ""
-                if (try entry.text().contains("TITOLO")){
+                if try entry.text().contains("TITOLO") {
                     let title = try entry.text()
                     animeTitle = String(title.dropFirst(8))
                 }
@@ -52,7 +52,7 @@ extension NASourceAnimeUnity {
                 let episodeName = String(x)
                 var episodeLink = try container.select("a").attr("href")
                 episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
-                if (!episodeLink.isEmpty){
+                if !episodeLink.isEmpty {
                     let newString = episodeLink.replacingOccurrences(of: "\'", with: "%27")
                     episodeLink = "https://animeunity.it/" + newString
                 collection.append(.init(
@@ -66,19 +66,18 @@ extension NASourceAnimeUnity {
             
             // Information
             var animeSynopsis = ""
-            var anno = ""
             var additionalAttributes = [Anime.AttributeKey: Any]()
             _ = try bowl.select("div.card-body p").compactMap {entry -> String in
                 let trama = ""
-                if (try entry.text().contains("TRAMA")){
+                if try entry.text().contains("TRAMA") {
                     let trama = try entry.text()
                     animeSynopsis = String(trama.dropFirst(7))
                 }
-                if (try entry.text().contains("TITOLO")){
+                if try entry.text().contains("TITOLO") {
                     let title = try entry.text()
                     animeTitle = String(title.dropFirst(8))
                 }
-                if (try entry.text().contains("ANNO DI USCITA:")){
+                if try entry.text().contains("ANNO DI USCITA:") {
                     let airdate = try entry.text()
                     additionalAttributes[.airDate] = String(airdate.dropFirst(16))
                 }

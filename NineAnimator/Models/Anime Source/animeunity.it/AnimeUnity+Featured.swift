@@ -29,8 +29,6 @@ extension NASourceAnimeUnity {
             let bowl = try SwiftSoup.parse(responseContent)
             let popularLinkElements = try bowl.select("div.current-anime>div.row>div>div.text-center a")//"div.current-anime>div.row>div a")
             let recentadded = try bowl.select("div.text-center>div.text-center>div a")
-            
-            
             let recentAnimeLinks = try recentadded.compactMap {
                 aElement -> (a: Element, img: Element)? in
                 if let imageElement = try aElement.select("img").first() {
@@ -40,7 +38,7 @@ extension NASourceAnimeUnity {
                 container, elements in
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = try? elements.a.text(),//try? elements.img.attr("title"),
+                    let animeTitle = try? elements.a.text(),
                     let animePath = try? elements.a.attr("href"),
                     
                     let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
@@ -53,8 +51,6 @@ extension NASourceAnimeUnity {
                     ))
                 }
             }
-            
-            
             let popularAnimeLinks = try popularLinkElements.compactMap {
                 aElement -> (a: Element, img: Element)? in
                 if let imageElement = try aElement.select("img").first() {
@@ -64,7 +60,7 @@ extension NASourceAnimeUnity {
                 container, elements in
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = try? elements.a.text(),// try? elements.img.attr("title"),
+                    let animeTitle = try? elements.a.text(),
                     let animePath = try? elements.a.attr("href"),
                     let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
                     // Construct and add anime link
@@ -77,8 +73,8 @@ extension NASourceAnimeUnity {
                 }
             }
             return BasicFeaturedContainer(
-                featured:popularAnimeLinks,
-                latest:recentAnimeLinks
+                featured: popularAnimeLinks,
+                latest: recentAnimeLinks
             )
         }
     }

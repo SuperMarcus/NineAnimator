@@ -26,7 +26,7 @@ extension NASourceAnimeUnity {
             var totalPages: Int? { 1 }
             var availablePages: Int { _results == nil ? 0 : 1 }
             var moreAvailable: Bool { _results == nil }
-            var stringa:String = ""
+            var stringa = ""
             private let parent: NASourceAnimeUnity
             private var requestTask: NineAnimatorAsyncTask?
             private var _results: [AnimeLink]?
@@ -39,18 +39,15 @@ extension NASourceAnimeUnity {
             }
             
             func func_real() {
-            
                 _ = [
                   "query": title
                 ]
-                let params: Parameters = ["query":title]
-                //let param:[String:Any] = ["c":"archive"]
+                let params: Parameters = ["query": title]
                 let url = "https://animeunity.it/anime.php?c=archive"
                 
-                _ = AF.request(url, method: .post, parameters:params)
+                _ = AF.request(url, method: .post, parameters: params)
                 .responseData { response in
                     self.stringa =  (response.debugDescription)
-                   
                 }
             }
             
@@ -62,26 +59,26 @@ extension NASourceAnimeUnity {
                     browsePath: "/Search/Anime",
                     query: [ "keyword": title ]
                 ) .then {
-                    [weak self] responseContent -> [AnimeLink] in
+                    [weak self] _ -> [AnimeLink] in
                     guard let self = self else { throw NineAnimatorError.unknownError }
-                    var str_correct:String?
+                    var str_correct = ""
                     str_correct = self.stringa
                    
-                    let bowl = try SwiftSoup.parse(str_correct!)
+                    let bowl = try SwiftSoup.parse(str_correct)
                     let entries = try bowl.select("div.row>div.col-lg-4")
                     let resultingLinks = entries.compactMap {
                         entry -> AnimeLink? in
                         do {
                             let animeTitle = try entry.select("div>h6.card-title>b"/*"h6.card-title>b"*/)
                             let title = try animeTitle.text()
-                            if (title.isEmpty) {return nil}
+                            if title.isEmpty { return nil }
                             let animeLinkPath = try entry.select("div>a")
                             let url = try animeLinkPath.attr("href")
                             let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
 
                             let animeArtworkPath = try entry.select("img").attr("src")
                             _ = ""
-                            guard let animeUrl = URL(string :"https://animeunity.it/" + trimmed),
+                            guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
                                 let coverImage = URL(string: animeArtworkPath)
                             else {
                                 return nil
