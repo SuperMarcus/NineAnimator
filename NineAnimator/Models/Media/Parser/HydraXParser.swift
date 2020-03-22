@@ -27,7 +27,7 @@ class HydraXParser: VideoProviderParser {
     }
     
     private static let vipChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/vip")!
-    private static let guestChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/guest")!
+    private static let guestChannelResourceRequestUrl = URL(string: "https://ping.idocdn.com/")!
     
     private static let resourceInfoRegex = try! NSRegularExpression(
         pattern: "options\\s+=\\s+(\\{[^}]+\\})",
@@ -41,11 +41,14 @@ class HydraXParser: VideoProviderParser {
 //        var aspectratio: String
     }
     
+    private struct ResourceResponseSources: Codable {
+        var file: String
+        var type: String
+    }
+    
     private struct ResourceResponse: Codable {
-//        var status: Bool
-//        var hash: String
-        var link: String
-//        var thumbnail: String
+        var status: Bool
+        var sources: ResourceResponseSources?
     }
     
     func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
@@ -131,14 +134,20 @@ class HydraXParser: VideoProviderParser {
             ResourceResponse.self,
             from: resourceResponseData
         )
-        let target = try URL(string: resource.link).tryUnwrap()
+        let sources = try resource.sources.tryUnwrap(
+            .providerError("Unable to fetch the resourcee")
+        )
+        let target = try URL(
+            string: sources.file
+        ).tryUnwrap()
+        let isAggregated = sources.type.caseInsensitiveCompare("mp4") != .orderedSame
         Log.info("(HydraX Parser) found asset at %@", target.absoluteString)
         return BasicPlaybackMedia(
             url: target,
             parent: episode,
-            contentType: "application/vnd.apple.mpegurl",
+            contentType: isAggregated ? "application/vnd.apple.mpegurl" : "video/mp4",
             headers: [:],
-            isAggregated: true
+            isAggregated: isAggregated
         )
     }
     
