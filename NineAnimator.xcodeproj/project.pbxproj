@@ -636,6 +636,7 @@
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledFlowLayoutHelper.swift; sourceTree = "<group>"; };
 		2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+Clamp.swift"; sourceTree = "<group>"; };
+		2C85031E24271F610038F881 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kissanime.swift; sourceTree = "<group>"; };
 		2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+RequestModifier.swift"; sourceTree = "<group>"; };
 		2C8519AA22CC919800EEF3AC /* Kissanime+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+Featured.swift"; sourceTree = "<group>"; };
@@ -1480,6 +1481,7 @@
 				2C8519B822CE460C00EEF3AC /* third-party-lists.md */,
 				2C8519B922CE466B00EEF3AC /* credits.md */,
 				2CCD952D23E5239E005D4402 /* runtime.md */,
+				2C85031E24271F610038F881 /* CONTRIBUTING.md */,
 			);
 			path = docs;
 			sourceTree = SOURCE_ROOT;
