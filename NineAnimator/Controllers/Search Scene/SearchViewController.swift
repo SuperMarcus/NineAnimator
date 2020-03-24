@@ -161,6 +161,11 @@ extension SearchViewController {
     /// Perform the search with keywords
     func performSearch(keywords: String) {
         searchingKeywords = keywords.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        guard !searchingKeywords.isEmpty else {
+            return Log.info("[SearchViewController] Empty query detected. Not performing the search.")
+        }
+        
         NineAnimator.default.user.enqueueSearchHistory(keywords)
         self.updateSearchPool()
         self.updateSearchResults()
@@ -168,6 +173,9 @@ extension SearchViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect rows
+        tableView.deselectSelectedRows(animated: true)
+        
         if let cell = tableView.cellForRow(at: indexPath) as? SimpleAnimeTableViewCell,
             let item = cell.item {
             if let link = item.link {

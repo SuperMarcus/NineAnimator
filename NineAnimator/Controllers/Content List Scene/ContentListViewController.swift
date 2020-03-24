@@ -23,8 +23,7 @@ import UIKit
 class ContentListViewController: UITableViewController, ContentProviderDelegate {
     private var providerError: Error?
     
-    // swiftlint:disable:next implicitly_unwrapped_optional
-    private var contentSource: ContentProvider!
+    private var contentSource: ContentProvider?
     
     /// Hight of each result cell
     private let staticListElementHeight: CGFloat = 160
@@ -40,16 +39,17 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
     override func viewWillAppear(_ animated: Bool) {
         providerError = nil
         
-        // Make sure the content source exists
-        guard contentSource != nil else { return }
+        if contentSource == nil {
+            Log.error("[ContentListViewController] Content list scene initialized without a content source. The behavior of this scene is undefined.")
+        }
         
         // Set delegate
-        contentSource.delegate = self
-        title = contentSource.title
+        contentSource?.delegate = self
+        title = contentSource?.title ?? "Unknown"
         
         // Request the first page
-        if contentSource.availablePages == 0 && contentSource.moreAvailable {
-            contentSource.more()
+        if contentSource?.availablePages == 0 && contentSource?.moreAvailable == true {
+            contentSource?.more()
         }
     }
     
@@ -60,7 +60,9 @@ class ContentListViewController: UITableViewController, ContentProviderDelegate 
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
-        if distanceFromBottom < height { contentSource.more() }
+        if distanceFromBottom < height {
+            contentSource?.more()
+        }
     }
 }
 
@@ -100,20 +102,20 @@ extension ContentListViewController {
 // MARK: - Table view data source
 extension ContentListViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        guard contentSource != nil else { return 0 }
+        guard let contentSource = contentSource else { return 0 }
         guard providerError == nil else { return 1 }
         return contentSource.availablePages + (contentSource.moreAvailable || contentSource.totalPages == 0 ? 1 : 0)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if providerError != nil ||
-            section == contentSource.availablePages ||
-            contentSource.availablePages == 0 {
+            section == contentSource?.availablePages ||
+            contentSource?.availablePages == 0 {
             tableView.separatorStyle = .none
             return 1
         }
         tableView.separatorStyle = .singleLine
-        return contentSource.links(on: section).count
+        return contentSource?.links(on: section).count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -125,14 +127,14 @@ extension ContentListViewController {
             return cell
         }
         
-        if contentSource.availablePages == indexPath.section {
+        if contentSource?.availablePages == indexPath.section {
             let cell = tableView.dequeueReusableCell(withIdentifier: "search.loading", for: indexPath) as! ContentListingLoadingTableViewCell
             cell.activates()
             cell.makeThemable()
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "search.result", for: indexPath) as? ListingEntryTableViewCell else { fatalError("cell type dequeued is not AnimeSearchResultTableViewCell") }
-            cell.link = contentSource.links(on: indexPath.section)[indexPath.item]
+            cell.link = contentSource?.links(on: indexPath.section)[indexPath.item]
             cell.makeThemable()
             return cell
         }
