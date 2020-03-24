@@ -26,34 +26,27 @@ extension NASourceAnimeUnity {
             var totalPages: Int? { 1 }
             var availablePages: Int { _results == nil ? 0 : 1 }
             var moreAvailable: Bool { _results == nil }
-            var stringa = ""
             private let parent: NASourceAnimeUnity
             private var requestTask: NineAnimatorAsyncTask?
             private var _results: [AnimeLink]?
             var title: String
-            
+            var stringa = ""
             weak var delegate: ContentProviderDelegate?
             
             func links(on page: Int) -> [AnyLink] {
                 page == 0 ? _results?.map { .anime($0) } ?? [] : []
             }
             
-            func func_real() {
-                _ = [
-                  "query": title
-                ]
+            func more() {
                 let params: Parameters = ["query": title]
                 let url = "https://animeunity.it/anime.php?c=archive"
-                
-                _ = AF.request(url, method: .post, parameters: params)
-                .responseData { response in
+                let response_post = AF.request(url, method: .post, parameters: params).responseData {
+                    response in
                     self.stringa =  (response.debugDescription)
                 }
-            }
-            
-            func more() {
-                func_real()
-                
+                // force wait for POST
+                while !response_post.isFinished {}
+                //
                 guard requestTask == nil && moreAvailable else { return }
                 requestTask = parent.request(
                     browsePath: "/Search/Anime",
@@ -63,7 +56,6 @@ extension NASourceAnimeUnity {
                     guard let self = self else { throw NineAnimatorError.unknownError }
                     var str_correct = ""
                     str_correct = self.stringa
-                   
                     let bowl = try SwiftSoup.parse(str_correct)
                     let entries = try bowl.select("div.row>div.col-lg-4")
                     let resultingLinks = entries.compactMap {
