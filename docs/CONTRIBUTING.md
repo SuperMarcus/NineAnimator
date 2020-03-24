@@ -63,7 +63,7 @@ Most operations in NineAnimator are performed asynchronously (optionally on a di
 
 At the center of NineAnimator's asynchronous framework is the [`NineAnimatorPromise` class](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Utilities/Asynchronous/Promise.swift). This class borrows the idea of promise and bridges the legacy callback mechanisms.
 
-> Note: As a safety measure, be sure to keep and reference to the promise instance for the duration of the task. Loosing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
+> Note: As a safety measure, be sure to maintain a reference to the promise instance for the duration of the task. Loosing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
 
 ```Swift
 let promise = NineAnimatorPromise.firstly {
@@ -119,6 +119,5 @@ A few points to keep in mind:
 * Avoid implicit unwrapping properties and variables (`var data: Data! { get }`).
 * Prefer shorter class names (`LibrarySceneController` not `LibraryTabSceneCollectionViewController`).
 * Prefer extensions over single files. Split large files into multiple smaller files with `+` extensions (ex. `User.swift`, `User+Preferences.swift`, `User+History.swift`).
-* Avoid yoda conditions. Keep constants intuitively to the right (ex. `x == 5` not `5 == x`).
 
 We use `swiftlint` to ensure the tidyness of our code. Before submitting your code, run `swiftlint` to check for potential styling violations.
