@@ -1,10 +1,10 @@
 {
-  "commitish" : "2.3.0",
+  "commitish" : "2.3.1",
   "iOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "9e9498b6c56479eb4ec0c85bfc3a23b23573334f63ffc2d0063dd4b082eed5c4",
-      "swiftToolchainVersion" : "5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
+      "hash" : "50b8ad9b2f262edd1ae0c1993f249cf82133f77fd2ae87ae8f9682bb0055f3ee",
+      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
     }
   ]
 }
