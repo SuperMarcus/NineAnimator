@@ -57,6 +57,8 @@ class LibraryTrackingReferenceCell: UICollectionViewCell, Themable {
             self.trackingProgressStepper.maximumValue = 7071
             self.progressBar.isHidden = true
         }
+        
+        self.pointerEffect.hover()
     }
     
     @IBAction private func onStepperValueDidChange(_ sender: UIStepper) {

@@ -46,9 +46,24 @@ class OfflineAccessButton: UIButton, Themable {
     
     private var preservationInitiatedActivityIndicator: UIActivityIndicatorView?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         addTarget(self, action: #selector(onTapped(_:)), for: .touchUpInside)
+    }
+    
+    private func commonInit() {
+        layer.cornerRadius = 8
+        pointerEffect.hover(shadow: true, scale: true)
     }
     
     func setPresenting(_ episodeLink: EpisodeLink, delegate: OfflineAccessButtonDelegate? = nil) {

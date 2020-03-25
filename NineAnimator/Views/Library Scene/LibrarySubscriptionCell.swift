@@ -35,6 +35,7 @@ class LibrarySubscriptionCell: UICollectionViewCell {
         self.representingLink = link
         self.titleLabel.text = link.name
         self.artworkImageView.kf.setImage(with: link.artwork ?? NineAnimator.placeholderArtworkUrl)
+        self.pointerEffect.hover(scale: true)
         
         // Set the source label to the approperiate value
         switch link {

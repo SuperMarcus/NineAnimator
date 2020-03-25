@@ -328,6 +328,8 @@
 		2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */; };
 		2CDC8BF1240023C7003A85AD /* BaseSource+Interceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC8BF0240023C7003A85AD /* BaseSource+Interceptor.swift */; };
 		2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */; };
+		2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */; };
+		2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */; };
 		2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */; };
 		2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */; };
 		2CE18B102374C7ED00771A16 /* LibraryTipGenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */; };
@@ -773,6 +775,8 @@
 		2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2CDC8BF0240023C7003A85AD /* BaseSource+Interceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BaseSource+Interceptor.swift"; sourceTree = "<group>"; };
 		2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorCloud.swift; sourceTree = "<group>"; };
+		2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPointerEffectDelegate.swift; sourceTree = "<group>"; };
+		2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PointerEffects.swift"; sourceTree = "<group>"; };
 		2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySubscriptionCell.swift; sourceTree = "<group>"; };
 		2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRecentlyWatchedCell.swift; sourceTree = "<group>"; };
 		2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipGenericCell.swift; sourceTree = "<group>"; };
@@ -1288,6 +1292,8 @@
 				2C98D673225CB525001FF874 /* ThemedBorderButton.swift */,
 				2CD7825921FFEF2800477FC6 /* OfflineAccessButton.swift */,
 				2CD1A646222EB94C00121320 /* AnimatedImageCollectionView.swift */,
+				2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */,
+				2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2210,6 +2216,7 @@
 				2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */,
 				2C8F6E8922062C220047798B /* OfflineAnimeViewController.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
+				2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */,
@@ -2467,6 +2474,7 @@
 				2C0CFC4122640A1200EC793E /* DiscoveryStandardTableViewCell.swift in Sources */,
 				2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */,
 				2C6A390623A017B900FC00A9 /* FourAnime+Search.swift in Sources */,
+				2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */,
 				2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */,
 				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
 				2C8519C822D3252600EEF3AC /* AnimeKisa+RequestModifier.swift in Sources */,

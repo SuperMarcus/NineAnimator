@@ -35,6 +35,7 @@ class LibraryUntrackedReferenceCell: UICollectionViewCell, Themable {
         self.delegate = delegate
         self.animeTitleLabel.text = reference.name
         self.animeArtworkView.kf.setImage(with: reference.artwork ?? NineAnimator.placeholderArtworkUrl)
+        self.pointerEffect.hover()
     }
     
     func didResolve(relatedTrackingContexts contexts: [TrackingContext]) {
