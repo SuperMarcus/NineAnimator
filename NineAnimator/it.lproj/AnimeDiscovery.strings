@@ -5,7 +5,7 @@
 "4kp-IB-7Yg.text" = "Caricamento";
 
 /* Class = "UINavigationItem"; title = "Watch Next"; ObjectID = "AWC-Sv-NA3"; */
-"AWC-Sv-NA3.title" = "Guarda il prossimo";
+"AWC-Sv-NA3.title" = "Guarda successivo";
 
 /* Class = "UILabel"; text = "This Week"; ObjectID = "BdS-bf-mCi"; */
 "BdS-bf-mCi.text" = "Questa settimana";
@@ -14,7 +14,7 @@
 "S9D-GU-IOj.title" = "Seleziona sorgente";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
-"WZx-eB-ztY.normalTitle" = "Mostra pianificazione";
+"WZx-eB-ztY.normalTitle" = "Mostra programmazione";
 
 /* Class = "UIBarButtonItem"; title = "Anime Schedule"; ObjectID = "iOO-54-dYf"; */
 "iOO-54-dYf.title" = "Calendario anime";
@@ -23,4 +23,4 @@
 "j7t-Oe-H6q.normalTitle" = "Mostra altro";
 
 /* Class = "UITabBarItem"; title = "Watch Next"; ObjectID = "lSV-Fp-1Cb"; */
-"lSV-Fp-1Cb.title" = "Guarda il prossimo";
+"lSV-Fp-1Cb.title" = "Guarda successivo";
