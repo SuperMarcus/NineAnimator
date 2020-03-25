@@ -2,7 +2,7 @@
 
 First and foremost, thank you for taking the time to read this document. We are a community of developers and anime lovers, and we need people like you to help in the development of this project.
 
-If you haven't join our [Discord server](https://discord.gg/dzTVzeW) already, feel free to come and find us [there](https://discord.gg/dzTVzeW). You'll get faster responses from our community members and contributors.
+If you haven't joined our [Discord server](https://discord.gg/dzTVzeW) already, feel free to come and find us [there](https://discord.gg/dzTVzeW). You'll get faster responses from our community members and contributors.
 
 In this document, you'll find a set of guidelines for contributing and some resources for getting familiar with NineAnimator's code.
 
@@ -29,10 +29,10 @@ Optionally, you can also use our [r/NineAnimator](https://reddit.com/r/NineAnima
 
 * **Report Bugs**: Use the [issue tracker](https://github.com/SuperMarcus/NineAnimator/issues/new/choose) with the `Bug Report` template to report a bug.
 * **Suggesting Enhancements**: Use the [issue tracker](https://github.com/SuperMarcus/NineAnimator/issues/new/choose) with the `Feature Request` template to suggest an enhancement.
-* **Help Translating the App**: Use our [Crowdin site](https://translate.9ani.app) at [https://translate.9ani.app](https://translate.9ani.app) to help translate NineAnimator into different langauges.
+* **Help Translating the App**: Use our [Crowdin site](https://translate.9ani.app) at [https://translate.9ani.app](https://translate.9ani.app) to help translate NineAnimator into different languages.
 * **Code Contribution**: Whether you implemented a new anime source or fixed a bug, feel free to open a pull request from your fork. Make sure you read the [styleguides](#styleguides) section.
 
-Feel free to talk to us in our [Discord server](https://discord.gg/dzTVzeW) before contributing.
+Feel free to talk to us on our [Discord server](https://discord.gg/dzTVzeW) before contributing.
 
 ### What should I know before I get started?
 
@@ -40,10 +40,10 @@ Feel free to talk to us in our [Discord server](https://discord.gg/dzTVzeW) befo
 
 NineAnimator is a typical Cocoa Touch iOS application following the Model-View-Controller (MVC) design pattern. There are many resources online for you to learn the MVC design, but in short, you should know the responsibility of each component and keep the additional code at where it should be.
 
-**Model**: NineAnimator, at its core, is a collection of parsers and analyzers. The `NineAnimator/Models` directory hosts all of the parsing logic and user-configurable.
-* **Anime Source**: Under the `Models` folder, you'll find the `Anime Source`. Code under this folder fetches data from different source anime websites, decodes it, and present the information to other components of NineAnimator. For each source website, NineAnimator creates a distinct `Source` class. `Source` encapsulates the functionalities and capabilities of the anime website.
-* **Media Parser**: Media Parsers, located under the `Media/Parser` folder in the models, are classes that accept a URL to a streaming site and return a locally streamable URL. Media Parsers are used to support playbacks with native players (and cast). NineAnimator parsers will conform to the `VideoProviderParser` protocol.
-* **Anime Listing Service**: The list services are third-party tracking and information services implemented under the `Anime List Service` folder under models. List services conform to the `ListingService` protocol and declare their capabilities through the `var isCapableOf<capability>: Bool` getters. List services also provide the matching `ListingAnimeReference` for each `AnimeLink`.
+**Model**: NineAnimator, at its core, is a collection of parsers and analyzers. The [`NineAnimator/Models`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models) directory hosts all of the parsing logic and user-configurable.
+* **Anime Source**: Under the `Models` folder, you'll find the [`Anime Source`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Anime%20Source). Code under this folder fetches data from different source anime websites, decodes it, and present the information to other components of NineAnimator. For each source website, NineAnimator creates a distinct `Source` class. `Source` encapsulates the functionalities and capabilities of the anime website.
+* **Media Parser**: Media Parsers, located under the [`Media/Parser`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Media/Parser) folder in the models, are classes that accept a URL to a streaming site and return a locally streamable URL. Media Parsers are used to support playbacks with native players (and cast). NineAnimator parsers will conform to the `VideoProviderParser` protocol.
+* **Anime Listing Service**: The list services are third-party tracking and information services implemented under the [`Anime List Service`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Anime%20Listing%20Service) folder under models. List services conform to the `ListingService` protocol and declare their capabilities through the `var isCapableOf<capability>: Bool` getters. List services also provide the matching `ListingAnimeReference` for each `AnimeLink`.
 
 **View**: The views define the look and feel of the UI components. NineAnimator employs several mechanisms to construct and configure the UI. In general, NineAnimator's design follows that of the latest iOS system apps.
 * **Storyboards and Xibs**: NineAnimator defines most of the UIs with storyboards. We also use auto-layout extensively for adaptive layouts and device variants.
@@ -63,7 +63,7 @@ Most operations in NineAnimator are performed asynchronously (optionally on a di
 
 At the center of NineAnimator's asynchronous framework is the [`NineAnimatorPromise` class](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Utilities/Asynchronous/Promise.swift). This class borrows the idea of promise and bridges the legacy callback mechanisms.
 
-> Note: As a safety measure, be sure to maintain a reference to the promise instance for the duration of the task. Loosing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
+> Note: As a safety measure, be sure to maintain a reference to the promise instance for the duration of the task. Losing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
 
 ```Swift
 let promise = NineAnimatorPromise.firstly {
@@ -120,4 +120,4 @@ A few points to keep in mind:
 * Prefer shorter class names (`LibrarySceneController` not `LibraryTabSceneCollectionViewController`).
 * Prefer extensions over single files. Split large files into multiple smaller files with `+` extensions (ex. `User.swift`, `User+Preferences.swift`, `User+History.swift`).
 
-We use `swiftlint` to ensure the tidyness of our code. Before submitting your code, run `swiftlint` to check for potential styling violations.
+We use `swiftlint` to ensure the tidiness of our code. Before submitting your code, run `swiftlint` to check for potential styling violations.
