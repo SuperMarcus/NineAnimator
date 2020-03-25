@@ -26,7 +26,9 @@ extension UIView {
         set {
             if newValue { makeThemable() }
         }
+        // swiftlint:disable implicit_getter
         get { false }
+        // swiftlint:enable implicit_getter
     }
     
     var themableOptionsStore: [String: Any] {

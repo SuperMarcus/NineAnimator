@@ -93,10 +93,10 @@ class AsyncTaskContainer: NineAnimatorAsyncTask {
 ///         asynchronous promises in the container instead.
 class StatefulAsyncTaskContainer: AsyncTaskContainer {
     /// Indicates whether all the tasks have been added to the container
-    @AtomicProperty private(set) var isReadyForCollection = false
+    @AtomicProperty var isReadyForCollection = false
     
     /// The final state of task executions
-    @AtomicProperty private(set) var state: TaskState = .unknown
+    @AtomicProperty var state: TaskState = .unknown
     
     @AtomicProperty private var numberOfStatesContributed: Int = 0
     
