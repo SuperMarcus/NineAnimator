@@ -55,6 +55,7 @@ extension Notification.Name {
      
      - `GoogleCastMediaPlaybackViewController.playback(didEnd media: CastMedia)`
      - `NativePlayerController.onPlayerRateChange`
+     - `NativePlayerController.reset`
      */
     static let playbackDidEnd =
         Notification.Name("com.marcuszhou.nineanimator.playbackWillEnd")
