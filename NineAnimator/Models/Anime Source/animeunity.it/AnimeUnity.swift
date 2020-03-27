@@ -26,7 +26,7 @@ import AppKit
 #endif
 
 class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
-    var name: String { "AnimeUnity (🇮🇹)" }
+    var name: String { "animeunity.it" }
     
     var aliases: [String] { [] }
     
@@ -37,7 +37,7 @@ class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
     #endif
     
     var siteDescription: String {
-        "AnimeUnity è un server italiano"
+        "AnimeUnity è un server italiano. AnimeUnity is a free website that provides Italian subtitled anime. The website may be region blocked."
     }
     
     class var AnimeUnityStream: Anime.ServerIdentifier {
