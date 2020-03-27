@@ -39,12 +39,13 @@ class CloudflareWAFResolver: SourceRequestRetrier {
         response: HTTPURLResponse,
         body: Data?) -> Alamofire.DataRequest.ValidationResult {
         if let requestingUrl = request?.url,
+            (400..<500).contains(response.statusCode),
             let serverHeaderField = response.allHeaderFields["Server"] as? String,
             serverHeaderField.lowercased().hasPrefix("cloudflare"),
             let body = body,
             let bodyString = String(data: body, encoding: .utf8),
-            bodyString.contains("jschl_vc"),
-            bodyString.contains("jschl_answer") {
+            bodyString.contains("challenge-form"),
+            bodyString.localizedCaseInsensitiveContains("cloudflare") {
             // Save the requestingUrl for modification
             var passthroughUrl: URL?
             var responseParameters: [String: String]?
@@ -55,6 +56,11 @@ class CloudflareWAFResolver: SourceRequestRetrier {
                 let challengeForm = try bowl.select("#challenge-form")
                 let challengeResponsePath = try challengeForm.attr("action")
                 
+                passthroughUrl = try URL(
+                    string: challengeResponsePath,
+                    relativeTo: requestingUrl
+                ).tryUnwrap()
+                
                 let cfJschlVcValue = try challengeForm.select("input[name=jschl_vc]").attr("value")
                 let cfPassValue = try challengeForm.select("input[name=pass]").attr("value")
                 let cfRValue = try challengeForm.select("input[name=r]").attr("value")
@@ -62,11 +68,6 @@ class CloudflareWAFResolver: SourceRequestRetrier {
                     bodyString,
                     requestingUrl: requestingUrl
                 ).tryUnwrap(.decodeError("unable to resolve cloudflare challenge"))
-                
-                passthroughUrl = try URL(
-                    string: challengeResponsePath,
-                    relativeTo: requestingUrl
-                ).tryUnwrap()
                 
                 responseParameters = [
                     "r": cfRValue,
@@ -108,7 +109,8 @@ extension CloudflareWAFResolver {
             return .success(.evaluateNext)
         }
         
-        guard let verificationUrl = error.authenticationUrl else {
+        guard let verificationUrl = error.authenticationUrl,
+            let authenticationResponse = error.authenticationResponse else {
             return .success(.evaluateNext)
         }
         
@@ -133,7 +135,12 @@ extension CloudflareWAFResolver {
             for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
                 HTTPCookieStorage.shared.deleteCookie(cookie)
             }
-            self.parent?.renewIdentity()
+            
+            // Renew identity with a delay
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                [weak self] in self?.parent?.renewIdentity()
+            }
+            
             return .success(.evaluateNext)
         }
         
@@ -179,7 +186,7 @@ extension CloudflareWAFResolver {
             parent.browseSession.request(
                 verificationUrl,
                 method: .post,
-                parameters: error.authenticationResponse,
+                parameters: authenticationResponse,
                 encoding: CFResponseEncoder.shared,
                 headers: [
                     "Referer": originalUrlString,
