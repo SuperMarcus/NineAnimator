@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,9 +29,6 @@
 		2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */; };
 		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
-		2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */; };
-		2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */; };
-		2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */; };
 		2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */; };
 		2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */; };
 		2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */; };
@@ -61,7 +58,6 @@
 		2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C718E221B118700760A69 /* AnimeInformation.storyboard */; };
 		2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C7192221B11D400760A69 /* AnimeInformationTableViewController.swift */; };
 		2C1C7196221B1C3000760A69 /* InformationSceneHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C7195221B1C3000760A69 /* InformationSceneHeadingView.swift */; };
-		2C211EC2225E9BB400389124 /* ViewAnimator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C211EC1225E9BB400389124 /* ViewAnimator.framework */; };
 		2C211EC4225EADDD00389124 /* SetupThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C211EC3225EADDD00389124 /* SetupThemeViewController.swift */; };
 		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23AE392229912100512150 /* Promise+Success.swift */; };
@@ -123,11 +119,8 @@
 		2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */; };
 		2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8C21B76010009B4D47 /* AnimePlayer.storyboard */; };
 		2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */; };
-		2C4ABC9521B7F53F009B4D47 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */; };
 		2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */; };
 		2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4ABC9921B88F8C009B4D47 /* Anime.swift */; };
-		2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */; };
-		2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */; };
 		2C4FDDAC22482AE90059B7D8 /* UrlFormEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDAB22482AE90059B7D8 /* UrlFormEncoding.swift */; };
 		2C4FDDAF22483CBB0059B7D8 /* AnimeUltima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */; };
 		2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */; };
@@ -282,7 +275,7 @@
 		2CA1DD4321E18FDB009241CB /* NineAnime+LinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4221E18FDB009241CB /* NineAnime+LinkRetriver.swift */; };
 		2CA1DD4521E1B765009241CB /* NineAnime+StreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4421E1B765009241CB /* NineAnime+StreamParser.swift */; };
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
-		2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; };
+		2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; platformFilter = ios; };
 		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
 		2CA3E275239C4F5300AAC4D1 /* AUEngineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E274239C4F5300AAC4D1 /* AUEngineParser.swift */; };
 		2CA3E277239C4FA300AAC4D1 /* FastStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E276239C4FA300AAC4D1 /* FastStreamParser.swift */; };
@@ -376,6 +369,14 @@
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E1D9BB235FC12200234409 /* VeryStreamParser.swift */; };
+		76DC74E9242D5369009DF797 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC74E8242D5369009DF797 /* Alamofire */; };
+		76DC74EC242D547E009DF797 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC74EB242D547E009DF797 /* SwiftyJSON */; };
+		76DC74EF242D5539009DF797 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC74EE242D5539009DF797 /* SwiftSoup */; };
+		76DC7500242D595F009DF797 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC74FF242D595F009DF797 /* Kingfisher */; };
+		76DC7503242D59A5009DF797 /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC7502242D59A5009DF797 /* ViewAnimator */; };
+		76DC7506242D5A3D009DF797 /* OpenCastSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC7505242D5A3D009DF797 /* OpenCastSwift */; };
+		76DC7509242D5A9C009DF797 /* SwiftProtobuf in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC7508242D5A9C009DF797 /* SwiftProtobuf */; };
+		76DC750B242D5A9C009DF797 /* SwiftProtobufPluginLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 76DC750A242D5A9C009DF797 /* SwiftProtobufPluginLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -865,14 +866,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C211EC2225E9BB400389124 /* ViewAnimator.framework in Frameworks */,
-				2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */,
-				2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */,
-				2C12EDD521BDDF320064D2BD /* OpenCastSwift.framework in Frameworks */,
-				2C4ABC9E21B8CA83009B4D47 /* SwiftSoup.framework in Frameworks */,
-				2C4ABC9C21B8942D009B4D47 /* Alamofire.framework in Frameworks */,
+				76DC7500242D595F009DF797 /* Kingfisher in Frameworks */,
+				76DC74E9242D5369009DF797 /* Alamofire in Frameworks */,
+				76DC750B242D5A9C009DF797 /* SwiftProtobufPluginLibrary in Frameworks */,
+				76DC7503242D59A5009DF797 /* ViewAnimator in Frameworks */,
+				76DC7506242D5A3D009DF797 /* OpenCastSwift in Frameworks */,
+				76DC74EF242D5539009DF797 /* SwiftSoup in Frameworks */,
 				2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */,
-				2C4ABC9521B7F53F009B4D47 /* Kingfisher.framework in Frameworks */,
+				76DC74EC242D547E009DF797 /* SwiftyJSON in Frameworks */,
+				76DC7509242D5A9C009DF797 /* SwiftProtobuf in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1948,7 +1950,6 @@
 			buildConfigurationList = 2C4ABC6D21B5881F009B4D47 /* Build configuration list for PBXNativeTarget "NineAnimator" */;
 			buildPhases = (
 				52F6A4F121DABBE60005D78D /* Linting */,
-				2C4ABC9621B7F55B009B4D47 /* Copy Frameworks */,
 				2CD7499C225B6409004C6C0C /* Generate Version Information */,
 				2C4ABC4C21B5881E009B4D47 /* Sources */,
 				2C4ABC4D21B5881E009B4D47 /* Frameworks */,
@@ -1960,6 +1961,16 @@
 			dependencies = (
 			);
 			name = NineAnimator;
+			packageProductDependencies = (
+				76DC74E8242D5369009DF797 /* Alamofire */,
+				76DC74EB242D547E009DF797 /* SwiftyJSON */,
+				76DC74EE242D5539009DF797 /* SwiftSoup */,
+				76DC74FF242D595F009DF797 /* Kingfisher */,
+				76DC7502242D59A5009DF797 /* ViewAnimator */,
+				76DC7505242D5A3D009DF797 /* OpenCastSwift */,
+				76DC7508242D5A9C009DF797 /* SwiftProtobuf */,
+				76DC750A242D5A9C009DF797 /* SwiftProtobufPluginLibrary */,
+			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
 			productType = "com.apple.product-type.application";
@@ -2034,6 +2045,15 @@
 				Base,
 			);
 			mainGroup = 2C4ABC4721B5881E009B4D47;
+			packageReferences = (
+				76DC74E7242D5369009DF797 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				76DC74EA242D547E009DF797 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				76DC74ED242D5539009DF797 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				76DC74FE242D595F009DF797 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				76DC7501242D59A5009DF797 /* XCRemoteSwiftPackageReference "ViewAnimator" */,
+				76DC7504242D5A3D009DF797 /* XCRemoteSwiftPackageReference "OpenCastSwift" */,
+				76DC7507242D5A9C009DF797 /* XCRemoteSwiftPackageReference "swift-protobuf" */,
+			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -2099,38 +2119,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2C4ABC9621B7F55B009B4D47 /* Copy Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftSoup.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/OpenCastSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftProtobuf.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ViewAnimator.framework",
-			);
-			name = "Copy Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Kingfisher.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftSoup.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/OpenCastSwift.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftProtobuf.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SwiftyJSON.framework",
-				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ViewAnimator.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
-		};
 		2CD7499C225B6409004C6C0C /* Generate Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2877,7 +2865,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = 2J9XP7ZEK3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2889,7 +2877,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FaizanDurrani.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -2907,7 +2895,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 3;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
-				DEVELOPMENT_TEAM = 8WB2V923XT;
+				DEVELOPMENT_TEAM = 2J9XP7ZEK3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -2919,7 +2907,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.2.6;
-				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
+				PRODUCT_BUNDLE_IDENTIFIER = com.FaizanDurrani.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -3015,6 +3003,108 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		76DC74E7242D5369009DF797 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.5;
+			};
+		};
+		76DC74EA242D547E009DF797 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		76DC74ED242D5539009DF797 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:scinfu/SwiftSoup.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.1;
+			};
+		};
+		76DC74FE242D595F009DF797 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.13.2;
+			};
+		};
+		76DC7501242D59A5009DF797 /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:marcosgriselli/ViewAnimator.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.7.0;
+			};
+		};
+		76DC7504242D5A3D009DF797 /* XCRemoteSwiftPackageReference "OpenCastSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:FaizanDurrani/OpenCastSwift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		76DC7507242D5A9C009DF797 /* XCRemoteSwiftPackageReference "swift-protobuf" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-protobuf.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		76DC74E8242D5369009DF797 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC74E7242D5369009DF797 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		76DC74EB242D547E009DF797 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC74EA242D547E009DF797 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+		76DC74EE242D5539009DF797 /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC74ED242D5539009DF797 /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		76DC74FF242D595F009DF797 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC74FE242D595F009DF797 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		76DC7502242D59A5009DF797 /* ViewAnimator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC7501242D59A5009DF797 /* XCRemoteSwiftPackageReference "ViewAnimator" */;
+			productName = ViewAnimator;
+		};
+		76DC7505242D5A3D009DF797 /* OpenCastSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC7504242D5A3D009DF797 /* XCRemoteSwiftPackageReference "OpenCastSwift" */;
+			productName = OpenCastSwift;
+		};
+		76DC7508242D5A9C009DF797 /* SwiftProtobuf */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC7507242D5A9C009DF797 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobuf;
+		};
+		76DC750A242D5A9C009DF797 /* SwiftProtobufPluginLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 76DC7507242D5A9C009DF797 /* XCRemoteSwiftPackageReference "swift-protobuf" */;
+			productName = SwiftProtobufPluginLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2C4ABC4821B5881E009B4D47 /* Project object */;
 }

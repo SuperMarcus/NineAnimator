@@ -24,6 +24,7 @@ private enum DeferredSelectSceneEvent {
     case endScene
 }
 
+#if !targetEnvironment(macCatalyst)
 class HomeIntegrationTableViewController: UITableViewController {
     @IBOutlet private weak var externalPlaybackOnlySwitch: UISwitch!
     
@@ -59,6 +60,7 @@ class HomeIntegrationTableViewController: UITableViewController {
         NotificationCenter.default.removeObserver(self)
     }
 }
+
 
 // MARK: - Update and sync preferences
 extension HomeIntegrationTableViewController {
@@ -217,3 +219,4 @@ extension HomeIntegrationTableViewController {
         configureForTransparentScrollEdge()
     }
 }
+#endif

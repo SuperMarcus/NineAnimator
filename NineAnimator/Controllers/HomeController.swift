@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+#if !targetEnvironment(macCatalyst)
 import Foundation
 import HomeKit
 
@@ -232,3 +233,5 @@ extension HomeController {
         }
     }
 }
+
+#endif

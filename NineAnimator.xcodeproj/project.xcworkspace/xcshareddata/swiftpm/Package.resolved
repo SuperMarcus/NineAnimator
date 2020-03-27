@@ -1,0 +1,70 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "git@github.com:Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "59037bfd28aa963a7916f1eb22a74107a3522f16",
+          "version": "5.0.5"
+        }
+      },
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "git@github.com:onevcat/Kingfisher.git",
+        "state": {
+          "branch": null,
+          "revision": "56075f629bc3915e1bfa876d175df67e1a7cbe3c",
+          "version": "5.13.2"
+        }
+      },
+      {
+        "package": "OpenCastSwift",
+        "repositoryURL": "git@github.com:FaizanDurrani/OpenCastSwift.git",
+        "state": {
+          "branch": "master",
+          "revision": "80b19ace1db7e3d4626a17d6a1991b42473449b1",
+          "version": null
+        }
+      },
+      {
+        "package": "SwiftProtobuf",
+        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
+        "state": {
+          "branch": null,
+          "revision": "7790acf0a81d08429cb20375bf42a8c7d279c5fe",
+          "version": "1.8.0"
+        }
+      },
+      {
+        "package": "SwiftSoup",
+        "repositoryURL": "git@github.com:scinfu/SwiftSoup.git",
+        "state": {
+          "branch": null,
+          "revision": "21e2a405e19298ad477fc007094db91b6cac08c3",
+          "version": "2.3.1"
+        }
+      },
+      {
+        "package": "SwiftyJSON",
+        "repositoryURL": "git@github.com:SwiftyJSON/SwiftyJSON.git",
+        "state": {
+          "branch": null,
+          "revision": "2b6054efa051565954e1d2b9da831680026cd768",
+          "version": "5.0.0"
+        }
+      },
+      {
+        "package": "ViewAnimator",
+        "repositoryURL": "git@github.com:marcosgriselli/ViewAnimator.git",
+        "state": {
+          "branch": null,
+          "revision": "17e7ba9e9c9e09bfd46086e0189b198fedc67847",
+          "version": "2.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -441,8 +441,11 @@ extension AnimeViewController {
                 Log.debug("- Playback target: %@", episode.target)
                 
                 if episode.nativePlaybackSupported {
+
+                    #if !targetEnvironment(macCatalyst)
                     // Prime the HMHomeManager
                     HomeController.shared.primeIfNeeded()
+                    #endif
                     
                     self.episodeRequestTask = episode.retrive(
                         forPurpose: CastController.default.isReady
