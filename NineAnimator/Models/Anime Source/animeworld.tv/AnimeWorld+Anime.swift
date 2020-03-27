@@ -83,7 +83,6 @@ extension NASourceAnimeWorld {
             let fullNameArr = fullName.split { $0 == ":" }.map(String.init)
             // or simply:
             // let fullNameArr = fullName.characters.split{" "}.map(String.init)
-            print("kkkkk")
             let range = 0...9
             var found = false
             for x in range {

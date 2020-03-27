@@ -26,7 +26,7 @@ import AppKit
 #endif
 
 class NASourceAnimeWorld: BaseSource, Source, PromiseSource {
-    var name: String { "AnimeWorld (🇮🇹)" }
+    var name: String { "animeworld.tv" }
     
     var aliases: [String] { [] }
     
@@ -37,7 +37,7 @@ class NASourceAnimeWorld: BaseSource, Source, PromiseSource {
     #endif
     
     var siteDescription: String {
-        "AnimeWorld è un server italiano"
+        "AnimeWorld è un server italiano. AnimeWorld is a free website that provides Italian subtitled anime. The website may be region blocked."
     }
     
     class var AnimeWorldStream: Anime.ServerIdentifier {
