@@ -31,6 +31,7 @@ class QuickActionCollectionViewCell: UICollectionViewCell {
         self.action = action
         actionButton.setTitle(action.title, for: .normal)
         actionButton.setImage(action.icon, for: .normal)
+        pointerEffect.hover()
     }
     
     @IBAction private func onAction(_ sender: Any) {

@@ -23,6 +23,16 @@ import UIKit
 class ThemedSolidButton: UIButton, Themable {
     @IBInspectable var inverted: Bool = false
     
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        commonInit()
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
     override var isHighlighted: Bool {
         get { super.isHighlighted }
         set {
@@ -51,5 +61,9 @@ class ThemedSolidButton: UIButton, Themable {
             setTitleColor(theme.primaryText, for: .normal)
             setTitleColor(theme.primaryText.withAlphaComponent(0.6), for: .highlighted)
         }
+    }
+    
+    private func commonInit() {
+        pointerEffect.highlight()
     }
 }

@@ -32,6 +32,7 @@ class LibraryCategoryCell: UICollectionViewCell, Themable {
     func setPresenting(_ category: LibrarySceneController.Category) {
         self.category = category
         self.updateLabels()
+        self.pointerEffect.hover()
     }
     
     func updateLabels() {

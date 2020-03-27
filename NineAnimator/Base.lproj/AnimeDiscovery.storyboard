@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="twB-g2-laz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="twB-g2-laz">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -617,25 +617,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="cda-9a-gtu">
-                            <size key="itemSize" width="394" height="118"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="15" id="cda-9a-gtu">
+                            <size key="itemSize" width="382" height="118"/>
                             <size key="headerReferenceSize" width="50" height="56"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="schedule.cell" id="l9l-yo-fk5" customClass="CalendarAnimeCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="10" y="56" width="394" height="118"/>
+                                <rect key="frame" x="16" y="56" width="382" height="118"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="394" height="118"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="382" height="118"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ymP-9S-Bxf">
-                                            <rect key="frame" x="9" y="4" width="376" height="110"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="118"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Twb-kn-MnW">
-                                                    <rect key="frame" x="8" y="8" width="62.5" height="94"/>
+                                                    <rect key="frame" x="8" y="8" width="68" height="102"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Twb-kn-MnW" secondAttribute="height" multiplier="24:36" id="HNr-c1-CZL"/>
@@ -647,7 +647,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Anime Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="O5c-C5-cMn">
-                                                    <rect key="frame" x="78.5" y="41.5" width="281.5" height="21.5"/>
+                                                    <rect key="frame" x="84" y="45.5" width="282" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -657,7 +657,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Ep. 2/12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i3b-OB-bct">
-                                                    <rect key="frame" x="78.5" y="63" width="281.5" height="17"/>
+                                                    <rect key="frame" x="84" y="67" width="282" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -667,7 +667,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="752" verticalCompressionResistancePriority="752" text="11:11 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sab-K2-tmC">
-                                                    <rect key="frame" x="78.5" y="27" width="281.5" height="14.5"/>
+                                                    <rect key="frame" x="84" y="31" width="282" height="14.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                     <nil key="highlightedColor"/>
@@ -698,11 +698,16 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="ymP-9S-Bxf" secondAttribute="trailing" constant="9" id="JjF-79-20a"/>
-                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="leading" secondItem="l9l-yo-fk5" secondAttribute="leading" constant="9" id="cqH-3e-Rz9"/>
-                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="top" secondItem="l9l-yo-fk5" secondAttribute="top" constant="4" id="hLY-7i-iDp"/>
-                                    <constraint firstAttribute="bottom" secondItem="ymP-9S-Bxf" secondAttribute="bottom" constant="4" id="rOR-1h-22P"/>
+                                    <constraint firstAttribute="trailing" secondItem="ymP-9S-Bxf" secondAttribute="trailing" id="JjF-79-20a"/>
+                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="leading" secondItem="l9l-yo-fk5" secondAttribute="leading" id="cqH-3e-Rz9"/>
+                                    <constraint firstItem="ymP-9S-Bxf" firstAttribute="top" secondItem="l9l-yo-fk5" secondAttribute="top" id="hLY-7i-iDp"/>
+                                    <constraint firstAttribute="bottom" secondItem="ymP-9S-Bxf" secondAttribute="bottom" id="rOR-1h-22P"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="backgroundContainerView" destination="ymP-9S-Bxf" id="BMW-EV-UPC"/>
                                     <outlet property="scheduledItemImageView" destination="Twb-kn-MnW" id="fnm-xi-77z"/>

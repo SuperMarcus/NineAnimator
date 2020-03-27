@@ -25,8 +25,13 @@ extension UserNotificationManager {
         var piority: RecommendationSource.Piority = .defaultHigh
         
         func shouldReload(recommendation: Recommendation) -> Bool {
-            // Reload subscribed recommendations every time
-            return true
+            let oldSet = recommendation.items.reduce(into: Set<AnyLink>()) {
+                $0.insert($1.link)
+            }
+            let currentSet = NineAnimator.default.user.subscribedAnimes.reduce(into: Set<AnyLink>()) {
+                $0.insert(.anime($1))
+            }
+            return oldSet != currentSet
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {

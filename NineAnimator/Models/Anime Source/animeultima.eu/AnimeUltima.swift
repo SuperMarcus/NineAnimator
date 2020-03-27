@@ -28,7 +28,9 @@ import AppKit
 class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
     var name: String { "animeultima.eu" }
     
-    var aliases: [String] { [] }
+    var aliases: [String] {
+        [ "animeultima.to" ]
+    }
     
 #if canImport(UIKit)
     var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeUltima Site Logo") }
@@ -40,7 +42,7 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         "AnimeUltima is a free anime streaming website with many self-hosted servers. This website is guarded by Cloudflare; you may be require to verify your identity manually."
     }
     
-    override var endpoint: String { "https://www16.animeultima.eu" }
+    override var endpoint: String { "https://www1.animeultima.to" }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         .fail(.unknownError)

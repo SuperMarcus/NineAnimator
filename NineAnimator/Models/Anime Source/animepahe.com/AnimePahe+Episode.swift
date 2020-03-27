@@ -20,17 +20,13 @@
 import Foundation
 
 extension NASourceAnimePahe {
-    // The same response as the other release response but different information
-    // is needed for episode parsing
-    fileprivate struct ReleaseResponse: Codable {
-        var data: [ReleaseEpisodeItem]?
-    }
-    
     // Individual episode items
-    fileprivate struct ReleaseEpisodeItem: Codable {
+    struct ReleaseEpisodeItem: Codable {
         // Only the identifier is important here
         var id: Int
-        var episode: String
+        var episode: Int
+        var episode2: Int?
+        var session: String?
     }
     
     // Episode fetching Embed response
@@ -46,60 +42,43 @@ extension NASourceAnimePahe {
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise.firstly {
-            () -> (animeIdentifier: String, episodeNumber: Int, page: String) in
+            () -> (animeIdentifier: String, episodeNumber: Int, page: Int) in
             let decodedEpisodeIdentifiers = try formDecode(link.identifier)
             return (
                 try decodedEpisodeIdentifiers["anime"].tryUnwrap(.decodeError),
-                try Int(decodedEpisodeIdentifiers["episode"].tryUnwrap(.decodeError))
-                    .tryUnwrap(.decodeError),
-                try decodedEpisodeIdentifiers["page"].tryUnwrap(.decodeError)
+                try Int(
+                    decodedEpisodeIdentifiers["episode"].tryUnwrap(.decodeError)
+                ) .tryUnwrap(.decodeError),
+                try Int(
+                    try decodedEpisodeIdentifiers["page"].tryUnwrap(.decodeError)
+                ) .tryUnwrap(.decodeError)
             )
         } .thenPromise {
-            (animeIdentifier: String, episodeNumber: Int, page: String) -> NineAnimatorPromise<(ReleaseResponse, Int)> in
-            // Retrieve the real episode identifier
+            animeIdentifier, episodeNumber, page in
+            self.lookupReleaseEpisodeItem(
+                animeIdentifier: animeIdentifier,
+                episodeNumber: episodeNumber,
+                lookupPage: page,
+                originalPage: page
+            ) .then { (animeIdentifier, $0) }
+        } .thenPromise {
+            animeIdentifier, episodeEntry in
+            // Retrieve streming target
             self.request(
                 ajaxPathDictionary: "/api",
                 query: [
-                    "m": "release",
-                    "id": animeIdentifier,
-                    "l": 30,
-                    "sort": "episode_asc",
-                    "page": page
-                ]
-            ) .then {
-                (
-                    try DictionaryDecoder().decode(ReleaseResponse.self, from: $0),
-                    episodeNumber
-                )
-            }
-        } .thenPromise {
-            release, episodeNumber -> NineAnimatorPromise<(EmbedResponse, String)> in
-            let episodeEntry = try release.data
-                .tryUnwrap(.responseError("No episodes were found in this anime"))
-                .first { Int($0.episode) == episodeNumber }
-                .tryUnwrap(.responseError("This episode does not exist"))
-            let selectedProvider = link.server
-            
-            // Retrieve streming target
-            return self.request(
-                ajaxPathDictionary: "/api",
-                query: [
                     "m": "embed",
-                    "id": episodeEntry.id,
-                    "p": selectedProvider
+                    "id": animeIdentifier,
+                    "p": link.server,
+                    "session": episodeEntry.session ?? ""
                 ]
-            ) .then { (
-                try DictionaryDecoder().decode(EmbedResponse.self, from: $0),
-                String(episodeEntry.id)
-            ) }
+            ) .then { try DictionaryDecoder().decode(EmbedResponse.self, from: $0) }
         } .then {
-            embed, episodeIdentifier in
-            let allDefinitions = try embed.data[episodeIdentifier].tryUnwrap(
-                .responseError("Unable to extract streaming source by definitions")
-            )
+            embed in
+            let allDefinitions = Dictionary(embed.data.flatMap { $1 }) { $1 }
             
             // Get the highest definition item
-            let selectedItem = try (allDefinitions["1080p"] ?? allDefinitions["720p"] ?? allDefinitions.map { $0.value }.last)
+            let selectedItem = try (allDefinitions["1080"] ?? allDefinitions["1080p"] ?? allDefinitions["720"] ?? allDefinitions["720p"] ?? allDefinitions.map { $0.value }.last)
                 .tryUnwrap(.responseError("No streaming source found for this episode"))
             let targetUrl = try URL(string: selectedItem.url).tryUnwrap(.urlError)
             
@@ -110,6 +89,51 @@ extension NASourceAnimePahe {
                 parent: anime,
                 referer: "https://animepahe.com/"
             )
+        }
+    }
+    
+    /// Lookup the episode release item
+    fileprivate func lookupReleaseEpisodeItem(animeIdentifier: String, episodeNumber: Int, lookupPage: Int, originalPage: Int) -> NineAnimatorPromise<ReleaseEpisodeItem> {
+        self.request(
+            ajaxPathDictionary: "/api",
+            query: [
+                "m": "release",
+                "id": animeIdentifier,
+                "l": 30,
+                "sort": "episode_asc",
+                "page": lookupPage
+            ]
+        ) .then {
+            try DictionaryDecoder().decode(ReleaseResponse.self, from: $0)
+        } .thenPromise {
+            response in
+            // Episode came before this page
+            if response.from == nil || (response.data?.first?.episode ?? 0) > episodeNumber {
+                let nextLookupPage = lookupPage - 1
+                
+                // Lookup at most 3 pages or people will get mad
+                if nextLookupPage <= 0 || (originalPage - nextLookupPage) >= 3 {
+                    return .fail(.responseError("Unable to find this episode"))
+                }
+                
+                Log.info("[NASourceAnimePahe] Episode %@ not found in release page %@ (expected to be in page %@). Looking in page %@...", episodeNumber, lookupPage, originalPage, nextLookupPage)
+                return self.lookupReleaseEpisodeItem(
+                    animeIdentifier: animeIdentifier,
+                    episodeNumber: episodeNumber,
+                    lookupPage: nextLookupPage,
+                    originalPage: originalPage
+                )
+            }
+            
+            return NineAnimatorPromise.firstly {
+                try response.data
+                    .tryUnwrap(.responseError("No episodes were found in this anime"))
+                    .first {
+                        // Taking care of the episode 2 item
+                        ($0.episode...max($0.episode, $0.episode2 ?? 0))
+                            .contains(episodeNumber)
+                    } .tryUnwrap(.responseError("This episode does not exist"))
+            }
         }
     }
 }

@@ -40,6 +40,7 @@ class LibraryRecentAnimeCell: UICollectionViewCell {
         let context = NineAnimator.default.trackingContext(for: animeLink)
         self.trackingContext = context
         self.updateAccessoryLabel()
+        self.pointerEffect.hover(scale: true)
     }
     
     func updateAccessoryLabel() {

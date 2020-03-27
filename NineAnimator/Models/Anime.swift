@@ -274,7 +274,7 @@ extension Dictionary where Key == Anime.ServerIdentifier, Value == Anime.Episode
         var names = [String]()
         self.flatMap { $0.value }.forEach {
             episodeLink in
-            if !names.contains { $0 == episodeLink.name } {
+            if !names.contains(where: { $0 == episodeLink.name }) {
                 names.append(episodeLink.name)
             }
         }

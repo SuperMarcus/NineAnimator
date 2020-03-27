@@ -86,11 +86,7 @@ extension ServerSelectionView {
     
     /// Scroll to a specified source
     func scrollToSource(_ source: Source, animated: Bool = true) {
-        guard let sourcePool = serverDataSource?.sources else {
-            return
-        }
-        
-        let sourceIndex = sourcePool.enumerated().first {
+        let sourceIndex = _sources.enumerated().first {
             $0.1.name == source.name
         }?.0
         

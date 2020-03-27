@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)
+// swift-compiler-version: Apple Swift version 5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)
 // swift-module-flags: -target arm64-apple-ios11.2 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OpenCastSwift
 import Foundation
 import Swift
@@ -10,7 +10,7 @@ public struct CastAppIdentifier {
   public static let youTube: Swift.String
   public static let googleAssistant: Swift.String
 }
-@objc final public class CastApp : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers final public class CastApp : ObjectiveC.NSObject {
   final public var id: Swift.String
   final public var displayName: Swift.String
   final public var isIdleScreen: Swift.Bool
@@ -21,8 +21,8 @@ public struct CastAppIdentifier {
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public enum CastPayload {
   case json([Swift.String : Any])
@@ -37,9 +37,9 @@ public enum CastError : Swift.Error {
   case launch(Swift.String)
   case load(Swift.String)
 }
-@objc public class CastRequest : ObjectiveC.NSObject {
-  @objc override dynamic public init()
+@objc @_hasMissingDesignatedInitializers public class CastRequest : ObjectiveC.NSObject {
   @objc deinit
+  @objc override dynamic public init()
 }
 @objc public protocol CastClientDelegate : AnyObject {
   @objc optional func castClient(_ client: OpenCastSwift.CastClient, willConnectTo device: OpenCastSwift.CastDevice)
@@ -61,7 +61,7 @@ public enum CastError : Swift.Error {
   }
   final public var currentMultizoneStatus: OpenCastSwift.CastMultizoneStatus? {
     get
-    }
+  }
   final public var statusDidChange: ((OpenCastSwift.CastStatus) -> Swift.Void)?
   final public var mediaStatusDidChange: ((OpenCastSwift.CastMediaStatus) -> Swift.Void)?
   public init(device: OpenCastSwift.CastDevice)
@@ -101,7 +101,7 @@ public class CastMultizoneDevice {
   public init(name: Swift.String, volume: Swift.Float, isMuted: Swift.Bool, capabilitiesMask: Swift.Int, id: Swift.String)
   @objc deinit
 }
-@objc final public class CastStatus : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers final public class CastStatus : ObjectiveC.NSObject {
   final public var volume: Swift.Double
   final public var muted: Swift.Bool
   final public var apps: [OpenCastSwift.CastApp]
@@ -111,7 +111,7 @@ public class CastMultizoneDevice {
   @objc override dynamic public init()
   @objc deinit
 }
-open class CastChannel {
+@_hasMissingDesignatedInitializers open class CastChannel {
   open func handleResponse(_ json: SwiftyJSON.JSON, sourceId: Swift.String)
   open func handleResponse(_ data: Foundation.Data, sourceId: Swift.String)
   public func send(_ request: OpenCastSwift.CastRequest, response: OpenCastSwift.CastResponseHandler? = nil)
@@ -132,42 +132,42 @@ public struct DeviceCapabilities : Swift.OptionSet {
   public typealias ArrayLiteralElement = OpenCastSwift.DeviceCapabilities
   public typealias RawValue = Swift.Int
 }
-@objc final public class CastDevice : ObjectiveC.NSObject, Foundation.NSCopying {
+@objc @_hasMissingDesignatedInitializers final public class CastDevice : ObjectiveC.NSObject, Foundation.NSCopying {
   final public var id: Swift.String {
     get
-    }
+  }
   final public var name: Swift.String {
     get
-    }
+  }
   final public var modelName: Swift.String {
     get
-    }
+  }
   final public var hostName: Swift.String {
     get
-    }
+  }
   final public var ipAddress: Swift.String {
     get
-    }
+  }
   final public var port: Swift.Int {
     get
-    }
+  }
   final public var capabilities: OpenCastSwift.DeviceCapabilities {
     get
-    }
+  }
   final public var status: Swift.String {
     get
-    }
+  }
   final public var iconPath: Swift.String {
     get
-    }
+  }
   @objc final public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
-@objc public class AppAvailability : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class AppAvailability : ObjectiveC.NSObject {
   public var availability: [Swift.String : Swift.Bool]
   @objc override dynamic public init()
   @objc deinit
@@ -177,7 +177,7 @@ public class CastMultizoneStatus {
   public init(devices: [OpenCastSwift.CastMultizoneDevice])
   @objc deinit
 }
-@objc final public class CastDeviceScanner : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers final public class CastDeviceScanner : ObjectiveC.NSObject {
   weak final public var delegate: OpenCastSwift.CastDeviceScannerDelegate?
   public static let deviceListDidChange: Foundation.Notification.Name
   final public var isScanning: Swift.Bool
@@ -216,7 +216,7 @@ public enum CastMediaPlayerState : Swift.String {
     get
   }
 }
-@objc final public class CastMediaStatus : ObjectiveC.NSObject {
+@objc @_hasMissingDesignatedInitializers final public class CastMediaStatus : ObjectiveC.NSObject {
   public struct MediaStatusMedia {
     public let duration: Swift.Double
   }
@@ -236,8 +236,8 @@ public enum CastMediaPlayerState : Swift.String {
   @objc override final public var description: Swift.String {
     @objc get
   }
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 public let CastMediaStreamTypeBuffered: Swift.String
 public let CastMediaStreamTypeLive: Swift.String
@@ -259,8 +259,8 @@ public enum CastMediaStreamType : Swift.String {
   final public let contentType: Swift.String
   final public let streamType: OpenCastSwift.CastMediaStreamType
   public init(title: Swift.String, url: Foundation.URL, poster: Foundation.URL? = nil, contentType: Swift.String, streamType: OpenCastSwift.CastMediaStreamType = .buffered, autoplay: Swift.Bool = true, currentTime: Swift.Double = 0)
-  @objc override dynamic public init()
   @objc deinit
+  @objc override dynamic public init()
 }
 extension OpenCastSwift.CastMediaPlayerState : Swift.Equatable {}
 extension OpenCastSwift.CastMediaPlayerState : Swift.Hashable {}

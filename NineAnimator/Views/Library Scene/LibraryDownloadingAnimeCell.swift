@@ -36,6 +36,7 @@ class LibraryDownloadingAnimeCell: UICollectionViewCell {
         self.animeTitleLabel.text = statefulAnime.title
         self.animeSourceLabel.text = statefulAnime.source.name
         self.updateStates()
+        self.pointerEffect.hover(scale: true)
     }
     
     func updateStates() {

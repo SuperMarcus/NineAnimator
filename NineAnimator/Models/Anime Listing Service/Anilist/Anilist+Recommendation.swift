@@ -51,8 +51,13 @@ extension Anilist {
                     date: Anilist.date(fromAnilistTimestamp: try scheduleItem.airingAt.tryUnwrap(.decodeError)),
                     episode: try scheduleItem.episode.tryUnwrap(.decodeError),
                     totalEpisodes: media.episodes,
-                    mediaSynopsis: try media.description.tryUnwrap(.decodeError),
-                    reference: try ListingAnimeReference(self, withMediaObject: try scheduleItem.media.tryUnwrap(.decodeError))
+                    mediaSynopsis: try SwiftSoup.parse(
+                        media.description ?? "No synopsis found for this title."
+                    ).text(),
+                    reference: try ListingAnimeReference(
+                        self,
+                        withMediaObject: try scheduleItem.media.tryUnwrap(.decodeError)
+                    )
                 )
             }
         }

@@ -63,7 +63,8 @@ class CalendarAnimeCell: UICollectionViewCell, Themable {
         let formatter = DateFormatter()
         formatter.dateStyle = .none
         formatter.timeStyle = .long
-        timeLabel.text = formatter.string(from: item.broadcastDate)
+        self.timeLabel.text = formatter.string(from: item.broadcastDate)
+        self.pointerEffect.hover(scale: true)
     }
     
     func theme(didUpdate theme: Theme) {

@@ -23,13 +23,13 @@ extension AppDelegate {
     /// Update NineAnimator settings based on environment variable values
     func configureEnvironment() {
         // NINEANIMATOR_NO_ANIMATIONS: Disable Animations
-        if ProcessInfo.processInfo.environment.keys.contains("NINEANIMATOR_NO_ANIMATIONS") {
+        if NineAnimator.runtime.isAnimationDisabled {
             Log.info("[AppDelegate.Environment] Disabling animations...")
             UIView.setAnimationsEnabled(false)
         }
         
         // NINEANIMATOR_APPEARANCE_OVERRIDE: Theme Override
-        if let overridingTheme = ProcessInfo.processInfo.environment["NINEANIMATOR_APPEARANCE_OVERRIDE"] {
+        if let overridingTheme = NineAnimator.runtime.overridingAppearanceName {
             if let theme = Theme.availableThemes[overridingTheme] {
                 Log.info("[AppDelegate.Environment] Updating appearance to '%@' (note this will not change the preferences in the user settings)...", overridingTheme)
                 Theme.setTheme(theme)
@@ -39,7 +39,7 @@ extension AppDelegate {
         }
         
         // NINEANIMATOR_CREATE_DUMMY_RECORDS: Dummy Records
-        if ProcessInfo.processInfo.environment.keys.contains("NINEANIMATOR_CREATE_DUMMY_RECORDS") {
+        if NineAnimator.runtime.shouldCreateDummyRecords {
             createDummyRecords()
         }
     }

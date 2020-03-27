@@ -24,6 +24,9 @@ import Kingfisher
 class NineAnimator: SessionDelegate {
     static var `default` = NineAnimator()
     
+    /// NineAnimator runtime properties
+    static var runtime = NineAnimatorRuntime()
+    
     /// A dummy artwork url
     class var placeholderArtworkUrl: URL {
         URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
@@ -151,6 +154,7 @@ extension NineAnimator {
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceMasterAnime(with: self))
+        register(source: NASourceAnimeUnity(with: self))
     }
 }
 

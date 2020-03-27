@@ -27,6 +27,7 @@ class SimpleAnimeTableViewCell: UITableViewCell, Themable {
         self.item = item
         self.imageView?.image = item.type.icon
         self.updateText()
+        self.pointerEffect.hover()
     }
     
     func theme(didUpdate theme: Theme) {
