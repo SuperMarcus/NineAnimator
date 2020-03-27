@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Alamofire
 import Foundation
 
 #if canImport(UIKit)
@@ -51,6 +52,17 @@ class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
         
         // Setup Kingfisher request modifier
         setupGlobalRequestModifier()
+        
+        addMiddleware {
+            _, response, _ in
+            if response.statusCode == 403,
+                response.headers["server"]?.hasPrefix("cloudflare") == true {
+                return .failure(NineAnimatorError.contentUnavailableError(
+                    "AnimeUnity.it is not available in your region. Please use other sources instead."
+                ))
+            }
+            return .success(())
+        }
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {

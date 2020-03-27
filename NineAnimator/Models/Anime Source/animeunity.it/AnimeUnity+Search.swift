@@ -64,7 +64,8 @@ extension NASourceAnimeUnity {
                 guard let self = self else { return }
                 
                 do {
-                    guard let responseValue = response.data else {
+                    guard let responseValue = response.data,
+                        response.error == nil else {
                         let error: Error? = (response.error?.underlyingError as? NineAnimatorError) ?? response.error
                         throw error ?? NineAnimatorError.unknownError
                     }
