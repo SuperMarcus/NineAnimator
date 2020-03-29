@@ -42,7 +42,7 @@ extension NASourceNineAnime {
     /// Retrieve the current timestamp `ts` value that should be
     /// included in the request
     private var currentNATimestamp: Int {
-        Int(Date().timeIntervalSince1970 / 3600 + 12) * 3600
+        Int(Date().timeIntervalSince1970 / 3600 - 12) * 3600
     }
     
     /// Sign the request url with parameters
@@ -52,8 +52,8 @@ extension NASourceNineAnime {
     ) -> URL {
         // Construct signed request parameters
         var requestParameters = parameters
-        requestParameters["ts"] = currentNATimestamp
         requestParameters["_"] = sign(requestParameters)
+        requestParameters["ts"] = currentNATimestamp
         
         // Reconstruct the URL
         // swiftlint:disable redundant_nil_coalescing
