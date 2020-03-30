@@ -31,9 +31,7 @@ extension NASourceAnimeUnity {
             private var _results: [AnimeLink]?
             var title: String
             var stringa = ""
-        var searchRequestUrl: URL {
-            parent.endpointURL.appendingPathComponent("inc/livesearch.php")
-        }
+            var returned = true
             weak var delegate: ContentProviderDelegate?
             
             func links(on page: Int) -> [AnyLink] {
@@ -41,41 +39,40 @@ extension NASourceAnimeUnity {
             }
             
             func more() {
-                let params: Parameters = ["query": title]
-                let url = "https://animeunity.it/anime.php?c=archive"
-                _ = AF.request(url, method: .post, parameters: params).responseData {response in
-                    do {
-                        let str_correct = response.debugDescription
-//                        str_correct = self.stringa
-                        let bowl = try SwiftSoup.parse(str_correct)
-                        let entries = try bowl.select("div.row>div.col-lg-4")
-                        self._results = try entries.compactMap {
-                            entry -> AnimeLink? in
-//                            do {
-                                let animeTitle = try entry.select("div>h6.card-title>b"/*"h6.card-title>b"*/)
-                                let title = try animeTitle.text()
-                                if title.isEmpty { return nil }
-                                let animeLinkPath = try entry.select("div>a")
-                                let url = try animeLinkPath.attr("href")
-                                let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
-
-                                let animeArtworkPath = try entry.select("img").attr("src")
-                                guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
-                                    let coverImage = URL(string: animeArtworkPath)
-                                else {
-                                    return nil
-                                }
-                            return AnimeLink(
-                                    title: title,
-                                    link: animeUrl,
-                                    image: coverImage,
-                                    source: self.parent
-                                )
+                if(self.returned) {
+                    self.returned = false
+                    let params: Parameters = ["query": title]
+                    let url = "https://animeunity.it/anime.php?c=archive"
+                    _ = AF.request(url, method: .post, parameters: params).responseData {response in
+                        do {
+                            let str_correct = response.debugDescription
+                            let bowl = try SwiftSoup.parse(str_correct)
+                            let entries = try bowl.select("div.row>div.col-lg-4")
+                            self._results = try entries.compactMap {
+                                entry -> AnimeLink? in
+                                    let animeTitle = try entry.select("div>h6.card-title>b"/*"h6.card-title>b"*/)
+                                    let title = try animeTitle.text()
+                                    if title.isEmpty { return nil }
+                                    let animeLinkPath = try entry.select("div>a")
+                                    let url = try animeLinkPath.attr("href")
+                                    let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+                                    let animeArtworkPath = try entry.select("img").attr("src")
+                                    guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
+                                        let coverImage = URL(string: animeArtworkPath)
+                                    else {
+                                        return nil
+                                    }
+                                    return AnimeLink(
+                                            title: title,
+                                            link: animeUrl,
+                                            image: coverImage,
+                                            source: self.parent
+                                        )
+                            }
+                            self.delegate?.pageIncoming(0, from: self)
+                        } catch {
+                            Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
                         }
-                        self.delegate?.pageIncoming(0, from: self)
-                    } catch {
-                        Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
-                        self.delegate?.onError(error, from: self)
                     }
                 }
         }
