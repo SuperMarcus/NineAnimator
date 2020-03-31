@@ -43,10 +43,11 @@ extension NASourceAnimeUnity {
                 let request = self.parent.browseSession.request(url, method: .post, parameters: params)
                 self.parent.applyMiddlewares(to: request).responseData {
                     [weak self] response in
+                    guard let self = self else { return }
                     do {
                         let bowl = try SwiftSoup.parse(response.debugDescription)
                         let entries = try bowl.select("div.row>div.col-lg-4")
-                        self?._results = try entries.compactMap {
+                        self._results = try entries.compactMap {
                             entry -> AnimeLink? in
                             let animeTitle = try entry.select("div>h6.card-title>b")
                             let title = try animeTitle.text()
@@ -60,19 +61,14 @@ extension NASourceAnimeUnity {
                                 else {
                                 return nil
                             }
-                            guard let mysource=self?.parent else {
-                                return nil
-                            }
-                                return AnimeLink(
-                                    title: title,
-                                    link: animeUrl,
-                                    image: coverImage,
-                                    source: mysource
-                                )
+                            return AnimeLink(
+                                title: title,
+                                link: animeUrl,
+                                image: coverImage,
+                                source: self.parent
+                            )
                         }
-                        guard let my_delegate = self?.delegate?.pageIncoming(0, from: self!)
-                            else { return }
-                        my_delegate
+                        self.delegate?.pageIncoming(0, from: self)
                     } catch {
                         Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
                     }
