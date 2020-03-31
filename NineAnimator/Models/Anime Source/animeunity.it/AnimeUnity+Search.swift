@@ -23,58 +23,61 @@ import SwiftSoup
 
 extension NASourceAnimeUnity {
     class SearchAgent: ContentProvider {
-            var totalPages: Int? { 1 }
-            var availablePages: Int { _results == nil ? 0 : 1 }
-            var moreAvailable: Bool { _results == nil }
-            private let parent: NASourceAnimeUnity
-            private var requestTask: NineAnimatorAsyncTask?
-            private var _results: [AnimeLink]?
-            var title: String
-            var stringa = ""
-            var returned = true
-            weak var delegate: ContentProviderDelegate?
-            
-            func links(on page: Int) -> [AnyLink] {
-                page == 0 ? _results?.map { .anime($0) } ?? [] : []
-            }
-            
-            func more() {
-                if(self.returned) {
-                    self.returned = false
-                    let params: Parameters = ["query": title]
-                    let url = "https://animeunity.it/anime.php?c=archive"
-                    _ = AF.request(url, method: .post, parameters: params).responseData {response in
-                        do {
-                            let str_correct = response.debugDescription
-                            let bowl = try SwiftSoup.parse(str_correct)
-                            let entries = try bowl.select("div.row>div.col-lg-4")
-                            self._results = try entries.compactMap {
-                                entry -> AnimeLink? in
-                                    let animeTitle = try entry.select("div>h6.card-title>b"/*"h6.card-title>b"*/)
-                                    let title = try animeTitle.text()
-                                    if title.isEmpty { return nil }
-                                    let animeLinkPath = try entry.select("div>a")
-                                    let url = try animeLinkPath.attr("href")
-                                    let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
-                                    let animeArtworkPath = try entry.select("img").attr("src")
-                                    guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
-                                        let coverImage = URL(string: animeArtworkPath)
-                                    else {
-                                        return nil
-                                    }
-                                    return AnimeLink(
-                                            title: title,
-                                            link: animeUrl,
-                                            image: coverImage,
-                                            source: self.parent
-                                        )
+        var totalPages: Int? { 1 }
+        var availablePages: Int { _results == nil ? 0 : 1 }
+        var moreAvailable: Bool { _results == nil }
+        private let parent: NASourceAnimeUnity
+        private var requestTask: NineAnimatorAsyncTask?
+        private var _results: [AnimeLink]?
+        var title: String
+        var returned = true
+        weak var delegate: ContentProviderDelegate?
+        func links(on page: Int) -> [AnyLink] {
+            page == 0 ? _results?.map { .anime($0) } ?? [] : []
+        }
+        func more() {
+            if self.returned {
+                self.returned = false
+                let params: Parameters = ["query": title]
+                let url = "https://animeunity.it/anime.php?c=archive"
+                let request = self.parent.browseSession.request(url, method: .post, parameters: params)
+                self.parent.applyMiddlewares(to: request).responseData {
+                    [weak self] response in
+                    do {
+                        let bowl = try SwiftSoup.parse(response.debugDescription)
+                        let entries = try bowl.select("div.row>div.col-lg-4")
+                        self?._results = try entries.compactMap {
+                            entry -> AnimeLink? in
+                            let animeTitle = try entry.select("div>h6.card-title>b")
+                            let title = try animeTitle.text()
+                            if title.isEmpty { return nil }
+                            let animeLinkPath = try entry.select("div>a")
+                            let url = try animeLinkPath.attr("href")
+                            let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let animeArtworkPath = try entry.select("img").attr("src")
+                            guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
+                                let coverImage = URL(string: animeArtworkPath)
+                                else {
+                                return nil
                             }
-                            self.delegate?.pageIncoming(0, from: self)
-                        } catch {
-                            Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
+                            guard let mysource=self?.parent else {
+                                return nil
+                            }
+                                return AnimeLink(
+                                    title: title,
+                                    link: animeUrl,
+                                    image: coverImage,
+                                    source: mysource
+                                )
                         }
+                        guard let my_delegate = self?.delegate?.pageIncoming(0, from: self!)
+                            else { return }
+                        my_delegate
+                    } catch {
+                        Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
                     }
                 }
+            }
         }
         init(query: String, parent: NASourceAnimeUnity) {
             self.title = query
