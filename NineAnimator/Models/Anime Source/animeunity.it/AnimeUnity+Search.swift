@@ -22,90 +22,64 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
-    struct SearchResponseRecords: Codable {
-        var animeid: String
-        var title: String
-        var imageurl: String
-    }
-    
-    struct SearchResponse: Codable {
-        var records: [SearchResponseRecords]
-    }
-    
     class SearchAgent: ContentProvider {
         var totalPages: Int? { 1 }
         var availablePages: Int { _results == nil ? 0 : 1 }
         var moreAvailable: Bool { _results == nil }
-        var searchRequestUrl: URL {
-            parent.endpointURL.appendingPathComponent("inc/livesearch.php")
-        }
-        
         private let parent: NASourceAnimeUnity
         private var requestTask: NineAnimatorAsyncTask?
         private var _results: [AnimeLink]?
-        
-        let title: String
+        var title: String
+        var returned = true
         weak var delegate: ContentProviderDelegate?
-        
         func links(on page: Int) -> [AnyLink] {
             page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
-        
         func more() {
-            guard requestTask == nil else { return }
-            
-            let request = self.parent.retriverSession.request(
-                searchRequestUrl,
-                method: .post,
-                parameters: [ "search": title ]
-            )
-            self.parent.applyMiddlewares(to: request).response {
-                [weak self] response in
-                guard let self = self else { return }
-                
-                do {
-                    guard let responseValue = response.data,
-                        response.error == nil else {
-                        let error: Error? = (response.error?.underlyingError as? NineAnimatorError) ?? response.error
-                        throw error ?? NineAnimatorError.unknownError
+            if self.returned {
+                self.returned = false
+                let params: Parameters = ["query": title]
+                let url = "https://animeunity.it/anime.php?c=archive"
+                let request = self.parent.browseSession.request(url, method: .post, parameters: params)
+                self.parent.applyMiddlewares(to: request).responseData {
+                    [weak self] response in
+                    guard let self = self else { return }
+                    do {
+                        let bowl = try SwiftSoup.parse(response.debugDescription)
+                        let entries = try bowl.select("div.row>div.col-lg-4")
+                        self._results = try entries.compactMap {
+                            entry -> AnimeLink? in
+                            let animeTitle = try entry.select("div>h6.card-title>b")
+                            let title = try animeTitle.text()
+                            if title.isEmpty { return nil }
+                            let animeLinkPath = try entry.select("div>a")
+                            let url = try animeLinkPath.attr("href")
+                            let trimmed = url.trimmingCharacters(in: .whitespacesAndNewlines)
+                            let animeArtworkPath = try entry.select("img").attr("src")
+                            guard let animeUrl = URL(string: "https://animeunity.it/" + trimmed),
+                                let coverImage = URL(string: animeArtworkPath)
+                                else {
+                                return nil
+                            }
+                            return AnimeLink(
+                                title: title,
+                                link: animeUrl,
+                                image: coverImage,
+                                source: self.parent
+                            )
+                        }
+                        self.delegate?.pageIncoming(0, from: self)
+                    } catch {
+                        Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
                     }
-                    
-                    let decodedResponse = try JSONDecoder().decode(
-                        SearchResponse.self,
-                        from: responseValue
-                    )
-                    
-                    self._results = try decodedResponse.records.map {
-                        record -> AnimeLink in
-                        var animeUrlBuilder = try URLComponents(
-                            url: self.parent.endpointURL.appendingPathComponent("anime.php"),
-                            resolvingAgainstBaseURL: true
-                        ).tryUnwrap()
-                        animeUrlBuilder.queryItems = [
-                            .init(name: "id", value: record.animeid)
-                        ]
-                        return AnimeLink(
-                            title: record.title,
-                            link: try animeUrlBuilder.url.tryUnwrap(),
-                            image: try URL(string: record.imageurl).tryUnwrap(),
-                            source: self.parent
-                        )
-                    }
-                    
-                    self.delegate?.pageIncoming(0, from: self)
-                } catch {
-                    Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
-                    self.delegate?.onError(error, from: self)
                 }
             }
         }
-        
         init(query: String, parent: NASourceAnimeUnity) {
             self.title = query
             self.parent = parent
         }
     }
-        
     func search(keyword: String) -> ContentProvider {
         SearchAgent(query: keyword, parent: self)
     }
