@@ -36,7 +36,7 @@ extension NASourceNineAnime {
     ///
     /// - Returns: The request signature (`_`) value
     private func sign(_ dict: [String: CustomStringConvertible]) -> Int {
-        636 + (dict.count * 48)
+        684 + (dict.count * 48)
     }
     
     /// Retrieve the current timestamp `ts` value that should be
