@@ -32,28 +32,50 @@ extension NASourceFourAnime {
             let videoElement = try bowl.select("video")
             let videoSource: URL
             
-            if videoElement.isEmpty() {
+            // If a valid url was found from the page's video tag
+            if !videoElement.isEmpty(),
+                let videoUrl = URL(string: try videoElement.attr("src")) {
+                // Video element was found, using the presented one
+                videoSource = videoUrl
+                Log.info("[NASourceFourAnime] Resource found from page source.")
+            } else {
                 // If no video element is present, try decoding the video asset url
                 // from the PACKER script
                 let decodedScript = try PackerDecoder().decode(episodePageContent)
+                
+                // Two variants found from 4anime's site
                 let sourceMatchingExpr = try NSRegularExpression(
                     pattern: "src=\\\\*\"([^\"\\\\]+)",
                     options: []
                 )
-                let videoSourcePath = sourceMatchingExpr
-                    .firstMatch(in: decodedScript)?
-                    .firstMatchingGroup
-                videoSource = try URL(
-                    string: try videoSourcePath.tryUnwrap(
-                        .responseError("Unable to find the video asset associated with this episode.")
-                    ),
-                    relativeTo: link.parent.link
-                ).tryUnwrap()
-                Log.info("[NASourceFourAnime] Resource found from packed scripts.")
-            } else {
-                // Video element was found, using the presented one
-                videoSource = try URL(string: videoElement.attr("src")).tryUnwrap()
-                Log.info("[NASourceFourAnime] Resource found from page source.")
+                let jwPlayerSetupMatchingExpr = try NSRegularExpression(
+                    pattern: "file:\\s*\"([^\"]+)",
+                    options: []
+                )
+                
+                if let jwPlayerUrlString = jwPlayerSetupMatchingExpr
+                        .firstMatch(in: decodedScript)?
+                        .firstMatchingGroup,
+                    let jwPlayerUrl = URL(
+                        string: jwPlayerUrlString,
+                        relativeTo: link.parent.link
+                    ) {
+                    // 1. JWPlayer setup script
+                    videoSource = jwPlayerUrl
+                    Log.info("[NASourceFourAnime] Resource found from packed scripts (jwplayer.setup).")
+                } else if let sourceUrlString = sourceMatchingExpr
+                        .firstMatch(in: decodedScript)?
+                        .firstMatchingGroup,
+                    let sourceUrl = URL(
+                        string: sourceUrlString,
+                        relativeTo: link.parent.link
+                    ) {
+                    // 2. Video tag src attribute
+                    videoSource = sourceUrl
+                    Log.info("[NASourceFourAnime] Resource found from packed scripts (video tag).")
+                } else {
+                    throw NineAnimatorError.providerError("Unable to resolve playback url from provider response")
+                }
             }
             
             return Episode(

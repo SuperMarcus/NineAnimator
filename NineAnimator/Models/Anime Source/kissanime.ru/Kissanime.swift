@@ -51,7 +51,10 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        VideoProviderRegistry.default.provider(for: name)
+        if (episode.userInfo["kissanime.dummy"] as? Bool) == true {
+            return DummyParser.registeredInstance
+        }
+        return VideoProviderRegistry.default.provider(for: name)
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
@@ -59,7 +62,6 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        // HydraX doesn't require verification
-        return "hydrax"
+        "beta"
     }
 }

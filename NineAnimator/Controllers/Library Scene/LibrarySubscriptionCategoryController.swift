@@ -54,6 +54,11 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
             .anime($0)
         }
         collectionView.reloadData()
+        
+        // Request for notification permissions
+        if !cachedWatchedAnimeItems.isEmpty {
+            UserNotificationManager.default.requestNotificationPermissions(shouldPresetError: false)
+        }
     }
 }
 

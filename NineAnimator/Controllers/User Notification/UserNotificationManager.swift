@@ -118,15 +118,16 @@ extension UserNotificationManager {
     }
     
     /// Request User's permission for pushing notifications
-    func requestNotificationPermissions() {
+    func requestNotificationPermissions(shouldPresetError: Bool = true, completionHandler: ((Bool) -> Void)? = nil) {
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.requestAuthorization(options: [.badge]) {
             success, _ in DispatchQueue.main.async {
-                if !success {
+                if shouldPresetError && !success {
                     let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     RootViewController.shared?.presentOnTop(alertController, animated: true)
                 }
+                completionHandler?(success)
             }
         }
     }
@@ -157,7 +158,7 @@ extension UserNotificationManager {
                 let decoer = PropertyListDecoder()
                 return try decoer.decode(WatchedAnime.self, from: serializedWatcher)
             }
-        } catch { Log.error("Unable to retrive watcher for anime - %@", error) }
+        } catch { Log.error("[UserNotificationManager] Unable to retrive watcher for anime - %@", error) }
         return nil
     }
     
@@ -169,7 +170,7 @@ extension UserNotificationManager {
             let serializedWatcher = try encoder.encode(watcher)
             try serializedWatcher.write(to: persistUrl)
             lazyPersistPool.remove(watcher.link)
-        } catch { Log.error("Unable to persist watcher - %@", error) }
+        } catch { Log.error("[UserNotificationManager] Unable to persist watcher - %@", error) }
     }
     
     /// Add the anime but do not cache the episodes until the app becomes inactive or the user enters the anime.
@@ -217,7 +218,7 @@ extension UserNotificationManager {
             // user notification center
             
             // try fileManager.removeItem(at: posterUrl(for: anime))
-        } catch { Log.error("Unable to remove persisted watcher - %@", error) }
+        } catch { Log.error("[UserNotificationManager] Unable to remove persisted watcher - %@", error) }
     }
     
     /// Clear all cached anime
@@ -230,7 +231,7 @@ extension UserNotificationManager {
                     try fileManager.removeItem(at: watcherUrl)
                 }
             }
-        } catch { Log.error("Unable to remove persisted watcher - %@", error) }
+        } catch { Log.error("[UserNotificationManager] Unable to remove persisted watcher - %@", error) }
     }
     
     /// Remove posted notifications about this anime
@@ -305,8 +306,10 @@ extension UserNotificationManager {
     private func updateWatcher(forAnime animeLink: AnimeLink, inQueue queue: DispatchQueue) -> NineAnimatorPromise<StatefulAsyncTaskContainer.TaskState> {
         NineAnimator.default.anime(with: animeLink).dispatch(on: queue).then {
             anime in
-            // Update the anime watcher
-            self.update(anime)
+            defer {
+                // Update the anime watcher
+                self.update(anime)
+            }
             
             if let currentWatcher = self.retrive(for: animeLink) {
                 var result = FetchResult(animeLink, [], [])
@@ -331,7 +334,7 @@ extension UserNotificationManager {
                     return .succeeded
                 }
             } else {
-                Log.info("Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title)
+                Log.info("[UserNotificationManager] Anime '%@' is being registered but has not been cached yet. No new notifications will be sent.", anime.link.title)
                 return .succeeded
             }
         }
@@ -369,7 +372,7 @@ extension UserNotificationManager {
             let linkData = try encoder.encode(result.anime)
             content.userInfo = [ "link": linkData ]
         } catch {
-            Log.error("Unable to encode AnimeLink to notificaiton (%@). Aborting notificaiton.", error)
+            Log.error("[UserNotificationManager] Unable to encode AnimeLink to notificaiton (%@). Aborting notificaiton.", error)
             return
         }
         
@@ -387,7 +390,7 @@ extension UserNotificationManager {
         // Alas, post notification to the user
         notificationCenter.add(request, withCompletionHandler: nil)
         
-        Log.info("Notification for '%@' sent.", result.anime.title)
+        Log.info("[UserNotificationManager] Notification for '%@' sent.", result.anime.title)
     }
     
     /// Send a download status update notification

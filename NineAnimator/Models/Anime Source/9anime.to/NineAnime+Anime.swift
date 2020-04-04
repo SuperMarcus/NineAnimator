@@ -105,7 +105,8 @@ extension NASourceNineAnime {
             
             return signedRequest(
                 ajax: "/ajax/film/servers/\(animeResourceTags.id)",
-                with: ajaxHeaders) { response, error in
+                with: ajaxHeaders
+            ) { response, error in
                 guard let responseJson = response else {
                     return handler(nil, error)
                 }
