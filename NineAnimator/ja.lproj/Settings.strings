@@ -11,7 +11,7 @@
 "1VP-oc-aqz.text" = "Clear Cached Data";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Clear Downloads";
+"1X7-X7-huV.text" = "ダウンロードをクリア";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
 "2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
@@ -20,7 +20,7 @@
 "2ol-44-Ha5.text" = "ステータス";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
-"3bY-Q0-VOr.text" = "Privacy Policy";
+"3bY-Q0-VOr.text" = "プライバシーポリシー";
 
 /* Class = "UILabel"; text = "ANILIST.CO"; ObjectID = "4rr-C0-0zN"; */
 "4rr-C0-0zN.text" = "ANILIST.CO";
@@ -29,7 +29,7 @@
 "4vz-rG-dvA.text" = "Not Setup";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
-"4ye-Yb-8qS.title" = "Storage";
+"4ye-Yb-8qS.title" = "ストレージ";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
 "5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
@@ -98,7 +98,7 @@
 "KLV-mK-zbJ.footerTitle" = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co.";
 
 /* Class = "UITableViewSection"; headerTitle = "Anilist"; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.headerTitle" = "Anilist";
+"KLV-mK-zbJ.headerTitle" = "AniList";
 
 /* Class = "UILabel"; text = "Picture in Picture Playback"; ObjectID = "KSq-np-Dks"; */
 "KSq-np-Dks.text" = "Picture in Picture Playback";
@@ -110,7 +110,7 @@
 "Kql-zU-bRq.text" = "Setup AniList.co";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "LfV-dW-fu4"; */
-"LfV-dW-fu4.text" = "Credits";
+"LfV-dW-fu4.text" = "クレジット";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
 "LoF-UE-Pdv.text" = "Not Setup";
