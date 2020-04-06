@@ -20,7 +20,7 @@
 "JGW-3m-qyq.text" = "ライト";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
-"MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
+"MDo-yQ-irq.text" = "個人設定メニューにあなたのAniList、Kitsu、MyAnimeListアカウントをログインして。Discordコミュニティに参加して、アップデートに通知されます。";
 
 /* Class = "UILabel"; text = "NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites."; ObjectID = "MRT-ib-AcS"; */
 "MRT-ib-AcS.text" = "NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites.";
@@ -77,7 +77,7 @@
 "uka-Zy-Cuf.title" = "アップデート";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
-"x9M-KR-UlF.text" = "Start Using NineAnimator";
+"x9M-KR-UlF.text" = "NineAnimatorを使って始める";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
 "xUo-iY-fAt.title" = "ようこそ";
