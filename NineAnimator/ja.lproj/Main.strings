@@ -17,13 +17,13 @@
 "Xji-1Z-Meq.text" = "Recently Updated";
 
 /* Class = "UINavigationItem"; title = "Featured"; ObjectID = "Xx9-4a-rNT"; */
-"Xx9-4a-rNT.title" = "Featured";
+"Xx9-4a-rNT.title" = "おすすめ";
 
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "Y8g-si-rdv"; */
 "Y8g-si-rdv.title" = "検索";
 
 /* Class = "UILabel"; text = "Contents are loading..."; ObjectID = "bTY-yy-a3Z"; */
-"bTY-yy-a3Z.text" = "Contents are loading...";
+"bTY-yy-a3Z.text" = "コンテンツがロード中";
 
 /* Class = "UILabel"; text = "You recently watched..."; ObjectID = "cty-4k-jCy"; */
 "cty-4k-jCy.text" = "You recently watched...";
