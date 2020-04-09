@@ -66,6 +66,7 @@ extension LibrarySceneController {
             
             // Initialize the cell with title and description
             cell.setPresenting(title: "New Episodes Available", description: description)
+            cell.makeThemable()
             return cell
         }
     }

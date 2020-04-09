@@ -33,6 +33,7 @@ class LibraryCategoryCell: UICollectionViewCell, Themable {
         self.category = category
         self.updateLabels()
         self.pointerEffect.hover()
+        self.makeThemable()
     }
     
     func updateLabels() {
