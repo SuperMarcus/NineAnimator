@@ -36,6 +36,7 @@ class SetupFinishingViewController: UIViewController {
     @IBOutlet private weak var finishSubtitleLabel: UILabel!
     @IBOutlet private weak var finishButton: UIButton!
     @IBOutlet private weak var openDiscordButton: UIButton!
+    @IBOutlet private weak var discordLogoView: UIImageView!
     
     private var didShowAnimations = false
     
@@ -51,6 +52,7 @@ class SetupFinishingViewController: UIViewController {
             finishSubtitleLabel.alpha = 0
             finishButton.alpha = 0
             openDiscordButton.alpha = 0
+            discordLogoView.alpha = 0
         }
     }
     
@@ -60,9 +62,20 @@ class SetupFinishingViewController: UIViewController {
         if !didShowAnimations {
             didShowAnimations = true
             
-            finishTitleLabel.animate(animations: [ AnimationType.from(direction: .top, offset: 16) ], duration: 0.5)
-            finishSubtitleLabel.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
-            openDiscordButton.animate(animations: [ AnimationType.from(direction: .bottom, offset: 16) ], duration: 0.5)
+            UIView.animate(
+                views: [ discordLogoView, finishTitleLabel ],
+                animations: [
+                    AnimationType.from(direction: .top, offset: 16)
+                ],
+                duration: 0.5
+            )
+            UIView.animate(
+                views: [ finishSubtitleLabel, openDiscordButton ],
+                animations: [
+                    AnimationType.from(direction: .bottom, offset: 16)
+                ],
+                duration: 0.5
+            )
             finishButton.animate(animations: [], delay: 0)
         }
     }
