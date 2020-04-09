@@ -82,7 +82,9 @@ extension NASourceAnimeUnity {
                                 source: self.parent
                             )
                         }
-                        self._results = self._results_not?.sorted { (lhs, rhs) in return lhs.link.absoluteString < rhs.link.absoluteString }
+                        self._results = self._results_not?.sorted {
+                            $0.link.absoluteString < $1.link.absoluteString
+                        }
                         self.delegate?.pageIncoming(0, from: self)
                     } catch {
                         Log.error("[NASourceAnimeUnity.SearchAgent] Unable to perform search operation: %@", error)
