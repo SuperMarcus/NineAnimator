@@ -41,6 +41,10 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
         "AnimeKisa is a free, ads-free, and HD anime streaming platform. NineAnimator has experimental support for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.english
+    }
+    
     override var endpoint: String { "https://animekisa.tv" }
     
     override init(with parent: NineAnimator) {

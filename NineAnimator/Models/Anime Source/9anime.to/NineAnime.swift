@@ -39,6 +39,10 @@ class NASourceNineAnime: BaseSource, Source {
     var siteLogo: NSImage { #imageLiteral(resourceName: "9anime Site Icon") }
 #endif
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     var siteDescription: String {
         "9anime is a popular free anime streaming website and one of the best supported anime sources in NineAnimator."
     }

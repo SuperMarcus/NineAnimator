@@ -42,6 +42,10 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
         "AnimeTwist is a free & ads free anime streaming website. Anime artworks may not be displayed correctly for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     override var endpoint: String { "https://twist.moe" }
     
     fileprivate var _listedAnime: [AnimeTwistListedAnime]?

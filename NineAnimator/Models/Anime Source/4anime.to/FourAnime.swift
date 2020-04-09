@@ -44,6 +44,10 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
         "4anime"
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     override var endpoint: String { "https://4anime.to" }
     
     override init(with parent: NineAnimator) {

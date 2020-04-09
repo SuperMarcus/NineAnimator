@@ -41,6 +41,10 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
         "Kissanime is a free anime streaming website. NineAnimator has experimental support for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     override var endpoint: String { "https://kissanime.ru" }
     
     override init(with parent: NineAnimator) {
