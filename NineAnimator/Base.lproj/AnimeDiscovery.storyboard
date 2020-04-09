@@ -621,7 +621,7 @@
                             <size key="itemSize" width="382" height="118"/>
                             <size key="headerReferenceSize" width="50" height="56"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                            <inset key="sectionInset" minX="8" minY="0.0" maxX="8" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="schedule.cell" id="l9l-yo-fk5" customClass="CalendarAnimeCell" customModule="NineAnimator" customModuleProvider="target">

@@ -42,7 +42,7 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
-        \.romaji
+        \.english
     }
     
     override var endpoint: String { "https://kissanime.ru" }

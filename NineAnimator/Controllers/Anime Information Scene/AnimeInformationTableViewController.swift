@@ -463,7 +463,16 @@ extension AnimeInformationTableViewController {
         // Use all available names to make decisions
         guard let reference = presentingReference else { return }
         let information = presentingAnimeInformation
-        let indexingName = information?.name.default ?? reference.name
+        let source = NineAnimator.default.user.source
+        let indexingName: String
+        
+        // Use source preferred name if possible
+        if let sourcePreferredKeywords = information?
+            .name[keyPath: source.preferredAnimeNameVariant]
+            .trimmingCharacters(in: .whitespacesAndNewlines),
+            !sourcePreferredKeywords.isEmpty {
+            indexingName = sourcePreferredKeywords
+        } else { indexingName = reference.name }
         
         // Hides the view episodes button and starts animating
         // the activity indicator
