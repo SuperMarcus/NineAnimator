@@ -30,7 +30,9 @@ extension NASourceAnimeUltima {
         var totalPages: Int? = 1
         var availablePages: Int { result == nil ? 0 : 1 }
         var moreAvailable: Bool { result == nil }
-        
+        private var anno: [AnimeLink]?
+        private var _results_not: [AnimeLink]?
+        var Year: [Int] = []
         // The result of the search
         private var result: [AnyLink]?
         private var searchRequestingTask: NineAnimatorAsyncTask?
@@ -60,7 +62,16 @@ extension NASourceAnimeUltima {
                     let animeArtworkString = try resultAnimeContainer.select("img").attr("src")
                     let animeArtworkUrl = try some(URL(string: animeArtworkString), or: .urlError)
                     let animeTitle = try resultAnimeContainer.select("span.anime-title").text()
-                    
+                    /////////////////////////////
+                    //detect the "realease year" and save it into Year array
+                    var year_ex = 0
+                    let anno2 = try resultAnimeContainer.select("span.anime-details.is-size-7.has-text-grey>strong").text()
+                    if anno2.contains(" · ") {
+                        let anno = anno2.components(separatedBy: " · ")
+                        year_ex = Int(anno[1]) ?? 0
+                    }
+                    self.Year.append(year_ex)
+                    /////////////////////////////
                     // Construct anime link and add to list
                     resultingAnime.append(AnimeLink(
                         title: animeTitle,
@@ -69,7 +80,7 @@ extension NASourceAnimeUltima {
                         source: self.parent
                     ))
                 }
-                
+                resultingAnime = zip(self.Year, resultingAnime).sorted { $0.0 < $1.0 }.map { $0.1 }
                 return resultingAnime
             } .error {
                 [weak self] error in
