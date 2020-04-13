@@ -224,7 +224,7 @@
 "dNx-EX-rHK.footerTitle" = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.";
 
 /* Class = "UITableViewSection"; headerTitle = "Data and Privacy"; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.headerTitle" = "Data and Privacy";
+"dNx-EX-rHK.headerTitle" = "データとプライバシー";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
 "dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
