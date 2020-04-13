@@ -5,16 +5,16 @@
 "Ao6-Pk-Lp9.text" = "FINDING LOCAL RECORDS...";
 
 /* Class = "UILabel"; text = "?"; ObjectID = "HvO-MC-MZh"; */
-"HvO-MC-MZh.text" = "?";
+"HvO-MC-MZh.text" = "？";
 
 /* Class = "UILabel"; text = "?"; ObjectID = "IFs-GB-oZN"; */
-"IFs-GB-oZN.text" = "?";
+"IFs-GB-oZN.text" = "？";
 
 /* Class = "UIBarButtonItem"; title = "Back"; ObjectID = "IoV-MJ-BXG"; */
 "IoV-MJ-BXG.title" = "戻る";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "Q1L-pC-tBH"; */
-"Q1L-pC-tBH.normalTitle" = "View";
+"Q1L-pC-tBH.normalTitle" = "見る";
 
 /* Class = "UINavigationItem"; title = "Recents"; ObjectID = "QFq-wf-q5V"; */
 "QFq-wf-q5V.title" = "Recents";
