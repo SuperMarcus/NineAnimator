@@ -11,7 +11,7 @@
 "BdS-bf-mCi.text" = "今週";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "S9D-GU-IOj"; */
-"S9D-GU-IOj.title" = "Select Source";
+"S9D-GU-IOj.title" = "ソースを選択";
 
 /* Class = "UIButton"; normalTitle = "Show Schedule"; ObjectID = "WZx-eB-ztY"; */
 "WZx-eB-ztY.normalTitle" = "スケジュールを表示する";
