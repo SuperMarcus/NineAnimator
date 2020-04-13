@@ -2,7 +2,7 @@
 "0eR-hu-Qxf.text" = "ホーム";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "GitHubリポジトリ";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
 "1D4-d4-eg5.text" = "Checking...";
@@ -50,7 +50,7 @@
 "74T-HL-SF3.text" = "Calculating Usage...";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
-"7gK-el-Ee1.text" = "Open Cast Controller";
+"7gK-el-Ee1.text" = "キャストコントローラーを開く";
 
 /* Class = "UITableViewSection"; footerTitle = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay."; ObjectID = "7nJ-6V-9oy"; */
 "7nJ-6V-9oy.footerTitle" = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.";
@@ -128,10 +128,10 @@
 "N8M-Jf-n7k.text" = "Manage Personal Information";
 
 /* Class = "UILabel"; text = "Allow NSFW Content"; ObjectID = "Nrj-vR-ORT"; */
-"Nrj-vR-ORT.text" = "Allow NSFW Content";
+"Nrj-vR-ORT.text" = "NSFWコンテンツを許可します";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
-"OUZ-2Z-Nei.text" = "GitHub Repository";
+"OUZ-2Z-Nei.text" = "GitHubリポジトリ";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[0] = "Reversed"; ObjectID = "QFr-Ue-S7z"; */
 "QFr-Ue-S7z.segmentTitles[0]" = "Reversed";
@@ -161,7 +161,7 @@
 "SkT-L9-D11.text" = "Not Setup";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
-"SsL-fL-doX.title" = "Preferences";
+"SsL-fL-doX.title" = "設定";
 
 /* Class = "UILabel"; text = "Retry Downloads"; ObjectID = "Tre-aJ-ohc"; */
 "Tre-aJ-ohc.text" = "Retry Downloads";
@@ -179,22 +179,22 @@
 "W4K-f9-Rrg.text" = "Preferred Source";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[0]" = "Dark";
+"WSB-go-EfB.segmentTitles[0]" = "ダーク";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[1] = "Light"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[1]" = "Light";
+"WSB-go-EfB.segmentTitles[1]" = "ライト";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "WoO-zh-kDF"; */
-"WoO-zh-kDF.text" = "Appearance";
+"WoO-zh-kDF.text" = "外観";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "Wu1-sV-neO"; */
-"Wu1-sV-neO.text" = "About";
+"Wu1-sV-neO.text" = "情報";
 
 /* Class = "UITableViewSection"; footerTitle = "Set appearance dynamically."; ObjectID = "ZJI-L3-7zk"; */
 "ZJI-L3-7zk.footerTitle" = "Set appearance dynamically.";
 
 /* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "ZJI-L3-7zk"; */
-"ZJI-L3-7zk.headerTitle" = "General";
+"ZJI-L3-7zk.headerTitle" = "一般";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
 "ZKK-PI-ugJ.text" = "Show Available Streams";
@@ -212,7 +212,7 @@
 "bH1-Rj-cxO.text" = "Setup MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
-"c84-vM-Uf0.text" = "Send Notifications";
+"c84-vM-Uf0.text" = "通知を送信";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
 "d3R-vQ-52G.text" = "Not Setup";
