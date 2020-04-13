@@ -29,7 +29,7 @@
 "RjP-7k-vGp.text" = "Select A Website";
 
 /* Class = "UILabel"; text = "Anime Source"; ObjectID = "TMt-Pq-6FS"; */
-"TMt-Pq-6FS.text" = "Anime Source";
+"TMt-Pq-6FS.text" = "アニメソース";
 
 /* Class = "UILabel"; text = "This version of NineAnimator includes experimental support for AnimeDao and 4anime as built-in anime sources."; ObjectID = "V1d-j4-fS2"; */
 "V1d-j4-fS2.text" = "This version of NineAnimator includes experimental support for AnimeDao and 4anime as built-in anime sources.";
