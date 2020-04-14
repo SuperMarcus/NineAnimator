@@ -40,6 +40,10 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
         "animedao.com allows you to stream subtitled anime and movies in SD and HD. NineAnimator has experimental support for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.english
+    }
+    
     override var endpoint: String { "https://animedao.com" }
     
     override init(with parent: NineAnimator) {

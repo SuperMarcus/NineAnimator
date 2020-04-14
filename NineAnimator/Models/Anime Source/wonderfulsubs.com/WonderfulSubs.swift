@@ -42,6 +42,10 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
         "WonderfulSubs is a free anime streaming website with numerous dubs and subs of anime. NineAnimator has fairly well-rounded support for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.default
+    }
+    
     /// Disabled due to requests from the website's owner
     override var isEnabled: Bool { false }
     

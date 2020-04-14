@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CommonCrypto
 import Foundation
 import SwiftSoup
 
@@ -28,8 +29,7 @@ extension NASourceKissanime {
 //        "streamango": "Streamango",
         "nova": "Nova Server",
         "beta": "Beta Server",
-        "beta2": "Beta2 Server",
-        "hydrax": "HydraX"
+        "beta4": "Beta4 Server"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -72,27 +72,50 @@ extension NASourceKissanime {
                 throw NineAnimatorError.responseError("This episode is not available on the selected server")
             }
             
-            let frameMatchingRegex = try NSRegularExpression(
-                pattern: "\\$\\('#divMyVideo'\\)\\.html\\('([^']+)",
-                options: []
-            )
+            let targetUrl: URL
+            var episodeUserInfo = [String: Any]()
             
-            let frameScriptSourceMatch = try frameMatchingRegex
-                .firstMatch(in: content)
-                .tryUnwrap(.responseError("Cannot find a valid URL to the resource"))
-                .firstMatchingGroup
-                .tryUnwrap()
-            
-            let parsedFrameElement = try SwiftSoup.parse(frameScriptSourceMatch).select("iframe")
-            let targetLinkString = try parsedFrameElement.attr("src")
-            let targetUrl = try URL(string: targetLinkString, relativeTo: reconstructedUrl).tryUnwrap()
+            // Detect if the video URL is embedded in the page
+            let qualitySelectionOptions = try bowl.select("#slcQualix>option")
+            if !qualitySelectionOptions.isEmpty() {
+                let videoSelections = Dictionary(try qualitySelectionOptions.map {
+                    option in (
+                        option.ownText().lowercased(),
+                        try option.attr("value")
+                    )
+                }) { $1 }
+                let selectedVideoOptionValue = try videoSelections["1080p"]
+                    ?? videoSelections["720p"]
+                    ?? videoSelections.first.tryUnwrap().value
+                let decodedVideoUrlString = try NASourceKissanime.decodeOvel(
+                    base64EncodedString: selectedVideoOptionValue
+                )
+                episodeUserInfo["kissanime.dummy"] = true
+                targetUrl = try URL(string: decodedVideoUrlString).tryUnwrap()
+            } else {
+                let frameMatchingRegex = try NSRegularExpression(
+                    pattern: "\\$\\('#divMyVideo'\\)\\.html\\('([^']+)",
+                    options: []
+                )
+                
+                let frameScriptSourceMatch = try frameMatchingRegex
+                    .firstMatch(in: content)
+                    .tryUnwrap(.responseError("Cannot find a valid URL to the resource"))
+                    .firstMatchingGroup
+                    .tryUnwrap()
+                
+                let parsedFrameElement = try SwiftSoup.parse(frameScriptSourceMatch).select("iframe")
+                let targetLinkString = try parsedFrameElement.attr("src")
+                targetUrl = try URL(string: targetLinkString, relativeTo: reconstructedUrl).tryUnwrap()
+            }
             
             // Construct the episode object
             return Episode(
                 link,
                 target: targetUrl,
                 parent: anime,
-                referer: reconstructedUrl.absoluteString
+                referer: reconstructedUrl.absoluteString,
+                userInfo: episodeUserInfo
             )
         }
     }
@@ -116,5 +139,56 @@ extension NASourceKissanime {
                 return eNumb
             } else { return nil }
         } catch { return nil }
+    }
+    
+    /// Decode kissanime CBC/Pkcs7 encrypted data
+    fileprivate static func decodeOvel(base64EncodedString: String) throws -> String {
+        let encryptedData = try Data(base64Encoded: base64EncodedString).tryUnwrap(
+            .responseError("Invalid base64 parameter")
+        )
+        let iv = try Data(base64Encoded: "pejS6cFyGuDoStZgxHLB8w==").tryUnwrap()
+        let key = try Data(base64Encoded: "/J90X5HuPNXncBpFUPGAbaFdm5iYrZU+gp+cEpmCQ9Y=").tryUnwrap()
+        
+        let destinationBufferLength = encryptedData.count + kCCBlockSizeAES128
+        var destinationBuffer = Data(count: destinationBufferLength)
+        var decryptedBytes = 0
+        
+        // AES256-CBC decrypt with key and iv
+        let decryptionStatus = destinationBuffer.withUnsafeMutableBytes {
+            destinationPointer in
+            encryptedData.withUnsafeBytes {
+                dataPointer in
+                key.withUnsafeBytes {
+                    keyPointer in
+                    iv.withUnsafeBytes {
+                        ivPointer in
+                        CCCrypt(
+                            CCOperation(kCCDecrypt),
+                            CCAlgorithm(kCCAlgorithmAES),
+                            CCOptions(kCCOptionPKCS7Padding),
+                            keyPointer.baseAddress!,
+                            kCCKeySizeAES256,
+                            ivPointer.baseAddress!,
+                            dataPointer.baseAddress!,
+                            encryptedData.count,
+                            destinationPointer.baseAddress!,
+                            destinationBufferLength,
+                            &decryptedBytes
+                        )
+                    }
+                }
+            }
+        }
+        
+        // Check result status
+        guard decryptionStatus == CCCryptorStatus(kCCSuccess) else {
+            throw NineAnimatorError.responseError("Unable to decrypt video streaming information")
+        }
+        
+        return try String(
+            data: destinationBuffer,
+            encoding: .utf8
+        ).tryUnwrap(.responseError("Malformed data"))
+         .trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
     }
 }

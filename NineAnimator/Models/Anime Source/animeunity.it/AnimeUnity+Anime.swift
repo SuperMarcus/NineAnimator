@@ -34,7 +34,6 @@ extension NASourceAnimeUnity {
                 }
                 return trama
             }
-            var x = 0
             let animeArtworkUrl = URL(
                 string: try bowl.select(".cover>img").attr("src")
             ) ?? link.image
@@ -48,8 +47,7 @@ extension NASourceAnimeUnity {
             // Obtain the list of episodes
             let episodes = try bowl.select("div.text-center div").reduce(into: [EpisodeLink]()) {
                 collection, container in
-                x += 1
-                let episodeName = String(x)
+                let episodeName = try container.select("a.ep-button").text()
                 var episodeLink = try container.select("a").attr("href")
                 episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
                 if !episodeLink.isEmpty {

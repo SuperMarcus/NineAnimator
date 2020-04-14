@@ -48,6 +48,10 @@ class NASourceAnimePahe: BaseSource, Source, PromiseSource {
     var siteLogo: NSImage { #imageLiteral(resourceName: "AnimePahe Site Icon") }
     #endif
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
         VideoProviderRegistry.default.provider(for: name)
     }

@@ -176,7 +176,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             RootViewController.shared?.showCastController()
         case "settings.history.recents":
             askForConfirmation(title: "Clear Recent Anime",
-                               message: "This action is irreversible. All anime history under the Recents tab will be cleared.",
+                               message: "This action is irreversible. All anime history under Recents will be cleared.",
                                continueActionName: "Clear Recents"
             ) { [weak self] in
                 NineAnimator.default.user.clearRecents()

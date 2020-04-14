@@ -136,6 +136,8 @@ extension NineAnimatorUser {
     /// Remove all anime viewing history
     func clearRecents() {
         _freezer.removeObject(forKey: Keys.recentEpisode)
+        _freezer.removeObject(forKey: Keys.recentAnimeList)
+        _freezer.removeObject(forKey: Keys.recentServer)
     }
 }
 

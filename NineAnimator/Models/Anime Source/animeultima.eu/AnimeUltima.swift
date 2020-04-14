@@ -42,6 +42,10 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         "AnimeUltima is a free anime streaming website with many self-hosted servers. This website is guarded by Cloudflare; you may be require to verify your identity manually."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.romaji
+    }
+    
     override var endpoint: String { "https://www1.animeultima.to" }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {

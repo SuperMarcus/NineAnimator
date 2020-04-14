@@ -39,7 +39,7 @@ class CloudflareWAFResolver: SourceRequestRetrier {
         response: HTTPURLResponse,
         body: Data?) -> Alamofire.DataRequest.ValidationResult {
         if let requestingUrl = request?.url,
-            (400..<500).contains(response.statusCode),
+            (400..<500).contains(response.statusCode) || response.statusCode == 503,
             let serverHeaderField = response.allHeaderFields["Server"] as? String,
             serverHeaderField.lowercased().hasPrefix("cloudflare"),
             let body = body,

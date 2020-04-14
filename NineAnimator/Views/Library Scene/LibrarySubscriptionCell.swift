@@ -55,20 +55,25 @@ class LibrarySubscriptionCell: UICollectionViewCell {
         switch link {
         case let .anime(animeLink):
             let context = NineAnimator.default.trackingContext(for: animeLink)
+            let furtherestStreamedEpisode: Int?
             
             if let record = context.furtherestEpisodeRecord {
                 let durationDescription = Date()
                     .timeIntervalSince(record.enqueueDate)
                     .durationDescription
+                furtherestStreamedEpisode = record.episodeNumber
                 accessorySubtitleLabel.text = "Ep. \(record.episodeNumber) streamed \(durationDescription)"
                     .uppercased()
-                
-                if let watcher = UserNotificationManager.default.retrive(for: animeLink) {
-                    let totalEpisodes = watcher.episodeNames.count
-                    self.updateStatusLabel.text = "Ep. \(record.episodeNumber) / \(totalEpisodes)"
-                } else {
-                    self.updateStatusLabel.text = "Ep. \(record.episodeNumber)"
-                }
+            } else {
+                furtherestStreamedEpisode = nil
+                accessorySubtitleLabel.text = "No records found".uppercased()
+            }
+            
+            if let watcher = UserNotificationManager.default.retrive(for: animeLink) {
+                let totalEpisodes = watcher.episodeNames.count
+                self.updateStatusLabel.text = "Ep. \(furtherestStreamedEpisode?.description ?? "0") / \(totalEpisodes)"
+            } else {
+                self.updateStatusLabel.text = "Ep. \(furtherestStreamedEpisode?.description ?? "0")"
             }
             
             // May want to re-design this in the near future

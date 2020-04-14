@@ -43,7 +43,8 @@ class LibraryRecentlyWatchedCell: UICollectionViewCell {
             progressLabel.text = "Ep. \(record.episodeNumber)"
         } else { progressLabel.text = "???" }
         
-        updatePointerEffects()
+        self.updatePointerEffects()
+        self.makeThemable()
     }
     
     override var isHighlighted: Bool {

@@ -33,6 +33,7 @@ class LibraryCollectionCell: UICollectionViewCell, Themable {
         self.collectionLabel.text = collection.title
         self.collectionIconView.image = #imageLiteral(resourceName: "List Icon HD")
         self.pointerEffect.hover(shadow: true)
+        self.makeThemable()
     }
     
     func theme(didUpdate theme: Theme) {

@@ -23,7 +23,7 @@ import Foundation
 
 class HydraXParser: VideoProviderParser {
     var aliases: [String] {
-        [ "HydraX", "replay.watch" ]
+        [ "HydraX", "replay.watch", "Server Hyrax" ]
     }
     
     private static let vipChannelResourceRequestUrl = URL(string: "https://multi.idocdn.com/vip")!

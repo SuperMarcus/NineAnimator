@@ -25,7 +25,7 @@ extension NASourceNineAnime {
         request: URLRequest?,
         response: HTTPURLResponse,
         body: Data?
-        ) -> Alamofire.DataRequest.ValidationResult {
+    ) -> Alamofire.DataRequest.ValidationResult {
         if let url = request?.url,
             let body = body,
             let bodyString = String(data: body, encoding: .utf8),
@@ -37,5 +37,23 @@ extension NASourceNineAnime {
                 )
             )
         } else { return .success(()) }
+    }
+    
+    class func _ipBlockDetectionMiddleware(
+        request: URLRequest?,
+        response: HTTPURLResponse,
+        body: Data?
+    ) -> Alamofire.DataRequest.ValidationResult {
+        if let body = body, body.count < 1000, // < 1kb body is abnormal
+            let bodyString = String(data: body, encoding: .utf8),
+            bodyString.localizedCaseInsensitiveContains("temporarily blocks")
+            && bodyString.localizedCaseInsensitiveContains("harmful requests") {
+            return .failure(
+                NineAnimatorError.contentUnavailableError(
+                    "This client may be blocked. Make sure you're using an up-to-date version of NineAnimator."
+                )
+            )
+        }
+        return .success(())
     }
 }

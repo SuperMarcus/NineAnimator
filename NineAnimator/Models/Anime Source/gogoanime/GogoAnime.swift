@@ -40,6 +40,10 @@ class NASourceGogoAnime: BaseSource, Source, PromiseSource {
     var siteDescription: String {
         "GogoAnime is a free anime streaming website. NineAnimator has fairly good support for this website."
     }
+    
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.english
+    }
 
     override var endpoint: String { "https://gogoanime.io" }
 
