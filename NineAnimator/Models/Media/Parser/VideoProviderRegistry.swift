@@ -43,6 +43,7 @@ class VideoProviderRegistry {
         defaultProvider.register(HydraXParser(), forServer: "HydraX")
         defaultProvider.register(ProxyDataParser(), forServer: "ProxyData")
         defaultProvider.register(GoUnlimitedParser(), forServer: "GoUnlimited")
+        defaultProvider.register(MixdropParser(), forServer: "Mixdrop")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
