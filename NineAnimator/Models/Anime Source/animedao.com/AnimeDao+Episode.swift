@@ -25,7 +25,8 @@ extension NASourceAnimeDao {
     static let knownServerMap = [
         "#hls": (name: "ProxyData", switcher: "hls"),
         "#gounlimited": (name: "GoUnlimited", switcher: "gounlimited"),
-        "#fembed": (name: "Fembed", switcher: "fembed")
+        "#fembed": (name: "Fembed", switcher: "fembed"),
+        "#mixdrop": (name: "Mixdrop", switcher: "mixdrop")
     ]
     
     static let attributeMatchingExpr = try! NSRegularExpression(
