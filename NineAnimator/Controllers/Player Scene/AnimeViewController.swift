@@ -155,13 +155,15 @@ extension AnimeViewController {
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             guard let anime = anime else {
+                guard let error = error else { return }
                 Log.error(error)
+                
                 return DispatchQueue.main.async {
                     // Allow the user to recover the anime by searching in another source
                     if let error = error as? NineAnimatorError.ContentUnavailableError {
-                        self?.presentError(error) {
+                        self?.presentError(error, allowRetry: "Recover") {
                             if $0 {
-                                self?.presentRecoveryOptions(for: link)
+                                self?.presentRecoveryOptions(for: link, error: error)
                             } else if let navigationController = self?.navigationController {
                                 _ = navigationController.popViewController(animated: true)
                             } else { self?.dismiss(animated: true, completion: nil) }
@@ -169,13 +171,20 @@ extension AnimeViewController {
                         return
                     }
                     
-                    self?.presentError(error!) {
+                    self?.presentError(error, allowRetry: "More Options") {
                         // If not allowed to retry, dismiss the view controller
                         guard let self = self else { return }
                         
                         // Retry loading the anime
                         if $0 {
-                            self.retrieveAnime()
+                            if let error = error as? NineAnimatorError.AuthenticationRequiredError,
+                                error.authenticationUrl != nil {
+                                // That is, if the user completed an authentication
+                                self.retrieveAnime()
+                            } else {
+                                // That is, if the user tapped on the "More Options" buttoon
+                                self.presentRecoveryOptions(for: link, error: error)
+                            }
                         } else {
                             DispatchQueue.main.async {
                                 if let navigationController = self.navigationController {
@@ -1059,15 +1068,16 @@ extension AnimeViewController {
 extension AnimeViewController {
     /// Present error
     ///
-    /// - parameter error: The error to present
+    /// - parameter error: The error to present.
+    /// - parameter allowRetry: Pass any non-nil String to show an retry option.
     /// - parameter completionHandler: Called when the user selected an option.
     ///             `true` if the user wants to proceed.
     ///
-    private func presentError(_ error: Error, completionHandler: ((Bool) -> Void)? = nil) {
+    private func presentError(_ error: Error, allowRetry retryActionName: String? = nil, completionHandler: ((Bool) -> Void)? = nil) {
         let alert = UIAlertController(
             error: error,
-            allowRetry: error is NineAnimatorError.ContentUnavailableError, // Allow recover on ContentUnavailableError
-            retryActionName: "Recover",
+            allowRetry: retryActionName != nil,
+            retryActionName: retryActionName ?? "Recover",
             source: self,
             completionHandler: completionHandler
         )
@@ -1076,7 +1086,7 @@ extension AnimeViewController {
     
     /// Present a list of recovery options if the anime is no longer available
     /// from this source
-    private func presentRecoveryOptions(for link: AnimeLink) {
+    private func presentRecoveryOptions(for link: AnimeLink, error: Error) {
         // This may only work with the context of an navigation controller
         guard let navigationController = navigationController else {
             return dismiss(animated: true, completion: nil)
@@ -1095,9 +1105,19 @@ extension AnimeViewController {
             }
         }
         
+        // Message to be displayed
+        let recoveryMessage: String
+        
+        switch error {
+        case _ as NineAnimatorError.ContentUnavailableError:
+            recoveryMessage = "This anime is no longer available on \(link.source.name) from NineAnimator. You may be able to recover the item by access the web page or search in a different source."
+        default:
+            recoveryMessage = "NineAnimator encountered an error while trying to fetch this content on \(link.source.name). You may be able to access this content on a different source."
+        }
+        
         let alert = UIAlertController(
             title: "Recovery Options",
-            message: "This anime is no longer available on \(link.source.name) from NineAnimator. You may be able to recover the item by access the web page or search in a different source.",
+            message: recoveryMessage,
             preferredStyle: .actionSheet
         )
         

@@ -263,7 +263,7 @@ extension NineAnimatorError {
             }
             
             super.init(
-                "this website asks NineAnimator to verify the identity of the user",
+                "This website requests NineAnimator to verify your identity",
                 authenticationUrl: authenticationUrl,
                 userInfo: userInfo
             )
