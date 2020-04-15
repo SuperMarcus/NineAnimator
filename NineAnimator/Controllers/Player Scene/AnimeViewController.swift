@@ -1082,9 +1082,22 @@ extension AnimeViewController {
             return dismiss(animated: true, completion: nil)
         }
         
+        // Search the link's title in the currently selected source
+        // (for recovery method 2 and 3)
+        let presentSearchDialog = {
+            // Preform the search in the current source
+            let searchProvider = NineAnimator.default.user.source.search(keyword: link.title)
+            let searchVc = ContentListViewController.create(withProvider: searchProvider)
+            
+            // Present the search view controller
+            if let vc = searchVc {
+                navigationController.pushViewController(vc, animated: true)
+            }
+        }
+        
         let alert = UIAlertController(
             title: "Recovery Options",
-            message: "This anime is no longer available on \(link.source.name) from NineAnimator. You may be able to recover the item by access the web page or search on your currently selected source.",
+            message: "This anime is no longer available on \(link.source.name) from NineAnimator. You may be able to recover the item by access the web page or search in a different source.",
             preferredStyle: .actionSheet
         )
         
@@ -1107,20 +1120,35 @@ extension AnimeViewController {
             }
         })
         
-        // Method 2: Search on the currently selected source
+        // Method 2: Select a different source
         alert.addAction(UIAlertAction(
-            title: "Search on \(NineAnimator.default.user.source.name)",
+            title: "Alternative Sources",
             style: .default
-        ) { _ in
-            let searchProvider = NineAnimator.default.user.source.search(keyword: link.title)
-            let searchVc = ContentListViewController.create(withProvider: searchProvider)
-            navigationController.popViewController(animated: true)
-            
-            // Present the search view controller
-            if let vc = searchVc {
-                navigationController.pushViewController(vc, animated: true)
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            ServerSelectionViewController.presentSelectionDialog(from: self) {
+                _ in
+                // Pop the current view controller
+                navigationController.popViewController(animated: true)
+                
+                // Search in the new source
+                DispatchQueue.main.async(execute: presentSearchDialog)
             }
         })
+        
+        if NineAnimator.default.user.source.name != link.source.name {
+            // Method 3: Search on the currently selected source
+            alert.addAction(UIAlertAction(
+                title: "Search in \(NineAnimator.default.user.source.name)",
+                style: .default
+            ) { _ in
+                // Pop the current view controller
+                navigationController.popViewController(animated: true)
+                
+                // Search in the new source
+                DispatchQueue.main.async(execute: presentSearchDialog)
+            })
+        }
         
         // Cancel action
         alert.addAction(UIAlertAction(
