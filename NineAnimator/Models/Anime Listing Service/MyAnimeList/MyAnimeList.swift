@@ -26,7 +26,7 @@ class MyAnimeList: BaseListingService, ListingService {
     override var identifier: String { "com.marcuszhou.nineanimator.service.mal" }
     
     /// MAL api endpoint
-    let endpoint = URL(string: "https://api.myanimelist.net/v0.21")!
+    let endpoint = URL(string: "https://api.myanimelist.net/v2")!
     
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
