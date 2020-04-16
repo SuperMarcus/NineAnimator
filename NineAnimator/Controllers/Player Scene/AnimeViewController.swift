@@ -86,6 +86,8 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var animeRequestTask: NineAnimatorAsyncTask?
     
+    private var previousEpisodeRetrivalError: Error?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -580,7 +582,7 @@ extension AnimeViewController {
         }
         
         // Prompt the user to search in a different source if there are no alternative episodes
-        if alternativeEpisodeLinks.isEmpty {
+        if alternativeEpisodeLinks.isEmpty || previousEpisodeRetrivalError != nil {
             alert.addAction(UIAlertAction(
                 title: "Alternative Sources",
                 style: .default
@@ -617,6 +619,7 @@ extension AnimeViewController {
             style: .cancel
         ) { _ in restoreInterfaceElements() })
         
+        previousEpisodeRetrivalError = error
         present(alert, animated: true)
     }
     
@@ -638,6 +641,9 @@ extension AnimeViewController {
     
     /// Handle the playback media
     private func onPlaybackMediaRetrieved(_ media: PlaybackMedia, episode: Episode? = nil) {
+        // Clear previous episode error
+        defer { previousEpisodeRetrivalError = nil }
+        
         // Use Google Cast if it is setup and ready
         if let episode = episode, CastController.default.isReady {
             CastController.default.initiate(playbackMedia: media, with: episode)
