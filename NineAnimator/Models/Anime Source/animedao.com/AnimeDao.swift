@@ -46,6 +46,8 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://animedao.com" }
     
+    static let animedaoStreamEndpoint = URL(string: "https://animedao28.stream")!
+    
     override init(with parent: NineAnimator) {
         super.init(with: parent)
         
@@ -58,6 +60,10 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+        if episode.userInfo["I am dummy"] as? Bool == true {
+            return DummyParser.registeredInstance
+        }
+        
         if let info = NASourceAnimeDao.knownServerMap[server] {
             return VideoProviderRegistry.default.provider(for: info.name)
         } else { return nil }
