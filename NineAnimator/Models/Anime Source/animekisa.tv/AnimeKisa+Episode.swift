@@ -21,13 +21,11 @@ import Foundation
 
 extension NASourceAnimeKisa {
     static let knownServers = [
-        "vidcdn": "VidStreaming",
+        "vidcdn": "VidCDN",
+        "vidstreaming": "VidStreaming",
         "fembed": "Fembed",
-        "rapidvideo": "RapidVideo",
-        "mp4upload": "Mp4Upload",
-        "openload": "OpenLoad",
-        "streamango": "Streamango",
-        "adless": "AnimeKisa - Adless"
+        "hydrax": "HydraX",
+        "mp4upload": "Mp4Upload"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -48,7 +46,20 @@ extension NASourceAnimeKisa {
                     referer: episodeUrl.absoluteString,
                     userInfo: [:]
                 )
-            } else { throw NineAnimatorError.responseError("This episode does not exist on the selected server") }
+            } else {
+                throw NineAnimatorError.EpisodeServerNotAvailableError(
+                    unavailableEpisode: link,
+                    alternativeEpisodes: resourceMap.map {
+                        server, _ in EpisodeLink(
+                            identifier: link.identifier,
+                            name: link.name,
+                            server: server,
+                            parent: link.parent
+                        )
+                    },
+                    updatedServerMap: NASourceAnimeKisa.knownServers
+                )
+            }
         }
     }
     
