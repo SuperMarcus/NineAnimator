@@ -70,6 +70,12 @@ extension NineAnimatorUser {
         }
     }
     
+    /// Directs the app to open the episode page in the in-app browser when fails to retrieve it
+    var playbackFallbackToBrowser: Bool {
+        get { _freezer.bool(forKey: Keys.playbackFallbackToBrowser) }
+        set { _freezer.set(newValue, forKey: Keys.playbackFallbackToBrowser) }
+    }
+    
     /// Detects any possible links to anime when the app becomes active
     var detectsPasteboardLinks: Bool {
         get { _freezer.bool(forKey: Keys.detectClipboardAnimeLinks) }

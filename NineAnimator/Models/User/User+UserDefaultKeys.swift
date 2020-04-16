@@ -41,6 +41,7 @@ extension NineAnimatorUser {
         static var episodeDetails: String { "episode.details" }
         static var backgroundPlayback: String { "playback.background" }
         static var pictureInPicturePlayback: String { "playback.pip" }
+        static var playbackFallbackToBrowser: String { "playback.browser" }
         static var notificationShowStream: String { "notification.showStreams" }
         static var homeExternalOnly: String { "home.externalOnly" }
         static var homeUUIDStart: String { "home.actionset.uuid.start" }

@@ -602,6 +602,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="selectSourceButton" destination="S9D-GU-IOj" id="bWE-h7-w4o"/>
                         <segue destination="cZi-0a-hIx" kind="show" identifier="open.schedule" id="Psa-O2-3p2"/>
                     </connections>
                 </tableViewController>

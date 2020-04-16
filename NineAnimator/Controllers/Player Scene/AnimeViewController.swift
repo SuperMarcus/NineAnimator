@@ -206,7 +206,7 @@ extension AnimeViewController {
                     // an attached cast device
                     if CastController.default.isAttached(to: episodeLink) {
                         CastController.default.presentPlaybackController()
-                    } else { self.retriveAndPlay() }
+                    } else { self.retrieveAndPlay() }
                 }
             }
         }
@@ -393,20 +393,21 @@ extension AnimeViewController {
         selectedEpisodeCell = cell
         self.episodeLink = episodeLink
         
-        retriveAndPlay()
+        retrieveAndPlay()
     }
 }
 
 // MARK: - Initiate playback
 extension AnimeViewController {
-    private func retriveAndPlay() {
+    /// Retrieve the `Episode` and `PlaybackMedia` and attempt to initiate playback
+    private func retrieveAndPlay() {
+        // Always uses self.episodeLink since it may be different from the selected cell
         guard let episodeLink = episodeLink else { return }
         
         episodeRequestTask?.cancel()
         NotificationCenter.default.removeObserver(self)
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
-        let trackingContext = anime?.trackingContext
         
         let clearSelection = {
             [weak self] in
@@ -429,15 +430,16 @@ extension AnimeViewController {
         }
         
         episodeRequestTask = anime!.episode(with: episodeLink) {
-            [weak self, weak trackingContext] episode, error in
+            [weak self] episode, error in
             DispatchQueue.main.async {
                 guard let self = self else { return }
                 guard let episode = episode else {
-                    // Present the error in main loop
-                    self.presentError(error!) {
-                        [weak self] _ in
-                        self?.selectedEpisodeCell = nil
-                        self?.tableView.deselectSelectedRows()
+                    if let error = error {
+                        // `onEpisodeRetrivalStall` will make sure to unselect cell and release reference to selected cell
+                        self.onEpisodeRetrivalStall(error, episodeLink: episodeLink)
+                    } else {
+                        self.selectedEpisodeCell = nil
+                        self.tableView.deselectSelectedRows()
                     }
                     return Log.error(error)
                 }
@@ -464,8 +466,9 @@ extension AnimeViewController {
                             self.episodeRequestTask = nil
                             
                             guard let media = media else {
-                                Log.error("Item not retrived: \"%@\"", error!)
-                                self.onPlaybackMediaStall(episode.target)
+                                guard let error = error else { return }
+                                Log.error("Item not retrived: \"%@\"", error)
+                                self.onPlaybackMediaStall(episode.target, error: error)
                                 return
                             }
                             
@@ -475,24 +478,165 @@ extension AnimeViewController {
                     }
                 } else {
                     // Always stall unsupported episodes and update the progress to 1.0
-                    self.onPlaybackMediaStall(episode.target)
-                    episode.update(progress: 1.0)
-                    // Update tracking state
-                    trackingContext?.endWatching(episode: episode.link)
-                    clearSelection()
+                    self.onPlaybackMediaStall(
+                        episode.target,
+                        error: NineAnimatorError.providerError(
+                            "NineAnimator does not support playing back from the selected server"
+                        )
+                    )
                 }
             }
         }
     }
     
-    // Handle when the link to the episode has been retrieved but no streamable link was found
-    private func onPlaybackMediaStall(_ fallbackURL: URL) {
-        Log.info("Playback media retrival stalled. Falling back to web access.")
-        let playbackController = SFSafariViewController(url: fallbackURL)
-        present(playbackController, animated: true)
+    /// Handles an episode retrival failiure
+    private func onEpisodeRetrivalStall(_ error: Error, episodeLink: EpisodeLink) {
+        let restoreInterfaceElements = {
+            [weak self] in
+            self?.tableView.deselectSelectedRows()
+            self?.selectedEpisodeCell = nil
+        }
+        
+        let scrollToSelectedCell = {
+            [weak self] in
+            guard let self = self else { return }
+            if let episodeLink = self.episodeLink,
+                let indexPath = self.indexPath(for: episodeLink) {
+                self.tableView.selectRow(
+                    at: indexPath,
+                    animated: true,
+                    scrollPosition: .middle
+                )
+            }
+        }
+        
+        // Let presentError handles the AuthenticationRequiredError
+        if error is NineAnimatorError.AuthenticationRequiredError {
+            presentError(error)
+            return restoreInterfaceElements()
+        }
+        
+        guard let selectedCell = self.selectedEpisodeCell,
+            let anime = anime else {
+            return restoreInterfaceElements()
+        }
+        
+        // Only present as action sheet if the cell is visible
+        let selectedEpisodeIsVisible: Bool
+        
+        if let visibleIndexPaths = tableView.indexPathsForVisibleRows,
+            let episodeIndexPath = indexPath(for: episodeLink),
+            visibleIndexPaths.contains(episodeIndexPath) {
+            selectedEpisodeIsVisible = true
+        } else { selectedEpisodeIsVisible = false }
+        
+        let alternativeEpisodeLinks: [EpisodeLink]
+        var serverMap = anime.servers
+        var alertTitle = "Error Retrieving Episode"
+        var alertMessage = String.localizedStringWithFormat(
+            "Unable to retrieve the episode because of an error: %@ You may want to try one of the following alternatives.",
+            error.localizedDescription
+        )
+        
+        // If the error is an EpisodeServerNotAvailableError, then present the list
+        // of alternative options
+        if let episodeNotOnServerError = error as? NineAnimatorError.EpisodeServerNotAvailableError,
+            let alternativeEpisodes = episodeNotOnServerError.alternativeEpisodes {
+            // Set updated serverMap
+            serverMap = episodeNotOnServerError.updatedServerMap ?? serverMap
+            alternativeEpisodeLinks = alternativeEpisodes
+            alertTitle = "Alternative Servers"
+            alertMessage = "This episode is not available on the selected server. Please choose from one of the following alternatives."
+        } else {
+            alternativeEpisodeLinks = Array(anime.equivalentEpisodeLinks(of: episodeLink))
+        }
+        
+        // Present the list of alternatives
+        let alert = UIAlertController(
+            title: alertTitle,
+            message: alertMessage,
+            preferredStyle: selectedEpisodeIsVisible ? .actionSheet : .alert
+        )
+        
+        if let popoverController = alert.popoverPresentationController {
+            popoverController.sourceView = selectedCell
+        }
+        
+        for alternativeEpisodeLink in alternativeEpisodeLinks {
+            alert.addAction(UIAlertAction(
+                title: serverMap[
+                    alternativeEpisodeLink.server,
+                    typedDefault: alternativeEpisodeLink.server
+                ],
+                style: .default
+            ) { [weak self] _ in
+                guard let self = self else { return }
+                // Update episodeLink and reattempts retrival, without
+                // resetting selected items.
+                scrollToSelectedCell()
+                self.episodeLink = alternativeEpisodeLink
+                self.retrieveAndPlay()
+            })
+        }
+        
+        // Prompt the user to search in a different source if there are no alternative episodes
+        if alternativeEpisodeLinks.isEmpty {
+            alert.addAction(UIAlertAction(
+                title: "Alternative Sources",
+                style: .default
+            ) { [weak self] _ in
+                restoreInterfaceElements()
+                ServerSelectionViewController.presentSelectionDialog(from: self) {
+                    _ in
+                    guard let navigationController = self?.navigationController else {
+                        return
+                    }
+                    navigationController.popViewController(animated: true)
+                    
+                    // Search in the new source
+                    DispatchQueue.main.async {
+                        // Preform the search in the current source
+                        let searchProvider = NineAnimator.default.user.source.search(
+                            keyword: episodeLink.parent.title
+                        )
+                        let searchVc = ContentListViewController.create(
+                            withProvider: searchProvider
+                        )
+                        
+                        // Present the search view controller
+                        if let vc = searchVc {
+                            navigationController.pushViewController(vc, animated: true)
+                        }
+                    }
+                }
+            })
+        }
+        
+        alert.addAction(UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ) { _ in restoreInterfaceElements() })
+        
+        present(alert, animated: true)
     }
     
-    // Handle the playback media
+    /// Handle when the link to the episode has been retrieved but no streamable link was found
+    private func onPlaybackMediaStall(_ fallbackURL: URL, error: Error) {
+        Log.info("[PlayerViewController] Playback media retrival stalled with error: %@", error)
+        
+        if NineAnimator.default.user.playbackFallbackToBrowser {
+            // Cleanup selections
+            self.tableView.deselectSelectedRows()
+            self.selectedEpisodeCell = nil
+            let playbackController = SFSafariViewController(url: fallbackURL)
+            present(playbackController, animated: true)
+        } else if let episodeLink = episodeLink {
+            // Let onEpisodeRetrivalStall prompt the user for alternative options
+            onEpisodeRetrivalStall(error, episodeLink: episodeLink)
+        }
+    }
+    
+    /// Handle the playback media
     private func onPlaybackMediaRetrieved(_ media: PlaybackMedia, episode: Episode? = nil) {
         // Use Google Cast if it is setup and ready
         if let episode = episode, CastController.default.isReady {
