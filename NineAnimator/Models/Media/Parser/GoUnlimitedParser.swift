@@ -36,7 +36,7 @@ class GoUnlimitedParser: VideoProviderParser {
             responseContent in
             let decodedScript = try PackerDecoder().decode(responseContent)
             let sourceMatchingExpr = try NSRegularExpression(
-                pattern: "sources:\\s*\\[\"([^\"]+)",
+                pattern: "src:\\s*\"([^\"]+)",
                 options: []
             )
             let videoAssetUrlString = try sourceMatchingExpr
