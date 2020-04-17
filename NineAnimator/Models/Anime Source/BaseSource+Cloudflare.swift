@@ -141,7 +141,7 @@ extension CloudflareWAFResolver {
                 [weak self] in self?.parent?.renewIdentity()
             }
             
-            return .success(.evaluateNext)
+            return .success(.fail(error: nil))
         }
         
         // Create an empty promise
