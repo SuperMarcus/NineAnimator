@@ -285,10 +285,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         
         // To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
-        viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount > 1 ? "Items" : "Item")"
+        viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         
         let subscribedAnimeCount = NineAnimator.default.user.subscribedAnimes.count
-        subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount > 1 ? "Items" : "Item")"
+        subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount == 1 ? "Item" : "Items")"
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
         
