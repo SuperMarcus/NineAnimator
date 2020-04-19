@@ -3,8 +3,8 @@
   "iOS" : [
     {
       "name" : "SwiftSoup",
-      "hash" : "50b8ad9b2f262edd1ae0c1993f249cf82133f77fd2ae87ae8f9682bb0055f3ee",
-      "swiftToolchainVersion" : "5.2 (swiftlang-1103.0.32.1 clang-1103.0.32.29)"
+      "hash" : "30269ab7f5a28b3ba9e91fd9cb0573503d1c75081940f38d1a66700375e81424",
+      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
     }
   ]
 }
