@@ -423,6 +423,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C046EE3244D3AFE00C5C788 /* modify_proj.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = modify_proj.gif; sourceTree = "<group>"; };
 		2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughParser.swift; sourceTree = "<group>"; };
 		2C0CFC362263B26900EC793E /* ThisWeekTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThisWeekTableViewCell.swift; sourceTree = "<group>"; };
 		2C0CFC382263B34300EC793E /* Anilist+Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+Recommendation.swift"; sourceTree = "<group>"; };
@@ -1184,6 +1185,7 @@
 				2C4817A421DB2A210092F694 /* notification_example.jpg */,
 				2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */,
 				2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */,
+				2C046EE3244D3AFE00C5C788 /* modify_proj.gif */,
 			);
 			path = Media;
 			sourceTree = "<group>";
