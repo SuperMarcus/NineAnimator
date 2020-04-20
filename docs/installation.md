@@ -88,6 +88,8 @@ you will need to modify the app's Bundle Identifier, Teams, and Capabilities.
 4. Scroll down in the `Signing & Capabilities` tab. Remove the associated
     domains capability.
 
+When contributing, do not include your team identifier.
+
 #### Step Four: Build the app with Xcode
 
 You won't need any Apple Developer membership to build and install this app.
