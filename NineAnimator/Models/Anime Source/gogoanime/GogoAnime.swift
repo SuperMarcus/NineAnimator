@@ -45,7 +45,7 @@ class NASourceGogoAnime: BaseSource, Source, PromiseSource {
         \.english
     }
 
-    override var endpoint: String { "https://gogoanime.io" }
+    override var endpoint: String { "https://gogoanime.video" }
 
     let ajaxEndpoint = URL(string: "https://ajax.apimovie.xyz")!
 
