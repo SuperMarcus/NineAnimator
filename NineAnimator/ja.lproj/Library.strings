@@ -17,16 +17,16 @@
 "Q1L-pC-tBH.normalTitle" = "見る";
 
 /* Class = "UINavigationItem"; title = "Recents"; ObjectID = "QFq-wf-q5V"; */
-"QFq-wf-q5V.title" = "Recents";
+"QFq-wf-q5V.title" = "履歴";
 
 /* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "QTm-Pg-SyT"; */
-"QTm-Pg-SyT.text" = "LOADING STREAMING HISTORY";
+"QTm-Pg-SyT.text" = "ストリーミング履歴を読み込み中";
 
 /* Class = "UILabel"; text = "LOADING STREAMING HISTORY"; ObjectID = "R3t-x9-Aoh"; */
-"R3t-x9-Aoh.text" = "LOADING STREAMING HISTORY";
+"R3t-x9-Aoh.text" = "ストリーミング履歴を読み込み中";
 
 /* Class = "UIBarButtonItem"; title = "Manage"; ObjectID = "crY-oZ-PX1"; */
-"crY-oZ-PX1.title" = "Manage";
+"crY-oZ-PX1.title" = "管理する";
 
 /* Class = "UILabel"; text = "FINDING LOCAL RECORDS..."; ObjectID = "ea1-Tz-3qf"; */
 "ea1-Tz-3qf.text" = "FINDING LOCAL RECORDS...";
