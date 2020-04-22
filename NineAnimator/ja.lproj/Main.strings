@@ -2,10 +2,10 @@
 "2rp-o4-MgZ.normalTitle" = "リンクを開く";
 
 /* Class = "UITableViewController"; title = "Recents"; ObjectID = "8OU-XT-7E1"; */
-"8OU-XT-7E1.title" = "Recents";
+"8OU-XT-7E1.title" = "履歴";
 
 /* Class = "UILabel"; text = "Loading Previews"; ObjectID = "EeQ-yb-72U"; */
-"EeQ-yb-72U.text" = "Loading Previews";
+"EeQ-yb-72U.text" = "プレビューを読み込み中";
 
 /* Class = "UILabel"; text = "NineAnimator is Unavailable"; ObjectID = "SBh-Sa-wuU"; */
 "SBh-Sa-wuU.text" = "NineAnimator is Unavailable";
@@ -38,7 +38,7 @@
 "o2r-J2-aqA.title" = "ライブラリ";
 
 /* Class = "UIButton"; normalTitle = "View"; ObjectID = "rUB-Iw-liv"; */
-"rUB-Iw-liv.normalTitle" = "View";
+"rUB-Iw-liv.normalTitle" = "見る";
 
 /* Class = "UINavigationItem"; title = "Library"; ObjectID = "smF-4W-Oha"; */
 "smF-4W-Oha.title" = "ライブラリ";
