@@ -41,6 +41,10 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
         "AnimeKisa is a free, ads-free, and HD anime streaming platform. NineAnimator has experimental support for this website."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.english
+    }
+    
     override var endpoint: String { "https://animekisa.tv" }
     
     override init(with parent: NineAnimator) {
@@ -51,7 +55,7 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        "adless"
+        "fembed"
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {

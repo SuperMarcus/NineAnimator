@@ -161,13 +161,13 @@ class SettingsDownloadsController: UITableViewController {
                 storageUsageTipCell.updateMessages(
                     .normal,
                     title: "You have enough storage left.",
-                    message: "The system may delete downloaded contents when disk space is low."
+                    message: "The system may delete downloaded contents when storage space is low."
                 )
             } else {
                 storageUsageTipCell.updateMessages(
                     .saturated,
                     title: "Your storage is almost full.",
-                    message: "The system may delete downloaded contents when disk space is low."
+                    message: "The system may delete downloaded contents when storage space is low."
                 )
             }
         } else { // Set every compoennt to updating state

@@ -50,6 +50,10 @@ class NASourceMasterAnime: BaseSource, Source {
         "MasterAni.me was one of the best supported anime websites by NineAnimator."
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.default
+    }
+    
     override var endpoint: String { "https://www.masterani.me" }
     
     static let cdnEndpoint = "https://cdn.masterani.me"

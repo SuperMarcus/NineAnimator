@@ -23,9 +23,11 @@ import SwiftSoup
 extension NASourceAnimeDao {
     /// A list of servers that are known to exists on AnimeDao
     static let knownServerMap = [
+        "#video": (name: "Google Video", switcher: "videoload"),
         "#hls": (name: "ProxyData", switcher: "hls"),
         "#gounlimited": (name: "GoUnlimited", switcher: "gounlimited"),
-        "#fembed": (name: "Fembed", switcher: "fembed")
+        "#fembed": (name: "Fembed", switcher: "fembed"),
+        "#mixdrop": (name: "Mixdrop", switcher: "mixdrop")
     ]
     
     static let attributeMatchingExpr = try! NSRegularExpression(
@@ -66,6 +68,9 @@ extension NASourceAnimeDao {
                 .select("#videocontent li a")
                 .map { try $0.attr("href") }
             
+            // Mark if this asset uses dummy parser
+            var isPassthroughLink = false
+            
             // If this episode is not available on this server, provide
             // a list of alternatives.
             guard availableServerList.contains(serverIdentifier) else {
@@ -89,40 +94,75 @@ extension NASourceAnimeDao {
                 )
             }
             
-            let frameMatchingExpr = try NSRegularExpression(
-                pattern: "function\\s+\(serverInformation.switcher)[^<]+(<iframe[^>]+)",
-                options: []
-            )
-            let attrMatchingExpr = NASourceAnimeDao.attributeMatchingExpr
+            let videoFrameUrl: URL
             
-            let frameTagContent = try (frameMatchingExpr
-                    .firstMatch(in: responseContent)?
-                    .firstMatchingGroup
-                ).tryUnwrap(.responseError("Unable to find the video frame that belongs to the selected server"))
-            let frameTagAttributes = Dictionary(
-                attrMatchingExpr
-                    .matches(in: frameTagContent)
-                    .map { (
-                        frameTagContent[$0.range(at: 1)],
-                        frameTagContent[$0.range(at: 2)]
-                    ) }
-            ) { $1 }
-            
-            let videoFramePath = try frameTagAttributes["src"].tryUnwrap(
-                .responseError("Video frame did not specify an address")
-            )
-            let videoFrameUrl = try URL(
-                string: videoFramePath,
-                relativeTo: link.parent.link
-            ).tryUnwrap()
+            if serverInformation.switcher == "videoload" {
+                videoFrameUrl = try NASourceAnimeDao.locateInlineVideo(
+                    link: link,
+                    in: responseContent
+                )
+                isPassthroughLink = true
+            } else {
+                videoFrameUrl = try NASourceAnimeDao.locateFrameUrl(
+                    serverInformation,
+                    link: link,
+                    in: responseContent
+                )
+            }
             
             return Episode(
                 link,
                 target: videoFrameUrl,
                 parent: anime,
                 referer: link.parent.link.absoluteString,
-                userInfo: [:]
+                userInfo: [ "I am dummy": isPassthroughLink ]
             )
         }
+    }
+    
+    private static func locateInlineVideo(link: EpisodeLink, in responseContent: String) throws -> URL {
+        let inlineVideoSrcMatchingExpr = try NSRegularExpression(
+            pattern: "src:\\s+'([^']+)",
+            options: []
+        )
+        let inlineVideoResourcePath = try inlineVideoSrcMatchingExpr
+            .firstMatch(in: responseContent)
+            .tryUnwrap(.responseError("Unable to locate video asset"))
+            .firstMatchingGroup
+            .tryUnwrap()
+        return try URL(
+            string: inlineVideoResourcePath,
+            relativeTo: animedaoStreamEndpoint
+        ).tryUnwrap()
+    }
+    
+    private static func locateFrameUrl(_ serverInformation: (name: String, switcher: String), link: EpisodeLink, in responseContent: String) throws -> URL {
+        let frameMatchingExpr = try NSRegularExpression(
+            pattern: "function\\s+\(serverInformation.switcher)[^<]+(<iframe[^>]+)",
+            options: []
+        )
+        let attrMatchingExpr = NASourceAnimeDao.attributeMatchingExpr
+        
+        let frameTagContent = try (frameMatchingExpr
+                .firstMatch(in: responseContent)?
+                .firstMatchingGroup
+            ).tryUnwrap(.responseError("Unable to find the video frame that belongs to the selected server"))
+        let frameTagAttributes = Dictionary(
+            attrMatchingExpr
+                .matches(in: frameTagContent)
+                .map { (
+                    frameTagContent[$0.range(at: 1)],
+                    frameTagContent[$0.range(at: 2)]
+                ) }
+        ) { $1 }
+        
+        let videoFramePath = try frameTagAttributes["src"].tryUnwrap(
+            .responseError("Video frame did not specify an address")
+        )
+        
+        return try URL(
+            string: videoFramePath,
+            relativeTo: link.parent.link
+        ).tryUnwrap()
     }
 }

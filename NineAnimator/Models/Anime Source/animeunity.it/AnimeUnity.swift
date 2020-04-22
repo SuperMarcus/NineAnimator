@@ -45,6 +45,10 @@ class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
         "AnimeUnity"
     }
     
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
+        \.english
+    }
+    
     override var endpoint: String { "https://animeunity.it" }
     
     override init(with parent: NineAnimator) {

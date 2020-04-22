@@ -98,7 +98,7 @@ class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromis
     
     /// Create a new promise in the DispatchQueue with a
     /// classic NineAnimator callback task
-    init(queue: DispatchQueue = .global(), _ task: NineAnimatorPromiseInitialTask?) {
+    init(queue: DispatchQueue = .global(qos: .utility), _ task: NineAnimatorPromiseInitialTask?) {
         // Execute the promise task in the DispatchQueue if there is one
         self.queue = queue
         self.task = task

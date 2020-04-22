@@ -52,6 +52,9 @@ protocol Source: AnyObject {
     /// from the represented website.
     var retriverSession: Session { get }
     
+    /// The preferred anime title variant to be used to perform search in this source
+    var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> { get }
+    
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask?
     
     func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask?

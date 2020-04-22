@@ -73,12 +73,12 @@ extension Anilist {
             formatter.timeStyle = .none
             
             self.reference = reference
-            self.name = .init(
+            self.name = Anilist.processListingAnimeName(.init(
                 default: try mediaEntry.value(at: "title.userPreferred", type: String.self),
                 english: mediaEntry.value(forKeyPath: "title.english") as? String ?? "",
                 romaji: mediaEntry.value(forKeyPath: "title.romaji") as? String ?? "",
                 native: mediaEntry.value(forKeyPath: "title.native") as? String ?? ""
-            )
+            ))
             self.artwork = try some(
                 URL(string: try mediaEntry.value(at: "coverImage.extraLarge", type: String.self)),
                 or: .urlError
@@ -233,6 +233,23 @@ private extension ListingAnimeCharacter {
         self.image = try some(
             URL(string: try characterEdgeEntry.value(at: "node.image.large", type: String.self)),
             or: .urlError
+        )
+    }
+}
+
+// MARK: - Helpers
+private extension Anilist {
+    /// Process the raw anime title variants returned from Anilist
+    static func processListingAnimeName(_ raw: ListingAnimeName) -> ListingAnimeName {
+        .init(
+            default: raw.default,
+            english: raw // Remove romaji prefix
+                .english
+                .replacingOccurrences(of: "\(raw.romaji): ", with: ""),
+            romaji: raw // Remove english suffix
+                .romaji
+                .replacingOccurrences(of: ": \(raw.english)", with: ""),
+            native: raw.native
         )
     }
 }

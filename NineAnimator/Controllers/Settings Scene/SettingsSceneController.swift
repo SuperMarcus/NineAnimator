@@ -39,6 +39,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
+    @IBOutlet private weak var fallbackToBrowserSwitch: UISwitch!
     
     /// The path that the Settings view controller will be navigating to
     private var navigatingTo: EntryPath?
@@ -110,6 +111,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         NineAnimator.default.user.allowBackgroundPlayback = sender.isOn
     }
     
+    @IBAction private func onPlaybackFallbackToBrowserDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.playbackFallbackToBrowser = sender.isOn
+    }
+    
     @IBAction private func onShowStreamsInNotificationDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.notificationShowStreams = sender.isOn
     }
@@ -176,7 +181,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             RootViewController.shared?.showCastController()
         case "settings.history.recents":
             askForConfirmation(title: "Clear Recent Anime",
-                               message: "This action is irreversible. All anime history under the Recents tab will be cleared.",
+                               message: "This action is irreversible. All anime history under Recents will be cleared.",
                                continueActionName: "Clear Recents"
             ) { [weak self] in
                 NineAnimator.default.user.clearRecents()
@@ -264,6 +269,11 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         backgroundPlaybackSwitch.isEnabled = !pictureInPictureSwitch.isOn
         backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
         
+        fallbackToBrowserSwitch.setOn(
+            NineAnimator.default.user.playbackFallbackToBrowser,
+            animated: true
+        )
+        
         // Appearance settings
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
         appearanceSegmentControl.isEnabled = !NineAnimator.default.user.dynamicAppearance
@@ -275,10 +285,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         
         // To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
-        viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount > 1 ? "Items" : "Item")"
+        viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         
         let subscribedAnimeCount = NineAnimator.default.user.subscribedAnimes.count
-        subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount > 1 ? "Items" : "Item")"
+        subscriptionStatsLabel.text = "\(subscribedAnimeCount) \(subscribedAnimeCount == 1 ? "Item" : "Items")"
         
         subscriptionShowStreamsSwitch.setOn(NineAnimator.default.user.notificationShowStreams, animated: true)
         

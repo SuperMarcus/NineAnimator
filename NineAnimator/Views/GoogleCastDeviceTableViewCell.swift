@@ -55,9 +55,4 @@ class GoogleCastDeviceTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var deviceNameLabel: UILabel!
     @IBOutlet private weak var deviceModelLabel: UILabel!
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        delegate?.device(selected: selected, from: device!, with: self)
-    }
 }

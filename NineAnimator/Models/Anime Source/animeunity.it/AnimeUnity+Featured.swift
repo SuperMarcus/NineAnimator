@@ -27,7 +27,7 @@ extension NASourceAnimeUnity {
             //div.current-anime>div.row>div a
             let endpointURL = self.endpointURL
             let bowl = try SwiftSoup.parse(responseContent)
-            let popularLinkElements = try bowl.select("div.current-anime>div.row>div>div.text-center a")//"div.current-anime>div.row>div a")
+            let popularLinkElements = try bowl.select("div.current-anime>div.row>div>div.text-center a")
             let recentadded = try bowl.select("div.text-center>div.text-center>div a")
             let recentAnimeLinks = try recentadded.compactMap {
                 aElement -> (a: Element, img: Element)? in
@@ -38,13 +38,13 @@ extension NASourceAnimeUnity {
                 container, elements in
                 if let artworkPath = try? elements.img.attr("src"),
                     let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = try? elements.a.text(),
+                    let animeTitle = (try? elements.a.text())?.components(separatedBy: " - Episodio"),
                     let animePath = try? elements.a.attr("href"),
-                    
+                
                     let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
                     // Construct and add anime link
                     container.append(.init(
-                        title: animeTitle,
+                        title: animeTitle[0],
                         link: animeUrl,
                         image: artworkUrl,
                         source: self

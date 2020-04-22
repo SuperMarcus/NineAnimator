@@ -19,7 +19,6 @@
 
 import UIKit
 
-// swiftlint:disable implicit_getter
 // https://stackoverflow.com/questions/805872/how-do-i-draw-a-shadow-under-a-uiview
 @IBDesignable extension UIView {
     @IBInspectable var cornerRadius: Float {
@@ -62,4 +61,3 @@ import UIKit
         get { accessibilityIgnoresInvertColors }
     }
 }
-// swiftlint:enable implicit_getter

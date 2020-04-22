@@ -15,7 +15,8 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - F5 Beta a.k.a. PrettyFast.to (unavailable for Google Cast)
 - Tiwi.Kiwi (may not be available for Google Cast)
 - FastStream (unavailable for Google Cast)
-- OpenLoad (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/commit/8d1c0fc196c04c0ca30c6d3b8281ea88b54ab08a))
+- OpenLoad (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/pull/10))
+- MixDrop (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/pull/95))
 - HydraX (and replay.watch)
 - Self-hosted Streaming Services ([4anime](//4anime.to), [Anime Twist](//twist.moe), Beta and Beta4 on Kissanime)
 

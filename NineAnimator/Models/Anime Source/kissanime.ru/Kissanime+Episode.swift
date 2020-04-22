@@ -29,7 +29,7 @@ extension NASourceKissanime {
 //        "streamango": "Streamango",
         "nova": "Nova Server",
         "beta": "Beta Server",
-        "beta4": "Beta4 Server"
+        "beta5": "Beta5 Server"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {

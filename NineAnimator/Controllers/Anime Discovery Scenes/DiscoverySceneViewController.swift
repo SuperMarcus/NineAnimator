@@ -31,6 +31,9 @@ import UIKit
 /// - Return true on RecommendationSource.shouldReload(recommendation:). The source will
 ///   be updated as soon as the To Watch scene is being (re-)presented.
 class DiscoverySceneViewController: UITableViewController {
+    // Outlets
+    @IBOutlet private weak var selectSourceButton: UIBarButtonItem!
+    
     private var recommendationList = [(RecommendationSource, Recommendation?, Error?)]()
     private var recommendationLoadingTasks = [ObjectIdentifier: NineAnimatorAsyncTask]()
     private var dirtySources = Set<ObjectIdentifier>()

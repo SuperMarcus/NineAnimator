@@ -56,4 +56,23 @@ extension NASourceNineAnime {
         }
         return .success(())
     }
+    
+    //9anime returns 503 instead of 404 status when request not found
+    class func _contentNotFoundMiddleware(
+        request: URLRequest?,
+        response: HTTPURLResponse,
+        body: Data?
+    ) -> Alamofire.DataRequest.ValidationResult {
+        if let body = body, response.statusCode == 503,
+            let bodyString = String(data: body, encoding: .utf8),
+            bodyString.localizedCaseInsensitiveContains("Error 404")
+            && bodyString.localizedCaseInsensitiveContains("NotFound") {
+            return .failure(
+                NineAnimatorError.contentUnavailableError(
+                    "This anime could not be found."
+                )
+            )
+        }
+        return .success(())
+    }
 }

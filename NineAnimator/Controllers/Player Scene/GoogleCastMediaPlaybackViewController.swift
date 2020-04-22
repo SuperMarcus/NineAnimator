@@ -29,7 +29,7 @@ enum CastDeviceState {
     case connecting
 }
 
-class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource, UIGestureRecognizerDelegate {
+class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewControllerProtocol, UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate {
     // swiftlint:disable:next implicitly_unwrapped_optional
     weak var castController: CastController!
     
@@ -83,6 +83,7 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
         }
         
         deviceListTableView.dataSource = self
+        deviceListTableView.delegate = self
         deviceListTableView.rowHeight = 48
         deviceListTableView.tableFooterView = UIView()
         
@@ -334,8 +335,7 @@ extension GoogleCastMediaPlaybackViewController {
         deviceListTableView.reloadSections([0], with: .automatic)
     }
     
-    func device(selected: Bool, from device: CastDevice, with cell: GoogleCastDeviceTableViewCell) {
-        guard selected else { return }
+    func device(selecting device: CastDevice, with cell: GoogleCastDeviceTableViewCell) {
         if device == castController.client?.device {
             castController.disconnect()
         } else {
@@ -344,7 +344,7 @@ extension GoogleCastMediaPlaybackViewController {
     }
 }
 
-// MARK: - Table view data source
+// MARK: - Data Source & Delegate
 extension GoogleCastMediaPlaybackViewController {
     func numberOfSections(in tableView: UITableView) -> Int { 1 }
     
@@ -362,6 +362,15 @@ extension GoogleCastMediaPlaybackViewController {
             : .idle
         cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? GoogleCastDeviceTableViewCell,
+            let device = cell.device else {
+            return
+        }
+        
+        self.device(selecting: device, with: cell)
     }
 }
 

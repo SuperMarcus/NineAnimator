@@ -7,6 +7,7 @@ To install NineAnimator, you have the following options:
 - Legacy Methods
     - Install from Third-Party App Stores
     - Install via Cydia Impactor with Compiled IPAs
+- For Contributors
     - Build from Source Code
 
 ## AppStore
@@ -42,11 +43,14 @@ and install the app with Cydia Impactor.
 
 For detailed instructions please view the **#installation** channel on our Discord server.
 
+## For Contributors
+
 ### Build from Source Code
 
 #### Step One: Install Carthage
 
-To build this app, you will need [Carthage](https://github.com/Carthage/Carthage#installing-carthage) installed.
+To build this app, you will need to have the latest version of Xcode and
+[Carthage](https://github.com/Carthage/Carthage#installing-carthage) installed.
 
 The simplest way to install Carthage is to use Homebrew.
 
@@ -58,28 +62,38 @@ $ brew install carthage
 You can also install Carthage with the installer package, which can be found
 [here](https://github.com/Carthage/Carthage/releases).
 
-#### Step Two: Build the app with Xcode
+#### Step Two (Optional): Update dependencies
+
+All the required binaries have been compiled and uploaded to the repository, so
+you shouldn't need to do this. But if something doesn't work out, you might want
+to try updating the dependencies.
+
+```sh
+$ carthage update --platform iOS
+```
+
+#### Step Three: Modify Project Settings
+
+This repository contains the code used for distribution. To build and sign the app,
+you will need to modify the app's Bundle Identifier, Teams, and Capabilities.
+
+![Modify Xcode Project Settings](../Misc/Media/modify_proj.gif)
+
+1. Navigate to the `NineAnimator` project file.
+2. Under the `General` tab, change part of the `Bundle Identifier` to any
+    aphanumeric characters without whitespaces.
+3. Then navigate to the `Signing & Capabilities` tab. Select your team in the
+    `Teams` drawer. If Xcode prompts you for the signing options, choose the one that
+    let Xcode automatically manages signing.
+4. Scroll down in the `Signing & Capabilities` tab. Remove the associated
+    domains capability.
+
+When contributing, do not include your team identifier.
+
+#### Step Four: Build the app with Xcode
 
 You won't need any Apple Developer membership to build and install this app.
 Open this project in Xcode, connect your phone to the computer, select your
 device, and click the run button on the top left corner.
 
 ![Xcode select device](../Misc/Media/xcode_select_device.jpg)
-
-Xcode might prompt you that the bundle identifier cannot be used. In this case,
-select the `NineAnimator` in the Navigator, choose `NineAnimator` in the Targets,
-click the `General` tab on the top, and change the `Bundle Identifier` in the
-Identity section to whatever you like. Then, click the `Team` drawer in the Signing
-section, and choose your developer profile. You should be good to go after this.
-
-#### Step Three (Optional): Update dependencies
-
-All the required binaries have been compiled and uploaded to the repository, so
-you shouldn't need to do this. But if something doesn't work out, you might want
-to try updating the dependencies.
-
-Still, you should make sure that you have a working copy of Carthage first.
-
-```sh
-$ carthage update
-```
