@@ -59,6 +59,7 @@ class NASourceNineAnime: BaseSource, Source {
         _internalUAIdentity = "Mozilla/5.0 (iPad; CPU iPhone OS 13_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1"
         addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
         addMiddleware(NASourceNineAnime._ipBlockDetectionMiddleware)
+        addMiddleware(NASourceNineAnime._contentNotFoundMiddleware)
     }
     
     override func canHandle(url: URL) -> Bool {
