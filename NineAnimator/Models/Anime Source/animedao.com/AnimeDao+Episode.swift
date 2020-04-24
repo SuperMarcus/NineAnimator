@@ -43,8 +43,7 @@ extension NASourceAnimeDao {
         }
         
         let serverIdentifier = Anime.ServerIdentifier(episodeIdentifierComponents[0])
-        let episodePagePath = episodeIdentifierComponents[1...]
-            .joined(separator: "|")
+        let episodePagePath = String(episodeIdentifierComponents[1])
         
         guard serverIdentifier == link.server else {
             return .fail(.decodeError("Inconsistent server and identifier"))

@@ -101,7 +101,7 @@ extension NASourceAnimeDao {
                 serverIdentifier in (serverIdentifier, episodeList.map {
                     episodeInfo -> (EpisodeLink, Anime.AdditionalEpisodeLinkInformation) in
                     let ep = EpisodeLink(
-                        identifier: "\(serverIdentifier)|\(episodeInfo.path)",
+                        identifier: "\(serverIdentifier)|\(episodeInfo.path)|\(serverIdentifier)",
                         name: episodeInfo.name,
                         server: serverIdentifier,
                         parent: reconstructedAnimeLink
