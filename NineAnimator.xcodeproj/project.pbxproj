@@ -269,6 +269,7 @@
 		2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */; };
 		2C95C1DC23E9FD0500430B19 /* SettingsPreferredSourceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */; };
 		2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */; };
+		2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96DADD24536663007A29B0 /* CloudNineParser.swift */; };
 		2C979F17235A16C400BC8699 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C979F15235A16C400BC8699 /* Library.storyboard */; };
 		2C979F1A235A17E100BC8699 /* LibrarySceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C979F19235A17E100BC8699 /* LibrarySceneController.swift */; };
 		2C98D66D225BE9C3001FF874 /* NineAnime+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+Middleware.swift */; };
@@ -720,6 +721,7 @@
 		2C93BD5722230E36000411CB /* Kitsu+LibraryEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kitsu+LibraryEntry.swift"; sourceTree = "<group>"; };
 		2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferredSourceController.swift; sourceTree = "<group>"; };
 		2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferredSourceCell.swift; sourceTree = "<group>"; };
+		2C96DADD24536663007A29B0 /* CloudNineParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNineParser.swift; sourceTree = "<group>"; };
 		2C979F16235A16C400BC8699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Library.storyboard; sourceTree = "<group>"; };
 		2C979F19235A17E100BC8699 /* LibrarySceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySceneController.swift; sourceTree = "<group>"; };
 		2C98D66C225BE9C3001FF874 /* NineAnime+Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+Middleware.swift"; sourceTree = "<group>"; };
@@ -1790,6 +1792,7 @@
 				2C8E962423B9E3A400415F92 /* ProxyDataParser.swift */,
 				2C8E962623B9EDED00415F92 /* GoUnlimitedParser.swift */,
 				65D061052445B31000E866DE /* MixdropParser.swift */,
+				2C96DADD24536663007A29B0 /* CloudNineParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2384,6 +2387,7 @@
 				2C8536852231C68300A5CFB9 /* CustomStringConvertible+UniqueHashingIdentifier.swift in Sources */,
 				2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */,
 				2CCC745E21C064800007502A /* NineAnime+Search.swift in Sources */,
+				2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C6A390823A017DB00FC00A9 /* FourAnime+Anime.swift in Sources */,
 				2CA4B7F923B1E81300B4E6F7 /* AnimeDao+Search.swift in Sources */,

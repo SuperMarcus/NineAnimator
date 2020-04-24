@@ -44,6 +44,7 @@ class VideoProviderRegistry {
         defaultProvider.register(ProxyDataParser(), forServer: "ProxyData")
         defaultProvider.register(GoUnlimitedParser(), forServer: "GoUnlimited")
         defaultProvider.register(MixdropParser(), forServer: "Mixdrop")
+        defaultProvider.register(CloudNineParser(), forServer: "Cloud9")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
