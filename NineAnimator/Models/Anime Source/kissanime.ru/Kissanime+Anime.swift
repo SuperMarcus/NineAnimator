@@ -25,6 +25,7 @@ extension NASourceKissanime {
         request(browseUrl: link.link).then {
             content in
             let bowl = try SwiftSoup.parse(content)
+            let reconstructedAnimeLink = try self.reconstructAnimeLink(fromAnimePage: bowl)
             
             // Fetch all available episode entries
             let episodeEntries = try bowl.select("table.listing tr").compactMap {
@@ -69,7 +70,7 @@ extension NASourceKissanime {
                         identifier: episodePath,
                         name: conventionalEpisodeName,
                         server: serverIdentifier,
-                        parent: link
+                        parent: reconstructedAnimeLink
                     )
                     currentCollection.append(currentEpisodeLink)
                     
@@ -136,7 +137,7 @@ extension NASourceKissanime {
             
             // Construct the anime object
             return Anime(
-                link,
+                reconstructedAnimeLink,
                 alias: animeAlternativeNames,
                 additionalAttributes: animeAttributes,
                 description: animeSynopsis,
@@ -145,6 +146,33 @@ extension NASourceKissanime {
                 episodesAttributes: episodeAttributes
             )
         }
+    }
+    
+    /// Reconstruct the `AnimeLink` from the parsed document
+    func reconstructAnimeLink(fromAnimePage bowl: Document) throws -> AnimeLink {
+        let titleElement = try bowl.select("div.barContent a.bigChar")
+        let imgElements = try bowl.select("div.rightBox div.barContent img")
+        
+        guard !titleElement.isEmpty(), let artworkElement = imgElements.first() else {
+            throw NineAnimatorError.responseError("No anime link found in this page")
+        }
+        
+        let animePageUrl = try URL(
+            string: try titleElement.attr("href"),
+            relativeTo: endpointURL
+        ).tryUnwrap()
+        let animeArtworkUrl = try URL(
+            string: try artworkElement.attr("src"),
+            relativeTo: endpointURL
+        ).tryUnwrap()
+        let animeTitle = try titleElement.text()
+        
+        return .init(
+            title: animeTitle,
+            link: animePageUrl,
+            image: animeArtworkUrl,
+            source: self
+        )
     }
     
     func processArtworkUrl(_ url: URL) -> URL {

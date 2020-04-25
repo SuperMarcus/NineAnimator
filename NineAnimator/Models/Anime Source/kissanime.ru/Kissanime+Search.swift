@@ -48,35 +48,42 @@ extension NASourceKissanime {
                 
                 // Parse the response content
                 let bowl = try SwiftSoup.parse(responseContent)
-                let entries = try bowl.select("table.listing td")
-                let resultingLinks = entries.compactMap {
-                    entry -> AnimeLink? in
-                    do {
-                        let linkContainer = try entry.select("a").first().tryUnwrap()
-                        let animeLinkPath = try linkContainer.attr("href")
-                        let animeUrl = try URL(
-                            string: animeLinkPath,
-                            relativeTo: self.parent.endpointURL
-                        ).tryUnwrap()
-                        let animeTitle = linkContainer
-                            .ownText()
-                            .trimmingCharacters(in: .whitespacesAndNewlines)
-                        let containerTitleContent = try entry.attr("title")
-                        let tooltipContainer = try SwiftSoup.parse(containerTitleContent)
-                        let animeArtworkPath = try tooltipContainer.select("img").attr("src")
-                        let animeArtworkUrl = self.parent.processArtworkUrl(try URL(
-                            string: animeArtworkPath,
-                            relativeTo: self.parent.endpointURL
-                        ).tryUnwrap())
-                        
-                        // Construct the AnimeLink
-                        return AnimeLink(
-                            title: animeTitle,
-                            link: animeUrl,
-                            image: animeArtworkUrl,
-                            source: self.parent
-                        )
-                    } catch { return nil }
+                let resultingLinks: [AnimeLink]
+                
+                // Sometimes kissanime redirects directly to the anime page
+                if let singleAnimeLink = try? self.parent.reconstructAnimeLink(fromAnimePage: bowl) {
+                    resultingLinks = [ singleAnimeLink ]
+                } else {
+                    let entries = try bowl.select("table.listing td")
+                    resultingLinks = entries.compactMap {
+                        entry -> AnimeLink? in
+                        do {
+                            let linkContainer = try entry.select("a").first().tryUnwrap()
+                            let animeLinkPath = try linkContainer.attr("href")
+                            let animeUrl = try URL(
+                                string: animeLinkPath,
+                                relativeTo: self.parent.endpointURL
+                            ).tryUnwrap()
+                            let animeTitle = linkContainer
+                                .ownText()
+                                .trimmingCharacters(in: .whitespacesAndNewlines)
+                            let containerTitleContent = try entry.attr("title")
+                            let tooltipContainer = try SwiftSoup.parse(containerTitleContent)
+                            let animeArtworkPath = try tooltipContainer.select("img").attr("src")
+                            let animeArtworkUrl = self.parent.processArtworkUrl(try URL(
+                                string: animeArtworkPath,
+                                relativeTo: self.parent.endpointURL
+                            ).tryUnwrap())
+                            
+                            // Construct the AnimeLink
+                            return AnimeLink(
+                                title: animeTitle,
+                                link: animeUrl,
+                                image: animeArtworkUrl,
+                                source: self.parent
+                            )
+                        } catch { return nil }
+                    }
                 }
                 
                 guard !resultingLinks.isEmpty else {
