@@ -28,6 +28,8 @@ class MyAnimeList: BaseListingService, ListingService {
     /// MAL api endpoint
     let endpoint = URL(string: "https://api.myanimelist.net/v2")!
     
+    let loginPage = URL(string: "https://myanimelist.net/login.php")!
+    
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     lazy var _allCollections: [Collection] = [
@@ -148,9 +150,16 @@ extension MyAnimeList {
             // If the error entry is present in the response object
             if let error = responseObject["error"] as? String,
                 let message = responseObject["message"] as? String {
-                if error == "invalid_grant" { // Invalid credentials
+                switch error {
+                case "invalid_grant": //Invalid credentials
                     throw NineAnimatorError.authenticationRequiredError(message, nil)
-                } else { throw NineAnimatorError.responseError(message) }
+                case "website_login_required": //Mal account is inactive (therefore requires a google recaptcha)
+                    throw NineAnimatorError.authenticationRequiredError("Please login with Safari before logging in with NineAnimator", self.loginPage)
+                case "too_many_failed_login_attempts":
+                    throw NineAnimatorError.authenticationRequiredError(message, nil)
+                default:
+                    throw NineAnimatorError.responseError(message)
+                }
             }
             
             let token = try some(responseObject["access_token"] as? String, or: .decodeError)
