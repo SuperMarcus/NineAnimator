@@ -36,6 +36,7 @@ extension MyAnimeList {
         private var _parent: MyAnimeList
 
         var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
+        var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> { .fail(.unknownError) }
         
         var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
             .success(_relatedAnimeReferences)

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9r-ko-ADk">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9r-ko-ADk">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +14,7 @@
             <objects>
                 <tableViewController id="f9r-ko-ADk" customClass="AnimeInformationTableViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" id="AHm-sh-8X0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="sC5-8R-KVp"/>
@@ -30,10 +29,10 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1X4-Yz-FdX" userLabel="Anime Information Container">
-                                    <rect key="frame" x="8" y="113.5" width="367" height="184.5"/>
+                                    <rect key="frame" x="8" y="113.33333333333333" width="367" height="184.66666666666669"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="251" verticalCompressionResistancePriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lGh-Aj-f92">
-                                            <rect key="frame" x="8" y="8" width="122" height="157.5"/>
+                                            <rect key="frame" x="8" y="8" width="122" height="157.66666666666666"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" priority="800" constant="122" id="5KG-RQ-7td"/>
                                                 <constraint firstAttribute="width" secondItem="lGh-Aj-f92" secondAttribute="height" multiplier="155:200" id="SUo-Xi-9yK"/>
@@ -43,7 +42,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="752" text="Anime Title" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="dKd-8l-exf">
-                                            <rect key="frame" x="146" y="56.5" width="205" height="30"/>
+                                            <rect key="frame" x="146" y="57.000000000000014" width="205" height="30"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -53,7 +52,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alternative anime title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="CGQ-fc-eQZ">
-                                            <rect key="frame" x="146" y="86.5" width="205" height="17"/>
+                                            <rect key="frame" x="146" y="87.000000000000014" width="205" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -63,7 +62,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nNy-wE-HN7" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="146" y="135.5" width="150" height="30"/>
+                                            <rect key="frame" x="146" y="135.66666666666669" width="150" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="750" constant="150" id="Xrm-xC-VMD"/>
                                             </constraints>
@@ -81,13 +80,13 @@
                                             </connections>
                                         </button>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="RhY-Fn-Vlp" userLabel="Episode Fetching Activity Indicator">
-                                            <rect key="frame" x="211" y="140.5" width="20" height="20"/>
+                                            <rect key="frame" x="211" y="140.66666666666669" width="20" height="20"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </activityIndicatorView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WXK-JH-G4x" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                            <rect key="frame" x="321" y="135.5" width="30" height="30"/>
+                                            <rect key="frame" x="321" y="135.66666666666669" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="WXK-JH-G4x" secondAttribute="height" multiplier="1:1" id="LnF-ok-XRi"/>
                                             </constraints>
@@ -185,7 +184,7 @@
                                 <rect key="frame" x="0.0" y="326" width="375" height="146"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Kr3-Ea-kee" id="pTX-zP-OkY">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="145.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="146"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMr-u7-SsS" userLabel="Actions Container">
@@ -259,11 +258,11 @@
                                 <rect key="frame" x="0.0" y="472" width="375" height="48"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tf8-Mm-THh" id="Gas-ap-HoO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="47.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pv7-K0-NCl">
-                                            <rect key="frame" x="16" y="11" width="118" height="24"/>
+                                            <rect key="frame" x="16" y="12" width="118" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -276,21 +275,133 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="pv7-K0-NCl" firstAttribute="centerY" secondItem="Gas-ap-HoO" secondAttribute="centerY" priority="500" id="Etk-jV-YC5"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="bottom" priority="750" constant="2" id="Nbn-VD-75l"/>
+                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="bottom" priority="750" id="Nbn-VD-75l"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="trailing" id="efJ-XR-Nt8"/>
                                         <constraint firstItem="pv7-K0-NCl" firstAttribute="leading" secondItem="Gas-ap-HoO" secondAttribute="leadingMargin" id="gD9-Wr-EY5"/>
-                                        <constraint firstItem="pv7-K0-NCl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gas-ap-HoO" secondAttribute="top" priority="750" constant="4" id="ljJ-5n-xeK"/>
+                                        <constraint firstItem="pv7-K0-NCl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gas-ap-HoO" secondAttribute="top" priority="750" constant="8" id="ljJ-5n-xeK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="headingLabel" destination="pv7-K0-NCl" id="gPa-dc-hq3"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.schedule" rowHeight="120" id="awY-3N-sws" customClass="InformationSceneSchedulesCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="520" width="375" height="120"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="awY-3N-sws" id="sMo-Dn-Qpm">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="87M-mc-geS">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="116" id="w5L-vc-dha"/>
+                                            </constraints>
+                                            <inset key="scrollIndicatorInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jfr-o9-iUM">
+                                                <size key="itemSize" width="270" height="100"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="schedule.episode" id="9WR-Ta-9tI" customClass="InformationSceneAiringEpisodeCell" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="10" width="270" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Hc-SU-5dH">
+                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="100"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAB-5M-1NJ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="97"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode 1 Airing in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ppz-Qj-t5J">
+                                                                        <rect key="frame" x="16" y="16" width="238" height="16"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Hours 33 Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WD-Wn-8fG">
+                                                                        <rect key="frame" x="16" y="36" width="238" height="23"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="Wednesday Apr. 5, 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3g-P2-qDd">
+                                                                        <rect key="frame" x="16" y="63" width="238" height="18"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="trailing" secondItem="2WD-Wn-8fG" secondAttribute="trailing" constant="16" id="0eH-Ii-vo7"/>
+                                                                    <constraint firstItem="L3g-P2-qDd" firstAttribute="top" secondItem="2WD-Wn-8fG" secondAttribute="bottom" constant="4" id="3iC-tO-eDg"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="L3g-P2-qDd" secondAttribute="trailing" constant="16" id="AJh-gq-dDD"/>
+                                                                    <constraint firstItem="2WD-Wn-8fG" firstAttribute="top" secondItem="Ppz-Qj-t5J" secondAttribute="bottom" constant="4" id="JaU-kH-O2K"/>
+                                                                    <constraint firstItem="L3g-P2-qDd" firstAttribute="leading" secondItem="SAB-5M-1NJ" secondAttribute="leading" constant="16" id="MgA-DF-AsV"/>
+                                                                    <constraint firstItem="2WD-Wn-8fG" firstAttribute="leading" secondItem="SAB-5M-1NJ" secondAttribute="leading" constant="16" id="V97-8f-Vr1"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="L3g-P2-qDd" secondAttribute="bottom" constant="16" id="lxD-IR-hcD"/>
+                                                                    <constraint firstItem="Ppz-Qj-t5J" firstAttribute="leading" secondItem="SAB-5M-1NJ" secondAttribute="leading" constant="16" id="n8u-4n-sgy"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Ppz-Qj-t5J" secondAttribute="trailing" constant="16" id="oc9-Et-aao"/>
+                                                                    <constraint firstItem="Ppz-Qj-t5J" firstAttribute="top" secondItem="SAB-5M-1NJ" secondAttribute="top" constant="16" id="wfv-T9-Pxj"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="12"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                            </view>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="SAB-5M-1NJ" firstAttribute="top" secondItem="5Hc-SU-5dH" secondAttribute="top" id="E5j-ZG-vgD"/>
+                                                            <constraint firstItem="SAB-5M-1NJ" firstAttribute="leading" secondItem="5Hc-SU-5dH" secondAttribute="leading" id="Ix3-dg-bBW"/>
+                                                            <constraint firstAttribute="trailing" secondItem="SAB-5M-1NJ" secondAttribute="trailing" id="hA5-zJ-Zec"/>
+                                                            <constraint firstAttribute="bottom" secondItem="SAB-5M-1NJ" secondAttribute="bottom" constant="3" id="zZ2-hD-otz"/>
+                                                        </constraints>
+                                                    </collectionViewCellContentView>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <size key="customSize" width="270" height="100"/>
+                                                    <connections>
+                                                        <outlet property="airingTimeLabel" destination="L3g-P2-qDd" id="LmN-ga-Jid"/>
+                                                        <outlet property="episodeDescriptionLabel" destination="Ppz-Qj-t5J" id="pna-gz-Cro"/>
+                                                        <outlet property="remainingTimeLabel" destination="2WD-Wn-8fG" id="hQe-7p-1hd"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <connections>
+                                                <outlet property="dataSource" destination="awY-3N-sws" id="CL6-Qv-hIJ"/>
+                                                <outlet property="delegate" destination="awY-3N-sws" id="EVp-f9-eiq"/>
+                                            </connections>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="87M-mc-geS" secondAttribute="trailing" id="k14-CZ-ApF"/>
+                                        <constraint firstItem="87M-mc-geS" firstAttribute="top" secondItem="sMo-Dn-Qpm" secondAttribute="top" id="nOF-i6-BNv"/>
+                                        <constraint firstItem="87M-mc-geS" firstAttribute="leading" secondItem="sMo-Dn-Qpm" secondAttribute="leading" id="sj1-YO-num"/>
+                                        <constraint firstAttribute="bottom" secondItem="87M-mc-geS" secondAttribute="bottom" id="tXo-XC-dkQ"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="collectionView" destination="87M-mc-geS" id="50b-dq-ipa"/>
+                                    <outlet property="flowLayout" destination="jfr-o9-iUM" id="wJF-mJ-lYm"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.statistics" rowHeight="90" id="FkU-13-VMD" customClass="InformationSceneStatisticsTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="520" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="640" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkU-13-VMD" id="8N7-zJ-TmF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nXD-Fj-vns" userLabel="Score Container">
@@ -354,14 +465,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.characters" rowHeight="150" id="V2x-8D-p6l" customClass="InformationSceneCharactersTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="610" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="730" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V2x-8D-p6l" id="YZy-p9-hHC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TvS-1f-Spi" userLabel="Characters Collection">
-                                            <rect key="frame" x="16" y="0.0" width="343" height="149.5"/>
+                                            <rect key="frame" x="16" y="0.0" width="343" height="150"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" constant="170" id="EIz-Lj-eNB"/>
@@ -374,7 +485,7 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="anime.character" id="5WW-Tg-5jB" customClass="InformationSceneCharacterCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-5" width="150" height="159"/>
+                                                    <rect key="frame" x="0.0" y="-4.666666666666667" width="150" height="159"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="150" height="159"/>
@@ -398,7 +509,7 @@
                                                                 <rect key="frame" x="0.0" y="100" width="150" height="55"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="900" text="Character Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="zLy-V6-RBp">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="16"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="150" height="15.666666666666666"/>
                                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
@@ -408,7 +519,7 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="760" text="Voice Actor Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="6Nj-hm-d7s">
-                                                                        <rect key="frame" x="0.0" y="16" width="150" height="12"/>
+                                                                        <rect key="frame" x="0.0" y="15.666666666666671" width="150" height="12"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
@@ -467,14 +578,14 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.related" rowHeight="224" id="bgx-yg-IDS" customClass="InformationSceneRelatedTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="760" width="375" height="224"/>
+                                <rect key="frame" x="0.0" y="880" width="375" height="224"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgx-yg-IDS" id="cW9-Kf-Wi3">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="223.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="224"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="krO-gp-LVO">
-                                            <rect key="frame" x="24" y="8" width="327" height="207.5"/>
+                                            <rect key="frame" x="24" y="11" width="327" height="168"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="850" constant="220" id="CVx-Vl-4ED"/>
@@ -487,14 +598,14 @@
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="anime.reference" id="RKY-Uz-of4" customClass="InformationReferenceCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="6" width="109" height="196"/>
+                                                    <rect key="frame" x="0.0" y="-14" width="109" height="196"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                         <rect key="frame" x="0.0" y="0.0" width="109" height="196"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wMN-eT-lMN">
-                                                                <rect key="frame" x="4" y="0.0" width="100" height="143"/>
+                                                                <rect key="frame" x="4" y="0.0" width="100" height="142.66666666666666"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" secondItem="wMN-eT-lMN" secondAttribute="height" multiplier="215:307" id="fik-u2-TWh"/>
                                                                     <constraint firstAttribute="width" constant="100" id="sAw-OV-27m"/>
@@ -504,7 +615,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anime Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="lQW-cW-z7d">
-                                                                <rect key="frame" x="4" y="147" width="101" height="17"/>
+                                                                <rect key="frame" x="4" y="146.66666666666666" width="101" height="17"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -548,21 +659,21 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.information" textLabel="rEQ-Pw-ii4" detailTextLabel="16a-OX-bbP" style="IBUITableViewCellStyleValue1" id="p1i-Sw-S7B">
-                                <rect key="frame" x="0.0" y="984" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="1104" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p1i-Sw-S7B" id="xrr-az-rSt">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Information Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rEQ-Pw-ii4">
-                                            <rect key="frame" x="15" y="14" width="122.5" height="18"/>
+                                            <rect key="frame" x="15.999999999999993" y="14" width="122.33333333333333" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Information Value" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="9" id="16a-OX-bbP">
-                                            <rect key="frame" x="226" y="12" width="134" height="20.5"/>
+                                            <rect key="frame" x="225.33333333333337" y="11.999999999999998" width="133.66666666666666" height="20.333333333333332"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -587,7 +698,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IH5-59-mGL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88.799999999999997" y="100.29985007496252"/>
+            <point key="canvasLocation" x="88.799999999999997" y="99.753694581280797"/>
         </scene>
     </scenes>
     <resources>

@@ -50,12 +50,14 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     private var statisticsRequestTask: NineAnimatorAsyncTask?
     private var relatedAnimeRequestTask: NineAnimatorAsyncTask?
     private var episodeFetchingTask: NineAnimatorAsyncTask?
+    private var airingScheduleFetchingTask: NineAnimatorAsyncTask?
     
     // Cached values
     private var enumeratedInformationList = [(name: String, value: String)]()
     private var characterList: [ListingAnimeCharacter]?
     private var _statistics: ListingAnimeStatistics?
     private var _relatedReferences: [ListingAnimeReference]?
+    private var _airingSchedules: [ListingAiringEpisode]?
     private var didPerformEpisodeFetchingTask = false
     
     // Outlets
@@ -112,11 +114,6 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         
         tableView.makeThemable()
         
-        tableView.performBatchUpdates({
-            headingView.sizeToFit()
-            tableView.setNeedsLayout()
-        }, completion: nil)
-        
         // Layout table view when the heading layout has changed
         headingView.onNeededLayout = needsLayoutHandler
         
@@ -157,6 +154,17 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.performBatchUpdates({
+                self.headingView.sizeToFit()
+                self.tableView.setNeedsLayout()
+            }, completion: nil)
+        }
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.cancelPerformingTasks()
@@ -180,47 +188,68 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         // Request character list
         characterListRequestTask = information
             .characters
+            .dispatch(on: .main)
             .error(onError)
             .finally {
                 [weak self] characters in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self.characterList = characters
-                    self.tableView.reloadSections(Section.indexSet(.characters), with: .automatic)
-                }
+                guard let self = self else { return }
+                self.characterList = characters
+                self.tableView.reloadSections(
+                    Section.indexSet(.characters),
+                    with: .automatic
+                )
             }
         
         // Request ratings
         statisticsRequestTask = information
             .statistics
+            .dispatch(on: .main)
             .error(onError)
             .finally {
                 [weak self] statistics in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self._statistics = statistics
-                    self.tableView.reloadSections(Section.indexSet(.statistics), with: .automatic)
-                }
+                guard let self = self else { return }
+                self._statistics = statistics
+                self.tableView.reloadSections(
+                    Section.indexSet(.statistics),
+                    with: .automatic
+                )
             }
         
         // Related anime
         relatedAnimeRequestTask = information
             .relatedReferences
+            .dispatch(on: .main)
             .error(onError)
             .finally {
                 [weak self] relatedReferences in
-                DispatchQueue.main.async {
-                    guard let self = self else { return }
-                    self._relatedReferences = relatedReferences
-                    self.tableView.reloadSections(Section.indexSet(.relatedReferences), with: .automatic)
-                }
+                guard let self = self else { return }
+                self._relatedReferences = relatedReferences
+                self.tableView.reloadSections(
+                    Section.indexSet(.relatedReferences),
+                    with: .automatic
+                )
+            }
+        
+        // Airing Schedule
+        airingScheduleFetchingTask = information
+            .futureAiringSchedules
+            .dispatch(on: .main)
+            .error(onError)
+            .finally {
+                [weak self] schedules in
+                guard let self = self else { return }
+                self._airingSchedules = schedules
+                self.tableView.reloadSections(
+                    Section.indexSet(.airingSchedule),
+                    with: .automatic
+                )
             }
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        6
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -230,6 +259,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         switch Section(rawValue: section)! {
         case .information: return enumeratedInformationList.count + 1
         case .synopsis: return 1
+        case .airingSchedule: return _airingSchedules?.isEmpty == false ? 2 : 0
         case .characters: return characterList?.isEmpty == false ? 2 : 0
         case .statistics: return _statistics == nil ? 0 : 2
         case .relatedReferences: return _relatedReferences?.isEmpty == false ? 2 : 0
@@ -259,6 +289,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             case .characters: cell.headingText = "Characters"
             case .statistics: cell.headingText = "Ratings & Statistics"
             case .relatedReferences: cell.headingText = "Related"
+            case .airingSchedule: cell.headingText = "Upcoming"
             default: break
             }
             
@@ -287,6 +318,17 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
                 [weak self] reference in
                 RootViewController.shared?.open(immedietly: .listingReference(reference), in: self)
             }
+            return cell
+        case .airingSchedule:
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "anime.schedule",
+                for: indexPath
+            ) as! InformationSceneSchedulesCell
+            
+            if let schedules = _airingSchedules {
+                cell.setPresenting(schedules)
+            }
+            
             return cell
         default: fatalError("No section \(section) was found")
         }
@@ -684,6 +726,8 @@ fileprivate extension AnimeInformationTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
     enum Section: Int, Equatable {
         case synopsis = 0
+        
+        case airingSchedule
         
         case statistics
         

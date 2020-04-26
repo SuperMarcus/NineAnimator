@@ -271,6 +271,8 @@
 		2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */; };
 		2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96DADD24536663007A29B0 /* CloudNineParser.swift */; };
 		2C96DAE02455FC5F007A29B0 /* MyAnimeList+Jikan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96DADF2455FC5F007A29B0 /* MyAnimeList+Jikan.swift */; };
+		2C96DAE224562610007A29B0 /* InformationSceneSchedulesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96DAE124562610007A29B0 /* InformationSceneSchedulesCell.swift */; };
+		2C96DAE424562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C96DAE324562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift */; };
 		2C979F17235A16C400BC8699 /* Library.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C979F15235A16C400BC8699 /* Library.storyboard */; };
 		2C979F1A235A17E100BC8699 /* LibrarySceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C979F19235A17E100BC8699 /* LibrarySceneController.swift */; };
 		2C98D66D225BE9C3001FF874 /* NineAnime+Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C98D66C225BE9C3001FF874 /* NineAnime+Middleware.swift */; };
@@ -724,6 +726,8 @@
 		2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPreferredSourceCell.swift; sourceTree = "<group>"; };
 		2C96DADD24536663007A29B0 /* CloudNineParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudNineParser.swift; sourceTree = "<group>"; };
 		2C96DADF2455FC5F007A29B0 /* MyAnimeList+Jikan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+Jikan.swift"; sourceTree = "<group>"; };
+		2C96DAE124562610007A29B0 /* InformationSceneSchedulesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneSchedulesCell.swift; sourceTree = "<group>"; };
+		2C96DAE324562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneAiringEpisodeCell.swift; sourceTree = "<group>"; };
 		2C979F16235A16C400BC8699 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Library.storyboard; sourceTree = "<group>"; };
 		2C979F19235A17E100BC8699 /* LibrarySceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibrarySceneController.swift; sourceTree = "<group>"; };
 		2C98D66C225BE9C3001FF874 /* NineAnime+Middleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+Middleware.swift"; sourceTree = "<group>"; };
@@ -1034,6 +1038,8 @@
 				2C93BD42221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift */,
 				2C93BD44221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift */,
 				2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */,
+				2C96DAE124562610007A29B0 /* InformationSceneSchedulesCell.swift */,
+				2C96DAE324562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift */,
 			);
 			path = "Anime Information Scene";
 			sourceTree = "<group>";
@@ -2338,6 +2344,7 @@
 				2C90C6A4236F988100C18620 /* LibraryUntrackedReferenceCell.swift in Sources */,
 				2CEB0DFC238C80B20022B30D /* UserDefaults+ValueWithDefaults.swift in Sources */,
 				2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */,
+				2C96DAE424562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift in Sources */,
 				2C3D7C032210AE780045D648 /* AnimeTwist+LinkRetriver.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
@@ -2484,6 +2491,7 @@
 				2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */,
 				2C684BCE2290665900E1BA35 /* AnimePahe+Featured.swift in Sources */,
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
+				2C96DAE224562610007A29B0 /* InformationSceneSchedulesCell.swift in Sources */,
 				2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */,
 				2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */,
 				2C563B322248108600A9CCB8 /* BaseSource+Cloudflare.swift in Sources */,

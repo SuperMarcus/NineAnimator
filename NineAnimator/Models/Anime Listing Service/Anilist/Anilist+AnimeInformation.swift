@@ -30,8 +30,11 @@ extension Anilist {
         var description: String
         var information: [String: String]
         
+        var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> {
+            .success(_airingEpisodes)
+        }
         var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
-            .firstly { [_characters] in _characters }
+            .success(_characters)
         }
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
             .firstly {
@@ -51,6 +54,7 @@ extension Anilist {
         var _characters: [ListingAnimeCharacter]
         var _statistics: ListingAnimeStatistics
         var _relations: [ListingAnimeReference]
+        var _airingEpisodes: [ListingAiringEpisode]
         
         // swiftlint:disable cyclomatic_complexity
         init(_ reference: ListingAnimeReference, mediaEntry: NSDictionary) throws {
@@ -90,6 +94,11 @@ extension Anilist {
             self.description = try SwiftSoup
                 .parse(try mediaEntry.value(at: "description", type: String.self))
                 .text()
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            if self.description.isEmpty {
+                self.description = "No synopsis found for this title."
+            }
             
             self.wallpapers = []
             if let bannerImageString = mediaEntry.valueIfPresent(at: "bannerImage", type: String.self),
@@ -109,6 +118,22 @@ extension Anilist {
             
             // Statistics
             _statistics = try ListingAnimeStatistics(mediaEntry: mediaEntry)
+            
+            // Airing Schedules
+            _airingEpisodes = try mediaEntry.value(
+                at: "airingSchedule.nodes",
+                type: [NSDictionary].self
+            ).map {
+                ListingAiringEpisode(
+                    scheduled: Date(
+                        timeIntervalSince1970: .init(try $0.value(
+                            at: "airingAt",
+                            type: Int.self
+                        ))
+                    ),
+                    episodeNumber: try $0.value(at: "episode", type: Int.self)
+                )
+            }
             
             // Extra information
             var information = [String: String]()
