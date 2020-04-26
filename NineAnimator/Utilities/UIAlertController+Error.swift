@@ -21,8 +21,13 @@ import SafariServices
 import UIKit
 
 extension UIAlertController {
-    /// Initialize a ready-to-present UIAlertController with all the
-    /// UIAlertAction installed for the error.
+    /// Initialize a ready-to-present UIAlertController from an error.
+    /// - Parameter error: The error object to be presented.
+    /// - Parameter customTitle: A custom title to be shown on the alert. Defaults to "Authentication Required" if `nil`.
+    /// - Parameter allowRetry: Specify if the alert should include a retry action. This parameter is ignored if `error` inherits from `NineAnimatorError.AuthenticationRequiredError`, in which case an `Open` button will be shown if `authenticationUrl` is set for the error.
+    /// - Parameter retryActionName: Specify the text on the retry button. This parameter is ignored if `error` inherits from `NineAnimatorError.AuthenticationRequiredError`.
+    /// - Parameter source: Specify the source view controller for presenting additional components (such as the authentication scene). A `nil` value will direct the controller to present additional scenes with `RootViewController.shared?.presentOnTop()`.
+    /// - Parameter completionHandler: The completion handler. `true` means the user intends to retry the task or an authentication has been completed.
     convenience init(error: Error,
                      customTitle: String? = nil,
                      allowRetry: Bool = false,

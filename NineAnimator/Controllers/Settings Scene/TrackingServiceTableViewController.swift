@@ -156,15 +156,20 @@ extension TrackingServiceTableViewController {
                 .dispatch(on: .main)
                 .error {
                     [weak self] error in
-                    let message: String = error.localizedDescription
+                    guard let self = self else { return }
                     
                     // Present the error message
-                    let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)
-                    errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                    let errorAlert = UIAlertController(
+                        error: error,
+                        customTitle: "Authentication Error",
+                        allowRetry: false,
+                        source: self,
+                        completionHandler: nil
+                    )
                     
-                    self?.malAuthenticationTask = nil
-                    self?.present(errorAlert, animated: true)
-                    self?.malUpdateStatus()
+                    self.malAuthenticationTask = nil
+                    self.present(errorAlert, animated: true)
+                    self.malUpdateStatus()
                 } .finally {
                     [weak self] in
                     Log.info("Successfully logged in to MyAnimeList.net")
@@ -252,11 +257,14 @@ extension TrackingServiceTableViewController {
             // Authenticate with the provided username and password
             self.kitsuAuthenticationTask = kitsu.authenticate(user: user, password: password).error {
                 [weak self] error in
-                let message = error.localizedDescription
-                
                 // Present the error message
-                let errorAlert = UIAlertController(title: "Authentication Error", message: message, preferredStyle: .alert)
-                errorAlert.addAction(UIAlertAction(title: "Ok", style: .cancel))
+                let errorAlert = UIAlertController(
+                    error: error,
+                    customTitle: "Authentication Error",
+                    allowRetry: false,
+                    source: self,
+                    completionHandler: nil
+                )
                 self?.kitsuAuthenticationTask = nil
                 
                 DispatchQueue.main.async {
