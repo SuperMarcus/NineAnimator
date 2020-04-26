@@ -33,6 +33,7 @@ class InformationSceneStatisticsTableViewCell: UITableViewCell {
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
         formatter.maximumSignificantDigits = 3
+        formatter.minimumSignificantDigits = 3
         
         self.averageScoreLabel.text = formatter.string(from: NSNumber(value: statistics.meanScore))
     }

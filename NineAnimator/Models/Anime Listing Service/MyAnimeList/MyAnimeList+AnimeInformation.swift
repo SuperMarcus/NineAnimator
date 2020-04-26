@@ -45,18 +45,27 @@ extension MyAnimeList {
                     let mean = self._meanRatings,
                     let n = self._numRatings else { return nil }
                 
+                func P(_ x: Double, μ: Double, σ: Double) -> Double {
+                    pow( // \frac{
+                        M_E, // e^{ \frac{-(x-μ)^2}{2σ^2} }
+                        -pow(x - μ, 2) / (2 * pow(σ, 2)) // }
+                    ) / (σ * sqrt(2 * .pi)) // {σ\sqrt{2π}}
+                }
+                
                 // Generate 100 data points for the ratings
-                let numArtificialDataPoints = 20
+                let numArtificialDataPoints = 29
                 let maxRatings = 10.0
                 // Assuming the distribution is normal, in reality is probably isn't.
 //                let porportions = mean / maxRatings
 //                let standardDeviation = sqrt(porportions * (1.0 - porportions) / Double(n)) * maxRatings
-                let standardDeviation = 2.0
-                let generatedDataPoints = (0...numArtificialDataPoints).map {
+                let standardDeviation = 1.0
+                let generatedDataPoints = (0..<numArtificialDataPoints).map {
                     index -> (Double, Double) in
-                    let x = Double(index) / Double(numArtificialDataPoints) * maxRatings
-                    return (x, pow(M_E, -pow(x - mean, 2) / (2 * pow(standardDeviation, 2))) /
-                        (standardDeviation * sqrt(2 * .pi)))
+                    let x = Double(index) / Double(numArtificialDataPoints - 1) * maxRatings
+                    let compensatingX = maxRatings * 2 - (
+                        Double(index - 1) / Double(numArtificialDataPoints - 1) * maxRatings
+                    )
+                    return (x, P(x, μ: mean, σ: standardDeviation) + P(compensatingX, μ: mean, σ: standardDeviation))
                 }
                 
                 // Construct the statistics object
