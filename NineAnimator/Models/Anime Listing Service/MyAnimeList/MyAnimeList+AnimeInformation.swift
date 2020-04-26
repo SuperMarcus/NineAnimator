@@ -33,51 +33,53 @@ extension MyAnimeList {
         private var _numRatings: Int?
         private var _relatedAnimeReferences: [ListingAnimeReference]
         private var _numEpisodes: Int?
+        private var _parent: MyAnimeList
 
-        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> { .fail(.unknownError) }
         var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
-        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> { .success(_relatedAnimeReferences) }
+        
+        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
+            .success(_relatedAnimeReferences)
+        }
+        
+        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
+            self._parent.jikanRequestCharactersAndStaffs(self.reference).then {
+                charactersResponse in charactersResponse.characters.compactMap {
+                    (character: JikanCharacter) -> ListingAnimeCharacter? in
+                    ListingAnimeCharacter(
+                        name: character.name,
+                        role: character.role,
+                        voiceActorName: character.voiceActors.map {
+                            "\($0.name) (\($0.language))"
+                        }.joined(separator: ", "),
+                        image: character.imageUrl
+                    )
+                }
+            }
+        }
         
         var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
-            NineAnimatorPromise.firstly {
-                [weak self] in
-                guard let self = self,
-                    let mean = self._meanRatings,
-                    let n = self._numRatings else { return nil }
-                
-                func P(_ x: Double, μ: Double, σ: Double) -> Double {
-                    pow( // \frac{
-                        M_E, // e^{ \frac{-(x-μ)^2}{2σ^2} }
-                        -pow(x - μ, 2) / (2 * pow(σ, 2)) // }
-                    ) / (σ * sqrt(2 * .pi)) // {σ\sqrt{2π}}
-                }
-                
-                // Generate 100 data points for the ratings
-                let numArtificialDataPoints = 29
-                let maxRatings = 10.0
-                // Assuming the distribution is normal, in reality is probably isn't.
-//                let porportions = mean / maxRatings
-//                let standardDeviation = sqrt(porportions * (1.0 - porportions) / Double(n)) * maxRatings
-                let standardDeviation = 1.0
-                let generatedDataPoints = (0..<numArtificialDataPoints).map {
-                    index -> (Double, Double) in
-                    let x = Double(index) / Double(numArtificialDataPoints - 1) * maxRatings
-                    let compensatingX = maxRatings * 2 - (
-                        Double(index - 1) / Double(numArtificialDataPoints - 1) * maxRatings
-                    )
-                    return (x, P(x, μ: mean, σ: standardDeviation) + P(compensatingX, μ: mean, σ: standardDeviation))
-                }
-                
-                // Construct the statistics object
+            self._parent.jikanRequestAnimeStatistics(self.reference).then {
+                [weak self] jikanStats in
+                guard let self = self else { return nil }
                 return ListingAnimeStatistics(
-                    ratingsDistribution: Dictionary(uniqueKeysWithValues: generatedDataPoints),
-                    numberOfRatings: n,
+                    ratingsDistribution: Dictionary(
+                        uniqueKeysWithValues: jikanStats.scores.compactMap {
+                            score -> (Double, Double)? in
+                            if let key = Double(score.key) {
+                                return (key, Double(score.value.votes))
+                            }
+                            return nil
+                        }
+                    ),
+                    numberOfRatings: jikanStats.scores.reduce(0) { $0 + $1.value.votes },
                     episodesCount: self._numEpisodes
                 )
             }
         }
         
-        init(_ animeEntry: NSDictionary, withReference reference: ListingAnimeReference) throws {
+        init(_ animeEntry: NSDictionary, parent: MyAnimeList, withReference reference: ListingAnimeReference) throws {
+            self._parent = parent
+            
             let numberFormatter = NumberFormatter()
             numberFormatter.numberStyle = .decimal
             numberFormatter.maximumFractionDigits = 2
@@ -151,7 +153,7 @@ extension MyAnimeList {
             }
             
             // Construct the listing anime information
-            return try MyAnimeListListingAnimeInformation(animeEntry, withReference: reference)
+            return try MyAnimeListListingAnimeInformation(animeEntry, parent: self, withReference: reference)
         }
     }
 }

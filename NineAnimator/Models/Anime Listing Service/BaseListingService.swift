@@ -101,6 +101,7 @@ class BaseListingService: SessionDelegate {
                 request.setValue($0.value, forHTTPHeaderField: $0.key)
             }
             request.httpBody = data
+            request.cachePolicy = .reloadRevalidatingCacheData
             return request
         } .thenPromise {
             request in
