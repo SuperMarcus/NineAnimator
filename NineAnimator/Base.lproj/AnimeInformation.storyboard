@@ -254,15 +254,15 @@
                                     <outlet property="synopsisContainer" destination="PKq-Il-hhv" id="VDq-hH-FI4"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.heading" rowHeight="48" id="Tf8-Mm-THh" customClass="InformationSceneHeadingTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="472" width="375" height="48"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.heading" rowHeight="45" id="Tf8-Mm-THh" customClass="InformationSceneHeadingTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="472" width="375" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Tf8-Mm-THh" id="Gas-ap-HoO">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="45"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pv7-K0-NCl">
-                                            <rect key="frame" x="16" y="12" width="118" height="24"/>
+                                            <rect key="frame" x="16" y="10.666666666666664" width="118" height="24"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -275,10 +275,10 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="pv7-K0-NCl" firstAttribute="centerY" secondItem="Gas-ap-HoO" secondAttribute="centerY" priority="500" id="Etk-jV-YC5"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="bottom" priority="750" id="Nbn-VD-75l"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="bottom" priority="750" id="Nbn-VD-75l"/>
                                         <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="pv7-K0-NCl" secondAttribute="trailing" id="efJ-XR-Nt8"/>
                                         <constraint firstItem="pv7-K0-NCl" firstAttribute="leading" secondItem="Gas-ap-HoO" secondAttribute="leadingMargin" id="gD9-Wr-EY5"/>
-                                        <constraint firstItem="pv7-K0-NCl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gas-ap-HoO" secondAttribute="top" priority="750" constant="8" id="ljJ-5n-xeK"/>
+                                        <constraint firstItem="pv7-K0-NCl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Gas-ap-HoO" secondAttribute="top" priority="750" constant="10" id="ljJ-5n-xeK"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -286,35 +286,35 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.schedule" rowHeight="120" id="awY-3N-sws" customClass="InformationSceneSchedulesCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="520" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="517" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="awY-3N-sws" id="sMo-Dn-Qpm">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="scrollableAxes" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="87M-mc-geS">
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="87M-mc-geS">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="116" id="w5L-vc-dha"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="110" id="w5L-vc-dha"/>
                                             </constraints>
                                             <inset key="scrollIndicatorInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jfr-o9-iUM">
-                                                <size key="itemSize" width="270" height="100"/>
+                                                <size key="itemSize" width="270" height="95"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                 <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="schedule.episode" id="9WR-Ta-9tI" customClass="InformationSceneAiringEpisodeCell" customModule="NineAnimator" customModuleProvider="target">
-                                                    <rect key="frame" x="16" y="10" width="270" height="100"/>
+                                                    <rect key="frame" x="16" y="12.666666666666666" width="270" height="95"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Hc-SU-5dH">
-                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="270" height="95"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SAB-5M-1NJ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="97"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="270" height="92"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episode 1 Airing in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ppz-Qj-t5J">
                                                                         <rect key="frame" x="16" y="16" width="238" height="16"/>
@@ -327,23 +327,31 @@
                                                                         </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 Hours 33 Minutes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2WD-Wn-8fG">
-                                                                        <rect key="frame" x="16" y="36" width="238" height="23"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                                        <rect key="frame" x="16" y="34" width="238" height="25.333333333333329"/>
+                                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="749" text="Wednesday Apr. 5, 2020" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L3g-P2-qDd">
-                                                                        <rect key="frame" x="16" y="63" width="238" height="18"/>
+                                                                        <rect key="frame" x="16" y="63.333333333333336" width="238" height="12.666666666666664"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
+                                                                        <userDefinedRuntimeAttributes>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                        </userDefinedRuntimeAttributes>
                                                                     </label>
                                                                 </subviews>
                                                                 <constraints>
                                                                     <constraint firstAttribute="trailing" secondItem="2WD-Wn-8fG" secondAttribute="trailing" constant="16" id="0eH-Ii-vo7"/>
                                                                     <constraint firstItem="L3g-P2-qDd" firstAttribute="top" secondItem="2WD-Wn-8fG" secondAttribute="bottom" constant="4" id="3iC-tO-eDg"/>
                                                                     <constraint firstAttribute="trailing" secondItem="L3g-P2-qDd" secondAttribute="trailing" constant="16" id="AJh-gq-dDD"/>
-                                                                    <constraint firstItem="2WD-Wn-8fG" firstAttribute="top" secondItem="Ppz-Qj-t5J" secondAttribute="bottom" constant="4" id="JaU-kH-O2K"/>
+                                                                    <constraint firstItem="2WD-Wn-8fG" firstAttribute="top" secondItem="Ppz-Qj-t5J" secondAttribute="bottom" constant="2" id="JaU-kH-O2K"/>
                                                                     <constraint firstItem="L3g-P2-qDd" firstAttribute="leading" secondItem="SAB-5M-1NJ" secondAttribute="leading" constant="16" id="MgA-DF-AsV"/>
                                                                     <constraint firstItem="2WD-Wn-8fG" firstAttribute="leading" secondItem="SAB-5M-1NJ" secondAttribute="leading" constant="16" id="V97-8f-Vr1"/>
                                                                     <constraint firstAttribute="bottom" secondItem="L3g-P2-qDd" secondAttribute="bottom" constant="16" id="lxD-IR-hcD"/>
@@ -369,7 +377,7 @@
                                                         </constraints>
                                                     </collectionViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <size key="customSize" width="270" height="100"/>
+                                                    <size key="customSize" width="270" height="95"/>
                                                     <connections>
                                                         <outlet property="airingTimeLabel" destination="L3g-P2-qDd" id="LmN-ga-Jid"/>
                                                         <outlet property="episodeDescriptionLabel" destination="Ppz-Qj-t5J" id="pna-gz-Cro"/>
@@ -398,7 +406,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.statistics" rowHeight="90" id="FkU-13-VMD" customClass="InformationSceneStatisticsTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="640" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="637" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkU-13-VMD" id="8N7-zJ-TmF">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -465,7 +473,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.characters" rowHeight="150" id="V2x-8D-p6l" customClass="InformationSceneCharactersTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="730" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="727" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V2x-8D-p6l" id="YZy-p9-hHC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -578,7 +586,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.related" rowHeight="224" id="bgx-yg-IDS" customClass="InformationSceneRelatedTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="880" width="375" height="224"/>
+                                <rect key="frame" x="0.0" y="877" width="375" height="224"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgx-yg-IDS" id="cW9-Kf-Wi3">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="224"/>
@@ -659,7 +667,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.information" textLabel="rEQ-Pw-ii4" detailTextLabel="16a-OX-bbP" style="IBUITableViewCellStyleValue1" id="p1i-Sw-S7B">
-                                <rect key="frame" x="0.0" y="1104" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="1101" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p1i-Sw-S7B" id="xrr-az-rSt">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>

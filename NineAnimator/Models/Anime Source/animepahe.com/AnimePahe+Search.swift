@@ -28,7 +28,7 @@ extension NASourceAnimePahe {
     fileprivate struct SearchAnimeItem: Codable {
         var slug: String
         var title: String
-        var image: String
+        var poster: String
     }
     
     class SearchAgent: ContentProvider {
@@ -62,7 +62,7 @@ extension NASourceAnimePahe {
                     item in AnimeLink(
                         title: item.title,
                         link: self.parent.animeBaseUrl.appendingPathComponent(item.slug),
-                        image: try URL(string: item.image).tryUnwrap(.urlError),
+                        image: try URL(string: item.poster).tryUnwrap(.urlError),
                         source: self.parent
                     )
                 }
