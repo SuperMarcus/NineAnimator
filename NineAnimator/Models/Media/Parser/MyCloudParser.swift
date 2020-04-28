@@ -26,21 +26,43 @@ class MyCloudParser: VideoProviderParser {
         [ "MyCloud" ]
     }
     
-    static let videoIdentifierRegex = try! NSRegularExpression(pattern: "videoId:\\s*'([^']+)", options: .caseInsensitive)
-    static let videoSourceRegex = try! NSRegularExpression(pattern: "\"file\":\"([^\"]+)", options: .caseInsensitive)
+    static let videoIdentifierRegex = try! NSRegularExpression(
+        pattern: "videoId:\\s*'([^']+)",
+        options: .caseInsensitive
+    )
+    static let videoSourceRegex = try! NSRegularExpression(
+        pattern: "\"file\":\"([^\"]+)",
+        options: .caseInsensitive
+    )
+    static let windowKeyRegex = try! NSRegularExpression(
+        pattern: "'([^']+)",
+        options: .caseInsensitive
+    )
+    static let windowKeyRetrivalEndpoint = URL(string: "https://mcloud2.to/key")!
+    
+    class func retrieveWindowKey(with session: Session, referer: URL) -> NineAnimatorPromise<String> {
+        AsyncRequestHelper(
+            session.request(
+                MyCloudParser.windowKeyRetrivalEndpoint,
+                headers: [ "Referer": referer.absoluteString ]
+            )
+        ) .stringResponse().then {
+            MyCloudParser.windowKeyRegex.firstMatch(in: $0)?.firstMatchingGroup
+        }
+    }
     
     func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.parentLink.link.absoluteString,
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "User-Agent": defaultUserAgent,
-            "Host": "mcloud.to"
+            "User-Agent": defaultUserAgent
         ]
         
         let playerAdditionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString,
             "User-Agent": defaultUserAgent
         ]
+        
         return session.request(episode.target, headers: additionalHeaders).responseString {
             response in
             guard let text = response.value else {
@@ -69,12 +91,16 @@ class MyCloudParser: VideoProviderParser {
             Log.info("(MyCloud Parser) found asset at %@", sourceURL.absoluteString)
             
             // MyCloud might not support Chromecast, since it uses COR checking
-            handler(BasicPlaybackMedia(
-                url: sourceURL,
-                parent: episode,
-                contentType: "application/vnd.apple.mpegurl",
-                headers: playerAdditionalHeaders.dictionary,
-                isAggregated: true), nil)
+            handler(
+                BasicPlaybackMedia(
+                    url: sourceURL,
+                    parent: episode,
+                    contentType: "application/vnd.apple.mpegurl",
+                    headers: playerAdditionalHeaders.dictionary,
+                    isAggregated: true
+                ),
+                nil
+            )
         }
     }
     
