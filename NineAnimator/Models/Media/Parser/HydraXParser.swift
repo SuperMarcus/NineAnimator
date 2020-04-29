@@ -51,6 +51,12 @@ class HydraXParser: VideoProviderParser {
         var sources: ResourceResponseSources?
     }
     
+    private struct ResourceAuthenticatingResponse: Codable {
+        var status: Bool
+        var url: String
+        var sources: [String]
+    }
+    
     func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         if episode.target.host?.lowercased() == "replay.watch" {
             return parseReplay(episode: episode, with: session, onCompletion: handler)
@@ -67,20 +73,30 @@ class HydraXParser: VideoProviderParser {
             let parameters = queryParameters.merging(fragmentParameters) { $1 }
             return parameters["slug"] ?? parameters["v"]
         } .thenPromise {
-            slug in NineAnimatorPromise {
+            slug in NineAnimatorPromise<(Data, String)> {
                 callback in session.request(
                     HydraXParser.guestChannelResourceRequestUrl,
                     method: .post,
                     parameters: [
-                        "slug": slug,
-                        "dataType": "m3u8"
+                        "slug": slug
                     ],
                     encoding: URLEncoding.default,
                     headers: nil
-                ) .responseData { callback($0.value, $0.error) }
+                ) .responseData {
+                    if let responseValue = $0.value {
+                        callback((responseValue, slug), nil)
+                    } else {
+                        callback(nil, $0.error)
+                    }
+                }
             }
-        } .then {
-            try self.decodePlaybackMedia(withResponseData: $0, episode: episode)
+        } .thenPromise {
+            try self.decodePlaybackMedia(
+                withResponseData: $0,
+                slug: $1,
+                session: session,
+                episode: episode
+            )
         } .handle(handler)
     }
     
@@ -123,17 +139,102 @@ class HydraXParser: VideoProviderParser {
                     headers: nil
                 ) .responseData { callback($0.value, $0.error) }
             }
-        } .then {
-            try self.decodePlaybackMedia(withResponseData: $0, episode: episode)
+        } .thenPromise {
+            try self.decodePlaybackMedia(
+                withResponseData: $0,
+                slug: "",
+                session: session,
+                episode: episode
+            )
         } .handle(handler)
     }
     
     /// Decode the generic resource response data into a valid `BasicPlaybackMedia`
-    private func decodePlaybackMedia(withResponseData resourceResponseData: Data, episode: Episode) throws -> PlaybackMedia {
-        let resource = try JSONDecoder().decode(
-            ResourceResponse.self,
-            from: resourceResponseData
+    private func decodePlaybackMedia(withResponseData resourceResponseData: Data, slug: String, session: Session, episode: Episode) throws -> NineAnimatorPromise<PlaybackMedia> {
+        if let decodedResource = try? JSONDecoder().decode(
+                ResourceResponse.self,
+                from: resourceResponseData
+            ) {
+            // Decode legacy version
+            return .success(try decodeLegacyPlaybackMedia(
+                resource: decodedResource,
+                episode: episode
+            ))
+        }
+        
+        if let decodedResource = try? JSONDecoder().decode(
+                ResourceAuthenticatingResponse.self,
+                from: resourceResponseData
+            ) {
+            return try decodeAuthenticatingPlaybackMedia(
+                resource: decodedResource,
+                slug: slug,
+                session: session,
+                episode: episode
+            )
+        }
+        
+        return .fail(.providerError("NineAnimator doesn't have a decoding strategy for the current resource"))
+    }
+    
+    private func decodeAuthenticatingPlaybackMedia(resource: ResourceAuthenticatingResponse, slug: String, session: Session, episode: Episode) throws -> NineAnimatorPromise<PlaybackMedia> {
+        let authenticationUrl = try URL(string: "https://\(resource.url)/ping.gif")
+            .tryUnwrap()
+        let additionalHeaders: HTTPHeaders = [
+            "Referer": episode.target.absoluteString
+        ]
+        var authenticationRequest = try URLRequest(
+            url: authenticationUrl,
+            method: .get,
+            headers: additionalHeaders
         )
+        authenticationRequest.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        
+        let generateTs = { Int(Date().timeIntervalSince1970 * 1000) }
+        let resourceDefMappers: [String: () -> URL?] = [
+            "fullHd": {
+                URL(string: "https://whw\(slug).\(resource.url)#ht=\(generateTs())")
+            },
+            "hd": {
+                URL(string: "https://www\(slug).\(resource.url)#st=\(generateTs())")
+            },
+            "sd": {
+                URL(string: "https://\(slug).\(resource.url)#ht=\(generateTs())")
+            }
+        ]
+        
+        return NineAnimatorPromise {
+            callback in session.request(
+                authenticationRequest
+            ) .responseData {
+                callback($0.value, $0.error)
+            }
+        } .then {
+            _ in
+            // Select the highest resolution possible
+            let preferredSource = resource.sources.contains("fullHd")
+                ? "fullHd" : resource.sources.contains("hd")
+                ? "hd" : resource.sources.last ?? ""
+            let signedResourceUrl = try (resourceDefMappers[preferredSource]?())
+                .tryUnwrap(.providerError("Unable to find the desired resource"))
+            
+            Log.info(
+                "[Parser.HydraX] Found legacy asset at %@",
+                signedResourceUrl.absoluteString
+            )
+            
+            return BasicPlaybackMedia(
+                url: signedResourceUrl,
+                parent: episode,
+                contentType: "video/mp4",
+                headers: [:],
+                isAggregated: false
+            )
+        }
+    }
+    
+    /// Decode the legacy sources with playback URLs included in the `sources` object
+    private func decodeLegacyPlaybackMedia(resource: ResourceResponse, episode: Episode) throws -> PlaybackMedia {
         let sources = try resource.sources.tryUnwrap(
             .providerError("Unable to fetch the resourcee")
         )
@@ -141,7 +242,8 @@ class HydraXParser: VideoProviderParser {
             string: sources.file
         ).tryUnwrap()
         let isAggregated = sources.type.caseInsensitiveCompare("mp4") != .orderedSame
-        Log.info("(HydraX Parser) found asset at %@", target.absoluteString)
+        Log.info("[Parser.HydraX] Found legacy asset at %@", target.absoluteString)
+        
         return BasicPlaybackMedia(
             url: target,
             parent: episode,
