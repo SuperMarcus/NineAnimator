@@ -21,7 +21,6 @@ import Foundation
 
 extension NASourceAnimeKisa {
     static let knownServers = [
-        "vidcdn": "VidCDN",
         "vidstreaming": "VidStreaming",
         "fembed": "Fembed",
         "hydrax": "HydraX",
@@ -75,7 +74,8 @@ extension NASourceAnimeKisa {
             "mp4upload": try buildExp("MP4Upload"),
             "openload": try buildExp("Openload"),
             "streamango": try buildExp("Streamango"),
-            "vidcdn": try buildExp("VidStreaming")
+            "vidstreaming": try buildExp("VidStreaming"),
+            "hydrax": try buildExp("Hydrax")
         ] .compactMapValues { $0.firstMatch(in: episodePage)?.firstMatchingGroup }
           .compactMapValues { $0.isEmpty ? nil : $0 }
         

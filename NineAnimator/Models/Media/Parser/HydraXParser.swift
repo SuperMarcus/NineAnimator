@@ -54,7 +54,7 @@ class HydraXParser: VideoProviderParser {
     private struct ResourceAuthenticatingResponse: Codable {
         var status: Bool
         var url: String
-        var sources: [String]
+        var sources: [String]?
     }
     
     func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
@@ -178,6 +178,11 @@ class HydraXParser: VideoProviderParser {
     }
     
     private func decodeAuthenticatingPlaybackMedia(resource: ResourceAuthenticatingResponse, slug: String, session: Session, episode: Episode) throws -> NineAnimatorPromise<PlaybackMedia> {
+        // Original Message: We're processing this video. Please check back later
+        guard let assetVariants = resource.sources else {
+            return .fail(.providerError("The streaming server is currently processing this content"))
+        }
+        
         let authenticationUrl = try URL(string: "https://\(resource.url)/ping.gif")
             .tryUnwrap()
         let additionalHeaders: HTTPHeaders = [
@@ -212,9 +217,9 @@ class HydraXParser: VideoProviderParser {
         } .then {
             _ in
             // Select the highest resolution possible
-            let preferredSource = resource.sources.contains("fullHd")
-                ? "fullHd" : resource.sources.contains("hd")
-                ? "hd" : resource.sources.last ?? ""
+            let preferredSource = assetVariants.contains("fullHd")
+                ? "fullHd" : assetVariants.contains("hd")
+                ? "hd" : assetVariants.last ?? ""
             let signedResourceUrl = try (resourceDefMappers[preferredSource]?())
                 .tryUnwrap(.providerError("Unable to find the desired resource"))
             
