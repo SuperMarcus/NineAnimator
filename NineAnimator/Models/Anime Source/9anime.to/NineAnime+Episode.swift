@@ -26,7 +26,10 @@ extension NASourceNineAnime {
         let dataIdentifier = linkComponents.first ?? ""
         let episodePath = linkComponents.last ?? ""
         
-        let ajaxHeaders: [String: String] = ["Referer": link.parent.link.absoluteString]
+        let refererUrl = URL(
+            string: String(episodePath),
+            relativeTo: link.parent.link
+        ) ?? link.parent.link
         let infoPath = "/ajax/episode/info"
         let resolveParametersPromise: NineAnimatorPromise<[String: CustomStringConvertible]>
         
@@ -49,12 +52,14 @@ extension NASourceNineAnime {
             ])
         }
         
-        return resolveParametersPromise.thenPromise {
+        return renewSession(referer: refererUrl.absoluteString).thenPromise {
+            resolveParametersPromise
+        } .thenPromise {
             requestParameters in NineAnimatorPromise {
                 self.signedRequest(
                     ajax: infoPath,
                     parameters: requestParameters,
-                    with: ajaxHeaders,
+                    with: [ "Referer": refererUrl.absoluteString ],
                     completion: $0
                 )
             }

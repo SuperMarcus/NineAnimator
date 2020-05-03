@@ -42,129 +42,193 @@ extension NASourceNineAnime {
     }
     
     func parseAnime(from page: String, with link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime>) -> NineAnimatorAsyncTask? {
-        let bowl = try! SwiftSoup.parse(page)
+        // Delegate to the new promise-based `_parseAnime(from:, with:)`
+        _parseAnime(from: page, with: link).handle(handler)
+    }
+}
+
+extension NASourceNineAnime {
+    func renewSession(referer: String) -> NineAnimatorPromise<Void> {
+        NineAnimatorPromise {
+            callback in self.signedRequest(
+                ajax: "/user/ajax/menu-bar",
+                with: [ "Referer": referer ]
+            ) { callback($0 == nil ? nil : (), $1) }
+        }
+    }
+}
+
+private extension NASourceNineAnime {
+    struct AnimeInitialPageInformation {
+        var bowl: SwiftSoup.Document
+        var reconstructedLink: AnimeLink
+        var animeResourceTags: (id: String, episode: String)
+        var attributes: [Anime.AttributeKey: Any]
+        var alias: String
+        var description: String
         
-        let alias: String? = {
-            let matches = NASourceNineAnime.animeAliasRegex.matches(
-                in: page, range: page.matchingRange
+        var referer: String {
+            animeResourceTags.episode.isEmpty
+                ? reconstructedLink.link.absoluteString
+                : reconstructedLink.link
+                    .appendingPathComponent(animeResourceTags.episode)
+                    .absoluteString
+        }
+    }
+    
+    struct ServerInformation {
+        var bowl: SwiftSoup.Document
+        var serverOptions: [Anime.ServerIdentifier: String]
+        var episodeServerMap: Anime.EpisodesCollection
+    }
+    
+    func _parseAnime(from page: String, with link: AnimeLink) -> NineAnimatorPromise<Anime> {
+        renewSession(referer: link.link.absoluteString).then {
+            try self._parseAnimePage(page, link: link)
+        } .thenPromise {
+            initialPageInformation -> NineAnimatorPromise<(AnimeInitialPageInformation, NSDictionary)> in
+            NineAnimatorPromise {
+                self.signedRequest(
+                    ajax: "/ajax/film/servers",
+                    parameters: [
+                        "id": initialPageInformation.animeResourceTags.id,
+                        "episode": initialPageInformation.animeResourceTags.episode
+                    ],
+                    with: [ "Referer": initialPageInformation.referer ],
+                    completion: $0
+                )
+            } .then { (initialPageInformation, $0) }
+        } .then {
+            initialPage, serversPageResponseDict in
+            // Obtain servers and episodes information
+            let serversPage = try self._parseServersPage(
+                serversPageResponseDict,
+                link: initialPage.reconstructedLink
             )
-            return matches.isEmpty ? nil : page[matches[0].range(at: 1)]
+            
+            // Construct Anime object
+            return Anime(
+                initialPage.reconstructedLink,
+                alias: initialPage.alias,
+                additionalAttributes: initialPage.attributes,
+                description: initialPage.description,
+                on: serversPage.serverOptions,
+                episodes: serversPage.episodeServerMap
+            )
+        }
+    }
+    
+    func _parseServersPage(_ serversResponse: NSDictionary, link: AnimeLink) throws -> ServerInformation {
+        let responseRawHtmlEntry = try serversResponse.value(
+            at: "html",
+            type: String.self
+        )
+        var results = ServerInformation(
+            bowl: try SwiftSoup.parse(responseRawHtmlEntry),
+            serverOptions: [:],
+            episodeServerMap: [:]
+        )
+        
+        // Map server to name
+        results.serverOptions = try results.bowl
+            .select("span.tab")
+            .reduce(into: results.serverOptions) {
+                $0[try $1.attr("data-name")] = $1.ownText()
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        
+        // Map server to episodes
+        results.episodeServerMap = try results.bowl
+            .select("div.server")
+            .reduce(into: results.episodeServerMap) {
+                episodeServerMap, serverElement in
+                let serverIdentifier = try serverElement.attr("data-id")
+                episodeServerMap[serverIdentifier] = try serverElement
+                    .select(".episodes a")
+                    .map {
+                        let dataIdentifier = try $0.attr("data-id")
+                        let pathIdentifier = try $0.attr("href")
+                        return EpisodeLink(
+                            identifier: "\(dataIdentifier)|\(pathIdentifier)",
+                            name: try $0.text(),
+                            server: serverIdentifier,
+                            parent: link
+                        )
+                    }
+            }
+        
+        return results
+    }
+    
+    func _parseAnimePage(_ pageContent: String, link: AnimeLink) throws -> AnimeInitialPageInformation {
+        var result = AnimeInitialPageInformation(
+            bowl: try SwiftSoup.parse(pageContent),
+            reconstructedLink: link,
+            animeResourceTags: ("", ""),
+            attributes: [:],
+            alias: (NASourceNineAnime.animeAliasRegex
+                .firstMatch(in: pageContent)?
+                .firstMatchingGroup) ?? "",
+            description: ""
+        )
+        
+        let serverContainerElement = try result.bowl.select("div#servers-container")
+                                
+        result.animeResourceTags = (
+            id: try serverContainerElement.attr("data-id"),
+            episode: try serverContainerElement.attr("data-epid")
+        )
+        
+        // Basic information
+        result.alias = (try? result.bowl.select(".info .alias").text()) ?? ""
+        result.description = (try? result.bowl.select("div.desc").text()) ?? "No description"
+        
+        // Reconstructing AnimeLink from the page content
+        let animePosterURL = URL(
+            string: try result.bowl.select("div.thumb>img").attr("src")
+        ) ?? link.image
+        let animeTitle = try result.bowl.select(".info .title").text()
+        result.reconstructedLink = AnimeLink(
+            title: animeTitle,
+            link: link.link,
+            image: animePosterURL,
+            source: link.source
+        )
+        
+        // Parse attributes
+        let animeAttributesRaw: [String: String] = {
+            do {
+                let zippedSequence = zip(
+                    try result.bowl
+                        .select("div.info>div.row dt")
+                        .array()
+                        .map { try $0.text() },
+                    try result.bowl
+                        .select("div.info>div.row dd")
+                        .array()
+                        .map { try $0.text() }
+                )
+                return Dictionary(zippedSequence) { $1 }
+            } catch { return [:] }
         }()
         
-        do {
-            let serverContainerElement = try bowl.select("div#servers-container")
-            
-            let animeResourceTags = (
-                id: try serverContainerElement.attr("data-id"),
-                episode: try serverContainerElement.attr("data-epid")
-            )
-            
-            let animeDescription = (try? bowl.select("div.desc").text()) ?? "No description"
-            let animePosterURL = URL(string: try bowl.select("div.thumb>img").attr("src")) ?? link.image
-            let animeAttributesRaw: [String: String] = {
-                do {
-                    let zippedSequence = zip(
-                        try bowl.select("div.info>div.row dt").array().map { try $0.text() },
-                        try bowl.select("div.info>div.row dd").array().map { try $0.text() }
-                    )
-                return Dictionary(uniqueKeysWithValues: zippedSequence)
-                } catch { return [:] }
-            }()
-//            let animeAttributesString = animeAttributesRaw.map { "・ \($0.0) \($0.1)\n" }.joined()
-            let animeTitle = try bowl.select(".info .title").text()
-            let animeAlias = (try? bowl.select(".info .alias").text()) ?? ""
-            
-            var animeAttributes = [Anime.AttributeKey: Any]()
-            
-            for (key, value) in animeAttributesRaw {
-                switch key.lowercased() {
-                case "rating:":
-                    let labels = value.split(separator: "/")
-                    guard let ratingString = labels.first?.trimmingCharacters(in: .whitespacesAndNewlines),
-                        let rating = Float(String(ratingString)) else { continue }
-                    animeAttributes[.rating] = rating
-                    animeAttributes[.ratingScale] = Float(10.0)
-                case "date aired:":
-                    animeAttributes[.airDate] = value.trimmingCharacters(in: .whitespacesAndNewlines)
-                default: continue
-                }
+        for (key, value) in animeAttributesRaw {
+            switch key.lowercased() {
+            case "rating:":
+                let labels = value.split(separator: "/")
+                guard let ratingString = labels.first?
+                        .trimmingCharacters(in: .whitespacesAndNewlines),
+                    let rating = Float(String(ratingString)) else { continue }
+                
+                result.attributes[.rating] = rating
+                result.attributes[.ratingScale] = Float(10.0)
+            case "date aired:":
+                result.attributes[.airDate] = value
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+            default: continue
             }
-            
-            let ajaxHeaders: [String: String] = ["Referer": link.link.absoluteString]
-            
-            let reconstructedLink = AnimeLink(
-                title: animeTitle,
-                link: link.link,
-                image: animePosterURL,
-                source: link.source
-            )
-            
-            Log.info("Retrived information for %@", link)
-            Log.debug("- Alias: %@", alias ?? "None")
-            Log.debug("- Resource Identifiers: ID=%@, EPISODE=%@", animeResourceTags.id, animeResourceTags.episode)
-            
-            return signedRequest(
-                ajax: "/ajax/film/servers/\(animeResourceTags.id)",
-                with: ajaxHeaders
-            ) { response, error in
-                guard let responseJson = response else {
-                    return handler(nil, error)
-                }
-                
-                guard let htmlList = responseJson["html"] as? String else {
-                    Log.error("Invalid response")
-                    return handler(nil, NineAnimatorError.responseError(
-                        "unable to retrieve episode list from responses"
-                    ))
-                }
-                
-                let matches = NASourceNineAnime.animeServerListRegex.matches(
-                    in: htmlList, range: htmlList.matchingRange
-                )
-                
-                let animeServers: [Anime.ServerIdentifier: String] = Dictionary(
-                    matches.map { match in
-                        (htmlList[match.range(at: 1)], htmlList[match.range(at: 2)])
-                    }
-                ) { _, new in new }
-                    
-                guard !animeServers.isEmpty else { return handler(nil, NineAnimatorError.responseError("No episodes found for this anime.")) }
-                
-                var animeEpisodes = [Anime.ServerIdentifier: Anime.EpisodeLinksCollection]()
-                
-                do {
-                    let soup = try SwiftSoup.parse(htmlList)
-                    
-                    for server in try soup.select("div.server") {
-                        let serverIdentifier = try server.attr("data-id")
-                        animeEpisodes[serverIdentifier] = try server.select("li>a").map {
-                            let dataIdentifier = try $0.attr("data-id")
-                            let pathIdentifier = try $0.attr("href")
-                            return EpisodeLink(
-                                identifier: "\(dataIdentifier)|\(pathIdentifier)",
-                                name: try $0.text(),
-                                server: serverIdentifier,
-                                parent: reconstructedLink
-                            )
-                        }
-                    }
-                    
-                    // Reconstruct the AnimeLink so we get the correct URLs and titles
-                    handler(Anime(reconstructedLink,
-                                  alias: animeAlias,
-                                  additionalAttributes: animeAttributes,
-//                                  description: "\(animeAttributesString)\n\(animeDescription)",
-                                  description: animeDescription,
-                                  on: animeServers,
-                                  episodes: animeEpisodes), nil)
-                } catch {
-                    Log.error("Unable to parse servers and episodes")
-                    handler(nil, error)
-                }
-            }
-        } catch {
-            handler(nil, error)
         }
-        return nil
+        
+        return result
     }
 }

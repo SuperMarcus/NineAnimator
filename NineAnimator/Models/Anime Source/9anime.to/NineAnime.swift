@@ -175,7 +175,8 @@ class NASourceNineAnime: BaseSource, Source {
         ) -> NineAnimatorAsyncTask? {
         // Additional verification headers
         let modifiedRequestHeaders = headers.merging([
-            "Age": "0"
+            "Age": "0",
+            "Accept": "application/json, text/javascript, */*; q=0.01"
         ]) { override, _ in override }
         
         // Forward the call
