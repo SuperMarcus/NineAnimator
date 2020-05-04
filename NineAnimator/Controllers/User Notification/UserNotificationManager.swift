@@ -46,6 +46,9 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     private var lazyPersistPool = Set<AnimeLink>()
     
+    /// A list of cached delivered notification identifiers
+    private var cachedDeliveredNotificationIdentifiers: Set<String>?
+    
     private var persistentTaskIdentifier: UIBackgroundTaskIdentifier?
     
     private let animeCachingDirectory: URL
@@ -243,11 +246,24 @@ extension UserNotificationManager {
     
     /// Check whether a notification was sent to the user for the specified anime link
     func hasNotifications(for anime: AnimeLink, _ handler: @escaping NineAnimatorCallback<Bool>) {
+        // Use cache whenever possible
+        if let cache = cachedDeliveredNotificationIdentifiers {
+            return handler(
+                cache.contains(.episodeUpdateNotificationIdentifier(anime)),
+                nil
+            )
+        }
+        
         let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.getDeliveredNotifications {
             notifications in
+            let identifiers = Set(notifications.map {
+                $0.request.identifier
+            })
+            self.cachedDeliveredNotificationIdentifiers = identifiers
+            
             handler(
-                notifications.contains { $0.request.identifier == .episodeUpdateNotificationIdentifier(anime) },
+                identifiers.contains(.episodeUpdateNotificationIdentifier(anime)),
                 nil
             )
         }
@@ -387,6 +403,9 @@ extension UserNotificationManager {
             trigger: nil
         )
         
+        // Clear delivered notification identifiers cache
+        cachedDeliveredNotificationIdentifiers = nil
+        
         // Alas, post notification to the user
         notificationCenter.add(request, withCompletionHandler: nil)
         
@@ -425,6 +444,9 @@ extension UserNotificationManager {
             content: notificationContent,
             trigger: nil
         )
+        
+        // Clear delivered notification identifiers cache
+        cachedDeliveredNotificationIdentifiers = nil
         
         // Enqueue the notification
         notificationCenter.add(request, withCompletionHandler: nil)
