@@ -106,3 +106,59 @@ extension LibrarySubscriptionCategoryController {
         }
     }
 }
+
+extension LibrarySubscriptionCategoryController {
+    func unsubscribe(_ link: AnyLink, indexPath: IndexPath? = nil) {
+        let correspondingIndex: IndexPath
+        
+        // Even though we're expecting the index to be valid, just to
+        // prevent some werid iOS glitches we'll still do a full check.
+        if let knownIndex = indexPath, knownIndex.section == 0,
+            (0..<cachedWatchedAnimeItems.count).contains(knownIndex.item) {
+            correspondingIndex = knownIndex
+        } else if let cachedIndex = cachedWatchedAnimeItems.firstIndex(of: link) {
+            correspondingIndex = .init(item: cachedIndex, section: 0)
+        } else {
+            return Log.error("[LibrarySubscriptionCategoryController] Trying to unsubscribe a link '%@' that doesn't exist in the cache.", link)
+        }
+        
+        if case let .anime(animeLink) = link {
+            NineAnimator.default.user.unsubscribe(anime: animeLink)
+            cachedWatchedAnimeItems.remove(at: correspondingIndex.item)
+            collectionView.deleteItems(at: [ correspondingIndex ])
+        }
+    }
+}
+
+// MARK: - Context Menus
+extension LibrarySubscriptionCategoryController {
+    @available(iOS 13.0, *)
+    override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let sourceCell = collectionView.cellForItem(at: indexPath) as? LibrarySubscriptionCell,
+            let relatedLink = sourceCell.representingLink else {
+            return nil
+        }
+        
+        return .init(
+            identifier: nil,
+            previewProvider: nil
+        ) { [weak self] _ -> UIMenu? in
+            var menuItems = [UIAction]()
+            
+            menuItems.append(.init(
+                title: "Unsubscribe", // Get to use SFSymbols here because >= iOS 13 !!
+                image: UIImage(systemName: "bell.slash.fill"),
+                identifier: nil
+            ) { [weak self] _ in
+                self?.unsubscribe(relatedLink, indexPath: indexPath)
+            })
+            
+            return UIMenu(
+                title: "Subscribed Anime",
+                identifier: nil,
+                options: [],
+                children: menuItems
+            )
+        }
+    }
+}
