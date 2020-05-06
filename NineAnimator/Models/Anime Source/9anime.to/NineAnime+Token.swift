@@ -35,8 +35,8 @@ extension NASourceNineAnime {
     /// Sign the request parameters
     ///
     /// - Returns: The request signature (`_`) value
-    private func sign(_ dict: [String: CustomStringConvertible]) -> Int {
-        684 + (dict.count * 48)
+    private func sign(_ dict: [URLQueryItem]) -> Int {
+        [0: 743, 1: 839, 2: 839, 3: 935][dict.count] ?? (684 + (dict.count * 48))
     }
     
     /// Retrieve the current timestamp `ts` value that should be
@@ -48,12 +48,18 @@ extension NASourceNineAnime {
     /// Sign the request url with parameters
     func signRequestURL(
         _ url: URL,
-        withParameters parameters: [String: CustomStringConvertible]
+        withParameters parameters: [URLQueryItem]
     ) -> URL {
         // Construct signed request parameters
         var requestParameters = parameters
-        requestParameters["_"] = sign(requestParameters)
-        requestParameters["ts"] = currentNATimestamp
+        requestParameters.append(.init(
+            name: "_",
+            value: String(sign(requestParameters))
+        ))
+        requestParameters.append(.init(
+            name: "ts",
+            value: String(currentNATimestamp)
+        ))
         
         // Reconstruct the URL
         // swiftlint:disable redundant_nil_coalescing
@@ -63,13 +69,33 @@ extension NASourceNineAnime {
         ) .unwrap {
             _components -> URL? in
             var components = _components
-            components.queryItems = requestParameters.map {
-                .init(name: $0.key, value: $0.value.description)
-            }
+            components.queryItems = requestParameters
             return components.url
         } ?? nil // Well, unfortunetly the unwrap function returns URL??
         
         // Return the signed URL
         return reconstructedUrl ?? url
+    }
+    
+    func renewSession(referer: String) -> NineAnimatorPromise<Void> {
+        NineAnimatorPromise<Any>.queue(listOfPromises: [
+            NineAnimatorPromise<Any> {
+                callback in self.request(
+                    browse: "/clear.gif",
+                    with: [
+                        "Referer": referer,
+                        "Accept": "image/png,image/svg+xml,image/*;q=0.8,video/*;q=0.8,*/*;q=0.5"
+                    ],
+                    completion: callback
+                )
+            },
+            NineAnimatorPromise<Any> {
+                callback in self.signedRequest(
+                    ajax: "/user/ajax/menu-bar",
+                    with: [ "Referer": referer ],
+                    completion: callback
+                )
+            }
+        ]) .then { _ in () }
     }
 }

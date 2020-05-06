@@ -31,7 +31,7 @@ extension NASourceNineAnime {
             relativeTo: link.parent.link
         ) ?? link.parent.link
         let infoPath = "/ajax/episode/info"
-        let resolveParametersPromise: NineAnimatorPromise<[String: CustomStringConvertible]>
+        let resolveParametersPromise: NineAnimatorPromise<[URLQueryItem]>
         
         if anime.servers[link.server] == "MyCloud" {
             // Additional key required for mycloud
@@ -52,9 +52,7 @@ extension NASourceNineAnime {
             ])
         }
         
-        return renewSession(referer: refererUrl.absoluteString).thenPromise {
-            resolveParametersPromise
-        } .thenPromise {
+        return resolveParametersPromise.thenPromise {
             requestParameters in NineAnimatorPromise {
                 self.signedRequest(
                     ajax: infoPath,

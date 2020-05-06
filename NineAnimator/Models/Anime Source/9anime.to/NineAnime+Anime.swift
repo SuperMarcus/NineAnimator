@@ -47,17 +47,6 @@ extension NASourceNineAnime {
     }
 }
 
-extension NASourceNineAnime {
-    func renewSession(referer: String) -> NineAnimatorPromise<Void> {
-        NineAnimatorPromise {
-            callback in self.signedRequest(
-                ajax: "/user/ajax/menu-bar",
-                with: [ "Referer": referer ]
-            ) { callback($0 == nil ? nil : (), $1) }
-        }
-    }
-}
-
 private extension NASourceNineAnime {
     struct AnimeInitialPageInformation {
         var bowl: SwiftSoup.Document
@@ -88,12 +77,20 @@ private extension NASourceNineAnime {
         } .thenPromise {
             initialPageInformation -> NineAnimatorPromise<(AnimeInitialPageInformation, NSDictionary)> in
             NineAnimatorPromise {
-                self.signedRequest(
+                var requestParameters: [URLQueryItem] = [
+                    "id": initialPageInformation.animeResourceTags.id
+                ]
+                
+                if !initialPageInformation.animeResourceTags.episode.isEmpty {
+                    requestParameters.append(.init(
+                        name: "episode",
+                        value: initialPageInformation.animeResourceTags.episode
+                    ))
+                }
+                
+                return self.signedRequest(
                     ajax: "/ajax/film/servers",
-                    parameters: [
-                        "id": initialPageInformation.animeResourceTags.id,
-                        "episode": initialPageInformation.animeResourceTags.episode
-                    ],
+                    parameters: requestParameters,
                     with: [ "Referer": initialPageInformation.referer ],
                     completion: $0
                 )

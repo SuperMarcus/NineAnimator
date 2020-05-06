@@ -56,7 +56,6 @@ class NASourceNineAnime: BaseSource, Source {
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
-        _internalUAIdentity = "Mozilla/5.0 (iPad; CPU iPhone OS 13_1_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.1 Mobile/15E148 Safari/604.1"
         addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
         addMiddleware(NASourceNineAnime._ipBlockDetectionMiddleware)
         addMiddleware(NASourceNineAnime._contentNotFoundMiddleware)
@@ -131,7 +130,7 @@ class NASourceNineAnime: BaseSource, Source {
     
     func signedRequest(
         browse path: String,
-        parameters: [String: CustomStringConvertible] = [:],
+        parameters: [URLQueryItem] = [:],
         with headers: [String: String] = [:],
         completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
@@ -145,7 +144,7 @@ class NASourceNineAnime: BaseSource, Source {
     
     func signedRequest(
             browse url: URL,
-            parameters: [String: CustomStringConvertible] = [:],
+            parameters: [URLQueryItem] = [:],
             with headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
@@ -154,7 +153,7 @@ class NASourceNineAnime: BaseSource, Source {
     
     func signedRequest(
             ajax path: String,
-            parameters: [String: CustomStringConvertible] = [:],
+            parameters: [URLQueryItem] = [:],
             with headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<NSDictionary>
         ) -> NineAnimatorAsyncTask? {
@@ -169,13 +168,12 @@ class NASourceNineAnime: BaseSource, Source {
     
     func signedRequest(
             ajax url: URL,
-            parameters: [String: CustomStringConvertible] = [:],
+            parameters: [URLQueryItem] = [:],
             with headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<NSDictionary>
         ) -> NineAnimatorAsyncTask? {
         // Additional verification headers
         let modifiedRequestHeaders = headers.merging([
-            "Age": "0",
             "Accept": "application/json, text/javascript, */*; q=0.01"
         ]) { override, _ in override }
         
@@ -190,7 +188,7 @@ class NASourceNineAnime: BaseSource, Source {
     /// Make a signed request with path related to the endpoint
     func signedRequest(
             ajaxString path: String,
-            parameters: [String: CustomStringConvertible] = [:],
+            parameters: [URLQueryItem] = [:],
             headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
@@ -206,7 +204,7 @@ class NASourceNineAnime: BaseSource, Source {
     /// Make a signed request
     func signedRequest(
             ajaxString url: URL,
-            parameters: [String: CustomStringConvertible] = [:],
+            parameters: [URLQueryItem] = [],
             headers: [String: String] = [:],
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {

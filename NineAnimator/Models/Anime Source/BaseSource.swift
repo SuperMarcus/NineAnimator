@@ -35,7 +35,7 @@ class BaseSource {
     
     var _cfResolverTimer: Timer?
     var _cfPausedTasks = [Alamofire.RetryHandler]()
-    var _internalUAIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Safari/605.1.15"
+    var _internalUAIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
     
     var _internalAdapterChain = [WeakRef<AnyObject>]()
     var _internalRetrierChain = [WeakRef<AnyObject>]()
@@ -242,7 +242,8 @@ extension BaseSource {
         configuration.httpCookieStorage = HTTPCookieStorage.shared
         configuration.httpAdditionalHeaders = [
             "User-Agent": sessionUserAgent,
-            "X-Requested-With": "XMLHttpRequest"
+            "X-Requested-With": "XMLHttpRequest",
+            "Accept-Language": "en-us"
         ]
         let manager = Session(
             configuration: configuration,
@@ -259,7 +260,8 @@ extension BaseSource {
         configuration.httpCookieStorage = HTTPCookieStorage.shared
         configuration.httpAdditionalHeaders = [
             "User-Agent": sessionUserAgent,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-us"
         ]
         let manager = Session(
             configuration: configuration,

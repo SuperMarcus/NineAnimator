@@ -26,10 +26,7 @@ extension NASourceNineAnime/*: Alamofire.RequestAdapter*/ {
         [
             // A list of hosts that 9anime uses
             "9anime.ru",
-            "www2.9anime.to",
-            "9anime.live",
-            "9anime.nl",
-            "9anime.one"
+            "www2.9anime.to"
         ]
     }
     
