@@ -1,95 +1,95 @@
 /* Class = "UILabel"; text = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you."; ObjectID = "3Ui-C3-ly1"; */
-"3Ui-C3-ly1.text" = "Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you.";
+"3Ui-C3-ly1.text" = "Encontre o seu Site Favorito de Streaming de Animes e NineAnimator irá usá-lo para fornecer conteúdo, só pra você.";
 
 /* Class = "UIButton"; normalTitle = "Finish"; ObjectID = "5eV-r3-Bap"; */
-"5eV-r3-Bap.normalTitle" = "Finish";
+"5eV-r3-Bap.normalTitle" = "Concluído";
 
 /* Class = "UILabel"; text = "Downloads"; ObjectID = "7Kf-LC-01q"; */
 "7Kf-LC-01q.text" = "Downloads";
 
 /* Class = "UILabel"; text = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites."; ObjectID = "8VJ-Os-i4X"; */
-"8VJ-Os-i4X.text" = "NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites.";
+"8VJ-Os-i4X.text" = "NineAnimator é um aplicativo gratuito para assistir Animes no iOS desenvolvido por Marcus Zhou (other.m arcus@icloud.com) sob a Licença Pública Geral GNU versão 3. NineAnimator não foi projetado para promover a pirataria, nem para apoiar sites de pirataria em animes.";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "Ier-uY-wii"; */
-"Ier-uY-wii.normalTitle" = "Continue";
+"Ier-uY-wii.normalTitle" = "Continuar";
 
 /* Class = "UILabel"; text = "Welcome to NineAnimator"; ObjectID = "JGR-Zv-VIj"; */
-"JGR-Zv-VIj.text" = "Welcome to NineAnimator";
+"JGR-Zv-VIj.text" = "Bem-vindo ao NineAnimator";
 
 /* Class = "UILabel"; text = "Light"; ObjectID = "JGW-3m-qyq"; */
-"JGW-3m-qyq.text" = "Light";
+"JGW-3m-qyq.text" = "Claro";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
-"MDo-yQ-irq.text" = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates.";
+"MDo-yQ-irq.text" = "Entre nas suas contas Anilist, Kitsu, ou MyAnimeList no menu de Preferências. Junte-se à nossa comunidade do Discord para receber atualizações.";
 
 /* Class = "UILabel"; text = "NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites."; ObjectID = "MRT-ib-AcS"; */
-"MRT-ib-AcS.text" = "NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites.";
+"MRT-ib-AcS.text" = "NineAnimator não é afiliado de nenhum dos sites listados acima. Suas informações pessoais e histórico não são compartilhados com os sites acima.";
 
 /* Class = "UILabel"; text = "Select A Website"; ObjectID = "RjP-7k-vGp"; */
-"RjP-7k-vGp.text" = "Select A Website";
+"RjP-7k-vGp.text" = "Selecione um Site";
 
 /* Class = "UILabel"; text = "Anime Source"; ObjectID = "TMt-Pq-6FS"; */
-"TMt-Pq-6FS.text" = "Anime Source";
+"TMt-Pq-6FS.text" = "Fonte de Anime";
 
 /* Class = "UILabel"; text = "This version of NineAnimator includes experimental support for AnimeDao and 4anime as built-in anime sources."; ObjectID = "V1d-j4-fS2"; */
-"V1d-j4-fS2.text" = "This version of NineAnimator includes experimental support for AnimeDao and 4anime as built-in anime sources.";
+"V1d-j4-fS2.text" = "Esta versão do NineAnimator inclui suporte experimental para AnimeDao e 4anime como fontes de anime incorporadas.";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "V5A-Fz-yzu"; */
-"V5A-Fz-yzu.normalTitle" = "Continue";
+"V5A-Fz-yzu.normalTitle" = "Continuar";
 
 /* Class = "UILabel"; text = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date."; ObjectID = "YWE-aH-85Y"; */
-"YWE-aH-85Y.text" = "NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.";
+"YWE-aH-85Y.text" = "NineAnimator está sob desenvolvimento ativo. Novos recursos e correções de bugs são lançados semanalmente. É recomendável que você mantenha o aplicativo atualizado.";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "aVI-dM-rv8"; */
-"aVI-dM-rv8.text" = "Appearance";
+"aVI-dM-rv8.text" = "Aparência";
 
 /* Class = "UIButton"; normalTitle = "Skip Setup"; ObjectID = "eYj-Vw-fYO"; */
-"eYj-Vw-fYO.normalTitle" = "Skip Setup";
+"eYj-Vw-fYO.normalTitle" = "Pular Configuração";
 
 /* Class = "UILabel"; text = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability."; ObjectID = "f1Q-9Z-lK6"; */
-"f1Q-9Z-lK6.text" = "This version of NineAnimator includes an updated download system that is optimized for performance and reliability.";
+"f1Q-9Z-lK6.text" = "Esta versão do NineAnimator inclui um sistema de downloads atualizado que é otimizado para desempenho e confiabilidade.";
 
 /* Class = "UIBarButtonItem"; title = "Select Source"; ObjectID = "fPo-Vc-IV4"; */
-"fPo-Vc-IV4.title" = "Select Source";
+"fPo-Vc-IV4.title" = "Selecionar Fonte";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "h82-lJ-xk8"; */
-"h82-lJ-xk8.normalTitle" = "Continue";
+"h82-lJ-xk8.normalTitle" = "Continuar";
 
 /* Class = "UIBarButtonItem"; title = "Appearance"; ObjectID = "hCU-cE-SPT"; */
-"hCU-cE-SPT.title" = "Appearance";
+"hCU-cE-SPT.title" = "Aparência";
 
 /* Class = "UILabel"; text = "What's New"; ObjectID = "ikj-0J-JNE"; */
-"ikj-0J-JNE.text" = "What's New";
+"ikj-0J-JNE.text" = "O que há de novo";
 
 /* Class = "UILabel"; text = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu."; ObjectID = "ok1-aG-zqs"; */
-"ok1-aG-zqs.text" = "Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.\nAfter setup, you can change the theme settings in the Preferences menu.";
+"ok1-aG-zqs.text" = "Definir a aparência como Dinâmica permite que o NineAnimator altere o tema de acordo com o brilho da tela.\nApós a configuração, você pode alterar as configurações de tema no menu Preferências.";
 
 /* Class = "UILabel"; text = "Library"; ObjectID = "ouh-B2-M5f"; */
-"ouh-B2-M5f.text" = "Library";
+"ouh-B2-M5f.text" = "Biblioteca";
 
 /* Class = "UIButton"; normalTitle = "Continue"; ObjectID = "rtk-Cw-RXt"; */
-"rtk-Cw-RXt.normalTitle" = "Continue";
+"rtk-Cw-RXt.normalTitle" = "Continuar";
 
 /* Class = "UIButton"; normalTitle = "Open Discord"; ObjectID = "t2o-HH-QfF"; */
-"t2o-HH-QfF.normalTitle" = "Open Discord";
+"t2o-HH-QfF.normalTitle" = "Abrir Discord";
 
 /* Class = "UIBarButtonItem"; title = "What's New"; ObjectID = "uka-Zy-Cuf"; */
-"uka-Zy-Cuf.title" = "What's New";
+"uka-Zy-Cuf.title" = "O que há de Novo";
 
 /* Class = "UILabel"; text = "Start Using NineAnimator"; ObjectID = "x9M-KR-UlF"; */
-"x9M-KR-UlF.text" = "Start Using NineAnimator";
+"x9M-KR-UlF.text" = "Comece a Usar o NineAnimator";
 
 /* Class = "UIBarButtonItem"; title = "Welcome"; ObjectID = "xUo-iY-fAt"; */
-"xUo-iY-fAt.title" = "Welcome";
+"xUo-iY-fAt.title" = "Bem-vindo";
 
 /* Class = "UILabel"; text = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information."; ObjectID = "xwc-kf-mgL"; */
-"xwc-kf-mgL.text" = "The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information.";
+"xwc-kf-mgL.text" = "A interface de biblioteca foi reformulada do zero e afinada para lhe apresentar as informações mais relevantes.";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[0] = "Light"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[0]" = "Light";
+"yQX-1k-GWU.segmentTitles[0]" = "Claro";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[1] = "Dark"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[1]" = "Dark";
+"yQX-1k-GWU.segmentTitles[1]" = "Escuro";
 
 /* Class = "UISegmentedControl"; yQX-1k-GWU.segmentTitles[2] = "Dynamic"; ObjectID = "yQX-1k-GWU"; */
-"yQX-1k-GWU.segmentTitles[2]" = "Dynamic";
+"yQX-1k-GWU.segmentTitles[2]" = "Dinâmica";
