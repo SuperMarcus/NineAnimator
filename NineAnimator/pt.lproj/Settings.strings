@@ -1,41 +1,41 @@
 /* Class = "UILabel"; text = "Home"; ObjectID = "0eR-hu-Qxf"; */
-"0eR-hu-Qxf.text" = "Home";
+"0eR-hu-Qxf.text" = "Início";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "0ne-Hh-nMP"; */
-"0ne-Hh-nMP.text" = "GitHub Repository";
+"0ne-Hh-nMP.text" = "Repositório do Github";
 
 /* Class = "UILabel"; text = "Checking..."; ObjectID = "1D4-d4-eg5"; */
-"1D4-d4-eg5.text" = "Checking...";
+"1D4-d4-eg5.text" = "Verificando...";
 
 /* Class = "UILabel"; text = "Clear Cached Data"; ObjectID = "1VP-oc-aqz"; */
-"1VP-oc-aqz.text" = "Clear Cached Data";
+"1VP-oc-aqz.text" = "Limpar Dados do Cache";
 
 /* Class = "UILabel"; text = "Clear Downloads"; ObjectID = "1X7-X7-huV"; */
-"1X7-X7-huV.text" = "Clear Downloads";
+"1X7-X7-huV.text" = "Apagar Downloads";
 
 /* Class = "UITableViewSection"; headerTitle = "Third Party Softwares and Websites"; ObjectID = "2US-vI-tzZ"; */
-"2US-vI-tzZ.headerTitle" = "Third Party Softwares and Websites";
+"2US-vI-tzZ.headerTitle" = "Softwares de Terceiros e Sites";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "2ol-44-Ha5"; */
 "2ol-44-Ha5.text" = "Status";
 
 /* Class = "UILabel"; text = "Privacy Policy"; ObjectID = "3bY-Q0-VOr"; */
-"3bY-Q0-VOr.text" = "Privacy Policy";
+"3bY-Q0-VOr.text" = "Política de Privacidade";
 
 /* Class = "UILabel"; text = "ANILIST.CO"; ObjectID = "4rr-C0-0zN"; */
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Not Setup";
+"4vz-rG-dvA.text" = "Não foi Configurado";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
-"4ye-Yb-8qS.title" = "Storage";
+"4ye-Yb-8qS.title" = "Armazenamento";
 
 /* Class = "UITableViewSection"; footerTitle = "Browse anime you've added to your collections and connet with progress tracking services."; ObjectID = "5UB-9w-oPI"; */
-"5UB-9w-oPI.footerTitle" = "Browse anime you've added to your collections and connet with progress tracking services.";
+"5UB-9w-oPI.footerTitle" = "Procure um anime que você adicionou a suas coleções e conecte com os serviços de rastreamento de progresso.";
 
 /* Class = "UILabel"; text = "Prevents Purging"; ObjectID = "5k7-hs-FeH"; */
-"5k7-hs-FeH.text" = "Prevents Purging";
+"5k7-hs-FeH.text" = "Impedir a Limpeza";
 
 /* Class = "UILabel"; text = "NineAnimator"; ObjectID = "6cg-cg-vWl"; */
 "6cg-cg-vWl.text" = "NineAnimator";
@@ -44,286 +44,286 @@
 "6ow-N9-6M8.text" = "Status";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
-"6wJ-Cg-cKO.text" = "Not Setup";
+"6wJ-Cg-cKO.text" = "Não foi Configurado";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
-"74T-HL-SF3.text" = "Calculating Usage...";
+"74T-HL-SF3.text" = "Calculando Uso...";
 
 /* Class = "UILabel"; text = "Open Cast Controller"; ObjectID = "7gK-el-Ee1"; */
-"7gK-el-Ee1.text" = "Open Cast Controller";
+"7gK-el-Ee1.text" = "Abrir Controlador de Transmissão";
 
 /* Class = "UITableViewSection"; footerTitle = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay."; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.footerTitle" = "Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.\n\nEnabling Background Playback will allow audios to be played while the app is in the background. This setting won't affect Google Cast or AirPlay.";
+"7nJ-6V-9oy.footerTitle" = "A reprodução de Picture in Picture (PiP) é suportada apenas em iPads. Ativar PiP também ativará a reprodução em segundo plano.\n\nAtivar a reprodução em segundo plano permitirá que os áudios sejam reproduzidos enquanto o aplicativo estiver em segundo plano. Essa configuração não afetará o Google Cast ou AirPlay.";
 
 /* Class = "UITableViewSection"; headerTitle = "Playback Controls"; ObjectID = "7nJ-6V-9oy"; */
-"7nJ-6V-9oy.headerTitle" = "Playback Controls";
+"7nJ-6V-9oy.headerTitle" = "Controles de Reprodução";
 
 /* Class = "UINavigationItem"; title = "Preferred Source"; ObjectID = "8Lj-r1-12t"; */
-"8Lj-r1-12t.title" = "Preferred Source";
+"8Lj-r1-12t.title" = "Fonte Preferida";
 
 /* Class = "UILabel"; text = "Version"; ObjectID = "A3J-Ya-mRo"; */
-"A3J-Ya-mRo.text" = "Version";
+"A3J-Ya-mRo.text" = "Versão";
 
 /* Class = "UILabel"; text = "Export History"; ObjectID = "AVN-Z6-xDl"; */
-"AVN-Z6-xDl.text" = "Export History";
+"AVN-Z6-xDl.text" = "Exportar Histórico";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "Avi-8B-KpP"; */
-"Avi-8B-KpP.text" = "Not Setup";
+"Avi-8B-KpP.text" = "Não foi Configurado";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
-"BDo-SJ-NV8.text" = "Third-Party Anime Lists";
+"BDo-SJ-NV8.text" = "Listas de Animes de Terceiros";
 
 /* Class = "UILabel"; text = "Current Subscriptions"; ObjectID = "CDE-MG-fiI"; */
-"CDE-MG-fiI.text" = "Current Subscriptions";
+"CDE-MG-fiI.text" = "Inscrições";
 
 /* Class = "UILabel"; text = "MYANIMELIST.NET"; ObjectID = "CXa-yX-XOv"; */
 "CXa-yX-XOv.text" = "MYANIMELIST.NET";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites."; ObjectID = "EzJ-Ri-uNU"; */
-"EzJ-Ri-uNU.footerTitle" = "NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.";
+"EzJ-Ri-uNU.footerTitle" = "NineAnimator é um aplicativo gratuito para assistir Animes no iOS desenvolvido por Marcus Zhou (other.marcus@icloud.com) sob a Licença Pública Geral GNU versão 3. NineAnimator não foi projetado para promover a pirataria, nem para apoiar sites de pirataria em animes.";
 
 /* Class = "UITableViewSection"; headerTitle = "About NineAnimator"; ObjectID = "EzJ-Ri-uNU"; */
-"EzJ-Ri-uNU.headerTitle" = "About NineAnimator";
+"EzJ-Ri-uNU.headerTitle" = "Sobre o NineAnimator";
 
 /* Class = "UITableViewSection"; footerTitle = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account."; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.footerTitle" = "You may clear your playback history and reset your personal preferences in the Preferences menu.\n\nNineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.\n\nBy setting up third party tracking services, you agree NineAnimator to upload your playback history and progress to only the third party services you have setup.\n\nYour playback history and preferences may be stored in your iCloud account.";
+"Ips-J8-mzS.footerTitle" = "Você pode limpar seu histórico de reprodução e redefinir suas preferências pessoais no menu Preferências.\n\nNineAnimator nunca irá compartilhar suas informações pessoais ou histórico de reprodução para quaisquer serviços de terceiros ou sites sem o seu consentimento. No entanto, NineAnimator não foi projetado para impedir serviços (por exemplo, 9anime, MyCloud, MyAnimeList) ou seu provedor de serviços via Internet de rastrear você.\n\nCriando serviços de rastreamento de terceiros, você concorda com o NineAnimator para fazer upload do seu histórico de reprodução e progresso para apenas os serviços de terceiros que você tiver configurado.\n\nSeu histórico de reprodução e preferências podem estar armazenados em sua conta do iCloud.";
 
 /* Class = "UITableViewSection"; headerTitle = "Privacy"; ObjectID = "Ips-J8-mzS"; */
-"Ips-J8-mzS.headerTitle" = "Privacy";
+"Ips-J8-mzS.headerTitle" = "Privacidade";
 
 /* Class = "UILabel"; text = "KITSU.IO"; ObjectID = "JZU-9o-boH"; */
 "JZU-9o-boH.text" = "KITSU.IO";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co."; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.footerTitle" = "Only the playback events after you have signed in will be pushed to AniList. By default, NineAnimator uses AniList to provide content information.\n\nNineAnimator is not affiliated with AniList.co.";
+"KLV-mK-zbJ.footerTitle" = "Somente as informações de reprodução serão informadas à AniList depois de ter se logado. Por padrão, a NineAnimator usa a AniList para fornecer informações de conteúdo.\n\nNineAnimator não é afiliado a AniList.co.";
 
 /* Class = "UITableViewSection"; headerTitle = "Anilist"; ObjectID = "KLV-mK-zbJ"; */
-"KLV-mK-zbJ.headerTitle" = "Anilist";
+"KLV-mK-zbJ.headerTitle" = "AniList";
 
 /* Class = "UILabel"; text = "Picture in Picture Playback"; ObjectID = "KSq-np-Dks"; */
-"KSq-np-Dks.text" = "Picture in Picture Playback";
+"KSq-np-Dks.text" = "Reprodução Picture in Picture (PiP)";
 
 /* Class = "UILabel"; text = "Episodes"; ObjectID = "KjW-mL-37B"; */
-"KjW-mL-37B.text" = "Episodes";
+"KjW-mL-37B.text" = "Episódios";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
-"Kql-zU-bRq.text" = "Setup AniList.co";
+"Kql-zU-bRq.text" = "Configurar o AniList.co";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "LfV-dW-fu4"; */
-"LfV-dW-fu4.text" = "Credits";
+"LfV-dW-fu4.text" = "Créditos";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
-"LoF-UE-Pdv.text" = "Not Setup";
+"LoF-UE-Pdv.text" = "Não foi Configurado";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
-"Mhg-Wl-1ep.text" = "List Episodes";
+"Mhg-Wl-1ep.text" = "Lista de Episódios";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io."; ObjectID = "Mk4-hl-YHD"; */
-"Mk4-hl-YHD.footerTitle" = "Only the playback events after you have signed in will be pushed to Kitsu.\n\nNineAnimator is not affiliated with Kitsu.io.";
+"Mk4-hl-YHD.footerTitle" = "Somente as informações de reprodução depois de logado serão informadas ao Kitsu.\n\nNineAnimator não está associado ao Kitsu.io.";
 
 /* Class = "UITableViewSection"; headerTitle = "Kitsu"; ObjectID = "Mk4-hl-YHD"; */
 "Mk4-hl-YHD.headerTitle" = "Kitsu";
 
 /* Class = "UILabel"; text = "Manage Personal Information"; ObjectID = "N8M-Jf-n7k"; */
-"N8M-Jf-n7k.text" = "Manage Personal Information";
+"N8M-Jf-n7k.text" = "Gerenciar Informações Pessoais";
 
 /* Class = "UILabel"; text = "Allow NSFW Content"; ObjectID = "Nrj-vR-ORT"; */
-"Nrj-vR-ORT.text" = "Allow NSFW Content";
+"Nrj-vR-ORT.text" = "Permitir Conteúdo NSFW";
 
 /* Class = "UILabel"; text = "GitHub Repository"; ObjectID = "OUZ-2Z-Nei"; */
-"OUZ-2Z-Nei.text" = "GitHub Repository";
+"OUZ-2Z-Nei.text" = "Repositório do Github";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[0] = "Reversed"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[0]" = "Reversed";
+"QFr-Ue-S7z.segmentTitles[0]" = "Revertido";
 
 /* Class = "UISegmentedControl"; QFr-Ue-S7z.segmentTitles[1] = "Ordered"; ObjectID = "QFr-Ue-S7z"; */
-"QFr-Ue-S7z.segmentTitles[1]" = "Ordered";
+"QFr-Ue-S7z.segmentTitles[1]" = "Pedido";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "Rbz-Nj-bSj"; */
 "Rbz-Nj-bSj.text" = "Status";
 
 /* Class = "UITableViewController"; title = "About"; ObjectID = "Rvs-DG-kmr"; */
-"Rvs-DG-kmr.title" = "About";
+"Rvs-DG-kmr.title" = "Sobre";
 
 /* Class = "UITableViewSection"; footerTitle = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>."; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.footerTitle" = "Copyright © 2018-2020 Marcus Zhou. All rights reserved.\n\nNineAnimator is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.\n\nNineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n\nYou should have received a copy of the GNU General Public License along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.";
+"SRm-Su-TD8.footerTitle" = "NineAnimator é um software livre; pode redistribuí-lo e/ou modificá-lo sob os termos da GNU General Public License conforme publicada pela Free Software Foundation; tanto a versão 3 da licença, ou (conforme escolha) qualquer versão posterior. NineAnimator é distribuído com a esperança de que seja útil, mas SEM QUALQUER GARANTIA; até mesmo sem a garantia implícita de COMERCIABILIDADE ou ADEQUAÇÃO A UM DETERMINADO PROPÓSITO. Para mais detalhes, veja a GNU General Public License. Você deve ter recebido uma cópia da GNU General Public License juntamente com este programa; caso contrário, escreva para a Free Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.";
 
 /* Class = "UITableViewSection"; headerTitle = "GNU General Public License version 3"; ObjectID = "SRm-Su-TD8"; */
-"SRm-Su-TD8.headerTitle" = "GNU General Public License version 3";
+"SRm-Su-TD8.headerTitle" = "Licença Pública Geral GNU versão 3";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com."; ObjectID = "Sei-S4-MPn"; */
-"Sei-S4-MPn.footerTitle" = "Only the playback events after you have signed in will be pushed to Simkl.\n\nNineAnimator is not affiliated with simkl.com.";
+"Sei-S4-MPn.footerTitle" = "Somente as informações de reprodução depois de logado serão informadas ao Simkl.\n\nNineAnimator não está associado ao Simkl.com.";
 
 /* Class = "UITableViewSection"; headerTitle = "Simkl"; ObjectID = "Sei-S4-MPn"; */
 "Sei-S4-MPn.headerTitle" = "Simkl";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "SkT-L9-D11"; */
-"SkT-L9-D11.text" = "Not Setup";
+"SkT-L9-D11.text" = "Não foi Configurado";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
-"SsL-fL-doX.title" = "Preferences";
+"SsL-fL-doX.title" = "Preferências";
 
 /* Class = "UILabel"; text = "Retry Downloads"; ObjectID = "Tre-aJ-ohc"; */
-"Tre-aJ-ohc.text" = "Retry Downloads";
+"Tre-aJ-ohc.text" = "Tentar Downloads Novamente";
 
 /* Class = "UITableViewSection"; footerTitle = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed)."; ObjectID = "UxF-RW-Y6p"; */
-"UxF-RW-Y6p.footerTitle" = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed).";
+"UxF-RW-Y6p.footerTitle" = "Listar episódios do primeiro ao último (ordenado) ou do mais recente ao mais antigo (Revertido).";
 
 /* Class = "UILabel"; text = "Starts Playing"; ObjectID = "V91-yy-Rkb"; */
-"V91-yy-Rkb.text" = "Starts Playing";
+"V91-yy-Rkb.text" = "Iniciar Reprodução";
 
 /* Class = "UILabel"; text = "Detect Clipboard Links"; ObjectID = "VBZ-pE-vXV"; */
-"VBZ-pE-vXV.text" = "Detect Clipboard Links";
+"VBZ-pE-vXV.text" = "Detectar Links da Área de Transferência";
 
 /* Class = "UILabel"; text = "Preferred Source"; ObjectID = "W4K-f9-Rrg"; */
-"W4K-f9-Rrg.text" = "Preferred Source";
+"W4K-f9-Rrg.text" = "Fonte Preferida";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[0] = "Dark"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[0]" = "Dark";
+"WSB-go-EfB.segmentTitles[0]" = "Escuro";
 
 /* Class = "UISegmentedControl"; WSB-go-EfB.segmentTitles[1] = "Light"; ObjectID = "WSB-go-EfB"; */
-"WSB-go-EfB.segmentTitles[1]" = "Light";
+"WSB-go-EfB.segmentTitles[1]" = "Claro";
 
 /* Class = "UILabel"; text = "Appearance"; ObjectID = "WoO-zh-kDF"; */
-"WoO-zh-kDF.text" = "Appearance";
+"WoO-zh-kDF.text" = "Aparência";
 
 /* Class = "UILabel"; text = "About"; ObjectID = "Wu1-sV-neO"; */
-"Wu1-sV-neO.text" = "About";
+"Wu1-sV-neO.text" = "Sobre";
 
 /* Class = "UITableViewSection"; footerTitle = "Set appearance dynamically."; ObjectID = "ZJI-L3-7zk"; */
-"ZJI-L3-7zk.footerTitle" = "Set appearance dynamically.";
+"ZJI-L3-7zk.footerTitle" = "Definir Aparência Dinâmica.";
 
 /* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "ZJI-L3-7zk"; */
-"ZJI-L3-7zk.headerTitle" = "General";
+"ZJI-L3-7zk.headerTitle" = "Geral";
 
 /* Class = "UILabel"; text = "Show Available Streams"; ObjectID = "ZKK-PI-ugJ"; */
-"ZKK-PI-ugJ.text" = "Show Available Streams";
+"ZKK-PI-ugJ.text" = "Mostrar Streams Disponíveis";
 
 /* Class = "UITableViewSection"; footerTitle = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app."; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.footerTitle" = "NineAnimator can be set to run certain scenes when the playback starts or ends. For example, NineAnimator can dim the lights and prepare the enviorments when AirPlay starts.\n\nFor Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.";
+"ZPg-j7-wjg.footerTitle" = "NineAnimator pode ser configurado para executar certas cenas quando a reprodução começa ou termina. Por exemplo, a NineAnimator pode apagar as luzes e preparar o ambiente quando o AirPlay começar.\n\nPara o funcionamento da integração interna, pelo menos um acessório compatível com o HomeKit precisa ser configurado no app Home e pelo menos um cenário precisa estar disponível. Você pode adicionar mais cenários no app Home.";
 
 /* Class = "UITableViewSection"; headerTitle = "Home Integration"; ObjectID = "ZPg-j7-wjg"; */
-"ZPg-j7-wjg.headerTitle" = "Home Integration";
+"ZPg-j7-wjg.headerTitle" = "Integração Inicial";
 
 /* Class = "UILabel"; text = "Delete All Downloads"; ObjectID = "Zaa-23-f0r"; */
-"Zaa-23-f0r.text" = "Delete All Downloads";
+"Zaa-23-f0r.text" = "Deletar Todos Downloads";
 
 /* Class = "UILabel"; text = "Setup MyAnimeList.net"; ObjectID = "bH1-Rj-cxO"; */
-"bH1-Rj-cxO.text" = "Setup MyAnimeList.net";
+"bH1-Rj-cxO.text" = "Configurar MyAnimeList.net";
 
 /* Class = "UILabel"; text = "Send Notifications"; ObjectID = "c84-vM-Uf0"; */
-"c84-vM-Uf0.text" = "Send Notifications";
+"c84-vM-Uf0.text" = "Enviar Notificações";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "d3R-vQ-52G"; */
-"d3R-vQ-52G.text" = "Not Setup";
+"d3R-vQ-52G.text" = "Não foi Configurado";
 
 /* Class = "UILabel"; text = "Clear Shortcuts and Spotlight Items"; ObjectID = "dIG-JR-U2D"; */
-"dIG-JR-U2D.text" = "Clear Shortcuts and Spotlight Items";
+"dIG-JR-U2D.text" = "Limpar Atalhos e Itens do Spotlight";
 
 /* Class = "UITableViewSection"; footerTitle = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries."; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.footerTitle" = "Clear Cached Data will remove cached images, requests, cookies, and episode information.\n\nClear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.";
+"dNx-EX-rHK.footerTitle" = "Limpar dados em cache removerá imagens armazenadas, solicitações, cookies e informações de episódio.\n\nLimpar atalhos e itens do Spotlight irá apagar todos os atalhos do NineAnimator e entradas de pesquisa do Spotlight.";
 
 /* Class = "UITableViewSection"; headerTitle = "Data and Privacy"; ObjectID = "dNx-EX-rHK"; */
-"dNx-EX-rHK.headerTitle" = "Data and Privacy";
+"dNx-EX-rHK.headerTitle" = "Dados e Privacidade";
 
 /* Class = "UITableViewSection"; footerTitle = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released."; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.footerTitle" = "Turn on Show Available Streams to include the streaming sources that the latest episode is uploaded to in the notification.\n\nNineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.";
+"dnn-sT-oir.footerTitle" = "Ative o Mostrar Streams Disponíveis para incluir as fontes de streaming para as quais o episódio mais recente já foi lançado.\n\nNineAnimator usa a Atualização do App em segundo plano para determinar se um novo episódio de anime foi lançado.";
 
 /* Class = "UITableViewSection"; headerTitle = "Notifications and Subscriptions"; ObjectID = "dnn-sT-oir"; */
-"dnn-sT-oir.headerTitle" = "Notifications and Subscriptions";
+"dnn-sT-oir.headerTitle" = "Notificações e Inscrições";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ehk-8y-ZWC"; */
-"ehk-8y-ZWC.text" = "Push NineAnimator Updates";
+"ehk-8y-ZWC.text" = "Atualizações do NineAnimator";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
-"ejU-pt-NEy.title" = "Home";
+"ejU-pt-NEy.title" = "Início";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
-"ekC-7m-AFc.text" = "Push NineAnimator Updates";
+"ekC-7m-AFc.text" = "Atualizações do NineAnimator";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "fhT-FK-ILc"; */
 "fhT-FK-ILc.text" = "Status";
 
 /* Class = "UITableViewSection"; footerTitle = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app."; ObjectID = "fjl-9Y-6m1"; */
-"fjl-9Y-6m1.footerTitle" = "Automatically reattempt failed downloads.\n\nEnable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.\n\nRemaining disk capacity displayed in this screen may be different from the Settings app.";
+"fjl-9Y-6m1.footerTitle" = "Repetir Automaticamente Downloads que Falharam\n\nAtive Impedir a Limpeza para proteger os episódios de serem excluídos pelo sistema. O sistema tentará remover outros recursos antes de apagar os episódios baixados.\n\nA capacidade de disco restante exibida nesta tela pode ser diferente da do app Configurações.";
 
 /* Class = "UILabel"; text = "Background Playback"; ObjectID = "gAn-bf-I7y"; */
-"gAn-bf-I7y.text" = "Background Playback";
+"gAn-bf-I7y.text" = "Reprodução em Segundo Plano";
 
 /* Class = "UILabel"; text = "External Playback Only"; ObjectID = "hDj-6B-Nou"; */
-"hDj-6B-Nou.text" = "External Playback Only";
+"hDj-6B-Nou.text" = "Apenas Reprodução Externa";
 
 /* Class = "UILabel"; text = "Unsubscribe All"; ObjectID = "hGc-BW-frZ"; */
-"hGc-BW-frZ.text" = "Unsubscribe All";
+"hGc-BW-frZ.text" = "Cancelar Inscrições";
 
 /* Class = "UILabel"; text = "Delete Cached Images"; ObjectID = "hNx-wP-LZ9"; */
-"hNx-wP-LZ9.text" = "Delete Cached Images";
+"hNx-wP-LZ9.text" = "Limpar Imagens em Cache";
 
 /* Class = "UILabel"; text = "Report Issues"; ObjectID = "hZK-F2-4cA"; */
-"hZK-F2-4cA.text" = "Report Issues";
+"hZK-F2-4cA.text" = "Reportar Erros";
 
 /* Class = "UILabel"; text = "Tracking Service Name"; ObjectID = "jGy-CK-BGd"; */
-"jGy-CK-BGd.text" = "Tracking Service Name";
+"jGy-CK-BGd.text" = "Nome do Serviço de Rastreamento";
 
 /* Class = "UILabel"; text = "Clear Recently Watched"; ObjectID = "jcd-Wl-m61"; */
-"jcd-Wl-m61.text" = "Clear Recently Watched";
+"jcd-Wl-m61.text" = "Limpar Assistidos Recentemente";
 
 /* Class = "UITableViewSection"; headerTitle = "Storage"; ObjectID = "jtv-aO-g6G"; */
-"jtv-aO-g6G.headerTitle" = "Storage";
+"jtv-aO-g6G.headerTitle" = "Armazenamento";
 
 /* Class = "UITableViewSection"; footerTitle = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net."; ObjectID = "k58-8v-meo"; */
-"k58-8v-meo.footerTitle" = "Only the playback events after you have signed in will be pushed to MyAnimeList.\n\nMyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.\n\nNineAnimator is not affiliated with MyAnimeList.net.";
+"k58-8v-meo.footerTitle" = "Somente as informações de reprodução serão compartilhadas com o MyAnimeList após o login.\n\nMyAnimeList.net é uma propriedade do MyAnimeList, LLC. ©2015 Todos os direitos reservados.\n\nNineAnimator não é associado a MyAnimeList.net.";
 
 /* Class = "UITableViewSection"; headerTitle = "MyAnimeList"; ObjectID = "k58-8v-meo"; */
 "k58-8v-meo.headerTitle" = "MyAnimeList";
 
 /* Class = "UILabel"; text = "Show Episode Details"; ObjectID = "lOR-rE-gEZ"; */
-"lOR-rE-gEZ.text" = "Show Episode Details";
+"lOR-rE-gEZ.text" = "Mostrar Detalhes do Episódio";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "lcW-Lk-ZTP"; */
-"lcW-Lk-ZTP.text" = "Updating...";
+"lcW-Lk-ZTP.text" = "Atualizando...";
 
 /* Class = "UILabel"; text = "Downloads & Storage"; ObjectID = "m9r-kn-kk7"; */
-"m9r-kn-kk7.text" = "Downloads & Storage";
+"m9r-kn-kk7.text" = "Downloads e Armazenamento";
 
 /* Class = "UILabel"; text = "MyAnimeList.net"; ObjectID = "oJY-Uv-hLj"; */
 "oJY-Uv-hLj.text" = "MyAnimeList.net";
 
 /* Class = "UILabel"; text = "License"; ObjectID = "p2c-ro-yj3"; */
-"p2c-ro-yj3.text" = "License";
+"p2c-ro-yj3.text" = "Licença";
 
 /* Class = "UITableViewController"; title = "Tracking Services"; ObjectID = "pGu-In-KWa"; */
-"pGu-In-KWa.title" = "Tracking Services";
+"pGu-In-KWa.title" = "Serviços de Rastreamento";
 
 /* Class = "UILabel"; text = "Ends Playing"; ObjectID = "q0P-aj-Wkc"; */
-"q0P-aj-Wkc.text" = "Ends Playing";
+"q0P-aj-Wkc.text" = "Terminar a Reprodução";
 
 /* Class = "UILabel"; text = "Setup Kitsu.io"; ObjectID = "qV5-lV-yLf"; */
-"qV5-lV-yLf.text" = "Setup Kitsu.io";
+"qV5-lV-yLf.text" = "Configurar Kitsu.io";
 
 /* Class = "UILabel"; text = "SIMKL.COM"; ObjectID = "qwG-xM-EqT"; */
 "qwG-xM-EqT.text" = "SIMKL.COM";
 
 /* Class = "UILabel"; text = "Updating..."; ObjectID = "uIR-9j-Tzk"; */
-"uIR-9j-Tzk.text" = "Updating...";
+"uIR-9j-Tzk.text" = "Atualizando...";
 
 /* Class = "UILabel"; text = "Status"; ObjectID = "uZi-hX-u8x"; */
 "uZi-hX-u8x.text" = "Status";
 
 /* Class = "UILabel"; text = "Setup Simkl.com"; ObjectID = "xLV-v6-fh9"; */
-"xLV-v6-fh9.text" = "Setup Simkl.com";
+"xLV-v6-fh9.text" = "Configurar Simkl.com";
 
 /* Class = "UILabel"; text = "Dynamic Appearance"; ObjectID = "xP9-AS-NPt"; */
-"xP9-AS-NPt.text" = "Dynamic Appearance";
+"xP9-AS-NPt.text" = "Aparência Dinâmica";
 
 /* Class = "UILabel"; text = "Images"; ObjectID = "xUc-BH-HNC"; */
-"xUc-BH-HNC.text" = "Images";
+"xUc-BH-HNC.text" = "Imagens";
 
 /* Class = "UILabel"; text = "Build"; ObjectID = "xjp-AG-MX5"; */
 "xjp-AG-MX5.text" = "Build";
 
 /* Class = "UILabel"; text = "Discuss on Discord"; ObjectID = "zQD-NZ-dqC"; */
-"zQD-NZ-dqC.text" = "Discuss on Discord";
+"zQD-NZ-dqC.text" = "Conversar no Discord";
 
 /* Class = "UILabel"; text = "Reset"; ObjectID = "zWP-wL-Vag"; */
-"zWP-wL-Vag.text" = "Reset";
+"zWP-wL-Vag.text" = "Redefinir";
