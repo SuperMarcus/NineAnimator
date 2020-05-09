@@ -31,28 +31,17 @@ extension NASourceNineAnime {
             relativeTo: link.parent.link
         ) ?? link.parent.link
         let infoPath = "/ajax/episode/info"
-        let resolveParametersPromise: NineAnimatorPromise<[URLQueryItem]>
         
-        if anime.servers[link.server] == "MyCloud" {
-            // Additional key required for mycloud
-            resolveParametersPromise = MyCloudParser.retrieveWindowKey(
-                with: browseSession,
-                referer: link.parent.link.appendingPathComponent(String(episodePath))
-            ) .then {
-                [
-                    "id": dataIdentifier,
-                    "server": link.server,
-                    "mcloud": $0
-                ]
-            }
-        } else {
-            resolveParametersPromise = .success([
+        return MyCloudParser.retrieveWindowKey(
+            with: browseSession,
+            referer: link.parent.link.appendingPathComponent(String(episodePath))
+        ) .then {
+            [
                 "id": dataIdentifier,
-                "server": link.server
-            ])
-        }
-        
-        return resolveParametersPromise.thenPromise {
+                "server": link.server,
+                "mcloud": $0
+            ]
+        } .thenPromise {
             requestParameters in NineAnimatorPromise {
                 self.signedRequest(
                     ajax: infoPath,
