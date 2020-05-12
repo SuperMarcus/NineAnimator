@@ -27,7 +27,7 @@ class Mp4UploadParser: VideoProviderParser {
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "player\\.src\\(\"([^\"]+)",
+        pattern: "src:\"([^\"]+)",
         options: []
     )
     
