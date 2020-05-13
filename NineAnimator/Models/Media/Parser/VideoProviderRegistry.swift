@@ -45,6 +45,7 @@ class VideoProviderRegistry {
         defaultProvider.register(GoUnlimitedParser(), forServer: "GoUnlimited")
         defaultProvider.register(MixdropParser(), forServer: "Mixdrop")
         defaultProvider.register(CloudNineParser(), forServer: "Cloud9")
+        defaultProvider.register(StreamTapeParser(), forServer: "Streamtape")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
