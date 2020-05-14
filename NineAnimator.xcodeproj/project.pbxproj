@@ -379,6 +379,7 @@
 		2CFE2DA5227D441700030B1F /* DictionaryErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D9F227D441700030B1F /* DictionaryErrors.swift */; };
 		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
+		6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520A110246B6F4C001D9634 /* StreamTapeParser.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
 		65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E1D9BB235FC12200234409 /* VeryStreamParser.swift */; };
@@ -862,6 +863,7 @@
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
 		52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectRows.swift"; sourceTree = "<group>"; };
 		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		6520A110246B6F4C001D9634 /* StreamTapeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamTapeParser.swift; sourceTree = "<group>"; };
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
 		65E1D9BB235FC12200234409 /* VeryStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryStreamParser.swift; sourceTree = "<group>"; };
@@ -1805,6 +1807,7 @@
 				2C8E962623B9EDED00415F92 /* GoUnlimitedParser.swift */,
 				65D061052445B31000E866DE /* MixdropParser.swift */,
 				2C96DADD24536663007A29B0 /* CloudNineParser.swift */,
+				6520A110246B6F4C001D9634 /* StreamTapeParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2550,6 +2553,7 @@
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
 				2C1C71832219975A00760A69 /* Promise+Hashable.swift in Sources */,
 				2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */,
+				6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */,
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
