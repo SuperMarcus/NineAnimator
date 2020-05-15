@@ -20,7 +20,7 @@
 "JGW-3m-qyq.text" = "Clair";
 
 /* Class = "UILabel"; text = "Login to your Anilist, Kitsu, or MyAnimeList accounts in the Preferences menu. Join our Discord community to receive updates."; ObjectID = "MDo-yQ-irq"; */
-"MDo-yQ-irq.text" = "Connectez-vous à vos comptes Anilist, Kitsu ou MyAnimeList dans le menu Préférences. Rejoignez notre communauté Discord pour recevoir des nouvelles.";
+"MDo-yQ-irq.text" = "Connectez-vous à vos comptes Anilist, Kitsu ou MyAnimeList dans le menu Préférences. Rejoignez notre communauté Discord pour recevoir des nouvelles de l'application.";
 
 /* Class = "UILabel"; text = "NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites."; ObjectID = "MRT-ib-AcS"; */
 "MRT-ib-AcS.text" = "NineAnimator n'est lié à aucun des sites Web énumérés ci-dessus. Vos informations personnelles et votre historique ne sont pas partagées avec les sites Web ci-dessus.";
