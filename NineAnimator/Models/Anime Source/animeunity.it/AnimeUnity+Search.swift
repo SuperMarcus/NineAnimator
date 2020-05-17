@@ -50,20 +50,9 @@ extension NASourceAnimeUnity {
                     do {
                         let bowl = try SwiftSoup.parse(response.debugDescription)
                         let entries = try bowl.select("div.row>div.col-lg-4")
-                        self._results_not = try entries.compactMap {
+                        self._results = try entries.compactMap {
                             entry -> AnimeLink? in
                             let animeTitle = try entry.select("div>h6.card-title>b")
-                            /*
-                             detect the "realease year" and save it into Year array
-                            var year_ex = 0
-                            let anno2 = try entry.select("div.card-block>p.card-text").text()
-                            if(anno2.contains("Anno di uscita:")){
-                                var anno = anno2.components(separatedBy: "Anno di uscita:")
-                                year_ex = Int(anno[1]) ?? 0
-                                
-                            }
-                            self.Year.append(year_ex)
- */
                             let title = try animeTitle.text()
                             if title.isEmpty { return nil }
                             let animeLinkPath = try entry.select("div>a")
@@ -81,9 +70,6 @@ extension NASourceAnimeUnity {
                                 image: coverImage,
                                 source: self.parent
                             )
-                        }
-                        self._results = self._results_not?.sorted {
-                            $0.link.absoluteString < $1.link.absoluteString
                         }
                         self.delegate?.pageIncoming(0, from: self)
                     } catch {
