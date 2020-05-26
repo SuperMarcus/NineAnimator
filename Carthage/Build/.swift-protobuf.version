@@ -1,10 +1,10 @@
 {
-  "commitish" : "1.8.0",
+  "commitish" : "1.9.0",
   "iOS" : [
     {
       "name" : "SwiftProtobuf",
-      "hash" : "553563e14f65c6afa7732a4180af68a2e5dfa1f67676102863ee760ed9ee3d9e",
-      "swiftToolchainVersion" : "5.2.2 (swiftlang-1103.0.32.6 clang-1103.0.32.51)"
+      "hash" : "0d22a4a65ef16fb181a7d9d60571c422a713b34e433b5dc4b2825a3e6c277b53",
+      "swiftToolchainVersion" : "5.2.4 (swiftlang-1103.0.32.9 clang-1103.0.32.53)"
     }
   ]
 }

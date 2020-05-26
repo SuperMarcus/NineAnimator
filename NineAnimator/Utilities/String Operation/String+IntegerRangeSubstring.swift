@@ -38,7 +38,11 @@ extension String {
     }
     
     subscript (_ matchResult: NSTextCheckingResult, at group: Int) -> String {
-        self[matchResult.range(at: group)]
+        let range = matchResult.range(at: group)
+        if range.lowerBound == NSNotFound && range.length == 0 {
+            return ""
+        }
+        return self[range]
     }
     
     subscript (range: PartialRangeFrom<Int>) -> String {
