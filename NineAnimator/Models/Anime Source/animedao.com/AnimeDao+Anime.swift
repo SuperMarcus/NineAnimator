@@ -52,7 +52,7 @@ extension NASourceAnimeDao {
             )
             
             // Retrieve Episodes
-            let episodeContainers = try bowl.select("#eps div.list-group a.animeinfo-content")
+            let episodeContainers = try bowl.select("#eps > div > a")
             let episodeList = try episodeContainers.reduce(into: [
                 (
                     path: String,
@@ -64,8 +64,8 @@ extension NASourceAnimeDao {
                 )
             ]()) { results, current in
                 let path = try current.attr("href")
-                let airDate = try current.select("p.pull-right").first()?.ownText()
-                let nameRaw = try current.select("p.list-group-item-heading>b")
+                let airDate = try current.select("span.pull-right").first()?.ownText()
+                let nameRaw = try current.select("div.anime-title")
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 let name: String = {
@@ -89,7 +89,7 @@ extension NASourceAnimeDao {
                 
                 var fullName: String?
                 
-                if let episodeNameContainer = try current.select("p.list-group-item-text").first() {
+                if let episodeNameContainer = try current.select("span.latestanime-subtitle").first() {
                     fullName = episodeNameContainer.ownText()
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                 }
