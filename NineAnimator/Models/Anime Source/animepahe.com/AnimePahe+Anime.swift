@@ -36,7 +36,7 @@ extension NASourceAnimePahe {
             let bowl = try SwiftSoup.parse(responseContent)
             
             // Find the anime identifier with a regex
-            let animeIdentifierRegex = try NSRegularExpression(pattern: "id=(\\d+)", options: [ .caseInsensitive ])
+            let animeIdentifierRegex = try NSRegularExpression(pattern: "anime-(\\d+)", options: [ .caseInsensitive ])
             let animeIdentifier = try (animeIdentifierRegex.firstMatch(in: responseContent)?.firstMatchingGroup).tryUnwrap(.responseError("Unable to find the matching anime identifier on animepahe.com"))
             
             // Find the synopsis in the container
