@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help us improve
+about: Create a report to help us improve. Please read and edit the contents of this issue
 title: "[BUG] Replace with Description"
 labels: bug
 assignees: ''

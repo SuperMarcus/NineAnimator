@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea for this project
+about: Suggest an idea for this project. Please read and edit the contents of this issue
 title: "[Feature Request] Replace with Description"
 labels: enhancement
 assignees: ''
