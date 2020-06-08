@@ -7,23 +7,26 @@ assignees: ''
 
 ---
 
+**STOP!!** Before submitting this bug report, make sure you have filled out the information below and renamed the title of this issue (ex. `[BUG] UrlError when trying to stream an episode on 9ani.app`). The information you provide helps us diagnose the problem and organize our issue tracker.
+
 **Describe the bug**
-A clear and concise description of what the bug is.
+Replace this line with a clear and concise description of what the bug is.
 
 **To Reproduce**
-Steps to reproduce the behavior:
+Replace this with the steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
 4. See error
 
 **Expected behavior**
-A clear and concise description of what you expected to happen.
+Replace this line with a clear and concise description of what you expected to happen.
 
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
-**Device (please complete the following information):**
+**Device:**
+Replace the following with the device on which you're experiencing this issue.
  - Device: [e.g. iPhone Xs Max]
  - OS: [e.g. iOS 13.3]
  - Version: [e.g. v1.2-3 or commit hash]

@@ -7,6 +7,8 @@ assignees: ''
 
 ---
 
+**STOP!!** Before submitting this feature request, make sure you have filled out the information below and renamed the title of this issue (ex. `[Feature Request] Please add 9ani.app to NineAnimator`).
+
 **Is your feature request related to a problem? Please describe.**
 A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
 
