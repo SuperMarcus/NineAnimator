@@ -115,9 +115,20 @@ class BaseSource {
         }
     }
     
-    func request(browse url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
+    func request(browse url: URL,
+                 method: HTTPMethod = .get,
+                 headers: [String: String],
+                 parameters: Parameters? = nil,
+                 encoding: ParameterEncoding = URLEncoding.default,
+                 completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
         applyMiddlewares(
-            to: browseSession.request(url, headers: HTTPHeaders(headers))
+            to: browseSession.request(
+                url,
+                method: method,
+                parameters: parameters,
+                encoding: encoding,
+                headers: HTTPHeaders(headers)
+            )
         ).responseString {
             switch $0.result {
             case .failure(let error):

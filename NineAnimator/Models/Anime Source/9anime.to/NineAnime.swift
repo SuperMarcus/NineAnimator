@@ -70,11 +70,20 @@ class NASourceNineAnime: BaseSource, Source {
     
     override func request(
             browse url: URL,
+            method: HTTPMethod = .get,
             headers: [String: String],
+            parameters: Parameters? = nil,
+            encoding: ParameterEncoding = URLEncoding.default,
             completion handler: @escaping NineAnimatorCallback<String>
         ) -> NineAnimatorAsyncTask? {
         let task = AsyncTaskContainer()
-        task += super.request(browse: _process(url: url), headers: headers) {
+        task += super.request(
+            browse: _process(url: url),
+            method: method,
+            headers: headers,
+            parameters: parameters,
+            encoding: encoding
+        ) {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
             if let value = value { return handler(value, nil) }

@@ -41,8 +41,12 @@ extension NASourceFourAnime {
         func more() {
             if performingTask == nil {
                 performingTask = parent.request(
-                    browsePath: "/",
-                    query: [ "s": title ]
+                    browseUrl: self.encodedW3CQueryUrl,
+                    method: .post,
+                    parameters: [
+                        "asl_active": "1",
+                        "p_asl_data": "qtranslate_lang=0&set_intitle=None&customset%5B%5D=anime"
+                    ]
                 ) .then {
                     [parent] responseContent -> [AnimeLink]? in
                     let bowl = try SwiftSoup.parse(responseContent)
@@ -90,6 +94,25 @@ extension NASourceFourAnime {
                     self.delegate?.pageIncoming(0, from: self)
                 }
             }
+        }
+        
+        private var encodedW3CQueryUrl: URL {
+            guard var urlBuilder = URLComponents(
+                    url: self.parent.endpointURL,
+                    resolvingAgainstBaseURL: false
+                ) else { return self.parent.endpointURL }
+            
+            var allowedCharacters = CharacterSet.urlQueryAllowed
+            allowedCharacters.remove("+")
+            
+            let encodedSearchKeywords = (self.title.addingPercentEncoding(
+                withAllowedCharacters: allowedCharacters
+            ) ?? "").replacingOccurrences(of: "%20", with: "+")
+            
+            urlBuilder.path = "/"
+            urlBuilder.percentEncodedQuery = "s=" + encodedSearchKeywords
+            
+            return urlBuilder.url ?? self.parent.endpointURL
         }
         
         init(_ query: String, withParent parent: NASourceFourAnime) {

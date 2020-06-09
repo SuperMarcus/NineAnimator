@@ -24,12 +24,19 @@ import Foundation
 extension PromiseSource where Self: BaseSource {
     /// Request a string content with URL using the browsing URLSession
     func request(browseUrl: URL,
+                 method: HTTPMethod = .get,
                  query: [String: CustomStringConvertible] = [:],
-                 headers: [String: String] = [:]) -> NineAnimatorPromise<String> {
+                 headers: [String: String] = [:],
+                 parameters: Parameters? = nil,
+                 encoding: ParameterEncoding = URLEncoding.default
+    ) -> NineAnimatorPromise<String> {
         NineAnimatorPromise {
             callback in self.request(
                 browse: self.assembleQuery(query, for: browseUrl),
+                method: method,
                 headers: headers,
+                parameters: parameters,
+                encoding: encoding,
                 completion: callback
             )
         }
