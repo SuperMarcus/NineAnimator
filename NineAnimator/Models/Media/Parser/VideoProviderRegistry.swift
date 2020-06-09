@@ -46,6 +46,7 @@ class VideoProviderRegistry {
         defaultProvider.register(MixdropParser(), forServer: "Mixdrop")
         defaultProvider.register(CloudNineParser(), forServer: "Cloud9")
         defaultProvider.register(StreamTapeParser(), forServer: "Streamtape")
+        defaultProvider.register(EasyLoadParser(), forServer: "Easyload")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
