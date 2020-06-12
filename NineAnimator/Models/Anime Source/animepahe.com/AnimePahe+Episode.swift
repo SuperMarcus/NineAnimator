@@ -32,12 +32,12 @@ extension NASourceAnimePahe {
     // Episode fetching Embed response
     fileprivate struct EmbedResponse: Codable {
         // response["data"]["<identifier>"]["<definition>"] => EmbedStreamingSourceItem
-        var data: [String: [String: EmbedStreamingSourceItem]]
+        var data: [[String: EmbedStreamingSourceItem]]
     }
     
     // An embed item
     fileprivate struct EmbedStreamingSourceItem: Codable {
-        var url: String
+        var kwik: String
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -75,12 +75,14 @@ extension NASourceAnimePahe {
             ) .then { try DictionaryDecoder().decode(EmbedResponse.self, from: $0) }
         } .then {
             embed in
-            let allDefinitions = Dictionary(embed.data.flatMap { $1 }) { $1 }
+            let allDefinitions = Dictionary(embed.data.flatMap {
+                $0.map { $0 }
+            }) { $1 }
             
             // Get the highest definition item
             let selectedItem = try (allDefinitions["1080"] ?? allDefinitions["1080p"] ?? allDefinitions["720"] ?? allDefinitions["720p"] ?? allDefinitions.map { $0.value }.last)
                 .tryUnwrap(.responseError("No streaming source found for this episode"))
-            let targetUrl = try URL(string: selectedItem.url).tryUnwrap(.urlError)
+            let targetUrl = try URL(string: selectedItem.kwik).tryUnwrap(.urlError)
             
             // Construct the episode object
             return Episode(
