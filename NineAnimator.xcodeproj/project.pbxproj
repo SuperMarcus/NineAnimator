@@ -379,6 +379,7 @@
 		2CFE2DA5227D441700030B1F /* DictionaryErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CFE2D9F227D441700030B1F /* DictionaryErrors.swift */; };
 		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
+		6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */; };
 		6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520A110246B6F4C001D9634 /* StreamTapeParser.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
@@ -863,6 +864,7 @@
 		526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AVPlayerItem+ProviderParsers.swift"; sourceTree = "<group>"; };
 		52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectRows.swift"; sourceTree = "<group>"; };
 		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
+		6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLoadParser.swift; sourceTree = "<group>"; };
 		6520A110246B6F4C001D9634 /* StreamTapeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamTapeParser.swift; sourceTree = "<group>"; };
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
@@ -1808,6 +1810,7 @@
 				65D061052445B31000E866DE /* MixdropParser.swift */,
 				2C96DADD24536663007A29B0 /* CloudNineParser.swift */,
 				6520A110246B6F4C001D9634 /* StreamTapeParser.swift */,
+				6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2272,6 +2275,7 @@
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
 				2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
+				6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
