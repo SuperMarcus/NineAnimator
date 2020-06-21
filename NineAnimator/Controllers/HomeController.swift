@@ -160,7 +160,7 @@ extension HomeController {
     
     func name(forScene uuid: UUID) -> String? {
 #if !targetEnvironment(macCatalyst)
-        actionSet(for: uuid)?.name
+        return actionSet(for: uuid)?.name
 #else
         return nil
 #endif
