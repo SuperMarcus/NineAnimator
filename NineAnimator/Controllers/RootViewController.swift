@@ -119,6 +119,7 @@ extension RootViewController {
         // Set Source view
         if let popover = activityViewController.popoverPresentationController {
             popover.sourceView = sourceView
+            popover.sourceRect = sourceView.bounds
         }
         
         // Present the activity controller
