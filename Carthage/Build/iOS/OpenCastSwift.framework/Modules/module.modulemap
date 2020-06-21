@@ -1,4 +1,0 @@
-framework module OpenCastSwift {
-  header "OpenCastSwift-Swift.h"
-  requires objc
-}

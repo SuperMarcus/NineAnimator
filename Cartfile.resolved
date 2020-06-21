@@ -1,7 +1,0 @@
-github "Alamofire/Alamofire" "5.2.1"
-github "SuperMarcus/OpenCastSwift" "d49b0be48aa41fad054c97d5094caebc6ec9befa"
-github "SwiftyJSON/SwiftyJSON" "5.0.0"
-github "apple/swift-protobuf" "1.9.0"
-github "marcosgriselli/ViewAnimator" "2.7.0"
-github "onevcat/Kingfisher" "5.14.0"
-github "scinfu/SwiftSoup" "2.3.2"
