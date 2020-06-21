@@ -28,6 +28,8 @@
 		2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0E75592262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift */; };
 		2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */; };
 		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
+		2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107710249EFBFB007B82D9 /* Fox@3x.png */; };
+		2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107711249EFBFC007B82D9 /* Fox@2x.png */; };
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
 		2C12EDD321BDDF320064D2BD /* SwiftProtobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */; };
 		2C12EDD421BDDF320064D2BD /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */; };
@@ -452,6 +454,8 @@
 		2C0E75592262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "QuickActionsTableViewCell+Cell.swift"; sourceTree = "<group>"; };
 		2C0FA3B6226E340800108D27 /* ServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
+		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
+		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
 		2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMedia.swift; sourceTree = "<group>"; };
 		2C12EDCE21BDDF320064D2BD /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
@@ -1608,6 +1612,8 @@
 		2C9383C921FBE774008C0D01 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
+				2C107711249EFBFC007B82D9 /* Fox@2x.png */,
+				2C107710249EFBFB007B82D9 /* Fox@3x.png */,
 				2C73A3A521FB72230080A8B2 /* Theme.swift */,
 				2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */,
 				2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */,
@@ -2121,6 +2127,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */,
+				2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */,
 				2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */,
 				2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */,
 				2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */,

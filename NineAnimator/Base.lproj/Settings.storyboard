@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -1918,7 +1918,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                             <tableViewSection headerTitle="About NineAnimator" id="EzJ-Ri-uNU">
                                 <string key="footerTitle">NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="about.version" textLabel="A3J-Ya-mRo" detailTextLabel="EeO-5U-kPF" style="IBUITableViewCellStyleValue1" id="ZXX-84-uGw">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="about.version" textLabel="A3J-Ya-mRo" detailTextLabel="EeO-5U-kPF" style="IBUITableViewCellStyleValue1" id="ZXX-84-uGw">
                                         <rect key="frame" x="16" y="55.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZXX-84-uGw" id="GfS-oZ-qOh">

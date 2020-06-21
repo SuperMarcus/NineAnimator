@@ -91,6 +91,28 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>Fox</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Fox</string>
+				</array>
+			</dict>
+		</dict>
+	</dict>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

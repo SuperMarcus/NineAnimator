@@ -33,6 +33,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     ]
     
     private let discordInvitationUrl = URL(string: "https://discord.gg/dzTVzeW")!
+    private var aboutTappingCounter = 0
     
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var buildNumberLabel: UILabel!
@@ -53,6 +54,12 @@ class AboutNineAnimatorTableViewController: UITableViewController {
             case "about.discord":
                 // Open discord invitation url
                 UIApplication.shared.open(discordInvitationUrl)
+            case "about.version":
+                aboutTappingCounter += 1
+                if aboutTappingCounter >= 10 {
+                    aboutTappingCounter = 5
+                    doMagic()
+                }
             default:
                 Log.error("[AboutNineAnimatorTableViewController] Unknwon cell with identitier %@ selected.", cell.reuseIdentifier ?? "<Unknown>")
             }
@@ -71,5 +78,17 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         // Update version information
         versionLabel.text = NineAnimator.default.version
         buildNumberLabel.text = "\(NineAnimator.default.buildNumber)"
+    }
+    
+    func doMagic() {
+        guard UIApplication.shared.supportsAlternateIcons else {
+            return Log.error("[AboutNineAnimatorTableViewController] Encountered an error: unsupported actions")
+        }
+        
+        if case .some = UIApplication.shared.alternateIconName {
+            UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
+        } else {
+            UIApplication.shared.setAlternateIconName("Fox", completionHandler: nil)
+        }
     }
 }
