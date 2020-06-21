@@ -282,7 +282,6 @@
 		2CA1DD4321E18FDB009241CB /* NineAnime+LinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4221E18FDB009241CB /* NineAnime+LinkRetriver.swift */; };
 		2CA1DD4521E1B765009241CB /* NineAnime+StreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4421E1B765009241CB /* NineAnime+StreamParser.swift */; };
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
-		2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; };
 		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
 		2CA3E275239C4F5300AAC4D1 /* AUEngineParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E274239C4F5300AAC4D1 /* AUEngineParser.swift */; };
 		2CA3E277239C4FA300AAC4D1 /* FastStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA3E276239C4FA300AAC4D1 /* FastStreamParser.swift */; };
@@ -309,6 +308,7 @@
 		2CB67048249FCA24006C11A9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB67047249FCA24006C11A9 /* SwiftSoup */; };
 		2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB6704A249FCA48006C11A9 /* OpenCastSwift */; };
 		2CB6704E249FCA65006C11A9 /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB6704D249FCA65006C11A9 /* ViewAnimator */; };
+		2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; platformFilter = ios; };
 		2CB9919421FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */; };
 		2CC2F5D2226F277B00A62A76 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */; };
 		2CCBC5C024041E2C0013C4FE /* Alamofire+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCBC5BF24041E2C0013C4FE /* Alamofire+Legacy.swift */; };
@@ -898,11 +898,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CB67042249FC9E3006C11A9 /* Kingfisher in Frameworks */,
 				2CB6704E249FCA65006C11A9 /* ViewAnimator in Frameworks */,
 				2CB67045249FCA06006C11A9 /* Alamofire in Frameworks */,
 				2CB67048249FCA24006C11A9 /* SwiftSoup in Frameworks */,
-				2CA1DD5E21E2B423009241CB /* HomeKit.framework in Frameworks */,
 				2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2933,10 +2933,6 @@
 				CURRENT_PROJECT_VERSION = 11;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = NineAnimator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -2963,10 +2959,6 @@
 				CURRENT_PROJECT_VERSION = 11;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = NineAnimator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (

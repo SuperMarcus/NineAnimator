@@ -18,7 +18,10 @@
 //
 
 import Foundation
+
+#if !targetEnvironment(macCatalyst)
 import HomeKit
+#endif
 
 /**
  Manages HomeKit integration
@@ -27,7 +30,7 @@ import HomeKit
  HomeController operates by tracking the updating playback
  progress notification.
  */
-class HomeController: NSObject, HMHomeManagerDelegate {
+class HomeController: NSObject {
     static let shared = HomeController()
     
     private var _isReady: Bool = false
@@ -37,20 +40,29 @@ class HomeController: NSObject, HMHomeManagerDelegate {
     private var _currentAuthorizationStatus: Any?
     
     var isReady: Bool {
+#if !targetEnvironment(macCatalyst)
         primeIfNeeded()
         return _isReady
+#else
+        return false
+#endif
     }
     
     /// Check if the user has denied NineAnimator's access to HomeKit data
     var isPermissionDenied: Bool {
+#if !targetEnvironment(macCatalyst)
         if #available(iOS 13.0, *) {
             // Use cached permission status to check if the permission is denied
             if let status = _currentAuthorizationStatus as? HMHomeManagerAuthorizationStatus {
                 return status.contains(.determined) && !status.contains(.authorized)
             } else { return false }
         } else { return false }
+#else
+        return true
+#endif
     }
     
+#if !targetEnvironment(macCatalyst)
     private lazy var manager: HMHomeManager = {
         // Creating this object is known to trigger main thread checker
         // But it doesn't seem to affect anything
@@ -59,44 +71,20 @@ class HomeController: NSObject, HMHomeManagerDelegate {
         manager.delegate = self
         return manager
     }()
+#endif
     
     override init() {
         super.init()
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onPlaybackStart(notification:)),
-            name: .playbackDidStart,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onPlaybackWillEnd(notification:)),
-            name: .playbackWillEnd,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onExternalPlaybackDidStart(notification:)),
-            name: .externalPlaybackDidStart,
-            object: nil
-        )
-        
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(onExternalPlaybackWillEnd(notification:)),
-            name: .externalPlaybackWillEnd,
-            object: nil
-        )
+        self.registerNotificationHandlers()
     }
     
     deinit { NotificationCenter.default.removeObserver(self) }
 }
 
+#if !targetEnvironment(macCatalyst)
+
 // MARK: - HMHomeManagerDelegate
-extension HomeController {
+extension HomeController: HMHomeManagerDelegate {
     func homeManagerDidUpdateHomes(_ manager: HMHomeManager) {
         _isReady = true
         
@@ -153,27 +141,37 @@ extension HomeController {
     }
 }
 
+#endif
+
 // MARK: - Accessing HomeController
 extension HomeController {
     var availableScenes: [UUID: String] {
         var scenes = [UUID: String]()
+#if !targetEnvironment(macCatalyst)
         for home in manager.homes {
             for scene in home.actionSets {
                 scenes[scene.uniqueIdentifier] = manager.homes.count > 1 ?
                     "\(scene.name) (\(home.name))" : scene.name
             }
         }
+#endif
         return scenes
     }
     
     func name(forScene uuid: UUID) -> String? {
+#if !targetEnvironment(macCatalyst)
         actionSet(for: uuid)?.name
+#else
+        return nil
+#endif
     }
     
+#if !targetEnvironment(macCatalyst)
     func actionSet(for uuid: UUID) -> HMActionSet? {
         let scenes = manager.homes.flatMap { $0.actionSets }
         return scenes.first { $0.uniqueIdentifier == uuid }
     }
+#endif
     
     /**
      This initialize the HMHomeManager if at least one scene is set to run
@@ -191,14 +189,19 @@ extension HomeController {
      Initialize the HMHomeManager
      */
     func prime() {
+#if !targetEnvironment(macCatalyst)
         // Init lazy variable
         _ = self.manager
         
         if #available(iOS 13.0, *) {
             updateAuthorizationStatus()
         }
+#else
+        Log.info("[HomeController] Not priming home manager because HomeKit is not available on macCatalyst.")
+#endif
     }
     
+#if !targetEnvironment(macCatalyst)
     @available(iOS 13.0, *)
     private func updateAuthorizationStatus() {
         let oldStatus = _currentAuthorizationStatus as? HMHomeManagerAuthorizationStatus
@@ -216,12 +219,46 @@ extension HomeController {
             )
         }
     }
+#endif
+    
+    private func registerNotificationHandlers() {
+#if !targetEnvironment(macCatalyst)
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackStart(notification:)),
+            name: .playbackDidStart,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackWillEnd(notification:)),
+            name: .playbackWillEnd,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onExternalPlaybackDidStart(notification:)),
+            name: .externalPlaybackDidStart,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onExternalPlaybackWillEnd(notification:)),
+            name: .externalPlaybackWillEnd,
+            object: nil
+        )
+#endif
+    }
 }
 
 // MARK: - Run Scenes
 extension HomeController {
     func run(scene uuid: UUID) {
-        Log.info("Searching HomeKit scene with UUID '%@'", uuid.uuidString)
+#if !targetEnvironment(macCatalyst)
+        Log.info("[HomeController] Searching HomeKit scene with UUID '%@'", uuid.uuidString)
         for home in manager.homes {
             for scene in home.actionSets where scene.uniqueIdentifier == uuid {
                 Log.info("Executing HomeKit action set '%@', total actions %@", scene.name, scene.actions.count)
@@ -230,5 +267,8 @@ extension HomeController {
                 }
             }
         }
+#else
+        Log.info("[HomeController] Not running homekit scene because it's not supported on macCatalyst.")
+#endif
     }
 }
