@@ -32,12 +32,27 @@ extension NASourceFourAnime {
             let videoElement = try bowl.select("video")
             let videoSource: URL
             
+            let jwPlayerSetupMatchingExpr = try NSRegularExpression(
+                pattern: "file:\\s*\"([^\"]+)",
+                options: []
+            )
+            
             // If a valid url was found from the page's video tag
             if !videoElement.isEmpty(),
                 let videoUrl = URL(string: try videoElement.attr("src")) {
                 // Video element was found, using the presented one
                 videoSource = videoUrl
                 Log.info("[NASourceFourAnime] Resource found from page source.")
+            } else if let jwPlayerUrlString = jwPlayerSetupMatchingExpr
+                    .firstMatch(in: episodePageContent)?
+                    .firstMatchingGroup,
+                let jwPlayerUrl = URL(
+                    string: jwPlayerUrlString,
+                    relativeTo: link.parent.link
+                ) {
+                // Latest 4anime page appears to be including the jwplayer configs in plaintext
+                videoSource = jwPlayerUrl
+                Log.info("[NASourceFourAnime] Resource found from packed scripts (plain.jwplayer.setup).")
             } else {
                 // If no video element is present, try decoding the video asset url
                 // from the PACKER script
@@ -46,10 +61,6 @@ extension NASourceFourAnime {
                 // Two variants found from 4anime's site
                 let sourceMatchingExpr = try NSRegularExpression(
                     pattern: "src=\\\\*\"([^\"\\\\]+)",
-                    options: []
-                )
-                let jwPlayerSetupMatchingExpr = try NSRegularExpression(
-                    pattern: "file:\\s*\"([^\"]+)",
                     options: []
                 )
                 
@@ -62,7 +73,7 @@ extension NASourceFourAnime {
                     ) {
                     // 1. JWPlayer setup script
                     videoSource = jwPlayerUrl
-                    Log.info("[NASourceFourAnime] Resource found from packed scripts (jwplayer.setup).")
+                    Log.info("[NASourceFourAnime] Resource found from packed scripts (packer.jwplayer.setup).")
                 } else if let sourceUrlString = sourceMatchingExpr
                         .firstMatch(in: decodedScript)?
                         .firstMatchingGroup,
