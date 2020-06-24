@@ -1,5 +1,7 @@
 ## Device Compatibility
 
+### iOS/iPadOS Compatibility
+
 NineAnimator is compatible with devices running iOS 11.2 or later. This
 includes iPhones and iPads.
 
@@ -11,13 +13,8 @@ systems:
 - iPad 9.7-inch (2018)
 - iPad Pro 11-inch (2018)
 
-### UIKit for Mac (a.k.a. Project Catalyst) Support
+### macOS Compatibility
 
-NineAnimator does not officially support Project Catalyst at the moment.
-However, we do plan on enabling this feature as soon as the SDK matures
-and stabilizes.
-
-In the mean time, you are welcomed to experiment with Project Catalyst
-by yourself. And feel free to discuss your experiences on our Discord
-channels (be sure to @marcuszhou -- I am super interested to see this
-work as well).
+Starting from version 1.2.6 build 12, NineAnimator releases will include
+a macCatalyst binary build. macCatalyst allows you to run NineAnimator
+on compatible macOS devices. 

@@ -1,21 +1,15 @@
 ## Installation
 
-To install NineAnimator, you have the following options:
+To install NineAnimator on an iOS device, you have the following options:
 
-- AppStore (Recommended)
 - TestFlight Beta Testing
+- AppStore
+- NineAnimator AltStore Source (Beta)
 - Legacy Methods
     - Install from Third-Party App Stores
     - Install via Cydia Impactor with Compiled IPAs
 - For Contributors
     - Build from Source Code
-
-## AppStore
-
-[![Download on the AppStore](../Misc/Media/download_from_appstore_black.svg)](https://apps.apple.com/app/nineanimator-the-anime-app/id1470033405)
-
-NineAnimator is now available on the AppStore. We recommand you to install NineAnimator
-from the AppStore.
 
 ## TestFlight Beta Testing
 
@@ -26,6 +20,21 @@ We're constantly adding supports for new websites and implementing additional fe
 Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w)
 to be the first ones to try out those updates:
 [https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)
+
+## AppStore
+
+> Note: NineAnimator is currently unavailable on the App Store. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
+
+[![Download on the AppStore](../Misc/Media/download_from_appstore_black.svg)](https://apps.apple.com/app/nineanimator-the-anime-app/id1470033405)
+
+~~NineAnimator is now available on the AppStore. We recommand you to install NineAnimator from the AppStore.~~
+
+## NineAnimator AltStore Source (Beta)
+
+> Note: NineAnimator's AltStore Source is an experimental service. Currently the version on the AltStore source is synchronized with the latest Github release.
+
+* Source URL: `https://9ani.app/api/altstore`
+* [Source Preview](https://altsource.by.lao.sb/browse/?source=https%3A%2F%2F9ani.app%2Fapi%2Faltstore)
 
 ## Legacy Methods
 

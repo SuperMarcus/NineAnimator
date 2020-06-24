@@ -455,9 +455,6 @@
 		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
 		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
 		2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMedia.swift; sourceTree = "<group>"; };
-		2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftProtobuf.framework; path = Carthage/Build/iOS/SwiftProtobuf.framework; sourceTree = "<group>"; };
-		2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
-		2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCastSwift.framework; path = Carthage/Build/iOS/OpenCastSwift.framework; sourceTree = "<group>"; };
 		2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillPresentationController.swift; sourceTree = "<group>"; };
 		2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -487,7 +484,6 @@
 		2C1C718F221B118700760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeInformation.storyboard; sourceTree = "<group>"; };
 		2C1C7192221B11D400760A69 /* AnimeInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeInformationTableViewController.swift; sourceTree = "<group>"; };
 		2C1C7195221B1C3000760A69 /* InformationSceneHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneHeadingView.swift; sourceTree = "<group>"; };
-		2C211EC1225E9BB400389124 /* ViewAnimator.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ViewAnimator.framework; path = Carthage/Build/iOS/ViewAnimator.framework; sourceTree = "<group>"; };
 		2C211EC3225EADDD00389124 /* SetupThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupThemeViewController.swift; sourceTree = "<group>"; };
 		2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
@@ -564,11 +560,8 @@
 		2C4ABC8721B753DD009B4D47 /* String+IntegerRangeSubstring.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+IntegerRangeSubstring.swift"; sourceTree = "<group>"; };
 		2C4ABC8D21B76010009B4D47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimePlayer.storyboard; sourceTree = "<group>"; };
 		2C4ABC8F21B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyUpdatedAnimeTableViewCell.swift; sourceTree = "<group>"; };
-		2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		2C4ABC9721B825A5009B4D47 /* AnimeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeViewController.swift; sourceTree = "<group>"; };
 		2C4ABC9921B88F8C009B4D47 /* Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anime.swift; sourceTree = "<group>"; };
-		2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftSoup.framework; path = Carthage/Build/iOS/SwiftSoup.framework; sourceTree = "<group>"; };
 		2C4FDDAB22482AE90059B7D8 /* UrlFormEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrlFormEncoding.swift; sourceTree = "<group>"; };
 		2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUltima.swift; sourceTree = "<group>"; };
 		2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Featured.swift"; sourceTree = "<group>"; };
@@ -627,7 +620,6 @@
 		2C6C20C623FADD19009FAFF5 /* UserDefaults+CodableValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+CodableValue.swift"; sourceTree = "<group>"; };
 		2C6C20C823FB4C0A009FAFF5 /* download_from_appstore_white.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_white.svg; sourceTree = "<group>"; };
 		2C6C20C923FB4C2A009FAFF5 /* download_from_appstore_black.svg */ = {isa = PBXFileReference; lastKnownFileType = text; path = download_from_appstore_black.svg; sourceTree = "<group>"; };
-		2C6C472D238E1E00001E723C /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		2C6C47312390311B001E723C /* OfflineContent+CacheStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OfflineContent+CacheStrategy.swift"; sourceTree = "<group>"; };
 		2C6C47352394491F001E723C /* AtomicProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicProperty.swift; sourceTree = "<group>"; };
 		2C6CF24B221B9F1E0009D554 /* SomeOrError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeOrError.swift; sourceTree = "<group>"; };
@@ -1390,17 +1382,9 @@
 		2C4ABC9321B7F53E009B4D47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2C6C472D238E1E00001E723C /* Reachability.framework */,
 				2C3F456323798B84007410B6 /* AVKit.framework */,
 				2C3F456123798B77007410B6 /* AVFoundation.framework */,
-				2C211EC1225E9BB400389124 /* ViewAnimator.framework */,
 				2CA1DD5D21E2B423009241CB /* HomeKit.framework */,
-				2C12EDD121BDDF320064D2BD /* OpenCastSwift.framework */,
-				2C12EDCF21BDDF320064D2BD /* SwiftProtobuf.framework */,
-				2C12EDD021BDDF320064D2BD /* SwiftyJSON.framework */,
-				2C4ABC9D21B8CA83009B4D47 /* SwiftSoup.framework */,
-				2C4ABC9B21B8942D009B4D47 /* Alamofire.framework */,
-				2C4ABC9421B7F53F009B4D47 /* Kingfisher.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

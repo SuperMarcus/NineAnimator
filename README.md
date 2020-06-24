@@ -19,11 +19,8 @@
     </a>
 </p>
 <p align="center">
-    <a href="https://github.com/Carthage/Carthage">
-        <img src="https://img.shields.io/badge/Carthage-compatible-green.svg?style=flat" alt="Carthage Compatible"/>
-    </a>
-    <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" alt="Swift 5.0"/>
-    <img src="https://img.shields.io/badge/platform-iOS-lightgrey.svg" alt="Platform iOS"/>
+    <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" alt="Swift 5.2"/>
+    <img src="https://img.shields.io/badge/platform-iOS%20%7C%20macCatalyst-lightgrey" alt="Platform: iOS | macCatalyst"/>
     <a href="/LICENSE">
         <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"/>
     </a>
