@@ -12,7 +12,7 @@ install:
 
 script:
   - swiftlint
-  - xcodebuild clean build CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
+  - xcodebuild clean build -configuration Release -scheme NineAnimator -destination generic/platform=iOS CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO | xcpretty -f `xcpretty-travis-formatter`; exit ${PIPESTATUS[0]}
 
 env:
   global:
