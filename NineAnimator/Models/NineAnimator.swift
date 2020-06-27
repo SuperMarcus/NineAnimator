@@ -153,6 +153,7 @@ extension NineAnimator {
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceAnimeUnity(with: self))
+        register(source: NASourceTheWatchCartoonOnline(with: self))
         
         // Disabled sources
         register(source: NASourceWonderfulSubs(with: self))
