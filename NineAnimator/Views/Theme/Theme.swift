@@ -201,7 +201,7 @@ extension Theme {
             primaryText: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
             secondaryText: #colorLiteral(red: 0.6352941176, green: 0.6352941176, blue: 0.6549019608, alpha: 1),
             background: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
-            secondaryBackground: UIColor.groupTableViewBackground,
+            secondaryBackground: #colorLiteral(red: 0.937254902, green: 0.937254902, blue: 0.9568627451, alpha: 1),
             translucentBackground: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1),
             tint: #colorLiteral(red: 0.07843137255, green: 0.5568627451, blue: 1, alpha: 1),
             seperator: #colorLiteral(red: 0.7, green: 0.7, blue: 0.7, alpha: 1),
