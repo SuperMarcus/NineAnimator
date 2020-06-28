@@ -24,31 +24,158 @@ import os
 class NineAnimatorLogger {
     typealias Logger = ((StaticString, Any...) -> Void)
     
-    private let customLog: OSLog
+    static let maximalInMemoryMessagesCache = 512
     
-    // The basic four levels of logging
-    let info: Logger
-    let debug: Logger
-    let error: Logger
-    let fault: Logger
-    
-    // Some convenient accesses
-    func error(_ error: Error?) {
-        if let error = error {
-            self.error("%@", error)
-        } else { self.error("Unknown error") }
-    }
+    private let _systemLogger: OSLog
+    private var _cachedLogMessagesHead: LogMessageListItem?
+    private var _cachedLogMessagesTail: LogMessageListItem?
+    private var _cachedLogMessagesCount: Int = 0
     
     fileprivate init() {
         let logObject = OSLog(subsystem: "com.marcuszhou.NineAnimator", category: "log")
         
-        //Maintains a reference to the log object
-        customLog = logObject
+        // Maintains a reference to the system log object
+        _systemLogger = logObject
+    }
+}
+
+// MARK: - Logging Methods
+extension NineAnimatorLogger {
+    func debug(_ message: StaticString, functionName: String = #function, fileName: String = #file, _ arguments: Any...) {
+        _log(
+            message,
+            level: .debug,
+            metadata: LogMetadata(
+                symbols: Thread.callStackSymbols,
+                function: functionName,
+                file: (fileName as NSString).lastPathComponent
+            ),
+            arguments: arguments
+        )
+    }
+    
+    func info(_ message: StaticString, functionName: String = #function, fileName: String = #file, _ arguments: Any...) {
+        _log(
+            message,
+            level: .info,
+            metadata: LogMetadata(
+                function: functionName,
+                file: (fileName as NSString).lastPathComponent
+            ),
+            arguments: arguments
+        )
+    }
+    
+    func error(_ message: StaticString, functionName: String = #function, fileName: String = #file, _ arguments: Any...) {
+        _log(
+            message,
+            level: .error,
+            metadata: LogMetadata(
+                symbols: Thread.callStackSymbols,
+                function: functionName,
+                file: (fileName as NSString).lastPathComponent
+            ),
+            arguments: arguments
+        )
+    }
+    
+    func error(_ error: Error?, functionName: String = #function, fileName: String = #file) {
+        if let error = error {
+            self.error("%@", functionName: functionName, fileName: fileName, error)
+        } else { self.error("Unknown error", functionName: functionName, fileName: fileName) }
+    }
+    
+    func fault(_ message: StaticString, functionName: String = #function, fileName: String = #file, _ arguments: Any...) {
+        _log(
+            message,
+            level: .fault,
+            metadata: LogMetadata(
+                symbols: Thread.callStackSymbols,
+                function: functionName,
+                file: (fileName as NSString).lastPathComponent
+            ),
+            arguments: arguments
+        )
+    }
+}
+
+extension NineAnimatorLogger {
+    /// Representing a level of the logging message
+    struct LogLevel: Codable {
+        static let debug = LogLevel(osLogTypeValue: OSLogType.debug.rawValue, description: "debug")
+        static let info = LogLevel(osLogTypeValue: OSLogType.info.rawValue, description: "info")
+        static let error = LogLevel(osLogTypeValue: OSLogType.error.rawValue, description: "error")
+        static let fault = LogLevel(osLogTypeValue: OSLogType.fault.rawValue, description: "fault")
         
-        info = generateLogger(logObject, for: .info)
-        debug = generateLogger(logObject, for: .debug)
-        error = generateLogger(logObject, for: .error)
-        fault = generateLogger(logObject, for: .fault)
+        var osLogTypeValue: UInt8
+        var description: String
+        
+        var osLogType: OSLogType { .init(osLogTypeValue) }
+    }
+    
+    /// Attributes of the log message
+    struct LogMetadata: Codable {
+        /// Callstack symbols for the message.
+        /// - Note: Callstack symbols are not recorded for the `info` logging level.
+        var symbols: [String]?
+        var function: String
+        var file: String
+        var timestamp: Date = .init()
+    }
+    
+    /// Representing a log message
+    struct LogMessage: Codable {
+        var level: LogLevel
+        var message: String
+        var parameters: [String]
+        var meta: LogMetadata
+    }
+    
+    /// Internal list for caching log messages in memory
+    private class LogMessageListItem {
+        var message: LogMessage
+        var nextItem: LogMessageListItem?
+        
+        init(_ message: LogMessage) {
+            self.message = message
+            self.nextItem = nil
+        }
+        
+        func nextItem(offset: Int) -> LogMessageListItem? {
+            if offset <= 0 {
+                return self
+            } else {
+                return nextItem?.nextItem(offset: offset - 1)
+            }
+        }
+    }
+    
+    private func _log(_ message: StaticString, level: LogLevel, metadata: LogMetadata, arguments: [Any]) {
+        let logMessage = LogMessage(
+            level: level,
+            message: message.description,
+            parameters: arguments.map { String(describing: $0) },
+            meta: metadata
+        )
+        _logToSystemLogger(message, level: level, arguments: logMessage.parameters)
+        
+        // Store the message item in memory
+        let logMessageItem = LogMessageListItem(logMessage)
+        if let tail = _cachedLogMessagesTail {
+            tail.nextItem = logMessageItem
+            _cachedLogMessagesTail = logMessageItem
+            
+            if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {
+                _cachedLogMessagesCount += 1
+            } else {
+                // Remove the first item
+                _cachedLogMessagesHead = _cachedLogMessagesHead?.nextItem
+            }
+        } else {
+            _cachedLogMessagesHead = logMessageItem
+            _cachedLogMessagesTail = logMessageItem
+            _cachedLogMessagesCount = 1
+        }
     }
 }
 
@@ -77,20 +204,15 @@ let Log = NineAnimatorLogger()
 // swiftlint:disable all
 
 extension NineAnimatorLogger {
-    private func generateLogger(_ customLog: OSLog, for level: OSLogType)
-        -> NineAnimatorLogger.Logger {
-            return { [unowned customLog] (message: StaticString, arguments: Any...) in
-                let args = arguments.map { String(describing: $0) }
-                switch args.count { // I'm really curious to know if there is any better way of wrapping os_log
-                case 0: os_log(message, log: customLog, type: level)
-                case 1: os_log(message, log: customLog, type: level, args[0])
-                case 2: os_log(message, log: customLog, type: level, args[0], args[1])
-                case 3: os_log(message, log: customLog, type: level, args[0], args[1], args[2])
-                case 4: os_log(message, log: customLog, type: level, args[0], args[1], args[2], args[3])
-                case 5: os_log(message, log: customLog, type: level, args[0], args[1], args[2], args[3], args[4])
-                default:
-                    os_log("[NineAnimatorLogger] Logger function is called with too many arguments.", log: customLog, type: .error)
-                }
-            }
+    fileprivate func _logToSystemLogger(_ message: StaticString, level: LogLevel, arguments args: [String]) {
+        switch args.count { // I'm really curious to know if there is any better way of wrapping os_log
+        case 0: os_log(message, log: _systemLogger, type: level.osLogType)
+        case 1: os_log(message, log: _systemLogger, type: level.osLogType, args[0])
+        case 2: os_log(message, log: _systemLogger, type: level.osLogType, args[0], args[1])
+        case 3: os_log(message, log: _systemLogger, type: level.osLogType, args[0], args[1], args[2])
+        case 4: os_log(message, log: _systemLogger, type: level.osLogType, args[0], args[1], args[2], args[3])
+        case 5: os_log(message, log: _systemLogger, type: level.osLogType, args[0], args[1], args[2], args[3], args[4])
+        default: os_log("[NineAnimatorLogger] Logger function is called with too many arguments.", log: _systemLogger, type: .fault)
+        }
     }
 }
