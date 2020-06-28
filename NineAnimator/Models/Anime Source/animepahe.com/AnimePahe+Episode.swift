@@ -64,15 +64,17 @@ extension NASourceAnimePahe {
         } .thenPromise {
             animeIdentifier, episodeEntry in
             // Retrieve streming target
-            self.request(
-                ajaxPathDictionary: "/api",
+            self.requestManager.request(
+                "/api",
+                handling: .ajax,
                 query: [
                     "m": "embed",
                     "id": animeIdentifier,
                     "p": link.server,
                     "session": episodeEntry.session ?? ""
                 ]
-            ) .then { try DictionaryDecoder().decode(EmbedResponse.self, from: $0) }
+            ) .responseDictionary
+              .then { try DictionaryDecoder().decode(EmbedResponse.self, from: $0) }
         } .then {
             embed in
             let allDefinitions = Dictionary(embed.data.flatMap {
@@ -96,8 +98,9 @@ extension NASourceAnimePahe {
     
     /// Lookup the episode release item
     fileprivate func lookupReleaseEpisodeItem(animeIdentifier: String, episodeNumber: Int, lookupPage: Int, originalPage: Int) -> NineAnimatorPromise<ReleaseEpisodeItem> {
-        self.request(
-            ajaxPathDictionary: "/api",
+        self.requestManager.request(
+            "/api",
+            handling: .ajax,
             query: [
                 "m": "release",
                 "id": animeIdentifier,
@@ -105,9 +108,8 @@ extension NASourceAnimePahe {
                 "sort": "episode_asc",
                 "page": lookupPage
             ]
-        ) .then {
-            try DictionaryDecoder().decode(ReleaseResponse.self, from: $0)
-        } .thenPromise {
+        ) .responseDecodable(type: ReleaseResponse.self)
+          .thenPromise {
             response in
             // Episode came before this page
             if response.from == nil || (response.data?.first?.episode ?? 0) > episodeNumber {

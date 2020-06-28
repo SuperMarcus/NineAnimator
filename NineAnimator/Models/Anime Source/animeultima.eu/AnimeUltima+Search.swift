@@ -43,10 +43,11 @@ extension NASourceAnimeUltima {
         
         func more() {
             guard searchRequestingTask == nil else { return }
-            searchRequestingTask = parent.request(
-                browsePath: "/search",
+            searchRequestingTask = parent.requestManager.request(
+                "/search",
+                handling: .browsing,
                 query: [ "search": query ]
-            ) .then {
+            ) .responseString.then {
                 [weak self] responseContent -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 

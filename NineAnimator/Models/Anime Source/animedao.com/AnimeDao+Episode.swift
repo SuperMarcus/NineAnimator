@@ -59,7 +59,10 @@ extension NASourceAnimeDao {
                 relativeTo: self.endpointURL
             ).tryUnwrap()
         } .thenPromise {
-            episodeUrl in self.request(browseUrl: episodeUrl)
+            episodeUrl in self
+                .requestManager
+                .request(url: episodeUrl, handling: .browsing)
+                .responseString
         } .then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)

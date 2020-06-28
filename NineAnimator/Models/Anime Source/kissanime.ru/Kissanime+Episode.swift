@@ -51,7 +51,9 @@ extension NASourceKissanime {
             return episodeUrlComponents.url
         } .thenPromise {
             reconstructedUrl in self
-                .request(browseUrl: reconstructedUrl)
+                .requestManager
+                .request(url: reconstructedUrl, handling: .browsing)
+                .responseString
                 .then { (reconstructedUrl, $0) }
         } .then {
             reconstructedUrl, content in

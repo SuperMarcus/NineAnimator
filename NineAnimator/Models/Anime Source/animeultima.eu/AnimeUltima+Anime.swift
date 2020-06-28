@@ -37,7 +37,8 @@ extension NASourceAnimeUltima {
             alias: String
         )
         
-        return request(browseUrl: link.link)
+        return self.requestManager.request(url: link.link, handling: .browsing)
+            .responseString
             .then {
                 responseContent -> ConstructingAnimeInformation in
                 let bowl = try SwiftSoup.parse(responseContent)

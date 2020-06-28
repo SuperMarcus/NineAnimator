@@ -22,7 +22,7 @@ import SwiftSoup
 
 extension NASourceKissanime {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browsePath: "/").then {
+        requestManager.request("/", handling: .browsing).responseString.then {
             content in
             let bowl = try SwiftSoup.parse(content)
             

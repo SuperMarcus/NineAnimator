@@ -107,7 +107,7 @@ struct NineAnimeFeatured: FeaturedContainer {
 
 extension NASourceNineAnime {
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
-        request(browse: "/anime") {
+        request(browse: endpointURL.appendingPathComponent("anime"), headers: [:]) {
             value, error in
             guard let value = value else {
                 return handler(nil, error)

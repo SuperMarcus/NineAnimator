@@ -39,7 +39,9 @@ extension NASourceAnimeUltima {
     
     /// Request the information listed on the specified episode page
     func pageInformation(for episodeUrl: URL) -> NineAnimatorPromise<EpisodePageInformation> {
-        request(browseUrl: episodeUrl)
+        requestManager
+            .request(url: episodeUrl, handling: .browsing)
+            .responseString
             .then {
                 responseContent in
                 let bowl = try SwiftSoup.parse(responseContent)

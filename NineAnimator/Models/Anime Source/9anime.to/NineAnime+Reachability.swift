@@ -38,7 +38,7 @@ extension NASourceNineAnime/*: Alamofire.RequestAdapter*/ {
                 return .fail(NineAnimatorError.urlError)
             }
             return NineAnimatorPromise<Bool> { callback in
-                super.request(browse: endpointUrl, headers: [:]) {
+                self.request(browse: endpointUrl, headers: [:]) {
                     value, _ in
                     if value == nil {
                         Log.info("[9anime] Endpoint '%@' is unavailable", endpoint)

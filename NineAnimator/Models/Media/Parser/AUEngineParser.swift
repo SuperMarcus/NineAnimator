@@ -37,7 +37,9 @@ class AUEngineParser: VideoProviderParser {
                forPurpose _: Purpose,
                onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         source
-            .request(browseUrl: episode.target)
+            .requestManager
+            .request(url: episode.target, handling: .browsing)
+            .responseString
             .then {
                 responseContent in
                 let fone = try NSRegularExpression(

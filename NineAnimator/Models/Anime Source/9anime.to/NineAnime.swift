@@ -33,11 +33,11 @@ class NASourceNineAnime: BaseSource, Source {
     
     override var endpoint: String { "https://\(_currentHost)" }
     
-#if canImport(UIKit)
+    #if canImport(UIKit)
     var siteLogo: UIImage { #imageLiteral(resourceName: "9anime Site Icon") }
-#elseif canImport(AppKit)
+    #elseif canImport(AppKit)
     var siteLogo: NSImage { #imageLiteral(resourceName: "9anime Site Icon") }
-#endif
+    #endif
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
         \.romaji
@@ -56,9 +56,9 @@ class NASourceNineAnime: BaseSource, Source {
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
-        addMiddleware(NASourceNineAnime._verificationDetectionMiddleware)
-        addMiddleware(NASourceNineAnime._ipBlockDetectionMiddleware)
-        addMiddleware(NASourceNineAnime._contentNotFoundMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnime._verificationDetectionMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnime._ipBlockDetectionMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnime._contentNotFoundMiddleware)
     }
     
     override func canHandle(url: URL) -> Bool {
@@ -68,22 +68,25 @@ class NASourceNineAnime: BaseSource, Source {
     
     // Override the request methods to intercept endpoint change
     
-    override func request(
-            browse url: URL,
-            method: HTTPMethod = .get,
-            headers: [String: String],
-            parameters: Parameters? = nil,
-            encoding: ParameterEncoding = URLEncoding.default,
-            completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+    // TODO: This is a clusterfuck!!!! I'll deal with this later.
+    
+    func request(
+        browse url: URL,
+        method: HTTPMethod = .get,
+        headers: [String: String],
+        parameters: Parameters? = nil,
+        encoding: ParameterEncoding = URLEncoding.default,
+        completion handler: @escaping NineAnimatorCallback<String>
+    ) -> NineAnimatorAsyncTask? {
         let task = AsyncTaskContainer()
-        task += super.request(
-            browse: _process(url: url),
+        task += requestManager.request(
+            url: _process(url: url),
+            handling: .browsing,
             method: method,
-            headers: headers,
             parameters: parameters,
-            encoding: encoding
-        ) {
+            encoding: encoding,
+            headers: HTTPHeaders(headers)
+        ) .responseString.handle {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
             if let value = value { return handler(value, nil) }
@@ -101,22 +104,35 @@ class NASourceNineAnime: BaseSource, Source {
                     [weak task] newUrl in
                     guard let task = task else { return }
                     Log.info("[9anime] New endpoint found, resuming original task.")
-                    task += super.request(browse: newUrl, headers: headers, completion: handler)
+                    task += self.requestManager.request(
+                        url: newUrl,
+                        handling: .browsing,
+                        method: method,
+                        parameters: parameters,
+                        encoding: encoding,
+                        headers: HTTPHeaders(headers)
+                    ) .responseString.handle(handler)
                 }
         }
         return task
     }
     
-    override func request(
-            ajax url: URL,
-            headers: [String: String],
-            completion handler: @escaping NineAnimatorCallback<NSDictionary>
-        ) -> NineAnimatorAsyncTask? {
+    func request(
+        ajax url: URL,
+        headers: [String: String],
+        completion handler: @escaping NineAnimatorCallback<NSDictionary>
+    ) -> NineAnimatorAsyncTask? {
         let task = AsyncTaskContainer()
-        task += super.request(ajax: _process(url: url), headers: headers) {
+        task += requestManager.request(
+            url: _process(url: url),
+            handling: .ajax,
+            headers: HTTPHeaders(headers)
+        ) .responseDictionary.handle {
             value, error in // Not using weak self here because Source instances persist
             // If the result is valid, pass it on to the handler
-            if let value = value { return handler(value, nil) }
+            if let value = value {
+                return handler(value, nil)
+            }
             
             // If the website requires authentication
             if error is NineAnimatorError.AuthenticationRequiredError {
@@ -131,7 +147,11 @@ class NASourceNineAnime: BaseSource, Source {
                     [weak task] newUrl in
                     guard let task = task else { return }
                     Log.info("[9anime] New endpoint found, resuming original task.")
-                    task += super.request(ajax: newUrl, headers: headers, completion: handler)
+                    task += self.requestManager.request(
+                        url: newUrl,
+                        handling: .ajax,
+                        headers: HTTPHeaders(headers)
+                    ) .responseDictionary.handle(handler)
                 }
         }
         return task
@@ -142,7 +162,7 @@ class NASourceNineAnime: BaseSource, Source {
         parameters: [URLQueryItem] = [:],
         with headers: [String: String] = [:],
         completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+    ) -> NineAnimatorAsyncTask? {
         signedRequest(
             browse: endpointURL.appendingPathComponent(path),
             parameters: parameters,
@@ -152,20 +172,20 @@ class NASourceNineAnime: BaseSource, Source {
     }
     
     func signedRequest(
-            browse url: URL,
-            parameters: [URLQueryItem] = [:],
-            with headers: [String: String] = [:],
-            completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+        browse url: URL,
+        parameters: [URLQueryItem] = [:],
+        with headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<String>
+    ) -> NineAnimatorAsyncTask? {
         request(browse: signRequestURL(url, withParameters: parameters), headers: headers, completion: handler)
     }
     
     func signedRequest(
-            ajax path: String,
-            parameters: [URLQueryItem] = [:],
-            with headers: [String: String] = [:],
-            completion handler: @escaping NineAnimatorCallback<NSDictionary>
-        ) -> NineAnimatorAsyncTask? {
+        ajax path: String,
+        parameters: [URLQueryItem] = [:],
+        with headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<NSDictionary>
+    ) -> NineAnimatorAsyncTask? {
         // Forward the call
         return signedRequest(
             ajax: endpointURL.appendingPathComponent(path),
@@ -176,11 +196,11 @@ class NASourceNineAnime: BaseSource, Source {
     }
     
     func signedRequest(
-            ajax url: URL,
-            parameters: [URLQueryItem] = [:],
-            with headers: [String: String] = [:],
-            completion handler: @escaping NineAnimatorCallback<NSDictionary>
-        ) -> NineAnimatorAsyncTask? {
+        ajax url: URL,
+        parameters: [URLQueryItem] = [:],
+        with headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<NSDictionary>
+    ) -> NineAnimatorAsyncTask? {
         // Additional verification headers
         let modifiedRequestHeaders = headers.merging([
             "Accept": "application/json, text/javascript, */*; q=0.01"
@@ -196,11 +216,11 @@ class NASourceNineAnime: BaseSource, Source {
     
     /// Make a signed request with path related to the endpoint
     func signedRequest(
-            ajaxString path: String,
-            parameters: [URLQueryItem] = [:],
-            headers: [String: String] = [:],
-            completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+        ajaxString path: String,
+        parameters: [URLQueryItem] = [:],
+        headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<String>
+    ) -> NineAnimatorAsyncTask? {
         // Forward the call
         return signedRequest(
             ajaxString: endpointURL.appendingPathComponent(path),
@@ -212,11 +232,11 @@ class NASourceNineAnime: BaseSource, Source {
     
     /// Make a signed request
     func signedRequest(
-            ajaxString url: URL,
-            parameters: [URLQueryItem] = [],
-            headers: [String: String] = [:],
-            completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+        ajaxString url: URL,
+        parameters: [URLQueryItem] = [],
+        headers: [String: String] = [:],
+        completion handler: @escaping NineAnimatorCallback<String>
+    ) -> NineAnimatorAsyncTask? {
         // Call the original request function with modified URL
         return request(
             ajaxString: signRequestURL(url, withParameters: parameters),
@@ -225,37 +245,46 @@ class NASourceNineAnime: BaseSource, Source {
         )
     }
     
-    override func request(
-            ajaxString url: URL,
-            headers: [String: String],
-            completion handler: @escaping NineAnimatorCallback<String>
-        ) -> NineAnimatorAsyncTask? {
+    func request(
+        ajaxString url: URL,
+        headers: [String: String],
+        completion handler: @escaping NineAnimatorCallback<String>
+    ) -> NineAnimatorAsyncTask? {
         let task = AsyncTaskContainer()
-        task += super.request(ajaxString: _process(url: url), headers: headers) {
-            value, error in // Not using weak self here because Source instances persist
-            // If the result is valid, pass it on to the handler
-            if let value = value { return handler(value, nil) }
-            
-            // If the website requires authentication
-            if error is NineAnimatorError.AuthenticationRequiredError {
-                return handler(nil, error)
-            }
-            
-            Log.info("[9anime] Request failed with an error: %@", String(describing: error))
-            
-            // Only try to resolve new hosts when in foreground
-            if AppDelegate.shared?.isActive == true {
-                Log.info("[9anime] Trying to resolve a new host for 9anime...")
-                // Trying to determine a new endpoint if an error occurred
-                self._endpointDeterminingTask = self.determineEndpoint(url)
-                    .error { _ in handler(nil, error) }
-                    .finally {
-                        [weak task] newUrl in
-                        guard let task = task else { return }
-                        Log.info("[9anime] New endpoint found, resuming original task.")
-                        task += super.request(ajaxString: newUrl, headers: headers, completion: handler)
-                    }
-            } else { handler(nil, error) }
+        task += requestManager
+            .request(
+                url: _process(url: url),
+                handling: .ajax,
+                headers: HTTPHeaders(headers)
+            )
+            .responseString
+            .handle {
+                value, error in // Not using weak self here because Source instances persist
+                // If the result is valid, pass it on to the handler
+                if let value = value { return handler(value, nil) }
+                
+                // If the website requires authentication
+                if error is NineAnimatorError.AuthenticationRequiredError {
+                    return handler(nil, error)
+                }
+                
+                Log.info("[9anime] Request failed with an error: %@", String(describing: error))
+                
+                // Only try to resolve new hosts when in foreground
+                if AppDelegate.shared?.isActive == true {
+                    Log.info("[9anime] Trying to resolve a new host for 9anime...")
+                    // Trying to determine a new endpoint if an error occurred
+                    self._endpointDeterminingTask = self.determineEndpoint(url)
+                        .thenPromise {
+                            newUrl in self.requestManager
+                                .request(
+                                    url: newUrl,
+                                    handling: .ajax,
+                                    headers: HTTPHeaders(headers)
+                                )
+                                .responseString
+                        } .handle(handler)
+                } else { handler(nil, error) }
         }
         return task
     }

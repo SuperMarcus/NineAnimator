@@ -25,7 +25,10 @@ extension NASourceAnimeUnity {
         NineAnimatorPromise.firstly {
             try URL(string: link.identifier).tryUnwrap()
         } .thenPromise {
-            episodePageUrl in self.request(browseUrl: episodePageUrl)
+            episodePageUrl in self
+                .requestManager
+                .request(url: episodePageUrl, handling: .browsing)
+                .responseString
         } .then {
             episodePageContent in
             let bowl = try SwiftSoup.parse(episodePageContent)

@@ -39,10 +39,11 @@ extension NASourceAnimeDao {
         
         func more() {
             if performingTask == nil {
-                performingTask = parent.request(
-                    browsePath: "/search/",
+                performingTask = parent.requestManager.request(
+                    "/search/",
+                    handling: .browsing,
                     query: [ "key": title ]
-                ) .then {
+                ) .responseString.then {
                     [parent] responseContent -> [AnimeLink]? in
                     try SwiftSoup.parse(responseContent)
                         .select("a")

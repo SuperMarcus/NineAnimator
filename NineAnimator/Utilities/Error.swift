@@ -30,6 +30,10 @@ class NineAnimatorError: NSError {
         DecodeError(info)
     }
     
+    class func unknownError(_ failiureReason: String) -> UnknownError {
+        UnknownError(failiureReason)
+    }
+    
     class func responseError(_ failiureReason: String) -> ResponseError {
         ResponseError(failiureReason)
     }

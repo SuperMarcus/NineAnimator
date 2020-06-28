@@ -22,7 +22,11 @@ import SwiftSoup
 
 extension NASourceAnimeUnity {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browseUrl: endpointURL).then { responseContent in
+        requestManager.request(
+            url: endpointURL,
+            handling: .browsing
+        ) .responseString
+          .then { responseContent in
             //div.text-center>div.text-center>div a
             //div.current-anime>div.row>div a
             let endpointURL = self.endpointURL

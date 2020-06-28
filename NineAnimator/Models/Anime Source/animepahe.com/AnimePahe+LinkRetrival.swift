@@ -22,11 +22,15 @@ import SwiftSoup
 
 extension NASourceAnimePahe {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        NineAnimatorPromise.firstly {
+        NineAnimatorPromise<URL>.firstly {
             let components = url.pathComponents
             return self.animeBaseUrl.appendingPathComponent(components[2])
         } .thenPromise {
-            url in self.request(browseUrl: url).then { ($0, url) }
+            url in self
+                .requestManager
+                .request(url: url, handling: .browsing)
+                .responseString
+                .then { ($0, url) }
         } .then {
             responseContent, animeUrl in
             let bowl = try SwiftSoup.parse(responseContent)

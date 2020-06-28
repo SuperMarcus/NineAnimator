@@ -39,10 +39,11 @@ extension NASourceAnimeKisa {
         
         func more() {
             guard performingTask == nil && moreAvailable else { return }
-            performingTask = parent.request(
-                browsePath: "/search",
+            performingTask = parent.requestManager.request(
+                "/search",
+                handling: .browsing,
                 query: [ "q": title ]
-            ) .then {
+            ) .responseString.then {
                 [weak self] responseContent -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 let bowl = try SwiftSoup.parse(responseContent)

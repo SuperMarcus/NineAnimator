@@ -49,13 +49,12 @@ extension NASourceAnimePahe {
         
         func more() {
             guard performingTask == nil else { return }
-            performingTask = parent.request(
-                ajaxPathDictionary: "/api",
+            performingTask = parent.requestManager.request(
+                "/api",
+                handling: .ajax,
                 query: [ "m": "search", "l": 64, "q": title ]
-            ) .then {
-                // Decode the search response
-                try DictionaryDecoder().decode(SearchResponse.self, from: $0)
-            } .then {
+            ) .responseDecodable(type: SearchResponse.self)
+              .then {
                 [weak self] decodedSearchResponse -> [AnimeLink]? in
                 guard let self = self else { return nil }
                 return try decodedSearchResponse.data.map {

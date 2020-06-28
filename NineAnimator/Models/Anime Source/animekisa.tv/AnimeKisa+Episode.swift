@@ -31,7 +31,11 @@ extension NASourceAnimeKisa {
         NineAnimatorPromise.firstly {
             URL(string: link.identifier, relativeTo: link.parent.link)
         } .thenPromise {
-            url in self.request(browseUrl: url).then { (url, $0) }
+            url in self
+                .requestManager
+                .request(url: url, handling: .browsing)
+                .responseString
+                .then { (url, $0) }
         } .then {
             episodeUrl, responseContent in
             let resourceMap = try self.collectSources(fromContent: responseContent)

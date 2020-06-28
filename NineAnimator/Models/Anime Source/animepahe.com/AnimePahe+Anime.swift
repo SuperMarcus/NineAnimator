@@ -31,7 +31,7 @@ extension NASourceAnimePahe {
     }
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        request(browseUrl: link.link).thenPromise {
+        self.requestManager.request(url: link.link, handling: .browsing).responseString.thenPromise {
             responseContent -> NineAnimatorPromise<(ClosedRange<Int>, Int, String, String, [Anime.AttributeKey: Any], AnimeLink)> in
             let bowl = try SwiftSoup.parse(responseContent)
             
@@ -132,8 +132,9 @@ extension NASourceAnimePahe {
     
     /// Lookup anime episode range and the per-page parameter
     fileprivate func lookupEpisodeRange(animeIdentifier: String) -> NineAnimatorPromise<(range: ClosedRange<Int>, perPage: Int)> {
-        self.request(
-            ajaxPathDictionary: "/api",
+        self.requestManager.request(
+            "/api",
+            handling: .ajax,
             query: [
                 "m": "release",
                 "id": animeIdentifier,
@@ -141,7 +142,8 @@ extension NASourceAnimePahe {
                 "sort": "episode_asc",
                 "page": 1
             ]
-        ) .then {
+        ) .responseDictionary
+          .then {
             try DictionaryDecoder().decode(
                 ReleaseResponse.self,
                 from: $0
@@ -168,8 +170,9 @@ extension NASourceAnimePahe {
                 ))
             }
             
-            return self.request(
-                ajaxPathDictionary: "/api",
+            return self.requestManager.request(
+                "/api",
+                handling: .ajax,
                 query: [
                     "m": "release",
                     "id": animeIdentifier,
@@ -177,7 +180,8 @@ extension NASourceAnimePahe {
                     "sort": "episode_asc",
                     "page": releaseFirstPage.last_page
                 ]
-            ) .then {
+            ) .responseDictionary
+              .then {
                 try DictionaryDecoder().decode(
                     ReleaseResponse.self,
                     from: $0

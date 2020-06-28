@@ -34,7 +34,8 @@ extension NASourceGogoAnime {
     
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         // Browse home
-        return request(browsePath: "/")
+        return requestManager.request("/", handling: .browsing)
+            .responseString
             .then {
                 content -> [AnimeLink] in
                 Log.info("Loading GogoAnime ongoing releases page")
@@ -73,81 +74,90 @@ extension NASourceGogoAnime {
                             image: artworkUrl,
                             source: self
                         )
-                    }
-            }
+                }
+        }
     }
     
     fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
-        request(ajaxUrlString: ajaxEndpoint.appendingPathComponent("/ajax/page-recent-release-ongoing.html"))
-            .then {
-                content -> [AnimeLink] in
-                Log.info("Loading GogoAnime popular releases page")
-                let bowl = try SwiftSoup.parse(content)
-                return try bowl
-                    .select(".added_series_body>ul>li")
-                    .compactMap {
-                        item -> AnimeLink? in
-                        guard let firstLinkElement = try item.select("a").first(),
-                            let animeURL = URL(string: "\(self.endpoint)\(try firstLinkElement.attr("href"))") else {
-                                return nil
-                        }
-                        
-                        let backgroundImageContainerStyle = try item
-                            .select("div.thumbnail-popular")
-                            .attr("style")
-                        let backgroundImageURLMatches = NASourceGogoAnime.animePosterImageRegex
-                            .matches(in: backgroundImageContainerStyle, options: [], range: backgroundImageContainerStyle.matchingRange)
-                        
-                        guard let firstMatch = backgroundImageURLMatches.first else { return nil }
-                        
-                        guard let imageUrl = URL(string: backgroundImageContainerStyle[firstMatch.range(at: 1)]) else {
+        self.requestManager.request(
+            url: ajaxEndpoint
+                .appendingPathComponent("/ajax/page-recent-release-ongoing.html"),
+            handling: .ajax
+        ) .responseString.then {
+            content -> [AnimeLink] in
+            Log.info("Loading GogoAnime popular releases page")
+            let bowl = try SwiftSoup.parse(content)
+            return try bowl
+                .select(".added_series_body>ul>li")
+                .compactMap {
+                    item -> AnimeLink? in
+                    guard let firstLinkElement = try item.select("a").first(),
+                        let animeURL = URL(string: "\(self.endpoint)\(try firstLinkElement.attr("href"))") else {
                             return nil
-                        }
-                        
-                        return AnimeLink(
-                            title: try firstLinkElement.attr("title"),
-                            link: animeURL,
-                            image: imageUrl,
-                            source: self
-                        )
                     }
+                    
+                    let backgroundImageContainerStyle = try item
+                        .select("div.thumbnail-popular")
+                        .attr("style")
+                    let backgroundImageURLMatches = NASourceGogoAnime.animePosterImageRegex
+                        .matches(in: backgroundImageContainerStyle, options: [], range: backgroundImageContainerStyle.matchingRange)
+                    
+                    guard let firstMatch = backgroundImageURLMatches.first else { return nil }
+                    
+                    guard let imageUrl = URL(string: backgroundImageContainerStyle[firstMatch.range(at: 1)]) else {
+                        return nil
+                    }
+                    
+                    return AnimeLink(
+                        title: try firstLinkElement.attr("title"),
+                        link: animeURL,
+                        image: imageUrl,
+                        source: self
+                    )
             }
+        }
     }
     
     /// Implementation for the new featured page
     fileprivate func newFeatured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browsePath: "/").then { content -> FeaturedContainer in
-            Log.info("[NASourceGogoAnime] Loading FeaturedContainer")
-            
-            // Parse html contents
-            let bowl = try SwiftSoup.parse(content)
-            
-            // Links for updated anime
-            let updatedAnimeContainer = try bowl.select(".new-latest")
-            let latestAnime = try updatedAnimeContainer.select(".nl-item").map {
-                element -> AnimeLink in
-                let urlString = try element.select("a.nli-image").attr("href")
-                let url = try URL(string: urlString).tryUnwrap(.urlError)
-                let artwork = try element.select("img").attr("src")
-                let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
-                let title = try element.select("nli-serie").text()
-                return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
+        self.requestManager
+            .request("/", handling: .browsing)
+            .responseString
+            .then { content -> FeaturedContainer in
+                Log.info("[NASourceGogoAnime] Loading FeaturedContainer")
+                
+                // Parse html contents
+                let bowl = try SwiftSoup.parse(content)
+                
+                // Links for updated anime
+                let updatedAnimeContainer = try bowl.select(".new-latest")
+                let latestAnime = try updatedAnimeContainer.select(".nl-item").map {
+                    element -> AnimeLink in
+                    let urlString = try element.select("a.nli-image").attr("href")
+                    let url = try URL(string: urlString).tryUnwrap(.urlError)
+                    let artwork = try element.select("img").attr("src")
+                    let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
+                    let title = try element.select("nli-serie").text()
+                    return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
+                }
+                
+                // Links for popular anime
+                let popularAnimeContainer = try bowl.select(".ci-contents .bl-box").map {
+                    element -> AnimeLink in
+                    let linkElement = try element.select("a.blb-title")
+                    let title = try linkElement.text()
+                    let urlString = try linkElement.attr("href")
+                    let url = try URL(string: urlString).tryUnwrap(.urlError)
+                    let artwork = try element.select(".blb-image>img").attr("src")
+                    let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
+                    return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
+                }
+                
+                // Construct a basic featured anime container
+                return BasicFeaturedContainer(
+                    featured: popularAnimeContainer,
+                    latest: latestAnime
+                )
             }
-            
-            // Links for popular anime
-            let popularAnimeContainer = try bowl.select(".ci-contents .bl-box").map {
-                element -> AnimeLink in
-                let linkElement = try element.select("a.blb-title")
-                let title = try linkElement.text()
-                let urlString = try linkElement.attr("href")
-                let url = try URL(string: urlString).tryUnwrap(.urlError)
-                let artwork = try element.select(".blb-image>img").attr("src")
-                let artworkUrl = try URL(string: artwork).tryUnwrap(.urlError)
-                return AnimeLink(title: title, link: url, image: artworkUrl, source: self)
-            }
-            
-            // Construct a basic featured anime container
-            return BasicFeaturedContainer(featured: popularAnimeContainer, latest: latestAnime)
-        }
     }
 }

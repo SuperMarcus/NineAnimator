@@ -31,10 +31,12 @@ extension NASourceAnimePahe {
     }
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(
-            ajaxPathDictionary: "/api",
+        self.requestManager.request(
+            "/api",
+            handling: .ajax,
             query: [ "m": "airing", "l": 32, "page": 1 ]
-        ) .then {
+        ) .responseDictionary
+          .then {
             response in try DictionaryDecoder().decode(AiringResponse.self, from: response)
         } .then {
             decodedResponse in try decodedResponse.data.map {

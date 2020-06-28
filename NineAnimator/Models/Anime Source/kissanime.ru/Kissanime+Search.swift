@@ -39,10 +39,11 @@ extension NASourceKissanime {
         
         func more() {
             guard requestTask == nil && moreAvailable else { return }
-            requestTask = parent.request(
-                browsePath: "/Search/Anime",
+            requestTask = parent.requestManager.request(
+                "/Search/Anime",
+                handling: .browsing,
                 query: [ "keyword": title ]
-            ) .then {
+            ) .responseString.then {
                 [weak self] responseContent -> [AnimeLink] in
                 guard let self = self else { throw NineAnimatorError.unknownError }
                 

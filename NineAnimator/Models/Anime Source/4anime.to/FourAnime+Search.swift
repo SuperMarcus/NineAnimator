@@ -40,14 +40,16 @@ extension NASourceFourAnime {
         
         func more() {
             if performingTask == nil {
-                performingTask = parent.request(
-                    browseUrl: self.encodedW3CQueryUrl,
+                performingTask = parent.requestManager.request(
+                    url: self.encodedW3CQueryUrl,
+                    handling: .browsing,
                     method: .post,
                     parameters: [
                         "asl_active": "1",
                         "p_asl_data": "qtranslate_lang=0&set_intitle=None&customset%5B%5D=anime"
                     ]
-                ) .then {
+                ) .responseString
+                  .then {
                     [parent] responseContent -> [AnimeLink]? in
                     let bowl = try SwiftSoup.parse(responseContent)
                     let possibleLinkContainers = try bowl.select("div.container a")

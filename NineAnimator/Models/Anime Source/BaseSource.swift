@@ -33,42 +33,23 @@ class BaseSource {
     // Default to enabled
     var isEnabled: Bool { true }
     
-    var _cfResolverTimer: Timer?
-    var _cfPausedTasks = [Alamofire.RetryHandler]()
-    var _internalUAIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
-    
-    var _internalAdapterChain = [WeakRef<AnyObject>]()
-    var _internalRetrierChain = [WeakRef<AnyObject>]()
-    var _internalRetryPolicy = Alamofire.RetryPolicy(retryLimit: 3)
-    
     @AtomicProperty private var _internalTaskReferences
         = [ObjectIdentifier: NineAnimatorAsyncTask]()
     
+    /// The network request manager of the source
+    lazy var requestManager = NABaseSourceRequestManager(parent: self)
+    
     /// The session used to create ajax requests
-    lazy var retriverSession: Session = createRetriverSession()
+    var retriverSession: Session { requestManager.session }
     
     /// The session used to create browsing requests
-    lazy var browseSession: Session = createBrowseSession()
+    var browseSession: Session { requestManager.session }
     
     /// The user agent that should be used with requests
-    var sessionUserAgent: String { _internalUAIdentity }
-    
-    /// Middlewares for verification
-    private var verificationMiddlewares = [Alamofire.DataRequest.Validation]()
-    
-    /// Chain of adapters
-    private var adaptorEvaluationChain = [Alamofire.RequestAdapter]()
-    
-    /// Chain of retriers
-    private var retrierEvaluationChain = [Alamofire.RequestRetrier]()
-    
-    private var cloudflareChallengeResolver: CloudflareWAFResolver?
+    var sessionUserAgent: String { requestManager.currentIdentity }
     
     init(with parent: NineAnimator) {
         self.parent = parent
-        
-        // Add cloudflare middleware
-        self.cloudflareChallengeResolver = CloudflareWAFResolver(self)
     }
     
     /**
@@ -113,204 +94,6 @@ class BaseSource {
                 return $0.key
             } else { return nil }
         }
-    }
-    
-    func request(browse url: URL,
-                 method: HTTPMethod = .get,
-                 headers: [String: String],
-                 parameters: Parameters? = nil,
-                 encoding: ParameterEncoding = URLEncoding.default,
-                 completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        applyMiddlewares(
-            to: browseSession.request(
-                url,
-                method: method,
-                parameters: parameters,
-                encoding: encoding,
-                headers: HTTPHeaders(headers)
-            )
-        ).responseString {
-            switch $0.result {
-            case .failure(let error):
-                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
-                
-                // Set source of error
-                if let naError = (error.underlyingError as? NineAnimatorError)
-                    ?? error as? NineAnimatorError {
-                    naError.sourceOfError = self
-                }
-                
-                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
-            case .success(let value):
-                handler(value, nil)
-            }
-        }
-    }
-    
-    func request(ajax url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        applyMiddlewares(
-            to: retriverSession.request(url, headers: HTTPHeaders(headers))
-        ) .responseJSON {
-            response in
-            switch response.result {
-            case .failure(let error):
-                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
-                
-                // Set source of error
-                if let naError = (error.underlyingError as? NineAnimatorError)
-                    ?? error as? NineAnimatorError {
-                    naError.sourceOfError = self
-                }
-                
-                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
-            case .success(let value as NSDictionary):
-                handler(value, nil)
-            default:
-                Log.error("[BaseSource] Unable to convert response value to NSDictionary")
-                handler(nil, NineAnimatorError.responseError("Invalid Response"))
-            }
-        }
-    }
-    
-    func request(ajaxString url: URL, headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        applyMiddlewares(
-            to: retriverSession.request(url, headers: HTTPHeaders(headers))
-        ) .responseString {
-            response in
-            switch response.result {
-            case .failure(let error):
-                Log.error("[BaseSource] Request to %@ failed - %@", url, error)
-                
-                // Set source of error
-                if let naError = (error.underlyingError as? NineAnimatorError)
-                    ?? error as? NineAnimatorError {
-                    naError.sourceOfError = self
-                }
-                
-                handler(nil, (error.underlyingError as? NineAnimatorError) ?? error)
-            case .success(let value):
-                handler(value, nil)
-            }
-        }
-    }
-    
-    func request(browse path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        request(browse: path, with: [:], completion: handler)
-    }
-    
-    func request(browse path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        guard let url = URL(string: "\(endpoint)\(path)") else {
-            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
-            handler(nil, NineAnimatorError.urlError)
-            return nil
-        }
-        return request(browse: url, headers: headers, completion: handler)
-    }
-    
-    func request(ajax path: String, completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        request(ajax: path, with: [:], completion: handler)
-    }
-    
-    func request(ajax path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<NSDictionary>) -> NineAnimatorAsyncTask? {
-        guard let url = URL(string: "\(endpoint)\(path)") else {
-            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
-            handler(nil, NineAnimatorError.urlError)
-            return nil
-        }
-        return request(ajax: url, headers: headers, completion: handler)
-    }
-    
-    func request(ajaxString path: String, completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        request(ajaxString: path, with: [:], completion: handler)
-    }
-    
-    func request(ajaxString path: String, with headers: [String: String], completion handler: @escaping NineAnimatorCallback<String>) -> NineAnimatorAsyncTask? {
-        guard let url = URL(string: "\(endpoint)\(path)") else {
-            Log.error("Unable to parse URL with endpoint \"%@\" at path \"%@\"", endpoint, path)
-            handler(nil, NineAnimatorError.urlError)
-            return nil
-        }
-        return request(ajaxString: url, headers: headers, completion: handler)
-    }
-}
-
-// MARK: - Validation middlewares
-extension BaseSource {
-    func addMiddleware(_ middleware: @escaping Alamofire.DataRequest.Validation) {
-        verificationMiddlewares.append(middleware)
-    }
-    
-    func applyMiddlewares(to request: Alamofire.DataRequest) -> Alamofire.DataRequest {
-        verificationMiddlewares.reduce(request) { $0.validate($1) }
-    }
-}
-
-extension BaseSource {
-    fileprivate func createRetriverSession() -> Session {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpShouldSetCookies = true
-        configuration.httpCookieAcceptPolicy = .always
-        configuration.httpCookieStorage = HTTPCookieStorage.shared
-        configuration.httpAdditionalHeaders = [
-            "User-Agent": sessionUserAgent,
-            "X-Requested-With": "XMLHttpRequest",
-            "Accept-Language": "en-us"
-        ]
-        let manager = Session(
-            configuration: configuration,
-            interceptor: self,
-            redirectHandler: self // Doesn't care about reference looping here b/c Source objects never get destroyed
-        )
-        return manager
-    }
-    
-    fileprivate func createBrowseSession() -> Session {
-        let configuration = URLSessionConfiguration.default
-        configuration.httpShouldSetCookies = true
-        configuration.httpCookieAcceptPolicy = .always
-        configuration.httpCookieStorage = HTTPCookieStorage.shared
-        configuration.httpAdditionalHeaders = [
-            "User-Agent": sessionUserAgent,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "Accept-Language": "en-us"
-        ]
-        let manager = Session(
-            configuration: configuration,
-            interceptor: self,
-            redirectHandler: self
-        )
-        return manager
-    }
-    
-    func renewIdentity() {
-        let pool = [
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/12.1 Safari/605.1.15",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.90 Safari/537.36",
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 11_4_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/11.0 Mobile/15E148 Safari/604.1",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
-        ]
-        
-        // Pick a user agent
-        let randomUA = pool[Int.random(in: 0..<pool.count)]
-        _internalUAIdentity = randomUA
-        
-        // Hold references to old sessions
-        var oldBrowseSession: Session? = browseSession
-        var oldRetriverSession: Session? = retriverSession
-        
-        oldBrowseSession?.cancelAllRequests {
-            oldBrowseSession = nil
-        }
-        
-        oldRetriverSession?.cancelAllRequests {
-            oldRetriverSession = nil
-        }
-        
-        // Recreate the sessions
-        browseSession = createBrowseSession()
-        retriverSession = createRetriverSession()
     }
 }
 

@@ -30,7 +30,9 @@ extension NASourceGogoAnime {
     }
     
     func anime(url: URL) -> NineAnimatorPromise<Anime> {
-        request(browseUrl: url)
+        self.requestManager
+            .request(url: url, handling: .browsing)
+            .responseString
             .thenPromise { content -> NineAnimatorPromise<(String, String)> in
                 guard let animeIdentifier = NASourceGogoAnime
                     .animeIdentifierRegex
@@ -60,7 +62,9 @@ extension NASourceGogoAnime {
                 }
                 
                 return self
-                    .request(ajaxUrlString: generatedUrl)
+                    .requestManager
+                    .request(url: generatedUrl, handling: .ajax)
+                    .responseString
                     .then { ($0, content) }
             } .thenPromise {
                 episodeListContent, animeContent

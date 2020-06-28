@@ -155,8 +155,8 @@ extension NineAnimator {
         register(source: NASourceAnimeUnity(with: self))
         
         // Disabled sources
-        register(source: NASourceWonderfulSubs(with: self))
-        register(source: NASourceMasterAnime(with: self))
+//        register(source: NASourceWonderfulSubs(with: self))
+//        register(source: NASourceMasterAnime(with: self))
     }
 }
 

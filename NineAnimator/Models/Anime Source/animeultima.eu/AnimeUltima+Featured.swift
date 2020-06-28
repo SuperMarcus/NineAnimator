@@ -22,7 +22,8 @@ import SwiftSoup
 
 extension NASourceAnimeUltima {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browsePath: "/")
+        requestManager.request("/", handling: .browsing)
+            .responseString
             .then {
                 result -> FeaturedContainer? in
                 // Parse and select the sections

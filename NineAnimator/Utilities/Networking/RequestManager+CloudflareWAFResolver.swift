@@ -22,15 +22,11 @@ import Foundation
 import JavaScriptCore
 import SwiftSoup
 
-class CloudflareWAFResolver: SourceRequestRetrier {
-    private(set) weak var parent: BaseSource?
+class CloudflareWAFResolver {
+    private(set) weak var parent: NARequestManager?
     
-    init(_ parent: BaseSource) {
+    init(parent: NARequestManager) {
         self.parent = parent
-        
-        // Add WAF detection middleware
-        parent.addMiddleware(CloudflareWAFResolver.middleware)
-        parent.enqueueRetrier(self)
     }
     
     /// A middleware that resolves into an error and attempts to resolve it if a Cloudflare WAF challenge has been detected
@@ -96,135 +92,135 @@ class CloudflareWAFResolver: SourceRequestRetrier {
 }
 
 // MARK: - Retrier
-extension CloudflareWAFResolver {
-    func retry(_ request: Request, for session: Session, dueTo inputError: Error) -> NineAnimatorPromise<SourceRequestRetryDirective> {
-        let error: NineAnimatorError.CloudflareAuthenticationChallenge
-        
-        if let retryError = inputError as? NineAnimatorError.CloudflareAuthenticationChallenge {
-            error = retryError
-        } else if let afError = inputError as? AFError, // Extract the underlying error
-            let challengeError = afError.underlyingError as? NineAnimatorError.CloudflareAuthenticationChallenge {
-            error = challengeError
-        } else {
-            return .success(.evaluateNext)
-        }
-        
-        guard let verificationUrl = error.authenticationUrl,
-            let authenticationResponse = error.authenticationResponse else {
-            return .success(.evaluateNext)
-        }
-        
-        // Return fail if challenge solver is not enabled
-        if !NineAnimator.default.user.solveFirewallChalleges {
-            Log.info("[CloudflareWAFResolver] Encountered a solvable challenge but the autoresolver has been disabled.")
-            return .success(.evaluateNext)
-        }
-        
-        // We will not retry this since app is not actively running in the foreground
-        if AppDelegate.shared?.isActive != true {
-            Log.info("[CloudflareWAFResolver] Encountered a solvable challenge but the app is inactive.")
-            return .success(.evaluateNext)
-        }
-        
-        // Assign the parent `BaseSource` as the source of error
-        error.sourceOfError = self.parent
-        
-        // Abort after 2 tries
-        if request.retryCount > 1 {
-            Log.info("[CloudflareWAFResolver] Maximal number of retry reached, renewing identity.")
-            for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
-                HTTPCookieStorage.shared.deleteCookie(cookie)
-            }
-            
-            // Renew identity with a delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
-                [weak self] in self?.parent?.renewIdentity()
-            }
-            
-            return .success(.fail(error: nil))
-        }
-        
-        // Create an empty promise
-        let promise = NineAnimatorPromise<SourceRequestRetryDirective> {
-            _ in nil
-        }
-        
-        let delay: DispatchTimeInterval = .seconds(4)
-        Log.info("[CloudflareWAFResolver] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
-        
-        // Solve the challenge in 5 seconds
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            [weak request, weak promise, weak parent] in
-            guard let promise = promise else {
-                return Log.error("[CloudflareWAFResolve] Cannot continue because reference to the promise has been lost")
-            }
-            
-            // Request cancelled during the retry process
-            guard let request = request,
-                request.isCancelled == false,
-                let parent = parent else {
-                promise.reject(NineAnimatorError.unknownError)
-                return
-            }
-            
-            guard let originalUrl = request.request?.url,
-                let urlScheme = originalUrl.scheme,
-                let urlHost = originalUrl.host else {
-                return promise.reject(NineAnimatorError.unknownError)
-            }
-            
-            let originalUrlString = originalUrl.absoluteString
-            var originUrl = "\(urlScheme)://\(urlHost)"
-            
-            if let port = originalUrl.port {
-                originUrl += ":\(port)"
-            }
-            
-            Log.info("[CloudflareWAFResolve] Sending cf resolve challenge request...")
-                    
-            // Make the verification request and then call the retry handler
-            parent.browseSession.request(
-                verificationUrl,
-                method: .post,
-                parameters: authenticationResponse,
-                encoding: CFResponseEncoder.shared,
-                headers: [
-                    "Referer": originalUrlString,
-                    "Origin": originUrl,
-                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-                ]
-            ) .responseData {
-                [weak promise] value in
-                guard let promise = promise else {
-                    return Log.error("[CloudflareWAFResolver] Cannot continue because reference to the promise has been lost")
-                }
-                
-                guard case .success = value.result,
-                    let headerFields = value.response?.allHeaderFields as? [String: String] else {
-                    Log.error("[CloudflareWAFResolver] Cannot continue because challenge response does not include valid header fields")
-                    return promise.resolve(.evaluateNext)
-                }
-                
-                // Check if clearance has been granted. If not, renew the current identity
-                let verificationResponseCookies = HTTPCookie.cookies(
-                    withResponseHeaderFields: headerFields,
-                    for: verificationUrl
-                )
-                
-                if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
-                    Log.info("[CloudflareWAFResolver] Clearance has been granted")
-                }
-                
-                Log.info("[CloudflareWAFResolver] Resuming original request...")
-                
-                // Retry after 0.5 seconds
-                promise.resolve(.retry(delay: 0.5))
-            }
-        }
-        
-        return promise
-    }
-}
+//extension CloudflareWAFResolver {
+//    func retry(_ request: Request, for session: Session, dueTo inputError: Error) -> NineAnimatorPromise<NARequestRetryDirective> {
+//        let error: NineAnimatorError.CloudflareAuthenticationChallenge
+//
+//        if let retryError = inputError as? NineAnimatorError.CloudflareAuthenticationChallenge {
+//            error = retryError
+//        } else if let afError = inputError as? AFError, // Extract the underlying error
+//            let challengeError = afError.underlyingError as? NineAnimatorError.CloudflareAuthenticationChallenge {
+//            error = challengeError
+//        } else {
+//            return .success(.evaluateNext)
+//        }
+//
+//        guard let verificationUrl = error.authenticationUrl,
+//            let authenticationResponse = error.authenticationResponse else {
+//            return .success(.evaluateNext)
+//        }
+//
+//        // Return fail if challenge solver is not enabled
+//        if !NineAnimator.default.user.solveFirewallChalleges {
+//            Log.info("[CloudflareWAFResolver] Encountered a solvable challenge but the autoresolver has been disabled.")
+//            return .success(.evaluateNext)
+//        }
+//
+//        // We will not retry this since app is not actively running in the foreground
+//        if AppDelegate.shared?.isActive != true {
+//            Log.info("[CloudflareWAFResolver] Encountered a solvable challenge but the app is inactive.")
+//            return .success(.evaluateNext)
+//        }
+//
+//        // Assign the parent `BaseSource` as the source of error
+//        error.sourceOfError = self.parent
+//
+//        // Abort after 2 tries
+//        if request.retryCount > 1 {
+//            Log.info("[CloudflareWAFResolver] Maximal number of retry reached, renewing identity.")
+//            for cookie in HTTPCookieStorage.shared.cookies(for: verificationUrl) ?? [] {
+//                HTTPCookieStorage.shared.deleteCookie(cookie)
+//            }
+//
+//            // Renew identity with a delay
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+//                [weak self] in self?.parent?.renewIdentity()
+//            }
+//
+//            return .success(.fail(error: nil))
+//        }
+//
+//        // Create an empty promise
+//        let promise = NineAnimatorPromise<NARequestRetryDirective> {
+//            _ in nil
+//        }
+//
+//        let delay: DispatchTimeInterval = .seconds(4)
+//        Log.info("[CloudflareWAFResolver] Attempting to solve cloudflare WAF challenge...continues after %@ seconds", delay)
+//
+//        // Solve the challenge in 5 seconds
+//        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+//            [weak request, weak promise, weak parent] in
+//            guard let promise = promise else {
+//                return Log.error("[CloudflareWAFResolve] Cannot continue because reference to the promise has been lost")
+//            }
+//
+//            // Request cancelled during the retry process
+//            guard let request = request,
+//                request.isCancelled == false,
+//                let parent = parent else {
+//                promise.reject(NineAnimatorError.unknownError)
+//                return
+//            }
+//
+//            guard let originalUrl = request.request?.url,
+//                let urlScheme = originalUrl.scheme,
+//                let urlHost = originalUrl.host else {
+//                return promise.reject(NineAnimatorError.unknownError)
+//            }
+//
+//            let originalUrlString = originalUrl.absoluteString
+//            var originUrl = "\(urlScheme)://\(urlHost)"
+//
+//            if let port = originalUrl.port {
+//                originUrl += ":\(port)"
+//            }
+//
+//            Log.info("[CloudflareWAFResolve] Sending cf resolve challenge request...")
+//
+//            // Make the verification request and then call the retry handler
+//            parent.browseSession.request(
+//                verificationUrl,
+//                method: .post,
+//                parameters: authenticationResponse,
+//                encoding: CFResponseEncoder.shared,
+//                headers: [
+//                    "Referer": originalUrlString,
+//                    "Origin": originUrl,
+//                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+//                ]
+//            ) .responseData {
+//                [weak promise] value in
+//                guard let promise = promise else {
+//                    return Log.error("[CloudflareWAFResolver] Cannot continue because reference to the promise has been lost")
+//                }
+//
+//                guard case .success = value.result,
+//                    let headerFields = value.response?.allHeaderFields as? [String: String] else {
+//                    Log.error("[CloudflareWAFResolver] Cannot continue because challenge response does not include valid header fields")
+//                    return promise.resolve(.evaluateNext)
+//                }
+//
+//                // Check if clearance has been granted. If not, renew the current identity
+//                let verificationResponseCookies = HTTPCookie.cookies(
+//                    withResponseHeaderFields: headerFields,
+//                    for: verificationUrl
+//                )
+//
+//                if verificationResponseCookies.contains(where: { $0.name == "cf_clearance" }) {
+//                    Log.info("[CloudflareWAFResolver] Clearance has been granted")
+//                }
+//
+//                Log.info("[CloudflareWAFResolver] Resuming original request...")
+//
+//                // Retry after 0.5 seconds
+//                promise.resolve(.retry(delay: 0.5))
+//            }
+//        }
+//
+//        return promise
+//    }
+//}
 
 // MARK: - Challenge Resolver
 private extension CloudflareWAFResolver {

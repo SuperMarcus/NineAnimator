@@ -37,10 +37,13 @@ extension NASourceAnimeTwist {
             $0.first { $0.slug == slug }
         } .thenPromise {
             info in
-            self.request(
-                ajaxPathString: "/api/anime/\(info.slug)/sources",
+            self.requestManager.request(
+                "/api/anime/\(info.slug)/sources",
+                handling: .ajax,
                 headers: [ "x-access-token": "1rj2vRtegS8Y60B3w3qNZm5T2Q0TN2NR" ]
-            ) .then { (info, $0) }
+            )
+            .responseString
+            .then { (info, $0) }
         } .then {
             info, sourceListString in
             guard let sourceListData = sourceListString.data(using: .utf8),

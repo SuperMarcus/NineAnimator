@@ -22,7 +22,11 @@ import SwiftSoup
 
 extension NASourceAnimeDao {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        request(browseUrl: endpointURL).then {
+        self.requestManager.request(
+            url: endpointURL,
+            handling: .browsing
+        ) .responseString
+          .then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             let updatedAnimeContainer = try bowl.select("#new")

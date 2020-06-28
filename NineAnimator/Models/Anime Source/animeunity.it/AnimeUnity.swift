@@ -57,7 +57,7 @@ class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
         // Setup Kingfisher request modifier
         setupGlobalRequestModifier()
         
-        addMiddleware {
+        requestManager.enqueueValidation {
             _, response, _ in
             if response.statusCode == 403,
                 response.headers["server"]?.hasPrefix("cloudflare") == true {
