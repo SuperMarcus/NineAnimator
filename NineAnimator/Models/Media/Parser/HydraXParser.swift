@@ -183,7 +183,7 @@ class HydraXParser: VideoProviderParser {
             return .fail(.providerError("The streaming server is currently processing this content"))
         }
         
-        let authenticationUrl = try URL(string: "https://\(resource.url)/ping.gif")
+        let authenticationUrl = try URL(string: "https://img.iamcdn.net/\(slug).jpg")
             .tryUnwrap()
         let additionalHeaders: HTTPHeaders = [
             "Referer": episode.target.absoluteString
