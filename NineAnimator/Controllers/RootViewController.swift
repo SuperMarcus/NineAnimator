@@ -94,8 +94,14 @@ class RootViewController: UITabBarController, Themable {
 
 // MARK: - Exposed APIs
 extension RootViewController {
+    /// Presnet the view controller from the topmost view controller
+    ///
+    /// - Note: If the view controller specified is already presenting, this method calls the completion handler directly.
     func presentOnTop(_ vc: UIViewController, animated: Bool = true, completion: (() -> Void)? = nil) {
-        topViewController.present(vc, animated: animated, completion: completion)
+        let topVc = topViewController
+        if topVc != vc {
+            topVc.present(vc, animated: animated, completion: completion)
+        } else { completion?() }
     }
     
     func showCastController() {
