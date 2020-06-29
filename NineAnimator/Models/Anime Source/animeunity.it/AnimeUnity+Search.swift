@@ -44,18 +44,20 @@ extension NASourceAnimeUnity {
                 self.requestTask = self.parent
                     .requestManager
                     .request( // Use relative urls whenever possible so it's easier to deal with endpoint changes
-                        "/anime.php?c=archive",
+                        "anime.php?c=archive",
                         method: .post,
                         parameters: [ "query": title ]
                     )
-                    .responseString
+                    .responseData
                     .then {
                         [weak self] responseContent -> [AnimeLink] in
                         guard let self = self else {
                             throw NineAnimatorError.unknownError
                         }
-                        
-                        let bowl = try SwiftSoup.parse(responseContent)
+                        let data = responseContent
+                        let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
+                        let  bowl = try SwiftSoup.parse(utf8Text)
+//                        let bowl = try SwiftSoup.parse(responseContent.debugDescription)
                         let entries = try bowl.select("div.row>div.col-lg-4")
                         
                         return try entries.compactMap {
