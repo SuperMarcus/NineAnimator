@@ -23,11 +23,12 @@ import SwiftSoup
 extension NASourceAnimeDao {
     /// A list of servers that are known to exists on AnimeDao
     static let knownServerMap = [
-        "#video": (name: "Google Video", switcher: "videoload"),
+        "#gstore": (name: "Google Video", switcher: "gstore"),
         "#hls": (name: "ProxyData", switcher: "hls"),
         "#gounlimited": (name: "GoUnlimited", switcher: "gounlimited"),
         "#fembed": (name: "Fembed", switcher: "fembed"),
-        "#mixdrop": (name: "Mixdrop", switcher: "mixdrop")
+        "#mixdrop": (name: "Mixdrop", switcher: "mixdrop"),
+        "#hydrax": (name: "HydraX", switcher: "hydrax")
     ]
     
     static let attributeMatchingExpr = try! NSRegularExpression(
@@ -63,7 +64,7 @@ extension NASourceAnimeDao {
                 .requestManager
                 .request(url: episodeUrl, handling: .browsing)
                 .responseString
-        } .then {
+        } .thenPromise {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             let availableServerList = try bowl
@@ -98,7 +99,7 @@ extension NASourceAnimeDao {
             
             let videoFrameUrl: URL
             
-            if serverInformation.switcher == "videoload" {
+            if serverInformation.switcher == "gstore" {
                 videoFrameUrl = try NASourceAnimeDao.locateInlineVideo(
                     link: link,
                     in: responseContent
@@ -112,14 +113,42 @@ extension NASourceAnimeDao {
                 )
             }
             
-            return Episode(
-                link,
-                target: videoFrameUrl,
-                parent: anime,
-                referer: link.parent.link.absoluteString,
-                userInfo: [ "I am dummy": isPassthroughLink ]
-            )
+            return self.resolveRedirection(url: videoFrameUrl, episodeLink: link).then {
+                referer, finalFrameUrl in Episode(
+                    link,
+                    target: finalFrameUrl,
+                    parent: anime,
+                    referer: referer,
+                    userInfo: [ "I am dummy": isPassthroughLink ]
+                )
+            }
         }
+    }
+    
+    private func resolveRedirection(url: URL, episodeLink: EpisodeLink) -> NineAnimatorPromise<(String, URL)> {
+        let fallbackResult = (episodeLink.parent.link.absoluteString, url)
+        guard url.pathComponents.contains("redirect") else {
+            return .success(fallbackResult)
+        }
+        
+        var destinationUrl: URL?
+        var refererContent: String = episodeLink.parent.link.absoluteString
+        return self
+            .requestManager
+            .request(url: url, handling: .browsing)
+            .onRedirection {
+                _, _, newRequest in
+                destinationUrl = newRequest.url
+                refererContent = newRequest.headers["Referer"] ?? refererContent
+                return nil
+            }
+            .responseVoid
+            .then {
+                if let destinationUrl = destinationUrl {
+                    Log.info("[NASourceAnimeDao] Resolved animedao redirection url: %@", destinationUrl)
+                    return (refererContent, destinationUrl)
+                } else { return fallbackResult }
+            }
     }
     
     private static func locateInlineVideo(link: EpisodeLink, in responseContent: String) throws -> URL {
