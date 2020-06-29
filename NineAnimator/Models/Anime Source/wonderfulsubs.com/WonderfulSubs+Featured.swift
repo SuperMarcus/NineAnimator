@@ -21,30 +21,31 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        NineAnimatorPromise<[AnimeLink]>
-            .queue(listOfPromises: [ retrieveFeaturedAnimePromise, retrieveLatestAnimePromise ])
-            .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
+        .fail(.contentUnavailableError("WonderfulSubs is no longer available on NineAnimator"))
+//        NineAnimatorPromise<[AnimeLink]>
+//            .queue(listOfPromises: [ retrieveFeaturedAnimePromise, retrieveLatestAnimePromise ])
+//            .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
     }
-    
-    private var retrieveFeaturedAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        request(
-            ajaxPathDictionary: "/api/media/popular?count=12",
-            headers: [ "Referer": endpoint ]
-        ) .then {
-            response in
-            let series = try response.value(at: "json.series", type: [NSDictionary].self)
-            return try series.map { try self.constructAnimeLink(from: $0, useWidePoster: true) }
-        }
-    }
-    
-    private var retrieveLatestAnimePromise: NineAnimatorPromise<[AnimeLink]> {
-        request(
-            ajaxPathDictionary: "/api/media/latest?count=12",
-            headers: [ "Referer": endpoint ]
-        ) .then {
-            response in
-            let series = try response.value(at: "json.series", type: [NSDictionary].self)
-            return try series.map { try self.constructAnimeLink(from: $0) }
-        }
-    }
+//
+//    private var retrieveFeaturedAnimePromise: NineAnimatorPromise<[AnimeLink]> {
+//        request(
+//            ajaxPathDictionary: "/api/media/popular?count=12",
+//            headers: [ "Referer": endpoint ]
+//        ) .then {
+//            response in
+//            let series = try response.value(at: "json.series", type: [NSDictionary].self)
+//            return try series.map { try self.constructAnimeLink(from: $0, useWidePoster: true) }
+//        }
+//    }
+//
+//    private var retrieveLatestAnimePromise: NineAnimatorPromise<[AnimeLink]> {
+//        request(
+//            ajaxPathDictionary: "/api/media/latest?count=12",
+//            headers: [ "Referer": endpoint ]
+//        ) .then {
+//            response in
+//            let series = try response.value(at: "json.series", type: [NSDictionary].self)
+//            return try series.map { try self.constructAnimeLink(from: $0) }
+//        }
+//    }
 }

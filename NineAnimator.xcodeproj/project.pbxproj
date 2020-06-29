@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		2C055AF324A9298900FCAC25 /* SourceRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C055AF224A9298900FCAC25 /* SourceRequestManager.swift */; };
 		2C055AF524A93E1F00FCAC25 /* RequestManager+QueryEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C055AF424A93E1F00FCAC25 /* RequestManager+QueryEncoding.swift */; };
+		2C055AF624AAAF9300FCAC25 /* WonderfulSubs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85368D2234008A00A5CFB9 /* WonderfulSubs.swift */; };
+		2C055AF724AAAF9300FCAC25 /* WonderfulSubs+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85368F2234022400A5CFB9 /* WonderfulSubs+Featured.swift */; };
+		2C055AF824AAAF9300FCAC25 /* WonderfulSubs+LinkConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536912234041500A5CFB9 /* WonderfulSubs+LinkConstruction.swift */; };
+		2C055AF924AAAF9300FCAC25 /* WonderfulSubs+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536932234093A00A5CFB9 /* WonderfulSubs+Anime.swift */; };
+		2C055AFA24AAAF9300FCAC25 /* WonderfulSubs+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536952234745400A5CFB9 /* WonderfulSubs+Episode.swift */; };
+		2C055AFB24AAAF9300FCAC25 /* WonderfulSubs+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536972234856100A5CFB9 /* WonderfulSubs+Search.swift */; };
+		2C055AFC24AAAF9300FCAC25 /* WonderfulSubs+LinkRetrival.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8536992234889F00A5CFB9 /* WonderfulSubs+LinkRetrival.swift */; };
+		2C055AFD24AAAF9300FCAC25 /* WonderfulSubs+ServerRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C85369B22348BFF00A5CFB9 /* WonderfulSubs+ServerRecommendation.swift */; };
+		2C055AFE24AAB0E300FCAC25 /* SourceMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746821C0975A0007502A /* SourceMasterAnime.swift */; };
+		2C055AFF24AAB0E300FCAC25 /* SearchMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746A21C098860007502A /* SearchMasterAnime.swift */; };
+		2C055B0024AAB0E300FCAC25 /* EpisodeMasterAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC746C21C172330007502A /* EpisodeMasterAnime.swift */; };
+		2C055B0124AAB0E300FCAC25 /* MasterAnimeLinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */; };
 		2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0BBA6022F8314000C35E33 /* PassthroughParser.swift */; };
 		2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC362263B26900EC793E /* ThisWeekTableViewCell.swift */; };
 		2C0CFC392263B34300EC793E /* Anilist+Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC382263B34300EC793E /* Anilist+Recommendation.swift */; };
@@ -2267,6 +2279,7 @@
 				2C93BD47221F5E62000411CB /* InformationReferenceCollectionViewCell.swift in Sources */,
 				2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */,
 				2C3BBAAC2217635000F1C77B /* Dictionary+KeyPathAccess.swift in Sources */,
+				2C055AFE24AAB0E300FCAC25 /* SourceMasterAnime.swift in Sources */,
 				2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */,
 				2C90C6A0236F8BF900C18620 /* LibraryTrackingCollectionController.swift in Sources */,
 				2C60EABA2266A22400280637 /* UserNotificationManager+RecommendationSource.swift in Sources */,
@@ -2275,6 +2288,7 @@
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
 				2CAD375822261BDE008AD6B4 /* MyAnimeList.swift in Sources */,
+				2C055AF724AAAF9300FCAC25 /* WonderfulSubs+Featured.swift in Sources */,
 				2CCC746021C06D1B0007502A /* NineAnime+Featured.swift in Sources */,
 				2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */,
 				2C6984ED227D490900C9EF0E /* Anilist+GQLDate.swift in Sources */,
@@ -2286,6 +2300,7 @@
 				2C684BCC2290613100E1BA35 /* AnimePahe.swift in Sources */,
 				2C684BD4229066BB00E1BA35 /* AnimePahe+Episode.swift in Sources */,
 				2C2EACB22415FBFF007C9BAC /* Anilist+GQLUser.swift in Sources */,
+				2C055B0124AAB0E300FCAC25 /* MasterAnimeLinkRetriver.swift in Sources */,
 				2C1C716F221853AD00760A69 /* Anilist.swift in Sources */,
 				2C6CF24E221C2E090009D554 /* InformationSceneHeadingTableViewCell.swift in Sources */,
 				2C0CFC3D2263D9AB00EC793E /* DiscoveryLoadingTableViewCell.swift in Sources */,
@@ -2306,6 +2321,7 @@
 				2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */,
 				2CEC218A2207E34E00A30F4F /* Promise+All.swift in Sources */,
 				2C0CFC4322640B6600EC793E /* DiscoveryStandardCell+Cell.swift in Sources */,
+				2C055B0024AAB0E300FCAC25 /* EpisodeMasterAnime.swift in Sources */,
 				2C8519B122CCA03C00EEF3AC /* Kissanime+Episode.swift in Sources */,
 				2C8519C022D31F0900EEF3AC /* AnimeKisa+Featured.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
@@ -2315,6 +2331,7 @@
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
 				2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */,
 				2C42578723268DFD00FCCCCE /* Simkl+Definitions.swift in Sources */,
+				2C055AF624AAAF9300FCAC25 /* WonderfulSubs.swift in Sources */,
 				2C23AE3E2229CFBD00512150 /* MyAnimeList+User.swift in Sources */,
 				2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
@@ -2354,6 +2371,7 @@
 				2C480015237061EC00ADB03F /* LibraryRecentsCategoryController.swift in Sources */,
 				2C6A390423A0179700FC00A9 /* FourAnime+Featured.swift in Sources */,
 				2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */,
+				2C055AFC24AAAF9300FCAC25 /* WonderfulSubs+LinkRetrival.swift in Sources */,
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
 				2C6C47362394491F001E723C /* AtomicProperty.swift in Sources */,
 				2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */,
@@ -2401,6 +2419,7 @@
 				2C66779821BC2213000E5ACC /* SearchViewController.swift in Sources */,
 				2CEC21A022089CF300A30F4F /* NSRegularExpression+StringMatches.swift in Sources */,
 				2CB4AF96239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift in Sources */,
+				2C055AFA24AAAF9300FCAC25 /* WonderfulSubs+Episode.swift in Sources */,
 				2C3D7C012210AE640045D648 /* AnimeTwist+Episode.swift in Sources */,
 				2C9C44FE21CD2B33004C8F0C /* SettingsSceneController.swift in Sources */,
 				2C93BD45221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift in Sources */,
@@ -2414,6 +2433,7 @@
 				2CA3E275239C4F5300AAC4D1 /* AUEngineParser.swift in Sources */,
 				2C8536872231D42C00A5CFB9 /* WeakRef.swift in Sources */,
 				C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */,
+				2C055AFF24AAB0E300FCAC25 /* SearchMasterAnime.swift in Sources */,
 				2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */,
 				C8E12D092422143700B0AF6A /* AnimeUnity+Search.swift in Sources */,
 				2C3D7BFD2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift in Sources */,
@@ -2430,6 +2450,7 @@
 				52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */,
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */,
+				2C055AFB24AAAF9300FCAC25 /* WonderfulSubs+Search.swift in Sources */,
 				2C6984E7227D465D00C9EF0E /* Anilist+GQLPage.swift in Sources */,
 				2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
@@ -2451,6 +2472,7 @@
 				2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */,
 				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
+				2C055AFD24AAAF9300FCAC25 /* WonderfulSubs+ServerRecommendation.swift in Sources */,
 				2C6A390223A015A200FC00A9 /* FourAnime.swift in Sources */,
 				65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */,
 				2C646F8C21C3245B00957A72 /* TiwiKiwiParser.swift in Sources */,
@@ -2467,11 +2489,13 @@
 				2C1C717D22190FAD00760A69 /* Anilist+Reference.swift in Sources */,
 				2C646F8A21C3125A00957A72 /* Mp4UploadParser.swift in Sources */,
 				2C96DAE02455FC5F007A29B0 /* MyAnimeList+Jikan.swift in Sources */,
+				2C055AF924AAAF9300FCAC25 /* WonderfulSubs+Anime.swift in Sources */,
 				2CEFD96D23A894C00064075E /* Alamofire+Promise.swift in Sources */,
 				2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */,
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,
 				2C74F1D024A4012D00D04DA8 /* RequestManager.swift in Sources */,
+				2C055AF824AAAF9300FCAC25 /* WonderfulSubs+LinkConstruction.swift in Sources */,
 				2C0DA2DE238B09C3002C6447 /* SettingsDownloadsController.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* User.swift in Sources */,
 				2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */,

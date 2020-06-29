@@ -24,42 +24,44 @@ extension NASourceMasterAnime {
     static let animeUrlEpisodeNumberRegex = try! NSRegularExpression(pattern: "\\/anime\\/watch\\/[^\\/]+\\/(\\d+)", options: [.caseInsensitive])
     
     func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
-        let urlString = url.absoluteString
-        
-        guard let match = NASourceMasterAnime.animeUrlSlugRegex.matches(in: urlString, options: [], range: urlString.matchingRange).first else {
-            handler(nil, NineAnimatorError.urlError)
-            return nil
-        }
-        
-        let slug = urlString[match.range(at: 1)]
-        let reconstructedAnimeUrl = URL(string: "\(endpoint)/anime/info/\(slug)")!
-        
-        return anime(from: reconstructedAnimeUrl) {
-            [urlString, handler] anime, responseError in
-            guard let anime = anime else { return handler(nil, responseError) }
-            
-            if let match = NASourceMasterAnime.animeUrlEpisodeNumberRegex.matches(in: urlString, options: [], range: urlString.matchingRange).first,
-                let episodeNumber = Int(urlString[match.range(at: 1)]) {
-                let episodeLinks = anime.episodes
-                    .flatMap { $0.value }
-                    .filter {
-                        let currentEpisodeNumber = $0.identifier.split(separator: ":")[1]
-                        return currentEpisodeNumber == "\(episodeNumber)"
-                    }
-                
-                if episodeLinks.isEmpty {
-                    return handler(nil, NineAnimatorError.responseError("No episode found for this link"))
-                }
-                
-                if let recentServer = NineAnimator.default.user.recentServer,
-                    let episodeLink = episodeLinks.first(where: { $0.server == recentServer }) {
-                    return handler(.episode(episodeLink), nil)
-                }
-                
-                handler(.episode(episodeLinks.first!), nil)
-            }
-            
-            handler(.anime(anime.link), nil)
-        }
+        handler(nil, NineAnimatorError.contentUnavailableError("masterani.me is no longer available on NineAnimator"))
+        return nil
+//        let urlString = url.absoluteString
+//
+//        guard let match = NASourceMasterAnime.animeUrlSlugRegex.matches(in: urlString, options: [], range: urlString.matchingRange).first else {
+//            handler(nil, NineAnimatorError.urlError)
+//            return nil
+//        }
+//
+//        let slug = urlString[match.range(at: 1)]
+//        let reconstructedAnimeUrl = URL(string: "\(endpoint)/anime/info/\(slug)")!
+//
+//        return anime(from: reconstructedAnimeUrl) {
+//            [urlString, handler] anime, responseError in
+//            guard let anime = anime else { return handler(nil, responseError) }
+//
+//            if let match = NASourceMasterAnime.animeUrlEpisodeNumberRegex.matches(in: urlString, options: [], range: urlString.matchingRange).first,
+//                let episodeNumber = Int(urlString[match.range(at: 1)]) {
+//                let episodeLinks = anime.episodes
+//                    .flatMap { $0.value }
+//                    .filter {
+//                        let currentEpisodeNumber = $0.identifier.split(separator: ":")[1]
+//                        return currentEpisodeNumber == "\(episodeNumber)"
+//                    }
+//
+//                if episodeLinks.isEmpty {
+//                    return handler(nil, NineAnimatorError.responseError("No episode found for this link"))
+//                }
+//
+//                if let recentServer = NineAnimator.default.user.recentServer,
+//                    let episodeLink = episodeLinks.first(where: { $0.server == recentServer }) {
+//                    return handler(.episode(episodeLink), nil)
+//                }
+//
+//                handler(.episode(episodeLinks.first!), nil)
+//            }
+//
+//            handler(.anime(anime.link), nil)
+//        }
     }
 }

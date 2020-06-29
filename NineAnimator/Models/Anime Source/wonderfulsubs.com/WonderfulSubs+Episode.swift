@@ -46,32 +46,33 @@ extension NASourceWonderfulSubs {
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        request(
-            ajaxPathDictionary: "/api/media/stream",
-            query: [ "code": link.identifier ],
-            headers: [ "Referer": link.parent.link.absoluteString ]
-        ) .then {
-            [weak self] response in
-            guard let self = self else { return nil }
-            
-            // A common error for WonderfulSubs
-            if response["status"] as? Int == 404 {
-                throw NineAnimatorError.responseError("This episode is not available on this server")
-            }
-            
-            do {
-                return try self.tryDecodeOrdinary(link, anime: anime, response: response)
-            } catch {
-                Log.info("[NASourceWonderfulSubs] Unable to decode as ordinary stream response: %@. Trying alternative format.", error)
-            }
-            
-            do {
-                return try self.tryDecodeEmbed(link, anime: anime, response: response)
-            } catch {
-                Log.info("[NASourceWonderfulSubs] Unable to decode as embed stream response: %@.", error)
-                throw NineAnimatorError.responseError("This episode cannot be parsed under the current server")
-            }
-        }
+        .fail(.contentUnavailableError("WonderfulSubs is no longer available on NineAnimator"))
+//        request(
+//            ajaxPathDictionary: "/api/media/stream",
+//            query: [ "code": link.identifier ],
+//            headers: [ "Referer": link.parent.link.absoluteString ]
+//        ) .then {
+//            [weak self] response in
+//            guard let self = self else { return nil }
+//
+//            // A common error for WonderfulSubs
+//            if response["status"] as? Int == 404 {
+//                throw NineAnimatorError.responseError("This episode is not available on this server")
+//            }
+//
+//            do {
+//                return try self.tryDecodeOrdinary(link, anime: anime, response: response)
+//            } catch {
+//                Log.info("[NASourceWonderfulSubs] Unable to decode as ordinary stream response: %@. Trying alternative format.", error)
+//            }
+//
+//            do {
+//                return try self.tryDecodeEmbed(link, anime: anime, response: response)
+//            } catch {
+//                Log.info("[NASourceWonderfulSubs] Unable to decode as embed stream response: %@.", error)
+//                throw NineAnimatorError.responseError("This episode cannot be parsed under the current server")
+//            }
+//        }
     }
     
     private func tryDecodeEmbed(_ link: EpisodeLink, anime: Anime, response: NSDictionary) throws -> Episode {

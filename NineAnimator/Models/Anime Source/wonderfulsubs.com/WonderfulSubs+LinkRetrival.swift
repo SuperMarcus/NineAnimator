@@ -21,29 +21,6 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        NineAnimatorPromise.firstly {
-            () -> String in
-            let components = url.pathComponents
-            // Make sure this is an url pointing to an anime
-            guard components.count > 2, components[1] == "watch" else {
-                throw NineAnimatorError.urlError
-            }
-            return components[2]
-        } .thenPromise {
-            [endpointURL] series -> NineAnimatorPromise<(NSDictionary, URL)> in
-            let reconstructedLink = endpointURL
-                .appendingPathComponent("watch")
-                .appendingPathComponent(series)
-            return self.request(
-                ajaxPathDictionary: "/api/media/series",
-                query: [ "series": series ],
-                headers: [ "Referer": url.absoluteString ]
-            ) .then { ($0, reconstructedLink) }
-        } .then {
-            [endpointURL] response, link in
-            let seriesEntry = try response.value(at: "json", type: NSDictionary.self)
-            let dummyLink = AnimeLink(title: "", link: link, image: endpointURL, source: self)
-            return .anime(try self.constructAnimeLink(from: seriesEntry, withParent: dummyLink))
-        }
+        .fail(.contentUnavailableError("WonderfulSubs is no longer available on NineAnimator"))
     }
 }

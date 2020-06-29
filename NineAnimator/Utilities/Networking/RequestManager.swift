@@ -44,10 +44,7 @@ class NARequestManager: NSObject {
     private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
     
     @AtomicProperty private var _internalTaskReferences = [ObjectIdentifier: NineAnimatorAsyncTask]()
-    @AtomicProperty fileprivate var _requestCustomRedirectionHandlers = [(
-        WeakRef<Alamofire.Request>,
-        RequestBuilding.RedirectionHandler
-    )]()
+    @AtomicProperty fileprivate var _requestCustomRedirectionHandlers = [(WeakRef<Alamofire.Request>, RequestBuilding.RedirectionHandler)]()
     fileprivate var _internalAdapterChain = [WeakRef<AnyObject>]()
     fileprivate var _internalRetrierChain = [WeakRef<AnyObject>]()
     fileprivate var _internalRetryPolicy = Alamofire.RetryPolicy(retryLimit: 3)

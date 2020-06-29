@@ -50,47 +50,48 @@ class NASearchMasterAnime: ContentProvider {
     }
     
     func more() {
-        if _lastRequest == nil && moreAvailable {
-            let keyword = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-            let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
-            _lastRequest = _parent.request(ajax: path) {
-                [weak self] response, _ in
-                guard let self = self else { return }
-                
-                defer { self._lastRequest = nil }
-                
-                guard let response = response else {
-                    self.delegate?.onError(NineAnimatorError.searchError("Did not find any results for \"\(self.title)\". This might suggests a bad network condition or a service issue."), from: self)
-                    return
-                }
-                
-                self.totalPages = response["last_page"] as? Int
-                
-                guard self.totalPages != 0 else {
-                    self.delegate?.onError(NineAnimatorError.searchError("Results Error"), from: self)
-                    return
-                }
-                guard let animes = response["data"] as? [NSDictionary] else { return }
-                
-                let pageResult: [AnimeLink] = animes.compactMap { anime in
-                    guard let title = anime["title"] as? String,
-                        let slug = anime["slug"] as? String,
-                        let posterDict = anime["poster"] as? NSDictionary,
-                        let posterName = posterDict["file"] as? String
-                        else { return nil }
-                    
-                    return AnimeLink(
-                        title: title,
-                        link: self._parent.anime(slug: slug),
-                        image: self._parent.poster(file: posterName),
-                        source: self._parent
-                    )
-                }
-                
-                let newPage = self.availablePages
-                self._results.append(pageResult)
-                self.delegate?.pageIncoming(newPage, from: self)
-            }
-        }
+        delegate?.onError(NineAnimatorError.contentUnavailableError("masterani.me is no longer available on NineAnimator"), from: self)
+//        if _lastRequest == nil && moreAvailable {
+//            let keyword = title.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+//            let path = String(format: NASearchMasterAnime.apiPathSearch, keyword, "\(availablePages + 1)")
+//            _lastRequest = _parent.request(ajax: path) {
+//                [weak self] response, _ in
+//                guard let self = self else { return }
+//
+//                defer { self._lastRequest = nil }
+//
+//                guard let response = response else {
+//                    self.delegate?.onError(NineAnimatorError.searchError("Did not find any results for \"\(self.title)\". This might suggests a bad network condition or a service issue."), from: self)
+//                    return
+//                }
+//
+//                self.totalPages = response["last_page"] as? Int
+//
+//                guard self.totalPages != 0 else {
+//                    self.delegate?.onError(NineAnimatorError.searchError("Results Error"), from: self)
+//                    return
+//                }
+//                guard let animes = response["data"] as? [NSDictionary] else { return }
+//
+//                let pageResult: [AnimeLink] = animes.compactMap { anime in
+//                    guard let title = anime["title"] as? String,
+//                        let slug = anime["slug"] as? String,
+//                        let posterDict = anime["poster"] as? NSDictionary,
+//                        let posterName = posterDict["file"] as? String
+//                        else { return nil }
+//
+//                    return AnimeLink(
+//                        title: title,
+//                        link: self._parent.anime(slug: slug),
+//                        image: self._parent.poster(file: posterName),
+//                        source: self._parent
+//                    )
+//                }
+//
+//                let newPage = self.availablePages
+//                self._results.append(pageResult)
+//                self.delegate?.pageIncoming(newPage, from: self)
+//            }
+//        }
     }
 }

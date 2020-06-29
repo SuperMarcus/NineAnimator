@@ -21,45 +21,46 @@ import Foundation
 
 extension NASourceWonderfulSubs {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        if !isEnabled {
-            return NineAnimatorPromise.fail(
-                NineAnimatorError.contentUnavailableError(
-                    "WonderfulSubs is no longer available on NineAnimator. Please consider using other sources."
-                )
-            )
-        }
-        
-        return request(
-            ajaxPathDictionary: "/api/media/series",
-            query: [ "series": link.link.lastPathComponent ],
-            headers: [ "Referer": link.link.absoluteString ]
-        ) .then {
-            response in
-            let detailedSeriesEntry = try response.value(at: "json", type: NSDictionary.self)
-            let reassembledLink = try self.constructAnimeLink(from: detailedSeriesEntry, withParent: link)
-            let aliases = detailedSeriesEntry.valueIfPresent(at: "aliases", type: [String].self) ?? []
-            let description = try detailedSeriesEntry.value(at: "description", type: String.self)
-            
-            // Construct child anime
-            let seasons = try detailedSeriesEntry.value(at: "seasons", type: NSDictionary.self)
-            let medias = try seasons
-                .compactMap { _, season in season as? NSDictionary }
-                .flatMap { try $0.value(at: "media", type: [NSDictionary].self) }
-            let children = medias.compactMap { try? self.anime(fromMediaEntry: $0, withParent: reassembledLink) }
-            
-            // Handle empty children list
-            guard !children.isEmpty else {
-                throw NineAnimatorError.responseError("No seasons found for this anime")
-            }
-            
-            // Construct the parent Anime object
-            return Anime(
-                reassembledLink,
-                alias: aliases.joined(separator: "; "),
-                description: description,
-                children: children
-            )
-        }
+        .fail(.contentUnavailableError("WonderfulSubs is no longer available on NineAnimator"))
+//        if !isEnabled {
+//            return NineAnimatorPromise.fail(
+//                NineAnimatorError.contentUnavailableError(
+//                    "WonderfulSubs is no longer available on NineAnimator. Please consider using other sources."
+//                )
+//            )
+//        }
+//
+//        return request(
+//            ajaxPathDictionary: "/api/media/series",
+//            query: [ "series": link.link.lastPathComponent ],
+//            headers: [ "Referer": link.link.absoluteString ]
+//        ) .then {
+//            response in
+//            let detailedSeriesEntry = try response.value(at: "json", type: NSDictionary.self)
+//            let reassembledLink = try self.constructAnimeLink(from: detailedSeriesEntry, withParent: link)
+//            let aliases = detailedSeriesEntry.valueIfPresent(at: "aliases", type: [String].self) ?? []
+//            let description = try detailedSeriesEntry.value(at: "description", type: String.self)
+//
+//            // Construct child anime
+//            let seasons = try detailedSeriesEntry.value(at: "seasons", type: NSDictionary.self)
+//            let medias = try seasons
+//                .compactMap { _, season in season as? NSDictionary }
+//                .flatMap { try $0.value(at: "media", type: [NSDictionary].self) }
+//            let children = medias.compactMap { try? self.anime(fromMediaEntry: $0, withParent: reassembledLink) }
+//
+//            // Handle empty children list
+//            guard !children.isEmpty else {
+//                throw NineAnimatorError.responseError("No seasons found for this anime")
+//            }
+//
+//            // Construct the parent Anime object
+//            return Anime(
+//                reassembledLink,
+//                alias: aliases.joined(separator: "; "),
+//                description: description,
+//                children: children
+//            )
+//        }
     }
     
     /// For WonderfulSubs, this is a rather tedius and computational intensive task
