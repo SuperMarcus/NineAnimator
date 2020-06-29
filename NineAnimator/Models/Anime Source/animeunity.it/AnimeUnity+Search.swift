@@ -44,7 +44,7 @@ extension NASourceAnimeUnity {
                 self.requestTask = self.parent
                     .requestManager
                     .request( // Use relative urls whenever possible so it's easier to deal with endpoint changes
-                        "anime.php?c=archive",
+                        "/anime.php?c=archive",
                         method: .post,
                         parameters: [ "query": title ]
                     )
