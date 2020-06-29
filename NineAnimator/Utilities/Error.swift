@@ -55,6 +55,7 @@ class NineAnimatorError: NSError {
     }
     
     var sourceOfError: Any?
+    weak var relatedRequestManager: NARequestManager?
     
     init(_ code: Int,
          message: String,

@@ -182,12 +182,22 @@ extension NARequestManager {
         
         private func _makePromise<S, E>(withResponseGenerator makeResponse: @escaping (Alamofire.DataRequest, @escaping (Alamofire.DataResponse<S, E>) -> Void) -> Alamofire.DataRequest) -> NineAnimatorPromise<S> {
             NineAnimatorPromise {
-                callback in
+                [weak parent] callback in
                 do {
                     let request = try self._makeRequestApplyingMiddlewares()
                     return makeResponse(request) {
                         response in
-                        callback(response.value, response.error)
+                        let error: Error?
+                        if let afError = response.error as? AFError,
+                            let underlyingError = afError.underlyingError {
+                            error = underlyingError
+                        } else { error = response.error }
+                        
+                        if let naError = error as? NineAnimatorError {
+                            naError.relatedRequestManager = parent
+                        }
+                        
+                        callback(response.value, error)
                     }
                 } catch {
                     callback(nil, error)

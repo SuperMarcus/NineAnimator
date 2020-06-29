@@ -207,7 +207,9 @@ class NAAuthenticationViewController: UIViewController, WKNavigationDelegate, WK
         
         // Retrieve the recommended user agent string
         let preferredUserAgent: String?
-        if let source = error.sourceOfError as? BaseSource {
+        if let requestManager = error.relatedRequestManager {
+            preferredUserAgent = requestManager.currentIdentity
+        } else if let source = error.sourceOfError as? BaseSource {
             preferredUserAgent = source.sessionUserAgent
         } else { preferredUserAgent = nil }
         

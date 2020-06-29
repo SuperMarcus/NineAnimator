@@ -63,7 +63,7 @@ extension UIAlertController {
                     let authenticationController = NAAuthenticationViewController
                         .create(
                             authenticationUrl,
-                            withUserAgent: (error.sourceOfError as? BaseSource)?.sessionUserAgent
+                            withUserAgent: error.relatedRequestManager?.currentIdentity ?? (error.sourceOfError as? BaseSource)?.sessionUserAgent
                         ) { completionHandler?(true) }
                     
                     // If no source view controller is present, use the RootViewController's shared
