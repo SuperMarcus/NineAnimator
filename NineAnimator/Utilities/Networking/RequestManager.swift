@@ -43,8 +43,11 @@ class NARequestManager: NSObject {
     
     private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
     
-    @AtomicProperty private var _internalTaskReferences
-    = [ObjectIdentifier: NineAnimatorAsyncTask]()
+    @AtomicProperty private var _internalTaskReferences = [ObjectIdentifier: NineAnimatorAsyncTask]()
+    @AtomicProperty fileprivate var _requestCustomRedirectionHandlers = [(
+        WeakRef<Alamofire.Request>,
+        RequestBuilding.RedirectionHandler
+    )]()
     fileprivate var _internalAdapterChain = [WeakRef<AnyObject>]()
     fileprivate var _internalRetrierChain = [WeakRef<AnyObject>]()
     fileprivate var _internalRetryPolicy = Alamofire.RetryPolicy(retryLimit: 3)
@@ -144,8 +147,14 @@ extension NARequestManager {
     /// A helper struct used to construct promises
     /// - Note: This struct holds strong reference to the parent request manager.
     struct RequestBuilding {
+        typealias ResponseHandler = (Alamofire.DataResponse<Any, Error>) throws -> Void
+        typealias RedirectionHandler = (_ request: Alamofire.Request,
+            _ response: HTTPURLResponse, _ redirectingTo: URLRequest) -> URLRequest?
+        
         fileprivate var parent: NARequestManager
         fileprivate var makeRequest: (Alamofire.Session) throws -> Alamofire.DataRequest?
+        fileprivate var customResponseHandler: ResponseHandler?
+        fileprivate var customRedirectionHandler: RedirectionHandler?
         
         /// Create a promise that resolves the response to a Data
         var responseData: NineAnimatorPromise<Data> {
@@ -173,6 +182,24 @@ extension NARequestManager {
                 .then { _ in () }
         }
         
+        /// Add a custom response handler which will be invoked before resolving the promise.
+        ///
+        /// The response handler will be called regardless of whether the request was made successfully. If an error was caught to be thrown by the handler block, the error will be passed on to the promise, masking the request results.
+        func onReceivingResponse(handler: @escaping ResponseHandler) -> Self {
+            var copyOfSelf = self
+            copyOfSelf.customResponseHandler = handler
+            return copyOfSelf
+        }
+        
+        /// Add a custom redirction handler to this request.
+        ///
+        /// The default behavior is to follow the requests.
+        func onRedirection(handler: @escaping RedirectionHandler) -> Self {
+            var copyOfSelf = self
+            copyOfSelf.customRedirectionHandler = handler
+            return copyOfSelf
+        }
+        
         /// Create a promise that resolves an encoded response
         func responseDecodable<T: Decodable>(type: T.Type, decoder: Alamofire.DataDecoder = JSONDecoder()) -> NineAnimatorPromise<T> {
             self._makePromise {
@@ -185,19 +212,41 @@ extension NARequestManager {
                 [weak parent] callback in
                 do {
                     let request = try self._makeRequestApplyingMiddlewares()
+                    let onResponse = self.customResponseHandler
+                    
+                    if let parent = parent {
+                        parent.onCreateRequest(self, request: request)
+                    } else {
+                        callback(
+                            nil,
+                            NineAnimatorError.responseError("RequestManager deinitialized while creating the request")
+                        )
+                        return nil
+                    }
+                    
                     return makeResponse(request) {
                         response in
-                        let error: Error?
-                        if let afError = response.error as? AFError,
-                            let underlyingError = afError.underlyingError {
-                            error = underlyingError
-                        } else { error = response.error }
-                        
-                        if let naError = error as? NineAnimatorError {
-                            naError.relatedRequestManager = parent
+                        do {
+                            let error: Error?
+                            
+                            if let afError = response.error as? AFError,
+                                let underlyingError = afError.underlyingError {
+                                error = underlyingError
+                            } else { error = response.error }
+                            
+                            if let naError = error as? NineAnimatorError {
+                                naError.relatedRequestManager = parent
+                            }
+                            
+                            // Call the response handler then the callback
+                            try onResponse?(response as! DataResponse<Any, Error>)
+                            callback(response.value, error)
+                        } catch {
+                            callback(nil, error)
                         }
                         
-                        callback(response.value, error)
+                        // Guarentee that we'll call the request conclusion handler
+                        parent?.onConcludeRequest(request: request)
                     }
                 } catch {
                     callback(nil, error)
@@ -262,6 +311,30 @@ extension NARequestManager {
             $0.removeValue(forKey: ObjectIdentifier(task))
         }
     }
+    
+    /// Called when the request is created by the request builder
+    fileprivate func onCreateRequest(_ requestBuilder: RequestBuilding, request: Alamofire.Request) {
+        // Add custom redirection handler
+        if let redirectionHandler = requestBuilder.customRedirectionHandler {
+            __requestCustomRedirectionHandlers.mutate {
+                list in list.append((WeakRef(request), redirectionHandler))
+            }
+        }
+    }
+    
+    /// Called when the request is concluded
+    fileprivate func onConcludeRequest(request: Alamofire.Request) {
+        __requestCustomRedirectionHandlers.mutate {
+            list in list.removeAll {
+                handlerTuple in
+                if let iteratingRequest = handlerTuple.0.object,
+                    iteratingRequest != request {
+                    return false
+                }
+                return true
+            }
+        }
+    }
 }
 
 // MARK: - Redirection Handler
@@ -273,6 +346,10 @@ private class NARequestManagerRedirectHandler: Alamofire.RedirectHandler {
     }
     
     func task(_ task: URLSessionTask, willBeRedirectedTo request: URLRequest, for response: HTTPURLResponse, completion: @escaping (URLRequest?) -> Void) {
+        guard let parent = parent else {
+            return completion(nil)
+        }
+        
         var modifiedNewRequest = request
         
         // If the request is redirected to a http schemed url, make the
@@ -290,6 +367,21 @@ private class NARequestManagerRedirectHandler: Alamofire.RedirectHandler {
         
         if response.url?.path == "/cdn-cgi/l/chk_jschl" {
             return completion(nil)
+        } else if let customRedirectionHandlerTuple = parent._requestCustomRedirectionHandlers.first(where: {
+            handlerTuple in
+            // Find matching request
+            if let afRequest = handlerTuple.0.object,
+                afRequest.tasks.contains(task) {
+                return true
+            }
+            return false
+        }), let afRequest = customRedirectionHandlerTuple.0.object {
+            // Pass the results from the custom redirection handler
+            return completion(customRedirectionHandlerTuple.1(
+                afRequest,
+                response,
+                modifiedNewRequest
+            ))
         } else { return completion(modifiedNewRequest) }
     }
 }
