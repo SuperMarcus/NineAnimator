@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterCrashes
 import Kingfisher
 import UIKit
 import UserNotifications
@@ -49,6 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.registerBackgroundUpdateTasks()
         self.configureEnvironment()
         
+        // Setup additional services
+        NineAnimator.default.cloud.setup()
+        NineAnimator.presenceController.setup()
+        
         return true
     }
     
@@ -72,8 +77,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Recover any pending download tasks
         OfflineContentManager.shared.recoverPendingTasks()
         
-        // Setup Kingfisher
+        // Finish Setup
         setupImageCacher()
+        setupCrashHandler()
         
         return true
     }
@@ -297,16 +303,17 @@ extension AppDelegate {
 
 // MARK: - Continuity
 extension AppDelegate {
-    func application(_ application: UIApplication,
-                     continue userActivity: NSUserActivity,
-                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
-        ) -> Bool {
+    func application(
+        _ application: UIApplication,
+        continue userActivity: NSUserActivity,
+        restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void
+    ) -> Bool {
         switch userActivity.activityType {
         case Continuity.activityTypeViewAnime: // Browse anime
             guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
                 let link = try? PropertyListDecoder().decode(AnimeLink.self, from: linkData) else {
-                Log.error("Cannot resume activity: invalid user info")
-                return false
+                    Log.error("Cannot resume activity: invalid user info")
+                    return false
             }
             RootViewController.open(whenReady: .anime(link))
             return true
@@ -321,8 +328,8 @@ extension AppDelegate {
             guard let info = userActivity.userInfo, let linkData = info["link"] as? Data,
                 let progress = info["progress"] as? Float,
                 let link = try? PropertyListDecoder().decode(EpisodeLink.self, from: linkData) else {
-                Log.error("Cannot resume activity: invalid user info")
-                return false
+                    Log.error("Cannot resume activity: invalid user info")
+                    return false
             }
             // Save progress so it will resume once we starts it
             NineAnimator.default.user.update(progress: progress, for: link)
@@ -418,6 +425,34 @@ fileprivate extension AppDelegate {
         // Set loading failure image
         Kingfisher.KingfisherManager.shared.defaultOptions.append(.onFailureImage(#imageLiteral(resourceName: "Artwork Load Failure")))
     }
+    
+    func setupCrashHandler() {
+        MSCrashes.setUserConfirmationHandler {
+            _ in
+            let alertController = UIAlertController(
+                title: "Oops, the app crashed.",
+                message: "Looks like NineAnimator just crashed due to an internal error. Do you want to send an anonymous crash report so we can fix the issue?",
+                preferredStyle: .alert
+            )
+            
+            alertController.addAction(UIAlertAction(title: "Don't send", style: .cancel) {
+                _ in MSCrashes.notify(with: .dontSend)
+            })
+            
+            alertController.addAction(UIAlertAction(title: "Send", style: .default) {
+                _ in MSCrashes.notify(with: .send)
+            })
+            
+            alertController.addAction(UIAlertAction(title: "Always send", style: .default) {
+                _ in MSCrashes.notify(with: .always)
+            })
+            
+            // Show the alert controller.
+            RootViewController.shared?.presentOnTop(alertController, animated: true)
+            
+            return true
+        }
+    }
 }
 
 // MARK: - Quick Actions
@@ -433,7 +468,7 @@ fileprivate extension AppDelegate {
             localizedSubtitle: nil,
             icon: .init(templateImageName: "Library Icon"),
             userInfo: nil
-        ))
+            ))
         
         availableShortcutItems.append(.init(
             type: AppShortcutType.search.rawValue,
@@ -441,7 +476,7 @@ fileprivate extension AppDelegate {
             localizedSubtitle: nil,
             icon: .init(type: .search),
             userInfo: nil
-        ))
+            ))
         
         if let lastWatchedEpisode = NineAnimator.default.user.lastEpisode {
             availableShortcutItems.append(.init(
@@ -450,7 +485,7 @@ fileprivate extension AppDelegate {
                 localizedSubtitle: "\(lastWatchedEpisode.name) - \(lastWatchedEpisode.parent.title)",
                 icon: .init(type: .play),
                 userInfo: nil
-            ))
+                ))
         }
         
         // Update the shortcut items

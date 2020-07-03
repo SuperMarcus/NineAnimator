@@ -22,6 +22,15 @@ import UIKit
 extension AppDelegate {
     /// Update NineAnimator settings based on environment variable values
     func configureEnvironment() {
+        // Update user runtime id
+        var rid = NineAnimator.applicationRuntimeUuid.uuid
+        let ridData = NSData(bytes: &rid, length: 10) as Data
+        let aidData = Bundle.main.infoDictionary!["UIApplicationRegistrationData", typedDefault: Data(repeating: 0, count: 6)]
+        let idData = ridData + aidData
+        NineAnimator.default.user.runtimeUuid = idData.withUnsafeBytes { (ptr: UnsafeRawBufferPointer) in
+            UUID(uuid: ptr.bindMemory(to: uuid_t.self).baseAddress!.pointee)
+        }
+        
         // NINEANIMATOR_NO_ANIMATIONS: Disable Animations
         if NineAnimator.runtime.isAnimationDisabled {
             Log.info("[AppDelegate.Environment] Disabling animations...")

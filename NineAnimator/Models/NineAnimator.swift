@@ -27,9 +27,15 @@ class NineAnimator: SessionDelegate {
     /// NineAnimator runtime properties
     static var runtime = NineAnimatorRuntime()
     
+    /// Discord rich presence controller
+    static var presenceController = DiscordPresenceController()
+    
+    /// Generate random application UUID
+    static var applicationRuntimeUuid = UUID()
+    
     /// A dummy artwork url
     class var placeholderArtworkUrl: URL {
-        URL(string: "https://nineanimator-api.marcuszhou.com/static/resources/artwork_not_available.jpg")!
+        NineAnimatorCloud.placeholderArtworkURL
     }
     
     /// Join NineAnimator community on Discord
@@ -46,6 +52,9 @@ class NineAnimator: SessionDelegate {
     
     /// Reachability manager
     private(set) var reachability: NetworkReachabilityManager?
+    
+    /// NineAnimator Cloud services instance
+    private(set) var cloud = NineAnimatorCloud()
     
     private let mainAdditionalHeaders: HTTPHeaders = {
         var headers = HTTPHeaders.default

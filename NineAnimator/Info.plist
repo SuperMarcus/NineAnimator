@@ -69,6 +69,16 @@
 				<string>nineanimator</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.marcuszhou.NineAnimator.discordRpcScheme</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>discord-573345011610026006</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -88,6 +98,10 @@
 		<string>com.marcuszhou.nineanimator.activity.resumePlayback</string>
 		<string>com.marcuszhou.nineanimator.activity.continueEpisode</string>
 	</array>
+	<key>UIApplicationRegistrationData</key>
+	<data>
+	b6TFpcxX
+	</data>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

@@ -55,6 +55,8 @@
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
+		2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2C18FDEC24AAD85400F021BE /* AppCenterCrashes */; };
+		2C18FDEF24AAD85400F021BE /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */; };
 		2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C716622183FA500760A69 /* AnimeListing.storyboard */; };
 		2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C716B221845A800760A69 /* ContentListingLoadingTableViewCell.swift */; };
 		2C1C716F221853AD00760A69 /* Anilist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C716E221853AD00760A69 /* Anilist.swift */; };
@@ -254,6 +256,8 @@
 		2C91297321BB61BE00284FD0 /* RapidVideoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */; };
 		2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297421BB7A4200284FD0 /* StreamangoParser.swift */; };
 		2C91297721BB867300284FD0 /* MyCloudParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91297621BB867300284FD0 /* MyCloudParser.swift */; };
+		2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */ = {isa = PBXBuildFile; platformFilter = maccatalyst; productRef = 2C9325C124ACDDD3001E3708 /* SwordRPC */; };
+		2C9325C424ACDE34001E3708 /* DiscordPresenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9325C324ACDE34001E3708 /* DiscordPresenceController.swift */; };
 		2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */; };
 		2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */; };
 		2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */; };
@@ -706,6 +710,7 @@
 		2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RapidVideoParser.swift; sourceTree = "<group>"; };
 		2C91297421BB7A4200284FD0 /* StreamangoParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamangoParser.swift; sourceTree = "<group>"; };
 		2C91297621BB867300284FD0 /* MyCloudParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCloudParser.swift; sourceTree = "<group>"; };
+		2C9325C324ACDE34001E3708 /* DiscordPresenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscordPresenceController.swift; sourceTree = "<group>"; };
 		2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MakeThemable.swift"; sourceTree = "<group>"; };
 		2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+StyleAttributes.swift"; sourceTree = "<group>"; };
 		2C9383D721FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+StyleAttributes.swift"; sourceTree = "<group>"; };
@@ -890,12 +895,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CB67042249FC9E3006C11A9 /* Kingfisher in Frameworks */,
 				2CB6704E249FCA65006C11A9 /* ViewAnimator in Frameworks */,
 				2CB67045249FCA06006C11A9 /* Alamofire in Frameworks */,
+				2C18FDEF24AAD85400F021BE /* AppCenterAnalytics in Frameworks */,
 				2CB67048249FCA24006C11A9 /* SwiftSoup in Frameworks */,
 				2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */,
+				2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1269,6 +1277,7 @@
 				2C12EDD621BDE66E0064D2BD /* Prototype */,
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
+				2C9325C324ACDE34001E3708 /* DiscordPresenceController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2015,6 +2024,9 @@
 				2CB67047249FCA24006C11A9 /* SwiftSoup */,
 				2CB6704A249FCA48006C11A9 /* OpenCastSwift */,
 				2CB6704D249FCA65006C11A9 /* ViewAnimator */,
+				2C18FDEC24AAD85400F021BE /* AppCenterCrashes */,
+				2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */,
+				2C9325C124ACDDD3001E3708 /* SwordRPC */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -2096,6 +2108,8 @@
 				2CB67046249FCA24006C11A9 /* XCRemoteSwiftPackageReference "SwiftSoup" */,
 				2CB67049249FCA48006C11A9 /* XCRemoteSwiftPackageReference "OpenCastSwift" */,
 				2CB6704C249FCA65006C11A9 /* XCRemoteSwiftPackageReference "ViewAnimator" */,
+				2C18FDEB24AAD85400F021BE /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */,
 			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
 			projectDirPath = "";
@@ -2180,7 +2194,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\nfi\n";
+			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\n    \n    echo \"Removing com.apple.security.app-sandbox on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.security\\.app-sandbox\" \"${ENTITLEMENTS_FILE}\"\nfi\n";
 		};
 		2CD7499C225B6409004C6C0C /* Generate Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2557,6 +2571,7 @@
 				2C1C71832219975A00760A69 /* Promise+Hashable.swift in Sources */,
 				2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */,
 				6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */,
+				2C9325C424ACDE34001E3708 /* DiscordPresenceController.swift in Sources */,
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
@@ -3075,6 +3090,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2C18FDEB24AAD85400F021BE /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.3.0;
+			};
+		};
+		2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SuperMarcus/SwordRPC";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		2CB67040249FC9E3006C11A9 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -3118,6 +3149,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2C18FDEC24AAD85400F021BE /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C18FDEB24AAD85400F021BE /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C18FDEB24AAD85400F021BE /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
+		};
+		2C9325C124ACDDD3001E3708 /* SwordRPC */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */;
+			productName = SwordRPC;
+		};
 		2CB67041249FC9E3006C11A9 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2CB67040249FC9E3006C11A9 /* XCRemoteSwiftPackageReference "Kingfisher" */;

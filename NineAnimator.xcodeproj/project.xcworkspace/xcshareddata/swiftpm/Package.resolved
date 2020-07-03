@@ -11,6 +11,24 @@
         }
       },
       {
+        "package": "App Center",
+        "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
+        "state": {
+          "branch": null,
+          "revision": "2c1618a9bca76039aad49a5079b0f2879a643a7d",
+          "version": "3.3.1"
+        }
+      },
+      {
+        "package": "Socket",
+        "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
+        "state": {
+          "branch": null,
+          "revision": "c46a3d41f5b2401d18bcb46d0101cdc5cd13e307",
+          "version": "1.0.52"
+        }
+      },
+      {
         "package": "Kingfisher",
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
@@ -24,8 +42,17 @@
         "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift",
         "state": {
           "branch": "spm",
-          "revision": "fdbecac31b2d84e45898136a85ea937f0e683850",
+          "revision": "ab3aafae42b7719b08fbaa18dbb80c2b8995ddb1",
           "version": null
+        }
+      },
+      {
+        "package": "PLCrashReporter",
+        "repositoryURL": "https://github.com/microsoft/plcrashreporter.git",
+        "state": {
+          "branch": null,
+          "revision": "5e013e00ad342d8ccaae767fef5a1ef117514ce8",
+          "version": "1.7.1"
         }
       },
       {
@@ -33,8 +60,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf",
         "state": {
           "branch": null,
-          "revision": "7f36441e3372665b1b414f8ac93b5905cc42a405",
-          "version": "1.9.0"
+          "revision": "05cb9347bb095d9a28234a593d45cb9fcdc9d196",
+          "version": "1.10.0"
         }
       },
       {
@@ -53,6 +80,15 @@
           "branch": null,
           "revision": "2b6054efa051565954e1d2b9da831680026cd768",
           "version": "5.0.0"
+        }
+      },
+      {
+        "package": "SwordRPC",
+        "repositoryURL": "https://github.com/SuperMarcus/SwordRPC",
+        "state": {
+          "branch": "master",
+          "revision": "04d6ac5ad1040a4ba6ebea696a2cc7b0b327f886",
+          "version": null
         }
       },
       {

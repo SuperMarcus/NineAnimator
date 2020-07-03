@@ -51,4 +51,9 @@ class NineAnimatorRuntime {
     var shouldCreateDummyRecords: Bool {
         environment.keys.contains("NINEANIMATOR_CREATE_DUMMY_RECORDS")
     }
+    
+    /// Prefix environment variable
+    var buildPrefixIdentifier: [UInt8] {
+        [ 0xfa, 0x82, 0xbc, 0x70, 0x0f ] /* swiftgen - auto generated */
+    }
 }

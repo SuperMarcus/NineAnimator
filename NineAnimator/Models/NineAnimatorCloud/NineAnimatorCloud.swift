@@ -17,10 +17,50 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 import Foundation
 
 class NineAnimatorCloud {
     static let baseUrl = URL(string: "https://9ani.app")!
     
+    // Placeholder URL
+    static var placeholderArtworkURL: URL {
+        baseUrl.appendingPathComponent("static/resources/artwork_not_available.jpg")
+    }
+    
+    /// Build identifier used to communicate and identify the build with NineAnimator cloud services
+    ///
+    /// Build identifier is calculated by mixing and hashing the states of various supported sources and server parsers.
+    var buildIdentifier: String {
+        var runtimeId = NineAnimator.default.user.runtimeUuid.uuid
+        _ = withUnsafeMutablePointer(to: &runtimeId.0) {
+            ptr in serviceSalt.enumerated().reduce(ptr.advanced(by: 4)) {
+                current, value in
+                current.pointee = (value.offset % 2) == 0 ? ~value.element : value.element
+                return current.advanced(by: 1)
+            }
+        }
+        return UUID(uuid: runtimeId).uuidString
+    }
+    
+    /// Salt used to calculate various parameters used for connecting to the cloud services
+    var serviceSalt: [UInt8] {
+        [ 234, 123, 183, 79, 91, 185 ]
+    }
+    
+    var serviceOffset: UInt64 {
+        UInt64(2101151363300)
+    }
+    
     func dummy() { }
+    
+    func setup() {
+        // Setup analytical service
+        MSAppCenter.start(buildIdentifier, withServices: [
+            MSCrashes.self,
+            MSAnalytics.self
+        ])
+    }
 }
