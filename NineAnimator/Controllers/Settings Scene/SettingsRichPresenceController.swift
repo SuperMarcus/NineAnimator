@@ -41,11 +41,17 @@ class SettingsRichPresenceController: UITableViewController {
             name: .presenceControllerConnectionStateDidUpdate,
             object: nil
         )
+        configureForTransparentScrollEdge()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.makeThemable()
         self._updateUIComponents()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectSelectedRows()
     }
     
     private func _updateUIComponents() {
