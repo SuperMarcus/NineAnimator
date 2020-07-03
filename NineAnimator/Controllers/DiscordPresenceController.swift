@@ -138,7 +138,7 @@ extension DiscordPresenceController {
         switch currentPresence {
         case .chilling:
             presence.state = "Just Chilling"
-            presence.details = "About to start some shows"
+            presence.details = "About to watch some anime"
             presence.assets.largeImage = "nineanimator_icon"
             presence.assets.largeText = "Using NineAnimator"
         case let .watching(episodeLink):
