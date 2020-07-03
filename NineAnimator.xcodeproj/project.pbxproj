@@ -215,6 +215,7 @@
 		2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7BD23921B9B4F400B29C90 /* Episode.swift */; };
 		2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */; };
 		2C7FD584235909B300E37A89 /* ClosedRange+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */; };
+		2C8374EA24AF808A0009F8D7 /* SettingsRichPresenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */; };
 		2C8519A722CC8DBD00EEF3AC /* Kissanime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */; };
 		2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */; };
 		2C8519AB22CC919800EEF3AC /* Kissanime+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8519AA22CC919800EEF3AC /* Kissanime+Featured.swift */; };
@@ -653,6 +654,7 @@
 		2C7BD23921B9B4F400B29C90 /* Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Episode.swift; sourceTree = "<group>"; };
 		2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledFlowLayoutHelper.swift; sourceTree = "<group>"; };
 		2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+Clamp.swift"; sourceTree = "<group>"; };
+		2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRichPresenceController.swift; sourceTree = "<group>"; };
 		2C85031E24271F610038F881 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		2C8519A622CC8DBD00EEF3AC /* Kissanime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kissanime.swift; sourceTree = "<group>"; };
 		2C8519A822CC8DD900EEF3AC /* Kissanime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kissanime+RequestModifier.swift"; sourceTree = "<group>"; };
@@ -1690,6 +1692,7 @@
 				2C1C717222186EC900760A69 /* TrackingServiceTableViewController.swift */,
 				2C0DA2DD238B09C3002C6447 /* SettingsDownloadsController.swift */,
 				2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */,
+				2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2404,6 +2407,7 @@
 				2CAEA891235D385400AC2370 /* LibraryHeaderView.swift in Sources */,
 				2C4FDDAC22482AE90059B7D8 /* UrlFormEncoding.swift in Sources */,
 				2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */,
+				2C8374EA24AF808A0009F8D7 /* SettingsRichPresenceController.swift in Sources */,
 				2C6A390A23A0180B00FC00A9 /* FourAnime+Episode.swift in Sources */,
 				2CFE2D98227D379200030B1F /* Anilist+CalendarProvider.swift in Sources */,
 				2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */,

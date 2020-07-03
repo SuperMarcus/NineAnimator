@@ -24,6 +24,29 @@ import SwordRPC
 #endif
 
 class DiscordPresenceController {
+    /// If rich presence service is available on the current platform
+    var isAvailable: Bool {
+        #if targetEnvironment(macCatalyst) || os(macOS)
+        return true
+        #else
+        return false
+        #endif
+    }
+    
+    /// Reflects the enabled state of rich presence integration from NineAnimatorUser
+    var isEnabled: Bool {
+        isAvailable && NineAnimator.default.user.richPresenceEnabled
+    }
+    
+    /// Whether the RPC service has been connected
+    var isConnected: Bool {
+        #if canImport(SwordRPC)
+        return _rpcService.isConnected
+        #else
+        return false
+        #endif
+    }
+    
     #if canImport(SwordRPC)
     private var _rpcService: SwordRPC
     #endif
@@ -52,6 +75,20 @@ class DiscordPresenceController {
             name: .playbackDidEnd,
             object: nil
         )
+        #endif
+    }
+    
+    func reset() {
+        #if canImport(SwordRPC)
+        _queue.async {
+            if self.isEnabled {
+                self._rpcService = SwordRPC(appId: DiscordPresenceController.serviceId)
+                self._rpcService.delegate = self
+                self._setupRPCService()
+            } else if self._rpcService.isConnected {
+                self._rpcService.disconnect()
+            }
+        }
         #endif
     }
     
@@ -94,13 +131,24 @@ extension DiscordPresenceController: SwordRPCDelegate {
     }
     
     private func _setupRPCService() {
-        Log.info("[DiscordPresenceController] Setting up Discord RPC service...")
-        _queue.async { self._rpcService.connect() }
+        if self.isEnabled && !self._rpcService.isConnected {
+            Log.info("[DiscordPresenceController] Setting up Discord RPC service...")
+            _queue.async { self._rpcService.connect() }
+        }
     }
     
     func swordRPCDidConnect(_ rpc: SwordRPC) {
         Log.info("[DiscordPresenceController] Discord RPC connection established.")
-        _queue.async { self._sendRPCPresence() }
+        _queue.async {
+            self._sendRPCPresence()
+            NotificationCenter.default.post(name: .presenceControllerConnectionStateDidUpdate, object: self)
+        }
+    }
+    
+    func swordRPCDidDisconnect(_ rpc: SwordRPC, code: Int?, message msg: String?) {
+        _queue.async {
+            NotificationCenter.default.post(name: .presenceControllerConnectionStateDidUpdate, object: self)
+        }
     }
     
     func swordRPCDidReceiveError(_ rpc: SwordRPC, code: Int, message: String) {
@@ -138,24 +186,29 @@ extension DiscordPresenceController {
         switch currentPresence {
         case .chilling:
             presence.state = "Just Chilling"
-            presence.details = "About to watch some anime"
+            presence.details = "About start watching"
             presence.assets.largeImage = "nineanimator_icon"
             presence.assets.largeText = "Using NineAnimator"
         case let .watching(episodeLink):
-            let episodeNumber = NineAnimator
-                .default
-                .trackingContext(for: episodeLink.parent)
-                .suggestingEpisodeNumber(for: episodeLink)
+            presence.state = "Watching an Anime"
+            presence.details = "In NineAnimator"
+            presence.assets.largeText = "Watching an Anime"
             
-            if let episodeNumber = episodeNumber {
-                presence.state = "Watching Episode \(episodeNumber)"
-            } else {
-                presence.state = "Watching an Anime"
+            if NineAnimator.default.user.richPresenceShowAnimeName {
+                let episodeNumber = NineAnimator
+                    .default
+                    .trackingContext(for: episodeLink.parent)
+                    .suggestingEpisodeNumber(for: episodeLink)
+                
+                if let episodeNumber = episodeNumber {
+                    presence.state = "Watching Episode \(episodeNumber)"
+                }
+                
+                presence.details = episodeLink.parent.title
+                presence.assets.largeText = "Watching \(episodeLink.parent.title)"
             }
             
-            presence.details = episodeLink.parent.title
             presence.assets.largeImage = "watching_anime"
-            presence.assets.largeText = "Watching \(episodeLink.parent.title)"
             presence.assets.smallImage = "nineanimator_icon"
             presence.assets.smallText = "with NineAnimator"
         }

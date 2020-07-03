@@ -157,8 +157,39 @@
                                             <segue destination="ewc-lA-d04" kind="show" identifier="storage" id="taP-uA-G6i"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="W4K-f9-Rrg" detailTextLabel="oJY-Uv-hLj" style="IBUITableViewCellStyleValue1" id="phW-yl-CAH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="zf6-9h-gav" detailTextLabel="OnI-zr-2Cs" style="IBUITableViewCellStyleValue1" id="nak-E7-NFu">
                                         <rect key="frame" x="16" y="393" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nak-E7-NFu" id="rmi-et-SQ7">
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Rich Presence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zf6-9h-gav">
+                                                    <rect key="frame" x="15" y="12" width="109.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enabled" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OnI-zr-2Cs">
+                                                    <rect key="frame" x="247" y="12" width="62" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Fv1-Ez-qVP" kind="show" id="emW-LH-IN0"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="W4K-f9-Rrg" detailTextLabel="oJY-Uv-hLj" style="IBUITableViewCellStyleValue1" id="phW-yl-CAH">
+                                        <rect key="frame" x="16" y="437" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="phW-yl-CAH" id="eou-o8-MwE">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -188,7 +219,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BDo-SJ-NV8" style="IBUITableViewCellStyleDefault" id="KtS-kv-Zim">
-                                        <rect key="frame" x="16" y="437" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="481" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KtS-kv-Zim" id="rAq-5c-VCU">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -212,7 +243,7 @@
                             <tableViewSection footerTitle="Sort episodes from oldest to newest (Ordered) or from newest to oldest (Reversed)." id="UxF-RW-Y6p">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ZGI-4p-RQT">
-                                        <rect key="frame" x="16" y="545" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="589" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZGI-4p-RQT" id="Vvu-Pd-mfs">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -247,7 +278,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="dgw-6u-reO">
-                                        <rect key="frame" x="16" y="589" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="633" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dgw-6u-reO" id="jNR-hn-O6a">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -282,7 +313,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="FzX-Wm-E1l">
-                                        <rect key="frame" x="16" y="633" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="677" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FzX-Wm-E1l" id="c69-Wg-t4z">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -317,7 +348,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="4td-cI-giU">
-                                        <rect key="frame" x="16" y="677" width="343" height="50"/>
+                                        <rect key="frame" x="16" y="721" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4td-cI-giU" id="FXE-v7-8hA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -366,14 +397,14 @@ Enabling Background Playback will allow audio to be played while NineAnimator is
 Fallback to Browser directs the app to open the playback page in Safari when failing to retrieve the content.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.pip" id="qhX-cq-vU4">
-                                        <rect key="frame" x="16" y="818.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="862.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qhX-cq-vU4" id="OSj-kC-9rq">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture in Picture Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-np-Dks">
-                                                    <rect key="frame" x="8" y="11.5" width="270" height="21"/>
+                                                    <rect key="frame" x="8" y="11.5" width="215" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -383,7 +414,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-YN-aHk">
-                                                    <rect key="frame" x="286" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="231" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onPiPDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="bNU-Fd-iPa"/>
                                                     </connections>
@@ -400,14 +431,14 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.background" rowHeight="49" id="n4D-7A-fGL">
-                                        <rect key="frame" x="16" y="862.5" width="343" height="49"/>
+                                        <rect key="frame" x="16" y="906.5" width="343" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n4D-7A-fGL" id="YQZ-Ov-IMJ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
-                                                    <rect key="frame" x="8" y="14" width="270" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="215" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -417,7 +448,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
-                                                    <rect key="frame" x="286" y="8" width="51" height="33"/>
+                                                    <rect key="frame" x="231" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onBackgroundPlaybackDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Thu-pY-uHV"/>
                                                     </connections>
@@ -435,14 +466,14 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.browser" rowHeight="49" id="lHh-KO-m79">
-                                        <rect key="frame" x="16" y="911.5" width="343" height="49"/>
+                                        <rect key="frame" x="16" y="955.5" width="343" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lHh-KO-m79" id="mF9-8T-lcr">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fallback to Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPl-8j-R24">
-                                                    <rect key="frame" x="8" y="14" width="270" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="215" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -452,7 +483,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="amF-Cb-8Hv">
-                                                    <rect key="frame" x="286" y="8" width="51" height="33"/>
+                                                    <rect key="frame" x="231" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onPlaybackFallbackToBrowserDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="txC-ln-kTz"/>
                                                     </connections>
@@ -470,7 +501,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="0eR-hu-Qxf" style="IBUITableViewCellStyleDefault" id="30T-PY-VFY">
-                                        <rect key="frame" x="16" y="960.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1004.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="30T-PY-VFY" id="eTQ-k1-6uJ">
                                             <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
@@ -490,7 +521,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.playback.cast.controller" textLabel="7gK-el-Ee1" style="IBUITableViewCellStyleDefault" id="Gfi-kw-cMp">
-                                        <rect key="frame" x="16" y="1004.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1048.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gfi-kw-cMp" id="Bba-gR-8CX">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -517,20 +548,20 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
 NineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Bf7-Pu-dBT">
-                                        <rect key="frame" x="16" y="1284" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1328" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bf7-Pu-dBT" id="7Jv-k7-Ho0">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BFt-ME-5uJ">
-                                                    <rect key="frame" x="286" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="231" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onShowStreamsInNotificationDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="T4a-ul-J75"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Available Streams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKK-PI-ugJ">
-                                                    <rect key="frame" x="8" y="11.5" width="270" height="21"/>
+                                                    <rect key="frame" x="8" y="11.5" width="215" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -551,7 +582,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="CDE-MG-fiI" detailTextLabel="7Ky-4E-HeC" style="IBUITableViewCellStyleValue1" id="5rn-67-5mc">
-                                        <rect key="frame" x="16" y="1328" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1372" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rn-67-5mc" id="tM1-zu-u0J">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -575,7 +606,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="2ol-44-Ha5" detailTextLabel="1D4-d4-eg5" style="IBUITableViewCellStyleValue1" id="ZKI-hf-ZyL">
-                                        <rect key="frame" x="16" y="1372" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1416" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZKI-hf-ZyL" id="xMv-AW-CLZ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -599,7 +630,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.notification.unsubscribe" textLabel="hGc-BW-frZ" style="IBUITableViewCellStyleDefault" id="7Te-DO-Vux">
-                                        <rect key="frame" x="16" y="1416" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1460" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Te-DO-Vux" id="Xv0-VE-rcD">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -626,7 +657,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
 Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.export" textLabel="AVN-Z6-xDl" style="IBUITableViewCellStyleDefault" id="7k5-mS-bTC">
-                                        <rect key="frame" x="16" y="1631.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1675.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7k5-mS-bTC" id="0lt-wk-XIg">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -646,7 +677,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.cache" textLabel="1VP-oc-aqz" style="IBUITableViewCellStyleDefault" id="PVj-MT-9I3">
-                                        <rect key="frame" x="16" y="1675.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1719.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVj-MT-9I3" id="MPd-xb-7NG">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -666,7 +697,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.search" textLabel="oqf-KR-CRA" style="IBUITableViewCellStyleDefault" id="oPk-Xa-CSY">
-                                        <rect key="frame" x="16" y="1719.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1763.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oPk-Xa-CSY" id="bZU-c8-uAL">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -686,7 +717,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
-                                        <rect key="frame" x="16" y="1763.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1807.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1L-Nj-oEr" id="GUF-UM-X8f">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -714,7 +745,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.download" textLabel="1X7-X7-huV" style="IBUITableViewCellStyleDefault" id="0ur-OD-NVC">
-                                        <rect key="frame" x="16" y="1807.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1851.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ur-OD-NVC" id="VLu-rd-6yQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -735,7 +766,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.activities" textLabel="dIG-JR-U2D" style="IBUITableViewCellStyleDefault" id="A67-qe-KDF">
-                                        <rect key="frame" x="16" y="1851.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1895.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A67-qe-KDF" id="ZJ4-s2-eF9">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -756,14 +787,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.reset" id="24A-0U-h1t">
-                                        <rect key="frame" x="16" y="1895.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1939.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24A-0U-h1t" id="tu1-Qe-wbN">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-wL-Vag">
-                                                    <rect key="frame" x="8" y="11" width="327" height="22"/>
+                                                    <rect key="frame" x="8" y="11" width="272" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -808,6 +839,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                         <outlet property="fallbackToBrowserSwitch" destination="amF-Cb-8Hv" id="P1S-OV-TNk"/>
                         <outlet property="pictureInPictureSwitch" destination="6vy-YN-aHk" id="Ah9-GZ-SZP"/>
                         <outlet property="preferredAnimeDetailsSourceLabel" destination="oJY-Uv-hLj" id="LTc-HY-lgh"/>
+                        <outlet property="richPresenceStatusLabel" destination="OnI-zr-2Cs" id="j7Z-jP-8Qf"/>
                         <outlet property="subscriptionShowStreamsSwitch" destination="BFt-ME-5uJ" id="2nT-eo-Faj"/>
                         <outlet property="subscriptionStatsLabel" destination="7Ky-4E-HeC" id="pc3-1U-XSv"/>
                         <outlet property="subscriptionStatusLabel" destination="1D4-d4-eg5" id="7uL-FQ-3pc"/>
@@ -1385,7 +1417,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simkl Icon" translatesAutoresizingMaskIntoConstraints="NO" id="1NB-hr-B7i">
-                                                    <rect key="frame" x="46.5" y="32" width="250" height="50"/>
+                                                    <rect key="frame" x="19" y="32" width="250" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="ZJP-BV-WWV"/>
                                                         <constraint firstAttribute="width" constant="250" id="clG-1o-vrj"/>
@@ -1395,7 +1427,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIMKL.COM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwG-xM-EqT">
-                                                    <rect key="frame" x="135.5" y="82" width="72.5" height="16"/>
+                                                    <rect key="frame" x="108" y="82" width="72.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1497,6 +1529,145 @@ NineAnimator is not affiliated with simkl.com.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rvg-r8-1li" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="577" y="959"/>
+        </scene>
+        <!--Rich Presence-->
+        <scene sceneID="YZR-Es-qp6">
+            <objects>
+                <tableViewController id="Fv1-Ez-qVP" customClass="SettingsRichPresenceController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="wKD-nH-WxQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection headerTitle="Discord Rich Presence" footerTitle="Rich Presence integration is only available on the macOS version of NineAnimator." id="7ve-qh-eJ7">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Xga-R0-viW">
+                                        <rect key="frame" x="16" y="55.5" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xga-R0-viW" id="bee-eJ-hn6">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Rich Presence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKG-YA-MEK">
+                                                    <rect key="frame" x="15" y="11.5" width="256" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-4T-PJx">
+                                                    <rect key="frame" x="279" y="8" width="51" height="28"/>
+                                                    <connections>
+                                                        <action selector="_onEnableSwitchToggle:" destination="Fv1-Ez-qVP" eventType="valueChanged" id="xp3-V3-0aV"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="dKG-YA-MEK" firstAttribute="centerY" secondItem="bee-eJ-hn6" secondAttribute="centerY" id="8nC-aa-9Dl"/>
+                                                <constraint firstItem="jIg-4T-PJx" firstAttribute="leading" secondItem="dKG-YA-MEK" secondAttribute="trailing" constant="8" id="LzM-pQ-xJd"/>
+                                                <constraint firstAttribute="bottom" secondItem="jIg-4T-PJx" secondAttribute="bottom" constant="8" id="ROt-VE-uiU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jIg-4T-PJx" secondAttribute="trailing" id="fwp-L8-wxM"/>
+                                                <constraint firstItem="jIg-4T-PJx" firstAttribute="top" secondItem="bee-eJ-hn6" secondAttribute="top" constant="8" id="rQa-ZZ-sn9"/>
+                                                <constraint firstItem="dKG-YA-MEK" firstAttribute="leading" secondItem="bee-eJ-hn6" secondAttribute="leadingMargin" id="yRV-Bm-sJs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ugW-Py-Ptp" detailTextLabel="PuS-sL-Ohy" style="IBUITableViewCellStyleValue1" id="ZoM-a3-ZER">
+                                        <rect key="frame" x="16" y="99.5" width="343" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZoM-a3-ZER" id="x9r-wK-OZO">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ugW-Py-Ptp">
+                                                    <rect key="frame" x="15" y="12" width="49.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Unavailable" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PuS-sL-Ohy">
+                                                    <rect key="frame" x="240" y="12" width="88" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection footerTitle="Include information about the currently watching episode on the rich presence." id="F2u-yS-1Me">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="0xL-Sb-L2t">
+                                        <rect key="frame" x="16" y="207" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xL-Sb-L2t" id="kwn-cB-uXb">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0r-Qw-HAp">
+                                                    <rect key="frame" x="15" y="11.5" width="256" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="irn-bE-VXh">
+                                                    <rect key="frame" x="279" y="8" width="51" height="28"/>
+                                                    <connections>
+                                                        <action selector="_onShowAnimeSwitchToggle:" destination="Fv1-Ez-qVP" eventType="valueChanged" id="aiw-Dd-wNd"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="irn-bE-VXh" firstAttribute="top" secondItem="kwn-cB-uXb" secondAttribute="top" constant="8" id="5ro-ra-Su7"/>
+                                                <constraint firstItem="irn-bE-VXh" firstAttribute="leading" secondItem="m0r-Qw-HAp" secondAttribute="trailing" constant="8" id="FDH-3O-4R7"/>
+                                                <constraint firstAttribute="bottom" secondItem="irn-bE-VXh" secondAttribute="bottom" constant="8" id="JR9-uT-ZLm"/>
+                                                <constraint firstItem="m0r-Qw-HAp" firstAttribute="leading" secondItem="kwn-cB-uXb" secondAttribute="leadingMargin" id="adm-Fk-KPS"/>
+                                                <constraint firstItem="m0r-Qw-HAp" firstAttribute="centerY" secondItem="kwn-cB-uXb" secondAttribute="centerY" id="hYN-cJ-4lH"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="irn-bE-VXh" secondAttribute="trailing" id="kS9-i8-MgG"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="dataSource" destination="Fv1-Ez-qVP" id="1e9-pe-0yV"/>
+                            <outlet property="delegate" destination="Fv1-Ez-qVP" id="TGb-Hp-QQO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Rich Presence" id="GvM-Nb-tnN"/>
+                    <connections>
+                        <outlet property="richPresenceEnabledSwitch" destination="jIg-4T-PJx" id="UF7-oj-8nm"/>
+                        <outlet property="richPresenceShowAnimeTitleSwitch" destination="irn-bE-VXh" id="1vu-mP-uIu"/>
+                        <outlet property="richPresenceStatusLabel" destination="PuS-sL-Ohy" id="N57-Vp-cTP"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KTZ-iu-wTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-374" y="-750"/>
         </scene>
         <!--Storage-->
         <scene sceneID="zsp-A0-a07">

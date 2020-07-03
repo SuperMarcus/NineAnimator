@@ -48,6 +48,8 @@ extension NineAnimatorUser {
         static var homeUUIDEnd: String { "home.actionset.uuid.end" }
         static var theme: String { "interface.theme" }
         static var brightnessBasedTheme: String { "interface.brightnessBasedTheme" }
+        static var richPresenceEnable: String { "presence.enable" }
+        static var richPresenceShowAnimeName: String { "presence.animeTitle" }
         
         // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { "com.marcuszhou.NineAnimator.anime.watching.plist" }

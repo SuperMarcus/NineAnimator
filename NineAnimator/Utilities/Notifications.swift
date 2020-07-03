@@ -109,4 +109,8 @@ extension Notification.Name {
     /// Fired when the rich presence has been updated.
     static let presenceControllerDidUpdatePresence =
         Notification.Name("com.marcuszhou.nineanimator.presenceControllerDidUpdatePresence")
+    
+    /// Fired when the RPC service connection state has changed
+    static let presenceControllerConnectionStateDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.presenceControllerConnectionStateDidUpdate")
 }

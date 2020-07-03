@@ -40,6 +40,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     @IBOutlet private weak var fallbackToBrowserSwitch: UISwitch!
+    @IBOutlet private weak var richPresenceStatusLabel: UILabel!
     
     /// The path that the Settings view controller will be navigating to
     private var navigatingTo: EntryPath?
@@ -295,6 +296,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         preferredAnimeDetailsSourceLabel.text =
             NineAnimator.default.user.preferredAnimeInformationService?.name
             ?? "Automatic"
+        richPresenceStatusLabel.text = SettingsRichPresenceController.currentStatus
         
         // Notification and fetch status
         var subscriptionEngineStatus = [String]()

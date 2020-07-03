@@ -173,6 +173,18 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.allowNSFWContent) }
     }
     
+    /// Enable rich presence integration
+    var richPresenceEnabled: Bool {
+        get { _freezer.typedValue(forKey: Keys.richPresenceEnable, default: true) }
+        set { _freezer.set(newValue, forKey: Keys.richPresenceEnable) }
+    }
+    
+    /// Include anime name and episode number in rich presence
+    var richPresenceShowAnimeName: Bool {
+        get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: true) }
+        set { _freezer.set(newValue, forKey: Keys.richPresenceShowAnimeName) }
+    }
+    
     /// Silence warnings about a specific purpose of a server
     func silenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) {
         var listOfSilencedPurposes = _silencedUnrecommendedServerPurposes[server] ?? []
