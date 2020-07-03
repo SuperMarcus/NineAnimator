@@ -20,20 +20,15 @@
 import Foundation
 
 extension Notification.Name {
-    /**
-     Fired when the playback progress has been updated in the NineAnimatorUser
-     */
+    /// Fired when the playback progress has been updated in the NineAnimatorUser
     static let playbackProgressDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.playbackProgressDidUpdate")
     
-    /**
-     Fired when the video is starting to play
-     
-     ## Where its posted
-     
-     - After `NativePlayerController.play(media: PlaybackMedia)` presented the player
-     - `GoogleCastMediaPlaybackViewController.playback(didStart media: CastMedia)`
-     */
+    /// Fired when the video is starting to play
+    ///
+    /// ## Where its posted
+    /// - After `NativePlayerController.play(media: PlaybackMedia)` presented the player
+    /// - `GoogleCastMediaPlaybackViewController.playback(didStart media: CastMedia)`
     static let playbackDidStart =
         Notification.Name("com.marcuszhou.nineanimator.playbackDidStart")
     
@@ -95,9 +90,7 @@ extension Notification.Name {
     static let externalPlaybackDidEnd =
         Notification.Name("com.marcuszhou.nineanimator.externalPlaybackDidEnd")
     
-    /**
-     Fired when HomeKit status is updated
-     */
+    /// Fired when HomeKit status is updated
     static let homeDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.homeDidUpdate")
     
@@ -105,16 +98,15 @@ extension Notification.Name {
     static let homeDidReceiveAuthroizationStatus =
         Notification.Name("com.marcuszhou.nineanimator.homeDidReceiveAuthroizationStatus")
     
-    /**
-     Fired when the offline access state is updated for an episode link
-     */
+    /// Fired when the offline access state is updated for an episode link
     static let offlineAccessStateDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.offlineAccessStateDidUpdate")
     
-    /**
-     Fired when the list of recommendation items are updated in a particular
-     RecommendationSource
-     */
+    /// Fired when the list of recommendation items are updated in a particular RecommendationSource
     static let sourceDidUpdateRecommendation =
         Notification.Name("com.marcuszhou.nineanimator.sourceDidUpdateRecommendation")
+    
+    /// Fired when the rich presence has been updated.
+    static let presenceControllerDidUpdatePresence =
+        Notification.Name("com.marcuszhou.nineanimator.presenceControllerDidUpdatePresence")
 }

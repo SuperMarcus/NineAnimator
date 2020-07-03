@@ -26,6 +26,25 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.version) }
     }
     
+    /// For now, the runtime uuid will reflect the randomly generated UUID at launchtime for privacy reasons
+    var runtimeUuid: UUID {
+        get {
+            var appRuntimeUuid = NineAnimator.applicationRuntimeUuid.uuid
+            _ = withUnsafeMutablePointer(to: &appRuntimeUuid.0) {
+                uuidPtr in
+                var buildPrefix = NineAnimator.runtime.buildPrefixIdentifier
+                let buildPrefixHashingId = buildPrefix.removeFirst()
+                _ = buildPrefix.reduce(uuidPtr) {
+                    ptr, currentValue in
+                    ptr.pointee = buildPrefixHashingId ^ currentValue
+                    return ptr.advanced(by: 1)
+                }
+            }
+            return UUID(uuid: appRuntimeUuid)
+        }
+        set { NineAnimator.applicationRuntimeUuid = newValue }
+    }
+    
     /// Check if the setup wizard was shown
     var didSetupLatestVersion: Bool {
         setupVersion == "\(NineAnimator.default.version) (\(NineAnimator.default.buildNumber))"

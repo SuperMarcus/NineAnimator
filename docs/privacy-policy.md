@@ -28,10 +28,11 @@ Privacy Policy applies to information that we collect about you when
 you use:
 
 * Our mobile applications (including the NineAnimator mobile app);
-* Our websites (including [nineanimator.marcuszhou.com](https://nineanimator.marcuszhou.com),
-  [nineanimator-api.marcuszhou.com](https://nineanimator-api.marcuszhou.com/)).
+* Our desktop applications (including the NineAnimator desktop app);
+* Our websites (including [nineanimator.marcuszhou.com](https://nineanimator.marcuszhou.com), [nineanimator-api.marcuszhou.com](https://nineanimator-api.marcuszhou.com/));
+* Our cloud services (including the NineAnimatorCloud service).
 
-Throughout this Privacy Policy we’ll refer to our mobile applications
+Throughout this Privacy Policy we’ll refer to our applications
 and websites collectively as “Services.” Please note that this Privacy
 Policy does not apply to any of our products or services that have a
 separate privacy policy. Below we explain how we collect, use, and
@@ -175,3 +176,5 @@ and, in some cases, we may provide additional notice (such as adding a
 statement to our mobile application, or sending you a notification through
 email). Your further use of the Services after a change to our Privacy
 Policy will be subject to the updated policy. That’s it! Thanks for reading.
+
+* **July 2, 2020**: Updated section [Who We Are and What This Policy Covers](#who-we-are-and-what-this-policy-covers) to include our latest services and applications.

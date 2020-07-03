@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import SafariServices
 import UIKit
 
@@ -85,10 +86,17 @@ class AboutNineAnimatorTableViewController: UITableViewController {
             return Log.error("[AboutNineAnimatorTableViewController] Encountered an error: unsupported actions")
         }
         
-        if case .some = UIApplication.shared.alternateIconName {
-            UIApplication.shared.setAlternateIconName(nil, completionHandler: nil)
-        } else {
-            UIApplication.shared.setAlternateIconName("Fox", completionHandler: nil)
-        }
+        let previousIcon = UIApplication.shared.alternateIconName
+        let currentIcon: String?
+        
+        if case .some = previousIcon {
+            currentIcon = nil
+        } else { currentIcon = "Fox" }
+        
+        UIApplication.shared.setAlternateIconName(currentIcon, completionHandler: nil)
+        MSAnalytics.trackEvent("App Magic #1001", withProperties: [
+            "previousIcon": previousIcon ?? "default",
+            "currentIcon": currentIcon ?? "default"
+        ])
     }
 }
