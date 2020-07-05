@@ -23,9 +23,13 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.autocapitalizationType = .words
         searchController.searchBar.delegate = self
+        
+        #if !targetEnvironment(macCatalyst)
+        searchController.dimsBackgroundDuringPresentation = false
+        #endif
+        
         return searchController
     }()
     
