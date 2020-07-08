@@ -390,6 +390,12 @@
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
 		65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E1D9BB235FC12200234409 /* VeryStreamParser.swift */; };
+		C8A7275824B5ABEA00744ED7 /* TheWatchCartoonOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275224B5ABEA00744ED7 /* TheWatchCartoonOnline.swift */; };
+		C8A7275924B5ABEA00744ED7 /* TheWatchCartoonOnline+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275324B5ABEA00744ED7 /* TheWatchCartoonOnline+Featured.swift */; };
+		C8A7275A24B5ABEA00744ED7 /* TheWatchCartoonOnline+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275424B5ABEA00744ED7 /* TheWatchCartoonOnline+Episode.swift */; };
+		C8A7275B24B5ABEA00744ED7 /* TheWatchCartoonOnline+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275524B5ABEA00744ED7 /* TheWatchCartoonOnline+Anime.swift */; };
+		C8A7275C24B5ABEA00744ED7 /* TheWatchCartoonOnline+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275624B5ABEA00744ED7 /* TheWatchCartoonOnline+RequestModifier.swift */; };
+		C8A7275D24B5ABEA00744ED7 /* TheWatchCartoonOnline+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8A7275724B5ABEA00744ED7 /* TheWatchCartoonOnline+Search.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
 		C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */; };
 		C8E12D03242213E000B0AF6A /* AnimeUnity+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */; };
@@ -870,6 +876,12 @@
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
 		65E1D9BB235FC12200234409 /* VeryStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryStreamParser.swift; sourceTree = "<group>"; };
+		C8A7275224B5ABEA00744ED7 /* TheWatchCartoonOnline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheWatchCartoonOnline.swift; sourceTree = "<group>"; };
+		C8A7275324B5ABEA00744ED7 /* TheWatchCartoonOnline+Featured.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TheWatchCartoonOnline+Featured.swift"; sourceTree = "<group>"; };
+		C8A7275424B5ABEA00744ED7 /* TheWatchCartoonOnline+Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TheWatchCartoonOnline+Episode.swift"; sourceTree = "<group>"; };
+		C8A7275524B5ABEA00744ED7 /* TheWatchCartoonOnline+Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TheWatchCartoonOnline+Anime.swift"; sourceTree = "<group>"; };
+		C8A7275624B5ABEA00744ED7 /* TheWatchCartoonOnline+RequestModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TheWatchCartoonOnline+RequestModifier.swift"; sourceTree = "<group>"; };
+		C8A7275724B5ABEA00744ED7 /* TheWatchCartoonOnline+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TheWatchCartoonOnline+Search.swift"; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
 		C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Anime.swift"; sourceTree = "<group>"; };
 		C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Featured.swift"; sourceTree = "<group>"; };
@@ -1550,6 +1562,7 @@
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
+				C8A7273824B5AB8000744ED7 /* thewatchcartoononline.tv */,
 				C8E12CFD2422133B00B0AF6A /* animeunity.it */,
 				2CA4B7F323B1CA0D00B4E6F7 /* animedao.com */,
 				2C6A390023A0158C00FC00A9 /* 4anime.to */,
@@ -1952,6 +1965,19 @@
 			path = Object;
 			sourceTree = "<group>";
 		};
+		C8A7273824B5AB8000744ED7 /* thewatchcartoononline.tv */ = {
+			isa = PBXGroup;
+			children = (
+				C8A7275224B5ABEA00744ED7 /* TheWatchCartoonOnline.swift */,
+				C8A7275524B5ABEA00744ED7 /* TheWatchCartoonOnline+Anime.swift */,
+				C8A7275424B5ABEA00744ED7 /* TheWatchCartoonOnline+Episode.swift */,
+				C8A7275324B5ABEA00744ED7 /* TheWatchCartoonOnline+Featured.swift */,
+				C8A7275624B5ABEA00744ED7 /* TheWatchCartoonOnline+RequestModifier.swift */,
+				C8A7275724B5ABEA00744ED7 /* TheWatchCartoonOnline+Search.swift */,
+			);
+			path = thewatchcartoononline.tv;
+			sourceTree = "<group>";
+		};
 		C8E12CFD2422133B00B0AF6A /* animeunity.it */ = {
 			isa = PBXGroup;
 			children = (
@@ -2274,6 +2300,7 @@
 				2C98D672225C09DA001FF874 /* NAAuthenticationViewController.swift in Sources */,
 				2C66779A21BC2671000E5ACC /* ContentListViewController.swift in Sources */,
 				2C6677B921BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift in Sources */,
+				C8A7275D24B5ABEA00744ED7 /* TheWatchCartoonOnline+Search.swift in Sources */,
 				2C48001D2370B9CC00ADB03F /* MinFilledCollectionViewController.swift in Sources */,
 				C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */,
 				2C2C54FB2216066100BAA76E /* User+History.swift in Sources */,
@@ -2284,6 +2311,7 @@
 				2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */,
 				2C8F6E8922062C220047798B /* OfflineAnimeViewController.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
+				C8A7275824B5ABEA00744ED7 /* TheWatchCartoonOnline.swift in Sources */,
 				2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */,
@@ -2387,9 +2415,11 @@
 				2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */,
 				2C480015237061EC00ADB03F /* LibraryRecentsCategoryController.swift in Sources */,
 				2C6A390423A0179700FC00A9 /* FourAnime+Featured.swift in Sources */,
+				C8A7275924B5ABEA00744ED7 /* TheWatchCartoonOnline+Featured.swift in Sources */,
 				2C8519A922CC8DD900EEF3AC /* Kissanime+RequestModifier.swift in Sources */,
 				2C055AFC24AAAF9300FCAC25 /* WonderfulSubs+LinkRetrival.swift in Sources */,
 				2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */,
+				C8A7275A24B5ABEA00744ED7 /* TheWatchCartoonOnline+Episode.swift in Sources */,
 				2C6C47362394491F001E723C /* AtomicProperty.swift in Sources */,
 				2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */,
 				2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */,
@@ -2514,6 +2544,7 @@
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,
 				2C74F1D024A4012D00D04DA8 /* RequestManager.swift in Sources */,
 				2C055AF824AAAF9300FCAC25 /* WonderfulSubs+LinkConstruction.swift in Sources */,
+				C8A7275C24B5ABEA00744ED7 /* TheWatchCartoonOnline+RequestModifier.swift in Sources */,
 				2C0DA2DE238B09C3002C6447 /* SettingsDownloadsController.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* User.swift in Sources */,
 				2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */,
@@ -2553,6 +2584,7 @@
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */,
 				2CCBC5C024041E2C0013C4FE /* Alamofire+Legacy.swift in Sources */,
+				C8A7275B24B5ABEA00744ED7 /* TheWatchCartoonOnline+Anime.swift in Sources */,
 				2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */,
 				2CEC219E22088B4900A30F4F /* Promise+Queue.swift in Sources */,
 				2CA4B7F723B1E7C400B4E6F7 /* AnimeDao+Featured.swift in Sources */,
