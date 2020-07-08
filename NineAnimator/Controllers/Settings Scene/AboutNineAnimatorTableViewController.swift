@@ -38,6 +38,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var buildNumberLabel: UILabel!
+    @IBOutlet private weak var optOutAnalyticsSwitch: UISwitch!
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectSelectedRows() }
@@ -75,13 +76,14 @@ class AboutNineAnimatorTableViewController: UITableViewController {
         super.viewDidLoad()
         tableView.makeThemable()
         configureForTransparentScrollEdge()
-        
-        // Update version information
-        versionLabel.text = NineAnimator.default.version
-        buildNumberLabel.text = "\(NineAnimator.default.buildNumber)"
     }
     
-    func doMagic() {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUIComponents()
+    }
+    
+    private func doMagic() {
         guard UIApplication.shared.supportsAlternateIcons else {
             return Log.error("[AboutNineAnimatorTableViewController] Encountered an error: unsupported actions")
         }
@@ -98,5 +100,16 @@ class AboutNineAnimatorTableViewController: UITableViewController {
             "previousIcon": previousIcon ?? "default",
             "currentIcon": currentIcon ?? "default"
         ])
+    }
+    
+    private func updateUIComponents() {
+        // Update version information
+        versionLabel.text = NineAnimator.default.version
+        buildNumberLabel.text = "\(NineAnimator.default.buildNumber)"
+        optOutAnalyticsSwitch.setOn(NineAnimator.default.user.optOutAnalytics, animated: true)
+    }
+    
+    @IBAction private func didToggleOptOutAnalyticsSwitch(_ sender: UISwitch) {
+        NineAnimator.default.user.optOutAnalytics = sender.isOn
     }
 }

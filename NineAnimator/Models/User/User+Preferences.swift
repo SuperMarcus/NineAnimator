@@ -185,6 +185,12 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.richPresenceShowAnimeName) }
     }
     
+    /// Whether the user has explicitly requested to opt-out analytical services.
+    var optOutAnalytics: Bool {
+        get { _freezer.typedValue(forKey: Keys.optOutAnalytics, default: true) }
+        set { _freezer.set(newValue, forKey: Keys.optOutAnalytics) }
+    }
+    
     /// Silence warnings about a specific purpose of a server
     func silenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) {
         var listOfSilencedPurposes = _silencedUnrecommendedServerPurposes[server] ?? []

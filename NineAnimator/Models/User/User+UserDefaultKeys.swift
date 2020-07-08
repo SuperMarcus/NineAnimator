@@ -50,6 +50,7 @@ extension NineAnimatorUser {
         static var brightnessBasedTheme: String { "interface.brightnessBasedTheme" }
         static var richPresenceEnable: String { "presence.enable" }
         static var richPresenceShowAnimeName: String { "presence.animeTitle" }
+        static var optOutAnalytics: String { "analytics.optOut" }
         
         // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { "com.marcuszhou.NineAnimator.anime.watching.plist" }
