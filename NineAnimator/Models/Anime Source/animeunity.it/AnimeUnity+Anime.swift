@@ -57,7 +57,7 @@ extension NASourceAnimeUnity {
                 let encoded = json[0]
                 let decoded = encoded.stringByDecodingHTMLEntitiesAnime
                 let data_json = decoded.data(using: .utf8)!
-                let decoder: JSONDecoder = JSONDecoder.init()
+                let decoder = JSONDecoder.init()
                 let user: SearchResponseAnime = try decoder.decode(SearchResponseAnime.self, from: data_json)
                 let decodedResponse = user
                 let reconstructedAnimeLink = AnimeLink(
@@ -68,14 +68,14 @@ extension NASourceAnimeUnity {
                 )
                 // Obtain the list of episodes
                 let episodesList = decodedResponse.to_array.map {
-                    episode -> (EpisodeLink, String)? in
+                    episode -> (EpisodeLink) in
                     let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
                     return (EpisodeLink(
                         identifier: String(link_ep),
                         name: episode.number,
                         server: NASourceAnimeUnity.AnimeUnityStream,
                         parent: reconstructedAnimeLink
-                    ), "")
+                    ))
                 }
                 // Information
                 let synopsis = try bowl.select("div.description").text()
@@ -99,7 +99,7 @@ extension NASourceAnimeUnity {
                     additionalAttributes: additionalAttributes,
                     description: synopsis,
                     on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],
-                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodesList.map { $0?.0 as! EpisodeLink} ]
+                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodesList]
                 )
             }
     }

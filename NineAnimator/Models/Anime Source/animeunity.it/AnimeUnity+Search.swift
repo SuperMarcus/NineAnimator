@@ -82,7 +82,7 @@ extension NASourceAnimeUnity {
                         let encoded = json[0]
                         let decoded = encoded.stringByDecodingHTMLEntitiesAnime
                         let data_json = decoded.data(using: .utf8)!
-                        let decoder: JSONDecoder = JSONDecoder.init()
+                        let decoder = JSONDecoder.init()
                         let user: SearchResponse = try decoder.decode(SearchResponse.self, from: data_json)
                         let decodedResponse = user
                         return try decodedResponse.to_array.map {
