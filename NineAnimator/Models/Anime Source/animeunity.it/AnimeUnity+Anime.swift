@@ -52,11 +52,9 @@ extension NASourceAnimeUnity {
                 let data = responseContent
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                 let  bowl = try SwiftSoup.parse(utf8Text)
-                let new_json = bowl.debugDescription.components(separatedBy: "episodes=\"")
-                let json = new_json[1].components(separatedBy: "\" ")
-                let encoded = json[0]
-                let decoded = encoded.stringByDecodingHTMLEntitiesAnime
-                let data_json = decoded.data(using: .utf8)!
+                var encoded = try bowl.select("video-player").attr("episodes")
+                encoded = encoded.replacingOccurrences(of: "\n", with: "")
+                let data_json = encoded.data(using: .utf8)!
                 let decoder = JSONDecoder.init()
                 let user: SearchResponseAnime = try decoder.decode(SearchResponseAnime.self, from: data_json)
                 let decodedResponse = user

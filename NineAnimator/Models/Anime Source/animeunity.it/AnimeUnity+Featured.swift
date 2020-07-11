@@ -27,9 +27,7 @@ extension NASourceAnimeUnity {
         var imageurl: String
         var slug: String
     }
-    
     private struct DummyCodableFeatured: Codable {}
-    
     struct SearchResponseFeatured: Codable {
         var to_array: [SearchResponseRecordsFeatured]
         init(from decoder: Decoder) throws {
@@ -51,16 +49,12 @@ extension NASourceAnimeUnity {
             handling: .browsing
         ) .responseData
           .then { responseContent in
-            //div.text-center>div.text-center>div a
-            //div.current-anime>div.row>div a
             let data = responseContent
             let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
             let  bowl = try SwiftSoup.parse(utf8Text)
-            let new_json = bowl.debugDescription.components(separatedBy: "<the-carousel animes=\"")
-            let json = new_json[1].components(separatedBy: "\" class=")
-            let encoded = json[0]
-            let decoded = encoded.stringByDecodingHTMLEntitiesAnime
-            let data_json = decoded.data(using: .utf8)!
+            var encoded = try bowl.select("the-carousel").attr("animes")
+            encoded = encoded.replacingOccurrences(of: "\n", with: "")
+            let data_json = encoded.data(using: .utf8)!
             let decoder = JSONDecoder.init()
             let user: SearchResponseFeatured = try decoder.decode(SearchResponseFeatured.self, from: data_json)
             let decodedResponse = user
@@ -81,7 +75,6 @@ extension NASourceAnimeUnity {
                     source: self
                 )
             }
-
             return BasicFeaturedContainer(
                 featured: [],
                 latest: recentAnimeLinks
