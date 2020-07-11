@@ -21,63 +21,69 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
+    struct SearchResponseRecordsFeatured: Codable {
+        var id: Int
+        var title: String
+        var imageurl: String
+        var slug: String
+    }
+    
+    private struct DummyCodableFeatured: Codable {}
+    
+    struct SearchResponseFeatured: Codable {
+        var to_array: [SearchResponseRecordsFeatured]
+        init(from decoder: Decoder) throws {
+            var to_array = [SearchResponseRecordsFeatured]()
+            var container = try decoder.unkeyedContainer()
+            while !container.isAtEnd {
+                if let route = try? container.decode(SearchResponseRecordsFeatured.self) {
+                    to_array.append(route)
+                } else {
+                    _ = try? container.decode(DummyCodableFeatured.self) // <-- TRICK
+                }
+            }
+            self.to_array = to_array
+        }
+    }
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
         requestManager.request(
             url: endpointURL,
             handling: .browsing
-        ) .responseString
+        ) .responseData
           .then { responseContent in
             //div.text-center>div.text-center>div a
             //div.current-anime>div.row>div a
-            let endpointURL = self.endpointURL
-            let bowl = try SwiftSoup.parse(responseContent)
-            let popularLinkElements = try bowl.select("div.current-anime>div.row>div>div.text-center a")
-            let recentadded = try bowl.select("div.text-center>div.text-center>div a")
-            let recentAnimeLinks = try recentadded.compactMap {
-                aElement -> (a: Element, img: Element)? in
-                if let imageElement = try aElement.select("img").first() {
-                    return (aElement, imageElement)
-                } else { return nil }
-            } .reduce(into: [AnimeLink]()) {
-                container, elements in
-                if let artworkPath = try? elements.img.attr("src"),
-                    let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = (try? elements.a.text())?.components(separatedBy: " - Episodio"),
-                    let animePath = try? elements.a.attr("href"),
-                
-                    let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
-                    // Construct and add anime link
-                    container.append(.init(
-                        title: animeTitle[0],
-                        link: animeUrl,
-                        image: artworkUrl,
-                        source: self
-                    ))
-                }
+            let data = responseContent
+            let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
+            let  bowl = try SwiftSoup.parse(utf8Text)
+            let new_json = bowl.debugDescription.components(separatedBy: "<the-carousel animes=\"")
+            let json = new_json[1].components(separatedBy: "\" class=")
+            let encoded = json[0]
+            let decoded = encoded.stringByDecodingHTMLEntitiesAnime
+            let data_json = decoded.data(using: .utf8)!
+            let decoder: JSONDecoder = JSONDecoder.init()
+            let user: SearchResponseFeatured = try decoder.decode(SearchResponseFeatured.self, from: data_json)
+            let decodedResponse = user
+            let recentAnimeLinks = try decodedResponse.to_array.map {
+                record -> AnimeLink in
+                let link = "https://animeunity.it/anime/"+String(record.id)+"-"+record.slug
+                var animeUrlBuilder = try URLComponents(
+                    url: link.asURL(),
+                    resolvingAgainstBaseURL: true
+                ).tryUnwrap()
+                animeUrlBuilder.queryItems = [
+                    .init(name: "id", value: "1")
+                ]
+                return AnimeLink(
+                    title: record.title,
+                    link: try animeUrlBuilder.url.tryUnwrap(),
+                    image: try record.imageurl.asURL(),
+                    source: self
+                )
             }
-            let popularAnimeLinks = try popularLinkElements.compactMap {
-                aElement -> (a: Element, img: Element)? in
-                if let imageElement = try aElement.select("img").first() {
-                    return (aElement, imageElement)
-                } else { return nil }
-            } .reduce(into: [AnimeLink]()) {
-                container, elements in
-                if let artworkPath = try? elements.img.attr("src"),
-                    let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
-                    let animeTitle = try? elements.a.text(),
-                    let animePath = try? elements.a.attr("href"),
-                    let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
-                    // Construct and add anime link
-                    container.append(.init(
-                        title: animeTitle,
-                        link: animeUrl,
-                        image: artworkUrl,
-                        source: self
-                    ))
-                }
-            }
+
             return BasicFeaturedContainer(
-                featured: popularAnimeLinks,
+                featured: [],
                 latest: recentAnimeLinks
             )
         }

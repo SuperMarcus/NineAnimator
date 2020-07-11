@@ -16,7 +16,6 @@
 //  You should have received a copy of the GNU General Public License
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
-
 import Foundation
 import SwiftSoup
 
@@ -28,40 +27,13 @@ extension NASourceAnimeUnity {
             episodePageUrl in self
                 .requestManager
                 .request(url: episodePageUrl, handling: .browsing)
-                .responseString
+                .responseVoid
         } .then {
-            episodePageContent in
-            let bowl = try SwiftSoup.parse(episodePageContent)
-            let videoElement = try bowl.select("video>source")
-            let videoSource: URL
-            if videoElement.isEmpty() {
-                // If no video element is present, try decoding the video asset url
-                // from the PACKER script
-                let decodedScript = try PackerDecoder().decode(episodePageContent)
-                let sourceMatchingExpr = try NSRegularExpression(
-                    pattern: "src=\\\\*\"([^\"\\\\]+)",
-                    options: []
-                )
-                
-                let videoSourcePath = sourceMatchingExpr
-                    .firstMatch(in: decodedScript)?
-                    .firstMatchingGroup
-                videoSource = try URL(
-                    string: try videoSourcePath.tryUnwrap(
-                        .responseError("Unable to find the video asset associated with this episode.")
-                    ),
-                    relativeTo: link.parent.link
-                ).tryUnwrap()
-                Log.info("[NASourceAnimeUnity] Resource found from packed scripts.")
-            } else {
-                let videourl = try videoElement.attr("src")
-                let newString = videourl.replacingOccurrences(of: "’", with: "%E2%80%99")
-                videoSource = try URL(string: newString) .tryUnwrap()
-                Log.info("[NASourceAnimeUnity] Resource found from page source.")
-            }
+            _ in
+            let video_url = link.identifier + ".mp4"
             return Episode(
                 link,
-                target: videoSource,
+                target: try video_url.asURL(),
                 parent: anime
             )
         }

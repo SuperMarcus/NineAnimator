@@ -21,91 +21,85 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
+    struct SearchResponseRecordsAnime: Codable {
+        var number: String = ""
+        var link: String = ""
+    }
+    
+    private struct DummyCodableAnime: Codable {}
+    
+    struct SearchResponseAnime: Codable {
+        var to_array: [SearchResponseRecordsAnime]
+        init(from decoder: Decoder) throws {
+            var to_array = [SearchResponseRecordsAnime]()
+            var container = try decoder.unkeyedContainer()
+            while !container.isAtEnd {
+                if let route = try? container.decode(SearchResponseRecordsAnime.self) {
+                    to_array.append(route)
+                } else {
+                    _ = try? container.decode(DummyCodableAnime.self) // <-- TRICK
+                }
+            }
+            self.to_array = to_array
+        }
+    }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager
             .request(url: link.link, handling: .browsing)
-            .responseString
+            .responseData
             .then {
                 responseContent -> Anime in
-                let bowl = try SwiftSoup.parse(responseContent)
-                var animeTitle = try bowl.select(".content p").text()
-                _ = try bowl.select("div.card-body p").compactMap {entry -> String in
-                    let trama = ""
-                    if try entry.text().contains("TITOLO") {
-                        let title = try entry.text()
-                        animeTitle = String(title.dropFirst(8))
-                    }
-                    return trama
-                }
-                let animeArtworkUrl = URL(
-                    string: try bowl.select(".cover>img").attr("src")
-                    ) ?? link.image
+                let data = responseContent
+                let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
+                let  bowl = try SwiftSoup.parse(utf8Text)
+                let new_json = bowl.debugDescription.components(separatedBy: "episodes=\"")
+                let json = new_json[1].components(separatedBy: "\" ")
+                let encoded = json[0]
+                let decoded = encoded.stringByDecodingHTMLEntitiesAnime
+                let data_json = decoded.data(using: .utf8)!
+                let decoder: JSONDecoder = JSONDecoder.init()
+                let user: SearchResponseAnime = try decoder.decode(SearchResponseAnime.self, from: data_json)
+                let decodedResponse = user
                 let reconstructedAnimeLink = AnimeLink(
-                    title: animeTitle,
+                    title: link.title,
                     link: link.link,
-                    image: animeArtworkUrl,
+                    image: link.image,
                     source: self
                 )
-                
                 // Obtain the list of episodes
-                let episodes = try bowl.select("div.text-center div").reduce(into: [EpisodeLink]()) {
-                    collection, container in
-                    let episodeName = try container.select("a.ep-button").text()
-                    var episodeLink = try container.select("a").attr("href")
-                    episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
-                    if !episodeLink.isEmpty {
-                        let newString = episodeLink.replacingOccurrences(of: "\'", with: "%27")
-                        episodeLink = "https://animeunity.it/" + newString
-                        collection.append(.init(
-                            identifier: episodeLink,
-                            name: episodeName,
-                            server: NASourceAnimeUnity.AnimeUnityStream,
-                            parent: reconstructedAnimeLink
-                            ))
-                    }
+                let episodesList = decodedResponse.to_array.map {
+                    episode -> (EpisodeLink, String)? in
+                    let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
+                    return (EpisodeLink(
+                        identifier: String(link_ep),
+                        name: episode.number,
+                        server: NASourceAnimeUnity.AnimeUnityStream,
+                        parent: reconstructedAnimeLink
+                    ), "")
                 }
-                
                 // Information
-                var animeSynopsis = ""
-                var additionalAttributes = [Anime.AttributeKey: Any]()
-                _ = try bowl.select("div.card-body p").compactMap {entry -> String in
-                    let trama = ""
-                    if try entry.text().contains("TRAMA") {
-                        let trama = try entry.text()
-                        animeSynopsis = String(trama.dropFirst(7))
-                    }
-                    if try entry.text().contains("TITOLO") {
-                        let title = try entry.text()
-                        animeTitle = String(title.dropFirst(8))
-                    }
-                    if try entry.text().contains("ANNO DI USCITA:") {
-                        let airdate = try entry.text()
-                        additionalAttributes[.airDate] = String(airdate.dropFirst(16))
-                    }
-                    return trama
-                }
+                let synopsis = try bowl.select("div.description").text()
                 // Attributes
-                
-                let detailContainers = try bowl.select("div.info div.detail")
-                
-                for container in detailContainers {
-                    let attributeName = ""
-                    let attributeValue = try container
-                        .text()
-                        .trimmingCharacters(in: .whitespacesAndNewlines)
-                    if attributeName.lowercased().contains("release date") {
-                        additionalAttributes[.airDate] = attributeValue
+                var additionalAttributes = [Anime.AttributeKey: Any]()
+                _ = try bowl.select("div.info-item").compactMap {entry -> Void in
+                    if try entry.text().contains("Anno") {
+                        let year = try entry.select("small").text()
+                        additionalAttributes[.airDate] = year
+                    }
+                    if try entry.text().contains("Valutazione") {
+                        let val = try entry.select("small").text()
+                        let rating = (val as NSString).floatValue
+                        additionalAttributes[.rating] = rating
+                        additionalAttributes[.ratingScale] = Float(10.0)
                     }
                 }
                 return Anime(
                     reconstructedAnimeLink,
-                    
-                    alias: animeTitle,
+                    alias: "",
                     additionalAttributes: additionalAttributes,
-                    description: animeSynopsis,
+                    description: synopsis,
                     on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],
-                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodes ],
-                    episodesAttributes: [:]
+                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodesList.map { $0?.0 as! EpisodeLink} ]
                 )
             }
     }
