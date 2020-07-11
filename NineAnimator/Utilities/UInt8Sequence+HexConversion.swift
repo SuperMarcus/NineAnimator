@@ -17,20 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Alamofire
 import Foundation
 
-/// NineAnimator network request manager for the sources.
-class NABaseSourceRequestManager: NAEndpointRelativeRequestManager {
-    private(set) weak var source: BaseSource?
-    
-    /// Endpoint URL retrieved from the source object
-    override var endpointURL: URL? {
-        source?.endpointURL
-    }
-    
-    init(parent: BaseSource) {
-        self.source = parent
-        super.init(endpoint: parent.endpointURL)
+extension Sequence where Element == UInt8 {
+    func hexEncodedString() -> String {
+        map { String(format: "%02hhx", $0) }.joined()
     }
 }

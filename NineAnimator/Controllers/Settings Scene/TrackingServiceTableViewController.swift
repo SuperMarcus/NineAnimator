@@ -121,6 +121,13 @@ extension TrackingServiceTableViewController {
     private var mal: MyAnimeList { NineAnimator.default.service(type: MyAnimeList.self) }
     
     private func malPresentAuthenticationPage() {
+        if #available(iOS 13.0, *) {
+            self.malPresentSSOAuthenticationPage()
+        } else { self.malPresentLegacyAuthenticationPage() }
+    }
+    
+    @available(iOS, deprecated: 13.0, message: "Use of legacy MAL authentication schemes.")
+    private func malPresentLegacyAuthenticationPage() {
         let alert = UIAlertController(
             title: "Setup MyAnimeList",
             message: "Login to MyAnimeList.net with your account name and password.",
@@ -172,7 +179,7 @@ extension TrackingServiceTableViewController {
                     self.malUpdateStatus()
                 } .finally {
                     [weak self] in
-                    Log.info("Successfully logged in to MyAnimeList.net")
+                    Log.info("[MyAnimeList.net] Successfully logged in to MyAnimeList.net")
                     self?.malAuthenticationTask = nil
                     self?.malUpdateStatus()
                 }
@@ -217,6 +224,33 @@ extension TrackingServiceTableViewController {
             malStatusLabel.text = "Not Setup"
             malActionLabel.text = "Setup MyAnimeList.net"
         }
+    }
+    
+    // Present the SSO login page
+    @available(iOS 13.0, *)
+    private func malPresentSSOAuthenticationPage() {
+        let callback: NineAnimatorCallback<URL> = {
+            [weak mal, weak self] url, callbackError in
+            defer { DispatchQueue.main.async { [weak self] in self?.malUpdateStatus() } }
+            var error = callbackError
+            
+            // If callback url is provided
+            if let url = url {
+                error = mal?.authenticate(withSSOCallbackUrl: url)
+            }
+            
+            // If an error is present
+            if let error = error {
+                Log.error("[MyAnimeList.net] Authentication session finished with error: %@", error)
+            }
+        }
+        
+        // Open the authentication dialog/web page
+        beginWebAuthenticationSession(
+            ssoUrl: mal.authenticationUrl,
+            callbackScheme: mal.ssoCallbackScheme,
+            completion: callback
+        )
     }
 }
 

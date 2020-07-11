@@ -837,6 +837,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                         <outlet property="dynamicAppearanceSwitchLabel" destination="xP9-AS-NPt" id="uNF-dO-LrX"/>
                         <outlet property="episodeListingOrderControl" destination="QFr-Ue-S7z" id="sOn-C7-tkt"/>
                         <outlet property="fallbackToBrowserSwitch" destination="amF-Cb-8Hv" id="P1S-OV-TNk"/>
+                        <outlet property="nsfwSwitchTextLabel" destination="Nrj-vR-ORT" id="gkz-7y-gCZ"/>
                         <outlet property="pictureInPictureSwitch" destination="6vy-YN-aHk" id="Ah9-GZ-SZP"/>
                         <outlet property="preferredAnimeDetailsSourceLabel" destination="oJY-Uv-hLj" id="LTc-HY-lgh"/>
                         <outlet property="richPresenceStatusLabel" destination="OnI-zr-2Cs" id="j7Z-jP-8Qf"/>
@@ -2191,13 +2192,13 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collects analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
+                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collects analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.
 
 By setting up third-party tracking services, you agree for NineAnimator to upload your playback history and progress to only the third-party services you have setup.
 
-Your playback history and preferences may be stored in your iCloud account.</mutableString>
+Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
                                         <rect key="frame" x="16" y="447" width="343" height="44"/>

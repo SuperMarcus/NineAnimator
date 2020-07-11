@@ -17,20 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Alamofire
 import Foundation
 
-/// NineAnimator network request manager for the sources.
-class NABaseSourceRequestManager: NAEndpointRelativeRequestManager {
-    private(set) weak var source: BaseSource?
-    
-    /// Endpoint URL retrieved from the source object
-    override var endpointURL: URL? {
-        source?.endpointURL
-    }
-    
-    init(parent: BaseSource) {
-        self.source = parent
-        super.init(endpoint: parent.endpointURL)
-    }
+/// A ServiceDescriptor is an object fetched from NineAnimatorCloud to support the various services and bring updates to the parsers
+struct ServiceDescriptor: Codable {
+    var releaseDate: Date
 }

@@ -35,6 +35,7 @@ extension NineAnimatorUser {
         static var recentSource: String { "source.recent" }
         static var searchHistory: String { "history.search" }
         static var sourceSolveChallenges: String { "source.challengeSolver" }
+        static var sourceExplicitEnabled: String { "source.explicit.allowed" }
         static var recentServer: String { "server.recent" }
         static var persistedProgresses: String { "episode.progress" }
         static var episodeListingOrder: String { "episode.listing.order" }
