@@ -328,4 +328,21 @@ extension NineAnimatorError {
             super.init(coder: aDecoder)
         }
     }
+    
+    /// An error received from the NineAnimatorCloud service
+    class NineAnimatorCloudError: NineAnimatorError {
+        var statusCode: Int? {
+            userInfo["statusCode"] as? Int
+        }
+        
+        init(statusCode: Int, message: String) {
+            super.init(9, message: "NineAnimatorCloud service responded with an error", failiureReason: message, userInfo: [
+                "statusCode": statusCode
+            ])
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
 }

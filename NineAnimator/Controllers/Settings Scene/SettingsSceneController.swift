@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import AVKit
 import Kingfisher
 import SafariServices
@@ -36,6 +37,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var subscriptionShowStreamsSwitch: UISwitch!
     @IBOutlet private weak var appearanceSegmentControl: UISegmentedControl!
     @IBOutlet private weak var dynamicAppearanceSwitchLabel: UILabel!
+    @IBOutlet private weak var nsfwSwitchTextLabel: UILabel!
     @IBOutlet private weak var dynamicAppearanceSwitch: UISwitch!
     @IBOutlet private weak var animeShowEpisodeDetailsSwitch: UISwitch!
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
@@ -47,6 +49,13 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     
     /// Dismissal handler
     private var onDismissal: (() -> Void)?
+    private var _fTimerCounter = 0 {
+        didSet {
+            if (_fTimerCounter % 30) == 0 {
+                _handleCounterTrigger()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,6 +135,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     
     @IBAction private func onAllowNSFWDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.allowNSFWContent = sender.isOn
+        _fTimerCounter += 1
     }
     
     @IBAction private func onDoneButtonClicked(_ sender: Any) {
@@ -284,6 +294,12 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             dynamicAppearanceSwitchLabel.text = "Sync with System"
         } else { dynamicAppearanceSwitchLabel.text = "Dynamic Appearance" }
         
+        if _fTimerCounter >= 30 {
+            let swText = nsfwSwitchTextLabel.text
+            nsfwSwitchTextLabel.text = NineAnimator.default.user.enableExperimentalSources
+                ? swText?.uppercased() : swText?.lowercased()
+        }
+        
         // To be gramatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
@@ -361,6 +377,17 @@ extension SettingsSceneController {
     func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
         onDismissal?()
         onDismissal = nil
+    }
+    
+    private func _handleCounterTrigger() {
+        let previousState = NineAnimator.default.user.enableExperimentalSources
+        NineAnimator.default.user.enableExperimentalSources = !previousState
+        Log.info("[SettingsSceneController] F.Counter triggered. Current state is %@", !previousState)
+        MSAnalytics.trackEvent("exp.counter.trigger", withProperties: [
+            "state": previousState ? "back to normal" : "xp",
+            "counter": _fTimerCounter.description
+        ])
+        updatePreferencesUI()
     }
 }
 

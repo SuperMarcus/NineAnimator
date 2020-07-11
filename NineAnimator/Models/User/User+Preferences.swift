@@ -173,6 +173,12 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.allowNSFWContent) }
     }
     
+    /// Allow experimental sources to be enabled
+    var enableExperimentalSources: Bool {
+        get { _freezer.typedValue(forKey: Keys.sourceExplicitEnabled, default: false) }
+        set { _freezer.set(newValue, forKey: Keys.sourceExplicitEnabled) }
+    }
+    
     /// Enable rich presence integration
     var richPresenceEnabled: Bool {
         get { _freezer.typedValue(forKey: Keys.richPresenceEnable, default: true) }
@@ -183,6 +189,12 @@ extension NineAnimatorUser {
     var richPresenceShowAnimeName: Bool {
         get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: true) }
         set { _freezer.set(newValue, forKey: Keys.richPresenceShowAnimeName) }
+    }
+    
+    /// Whether the user has explicitly requested to opt-out analytical services.
+    var optOutAnalytics: Bool {
+        get { _freezer.typedValue(forKey: Keys.optOutAnalytics, default: false) }
+        set { _freezer.set(newValue, forKey: Keys.optOutAnalytics) }
     }
     
     /// Silence warnings about a specific purpose of a server

@@ -30,6 +30,8 @@ class NineAnimatorCloud {
         baseUrl.appendingPathComponent("static/resources/artwork_not_available.jpg")
     }
     
+    private(set) lazy var requestManager = NACloudRequestManager(parent: self)
+    
     /// Build identifier used to communicate and identify the build with NineAnimator cloud services
     ///
     /// Build identifier is calculated by mixing and hashing the states of various supported sources and server parsers.
@@ -62,5 +64,6 @@ class NineAnimatorCloud {
             MSCrashes.self,
             MSAnalytics.self
         ])
+        MSAnalytics.setEnabled(!NineAnimator.default.user.optOutAnalytics)
     }
 }
