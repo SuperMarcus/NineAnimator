@@ -226,7 +226,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-B2-M5f">
-                                                <rect key="frame" x="94.333333333333329" y="22.333333333333343" width="200.66666666666669" height="24"/>
+                                                <rect key="frame" x="94.333333333333329" y="24.666666666666657" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="eAS-am-UIV"/>
                                                 </constraints>
@@ -244,8 +244,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned from the ground up, tuned to present you with the most relevant information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
-                                                <rect key="frame" x="94.333333333333329" y="48.333333333333314" width="208.66666666666669" height="52.666666666666657"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned to present you with the most relevant information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
+                                                <rect key="frame" x="94.333333333333329" y="50.666666666666686" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -269,7 +269,7 @@
                                             <constraint firstItem="xwc-kf-mgL" firstAttribute="top" secondItem="ouh-B2-M5f" secondAttribute="bottom" constant="2" id="Z15-xy-mS3"/>
                                             <constraint firstItem="8DS-lO-J59" firstAttribute="width" secondItem="Es9-cv-aHe" secondAttribute="width" multiplier="0.2" id="gRj-62-erO"/>
                                             <constraint firstAttribute="trailing" secondItem="xwc-kf-mgL" secondAttribute="trailing" constant="8" id="gxj-JT-u5i"/>
-                                            <constraint firstItem="ouh-B2-M5f" firstAttribute="bottom" secondItem="8DS-lO-J59" secondAttribute="centerY" multiplier="0.8" priority="500" id="kcM-Vc-Qec"/>
+                                            <constraint firstItem="ouh-B2-M5f" firstAttribute="bottom" secondItem="8DS-lO-J59" secondAttribute="centerY" multiplier="0.84" priority="500" id="kcM-Vc-Qec"/>
                                             <constraint firstAttribute="trailing" secondItem="ouh-B2-M5f" secondAttribute="trailing" constant="16" id="noh-t7-mpW"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xwc-kf-mgL" secondAttribute="bottom" constant="12" id="qTP-Ox-ol5"/>
                                             <constraint firstItem="ouh-B2-M5f" firstAttribute="leading" secondItem="8DS-lO-J59" secondAttribute="trailing" constant="24" id="wdN-YH-4y3"/>
@@ -304,7 +304,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
-                                                <rect key="frame" x="94.333333333333329" y="22" width="200.66666666666669" height="24"/>
+                                                <rect key="frame" x="94.333333333333329" y="24.333333333333314" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="F5o-pt-dez"/>
                                                 </constraints>
@@ -322,8 +322,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator now includes AnimeUnity as a source for international (Italian) audiences." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
-                                                <rect key="frame" x="94.333333333333329" y="48" width="208.66666666666669" height="39.666666666666657"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator improves compatibility with supported sources and servers." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
+                                                <rect key="frame" x="94.333333333333329" y="50.333333333333314" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -343,7 +343,7 @@
                                         <constraints>
                                             <constraint firstItem="JH6-I0-KQl" firstAttribute="leading" secondItem="XD8-rz-uSl" secondAttribute="leading" constant="8" id="Aq3-Op-ecn"/>
                                             <constraint firstItem="V1d-j4-fS2" firstAttribute="leading" secondItem="JH6-I0-KQl" secondAttribute="trailing" constant="24" id="EBA-fl-Fe4"/>
-                                            <constraint firstItem="TMt-Pq-6FS" firstAttribute="bottom" secondItem="JH6-I0-KQl" secondAttribute="centerY" multiplier="0.8" priority="500" id="KeK-dA-kW5"/>
+                                            <constraint firstItem="TMt-Pq-6FS" firstAttribute="bottom" secondItem="JH6-I0-KQl" secondAttribute="centerY" multiplier="0.84" priority="500" id="KeK-dA-kW5"/>
                                             <constraint firstItem="TMt-Pq-6FS" firstAttribute="leading" secondItem="JH6-I0-KQl" secondAttribute="trailing" constant="24" id="Smr-ao-iji"/>
                                             <constraint firstAttribute="trailing" secondItem="TMt-Pq-6FS" secondAttribute="trailing" constant="16" id="ZTi-dQ-wfo"/>
                                             <constraint firstAttribute="trailing" secondItem="V1d-j4-fS2" secondAttribute="trailing" constant="8" id="dJa-WK-uAb"/>
@@ -359,8 +359,8 @@
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keW-rL-lk1">
                                                 <rect key="frame" x="8.0000000000000036" y="28.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pointer Interactions Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
-                                                        <rect key="frame" x="6.3333333333333357" y="6.3333333333333712" width="49.666666666666664" height="49.666666666666664"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Privacy HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="62.333333333333336" height="62.333333333333336"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="4tt-2A-VQU" secondAttribute="height" id="fDS-no-lOe"/>
@@ -369,7 +369,7 @@
                                                 </subviews>
                                                 <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
                                                 <constraints>
-                                                    <constraint firstItem="4tt-2A-VQU" firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="width" multiplier="0.8" id="Egh-sj-Ak3"/>
+                                                    <constraint firstItem="4tt-2A-VQU" firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="width" id="Egh-sj-Ak3"/>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="centerX" secondItem="keW-rL-lk1" secondAttribute="centerX" id="Ldd-hp-gu9"/>
                                                     <constraint firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="height" multiplier="1:1" id="jKB-E3-Vz3"/>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="centerY" secondItem="keW-rL-lk1" secondAttribute="centerY" id="y3T-so-GMn"/>
@@ -380,8 +380,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Pointer Effects" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
-                                                <rect key="frame" x="94.333333333333329" y="23.666666666666686" width="200.66666666666669" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Privacy &amp; Security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
+                                                <rect key="frame" x="94.333333333333329" y="26" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
                                                 </constraints>
@@ -399,8 +399,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator adds support for pointer interactions (available on iPad OS 13.4)." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
-                                                <rect key="frame" x="94.333333333333329" y="49.666666666666686" width="208.66666666666669" height="39.666666666666657"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="We've updated our privacy policy to include our macOS app and cloud services. Learn more on our website." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                                <rect key="frame" x="94.333333333333329" y="52" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -420,7 +420,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="7Kf-LC-01q" secondAttribute="trailing" constant="16" id="A8E-rc-K8b"/>
                                             <constraint firstAttribute="trailing" secondItem="f1Q-9Z-lK6" secondAttribute="trailing" constant="8" id="DtM-h5-439"/>
-                                            <constraint firstItem="7Kf-LC-01q" firstAttribute="bottom" secondItem="keW-rL-lk1" secondAttribute="centerY" multiplier="0.8" priority="500" id="KEd-gC-r5V"/>
+                                            <constraint firstItem="7Kf-LC-01q" firstAttribute="bottom" secondItem="keW-rL-lk1" secondAttribute="centerY" multiplier="0.84" priority="500" id="KEd-gC-r5V"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="f1Q-9Z-lK6" secondAttribute="bottom" constant="12" id="Otk-np-MPE"/>
                                             <constraint firstItem="keW-rL-lk1" firstAttribute="width" secondItem="07v-sr-Jlp" secondAttribute="width" multiplier="0.2" id="cBL-pd-0cP"/>
                                             <constraint firstItem="f1Q-9Z-lK6" firstAttribute="leading" secondItem="keW-rL-lk1" secondAttribute="trailing" constant="24" id="gMr-tC-Weq"/>
@@ -859,6 +859,6 @@ After setup, you can change the theme settings in the Preferences menu.</string>
         <image name="Discord Logo HD" width="600" height="686"/>
         <image name="High Resolution App Icon" width="2048" height="2048"/>
         <image name="Library Icon HD" width="2000" height="2000"/>
-        <image name="Pointer Interactions Icon HD" width="1200" height="1200"/>
+        <image name="Privacy HD" width="1200" height="1200"/>
     </resources>
 </document>
