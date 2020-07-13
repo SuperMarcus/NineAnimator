@@ -30,10 +30,10 @@ extension NASourceAnimeUnity {
                 .responseVoid
         } .then {
             _ in
-            let video_url = link.identifier + ".mp4"
+            let videoUrl = try URL(string: link.identifier + ".mp4").tryUnwrap()
             return Episode(
                 link,
-                target: try video_url.asURL(),
+                target: videoUrl,
                 parent: anime
             )
         }

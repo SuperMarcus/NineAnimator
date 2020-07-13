@@ -27,22 +27,7 @@ extension NASourceAnimeUnity {
         var imageurl: String
         var slug: String
     }
-    private struct DummyCodableFeatured: Codable {}
-    struct SearchResponseFeatured: Codable {
-        var to_array: [SearchResponseRecordsFeatured]
-        init(from decoder: Decoder) throws {
-            var to_array = [SearchResponseRecordsFeatured]()
-            var container = try decoder.unkeyedContainer()
-            while !container.isAtEnd {
-                if let route = try? container.decode(SearchResponseRecordsFeatured.self) {
-                    to_array.append(route)
-                } else {
-                    _ = try? container.decode(DummyCodableFeatured.self) // <-- TRICK
-                }
-            }
-            self.to_array = to_array
-        }
-    }
+
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
         requestManager.request(
             url: endpointURL,
@@ -51,14 +36,14 @@ extension NASourceAnimeUnity {
           .then { responseContent in
             let data = responseContent
             let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
-            let  bowl = try SwiftSoup.parse(utf8Text)
+            let bowl = try SwiftSoup.parse(utf8Text)
             var encoded = try bowl.select("the-carousel").attr("animes")
             encoded = encoded.replacingOccurrences(of: "\n", with: "")
             let data_json = encoded.data(using: .utf8)!
             let decoder = JSONDecoder.init()
-            let user: SearchResponseFeatured = try decoder.decode(SearchResponseFeatured.self, from: data_json)
+            let user: [SearchResponseRecordsFeatured] = try decoder.decode([SearchResponseRecordsFeatured].self, from: data_json)
             let decodedResponse = user
-            let recentAnimeLinks = try decodedResponse.to_array.map {
+            let recentAnimeLinks = try decodedResponse.map {
                 record -> AnimeLink in
                 let link = "https://animeunity.it/anime/"+String(record.id)+"-"+record.slug
                 var animeUrlBuilder = try URLComponents(

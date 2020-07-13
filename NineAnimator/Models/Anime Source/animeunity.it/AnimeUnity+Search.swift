@@ -22,28 +22,13 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
-    struct SearchResponseRecords: Codable {
+    struct SearchResponseRecords : Codable {
         var id: Int
         var title: String
         var imageurl: String
         var slug: String
     }
-    private struct DummyCodable: Codable {}
-    struct SearchResponse: Codable {
-        var to_array: [SearchResponseRecords]
-        init(from decoder: Decoder) throws {
-            var to_array = [SearchResponseRecords]()
-            var container = try decoder.unkeyedContainer()
-            while !container.isAtEnd {
-                if let route = try? container.decode(SearchResponseRecords.self) {
-                    to_array.append(route)
-                } else {
-                    _ = try? container.decode(DummyCodable.self) // <-- TRICK
-                }
-            }
-            self.to_array = to_array
-        }
-    }
+
     class SearchAgent: ContentProvider {
         var totalPages: Int? { 1 }
         var availablePages: Int { _results == nil ? 0 : 1 }
@@ -81,9 +66,9 @@ extension NASourceAnimeUnity {
                         encoded = encoded.replacingOccurrences(of: "\n", with: "")
                         let data_json = encoded.data(using: .utf8)!
                         let decoder = JSONDecoder.init()
-                        let user: SearchResponse = try decoder.decode(SearchResponse.self, from: data_json)
+                        let user: [SearchResponseRecords] = try decoder.decode([SearchResponseRecords].self, from: data_json)
                         let decodedResponse = user
-                        return try decodedResponse.to_array.map {
+                        return try decodedResponse.map {
                             record -> AnimeLink in
                             let link = "https://animeunity.it/anime/"+String(record.id)+"-"+record.slug
                             let animeUrlBuilder = try URLComponents(

@@ -26,23 +26,6 @@ extension NASourceAnimeUnity {
         var link: String = ""
     }
     
-    private struct DummyCodableAnime: Codable {}
-    
-    struct SearchResponseAnime: Codable {
-        var to_array: [SearchResponseRecordsAnime]
-        init(from decoder: Decoder) throws {
-            var to_array = [SearchResponseRecordsAnime]()
-            var container = try decoder.unkeyedContainer()
-            while !container.isAtEnd {
-                if let route = try? container.decode(SearchResponseRecordsAnime.self) {
-                    to_array.append(route)
-                } else {
-                    _ = try? container.decode(DummyCodableAnime.self) // <-- TRICK
-                }
-            }
-            self.to_array = to_array
-        }
-    }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager
             .request(url: link.link, handling: .browsing)
@@ -51,12 +34,13 @@ extension NASourceAnimeUnity {
                 responseContent -> Anime in
                 let data = responseContent
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
-                let  bowl = try SwiftSoup.parse(utf8Text)
+                let bowl = try SwiftSoup.parse(utf8Text)
                 var encoded = try bowl.select("video-player").attr("episodes")
                 encoded = encoded.replacingOccurrences(of: "\n", with: "")
                 let data_json = encoded.data(using: .utf8)!
                 let decoder = JSONDecoder.init()
-                let user: SearchResponseAnime = try decoder.decode(SearchResponseAnime.self, from: data_json)
+                let user: [SearchResponseRecordsAnime]
+                    = try decoder.decode([SearchResponseRecordsAnime].self, from: data_json)
                 let decodedResponse = user
                 let reconstructedAnimeLink = AnimeLink(
                     title: link.title,
@@ -65,7 +49,7 @@ extension NASourceAnimeUnity {
                     source: self
                 )
                 // Obtain the list of episodes
-                let episodesList = decodedResponse.to_array.map {
+                let episodesList = decodedResponse.compactMap {
                     episode -> (EpisodeLink) in
                     let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
                     return (EpisodeLink(
@@ -79,7 +63,7 @@ extension NASourceAnimeUnity {
                 let synopsis = try bowl.select("div.description").text()
                 // Attributes
                 var additionalAttributes = [Anime.AttributeKey: Any]()
-                _ = try bowl.select("div.info-item").compactMap {entry -> Void in
+                _ = try bowl.select("div.info-item").compactMap { entry -> Void in
                     if try entry.text().contains("Anno") {
                         let year = try entry.select("small").text()
                         additionalAttributes[.airDate] = year
