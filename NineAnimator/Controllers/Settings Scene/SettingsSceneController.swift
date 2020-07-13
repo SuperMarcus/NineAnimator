@@ -96,7 +96,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             }
         }
     }
-    
+}
+ 
+// MARK: - IBActions
+extension SettingsSceneController {
     @IBAction private func onDetectClipboardLinksChange(_ sender: UISwitch) {
         NineAnimator.default.user.detectsPasteboardLinks = sender.isOn
     }

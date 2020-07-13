@@ -34,6 +34,9 @@ class NineAnimatorUser {
     /// A list of server identifiers that has been silenced from presenting warnings regarding unrecommended use
     var _silencedUnrecommendedServerPurposes = [Anime.ServerIdentifier: Set<VideoProviderParser.Purpose>]()
     
+    /// Underlying CoreData store
+    let coreDataLibrary = NACoreDataLibrary()
+    
     /// Remove all default entries
     func clearAll() {
         guard let bundleId = Bundle.main.bundleIdentifier else { return }

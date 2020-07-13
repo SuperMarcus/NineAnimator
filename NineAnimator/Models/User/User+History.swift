@@ -113,13 +113,35 @@ extension NineAnimatorUser {
     /// Direct modification outside the scope of NineAnimatorUser should
     /// be prevented. Always use available methods when possible.
     var recentAnimes: [AnimeLink] {
-        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
-        set {
-            guard let data = encodeIfPresent(data: newValue) else {
-                return Log.error("Recent animes failed to encode")
+        get {
+            do {
+                return try coreDataLibrary.mainContext.fetchRecents().compactMap {
+                    anyLink in
+                    if case let .anime(animeLink) = anyLink {
+                        return animeLink
+                    } else { return nil }
+                }
+            } catch {
+                Log.error("[NineAnimatorUser] Unable to decode recent list: %@", error)
+                return []
             }
-            _freezer.set(data, forKey: Keys.recentAnimeList)
         }
+        set {
+            do {
+                try coreDataLibrary.mainContext.resetRecents(to: newValue.map {
+                    .anime($0)
+                })
+            } catch {
+                Log.error("[NineAnimatorUser] Unable to save recent list: %@", error)
+            }
+        }
+//        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
+//        set {
+//            guard let data = encodeIfPresent(data: newValue) else {
+//                return Log.error("Recent animes failed to encode")
+//            }
+//            _freezer.set(data, forKey: Keys.recentAnimeList)
+//        }
     }
     
     /// The `EpisodeLink` to the last viewed episode
