@@ -25,7 +25,10 @@ extension NASourceAnimeUnity {
         var number: String = ""
         var link: String = ""
     }
-    
+    struct  SearchResponseRecordsData: Codable {
+        var title_eng: String?
+        var episodes: [SearchResponseRecordsAnime]
+    }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager
             .request(url: link.link, handling: .browsing)
@@ -35,12 +38,12 @@ extension NASourceAnimeUnity {
                 let data = responseContent
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                 let bowl = try SwiftSoup.parse(utf8Text)
-                var encoded = try bowl.select("video-player").attr("episodes")
+                var encoded = try bowl.select("video-player").attr("anime")
                 encoded = encoded.replacingOccurrences(of: "\n", with: "")
                 let data_json = encoded.data(using: .utf8)!
                 let decoder = JSONDecoder.init()
-                let user: [SearchResponseRecordsAnime]
-                    = try decoder.decode([SearchResponseRecordsAnime].self, from: data_json)
+                let user: SearchResponseRecordsData
+                    = try decoder.decode(SearchResponseRecordsData.self, from: data_json)
                 let decodedResponse = user
                 let reconstructedAnimeLink = AnimeLink(
                     title: link.title,
@@ -49,7 +52,13 @@ extension NASourceAnimeUnity {
                     source: self
                 )
                 // Obtain the list of episodes
-                let episodesList = decodedResponse.compactMap {
+                var eng_title = decodedResponse.title_eng
+                if let theTitle = eng_title {
+                    eng_title = theTitle
+                } else {
+                    eng_title = link.title
+                }
+                let episodesList = decodedResponse.episodes.compactMap {
                     episode -> (EpisodeLink) in
                     let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
                     return (EpisodeLink(
@@ -77,7 +86,7 @@ extension NASourceAnimeUnity {
                 }
                 return Anime(
                     reconstructedAnimeLink,
-                    alias: "",
+                    alias: eng_title ?? "",
                     additionalAttributes: additionalAttributes,
                     description: synopsis,
                     on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],
