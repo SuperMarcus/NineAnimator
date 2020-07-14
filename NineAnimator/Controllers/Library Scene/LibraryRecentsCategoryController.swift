@@ -17,17 +17,22 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import CoreData
 import UIKit
 
-class LibraryRecentsCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController {
-    /// Cached recent anime from `NineAnimatorUser`
-    private var cachedRecentAnime = [AnimeLink]()
-    
+class LibraryRecentsCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController, NSFetchedResultsControllerDelegate {
     /// The `AnimeLink` that was selected by the user in the collection view
     private var selectedAnimeLink: AnimeLink?
     
     /// The `IndexPath` that is currently used by the menu controller
     private var menuIndexPath: IndexPath?
+    
+    private var dataSource: NACoreDataDataSource<NACoreDataLibraryRecord>?
+    
+    /// Main context
+    private var dataContext: NACoreDataLibrary.Context {
+        NineAnimator.default.user.coreDataLibrary.mainContext
+    }
     
     /// Needs to be able to become the first responder
     override var canBecomeFirstResponder: Bool { true }
@@ -35,66 +40,61 @@ class LibraryRecentsCategoryController: MinFilledCollectionViewController, Libra
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Configure data source
+        let resultsController = dataContext.fetchRecentsController()
+        let dataSource = NACoreDataDataSource(resultsController)
+        self.dataSource = dataSource
+        
+        dataSource.configure(collectionView: collectionView) {
+            collectionView, _, indexPath, record in
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: "recents.item",
+                for: indexPath
+            ) as! LibraryRecentAnimeCell
+            
+            if case let .some(.anime(recordAnimeLink)) = record.link?.nativeAnyLink {
+                cell.setPresenting(recordAnimeLink)
+            }
+            
+            return cell
+        }
+        
         // Initialize Min Filled Layout
         setLayoutParameters(
             alwaysFillLine: false,
             minimalSize: .init(width: 300, height: 110)
         )
+        
+        // Fetch data
+        dataSource.fetch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // Load Recent Links
-        self.reloadRecentLinks()
+    }
+}
+
+// MARK: - Delegate
+extension LibraryRecentsCategoryController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let cell = collectionView.cellForItem(at: indexPath),
+            case let .anime(animeLink) = dataSource?.object(at: indexPath).link?.nativeAnyLink else { return }
+        selectedAnimeLink = animeLink
+        performSegue(withIdentifier: "recents.player", sender: cell)
     }
 }
 
 // MARK: - Data Loading
 extension LibraryRecentsCategoryController {
-    private func reloadRecentLinks() {
-        let shouldAnimate = self.cachedRecentAnime.isEmpty
-        self.cachedRecentAnime = NineAnimator.default.user.recentAnimes
-        
-        // Send message to the collection view
-        if shouldAnimate {
-            self.collectionView.reloadSections([ 0 ])
-        } else { self.collectionView.reloadData() }
-    }
-    
     /// Remove the anime from the recents anime list
     private func removeAnime(atIndex indexPath: IndexPath) {
-        DispatchQueue.main.async {
-            self.cachedRecentAnime.remove(at: indexPath.item)
-            self.collectionView.deleteItems(at: [ indexPath ])
-            NineAnimator.default.user.recentAnimes = self.cachedRecentAnime
+        if let record = self.dataSource?.object(at: indexPath) {
+            do {
+                try dataContext.removeLibraryRecord(record: record)
+            } catch {
+                Log.error("[LibraryRecentsCategoryController] Unable to remove record: %@.", error)
+            }
         }
-    }
-}
-
-// MARK: - Data Source & Delegate
-extension LibraryRecentsCategoryController {
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        section == 0 ? cachedRecentAnime.count : 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "recents.item",
-            for: indexPath
-        ) as! LibraryRecentAnimeCell
-        cell.setPresenting(cachedRecentAnime[indexPath.item])
-        return cell
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        selectedAnimeLink = cachedRecentAnime[indexPath.item]
-        performSegue(withIdentifier: "recents.player", sender: cell)
     }
 }
 
@@ -126,8 +126,12 @@ extension LibraryRecentsCategoryController {
     /// For iOS 13.0 and higher, use the built-in `UIContextMenu` for operations
     @available(iOS 13.0, *)
     override func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
-        let animationWaitTime: DispatchTimeInterval = .milliseconds(500)
-        let relatedAnimeLink = cachedRecentAnime[indexPath.item]
+        guard let managedLibraryRecord = self.dataSource?.object(at: indexPath),
+            case let .some(.anime(relatedAnimeLink)) = managedLibraryRecord.link?.nativeAnyLink else {
+            return nil
+        }
+        
+        let animationWaitTime: DispatchTimeInterval = .milliseconds(300)
         let configuration = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) {

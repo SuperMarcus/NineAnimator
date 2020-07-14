@@ -34,9 +34,28 @@ extension NACoreDataLibrary {
 extension NACoreDataLibrary.Context {
     /// Obtain the list of recently viewed titles
     func fetchRecents() throws -> [AnyLink] {
-        try _fetchAllManagedRecentRecords().compactMap {
-            $0.link?.nativeAnyLink
-        }
+        try _coreDataContext
+            .fetch(_recentsFetchRequest())
+            .compactMap {
+                $0.link?.nativeAnyLink
+            }
+    }
+    
+    /// Obtain a fetch results controller for the recent records
+    func fetchRecentsController() -> NSFetchedResultsController<NACoreDataLibraryRecord> {
+        let request = _recentsFetchRequest()
+        return NSFetchedResultsController(
+            fetchRequest: request,
+            managedObjectContext: _coreDataContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
+    }
+    
+    /// Remove a single entry from the library
+    func removeLibraryRecord(record: NACoreDataLibraryRecord) throws {
+        _coreDataContext.delete(record)
+        try _coreDataContext.save()
     }
     
     /// Reset the recently viewed titles to the array of AnyLink.
@@ -57,7 +76,10 @@ extension NACoreDataLibrary.Context {
         
         try _coreDataContext.save()
     }
-    
+}
+
+// MARK: - Private Helpers
+extension NACoreDataLibrary.Context {
     fileprivate func _obtainManagedRecord(forAnyLink anyLink: AnyLink) throws -> NACoreDataLibraryRecord {
         let request = NACoreDataLibraryRecord.fetchRequest() as NSFetchRequest<NACoreDataLibraryRecord>
         let managedLink = try _obtainManagedLink(forAnyLink: anyLink)
@@ -122,7 +144,8 @@ extension NACoreDataLibrary.Context {
         )
     }
     
-    fileprivate func _fetchAllManagedRecentRecords() throws -> [NACoreDataLibraryRecord] {
+    /// Obtain a NSFetchRequest for a list of library records sorted by lastAccess
+    fileprivate func _recentsFetchRequest() -> NSFetchRequest<NACoreDataLibraryRecord> {
         let request = NACoreDataLibraryRecord.fetchRequest() as NSFetchRequest<NACoreDataLibraryRecord>
         request.sortDescriptors = [
             .init(key: "lastAccess", ascending: false)
@@ -130,6 +153,6 @@ extension NACoreDataLibrary.Context {
         request.relationshipKeyPathsForPrefetching = [
             "link"
         ]
-        return try _coreDataContext.fetch(request)
+        return request
     }
 }

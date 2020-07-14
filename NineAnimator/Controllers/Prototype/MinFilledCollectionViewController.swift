@@ -34,7 +34,7 @@ class MinFilledCollectionViewController: UICollectionViewController, MinFilledLa
     /// This method must be called in `viewDidLoad` and before any layout function is used.
     func setLayoutParameters(alwaysFillLine: Bool, minimalSize: CGSize...) {
         layoutHelper = MinFilledFlowLayoutHelper(
-            dataSource: self,
+            dataSource: collectionView.dataSource ?? self,
             alwaysFillLine: alwaysFillLine,
             minimalSizes: minimalSize
         )
