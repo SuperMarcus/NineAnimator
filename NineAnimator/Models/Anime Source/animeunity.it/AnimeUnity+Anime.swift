@@ -71,17 +71,16 @@ extension NASourceAnimeUnity {
                 // Information
                 let synopsis = try bowl.select("div.description").text()
                 // Attributes
-                var additionalAttributes = [Anime.AttributeKey: Any]()
-                _ = try bowl.select("div.info-item").compactMap { entry -> Void in
+                let additionalAttributes = try bowl.select("div.info-item").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
                     if try entry.text().contains("Anno") {
                         let year = try entry.select("small").text()
-                        additionalAttributes[.airDate] = year
+                        attributes[.airDate] = year
                     }
                     if try entry.text().contains("Valutazione") {
                         let val = try entry.select("small").text()
                         let rating = (val as NSString).floatValue
-                        additionalAttributes[.rating] = rating
-                        additionalAttributes[.ratingScale] = Float(10.0)
+                        attributes[.rating] = rating
+                        attributes[.ratingScale] = Float(10.0)
                     }
                 }
                 return Anime(
