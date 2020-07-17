@@ -119,6 +119,7 @@ class SetupWelcomeViewController: UIViewController {
         
         // Perform migration
         if let modelVersion = NineAnimator.default.user.setupVersion, let migrator = scheduledDataMigrator {
+            migrator.delegate = self
             migrator.beginMigration(sourceVersion: modelVersion)
         }
     }
@@ -152,6 +153,7 @@ extension SetupWelcomeViewController: ModelMigratorDelegate {
                 self.continueButton.isEnabled = true
                 self.skipSetupButton.isEnabled = true
                 self.welcomeTitleLabel.text = "Welcome Back"
+                self.scheduledDataMigrator = nil
             }
         }
     }

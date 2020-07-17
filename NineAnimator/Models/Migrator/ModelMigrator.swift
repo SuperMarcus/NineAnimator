@@ -19,8 +19,8 @@
 
 import Foundation
 
-protocol ModelMigrator {
-    var delegate: ModelMigratorDelegate? { get }
+protocol ModelMigrator: AnyObject {
+    var delegate: ModelMigratorDelegate? { get set }
     
     /// The input version range that the migrator accepts
     var inputVersionRange: Range<NineAnimatorVersion> { get }
