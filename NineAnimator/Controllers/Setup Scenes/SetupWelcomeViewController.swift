@@ -43,6 +43,7 @@ class SetupWelcomeViewController: UIViewController {
     @IBOutlet private weak var skipSetupButton: UIButton!
     
     private var didShowAnimation = false
+    private var scheduledDataMigrator = NineAnimator.default.user.availableModelMigrator()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -63,6 +64,12 @@ class SetupWelcomeViewController: UIViewController {
         // change the title to "Welcome Back"
         if NineAnimator.default.user.setupVersion != nil {
             welcomeTitleLabel.text = "Welcome Back"
+            
+            if scheduledDataMigrator != nil {
+                welcomeTitleLabel.text = "Updating Data"
+                continueButton.isEnabled = false
+                skipSetupButton.isEnabled = false
+            }
         }
     }
     
@@ -109,10 +116,43 @@ class SetupWelcomeViewController: UIViewController {
                 duration: 0.5
             )
         }
+        
+        // Perform migration
+        if let modelVersion = NineAnimator.default.user.setupVersion, let migrator = scheduledDataMigrator {
+            migrator.beginMigration(sourceVersion: modelVersion)
+        }
     }
     
     @IBAction private func onSkipSetupButtonTap(_ sender: Any) {
-        NineAnimator.default.user.markDidSetupLatestVersion()
-        dismiss(animated: true)
+        if scheduledDataMigrator == nil {
+            NineAnimator.default.user.markDidSetupLatestVersion()
+            dismiss(animated: true)
+        }
+    }
+    
+    @IBAction private func onContinueButtonTap(_ sender: Any) {
+        if scheduledDataMigrator == nil {
+            performSegue(withIdentifier: "continue", sender: self)
+        }
+    }
+}
+
+extension SetupWelcomeViewController: ModelMigratorDelegate {
+    func migrator(willBeginMigration migrator: ModelMigrator) {
+        // Not doing anything atm
+    }
+    
+    func migrator(migrationInProgress migrator: ModelMigrator, progress: ModelMigrationProgress) {
+        // Not doing anything atm
+    }
+    
+    func migrator(didCompleteMigration migrator: ModelMigrator, withError error: Error?) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.continueButton.isEnabled = true
+                self.skipSetupButton.isEnabled = true
+                self.welcomeTitleLabel.text = "Welcome Back"
+            }
+        }
     }
 }

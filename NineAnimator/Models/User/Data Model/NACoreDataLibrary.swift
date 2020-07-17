@@ -35,4 +35,9 @@ internal class NACoreDataLibrary {
             }
         }
     }
+    
+    func createBackgroundContext() -> Context {
+        let managedContext = self._container.newBackgroundContext()
+        return Context(withContext: managedContext)
+    }
 }

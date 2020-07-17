@@ -31,15 +31,19 @@ extension NineAnimatorUser {
     /// Triggered when an anime is presented
     ///
     /// - Parameter anime: AnimeLink of the anime
+    /// - Important: Only call this method on the main thread
     func entering(anime: AnimeLink) {
-        var animes = recentAnimes.filter { $0 != anime }
-        animes.insert(anime, at: 0)
-        recentAnimes = animes
+        do {
+            try coreDataLibrary.mainContext.updateLibraryRecord(forLink: .anime(anime))
+        } catch {
+            Log.error("[NineAnimatorUser] Unable to record recently viewed item because of error: %@", error)
+        }
     }
     
     /// Triggered when the playback is about to start
     ///
     /// - Parameter episode: EpisodeLink of the episode
+    /// - Important: Only call this method on the main thread
     func entering(episode: EpisodeLink) {
         guard let data = encodeIfPresent(data: episode) else {
             Log.error("EpisodeLink failed to encode.")

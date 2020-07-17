@@ -58,6 +58,13 @@ extension NACoreDataLibrary.Context {
         try _coreDataContext.save()
     }
     
+    /// Update the recently accessed record for the link
+    func updateLibraryRecord(forLink link: AnyLink) throws {
+        let record = try _obtainManagedRecord(forAnyLink: link)
+        record.lastAccess = Date()
+        try _coreDataContext.save()
+    }
+    
     /// Reset the recently viewed titles to the array of AnyLink.
     ///
     /// This is a time-consuming operation and should not be performed regularly. This operation also erases any information about the individual records.

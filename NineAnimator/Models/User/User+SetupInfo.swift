@@ -21,9 +21,15 @@ import Foundation
 
 extension NineAnimatorUser {
     /// Store the version of NineAnimator that has been setup
-    var setupVersion: String? {
-        get { _freezer.string(forKey: Keys.version) }
-        set { _freezer.set(newValue, forKey: Keys.version) }
+    var setupVersion: NineAnimatorVersion? {
+        get {
+            if let versionStrng = _freezer.string(forKey: Keys.version) {
+                return NineAnimatorVersion(string: versionStrng)
+            }
+            
+            return nil
+        }
+        set { _freezer.set(newValue?.stringRepresentation, forKey: Keys.version) }
     }
     
     /// For now, the runtime uuid will reflect the randomly generated UUID at launchtime for privacy reasons
@@ -47,11 +53,32 @@ extension NineAnimatorUser {
     
     /// Check if the setup wizard was shown
     var didSetupLatestVersion: Bool {
-        setupVersion == "\(NineAnimator.default.version) (\(NineAnimator.default.buildNumber))"
+        setupVersion == .current
+    }
+    
+    /// Versions of NineAnimator that are compatible with the current model
+    var modelCompatibleVersions: ClosedRange<NineAnimatorVersion> {
+        NineAnimatorVersion(major: 1, minor: 2, patch: 6, build: 15)...(.current)
+    }
+    
+    /// A list of ModelMigrator built in to the current version of NineAnimator
+    var builtinMigrators: [ModelMigrator] {
+        [ LegacyUserDefaultsModelMigrator() ]
+    }
+    
+    /// Returns a ModelMigrator available to migrate an outdated model
+    /// - Returns: nil if the current version is compatible or if no model migrator is available for the current model version
+    func availableModelMigrator() -> ModelMigrator? {
+        if !didSetupLatestVersion, let modelVersion = setupVersion {
+            return builtinMigrators.first {
+                migrator in migrator.inputVersionRange.contains(modelVersion)
+            }
+        }
+        return nil
     }
     
     /// Mark setup as completed
     func markDidSetupLatestVersion() {
-        setupVersion = "\(NineAnimator.default.version) (\(NineAnimator.default.buildNumber))"
+        setupVersion = .current
     }
 }
