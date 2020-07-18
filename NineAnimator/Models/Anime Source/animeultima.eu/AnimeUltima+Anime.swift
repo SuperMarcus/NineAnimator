@@ -171,7 +171,7 @@ extension NASourceAnimeUltima {
                     }
                     
                     // Enqueue the episode information
-                    listOfEpisodes.insert((episodeName, episodeNumber, episodeAirDate, episodeUrl), at: 0)
+                    listOfEpisodes.append((episodeName, episodeNumber, episodeAirDate, episodeUrl))
                 }
                 
                 // Check to make sure that there is at least one episode
