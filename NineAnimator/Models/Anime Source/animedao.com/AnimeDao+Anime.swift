@@ -150,7 +150,7 @@ extension NASourceAnimeDao {
                 case "year":
                     additionalAnimeAttributes[.airDate] = attributeValue
                 case "description":
-                    animeSynopsis = attributeValue
+                    animeSynopsis = try Entities.unescape(attributeValue)
                 case "alternative":
                     animeAliases = attributeValue.replacingOccurrences(
                         of: ",",
