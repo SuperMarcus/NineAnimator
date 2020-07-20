@@ -22,6 +22,13 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
+    struct SearchResponseRecords: Codable {
+        var id: Int
+        var title: String
+        var imageurl: String
+        var slug: String
+    }
+
     class SearchAgent: ContentProvider {
         var totalPages: Int? { 1 }
         var availablePages: Int { _results == nil ? 0 : 1 }
@@ -37,16 +44,13 @@ extension NASourceAnimeUnity {
         func links(on page: Int) -> [AnyLink] {
             page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
-        
         func more() {
             if case .none = self.requestTask {
-                let endpointUrl = self.parent.endpointURL
                 self.requestTask = self.parent
                     .requestManager
                     .request( // Use relative urls whenever possible so it's easier to deal with endpoint changes
-                        "/anime.php?c=archive",
-                        method: .post,
-                        parameters: [ "query": title ]
+                        "/archivio",
+                        query: [ "title": title ]
                     )
                     .responseData
                     .then {
@@ -57,31 +61,24 @@ extension NASourceAnimeUnity {
                         let data = responseContent
                         let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                         let  bowl = try SwiftSoup.parse(utf8Text)
-//                        let bowl = try SwiftSoup.parse(responseContent.debugDescription)
-                        let entries = try bowl.select("div.row>div.col-lg-4")
-                        
-                        return try entries.compactMap {
-                            entry -> AnimeLink? in
-                            let animeTitle = try entry.select("div>h6.card-title>b")
-                            let title = try animeTitle.text()
-                            
-                            if title.isEmpty { return nil }
-                            
-                            let animeLinkPath = try entry.select("div>a")
-                            let url = try animeLinkPath.attr("href")
-                            let animeLinkURLString = url.trimmingCharacters(in: .whitespacesAndNewlines)
-                            let animeArtworkPath = try entry.select("img").attr("src")
-                            
-                            guard let animeUrl = URL(string: animeLinkURLString, relativeTo: endpointUrl),
-                                let coverImage = URL(string: animeArtworkPath, relativeTo: endpointUrl)
-                                else {
-                                    return nil
-                            }
-                            
+                        var encoded = try bowl.select("archivio").attr("records")
+                        encoded = encoded.replacingOccurrences(of: "\n", with: "")
+                        let data_json = try encoded.data(using: .utf8).tryUnwrap()
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+                        let user: [SearchResponseRecords] = try decoder.decode([SearchResponseRecords].self, from: data_json)
+                        let decodedResponse = user
+                        return try decodedResponse.map {
+                            record -> AnimeLink in
+                            let link = "https://animeunity.it/anime/"+String(record.id)+"-"+record.slug
+                            let animeUrlBuilder = try URLComponents(
+                                url: link.asURL(),
+                                resolvingAgainstBaseURL: true
+                            ).tryUnwrap()
                             return AnimeLink(
-                                title: title,
-                                link: animeUrl,
-                                image: coverImage,
+                                title: record.title,
+                                link: try animeUrlBuilder.url.tryUnwrap(),
+                                image: try record.imageurl.asURL(),
                                 source: self.parent
                             )
                         }
