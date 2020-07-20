@@ -66,6 +66,11 @@ extension NASourceFourAnime {
                     with: "\n",
                     options: [.regularExpression]
                 )
+                .replacingOccurrences(
+                    of: "^Description\\s",
+                    with: "",
+                    options: [.regularExpression]
+                )
             
             // Attributes
             var additionalAttributes = [Anime.AttributeKey: Any]()

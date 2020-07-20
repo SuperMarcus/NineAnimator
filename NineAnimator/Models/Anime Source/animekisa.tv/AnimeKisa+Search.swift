@@ -63,7 +63,7 @@ extension NASourceAnimeKisa {
                             relativeTo: relativeUrlBase
                         ).tryUnwrap()
                         let animeTitle = try resultContainer
-                            .select("div.similard")
+                            .select("div.similardd")
                             .text()
                             .trimmingCharacters(in: .whitespacesAndNewlines)
                         return AnimeLink(
