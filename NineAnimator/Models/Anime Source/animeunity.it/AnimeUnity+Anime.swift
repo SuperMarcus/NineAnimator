@@ -40,8 +40,9 @@ extension NASourceAnimeUnity {
                 let bowl = try SwiftSoup.parse(utf8Text)
                 var encoded = try bowl.select("video-player").attr("anime")
                 encoded = encoded.replacingOccurrences(of: "\n", with: "")
-                let data_json = encoded.data(using: .utf8)!
-                let decoder = JSONDecoder.init()
+                let data_json = try encoded.data(using: .utf8).tryUnwrap()
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let user: SearchResponseRecordsData
                     = try decoder.decode(SearchResponseRecordsData.self, from: data_json)
                 let decodedResponse = user

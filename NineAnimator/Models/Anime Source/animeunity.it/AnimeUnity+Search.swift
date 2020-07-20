@@ -22,7 +22,7 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeUnity {
-    struct SearchResponseRecords : Codable {
+    struct SearchResponseRecords: Codable {
         var id: Int
         var title: String
         var imageurl: String
@@ -46,7 +46,6 @@ extension NASourceAnimeUnity {
         }
         func more() {
             if case .none = self.requestTask {
-                //let endpointUrl = self.parent.endpointURL
                 self.requestTask = self.parent
                     .requestManager
                     .request( // Use relative urls whenever possible so it's easier to deal with endpoint changes
@@ -64,8 +63,9 @@ extension NASourceAnimeUnity {
                         let  bowl = try SwiftSoup.parse(utf8Text)
                         var encoded = try bowl.select("archivio").attr("records")
                         encoded = encoded.replacingOccurrences(of: "\n", with: "")
-                        let data_json = encoded.data(using: .utf8)!
-                        let decoder = JSONDecoder.init()
+                        let data_json = try encoded.data(using: .utf8).tryUnwrap()
+                        let decoder = JSONDecoder()
+                        decoder.keyDecodingStrategy = .convertFromSnakeCase
                         let user: [SearchResponseRecords] = try decoder.decode([SearchResponseRecords].self, from: data_json)
                         let decodedResponse = user
                         return try decodedResponse.map {

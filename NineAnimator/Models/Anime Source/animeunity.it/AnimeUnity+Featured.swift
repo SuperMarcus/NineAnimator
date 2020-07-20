@@ -39,8 +39,9 @@ extension NASourceAnimeUnity {
             let bowl = try SwiftSoup.parse(utf8Text)
             var encoded = try bowl.select("the-carousel").attr("animes")
             encoded = encoded.replacingOccurrences(of: "\n", with: "")
-            let data_json = encoded.data(using: .utf8)!
-            let decoder = JSONDecoder.init()
+            let data_json = try encoded.data(using: .utf8).tryUnwrap()
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             let user: [SearchResponseRecordsFeatured] = try decoder.decode([SearchResponseRecordsFeatured].self, from: data_json)
             let decodedResponse = user
             let recentAnimeLinks = try decodedResponse.map {
