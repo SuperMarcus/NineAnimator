@@ -56,7 +56,7 @@ extension NASourceGogoAnime {
                 let bowl = try SwiftSoup.parse(content)
                 
                 // Parse the streaming sources
-                let streamingSources = try bowl.select("div.anime_muti_link a").compactMap {
+                var streamingSources = try bowl.select("div.anime_muti_link a").compactMap {
                     serverLinkContainer -> (String, URL)? in
                     // Remove the "Select this server thing"
                     try serverLinkContainer.select("span").remove()
@@ -72,6 +72,11 @@ extension NASourceGogoAnime {
                 guard !streamingSources.isEmpty else {
                     throw NineAnimatorError.responseError("No streaming sources found for this anime")
                 }
+                
+                //GogoAnime's "Vidstreaming" server is a collection of backup links to different servers, however there is currently no way for the user to select a backup link, so we are removing this server from the Dictionary of sources.
+                
+                //Keep in mind that GogoAnime's "Gogo server" does use the VidStreamingParser
+                streamingSources.removeAll { $0.0 == "Vidstreaming" }
                 
                 // Construct the episode information structure
                 return NAGogoAnimeEpisodeInformation(
