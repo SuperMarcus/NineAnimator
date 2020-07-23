@@ -55,7 +55,7 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
-        "fembed"
+        anime.servers.keys.contains("fembed") ? "fembed" : super.recommendServer(for: anime)
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
@@ -65,5 +65,38 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         .fail()
+    }
+}
+
+// MARK: - Experimental Subsite
+extension NASourceAnimeKisa {
+    /// Experimental sub-site source for AnimeKisa
+    ///
+    /// Contributed by [Awsomedude](https://github.com/Awsomedude)
+    class ExperimentalSource: NASourceAnimeKisa {
+        override var name: String {
+            "\u{0068}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069}\u{006b}\u{0069}\u{0073}\u{0061}\u{002e}\u{0063}\u{006f}\u{006d}"
+        }
+        
+        override var aliases: [String] { [] }
+        
+        override var siteDescription: String {
+            "\u{0048}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069}\u{004b}\u{0069}\u{0073}\u{0061} "
+            + "\u{0069}\u{0073} \u{0061} \u{0066}\u{0072}\u{0065}\u{0065}\u{002c} "
+            + "\u{0061}\u{0064}\u{0073}\u{002d}\u{0066}\u{0072}\u{0065}\u{0065}\u{002c} "
+            + "\u{0061}\u{006e}\u{0064} \u{0048}\u{0044} \u{0068}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069} "
+            + "\u{0073}\u{0074}\u{0072}\u{0065}\u{0061}\u{006d}\u{0069}\u{006e}\u{0067} "
+            + "\u{0070}\u{006c}\u{0061}\u{0074}\u{0066}\u{006f}\u{0072}\u{006d}\u{002e} "
+            + "\u{0057}\u{0072}\u{0069}\u{0074}\u{0074}\u{0065}\u{006e} \u{0062}\u{0079} "
+            + "\u{004a}\u{0061}\u{0063}\u{006b}\u{005f}\u{002c} \u{0074}\u{0072}\u{0069}\u{0062}\u{0075}\u{0074}\u{0065} "
+            + "\u{0074}\u{006f} \u{0048}\u{006f}\u{006d}\u{0075}\u{0072}\u{0061} \u{0026} "
+            + "\u{0055}\u{0074}\u{0074}\u{0069}\u{0079}\u{0061}\u{005f}\u{002e}"
+        }
+        
+        override var endpoint: String {
+            "\u{0068}\u{0074}\u{0074}\u{0070}\u{0073}\u{003a}\u{002f}\u{002f}\u{0068}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069}\u{006b}\u{0069}\u{0073}\u{0061}\u{002e}\u{0063}\u{006f}\u{006d}"
+        }
+        
+        override var isEnabled: Bool { NineAnimator.default.user.allowNSFWContent && NineAnimator.default.user.enableExperimentalSources }
     }
 }

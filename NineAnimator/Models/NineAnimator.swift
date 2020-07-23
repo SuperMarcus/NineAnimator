@@ -33,6 +33,13 @@ class NineAnimator: SessionDelegate {
     /// Generate random application UUID
     static var applicationRuntimeUuid = UUID()
     
+    /// Random runtime UUID bytes
+    class var applicationRuntimeUuidData: Data {
+        withUnsafePointer(to: &applicationRuntimeUuid) {
+            .init(bytes: $0, count: 16)
+        }
+    }
+    
     /// A dummy artwork url
     class var placeholderArtworkUrl: URL {
         NineAnimatorCloud.placeholderArtworkURL
@@ -158,6 +165,7 @@ extension NineAnimator {
         register(source: NASourceNineAnime(with: self))
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceAnimeKisa(with: self))
+        register(source: NASourceAnimeKisa.ExperimentalSource(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeDao(with: self))
         register(source: NASourceKissanime(with: self))

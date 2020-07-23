@@ -28,7 +28,11 @@ extension NASourceAnimeKisa {
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise.firstly {
+        if let expSelf = self as? ExperimentalSource {
+            return expSelf._episode(from: link, with: anime)
+        }
+        
+        return NineAnimatorPromise.firstly {
             URL(string: link.identifier, relativeTo: link.parent.link)
         } .thenPromise {
             url in self
@@ -92,5 +96,38 @@ extension NASourceAnimeKisa {
         }
         
         return obtainedSources
+    }
+}
+
+extension NASourceAnimeKisa.ExperimentalSource {
+    func _episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        NineAnimatorPromise.firstly {
+            try URL(string: link.identifier, relativeTo: link.parent.link).tryUnwrap()
+        } .thenPromise {
+            episodePageUrl in self.requestManager.request(
+                url: episodePageUrl,
+                handling: .browsing
+            ).responseString
+        } .then {
+            episodePageContent in
+            
+            let mediaRegex = try NSRegularExpression(
+                pattern: "server_main\\s=\\s\"([^\"]+)",
+                options: []
+            )
+            
+            let source = try (mediaRegex
+                .firstMatch(in: episodePageContent)?
+                .firstMatchingGroup)
+                .tryUnwrap(.providerError("Unable to find the streaming resource"))
+            
+            let videoSource = try URL(string: source).tryUnwrap()
+            
+            return Episode(
+                link,
+                target: videoSource,
+                parent: anime
+            )
+        }
     }
 }

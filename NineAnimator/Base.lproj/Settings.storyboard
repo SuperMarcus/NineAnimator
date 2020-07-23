@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -390,7 +390,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Playback Controls" id="7nJ-6V-9oy">
-                                <string key="footerTitle">Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.
+                                <string key="footerTitle">Picture in Picture (PiP) playback may not be available on older systems. Enabling PiP will also enable Background Playback.
 
 Enabling Background Playback will allow audio to be played while NineAnimator is in the background. This setting won't affect Google Cast or AirPlay.
 
@@ -404,7 +404,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture in Picture Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-np-Dks">
-                                                    <rect key="frame" x="8" y="11.5" width="215" height="21"/>
+                                                    <rect key="frame" x="8" y="11.5" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -414,7 +414,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-YN-aHk">
-                                                    <rect key="frame" x="231" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="286" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onPiPDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="bNU-Fd-iPa"/>
                                                     </connections>
@@ -438,7 +438,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
-                                                    <rect key="frame" x="8" y="14" width="215" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -448,7 +448,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
-                                                    <rect key="frame" x="231" y="8" width="51" height="33"/>
+                                                    <rect key="frame" x="286" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onBackgroundPlaybackDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Thu-pY-uHV"/>
                                                     </connections>
@@ -473,7 +473,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fallback to Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPl-8j-R24">
-                                                    <rect key="frame" x="8" y="14" width="215" height="21"/>
+                                                    <rect key="frame" x="8" y="14" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -483,7 +483,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="amF-Cb-8Hv">
-                                                    <rect key="frame" x="231" y="8" width="51" height="33"/>
+                                                    <rect key="frame" x="286" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onPlaybackFallbackToBrowserDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="txC-ln-kTz"/>
                                                     </connections>
@@ -555,13 +555,13 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BFt-ME-5uJ">
-                                                    <rect key="frame" x="231" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="286" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onShowStreamsInNotificationDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="T4a-ul-J75"/>
                                                     </connections>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Available Streams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKK-PI-ugJ">
-                                                    <rect key="frame" x="8" y="11.5" width="215" height="21"/>
+                                                    <rect key="frame" x="8" y="11.5" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -664,7 +664,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Export History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AVN-Z6-xDl">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -684,7 +684,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1VP-oc-aqz">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -704,7 +704,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Search History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqf-KR-CRA">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -731,7 +731,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rns-aJ-RlM">
-                                                    <rect key="frame" x="279.5" y="12" width="48.5" height="20.5"/>
+                                                    <rect key="frame" x="286.5" y="12" width="48.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -794,7 +794,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-wL-Vag">
-                                                    <rect key="frame" x="8" y="11" width="272" height="22"/>
+                                                    <rect key="frame" x="8" y="11" width="327" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -837,6 +837,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                         <outlet property="dynamicAppearanceSwitchLabel" destination="xP9-AS-NPt" id="uNF-dO-LrX"/>
                         <outlet property="episodeListingOrderControl" destination="QFr-Ue-S7z" id="sOn-C7-tkt"/>
                         <outlet property="fallbackToBrowserSwitch" destination="amF-Cb-8Hv" id="P1S-OV-TNk"/>
+                        <outlet property="nsfwSwitchTextLabel" destination="Nrj-vR-ORT" id="gkz-7y-gCZ"/>
                         <outlet property="pictureInPictureSwitch" destination="6vy-YN-aHk" id="Ah9-GZ-SZP"/>
                         <outlet property="preferredAnimeDetailsSourceLabel" destination="oJY-Uv-hLj" id="LTc-HY-lgh"/>
                         <outlet property="richPresenceStatusLabel" destination="OnI-zr-2Cs" id="j7Z-jP-8Qf"/>
@@ -1417,7 +1418,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simkl Icon" translatesAutoresizingMaskIntoConstraints="NO" id="1NB-hr-B7i">
-                                                    <rect key="frame" x="19" y="32" width="250" height="50"/>
+                                                    <rect key="frame" x="46.5" y="32" width="250" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="ZJP-BV-WWV"/>
                                                         <constraint firstAttribute="width" constant="250" id="clG-1o-vrj"/>
@@ -1427,7 +1428,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIMKL.COM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwG-xM-EqT">
-                                                    <rect key="frame" x="108" y="82" width="72.5" height="16"/>
+                                                    <rect key="frame" x="135.5" y="82" width="72.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1574,6 +1575,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                 <constraint firstItem="dKG-YA-MEK" firstAttribute="leading" secondItem="bee-eJ-hn6" secondAttribute="leadingMargin" id="yRV-Bm-sJs"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ugW-Py-Ptp" detailTextLabel="PuS-sL-Ohy" style="IBUITableViewCellStyleValue1" id="ZoM-a3-ZER">
                                         <rect key="frame" x="16" y="99.5" width="343" height="43.5"/>
@@ -1607,6 +1611,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1646,6 +1653,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                 <constraint firstAttribute="trailingMargin" secondItem="irn-bE-VXh" secondAttribute="trailing" id="kS9-i8-MgG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2191,13 +2201,13 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.
+                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.
 
 By setting up third-party tracking services, you agree for NineAnimator to upload your playback history and progress to only the third-party services you have setup.
 
-Your playback history and preferences may be stored in your iCloud account.</string>
+Your playback history and preferences may be stored in your iCloud account.</mutableString>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
                                         <rect key="frame" x="16" y="447" width="343" height="44"/>
@@ -2233,6 +2243,43 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="about.privacy.analytics.optOut" id="orH-GQ-LET">
+                                        <rect key="frame" x="16" y="535" width="343" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orH-GQ-LET" id="pE4-Iy-LFr">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opt-out Analytics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHw-KD-pcc">
+                                                    <rect key="frame" x="15" y="11.5" width="256" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pVb-6h-Klh">
+                                                    <rect key="frame" x="279" y="8" width="51" height="28"/>
+                                                    <connections>
+                                                        <action selector="didToggleOptOutAnalyticsSwitch:" destination="Rvs-DG-kmr" eventType="valueChanged" id="bpJ-PC-I9j"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hHw-KD-pcc" firstAttribute="centerY" secondItem="pE4-Iy-LFr" secondAttribute="centerY" id="OCV-Lo-3gB"/>
+                                                <constraint firstItem="pVb-6h-Klh" firstAttribute="leading" secondItem="hHw-KD-pcc" secondAttribute="trailing" constant="8" id="R5G-MR-4n4"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="pVb-6h-Klh" secondAttribute="trailing" id="jDV-3j-VTM"/>
+                                                <constraint firstAttribute="bottom" secondItem="pVb-6h-Klh" secondAttribute="bottom" constant="8" id="lFJ-al-Z8J"/>
+                                                <constraint firstItem="pVb-6h-Klh" firstAttribute="top" secondItem="pE4-Iy-LFr" secondAttribute="top" constant="8" id="uVf-ZU-1FG"/>
+                                                <constraint firstItem="hHw-KD-pcc" firstAttribute="leading" secondItem="pE4-Iy-LFr" secondAttribute="leadingMargin" id="zGi-Sm-O21"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="GNU General Public License version 3" id="SRm-Su-TD8">
@@ -2245,7 +2292,7 @@ NineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.license" textLabel="p2c-ro-yj3" style="IBUITableViewCellStyleDefault" id="3WC-jV-54E">
-                                        <rect key="frame" x="16" y="866.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1022.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3WC-jV-54E" id="OKY-Es-GnJ">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -2333,7 +2380,7 @@ This software is covered by Elegant Chaos' liberal license: http://elegantchaos.
 See the complete credit list in the "Credits" page.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
-                                        <rect key="frame" x="16" y="1258" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1414" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="edi-Jf-1sC" id="02i-0k-mmN">
                                             <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
@@ -2359,6 +2406,7 @@ See the complete credit list in the "Credits" page.</string>
                     </tableView>
                     <connections>
                         <outlet property="buildNumberLabel" destination="Dt8-B6-aD6" id="uYX-dr-sgU"/>
+                        <outlet property="optOutAnalyticsSwitch" destination="pVb-6h-Klh" id="R1D-1d-Ku0"/>
                         <outlet property="versionLabel" destination="EeO-5U-kPF" id="SB2-MV-UWI"/>
                     </connections>
                 </tableViewController>

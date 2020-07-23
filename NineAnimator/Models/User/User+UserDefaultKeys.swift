@@ -35,6 +35,7 @@ extension NineAnimatorUser {
         static var recentSource: String { "source.recent" }
         static var searchHistory: String { "history.search" }
         static var sourceSolveChallenges: String { "source.challengeSolver" }
+        static var sourceExplicitEnabled: String { "source.explicit.allowed" }
         static var recentServer: String { "server.recent" }
         static var persistedProgresses: String { "episode.progress" }
         static var episodeListingOrder: String { "episode.listing.order" }
@@ -50,6 +51,7 @@ extension NineAnimatorUser {
         static var brightnessBasedTheme: String { "interface.brightnessBasedTheme" }
         static var richPresenceEnable: String { "presence.enable" }
         static var richPresenceShowAnimeName: String { "presence.animeTitle" }
+        static var optOutAnalytics: String { "analytics.optOut" }
         
         // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { "com.marcuszhou.NineAnimator.anime.watching.plist" }

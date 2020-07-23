@@ -46,6 +46,12 @@ extension NASourceFourAnime {
                 // Video element was found, using the presented one
                 videoSource = videoUrl
                 Log.info("[NASourceFourAnime] Resource found from page source.")
+            } else if !videoElement.isEmpty(),
+                let source = try videoElement.select("source").first(),
+                let videoUrl = URL(string: try source.attr("src")) {
+                // Video element found under the source tag nested in the video element
+                videoSource = videoUrl
+                Log.info("[NASourceFourAnime] Resource found from page source (nested).")
             } else if let jwPlayerUrlString = jwPlayerSetupMatchingExpr
                     .firstMatch(in: episodePageContent)?
                     .firstMatchingGroup,

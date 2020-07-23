@@ -20,15 +20,19 @@
 import Alamofire
 import Foundation
 
+#if canImport(CryptoKit)
+import CryptoKit
+#endif
+
 class MyAnimeList: BaseListingService, ListingService {
     var name: String { "MyAnimeList.net" }
     
     override var identifier: String { "com.marcuszhou.nineanimator.service.mal" }
     
     /// MAL api endpoint
-    let endpoint = URL(string: "https://api.myanimelist.net/v2")!
-    
-    let loginPage = URL(string: "https://myanimelist.net/login.php")!
+    var endpoint: URL {
+        URL(string: "https://api.myanimelist.net/v2")!
+    }
     
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
@@ -59,6 +63,42 @@ extension MyAnimeList {
 
 // MARK: - Authentications
 extension MyAnimeList {
+    @available(iOS 13.0, *)
+    internal var authenticationUrl: URL {
+        // Take the hash of the uniquely generated runtime identifier as the code verifier
+        let sessionIdData = NineAnimator.applicationRuntimeUuidData
+        let challengeSalt = Bundle.main.bundleIdentifier ?? ""
+        let truncatedState = challengeSalt + "-" + sessionIdData.subdata(in: 0..<10).hexEncodedString()
+        
+        // Calculate challenge
+        var hasher = CryptoKit.SHA256()
+        if !challengeSalt.isEmpty, let saltData = challengeSalt.data(using: .utf8) {
+            hasher.update(data: saltData)
+        }
+        hasher.update(data: sessionIdData)
+        let codeChallenge = hasher.finalize().hexEncodedString()
+        
+        // Assemble mal sso url
+        var authUrlBuilder = URLComponents(string: "https://myanimelist.net/v1/oauth2/authorize")!
+        authUrlBuilder.queryItems = [
+            .init(name: "response_type", value: "code"),
+            .init(name: "client_id", value: clientIdentifier),
+            .init(name: "code_challenge_method", value: "plain"),
+            .init(name: "code_challenge", value: codeChallenge),
+            .init(name: "state", value: truncatedState)
+        ]
+        
+        return authUrlBuilder.url!
+    }
+    
+    /// Single-Sign-On Callback Scheme
+    @available(iOS 13.0, *)
+    internal var ssoCallbackScheme: String { "nineanimator-list-auth" }
+    
+    internal var legacyLoginPage: URL {
+        URL(string: "https://myanimelist.net/login.php")!
+    }
+    
     private var accessToken: String? {
         get { persistedProperties["access_token"] as? String }
         set { persistedProperties["access_token"] = newValue }
@@ -74,8 +114,14 @@ extension MyAnimeList {
         set { persistedProperties["restore_token"] = newValue }
     }
     
-    /// MAL Android app's client identifier
-    private var clientIdentifier: String { "6114d00ca681b7701d1e15fe11a4987e" }
+    private var _savedClientID: String? {
+        get { persistedProperties["client_id"] as? String }
+        set { persistedProperties["client_id"] = newValue }
+    }
+    
+    private var clientIdentifier: String {
+        _savedClientID ?? "09b2968a89641f412c62a9803fcd2e57"
+    }
     
     var didSetup: Bool { accessToken != nil }
     
@@ -89,6 +135,7 @@ extension MyAnimeList {
     }
     
     /// Authenticate the session with username and password
+    @available(iOS, deprecated: 13.0, message: "Use of legacy MAL authentication schemes.")
     func authenticate(withUser user: String, password: String) -> NineAnimatorPromise<Void> {
         NineAnimatorPromise.firstly {
             [clientIdentifier] in
@@ -112,6 +159,31 @@ extension MyAnimeList {
             (responseData: Data) in
             try JSONSerialization.jsonObject(with: responseData, options: []) as? NSDictionary
         } .thenPromise { self.authenticate(withResponseObject: $0) }
+    }
+    
+    /// Authenticate the session with the callback URL
+    func authenticate(withSSOCallbackUrl url: URL) -> Error? {
+        do {
+            // Decode authentication parameters from query
+            let authParamsDict = try formDecode(url.query ?? "")
+            let decoder = DictionaryDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let authParams = try decoder.decode(OAuthInitialResponse.self, from: authParamsDict)
+            
+            // Check token type
+            guard authParams.tokenType == "Bearer" else {
+                throw NineAnimatorError.responseError("The server returned an invalid token type")
+            }
+            
+            accessToken = authParams.accessToken
+            refreshToken = authParams.refreshToken
+            accessTokenExpirationDate = Date().addingTimeInterval(TimeInterval(try Int(authParams.expiresIn).tryUnwrap(
+                NineAnimatorError.responseError("Invalid expiration date")
+            )))
+            
+            Log.info("[MyAnimeList] Credentials accepted.")
+        } catch { return error }
+        return nil
     }
     
     /// Refresh the expired token with the stored refresh token
@@ -154,7 +226,7 @@ extension MyAnimeList {
                 case "invalid_grant": //Invalid credentials
                     throw NineAnimatorError.authenticationRequiredError(message, nil)
                 case "website_login_required": //Mal account is inactive (therefore requires a google recaptcha)
-                    throw NineAnimatorError.authenticationRequiredError("Please login with Safari before logging in with NineAnimator", self.loginPage)
+                    throw NineAnimatorError.authenticationRequiredError("Please login with Safari before logging in with NineAnimator", self.legacyLoginPage)
                 case "too_many_failed_login_attempts":
                     throw NineAnimatorError.authenticationRequiredError(message, nil)
                 default:
@@ -187,6 +259,13 @@ extension MyAnimeList {
 
 // MARK: - Request Helper
 extension MyAnimeList {
+    struct OAuthInitialResponse: Codable {
+        var accessToken: String
+        var tokenType: String
+        var expiresIn: String
+        var refreshToken: String
+    }
+    
     struct APIResponse {
         /// Access the raw response object
         let raw: NSDictionary

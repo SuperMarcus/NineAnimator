@@ -30,7 +30,8 @@ extension NASourceFourAnime {
             let bowl = try SwiftSoup.parse(responseContent)
             let animeTitle = try bowl.select(".content p").text()
             let animeArtworkUrl = URL(
-                string: try bowl.select(".cover>img").attr("src")
+                string: try bowl.select(".cover>img").attr("src"),
+                relativeTo: link.link
             ) ?? link.image
             let reconstructedAnimeLink = AnimeLink(
                 title: animeTitle,
@@ -63,6 +64,11 @@ extension NASourceFourAnime {
                 .replacingOccurrences(
                     of: "\\n+",
                     with: "\n",
+                    options: [.regularExpression]
+                )
+                .replacingOccurrences(
+                    of: "^Description\\s",
+                    with: "",
                     options: [.regularExpression]
                 )
             
