@@ -22,6 +22,9 @@ import SwiftSoup
 extension NASourceAnimeUnity {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise.firstly {}.then {
+            guard !link.identifier.contains("www.vvvvid.it") else {
+                throw NineAnimatorError.contentUnavailableError("Watch it on vvvvid")
+            }
             let videoUrl = try URL(string: link.identifier + ".mp4").tryUnwrap()
             return Episode(
                 link,

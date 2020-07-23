@@ -26,7 +26,7 @@ extension NASourceAnimeUnity {
         var link: String = ""
     }
     struct  SearchResponseRecordsData: Codable {
-        var title_eng: String?
+        var titleEng: String?
         var episodes: [SearchResponseRecordsAnime]
     }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
@@ -53,7 +53,7 @@ extension NASourceAnimeUnity {
                     source: self
                 )
                 // Obtain the list of episodes
-                var eng_title = decodedResponse.title_eng
+                var eng_title = decodedResponse.titleEng
                 if let theTitle = eng_title {
                     eng_title = theTitle
                 } else {
