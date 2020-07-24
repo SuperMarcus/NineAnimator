@@ -56,7 +56,7 @@ extension NASourceGogoAnime {
                 let bowl = try SwiftSoup.parse(content)
                 
                 // Parse the streaming sources
-                var streamingSources = try bowl.select("div.anime_muti_link a").compactMap {
+                let streamingSources = try bowl.select("div.anime_muti_link a").compactMap {
                     serverLinkContainer -> (String, URL)? in
                     // Remove the "Select this server thing"
                     try serverLinkContainer.select("span").remove()
@@ -66,10 +66,10 @@ extension NASourceGogoAnime {
                         relativeTo: self.endpointURL.appendingPathComponent(episodePath)
                     ) else { return nil }
                     return (serverName, streamUrl)
-                }.filter {
-                    //GogoAnime's "Vidstreaming" server is a collection of backup links to different servers, however there is currently no way for the user to select a backup link, so we are removing this server.
+                } .filter {
+                    // GogoAnime's "Vidstreaming" server is a collection of backup links to different servers, however there is currently no way for the user to select a backup link, so we are removing this server.
 
-                    //Keep in mind that GogoAnime's "Gogo server" does use the VidStreamingParser
+                    // Keep in mind that GogoAnime's "Gogo server" does use the VidStreamingParser
                     $0.0 != "Vidstreaming"
                 }
                 
