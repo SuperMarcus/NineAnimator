@@ -23,6 +23,11 @@ import Foundation
 class MixdropParser: VideoProviderParser {
     var aliases: [String] { [] }
     
+    static let videoURLParamsRegex = try! NSRegularExpression(
+        pattern: "window.location = \"([^\"]+)",
+        options: []
+    )
+
     func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         let videoUrl = episode.target.absoluteString.hasPrefix("//") ?  "https:\(episode.target.absoluteString)" : episode.target.absoluteString
 
@@ -33,31 +38,50 @@ class MixdropParser: VideoProviderParser {
             callback in session.request(sourceInfoUrl).responseString {
                 callback($0.value, $0.error)
             }
-        } .then {
+        } .thenPromise {
             responseContent in
-            let decodedScript = try PackerDecoder().decode(responseContent)
-            let sourceMatchingExpr = try NSRegularExpression(
-                pattern: "MDCore\\.wurl=\"([^\"]+)",
-                options: []
-            )
             
-            let videoAssetUrlString = try sourceMatchingExpr
-                .firstMatch(in: decodedScript)
-                .tryUnwrap(.responseError("Video asset not found"))
+            let redirectRequestParams = try MixdropParser.videoURLParamsRegex
+                .firstMatch(in: responseContent)
+                .tryUnwrap(.responseError("URL Parameters not found"))
                 .firstMatchingGroup
                 .tryUnwrap()
             
-            let resourceUrl = try URL(string: videoAssetUrlString.hasPrefix("//") ?  "https:\(videoAssetUrlString)" : videoAssetUrlString).tryUnwrap(.urlError)
+            guard let redirectRequestURL = URL(string: "https://mixdrop.co\(redirectRequestParams)") else {
+                throw NineAnimatorError.urlError
+            }
             
-            Log.info("(Mixdrop Parser) found asset at %@", resourceUrl.absoluteString)
-            
-            return BasicPlaybackMedia(
-                url: resourceUrl,
-                parent: episode,
-                contentType: "video/mp4",
-                headers: [:],
-                isAggregated: false
-            )
+            return NineAnimatorPromise {
+                callback in session.request(redirectRequestURL).responseString {
+                    callback($0.value, $0.error)
+                }
+            }.then {
+                responseContent in
+                
+                let decodedScript = try PackerDecoder().decode(responseContent)
+                let sourceMatchingExpr = try NSRegularExpression(
+                    pattern: "MDCore\\.wurl=\"([^\"]+)",
+                    options: []
+                )
+                
+                let videoAssetUrlString = try sourceMatchingExpr
+                    .firstMatch(in: decodedScript)
+                    .tryUnwrap(.responseError("Video asset not found"))
+                    .firstMatchingGroup
+                    .tryUnwrap()
+                
+                let resourceUrl = try URL(string: videoAssetUrlString.hasPrefix("//") ?  "https:\(videoAssetUrlString)" : videoAssetUrlString).tryUnwrap(.urlError)
+                
+                Log.info("(Mixdrop Parser) found asset at %@", resourceUrl.absoluteString)
+                
+                return BasicPlaybackMedia(
+                    url: resourceUrl,
+                    parent: episode,
+                    contentType: "video/mp4",
+                    headers: [:],
+                    isAggregated: false
+                )
+            }
         } .handle(handler)
     }
     
