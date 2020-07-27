@@ -23,7 +23,7 @@ import Foundation
 
 class VidStreamingParser: VideoProviderParser {
     var aliases: [String] {
-        [ "VidStreaming", "VidCDN" ]
+        [ "VidStreaming", "VidCDN", "Gogo Server" ]
     }
     
     private static let videoSourceRegex = try! NSRegularExpression(
