@@ -394,6 +394,8 @@
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
 		65E1D9BC235FC12300234409 /* VeryStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E1D9BB235FC12200234409 /* VeryStreamParser.swift */; };
+		BF2B8F1924CFB6370039E505 /* GenresCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8F1724CF4C070039E505 /* GenresCollectionViewCell.swift */; };
+		BF2B8F1B24CFCA8A0039E505 /* GenresTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF2B8F1A24CFCA8A0039E505 /* GenresTableViewCell.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
 		C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */; };
 		C8E12D03242213E000B0AF6A /* AnimeUnity+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */; };
@@ -878,6 +880,8 @@
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
 		65E1D9BB235FC12200234409 /* VeryStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VeryStreamParser.swift; sourceTree = "<group>"; };
+		BF2B8F1724CF4C070039E505 /* GenresCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresCollectionViewCell.swift; sourceTree = "<group>"; };
+		BF2B8F1A24CFCA8A0039E505 /* GenresTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresTableViewCell.swift; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
 		C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Anime.swift"; sourceTree = "<group>"; };
 		C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Featured.swift"; sourceTree = "<group>"; };
@@ -1056,6 +1060,8 @@
 				2C93BD46221F5E62000411CB /* InformationReferenceCollectionViewCell.swift */,
 				2C96DAE124562610007A29B0 /* InformationSceneSchedulesCell.swift */,
 				2C96DAE324562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift */,
+				BF2B8F1724CF4C070039E505 /* GenresCollectionViewCell.swift */,
+				BF2B8F1A24CFCA8A0039E505 /* GenresTableViewCell.swift */,
 			);
 			path = "Anime Information Scene";
 			sourceTree = "<group>";
@@ -2387,6 +2393,7 @@
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
 				2C8519AD22CC949500EEF3AC /* Kissanime+Search.swift in Sources */,
+				BF2B8F1B24CFCA8A0039E505 /* GenresTableViewCell.swift in Sources */,
 				2C6C20C723FADD19009FAFF5 /* UserDefaults+CodableValue.swift in Sources */,
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
@@ -2427,6 +2434,7 @@
 				2C60EABC22676C4400280637 /* MyAnimeList+GenericPagedAnimeList.swift in Sources */,
 				2C4257812325366E00FCCCCE /* Simkl+Mutation.swift in Sources */,
 				2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */,
+				BF2B8F1924CFB6370039E505 /* GenresCollectionViewCell.swift in Sources */,
 				2CAD375A22261C5A008AD6B4 /* MyAnimeList+Reference.swift in Sources */,
 				2CEB56D721DBE53A0018D804 /* Log.swift in Sources */,
 				2C2C54F72215D47500BAA76E /* User+Subscriptions.swift in Sources */,

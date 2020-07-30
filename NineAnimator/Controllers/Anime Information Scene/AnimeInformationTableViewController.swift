@@ -179,7 +179,8 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         // Update table view
         tableView.reloadSections(Section.indexSet([
             .information,
-            .synopsis
+            .synopsis,
+            .genres
         ]), with: .automatic)
         
         // Update heading view
@@ -249,7 +250,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        6
+        7
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -259,6 +260,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         switch Section(rawValue: section)! {
         case .information: return enumeratedInformationList.count + 1
         case .synopsis: return 1
+        case .genres: return 2
         case .airingSchedule: return _airingSchedules?.isEmpty == false ? 2 : 0
         case .characters: return characterList?.isEmpty == false ? 2 : 0
         case .statistics: return _statistics == nil ? 0 : 2
@@ -285,6 +287,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             
             // Assign header value
             switch section {
+            case .genres: cell.headingText = "Genres"
             case .information: cell.headingText = "Information"
             case .characters: cell.headingText = "Characters"
             case .statistics: cell.headingText = "Ratings & Statistics"
@@ -299,6 +302,10 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
         let itemIndex = indexPath.item - 1
         
         switch section {
+        case .genres:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.genres", for: indexPath) as! GenresTableViewCell
+            cell.initialize(information.genres)
+            return cell
         case .information:
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.information", for: indexPath)
             cell.textLabel?.text = enumeratedInformationList[itemIndex].name
@@ -726,6 +733,8 @@ fileprivate extension AnimeInformationTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
     enum Section: Int, Equatable {
         case synopsis = 0
+        
+        case genres
         
         case airingSchedule
         

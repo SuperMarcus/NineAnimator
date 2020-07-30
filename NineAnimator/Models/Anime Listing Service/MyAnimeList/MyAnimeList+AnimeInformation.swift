@@ -28,6 +28,7 @@ extension MyAnimeList {
         var siteUrl: URL
         var description: String
         var information: [String: String]
+        var genres: [ListingAnimeGenre]
         
         private var _meanRatings: Double?
         private var _numRatings: Int?
@@ -108,6 +109,12 @@ extension MyAnimeList {
             self.wallpapers = [ preferredArtwork ]
             self.siteUrl = try URL(string: "https://myanimelist.net/anime/\(reference.uniqueIdentifier)").tryUnwrap(.urlError)
             self.description = try animeEntry.value(at: "synopsis", type: String.self)
+            self.genres = try animeEntry.value(at: "genres", type: [NSDictionary].self).map {
+                ListingAnimeGenre(
+                    name: $0["name"] as! String,
+                    id: $0["id"] as? Int
+                )
+            }
             
             // Decode additional information
             var animeInformation = [String: CustomStringConvertible]()
@@ -146,7 +153,7 @@ extension MyAnimeList {
     
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         apiRequest("/anime/\(reference.uniqueIdentifier)", query: [
-            "fields": "alternative_titles,average_episode_duration,broadcast,created_at,end_date,main_picture,mean,media_type,nsfw,num_scoring_users,popularity,rank,synopsis,title,background,related_anime,related_anime{node{my_list_status{start_date,finish_date}}},num_episodes,start_date"
+            "fields": "alternative_titles,average_episode_duration,broadcast,created_at,end_date,main_picture,mean,media_type,nsfw,num_scoring_users,popularity,rank,synopsis,genres,title,background,related_anime,related_anime{node{my_list_status{start_date,finish_date}}},num_episodes,start_date"
         ]).then {
             response in
             guard let animeEntry = response.data.first else {
