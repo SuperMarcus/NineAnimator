@@ -61,7 +61,7 @@ extension NASourceAnimeUnity {
                 }
                 let episodesList = decodedResponse.episodes.compactMap {
                     episode -> (EpisodeLink) in
-                    let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
+                    let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").replacingOccurrences(of: " ", with: "%20").dropLast(4)
                     return (EpisodeLink(
                         identifier: String(link_ep),
                         name: episode.number,
