@@ -21,11 +21,6 @@ import Foundation
 import SwiftSoup
 
 struct NineAnimeFeatured: FeaturedContainer {
-    static let featuredAnimesRegex = try! NSRegularExpression(
-        pattern: "background-image: url\\(([^)]+)\\)",
-        options: .caseInsensitive
-    )
-    
     let featured: [AnimeLink]
     
     let latest: [AnimeLink]
@@ -33,16 +28,11 @@ struct NineAnimeFeatured: FeaturedContainer {
     init?(_ pageSource: String, with parent: NASourceNineAnime) throws {
         let bowl = try SwiftSoup.parse(pageSource)
         
-        featured = try bowl.select("div.items.swiper-wrapper div.item.swiper-slide").compactMap {
+        featured = try bowl.select("div.items.swiper-wrapper div.item.swiper-slide.lazyload").compactMap {
             element -> AnimeLink? in
             do {
                 let animeTitle = try element.select("a.name").text()
-                let animeArtwork =  try NineAnimeFeatured
-                    .featuredAnimesRegex
-                    .firstMatch(in: try element.attr("style"))
-                    .tryUnwrap()
-                    .firstMatchingGroup
-                    .tryUnwrap()
+                let animeArtwork = try element.attr("data-src")
                 let animeArtworkUrl = try URL(string: animeArtwork).tryUnwrap()
                 let animeLinkString = try element.select("a.name").attr("href")
                 let animeLink = try URL(string: animeLinkString).tryUnwrap()
@@ -62,7 +52,7 @@ struct NineAnimeFeatured: FeaturedContainer {
             element -> AnimeLink? in
             do {
                 let animeTitle = try element.select("a.name").text()
-                let animeArtwork = try element.select("a.poster img").attr("src")
+                let animeArtwork = try element.select("a.poster img").attr("data-src")
                 let animeArtworkUrl = try URL(string: animeArtwork).tryUnwrap()
                 let animeLinkString = try element.select("a.poster").attr("href")
                 let animeLink = try URL(string: animeLinkString).tryUnwrap()
