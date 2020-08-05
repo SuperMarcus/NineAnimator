@@ -29,6 +29,7 @@ extension Anilist {
         var siteUrl: URL
         var description: String
         var information: [String: String]
+        var genres: [ListingAnimeGenre]
         
         var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> {
             .success(_airingEpisodes)
@@ -98,6 +99,13 @@ extension Anilist {
             
             if self.description.isEmpty {
                 self.description = "No synopsis found for this title."
+            }
+            
+            self.genres = try mediaEntry.value(at: "genres", type: [String].self).map {
+                ListingAnimeGenre(
+                    name: $0,
+                    id: nil
+                )
             }
             
             self.wallpapers = []

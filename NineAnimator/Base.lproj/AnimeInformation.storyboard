@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9r-ko-ADk">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="f9r-ko-ADk">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -303,8 +303,96 @@
                                     <outlet property="headingLabel" destination="pv7-K0-NCl" id="gPa-dc-hq3"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.genres" rowHeight="34" id="1xA-6r-Txc" userLabel="anime.genres" customClass="GenresTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="517" width="375" height="34"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1xA-6r-Txc" id="NMR-O3-IBd">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="21y-9f-ZxJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="lessThanOrEqual" constant="34" id="RmD-Ig-R3p"/>
+                                            </constraints>
+                                            <inset key="scrollIndicatorInsets" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="mmk-PO-JU9">
+                                                <size key="itemSize" width="75" height="31"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="genres.chip" id="3dS-Pa-idO" customClass="GenresCollectionViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                                    <rect key="frame" x="16" y="1.3333333333333333" width="75" height="31.000000000000004"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hjJ-x7-Q68">
+                                                        <rect key="frame" x="0.0" y="0.0" width="75" height="31.000000000000004"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ge-9y-BzQ" userLabel="Genre Chip">
+                                                                <rect key="frame" x="0.0" y="0.0" width="70" height="31"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AyL-Kd-wpI">
+                                                                        <rect key="frame" x="15.666666666666664" y="7" width="39" height="17"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" secondItem="AyL-Kd-wpI" secondAttribute="width" multiplier="2.04255" id="2CH-3N-ydx"/>
+                                                                    <constraint firstItem="AyL-Kd-wpI" firstAttribute="centerX" secondItem="9ge-9y-BzQ" secondAttribute="centerX" id="3Lw-VM-4Xy"/>
+                                                                    <constraint firstItem="AyL-Kd-wpI" firstAttribute="centerY" secondItem="9ge-9y-BzQ" secondAttribute="centerY" id="E1h-I8-9QC"/>
+                                                                    <constraint firstAttribute="height" constant="37" id="oMT-br-K9S"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="10"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="backgroundSecondaryColor" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <variation key="default">
+                                                                    <mask key="constraints">
+                                                                        <exclude reference="oMT-br-K9S"/>
+                                                                        <exclude reference="2CH-3N-ydx"/>
+                                                                    </mask>
+                                                                </variation>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="9ge-9y-BzQ" secondAttribute="trailing" constant="5" id="50k-jO-Yh7"/>
+                                                            <constraint firstItem="9ge-9y-BzQ" firstAttribute="top" secondItem="hjJ-x7-Q68" secondAttribute="top" id="EU0-Hx-tjR"/>
+                                                            <constraint firstItem="9ge-9y-BzQ" firstAttribute="leading" secondItem="hjJ-x7-Q68" secondAttribute="leading" id="T5B-y3-toj"/>
+                                                            <constraint firstAttribute="bottom" secondItem="9ge-9y-BzQ" secondAttribute="bottom" id="hRU-xD-ku7"/>
+                                                        </constraints>
+                                                    </collectionViewCellContentView>
+                                                    <connections>
+                                                        <outlet property="genreLabel" destination="AyL-Kd-wpI" id="pb7-6F-OHW"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </collectionView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="21y-9f-ZxJ" secondAttribute="trailing" id="4F2-Ub-CB4"/>
+                                        <constraint firstItem="21y-9f-ZxJ" firstAttribute="leading" secondItem="NMR-O3-IBd" secondAttribute="leading" id="6D0-BY-ub3"/>
+                                        <constraint firstItem="21y-9f-ZxJ" firstAttribute="top" secondItem="NMR-O3-IBd" secondAttribute="top" id="wFF-0R-wkj"/>
+                                        <constraint firstAttribute="bottom" secondItem="21y-9f-ZxJ" secondAttribute="bottom" id="yfz-nP-Q9Z"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="collectionView" destination="21y-9f-ZxJ" id="lCw-k0-FOk"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.schedule" rowHeight="120" id="awY-3N-sws" customClass="InformationSceneSchedulesCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="517" width="375" height="120"/>
+                                <rect key="frame" x="0.0" y="551" width="375" height="120"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="awY-3N-sws" id="sMo-Dn-Qpm">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
@@ -425,7 +513,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.statistics" rowHeight="90" id="FkU-13-VMD" customClass="InformationSceneStatisticsTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="637" width="375" height="90"/>
+                                <rect key="frame" x="0.0" y="671" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FkU-13-VMD" id="8N7-zJ-TmF">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -492,7 +580,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.characters" rowHeight="150" id="V2x-8D-p6l" customClass="InformationSceneCharactersTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="727" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="761" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V2x-8D-p6l" id="YZy-p9-hHC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
@@ -605,7 +693,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.related" rowHeight="224" id="bgx-yg-IDS" customClass="InformationSceneRelatedTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="877" width="375" height="224"/>
+                                <rect key="frame" x="0.0" y="911" width="375" height="224"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bgx-yg-IDS" id="cW9-Kf-Wi3">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="224"/>
@@ -686,7 +774,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.information" textLabel="rEQ-Pw-ii4" detailTextLabel="16a-OX-bbP" style="IBUITableViewCellStyleValue1" id="p1i-Sw-S7B">
-                                <rect key="frame" x="0.0" y="1101" width="375" height="43.666667938232422"/>
+                                <rect key="frame" x="0.0" y="1135" width="375" height="43.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p1i-Sw-S7B" id="xrr-az-rSt">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.666667938232422"/>

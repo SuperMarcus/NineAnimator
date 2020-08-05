@@ -69,6 +69,15 @@ struct ListingAnimeStatistics {
     let episodesCount: Int?
 }
 
+/// Representing the genres of an anime
+struct ListingAnimeGenre {
+    /// The name of the genre
+    let name: String
+    
+    /// Optional ID of the genre
+    let id: Int?
+}
+
 /// Representing the ratings
 struct ListingAnimeReview {
     /// The author of the review
@@ -114,6 +123,9 @@ protocol ListingAnimeInformation {
     
     /// A list of information that is displayed in the information section
     var information: [String: String] { get }
+    
+    /// A list of the anime's genres
+    var genres: [ListingAnimeGenre] { get }
     
     // Promisified and need-based information
     
