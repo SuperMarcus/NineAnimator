@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -390,7 +390,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Playback Controls" id="7nJ-6V-9oy">
-                                <string key="footerTitle">Picture in Picture (PiP) playback is only supported on iPads. Enabling PiP will also enable Background Playback.
+                                <string key="footerTitle">Picture in Picture (PiP) playback may not be available on older systems. Enabling PiP will also enable Background Playback.
 
 Enabling Background Playback will allow audio to be played while NineAnimator is in the background. This setting won't affect Google Cast or AirPlay.
 
@@ -504,11 +504,11 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         <rect key="frame" x="16" y="1004.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="30T-PY-VFY" id="eTQ-k1-6uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eR-hu-Qxf">
-                                                    <rect key="frame" x="15" y="0.0" width="301" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="294" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -528,7 +528,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Open Cast Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gK-el-Ee1">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -596,7 +596,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Items" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ky-4E-HeC">
-                                                    <rect key="frame" x="278" y="12" width="57" height="20.5"/>
+                                                    <rect key="frame" x="271" y="12" width="57" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -620,7 +620,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Checking..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1D4-d4-eg5">
-                                                    <rect key="frame" x="248.5" y="12" width="86.5" height="20.5"/>
+                                                    <rect key="frame" x="241.5" y="12" width="86.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -637,7 +637,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Unsubscribe All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hGc-BW-frZ">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -1575,6 +1575,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                 <constraint firstItem="dKG-YA-MEK" firstAttribute="leading" secondItem="bee-eJ-hn6" secondAttribute="leadingMargin" id="yRV-Bm-sJs"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ugW-Py-Ptp" detailTextLabel="PuS-sL-Ohy" style="IBUITableViewCellStyleValue1" id="ZoM-a3-ZER">
                                         <rect key="frame" x="16" y="99.5" width="343" height="43.5"/>
@@ -1608,6 +1611,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -1647,6 +1653,9 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                 <constraint firstAttribute="trailingMargin" secondItem="irn-bE-VXh" secondAttribute="trailing" id="kS9-i8-MgG"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -2192,13 +2201,13 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collects analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
+                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.
 
 By setting up third-party tracking services, you agree for NineAnimator to upload your playback history and progress to only the third-party services you have setup.
 
-Your playback history and preferences may be stored in your iCloud account.</string>
+Your playback history and preferences may be stored in your iCloud account.</mutableString>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
                                         <rect key="frame" x="16" y="447" width="343" height="44"/>
@@ -2267,6 +2276,9 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                                 <constraint firstItem="hHw-KD-pcc" firstAttribute="leading" secondItem="pE4-Iy-LFr" secondAttribute="leadingMargin" id="zGi-Sm-O21"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>

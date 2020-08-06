@@ -16,21 +16,10 @@
 //  You should have received a copy of the GNU General Public License
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
-import Foundation
-import SwiftSoup
 
-extension NASourceAnimeUnity {
-    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise.firstly {}.then {
-            guard !link.identifier.contains("www.vvvvid.it") else {
-                throw NineAnimatorError.contentUnavailableError("Watch it on vvvvid")
-            }
-            let videoUrl = try URL(string: link.identifier + ".mp4").tryUnwrap()
-            return Episode(
-                link,
-                target: videoUrl,
-                parent: anime
-            )
-        }
-    }
+import Foundation
+
+protocol NACredentialManager: AnyObject {
+    func credentialManager(authorizeRequest request: URLRequest) -> URLRequest
+    func credentialManager(validateResponse response: URLResponse, data: Data?) throws
 }

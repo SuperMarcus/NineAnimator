@@ -79,6 +79,7 @@
 		2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C718E221B118700760A69 /* AnimeInformation.storyboard */; };
 		2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C7192221B11D400760A69 /* AnimeInformationTableViewController.swift */; };
 		2C1C7196221B1C3000760A69 /* InformationSceneHeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1C7195221B1C3000760A69 /* InformationSceneHeadingView.swift */; };
+		2C1DCF1F24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1DCF1E24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift */; };
 		2C211EC4225EADDD00389124 /* SetupThemeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C211EC3225EADDD00389124 /* SetupThemeViewController.swift */; };
 		2C2196D121DAC555002059D3 /* NineAnimatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */; };
 		2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C23AE392229912100512150 /* Promise+Success.swift */; };
@@ -327,6 +328,7 @@
 		2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB6704A249FCA48006C11A9 /* OpenCastSwift */; };
 		2CB6704E249FCA65006C11A9 /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB6704D249FCA65006C11A9 /* ViewAnimator */; };
 		2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; platformFilter = ios; };
+		2CB8A4AD24DC4BB000F7EAC7 /* RequestManager+OAuthCredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB8A4AC24DC4BB000F7EAC7 /* RequestManager+OAuthCredentialsManager.swift */; };
 		2CB9919421FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */; };
 		2CBDBC5B24BCBC0F000B360D /* UserLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CBDBC5924BCBC0F000B360D /* UserLibrary.xcdatamodeld */; };
 		2CC2F5D2226F277B00A62A76 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */; };
@@ -510,6 +512,7 @@
 		2C1C718F221B118700760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeInformation.storyboard; sourceTree = "<group>"; };
 		2C1C7192221B11D400760A69 /* AnimeInformationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeInformationTableViewController.swift; sourceTree = "<group>"; };
 		2C1C7195221B1C3000760A69 /* InformationSceneHeadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationSceneHeadingView.swift; sourceTree = "<group>"; };
+		2C1DCF1E24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+CredentialsManager.swift"; sourceTree = "<group>"; };
 		2C211EC3225EADDD00389124 /* SetupThemeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupThemeViewController.swift; sourceTree = "<group>"; };
 		2C2196CE21DAC555002059D3 /* NineAnimatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2196D021DAC555002059D3 /* NineAnimatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorTests.swift; sourceTree = "<group>"; };
@@ -796,6 +799,7 @@
 		2CB4AF95239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachableAVAssetLoaderDelegate.swift; sourceTree = "<group>"; };
 		2CB5F2B9244006A9002461CD /* .github */ = {isa = PBXFileReference; lastKnownFileType = text; path = .github; sourceTree = SOURCE_ROOT; };
 		2CB5F2BA244158D8002461CD /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = SOURCE_ROOT; };
+		2CB8A4AC24DC4BB000F7EAC7 /* RequestManager+OAuthCredentialsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+OAuthCredentialsManager.swift"; sourceTree = "<group>"; };
 		2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2CBDBC5A24BCBC0F000B360D /* UserLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserLibrary.xcdatamodel; sourceTree = "<group>"; };
 		2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Unwrap.swift"; sourceTree = "<group>"; };
@@ -1539,6 +1543,8 @@
 				2C055AF424A93E1F00FCAC25 /* RequestManager+QueryEncoding.swift */,
 				2C055AF224A9298900FCAC25 /* SourceRequestManager.swift */,
 				2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */,
+				2C1DCF1E24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift */,
+				2CB8A4AC24DC4BB000F7EAC7 /* RequestManager+OAuthCredentialsManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -2432,6 +2438,7 @@
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
 				2C8519AD22CC949500EEF3AC /* Kissanime+Search.swift in Sources */,
+				2CB8A4AD24DC4BB000F7EAC7 /* RequestManager+OAuthCredentialsManager.swift in Sources */,
 				2C6C20C723FADD19009FAFF5 /* UserDefaults+CodableValue.swift in Sources */,
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
@@ -2635,6 +2642,7 @@
 				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
 				2C7BD23A21B9B4F400B29C90 /* Episode.swift in Sources */,
 				2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */,
+				2C1DCF1F24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift in Sources */,
 				2CEC21942207F5A100A30F4F /* Promise+Callback.swift in Sources */,
 				2C23AE3C2229B17A00512150 /* MyAnimeList+Mutation.swift in Sources */,
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
