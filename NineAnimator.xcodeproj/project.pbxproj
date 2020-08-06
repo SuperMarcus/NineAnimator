@@ -394,6 +394,7 @@
 		650A5CC924DBC3DE00C01CC7 /* ClipWatchingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */; };
 		650A5CCB24DBCCBD00C01CC7 /* UqloadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */; };
 		650A5CCD24DBD0FB00C01CC7 /* SendvidParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */; };
+		650A5CCF24DBDF9100C01CC7 /* VideobinParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CCE24DBDF9100C01CC7 /* VideobinParser.swift */; };
 		6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520A110246B6F4C001D9634 /* StreamTapeParser.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
@@ -887,6 +888,7 @@
 		650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipWatchingParser.swift; sourceTree = "<group>"; };
 		650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UqloadParser.swift; sourceTree = "<group>"; };
 		650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendvidParser.swift; sourceTree = "<group>"; };
+		650A5CCE24DBDF9100C01CC7 /* VideobinParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideobinParser.swift; sourceTree = "<group>"; };
 		6520A110246B6F4C001D9634 /* StreamTapeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamTapeParser.swift; sourceTree = "<group>"; };
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
@@ -1851,6 +1853,7 @@
 				650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */,
 				650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */,
 				650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */,
+				650A5CCE24DBDF9100C01CC7 /* VideobinParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2429,6 +2432,7 @@
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
 				2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */,
+				650A5CCF24DBDF9100C01CC7 /* VideobinParser.swift in Sources */,
 				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
 				65D061062445B31000E866DE /* MixdropParser.swift in Sources */,
 				2C055AF524A93E1F00FCAC25 /* RequestManager+QueryEncoding.swift in Sources */,

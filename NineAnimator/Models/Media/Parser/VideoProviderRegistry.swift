@@ -50,6 +50,7 @@ class VideoProviderRegistry {
         defaultProvider.register(ClipWatchingParser(), forServer: "ClipWatching")
         defaultProvider.register(UqloadParser(), forServer: "Uqload")
         defaultProvider.register(SendvidParser(), forServer: "Sendvid")
+        defaultProvider.register(VideobinParser(), forServer: "Videobin")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
