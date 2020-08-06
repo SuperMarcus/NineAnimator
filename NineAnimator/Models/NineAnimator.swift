@@ -170,6 +170,7 @@ extension NineAnimator {
         register(source: NASourceAnimeDao(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceAnimeUnity(with: self))
+        register(source: NASourceMonosChinos(with: self))
         
         // Disabled sources
         register(source: NASourceWonderfulSubs(with: self))
