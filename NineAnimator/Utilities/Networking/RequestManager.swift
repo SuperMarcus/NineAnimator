@@ -297,7 +297,7 @@ extension NARequestManager {
         
         // Register CredentialManager validations
         self.enqueueValidation {
-            [weak self] request, response, body in
+            [weak self] _, response, body in
             do {
                 try self?
                     .credentialManager?

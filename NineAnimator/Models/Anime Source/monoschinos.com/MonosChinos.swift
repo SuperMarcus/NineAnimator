@@ -62,5 +62,6 @@ class NASourceMonosChinos: BaseSource, Source, PromiseSource {
     override init(with parent: NineAnimator) {
         super.init(with: parent)
         registerPrivateParsers()
+        setupGlobalRequestModifier()
     }
 }
