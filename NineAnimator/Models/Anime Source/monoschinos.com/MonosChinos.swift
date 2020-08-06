@@ -50,7 +50,17 @@ class NASourceMonosChinos: BaseSource, Source, PromiseSource {
         VideoProviderRegistry.default.provider(for: name)
     }
     
+    func registerPrivateParsers() {
+        let registry = VideoProviderRegistry.default
+        registry.register(MonosChinosParser(), forServer: "MonosChinos")
+    }
+    
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         .fail()
+    }
+    
+    override init(with parent: NineAnimator) {
+        super.init(with: parent)
+        registerPrivateParsers()
     }
 }

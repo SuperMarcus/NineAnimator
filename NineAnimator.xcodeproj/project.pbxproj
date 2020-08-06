@@ -390,6 +390,7 @@
 		526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526A018721BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 		6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */; };
+		650A5CC724DBC0D500C01CC7 /* MonosChinosParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */; };
 		6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520A110246B6F4C001D9634 /* StreamTapeParser.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
@@ -879,6 +880,7 @@
 		52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectRows.swift"; sourceTree = "<group>"; };
 		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyLoadParser.swift; sourceTree = "<group>"; };
+		650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonosChinosParser.swift; sourceTree = "<group>"; };
 		6520A110246B6F4C001D9634 /* StreamTapeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamTapeParser.swift; sourceTree = "<group>"; };
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
@@ -1839,6 +1841,7 @@
 				2C96DADD24536663007A29B0 /* CloudNineParser.swift */,
 				6520A110246B6F4C001D9634 /* StreamTapeParser.swift */,
 				6501C34B248F2B4300FE9AA9 /* EasyLoadParser.swift */,
+				650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2528,6 +2531,7 @@
 				2C0FA3B7226E340800108D27 /* ServerSelectionViewController.swift in Sources */,
 				2C0E755322622DD600DF3AC4 /* DiscoverySceneViewController.swift in Sources */,
 				2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */,
+				650A5CC724DBC0D500C01CC7 /* MonosChinosParser.swift in Sources */,
 				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
 				2C055AFD24AAAF9300FCAC25 /* WonderfulSubs+ServerRecommendation.swift in Sources */,
