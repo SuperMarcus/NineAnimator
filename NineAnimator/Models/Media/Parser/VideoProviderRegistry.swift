@@ -48,6 +48,7 @@ class VideoProviderRegistry {
         defaultProvider.register(StreamTapeParser(), forServer: "Streamtape")
         defaultProvider.register(EasyLoadParser(), forServer: "Easyload")
         defaultProvider.register(ClipWatchingParser(), forServer: "ClipWatching")
+        defaultProvider.register(UqloadParser(), forServer: "Uqload")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
