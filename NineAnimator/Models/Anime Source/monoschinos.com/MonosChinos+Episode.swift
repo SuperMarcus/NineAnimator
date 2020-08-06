@@ -70,7 +70,13 @@ extension NASourceMonosChinos {
                 throw NineAnimatorError.responseError("Cannot find a valid URL to the resource")
             }
             
-            let targetUrl = try URL(string: serverUrl).tryUnwrap()
+            var targetUrl = try URL(string: serverUrl).tryUnwrap()
+            
+            // Retrieve sendvid url from url parameter
+            if serverUrl.contains("tvanime") && serverUrl.contains("?url=") {
+                let parameter = serverUrl.components(separatedBy: "?url=")
+                targetUrl = try URL(string: parameter[1]).tryUnwrap()
+            }
             
             return Episode(
                 link,

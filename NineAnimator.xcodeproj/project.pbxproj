@@ -393,6 +393,7 @@
 		650A5CC724DBC0D500C01CC7 /* MonosChinosParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */; };
 		650A5CC924DBC3DE00C01CC7 /* ClipWatchingParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */; };
 		650A5CCB24DBCCBD00C01CC7 /* UqloadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */; };
+		650A5CCD24DBD0FB00C01CC7 /* SendvidParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */; };
 		6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6520A110246B6F4C001D9634 /* StreamTapeParser.swift */; };
 		65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */; };
 		65D061062445B31000E866DE /* MixdropParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D061052445B31000E866DE /* MixdropParser.swift */; };
@@ -885,6 +886,7 @@
 		650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonosChinosParser.swift; sourceTree = "<group>"; };
 		650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipWatchingParser.swift; sourceTree = "<group>"; };
 		650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UqloadParser.swift; sourceTree = "<group>"; };
+		650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendvidParser.swift; sourceTree = "<group>"; };
 		6520A110246B6F4C001D9634 /* StreamTapeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamTapeParser.swift; sourceTree = "<group>"; };
 		65A1F44322726A0E00B43F85 /* OpenLoadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLoadParser.swift; sourceTree = "<group>"; };
 		65D061052445B31000E866DE /* MixdropParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MixdropParser.swift; sourceTree = "<group>"; };
@@ -1848,6 +1850,7 @@
 				650A5CC624DBC0D500C01CC7 /* MonosChinosParser.swift */,
 				650A5CC824DBC3DE00C01CC7 /* ClipWatchingParser.swift */,
 				650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */,
+				650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2567,6 +2570,7 @@
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,
 				2C74F1D024A4012D00D04DA8 /* RequestManager.swift in Sources */,
 				2C055AF824AAAF9300FCAC25 /* WonderfulSubs+LinkConstruction.swift in Sources */,
+				650A5CCD24DBD0FB00C01CC7 /* SendvidParser.swift in Sources */,
 				2C0DA2DE238B09C3002C6447 /* SettingsDownloadsController.swift in Sources */,
 				2C6677AC21BD5FE0000E5ACC /* User.swift in Sources */,
 				2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */,
