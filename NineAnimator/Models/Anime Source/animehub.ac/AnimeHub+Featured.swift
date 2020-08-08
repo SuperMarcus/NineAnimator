@@ -17,7 +17,7 @@ extension NASourceAnimeHub {
         ).responseString.then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
-            let featuredAnime = try bowl.select("ulclear.grid-item.grid-item-featured")
+            let featuredAnime = try bowl.select("ul.ulclear.grid-item.grid-item-featured")
                 .first()
                 .tryUnwrap(NineAnimatorError.decodeError("Cannot retrieve featured anime"))
                 .select("li")
@@ -42,7 +42,8 @@ extension NASourceAnimeHub {
                 )
             }
             
-            let ongoingAnime = try bowl.select("ulclear.grid-item.grid-item-featured")[1]
+            let ongoingAnime = try bowl.select("ul.ulclear.grid-item.grid-item-featured")[safe: 1]
+                .tryUnwrap(NineAnimatorError.decodeError("Cannot retrieve latest anime"))
                 .select("li")
                 .map {
                     animeContainer -> AnimeLink in

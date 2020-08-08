@@ -15,6 +15,14 @@ import AppKit
 #endif
 
 class NASourceAnimeHub: BaseSource, Source, PromiseSource {
+    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        .fail()
+    }
+    
+    func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
+        .fail()
+    }
+    
     var name: String { "animehub.ac" }
     
     var aliases: [String] { [] }
@@ -33,15 +41,17 @@ class NASourceAnimeHub: BaseSource, Source, PromiseSource {
         \.romaji
     }
     
+    override var endpoint: String { "https://animehub.ac" }
+    
     func search(keyword: String) -> ContentProvider {
-        
+        SearchAgent(keyword, withParent: self)
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        
+        VideoProviderRegistry.default.provider(for: name)
     }
     
-    func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        
+    func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
+        .fail()
     }
 }
