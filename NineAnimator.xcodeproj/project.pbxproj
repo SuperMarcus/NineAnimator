@@ -410,6 +410,8 @@
 		BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */; };
 		BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489424DE0723009BE142 /* AnimeHub.swift */; };
 		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
+		BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */; };
+		BFCB22AB24DF378800406034 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
 		BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
 		C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */; };
@@ -911,6 +913,8 @@
 		BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeSubscript.swift"; sourceTree = "<group>"; };
 		BFAA489424DE0723009BE142 /* AnimeHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHub.swift; sourceTree = "<group>"; };
 		BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Featured.swift"; sourceTree = "<group>"; };
+		BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Anime.swift"; sourceTree = "<group>"; };
+		BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode.swift"; sourceTree = "<group>"; };
 		BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Search.swift"; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
 		C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Anime.swift"; sourceTree = "<group>"; };
@@ -2027,6 +2031,8 @@
 				BFAA489424DE0723009BE142 /* AnimeHub.swift */,
 				BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */,
 				BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */,
+				BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */,
+				BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */,
 			);
 			path = animehub.ac;
 			sourceTree = "<group>";
@@ -2461,6 +2467,7 @@
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
+				BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */,
 				2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */,
 				650A5CCF24DBDF9100C01CC7 /* VideobinParser.swift in Sources */,
 				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
@@ -2511,6 +2518,7 @@
 				2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C6A390823A017DB00FC00A9 /* FourAnime+Anime.swift in Sources */,
+				BFCB22AB24DF378800406034 /* AnimeHub+Episode.swift in Sources */,
 				2CA4B7F923B1E81300B4E6F7 /* AnimeDao+Search.swift in Sources */,
 				2CA1DD4521E1B765009241CB /* NineAnime+StreamParser.swift in Sources */,
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,

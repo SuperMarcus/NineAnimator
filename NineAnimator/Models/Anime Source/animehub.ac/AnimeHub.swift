@@ -19,10 +19,6 @@ class NASourceAnimeHub: BaseSource, Source, PromiseSource {
         .fail()
     }
     
-    func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        .fail()
-    }
-    
     var name: String { "animehub.ac" }
     
     var aliases: [String] { [] }
