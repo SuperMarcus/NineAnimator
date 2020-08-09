@@ -14,11 +14,7 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceAnimeHub: BaseSource, Source, PromiseSource {
-    func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        .fail()
-    }
-    
+class NASourceAnimeHub: BaseSource, Source, PromiseSource {    
     var name: String { "animehub.ac" }
     
     var aliases: [String] { [] }

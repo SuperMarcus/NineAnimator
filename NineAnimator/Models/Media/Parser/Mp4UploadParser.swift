@@ -23,7 +23,7 @@ import Foundation
 
 class Mp4UploadParser: VideoProviderParser {
     var aliases: [String] {
-        [ "Mp4Upload", "Mp4 Upload" ]
+        [ "Mp4Upload", "Mp4 Upload", "mpserver" ]
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
