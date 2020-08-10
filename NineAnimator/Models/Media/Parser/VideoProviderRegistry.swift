@@ -52,6 +52,7 @@ class VideoProviderRegistry {
         defaultProvider.register(SendvidParser(), forServer: "Sendvid")
         defaultProvider.register(VideobinParser(), forServer: "Videobin")
         defaultProvider.register(FacebookParser(), forServer: "fserver")
+        defaultProvider.register(YourUploadParser(), forServer: "yuserver")
         
         // Private parsers are registered from their own source instances
         return defaultProvider

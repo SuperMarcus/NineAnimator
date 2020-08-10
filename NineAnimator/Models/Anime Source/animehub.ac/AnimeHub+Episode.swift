@@ -16,10 +16,10 @@ extension NASourceAnimeHub {
         "oserver": "Oserver",
         "mpserver": "MPserver",
         "yuserver": "YUserver",
-        "hserver": "Hserver"
+        //"hserver": "Hserver" Excluding until we update HydraX parser
     ]
 
-    static let urlRegex = try! NSRegularExpression(pattern: #"(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})"#, options: .caseInsensitive)
+    static let urlRegex = try! NSRegularExpression(pattern: #"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"#, options: .caseInsensitive)
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise<String>.firstly {
@@ -49,7 +49,6 @@ extension NASourceAnimeHub {
                     .tryUnwrap()
                     .firstMatchingGroup
                     .tryUnwrap()
-                    .replacingOccurrences(of: "\"", with: "") // Remove "\" escape characters from url
                 
                 // Add URL scheme if not present
                 if !iframeURLString.hasPrefix("https://") {
