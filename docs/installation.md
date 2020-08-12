@@ -1,15 +1,21 @@
 ## Installation
 
-To install NineAnimator on an iOS device, you have the following options:
+To install NineAnimator on **iOS/iPadOS**, you have the following options:
 
-- TestFlight Beta Testing
-- AppStore
-- NineAnimator AltStore Source (Beta)
-- Legacy Methods
+- [TestFlight Beta Testing](#testflight-beta-testing)
+- [AppStore](#appstore)
+- [NineAnimator AltStore Source (Beta)](#nineanimator-altstore-source-beta)
+- [Legacy Methods](#legacy-methods)
     - Install from Third-Party App Stores
     - Install via Cydia Impactor with Compiled IPAs
-- For Contributors
+- [For Contributors](#for-contributors)
     - Build from Source Code
+
+To install/update NineAnimator on **macOS**, follow the steps below:
+
+1. Head to the [latest release](https://github.com/SuperMarcus/NineAnimator/releases/latest) page;
+2. Scroll down to Assets, click on the file with suffix `.macCatalyst.zip`;
+3. Decompress the archive and drag the NineAnimator app to your Applications folder.
 
 ## TestFlight Beta Testing
 
