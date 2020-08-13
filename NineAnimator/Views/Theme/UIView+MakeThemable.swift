@@ -23,10 +23,10 @@ import UIKit
 extension UIView {
     @IBInspectable
     var isThemable: Bool {
+        get { false }
         set {
             if newValue { makeThemable() }
         }
-        get { false }
     }
     
     var themableOptionsStore: [String: Any] {

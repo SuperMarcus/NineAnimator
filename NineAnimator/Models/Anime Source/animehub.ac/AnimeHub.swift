@@ -25,7 +25,7 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceAnimeHub: BaseSource, Source, PromiseSource {    
+class NASourceAnimeHub: BaseSource, Source, PromiseSource {
     var name: String { "animehub.ac" }
     
     var aliases: [String] { [] }

@@ -27,7 +27,7 @@ extension NASourceAnimeHub {
         //"xserver": "Xserver", Seems like this no episodes support this server
         "oserver": "Oserver",
         "mpserver": "MPserver",
-        "yuserver": "YUserver",
+        "yuserver": "YUserver"
         //"hserver": "Hserver" Excluding until we update HydraX parser
     ]
 
@@ -36,7 +36,7 @@ extension NASourceAnimeHub {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise<String>.firstly {
             // Extract Episode ID from EpisodeLink URL
-            let episodeURLParams = try URL(string:link.identifier, relativeTo: self.endpointURL).tryUnwrap()
+            let episodeURLParams = try URL(string: link.identifier, relativeTo: self.endpointURL).tryUnwrap()
                 .query
                 .tryUnwrap()
             let episodeID = try formDecode(episodeURLParams).value(at: "ep", type: String.self)
