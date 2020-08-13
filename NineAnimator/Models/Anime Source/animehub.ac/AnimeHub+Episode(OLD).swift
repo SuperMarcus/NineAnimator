@@ -17,6 +17,12 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+// This Version of AnimeHub+Episode has extra checks to make sure
+// that the user selected server is available. It also provides enhanced
+// error messages (EpisodeServerNotAvailableError).
+// However, since it makes multiple network requests, it is very slow.
+// Therefore we are disabling it.
+
 import Foundation
 import SwiftSoup
 
@@ -34,17 +40,48 @@ extension NASourceAnimeHub {
     static let urlRegex = try! NSRegularExpression(pattern: #"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"#, options: .caseInsensitive)
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise<String>.firstly {
+        self.requestManager.request(
+            link.identifier,
+            handling: .browsing
+        ).responseString.thenPromise {
+            responseContent in
+            let bowl = try SwiftSoup.parse(responseContent)
+            
+            // Get available servers
+            let availableServerList = try bowl.select("#selectServer > option").map {
+                serverContainer in
+                try serverContainer.attr("sv")
+            } .filter {
+                // Exclude any servers that NineAnimator does not support
+                NASourceAnimeHub.knownServers.keys.contains($0)
+            }
+            
+            // Check if selected server is available
+            guard availableServerList.contains(link.server) else {
+                let alternativeEpisodeLinks = availableServerList.map {
+                    alternativeServer in EpisodeLink(
+                        identifier: link.identifier,
+                        name: link.name,
+                        server: alternativeServer,
+                        parent: link.parent
+                    )
+                }
+                // Throw EpisodeServerNotAvailableError with the list of alternatives
+                throw NineAnimatorError.EpisodeServerNotAvailableError(
+                    unavailableEpisode: link,
+                    alternativeEpisodes: alternativeEpisodeLinks,
+                    updatedServerMap: NASourceAnimeHub.knownServers
+                )
+            }
+            
             // Extract Episode ID from EpisodeLink URL
             let episodeURLParams = try URL(string:link.identifier, relativeTo: self.endpointURL).tryUnwrap()
                 .query
                 .tryUnwrap()
             let episodeID = try formDecode(episodeURLParams).value(at: "ep", type: String.self)
-            return episodeID
-        } .thenPromise {
-            episodeID in
-            // Request api for episode iframe
-            self.requestManager.request(
+            
+            // Request api for episode iframe (if available)
+            return self.requestManager.request(
                 "ajax/anime/load_episodes_v2",
                 handling: .ajax,
                 query: ["s": link.server],
@@ -54,13 +91,6 @@ extension NASourceAnimeHub {
                 // Convert response into NSDictionary
                 let responseJSON = try JSONSerialization.jsonObject(with: responseContent, options: []) as! NSDictionary
                 
-                // Check if server is available.
-                // Note: The api might incorrectly state that the server is available.
-                guard try responseJSON.value(at: "status", type: Int.self) == 1 else {
-                    throw NineAnimatorError
-                        .EpisodeServerNotAvailableError(unavailableEpisode: link)
-                }
-
                 let iframe = try responseJSON.value(at: "value", type: String.self)
                 
                 // Extract URL from iframe

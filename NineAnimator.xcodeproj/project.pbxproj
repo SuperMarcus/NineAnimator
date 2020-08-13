@@ -413,7 +413,7 @@
 		BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489424DE0723009BE142 /* AnimeHub.swift */; };
 		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
 		BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */; };
-		BFCB22AB24DF378800406034 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
+		BFC3082224E4F0E500943E38 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
 		BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */; };
 		BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
@@ -919,6 +919,7 @@
 		BFAA489424DE0723009BE142 /* AnimeHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHub.swift; sourceTree = "<group>"; };
 		BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Featured.swift"; sourceTree = "<group>"; };
 		BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Anime.swift"; sourceTree = "<group>"; };
+		BFC3082024E4E01800943E38 /* AnimeHub+Episode(OLD).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode(OLD).swift"; sourceTree = "<group>"; };
 		BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode.swift"; sourceTree = "<group>"; };
 		BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookParser.swift; sourceTree = "<group>"; };
 		BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Search.swift"; sourceTree = "<group>"; };
@@ -2042,6 +2043,7 @@
 				BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */,
 				BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */,
 				BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */,
+				BFC3082024E4E01800943E38 /* AnimeHub+Episode(OLD).swift */,
 			);
 			path = animehub.ac;
 			sourceTree = "<group>";
@@ -2453,6 +2455,7 @@
 				2C90C6A6236F98C600C18620 /* LibraryTrackingReferenceCell.swift in Sources */,
 				2C1C71792218EFEB00760A69 /* Anilist+Collections.swift in Sources */,
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
+				BFC3082224E4F0E500943E38 /* AnimeHub+Episode.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
 				2C8519AF22CC9AAE00EEF3AC /* Kissanime+Anime.swift in Sources */,
 				65ED215924DB3B740040844C /* MonosChinos.swift in Sources */,
@@ -2529,7 +2532,6 @@
 				2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C6A390823A017DB00FC00A9 /* FourAnime+Anime.swift in Sources */,
-				BFCB22AB24DF378800406034 /* AnimeHub+Episode.swift in Sources */,
 				2CA4B7F923B1E81300B4E6F7 /* AnimeDao+Search.swift in Sources */,
 				2CA1DD4521E1B765009241CB /* NineAnime+StreamParser.swift in Sources */,
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,
