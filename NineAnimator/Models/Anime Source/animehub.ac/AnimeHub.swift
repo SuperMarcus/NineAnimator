@@ -31,13 +31,13 @@ class NASourceAnimeHub: BaseSource, Source, PromiseSource {
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeHub Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { #imageLiteral(resourceName: "MonosChinos.png") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "AnimeHub Site Icon") }
     #endif
 
     var siteDescription: String {
-        "AnimeHub has many servers to choose from. NineAnimator has experimental support for this!"
+        "AnimeHub has many servers to choose from. NineAnimator has experimental support for this website!"
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
