@@ -79,7 +79,10 @@ class NineAnimeSearch: ContentProvider {
                     let nameElement = try film.select("a.name")
                     let name = try nameElement.text()
                     let linkString = try nameElement.attr("href")
-                    let coverImageString = try film.select("img").attr("data-src")
+                    let coverImageElement = try film.select("img")
+                    
+                    // 9anime seems to be switching between attribute names, so we check for both attributes.
+                    let coverImageString = try coverImageElement.attr("src").isEmpty ? coverImageElement.attr("data-src") : coverImageElement.attr("src")
                     
                     guard let link = URL(string: linkString),
                         let coverImage = URL(string: coverImageString)

@@ -52,7 +52,11 @@ struct NineAnimeFeatured: FeaturedContainer {
             element -> AnimeLink? in
             do {
                 let animeTitle = try element.select("a.name").text()
-                let animeArtwork = try element.select("a.poster img").attr("data-src")
+                let animeArtworkElement = try element.select("a.poster img")
+                
+                // 9anime seems to be switching between attribute names, so we check for both attributes.
+                let animeArtwork = try animeArtworkElement.attr("src").isEmpty ? animeArtworkElement.attr("data-src") : animeArtworkElement.attr("src")
+                
                 let animeArtworkUrl = try URL(string: animeArtwork).tryUnwrap()
                 let animeLinkString = try element.select("a.poster").attr("href")
                 let animeLink = try URL(string: animeLinkString).tryUnwrap()
