@@ -30,6 +30,16 @@ extension NASourceAnimeHub {
         "yuserver": "YUserver"
         //"hserver": "Hserver" Excluding until we update HydraX parser
     ]
+    /// Represents the response from AnimeHub episode endpoint
+    struct EpisodeResponse: Decodable {
+        let status: Bool
+        let value: String
+        let embed: Bool
+        let html5: Bool
+        let type: String
+        let sv: String
+        let download_get: String
+    }
 
     static let urlRegex = try! NSRegularExpression(pattern: #"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"#, options: .caseInsensitive)
     
@@ -49,38 +59,33 @@ extension NASourceAnimeHub {
                 handling: .ajax,
                 query: ["s": link.server],
                 parameters: ["episode_id": episodeID]
-            ).responseData.then {
-                responseContent in
-                // Convert response into NSDictionary
-                let responseJSON = try JSONSerialization.jsonObject(with: responseContent, options: []) as! NSDictionary
-                
-                // Check if server is available.
-                // Note: The api might incorrectly state that the server is available.
-                guard try responseJSON.value(at: "status", type: Int.self) == 1 else {
-                    throw NineAnimatorError
-                        .EpisodeServerNotAvailableError(unavailableEpisode: link)
-                }
-
-                let iframe = try responseJSON.value(at: "value", type: String.self)
-                
-                // Extract URL from iframe
-                var iframeURLString = try (NASourceAnimeHub.urlRegex.firstMatch(in: iframe)?
-                    .firstMatchingGroup)
-                    .tryUnwrap()
-                
-                // Add URL scheme if not present
-                if !iframeURLString.hasPrefix("https://") {
-                    iframeURLString = "https://\(iframeURLString)"
-                }
-                
-                let iframeURL = try URL(string: iframeURLString).tryUnwrap()
-                
-                return Episode(
-                    link,
-                    target: iframeURL,
-                    parent: anime
-                )
+                ).responseDecodable(type: EpisodeResponse.self)
+        } .then {
+            episodeResponse in
+            // Check if server is available.
+            // Note: The api might incorrectly state that the server is available.
+            guard episodeResponse.status == true else {
+                throw NineAnimatorError
+                    .EpisodeServerNotAvailableError(unavailableEpisode: link)
             }
+            
+            // Extract URL from iframe
+            var iframeURLString = try (NASourceAnimeHub.urlRegex.firstMatch(in: episodeResponse.value)?
+                .firstMatchingGroup)
+                .tryUnwrap()
+            
+            // Add URL scheme if not present
+            if !iframeURLString.hasPrefix("https://") {
+                iframeURLString = "https://\(iframeURLString)"
+            }
+            
+            let iframeURL = try URL(string: iframeURLString).tryUnwrap()
+            
+            return Episode(
+                link,
+                target: iframeURL,
+                parent: anime
+            )
         }
     }
 }

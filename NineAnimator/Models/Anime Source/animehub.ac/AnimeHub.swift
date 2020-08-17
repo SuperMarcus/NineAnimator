@@ -37,7 +37,7 @@ class NASourceAnimeHub: BaseSource, Source, PromiseSource {
     #endif
 
     var siteDescription: String {
-        "AnimeHub has many servers to choose from. NineAnimator has experimental support for this website!"
+        "AnimeHub has many servers to choose from. NineAnimator has experimental support for this website."
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
