@@ -22,13 +22,6 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAnimeSaturn {
-    struct SearchResponseRecords: Codable {
-        var id: Int
-        var title: String
-        var imageurl: String
-        var slug: String
-    }
-
     class SearchAgent: ContentProvider {
         var totalPages: Int? { 1 }
         var availablePages: Int { _results == nil ? 0 : 1 }
