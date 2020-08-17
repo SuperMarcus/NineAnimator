@@ -1,15 +1,21 @@
 ## Installation
 
-To install NineAnimator on an iOS device, you have the following options:
+To install NineAnimator on **iOS/iPadOS**, you have the following options:
 
-- TestFlight Beta Testing
-- AppStore
-- NineAnimator AltStore Source (Beta)
-- Legacy Methods
+- [TestFlight Beta Testing](#testflight-beta-testing)
+- [AppStore](#appstore)
+- [NineAnimator AltStore Source (Beta)](#nineanimator-altstore-source-beta)
+- [Legacy Methods](#legacy-methods)
     - Install from Third-Party App Stores
     - Install via Cydia Impactor with Compiled IPAs
-- For Contributors
+- [For Contributors](#for-contributors)
     - Build from Source Code
+
+To install/update NineAnimator on **macOS**, follow the steps below:
+
+1. Head to the [latest release](https://github.com/SuperMarcus/NineAnimator/releases/latest) page;
+2. Scroll down to Assets, click on the file with suffix `.macCatalyst.zip`;
+3. Decompress the archive and drag the NineAnimator app to your Applications folder.
 
 ## TestFlight Beta Testing
 
@@ -56,32 +62,16 @@ For detailed instructions please view the **#installation** channel on our Disco
 
 ### Build from Source Code
 
-#### Step One: Install Carthage
+#### Step One: Clone the Source Code
 
-To build this app, you will need to have the latest version of Xcode and
-[Carthage](https://github.com/Carthage/Carthage#installing-carthage) installed.
-
-The simplest way to install Carthage is to use Homebrew.
+To build this app, you will need to have the latest version of Xcode installed. Open the
+Terminal app and clone the project to your local machine.
 
 ```sh
-$ brew update
-$ brew install carthage
+$ git clone https://github.com/SuperMarcus/NineAnimator.git
 ```
 
-You can also install Carthage with the installer package, which can be found
-[here](https://github.com/Carthage/Carthage/releases).
-
-#### Step Two (Optional): Update dependencies
-
-All the required binaries have been compiled and uploaded to the repository, so
-you shouldn't need to do this. But if something doesn't work out, you might want
-to try updating the dependencies.
-
-```sh
-$ carthage update --platform iOS
-```
-
-#### Step Three: Modify Project Settings
+#### Step Two: Modify Project Settings
 
 This repository contains the code used for distribution. To build and sign the app,
 you will need to modify the app's Bundle Identifier, Teams, and Capabilities.
@@ -99,7 +89,7 @@ you will need to modify the app's Bundle Identifier, Teams, and Capabilities.
 
 When contributing, do not include your team identifier.
 
-#### Step Four: Build the app with Xcode
+#### Step Three: Build the app with Xcode
 
 You won't need any Apple Developer membership to build and install this app.
 Open this project in Xcode, connect your phone to the computer, select your

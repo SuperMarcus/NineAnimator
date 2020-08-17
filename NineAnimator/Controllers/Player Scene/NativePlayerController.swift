@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import AVKit
 import UIKit
 
@@ -125,6 +126,11 @@ extension NativePlayerController {
         
         playerViewController.userActivity = Continuity.activity(for: media)
         playerViewController.userActivity?.delegate = self
+        
+        // Track the server that's being used the most
+        MSAnalytics.trackEvent("Playback", withProperties: [
+            "source_server": "\(media.link.parent.source.name) (\(media.link.server))"
+        ])
     }
     
     /// Reset the player view controller

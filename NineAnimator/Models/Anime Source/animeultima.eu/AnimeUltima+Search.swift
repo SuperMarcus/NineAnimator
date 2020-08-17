@@ -60,7 +60,10 @@ extension NASourceAnimeUltima {
                     let animeUrl = try some(URL(string: animeUrlString), or: .urlError)
                     let animeArtworkString = try resultAnimeContainer.select("img").attr("src")
                     let animeArtworkUrl = try some(URL(string: animeArtworkString), or: .urlError)
-                    let animeTitle = try resultAnimeContainer.select("span.anime-title").text()
+                    let animeTitle = try resultAnimeContainer.select("span.anime-title")
+                        .first()
+                        .tryUnwrap(NineAnimatorError.decodeError("Cannot get anime title"))
+                        .text()
                     
                     // Construct anime link and add to list
                     resultingAnime.append(AnimeLink(

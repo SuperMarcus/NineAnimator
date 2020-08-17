@@ -24,6 +24,7 @@ import Foundation
 ///
 /// NARequestManager modernizes the legacy APIs used in the BaseSource class. All of the request methods in this class are promise-based.
 class NARequestManager: NSObject {
+    /// Alamofire session used internally
     private(set) lazy var session: Alamofire.Session = {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
@@ -37,11 +38,18 @@ class NARequestManager: NSObject {
         )
     }()
     
+    /// Current User-Agent for requests made from this request manager
+    private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
+    
+    /// Retrieve/set the credential manager for this request manager
+    var credentialManager: NACredentialManager?
+    
+    /// Additional headers that will be added to the requests
+    var additionalHeaders: HTTPHeaders = [:]
+    
     private lazy var _interceptor = NARequestManagerRequestInterceptor(parent: self)
     private lazy var _redirectHandler = NARequestManagerRedirectHandler(parent: self)
     private lazy var _cfResolver = CloudflareWAFResolver(parent: self)
-    
-    private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
     
     @AtomicProperty private var _internalTaskReferences = [ObjectIdentifier: NineAnimatorAsyncTask]()
     @AtomicProperty fileprivate var _requestCustomRedirectionHandlers = [(WeakRef<Alamofire.Request>, RequestBuilding.RedirectionHandler)]()
@@ -286,6 +294,19 @@ extension NARequestManager {
     private func _registerBuiltinMiddlewares() {
         // Register Cloudflare WAF validations
         self.enqueueValidation(CloudflareWAFResolver.middleware(request:response:body:))
+        
+        // Register CredentialManager validations
+        self.enqueueValidation {
+            [weak self] _, response, body in
+            do {
+                try self?
+                    .credentialManager?
+                    .credentialManager(validateResponse: response, data: body)
+                return .success(())
+            } catch {
+                return .failure(error)
+            }
+        }
     }
     
     /// Apply validation middlewares to request
@@ -408,6 +429,18 @@ private class NARequestManagerRequestInterceptor: Alamofire.RequestInterceptor {
                 value: parent.currentIdentity
             )
         }
+        
+        // Set additional headers
+        let additionalHeaders = parent.additionalHeaders
+        mutatingUrlRequest.headers = mutatingUrlRequest.headers.reduce(into: additionalHeaders) {
+            headers, value in
+            headers.add(value)
+        }
+        
+        // Call CredentialManager to authorize the request
+        mutatingUrlRequest = parent
+            .credentialManager?
+            .credentialManager(authorizeRequest: mutatingUrlRequest) ?? mutatingUrlRequest
         
         // Run adapter chain
         let adapters = parent._internalAdapterChain.compactMap {
