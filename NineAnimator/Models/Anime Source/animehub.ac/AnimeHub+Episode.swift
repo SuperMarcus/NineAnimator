@@ -31,7 +31,7 @@ extension NASourceAnimeHub {
         //"hserver": "Hserver" Excluding until we update HydraX parser
     ]
     /// Represents the response from AnimeHub episode endpoint
-    struct EpisodeResponse: Decodable {
+    fileprivate struct EpisodeResponse: Decodable {
         let status: Bool
         let value: String
         let embed: Bool

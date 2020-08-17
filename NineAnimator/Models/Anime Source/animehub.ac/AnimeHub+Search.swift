@@ -90,10 +90,12 @@ extension NASourceAnimeHub {
                 }
             }
         }
-        
         init(_ query: String, withParent parent: NASourceAnimeHub) {
             self.parent = parent
             self.title = query
         }
+    }
+    func search(keyword: String) -> ContentProvider {
+        SearchAgent(keyword, withParent: self)
     }
 }

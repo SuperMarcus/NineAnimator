@@ -46,10 +46,6 @@ class NASourceAnimeHub: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://animehub.ac" }
     
-    func search(keyword: String) -> ContentProvider {
-        SearchAgent(keyword, withParent: self)
-    }
-    
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
         VideoProviderRegistry.default.provider(for: name)
     }
