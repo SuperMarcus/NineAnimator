@@ -73,7 +73,7 @@ extension NASourceAnimeSaturn {
                         }
                         if elem.contains("<b>Data di uscita:</b> ") {
                             let rat = elem.components(separatedBy: "<b>Data di uscita:</b> ")
-                            let airdate = rat[1]
+                            let airdate = rat[safe: 1]
                             attributes[.airDate] = airdate
                         }
                     }
