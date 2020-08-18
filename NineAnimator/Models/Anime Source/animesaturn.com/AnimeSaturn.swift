@@ -37,7 +37,7 @@ class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
     var siteLogo: NSImage { #imageLiteral(resourceName: "AnimeSaturn Site Icon") }
     #endif
     var siteDescription: String {
-        "AnimeSaturn è un server italiano. AnimeSaturn is a free website that provides Italian subtitled anime. The website may be region blocked."
+        "AnimeSaturn è un server italiano. AnimeSaturn is a free website that provides Italian subtitled anime."
     }
     
     class var AnimeSaturnStream: Anime.ServerIdentifier {
@@ -55,17 +55,6 @@ class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
         
         // Setup Kingfisher request modifier
         setupGlobalRequestModifier()
-        
-        requestManager.enqueueValidation {
-            _, response, _ in
-            if response.statusCode == 403,
-                response.headers["server"]?.hasPrefix("cloudflare") == true {
-                return .failure(NineAnimatorError.contentUnavailableError(
-                    "AnimeSaturn.it is not available in your region. Please use other sources instead."
-                ))
-            }
-            return .success(())
-        }
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {

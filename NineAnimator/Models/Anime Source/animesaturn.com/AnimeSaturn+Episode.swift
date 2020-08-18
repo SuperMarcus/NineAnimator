@@ -22,25 +22,28 @@ import SwiftSoup
 extension NASourceAnimeSaturn {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         self.requestManager.request(url: link.identifier, handling: .browsing)
-            .responseData.thenPromise {
+            .responseData
+            .thenPromise {
                 episodePageContent in
                 let data = episodePageContent
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                 let bowl = try SwiftSoup.parse(utf8Text)
-                let link_watch =  try bowl.select("div.card-body a").attr("href")
-                return self.requestManager.request(link_watch
-                ).responseData.then {
-                    responseContent in
-                    let data = responseContent
-                    let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
-                    let  bowl = try SwiftSoup.parse(utf8Text)
-                    let video = try bowl.select("video source").attr("src").replacingOccurrences(of: "http://", with: "https://")
-                    return Episode(
-                        link,
-                        target: try video.asURL(),
-                        parent: anime
-                    )
-                }
+                let linkWatch =  try bowl.select("div.card-body a").attr("href")
+                return self.requestManager
+                    .request(linkWatch)
+                    .responseData
+                    .then {
+                        responseContent in
+                        let data = responseContent
+                        let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
+                        let  bowl = try SwiftSoup.parse(utf8Text)
+                        let video = try bowl.select("video source").attr("src").replacingOccurrences(of: "http://", with: "https://")
+                        return Episode(
+                            link,
+                            target: try video.asURL(),
+                            parent: anime
+                        )
+                    }
             }
     }
 }
