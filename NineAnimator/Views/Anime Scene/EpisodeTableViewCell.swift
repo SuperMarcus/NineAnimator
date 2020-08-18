@@ -105,6 +105,4 @@ class EpisodeTableViewCell: UITableViewCell {
         backgroundColor = theme.background
         titleLabel.textColor = theme.primaryText
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }

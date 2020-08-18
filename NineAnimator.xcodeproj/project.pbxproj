@@ -407,6 +407,15 @@
 		65ED215D24DB3BC50040844C /* MonosChinos+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED215C24DB3BC50040844C /* MonosChinos+Search.swift */; };
 		65ED215F24DB3BD30040844C /* MonosChinos+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED215E24DB3BD30040844C /* MonosChinos+Anime.swift */; };
 		65ED216124DB3BE00040844C /* MonosChinos+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */; };
+		BF064BAF24E30ACD005A44EB /* OpenStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */; };
+		BF1924A924E1FB12008164C2 /* YourUploadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1924A824E1FB12008164C2 /* YourUploadParser.swift */; };
+		BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
+		BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */; };
+		BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489424DE0723009BE142 /* AnimeHub.swift */; };
+		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
+		BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */; };
+		BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */; };
+		BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
 		C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */; };
 		C8E12D03242213E000B0AF6A /* AnimeUnity+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */; };
@@ -904,6 +913,15 @@
 		65ED215C24DB3BC50040844C /* MonosChinos+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Search.swift"; sourceTree = "<group>"; };
 		65ED215E24DB3BD30040844C /* MonosChinos+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Anime.swift"; sourceTree = "<group>"; };
 		65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Episode.swift"; sourceTree = "<group>"; };
+		BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStreamParser.swift; sourceTree = "<group>"; };
+		BF1924A824E1FB12008164C2 /* YourUploadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourUploadParser.swift; sourceTree = "<group>"; };
+		BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeSubscript.swift"; sourceTree = "<group>"; };
+		BFAA489424DE0723009BE142 /* AnimeHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHub.swift; sourceTree = "<group>"; };
+		BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Featured.swift"; sourceTree = "<group>"; };
+		BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Anime.swift"; sourceTree = "<group>"; };
+		BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode.swift"; sourceTree = "<group>"; };
+		BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookParser.swift; sourceTree = "<group>"; };
+		BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Search.swift"; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
 		C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Anime.swift"; sourceTree = "<group>"; };
 		C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Featured.swift"; sourceTree = "<group>"; };
@@ -1405,6 +1423,7 @@
 				2CCBC5BF24041E2C0013C4FE /* Alamofire+Legacy.swift */,
 				2C852B4024632454000F2C85 /* QueryItems+ExpressibleByDictionaryLiteral.swift */,
 				2C371C8024B9536600EBC5D1 /* UInt8Sequence+HexConversion.swift */,
+				BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1590,6 +1609,7 @@
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
+				BFAA489324DE06F3009BE142 /* animehub.ac */,
 				65ED215724DB3B2E0040844C /* monoschinos.com */,
 				C8E12CFD2422133B00B0AF6A /* animeunity.it */,
 				2CA4B7F323B1CA0D00B4E6F7 /* animedao.com */,
@@ -1862,6 +1882,9 @@
 				650A5CCA24DBCCBD00C01CC7 /* UqloadParser.swift */,
 				650A5CCC24DBD0FB00C01CC7 /* SendvidParser.swift */,
 				650A5CCE24DBDF9100C01CC7 /* VideobinParser.swift */,
+				BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */,
+				BF1924A824E1FB12008164C2 /* YourUploadParser.swift */,
+				BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2009,6 +2032,18 @@
 				2CB8A4AE24DC7A0E00F7EAC7 /* MonoChinos+RequestModifier.swift */,
 			);
 			path = monoschinos.com;
+			sourceTree = "<group>";
+		};
+		BFAA489324DE06F3009BE142 /* animehub.ac */ = {
+			isa = PBXGroup;
+			children = (
+				BFAA489424DE0723009BE142 /* AnimeHub.swift */,
+				BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */,
+				BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */,
+				BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */,
+				BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */,
+			);
+			path = animehub.ac;
 			sourceTree = "<group>";
 		};
 		C8E12CFD2422133B00B0AF6A /* animeunity.it */ = {
@@ -2325,6 +2360,7 @@
 				65ED215D24DB3BC50040844C /* MonosChinos+Search.swift in Sources */,
 				2CD9B9A021FE2F1900203442 /* UIAlertAction+Properties.swift in Sources */,
 				2CCC745C21C063EC0007502A /* NineAnime.swift in Sources */,
+				BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */,
 				2CEC219C2207FACA00A30F4F /* GogoAnime+LinkRetriever.swift in Sources */,
 				2C4257832325367E00FCCCCE /* Simkl+Collections.swift in Sources */,
 				2C6C47322390311B001E723C /* OfflineContent+CacheStrategy.swift in Sources */,
@@ -2441,6 +2477,8 @@
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
+				BF064BAF24E30ACD005A44EB /* OpenStreamParser.swift in Sources */,
+				BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */,
 				2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */,
 				650A5CCF24DBDF9100C01CC7 /* VideobinParser.swift in Sources */,
 				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
@@ -2530,6 +2568,7 @@
 				2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */,
 				2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */,
 				2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */,
+				BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */,
 				2CA4B7FF23B1E84C00B4E6F7 /* AnimeDao+RequestModifier.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
 				2C211EC4225EADDD00389124 /* SetupThemeViewController.swift in Sources */,
@@ -2550,6 +2589,7 @@
 				2C7B27D62423D22A00DF1337 /* NineAnimator+Environment.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
+				BF1924A924E1FB12008164C2 /* YourUploadParser.swift in Sources */,
 				2C480017237072A000ADB03F /* LibraryRecentAnimeCell.swift in Sources */,
 				2C8E962723B9EDED00415F92 /* GoUnlimitedParser.swift in Sources */,
 				2C0BBA6122F8314000C35E33 /* PassthroughParser.swift in Sources */,
@@ -2580,6 +2620,7 @@
 				2C96DAE02455FC5F007A29B0 /* MyAnimeList+Jikan.swift in Sources */,
 				2C055AF924AAAF9300FCAC25 /* WonderfulSubs+Anime.swift in Sources */,
 				2CEFD96D23A894C00064075E /* Alamofire+Promise.swift in Sources */,
+				BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */,
 				2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */,
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
 				2CD1A647222EB94C00121320 /* AnimatedImageCollectionView.swift in Sources */,
@@ -2652,6 +2693,7 @@
 				6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */,
 				2C9325C424ACDE34001E3708 /* DiscordPresenceController.swift in Sources */,
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
+				BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */,
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2CA4B7FD23B1E83A00B4E6F7 /* AnimeDao+Episode.swift in Sources */,
@@ -2667,6 +2709,7 @@
 				2C979F1A235A17E100BC8699 /* LibrarySceneController.swift in Sources */,
 				2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */,
 				2CD1A64E222EE32000121320 /* CollectionsTableViewCell.swift in Sources */,
+				BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */,
 				2C0DA2E0238B10E4002C6447 /* PortionBarView.swift in Sources */,
 				2C8DD30B224B0B9A001D9A16 /* AnimeUltima+Anime.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
@@ -2678,6 +2721,7 @@
 				2C6984EB227D477C00C9EF0E /* Anilist+GQLMedia.swift in Sources */,
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2CEC21962207F95D00A30F4F /* GogoAnime+ContentProvider.swift in Sources */,
+				BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */,
 				2C60EABE2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift in Sources */,
 				2CEC218E2207EC9300A30F4F /* BaseSource.swift in Sources */,
 				2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */,

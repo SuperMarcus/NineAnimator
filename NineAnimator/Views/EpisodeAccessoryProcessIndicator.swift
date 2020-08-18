@@ -50,8 +50,6 @@ class EpisodeAccessoryProcessIndicator: UIView, Themable {
         }
     }
     
-    deinit { NotificationCenter.default.removeObserver(self) }
-    
     @objc func onProgressUpdate() {
         DispatchQueue.main.async { self.setNeedsDisplay() }
     }

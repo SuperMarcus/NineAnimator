@@ -17,20 +17,11 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import UIKit
+import Foundation
 
-@IBDesignable
-class ThemedBorderButton: UIButton, Themable {
-    @IBInspectable var borderWidth: CGFloat {
-        get { layer.borderWidth }
-        set { layer.borderWidth = newValue }
-    }
-    
-    @IBInspectable var useSecondaryColorInsteadOfTint: Bool = false
-    
-    func theme(didUpdate theme: Theme) {
-        let color = useSecondaryColorInsteadOfTint ? theme.secondaryText : theme.tint
-        tintColor = color
-        layer.borderColor = color.cgColor
+extension Collection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        index >= startIndex && index < endIndex ? self[index] : nil
     }
 }

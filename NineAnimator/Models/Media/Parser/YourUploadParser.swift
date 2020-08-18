@@ -18,20 +18,17 @@
 //
 
 import Alamofire
-import AVKit
 import Foundation
 
-class Mp4UploadParser: VideoProviderParser {
-    var aliases: [String] {
-        [ "Mp4Upload", "Mp4 Upload", "mpserver" ]
-    }
+class YourUploadParser: VideoProviderParser {
+    var aliases: [String] { [] }
     
-    static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "src:\"([^\"]+)",
-        options: []
+    static let videoSourceRegex = try! NSRegularExpression(
+        pattern: #"file: '([^']+)"#,
+        options: .caseInsensitive
     )
     
-    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         session.request(episode.target).responseString {
             response in
             do {
@@ -41,32 +38,27 @@ class Mp4UploadParser: VideoProviderParser {
                 case let .failure(error): throw error
                 }
                 
-                // Feed the entire webpage to the packer decoder
-                let decodedPackerScript = try PackerDecoder().decode(responseContent)
+                let sourceURLString = try (YourUploadParser
+                    .videoSourceRegex
+                    .firstMatch(in: responseContent)?
+                    .firstMatchingGroup)
+                    .tryUnwrap(.providerError("Unable to find the streaming resource"))
                 
-                // Find the source URL
-                let sourceUrl = try (Mp4UploadParser
-                    .playerSourceRegex
-                    .firstMatch(in: decodedPackerScript)?
-                    .firstMatchingGroup).tryUnwrap(.providerError("Unable to find the streaming resource"))
-                let sourceURL = try URL(string: sourceUrl).tryUnwrap(.urlError)
+                let sourceURL = try URL(string: sourceURLString).tryUnwrap(.urlError)
                 
-                Log.info("(Mp4Upload Parser) found asset at %@", sourceURL.absoluteString)
+                Log.info("(YourUpload Parser) found asset at %@", sourceURL.absoluteString)
                 
                 handler(BasicPlaybackMedia(
                     url: sourceURL,
                     parent: episode,
                     contentType: "video/mp4",
-                    headers: [
-                        "User-Agent": self.defaultUserAgent,
-                        "Origin": episode.target.absoluteString
-                    ],
+                    headers: [ "referer": episode.target.absoluteString ],
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
         }
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        true // Mp4Upload seems to work for all purposes
+        true
     }
 }
