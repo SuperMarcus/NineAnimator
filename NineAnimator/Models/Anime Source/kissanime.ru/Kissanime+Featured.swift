@@ -22,35 +22,6 @@ import SwiftSoup
 
 extension NASourceKissanime {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        requestManager.request("/", handling: .browsing).responseString.then {
-            content in
-            let bowl = try SwiftSoup.parse(content)
-            
-            let trendingAnimeList = try bowl.select("#tab-trending>div").compactMap {
-                container -> AnimeLink? in
-                if let linkString = try? container.select("a").attr("href"),
-                    let imageUrlString = try? container.select("img").attr("src"),
-                    let title = try? container.select("span.title").text(),
-                    let animeUrl = URL(string: linkString, relativeTo: self.endpointURL),
-                    let artworkUrl = URL(string: imageUrlString, relativeTo: self.endpointURL) {
-                    return AnimeLink(title: title, link: animeUrl, image: artworkUrl, source: self)
-                }
-                return nil
-            }
-            
-            let updatedAnimeList = try bowl.select(".bigBarContainer .items div>a").compactMap {
-                container -> AnimeLink? in
-                if let linkString = try? container.attr("href"),
-                    let imageUrlString = try? container.select("img").attr("srctemp"),
-                    let animeUrl = URL(string: linkString, relativeTo: self.endpointURL),
-                    let artworkUrl = URL(string: imageUrlString, relativeTo: self.endpointURL) {
-                    let title = container.ownText()
-                    return AnimeLink(title: title, link: animeUrl, image: artworkUrl, source: self)
-                }
-                return nil
-            }
-            
-            return BasicFeaturedContainer(featured: trendingAnimeList, latest: updatedAnimeList)
-        }
+        .fail(.ContentUnavailableError("This source is no longer available."))
     }
 }

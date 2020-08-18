@@ -130,62 +130,7 @@ extension NASourceAnimeKisa {
 }
 
 extension NASourceAnimeKisa.ExperimentalSource {
-    static let episodeRegex = try! NSRegularExpression(
-        pattern: "Episode\\s?(\\d+)",
-        options: .caseInsensitive
-    )
-    
     func _anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        self.requestManager.request(
-            url: link.link,
-            handling: .browsing
-        ) .responseString.then {
-            response in
-            let bowl = try SwiftSoup.parse(response)
-            
-            let defaultServerName = "adless"
-            let artworkUrl = URL(
-                string: try bowl
-                    .select(".image-box > img")
-                    .attr("src"),
-                relativeTo: link.link
-            ) ?? link.image
-            
-            let reconstructedAnimeLink = AnimeLink(
-                title: link.title,
-                link: link.link,
-                image: artworkUrl,
-                source: self
-            )
-            
-            let episodes = try bowl.select("a.an").reduce(into: [EpisodeLink]()) {
-                collection, container in
-                let episodeName = try NASourceAnimeKisa.ExperimentalSource
-                    .episodeRegex
-                    .firstMatch(in: try container.select("div > .info-box").text())
-                    .tryUnwrap()
-                    .firstMatchingGroup
-                    .tryUnwrap()
-                
-                let episodeLink = try container.attr("href")
-                
-                collection.append(.init(
-                    identifier: episodeLink,
-                    name: episodeName,
-                    server: defaultServerName,
-                    parent: reconstructedAnimeLink
-                ))
-            }
-            
-            return Anime(
-                reconstructedAnimeLink,
-                alias: "",
-                additionalAttributes: [:],
-                description: "No synopsis found for this anime",
-                on: [ defaultServerName: "\u{0048}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069}\u{004b}\u{0069}\u{0073}\u{0061}" ],
-                episodes: [ defaultServerName: episodes.reversed() ],
-                episodesAttributes: [:]
-            )
-        }
+        .fail(.ContentUnavailableError("This source is no longer available."))
     }
 }

@@ -28,69 +28,81 @@ Feel free to open an issue to request additional hosts.
 NineAnimator supports the following anime websites but with different sets
 of features:
 
-- [Anime Ultima](//animeultima.eu)
+- [4anime](https://4anime.to)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
-    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [gogoanime.io](//gogoanime.io)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
-- [Anime Pahe](//animepahe.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
-- [Anime Twist](//twist.moe)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [ ] Anime synopsis
-    - [ ] Detailed anime attributes (Air Date is found but not displayed)
-    - [ ] Detailed episode synopsis
-- [9anime.ru](//9anime.ru)
+- [9anime.ru](https://9anime.ru)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
-- [KissAnime](//kissanime.ru)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
-- [AnimeKisa](//animekisa.tv)
+- [AnimeKisa](https://animekisa.tv)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes
     - [ ] Detailed episode synopsis
-- [4anime](//4anime.to)
+- [Anime Ultima](https://animeultima.eu)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
+    - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
+- [gogoanime.io](https://gogoanime.io)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
-- [AnimeDao](//animedao.com)
+- [Anime Pahe](https://animepahe.com)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- [Anime Twist](https://twist.moe)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [ ] Anime synopsis
+    - [ ] Detailed anime attributes (Air Date is found but not displayed)
+    - [ ] Detailed episode synopsis
+- [AnimeDao](https://animedao.com)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (No Ratings)
     - [x] Detailed episode synopsis (Air Date and Episode Name are available; no episode synopsis available)
-- [AnimeUnity](//animeunity.it)
+- [AnimeHub](https://animehub.ac)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
-- ~~[masterani.me](//masterani.me)~~ (no longer available)
+- [AnimeUnity](https://animeunity.it) (Italian)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- [MonoSchinos](https://monoschinos.com) (Spanish)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- ~~[masterani.me](https://masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [x] Detailed episode synopsis
+- ~~[KissAnime](https://kissanime.ru)~~ (no longer available)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
