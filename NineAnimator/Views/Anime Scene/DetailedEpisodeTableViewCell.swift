@@ -139,6 +139,4 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
             } else { self.progress = currentProgress }
         }
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }

@@ -22,8 +22,8 @@ import UIKit
 @IBDesignable
 class ThemedBorderButton: UIButton, Themable {
     @IBInspectable var borderWidth: CGFloat {
-        set { layer.borderWidth = newValue }
         get { layer.borderWidth }
+        set { layer.borderWidth = newValue }
     }
     
     @IBInspectable var useSecondaryColorInsteadOfTint: Bool = false
