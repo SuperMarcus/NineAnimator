@@ -62,12 +62,12 @@ extension NASourceAnimeSaturn {
                 //var additionalAttributes = [Anime.AttributeKey: Any]()
                 // Attributes
                 let additionalAttributes = try bowl.select("div.container.shadow.rounded.bg-dark-as-box.mb-3.p-3.w-100.text-white").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
-                    let info = entry.debugDescription.components(separatedBy: "<br>")
+                    let info = try entry.html().components(separatedBy: "<br>")
                     for elem in info {
                         if elem.contains("<b>Voto:</b> ") {
-                            var rat = elem.dropFirst(13).components(separatedBy: "<b>Voto:</b> ")
-                            rat = rat[1].components(separatedBy: "/")
-                            let rating = (rat[0] as NSString).floatValue
+                            var rat = elem.components(separatedBy: "<b>Voto:</b> ")
+                            rat = rat[safe: 1]?.components(separatedBy: "/") ?? []
+                            let rating = ((rat[safe: 0] ?? "") as NSString).floatValue
                             attributes[.rating] = rating
                             attributes[.ratingScale] = Float(5.0)
                         }
