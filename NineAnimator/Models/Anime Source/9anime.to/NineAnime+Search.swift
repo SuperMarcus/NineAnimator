@@ -81,14 +81,13 @@ class NineAnimeSearch: ContentProvider {
                     let linkString = try nameElement.attr("href")
                     let coverImageElement = try film.select("img")
                     
-                    // 9anime seems to be switching between attribute names, so we check for both attributes.
-                    let coverImageString = try coverImageElement.attr("src").isEmpty ? coverImageElement.attr("data-src") : coverImageElement.attr("src")
-                    
                     guard let link = URL(string: linkString),
-                        let coverImage = URL(string: coverImageString)
-                        else {
-                            Log.error("An invalid link (%@) was extracted from the search result page", linkString)
-                            return nil
+                        let coverImage = try ( // Either in src or data-src
+                            URL(string: try coverImageElement.attr("src"))
+                            ?? URL(string: try coverImageElement.attr("data-src"))
+                        ) else {
+                        Log.error("An invalid link (%@) was extracted from the search result page", linkString)
+                        return nil
                     }
                     
                     return AnimeLink(title: name, link: link, image: coverImage, source: self._parent)
