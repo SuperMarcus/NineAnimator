@@ -42,6 +42,7 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
     }
     
     override var isSelected: Bool {
+        get { super.isSelected }
         set {
             super.isSelected = newValue
             
@@ -52,6 +53,5 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
                 } else { self.backgroundColor = .clear }
             }
         }
-        get { super.isSelected }
     }
 }

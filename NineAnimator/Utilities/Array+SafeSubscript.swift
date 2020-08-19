@@ -18,10 +18,10 @@
 //
 
 import Foundation
-import SwiftSoup
 
-extension NASourceKissanime {
-    func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        .fail(.ContentUnavailableError("This source is no longer available."))
+extension Collection {
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Element? {
+        index >= startIndex && index < endIndex ? self[index] : nil
     }
 }

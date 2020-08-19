@@ -250,6 +250,7 @@ extension SettingsSceneController {
             
             if let popoverController = activityController.popoverPresentationController {
                 popoverController.sourceView = cell
+                popoverController.sourceRect = cell.bounds
             }
             
             present(activityController, animated: true, completion: nil)

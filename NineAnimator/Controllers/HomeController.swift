@@ -77,8 +77,6 @@ class HomeController: NSObject {
         super.init()
         self.registerNotificationHandlers()
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 #if !targetEnvironment(macCatalyst)

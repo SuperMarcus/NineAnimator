@@ -157,14 +157,14 @@ extension AnimeViewController {
         // Store the reference in animeRequestTask
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
+            // Keep track of the usage and error rates of each source
+            MSAnalytics.trackEvent("Load Anime", withProperties: [
+                "source": link.source.name,
+                "success": error == nil ? "YES" : "NO",
+                "source_success": "\(link.source.name) - \(error == nil ? "Success" : "Error")"
+            ])
+            
             guard let anime = anime else {
-                // Keep track of the usage and error rates of each source
-                MSAnalytics.trackEvent("Load Anime", withProperties: [
-                    "source": link.source.name,
-                    "success": error == nil ? "YES" : "NO",
-                    "source_success": "\(link.source.name) - \(error == nil ? "Success" : "Error")"
-                ])
-                
                 guard let error = error else { return }
                 Log.error(error)
                 

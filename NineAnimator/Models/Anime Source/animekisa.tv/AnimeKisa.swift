@@ -97,6 +97,6 @@ extension NASourceAnimeKisa {
             "\u{0068}\u{0074}\u{0074}\u{0070}\u{0073}\u{003a}\u{002f}\u{002f}\u{0068}\u{0065}\u{006e}\u{0074}\u{0061}\u{0069}\u{006b}\u{0069}\u{0073}\u{0061}\u{002e}\u{0063}\u{006f}\u{006d}"
         }
         
-        override var isEnabled: Bool { NineAnimator.default.user.allowNSFWContent && NineAnimator.default.user.enableExperimentalSources }
+        override var isEnabled: Bool { false }
     }
 }
