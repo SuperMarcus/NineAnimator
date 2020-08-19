@@ -18,6 +18,7 @@
 //
 
 import CommonCrypto
+import CryptoKit
 import Foundation
 
 extension NASourceAnimeTwist {
@@ -106,38 +107,38 @@ extension NASourceAnimeTwist {
         let dataAndSalt = data + salt
         
         // Calculate the key and value with data and salt
-        var digestBuffer = Data(count: Int(CC_MD5_DIGEST_LENGTH))
-        _ = digestBuffer.withUnsafeMutableBytes {
-            destinationPointer in
-            dataAndSalt.withUnsafeBytes {
-                (pointer: UnsafeRawBufferPointer) in
-                CC_MD5(
-                    pointer.baseAddress!,
-                    CC_LONG(dataAndSalt.count),
-                    destinationPointer.bindMemory(to: UInt8.self).baseAddress!
-                )
-            }
-        }
+        var digestBuffer = insecureHash(input: dataAndSalt)
         destinationBuffer.append(digestBuffer)
         
         // Keep digesting until the buffer is filled
         while destinationBuffer.count < totalLength {
             let combined = digestBuffer + dataAndSalt
-            _ = digestBuffer.withUnsafeMutableBytes {
-                (destinationPointer: UnsafeMutableRawBufferPointer) in
-                combined.withUnsafeBytes {
-                    pointer in
-                    CC_MD5(
-                        pointer.baseAddress!,
-                        CC_LONG(combined.count),
-                        destinationPointer.bindMemory(to: UInt8.self).baseAddress!
-                    )
-                }
-            }
+            digestBuffer = insecureHash(input: combined)
             destinationBuffer.append(digestBuffer)
         }
         
         // Generate key and iv
         return (destinationBuffer[0..<32], destinationBuffer[32..<48])
+    }
+    
+    private func insecureHash(input: Data) -> Data {
+        if #available(iOS 13.0, *) {
+            // Use CryptoKit.Insecure.MD5 for hashing
+            var insecureHasher = Insecure.MD5()
+            insecureHasher.update(data: input)
+            return Data(insecureHasher.finalize())
+        } else {
+            var digestBuffer = Data(count: Int(CC_MD5_DIGEST_LENGTH))
+            _ = digestBuffer.withUnsafeMutableBytes {
+                destinationPointer in input.withUnsafeBytes {
+                    (pointer: UnsafeRawBufferPointer) in CC_MD5(
+                        pointer.baseAddress!,
+                        CC_LONG(input.count),
+                        destinationPointer.bindMemory(to: UInt8.self).baseAddress!
+                    )
+                }
+            }
+            return digestBuffer
+        }
     }
 }
