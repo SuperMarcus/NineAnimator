@@ -105,7 +105,7 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
- - [AnimeSaturn](https://animesaturn.com) (Spanish)
+ - [AnimeSaturn](https://animesaturn.com) (Italian)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
