@@ -18,7 +18,18 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - OpenLoad (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/pull/10))
 - MixDrop (contributed by [Awsomedude](https://github.com/SuperMarcus/NineAnimator/pull/95))
 - HydraX (and replay.watch)
-- Self-hosted Streaming Services ([4anime](//4anime.to), [Anime Twist](//twist.moe), Beta and Beta4 on Kissanime)
+- Self-hosted Streaming Services ([4anime](//4anime.to), [Anime Twist](//twist.moe), [MonosChinos](https://monoschinos.com/))
+- Facebook
+- OpenStream
+- YourUpload
+- Sendvid
+- Uqload
+- GoUnlimited
+- Streamtape
+- Nova
+
+For a more complete and updated list of supported video streaming hosts, visit our [VideoProviderRegistry](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Models/Media/Parser/VideoProviderRegistry.swift#L28)
+
 
 All of the sources above support downloading. More hosts may be added later.
 Feel free to open an issue to request additional hosts.
@@ -30,7 +41,7 @@ of features:
 
 - [4anime](https://4anime.to)
     - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
+    - [x] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
@@ -88,11 +99,17 @@ of features:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
-- [MonoSchinos](https://monoschinos.com) (Spanish)
+- [MonosChinos](https://monoschinos.com) (Spanish)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+ - [AnimeSaturn](https://animesaturn.com) (Italian)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
 - ~~[masterani.me](https://masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
