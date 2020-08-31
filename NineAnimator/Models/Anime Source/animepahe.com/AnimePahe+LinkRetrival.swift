@@ -37,7 +37,7 @@ extension NASourceAnimePahe {
             
             // Find the HD anime poster
             // This is the same as the implementation for retriving Anime
-            let animePosterLink = try bowl.select(".anime-poster img").attr("data-src")
+            let animePosterLink = try bowl.select(".anime-poster img").attr("src")
             let animePosterUrl = try URL(string: animePosterLink).tryUnwrap(.responseError("No artwork for this anime was found"))
             
             // Find the anime title in h1

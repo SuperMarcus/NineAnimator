@@ -47,7 +47,7 @@ extension NASourceAnimePahe {
             var animeAttributes = [Anime.AttributeKey: Any]()
             
             // Find the HD anime poster
-            let animePosterLink = try bowl.select(".anime-poster img").attr("data-src")
+            let animePosterLink = try bowl.select(".anime-poster img").attr("src")
             let animePosterUrl = URL(string: animePosterLink) ?? link.image
             let reconstructedAnimeLink = AnimeLink(
                 title: link.title,

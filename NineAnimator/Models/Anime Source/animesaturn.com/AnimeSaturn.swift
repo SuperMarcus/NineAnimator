@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Alamofire
 import Foundation
 
 #if canImport(UIKit)
@@ -25,30 +26,29 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceFourAnime: BaseSource, Source, PromiseSource {
-    var name: String { "4anime.to" }
+class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
+    var name: String { "animesaturn.com" }
     
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeSaturn Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { #imageLiteral(resourceName: "4anime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "AnimeSaturn Site Icon") }
     #endif
-    
     var siteDescription: String {
-        "4anime is a popular free anime streaming website funded by donations. This website is guarded by Cloudflare; you may be asked to verify your identity."
+        "AnimeSaturn è un server italiano. AnimeSaturn is a free website that provides Italian subtitled anime."
     }
     
-    class var FourAnimeStream: Anime.ServerIdentifier {
-        "4anime"
+    class var AnimeSaturnStream: Anime.ServerIdentifier {
+        "AnimeSaturn"
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
-        \.romaji
+        \.english
     }
     
-    override var endpoint: String { "https://4anime.to" }
+    override var endpoint: String { "https://animesaturn.com" }
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
@@ -58,7 +58,7 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        server == NASourceFourAnime.FourAnimeStream
+        server == NASourceAnimeSaturn.AnimeSaturnStream
             ? DummyParser.registeredInstance : nil
     }
     
@@ -67,7 +67,11 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
-        anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
-            ? [NASourceFourAnime.FourAnimeStream] : []
+        anime.servers.keys.contains(NASourceAnimeSaturn.AnimeSaturnStream)
+            ? [NASourceAnimeSaturn.AnimeSaturnStream] : []
+    }
+    
+    func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
+        .fail()
     }
 }

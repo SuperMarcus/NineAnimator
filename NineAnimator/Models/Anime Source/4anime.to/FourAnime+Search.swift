@@ -56,8 +56,11 @@ extension NASourceFourAnime {
                     return try possibleLinkContainers.reduce(into: [AnimeLink]()) {
                         results, container in
                         if let img = try container.select("img").first() {
+                            let artworkURLString = try img.attr("src")
+                                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                                .tryUnwrap(.urlError)
                             let artworkUrl = try URL(
-                                string: try img.attr("src")
+                                string: artworkURLString
                             ).tryUnwrap()
                             let animeUrl = try URL(
                                 string: try container.attr("href")
