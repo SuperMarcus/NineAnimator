@@ -25,79 +25,90 @@ extension NASourceFourAnime {
         self.requestManager.request(
             url: link.link,
             handling: .browsing
-        ) .responseString.then {
-            responseContent -> Anime in
+        ) .responseString.thenPromise {
+            responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
-            let animeTitle = try bowl.select(".content p").text()
-            let animeArtworkUrl = URL(
-                string: try bowl.select(".cover>img").attr("src"),
+            let animeLinkURL = URL(
+                string: try bowl.select("#titleleft").attr("href"),
                 relativeTo: link.link
-            ) ?? link.image
-            let reconstructedAnimeLink = AnimeLink(
-                title: animeTitle,
-                link: link.link,
-                image: animeArtworkUrl,
-                source: self
-            )
-            
-            // Obtain the list of episodes
-            let episodes = try bowl.select("ul.episodes>li").reduce(into: [EpisodeLink]()) {
-                collection, container in
-                let episodeName = try container
-                    .text()
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
-                let episodeLink = try container.select("a").attr("href")
-                
-                collection.append(.init(
-                    identifier: episodeLink,
-                    name: episodeName,
-                    server: NASourceFourAnime.FourAnimeStream,
-                    parent: reconstructedAnimeLink
-                ))
-            }
-            
-            // Information
-            let animeSynopsis = try bowl
-                .select("div#description-mob")
-                .text()
-                .trimmingCharacters(in: .whitespacesAndNewlines)
-                .replacingOccurrences(
-                    of: "\\n+",
-                    with: "\n",
-                    options: [.regularExpression]
+                ) ?? link.link
+            return self.requestManager.request(
+                url: animeLinkURL,
+                handling: .browsing
+            ) .responseString.then {
+                responseContent -> Anime in
+                let bowl = try SwiftSoup.parse(responseContent)
+                let animeTitle = try bowl.select(".content p").text()
+                let animeArtworkUrl = URL(
+                    string: try bowl.select(".cover>img").attr("src"),
+                    relativeTo: link.link
+                ) ?? link.image
+                let reconstructedAnimeLink = AnimeLink(
+                    title: animeTitle,
+                    link: link.link,
+                    image: animeArtworkUrl,
+                    source: self
                 )
-                .replacingOccurrences(
-                    of: "^Description\\s",
-                    with: "",
-                    options: [.regularExpression]
-                )
-            
-            // Attributes
-            var additionalAttributes = [Anime.AttributeKey: Any]()
-            let detailContainers = try bowl.select("div.info div.detail")
-            
-            for container in detailContainers {
-                let attributeNameContainer = try container.select(".title-side")
-                let attributeName = try attributeNameContainer.text()
-                try attributeNameContainer.remove()
-                let attributeValue = try container
-                    .text()
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
                 
-                if attributeName.lowercased().contains("release date") {
-                    additionalAttributes[.airDate] = attributeValue
+                // Obtain the list of episodes
+                let episodes = try bowl.select("ul.episodes>li").reduce(into: [EpisodeLink]()) {
+                    collection, container in
+                    let episodeName = try container
+                        .text()
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    let episodeLink = try container.select("a").attr("href")
+                    
+                    collection.append(.init(
+                        identifier: episodeLink,
+                        name: episodeName,
+                        server: NASourceFourAnime.FourAnimeStream,
+                        parent: reconstructedAnimeLink
+                    ))
                 }
+                
+                // Information
+                let animeSynopsis = try bowl
+                    .select("div#description-mob")
+                    .text()
+                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                    .replacingOccurrences(
+                        of: "\\n+",
+                        with: "\n",
+                        options: [.regularExpression]
+                    )
+                    .replacingOccurrences(
+                        of: "^Description\\s",
+                        with: "",
+                        options: [.regularExpression]
+                    )
+                
+                // Attributes
+                var additionalAttributes = [Anime.AttributeKey: Any]()
+                let detailContainers = try bowl.select("div.info div.detail")
+                
+                for container in detailContainers {
+                    let attributeNameContainer = try container.select(".title-side")
+                    let attributeName = try attributeNameContainer.text()
+                    try attributeNameContainer.remove()
+                    let attributeValue = try container
+                        .text()
+                        .trimmingCharacters(in: .whitespacesAndNewlines)
+                    
+                    if attributeName.lowercased().contains("release date") {
+                        additionalAttributes[.airDate] = attributeValue
+                    }
+                }
+                
+                return Anime(
+                    reconstructedAnimeLink,
+                    alias: "",
+                    additionalAttributes: additionalAttributes,
+                    description: animeSynopsis,
+                    on: [ NASourceFourAnime.FourAnimeStream: "4anime" ],
+                    episodes: [ NASourceFourAnime.FourAnimeStream: episodes ],
+                    episodesAttributes: [:]
+                )
             }
-            
-            return Anime(
-                reconstructedAnimeLink,
-                alias: "",
-                additionalAttributes: additionalAttributes,
-                description: animeSynopsis,
-                on: [ NASourceFourAnime.FourAnimeStream: "4anime" ],
-                episodes: [ NASourceFourAnime.FourAnimeStream: episodes ],
-                episodesAttributes: [:]
-            )
         }
     }
 }
