@@ -28,6 +28,7 @@ extension NASourceAnimePahe {
         var anime_title: String
         var anime_slug: String
         var snapshot: String
+        var anime_session: String
     }
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
@@ -42,7 +43,7 @@ extension NASourceAnimePahe {
             decodedResponse in try decodedResponse.data.map {
                 animeItem in AnimeLink(
                     title: animeItem.anime_title,
-                    link: self.animeBaseUrl.appendingPathComponent(animeItem.anime_slug),
+                    link: self.animeBaseUrl.appendingPathComponent(animeItem.anime_session),
                     image: try URL(string: animeItem.snapshot).tryUnwrap(.urlError),
                     source: self
                 )
