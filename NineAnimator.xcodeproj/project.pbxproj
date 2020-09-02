@@ -2050,6 +2050,18 @@
 			path = monoschinos.com;
 			sourceTree = "<group>";
 		};
+		BFAA489324DE06F3009BE142 /* animehub.ac */ = {
+			isa = PBXGroup;
+			children = (
+				BFAA489424DE0723009BE142 /* AnimeHub.swift */,
+				BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */,
+				BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */,
+				BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */,
+				BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */,
+			);
+			path = animehub.ac;
+			sourceTree = "<group>";
+		};
 		C8B7F2FE24EA995400A56BE1 /* animesaturn.com */ = {
 			isa = PBXGroup;
 			children = (
@@ -2061,18 +2073,6 @@
 				C8E1F75424EAAFA900EC4BD0 /* AnimeSaturn+RequestModifier.swift */,
 			);
 			path = animesaturn.com;
-      sourceTree = "<group>";
-		};
-		BFAA489324DE06F3009BE142 /* animehub.ac */ = {
-			isa = PBXGroup;
-			children = (
-				BFAA489424DE0723009BE142 /* AnimeHub.swift */,
-				BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */,
-				BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */,
-				BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */,
-				BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */,
-			);
-			path = animehub.ac;
 			sourceTree = "<group>";
 		};
 		C8E12CFD2422133B00B0AF6A /* animeunity.it */ = {
@@ -3116,7 +3116,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
@@ -3125,7 +3125,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3142,7 +3142,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
@@ -3151,7 +3151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.6;
+				MARKETING_VERSION = 1.2.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
