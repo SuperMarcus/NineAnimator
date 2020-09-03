@@ -27,11 +27,23 @@ extension NASourceAnimeDao {
     )
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        self.requestManager.request(
-            url: link.link,
-            handling: .browsing
-        ) .responseString
-          .then {
+        NineAnimatorPromise.firstly {
+            var animePageLinkBuilder = try URLComponents(
+                url: link.link,
+                resolvingAgainstBaseURL: true
+            ).tryUnwrap()
+            
+            if let linkHost = animePageLinkBuilder.host, self.deprecatedHosts.contains(linkHost) {
+                animePageLinkBuilder.host = self.endpointURL.host
+            }
+            
+            return animePageLinkBuilder.url
+        } .thenPromise {
+            animePageUrl in self.requestManager.request(
+                url: animePageUrl,
+                handling: .browsing
+            ) .responseString
+        } .then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             

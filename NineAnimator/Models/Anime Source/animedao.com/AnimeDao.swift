@@ -26,9 +26,9 @@ import AppKit
 #endif
 
 class NASourceAnimeDao: BaseSource, Source, PromiseSource {
-    var name: String { "animedao.com" }
+    var name: String { "animedao.to" }
     
-    var aliases: [String] { [] }
+    var aliases: [String] { [ "animedao.com" ] }
     
     #if canImport(UIKit)
     var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeDao Site Logo") }
@@ -44,9 +44,11 @@ class NASourceAnimeDao: BaseSource, Source, PromiseSource {
         \.english
     }
     
-    override var endpoint: String { "https://animedao.com" }
+    override var endpoint: String { "https://animedao.to" }
     
-    static let animedaoStreamEndpoint = URL(string: "https://animedao28.stream")!
+    static let animedaoStreamEndpoint = URL(string: "https://animedao24.stream")!
+    
+    var deprecatedHosts: [String] { [ "animedao.com" ] }
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
