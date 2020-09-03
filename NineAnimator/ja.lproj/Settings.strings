@@ -26,7 +26,7 @@
 "4rr-C0-0zN.text" = "ANILIST.CO";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "4vz-rG-dvA"; */
-"4vz-rG-dvA.text" = "Not Setup";
+"4vz-rG-dvA.text" = "設定していません";
 
 /* Class = "UINavigationItem"; title = "Storage"; ObjectID = "4ye-Yb-8qS"; */
 "4ye-Yb-8qS.title" = "ストレージ";
@@ -44,7 +44,7 @@
 "6ow-N9-6M8.text" = "ステータス";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "6wJ-Cg-cKO"; */
-"6wJ-Cg-cKO.text" = "Not Setup";
+"6wJ-Cg-cKO.text" = "設定していません";
 
 /* Class = "UILabel"; text = "Calculating Usage..."; ObjectID = "74T-HL-SF3"; */
 "74T-HL-SF3.text" = "Calculating Usage...";
@@ -68,7 +68,7 @@
 "AVN-Z6-xDl.text" = "Export History";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "Avi-8B-KpP"; */
-"Avi-8B-KpP.text" = "Not Setup";
+"Avi-8B-KpP.text" = "設定していません";
 
 /* Class = "UILabel"; text = "Third-Party Anime Lists"; ObjectID = "BDo-SJ-NV8"; */
 "BDo-SJ-NV8.text" = "Third-Party Anime Lists";
@@ -107,13 +107,13 @@
 "KjW-mL-37B.text" = "エピソード";
 
 /* Class = "UILabel"; text = "Setup AniList.co"; ObjectID = "Kql-zU-bRq"; */
-"Kql-zU-bRq.text" = "Setup AniList.co";
+"Kql-zU-bRq.text" = "AniList.coを設定する";
 
 /* Class = "UILabel"; text = "Credits"; ObjectID = "LfV-dW-fu4"; */
 "LfV-dW-fu4.text" = "クレジット";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "LoF-UE-Pdv"; */
-"LoF-UE-Pdv.text" = "Not Setup";
+"LoF-UE-Pdv.text" = "設定していません";
 
 /* Class = "UILabel"; text = "List Episodes"; ObjectID = "Mhg-Wl-1ep"; */
 "Mhg-Wl-1ep.text" = "List Episodes";
@@ -158,7 +158,7 @@
 "Sei-S4-MPn.headerTitle" = "Simkl";
 
 /* Class = "UILabel"; text = "Not Setup"; ObjectID = "SkT-L9-D11"; */
-"SkT-L9-D11.text" = "Not Setup";
+"SkT-L9-D11.text" = "設定していません";
 
 /* Class = "UINavigationItem"; title = "Preferences"; ObjectID = "SsL-fL-doX"; */
 "SsL-fL-doX.title" = "設定";
@@ -170,7 +170,7 @@
 "UxF-RW-Y6p.footerTitle" = "List episode from the first to the last (Ordered) or from the most recent to the most distant (Reversed).";
 
 /* Class = "UILabel"; text = "Starts Playing"; ObjectID = "V91-yy-Rkb"; */
-"V91-yy-Rkb.text" = "Starts Playing";
+"V91-yy-Rkb.text" = "再生の始まり";
 
 /* Class = "UILabel"; text = "Detect Clipboard Links"; ObjectID = "VBZ-pE-vXV"; */
 "VBZ-pE-vXV.text" = "Detect Clipboard Links";
@@ -236,7 +236,7 @@
 "ehk-8y-ZWC.text" = "Push NineAnimator Updates";
 
 /* Class = "UITableViewController"; title = "Home"; ObjectID = "ejU-pt-NEy"; */
-"ejU-pt-NEy.title" = "Home";
+"ejU-pt-NEy.title" = "ホーム";
 
 /* Class = "UILabel"; text = "Push NineAnimator Updates"; ObjectID = "ekC-7m-AFc"; */
 "ekC-7m-AFc.text" = "Push NineAnimator Updates";
