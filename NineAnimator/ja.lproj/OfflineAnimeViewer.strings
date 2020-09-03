@@ -5,7 +5,7 @@
 "7US-lL-eqn.text" = "Download Statistics";
 
 /* Class = "UILabel"; text = "Loading Download Information"; ObjectID = "FLh-Zr-rat"; */
-"FLh-Zr-rat.text" = "Loading Download Information";
+"FLh-Zr-rat.text" = "ダウンロード情報を読み込み中";
 
 /* Class = "UILabel"; text = "Loading Episode Name"; ObjectID = "QKz-J0-kb0"; */
 "QKz-J0-kb0.text" = "エピソードネームをロード中";
