@@ -23,6 +23,7 @@ extension MyAnimeList {
     class TrendingAnimeRecommendation: RecommendationSource {
         let name = "Trending"
         let piority: RecommendationSource.Piority = .defaultLow
+        var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList
         
@@ -90,6 +91,7 @@ extension MyAnimeList {
     class SeasonalAnimeRecommendation: RecommendationSource {
         let name = "Seasonal Anime"
         let piority: RecommendationSource.Piority = .defaultLow
+        var shouldPresentRecommendation: Bool { false }
         
         private let parent: MyAnimeList
         

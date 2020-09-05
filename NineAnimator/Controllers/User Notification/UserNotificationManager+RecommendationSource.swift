@@ -23,6 +23,7 @@ extension UserNotificationManager {
     class SubscribedAnimeRecommendationSource: RecommendationSource {
         var name = "Subscriptions"
         var piority: RecommendationSource.Piority = .defaultHigh
+        var shouldPresentRecommendation: Bool { true }
         
         func shouldReload(recommendation: Recommendation) -> Bool {
             let oldSet = recommendation.items.reduce(into: Set<AnyLink>()) {
