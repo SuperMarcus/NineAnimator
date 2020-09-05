@@ -22,6 +22,7 @@ import UIKit
 class QuickActionsTableViewCell: UITableViewCell, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet private weak var collectionView: UICollectionView!
     private var quickActions = [DiscoverySceneViewController.QuickAction]()
+    private var quickActionCompletionHandler: ((DiscoverySceneViewController.QuickAction) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -43,12 +44,17 @@ class QuickActionsTableViewCell: UITableViewCell, UICollectionViewDataSource, UI
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let action = quickActions[indexPath.item]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "action", for: indexPath) as! Cell
-        cell.setPresenting(action)
+        
+        if let completionHandler = self.quickActionCompletionHandler {
+            cell.setPresenting(action, completionHandler: completionHandler)
+        }
+        
         return cell
     }
     
-    func updateQuickActionsList(_ list: [DiscoverySceneViewController.QuickAction]) {
+    func updateQuickActionsList(_ list: [DiscoverySceneViewController.QuickAction], completionHandler: @escaping (DiscoverySceneViewController.QuickAction) -> Void) {
         self.quickActions = list
+        self.quickActionCompletionHandler = completionHandler
         self.collectionView.reloadData()
     }
     
