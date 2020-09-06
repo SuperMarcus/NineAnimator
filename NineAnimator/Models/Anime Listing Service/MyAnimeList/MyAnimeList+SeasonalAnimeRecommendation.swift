@@ -91,7 +91,7 @@ extension MyAnimeList {
     class SeasonalAnimeRecommendation: RecommendationSource {
         let name = "Seasonal Anime"
         let piority: RecommendationSource.Piority = .defaultLow
-        var shouldPresentRecommendation: Bool { false }
+        var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList
         
