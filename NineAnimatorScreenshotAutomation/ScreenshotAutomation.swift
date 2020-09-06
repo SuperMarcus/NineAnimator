@@ -52,7 +52,7 @@ class ScreenshotAutomation: XCTestCase {
         watchNextButton.tap()
         
         let tablesQuery = app.tables
-        tablesQuery.buttons["Preferences"].tap()
+        tablesQuery.buttons["Settings"].tap()
         tablesQuery.staticTexts["Third-Party Anime Lists"].tap()
         
         snapshot("TrackingServices")

@@ -19,7 +19,7 @@
 
 import Foundation
 
-// MARK: - Home Integration preferences
+// MARK: - Home Integration settings
 extension NineAnimatorUser {
     /// Configure NineAnimator to only run HomeKit tasks when the video is
     /// playing on external screens.

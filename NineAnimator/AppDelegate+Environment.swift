@@ -40,7 +40,7 @@ extension AppDelegate {
         // NINEANIMATOR_APPEARANCE_OVERRIDE: Theme Override
         if let overridingTheme = NineAnimator.runtime.overridingAppearanceName {
             if let theme = Theme.availableThemes[overridingTheme] {
-                Log.info("[AppDelegate.Environment] Updating appearance to '%@' (note this will not change the preferences in the user settings)...", overridingTheme)
+                Log.info("[AppDelegate.Environment] Updating appearance to '%@' (note this will not change the setting in the user settings)...", overridingTheme)
                 Theme.setTheme(theme)
             } else {
                 Log.error("[AppDelegate.Environment] Appearance '%@' is undefined.", overridingTheme)
