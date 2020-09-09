@@ -21,6 +21,8 @@ import Foundation
 
 extension Anilist {
     class AnilistUserRecommendations: RecommendationSource {
+        var shouldPresentRecommendation: Bool { parent.didSetup }
+        
         var name: String = "Anime For You"
         
         var piority: Piority = .defaultLow
@@ -36,9 +38,6 @@ extension Anilist {
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
-            guard parent.didSetup else {
-                return NineAnimatorPromise.fail(.providerError("Please login to Anilist and restart the app."))
-            }
             let queue = DispatchQueue.global()
             return NineAnimatorPromise(queue: queue) {
                 (callback: @escaping ((Void?, Error?) -> Void)) in
