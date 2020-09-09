@@ -145,6 +145,7 @@
 		2C4FDDAF22483CBB0059B7D8 /* AnimeUltima.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */; };
 		2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */; };
 		2C4FDDB322485EF90059B7D8 /* AnimeUltima+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */; };
+		2C5330E62509194F007C8067 /* NineAnime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5330E52509194F007C8067 /* NineAnime+RequestModifier.swift */; };
 		2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54FF5C233967A0007669BB /* UIStyleOverride.swift */; };
 		2C563B322248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift */; };
 		2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */; };
@@ -609,6 +610,7 @@
 		2C4FDDAE22483CBB0059B7D8 /* AnimeUltima.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUltima.swift; sourceTree = "<group>"; };
 		2C4FDDB022485E5D0059B7D8 /* AnimeUltima+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Featured.swift"; sourceTree = "<group>"; };
 		2C4FDDB222485EF90059B7D8 /* AnimeUltima+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Search.swift"; sourceTree = "<group>"; };
+		2C5330E52509194F007C8067 /* NineAnime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnime+RequestModifier.swift"; sourceTree = "<group>"; };
 		2C54FF5C233967A0007669BB /* UIStyleOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyleOverride.swift; sourceTree = "<group>"; };
 		2C563B312248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+CloudflareWAFResolver.swift"; sourceTree = "<group>"; };
 		2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydraXParser.swift; sourceTree = "<group>"; };
@@ -1841,6 +1843,7 @@
 				2C3D7BF52210825B0045D648 /* NineAnime+Reachability.swift */,
 				2C98D66C225BE9C3001FF874 /* NineAnime+Middleware.swift */,
 				2C0D594922B9DF6600237511 /* NineAnime+Token.swift */,
+				2C5330E52509194F007C8067 /* NineAnime+RequestModifier.swift */,
 			);
 			path = 9anime.to;
 			sourceTree = "<group>";
@@ -2404,6 +2407,7 @@
 				2C2C54FB2216066100BAA76E /* User+History.swift in Sources */,
 				2CEBE90F2207BF81006A64CC /* GogoAnime+Featured.swift in Sources */,
 				2CAEA893235D450D00AC2370 /* LibraryCollectionCell.swift in Sources */,
+				2C5330E62509194F007C8067 /* NineAnime+RequestModifier.swift in Sources */,
 				2CA1DD4321E18FDB009241CB /* NineAnime+LinkRetriver.swift in Sources */,
 				2CA4B7F523B1CA2700B4E6F7 /* AnimeDao.swift in Sources */,
 				2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */,

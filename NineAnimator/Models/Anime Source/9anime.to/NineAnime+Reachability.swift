@@ -31,6 +31,14 @@ extension NASourceNineAnime/*: Alamofire.RequestAdapter*/ {
         ]
     }
     
+    var possibleStaticAssetHosts: [String] {
+        possibleHosts + [
+            "static.9anime.ru",
+            "static.9anime.to",
+            "static.9anime.live"
+        ]
+    }
+    
     func determineEndpoint(_ url: URL) -> NineAnimatorPromise<URL> {
         Log.info("[9anime] Looking for a new valid 9anime host")
         return NineAnimatorPromise<Bool>.queue(listOfPromises: possibleHosts.map {
