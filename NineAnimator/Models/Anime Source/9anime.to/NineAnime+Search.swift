@@ -81,11 +81,13 @@ class NineAnimeSearch: ContentProvider {
                     let linkString = try nameElement.attr("href")
                     let coverImageElement = try film.select("img")
                     
-                    guard let link = URL(string: linkString),
-                        let coverImage = try ( // Either in src or data-src
-                            URL(string: try coverImageElement.attr("src"))
-                            ?? URL(string: try coverImageElement.attr("data-src"))
-                        ) else {
+                    let coverImage = try ( // Either in src or data-src
+                        self._parent.processRelativeUrl(try coverImageElement.attr("src"))
+                        ?? self._parent.processRelativeUrl(try coverImageElement.attr("data-src"))
+                        ?? NineAnimator.placeholderArtworkUrl
+                    )
+                    
+                    guard let link = URL(string: linkString) else {
                         Log.error("An invalid link (%@) was extracted from the search result page", linkString)
                         return nil
                     }

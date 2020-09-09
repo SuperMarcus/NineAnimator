@@ -59,6 +59,7 @@ class NASourceNineAnime: BaseSource, Source {
         requestManager.enqueueValidation(NASourceNineAnime._verificationDetectionMiddleware)
         requestManager.enqueueValidation(NASourceNineAnime._ipBlockDetectionMiddleware)
         requestManager.enqueueValidation(NASourceNineAnime._contentNotFoundMiddleware)
+        setupGlobalRequestModifier()
     }
     
     override func canHandle(url: URL) -> Bool {

@@ -67,7 +67,10 @@ class FacebookParser: VideoProviderParser {
                     url: sourceURL,
                     parent: episode,
                     contentType: "video/mp4",
-                    headers: [:],
+                    headers: [
+                        "referer": "https://embed.streamx.me/",
+                        "User-Agent": self.defaultUserAgent
+                    ],
                     isAggregated: false
                 ), nil)
             } catch { handler(nil, error) }
