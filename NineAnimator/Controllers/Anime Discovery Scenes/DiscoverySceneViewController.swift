@@ -277,11 +277,10 @@ fileprivate extension DiscoverySceneViewController {
     
     /// Mark the sources that request updates as dirty
     private func markDirtySources() {
-        for (source, recommendation, error) in recommendationList where error == nil {
+        for (source, recommendation, error) in recommendationList where error == nil && source.shouldPresentRecommendation {
             let sourceIdentifier = ObjectIdentifier(source)
             if let recommendation = recommendation {
-                if source.shouldPresentRecommendation,
-                    source.shouldReload(recommendation: recommendation) {
+                if source.shouldReload(recommendation: recommendation) {
                     markSourceAsDirty(source)
                 }
             } else if !recommendationLoadingTasks.keys.contains(sourceIdentifier), case .none = error {
