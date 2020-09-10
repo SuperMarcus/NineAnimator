@@ -48,7 +48,7 @@ extension DiscoverySceneViewController {
         listOfActions.append(
             .init(
                 icon: UIImage(named: "Cog Icon QuickAction")!,
-                title: "Preferences"
+                title: "Settings"
             ) {
                 [weak self] completion in
                 guard let self = self else { return }

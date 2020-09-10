@@ -131,7 +131,7 @@ Or simply tap on the subscribe button when you are viewing any anime.
 NineAnimator can be configurated to run Home scenes when the playback starts and
 ends. The default behavior is to only run the scenes when the video is playing on
 external screens (e.g. Google Cast, AirPlay). However, you may change that in the
-`Preference` -> `Home` panel.
+`Settings` -> `Home` panel.
 
 - NineAnimator runs `Starts Playing` scene immediately after the video starts playing
 - The `Ends Playing` scene will be performed 15 seconds before video playback ends
@@ -153,7 +153,7 @@ When you browse an anime, depending on the device you are using, the NineAnimato
 will show up on the dock (iPad) or the task switcher of your other devices. You may tap
 on the icon to continue browsing or watching on the new device.
 
-To add a siri shortcut, navigate to the system preferences app. Find NineAnimator under
+To add a siri shortcut, navigate to the system settings app. Find NineAnimator under
 the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
 ## Backup History and Playback Progresses
@@ -162,7 +162,7 @@ NineAnimator can export the recently watched anime list and the playback histori
 a `.naconfig` file. You may use this file to restore anime to the Recents tab or sync
 progresses between devices.
 
-Navigate to the preferences menu and tap on the `Export History`, a share menu
+Navigate to the settings menu and tap on the `Export History`, a share menu
 will pop up.
 
 >

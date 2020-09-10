@@ -9,7 +9,7 @@
 NineAnimator can present information on a selection of third party listing websites. You can configure
 NineAnimator to push local playback history to those tracking services.
 
-The tracking services can be configured in the `Preferences` menu, under the `Anime Tracking Services`
+The tracking services can be configured in the `Settings` menu, under the `Anime Tracking Services`
 submenu in the `Data and Privacy` section.
 
 Supported tracking/listing services and capabilities:

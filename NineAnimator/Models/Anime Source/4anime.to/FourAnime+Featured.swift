@@ -27,6 +27,7 @@ extension NASourceFourAnime {
             let endpointURL = self.endpointURL
             let bowl = try SwiftSoup.parse(responseContent)
             let popularLinkElements = try bowl.select("#populartodaycontent>div a")
+            let recentLinkElements = try bowl.select("#urcontent>div a")
             
             let popularAnimeLinks = try popularLinkElements.compactMap {
                 aElement -> (a: Element, img: Element)? in
@@ -50,9 +51,35 @@ extension NASourceFourAnime {
                 }
             }
             
+            let recentAnimeLinks = try recentLinkElements.compactMap {
+                aElement -> (a: Element, img: Element)? in
+                if let imageElement = try aElement.select("img").first() {
+                    return (aElement, imageElement)
+                } else { return nil }
+            } .reduce(into: [AnimeLink]()) {
+                container, elements in
+                if let artworkPath = try? elements.img.attr("src"),
+                    let artworkUrl = URL(string: artworkPath, relativeTo: endpointURL),
+                    let animeTitle = try? elements.img.attr("title").replacingOccurrences(
+                        of: " Episode [\\d]+$",
+                        with: "",
+                        options: [ .regularExpression ]
+                    ),
+                    let animePath = try? elements.a.attr("href"),
+                    let animeUrl = URL(string: animePath, relativeTo: endpointURL) {
+                    // Construct and add anime link
+                    container.append(.init(
+                        title: animeTitle,
+                        link: animeUrl,
+                        image: artworkUrl,
+                        source: self
+                    ))
+                }
+            }
+            
             return BasicFeaturedContainer(
                 featured: popularAnimeLinks,
-                latest: []
+                latest: recentAnimeLinks
             )
         }
     }
