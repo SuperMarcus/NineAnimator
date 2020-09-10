@@ -37,7 +37,7 @@ extension NASourceFourAnime {
                 string: try bowl.select(".cover>img").attr("src"),
                 relativeTo: resolvedAnimeLink.link
             ) ?? resolvedAnimeLink.image
-            let animeTitle = try bowl.select("div#details center").text()
+            let animeTitle = try bowl.select(".content p").text()
             let reconstructedAnimeLink = AnimeLink(
                 title: animeTitle,
                 link: resolvedAnimeLink.link,
