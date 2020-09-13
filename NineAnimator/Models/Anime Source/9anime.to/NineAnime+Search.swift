@@ -87,7 +87,12 @@ class NineAnimeSearch: ContentProvider {
                         ?? NineAnimator.placeholderArtworkUrl
                     )
                     
-                    guard let link = URL(string: linkString) else {
+                    // Add https:// + currentHost to the link
+                    guard let link = self._parent.processRelativeUrl(
+                        linkString,
+                        base: URL(
+                            string: "https://" + self._parent._currentHost)
+                        ) else {
                         Log.error("An invalid link (%@) was extracted from the search result page", linkString)
                         return nil
                     }
