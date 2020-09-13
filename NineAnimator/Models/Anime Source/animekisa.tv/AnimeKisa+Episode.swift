@@ -24,7 +24,8 @@ extension NASourceAnimeKisa {
         "vidstreaming": "VidStreaming",
         "fembed": "Fembed",
         "hydrax": "HydraX",
-        "mp4upload": "Mp4Upload"
+        "mp4upload": "Mp4Upload",
+        "cloud9": "Cloud9"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -83,7 +84,8 @@ extension NASourceAnimeKisa {
             "openload": try buildExp("Openload"),
             "streamango": try buildExp("Streamango"),
             "vidstreaming": try buildExp("VidStreaming"),
-            "hydrax": try buildExp("Hydrax")
+            "hydrax": try buildExp("Hydrax"),
+            "cloud9": try buildExp("Cloud9")
         ] .compactMapValues { $0.firstMatch(in: episodePage)?.firstMatchingGroup }
           .compactMapValues { $0.isEmpty ? nil : $0 }
         
