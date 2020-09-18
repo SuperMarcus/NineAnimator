@@ -34,10 +34,9 @@ extension NASourceGogoAnime {
             .request(url: url, handling: .browsing)
             .responseString
             .thenPromise { content -> NineAnimatorPromise<(String, String)> in
-                guard let animeIdentifier = NASourceGogoAnime
-                    .animeIdentifierRegex
-                    .firstMatch(in: content)?
-                    .firstMatchingGroup else {
+                guard let animeIdentifier = try? SwiftSoup.parse(content)
+                    .select("input#movie_id.movie_id")
+                    .attr("value") else {
                         throw NineAnimatorError.responseError("Cannot identify the anime")
                 }
                 
