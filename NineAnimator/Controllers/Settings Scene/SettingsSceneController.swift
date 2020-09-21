@@ -96,7 +96,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             }
         }
     }
-    
+}
+
+// MARK: - IBActions
+extension SettingsSceneController {
     @IBAction private func onDetectClipboardLinksChange(_ sender: UISwitch) {
         NineAnimator.default.user.detectsPasteboardLinks = sender.isOn
     }
@@ -155,7 +158,10 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
         RootViewController.shared?.updateDynamicTheme() // Sync with the current theme
         updatePreferencesUI()
     }
-    
+}
+
+// MARK: - Delegate
+extension SettingsSceneController {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.makeThemable()
     }
@@ -244,29 +250,17 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
             
             if let popoverController = activityController.popoverPresentationController {
                 popoverController.sourceView = cell
+                popoverController.sourceRect = cell.bounds
             }
             
             present(activityController, animated: true, completion: nil)
         default: return
         }
     }
-    
-    private func clearCache() {
-        Kingfisher.ImageCache.default.clearDiskCache()
-        Kingfisher.ImageCache.default.clearMemoryCache()
-        URLCache.shared.removeAllCachedResponses()
-        HTTPCookieStorage.shared.removeCookies(since: .distantPast)
-        UserNotificationManager.default.removeAll()
-    }
-    
-    private func clearActivities() {
-        if #available(iOS 12.0, *) {
-            NSUserActivity.deleteAllSavedUserActivities {
-                [weak self] in self?.updatePreferencesUI()
-            }
-        }
-    }
-    
+}
+
+// MARK: - Syncing UI Components
+extension SettingsSceneController {
     private func updatePreferencesUI() {
         episodeListingOrderControl.selectedSegmentIndex = NineAnimator.default.user.episodeListingOrder == .reversed ? 0 : 1
         animeShowEpisodeDetailsSwitch.setOn(NineAnimator.default.user.showEpisodeDetails, animated: true)
@@ -388,6 +382,22 @@ extension SettingsSceneController {
             "counter": _fTimerCounter.description
         ])
         updatePreferencesUI()
+    }
+    
+    private func clearCache() {
+        Kingfisher.ImageCache.default.clearDiskCache()
+        Kingfisher.ImageCache.default.clearMemoryCache()
+        URLCache.shared.removeAllCachedResponses()
+        HTTPCookieStorage.shared.removeCookies(since: .distantPast)
+        UserNotificationManager.default.removeAll()
+    }
+    
+    private func clearActivities() {
+        if #available(iOS 12.0, *) {
+            NSUserActivity.deleteAllSavedUserActivities {
+                [weak self] in self?.updatePreferencesUI()
+            }
+        }
     }
 }
 

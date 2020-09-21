@@ -19,7 +19,7 @@
 
 import Foundation
 
-// MARK: - Preferences
+// MARK: - Settings
 extension NineAnimatorUser {
     enum EpisodeListingOrder: String {
         /// List from the first episode to the last
@@ -158,7 +158,7 @@ extension NineAnimatorUser {
     ///
     /// This was disabled by default as of 1.1b2 since the WAF resolver is unstable
     /// and usually takes a long time to fallback to manual authentication.
-    /// Until the challenge resolver has stablized, there will be no preferences
+    /// Until the challenge resolver has stablized, there will be no settings
     /// menu option to enable this functionality.
     ///
     /// Re-enabled on 1.1b8 thanks to [Awsomedude](https://github.com/Awsomedude)

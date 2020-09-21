@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import AVKit
 import UIKit
 
@@ -45,6 +46,8 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     private var playerRateObservation: NSKeyValueObservation?
     
     private var playerExternalPlaybackObservation: NSKeyValueObservation?
+    
+    private var playerStatusObservation: NSKeyValueObservation?
     
     private var playerPeriodicObservation: Any?
     
@@ -102,6 +105,8 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
         playerRateObservation = player.observe(\.rate, changeHandler: self.onPlayerRateChange)
         playerExternalPlaybackObservation =
             player.observe(\.isExternalPlaybackActive, changeHandler: self.onPlayerExternalPlaybackChange)
+        playerStatusObservation =
+            player.observe(\.status, changeHandler: self.onPlayerStatusChange)
     }
 }
 
@@ -125,6 +130,11 @@ extension NativePlayerController {
         
         playerViewController.userActivity = Continuity.activity(for: media)
         playerViewController.userActivity?.delegate = self
+        
+        // Track the server that's being used the most
+        MSAnalytics.trackEvent("Playback", withProperties: [
+            "source_server": "\(media.link.parent.source.name) (\(media.link.server))"
+        ])
     }
     
     /// Reset the player view controller
@@ -240,6 +250,10 @@ extension NativePlayerController {
 
 // MARK: - AVPlayer & AVPlayerItem observers
 extension NativePlayerController {
+    private func onPlayerStatusChange(player _: AVPlayer, change _: NSKeyValueObservedChange<AVPlayer.Status>) {
+        Log.debug("[NativePlayerController] Player status changed to %@.", player.status.rawValue)
+    }
+    
     private func onPlayerRateChange(player _: AVPlayer, change _: NSKeyValueObservedChange<Float>) {
         DispatchQueue.main.async {
             self.updatePlaybackSession()
@@ -356,7 +370,7 @@ extension NativePlayerController {
     }
 }
 
-// MARK: - Update preferences
+// MARK: - Update settings
 extension NativePlayerController {
     @objc func onUserPreferenceDidChange(notification _: Notification) {
         playerViewController.allowsPictureInPicturePlayback = shouldUsePictureInPicture

@@ -28,7 +28,7 @@ extension DiscoverySceneViewController {
     struct QuickAction {
         var icon: UIImage
         var title: String
-        var onAction: () -> Void
+        var onAction: (_ completion: @escaping () -> Void) -> Void
     }
     
     var availableQuickActions: [QuickAction] {
@@ -41,18 +41,18 @@ extension DiscoverySceneViewController {
                 .init(
                     icon: UIImage(named: "Play Icon QuickAction")!,
                     title: "Continue Playback"
-                ) { RootViewController.open(whenReady: .episode(lastPlayedEpisodeLink)) }
+                ) { _ in RootViewController.open(whenReady: .episode(lastPlayedEpisodeLink)) }
             )
         }
         
         listOfActions.append(
             .init(
                 icon: UIImage(named: "Cog Icon QuickAction")!,
-                title: "Preferences"
+                title: "Settings"
             ) {
-                [weak self] in
+                [weak self] completion in
                 guard let self = self else { return }
-                if let viewController = SettingsSceneController.create() {
+                if let viewController = SettingsSceneController.create(onDismissal: completion) {
                     self.present(viewController, animated: true)
                 }
             }
@@ -62,7 +62,7 @@ extension DiscoverySceneViewController {
             .init(
                 icon: UIImage(named: "Chromecast Icon QuickAction")!,
                 title: "Setup Cast"
-            ) { CastController.default.presentPlaybackController() }
+            ) { _ in  CastController.default.presentPlaybackController() }
         )
         
         return listOfActions

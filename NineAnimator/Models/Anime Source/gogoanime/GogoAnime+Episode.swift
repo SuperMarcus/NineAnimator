@@ -66,13 +66,18 @@ extension NASourceGogoAnime {
                         relativeTo: self.endpointURL.appendingPathComponent(episodePath)
                     ) else { return nil }
                     return (serverName, streamUrl)
+                } .filter {
+                    // GogoAnime's "Vidstreaming" server is a collection of backup links to different servers, however there is currently no way for the user to select a backup link, so we are removing this server.
+
+                    // Keep in mind that GogoAnime's "Gogo server" does use the VidStreamingParser
+                    $0.0 != "Vidstreaming"
                 }
                 
                 // Make sure there is any
                 guard !streamingSources.isEmpty else {
                     throw NineAnimatorError.responseError("No streaming sources found for this anime")
                 }
-                
+                                
                 // Construct the episode information structure
                 return NAGogoAnimeEpisodeInformation(
                     path: episodePath,

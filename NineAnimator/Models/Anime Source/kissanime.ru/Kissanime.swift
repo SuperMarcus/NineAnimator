@@ -47,6 +47,10 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://kissanime.ru" }
     
+    override var isEnabled: Bool {
+        false
+    }
+    
     override init(with parent: NineAnimator) {
         super.init(with: parent)
         

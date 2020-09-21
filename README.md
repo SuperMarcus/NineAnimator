@@ -30,7 +30,7 @@
 </p>
 
 A simple yet elegant way of waching anime on your favorite anime websites.
-NineAnimator is a free and open source anime watching app for iOS. GPLv3 Licensed.
+NineAnimator is a free and open source anime watching app for iOS and macOS. GPLv3 Licensed.
 
     
     Copyright © 2018-2020 Marcus Zhou. All rights reserved.
@@ -74,8 +74,8 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
 - [x] Ads Free and no logins
 - [x] Super-duper clean UIs + Dark Mode
 - [x] Get notifications when new episodes come out
-- [x] iOS's native video playback interface
-- [x] Picture in Picture playback on iPads
+- [x] Apple's native video playback interface
+- [x] Picture in Picture playback on iPads/iOS 14+ devices
 - [x] Chromecast/Google Cast with lockscreen & control center support
 - [x] Playback History & Auto Resumes
 - [x] Support [Multiple Anime Websites](docs/supported-sources.md)
@@ -87,7 +87,7 @@ NineAnimator is a free and open source anime watching app for iOS. GPLv3 License
 
 ## Google Cast
 
-NineAnimator supports playing back on both AirPlay (via iOS's native media player) and
+NineAnimator supports playing back on both AirPlay (via Apple's native media player) and
 Chromecast/Google Cast devices. However, not all of the steaming sources are supported
 on Chromecast. Check [Video Sources](docs/supported-sources.md) for details.
 
@@ -104,7 +104,7 @@ bar and tap the device that is already connected.
 
 ## Picture in Picture Playback
 
-This feature is only supported on iPads.
+This feature is only supported on iPads, Macs, and iOS 14+ devices.
 
 The Picture in Picture (PiP) icon will appear on the top left corner of the player once PiP
 is ready. You may tap on this icon to initiate PiP playback. To restore fullscreen playback,
@@ -112,8 +112,8 @@ tap the restore button on the PiP window.
 
 ## Notifications & Subscription
 
-Subscribing anime in NineAnimator is implemented with iOS's Background Application
-Refresh. NineAnimator will actively polls the available episodes and compares it with
+Subscribing anime in NineAnimator is implemented with Apple's Background Application
+Refresh. NineAnimator will actively poll the available episodes and compares it with
 locally cached episodes.
 
 <img src="Misc/Media/notification_example.jpg" width="320" />
@@ -131,9 +131,9 @@ Or simply tap on the subscribe button when you are viewing any anime.
 NineAnimator can be configurated to run Home scenes when the playback starts and
 ends. The default behavior is to only run the scenes when the video is playing on
 external screens (e.g. Google Cast, AirPlay). However, you may change that in the
-`Preference` -> `Home` panel.
+`Settings` -> `Home` panel.
 
-- NineAnimator runs `Starts Playing` scene immedietly after the video starts playing
+- NineAnimator runs `Starts Playing` scene immediately after the video starts playing
 - The `Ends Playing` scene will be performed 15 seconds before video playback ends
 
 <img src="Misc/Media/homekit.jpg" width="320" />
@@ -144,16 +144,16 @@ details.
 
 ## Handoff & Siri Shortcuts
 
-NineAnimator supports iOS's handoff and Siri Shortcuts. This enables you to seemlessly
+NineAnimator supports Apple's handoff and Siri Shortcuts. This enables you to seemlessly
 switch between devices when browsing and viewing anime.
 
 <img src="Misc/Media/continuity.jpg" width="320" />
 
-When you browse an anime, depending on the device you are using, NineAnimator icon
+When you browse an anime, depending on the device you are using, the NineAnimator icon
 will show up on the dock (iPad) or the task switcher of your other devices. You may tap
 on the icon to continue browsing or watching on the new device.
 
-To add a siri shortcut, navigate to the system preferences app. Find NineAnimator under
+To add a siri shortcut, navigate to the system settings app. Find NineAnimator under
 the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
 ## Backup History and Playback Progresses
@@ -162,7 +162,7 @@ NineAnimator can export the recently watched anime list and the playback histori
 a `.naconfig` file. You may use this file to restore anime to the Recents tab or sync
 progresses between devices.
 
-Navigate to the preferences menu and tap on the `Export History`, a share menu
+Navigate to the settings menu and tap on the `Export History`, a share menu
 will pop up.
 
 >

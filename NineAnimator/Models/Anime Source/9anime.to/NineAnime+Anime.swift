@@ -181,8 +181,9 @@ private extension NASourceNineAnime {
         result.description = (try? result.bowl.select("div.desc").text()) ?? "No description"
         
         // Reconstructing AnimeLink from the page content
-        let animePosterURL = URL(
-            string: try result.bowl.select("div.thumb>img").attr("src")
+        let animePosterURL = processRelativeUrl(
+            try result.bowl.select("div.thumb>img").attr("src"),
+            base: link.link
         ) ?? link.image
         let animeTitle = try result.bowl.select(".info .title").text()
         result.reconstructedLink = AnimeLink(
@@ -227,5 +228,15 @@ private extension NASourceNineAnime {
         }
         
         return result
+    }
+}
+
+extension NASourceNineAnime {
+    /// Process protocol-relative URLs
+    func processRelativeUrl(_ input: String, base: URL? = nil) -> URL? {
+        URL(
+            string: input.hasPrefix("//") ? "https:" + input : input,
+            relativeTo: base
+        )
     }
 }

@@ -49,6 +49,7 @@ class MyAnimeList: BaseListingService, ListingService {
         
         parent.register(additionalRecommendationSource: SeasonalAnimeRecommendation(self))
         parent.register(additionalRecommendationSource: TrendingAnimeRecommendation(self))
+        parent.register(additionalRecommendationSource: UserRecommendations(self))
     }
 }
 

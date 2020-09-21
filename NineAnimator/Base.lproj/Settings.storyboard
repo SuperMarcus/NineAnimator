@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Preferences-->
+        <!--Settings-->
         <scene sceneID="Vvw-7M-2Be">
             <objects>
                 <tableViewController id="avc-gc-Mj2" customClass="SettingsSceneController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
@@ -504,11 +504,11 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         <rect key="frame" x="16" y="1004.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="30T-PY-VFY" id="eTQ-k1-6uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="317" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eR-hu-Qxf">
-                                                    <rect key="frame" x="15" y="0.0" width="294" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="301" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -528,7 +528,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Open Cast Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gK-el-Ee1">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -596,7 +596,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Items" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ky-4E-HeC">
-                                                    <rect key="frame" x="271" y="12" width="57" height="20.5"/>
+                                                    <rect key="frame" x="278" y="12" width="57" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -620,7 +620,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Checking..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1D4-d4-eg5">
-                                                    <rect key="frame" x="241.5" y="12" width="86.5" height="20.5"/>
+                                                    <rect key="frame" x="248.5" y="12" width="86.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -637,7 +637,7 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Unsubscribe All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hGc-BW-frZ">
-                                                    <rect key="frame" x="15" y="0.0" width="313" height="44"/>
+                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -820,7 +820,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                             <outlet property="delegate" destination="avc-gc-Mj2" id="w3F-YX-9Kd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Preferences" id="SsL-fL-doX">
+                    <navigationItem key="navigationItem" title="Settings" id="SsL-fL-doX">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="XHY-Ma-Rtv">
                             <connections>
                                 <action selector="onDoneButtonClicked:" destination="avc-gc-Mj2" id="U44-8U-CwK"/>
@@ -2201,7 +2201,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Preferences menu.  By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
+                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Settings menu.  By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.
 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.
 

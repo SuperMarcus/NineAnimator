@@ -101,7 +101,13 @@ extension NASourceFourAnime {
             return Episode(
                 link,
                 target: videoSource,
-                parent: anime
+                parent: anime,
+                userInfo: [
+                    DummyParser.Options.headers: [
+                        "User-Agent": self.sessionUserAgent,
+                        "Referer": "https://4anime.to/"
+                    ]
+                ]
             )
         }
     }

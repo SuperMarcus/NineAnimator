@@ -26,7 +26,7 @@ extension NASourceAnimeUnity {
         var link: String = ""
     }
     struct  SearchResponseRecordsData: Codable {
-        var title_eng: String?
+        var titleEng: String?
         var episodes: [SearchResponseRecordsAnime]
     }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
@@ -53,17 +53,12 @@ extension NASourceAnimeUnity {
                     source: self
                 )
                 // Obtain the list of episodes
-                var eng_title = decodedResponse.title_eng
-                if let theTitle = eng_title {
-                    eng_title = theTitle
-                } else {
-                    eng_title = link.title
-                }
+                let eng_title = decodedResponse.titleEng
                 let episodesList = decodedResponse.episodes.compactMap {
                     episode -> (EpisodeLink) in
-                    let link_ep = episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)
+                    let link_ep = String(episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)).addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
                     return (EpisodeLink(
-                        identifier: String(link_ep),
+                        identifier: link_ep ?? "",
                         name: episode.number,
                         server: NASourceAnimeUnity.AnimeUnityStream,
                         parent: reconstructedAnimeLink
@@ -86,7 +81,7 @@ extension NASourceAnimeUnity {
                 }
                 return Anime(
                     reconstructedAnimeLink,
-                    alias: eng_title ?? "",
+                    alias: eng_title ?? link.title,
                     additionalAttributes: additionalAttributes,
                     description: synopsis,
                     on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],

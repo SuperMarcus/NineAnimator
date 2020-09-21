@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import AVKit
 import SafariServices
 import UIKit
@@ -156,6 +157,13 @@ extension AnimeViewController {
         // Store the reference in animeRequestTask
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
+            // Keep track of the usage and error rates of each source
+            MSAnalytics.trackEvent("Load Anime", withProperties: [
+                "source": link.source.name,
+                "success": error == nil ? "YES" : "NO",
+                "source_success": "\(link.source.name) - \(error == nil ? "Success" : "Error")"
+            ])
+            
             guard let anime = anime else {
                 guard let error = error else { return }
                 Log.error(error)
@@ -267,6 +275,10 @@ extension AnimeViewController {
     func setPresenting(anime link: AnimeLink) {
         self.episodeLink = nil
         self.animeLink = link
+        
+        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+            "source": link.source.name
+        ])
     }
     
     /**
@@ -283,6 +295,10 @@ extension AnimeViewController {
      */
     func setPresenting(episode link: EpisodeLink) {
         self.episodeLink = link
+        
+        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+            "source": link.parent.source.name
+        ])
     }
     
     /**

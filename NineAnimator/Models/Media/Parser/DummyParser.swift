@@ -36,11 +36,19 @@ class DummyParser: VideoProviderParser {
                 isAggregatedAsset = self.isAggregatedAsset(mimeType: contentType)
             }
             
+            // Attach Referer header to all requests for backwards compatibility
+            var headers = [ "Referer": episode.link.parent.link.absoluteString ]
+            
+            if let additionalHeaders = options[Options.headers] as? [String: String] {
+                // Combine headers with the additionalHeaders taking prioity
+                headers.merge(additionalHeaders) { _, new in new }
+            }
+            
             handler(BasicPlaybackMedia(
                 url: episode.target,
                 parent: episode,
                 contentType: (options[Options.contentType] as? String) ?? "video/mp4",
-                headers: [ "Referer": episode.link.parent.link.absoluteString ],
+                headers: headers,
                 isAggregated: (options[Options.isAggregated] as? Bool) ?? isAggregatedAsset
             ), nil)
         }
@@ -54,6 +62,8 @@ class DummyParser: VideoProviderParser {
         
         static let isAggregated: String =
             "com.marcuszhou.nineanimator.providerparser.DummyParser.option.isAggregated"
+        
+        static let headers: String = "com.marcuszhou.nineanimator.providerparser.DummyParser.option.headers"
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {

@@ -36,7 +36,7 @@ Temporary Items
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
 ## Build generated
-# build/
+build/
 DerivedData/
 
 ## Various settings
@@ -87,7 +87,7 @@ playground.xcworkspace
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-/Carthage/Checkouts
+#/Carthage/Checkouts
 #/Carthage/Build/watchOS
 #/Carthage/Build/tvOS
 #/Carthage/Build/Mac
@@ -117,7 +117,4 @@ fastlane/metadata
 iOSInjectionProject/
 
 # End of https://www.gitignore.io/api/macos,swift
-
-# xcodebuild directory
-build
 

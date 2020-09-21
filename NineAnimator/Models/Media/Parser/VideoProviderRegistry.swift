@@ -47,6 +47,13 @@ class VideoProviderRegistry {
         defaultProvider.register(CloudNineParser(), forServer: "Cloud9")
         defaultProvider.register(StreamTapeParser(), forServer: "Streamtape")
         defaultProvider.register(EasyLoadParser(), forServer: "Easyload")
+        defaultProvider.register(ClipWatchingParser(), forServer: "ClipWatching")
+        defaultProvider.register(UqloadParser(), forServer: "Uqload")
+        defaultProvider.register(SendvidParser(), forServer: "Sendvid")
+        defaultProvider.register(VideobinParser(), forServer: "Videobin")
+        defaultProvider.register(FacebookParser(), forServer: "fserver")
+        defaultProvider.register(YourUploadParser(), forServer: "yuserver")
+        defaultProvider.register(OpenStreamParser(), forServer: "oserver")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
