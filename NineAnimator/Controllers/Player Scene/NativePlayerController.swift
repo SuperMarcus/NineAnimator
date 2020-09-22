@@ -370,7 +370,7 @@ extension NativePlayerController {
     }
 }
 
-// MARK: - Update preferences
+// MARK: - Update settings
 extension NativePlayerController {
     @objc func onUserPreferenceDidChange(notification _: Notification) {
         playerViewController.allowsPictureInPicturePlayback = shouldUsePictureInPicture

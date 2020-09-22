@@ -19,6 +19,7 @@
 
 import Alamofire
 import Foundation
+import SwiftSoup
 
 /// NARequestManager provides an additional abstraction layer on top of Alamofire and URLSession.
 ///
@@ -185,6 +186,13 @@ extension NARequestManager {
         var responseVoid: NineAnimatorPromise<Void> {
             self._makePromise { $0.response(completionHandler: $1) }
                 .then { _ in () }
+        }
+        
+        /// Create a promise that resolves into a parsed SwiftSoup.Document
+        var responseBowl: NineAnimatorPromise<SwiftSoup.Document> {
+            self.responseString.then {
+                documentString in try SwiftSoup.parse(documentString)
+            }
         }
         
         /// Add a custom response handler which will be invoked before resolving the promise.

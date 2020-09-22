@@ -101,6 +101,21 @@ class DiscoverySceneViewController: UITableViewController {
         cell.makeThemable()
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard let section = Section(from: indexPath) else {
+            return UITableView.automaticDimension
+        }
+        
+        switch section {
+        case .quickActions: return UITableView.automaticDimension
+        case .recommendations:
+            let (source, _, _) = recommendationList[indexPath.item]
+            // Hide the table view cell if not presenting
+            return source.shouldPresentRecommendation ?
+                UITableView.automaticDimension : 0
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let calendarVc = segue.destination as? AnimeScheduleCollectionViewController,
             let calendarSource = sender as? CalendarProvider {
@@ -167,12 +182,19 @@ extension DiscoverySceneViewController {
         switch section {
         case .quickActions:
             let cell = tableView.dequeueReusableCell(withIdentifier: "next.actions", for: indexPath) as! QuickActionsTableViewCell
-            cell.updateQuickActionsList(availableQuickActions)
+            cell.updateQuickActionsList(availableQuickActions) {
+                [weak self] action in DispatchQueue.main.async {
+                    self?.onQuickActionCompletion(action)
+                }
+            }
             return cell
         case .recommendations:
             let attributes = recommendationList[indexPath.item]
             
-            if let recommendation = attributes.1 {
+            if !attributes.0.shouldPresentRecommendation {
+                // Return empty cell
+                return UITableViewCell()
+            } else if let recommendation = attributes.1 {
                 // return recommendation cell
                 return cell(for: recommendation, at: indexPath)
             } else if let error = attributes.2 {
@@ -194,6 +216,14 @@ extension DiscoverySceneViewController {
                 return cell
             }
         }
+    }
+}
+
+// MARK: - Quick Action Handling
+fileprivate extension DiscoverySceneViewController {
+    func onQuickActionCompletion(_ action: QuickAction) {
+        markDirtySources()
+        reloadDirtySources()
     }
 }
 
@@ -247,8 +277,14 @@ fileprivate extension DiscoverySceneViewController {
     
     /// Mark the sources that request updates as dirty
     private func markDirtySources() {
-        for (source, recommendation, error) in recommendationList where error == nil {
-            if let recommendation = recommendation, source.shouldReload(recommendation: recommendation) {
+        for (source, recommendation, error) in recommendationList where error == nil && source.shouldPresentRecommendation {
+            let sourceIdentifier = ObjectIdentifier(source)
+            if let recommendation = recommendation {
+                if source.shouldReload(recommendation: recommendation) {
+                    markSourceAsDirty(source)
+                }
+            } else if !recommendationLoadingTasks.keys.contains(sourceIdentifier), case .none = error {
+                // Mark as dirty if the source hasn't been loaded before
                 markSourceAsDirty(source)
             }
         }
@@ -268,7 +304,7 @@ fileprivate extension DiscoverySceneViewController {
     private func reloadErroredSources() {
         tableView.performBatchUpdates({
             let enumeratedRecommendationSourceList = recommendationList.enumerated()
-            for (index, (source, _, error)) in enumeratedRecommendationSourceList where error != nil {
+            for (index, (source, _, error)) in enumeratedRecommendationSourceList where error != nil && source.shouldPresentRecommendation {
                 // Set to loading state
                 recommendationList[index] = (source, nil, nil)
                 tableView.reloadRows(at: [ Section.recommendations[index] ], with: .fade)
@@ -294,7 +330,8 @@ fileprivate extension DiscoverySceneViewController {
             tableView.reloadSections(Section.indexSet(.recommendations), with: .fade)
         }
         
-        for (index, (source, _, _)) in recommendationList.enumerated() {
+        // Only reload recommendations that are marked as presenting
+        for (index, (source, _, _)) in recommendationList.enumerated() where source.shouldPresentRecommendation {
             let identifier = ObjectIdentifier(source)
             let task = createTask(for: source, withItemIndex: index)
             recommendationLoadingTasks[identifier] = task

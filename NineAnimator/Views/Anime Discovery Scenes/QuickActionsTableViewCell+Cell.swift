@@ -26,15 +26,19 @@ extension QuickActionsTableViewCell {
 class QuickActionCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var actionButton: ThemedSolidButton!
     private var action: DiscoverySceneViewController.QuickAction?
+    private var completionHandler: (() -> Void)?
     
-    func setPresenting(_ action: DiscoverySceneViewController.QuickAction) {
+    func setPresenting(_ action: DiscoverySceneViewController.QuickAction, completionHandler: @escaping (DiscoverySceneViewController.QuickAction) -> Void) {
         self.action = action
+        self.completionHandler = { completionHandler(action) }
         actionButton.setTitle(action.title, for: .normal)
         actionButton.setImage(action.icon, for: .normal)
         pointerEffect.hover()
     }
     
     @IBAction private func onAction(_ sender: Any) {
-        action?.onAction()
+        if let action = self.action, let completionHandler = self.completionHandler {
+            action.onAction(completionHandler)
+        }
     }
 }

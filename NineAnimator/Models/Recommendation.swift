@@ -31,6 +31,9 @@ protocol RecommendationSource: AnyObject {
     /// The piority of this recommendation collection when sorting
     var piority: Piority { get }
     
+    /// If the recommendation should be presented in the anime discovery scene
+    var shouldPresentRecommendation: Bool { get }
+    
     /// Check if the recommendation should be reloaded
     func shouldReload(recommendation: Recommendation) -> Bool
     

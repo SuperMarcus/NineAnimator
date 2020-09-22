@@ -1,0 +1,21 @@
+query ($page: Int, $perPage: Int) {
+  Page(page: $page, perPage: $perPage) {
+    pageInfo {
+      total
+      hasNextPage
+    }
+    recommendations(onList: true) {
+      mediaRecommendation {
+        id
+        type
+        title {
+          userPreferred
+        }
+        coverImage {
+          extraLarge
+        }
+      }
+    }
+  }
+}
+

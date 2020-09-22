@@ -49,6 +49,7 @@ class Anilist: BaseListingService, ListingService {
         // Register the "This Week" recommendation row
         let thisWeekRecommendationSource = ThisWeekRecommendationSource(self)
         parent.register(additionalRecommendationSource: thisWeekRecommendationSource)
+        parent.register(additionalRecommendationSource: AnilistUserRecommendations(self))
     }
 }
 

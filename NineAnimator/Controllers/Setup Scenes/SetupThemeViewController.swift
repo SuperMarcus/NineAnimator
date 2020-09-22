@@ -104,7 +104,7 @@ class SetupThemeViewController: UIViewController, Themable {
         if #available(iOS 13.0, *) {
             themeDescriptionLabel.text = """
 Select Light or Dark to use an appearance independent from the system.
-After setup, you can change the theme settings in the Preferences menu.
+After setup, you can change the theme settings in the Settings menu.
 """
         }
     }

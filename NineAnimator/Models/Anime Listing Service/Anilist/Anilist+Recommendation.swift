@@ -66,6 +66,7 @@ extension Anilist {
     class ThisWeekRecommendationSource: RecommendationSource {
         let name = "This Week"
         let piority: RecommendationSource.Piority = .defaultHigh
+        var shouldPresentRecommendation: Bool { true }
         
         private var generatedRecommendation: Recommendation?
         private let parent: Anilist

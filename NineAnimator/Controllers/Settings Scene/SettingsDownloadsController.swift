@@ -182,7 +182,7 @@ class SettingsDownloadsController: UITableViewController {
             }
         }
         
-        // Update preferences states
+        // Update settings states
         autoRetrySwitch.setOn(
             NineAnimator.default.user.autoRestartInterruptedDownloads,
             animated: true
