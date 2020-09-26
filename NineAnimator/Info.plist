@@ -105,9 +105,7 @@
 		<string>com.marcuszhou.nineanimator.activity.continueEpisode</string>
 	</array>
 	<key>UIApplicationRegistrationData</key>
-	<data>
-	b6TFpcxX
-	</data>
+	<data>b6TFpcxX</data>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -135,6 +133,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_googlecast._tcp</string>
+		<string>_48A09E00._googlecast._tcp</string>
+	</array>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
@@ -155,5 +158,7 @@
 			</dict>
 		</dict>
 	</array>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>NineAnimator uses the local network to discover Cast-enabled devices on your home network.</string>
 </dict>
 </plist>
