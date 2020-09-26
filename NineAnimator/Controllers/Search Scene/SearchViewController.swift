@@ -25,10 +25,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         searchController.searchResultsUpdater = self
         searchController.searchBar.autocapitalizationType = .words
         searchController.searchBar.delegate = self
-        
-        #if !targetEnvironment(macCatalyst)
-        searchController.dimsBackgroundDuringPresentation = false
-        #endif
+        searchController.obscuresBackgroundDuringPresentation = false
         
         return searchController
     }()

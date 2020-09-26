@@ -30,7 +30,7 @@ extension NineAnimatorUser {
     var runtimeUuid: UUID {
         get {
             var appRuntimeUuid = NineAnimator.applicationRuntimeUuid.uuid
-            _ = withUnsafeMutablePointer(to: &appRuntimeUuid.0) {
+            withUnsafeMutablePointer(to: &appRuntimeUuid.0) {
                 uuidPtr in
                 var buildPrefix = NineAnimator.runtime.buildPrefixIdentifier
                 let buildPrefixHashingId = buildPrefix.removeFirst()
