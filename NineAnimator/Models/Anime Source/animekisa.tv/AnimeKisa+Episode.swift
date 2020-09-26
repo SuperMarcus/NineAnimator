@@ -23,7 +23,6 @@ extension NASourceAnimeKisa {
     static let knownServers = [
         "vidstreaming": "VidStreaming",
         "fembed": "Fembed",
-        "hydrax": "HydraX",
         "mp4upload": "Mp4Upload",
         "cloud9": "Cloud9"
     ]
