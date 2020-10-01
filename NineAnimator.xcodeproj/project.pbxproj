@@ -222,6 +222,11 @@
 		2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */; };
 		2C7FD584235909B300E37A89 /* ClosedRange+Clamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */; };
 		2C8374EA24AF808A0009F8D7 /* SettingsRichPresenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */; };
+		2C83E06325269B7F00B00850 /* HAnime+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E05E25269B7F00B00850 /* HAnime+Search.swift */; };
+		2C83E06425269B7F00B00850 /* HAnime+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E05F25269B7F00B00850 /* HAnime+Anime.swift */; };
+		2C83E06525269B7F00B00850 /* HAnime+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06025269B7F00B00850 /* HAnime+Episode.swift */; };
+		2C83E06625269B7F00B00850 /* HAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06125269B7F00B00850 /* HAnime.swift */; };
+		2C83E06725269B7F00B00850 /* HAnime+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06225269B7F00B00850 /* HAnime+Featured.swift */; };
 		2C84D8E324B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */; };
 		2C84D8E524B4BF0000E495A8 /* ServiceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */; };
 		2C84D8E724B4D25900E495A8 /* NineAnimatorCloud+Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */; };
@@ -710,6 +715,11 @@
 		2C7FD5812359060800E37A89 /* MinFilledFlowLayoutHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinFilledFlowLayoutHelper.swift; sourceTree = "<group>"; };
 		2C7FD583235909B300E37A89 /* ClosedRange+Clamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ClosedRange+Clamp.swift"; sourceTree = "<group>"; };
 		2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRichPresenceController.swift; sourceTree = "<group>"; };
+		2C83E05E25269B7F00B00850 /* HAnime+Search.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Search.swift"; sourceTree = "<group>"; };
+		2C83E05F25269B7F00B00850 /* HAnime+Anime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Anime.swift"; sourceTree = "<group>"; };
+		2C83E06025269B7F00B00850 /* HAnime+Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Episode.swift"; sourceTree = "<group>"; };
+		2C83E06125269B7F00B00850 /* HAnime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HAnime.swift; sourceTree = "<group>"; };
+		2C83E06225269B7F00B00850 /* HAnime+Featured.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Featured.swift"; sourceTree = "<group>"; };
 		2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointRelativeRequestManager.swift; sourceTree = "<group>"; };
 		2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptor.swift; sourceTree = "<group>"; };
 		2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimatorCloud+Requests.swift"; sourceTree = "<group>"; };
@@ -1616,6 +1626,18 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		2C83E05A25269B5800B00850 /* hanime.tv */ = {
+			isa = PBXGroup;
+			children = (
+				2C83E06125269B7F00B00850 /* HAnime.swift */,
+				2C83E05F25269B7F00B00850 /* HAnime+Anime.swift */,
+				2C83E06025269B7F00B00850 /* HAnime+Episode.swift */,
+				2C83E06225269B7F00B00850 /* HAnime+Featured.swift */,
+				2C83E05E25269B7F00B00850 /* HAnime+Search.swift */,
+			);
+			path = hanime.tv;
+			sourceTree = "<group>";
+		};
 		2C8519A522CC8DAB00EEF3AC /* kissanime.ru */ = {
 			isa = PBXGroup;
 			children = (
@@ -1660,6 +1682,7 @@
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
+				2C83E05A25269B5800B00850 /* hanime.tv */,
 				C8B7F2FE24EA995400A56BE1 /* animesaturn.com */,
 				BFAA489324DE06F3009BE142 /* animehub.ac */,
 				65ED215724DB3B2E0040844C /* monoschinos.com */,
@@ -2576,11 +2599,13 @@
 				2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */,
 				650A5CCF24DBDF9100C01CC7 /* VideobinParser.swift in Sources */,
 				2C93BD5222220C70000411CB /* Kitsu+Collections.swift in Sources */,
+				2C83E06325269B7F00B00850 /* HAnime+Search.swift in Sources */,
 				65D061062445B31000E866DE /* MixdropParser.swift in Sources */,
 				2C055AF524A93E1F00FCAC25 /* RequestManager+QueryEncoding.swift in Sources */,
 				2C3D7BF62210825B0045D648 /* NineAnime+Reachability.swift in Sources */,
 				2C684BD2229066AD00E1BA35 /* AnimePahe+Anime.swift in Sources */,
 				2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */,
+				2C83E06425269B7F00B00850 /* HAnime+Anime.swift in Sources */,
 				2C480015237061EC00ADB03F /* LibraryRecentsCategoryController.swift in Sources */,
 				2C84D8E724B4D25900E495A8 /* NineAnimatorCloud+Requests.swift in Sources */,
 				2C6A390423A0179700FC00A9 /* FourAnime+Featured.swift in Sources */,
@@ -2670,6 +2695,7 @@
 				2C8536822230B49000A5CFB9 /* PrettyFastParser.swift in Sources */,
 				2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */,
 				2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */,
+				2C83E06625269B7F00B00850 /* HAnime.swift in Sources */,
 				BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */,
 				2CA4B7FF23B1E84C00B4E6F7 /* AnimeDao+RequestModifier.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
@@ -2726,6 +2752,7 @@
 				2C055AF924AAAF9300FCAC25 /* WonderfulSubs+Anime.swift in Sources */,
 				2CEFD96D23A894C00064075E /* Alamofire+Promise.swift in Sources */,
 				C8E1F74F24EAAF7700EC4BD0 /* AnimeSaturn+Episode.swift in Sources */,
+				2C83E06525269B7F00B00850 /* HAnime+Episode.swift in Sources */,
 				BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */,
 				2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */,
 				2C2C54F92215D51300BAA76E /* User+HomeIntegration.swift in Sources */,
@@ -2834,6 +2861,7 @@
 				2C0554B124BE5E8000228434 /* LegacyUserDefaultsDataMigrator.swift in Sources */,
 				2C93BD5422221A43000411CB /* ListingAnimeReference+Kitsu.swift in Sources */,
 				2CEBE90D2207BEAD006A64CC /* GogoAnime.swift in Sources */,
+				2C83E06725269B7F00B00850 /* HAnime+Featured.swift in Sources */,
 				2C643326238D7928006447D5 /* SettingsStorageTipCell.swift in Sources */,
 				2CCC746421C07C700007502A /* NineAnime+Anime.swift in Sources */,
 				65ED216124DB3BE00040844C /* MonosChinos+Episode.swift in Sources */,
