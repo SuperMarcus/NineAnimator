@@ -129,7 +129,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="QE4-hY-gYT" kind="show" id="wg7-jq-E6A"/>
+                                            <segue destination="QE4-hY-gYT" kind="show" identifier="appIcon" id="wg7-jq-E6A"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Jft-Jx-qgv">
@@ -388,7 +388,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhg-Wl-1ep">
-                                                    <rect key="frame" x="16" y="14.5" width="150" height="21"/>
+                                                    <rect key="frame" x="8" y="14.5" width="166" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -398,7 +398,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="900" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Ue-S7z">
-                                                    <rect key="frame" x="174" y="10" width="153" height="31"/>
+                                                    <rect key="frame" x="182" y="10" width="153" height="31"/>
                                                     <segments>
                                                         <segment title="Reversed"/>
                                                         <segment title="Ordered"/>

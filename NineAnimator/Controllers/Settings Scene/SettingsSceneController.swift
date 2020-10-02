@@ -424,6 +424,11 @@ extension SettingsSceneController {
             EntryPath(segueIdentifier: "storage", itemIndex: nil)
         }
         
+        /// Navigating to the `App Icon` entry
+        static var appIcon: EntryPath {
+            EntryPath(segueIdentifier: "appIcon", itemIndex: nil)
+        }
+        
         fileprivate let segueIdentifier: String?
         fileprivate let itemIndex: IndexPath?
     }

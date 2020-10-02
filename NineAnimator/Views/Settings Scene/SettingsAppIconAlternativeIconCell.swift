@@ -31,15 +31,17 @@ class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
         isCurrentlySelected = false
     }
     
-    func setPresenting(_ alternativeIconName: String?) {
-        if let alternativeIconName = alternativeIconName,
+    func setPresenting(_ alternativeIconName: String?, isUnlocked: Bool) {
+        if !isUnlocked {
+            iconPreviewView.image = #imageLiteral(resourceName: "Unknwon Square")
+        } else if let alternativeIconName = alternativeIconName,
            let iconResource = Bundle.main.url(forResource: "\(alternativeIconName)@3x", withExtension: "png") {
             iconPreviewView.kf.setImage(with: iconResource)
         } else {
             iconPreviewView.image = #imageLiteral(resourceName: "High Resolution App Icon")
         }
         
-        iconNameLabel.text = alternativeIconName ?? "Default"
+        iconNameLabel.text = isUnlocked ? alternativeIconName ?? "Default" : "?"
     }
     
     func setIsCurrentIcon(_ isCurrent: Bool, animated: Bool) {

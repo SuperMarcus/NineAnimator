@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import UIKit
 
 class SettingsAppIconController: MinFilledCollectionViewController {
@@ -28,17 +29,28 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         return Array(declaredAltIcons.keys)
     }()
     
+    private lazy var communityContributedIcons: [String] = {
+        // A list of app icons contributed by our discord community
+        [
+            "Tydox's 9",
+            "9 Testboi"
+        ] .filter { availableAppIcons.contains($0) }
+    }()
+    
+    private lazy var discoverableIcons: [String] = {
+        availableAppIcons.filter {
+            !communityContributedIcons.contains($0)
+        } .sorted(by: <)
+    }()
+    
+    private lazy var discoveredIconsSet = Set(NineAnimator.default.user.discoveredAppIcons)
+    
     private var currentSelection: String? {
         UIApplication.shared.alternateIconName
     }
     
     private var currentSelectionCellPath: IndexPath {
-        if let selection = currentSelection,
-           let index = availableAppIcons.firstIndex(of: selection) {
-            return .init(item: index, section: 1)
-        }
-        
-        return .init(item: 0, section: 0)
+        indexPath(forIconName: currentSelection)
     }
     
     override func viewDidLoad() {
@@ -47,12 +59,13 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         configureForTransparentScrollEdge()
     }
     
-    override func numberOfSections(in collectionView: UICollectionView) -> Int { 2 }
+    override func numberOfSections(in collectionView: UICollectionView) -> Int { 3 }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return availableAppIcons.count
+        case 1: return communityContributedIcons.count
+        case 2: return discoverableIcons.count
         default: return 0
         }
     }
@@ -63,17 +76,9 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             for: indexPath
         ) as! SettingsAppIconAlternativeIconCell
         
-        switch indexPath.section {
-        case 0: // Default icon section
-            cell.setPresenting(nil)
-            cell.setIsCurrentIcon(currentSelection == nil, animated: false)
-        case 1: // Alt icons
-            let altIconName = availableAppIcons[indexPath.item]
-            cell.setPresenting(altIconName)
-            cell.setIsCurrentIcon(currentSelection == altIconName, animated: false)
-        default:
-            Log.error("[SettingsAppIconController] Cannot make cell for unknown section index %s", indexPath.section)
-        }
+        let iconName = self.iconName(forIndex: indexPath)
+        cell.setPresenting(iconName, isUnlocked: self.isIconUnlocked(iconName: iconName))
+        cell.setIsCurrentIcon(currentSelection == iconName, animated: false)
         
         return cell
     }
@@ -87,7 +92,8 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         
         switch indexPath.section {
         case 0: sectionHeader.setSectionName("DEFAULT ICON")
-        case 1: sectionHeader.setSectionName("ALTERNATIVE ICONS")
+        case 1: sectionHeader.setSectionName("COMMUNITY CONTRIBUTED")
+        case 2: sectionHeader.setSectionName("DISCOVERABLE ICONS")
         default:
             sectionHeader.setSectionName("UNKNOWN")
             Log.error("[SettingsAppIconController] Unknown section index %s", indexPath.section)
@@ -97,8 +103,18 @@ class SettingsAppIconController: MinFilledCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedIconName = indexPath.section == 1 ? availableAppIcons[indexPath.item] : nil
+        let selectedIconName = iconName(forIndex: indexPath)
         let previousIndex = currentSelectionCellPath
+        
+        // Of course...anyone can bypass this. But that wouldn't be fun would it?
+        guard self.isIconUnlocked(iconName: selectedIconName) else {
+            return Log.info("[SettingsAppIconController] Per uttiya's request, this icon cannot be used because it hasn't been discovered.")
+        }
+        
+        MSAnalytics.trackEvent("App Magic #1001", withProperties: [
+            "previousIcon": selectedIconName ?? "default",
+            "currentIcon": currentSelection ?? "default"
+        ])
         
         UIApplication.shared.setAlternateIconName(selectedIconName) {
             [weak self] error in
@@ -123,5 +139,78 @@ class SettingsAppIconController: MinFilledCollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         .init(top: 0, left: 12, bottom: 16, right: 12)
+    }
+    
+    private func indexPath(forIconName iconName: String?) -> IndexPath {
+        if let selection = iconName {
+            if let index = communityContributedIcons.firstIndex(of: selection) {
+                return .init(item: index, section: 1)
+            } else if let index = discoverableIcons.firstIndex(of: selection) {
+                return .init(item: index, section: 2)
+            }
+        }
+        
+        return .init(item: 0, section: 0)
+    }
+    
+    private func iconName(forIndex indexPath: IndexPath) -> String? {
+        switch indexPath.section {
+        case 1: return communityContributedIcons[indexPath.item]
+        case 2: return discoverableIcons[indexPath.item]
+        default: return nil
+        }
+    }
+    
+    private func isIconUnlocked(iconName: String?) -> Bool {
+        if let iconName = iconName, !communityContributedIcons.contains(iconName) {
+            return discoveredIconsSet.contains(iconName)
+        }
+        
+        return true
+    }
+}
+
+// MARK: - Discover New Icon!
+extension SettingsAppIconController {
+    static func makeAvailable(_ iconName: String, from viewController: UIViewController, allowsSettingsPopup: Bool, completionHandler: (() -> Void)? = nil) {
+        var discoveredIcons = NineAnimator.default.user.discoveredAppIcons
+        
+        guard UIApplication.shared.supportsAlternateIcons, !discoveredIcons.contains(iconName) else {
+            completionHandler?()
+            return
+        }
+        
+        let alertController = UIAlertController(
+            title: "App Icon Discovered",
+            message: "You have discovered a new app icon: \(iconName).",
+            preferredStyle: .alert
+        )
+        
+        if allowsSettingsPopup {
+            alertController.addAction(UIAlertAction(title: "View", style: .default) {
+                [weak viewController] _ in
+                guard let viewController = viewController,
+                      let settingsPanel = SettingsSceneController.create(
+                        navigatingTo: .appIcon,
+                        onDismissal: completionHandler
+                      ) else {
+                    completionHandler?()
+                    return
+                }
+                viewController.present(settingsPanel, animated: true)
+            })
+            
+            alertController.addAction(UIAlertAction(title: "Later", style: .cancel) {
+                _ in completionHandler?()
+            })
+        } else {
+            alertController.addAction(UIAlertAction(title: "Okay", style: .cancel) {
+                _ in completionHandler?()
+            })
+        }
+        
+        discoveredIcons.append(iconName)
+        NineAnimator.default.user.discoveredAppIcons = discoveredIcons
+        viewController.present(alertController, animated: true)
     }
 }

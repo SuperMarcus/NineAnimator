@@ -197,6 +197,12 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.optOutAnalytics) }
     }
     
+    /// Discovered app icons
+    var discoveredAppIcons: [String] {
+        get { _freezer.typedValue(forKey: Keys.discoveredAppIcons, default: [String]()) }
+        set { _freezer.set(newValue, forKey: Keys.discoveredAppIcons) }
+    }
+    
     /// Silence warnings about a specific purpose of a server
     func silenceUnrecommendedWarnings(forServer server: Anime.ServerIdentifier, ofPurpose purpose: VideoProviderParser.Purpose) {
         var listOfSilencedPurposes = _silencedUnrecommendedServerPurposes[server] ?? []
