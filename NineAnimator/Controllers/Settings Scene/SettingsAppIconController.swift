@@ -33,7 +33,8 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         // A list of app icons contributed by our discord community
         [
             "Tydox's 9",
-            "9 Testboi"
+            "9 Testboi",
+            "Nsxtop's 9"
         ] .filter { availableAppIcons.contains($0) }
     }()
     

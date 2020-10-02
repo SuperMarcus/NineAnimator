@@ -234,6 +234,8 @@
 		2C83E0812526C51B00B00850 /* Tydox's 9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */; };
 		2C83E0872526C62D00B00850 /* 9 Testboi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */; };
 		2C83E0882526C62D00B00850 /* 9 Testboi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */; };
+		2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0AB2526F4B400B00850 /* Nsxtop's 9@3x.png */; };
+		2C83E0AE2526F4B500B00850 /* Nsxtop's 9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0AC2526F4B400B00850 /* Nsxtop's 9@2x.png */; };
 		2C84D8E324B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */; };
 		2C84D8E524B4BF0000E495A8 /* ServiceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */; };
 		2C84D8E724B4D25900E495A8 /* NineAnimatorCloud+Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */; };
@@ -734,6 +736,8 @@
 		2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tydox's 9@3x.png"; sourceTree = "<group>"; };
 		2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9 Testboi@3x.png"; sourceTree = "<group>"; };
 		2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9 Testboi@2x.png"; sourceTree = "<group>"; };
+		2C83E0AB2526F4B400B00850 /* Nsxtop's 9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nsxtop's 9@3x.png"; sourceTree = "<group>"; };
+		2C83E0AC2526F4B400B00850 /* Nsxtop's 9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Nsxtop's 9@2x.png"; sourceTree = "<group>"; };
 		2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointRelativeRequestManager.swift; sourceTree = "<group>"; };
 		2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptor.swift; sourceTree = "<group>"; };
 		2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimatorCloud+Requests.swift"; sourceTree = "<group>"; };
@@ -1658,6 +1662,8 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2C83E0AC2526F4B400B00850 /* Nsxtop's 9@2x.png */,
+				2C83E0AB2526F4B400B00850 /* Nsxtop's 9@3x.png */,
 				2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */,
 				2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */,
 				2C83E07E2526C51A00B00850 /* Tydox's 9@2x.png */,
@@ -2389,6 +2395,7 @@
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
+				2C83E0AE2526F4B500B00850 /* Nsxtop's 9@2x.png in Resources */,
 				BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */,
 				2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */,
 				2C86C1E5225D6D8500950ABF /* Setup.storyboard in Resources */,
@@ -2404,6 +2411,7 @@
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 				2C979F17235A16C400BC8699 /* Library.storyboard in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
+				2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
