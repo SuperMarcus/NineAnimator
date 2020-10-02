@@ -227,6 +227,13 @@
 		2C83E06525269B7F00B00850 /* HAnime+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06025269B7F00B00850 /* HAnime+Episode.swift */; };
 		2C83E06625269B7F00B00850 /* HAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06125269B7F00B00850 /* HAnime.swift */; };
 		2C83E06725269B7F00B00850 /* HAnime+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06225269B7F00B00850 /* HAnime+Featured.swift */; };
+		2C83E0702526A9D800B00850 /* SettingsAppIconController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E06F2526A9D800B00850 /* SettingsAppIconController.swift */; };
+		2C83E0752526ACE900B00850 /* SettingsAppIconHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E0742526ACE900B00850 /* SettingsAppIconHeaderView.swift */; };
+		2C83E07A2526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C83E0792526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift */; };
+		2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E07E2526C51A00B00850 /* Tydox's 9@2x.png */; };
+		2C83E0812526C51B00B00850 /* Tydox's 9@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */; };
+		2C83E0872526C62D00B00850 /* 9 Testboi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */; };
+		2C83E0882526C62D00B00850 /* 9 Testboi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */; };
 		2C84D8E324B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */; };
 		2C84D8E524B4BF0000E495A8 /* ServiceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */; };
 		2C84D8E724B4D25900E495A8 /* NineAnimatorCloud+Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */; };
@@ -720,6 +727,13 @@
 		2C83E06025269B7F00B00850 /* HAnime+Episode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Episode.swift"; sourceTree = "<group>"; };
 		2C83E06125269B7F00B00850 /* HAnime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HAnime.swift; sourceTree = "<group>"; };
 		2C83E06225269B7F00B00850 /* HAnime+Featured.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "HAnime+Featured.swift"; sourceTree = "<group>"; };
+		2C83E06F2526A9D800B00850 /* SettingsAppIconController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIconController.swift; sourceTree = "<group>"; };
+		2C83E0742526ACE900B00850 /* SettingsAppIconHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIconHeaderView.swift; sourceTree = "<group>"; };
+		2C83E0792526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppIconAlternativeIconCell.swift; sourceTree = "<group>"; };
+		2C83E07E2526C51A00B00850 /* Tydox's 9@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tydox's 9@2x.png"; sourceTree = "<group>"; };
+		2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Tydox's 9@3x.png"; sourceTree = "<group>"; };
+		2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9 Testboi@3x.png"; sourceTree = "<group>"; };
+		2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "9 Testboi@2x.png"; sourceTree = "<group>"; };
 		2C84D8E224B4ACCD00E495A8 /* EndpointRelativeRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointRelativeRequestManager.swift; sourceTree = "<group>"; };
 		2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceDescriptor.swift; sourceTree = "<group>"; };
 		2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NineAnimatorCloud+Requests.swift"; sourceTree = "<group>"; };
@@ -1035,6 +1049,8 @@
 				2C0DA2E4238B27B0002C6447 /* SettingsStorageGraphCell.swift */,
 				2C643325238D7928006447D5 /* SettingsStorageTipCell.swift */,
 				2C95C1DD23E9FE4100430B19 /* SettingsPreferredSourceCell.swift */,
+				2C83E0742526ACE900B00850 /* SettingsAppIconHeaderView.swift */,
+				2C83E0792526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -1427,6 +1443,7 @@
 				2C665570235CE70300A6126A /* Library Scene */,
 				2C71DEC1226CF748004F3AC3 /* Server Selection Scene */,
 				2C0E7556226240F800DF3AC4 /* Anime Discovery Scenes */,
+				2C83E06B2526A77600B00850 /* Alternative Icons */,
 				2C1C7194221B1C0D00760A69 /* Anime Information Scene */,
 				2C9383C921FBE774008C0D01 /* Theme */,
 				2CEB56D521DBE48F0018D804 /* Search Scene */,
@@ -1638,6 +1655,19 @@
 			path = hanime.tv;
 			sourceTree = "<group>";
 		};
+		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
+			isa = PBXGroup;
+			children = (
+				2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */,
+				2C83E0852526C62D00B00850 /* 9 Testboi@3x.png */,
+				2C83E07E2526C51A00B00850 /* Tydox's 9@2x.png */,
+				2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */,
+				2C107711249EFBFC007B82D9 /* Fox@2x.png */,
+				2C107710249EFBFB007B82D9 /* Fox@3x.png */,
+			);
+			path = "Alternative Icons";
+			sourceTree = "<group>";
+		};
 		2C8519A522CC8DAB00EEF3AC /* kissanime.ru */ = {
 			isa = PBXGroup;
 			children = (
@@ -1746,8 +1776,6 @@
 		2C9383C921FBE774008C0D01 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				2C107711249EFBFC007B82D9 /* Fox@2x.png */,
-				2C107710249EFBFB007B82D9 /* Fox@3x.png */,
 				2C73A3A521FB72230080A8B2 /* Theme.swift */,
 				2C9383CC21FBF442008C0D01 /* UIView+MakeThemable.swift */,
 				2C9383D321FCCC43008C0D01 /* UILabel+StyleAttributes.swift */,
@@ -1829,6 +1857,7 @@
 				2C0DA2DD238B09C3002C6447 /* SettingsDownloadsController.swift */,
 				2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */,
 				2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */,
+				2C83E06F2526A9D800B00850 /* SettingsAppIconController.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2347,11 +2376,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C83E0882526C62D00B00850 /* 9 Testboi@2x.png in Resources */,
 				2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */,
+				2C83E0812526C51B00B00850 /* Tydox's 9@3x.png in Resources */,
 				2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */,
 				2C60EED3221B56C6002C96D4 /* AniListListingAnimeInformation.graphql in Resources */,
 				2C60EED7221B5965002C96D4 /* AniListUserMediaCollections.graphql in Resources */,
 				2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */,
+				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
 				2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */,
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
@@ -2363,6 +2395,7 @@
 				2C71DEC8226E179B004F3AC3 /* ServerSelection.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
 				2C6CF252221C5A400009D554 /* AniListSearchReference.graphql in Resources */,
+				2C83E0872526C62D00B00850 /* 9 Testboi@3x.png in Resources */,
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
 				2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */,
@@ -2514,6 +2547,7 @@
 				2CAD375822261BDE008AD6B4 /* MyAnimeList.swift in Sources */,
 				2C055AF724AAAF9300FCAC25 /* WonderfulSubs+Featured.swift in Sources */,
 				2CCC746021C06D1B0007502A /* NineAnime+Featured.swift in Sources */,
+				2C83E07A2526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift in Sources */,
 				2CE1F84A22EEBA6A005448FF /* BasicPlaybackMedia.swift in Sources */,
 				2C6984ED227D490900C9EF0E /* Anilist+GQLDate.swift in Sources */,
 				2C6677B221BD846A000E5ACC /* CMTime.swift in Sources */,
@@ -2767,6 +2801,7 @@
 				2C66779C21BC294D000E5ACC /* SimpleAnimeTableViewCell.swift in Sources */,
 				2C96DAE224562610007A29B0 /* InformationSceneSchedulesCell.swift in Sources */,
 				2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */,
+				2C83E0752526ACE900B00850 /* SettingsAppIconHeaderView.swift in Sources */,
 				2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */,
 				2C563B322248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift in Sources */,
 				2C0CFC452264105100EC793E /* MyAnimeList+SeasonalAnimeRecommendation.swift in Sources */,
@@ -2807,6 +2842,7 @@
 				2C6A390623A017B900FC00A9 /* FourAnime+Search.swift in Sources */,
 				2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */,
 				2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */,
+				2C83E0702526A9D800B00850 /* SettingsAppIconController.swift in Sources */,
 				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
 				2C8519C822D3252600EEF3AC /* AnimeKisa+RequestModifier.swift in Sources */,
 				2CFD3F7F24BCE4270056E68E /* NACoreDataLibrary.swift in Sources */,

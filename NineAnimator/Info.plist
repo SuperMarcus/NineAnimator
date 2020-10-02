@@ -38,6 +38,20 @@
 					<string>Fox</string>
 				</array>
 			</dict>
+			<key>Tydox&apos;s 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox&apos;s 9</string>
+				</array>
+			</dict>
+			<key>9 Testboi</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>9 Testboi</string>
+				</array>
+			</dict>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
@@ -49,6 +63,20 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Fox</string>
+				</array>
+			</dict>
+			<key>Tydox&apos;s 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox&apos;s 9</string>
+				</array>
+			</dict>
+			<key>9 Testboi</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>9 Testboi</string>
 				</array>
 			</dict>
 		</dict>
