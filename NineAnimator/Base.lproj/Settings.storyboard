@@ -865,6 +865,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                         <outlet property="animeShowEpisodeDetailsSwitch" destination="gcE-bq-MwC" id="TWX-Xx-1QX"/>
                         <outlet property="appearanceSegmentControl" destination="WSB-go-EfB" id="fIG-Sy-Q6a"/>
                         <outlet property="backgroundPlaybackSwitch" destination="l15-ir-tZP" id="3zp-ZE-n13"/>
+                        <outlet property="currentAppIconLabel" destination="TxJ-Zg-qNb" id="P0N-O4-bf6"/>
                         <outlet property="detectClipboardLinksSwitch" destination="TIf-aG-oVN" id="NuT-4R-KgQ"/>
                         <outlet property="dynamicAppearanceSwitch" destination="lSk-5N-CFL" id="cma-P9-HEp"/>
                         <outlet property="dynamicAppearanceSwitchLabel" destination="xP9-AS-NPt" id="uNF-dO-LrX"/>
