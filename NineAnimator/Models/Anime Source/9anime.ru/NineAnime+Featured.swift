@@ -65,7 +65,32 @@ extension NASourceNineAnime {
                 )
             }
             
-            return BasicFeaturedContainer(featured: featuredLinks, latest: [])
+            let updatedLinks = try bowl.select(".anime-list>li").map {
+                li -> AnimeLink in
+                let artworkLinkString = try li.select("img").attr("src")
+                let artworkLink = try URL(
+                    protocolRelativeString: artworkLinkString,
+                    relativeTo: requestBaseUrl
+                ).tryUnwrap()
+                let animeTitleLink = try li.select("a.name")
+                let animePageLinkString = try animeTitleLink.attr("href")
+                let animePageLink = try URL(
+                    protocolRelativeString: animePageLinkString,
+                    relativeTo: requestBaseUrl
+                ).tryUnwrap()
+                let animeTitle = try animeTitleLink.text()
+                return AnimeLink(
+                    title: animeTitle,
+                    link: animePageLink,
+                    image: artworkLink,
+                    source: self
+                )
+            }
+            
+            return BasicFeaturedContainer(
+                featured: featuredLinks,
+                latest: updatedLinks
+            )
         }
     }
 }

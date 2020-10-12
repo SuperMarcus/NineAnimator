@@ -23,20 +23,72 @@ extension NASourceNineAnime {
     class SearchAgent: ContentProvider {
         var title: String
         
-        var totalPages: Int? { 1 }
-        var availablePages: Int { 0 }
+        var totalPages: Int?
+        var availablePages: Int { loadedResults.count }
         var moreAvailable: Bool { true }
         
         weak var delegate: ContentProviderDelegate?
+        
         private var parent: NASourceNineAnime
         private var performingTask: NineAnimatorAsyncTask?
-        private var _results: [AnimeLink]?
+        private var loadedResults = [[AnyLink]]()
         
         func links(on page: Int) -> [AnyLink] {
-            []
+            (0..<loadedResults.count).contains(page) ? loadedResults[page] : []
         }
         
-        func more() { }
+        func more() {
+            guard performingTask == nil else { return }
+            
+            let parent = self.parent
+            let keywords = self.title
+            let requestingPage = self.loadedResults.count + 1
+            
+            performingTask = parent.requestDescriptor().thenPromise {
+                _ in parent.requestManager.request(
+                    "search",
+                    handling: .browsing,
+                    query: [
+                        "keyword": keywords,
+                        "page": requestingPage
+                    ]
+                ).responseBowl
+            } .then {
+                bowl -> [AnyLink] in
+                let baseUrl = parent.endpointURL.appendingPathComponent("search")
+                return try bowl.select(".anime-list>li").map {
+                    li in
+                    let artworkLinkString = try li.select("img").attr("src")
+                    let artworkLink = try URL(
+                        protocolRelativeString: artworkLinkString,
+                        relativeTo: baseUrl
+                    ).tryUnwrap()
+                    let animeTitleElement = try li.select("a.name")
+                    let animePageLink = try URL(
+                        protocolRelativeString: animeTitleElement.attr("href"),
+                        relativeTo: baseUrl
+                    ).tryUnwrap()
+                    let animeTitle = try animeTitleElement.text()
+                    return AnimeLink(
+                        title: animeTitle,
+                        link: animePageLink,
+                        image: artworkLink,
+                        source: parent
+                    )
+                } .map { .anime($0) }
+            } .defer {
+                [weak self] _ in self?.performingTask = nil
+            } .error {
+                [weak self] error in
+                guard let self = self else { return }
+                self.delegate?.onError(error, from: self)
+            } .finally {
+                [weak self] links in
+                guard let self = self else { return }
+                self.loadedResults.append(links)
+                self.delegate?.pageIncoming(requestingPage - 1, from: self)
+            }
+        }
         
         init(_ query: String, withParent parent: NASourceNineAnime) {
             self.parent = parent
