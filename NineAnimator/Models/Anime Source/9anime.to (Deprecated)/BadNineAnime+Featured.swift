@@ -25,7 +25,7 @@ struct NineAnimeFeatured: FeaturedContainer {
     
     let latest: [AnimeLink]
     
-    init?(_ pageSource: String, with parent: NASourceNineAnime) throws {
+    init?(_ pageSource: String, with parent: NASourceNineAnimeOld) throws {
         let bowl = try SwiftSoup.parse(pageSource)
         
         featured = try bowl.select("div.items.swiper-wrapper div.item.swiper-slide.lazyload").compactMap {
@@ -102,7 +102,7 @@ struct NineAnimeFeatured: FeaturedContainer {
     }
 }
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> NineAnimatorAsyncTask? {
         request(browse: endpointURL.appendingPathComponent("anime"), headers: [:]) {
             value, error in

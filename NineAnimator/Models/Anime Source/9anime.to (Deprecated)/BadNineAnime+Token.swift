@@ -20,7 +20,7 @@
 import Foundation
 
 /// Special thanks to github@Awsomedude
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     //    private static let magicValue = "0a9de5a4"
     //
     //    private func accumulate(_ content: String) -> Int {

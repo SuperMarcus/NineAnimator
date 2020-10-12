@@ -26,7 +26,7 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceNineAnime: BaseSource, Source {
+class NASourceNineAnimeOld: BaseSource, Source {
     let name: String = "9anime.ru"
     
     var aliases: [String] { [] }
@@ -56,9 +56,9 @@ class NASourceNineAnime: BaseSource, Source {
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
-        requestManager.enqueueValidation(NASourceNineAnime._verificationDetectionMiddleware)
-        requestManager.enqueueValidation(NASourceNineAnime._ipBlockDetectionMiddleware)
-        requestManager.enqueueValidation(NASourceNineAnime._contentNotFoundMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnimeOld._verificationDetectionMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnimeOld._ipBlockDetectionMiddleware)
+        requestManager.enqueueValidation(NASourceNineAnimeOld._contentNotFoundMiddleware)
         setupGlobalRequestModifier()
     }
     

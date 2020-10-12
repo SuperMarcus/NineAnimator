@@ -31,9 +31,9 @@ class NineAnimeSearch: ContentProvider {
     
     private var _results: [[AnimeLink]]
     private var _lastRequest: NineAnimatorAsyncTask?
-    private let _parent: NASourceNineAnime
+    private let _parent: NASourceNineAnimeOld
     
-    init(_ parent: NASourceNineAnime, query: String) {
+    init(_ parent: NASourceNineAnimeOld, query: String) {
         self.title = query
         self._results = []
         self._parent = parent
@@ -112,7 +112,7 @@ class NineAnimeSearch: ContentProvider {
     }
 }
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     func search(keyword: String) -> ContentProvider {
         NineAnimeSearch(self, query: keyword)
     }

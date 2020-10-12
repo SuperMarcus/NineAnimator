@@ -30,6 +30,13 @@ extension NineAnimatorCloud {
     func requestServiceDescriptor() -> NineAnimatorPromise<ServiceDescriptor> {
         requestManager.request(resourcePath: "api/app/service_descriptor", responseType: ServiceDescriptor.self)
     }
+    
+    func requestSourceDescriptor<SourceDescriptorType: Decodable>(
+        source: Source,
+        descriptorType: SourceDescriptorType.Type
+    ) -> NineAnimatorPromise<SourceDescriptorType> {
+        requestManager.request(resourcePath: "api/app/source_descriptor/\(source.name)", responseType: descriptorType)
+    }
 }
 
 /// A private network request manager used only by the NineAnimatorCloud service

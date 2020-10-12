@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 // Implementations for 9anime endpoint switching
-extension NASourceNineAnime/*: Alamofire.RequestAdapter*/ {
+extension NASourceNineAnimeOld/*: Alamofire.RequestAdapter*/ {
     var possibleHosts: [String] {
         [
             // A list of hosts that 9anime uses

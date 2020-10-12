@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     static let animeAliasRegex = try! NSRegularExpression(pattern: "<p class=\"alias\">([^<]+)", options: .caseInsensitive)
     static let animeAttributesRegex = try! NSRegularExpression(pattern: "<dt>([^<:]+):*<\\/dt>\\s+<dd>([^<]+)")
     static let animeServerListRegex = try! NSRegularExpression(pattern: "<span\\s+class=[^d]+data-name=\"([^\"]+)\">([^<]+)", options: .caseInsensitive)
@@ -47,7 +47,7 @@ extension NASourceNineAnime {
     }
 }
 
-private extension NASourceNineAnime {
+private extension NASourceNineAnimeOld {
     struct AnimeInitialPageInformation {
         var bowl: SwiftSoup.Document
         var reconstructedLink: AnimeLink
@@ -163,7 +163,7 @@ private extension NASourceNineAnime {
             reconstructedLink: link,
             animeResourceTags: ("", ""),
             attributes: [:],
-            alias: (NASourceNineAnime.animeAliasRegex
+            alias: (NASourceNineAnimeOld.animeAliasRegex
                 .firstMatch(in: pageContent)?
                 .firstMatchingGroup) ?? "",
             description: ""
@@ -231,7 +231,7 @@ private extension NASourceNineAnime {
     }
 }
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     /// Process protocol-relative URLs
     func processRelativeUrl(_ input: String, base: URL? = nil) -> URL? {
         URL(

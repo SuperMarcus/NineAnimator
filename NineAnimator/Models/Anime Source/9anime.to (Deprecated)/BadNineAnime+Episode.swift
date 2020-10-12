@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping NineAnimatorCallback<Episode>) -> NineAnimatorAsyncTask? {
         let linkComponents = link.identifier.split(separator: "|")
         let dataIdentifier = linkComponents.first ?? ""

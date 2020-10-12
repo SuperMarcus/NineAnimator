@@ -20,14 +20,14 @@
 import Foundation
 import SwiftSoup
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     func parseAvailableEpisodes(from responseJson: NSDictionary, with parent: AnimeLink) throws -> Anime.EpisodesCollection {
         guard let htmlList = responseJson["html"] as? String else {
             Log.error("Invalid response")
             throw NineAnimatorError.responseError("unable to retrieve episode list from responses")
         }
         
-        let matches = NASourceNineAnime.animeServerListRegex.matches(
+        let matches = NASourceNineAnimeOld.animeServerListRegex.matches(
             in: htmlList, range: htmlList.matchingRange
         )
         

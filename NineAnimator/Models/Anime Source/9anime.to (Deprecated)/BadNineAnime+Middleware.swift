@@ -20,7 +20,7 @@
 import Alamofire
 import Foundation
 
-extension NASourceNineAnime {
+extension NASourceNineAnimeOld {
     class func _verificationDetectionMiddleware(
         request: URLRequest?,
         response: HTTPURLResponse,
