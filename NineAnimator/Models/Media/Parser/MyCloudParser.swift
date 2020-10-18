@@ -72,7 +72,7 @@ class MyCloudParser: VideoProviderParser {
                 session.request(
                     embedInfoUrl,
                     headers: [
-                        "Referer": episode.target.absoluteString,
+                        "Referer": episode.referer,
                         "Accept": "application/json, text/javascript, */*; q=0.01",
                         "User-Agent": self.defaultUserAgent
                     ]
@@ -80,19 +80,24 @@ class MyCloudParser: VideoProviderParser {
             ) .decodableResponse(ContentInfoResponse.self)
         } .then {
             decodedValue in
-            let playlistUrl = try decodedValue.media.sources.first.tryUnwrap(
+            let playlistUrlString = try decodedValue.media.sources.first.tryUnwrap(
                 .providerError("No playlist is available")
-            ).file
+            ) .file
+              .trimmingCharacters(in: .whitespacesAndNewlines)
+            let playlistUrl = try URL(string: playlistUrlString).tryUnwrap()
             let playerAdditionalHeaders: HTTPHeaders = [
                 "Referer": episode.target.absoluteString,
                 "User-Agent": self.defaultUserAgent
             ]
+            
+            let isHLS = playlistUrl.pathExtension == "m3u8"
+            
             return BasicPlaybackMedia(
                 url: playlistUrl,
                 parent: episode,
-                contentType: "application/vnd.apple.mpegurl",
+                contentType: isHLS ? "application/vnd.apple.mpegurl" : "video/mp4",
                 headers: playerAdditionalHeaders.dictionary,
-                isAggregated: true
+                isAggregated: isHLS
             )
         } .handle(handler)
     }
@@ -114,6 +119,6 @@ private extension MyCloudParser {
     }
     
     struct ContentInfoSource: Codable {
-        var file: URL
+        var file: String
     }
 }
