@@ -41,3 +41,34 @@ internal class NACoreDataLibrary {
         return Context(withContext: managedContext)
     }
 }
+
+// MARK: - Dangerous
+extension NACoreDataLibrary {
+    /// Deletes everything in the CoreData library
+    func reset() {
+        do {
+            Log.info("[NACoreDataLibrary.Context] Resetting CoreData library...")
+            let persistentStoreCoordinator = self._container
+                .persistentStoreCoordinator
+            let fs = FileManager.default
+            
+            for store in persistentStoreCoordinator.persistentStores where !store.isReadOnly {
+                if let storeUrl = store.url, storeUrl.isFileURL {
+                    Log.info("[NACoreDataLibrary.Context] Resetting persistent store at: %@", storeUrl)
+                    try persistentStoreCoordinator.remove(store)
+                    try fs.removeItem(at: storeUrl)
+                }
+            }
+            
+            Log.info("[NACoreDataLibrary.Context] Reloading CoreData persistent containers...")
+            self._container.loadPersistentStores {
+                _, error in
+                if let error = error as NSError? {
+                    fatalError("Unresolved error \(error), \(error.userInfo)")
+                }
+            }
+        } catch {
+            Log.error("[NACoreDataLibrary.Context] Unable to reset library because of error: %@", error)
+        }
+    }
+}

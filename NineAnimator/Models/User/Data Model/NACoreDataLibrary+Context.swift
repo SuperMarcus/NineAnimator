@@ -68,7 +68,7 @@ extension NACoreDataLibrary.Context {
     /// Reset the recently viewed titles to the array of AnyLink.
     ///
     /// This is a time-consuming operation and should not be performed regularly. This operation also erases any information about the individual records.
-    func resetRecents(to newRecents: [AnyLink]) throws {
+    func resetRecents(to newRecents: [AnyLink] = []) throws {
         // First remove all library records
         let recentsFetchRequest = NACoreDataLibraryRecord.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: recentsFetchRequest)

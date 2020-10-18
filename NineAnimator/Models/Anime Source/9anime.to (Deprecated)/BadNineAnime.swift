@@ -69,8 +69,6 @@ class NASourceNineAnimeOld: BaseSource, Source {
     
     // Override the request methods to intercept endpoint change
     
-    // TODO: This is a clusterfuck!!!! I'll deal with this later.
-    
     func request(
         browse url: URL,
         method: HTTPMethod = .get,

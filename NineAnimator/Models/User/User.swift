@@ -37,9 +37,10 @@ class NineAnimatorUser {
     /// Underlying CoreData store
     let coreDataLibrary = NACoreDataLibrary()
     
-    /// Remove all default entries
+    /// Remove all default entries and the coredata library
     func clearAll() {
         guard let bundleId = Bundle.main.bundleIdentifier else { return }
         _freezer.removePersistentDomain(forName: bundleId)
+        coreDataLibrary.reset()
     }
 }
