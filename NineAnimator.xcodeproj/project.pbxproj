@@ -217,6 +217,7 @@
 		2C71DEC8226E179B004F3AC3 /* ServerSelection.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C71DEC6226E179B004F3AC3 /* ServerSelection.storyboard */; };
 		2C73A3A621FB72230080A8B2 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C73A3A521FB72230080A8B2 /* Theme.swift */; };
 		2C74F1D024A4012D00D04DA8 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C74F1CF24A4012D00D04DA8 /* RequestManager.swift */; };
+		2C78275E253CF5E600F96A77 /* VidStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C78275D253CF5E600F96A77 /* VidStreamParser.swift */; };
 		2C7A1D54224C23CC00DD83A5 /* AnimeUltima+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D53224C23CC00DD83A5 /* AnimeUltima+Episode.swift */; };
 		2C7A1D56224C500B00DD83A5 /* AnimeUltima+Provider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */; };
 		2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */; };
@@ -727,6 +728,7 @@
 		2C71DEC7226E179B004F3AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/ServerSelection.storyboard; sourceTree = "<group>"; };
 		2C73A3A521FB72230080A8B2 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		2C74F1CF24A4012D00D04DA8 /* RequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		2C78275D253CF5E600F96A77 /* VidStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VidStreamParser.swift; sourceTree = "<group>"; };
 		2C7A1D53224C23CC00DD83A5 /* AnimeUltima+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Episode.swift"; sourceTree = "<group>"; };
 		2C7A1D55224C500B00DD83A5 /* AnimeUltima+Provider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUltima+Provider.swift"; sourceTree = "<group>"; };
 		2C7A1D572251393300DD83A5 /* UIAlertController+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Error.swift"; sourceTree = "<group>"; };
@@ -2044,6 +2046,7 @@
 				BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */,
 				BF1924A824E1FB12008164C2 /* YourUploadParser.swift */,
 				BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */,
+				2C78275D253CF5E600F96A77 /* VidStreamParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2565,6 +2568,7 @@
 				2C8F6E8922062C220047798B /* OfflineAnimeViewController.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
 				2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */,
+				2C78275E253CF5E600F96A77 /* VidStreamParser.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
