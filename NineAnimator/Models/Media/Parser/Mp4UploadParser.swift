@@ -27,7 +27,7 @@ class Mp4UploadParser: VideoProviderParser {
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "src:\"([^\"]+)",
+        pattern: "player\\.src\\(\"([^\"]+)",
         options: []
     )
     
@@ -59,7 +59,7 @@ class Mp4UploadParser: VideoProviderParser {
                     contentType: "video/mp4",
                     headers: [
                         "User-Agent": self.defaultUserAgent,
-                        "Origin": episode.target.absoluteString
+                        "Referer": episode.referer
                     ],
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
