@@ -31,7 +31,7 @@ class LegacyUserDefaultsModelMigrator: ModelMigrator {
     
     /// Accepts version up to 1.2.6-15
     var inputVersionRange: Range<NineAnimatorVersion> {
-        (.zero)..<(.init(major: 1, minor: 2, patch: 6, build: 15))
+        (.zero)..<(.init(major: 1, minor: 2, patch: 7, build: 2))
     }
     
     func beginMigration(sourceVersion: NineAnimatorVersion) {
