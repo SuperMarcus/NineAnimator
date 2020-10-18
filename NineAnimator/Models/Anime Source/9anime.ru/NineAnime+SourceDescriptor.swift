@@ -18,11 +18,13 @@
 //
 
 import Foundation
+import JavaScriptCore
 
 extension NASourceNineAnime {
     struct SourceDescriptor: Codable {
         var currentHost: String
         var outageInfo: OutageInfo?
+        var transformScript: String?
     }
     
     struct OutageInfo: Codable {
@@ -34,5 +36,29 @@ extension NASourceNineAnime {
             source: self,
             descriptorType: SourceDescriptor.self
         )
+    }
+}
+
+extension NASourceNineAnime.SourceDescriptor {
+    func transform(_ input: String) -> String {
+        do {
+            let transformScript = try self.transformScript.tryUnwrap(.unknownError("Transform script does not exist."))
+            let ctx = try JSContext().tryUnwrap()
+            ctx.evaluateScript(transformScript)
+            
+            let transformFunction = try ctx.objectForKeyedSubscript("transform").tryUnwrap(
+                .unknownError("Transform function cannot be found")
+            )
+            
+            let transformResult = try transformFunction.call(withArguments: [ input ])
+                .tryUnwrap(.unknownError("Cannot invoke transform function"))
+                .toString()
+                .tryUnwrap()
+            
+            return transformResult
+        } catch {
+            Log.error("[NASourceNineAnime.SourceDescriptor] Unable to run the transform script: %@. Returning input string...", error)
+            return input
+        }
     }
 }

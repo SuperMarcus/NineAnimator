@@ -47,6 +47,7 @@ class NASourceNineAnime: BaseSource, Source, PromiseSource {
     }
     
     private var _cachedDescriptor: SourceDescriptor?
+    private var _serverInfoCache = [String: (Date, AnimeServerList)]()
     
     override init(with parent: NineAnimator) {
         super.init(with: parent)
@@ -65,6 +66,29 @@ extension NASourceNineAnime {
     }
 }
 
+// MARK: - Caching
+extension NASourceNineAnime {
+    /// Duration that a retrieved server-episode info stays in the cache.
+    fileprivate var serverInfoCacheDuration: TimeInterval {
+        // Store episode info for up to 30 minutes
+        30 * 60
+    }
+    
+    /// Retrieve cached anime server list
+    /// This makes episode retrival much faster.
+    func retrieveServerInfoCache(_ id: String) -> AnimeServerList? {
+        if let cachedServerInfo = _serverInfoCache[id],
+           (cachedServerInfo.0.timeIntervalSinceNow + serverInfoCacheDuration) > 0 {
+            return cachedServerInfo.1
+        } else { return nil }
+    }
+    
+    func storeServerInfoCache(_ id: String, caching serverList: AnimeServerList) {
+        // Anime slug.id component
+        _serverInfoCache[id] = (Date(), serverList)
+    }
+}
+
 // MARK: - Definitions
 extension NASourceNineAnime {
     /// Known hosts where 9anime stores their static assets
@@ -78,6 +102,12 @@ extension NASourceNineAnime {
     
     var fallbackEndpoint: String {
         "https://www12.9anime.ru"
+    }
+    
+    /// Keys used in Anime.additionalAttributes for private data
+    enum AnimeAttributeKey {
+        /// Key of the anime page info object
+        static var animePageInfo: String { ".9anime.pageInfo" }
     }
     
     /// Request the source descriptor object

@@ -20,6 +20,16 @@
 import Foundation
 
 extension NASourceNineAnime {
+    // Map 9anime attribute key to NineAnimator.Anime.AttributeKey
+    fileprivate static let attributeKeyMap = [
+        "date aired": Anime.AttributeKey.airDate
+    ]
+    
+    fileprivate static let scoresRegex = try! NSRegularExpression(
+        pattern: "([\\d.]+)\\s*\\/\\s*([\\d,.]+)",
+        options: []
+    )
+    
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestDescriptor().thenPromise {
             _ in self.animeInfo(in: link.link)
@@ -30,8 +40,56 @@ extension NASourceNineAnime {
                 refererLink: animePageInfo.animeLink.link
             ) .then { (animePageInfo, $0) }
         } .then {
-            animePageInfo, serverList in
-            nil
+            animePageInfo, serverEpisodeInfo in
+            // Map episodes to server-episodes
+            let serverEpisodeMap = serverEpisodeInfo.servers.reduce(into: Anime.EpisodesCollection()) {
+                collection, server in
+                collection[server.id] = serverEpisodeInfo.episodes.compactMap {
+                    episodeInfo in EpisodeLink(
+                        identifier: episodeInfo.link.path,
+                        name: episodeInfo.name,
+                        server: server.id,
+                        parent: animePageInfo.animeLink
+                    )
+                }
+            }
+            
+            let availableServerList = serverEpisodeInfo.servers.reduce(into: [Anime.ServerIdentifier: String]()) {
+                $0[$1.id] = $1.name
+            }
+            
+            // Additional attributes
+            var animeAttributes = animePageInfo.attributes.reduce(into: [Anime.AttributeKey: Any]()) {
+                result, attribute in
+                if attribute.key.lowercased() == "scores" {
+                    if let scoreMatch = NASourceNineAnime.scoresRegex.firstMatch(in: attribute.value) {
+                        if let rating = Float(scoreMatch[1]) {
+                            result[Anime.AttributeKey.rating] = rating
+                            result[Anime.AttributeKey.ratingScale] = Float(10)
+                        }
+                        
+                        if let votes = Int(scoreMatch[2].replacingOccurrences(of: ",", with: "")) {
+                            result["Number of Votes"] = votes
+                        }
+                    }
+                    
+                    return
+                }
+                
+                result[NASourceNineAnime.attributeKeyMap[attribute.key] ?? attribute.key] = attribute.value
+            }
+            
+            // Private attributes
+            animeAttributes[AnimeAttributeKey.animePageInfo] = animePageInfo
+            
+            return Anime(
+                animePageInfo.animeLink,
+                alias: animePageInfo.alias,
+                additionalAttributes: animeAttributes,
+                description: animePageInfo.synopsis,
+                on: availableServerList,
+                episodes: serverEpisodeMap
+            )
         }
     }
     
@@ -110,7 +168,11 @@ extension NASourceNineAnime {
     
     /// Retrieve the available servers and episodes of an anime
     func availableServers(of animeId: String, refererLink: URL) -> NineAnimatorPromise<AnimeServerList> {
-        self.requestManager.request(
+        if let cachedServerList = self.retrieveServerInfoCache(animeId) {
+            return .success(cachedServerList)
+        }
+        
+        return self.requestManager.request(
             "ajax/anime/servers",
             handling: .ajax,
             parameters: [
@@ -124,7 +186,7 @@ extension NASourceNineAnime {
             ]
         ) .responseBowl
           .then {
-            bowl in
+            bowl -> AnimeServerList in
             let serverList = try bowl
                 .select(".servers>span")
                 .map {
@@ -176,6 +238,11 @@ extension NASourceNineAnime {
                 servers: serverList,
                 episodes: episodeList
             )
+        } .then {
+            list in
+            // Store in cache
+            self.storeServerInfoCache(animeId, caching: list)
+            return list
         }
     }
 }

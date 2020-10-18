@@ -21,6 +21,79 @@ import Foundation
 
 extension NASourceNineAnime {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        .fail()
+        guard let pageInfo = anime.additionalAttributes[AnimeAttributeKey.animePageInfo] as? AnimeInfo else {
+            Log.error(
+                "[NASourceNineAnime] Trying to retrieve an episode (%@) for an anime (%@) that does not have an associated AnimeInfo object.",
+                link.identifier,
+                anime.link.link.absoluteString
+            )
+            return .fail(.unknownError("This anime object does not have an associated AnimeInfo."))
+        }
+        
+        return requestDescriptor().thenPromise {
+            descriptor in self.availableServers(
+                of: pageInfo.siteId,
+                refererLink: anime.link.link
+            ) .then { ($0, descriptor) }
+        } .thenPromise {
+            serverInfo, descriptor in
+            guard let resourceInfo = serverInfo.episodes.first(where: {
+                    $0.link.path == link.identifier
+                }) else {
+                throw NineAnimatorError.responseError("This episode has disappeared.")
+            }
+            
+            guard let dynamicResourceId = resourceInfo.resourceMap[link.server] else {
+                let alternatives = resourceInfo.resourceMap.keys.map {
+                    serverId in EpisodeLink(
+                        identifier: resourceInfo.link.path,
+                        name: resourceInfo.name,
+                        server: serverId,
+                        parent: anime.link
+                    )
+                }
+                
+                let newServerMap = serverInfo.servers.reduce(into: [Anime.ServerIdentifier: String]()) {
+                    serverMap, server in serverMap[server.id] = server.name
+                }
+                
+                // Episode not available on server
+                throw NineAnimatorError.EpisodeServerNotAvailableError(
+                    unavailableEpisode: link,
+                    alternativeEpisodes: alternatives,
+                    updatedServerMap: newServerMap
+                )
+            }
+            
+            return self.requestManager.request(
+                "ajax/anime/episode",
+                handling: .ajax,
+                parameters: [
+                    "id": dynamicResourceId
+                ],
+                headers: [
+                    "Referer": resourceInfo.link.absoluteString
+                ]
+            ) .responseDecodable(type: EpisodeResponse.self)
+              .then { ($0, descriptor, resourceInfo) }
+        } .then {
+            (response: EpisodeResponse, descriptor: SourceDescriptor, episodeInfo: EpisodeInfo) in
+            let transformedUrlString = descriptor.transform(response.url)
+            let targetUrl = try URL(string: transformedUrlString).tryUnwrap()
+            
+            return Episode(
+                link,
+                target: targetUrl,
+                parent: anime,
+                referer: episodeInfo.link.absoluteString
+            )
+        }
+    }
+}
+
+// MARK: - Data Structures
+extension NASourceNineAnime {
+    struct EpisodeResponse: Codable {
+        var url: String
     }
 }
