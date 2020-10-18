@@ -59,7 +59,7 @@ class Mp4UploadParser: VideoProviderParser {
                     contentType: "video/mp4",
                     headers: [
                         "User-Agent": self.defaultUserAgent,
-                        "Referer": episode.referer
+                        "Referer": episode.target.absoluteString
                     ],
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
@@ -67,6 +67,6 @@ class Mp4UploadParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        true // Mp4Upload seems to work for all purposes
+        purpose != .googleCast
     }
 }
