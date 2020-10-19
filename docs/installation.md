@@ -39,7 +39,7 @@ to be the first ones to try out those updates:
 
 > Note: NineAnimator's AltStore Source is an experimental service. Currently the version on the AltStore source is synchronized with the latest Github release.
 
-* Source URL: `https://9ani.app/api/altstore`
+* Source URL: `https://9ani.app/api/altstore` ([Add Source](altstore://source?url=https%3A%2F%2F9ani.app%2Fapi%2Faltstore))
 * [Source Preview](https://altsource.by.lao.sb/browse/?source=https%3A%2F%2F9ani.app%2Fapi%2Faltstore)
 
 ## Legacy Methods
