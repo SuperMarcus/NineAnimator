@@ -19,13 +19,13 @@ To install/update NineAnimator on **macOS**, follow the steps below:
 
 ## TestFlight Beta Testing
 
-> [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w) is currently
-> reaching full capacity. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
+> NineAnimator Beta Testing Program is currently unavailable. We plan to make it available again soon.
+> Please use another method for now. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
 
-We're constantly adding supports for new websites and implementing additional features.
+~~We're constantly adding supports for new websites and implementing additional features.
 Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w)
 to be the first ones to try out those updates:
-[https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)
+[https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)~~
 
 ## AppStore
 
