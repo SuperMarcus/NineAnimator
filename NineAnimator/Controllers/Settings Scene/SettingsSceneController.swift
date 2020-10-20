@@ -43,6 +43,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     @IBOutlet private weak var fallbackToBrowserSwitch: UISwitch!
     @IBOutlet private weak var richPresenceStatusLabel: UILabel!
+    @IBOutlet private weak var appIconTableViewCell: UITableViewCell!
     @IBOutlet private weak var currentAppIconLabel: UILabel!
     
     /// The path that the Settings view controller will be navigating to
@@ -285,7 +286,14 @@ extension SettingsSceneController {
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
         appearanceSegmentControl.isEnabled = !NineAnimator.default.user.dynamicAppearance
         dynamicAppearanceSwitch.setOn(NineAnimator.default.user.dynamicAppearance, animated: true)
-        currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
+        if UIApplication.shared.supportsAlternateIcons {
+            currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
+            appIconTableViewCell.isUserInteractionEnabled = true
+        } else {
+            currentAppIconLabel.text = "Unavailable"
+            appIconTableViewCell.isUserInteractionEnabled = false
+        }
+        //currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
         
         if #available(iOS 13.0, *) {
             dynamicAppearanceSwitchLabel.text = "Sync with System"
