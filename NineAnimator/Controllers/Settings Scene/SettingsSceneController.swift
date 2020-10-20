@@ -223,6 +223,7 @@ extension SettingsSceneController {
                                continueActionName: "Reset"
             ) { [weak self] in
                 NineAnimator.default.user.clearAll()
+                self?.logoutOfAllListingServices()
                 self?.clearCache()
                 self?.clearActivities()
                 self?.updatePreferencesUI()
@@ -400,6 +401,15 @@ extension SettingsSceneController {
                 [weak self] in DispatchQueue.main.async {
                     self?.updatePreferencesUI()
                 }
+            }
+        }
+    }
+    
+    private func logoutOfAllListingServices() {
+        NineAnimator.default.trackingServices.forEach {
+            trackingService in
+            if trackingService.isCapableOfRetrievingAnimeState {
+                trackingService.deauthenticate()
             }
         }
     }

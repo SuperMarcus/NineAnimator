@@ -108,7 +108,7 @@ protocol ListingService: AnyObject {
     
     /// Update the progress of an listed anime
     ///
-    /// The episodeNumber passed in as parameter is not guarenteed to be the furtherest epiosde
+    /// The episodeNumber passed in as parameter is not guarenteed to be the furtherest episode
     /// that the user has completed. It is the episode that the user has just finished watching.
     /// Only called if the service returns true for `isCapableOfPersistingAnimeState`
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?)
@@ -125,4 +125,9 @@ protocol ListingService: AnyObject {
     
     /// Called when the service is registered
     func onRegister()
+    
+    /// Called when the service should logout the current user.
+    ///
+    /// Only called if the service returns true for `isCapableOfRetrievingAnimeState`
+    func deauthenticate()
 }

@@ -123,3 +123,9 @@ extension ListingAnimeStatistics {
         return sum.0 / sum.1
     }
 }
+
+extension ListingService {
+    func deauthenticate() {
+        Log.error("[ListingService] Concrete classes did not inherit the deauthenticate() method. Listing Service's user will not be deauthenticated.")
+    }
+}
