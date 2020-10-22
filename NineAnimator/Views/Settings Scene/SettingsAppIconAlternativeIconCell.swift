@@ -64,9 +64,6 @@ class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
     }
     
     func theme(didUpdate theme: Theme) {
-        /*if let iconPreviewView = iconPreviewView {
-            iconPreviewView.layer.borderColor = isCurrentlySelected ? theme.tint.cgColor : theme.background.cgColor
-        }*/
         if let iconContentView = iconContentView {
             iconContentView.layer.borderColor = isCurrentlySelected ? theme.tint.cgColor : theme.background.cgColor
         }
