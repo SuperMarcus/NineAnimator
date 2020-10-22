@@ -293,7 +293,6 @@ extension SettingsSceneController {
             currentAppIconLabel.text = "Unavailable"
             appIconTableViewCell.isUserInteractionEnabled = false
         }
-        //currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
         
         if #available(iOS 13.0, *) {
             dynamicAppearanceSwitchLabel.text = "Sync with System"
