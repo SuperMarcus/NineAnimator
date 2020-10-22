@@ -84,22 +84,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     }
     
     private func doMagic() {
-        guard UIApplication.shared.supportsAlternateIcons else {
-            return Log.error("[AboutNineAnimatorTableViewController] Encountered an error: unsupported actions")
-        }
-        
-        let previousIcon = UIApplication.shared.alternateIconName
-        let currentIcon: String?
-        
-        if case .some = previousIcon {
-            currentIcon = nil
-        } else { currentIcon = "Fox" }
-        
-        UIApplication.shared.setAlternateIconName(currentIcon, completionHandler: nil)
-        MSAnalytics.trackEvent("App Magic #1001", withProperties: [
-            "previousIcon": previousIcon ?? "default",
-            "currentIcon": currentIcon ?? "default"
-        ])
+        SettingsAppIconController.makeAvailable("Fox", from: self, allowsSettingsPopup: false)
     }
     
     private func updateUIComponents() {

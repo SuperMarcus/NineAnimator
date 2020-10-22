@@ -31,11 +31,32 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>9 Testboi</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>9 Testboi</string>
+				</array>
+			</dict>
 			<key>Fox</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Fox</string>
+				</array>
+			</dict>
+			<key>Nsxtop's 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Nsxtop's 9</string>
+				</array>
+			</dict>
+			<key>Tydox's 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox's 9</string>
 				</array>
 			</dict>
 		</dict>
@@ -44,11 +65,32 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>9 Testboi</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>9 Testboi</string>
+				</array>
+			</dict>
 			<key>Fox</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Fox</string>
+				</array>
+			</dict>
+			<key>Nsxtop's 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Nsxtop's 9</string>
+				</array>
+			</dict>
+			<key>Tydox's 9</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox's 9</string>
 				</array>
 			</dict>
 		</dict>
@@ -96,8 +138,15 @@
 	<true/>
 	<key>LSSupportsOpeningDocumentsInPlace</key>
 	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_googlecast._tcp</string>
+		<string>_48A09E00._googlecast._tcp</string>
+	</array>
 	<key>NSHomeKitUsageDescription</key>
 	<string>NineAnimator uses Home to run certain scenes during playback.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>NineAnimator uses the local network to discover Cast-enabled devices on your home network.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.marcuszhou.nineanimator.activity.viewAnime</string>

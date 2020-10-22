@@ -31,15 +31,19 @@ extension NineAnimatorUser {
     /// Triggered when an anime is presented
     ///
     /// - Parameter anime: AnimeLink of the anime
+    /// - Important: Only call this method on the main thread
     func entering(anime: AnimeLink) {
-        var animes = recentAnimes.filter { $0 != anime }
-        animes.insert(anime, at: 0)
-        recentAnimes = animes
+        do {
+            try coreDataLibrary.mainContext.updateLibraryRecord(forLink: .anime(anime))
+        } catch {
+            Log.error("[NineAnimatorUser] Unable to record recently viewed item because of error: %@", error)
+        }
     }
     
     /// Triggered when the playback is about to start
     ///
     /// - Parameter episode: EpisodeLink of the episode
+    /// - Important: Only call this method on the main thread
     func entering(episode: EpisodeLink) {
         guard let data = encodeIfPresent(data: episode) else {
             Log.error("EpisodeLink failed to encode.")
@@ -113,13 +117,35 @@ extension NineAnimatorUser {
     /// Direct modification outside the scope of NineAnimatorUser should
     /// be prevented. Always use available methods when possible.
     var recentAnimes: [AnimeLink] {
-        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
-        set {
-            guard let data = encodeIfPresent(data: newValue) else {
-                return Log.error("Recent animes failed to encode")
+        get {
+            do {
+                return try coreDataLibrary.mainContext.fetchRecents().compactMap {
+                    anyLink in
+                    if case let .anime(animeLink) = anyLink {
+                        return animeLink
+                    } else { return nil }
+                }
+            } catch {
+                Log.error("[NineAnimatorUser] Unable to decode recent list: %@", error)
+                return []
             }
-            _freezer.set(data, forKey: Keys.recentAnimeList)
         }
+        set {
+            do {
+                try coreDataLibrary.mainContext.resetRecents(to: newValue.map {
+                    .anime($0)
+                })
+            } catch {
+                Log.error("[NineAnimatorUser] Unable to save recent list: %@", error)
+            }
+        }
+//        get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.recentAnimeList)) ?? [] }
+//        set {
+//            guard let data = encodeIfPresent(data: newValue) else {
+//                return Log.error("Recent animes failed to encode")
+//            }
+//            _freezer.set(data, forKey: Keys.recentAnimeList)
+//        }
     }
     
     /// The `EpisodeLink` to the last viewed episode
@@ -135,9 +161,14 @@ extension NineAnimatorUser {
     
     /// Remove all anime viewing history
     func clearRecents() {
-        _freezer.removeObject(forKey: Keys.recentEpisode)
-        _freezer.removeObject(forKey: Keys.recentAnimeList)
-        _freezer.removeObject(forKey: Keys.recentServer)
+        do {
+            _freezer.removeObject(forKey: Keys.recentEpisode)
+            _freezer.removeObject(forKey: Keys.recentAnimeList)
+            _freezer.removeObject(forKey: Keys.recentServer)
+            try coreDataLibrary.mainContext.resetRecents()
+        } catch {
+            Log.error("[NineAnimatorUser] Unable to clear recents due to error: %@", error)
+        }
     }
 }
 

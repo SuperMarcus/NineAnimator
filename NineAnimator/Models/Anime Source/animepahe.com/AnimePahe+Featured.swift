@@ -25,24 +25,27 @@ extension NASourceAnimePahe {
     }
     
     fileprivate struct AiringAnimeItem: Codable {
-        var anime_title: String
-        var anime_slug: String
+        var animeTitle: String
+        var animeSession: String
         var snapshot: String
     }
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        self.requestManager.request(
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        return self.requestManager.request(
             "/api",
             handling: .ajax,
             query: [ "m": "airing", "l": 32, "page": 1 ]
-        ) .responseDictionary
-          .then {
-            response in try DictionaryDecoder().decode(AiringResponse.self, from: response)
-        } .then {
+        ) .responseDecodable(
+            type: AiringResponse.self,
+            decoder: decoder
+        ) .then {
             decodedResponse in try decodedResponse.data.map {
                 animeItem in AnimeLink(
-                    title: animeItem.anime_title,
-                    link: self.animeBaseUrl.appendingPathComponent(animeItem.anime_slug),
+                    title: animeItem.animeTitle,
+                    link: self.animeBaseUrl.appendingPathComponent(animeItem.animeSession),
                     image: try URL(string: animeItem.snapshot).tryUnwrap(.urlError),
                     source: self
                 )

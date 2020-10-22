@@ -73,6 +73,4 @@ class OfflineAnimeTableViewCell: UITableViewCell {
             offlineStateLabel.text = "Downloading from \(link.source.name)..."
         } else { offlineStateLabel.text = "Downloaded from \(link.source.name)" }
     }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }

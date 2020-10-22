@@ -49,6 +49,7 @@ extension NineAnimatorUser {
         static var homeUUIDEnd: String { "home.actionset.uuid.end" }
         static var theme: String { "interface.theme" }
         static var brightnessBasedTheme: String { "interface.brightnessBasedTheme" }
+        static var discoveredAppIcons: String { "interface.discoveredIcons" }
         static var richPresenceEnable: String { "presence.enable" }
         static var richPresenceShowAnimeName: String { "presence.animeTitle" }
         static var optOutAnalytics: String { "analytics.optOut" }

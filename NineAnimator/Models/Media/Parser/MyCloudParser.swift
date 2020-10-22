@@ -39,6 +39,7 @@ class MyCloudParser: VideoProviderParser {
         options: .caseInsensitive
     )
     static let windowKeyRetrivalEndpoint = URL(string: "https://mcloud2.to/key")!
+    static let streamInfoEndpoint = URL(string: "https://mcloud.to/info")!
     
     class func retrieveWindowKey(with session: Session, referer: URL) -> NineAnimatorPromise<String> {
         AsyncRequestHelper(
@@ -52,60 +53,72 @@ class MyCloudParser: VideoProviderParser {
     }
     
     func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        let additionalHeaders: HTTPHeaders = [
-            "Referer": episode.parentLink.link.absoluteString,
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-            "User-Agent": defaultUserAgent
-        ]
-        
-        let playerAdditionalHeaders: HTTPHeaders = [
-            "Referer": episode.target.absoluteString,
-            "User-Agent": defaultUserAgent
-        ]
-        
-        return session.request(episode.target, headers: additionalHeaders).responseString {
-            response in
-            guard let text = response.value else {
-                Log.error(response.error)
-                return handler(nil, NineAnimatorError.responseError(
-                    "response error: \(response.error?.localizedDescription ?? "Unknown")"
-                ))
-            }
+        NineAnimatorPromise<URL>.firstly {
+            let embedUrl = episode.target
+            let embedContentId = embedUrl.lastPathComponent
             
-            let matches = MyCloudParser.videoSourceRegex.matches(
-                in: text, range: text.matchingRange
+            var embedContentInfoUrl = try URLComponents(
+                url: MyCloudParser
+                    .streamInfoEndpoint
+                    .appendingPathComponent(embedContentId),
+                resolvingAgainstBaseURL: true
+            ).tryUnwrap()
+            embedContentInfoUrl.query = embedUrl.query
+            embedContentInfoUrl.fragment = embedUrl.fragment
+            
+            return embedContentInfoUrl.url
+        } .thenPromise {
+            embedInfoUrl in AsyncRequestHelper(
+                session.request(
+                    embedInfoUrl,
+                    headers: [
+                        "Referer": episode.referer,
+                        "Accept": "application/json, text/javascript, */*; q=0.01",
+                        "User-Agent": self.defaultUserAgent
+                    ]
+                )
+            ) .decodableResponse(ContentInfoResponse.self)
+        } .then {
+            decodedValue in
+            let playlistUrlString = try decodedValue.media.sources.first.tryUnwrap(
+                .providerError("No playlist is available")
+            ) .file
+              .trimmingCharacters(in: .whitespacesAndNewlines)
+            let playlistUrl = try URL(string: playlistUrlString).tryUnwrap()
+            let playerAdditionalHeaders: HTTPHeaders = [
+                "Referer": episode.target.absoluteString,
+                "User-Agent": self.defaultUserAgent
+            ]
+            
+            let isHLS = playlistUrl.pathExtension == "m3u8"
+            
+            return BasicPlaybackMedia(
+                url: playlistUrl,
+                parent: episode,
+                contentType: isHLS ? "application/vnd.apple.mpegurl" : "video/mp4",
+                headers: playerAdditionalHeaders.dictionary,
+                isAggregated: isHLS
             )
-            
-            guard let match = matches.first else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "no matches for source url"
-                ))
-            }
-            
-            guard let sourceURL = URL(string: text[match.range(at: 1)]) else {
-                return handler(nil, NineAnimatorError.responseError(
-                    "source url not recongized"
-                ))
-            }
-            
-            Log.info("(MyCloud Parser) found asset at %@", sourceURL.absoluteString)
-            
-            // MyCloud might not support Chromecast, since it uses COR checking
-            handler(
-                BasicPlaybackMedia(
-                    url: sourceURL,
-                    parent: episode,
-                    contentType: "application/vnd.apple.mpegurl",
-                    headers: playerAdditionalHeaders.dictionary,
-                    isAggregated: true
-                ),
-                nil
-            )
-        }
+        } .handle(handler)
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
         // MyCloud may not work for GoogleCast
         return purpose != .googleCast
+    }
+}
+
+private extension MyCloudParser {
+    struct ContentInfoResponse: Codable {
+        var success: Bool
+        var media: ContentInfoMediaEntry
+    }
+    
+    struct ContentInfoMediaEntry: Codable {
+        var sources: [ContentInfoSource]
+    }
+    
+    struct ContentInfoSource: Codable {
+        var file: String
     }
 }

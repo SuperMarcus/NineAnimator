@@ -210,8 +210,6 @@ class OfflineAccessButton: UIButton, Themable {
     }
     
     func theme(didUpdate theme: Theme) { updateContent() }
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }
 
 /// Delegate for offline access button

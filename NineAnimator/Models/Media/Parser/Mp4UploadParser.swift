@@ -23,11 +23,11 @@ import Foundation
 
 class Mp4UploadParser: VideoProviderParser {
     var aliases: [String] {
-        [ "Mp4Upload", "Mp4 Upload" ]
+        [ "Mp4Upload", "Mp4 Upload", "mpserver" ]
     }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "src:\"([^\"]+)",
+        pattern: "player\\.src\\(\"([^\"]+)",
         options: []
     )
     
@@ -59,7 +59,7 @@ class Mp4UploadParser: VideoProviderParser {
                     contentType: "video/mp4",
                     headers: [
                         "User-Agent": self.defaultUserAgent,
-                        "Origin": episode.target.absoluteString
+                        "Referer": episode.target.absoluteString
                     ],
                     isAggregated: false), nil)
             } catch { handler(nil, error) }
@@ -67,6 +67,6 @@ class Mp4UploadParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        true // Mp4Upload seems to work for all purposes
+        purpose != .googleCast
     }
 }

@@ -70,8 +70,4 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
         anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
             ? [NASourceFourAnime.FourAnimeStream] : []
     }
-    
-    func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
-        .fail()
-    }
 }

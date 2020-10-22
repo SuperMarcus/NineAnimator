@@ -31,17 +31,18 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
         
         // Load image
         artworkImageView.alpha = 0.0
-        artworkImageView.kf.setImage(with: reference.artwork) {
+        artworkImageView.kf.setImage(with: reference.artwork, completionHandler: {
             [weak artworkImageView] _ in UIView.animate(withDuration: 0.2) {
                 artworkImageView?.alpha = 1.0
             }
-        }
+        })
         
         // Set name
         referenceNameLabel.text = reference.name
     }
     
     override var isSelected: Bool {
+        get { super.isSelected }
         set {
             super.isSelected = newValue
             
@@ -52,6 +53,5 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
                 } else { self.backgroundColor = .clear }
             }
         }
-        get { super.isSelected }
     }
 }

@@ -126,7 +126,7 @@ extension UserNotificationManager {
         notificationCenter.requestAuthorization(options: [.badge]) {
             success, _ in DispatchQueue.main.async {
                 if shouldPresetError && !success {
-                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in Settings.", preferredStyle: .alert)
+                    let alertController = UIAlertController(title: "Updates Unavailable", message: "NineAnimator doesn't have persmission to send notifications. You won't receive any updates for this anime until you allow notifications from NineAnimator in system settings app.", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     RootViewController.shared?.presentOnTop(alertController, animated: true)
                 }

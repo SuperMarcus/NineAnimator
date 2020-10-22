@@ -23,8 +23,8 @@ extension NASourceAnimeKisa {
     static let knownServers = [
         "vidstreaming": "VidStreaming",
         "fembed": "Fembed",
-        "hydrax": "HydraX",
-        "mp4upload": "Mp4Upload"
+        "mp4upload": "Mp4Upload",
+        "cloud9": "Cloud9"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -77,13 +77,11 @@ extension NASourceAnimeKisa {
         }
         var obtainedSources = [
             "adless": try buildExp("GoogleVideo"),
-            "rapidvideo": try buildExp("RapidVideo"),
             "fembed": try buildExp("Fembed"),
             "mp4upload": try buildExp("MP4Upload"),
-            "openload": try buildExp("Openload"),
-            "streamango": try buildExp("Streamango"),
             "vidstreaming": try buildExp("VidStreaming"),
-            "hydrax": try buildExp("Hydrax")
+            "hydrax": try buildExp("Hydrax"),
+            "cloud9": try buildExp("Cloud9")
         ] .compactMapValues { $0.firstMatch(in: episodePage)?.firstMatchingGroup }
           .compactMapValues { $0.isEmpty ? nil : $0 }
         
@@ -101,33 +99,6 @@ extension NASourceAnimeKisa {
 
 extension NASourceAnimeKisa.ExperimentalSource {
     func _episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise.firstly {
-            try URL(string: link.identifier, relativeTo: link.parent.link).tryUnwrap()
-        } .thenPromise {
-            episodePageUrl in self.requestManager.request(
-                url: episodePageUrl,
-                handling: .browsing
-            ).responseString
-        } .then {
-            episodePageContent in
-            
-            let mediaRegex = try NSRegularExpression(
-                pattern: "server_main\\s=\\s\"([^\"]+)",
-                options: []
-            )
-            
-            let source = try (mediaRegex
-                .firstMatch(in: episodePageContent)?
-                .firstMatchingGroup)
-                .tryUnwrap(.providerError("Unable to find the streaming resource"))
-            
-            let videoSource = try URL(string: source).tryUnwrap()
-            
-            return Episode(
-                link,
-                target: videoSource,
-                parent: anime
-            )
-        }
+        .fail(.ContentUnavailableError("This source is no longer available."))
     }
 }

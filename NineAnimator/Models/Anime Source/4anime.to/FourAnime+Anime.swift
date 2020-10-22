@@ -22,20 +22,25 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        self.requestManager.request(
-            url: link.link,
-            handling: .browsing
-        ) .responseString.then {
-            responseContent -> Anime in
-            let bowl = try SwiftSoup.parse(responseContent)
-            let animeTitle = try bowl.select(".content p").text()
+        (self.isAnimeLink(url: link.link) ? .success(link) : self.resolveAnimeLink(
+            from: link.link,
+            artworkUrl: link.image
+        )) .thenPromise {
+            resolvedAnimeLink in self.requestManager.request(
+                url: resolvedAnimeLink.link,
+                handling: .browsing
+            ) .responseBowl // Resolves to a SwiftSoup bowl and combine with the newly resolved link
+              .then { (resolvedAnimeLink, $0) }
+        } .then {
+            resolvedAnimeLink, bowl in
             let animeArtworkUrl = URL(
                 string: try bowl.select(".cover>img").attr("src"),
-                relativeTo: link.link
-            ) ?? link.image
+                relativeTo: resolvedAnimeLink.link
+            ) ?? resolvedAnimeLink.image
+            let animeTitle = try bowl.select(".content p").text()
             let reconstructedAnimeLink = AnimeLink(
                 title: animeTitle,
-                link: link.link,
+                link: resolvedAnimeLink.link,
                 image: animeArtworkUrl,
                 source: self
             )
@@ -99,5 +104,36 @@ extension NASourceFourAnime {
                 episodesAttributes: [:]
             )
         }
+    }
+    
+    /// Attempts to resolve the AnimeLink from an episode page URl
+    private func resolveAnimeLink(from url: URL, artworkUrl: URL? = nil) -> NineAnimatorPromise<AnimeLink> {
+        self.requestManager
+            .request(url: url, handling: .browsing)
+            .responseBowl
+            .then {
+                bowl in
+                let animeTitleLink = try bowl.select("a#titleleft")
+                let animeLinkString = try animeTitleLink.attr("href")
+                let animeLinkURL = try URL(
+                    string: animeLinkString,
+                    relativeTo: url
+                ).tryUnwrap(.responseError("Cannot find a valid link to the anime page"))
+                let animeArtworkURL = artworkUrl ?? NineAnimator.placeholderArtworkUrl
+                let animeTitle = try animeTitleLink.text()
+                
+                // Construct AnimeLink
+                return AnimeLink(
+                    title: animeTitle,
+                    link: animeLinkURL,
+                    image: animeArtworkURL,
+                    source: self
+                )
+            }
+    }
+    
+    /// Checks if the provided link points to an anime page
+    private func isAnimeLink(url: URL) -> Bool {
+        url.pathComponents.contains("anime")
     }
 }

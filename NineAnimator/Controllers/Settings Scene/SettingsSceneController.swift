@@ -43,6 +43,7 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     @IBOutlet private weak var fallbackToBrowserSwitch: UISwitch!
     @IBOutlet private weak var richPresenceStatusLabel: UILabel!
+    @IBOutlet private weak var currentAppIconLabel: UILabel!
     
     /// The path that the Settings view controller will be navigating to
     private var navigatingTo: EntryPath?
@@ -250,6 +251,7 @@ extension SettingsSceneController {
             
             if let popoverController = activityController.popoverPresentationController {
                 popoverController.sourceView = cell
+                popoverController.sourceRect = cell.bounds
             }
             
             present(activityController, animated: true, completion: nil)
@@ -282,6 +284,7 @@ extension SettingsSceneController {
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
         appearanceSegmentControl.isEnabled = !NineAnimator.default.user.dynamicAppearance
         dynamicAppearanceSwitch.setOn(NineAnimator.default.user.dynamicAppearance, animated: true)
+        currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
         
         if #available(iOS 13.0, *) {
             dynamicAppearanceSwitchLabel.text = "Sync with System"
@@ -394,7 +397,9 @@ extension SettingsSceneController {
     private func clearActivities() {
         if #available(iOS 12.0, *) {
             NSUserActivity.deleteAllSavedUserActivities {
-                [weak self] in self?.updatePreferencesUI()
+                [weak self] in DispatchQueue.main.async {
+                    self?.updatePreferencesUI()
+                }
             }
         }
     }
@@ -421,6 +426,11 @@ extension SettingsSceneController {
         /// Navigating to the `Storage` entry
         static var storage: EntryPath {
             EntryPath(segueIdentifier: "storage", itemIndex: nil)
+        }
+        
+        /// Navigating to the `App Icon` entry
+        static var appIcon: EntryPath {
+            EntryPath(segueIdentifier: "appIcon", itemIndex: nil)
         }
         
         fileprivate let segueIdentifier: String?

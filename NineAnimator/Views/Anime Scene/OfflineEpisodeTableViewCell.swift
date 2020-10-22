@@ -158,6 +158,4 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
     @IBOutlet private weak var downloadStatusLabel: UILabel!
     @IBOutlet private weak var progressView: UIProgressView!
     @IBOutlet private weak var progressLabel: UILabel!
-    
-    deinit { NotificationCenter.default.removeObserver(self) }
 }
