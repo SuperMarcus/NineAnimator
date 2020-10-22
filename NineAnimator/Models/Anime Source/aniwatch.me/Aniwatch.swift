@@ -59,6 +59,11 @@ class NASourceAniwatch: BaseSource, Source, PromiseSource {
         NASourceAniwatch.knownServers.keys.contains(server) ? DummyParser.registeredInstance : nil
     }
     
+    override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
+        if purpose == .googleCast { return [] }
+        return [ "ensub", "endub", "desub", "dedub" ]
+    }
+    
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         .fail()
     }

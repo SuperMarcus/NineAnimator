@@ -89,19 +89,28 @@ extension NASourceAniwatch {
             
             let episodeURL = try URL(string: episodeURLString).tryUnwrap(.urlError)
             
+            var playbackHeaders = [
+                "User-Agent": self.sessionUserAgent,
+                "Referer": "https://aniwatch.me/",
+                "Origin": "https://aniwatch.me",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "cors",
+                "sec-fetch-site": "same-site"
+            ]
+            
+            // TODO: Fix issue where HTTP cookies are not sent during episode playback on macOS
+            // WORKAROUND: Manually attach httpCookies for aniwatch to http headers.
+            if let cookies = HTTPCookieStorage.shared.cookies(for: episodeURL) {
+                let additionalHeaders = HTTPCookie.requestHeaderFields(with: cookies)
+                playbackHeaders.merge(additionalHeaders) { $1 }
+            }
+            
             return Episode(
                 link,
                 target: episodeURL,
                 parent: anime,
                 userInfo: [
-                    DummyParser.Options.headers: [
-                        "User-Agent": self.sessionUserAgent,
-                        "Referer": "https://aniwatch.me/",
-                        "Origin": "https://aniwatch.me",
-                        "sec-fetch-dest": "empty",
-                        "sec-fetch-mode": "cors",
-                        "sec-fetch-site": "same-site"
-                    ],
+                    DummyParser.Options.headers: playbackHeaders,
                     DummyParser.Options.contentType: "application/x-mpegurl"
                 ]
             )
