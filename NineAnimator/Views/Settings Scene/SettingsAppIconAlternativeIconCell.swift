@@ -25,6 +25,7 @@ class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
     
     @IBOutlet private var iconNameLabel: UILabel!
     @IBOutlet private var iconPreviewView: UIImageView!
+    @IBOutlet private var iconContentView: UIView!
     
     override func prepareForReuse() {
         iconPreviewView.layer.borderColor = Theme.current.background.cgColor
@@ -47,7 +48,7 @@ class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
     func setIsCurrentIcon(_ isCurrent: Bool, animated: Bool) {
         self.isCurrentlySelected = isCurrent
         
-        let currentColor = self.iconPreviewView.layer.borderColor ?? Theme.current.background.cgColor
+        let currentColor = self.iconContentView.layer.borderColor ?? Theme.current.background.cgColor
         let targetColor = self.isCurrentlySelected ? Theme.current.tint.cgColor : Theme.current.background.cgColor
         
         if animated {
@@ -56,15 +57,15 @@ class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
             animation.toValue = targetColor
             animation.duration = 0.2
             animation.fillMode = .forwards
-            self.iconPreviewView.layer.add(animation, forKey: "settings.animation.borderColor")
+            self.iconContentView.layer.add(animation, forKey: "settings.animation.borderColor")
         }
         
-        self.iconPreviewView.layer.borderColor = targetColor
+        self.iconContentView.layer.borderColor = targetColor
     }
     
     func theme(didUpdate theme: Theme) {
-        if let iconPreviewView = iconPreviewView {
-            iconPreviewView.layer.borderColor = isCurrentlySelected ? theme.tint.cgColor : theme.background.cgColor
+        if let iconContentView = iconContentView {
+            iconContentView.layer.borderColor = isCurrentlySelected ? theme.tint.cgColor : theme.background.cgColor
         }
     }
 }
