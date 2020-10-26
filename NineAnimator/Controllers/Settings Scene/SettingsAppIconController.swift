@@ -34,7 +34,9 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         [
             "Tydox's 9",
             "9 Testboi",
-            "Nsxtop's 9"
+            "Nsxtop's 9",
+            "NsxHalloween",
+            "B'day by Nsx"
         ] .filter { availableAppIcons.contains($0) }
     }()
     

@@ -38,6 +38,20 @@
 					<string>9 Testboi</string>
 				</array>
 			</dict>
+			<key>NsxHalloween</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>NsxHalloween</string>
+				</array>
+			</dict>
+			<key>B&apos;day by Nsx</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>B&apos;day by Nsx</string>
+				</array>
+			</dict>
 			<key>Fox</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -45,18 +59,18 @@
 					<string>Fox</string>
 				</array>
 			</dict>
-			<key>Nsxtop's 9</key>
+			<key>Nsxtop&apos;s 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Nsxtop's 9</string>
+					<string>Nsxtop&apos;s 9</string>
 				</array>
 			</dict>
-			<key>Tydox's 9</key>
+			<key>Tydox&apos;s 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Tydox's 9</string>
+					<string>Tydox&apos;s 9</string>
 				</array>
 			</dict>
 		</dict>
@@ -65,6 +79,20 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>B&apos;day by Nsx</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>B&apos;day by Nsx</string>
+				</array>
+			</dict>
+			<key>NsxHalloween</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>NsxHalloween</string>
+				</array>
+			</dict>
 			<key>9 Testboi</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -79,18 +107,18 @@
 					<string>Fox</string>
 				</array>
 			</dict>
-			<key>Nsxtop's 9</key>
+			<key>Nsxtop&apos;s 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Nsxtop's 9</string>
+					<string>Nsxtop&apos;s 9</string>
 				</array>
 			</dict>
-			<key>Tydox's 9</key>
+			<key>Tydox&apos;s 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Tydox's 9</string>
+					<string>Tydox&apos;s 9</string>
 				</array>
 			</dict>
 		</dict>
@@ -154,9 +182,7 @@
 		<string>com.marcuszhou.nineanimator.activity.continueEpisode</string>
 	</array>
 	<key>UIApplicationRegistrationData</key>
-	<data>
-	b6TFpcxX
-	</data>
+	<data>b6TFpcxX</data>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

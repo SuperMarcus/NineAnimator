@@ -374,6 +374,10 @@
 		2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */; };
 		2CD9B9A621FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */; };
 		2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */; };
+		2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */; };
+		2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */; };
+		2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */; };
+		2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */; };
 		2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */; };
 		2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */; };
 		2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */; };
@@ -911,6 +915,10 @@
 		2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeAirDateView.swift; sourceTree = "<group>"; };
 		2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSynopsisCellTableViewCell.swift; sourceTree = "<group>"; };
 		2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@2x.png"; sourceTree = "<group>"; };
+		2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@3x.png"; sourceTree = "<group>"; };
+		2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@3x.png"; sourceTree = "<group>"; };
+		2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@2x.png"; sourceTree = "<group>"; };
 		2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorCloud.swift; sourceTree = "<group>"; };
 		2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPointerEffectDelegate.swift; sourceTree = "<group>"; };
 		2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PointerEffects.swift"; sourceTree = "<group>"; };
@@ -1707,6 +1715,10 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */,
+				2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */,
+				2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */,
+				2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */,
 				2C83E0AC2526F4B400B00850 /* Nsxtop's 9@2x.png */,
 				2C83E0AB2526F4B400B00850 /* Nsxtop's 9@3x.png */,
 				2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */,
@@ -2452,11 +2464,13 @@
 				2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */,
 				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
+				2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */,
 				2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */,
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C83E0AE2526F4B500B00850 /* Nsxtop's 9@2x.png in Resources */,
+				2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */,
 				BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */,
 				2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */,
 				2C86C1E5225D6D8500950ABF /* Setup.storyboard in Resources */,
@@ -2470,9 +2484,11 @@
 				2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
+				2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */,
 				2C979F17235A16C400BC8699 /* Library.storyboard in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 				2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */,
+				2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
