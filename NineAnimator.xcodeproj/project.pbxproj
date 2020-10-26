@@ -987,7 +987,7 @@
 		2CFD3F5A24BCC6960056E68E /* NACoreDataAnyLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataAnyLink.swift; sourceTree = "<group>"; };
 		2CFD3F7C24BCD2910056E68E /* NACoreDataLibraryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataLibraryRecord.swift; sourceTree = "<group>"; };
 		2CFD3F7E24BCE4270056E68E /* NACoreDataLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataLibrary.swift; sourceTree = "<group>"; };
-		2CFD3F8024BCE6D50056E68E /* NACoreDataLibrary+Context.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = "NACoreDataLibrary+Context.swift"; sourceTree = "<group>"; };
+		2CFD3F8024BCE6D50056E68E /* NACoreDataLibrary+Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NACoreDataLibrary+Context.swift"; sourceTree = "<group>"; };
 		2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMigrator.swift; sourceTree = "<group>"; };
 		2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+CalendarProvider.swift"; sourceTree = "<group>"; };
 		2CFE2D9A227D441700030B1F /* DictionaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
