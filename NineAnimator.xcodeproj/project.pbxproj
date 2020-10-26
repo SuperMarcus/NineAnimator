@@ -2502,7 +2502,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\n    \n    echo \"Removing com.apple.security.app-sandbox on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.security\\.app-sandbox\" \"${ENTITLEMENTS_FILE}\"\nfi\n";
+			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    if [ -f \"${ENTITLEMENTS_FILE}\" ]; then\n        echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n        plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\n        \n        echo \"Removing com.apple.security.app-sandbox on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n        plutil -remove \"com\\.apple\\.security\\.app-sandbox\" \"${ENTITLEMENTS_FILE}\"\n    else\n        echo \"WARNING: Unable to find and adjust entitlement file for macCatalyst build!!\"\n    fi\nfi\n";
 		};
 		2CD7499C225B6409004C6C0C /* Generate Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
