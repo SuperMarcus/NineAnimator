@@ -128,7 +128,7 @@ struct Anime {
     
     /// Retrieve all available links under the current server selection
     var episodeLinks: EpisodeLinksCollection {
-        episodes[currentServer]!
+        episodes[currentServer] ?? []
     }
     
     /// Retrieve the number of episode links under the current server selection
@@ -227,7 +227,7 @@ struct Anime {
         
         // If even the source cannot recommend a server, fallback to
         // the default behavior -- use the first available server
-        select(server: servers.first!.key)
+        select(server: servers.first?.key ?? Anime.undeterminedServer)
     }
 }
 
