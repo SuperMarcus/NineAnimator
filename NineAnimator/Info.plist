@@ -52,6 +52,13 @@
 					<string>B&apos;day by Nsx</string>
 				</array>
 			</dict>
+			<key>Bald Man</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Bald Man</string>
+				</array>
+			</dict>
 			<key>Fox</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -79,6 +86,13 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>Bald Man</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Bald Man</string>
+				</array>
+			</dict>
 			<key>B&apos;day by Nsx</key>
 			<dict>
 				<key>CFBundleIconFiles</key>

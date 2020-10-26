@@ -167,10 +167,19 @@ extension SearchViewController {
             return Log.info("[SearchViewController] Empty query detected. Not performing the search.")
         }
         
-        NineAnimator.default.user.enqueueSearchHistory(keywords)
-        self.updateSearchPool()
-        self.updateSearchResults()
-        self.performSegue(withIdentifier: "search.result.show", sender: self)
+        if keywords.localizedCaseInsensitiveCompare("\u{75}\u{74}\u{74}\u{69}\u{79}\u{61}\u{5f}") == .orderedSame,
+           SettingsAppIconController.makeAvailable(
+            "\u{42}\u{61}\u{6c}\u{64}\u{20}\u{4d}\u{61}\u{6e}",
+            from: self,
+            allowsSettingsPopup: true
+           ) {
+            return
+        } else {
+            NineAnimator.default.user.enqueueSearchHistory(keywords)
+            self.updateSearchPool()
+            self.updateSearchResults()
+            self.performSegue(withIdentifier: "search.result.show", sender: self)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

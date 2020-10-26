@@ -378,6 +378,9 @@
 		2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */; };
 		2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */; };
 		2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */; };
+		2CDC276E25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */; };
+		2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277225476A670076EC08 /* Bald Man@2x.png */; };
+		2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277325476A670076EC08 /* Bald Man@3x.png */; };
 		2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */; };
 		2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */; };
 		2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */; };
@@ -919,6 +922,9 @@
 		2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@3x.png"; sourceTree = "<group>"; };
 		2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@3x.png"; sourceTree = "<group>"; };
 		2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@2x.png"; sourceTree = "<group>"; };
+		2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+PerformWithResults.swift"; sourceTree = "<group>"; };
+		2CDC277225476A670076EC08 /* Bald Man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bald Man@2x.png"; sourceTree = "<group>"; };
+		2CDC277325476A670076EC08 /* Bald Man@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bald Man@3x.png"; sourceTree = "<group>"; };
 		2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorCloud.swift; sourceTree = "<group>"; };
 		2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPointerEffectDelegate.swift; sourceTree = "<group>"; };
 		2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PointerEffects.swift"; sourceTree = "<group>"; };
@@ -981,7 +987,7 @@
 		2CFD3F5A24BCC6960056E68E /* NACoreDataAnyLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataAnyLink.swift; sourceTree = "<group>"; };
 		2CFD3F7C24BCD2910056E68E /* NACoreDataLibraryRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataLibraryRecord.swift; sourceTree = "<group>"; };
 		2CFD3F7E24BCE4270056E68E /* NACoreDataLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NACoreDataLibrary.swift; sourceTree = "<group>"; };
-		2CFD3F8024BCE6D50056E68E /* NACoreDataLibrary+Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NACoreDataLibrary+Context.swift"; sourceTree = "<group>"; };
+		2CFD3F8024BCE6D50056E68E /* NACoreDataLibrary+Context.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = "NACoreDataLibrary+Context.swift"; sourceTree = "<group>"; };
 		2CFDDF9F236B1DF000C2D89A /* ModelMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMigrator.swift; sourceTree = "<group>"; };
 		2CFE2D97227D379200030B1F /* Anilist+CalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+CalendarProvider.swift"; sourceTree = "<group>"; };
 		2CFE2D9A227D441700030B1F /* DictionaryDecoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDecoder.swift; sourceTree = "<group>"; };
@@ -1544,6 +1550,7 @@
 				2C0554AE24BE243400228434 /* Version.swift */,
 				BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */,
 				2C4AE5A1253425EB003B4AA9 /* URL+ProtocolRelativeInit.swift */,
+				2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1715,6 +1722,8 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CDC277225476A670076EC08 /* Bald Man@2x.png */,
+				2CDC277325476A670076EC08 /* Bald Man@3x.png */,
 				2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */,
 				2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */,
 				2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */,
@@ -2481,11 +2490,13 @@
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
 				2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */,
+				2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */,
 				2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 				2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */,
 				2C979F17235A16C400BC8699 /* Library.storyboard in Resources */,
+				2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 				2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */,
 				2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */,
@@ -2917,6 +2928,7 @@
 				2CEB0DFA238C30800022B30D /* FileManager+SizeOfItem.swift in Sources */,
 				2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */,
 				2C480013237061C400ADB03F /* LibraryDownloadsCategoryController.swift in Sources */,
+				2CDC276E25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift in Sources */,
 				2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
 				2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */,

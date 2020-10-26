@@ -112,6 +112,10 @@ extension RootViewController {
     func presentShareSheet(forLink link: AnyLink, from sourceView: UIView, inViewController vc: UIViewController? = nil) {
         // Sharing the redirection link from NineAnimatorCloud
         let sharingLink = link.cloudRedirectionUrl
+        presentShareSheet(forURL: sharingLink, from: sourceView, inViewController: vc)
+    }
+    
+    func presentShareSheet(forURL sharingLink: URL, from sourceView: UIView, inViewController vc: UIViewController? = nil) {
         let activityViewController = UIActivityViewController(
             activityItems: [ sharingLink ],
             applicationActivities: nil

@@ -34,11 +34,13 @@ extension NACoreDataLibrary {
 extension NACoreDataLibrary.Context {
     /// Obtain the list of recently viewed titles
     func fetchRecents() throws -> [AnyLink] {
-        try _coreDataContext
-            .fetch(_recentsFetchRequest())
-            .compactMap {
-                $0.link?.nativeAnyLink
-            }
+        try _coreDataContext.performWithResults {
+            try _coreDataContext
+                .fetch(_recentsFetchRequest())
+                .compactMap {
+                    $0.link?.nativeAnyLink
+                }
+        }
     }
     
     /// Obtain a fetch results controller for the recent records
@@ -69,19 +71,21 @@ extension NACoreDataLibrary.Context {
     ///
     /// This is a time-consuming operation and should not be performed regularly. This operation also erases any information about the individual records.
     func resetRecents(to newRecents: [AnyLink] = []) throws {
-        // First remove all library records
-        let recentsFetchRequest = NACoreDataLibraryRecord.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
-        let deleteRequest = NSBatchDeleteRequest(fetchRequest: recentsFetchRequest)
-        _ = try self._coreDataContext.execute(deleteRequest)
-        
-        var dummyUpdateDate = Date()
-        for recent in newRecents {
-            let managedRecord = try _obtainManagedRecord(forAnyLink: recent)
-            managedRecord.lastAccess = dummyUpdateDate
-            dummyUpdateDate = dummyUpdateDate.addingTimeInterval(-1)
+        try _coreDataContext.performWithResults {
+            // First remove all library records
+            let recentsFetchRequest = NACoreDataLibraryRecord.fetchRequest() as NSFetchRequest<NSFetchRequestResult>
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: recentsFetchRequest)
+            _ = try self._coreDataContext.execute(deleteRequest)
+            
+            var dummyUpdateDate = Date()
+            for recent in newRecents {
+                let managedRecord = try _obtainManagedRecord(forAnyLink: recent)
+                managedRecord.lastAccess = dummyUpdateDate
+                dummyUpdateDate = dummyUpdateDate.addingTimeInterval(-1)
+            }
+            
+            try _coreDataContext.save()
         }
-        
-        try _coreDataContext.save()
     }
 }
 
