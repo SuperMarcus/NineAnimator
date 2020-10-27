@@ -17,6 +17,7 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenterAnalytics
 import UIKit
 
 protocol BlendInViewController { }
@@ -66,6 +67,12 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     func navigationController(_ navigationController: UINavigationController,
                               didShow viewController: UIViewController,
                               animated: Bool) {
+        // Track screen view events to better resolve crashes/bugs
+        MSAnalytics.trackEvent(
+            "Entered Scene",
+            withProperties: ["sceneName": viewController.className]
+        )
+        
         // Don't bother DontBotherViewController
         guard !(viewController is DontBotherViewController) else { return }
         
@@ -119,5 +126,11 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     @available(iOS 13.0, *)
     func resetNavigationBarStyle() {
         updateAppearance(withTheme: Theme.current)
+    }
+}
+private extension UIViewController {
+    var className: String {
+        // Removes The Module Name Prefix
+        NSStringFromClass(self.classForCoder).components(separatedBy: ".").last ?? "Unknown UIViewController Class"
     }
 }
