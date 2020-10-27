@@ -104,6 +104,13 @@ extension NineAnimatorUser {
         searchHistory = mutatingHistory
     }
     
+    /// Remove a search history item
+    func removeSearchHistoryItems(matchingKeywords: String) {
+        searchHistory = searchHistory.filter {
+            $0 != matchingKeywords
+        }
+    }
+    
     /// Clear the search history
     func clearSearchHistory() {
         _freezer.removeObject(forKey: Keys.searchHistory)

@@ -73,7 +73,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
     private func updateSearchPool() {
         // Search history
         let searchHistoryItems: [Item] = NineAnimator.default.user.searchHistory.map {
-            history in .init(keywords: history, ofType: .history)
+            history in .init(keywords: history, ofType: .history, acceptsDeleteAction: true)
         }
         
         // Links from recents
@@ -84,11 +84,20 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
         
         let recentAnimeItems: [Item] = Set(recentAnimeList).map {
-            recent in .init(.anime(recent), ofType: .recents)
+            recent in .init(.anime(recent), ofType: .recents, acceptsDeleteAction: false)
         } .sorted { $0.keywords < $1.keywords }
         
         // Concatenate results to form the items pool
         quickSearchPool = searchHistoryItems + recentAnimeItems
+    }
+    
+    private func removeItemFromPool(_ item: Item) {
+        quickSearchPool.removeAll { $0 == item }
+        
+        if let visibleItemIndex = self.indexPath(forVisibleItem: item) {
+            self.filteredItems.removeAll { $0 == item }
+            self.tableView.deleteRows(at: [ visibleItemIndex ], with: .top)
+        }
     }
 }
 
@@ -205,6 +214,16 @@ extension SearchViewController {
             }
         }
     }
+    
+    func searchViewItemCell(_ cell: SimpleAnimeTableViewCell, deleteItem item: Item) {
+        switch item.type {
+        case .history:
+            NineAnimator.default.user.removeSearchHistoryItems(matchingKeywords: item.keywords)
+            self.removeItemFromPool(item)
+        default:
+            Log.error("[SearchViewController] Deleting an item of type %@ is not supported", item.type.rawValue)
+        }
+    }
 }
 
 // MARK: - Table view data source
@@ -222,7 +241,7 @@ extension SearchViewController {
             withIdentifier: "anime.container.simple",
             for: indexPath
         ) as! SimpleAnimeTableViewCell
-        cell.setPresenting(filteredItems[indexPath.item])
+        cell.setPresenting(filteredItems[indexPath.item], delegate: self)
         cell.makeThemable()
         return cell
     }
@@ -294,20 +313,33 @@ extension SearchViewController {
         /// Type of the item
         var type: ItemType
         
-        init(_ link: AnyLink, ofType type: ItemType) {
+        /// Whether this item can be deleted
+        var acceptsDeleteAction: Bool
+        
+        init(_ link: AnyLink, ofType type: ItemType, acceptsDeleteAction: Bool) {
             self.link = link
             self.type = type
             self.keywords = link.name
+            self.acceptsDeleteAction = acceptsDeleteAction
         }
         
-        init(keywords: String, ofType type: ItemType) {
+        init(keywords: String, ofType type: ItemType, acceptsDeleteAction: Bool) {
             self.keywords = keywords
             self.type = type
+            self.acceptsDeleteAction = acceptsDeleteAction
         }
         
         func hash(into hasher: inout Hasher) {
             hasher.combine(link)
             hasher.combine(type)
         }
+    }
+    
+    fileprivate func indexPath(forVisibleItem item: Item) -> IndexPath? {
+        if let itemIndex = filteredItems.firstIndex(of: item) {
+            return IndexPath(item: itemIndex, section: 0)
+        }
+        
+        return nil
     }
 }
