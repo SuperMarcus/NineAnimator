@@ -51,7 +51,7 @@ extension NASourceAnimeUnity {
             let decodedResponse = user
             let recentAnimeLinks = try decodedResponse.map {
                 record -> AnimeLink in
-                let link = self.endpointURL.absoluteString + "/anime/"+String(record.id)+"-"+record.slug
+                let link = self.endpointURL.absoluteString + "/anime/" + String(record.id) + "-" + record.slug
                 var animeUrlBuilder = try URLComponents(
                     url: link.asURL(),
                     resolvingAgainstBaseURL: true
