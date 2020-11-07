@@ -27,6 +27,7 @@ extension NASourceAnimeUnity {
         var imageurl: String
         var slug: String
     }
+
     struct Featured: Codable {
         var data: [SearchResponseRecordsFeatured]
     }
