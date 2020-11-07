@@ -30,6 +30,7 @@ extension NASourceAnimeUnity {
     struct Featured: Codable {
         var data: [SearchResponseRecordsFeatured]
     }
+    
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
         requestManager.request(
             url: endpointURL,
