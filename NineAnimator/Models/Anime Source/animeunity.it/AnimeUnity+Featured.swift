@@ -81,7 +81,7 @@ extension NASourceAnimeUnity {
             let data_jsonFeatured = try encodedFeatured.data(using: .utf8).tryUnwrap()
             let decoderFeatured = JSONDecoder()
             decoderFeatured.keyDecodingStrategy = .convertFromSnakeCase
-            let userFeatured: Featured = try decoderFeatured.decode(Featured.self, from: data_jsonFeatured)
+            let userFeatured: Featured = try decoderFeatured.decode(Featured.self, from: jsonFeaturedData)
             let decodedResponseFeatured = userFeatured.data
             let FeaturedAnimeLinks = try decodedResponseFeatured.map {
                 record -> AnimeLink in
