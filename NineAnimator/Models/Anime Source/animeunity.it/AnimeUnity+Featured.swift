@@ -37,7 +37,7 @@ extension NASourceAnimeUnity {
             url: endpointURL,
             handling: .browsing
         ) .responseData
-        .thenPromise {
+          .thenPromise {
             episodePageContent in
             let data = episodePageContent
             let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
