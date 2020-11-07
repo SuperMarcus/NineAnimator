@@ -34,7 +34,9 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         [
             "Tydox's 9",
             "9 Testboi",
-            "Nsxtop's 9"
+            "Nsxtop's 9",
+            "NsxHalloween",
+            "B'day by Nsx"
         ] .filter { availableAppIcons.contains($0) }
     }()
     
@@ -173,13 +175,17 @@ class SettingsAppIconController: MinFilledCollectionViewController {
 
 // MARK: - Discover New Icon!
 extension SettingsAppIconController {
-    static func makeAvailable(_ iconName: String, from viewController: UIViewController, allowsSettingsPopup: Bool, completionHandler: (() -> Void)? = nil) {
+    static func makeAvailable(_ iconName: String, from viewController: UIViewController, allowsSettingsPopup: Bool, completionHandler: (() -> Void)? = nil) -> Bool {
         var discoveredIcons = NineAnimator.default.user.discoveredAppIcons
         
         guard UIApplication.shared.supportsAlternateIcons, !discoveredIcons.contains(iconName) else {
             completionHandler?()
-            return
+            return false
         }
+        
+        MSAnalytics.trackEvent("App Magic #1002", withProperties: [
+            "unlockedIcon": iconName
+        ])
         
         let alertController = UIAlertController(
             title: "App Icon Discovered",
@@ -213,5 +219,7 @@ extension SettingsAppIconController {
         discoveredIcons.append(iconName)
         NineAnimator.default.user.discoveredAppIcons = discoveredIcons
         viewController.present(alertController, animated: true)
+        
+        return true
     }
 }

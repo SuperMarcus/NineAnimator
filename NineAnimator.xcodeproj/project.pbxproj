@@ -374,6 +374,13 @@
 		2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */; };
 		2CD9B9A621FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */; };
 		2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */; };
+		2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */; };
+		2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */; };
+		2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */; };
+		2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */; };
+		2CDC276E25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */; };
+		2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277225476A670076EC08 /* Bald Man@2x.png */; };
+		2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277325476A670076EC08 /* Bald Man@3x.png */; };
 		2CDE858823226B2300F1A61A /* NineAnimatorCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */; };
 		2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */; };
 		2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */; };
@@ -444,10 +451,16 @@
 		65ED216124DB3BE00040844C /* MonosChinos+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */; };
 		BF064BAF24E30ACD005A44EB /* OpenStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */; };
 		BF1924A924E1FB12008164C2 /* YourUploadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1924A824E1FB12008164C2 /* YourUploadParser.swift */; };
+		BF1CBEFC25253006003354B5 /* Aniwatch+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */; };
+		BF5FC2B9252BC1600074495C /* Aniwatch+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */; };
+		BF5FC2BE252BC9BC0074495C /* Aniwatch+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */; };
 		BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
 		BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */; };
 		BF95264424F1E72300924B79 /* Anilist+GQLRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95264324F1E72300924B79 /* Anilist+GQLRecommendation.swift */; };
 		BF95264624F1EAF600924B79 /* Anilist+UserRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95264524F1EAF600924B79 /* Anilist+UserRecommendations.swift */; };
+		BF9EF268251D3BCF007E8FB5 /* Aniwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9EF267251D3BCF007E8FB5 /* Aniwatch.swift */; };
+		BF9EF270251D3DA3007E8FB5 /* Aniwatch+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9EF26F251D3DA3007E8FB5 /* Aniwatch+Featured.swift */; };
+		BF9EF275251D4314007E8FB5 /* Aniwatch+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9EF274251D4314007E8FB5 /* Aniwatch+RequestModifier.swift */; };
 		BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */; };
 		BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489424DE0723009BE142 /* AnimeHub.swift */; };
 		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
@@ -905,6 +918,13 @@
 		2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeAirDateView.swift; sourceTree = "<group>"; };
 		2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSynopsisCellTableViewCell.swift; sourceTree = "<group>"; };
 		2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@2x.png"; sourceTree = "<group>"; };
+		2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@3x.png"; sourceTree = "<group>"; };
+		2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@3x.png"; sourceTree = "<group>"; };
+		2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@2x.png"; sourceTree = "<group>"; };
+		2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+PerformWithResults.swift"; sourceTree = "<group>"; };
+		2CDC277225476A670076EC08 /* Bald Man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bald Man@2x.png"; sourceTree = "<group>"; };
+		2CDC277325476A670076EC08 /* Bald Man@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bald Man@3x.png"; sourceTree = "<group>"; };
 		2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NineAnimatorCloud.swift; sourceTree = "<group>"; };
 		2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedPointerEffectDelegate.swift; sourceTree = "<group>"; };
 		2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PointerEffects.swift"; sourceTree = "<group>"; };
@@ -996,9 +1016,15 @@
 		65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Episode.swift"; sourceTree = "<group>"; };
 		BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStreamParser.swift; sourceTree = "<group>"; };
 		BF1924A824E1FB12008164C2 /* YourUploadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourUploadParser.swift; sourceTree = "<group>"; };
+		BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Search.swift"; sourceTree = "<group>"; };
+		BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Anime.swift"; sourceTree = "<group>"; };
+		BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Episode.swift"; sourceTree = "<group>"; };
 		BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AnilistUserRecommendations.graphql; sourceTree = "<group>"; };
 		BF95264324F1E72300924B79 /* Anilist+GQLRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLRecommendation.swift"; sourceTree = "<group>"; };
 		BF95264524F1EAF600924B79 /* Anilist+UserRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+UserRecommendations.swift"; sourceTree = "<group>"; };
+		BF9EF267251D3BCF007E8FB5 /* Aniwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Aniwatch.swift; sourceTree = "<group>"; };
+		BF9EF26F251D3DA3007E8FB5 /* Aniwatch+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Featured.swift"; sourceTree = "<group>"; };
+		BF9EF274251D4314007E8FB5 /* Aniwatch+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+RequestModifier.swift"; sourceTree = "<group>"; };
 		BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeSubscript.swift"; sourceTree = "<group>"; };
 		BFAA489424DE0723009BE142 /* AnimeHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHub.swift; sourceTree = "<group>"; };
 		BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Featured.swift"; sourceTree = "<group>"; };
@@ -1524,6 +1550,7 @@
 				2C0554AE24BE243400228434 /* Version.swift */,
 				BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */,
 				2C4AE5A1253425EB003B4AA9 /* URL+ProtocolRelativeInit.swift */,
+				2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1695,6 +1722,12 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CDC277225476A670076EC08 /* Bald Man@2x.png */,
+				2CDC277325476A670076EC08 /* Bald Man@3x.png */,
+				2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */,
+				2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */,
+				2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */,
+				2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */,
 				2C83E0AC2526F4B400B00850 /* Nsxtop's 9@2x.png */,
 				2C83E0AB2526F4B400B00850 /* Nsxtop's 9@3x.png */,
 				2C83E0862526C62D00B00850 /* 9 Testboi@2x.png */,
@@ -1752,6 +1785,7 @@
 			isa = PBXGroup;
 			children = (
 				2C83E05A25269B5800B00850 /* hanime.tv */,
+				BF9EF266251D3B92007E8FB5 /* aniwatch.me */,
 				C8B7F2FE24EA995400A56BE1 /* animesaturn.com */,
 				BFAA489324DE06F3009BE142 /* animehub.ac */,
 				65ED215724DB3B2E0040844C /* monoschinos.com */,
@@ -2199,6 +2233,19 @@
 			path = monoschinos.com;
 			sourceTree = "<group>";
 		};
+		BF9EF266251D3B92007E8FB5 /* aniwatch.me */ = {
+			isa = PBXGroup;
+			children = (
+				BF9EF267251D3BCF007E8FB5 /* Aniwatch.swift */,
+				BF9EF26F251D3DA3007E8FB5 /* Aniwatch+Featured.swift */,
+				BF9EF274251D4314007E8FB5 /* Aniwatch+RequestModifier.swift */,
+				BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */,
+				BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */,
+				BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */,
+			);
+			path = aniwatch.me;
+			sourceTree = "<group>";
+		};
 		BFAA489324DE06F3009BE142 /* animehub.ac */ = {
 			isa = PBXGroup;
 			children = (
@@ -2426,11 +2473,13 @@
 				2C60EEDD221B5AC8002C96D4 /* AniListTrackingMutation.graphql in Resources */,
 				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
+				2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */,
 				2C60EED5221B58C2002C96D4 /* AniListUser.graphql in Resources */,
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
 				2C83E0AE2526F4B500B00850 /* Nsxtop's 9@2x.png in Resources */,
+				2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */,
 				BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */,
 				2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */,
 				2C86C1E5225D6D8500950ABF /* Setup.storyboard in Resources */,
@@ -2441,12 +2490,16 @@
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
 				2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */,
+				2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */,
 				2C0CFC3B2263B39100EC793E /* AniListCalendarQuery.graphql in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
+				2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */,
 				2C979F17235A16C400BC8699 /* Library.storyboard in Resources */,
+				2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 				2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */,
+				2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2476,7 +2529,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\n    \n    echo \"Removing com.apple.security.app-sandbox on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n    plutil -remove \"com\\.apple\\.security\\.app-sandbox\" \"${ENTITLEMENTS_FILE}\"\nfi\n";
+			shellScript = "if [ \"${IS_MACCATALYST}\" = \"YES\" ]; then\n    ENTITLEMENTS_FILE=\"${TARGET_TEMP_DIR}/${FULL_PRODUCT_NAME}.xcent\"\n    \n    if [ -f \"${ENTITLEMENTS_FILE}\" ]; then\n        echo \"Removing com.apple.developer.homekit entitlement on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n        plutil -remove \"com\\.apple\\.developer\\.homekit\" \"${ENTITLEMENTS_FILE}\"\n        \n        echo \"Removing com.apple.security.app-sandbox on Mac Catalyst from ${ENTITLEMENTS_FILE}\"\n        plutil -remove \"com\\.apple\\.security\\.app-sandbox\" \"${ENTITLEMENTS_FILE}\"\n    else\n        echo \"WARNING: Unable to find and adjust entitlement file for macCatalyst build!!\"\n    fi\nfi\n";
 		};
 		2CD7499C225B6409004C6C0C /* Generate Version Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2538,6 +2591,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF1CBEFC25253006003354B5 /* Aniwatch+Search.swift in Sources */,
 				2C7FD584235909B300E37A89 /* ClosedRange+Clamp.swift in Sources */,
 				2C0D594A22B9DF6600237511 /* BadNineAnime+Token.swift in Sources */,
 				2C4800112370618D00ADB03F /* LibrarySubscriptionCategoryController.swift in Sources */,
@@ -2632,6 +2686,7 @@
 				2C8519C022D31F0900EEF3AC /* AnimeKisa+Featured.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
 				2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */,
+				BF9EF268251D3BCF007E8FB5 /* Aniwatch.swift in Sources */,
 				2C93BD4E22220C17000411CB /* Kitsu+Mutation.swift in Sources */,
 				2C7B7AAA2296F8CA002EC74C /* VidStreamingParser.swift in Sources */,
 				2C9383D821FCF1B9008C0D01 /* UITableViewCell+StyleAttributes.swift in Sources */,
@@ -2823,6 +2878,7 @@
 				2C42577F2325366000FCCCCE /* Simkl+Reference.swift in Sources */,
 				2C3D7BFB2210AE1D0045D648 /* AnimeTwist+Anime.swift in Sources */,
 				2C0E7558226241A500DF3AC4 /* QuickActionsTableViewCell.swift in Sources */,
+				BF5FC2B9252BC1600074495C /* Aniwatch+Anime.swift in Sources */,
 				2C42577D2325365100FCCCCE /* Simkl+User.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2C84D8E524B4BF0000E495A8 /* ServiceDescriptor.swift in Sources */,
@@ -2872,11 +2928,13 @@
 				2CEB0DFA238C30800022B30D /* FileManager+SizeOfItem.swift in Sources */,
 				2CAD37552224A277008AD6B4 /* String+RomanNumerals.swift in Sources */,
 				2C480013237061C400ADB03F /* LibraryDownloadsCategoryController.swift in Sources */,
+				2CDC276E25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift in Sources */,
 				2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
 				2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */,
 				2C2C54F122159E4700BAA76E /* String+Proximity.swift in Sources */,
 				2C6677A021BC4664000E5ACC /* ListingEntryTableViewCell.swift in Sources */,
+				BF9EF270251D3DA3007E8FB5 /* Aniwatch+Featured.swift in Sources */,
 				2C86BD0921F0169F002D876A /* DummyParser.swift in Sources */,
 				2C23AE422229FE5600512150 /* MyAnimeList+Collections.swift in Sources */,
 				2C2C54FD221606CA00BAA76E /* User+Synchronize.swift in Sources */,
@@ -2891,6 +2949,7 @@
 				2CA4B7F723B1E7C400B4E6F7 /* AnimeDao+Featured.swift in Sources */,
 				2C0CFC4122640A1200EC793E /* DiscoveryStandardTableViewCell.swift in Sources */,
 				2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */,
+				BF9EF275251D4314007E8FB5 /* Aniwatch+RequestModifier.swift in Sources */,
 				2C6A390623A017B900FC00A9 /* FourAnime+Search.swift in Sources */,
 				2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */,
 				2C4FDDB122485E5D0059B7D8 /* AnimeUltima+Featured.swift in Sources */,
@@ -2899,6 +2958,7 @@
 				2C8519C822D3252600EEF3AC /* AnimeKisa+RequestModifier.swift in Sources */,
 				2CFD3F7F24BCE4270056E68E /* NACoreDataLibrary.swift in Sources */,
 				2CEC21A2220917D200A30F4F /* Promise+Fail.swift in Sources */,
+				BF5FC2BE252BC9BC0074495C /* Aniwatch+Episode.swift in Sources */,
 				2C4FDDAF22483CBB0059B7D8 /* AnimeUltima.swift in Sources */,
 				2C1C71772218EFB700760A69 /* Anilist+AnimeInformation.swift in Sources */,
 				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
