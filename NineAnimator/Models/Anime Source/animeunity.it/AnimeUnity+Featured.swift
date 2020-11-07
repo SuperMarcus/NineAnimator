@@ -101,7 +101,7 @@ extension NASourceAnimeUnity {
                 )
             }
             return BasicFeaturedContainer(
-                featured: Array(FeaturedAnimeLinks.prefix(10)),
+                featured: Array(featuredAnimeLinks.prefix(10)),
                 latest: Array(recentAnimeLinks.prefix(10))
             )
           }
