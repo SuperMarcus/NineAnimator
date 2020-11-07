@@ -78,7 +78,7 @@ extension NASourceAnimeUnity {
             let bowlFeatured = try SwiftSoup.parse(utf8TextFeatured)
             var encodedFeatured = try bowlFeatured.select("top-anime").attr("animes")
             encodedFeatured = encodedFeatured.replacingOccurrences(of: "\n", with: "")
-            let data_jsonFeatured = try encodedFeatured.data(using: .utf8).tryUnwrap()
+            let jsonFeaturedData = try encodedFeatured.data(using: .utf8).tryUnwrap()
             let decoderFeatured = JSONDecoder()
             decoderFeatured.keyDecodingStrategy = .convertFromSnakeCase
             let userFeatured: Featured = try decoderFeatured.decode(Featured.self, from: jsonFeaturedData)
