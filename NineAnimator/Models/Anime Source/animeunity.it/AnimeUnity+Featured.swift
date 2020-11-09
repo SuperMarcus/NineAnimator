@@ -51,9 +51,9 @@ extension NASourceAnimeUnity {
             let decodedResponse = user
             let recentAnimeLinks = try decodedResponse.map {
                 record -> AnimeLink in
-                let link = self.endpointURL.absoluteString + "/anime/" + String(record.id) + "-" + record.slug
+                let link = self.endpointURL.appendingPathComponent("anime/" + String(record.id) + "-" + record.slug)
                 var animeUrlBuilder = try URLComponents(
-                    url: link.asURL(),
+                    url: link,
                     resolvingAgainstBaseURL: true
                 ).tryUnwrap()
                 animeUrlBuilder.queryItems = [
@@ -85,9 +85,9 @@ extension NASourceAnimeUnity {
             let decodedResponseFeatured = userFeatured.data
             let featuredAnimeLinks = try decodedResponseFeatured.map {
                 record -> AnimeLink in
-                let link = self.endpointURL.absoluteString + "/anime/"+String(record.id)+"-"+record.slug
+                let link = self.endpointURL.appendingPathComponent("anime/" + String(record.id) + "-" + record.slug)
                 var animeUrlBuilder = try URLComponents(
-                    url: link.asURL(),
+                    url: link,
                     resolvingAgainstBaseURL: true
                 ).tryUnwrap()
                 animeUrlBuilder.queryItems = [
