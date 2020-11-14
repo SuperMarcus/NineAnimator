@@ -19,4 +19,39 @@
 
 import Foundation
 
-protocol ModelMigrator { }
+protocol ModelMigrator: AnyObject {
+    var delegate: ModelMigratorDelegate? { get set }
+    
+    /// The input version range that the migrator accepts
+    var inputVersionRange: Range<NineAnimatorVersion> { get }
+    
+    /// Perform the migration asynchronously
+    func beginMigration(sourceVersion: NineAnimatorVersion)
+}
+
+/// Progress of data migration
+struct ModelMigrationProgress {
+    /// Total number of steps for this migration
+    var numberOfSteps: Int
+    
+    /// Current step that the migrator is performing
+    var currentStep: Int
+    
+    /// User-readable description of the current step
+    var currentStepDescription: String
+    
+    /// Number of items in the current step
+    var currentStepItemsCount: Int
+    
+    /// Index of the currently processing item
+    var currentStepProcessingItem: Int
+}
+
+/// Delegate for ModelMigrator.
+///
+/// - Note: ModelMigrator makes no promise on which thread the delegate methods are called.
+protocol ModelMigratorDelegate: AnyObject {
+    func migrator(willBeginMigration migrator: ModelMigrator)
+    func migrator(migrationInProgress migrator: ModelMigrator, progress: ModelMigrationProgress)
+    func migrator(didCompleteMigration migrator: ModelMigrator, withError error: Error?)
+}

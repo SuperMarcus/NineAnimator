@@ -19,13 +19,13 @@ To install/update NineAnimator on **macOS**, follow the steps below:
 
 ## TestFlight Beta Testing
 
-> [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w) is currently
-> reaching full capacity. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
+> NineAnimator Beta Testing Program is currently unavailable. We plan to make it available again soon.
+> Please use another method for now. Join our [Discord server](https://discord.gg/dzTVzeW) for more information.
 
-We're constantly adding supports for new websites and implementing additional features.
+~~We're constantly adding supports for new websites and implementing additional features.
 Join the [NineAnimator Beta Testing Program](https://testflight.apple.com/join/SzIVhF6w)
 to be the first ones to try out those updates:
-[https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)
+[https://testflight.apple.com/join/SzIVhF6w](https://testflight.apple.com/join/SzIVhF6w)~~
 
 ## AppStore
 
@@ -39,7 +39,7 @@ to be the first ones to try out those updates:
 
 > Note: NineAnimator's AltStore Source is an experimental service. Currently the version on the AltStore source is synchronized with the latest Github release.
 
-* Source URL: `https://9ani.app/api/altstore`
+* Source URL: `https://9ani.app/api/altstore` ([Add Source](altstore://source?url=https%3A%2F%2F9ani.app%2Fapi%2Faltstore))
 * [Source Preview](https://altsource.by.lao.sb/browse/?source=https%3A%2F%2F9ani.app%2Fapi%2Faltstore)
 
 ## Legacy Methods

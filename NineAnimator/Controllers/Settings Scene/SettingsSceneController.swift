@@ -43,6 +43,8 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var allowNSFWContentSwitch: UISwitch!
     @IBOutlet private weak var fallbackToBrowserSwitch: UISwitch!
     @IBOutlet private weak var richPresenceStatusLabel: UILabel!
+    @IBOutlet private weak var appIconTableViewCell: UITableViewCell!
+    @IBOutlet private weak var currentAppIconLabel: UILabel!
     
     /// The path that the Settings view controller will be navigating to
     private var navigatingTo: EntryPath?
@@ -222,6 +224,7 @@ extension SettingsSceneController {
                                continueActionName: "Reset"
             ) { [weak self] in
                 NineAnimator.default.user.clearAll()
+                self?.logoutOfAllListingServices()
                 self?.clearCache()
                 self?.clearActivities()
                 self?.updatePreferencesUI()
@@ -283,6 +286,13 @@ extension SettingsSceneController {
         appearanceSegmentControl.selectedSegmentIndex = Theme.current.name == "dark" ? 0 : 1
         appearanceSegmentControl.isEnabled = !NineAnimator.default.user.dynamicAppearance
         dynamicAppearanceSwitch.setOn(NineAnimator.default.user.dynamicAppearance, animated: true)
+        if UIApplication.shared.supportsAlternateIcons {
+            currentAppIconLabel.text = UIApplication.shared.alternateIconName ?? "Default"
+            appIconTableViewCell.isUserInteractionEnabled = true
+        } else {
+            currentAppIconLabel.text = "Unavailable"
+            appIconTableViewCell.isUserInteractionEnabled = false
+        }
         
         if #available(iOS 13.0, *) {
             dynamicAppearanceSwitchLabel.text = "Sync with System"
@@ -395,7 +405,18 @@ extension SettingsSceneController {
     private func clearActivities() {
         if #available(iOS 12.0, *) {
             NSUserActivity.deleteAllSavedUserActivities {
-                [weak self] in self?.updatePreferencesUI()
+                [weak self] in DispatchQueue.main.async {
+                    self?.updatePreferencesUI()
+                }
+            }
+        }
+    }
+    
+    private func logoutOfAllListingServices() {
+        NineAnimator.default.trackingServices.forEach {
+            trackingService in
+            if trackingService.isCapableOfRetrievingAnimeState {
+                trackingService.deauthenticate()
             }
         }
     }
@@ -422,6 +443,11 @@ extension SettingsSceneController {
         /// Navigating to the `Storage` entry
         static var storage: EntryPath {
             EntryPath(segueIdentifier: "storage", itemIndex: nil)
+        }
+        
+        /// Navigating to the `App Icon` entry
+        static var appIcon: EntryPath {
+            EntryPath(segueIdentifier: "appIcon", itemIndex: nil)
         }
         
         fileprivate let segueIdentifier: String?

@@ -67,24 +67,25 @@ class InformationSceneHeadingView: UIView, Themable {
         optionsButton.isEnabled = false
         
         animeArtworkImageView.alpha = 0.0
-        animeArtworkImageView.kf.setImage(with: reference.artwork) {
+        animeArtworkImageView.kf.setImage(with: reference.artwork, completionHandler: {
             [weak animeArtworkImageView] _ in
             UIView.animate(withDuration: 0.1) {
                 animeArtworkImageView?.alpha = 1.0
             }
-        }
+        })
     }
     
     func update(with animeInformation: ListingAnimeInformation) {
         if let wallpaper = animeInformation.wallpapers.first {
             topImageView.alpha = 0.0
             topImageView.kf.setImage(
-                with: wallpaper
-            ) { [weak topImageView] _ in
-                UIView.animate(withDuration: 1) {
-                    topImageView?.alpha = 0.4
+                with: wallpaper,
+                completionHandler: { [weak topImageView] _ in
+                    UIView.animate(withDuration: 1) {
+                        topImageView?.alpha = 0.4
+                    }
                 }
-            }
+            )
         }
         
         UIView.animate(withDuration: 0.2) {

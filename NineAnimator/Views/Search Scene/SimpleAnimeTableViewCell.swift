@@ -21,18 +21,34 @@ import UIKit
 
 class SimpleAnimeTableViewCell: UITableViewCell, Themable {
     private(set) var item: SearchViewController.Item?
+    private(set) weak var delegate: SearchViewController?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let trashCanImage = #imageLiteral(resourceName: "baseline_delete_forever_black_24pt")
+        let accessoryButton = UIButton()
+        accessoryButton.setImage(trashCanImage, for: .normal)
+        accessoryButton.setImage(trashCanImage, for: .highlighted)
+        accessoryButton.addTarget(self, action: #selector(onDeleteButtonDidTap(_:)), for: .touchUpInside)
+        
+        self.accessoryView = accessoryButton
+    }
     
     /// Initialize the cell with a result item
-    func setPresenting(_ item: SearchViewController.Item) {
+    func setPresenting(_ item: SearchViewController.Item, delegate: SearchViewController) {
         self.item = item
         self.imageView?.image = item.type.icon
         self.updateText()
         self.pointerEffect.hover()
+        self.accessoryView?.isHidden = !item.acceptsDeleteAction
+        self.delegate = delegate
     }
     
     func theme(didUpdate theme: Theme) {
         self.imageView?.tintColor = theme.secondaryText
         self.backgroundColor = .clear
+        self.accessoryView?.tintColor = theme.secondaryText
         updateText()
     }
     
@@ -80,6 +96,17 @@ class SimpleAnimeTableViewCell: UITableViewCell, Themable {
                     ]
                 )
             }
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.accessoryView?.sizeToFit()
+    }
+    
+    @objc fileprivate func onDeleteButtonDidTap(_ senser: UIButton) {
+        if let item = self.item, let delegate = self.delegate {
+            delegate.searchViewItemCell(self, deleteItem: item)
         }
     }
 }

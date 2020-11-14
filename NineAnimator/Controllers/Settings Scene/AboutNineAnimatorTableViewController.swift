@@ -35,6 +35,7 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     
     private let discordInvitationUrl = URL(string: "https://discord.gg/dzTVzeW")!
     private var aboutTappingCounter = 0
+    private var buildTappingCounter = 0
     
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet private weak var buildNumberLabel: UILabel!
@@ -62,6 +63,12 @@ class AboutNineAnimatorTableViewController: UITableViewController {
                     aboutTappingCounter = 5
                     doMagic()
                 }
+            case "about.build":
+                buildTappingCounter += 1
+                if buildTappingCounter >= 3 {
+                    buildTappingCounter = 0
+                    exportLogs(source: cell)
+                }
             default:
                 Log.error("[AboutNineAnimatorTableViewController] Unknwon cell with identitier %@ selected.", cell.reuseIdentifier ?? "<Unknown>")
             }
@@ -84,22 +91,54 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     }
     
     private func doMagic() {
-        guard UIApplication.shared.supportsAlternateIcons else {
-            return Log.error("[AboutNineAnimatorTableViewController] Encountered an error: unsupported actions")
+        _ = SettingsAppIconController.makeAvailable("Fox", from: self, allowsSettingsPopup: false)
+    }
+    
+    private func exportLogs(source: UIView) {
+        let alertController = UIAlertController(
+            title: "Export Runtime Logs",
+            message: "Export NineAnimator runtime logs for debugging. You may choose to export a redacted version for sharing with the developers. Redacted runtime logs remove all dynamic information such as anime title, episode name, playback progresses, etc.",
+            preferredStyle: .actionSheet
+        )
+        
+        alertController.addAction(UIAlertAction(title: "Redacted Version", style: .default) {
+            [weak self, weak source] _ in DispatchQueue.main.async {
+                if let self = self, let source = source {
+                    self.exportLogsForReal(source: source, exportOptions: [ .redactParameters ])
+                }
+            }
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Full Version", style: .default) {
+            [weak self, weak source] _ in DispatchQueue.main.async {
+                if let self = self, let source = source {
+                    self.exportLogsForReal(source: source, exportOptions: [])
+                }
+            }
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = source
+            popoverController.sourceRect = source.bounds
         }
         
-        let previousIcon = UIApplication.shared.alternateIconName
-        let currentIcon: String?
-        
-        if case .some = previousIcon {
-            currentIcon = nil
-        } else { currentIcon = "Fox" }
-        
-        UIApplication.shared.setAlternateIconName(currentIcon, completionHandler: nil)
-        MSAnalytics.trackEvent("App Magic #1001", withProperties: [
-            "previousIcon": previousIcon ?? "default",
-            "currentIcon": currentIcon ?? "default"
-        ])
+        self.present(alertController, animated: true)
+    }
+    
+    private func exportLogsForReal(source: UIView, exportOptions: NineAnimatorLogger.ExportPrivacyOption) {
+        do {
+            let exportedFileURL = try Log.exportRuntimeLogs(privacyOptions: exportOptions)
+            RootViewController.shared?.presentShareSheet(
+                forURL: exportedFileURL,
+                from: source,
+                inViewController: self
+            )
+        } catch {
+            let alertController = UIAlertController(error: error)
+            self.present(alertController, animated: true)
+        }
     }
     
     private func updateUIComponents() {

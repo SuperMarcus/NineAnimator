@@ -80,6 +80,7 @@ NineAnimator is a free and open source anime watching app for iOS and macOS. GPL
 - [x] Playback History & Auto Resumes
 - [x] Support [Multiple Anime Websites](docs/supported-sources.md)
 - [x] Integration with HomeKit
+- [x] Discord Rich Presence integration (macOS only)
 - [x] Handoff & Siri Shortcuts
 - [x] Download & play episodes offline
 - [x] Third party anime [listing & tracking websites](docs/third-party-lists.md) (view & edit)

@@ -99,6 +99,51 @@ extension NineAnimatorLogger {
     }
 }
 
+// MARK: - Exporting Logs
+extension NineAnimatorLogger {
+    /// Dump logs from the current session to a file
+    func exportRuntimeLogs(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache, privacyOptions: ExportPrivacyOption = []) throws -> URL {
+        // Redact messages
+        let messages = retrieveMostRecentMessages(maxItems: maxItems).map {
+            message -> LogMessage in
+            var mutatedMessage = message
+            
+            if privacyOptions.contains(.redactParameters) {
+                mutatedMessage.parameters = mutatedMessage.parameters.map {
+                    _ in "<redacted>"
+                }
+            }
+            
+            return mutatedMessage
+        }
+        
+        let outputFileStruct = ExportFile(exportPrivacyOptions: privacyOptions, messages: messages)
+        let outputFileName = "NineAnimatorLog-\(Int(outputFileStruct.exportDate.timeIntervalSince1970)).json"
+        let outputFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(outputFileName)
+        
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        let serializedLogData = try encoder.encode(outputFileStruct)
+        try serializedLogData.write(to: outputFileUrl)
+        
+        return outputFileUrl
+    }
+    
+    /// Retrieve the most recent log messages
+    func retrieveMostRecentMessages(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache) -> [LogMessage] {
+        var result = [LogMessage]()
+        var currentItem = _cachedLogMessagesTail
+        
+        while let unwrappedCurrentItem = currentItem {
+            result.append(unwrappedCurrentItem.message)
+            currentItem = unwrappedCurrentItem.previousItem
+        }
+        
+        return result
+    }
+}
+
 extension NineAnimatorLogger {
     /// Representing a level of the logging message
     struct LogLevel: Codable {
@@ -131,21 +176,47 @@ extension NineAnimatorLogger {
         var meta: LogMetadata
     }
     
+    /// Log messages export options
+    struct ExportPrivacyOption: OptionSet, Codable {
+        var rawValue: Int
+        
+        /// Remove message parameters before exporting
+        static let redactParameters = ExportPrivacyOption(rawValue: 1 << 0)
+    }
+    
+    /// Structure of the exported log messages
+    struct ExportFile: Codable {
+        var exportDate = Date()
+        var version = NineAnimatorVersion.current.stringRepresentation
+        var exportPrivacyOptions: ExportPrivacyOption
+        var messages: [LogMessage]
+    }
+    
     /// Internal list for caching log messages in memory
     private class LogMessageListItem {
         var message: LogMessage
         var nextItem: LogMessageListItem?
+        weak var previousItem: LogMessageListItem?
         
         init(_ message: LogMessage) {
             self.message = message
             self.nextItem = nil
+            self.previousItem = nil
         }
         
-        func nextItem(offset: Int) -> LogMessageListItem? {
+        func nextItem(offset: Int = 1) -> LogMessageListItem? {
             if offset <= 0 {
                 return self
             } else {
                 return nextItem?.nextItem(offset: offset - 1)
+            }
+        }
+        
+        func previousItem(offset: Int = 1) -> LogMessageListItem? {
+            if offset <= 0 {
+                return self
+            } else {
+                return previousItem?.previousItem(offset: offset - 1)
             }
         }
     }
@@ -163,6 +234,7 @@ extension NineAnimatorLogger {
         let logMessageItem = LogMessageListItem(logMessage)
         if let tail = _cachedLogMessagesTail {
             tail.nextItem = logMessageItem
+            logMessageItem.previousItem = tail
             _cachedLogMessagesTail = logMessageItem
             
             if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {

@@ -24,7 +24,7 @@ class StreamTapeParser: VideoProviderParser {
     var aliases: [String] { [ "streamtape", "Sreamtape" ] }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "<div id=\"videolink\" style=\".+\">(.+?)<\\/div>",
+        pattern: "document\\.getElementById\\(\"videolink\"\\)\\.innerHTML\\s*=\\s*\"([^\"]+)",
         options: []
     )
     
@@ -38,21 +38,28 @@ class StreamTapeParser: VideoProviderParser {
                 case let .failure(error): throw error
                 }
                 
-                let sourceUrl = try (StreamTapeParser
+                let sourceUrlString = try StreamTapeParser
                     .playerSourceRegex
-                    .firstMatch(in: responseContent)?
-                    .firstMatchingGroup).tryUnwrap(.providerError("Unable to find the streaming resource"))
+                    .firstMatch(in: responseContent)
+                    .tryUnwrap(.providerError("Unable to find the streaming resource"))
+                    .firstMatchingGroup
+                    .tryUnwrap()
+                let sourceUrl = try URL(
+                    protocolRelativeString: sourceUrlString,
+                    relativeTo: episode.target
+                ) .tryUnwrap()
                 
-                let resourceUrl = try URL(string: sourceUrl.hasPrefix("//") ? "https:\(sourceUrl)" : sourceUrl).tryUnwrap(.urlError)
+                Log.info("(StreamTape Parser) found asset at %@", sourceUrl)
                 
-                Log.info("(StreamTape Parser) found asset at %@", resourceUrl.absoluteString)
-                
-                handler(BasicPlaybackMedia(
-                    url: resourceUrl,
+                let media = BasicPlaybackMedia(
+                    url: sourceUrl,
                     parent: episode,
                     contentType: "video/mp4",
                     headers: [:],
-                    isAggregated: false), nil)
+                    isAggregated: false
+                )
+                
+                handler(media, nil)
             } catch { handler(nil, error) }
         }
     }

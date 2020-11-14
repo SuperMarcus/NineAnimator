@@ -166,6 +166,8 @@ extension NineAnimator {
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceAnimeKisa(with: self))
         register(source: NASourceAnimeKisa.ExperimentalSource(with: self))
+        register(source: NASourceAniwatch(with: self))
+        register(source: NASourceHAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeDao(with: self))
         register(source: NASourceAnimeHub(with: self))
