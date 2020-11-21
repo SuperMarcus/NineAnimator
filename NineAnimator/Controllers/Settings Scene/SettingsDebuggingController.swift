@@ -33,6 +33,7 @@ class SettingsDebuggingController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.tableView.makeThemable()
         self.updateUIComponents()
     }
 }
