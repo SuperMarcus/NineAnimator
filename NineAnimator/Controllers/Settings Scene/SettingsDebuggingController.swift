@@ -30,6 +30,11 @@ class SettingsDebuggingController: UITableViewController {
         super.viewDidLoad()
         self.configureForTransparentScrollEdge()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.updateUIComponents()
+    }
 }
 
 // MARK: - Delegate
@@ -54,9 +59,10 @@ extension SettingsDebuggingController {
 }
 
 private extension SettingsDebuggingController {
-    func updateUIComponents() {
+    func updateUIComponents(animated: Bool = false) {
         let profile = NineAnimator.default.user
-        optOutAnalyticsSwitch.setOn(profile.optOutAnalytics, animated: true)
+        optOutAnalyticsSwitch.setOn(profile.optOutAnalytics, animated: animated)
+        redactLogsSwitch.setOn(profile.crashReporterRedactLogs, animated: animated)
     }
     
     func onExportRuntimeLogsSelected(source: UIView) {

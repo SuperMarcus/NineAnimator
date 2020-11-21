@@ -19,6 +19,7 @@
 
 import UIKit
 
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 class RecentlyViewedTableViewController: UITableViewController, BlendInViewController {
     /// Downloaded/downloading anime
     private lazy var statefulAnime = OfflineContentManager.shared.statefulAnime
@@ -67,6 +68,7 @@ class RecentlyViewedTableViewController: UITableViewController, BlendInViewContr
     }
 }
 
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 extension RecentlyViewedTableViewController {
     @IBAction private func onCastButtonPressed(_ sender: Any) {
         CastController.default.presentPlaybackController()
@@ -74,6 +76,7 @@ extension RecentlyViewedTableViewController {
 }
 
 // MARK: - Table view data source
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 extension RecentlyViewedTableViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         4
@@ -122,6 +125,7 @@ extension RecentlyViewedTableViewController {
 }
 
 // MARK: - Swipe actions
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 extension RecentlyViewedTableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var actions = [UIContextualAction]()
@@ -217,6 +221,7 @@ extension RecentlyViewedTableViewController {
 }
 
 // MARK: - Segue preparation
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 extension RecentlyViewedTableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Episodes and anime
@@ -265,6 +270,7 @@ extension RecentlyViewedTableViewController {
 }
 
 // MARK: - Constants
+@available(*, deprecated, message: "Use LibrarySceneController instead.")
 fileprivate extension RecentlyViewedTableViewController {
     // Using this enum to remind me to implement stuff when adding new sections...
     enum Section: Int, Equatable, SectionProtocol, CaseIterable {
