@@ -28,13 +28,18 @@ extension NASourceAnimeUnity {
         var slug: String
     }
 
+    struct Featured: Codable {
+        var data: [SearchResponseRecordsFeatured]
+    }
+    
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
         requestManager.request(
             url: endpointURL,
             handling: .browsing
         ) .responseData
-          .then { responseContent in
-            let data = responseContent
+          .thenPromise {
+            episodePageContent in
+            let data = episodePageContent
             let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
             let bowl = try SwiftSoup.parse(utf8Text)
             var encoded = try bowl.select("the-carousel").attr("animes")
@@ -46,9 +51,41 @@ extension NASourceAnimeUnity {
             let decodedResponse = user
             let recentAnimeLinks = try decodedResponse.map {
                 record -> AnimeLink in
-                let link = "https://animeunity.it/anime/"+String(record.id)+"-"+record.slug
                 var animeUrlBuilder = try URLComponents(
-                    url: link.asURL(),
+                    url: self.endpointURL.appendingPathComponent("anime/" + String(record.id) + "-" + record.slug),
+                    resolvingAgainstBaseURL: true
+                ).tryUnwrap()
+                animeUrlBuilder.queryItems = [
+                    .init(name: "id", value: "1")
+                ]
+                return AnimeLink(
+                    title: record.title,
+                    link: try animeUrlBuilder.url.tryUnwrap(),
+                    image: try record.imageurl.asURL(),
+                    source: self
+                )
+            }
+            return self.requestManager.request(
+                url: self.endpointURL.absoluteString + "/top-anime",
+                handling: .browsing,
+                query: [ "popular": "true" ]
+            ) .responseData
+          .then {
+            responseContent in
+            let dataFeatured = responseContent
+            let utf8TextFeatured = String(data: dataFeatured, encoding: .utf8) ?? String(decoding: dataFeatured, as: UTF8.self)
+            let bowlFeatured = try SwiftSoup.parse(utf8TextFeatured)
+            var encodedFeatured = try bowlFeatured.select("top-anime").attr("animes")
+            encodedFeatured = encodedFeatured.replacingOccurrences(of: "\n", with: "")
+            let jsonFeaturedData = try encodedFeatured.data(using: .utf8).tryUnwrap()
+            let decoderFeatured = JSONDecoder()
+            decoderFeatured.keyDecodingStrategy = .convertFromSnakeCase
+            let userFeatured: Featured = try decoderFeatured.decode(Featured.self, from: jsonFeaturedData)
+            let decodedResponseFeatured = userFeatured.data
+            let featuredAnimeLinks = try decodedResponseFeatured.map {
+                record -> AnimeLink in
+                var animeUrlBuilder = try URLComponents(
+                    url: self.endpointURL.appendingPathComponent("anime/" + String(record.id) + "-" + record.slug),
                     resolvingAgainstBaseURL: true
                 ).tryUnwrap()
                 animeUrlBuilder.queryItems = [
@@ -62,9 +99,10 @@ extension NASourceAnimeUnity {
                 )
             }
             return BasicFeaturedContainer(
-                featured: [],
-                latest: recentAnimeLinks
+                featured: Array(featuredAnimeLinks.prefix(10)),
+                latest: Array(recentAnimeLinks.prefix(10))
             )
+          }
         }
     }
 }
