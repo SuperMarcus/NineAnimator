@@ -28,13 +28,82 @@ class SettingsDebuggingController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.configureForTransparentScrollEdge()
     }
 }
 
+// MARK: - Delegate
 extension SettingsDebuggingController {
-    private func updateUIComponents() {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        defer {
+            // Deselect row
+            tableView.deselectSelectedRows(animated: true)
+        }
+        
+        guard let cell = tableView.cellForRow(at: indexPath),
+              let cellReuseIdentifier = cell.reuseIdentifier else {
+            return
+        }
+        
+        switch cellReuseIdentifier {
+        case "analytics.exportLogs":
+            onExportRuntimeLogsSelected(source: cell)
+        default: break
+        }
+    }
+}
+
+private extension SettingsDebuggingController {
+    func updateUIComponents() {
         let profile = NineAnimator.default.user
         optOutAnalyticsSwitch.setOn(profile.optOutAnalytics, animated: true)
+    }
+    
+    func onExportRuntimeLogsSelected(source: UIView) {
+        let alertController = UIAlertController(
+            title: "Export Runtime Logs",
+            message: "Export NineAnimator runtime logs for debugging. You may choose to export a redacted version for sharing with the developers. Redacted runtime logs remove all dynamic information such as anime title, episode name, playback progresses, etc.",
+            preferredStyle: .actionSheet
+        )
+        
+        alertController.addAction(UIAlertAction(title: "Redacted Version", style: .default) {
+            [weak self, weak source] _ in DispatchQueue.main.async {
+                if let self = self, let source = source {
+                    self.performLogExportOperation(source: source, exportOptions: [ .redactParameters ])
+                }
+            }
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Full Version", style: .default) {
+            [weak self, weak source] _ in DispatchQueue.main.async {
+                if let self = self, let source = source {
+                    self.performLogExportOperation(source: source, exportOptions: [])
+                }
+            }
+        })
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.sourceView = source
+            popoverController.sourceRect = source.bounds
+        }
+        
+        self.present(alertController, animated: true)
+    }
+    
+    private func performLogExportOperation(source: UIView, exportOptions: NineAnimatorLogger.ExportPrivacyOption) {
+        do {
+            let exportedFileURL = try Log.exportRuntimeLogs(privacyOptions: exportOptions)
+            RootViewController.shared?.presentShareSheet(
+                forURL: exportedFileURL,
+                from: source,
+                inViewController: self
+            )
+        } catch {
+            let alertController = UIAlertController(error: error)
+            self.present(alertController, animated: true)
+        }
     }
 }
 

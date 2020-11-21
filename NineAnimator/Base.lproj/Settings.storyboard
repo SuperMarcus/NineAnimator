@@ -2588,7 +2588,7 @@ See the complete credit list in the "Credits" page.</string>
                             <tableViewSection headerTitle="Analytics" id="G1Y-C9-kbC">
                                 <string key="footerTitle">By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="yeE-Ve-gBL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="analytics.optOutAnalytics" rowHeight="48" id="yeE-Ve-gBL">
                                         <rect key="frame" x="16" y="55.5" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yeE-Ve-gBL" id="GIk-nm-Nth">
@@ -2627,9 +2627,10 @@ See the complete credit list in the "Credits" page.</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Crash Reporter" footerTitle="Remove the dynamic portions of the runtime logs sent with the crash reports." id="AU3-gQ-UJF">
+                            <tableViewSection headerTitle="Crash Reporter" id="AU3-gQ-UJF">
+                                <string key="footerTitle">Remove the dynamic portions of the runtime logs sent with the crash reports. NineAnimator automatically saves the runtime logs from a crashed session and attaches them with the crash reports.</string>
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="k7w-Yb-XDH">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="analytics.redactLogs" rowHeight="48" id="k7w-Yb-XDH">
                                         <rect key="frame" x="16" y="259" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k7w-Yb-XDH" id="CII-lg-PSt">
@@ -2668,10 +2669,10 @@ See the complete credit list in the "Credits" page.</string>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="yXF-MW-GTr">
+                            <tableViewSection footerTitle="Export the current session runtime logs for debugging purposes." id="yXF-MW-GTr">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="NuA-hZ-4xE" style="IBUITableViewCellStyleDefault" id="Egs-nk-tpx">
-                                        <rect key="frame" x="16" y="371" width="343" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="analytics.exportLogs" textLabel="NuA-hZ-4xE" style="IBUITableViewCellStyleDefault" id="Egs-nk-tpx">
+                                        <rect key="frame" x="16" y="419" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Egs-nk-tpx" id="2EF-5Q-Tlw">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
