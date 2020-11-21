@@ -39,4 +39,4 @@ entries:
 - `trackingData`: A dictionary keyed by `AnimeLink` for the serialized `TrackingContext`.
 - `subscriptions`: A list of serialized `AnimeLink` for your subscribed anime.
 
-See [StatesSerialization.swift](NineAnimator/Utilities/StatesSerialization.swift) for implementation details.
+See [StatesSerialization.swift](../NineAnimator/Utilities/StatesSerialization.swift) for implementation details.
