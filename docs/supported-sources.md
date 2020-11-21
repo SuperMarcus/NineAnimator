@@ -36,8 +36,7 @@ Feel free to open an issue to request additional hosts.
 
 ### Anime Websites
 
-NineAnimator supports the following anime websites but with different sets
-of features:
+NineAnimator supports the following anime websites:
 
 - [4anime](https://4anime.to)
     - [x] Basic features (featured list, notifications, search, and playback)
@@ -111,6 +110,7 @@ of features:
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
+- ~~[redacted](#?)~~
 - ~~[masterani.me](https://masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [x] Open arbitrary links

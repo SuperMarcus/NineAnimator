@@ -61,7 +61,7 @@ NineAnimator is a free and open source anime watching app for iOS and macOS. GPL
 - [Notifications & Subscription](#notifications--subscription)
 - [Smart Home Integration](#smart-home-integration)
 - [Handoff & Siri Shortcuts](#handoff--siri-shortcuts)
-- [Backup History and Playback Progresses](#backup-history-and-playback-progresses)
+- [Backup History and Playback Progresses](docs/backups.md)
 - [Download Episodes](#download-episodes)
 - [Screenshots](#screenshots)
 - [Credits](docs/credits.md)
@@ -157,44 +157,6 @@ on the icon to continue browsing or watching on the new device.
 To add a siri shortcut, navigate to the system settings app. Find NineAnimator under
 the root menu, tap `Siri & Search`, then tap `Shortcuts`.
 
-## Backup History and Playback Progresses
-
-NineAnimator can export the recently watched anime list and the playback histories to
-a `.naconfig` file. You may use this file to restore anime to the Recents tab or sync
-progresses between devices.
-
-Navigate to the settings menu and tap on the `Export History`, a share menu
-will pop up.
-
->
-> Some updates of NineAnimator or improper operations may cause the anime under
-> the Recents tab to disappear. Thus it is always a good habit to regularly backup
-> the playback histories and progresses.
->
-
-### Importing Modes
-
-There are three ways to import a `.naconfig` file. When you open a `.naconfig`
-file, NineAnimator will prompt you to choose one.
-
-- `Replace Current`: Choosing this option will replace all local playback histories and progresses with the ones contained in the `.naconfig` file.
-- `Merge - Pioritize Local`:  Choosing this option will merge the histories stored in the `.naconfig` file with local history. Local histories will be showed on top in the Recents tab. NineAnimator will prefer the local version of any data if it is present in both the importing `.naconfig` file and the local database.
-- `Merge - Pioritize Importing`: Choosing this option will merge the histories stored in the `.naconfig` file with local history. The importing histories will be showed on top in the Recents tab. NineAnimator will prefer the importing version of any data if it is present in both the importing `.naconfig` file and the local database.
-
-### `.naconfig` File
-
-The `.naconfig` is essentially a binary, property list encoded dictionary with three
-entries:
-
-- `history`: A list of serialized `AnimeLink` objects from the recently watched tab.
-- `progresses`: A dictionary keyed by the episode identifier for the persisted playback progresses.
-- `exportedDate`: The `Date` that this file is generated.
-- `trackingData`: A dictionary keyed by `AnimeLink` for the serialized `TrackingContext`.
-- `subscriptions`: A list of serialized `AnimeLink` for your subscribed anime.
-
-See [StatesSerialization.swift](NineAnimator/Utilities/StatesSerialization.swift) for
-implementation details.
-
 ## Download Episodes
 
 NineAnimator can download episodes for later playback. Tap on the cloud icon in the anime browser
@@ -225,6 +187,10 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | ----------------- | -------------------- |
 | ![9](Misc/Media/Demo/Dark/information.png) | ![10](Misc/Media/Demo/Dark/calendar_ipad.dark.png) |
 
+| Browse Episodes (macOS) |
+| ------ |
+| ![11](Misc/Media/Demo/Dark/browse_episodes_mac.png) |
+
 ### Light Appearance
 
 | Watch Next | Library | Search |
@@ -242,6 +208,10 @@ There are some limitations to NineAnimator's ability to download and playback vi
 | Anime Information | Airing Schedule (iPad) |
 | ----------------- | -------------------- |
 | ![9](Misc/Media/Demo/Light/information.png) | ![10](Misc/Media/Demo/Light/calendar_ipad.light.png) |
+
+| Browse Episodes (macOS) |
+| ------ |
+| ![11](Misc/Media/Demo/Light/browse_episodes_mac.png) |
 
 ### Google Cast
 

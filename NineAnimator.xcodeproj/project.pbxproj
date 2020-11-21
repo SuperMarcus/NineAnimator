@@ -941,6 +941,27 @@
 		2CE1F84D22EEC3D9005448FF /* CompositionalPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompositionalPlaybackMedia.swift; sourceTree = "<group>"; };
 		2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFinishingViewController.swift; sourceTree = "<group>"; };
 		2CE5B8E12260D7BE00A2CF89 /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
+		2CE9FF8525699EB900D364E0 /* backups.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = backups.md; sourceTree = "<group>"; };
+		2CE9FF862569A60400D364E0 /* information_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_ipad.png; sourceTree = "<group>"; };
+		2CE9FF872569A60400D364E0 /* recents_ipad.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents_ipad.light.png; sourceTree = "<group>"; };
+		2CE9FF882569A60400D364E0 /* library_ipad.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library_ipad.light.png; sourceTree = "<group>"; };
+		2CE9FF892569A60400D364E0 /* information.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information.png; sourceTree = "<group>"; };
+		2CE9FF8A2569A60500D364E0 /* listing_edit.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listing_edit.light.png; sourceTree = "<group>"; };
+		2CE9FF8B2569A60500D364E0 /* watch_next_ipad.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_next_ipad.light.png; sourceTree = "<group>"; };
+		2CE9FF8C2569A60500D364E0 /* library.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.light.png; sourceTree = "<group>"; };
+		2CE9FF8D2569A60500D364E0 /* calendar_ipad.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar_ipad.light.png; sourceTree = "<group>"; };
+		2CE9FF8E2569A60500D364E0 /* browse_episodes_mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse_episodes_mac.png; sourceTree = "<group>"; };
+		2CE9FF8F2569A60500D364E0 /* watch_next.light.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_next.light.png; sourceTree = "<group>"; };
+		2CE9FF902569A61000D364E0 /* watch_next.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_next.dark.png; sourceTree = "<group>"; };
+		2CE9FF912569A61000D364E0 /* information.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information.png; sourceTree = "<group>"; };
+		2CE9FF922569A61000D364E0 /* library.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library.dark.png; sourceTree = "<group>"; };
+		2CE9FF932569A61100D364E0 /* recents_ipad.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = recents_ipad.dark.png; sourceTree = "<group>"; };
+		2CE9FF942569A61100D364E0 /* listing_edit.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = listing_edit.dark.png; sourceTree = "<group>"; };
+		2CE9FF952569A61100D364E0 /* calendar_ipad.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar_ipad.dark.png; sourceTree = "<group>"; };
+		2CE9FF962569A61100D364E0 /* library_ipad_dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = library_ipad_dark.png; sourceTree = "<group>"; };
+		2CE9FF972569A61100D364E0 /* information_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_ipad.png; sourceTree = "<group>"; };
+		2CE9FF982569A61200D364E0 /* watch_next_ipad.dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = watch_next_ipad.dark.png; sourceTree = "<group>"; };
+		2CE9FF992569A61200D364E0 /* browse_episodes_mac.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = browse_episodes_mac.png; sourceTree = "<group>"; };
 		2CEA0BE521F54E1D007EECC4 /* StatesSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesSerialization.swift; sourceTree = "<group>"; };
 		2CEA0BE721F66D49007EECC4 /* Continuity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Continuity.swift; sourceTree = "<group>"; };
 		2CEA0BE921F67EB0007EECC4 /* continuity.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = continuity.jpg; sourceTree = "<group>"; };
@@ -1769,6 +1790,7 @@
 				2C8519B922CE466B00EEF3AC /* credits.md */,
 				2CCD952D23E5239E005D4402 /* runtime.md */,
 				2C85031E24271F610038F881 /* CONTRIBUTING.md */,
+				2CE9FF8525699EB900D364E0 /* backups.md */,
 			);
 			path = docs;
 			sourceTree = SOURCE_ROOT;
@@ -2128,6 +2150,16 @@
 		2CEBE8F7220740CE006A64CC /* Dark */ = {
 			isa = PBXGroup;
 			children = (
+				2CE9FF992569A61200D364E0 /* browse_episodes_mac.png */,
+				2CE9FF952569A61100D364E0 /* calendar_ipad.dark.png */,
+				2CE9FF972569A61100D364E0 /* information_ipad.png */,
+				2CE9FF912569A61000D364E0 /* information.png */,
+				2CE9FF962569A61100D364E0 /* library_ipad_dark.png */,
+				2CE9FF922569A61000D364E0 /* library.dark.png */,
+				2CE9FF942569A61100D364E0 /* listing_edit.dark.png */,
+				2CE9FF932569A61100D364E0 /* recents_ipad.dark.png */,
+				2CE9FF982569A61200D364E0 /* watch_next_ipad.dark.png */,
+				2CE9FF902569A61000D364E0 /* watch_next.dark.png */,
 				2CEBE8FF22074539006A64CC /* browse_episodes.png */,
 				2CEBE9072207469F006A64CC /* browse_episodes_ipad.png */,
 				2CEBE90322074539006A64CC /* downloads.png */,
@@ -2143,6 +2175,16 @@
 		2CEBE8F8220740E6006A64CC /* Light */ = {
 			isa = PBXGroup;
 			children = (
+				2CE9FF8E2569A60500D364E0 /* browse_episodes_mac.png */,
+				2CE9FF8D2569A60500D364E0 /* calendar_ipad.light.png */,
+				2CE9FF862569A60400D364E0 /* information_ipad.png */,
+				2CE9FF892569A60400D364E0 /* information.png */,
+				2CE9FF882569A60400D364E0 /* library_ipad.light.png */,
+				2CE9FF8C2569A60500D364E0 /* library.light.png */,
+				2CE9FF8A2569A60500D364E0 /* listing_edit.light.png */,
+				2CE9FF872569A60400D364E0 /* recents_ipad.light.png */,
+				2CE9FF8B2569A60500D364E0 /* watch_next_ipad.light.png */,
+				2CE9FF8F2569A60500D364E0 /* watch_next.light.png */,
 				2CEBE8FA220741C7006A64CC /* browse_episodes.png */,
 				2CEBE9052207466D006A64CC /* browse_episodes_ipad.png */,
 				2CEBE8FC2207425E006A64CC /* downloads.png */,
