@@ -158,7 +158,7 @@ extension AnimeViewController {
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             // Keep track of the usage and error rates of each source
-            MSAnalytics.trackEvent("Load Anime", withProperties: [
+            Analytics.trackEvent("Load Anime", withProperties: [
                 "source": link.source.name,
                 "success": error == nil ? "YES" : "NO",
                 "source_success": "\(link.source.name) - \(error == nil ? "Success" : "Error")"
@@ -276,7 +276,7 @@ extension AnimeViewController {
         self.episodeLink = nil
         self.animeLink = link
         
-        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+        Analytics.trackEvent("Visit Anime", withProperties: [
             "source": link.source.name
         ])
     }
@@ -296,7 +296,7 @@ extension AnimeViewController {
     func setPresenting(episode link: EpisodeLink) {
         self.episodeLink = link
         
-        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+        Analytics.trackEvent("Visit Anime", withProperties: [
             "source": link.parent.source.name
         ])
     }

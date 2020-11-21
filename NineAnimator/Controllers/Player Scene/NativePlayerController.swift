@@ -132,7 +132,7 @@ extension NativePlayerController {
         playerViewController.userActivity?.delegate = self
         
         // Track the server that's being used the most
-        MSAnalytics.trackEvent("Playback", withProperties: [
+        Analytics.trackEvent("Playback", withProperties: [
             "source_server": "\(media.link.parent.source.name) (\(media.link.server))"
         ])
     }

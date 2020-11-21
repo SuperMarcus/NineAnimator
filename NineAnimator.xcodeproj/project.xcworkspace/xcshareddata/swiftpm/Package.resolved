@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "2c1618a9bca76039aad49a5079b0f2879a643a7d",
-          "version": "3.3.1"
+          "revision": "79d99eaff599d1b38adf81884fe220c75fd38867",
+          "version": "4.0.0"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/microsoft/plcrashreporter.git",
         "state": {
           "branch": null,
-          "revision": "5e013e00ad342d8ccaae767fef5a1ef117514ce8",
-          "version": "1.7.1"
+          "revision": "de6b8f9db4b2a0aa859a5507550a70548e4da936",
+          "version": "1.8.1"
         }
       },
       {

@@ -427,7 +427,7 @@ fileprivate extension AppDelegate {
     }
     
     func setupCrashHandler() {
-        MSCrashes.setUserConfirmationHandler {
+        Crashes.userConfirmationHandler = {
             _ in
             let alertController = UIAlertController(
                 title: "Oops, the app crashed.",
@@ -436,15 +436,15 @@ fileprivate extension AppDelegate {
             )
             
             alertController.addAction(UIAlertAction(title: "Don't send", style: .cancel) {
-                _ in MSCrashes.notify(with: .dontSend)
+                _ in Crashes.notify(with: .dontSend)
             })
             
             alertController.addAction(UIAlertAction(title: "Send", style: .default) {
-                _ in MSCrashes.notify(with: .send)
+                _ in Crashes.notify(with: .send)
             })
             
             alertController.addAction(UIAlertAction(title: "Always send", style: .default) {
-                _ in MSCrashes.notify(with: .always)
+                _ in Crashes.notify(with: .always)
             })
             
             // Show the alert controller.

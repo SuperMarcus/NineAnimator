@@ -160,6 +160,7 @@
 		2C5330E62509194F007C8067 /* BadNineAnime+RequestModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5330E52509194F007C8067 /* BadNineAnime+RequestModifier.swift */; };
 		2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C54FF5C233967A0007669BB /* UIStyleOverride.swift */; };
 		2C563B322248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C563B312248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift */; };
+		2C57B3932568E64C00EFC694 /* CrashesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C57B3922568E64C00EFC694 /* CrashesDelegate.swift */; };
 		2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */; };
 		2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */; };
 		2C60EABA2266A22400280637 /* UserNotificationManager+RecommendationSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C60EAB92266A22400280637 /* UserNotificationManager+RecommendationSource.swift */; };
@@ -677,6 +678,7 @@
 		2C5330E52509194F007C8067 /* BadNineAnime+RequestModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BadNineAnime+RequestModifier.swift"; sourceTree = "<group>"; };
 		2C54FF5C233967A0007669BB /* UIStyleOverride.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyleOverride.swift; sourceTree = "<group>"; };
 		2C563B312248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RequestManager+CloudflareWAFResolver.swift"; sourceTree = "<group>"; };
+		2C57B3922568E64C00EFC694 /* CrashesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashesDelegate.swift; sourceTree = "<group>"; };
 		2C5E4EE1236F6CE20089B84E /* HydraXParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HydraXParser.swift; sourceTree = "<group>"; };
 		2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NineAnimator.entitlements; sourceTree = "<group>"; };
 		2C60EAB722655C5F00280637 /* DiscoveryErrorTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryErrorTableViewCell.swift; sourceTree = "<group>"; };
@@ -1351,6 +1353,7 @@
 				2CDE858723226B2300F1A61A /* NineAnimatorCloud.swift */,
 				2C84D8E424B4BF0000E495A8 /* ServiceDescriptor.swift */,
 				2C84D8E624B4D25900E495A8 /* NineAnimatorCloud+Requests.swift */,
+				2C57B3922568E64C00EFC694 /* CrashesDelegate.swift */,
 			);
 			path = NineAnimatorCloud;
 			sourceTree = "<group>";
@@ -2857,6 +2860,7 @@
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
 				2C93BD5822230E36000411CB /* Kitsu+LibraryEntry.swift in Sources */,
 				2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */,
+				2C57B3932568E64C00EFC694 /* CrashesDelegate.swift in Sources */,
 				2C7B27D62423D22A00DF1337 /* NineAnimator+Environment.swift in Sources */,
 				2C1C717522188CA500760A69 /* Anilist+User.swift in Sources */,
 				2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */,
@@ -3509,7 +3513,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.3.0;
+				minimumVersion = 4.0.0;
 			};
 		};
 		2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */ = {

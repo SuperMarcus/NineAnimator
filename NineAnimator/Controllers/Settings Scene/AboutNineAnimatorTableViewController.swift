@@ -150,6 +150,6 @@ class AboutNineAnimatorTableViewController: UITableViewController {
     
     @IBAction private func didToggleOptOutAnalyticsSwitch(_ sender: UISwitch) {
         NineAnimator.default.user.optOutAnalytics = sender.isOn
-        MSAnalytics.setEnabled(!sender.isOn)
+        Analytics.enabled = !sender.isOn
     }
 }

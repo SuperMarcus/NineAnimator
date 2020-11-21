@@ -42,7 +42,7 @@ extension SettingsDebuggingController {
 extension SettingsDebuggingController {
     @IBAction private func onOptOutAnalyticsSwitchDidToggle(_ sender: UISwitch) {
         NineAnimator.default.user.optOutAnalytics = sender.isOn
-        MSAnalytics.setEnabled(!sender.isOn)
+        Analytics.enabled = !sender.isOn
     }
     
     @IBAction private func onCrashReporterRedactedLogsDidToggle(_ sender: UISwitch) {

@@ -114,7 +114,7 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             return Log.info("[SettingsAppIconController] Per uttiya's request, this icon cannot be used because it hasn't been discovered.")
         }
         
-        MSAnalytics.trackEvent("App Magic #1001", withProperties: [
+        Analytics.trackEvent("App Magic #1001", withProperties: [
             "previousIcon": selectedIconName ?? "default",
             "currentIcon": currentSelection ?? "default"
         ])
@@ -183,7 +183,7 @@ extension SettingsAppIconController {
             return false
         }
         
-        MSAnalytics.trackEvent("App Magic #1002", withProperties: [
+        Analytics.trackEvent("App Magic #1002", withProperties: [
             "unlockedIcon": iconName
         ])
         

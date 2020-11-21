@@ -387,7 +387,7 @@ extension SettingsSceneController {
         let previousState = NineAnimator.default.user.enableExperimentalSources
         NineAnimator.default.user.enableExperimentalSources = !previousState
         Log.info("[SettingsSceneController] F.Counter triggered. Current state is %@", !previousState)
-        MSAnalytics.trackEvent("exp.counter.trigger", withProperties: [
+        Analytics.trackEvent("exp.counter.trigger", withProperties: [
             "state": previousState ? "back to normal" : "xp",
             "counter": _fTimerCounter.description
         ])

@@ -29,7 +29,7 @@ class NineAnimatorLogger {
     static var previousTopLevelExceptionHandler: NSUncaughtExceptionHandler?
     static var crashRuntimeLogsDirectory: URL? {
         return try? FileManager.default.url(
-            for: .applicationDirectory,
+            for: .applicationSupportDirectory,
             in: .userDomainMask,
             appropriateFor: nil,
             create: true
@@ -320,6 +320,29 @@ private extension NineAnimatorLogger {
         } catch {
             Log.error("[NineAnimatorLogger] Cannot write pre-crash runtime logs: %@", error)
         }
+    }
+}
+
+extension NineAnimatorLogger {
+    /// Find previously created but unsent runtime logs
+    static func findUnsentRuntimeLogs() -> [URL] {
+        if let crashesDir = NineAnimatorLogger.crashRuntimeLogsDirectory {
+            do {
+                let possibleCrashRunetimeLogs = try FileManager.default.contentsOfDirectory(
+                    at: crashesDir,
+                    includingPropertiesForKeys: nil,
+                    options: []
+                )
+                
+                return possibleCrashRunetimeLogs.filter {
+                    $0.pathExtension == "json"
+                }
+            } catch {
+                Log.error("[NineAnimatorLogger] Unable to collect pre-crash runtime logs: %@", error)
+            }
+        }
+        
+        return []
     }
 }
 

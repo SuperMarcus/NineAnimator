@@ -31,6 +31,7 @@ class NineAnimatorCloud {
     }
     
     private(set) lazy var requestManager = NACloudRequestManager(parent: self)
+    private let appCenterCrashesDelegate = NAAppCenterCrashesDelegate()
     
     /// Build identifier used to communicate and identify the build with NineAnimator cloud services
     ///
@@ -60,10 +61,11 @@ class NineAnimatorCloud {
     
     func setup() {
         // Setup analytical service
-        MSAppCenter.start(buildIdentifier, withServices: [
-            MSCrashes.self,
-            MSAnalytics.self
+        Crashes.delegate = appCenterCrashesDelegate
+        AppCenter.start(withAppSecret: buildIdentifier, services: [
+            Crashes.self,
+            Analytics.self
         ])
-        MSAnalytics.setEnabled(!NineAnimator.default.user.optOutAnalytics)
+        Analytics.enabled = !NineAnimator.default.user.optOutAnalytics
     }
 }
