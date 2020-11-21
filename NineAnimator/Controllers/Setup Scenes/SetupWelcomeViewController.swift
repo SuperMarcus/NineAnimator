@@ -87,7 +87,8 @@ class SetupWelcomeViewController: UIViewController {
             )
             welcomeTitleLabel.animate(
                 animations: [
-                    AnimationType.from(direction: .bottom, offset: 16)
+//                    AnimationType.from(direction: .bottom, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: 16))
                 ],
                 initialAlpha: 0.0,
                 finalAlpha: 1.0,

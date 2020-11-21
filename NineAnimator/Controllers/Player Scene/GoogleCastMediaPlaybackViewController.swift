@@ -286,13 +286,13 @@ extension GoogleCastMediaPlaybackViewController {
 // MARK: - Updates from media server
 extension GoogleCastMediaPlaybackViewController {
     func playback(update media: CastMedia, mediaStatus status: CastMediaStatus) {
-        coverImage.kf.setImage(with: media.poster, completionHandler: {
+        coverImage.kf.setImage(with: media.poster, progressBlock: nil) {
             result in
             guard let image = try? result.get().image else { return }
             // Set poster image but let the updater to push it to the now playing center
             self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
                 MPMediaItemArtwork(boundsSize: image.size) { _ in image }
-        })
+        }
         coverImage.kf.indicatorType = .activity
         
         updateUI(playbackProgress: Float(status.currentTime), volume: nil, isPaused: status.playerState == .paused)

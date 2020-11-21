@@ -78,7 +78,8 @@ class SetupWhatsNewViewController: UIViewController {
             UIView.animate(
                 views: newFeaturesView,
                 animations: [
-                    AnimationType.from(direction: .right, offset: 32)
+//                    AnimationType.from(direction: .right, offset: 32)
+                    AnimationType.vector(.init(dx: 32, dy: 0))
                 ],
                 delay: 0.4,
                 animationInterval: 0.4,

@@ -28,7 +28,7 @@ class NineAnimatorLogger {
     static var didSetupRuntimeExceptionHandler = false
     static var previousTopLevelExceptionHandler: NSUncaughtExceptionHandler?
     static var crashRuntimeLogsDirectory: URL? {
-        return try? FileManager.default.url(
+        try? FileManager.default.url(
             for: .applicationSupportDirectory,
             in: .userDomainMask,
             appropriateFor: nil,

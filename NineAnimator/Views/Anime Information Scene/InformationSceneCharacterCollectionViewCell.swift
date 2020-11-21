@@ -29,11 +29,11 @@ class InformationSceneCharacterCollectionViewCell: UICollectionViewCell {
     func initialize(_ character: ListingAnimeCharacter) {
         // Animate avatar
         avatarImageView.alpha = 0.0
-        avatarImageView.kf.setImage(with: character.image, completionHandler: {
+        avatarImageView.kf.setImage(with: character.image, progressBlock: nil) {
             [avatarImageView] _ in UIView.animate(withDuration: 0.2) {
                 avatarImageView?.alpha = 1.0
             }
-        })
+        }
         
         // Set name
         characterNameLabel.text = character.name

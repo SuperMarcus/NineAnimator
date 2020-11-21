@@ -128,6 +128,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         updateAppearance(withTheme: Theme.current)
     }
 }
+
 private extension UIViewController {
     var className: String {
         // Removes The Module Name Prefix

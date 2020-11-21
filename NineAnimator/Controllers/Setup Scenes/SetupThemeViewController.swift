@@ -117,7 +117,8 @@ After setup, you can change the theme settings in the Settings menu.
             
             appearanceSubtitleLabel.animate(
                 animations: [
-                    AnimationType.from(direction: .bottom, offset: 16)
+//                    AnimationType.from(direction: .bottom, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: 16))
                 ],
                 initialAlpha: 0.0,
                 finalAlpha: 1.0,
@@ -126,7 +127,8 @@ After setup, you can change the theme settings in the Settings menu.
             )
             themeTitleLabel.animate(
                 animations: [
-                    AnimationType.from(direction: .top, offset: 24)
+//                    AnimationType.from(direction: .top, offset: 24)
+                    AnimationType.vector(.init(dx: 0, dy: -24))
                 ],
                 initialAlpha: 0.0,
                 finalAlpha: 1.0,
