@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -2365,12 +2365,12 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Privacy" id="Ips-J8-mzS">
-                                <mutableString key="footerTitle">You may clear your playback history and reset your personal preferences in the Settings menu. 
+                                <string key="footerTitle">You may clear your playback history and reset your personal preferences in the Settings menu. 
 NineAnimator will never uploads your personal information or playback history to any third party services or websites without your consent. However, NineAnimator is not designed to prevent services (e.g. 9anime, MyCloud, MyAnimeList) or your Internet Service Provider from tracking you.
 
 By setting up third-party tracking services, you agree for NineAnimator to upload your playback history and progress to only the third-party services you have setup.
 
-Your playback history and preferences may be stored in your iCloud account.</mutableString>
+Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
                                         <rect key="frame" x="16" y="447" width="343" height="44"/>
@@ -2629,48 +2629,14 @@ See the complete credit list in the "Credits" page.</string>
                             </tableViewSection>
                             <tableViewSection headerTitle="Crash Reporter" footerTitle="Remove the dynamic portions of the runtime logs sent with the crash reports." id="AU3-gQ-UJF">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="EKv-0J-TJm">
-                                        <rect key="frame" x="16" y="259" width="343" height="48"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EKv-0J-TJm" id="FPJ-cA-YRE">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Always Send Crash Reports" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="egY-lW-yXe">
-                                                    <rect key="frame" x="16" y="11" width="254" height="26"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hvh-0W-fLE">
-                                                    <rect key="frame" x="278" y="8.5" width="51" height="31"/>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="egY-lW-yXe" firstAttribute="leading" secondItem="FPJ-cA-YRE" secondAttribute="leadingMargin" id="Abu-I5-KBH"/>
-                                                <constraint firstItem="egY-lW-yXe" firstAttribute="bottom" secondItem="FPJ-cA-YRE" secondAttribute="bottomMargin" id="Dsx-dO-q6Y"/>
-                                                <constraint firstItem="Hvh-0W-fLE" firstAttribute="centerY" secondItem="FPJ-cA-YRE" secondAttribute="centerY" id="Wjc-ld-96q"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Hvh-0W-fLE" secondAttribute="trailing" id="ZFW-8a-Cle"/>
-                                                <constraint firstItem="egY-lW-yXe" firstAttribute="top" secondItem="FPJ-cA-YRE" secondAttribute="topMargin" id="kYC-e6-ORO"/>
-                                                <constraint firstItem="Hvh-0W-fLE" firstAttribute="leading" secondItem="egY-lW-yXe" secondAttribute="trailing" constant="8" id="xLq-qj-1xr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
-                                        </userDefinedRuntimeAttributes>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="k7w-Yb-XDH">
-                                        <rect key="frame" x="16" y="307" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="259" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k7w-Yb-XDH" id="CII-lg-PSt">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redacted Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YP0-mb-FYW">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Redact Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YP0-mb-FYW">
                                                     <rect key="frame" x="16" y="11" width="254" height="26"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2682,6 +2648,9 @@ See the complete credit list in the "Credits" page.</string>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9b9-Bp-M6N">
                                                     <rect key="frame" x="278" y="8.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onCrashReporterRedactedLogsDidToggle:" destination="IQA-UM-6uc" eventType="valueChanged" id="V4I-hx-lAV"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <constraints>
@@ -2702,7 +2671,7 @@ See the complete credit list in the "Credits" page.</string>
                             <tableViewSection id="yXF-MW-GTr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="NuA-hZ-4xE" style="IBUITableViewCellStyleDefault" id="Egs-nk-tpx">
-                                        <rect key="frame" x="16" y="419" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="371" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Egs-nk-tpx" id="2EF-5Q-Tlw">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -2735,7 +2704,6 @@ See the complete credit list in the "Credits" page.</string>
                     </tableView>
                     <navigationItem key="navigationItem" title="Analytics &amp; Improvements" id="HKW-6C-EFI"/>
                     <connections>
-                        <outlet property="automaticallySendCrashReportsSwitch" destination="Hvh-0W-fLE" id="00Q-Kv-bWZ"/>
                         <outlet property="optOutAnalyticsSwitch" destination="S0y-aD-Sqd" id="i2l-7v-jTY"/>
                         <outlet property="redactLogsSwitch" destination="9b9-Bp-M6N" id="hsX-P9-TBA"/>
                     </connections>

@@ -53,6 +53,7 @@ extension NineAnimatorUser {
         static var richPresenceEnable: String { "presence.enable" }
         static var richPresenceShowAnimeName: String { "presence.animeTitle" }
         static var optOutAnalytics: String { "analytics.optOut" }
+        static var crashReporterShouldRedactLogs: String { "crashReporter.log.redact" }
         
         // Watching anime episodes persist filename
         static var watchedAnimesFileName: String { "com.marcuszhou.NineAnimator.anime.watching.plist" }

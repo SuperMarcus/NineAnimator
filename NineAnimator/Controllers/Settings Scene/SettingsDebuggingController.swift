@@ -24,7 +24,6 @@ import UIKit
 
 class SettingsDebuggingController: UITableViewController {
     @IBOutlet private var optOutAnalyticsSwitch: UISwitch!
-    @IBOutlet private var automaticallySendCrashReportsSwitch: UISwitch!
     @IBOutlet private var redactLogsSwitch: UISwitch!
     
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ extension SettingsDebuggingController {
         MSAnalytics.setEnabled(!sender.isOn)
     }
     
-    @IBAction private func onAutomaticallySendCrashReportsSwitchDidToggle(_ sender: UISwitch) {
-        
+    @IBAction private func onCrashReporterRedactedLogsDidToggle(_ sender: UISwitch) {
+        NineAnimator.default.user.crashReporterRedactLogs = sender.isOn
     }
 }

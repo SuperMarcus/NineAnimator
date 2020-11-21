@@ -197,6 +197,12 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.optOutAnalytics) }
     }
     
+    /// Whether the crash reporter should redact runtime logs attached with a crash report.
+    var crashReporterRedactLogs: Bool {
+        get { _freezer.typedValue(forKey: Keys.crashReporterShouldRedactLogs, default: false) }
+        set { _freezer.set(newValue, forKey: Keys.crashReporterShouldRedactLogs) }
+    }
+    
     /// Discovered app icons
     var discoveredAppIcons: [String] {
         get { _freezer.typedValue(forKey: Keys.discoveredAppIcons, default: [String]()) }
