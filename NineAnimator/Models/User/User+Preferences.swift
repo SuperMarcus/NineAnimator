@@ -187,7 +187,7 @@ extension NineAnimatorUser {
     
     /// Include anime name and episode number in rich presence
     var richPresenceShowAnimeName: Bool {
-        get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: true) }
+        get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: false) }
         set { _freezer.set(newValue, forKey: Keys.richPresenceShowAnimeName) }
     }
     
