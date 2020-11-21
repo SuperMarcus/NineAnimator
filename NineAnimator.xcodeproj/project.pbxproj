@@ -58,6 +58,7 @@
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
+		2C18BA572557519F005CD7D9 /* SettingsDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */; };
 		2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2C18FDEC24AAD85400F021BE /* AppCenterCrashes */; };
 		2C18FDEF24AAD85400F021BE /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */; };
 		2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C716622183FA500760A69 /* AnimeListing.storyboard */; };
@@ -561,6 +562,7 @@
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
+		2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDebuggingController.swift; sourceTree = "<group>"; };
 		2C1C716722183FA500760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeListing.storyboard; sourceTree = "<group>"; };
 		2C1C716B221845A800760A69 /* ContentListingLoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentListingLoadingTableViewCell.swift; sourceTree = "<group>"; };
 		2C1C716E221853AD00760A69 /* Anilist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Anilist.swift; sourceTree = "<group>"; };
@@ -1932,6 +1934,7 @@
 				2C95C1DB23E9FD0500430B19 /* SettingsPreferredSourceController.swift */,
 				2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */,
 				2C83E06F2526A9D800B00850 /* SettingsAppIconController.swift */,
+				2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2966,6 +2969,7 @@
 				2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */,
 				2C1DCF1F24CF5A9600FD3ECD /* RequestManager+CredentialsManager.swift in Sources */,
 				2CEC21942207F5A100A30F4F /* Promise+Callback.swift in Sources */,
+				2C18BA572557519F005CD7D9 /* SettingsDebuggingController.swift in Sources */,
 				2C23AE3C2229B17A00512150 /* MyAnimeList+Mutation.swift in Sources */,
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
 				2C1C71832219975A00760A69 /* Promise+Hashable.swift in Sources */,
