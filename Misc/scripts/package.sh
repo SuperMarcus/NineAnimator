@@ -1,6 +1,6 @@
 #!/bin/bash
 
-XCARCHIVE=`realpath "$1"`
+XCARCHIVE="$(pwd)/$1"
 PLATFORM="$2"
 PROJ_DIR=`pwd`
 PACKAGE_NAME="$3"
