@@ -627,6 +627,7 @@
 		2C42578623268DFD00FCCCCE /* Simkl+Definitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Simkl+Definitions.swift"; sourceTree = "<group>"; };
 		2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringArray+FirstMatchingGroup.swift"; sourceTree = "<group>"; };
 		2C433159220B380200A2E64F /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		2C45E1B3256C34560068678B /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
 		2C45F73B23E4FC9D009916DB /* NineAnimatorScreenshotAutomation.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorScreenshotAutomation.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C45F73D23E4FC9D009916DB /* ScreenshotAutomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotAutomation.swift; sourceTree = "<group>"; };
 		2C45F73F23E4FC9D009916DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1669,6 +1670,7 @@
 		2C6677A221BC78EF000E5ACC /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				2C45E1B3256C34560068678B /* scripts */,
 				2CCD952C23E50446005D4402 /* fastlane */,
 				2C8519B322CDC50D00EEF3AC /* docs */,
 				2C4817A221DB297D0092F694 /* Media */,
