@@ -37,6 +37,7 @@ package_macOS() {
     cp -r "${BIN_PKG_PATH}" "${APPNAME}.app"
     cp "${LICENSE_FILE}" "LICENSE"
     zip -9 -r "${PACKAGE_NAME}.zip" "${APPNAME}.app" "LICENSE"
+    rm -rf "${APPNAME}.app" "LICENSE"
     
     echo "[*] Generating .dSYM archive..."
     

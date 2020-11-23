@@ -19,9 +19,19 @@ jobs:
     - name: Build ${{ matrix.platform }}
       run: xcodebuild -scheme NineAnimator -configuration Debug -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Package ${{ matrix.platform }}
-      run: ./Misc/scripts/package.sh "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "NineAnimator_Nightly.${{ env.GITHUB_SHA }}.${{ matrix.platform }}"
-    - name: Upload ${{ matrix.platform }}
+      run: ./Misc/scripts/package.sh "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "NineAnimator_Nightly.${GITHUB_SHA}.${{ matrix.platform }}"
+    - name: Upload iOS IPA
       uses: actions/upload-artifact@v2
       with:
-        name: NineAnimator_Nightly_${{ matrix.platform }}
-        path: build/*
+        path: build/NineAnimator_Nightly.${{ env.GITHUB_SHA }}.${{ matrix.platform }}.ipa
+        if-no-files-found: ignore
+    - name: Upload macCatalyst Package
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/NineAnimator_Nightly.${{ env.GITHUB_SHA }}.${{ matrix.platform }}.zip
+        if-no-files-found: ignore
+    - name: Upload ${{ matrix.platform }} dSYMs
+      uses: actions/upload-artifact@v2
+      with:
+        path: build/NineAnimator_Nightly.${{ env.GITHUB_SHA }}.${{ matrix.platform }}.dSYMs.zip
+        if-no-files-found: error
