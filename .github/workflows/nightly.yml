@@ -22,24 +22,14 @@ jobs:
       with:
         xcode-version: latest-stable
     - name: Build ${{ matrix.platform }}
-      run: xcodebuild -scheme NineAnimator -configuration Debug -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild -scheme NineAnimator -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Package ${{ matrix.platform }}
       run: ./Misc/scripts/package.sh "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
-    - name: Upload iOS IPA
+    - name: Upload ${{ matrix.platform }} Symbols
+      run: ./Misc/scripts/upload_symbols.sh ${{ secrets.APPCENTER_TOKEN }}
+    - name: Upload ${{ matrix.platform }} Artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
-        path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
-        if-no-files-found: ignore
-    - name: Upload macCatalyst Package
-      uses: actions/upload-artifact@v2
-      with:
-        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.zip
-        path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.zip
-        if-no-files-found: ignore
-    - name: Upload ${{ matrix.platform }} dSYMs
-      uses: actions/upload-artifact@v2
-      with:
-        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.dSYMs.zip
-        path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.dSYMs.zip
+        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}
+        path: build/*
         if-no-files-found: error
