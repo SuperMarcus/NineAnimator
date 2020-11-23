@@ -28,15 +28,18 @@ jobs:
     - name: Upload iOS IPA
       uses: actions/upload-artifact@v2
       with:
+        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
         path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.ipa
         if-no-files-found: ignore
     - name: Upload macCatalyst Package
       uses: actions/upload-artifact@v2
       with:
+        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.zip
         path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.zip
         if-no-files-found: ignore
     - name: Upload ${{ matrix.platform }} dSYMs
       uses: actions/upload-artifact@v2
       with:
+        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.dSYMs.zip
         path: build/NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}.dSYMs.zip
         if-no-files-found: error
