@@ -8,8 +8,8 @@
     <a href="https://travis-ci.org/SuperMarcus/NineAnimator">
         <img src="https://travis-ci.org/SuperMarcus/NineAnimator.svg?branch=master" alt="Travis Build status"/>
     </a>
-    <a href="https://testflight.apple.com/join/SzIVhF6w">
-        <img src="https://img.shields.io/badge/join-TestFlight-blue.svg" alt="Join TestFlight"/>
+    <a href="https://github.com/SuperMarcus/NineAnimator/actions?query=workflow%3A%22Nightly+Build%22">
+        <img src="https://github.com/SuperMarcus/NineAnimator/workflows/Nightly%20Build/badge.svg?branch=master" alt="Nightly Build Status"/>
     </a>
     <a href="https://discord.gg/dzTVzeW">
         <img src="https://img.shields.io/discord/545740643247456267.svg?logo=discord&color=blue" alt="Discord Server"/>
@@ -21,6 +21,9 @@
 <p align="center">
     <img src="https://img.shields.io/badge/Swift-5.2-orange.svg" alt="Swift 5.2"/>
     <img src="https://img.shields.io/badge/platform-iOS%20%7C%20macCatalyst-lightgrey" alt="Platform: iOS | macCatalyst"/>
+    <a href="https://testflight.apple.com/join/SzIVhF6w">
+        <img src="https://img.shields.io/badge/join-TestFlight-blue.svg" alt="Join TestFlight"/>
+    </a>
     <a href="/LICENSE">
         <img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"/>
     </a>
