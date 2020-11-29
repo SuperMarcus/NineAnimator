@@ -444,8 +444,7 @@ extension OfflineContentManager {
             } catch {
                 // Fallback that works on Jailbroken version
                 Log.info("[OfflineContentManager] Attempting to move the downloaded asset for task (%@) indirectly after failed attempt using FileManager: %@", downloadTask.taskIdentifier, error)
-                let data = try Data(contentsOf: location)
-                try data.write(to: destinationUrl)
+                try fs.copyItem(at: location, to: destinationUrl)
             }
             
             // Set the resource to be excluded from backups
