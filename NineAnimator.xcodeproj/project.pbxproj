@@ -119,6 +119,9 @@
 		2C42578723268DFD00FCCCCE /* Simkl+Definitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C42578623268DFD00FCCCCE /* Simkl+Definitions.swift */; };
 		2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */; };
 		2C43315A220B380200A2E64F /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C433159220B380200A2E64F /* Error.swift */; };
+		2C45E1C5256ECF690068678B /* CoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45E1C4256ECF690068678B /* CoreEngine.swift */; };
+		2C45E1CA256EDE180068678B /* CoreEngine+FetchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45E1C9256EDE180068678B /* CoreEngine+FetchAPI.swift */; };
+		2C45E1CF256EE93C0068678B /* CoreEngine+DeferredPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45E1CE256EE93C0068678B /* CoreEngine+DeferredPromise.swift */; };
 		2C45F73E23E4FC9D009916DB /* ScreenshotAutomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45F73D23E4FC9D009916DB /* ScreenshotAutomation.swift */; };
 		2C45F74623E4FCBB009916DB /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45F74523E4FCBB009916DB /* SnapshotHelper.swift */; };
 		2C46FC8C232030E500D4206D /* LinkSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C46FC8B232030E500D4206D /* LinkSerialization.swift */; };
@@ -359,6 +362,7 @@
 		2CB9919421FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */; };
 		2CBDBC5B24BCBC0F000B360D /* UserLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2CBDBC5924BCBC0F000B360D /* UserLibrary.xcdatamodeld */; };
 		2CC2F5D2226F277B00A62A76 /* Optional+Unwrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */; };
+		2CC69A3E2570391200F269ED /* CoreEngine+NineAnimatorExport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC69A3D2570391200F269ED /* CoreEngine+NineAnimatorExport.swift */; };
 		2CCBC5C024041E2C0013C4FE /* Alamofire+Legacy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCBC5BF24041E2C0013C4FE /* Alamofire+Legacy.swift */; };
 		2CCC745A21C060480007502A /* Source.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745921C060480007502A /* Source.swift */; };
 		2CCC745C21C063EC0007502A /* BadNineAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCC745B21C063EC0007502A /* BadNineAnime.swift */; };
@@ -628,6 +632,9 @@
 		2C433156220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StringArray+FirstMatchingGroup.swift"; sourceTree = "<group>"; };
 		2C433159220B380200A2E64F /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		2C45E1B3256C34560068678B /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
+		2C45E1C4256ECF690068678B /* CoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreEngine.swift; sourceTree = "<group>"; };
+		2C45E1C9256EDE180068678B /* CoreEngine+FetchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreEngine+FetchAPI.swift"; sourceTree = "<group>"; };
+		2C45E1CE256EE93C0068678B /* CoreEngine+DeferredPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreEngine+DeferredPromise.swift"; sourceTree = "<group>"; };
 		2C45F73B23E4FC9D009916DB /* NineAnimatorScreenshotAutomation.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NineAnimatorScreenshotAutomation.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C45F73D23E4FC9D009916DB /* ScreenshotAutomation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenshotAutomation.swift; sourceTree = "<group>"; };
 		2C45F73F23E4FC9D009916DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -901,6 +908,7 @@
 		2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEpisodeTableViewCell.swift; sourceTree = "<group>"; };
 		2CBDBC5A24BCBC0F000B360D /* UserLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserLibrary.xcdatamodel; sourceTree = "<group>"; };
 		2CC2F5D1226F277B00A62A76 /* Optional+Unwrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Optional+Unwrap.swift"; sourceTree = "<group>"; };
+		2CC69A3D2570391200F269ED /* CoreEngine+NineAnimatorExport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreEngine+NineAnimatorExport.swift"; sourceTree = "<group>"; };
 		2CCBC5BF24041E2C0013C4FE /* Alamofire+Legacy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Alamofire+Legacy.swift"; sourceTree = "<group>"; };
 		2CCC745921C060480007502A /* Source.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Source.swift; sourceTree = "<group>"; };
 		2CCC745B21C063EC0007502A /* BadNineAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadNineAnime.swift; sourceTree = "<group>"; };
@@ -1358,6 +1366,17 @@
 			path = AVFoundation;
 			sourceTree = "<group>";
 		};
+		2C45E1C3256ECF460068678B /* NineAnimatorCore */ = {
+			isa = PBXGroup;
+			children = (
+				2C45E1C4256ECF690068678B /* CoreEngine.swift */,
+				2C45E1C9256EDE180068678B /* CoreEngine+FetchAPI.swift */,
+				2C45E1CE256EE93C0068678B /* CoreEngine+DeferredPromise.swift */,
+				2CC69A3D2570391200F269ED /* CoreEngine+NineAnimatorExport.swift */,
+			);
+			path = NineAnimatorCore;
+			sourceTree = "<group>";
+		};
 		2C45F73C23E4FC9D009916DB /* NineAnimatorScreenshotAutomation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1491,6 +1510,7 @@
 		2C4ABC7621B599E3009B4D47 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C45E1C3256ECF460068678B /* NineAnimatorCore */,
 				2CFDDF9E236B1DCA00C2D89A /* Migrator */,
 				2C46FC8A2320309E00D4206D /* NineAnimatorCloud */,
 				2C8536832231BC5400A5CFB9 /* Anime Source */,
@@ -2769,6 +2789,7 @@
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
 				2C4ABC8821B753DD009B4D47 /* String+IntegerRangeSubstring.swift in Sources */,
 				C8E1F74D24EAAF6B00EC4BD0 /* AnimeSaturn+Search.swift in Sources */,
+				2C45E1CA256EDE180068678B /* CoreEngine+FetchAPI.swift in Sources */,
 				2CEC21982207FA6800A30F4F /* GogoAnime+Anime.swift in Sources */,
 				2CFE2DA3227D441700030B1F /* DictionaryCodingKey.swift in Sources */,
 				2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */,
@@ -2839,7 +2860,9 @@
 				2C96DADE24536663007A29B0 /* CloudNineParser.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C6A390823A017DB00FC00A9 /* FourAnime+Anime.swift in Sources */,
+				2C45E1C5256ECF690068678B /* CoreEngine.swift in Sources */,
 				2CA4B7F923B1E81300B4E6F7 /* AnimeDao+Search.swift in Sources */,
+				2CC69A3E2570391200F269ED /* CoreEngine+NineAnimatorExport.swift in Sources */,
 				2CA1DD4521E1B765009241CB /* BadNineAnime+StreamParser.swift in Sources */,
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,
 				2C48001F2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift in Sources */,
@@ -2961,6 +2984,7 @@
 				2C96DAE224562610007A29B0 /* InformationSceneSchedulesCell.swift in Sources */,
 				2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */,
 				2C83E0752526ACE900B00850 /* SettingsAppIconHeaderView.swift in Sources */,
+				2C45E1CF256EE93C0068678B /* CoreEngine+DeferredPromise.swift in Sources */,
 				2C54FF5D233967A0007669BB /* UIStyleOverride.swift in Sources */,
 				2C563B322248108600A9CCB8 /* RequestManager+CloudflareWAFResolver.swift in Sources */,
 				2C0CFC452264105100EC793E /* MyAnimeList+SeasonalAnimeRecommendation.swift in Sources */,
