@@ -439,7 +439,8 @@ extension OfflineContentManager {
             }
             
             // Move the item
-            try fs.moveItem(at: location, to: destinationUrl)
+            try fs.copyItem(at: location, to: destinationUrl)
+            try? fs.removeItem(at: location) // Fails on jailbroken devices
             
             // Set the resource to be excluded from backups
             var resourceValues = URLResourceValues()
