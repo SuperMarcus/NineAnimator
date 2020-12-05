@@ -257,6 +257,17 @@ extension SettingsSceneController {
             }
             
             present(activityController, animated: true, completion: nil)
+        case "settings.history.import":
+            if #available(iOS 14.0, *) {
+                let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: [UTType("nineanimator.config")!])
+                documentPickerController.delegate = self
+                self.present(documentPickerController, animated: true)
+            } else {
+                // Fallback on earlier versions
+                let documentPickerController = UIDocumentPickerViewController(documentTypes: ["nineanimator.config"], in: .open)
+                documentPickerController.delegate = self
+                self.present(documentPickerController, animated: true)
+            }
         default: return
         }
     }
