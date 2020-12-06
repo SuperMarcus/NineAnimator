@@ -217,7 +217,13 @@ extension NativePlayerController {
     }
     
     func playerViewController(_ playerViewController: AVPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        Log.debug("[NativePlayerController] Restoring from PiP playbacck...")
+        // Do not restore to fullscreen if PiP ended because the video has finished playing
+        guard self.currentPlaybackTMinus != 0.0 else {
+            Log.debug("[NativePlayerController] PiP playback will end because video has finished playing")
+            return completionHandler(false)
+        }
+        
+        Log.debug("[NativePlayerController] Restoring from PiP playback...")
         RootViewController.shared?.presentOnTop(playerViewController, animated: true) { completionHandler(true) }
         state = .fullscreen
     }
