@@ -24,7 +24,8 @@ import UIKit
 extension SettingsSceneController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         Log.info("[SettingsSceneController] NAConfig Document has been selected at path: %@", urls)
-        if let url = urls[safe: 0] { RootViewController.restore(whenReady: url)
+        if let url = urls[safe: 0] {
+            RootViewController.restore(whenReady: url)
         }
     }
 }
