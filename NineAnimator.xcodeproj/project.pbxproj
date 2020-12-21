@@ -475,6 +475,7 @@
 		BFE3339F24F353F1004B680F /* FourAnime+LinkRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */; };
 		BFE34BF324EF5B670054F3AE /* MyAnimeList+UserRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */; };
 		BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */; };
+		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
 		C8E12D01242213CB00B0AF6A /* AnimeUnity+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */; };
 		C8E12D03242213E000B0AF6A /* AnimeUnity+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */; };
@@ -1068,6 +1069,7 @@
 		BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+LinkRetriever.swift"; sourceTree = "<group>"; };
 		BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+UserRecommendations.swift"; sourceTree = "<group>"; };
 		BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Search.swift"; sourceTree = "<group>"; };
+		BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsSceneController+DocumentPicker.swift"; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
 		C8E12D00242213CB00B0AF6A /* AnimeUnity+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Anime.swift"; sourceTree = "<group>"; };
 		C8E12D02242213E000B0AF6A /* AnimeUnity+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeUnity+Featured.swift"; sourceTree = "<group>"; };
@@ -1982,6 +1984,7 @@
 				2C8374E924AF808A0009F8D7 /* SettingsRichPresenceController.swift */,
 				2C83E06F2526A9D800B00850 /* SettingsAppIconController.swift */,
 				2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */,
+				BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */,
 			);
 			path = "Settings Scene";
 			sourceTree = "<group>";
@@ -2885,6 +2888,7 @@
 				2C93BD45221F5C98000411CB /* InformationSceneRelatedTableViewCell.swift in Sources */,
 				2C6CF250221C39E00009D554 /* InformationSceneSynopsisTableViewCell.swift in Sources */,
 				2C6CF24C221B9F1E0009D554 /* SomeOrError.swift in Sources */,
+				BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */,
 				2CEBE9112207CBE7006A64CC /* Promise.swift in Sources */,
 				C8E1F75124EAAF8400EC4BD0 /* AnimeSaturn+Featured.swift in Sources */,
 				2C91297521BB7A4200284FD0 /* StreamangoParser.swift in Sources */,
