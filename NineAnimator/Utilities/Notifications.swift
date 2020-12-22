@@ -44,6 +44,19 @@ extension Notification.Name {
         Notification.Name("com.marcuszhou.nineanimator.playbackWillEnd")
     
     /**
+    Fired within the last 2 minutes of video playback. Used to alert when the app should preload the next episode of an anime.
+     
+     ## Where its posted
+     - `NativePlayerController.persistProgress`
+     - Checked in `AnimeViewController`
+     
+     ## UserInfo
+     - Provides the currently playing media.
+     - ["currentMedia": `PlaybackMedia`]
+     */
+    static let autoPlayShouldPreload = Notification.Name("com.marcuszhou.nineanimator.autoPlayShouldPreload")
+    
+    /**
      Fired after the playback has ended
      
      ## Where its posted

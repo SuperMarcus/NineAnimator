@@ -87,7 +87,7 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var animeRequestTask: NineAnimatorAsyncTask?
     
-    private var previousEpisodeRetrivalError: Error?
+    private var previousEpisodeRetrivalError: (Error, EpisodeLink)?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -126,6 +126,20 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             self,
             selector: #selector(onPlaybackDidEnd(_:)),
             name: .playbackDidEnd,
+            object: nil
+        )
+        
+        /*NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPlaybackWillEnd(notification:)),
+            name: .playbackWillEnd,
+            object: nil
+        )*/
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onAutoplayShouldPreload(notification:)),
+            name: .autoPlayShouldPreload,
             object: nil
         )
     }
@@ -417,13 +431,18 @@ extension AnimeViewController {
 
 // MARK: - Initiate playback
 extension AnimeViewController {
-    /// Retrieve the `Episode` and `PlaybackMedia` and attempt to initiate playback
-    private func retrieveAndPlay() {
+    /**
+     Retrieve the `Episode` and `PlaybackMedia` and attempt to initiate playback.
+     
+     - Note: Must set `self.episodeLink` and `self.selectedEpisodeCell` before calling this function.
+     
+     - Parameter forAutoPlay: Errors during retrieval will not be displayed immediately during autoplay. They will be displayed after playback has ended, to not interrupt the user.
+    */
+    private func retrieveAndPlay(forAutoPlay: Bool = false) {
         // Always uses self.episodeLink since it may be different from the selected cell
         guard let episodeLink = episodeLink else { return }
         
         episodeRequestTask?.cancel()
-        NotificationCenter.default.removeObserver(self)
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
         
@@ -440,9 +459,9 @@ extension AnimeViewController {
             if CastController.default.isReady {
                 Log.info("Offline content is available, but Google Cast has been setup. Using online media.")
             } else {
-                Log.info("Offline content is available. Using donloaded asset.")
+                Log.info("Offline content is available. Using downloaded asset.")
                 clearSelection()
-                onPlaybackMediaRetrieved(media)
+                onPlaybackMediaRetrieved(media, forAutoPlay: forAutoPlay)
                 return
             }
         }
@@ -454,7 +473,7 @@ extension AnimeViewController {
                 guard let episode = episode else {
                     if let error = error {
                         // `onEpisodeRetrivalStall` will make sure to unselect cell and release reference to selected cell
-                        self.onEpisodeRetrivalStall(error, episodeLink: episodeLink)
+                        self.onEpisodeRetrivalStall(error, episodeLink: episodeLink, retrievedForAutoPlay: forAutoPlay)
                     } else {
                         self.selectedEpisodeCell = nil
                         self.tableView.deselectSelectedRows()
@@ -486,12 +505,12 @@ extension AnimeViewController {
                             guard let media = media else {
                                 guard let error = error else { return }
                                 Log.error("Item not retrived: \"%@\"", error)
-                                self.onPlaybackMediaStall(episode.target, error: error)
+                                self.onPlaybackMediaStall(episode.target, error: error, retreivedForAutoPlay: forAutoPlay)
                                 return
                             }
-                            
+                        
                             // Call media retrieved handler
-                            self.onPlaybackMediaRetrieved(media, episode: episode)
+                            self.onPlaybackMediaRetrieved(media, episode: episode, forAutoPlay: forAutoPlay)
                         }
                     }
                 } else {
@@ -500,7 +519,8 @@ extension AnimeViewController {
                         episode.target,
                         error: NineAnimatorError.providerError(
                             "NineAnimator does not support playing back from the selected server"
-                        )
+                        ),
+                        retreivedForAutoPlay: forAutoPlay
                     )
                 }
             }
@@ -508,7 +528,12 @@ extension AnimeViewController {
     }
     
     /// Handles an episode retrival failiure
-    private func onEpisodeRetrivalStall(_ error: Error, episodeLink: EpisodeLink) {
+    private func onEpisodeRetrivalStall(_ error: Error, episodeLink: EpisodeLink, retrievedForAutoPlay: Bool) {
+        guard retrievedForAutoPlay == false else {
+            // Save the error so it can be displayed after playback has finished
+            self.previousEpisodeRetrivalError = (error, episodeLink)
+            return
+        }
         let restoreInterfaceElements = {
             [weak self] in
             self?.tableView.deselectSelectedRows()
@@ -635,15 +660,16 @@ extension AnimeViewController {
             style: .cancel
         ) { _ in restoreInterfaceElements() })
         
-        previousEpisodeRetrivalError = error
+        previousEpisodeRetrivalError = (error, episodeLink)
         present(alert, animated: true)
     }
     
     /// Handle when the link to the episode has been retrieved but no streamable link was found
-    private func onPlaybackMediaStall(_ fallbackURL: URL, error: Error) {
+    private func onPlaybackMediaStall(_ fallbackURL: URL, error: Error, retreivedForAutoPlay: Bool) {
         Log.info("[PlayerViewController] Playback media retrival stalled with error: %@", error)
         
-        if NineAnimator.default.user.playbackFallbackToBrowser {
+        // Fallback to in-app-browser if enabled, and not using autoPlay
+        if NineAnimator.default.user.playbackFallbackToBrowser && !retreivedForAutoPlay {
             // Cleanup selections
             self.tableView.deselectSelectedRows()
             self.selectedEpisodeCell = nil
@@ -651,12 +677,12 @@ extension AnimeViewController {
             present(playbackController, animated: true)
         } else if let episodeLink = episodeLink {
             // Let onEpisodeRetrivalStall prompt the user for alternative options
-            onEpisodeRetrivalStall(error, episodeLink: episodeLink)
+            onEpisodeRetrivalStall(error, episodeLink: episodeLink, retrievedForAutoPlay: retreivedForAutoPlay)
         }
     }
     
     /// Handle the playback media
-    private func onPlaybackMediaRetrieved(_ media: PlaybackMedia, episode: Episode? = nil) {
+    private func onPlaybackMediaRetrieved(_ media: PlaybackMedia, episode: Episode? = nil, forAutoPlay: Bool) {
         // Clear previous episode error
         defer { previousEpisodeRetrivalError = nil }
         
@@ -664,7 +690,12 @@ extension AnimeViewController {
         if let episode = episode, CastController.default.isReady {
             CastController.default.initiate(playbackMedia: media, with: episode)
             CastController.default.presentPlaybackController()
-        } else { NativePlayerController.default.play(media: media) }
+        } else if forAutoPlay {
+            // Append Media For Autoplay
+            NativePlayerController.default.append(media: media)
+        } else {
+            NativePlayerController.default.play(media: media)
+        }
     }
     
     /// Cancels the episode retrival task
@@ -810,13 +841,39 @@ extension AnimeViewController {
         }
     }
     
-    // Update suggestion when playback did end
+    // Update suggestion when playback did end, and display any errors saved during autoPlay episode retrieval
     @objc private func onPlaybackDidEnd(_ notification: Notification) {
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200)) {
-            [weak self] in self?.tableView?.reloadSections(
+            [weak self] in
+            guard let self = self else { return }
+            self.tableView?.reloadSections(
                 Section.indexSet(.suggestion),
                 with: .automatic
             )
+            if let (retrivelError, episodeLink)  = self.previousEpisodeRetrivalError {
+                self.onEpisodeRetrivalStall(retrivelError, episodeLink: episodeLink, retrievedForAutoPlay: false)
+            }
+        }
+    }
+    
+    // MARK: - Autoplay
+    // Called during the Last 2 minutes of video playback if enabled by user. Retrieves next episodeLink.
+    @objc private func onAutoplayShouldPreload(notification: Notification) {
+        // If next episode is already being requested, or the request has errored, ignore the notification
+        guard episodeRequestTask == nil && previousEpisodeRetrivalError == nil else { return }
+        // Retrieve the next EpisodeLink and it's corresponding UITableViewCell
+        DispatchQueue.main.async {
+            guard let currentEpisodeLink = NativePlayerController.default.mediaQueue.first?.link,
+                  let currentEpisodeIndex = self.anime?.episodeLinks.firstIndex(of: currentEpisodeLink),
+                  let nextEpisodeLink = self.anime?.episodeLink(at: currentEpisodeIndex + 1),
+                  let episodeIndexPathForNextLink = self.indexPath(for: nextEpisodeLink),
+                  let episodeCellForNextLink = self.tableView.cellForRow(at: episodeIndexPathForNextLink)
+                else { return }
+            
+            // Request episode
+            self.selectedEpisodeCell = episodeCellForNextLink
+            self.episodeLink = nextEpisodeLink
+            self.retrieveAndPlay(forAutoPlay: true)
         }
     }
 }

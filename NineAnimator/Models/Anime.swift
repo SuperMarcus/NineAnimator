@@ -137,8 +137,8 @@ struct Anime {
     }
     
     /// Retrieve an episode link at index under the current server selection
-    func episodeLink(at index: Int) -> EpisodeLink {
-        episodeLinks[index]
+    func episodeLink(at index: Int) -> EpisodeLink? {
+        episodeLinks[safe: index]
     }
     
     /// Find episodes on alternative different servers with the same name

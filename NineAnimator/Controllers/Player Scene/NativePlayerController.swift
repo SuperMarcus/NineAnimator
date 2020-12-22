@@ -179,7 +179,7 @@ extension NativePlayerController {
         // Add observer for did reach end notification
         NotificationCenter.default.addObserver(
             self,
-            selector: #selector(onPlayerDidReachEnd(_:)),
+            selector: #selector(onPlayerItemDidReachEnd(_:)),
             name: .AVPlayerItemDidPlayToEndTime,
             object: item
         )
@@ -315,20 +315,27 @@ extension NativePlayerController {
         }
     }
     
-    @objc private func onPlayerDidReachEnd(_ notification: Notification) {
+    @objc private func onPlayerItemDidReachEnd(_ notification: Notification) {
         // Remove all did play to end time notificiation observer
         NotificationCenter.default.removeObserver(
             self,
             name: .AVPlayerItemDidPlayToEndTime,
             object: notification.object
         )
-        
-        DispatchQueue.main.async {
-            [weak self] in
-            guard let self = self else { return }
-            
-            // Dismiss the player if no more item is in the queue
-            if self.mediaQueue.count == 1 {
+        // Remove the media from the queue, and post `playbackDidEnd` notification
+        Log.debug(
+            "[NativePlayerController] AVPlayerItem has finished playing. Removing old item from mediaQueue. New count is: %@", self.mediaQueue.count - 1)
+        let media = self.mediaQueue.removeFirst()
+        NotificationCenter.default.post(
+            name: .playbackDidEnd,
+            object: self,
+            userInfo: [ "media": media ]
+        )
+        // Dismiss the player if no more items are in the queue
+        if self.mediaQueue.isEmpty {
+            DispatchQueue.main.async {
+                [weak self] in
+                guard let self = self else { return }
                 self.playerViewController.dismiss(animated: true)
             }
         }
@@ -352,10 +359,28 @@ extension NativePlayerController {
         
         // Last 15 seconds, fire will end events
         if case 14.0...15.0 = currentPlaybackTMinus {
-            NotificationCenter.default.post(name: .playbackWillEnd, object: self, userInfo: nil)
+            NotificationCenter.default.post(
+                name: .playbackWillEnd,
+                object: self,
+                userInfo: nil
+            )
             
             if player.isExternalPlaybackActive {
-                NotificationCenter.default.post(name: .externalPlaybackWillEnd, object: self, userInfo: nil)
+                NotificationCenter.default.post(
+                    name: .externalPlaybackWillEnd,
+                    object: self,
+                    userInfo: nil
+                )
+            }
+        }
+        // In Last 2 minutes, if mediaQueue doesn't have more media, alert autoPlay (if enabled) to preload next media
+        if case 0.0...120.0 = currentPlaybackTMinus {
+            if mediaQueue.count <= 1 {
+                NotificationCenter.default.post(
+                    name: .autoPlayShouldPreload,
+                    object: self,
+                    userInfo: nil
+                )
             }
         }
     }
