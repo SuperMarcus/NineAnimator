@@ -153,7 +153,7 @@ extension NARequestManager {
     /// A helper struct used to construct promises
     /// - Note: This struct holds strong reference to the parent request manager.
     struct RequestBuilding {
-        typealias ResponseHandler = (Alamofire.DataResponse<Any, Error>) throws -> Void
+        typealias ResponseHandler = (Response) throws -> Void
         typealias RedirectionHandler = (_ request: Alamofire.Request,
             _ response: HTTPURLResponse, _ redirectingTo: URLRequest) -> URLRequest?
         
@@ -251,8 +251,14 @@ extension NARequestManager {
                                 naError.relatedRequestManager = parent
                             }
                             
-                            // Call the response handler then the callback
-                            try onResponse?(response as! DataResponse<Any, Error>)
+                            if let onResponse = onResponse {
+                                let responseObject = Response(
+                                    request: response.request,
+                                    response: request.response
+                                )
+                                try onResponse(responseObject)
+                            }
+                            
                             callback(response.value, error)
                         } catch {
                             callback(nil, error)
@@ -274,6 +280,15 @@ extension NARequestManager {
                 .tryUnwrap()
             return parent._applyValidations(forRequest: request)
         }
+    }
+}
+
+// MARK: - Type-erased Response Object
+extension NARequestManager {
+    /// A type-erased wrapper for Alamofire's DataResponse object
+    struct Response {
+        var request: URLRequest?
+        var response: HTTPURLResponse?
     }
 }
 
@@ -564,7 +579,7 @@ private class NARequestManagerRequestInterceptor: Alamofire.RequestInterceptor {
 }
 
 /// Tell the request manager to make the request in certain ways
-enum NARequestHandlingDirective {
+enum NARequestHandlingDirective: String {
     /// No special handling needed
     case none
     
