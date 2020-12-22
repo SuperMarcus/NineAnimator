@@ -18,6 +18,7 @@
 //
 
 import Foundation
+import JavaScriptCore
 
 /// A generic error class thrown within NineAniamtor
 class NineAnimatorError: NSError {
@@ -339,6 +340,34 @@ extension NineAnimatorError {
             super.init(9, message: "NineAnimatorCloud service responded with an error", failiureReason: message, userInfo: [
                 "statusCode": statusCode
             ])
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
+    
+    /// An error received from the NineAnimatorCore engine.
+    public class NineAnimatorCoreError: NineAnimatorError {
+        var name: String {
+            (userInfo["errorName"] as? String) ?? "UnknownError"
+        }
+        
+        var message: String {
+            (userInfo["errorMessage"] as? String) ?? "Unknown message"
+        }
+        
+        /// The JavaScript error object
+        var errorObject: JSManagedValue?
+        
+        init(errorObject: JSValue, name: String, message: String) {
+            super.init(10, message: "NineAnimatorCore encountered an error", failiureReason: message, userInfo: [
+                "errorName": name,
+                "errorMessage": message
+            ])
+            
+            // Using managed value here because this object may be mixed with CoreEngine memory graphs
+            self.errorObject = JSManagedValue(value: errorObject, andOwner: self)
         }
         
         required init?(coder aDecoder: NSCoder) {
