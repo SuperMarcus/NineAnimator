@@ -73,69 +73,64 @@ func export(_ configuration: NineAnimatorUser) -> URL? {
     return nil
 }
 
-func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAnimatorUser.MergePiority) -> Bool {
-    do {
-        // Read the contents of the configuration file
-        _ = fileUrl.startAccessingSecurityScopedResource()
-        let serializedConfiguration = try Data(contentsOf: fileUrl)
-        fileUrl.stopAccessingSecurityScopedResource()
-        
-        let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
-        
-        let piorityHistory = policy == .localFirst ? configuration.recentAnimes : preservedStates.history
-        let secondaryHistory = policy == .localFirst ? preservedStates.history : configuration.recentAnimes
-        
-        configuration.recentAnimes = piorityHistory + secondaryHistory.filter {
-            item in !piorityHistory.contains { $0 == item }
-        }
-        
-        let piroityPersistedProgresses = policy == .localFirst ? configuration.persistedProgresses : preservedStates.progresses
-        let secondaryPersistedProgresses = policy == .localFirst ? preservedStates.progresses : configuration.persistedProgresses
-        
-        configuration.persistedProgresses = piroityPersistedProgresses
-            .merging(secondaryPersistedProgresses) { piority, _ in piority }
-        
-        // Merge subscription list
-        if let backupSubscriptions = preservedStates.subscriptions {
-            var finalSubscriptionsSet = Set<AnimeLink>()
-            configuration.subscribedAnimes.forEach { finalSubscriptionsSet.insert($0) }
-            backupSubscriptions.forEach { finalSubscriptionsSet.insert($0) }
-            configuration.subscribedAnimes = finalSubscriptionsSet.map { $0 }
-        }
-        
-        return true
-    } catch { Log.error(error) }
-    return false
+func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAnimatorUser.MergePiority) throws {
+    // Read the contents of the configuration file
+    guard fileUrl.startAccessingSecurityScopedResource() == true else {
+        throw NineAnimatorError.unknownError("Failed to access security scoped resource")
+    }
+    let serializedConfiguration = try Data(contentsOf: fileUrl)
+    fileUrl.stopAccessingSecurityScopedResource()
+    
+    let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
+    
+    let piorityHistory = policy == .localFirst ? configuration.recentAnimes : preservedStates.history
+    let secondaryHistory = policy == .localFirst ? preservedStates.history : configuration.recentAnimes
+    
+    configuration.recentAnimes = piorityHistory + secondaryHistory.filter {
+        item in !piorityHistory.contains { $0 == item }
+    }
+    
+    let piroityPersistedProgresses = policy == .localFirst ? configuration.persistedProgresses : preservedStates.progresses
+    let secondaryPersistedProgresses = policy == .localFirst ? preservedStates.progresses : configuration.persistedProgresses
+    
+    configuration.persistedProgresses = piroityPersistedProgresses
+        .merging(secondaryPersistedProgresses) { piority, _ in piority }
+    
+    // Merge subscription list
+    if let backupSubscriptions = preservedStates.subscriptions {
+        var finalSubscriptionsSet = Set<AnimeLink>()
+        configuration.subscribedAnimes.forEach { finalSubscriptionsSet.insert($0) }
+        backupSubscriptions.forEach { finalSubscriptionsSet.insert($0) }
+        configuration.subscribedAnimes = finalSubscriptionsSet.map { $0 }
+    }
 }
 
-func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) -> Bool {
-    do {
-        _ = fileUrl.startAccessingSecurityScopedResource()
-        let serializedConfiguration = try Data(contentsOf: fileUrl)
-        fileUrl.stopAccessingSecurityScopedResource()
-        
-        let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
-        
-        configuration.recentAnimes = preservedStates.history
-        configuration.persistedProgresses = preservedStates.progresses
-        
-        // Restoring subscription list
-        if let subscriptions = preservedStates.subscriptions {
-            configuration.subscribedAnimes = subscriptions
+func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) throws {
+    // Read the contents of the configuration file
+    guard fileUrl.startAccessingSecurityScopedResource() == true else {
+        throw NineAnimatorError.unknownError("Failed to access security scoped resource")
+    }
+    let serializedConfiguration = try Data(contentsOf: fileUrl)
+    fileUrl.stopAccessingSecurityScopedResource()
+    
+    let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
+    
+    configuration.recentAnimes = preservedStates.history
+    configuration.persistedProgresses = preservedStates.progresses
+    
+    // Restoring subscription list
+    if let subscriptions = preservedStates.subscriptions {
+        configuration.subscribedAnimes = subscriptions
+    }
+    
+    // Restoring the tracking data
+    if let trackingData = preservedStates.trackingData {
+        for (anime, data) in trackingData {
+            do {
+                let context = NineAnimator.default.trackingContext(for: anime)
+                try context.restore(from: data)
+                context.save()
+            } catch { Log.error("[Model.replace] Unable to restore %@: %@", anime, data) }
         }
-        
-        // Restoring the tracking data
-        if let trackingData = preservedStates.trackingData {
-            for (anime, data) in trackingData {
-                do {
-                    let context = NineAnimator.default.trackingContext(for: anime)
-                    try context.restore(from: data)
-                    context.save()
-                } catch { Log.error("[Model.replace] Unable to restore %@: %@", anime, data) }
-            }
-        }
-        
-        return true
-    } catch { Log.error(error) }
-    return false
+    }
 }
