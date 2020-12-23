@@ -21,27 +21,88 @@ import Foundation
 import JavaScriptCore
 
 @available(iOS 13, *)
-class NACoreEngine {
+class NACoreEngine: NSObject {
     /// Shared virtual machine instance, allowing values to be passed between contexts
     static let sharedVirtualMachine: JSVirtualMachine = sharedQueue.sync { JSVirtualMachine() }
     static let sharedQueue = DispatchQueue(label: "com.nineanimator.NACoreEngine")
+    
+    /// Instances of the core engines, used for lookups.
+    @AtomicProperty
+    private static var _coreEngineInstances = [ObjectIdentifier: WeakRef<NACoreEngine>]()
     
     let jsContext: JSContext
     let requestManager: NARequestManager
     
     private var _retainedPromises: [ObjectIdentifier: NineAnimatorAsyncTask]
-    private lazy var _jsExports = NineAnimatorNamespaceExports(parent: self)
+    private lazy var _jsExports: NACoreEngineExportsNineAnimatorProtocol = NACoreEngineExportsNineAnimator(parent: self)
     
     /// Initialize the CoreEngine with a provided reuqest manager
     /// - Important: The initializer should never be called from inside the NACoreEngine.sharedQueue, as it will cause a deadlock.
-    init(requestManager: NARequestManager) {
+    init(name: String, requestManager: NARequestManager) {
         let vm = NACoreEngine.sharedVirtualMachine
         self.jsContext = JSContext(virtualMachine: vm)
         self.requestManager = requestManager
         self._retainedPromises = [:]
         
+        super.init()
+        
         // Naming the context, not that it matters
-        self.jsContext.name = "NACoreEngine"
+        self.jsContext.name = "NACoreEngine(\(name))"
+        self.initializeGlobalValues()
+        
+        // Register this instance
+        NACoreEngine.registerInstance(self)
+    }
+    
+    deinit {
+        // Unregister instance
+        NACoreEngine.unregisterInstance(self)
+    }
+       
+    private func initializeGlobalValues() {
+        // Objects
+        self.jsContext.setObject(self._jsExports, forKeyedSubscript: "NineAnimator" as NSString)
+        
+        // Types
+        self.jsContext.setObject(NACoreEngineExportsAnimeLink.self, forKeyedSubscript: "AnimeLink" as NSString)
+        self.jsContext.setObject(NACoreEngineExportsEpisodeLink.self, forKeyedSubscript: "EpisodeLink" as NSString)
+    }
+}
+
+// MARK: - Promise Conversions
+@available(iOS 13, *)
+extension NACoreEngine {
+    /// Convert a JavaScript promise to native promise
+    func toNativePromise(_ corePromise: JSValue) -> NineAnimatorPromise<JSValue> {
+        .init {
+            [weak self] callback in
+            guard let self = self else {
+                return nil
+            }
+            
+            if corePromise.isInstance(of: self.promiseType) {
+                // Init rejector and resolver
+                let rejector: @convention(block) (JSValue) -> Void = {
+                    [weak self] errorValue in
+                    guard let self = self else {
+                        return callback(nil, NineAnimatorError.unknownError("CoreEngine released"))
+                    }
+                    callback(nil, self.toNativeError(errorValue))
+                }
+                let resolver: @convention(block) (JSValue) -> Void = {
+                    value in
+                    callback(value, nil)
+                }
+                corePromise.invokeMethod("then", withArguments: [
+                    self.convertToJSValue(resolver),
+                    self.convertToJSValue(rejector)
+                ])
+            } else {
+                Log.debug("[NACoreEngine] Cannot convert object %@ to native promise.", corePromise)
+            }
+            
+            return nil
+        }
     }
     
     /// Retain an instance of NineAnimatorPromise in the current context, return a JSValue containing a JavaScript promise.
@@ -90,13 +151,39 @@ class NACoreEngine {
         
         return jsPromise ?? JSValue(undefinedIn: self.jsContext)
     }
-    
-    func convertToJSError(_ nativeError: NSError) -> JSValue {
-        JSValue(object: nativeError, in: jsContext)
+}
+
+// MARK: - Lookup Instances
+@available(iOS 13, *)
+extension NACoreEngine {
+    private static func registerInstance(_ engine: NACoreEngine) {
+        Log.info("[NACoreEngine] Registering NACoreEngine instace: %@", engine)
+        __coreEngineInstances.mutate {
+            $0[ObjectIdentifier(engine.jsContext)] = WeakRef(engine)
+        }
     }
     
-    private func initializeGlobalValues() {
-        self.jsContext.setObject(self._coreEngineFetch, forKeyedSubscript: "fetch" as NSString)
-        self.jsContext.setObject(self._jsExports, forKeyedSubscript: "NineAnimator" as NSString)
+    private static func unregisterInstance(_ engine: NACoreEngine) {
+        Log.info("[NACoreEngine] Unregistering NACoreEngine instace: %@", engine)
+        __coreEngineInstances.mutate {
+            _ = $0.removeValue(forKey: ObjectIdentifier(engine.jsContext))
+        }
+    }
+    
+    /// Retrieve the NACoreEngine instance from a JavaScript execution context
+    static func current() -> NACoreEngine? {
+        if let currentContext = JSContext.current() {
+            return instance(forContext: currentContext)
+        } else {
+            Log.error("[NACoreEngine] Calling NACoreEngine.current() outside a JavaScript execution context results in undefined behaviors!!")
+            return nil
+        }
+    }
+    
+    /// Obtain a registered instance of NACoreEngine for the given JSContext
+    static func instance(forContext context: JSContext) -> NACoreEngine? {
+        $_coreEngineInstances.synchronize {
+            $0[ObjectIdentifier(context)]?.object
+        }
     }
 }
