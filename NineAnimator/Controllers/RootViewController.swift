@@ -250,16 +250,9 @@ extension RootViewController {
         func showErrorAlert(error: Error) {
             Log.error(error)
             let errorAlert = UIAlertController(
-                title: "Error",
-                message: "Cannot import configurations: \(error)",
-                preferredStyle: .alert
+                error: error,
+                customTitle: "Cannot Import Backup"
             )
-            
-            errorAlert.addAction(UIAlertAction(
-                title: "Done",
-                style: .cancel,
-                handler: nil
-            ))
             presentOnTop(errorAlert)
         }
         
