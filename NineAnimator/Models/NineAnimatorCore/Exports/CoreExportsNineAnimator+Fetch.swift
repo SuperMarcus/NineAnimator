@@ -116,7 +116,7 @@ extension NACoreEngineExportsNineAnimator {
                 return JSValue(object: responseObject, in: self.jsContext)
             }
             
-            return self.coreEngine.retrainNativePromise(requestPromise)
+            return self.coreEngine.retainNativePromise(requestPromise)
         } catch {
             Log.debug("[NineAnimatorCore.NineAnimator.FetchAPI] Failed to initiate the fetch operation because of an error: %@", error)
             return JSValue(
@@ -228,7 +228,7 @@ private extension NACoreEngineExportsNineAnimator {
         
         func json() -> JSValue? {
             if let engine = self.engine {
-                return engine.retrainNativePromise(.firstly {
+                return engine.retainNativePromise(.firstly {
                     [responseData, weak engine] in
                     guard let engine = engine else {
                         return nil
@@ -251,7 +251,7 @@ private extension NACoreEngineExportsNineAnimator {
         
         func text() -> JSValue? {
             if let engine = self.engine {
-                return engine.retrainNativePromise(.firstly {
+                return engine.retainNativePromise(.firstly {
                     [responseData, weak engine] in
                     guard let engine = engine else {
                         return nil

@@ -36,7 +36,7 @@ class NACoreEngine: NSObject {
     private var _retainedPromises: [ObjectIdentifier: NineAnimatorAsyncTask]
     private lazy var _jsExports: NACoreEngineExportsNineAnimatorProtocol = NACoreEngineExportsNineAnimator(parent: self)
     
-    /// Initialize the CoreEngine with a provided reuqest manager
+    /// Initialize the CoreEngine with a provided request manager
     /// - Important: The initializer should never be called from inside the NACoreEngine.sharedQueue, as it will cause a deadlock.
     init(name: String, requestManager: NARequestManager) {
         let vm = NACoreEngine.sharedVirtualMachine
@@ -106,7 +106,7 @@ extension NACoreEngine {
     }
     
     /// Retain an instance of NineAnimatorPromise in the current context, return a JSValue containing a JavaScript promise.
-    func retrainNativePromise(_ promise: NineAnimatorPromise<JSValue>) -> JSValue {
+    func retainNativePromise(_ promise: NineAnimatorPromise<JSValue>) -> JSValue {
         let jsPromise = JSValue(newPromiseIn: self.jsContext) {
             [weak self] resolver, rejector in
             guard let resolver = resolver, let rejector = rejector else {
@@ -157,14 +157,14 @@ extension NACoreEngine {
 @available(iOS 13, *)
 extension NACoreEngine {
     private static func registerInstance(_ engine: NACoreEngine) {
-        Log.info("[NACoreEngine] Registering NACoreEngine instace: %@", engine)
+        Log.info("[NACoreEngine] Registering NACoreEngine instance: %@", engine)
         __coreEngineInstances.mutate {
             $0[ObjectIdentifier(engine.jsContext)] = WeakRef(engine)
         }
     }
     
     private static func unregisterInstance(_ engine: NACoreEngine) {
-        Log.info("[NACoreEngine] Unregistering NACoreEngine instace: %@", engine)
+        Log.info("[NACoreEngine] Unregistering NACoreEngine instance: %@", engine)
         __coreEngineInstances.mutate {
             _ = $0.removeValue(forKey: ObjectIdentifier(engine.jsContext))
         }
