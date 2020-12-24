@@ -20,7 +20,7 @@
 import Foundation
 import JavaScriptCore
 
-/// A generic error class thrown within NineAniamtor
+/// A generic error class thrown within NineAnimator
 class NineAnimatorError: NSError {
     class var urlError: URLError { URLError() }
     class var decodeError: DecodeError { DecodeError() }
