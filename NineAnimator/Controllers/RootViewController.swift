@@ -247,38 +247,39 @@ extension RootViewController {
             preferredStyle: .alert
         )
         
-        let errorAlert = UIAlertController(
-            title: "Error",
-            message: "Cannot import configurations",
-            preferredStyle: .alert
-        )
-        
-        errorAlert.addAction(UIAlertAction(
-            title: "Done",
-            style: .cancel,
-            handler: nil
-        ))
-        
-        func showErrorAlert() { presentOnTop(errorAlert) }
+        func showErrorAlert(error: Error) {
+            Log.error(error)
+            let errorAlert = UIAlertController(
+                error: error,
+                customTitle: "Cannot Import Backup"
+            )
+            presentOnTop(errorAlert)
+        }
         
         alert.addAction(UIAlertAction(title: "Replace Current", style: .destructive) {
             _ in
-            if !replace(NineAnimator.default.user, with: config) {
-                showErrorAlert()
+            do {
+                try replace(NineAnimator.default.user, with: config)
+            } catch {
+                showErrorAlert(error: error)
             }
         })
         
         alert.addAction(UIAlertAction(title: "Merge - Pioritize Local", style: .default) {
             _ in
-            if !merge(NineAnimator.default.user, with: config, policy: .localFirst) {
-                showErrorAlert()
+            do {
+                try merge(NineAnimator.default.user, with: config, policy: .localFirst)
+            } catch {
+                showErrorAlert(error: error)
             }
         })
         
         alert.addAction(UIAlertAction(title: "Merge - Pioritize Importing", style: .default) {
             _ in
-            if !merge(NineAnimator.default.user, with: config, policy: .remoteFirst) {
-                showErrorAlert()
+            do {
+                try merge(NineAnimator.default.user, with: config, policy: .remoteFirst)
+            } catch {
+                showErrorAlert(error: error)
             }
         })
         
@@ -286,7 +287,7 @@ extension RootViewController {
         
         // Change to Featured view so when we tap back to recents view the imported
         // anime will show up.
-        selectedIndex = 0
+        navigate(toScene: .featured)
         presentOnTop(alert)
     }
 }

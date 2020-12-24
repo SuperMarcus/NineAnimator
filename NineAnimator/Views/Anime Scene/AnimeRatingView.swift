@@ -26,7 +26,8 @@ class AnimeRatingView: UIView {
     @IBOutlet private weak var ratingStringLabel: UILabel!
     
     func update(rating: Float, scale: Float) {
-        let normalizedRating = rating / scale
+        // Ensure rating is not above 1 to avoid crash. This can occur when an anime's rating is above it's scale
+        let normalizedRating = min(rating / scale, 1)
         let filledStartCount = Int(ceil(normalizedRating / 0.2))
         
         let formatter = NumberFormatter()
