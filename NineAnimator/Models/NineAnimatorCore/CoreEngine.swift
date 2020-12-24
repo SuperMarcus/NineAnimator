@@ -66,6 +66,18 @@ class NACoreEngine: NSObject {
         // Types
         self.jsContext.setObject(NACoreEngineExportsAnimeLink.self, forKeyedSubscript: "AnimeLink" as NSString)
         self.jsContext.setObject(NACoreEngineExportsEpisodeLink.self, forKeyedSubscript: "EpisodeLink" as NSString)
+        self.jsContext.setObject(NACoreEngineExportsAdditionalEpisodeLinkInformation.self, forKeyedSubscript: "AdditionalEpisodeLinkInformation" as NSString)
+        self.jsContext.setObject(NACoreEngineExportsAnime.self, forKeyedSubscript: "Anime" as NSString)
+    }
+}
+
+// MARK: - Error Handling
+@available(iOS 13, *)
+extension NACoreEngine {
+    /// Throw an error in the current execution context
+    func raiseErrorInContext(_ error: NSError) {
+        let convertedError = self.convertToJSError(error)
+        self.jsContext.exception = convertedError
     }
 }
 

@@ -46,12 +46,14 @@ extension NACoreEngine {
     /// Make a JavaScript error object from a native NSError object
     func convertToJSError(_ nativeError: NSError) -> JSValue {
         // Reuse instantiated JSCore error
-        if let coreError = nativeError as? NineAnimatorError.NineAnimatorCoreError,
+        if let coreError = nativeError as? NineAnimatorError.CoreEngineError,
            let instantiatedError = coreError.errorObject?.value {
             return instantiatedError
         }
         
-        guard let errorObject = JSValue(newErrorFromMessage: nativeError.localizedDescription, in: jsContext) else {
+        let formattedErrorMessage = String(format: "%@: %@", nativeError.localizedDescription, nativeError.localizedFailureReason ?? "unknown reason")
+        
+        guard let errorObject = JSValue(newErrorFromMessage: formattedErrorMessage, in: jsContext) else {
             return JSValue(undefinedIn: jsContext)
         }
         
@@ -86,10 +88,38 @@ extension NACoreEngine {
         } else if jsErrorValue.isInstance(of: self.errorType) {
             let errorName = jsErrorValue.objectForKeyedSubscript("name")?.toString() ?? "UnknownError"
             let errorMessage = jsErrorValue.objectForKeyedSubscript("message")?.toString() ?? "Unknown message"
-            return NineAnimatorError.NineAnimatorCoreError(errorObject: jsErrorValue, name: errorName, message: errorMessage)
+            return NineAnimatorError.CoreEngineError(errorObject: jsErrorValue, name: errorName, message: errorMessage)
         } else {
             let convertedErrorMessage = jsErrorValue.toString()
             return NineAnimatorError.unknownError(convertedErrorMessage ?? "Unknown JavaScript Error")
         }
+    }
+    
+    /// Convert a JavaScript value to a native object
+    func toNativeObject<ObjectType>(_ jsValue: JSValue, type: ObjectType.Type) -> ObjectType? {
+        if let jsValueObject = jsValue.toObject(),
+           let convertedObject = jsValueObject as? ObjectType {
+            return convertedObject
+        }
+        return nil
+    }
+    
+    /// Validate the type of an input value
+    func validateValue<InputType, ParameterType>(_ inputValue: InputType?, type: ParameterType.Type) -> ParameterType? {
+        // I want my sweet type safety
+        if let coreObject = (inputValue as? JSValue) ?? JSValue(object: inputValue, in: self.jsContext) {
+            return self.toNativeObject(coreObject, type: type)
+        }
+        
+        return nil
+    }
+    
+    /// Validate the type of an input value
+    ///
+    /// Always use this method to check callback parameters that involve generic bridged classes (such as NSArray and NSDictionary)
+    /// since JavaScriptCore does not provide type-safety checks in such instances.
+    func validateValue<InputType>(_ inputValue: InputType?) -> InputType? {
+        // I also want my type safety :)
+        validateValue(inputValue, type: InputType.self)
     }
 }

@@ -102,6 +102,8 @@
 		2C34F0542594403100D16F64 /* Zeref's Collection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F04E2594403100D16F64 /* Zeref's Collection@2x.png */; };
 		2C34F0552594403100D16F64 /* Zeref's Collection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F04F2594403100D16F64 /* Zeref's Collection@3x.png */; };
 		2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F0502594403100D16F64 /* Use's Inverted@2x.png */; };
+		2C34F0702594507700D16F64 /* CoreExportsAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */; };
+		2C34F0782594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */; };
 		2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* UserNotificationManager.swift */; };
 		2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */; };
 		2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */; };
@@ -621,6 +623,8 @@
 		2C34F04E2594403100D16F64 /* Zeref's Collection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zeref's Collection@2x.png"; sourceTree = "<group>"; };
 		2C34F04F2594403100D16F64 /* Zeref's Collection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zeref's Collection@3x.png"; sourceTree = "<group>"; };
 		2C34F0502594403100D16F64 /* Use's Inverted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Use's Inverted@2x.png"; sourceTree = "<group>"; };
+		2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAnime.swift; sourceTree = "<group>"; };
+		2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAdditionalEpisodeLinkInformation.swift; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCell.swift; sourceTree = "<group>"; };
@@ -1310,6 +1314,8 @@
 				2C368A072592F0580069DE91 /* CoreExportsEpisodeLink.swift */,
 				2C368A082592F0580069DE91 /* CoreExportsNineAnimator.swift */,
 				2C368A092592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift */,
+				2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */,
+				2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */,
 			);
 			path = Exports;
 			sourceTree = "<group>";
@@ -2842,6 +2848,7 @@
 				2C6C20C723FADD19009FAFF5 /* UserDefaults+CodableValue.swift in Sources */,
 				2C8519C622D3202B00EEF3AC /* AnimeKisa+Episode.swift in Sources */,
 				2C1C71852219AFB700760A69 /* TrackingContext.swift in Sources */,
+				2C34F0782594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift in Sources */,
 				2C1C718D221AE43600760A69 /* ListingAnimeInformation.swift in Sources */,
 				BF064BAF24E30ACD005A44EB /* OpenStreamParser.swift in Sources */,
 				BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */,
@@ -3057,6 +3064,7 @@
 				2C23AE402229EDEA00512150 /* StaticListingAnimeCollection.swift in Sources */,
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */,
+				2C34F0702594507700D16F64 /* CoreExportsAnime.swift in Sources */,
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
 				65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */,
 				2CCBC5C024041E2C0013C4FE /* Alamofire+Legacy.swift in Sources */,

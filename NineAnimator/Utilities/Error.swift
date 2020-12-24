@@ -55,6 +55,10 @@ class NineAnimatorError: NSError {
         ContentUnavailableError(failiureReason)
     }
     
+    class func argumentError(_ description: String, expectedValue: String? = nil, actualValue: String? = nil) -> ArgumentError {
+        ArgumentError(description: description, expectedValue: expectedValue, actualValue: actualValue)
+    }
+    
     var sourceOfError: Any?
     weak var relatedRequestManager: NARequestManager?
     
@@ -348,7 +352,7 @@ extension NineAnimatorError {
     }
     
     /// An error received from the NineAnimatorCore engine.
-    public class NineAnimatorCoreError: NineAnimatorError {
+    class CoreEngineError: NineAnimatorError {
         var name: String {
             (userInfo["errorName"] as? String) ?? "UnknownError"
         }
@@ -368,6 +372,51 @@ extension NineAnimatorError {
             
             // Using managed value here because this object may be mixed with CoreEngine memory graphs
             self.errorObject = JSManagedValue(value: errorObject, andOwner: self)
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
+    
+    /// Representing an unexpected internal error
+    class InternalError: NineAnimatorError {
+        init(failiureReason: String, userInfo: [String: Any]? = nil) {
+            super.init(
+                11,
+                message: "NineAnimator encountered an internal error",
+                failiureReason: failiureReason,
+                userInfo: userInfo
+            )
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+    }
+    
+    /// Representing unexpected argument error
+    class ArgumentError: InternalError {
+        var expectedValue: String? {
+            userInfo["expectedValue"] as? String
+        }
+        
+        var actualValue: String? {
+            userInfo["actualValue"] as? String
+        }
+        
+        init(description: String, expectedValue: String? = nil, actualValue: String? = nil) {
+            var customInfo = [String: Any]()
+            
+            if let expectedValue = expectedValue {
+                customInfo["expectedValue"] = expectedValue
+            }
+            
+            if let actualValue = actualValue {
+                customInfo["actualValue"] = actualValue
+            }
+            
+            super.init(failiureReason: description, userInfo: customInfo)
         }
         
         required init?(coder aDecoder: NSCoder) {
