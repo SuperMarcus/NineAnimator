@@ -104,6 +104,7 @@
 		2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F0502594403100D16F64 /* Use's Inverted@2x.png */; };
 		2C34F0702594507700D16F64 /* CoreExportsAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */; };
 		2C34F0782594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */; };
+		2C34F084259654FF00D16F64 /* CoreExportsEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */; };
 		2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* UserNotificationManager.swift */; };
 		2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */; };
 		2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */; };
@@ -625,6 +626,7 @@
 		2C34F0502594403100D16F64 /* Use's Inverted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Use's Inverted@2x.png"; sourceTree = "<group>"; };
 		2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAnime.swift; sourceTree = "<group>"; };
 		2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAdditionalEpisodeLinkInformation.swift; sourceTree = "<group>"; };
+		2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsEpisode.swift; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCell.swift; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 				2C368A092592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift */,
 				2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */,
 				2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */,
+				2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */,
 			);
 			path = Exports;
 			sourceTree = "<group>";
@@ -2794,6 +2797,7 @@
 				2CEC219A2207FA9800A30F4F /* GogoAnime+Episode.swift in Sources */,
 				2C4ABC9A21B88F8C009B4D47 /* Anime.swift in Sources */,
 				2C0CFC392263B34300EC793E /* Anilist+Recommendation.swift in Sources */,
+				2C34F084259654FF00D16F64 /* CoreExportsEpisode.swift in Sources */,
 				2C7B7AA82296E819002EC74C /* KiwikParser.swift in Sources */,
 				2C93BD4A22220B07000411CB /* Kitsu.swift in Sources */,
 				2CEC218A2207E34E00A30F4F /* Promise+All.swift in Sources */,
