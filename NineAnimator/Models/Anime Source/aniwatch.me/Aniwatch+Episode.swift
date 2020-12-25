@@ -104,7 +104,9 @@ extension NASourceAniwatch {
                 let additionalHeaders = HTTPCookie.requestHeaderFields(with: cookies)
                 playbackHeaders.merge(additionalHeaders) { $1 }
             }
-            
+            if (Int.random(in: 0...1) == 1) {
+                throw NineAnimatorError.decodeError("Fake Error")
+            }
             return Episode(
                 link,
                 target: episodeURL,
