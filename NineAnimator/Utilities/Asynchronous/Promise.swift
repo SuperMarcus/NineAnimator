@@ -36,7 +36,7 @@ protocol NineAnimatorPromiseProtocol {
 /// Since NineAnimator is involved in many chainned networking stuff,
 /// which, as many can tell, creates numerous "callback hells" in the
 /// code, and that Marcus couldn't come up with which promise
-/// framework to use, I am just going to write one myself.
+/// framework to use, so he's just going to write one himself.
 class NineAnimatorPromise<ResultType>: NineAnimatorAsyncTask, NineAnimatorPromiseProtocol, Hashable {
     /// Hold reference to the task
     private var referenceTask: NineAnimatorAsyncTask?
