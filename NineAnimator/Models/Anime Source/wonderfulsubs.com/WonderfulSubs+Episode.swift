@@ -108,7 +108,7 @@ extension NASourceWonderfulSubs {
                 parent: episode,
                 contentType: selectedAsset.type,
                 headers: [:],
-                isAggregated: DummyParser.registeredInstance!.isAggregatedAsset(mimeType: selectedAsset.type)
+                isAggregated: DummyParser.isAggregatedAsset(mimeType: selectedAsset.type)
             )
             // Assuming that all assets with external subtitles are aggregated, which may not be true
         //                if let captions = selectedAsset.captions {

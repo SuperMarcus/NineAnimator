@@ -56,7 +56,7 @@ import JavaScriptCore
         .init(underlyingEpisodeObject.parent)
     }
     
-    dynamic var userInfo: [String : Any]? {
+    dynamic var userInfo: [String: Any]? {
         get {
             underlyingEpisodeObject.userInfo
         }

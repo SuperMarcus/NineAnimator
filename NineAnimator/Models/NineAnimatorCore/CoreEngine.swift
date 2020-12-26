@@ -69,6 +69,7 @@ class NACoreEngine: NSObject {
         self.jsContext.setObject(NACoreEngineExportsAdditionalEpisodeLinkInformation.self, forKeyedSubscript: "AdditionalEpisodeLinkInformation" as NSString)
         self.jsContext.setObject(NACoreEngineExportsAnime.self, forKeyedSubscript: "Anime" as NSString)
         self.jsContext.setObject(NACoreEngineExportsEpisode.self, forKeyedSubscript: "Episode" as NSString)
+        self.jsContext.setObject(NACoreEngineExportsPlaybackMedia.self, forKeyedSubscript: "PlaybackMedia" as NSString)
     }
 }
 

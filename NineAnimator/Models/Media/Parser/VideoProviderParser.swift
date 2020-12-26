@@ -43,7 +43,7 @@ extension VideoProviderParser {
     }
     
     /// Check if the content type infers an aggregated asset
-    func isAggregatedAsset(mimeType: String) -> Bool {
+    static func isAggregatedAsset(mimeType: String) -> Bool {
         let loweredMimeType = mimeType.lowercased()
         return loweredMimeType == "application/x-mpegurl" || loweredMimeType == "vnd.apple.mpegurl"
     }

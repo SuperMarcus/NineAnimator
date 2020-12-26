@@ -33,7 +33,7 @@ class DummyParser: VideoProviderParser {
             
             // Infer isAggregated from mime type
             if let contentType = options[Options.contentType] as? String {
-                isAggregatedAsset = self.isAggregatedAsset(mimeType: contentType)
+                isAggregatedAsset = DummyParser.isAggregatedAsset(mimeType: contentType)
             }
             
             // Attach Referer header to all requests for backwards compatibility
