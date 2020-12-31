@@ -6,17 +6,17 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire",
         "state": {
           "branch": null,
-          "revision": "9e0328127dfb801cefe8ac53a13c0c90a7770448",
-          "version": "5.4.0"
+          "revision": "eaf6e622dd41b07b251d8f01752eab31bc811493",
+          "version": "5.4.1"
         }
       },
       {
-        "package": "App Center",
+        "package": "AppCenter",
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "79d99eaff599d1b38adf81884fe220c75fd38867",
-          "version": "4.0.0"
+          "revision": "484dead179e6d7edd534d0d7defdf65c14a5b426",
+          "version": "4.1.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "c46a3d41f5b2401d18bcb46d0101cdc5cd13e307",
-          "version": "1.0.52"
+          "revision": "c9894fd117457f1d006575fbfb2fdfd6f79eac03",
+          "version": "1.0.200"
         }
       },
       {
@@ -33,22 +33,22 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher",
         "state": {
           "branch": null,
-          "revision": "0e548b700c7c123dd3b2ac776e90d63a540f084d",
-          "version": "5.15.7"
+          "revision": "2a10bf41da75599a9f8e872dbd44fe0155a2e00c",
+          "version": "5.15.8"
         }
       },
       {
         "package": "OpenCastSwift",
         "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift",
         "state": {
-          "branch": null,
-          "revision": "5fa97c29c22be3d31b9c8f769b3aa4d15d4b556b",
+          "branch": "spm",
+          "revision": "bc8294a5894ccc06b6897294ce255fc9285cec6c",
           "version": null
         }
       },
       {
         "package": "PLCrashReporter",
-        "repositoryURL": "https://github.com/microsoft/plcrashreporter.git",
+        "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
         "state": {
           "branch": null,
           "revision": "de6b8f9db4b2a0aa859a5507550a70548e4da936",
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf",
         "state": {
           "branch": null,
-          "revision": "426bef0ddfdc6449b7bd1418baafad6bbc56110b",
-          "version": "1.13.0"
+          "revision": "da9a52be9cd36c63993291ce3f1b65dafcd1e826",
+          "version": "1.14.0"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/marcosgriselli/ViewAnimator",
         "state": {
           "branch": null,
-          "revision": "351ad8f03101567e60dfd0dcf8519e1cbcd9a123",
-          "version": "3.0.1"
+          "revision": "d3034df845182f9cf0b10fcf35e742541c1926b8",
+          "version": "3.0.2"
         }
       }
     ]
