@@ -21,7 +21,7 @@ import AppCenterCrashes
 import Foundation
 
 class NAAppCenterCrashesDelegate: NSObject, CrashesDelegate {
-    func attachments(with crashes: Crashes, for errorReport: ErrorReport) -> [ErrorAttachmentLog] {
+    func attachments(with crashes: Crashes, for errorReport: ErrorReport) -> [ErrorAttachmentLog]? {
         do {
             let fs = FileManager.default
             let tempDir = fs.temporaryDirectory

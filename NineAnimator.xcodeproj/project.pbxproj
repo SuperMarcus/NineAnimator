@@ -3585,7 +3585,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				minimumVersion = 4.1.0;
 			};
 		};
 		2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */ = {
@@ -3601,7 +3601,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.15.7;
+				minimumVersion = 5.15.8;
 			};
 		};
 		2CB67043249FCA06006C11A9 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -3609,7 +3609,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
+				minimumVersion = 5.4.1;
 			};
 		};
 		2CB67046249FCA24006C11A9 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
@@ -3624,8 +3624,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SuperMarcus/OpenCastSwift";
 			requirement = {
-				kind = revision;
-				revision = 5fa97c29c22be3d31b9c8f769b3aa4d15d4b556b;
+				branch = spm;
+				kind = branch;
 			};
 		};
 		2CB6704C249FCA65006C11A9 /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
@@ -3633,7 +3633,7 @@
 			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				minimumVersion = 3.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
