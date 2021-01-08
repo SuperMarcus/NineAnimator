@@ -65,8 +65,11 @@ extension NineAnimatorUser {
         
         NotificationCenter.default.post(
             name: .playbackProgressDidUpdate,
-            object: episode,
-            userInfo: ["progress": clippedProgress]
+            object: self,
+            userInfo: [
+                "episodeLink": episode,
+                "updatedProgress": clippedProgress
+            ]
         )
     }
     
@@ -78,12 +81,15 @@ extension NineAnimatorUser {
         var store = persistedProgresses
         episodes.forEach {
             store["\($0.parent.source.name)+\($0.identifier)"] = clippedProgress
-            NotificationCenter.default.post(
-                name: .playbackProgressDidUpdate,
-                object: $0,
-                userInfo: ["progress": clippedProgress]
-            )
         }
+        NotificationCenter.default.post(
+            name: .batchPlaybackProgressDidUpdate,
+            object: self,
+            userInfo: [
+                "episodeLinks": [episodes],
+                "progress": clippedProgress
+            ]
+        )
 
         persistedProgresses = store
     }

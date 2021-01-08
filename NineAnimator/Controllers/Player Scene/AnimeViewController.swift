@@ -1071,11 +1071,12 @@ extension AnimeViewController {
             preferredStyle: .actionSheet
         )
         
-        alertMessage.addAction((UIAlertAction(title: "Only This Episode", style: .default) {_ in
-            if let episodeLink = self.contextMenuSelectedEpisode, let tracker = self.anime?.trackingContext {
+        alertMessage.addAction((UIAlertAction(title: "Only This Episode", style: .default) { [weak self] _ in
+            if let episodeLink = self?.contextMenuSelectedEpisode,
+               let tracker = self?.anime?.trackingContext {
                 tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
                 tracker.endWatching(episode: episodeLink)
-                DispatchQueue.main.async { self.concludeContextMenu() }
+                DispatchQueue.main.async { self?.concludeContextMenu() }
             }
         }))
         
