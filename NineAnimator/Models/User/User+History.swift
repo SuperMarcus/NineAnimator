@@ -58,7 +58,7 @@ extension NineAnimatorUser {
     ///   - progress: Float value ranging from 0.0 to 1.0.
     ///   - episode: EpisodeLink of the episode.
     func update(progress: Float, for episode: EpisodeLink) {
-        let clippedProgress = max(min(1.0, progress), 0.0)
+        let clippedProgress = (0.0...1.0).clamp(value: progress)
         var store = persistedProgresses
         store["\(episode.parent.source.name)+\(episode.identifier)"] = clippedProgress
         persistedProgresses = store
@@ -68,6 +68,24 @@ extension NineAnimatorUser {
             object: episode,
             userInfo: ["progress": clippedProgress]
         )
+    }
+    
+    /// - Parameters:
+    ///   - progress: Float value ranging from 0.0 to 1.0.
+    ///   - episodes: EpisodeLinks
+    func update(progress: Float, for episodes: [EpisodeLink]) {
+        let clippedProgress = (0.0...1.0).clamp(value: progress)
+        var store = persistedProgresses
+        episodes.forEach {
+            store["\($0.parent.source.name)+\($0.identifier)"] = clippedProgress
+            NotificationCenter.default.post(
+                name: .playbackProgressDidUpdate,
+                object: $0,
+                userInfo: ["progress": clippedProgress]
+            )
+        }
+
+        persistedProgresses = store
     }
     
     /// Retrive playback progress for episode

@@ -1064,11 +1064,45 @@ extension AnimeViewController {
     }
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
-        if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
-            tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
-            tracker.endWatching(episode: episodeLink)
-        }
-        DispatchQueue.main.async { self.concludeContextMenu() }
+        // Ask the user if they want to mark previous episodes "Completed" as well
+        let alertMessage = UIAlertController(
+            title: "Mark Episode As Complete",
+            message: "Do you want to mark previous episodes as complete?",
+            preferredStyle: .actionSheet
+        )
+        
+        alertMessage.addAction((UIAlertAction(title: "Only This Episode", style: .default) {_ in
+            if let episodeLink = self.contextMenuSelectedEpisode, let tracker = self.anime?.trackingContext {
+                tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
+                tracker.endWatching(episode: episodeLink)
+                DispatchQueue.main.async { self.concludeContextMenu() }
+            }
+        }))
+        
+        alertMessage.addAction((UIAlertAction(title: "Mark All Previous Episodes", style: .default) {
+            [weak self] _ in
+            // Retrieve currently selected and previous episodeLinks
+            if let selectedEpisodeLink = self?.contextMenuSelectedEpisode,
+               let tracker = self?.anime?.trackingContext,
+               let currentEpisodeLinkIndex = self?.anime?.episodeLinks.firstIndex(of: selectedEpisodeLink),
+               let episodeLinksArraySlice = self?.anime?.episodeLinks[0...currentEpisodeLinkIndex] {
+                // Mark all episodeLinks as complete, this is very intensive
+                DispatchQueue.global(qos: .userInitiated).async {
+                    let episodeLinksToUpdate = Array(episodeLinksArraySlice)
+                    tracker.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
+                    
+                    // Only call this method for the current episodeLink, to reduce unnecessary network requests to Anime Listing Services
+                    tracker.endWatching(episode: selectedEpisodeLink)
+                    DispatchQueue.main.async {
+                        // Reload entire section to prevent weird UI bugs
+                        self?.concludeContextMenu(reloadAllRows: true)
+                    }
+                }
+            }
+        }))
+        
+        alertMessage.addAction((UIAlertAction(title: "Cancel", style: .cancel)))
+        present(alertMessage, animated: true)
     }
     
     @objc private func contextMenu(markAsUnwatched sender: UIMenuController) {
@@ -1078,8 +1112,16 @@ extension AnimeViewController {
         DispatchQueue.main.async { self.concludeContextMenu() }
     }
     
-    private func concludeContextMenu() {
-        if let targetIndexPath = contextMenuSelectedIndexPath {
+    /// Closes context menu and reloads episodeLink's tableViewRow
+    /// - Parameters:
+    ///     - reloadAllRows: Force entire Episode Section IndexSet to reload
+    private func concludeContextMenu(reloadAllRows: Bool = false) {
+        if reloadAllRows {
+            tableView.performBatchUpdates {
+                tableView.reloadSections(Section.indexSet(.episodes), with: .fade)
+                tableView.setNeedsLayout()
+            }
+        } else if let targetIndexPath = contextMenuSelectedIndexPath {
             tableView.performBatchUpdates({
                 tableView.reloadRows(at: [targetIndexPath], with: .fade)
                 tableView.setNeedsLayout()
