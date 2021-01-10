@@ -1128,7 +1128,7 @@ extension AnimeViewController {
                 if let currentEpisodeLinkIndex = anime.episodeLinks.firstIndex(of: selectedEpisodeLink) {
                     let episodeLinksArraySlice = anime.episodeLinks[0...currentEpisodeLinkIndex]
                     let episodeLinksToUpdate = Array(episodeLinksArraySlice)
-                    anime.trackingContext.update(progress: 0.0, forEpisodeLinks: episodeLinksToUpdate)
+                    anime.trackingContext.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
                     
                     // Only call this method for the current episodeLink, to reduce unnecessary network requests to Anime Listing Services
                     anime.trackingContext.endWatching(episode: selectedEpisodeLink)
