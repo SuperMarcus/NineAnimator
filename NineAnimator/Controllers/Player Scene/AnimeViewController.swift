@@ -91,6 +91,10 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var shouldPromptBatchEpisodeMarking = true
     
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -128,6 +132,14 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             self,
             selector: #selector(onPlaybackDidEnd(_:)),
             name: .playbackDidEnd,
+            object: nil
+        )
+        
+        // Receive batch update playback progress notification and reload episode tableview section
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onBatchPlaybackProgressDidUpdate(_:)),
+            name: .batchPlaybackProgressDidUpdate,
             object: nil
         )
     }
@@ -414,6 +426,18 @@ extension AnimeViewController {
         self.episodeLink = episodeLink
         
         retrieveAndPlay()
+    }
+    
+    @objc func onBatchPlaybackProgressDidUpdate(_ notification: Notification) {
+        Log.info("[AnimeViewController] Batch Playback Progress Notification Received. Reloading TableView Episode Section")
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            self.tableView.performBatchUpdates {
+                self.tableView.reloadSections(Section.indexSet(.episodes), with: .fade)
+                self.tableView.setNeedsLayout()
+            }
+        }
     }
 }
 
@@ -1104,14 +1128,13 @@ extension AnimeViewController {
                 if let currentEpisodeLinkIndex = anime.episodeLinks.firstIndex(of: selectedEpisodeLink) {
                     let episodeLinksArraySlice = anime.episodeLinks[0...currentEpisodeLinkIndex]
                     let episodeLinksToUpdate = Array(episodeLinksArraySlice)
-                    anime.trackingContext.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
+                    anime.trackingContext.update(progress: 0.0, forEpisodeLinks: episodeLinksToUpdate)
                     
                     // Only call this method for the current episodeLink, to reduce unnecessary network requests to Anime Listing Services
                     anime.trackingContext.endWatching(episode: selectedEpisodeLink)
                     
                     DispatchQueue.main.async {
-                        // Reload entire section to prevent weird UI bugs
-                        self?.concludeContextMenu(reloadAllRows: true)
+                        self?.concludeContextMenu(batchUpdatePerformed: true)
                     }
                 }
             }
@@ -1139,14 +1162,11 @@ extension AnimeViewController {
     
     /// Closes context menu and reloads episodeLink's tableViewRow
     /// - Parameters:
-    ///     - reloadAllRows: Force entire Episode Section IndexSet to reload
-    private func concludeContextMenu(reloadAllRows: Bool = false) {
-        if reloadAllRows {
-            tableView.performBatchUpdates {
-                tableView.reloadSections(Section.indexSet(.episodes), with: .fade)
-                tableView.setNeedsLayout()
-            }
-        } else if let targetIndexPath = contextMenuSelectedIndexPath {
+    ///     - batchUpdatePerformed: Boolean indicating if more than 1 episode's progress has been updated.
+    private func concludeContextMenu(batchUpdatePerformed: Bool = false) {
+        /// Do not reload tableView if batch update has occured.
+        /// `onBatchPlaybackProgressDidUpdate(:_)` will handle reloading the tableView
+        if let targetIndexPath = contextMenuSelectedIndexPath, !batchUpdatePerformed {
             tableView.performBatchUpdates({
                 tableView.reloadRows(at: [targetIndexPath], with: .fade)
                 tableView.setNeedsLayout()
@@ -1155,10 +1175,6 @@ extension AnimeViewController {
         
         contextMenuSelectedIndexPath = nil
         contextMenuSelectedEpisode = nil
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        true
     }
     
     func offlineAccessButton(

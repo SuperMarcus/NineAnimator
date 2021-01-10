@@ -47,12 +47,6 @@ class EpisodeAccessoryProcessIndicator: UIView, Themable {
                 name: .playbackProgressDidUpdate,
                 object: nil
             )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(onProgressUpdate),
-                name: .batchPlaybackProgressDidUpdate,
-                object: nil
-            )
         }
     }
     

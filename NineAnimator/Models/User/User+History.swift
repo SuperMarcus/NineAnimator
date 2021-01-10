@@ -82,6 +82,8 @@ extension NineAnimatorUser {
         episodes.forEach {
             store["\($0.parent.source.name)+\($0.identifier)"] = clippedProgress
         }
+        persistedProgresses = store
+        
         NotificationCenter.default.post(
             name: .batchPlaybackProgressDidUpdate,
             object: self,
@@ -90,8 +92,6 @@ extension NineAnimatorUser {
                 "updatedProgress": clippedProgress
             ]
         )
-
-        persistedProgresses = store
     }
     
     /// Retrive playback progress for episode

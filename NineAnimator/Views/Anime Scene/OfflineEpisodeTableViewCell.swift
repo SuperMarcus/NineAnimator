@@ -40,12 +40,6 @@ class OfflineEpisodeTableViewCell: UITableViewCell {
                 name: .playbackProgressDidUpdate,
                 object: nil
             )
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(onPlaybackProgressDidUpdate(_:)),
-                name: .batchPlaybackProgressDidUpdate,
-                object: nil
-            )
         }
     }
     
