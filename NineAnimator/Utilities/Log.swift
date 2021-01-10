@@ -37,6 +37,7 @@ class NineAnimatorLogger {
     }
     
     private let _systemLogger: OSLog
+    private let _cachedLogMessagesLock: NSLock
     private var _cachedLogMessagesHead: LogMessageListItem?
     private var _cachedLogMessagesTail: LogMessageListItem?
     private var _cachedLogMessagesCount: Int = 0
@@ -46,6 +47,7 @@ class NineAnimatorLogger {
         
         // Maintains a reference to the system log object
         _systemLogger = logObject
+        _cachedLogMessagesLock = .init()
         
         // Setup uncaught exception handler
         NineAnimatorLogger.setupCrashHandler()
@@ -156,6 +158,9 @@ extension NineAnimatorLogger {
     
     /// Retrieve the most recent log messages
     func retrieveMostRecentMessages(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache) -> [LogMessage] {
+        // Enter critical section
+        _cachedLogMessagesLock.lock()
+        
         var result = [LogMessage]()
         var currentItem = _cachedLogMessagesTail
         
@@ -163,6 +168,9 @@ extension NineAnimatorLogger {
             result.append(unwrappedCurrentItem.message)
             currentItem = unwrappedCurrentItem.previousItem
         }
+        
+        // Exit critical section
+        _cachedLogMessagesLock.unlock()
         
         return result
     }
@@ -255,6 +263,9 @@ extension NineAnimatorLogger {
         )
         _logToSystemLogger(message, level: level, arguments: logMessage.parameters)
         
+        // Enter critical section
+        _cachedLogMessagesLock.lock()
+        
         // Store the message item in memory
         let logMessageItem = LogMessageListItem(logMessage)
         if let tail = _cachedLogMessagesTail {
@@ -273,6 +284,9 @@ extension NineAnimatorLogger {
             _cachedLogMessagesTail = logMessageItem
             _cachedLogMessagesCount = 1
         }
+        
+        // Exit critical section
+        _cachedLogMessagesLock.unlock()
     }
 }
 
