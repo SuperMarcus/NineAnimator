@@ -20,9 +20,29 @@
 import Foundation
 
 extension Notification.Name {
-    /// Fired when the playback progress has been updated in the NineAnimatorUser
+    /**
+    Fired when the playback progress has been updated in the NineAnimatorUser
+     
+     ## UserInfo
+     - Provides the episodeLink and it's updated playback progress:
+     - "episodeLink": `EpisodeLink`,
+     - "updatedProgress": `Float`
+     
+    */
     static let playbackProgressDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.playbackProgressDidUpdate")
+    
+    /**
+    Fired when the playback progress has been updated for multiple episodes in the NineAnimatorUser
+     
+     ## UserInfo
+     - Provides array of episodeLink's and it's updated playback progress:
+     - "episodeLinks": `[EpisodeLink]`,
+     - "updatedProgress": `Float`
+     
+    */
+    static let batchPlaybackProgressDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.batchPlaybackProgressDidUpdate")
     
     /// Fired when the video is starting to play
     ///

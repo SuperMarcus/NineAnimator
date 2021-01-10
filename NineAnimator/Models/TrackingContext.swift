@@ -361,6 +361,27 @@ extension TrackingContext {
         }
     }
     
+    /// Enqueue new records for multiple episodes with a playback progress
+    func updateRecord(_ progress: Double, forEpisodeNumbers episodes: [Int]) {
+        queue.async(flags: [ .barrier ]) {
+            // Remove all old records
+            self.progressRecords.removeAll { episodes.contains($0.episodeNumber) }
+            // Insert new records
+            let currentDate = Date()
+            episodes.forEach {
+                self.progressRecords.append(
+                    PlaybackProgressRecord(
+                        episodeNumber: $0,
+                        progress: progress,
+                        enqueueDate: currentDate
+                    )
+                )
+            }
+            self.updateDate = currentDate
+            self.save()
+        }
+    }
+    
     /// Retrieve the latest playback record for the specific episode
     func retrieveLatestRecord(forEpisodeNumber episode: Int) -> PlaybackProgressRecord? {
         queue.sync {
@@ -409,6 +430,18 @@ extension TrackingContext {
         if let episodeNumber = suggestingEpisodeNumber(for: episodeLink) {
             updateRecord(progress, forEpisodeNumber: episodeNumber)
         }
+    }
+    
+    /// Batch update the playback progress
+    ///
+    /// This also persists the progresses to NineAnimatorUser
+    func update(progress: Double, forEpisodeLinks episodeLinks: [EpisodeLink]) {
+        parent.user.update(progress: Float(progress), for: episodeLinks)
+        // Only record progresses for episodes if the episode number can be infered
+        let episodeNumbers = episodeLinks
+            .compactMap { suggestingEpisodeNumber(for: $0) }
+        
+        updateRecord(progress, forEpisodeNumbers: episodeNumbers)
     }
     
     /// When user selects a new streaming server
