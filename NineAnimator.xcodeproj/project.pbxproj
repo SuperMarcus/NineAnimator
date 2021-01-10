@@ -57,6 +57,7 @@
 		2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */; };
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
+		2C13B98125AB748A00A6449E /* NSLock+Closure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C13B98025AB748A00A6449E /* NSLock+Closure.swift */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
 		2C18BA572557519F005CD7D9 /* SettingsDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */; };
 		2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2C18FDEC24AAD85400F021BE /* AppCenterCrashes */; };
@@ -569,6 +570,7 @@
 		2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastMediaPlaybackViewController.swift; sourceTree = "<group>"; };
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		2C13B98025AB748A00A6449E /* NSLock+Closure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLock+Closure.swift"; sourceTree = "<group>"; };
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
 		2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDebuggingController.swift; sourceTree = "<group>"; };
 		2C1C716722183FA500760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeListing.storyboard; sourceTree = "<group>"; };
@@ -1592,6 +1594,7 @@
 				BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */,
 				2C4AE5A1253425EB003B4AA9 /* URL+ProtocolRelativeInit.swift */,
 				2CDC276D25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift */,
+				2C13B98025AB748A00A6449E /* NSLock+Closure.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -3024,6 +3027,7 @@
 				65A1F44422726A0E00B43F85 /* OpenLoadParser.swift in Sources */,
 				2CCBC5C024041E2C0013C4FE /* Alamofire+Legacy.swift in Sources */,
 				2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */,
+				2C13B98125AB748A00A6449E /* NSLock+Closure.swift in Sources */,
 				2CEC219E22088B4900A30F4F /* Promise+Queue.swift in Sources */,
 				2CA4B7F723B1E7C400B4E6F7 /* AnimeDao+Featured.swift in Sources */,
 				2C0CFC4122640A1200EC793E /* DiscoveryStandardTableViewCell.swift in Sources */,
