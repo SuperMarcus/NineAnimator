@@ -86,7 +86,7 @@ extension NineAnimatorUser {
             name: .batchPlaybackProgressDidUpdate,
             object: self,
             userInfo: [
-                "episodeLinks": [episodes],
+                "episodeLinks": episodes,
                 "updatedProgress": clippedProgress
             ]
         )
