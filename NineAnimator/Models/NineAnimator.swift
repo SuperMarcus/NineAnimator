@@ -234,7 +234,7 @@ extension NineAnimator {
             var holdingReferenceContext: TrackingContext? = context
             NineAnimator.globalConfigurationQueue.asyncAfter(deadline: .now() + 10) {
                 holdingReferenceContext = nil
-                _ = holdingReferenceContext // Just to silent the warning
+                _ = holdingReferenceContext // Just to silence the warning
             }
         }
         

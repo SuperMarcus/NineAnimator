@@ -27,10 +27,7 @@ struct AtomicProperty<Value> {
     
     /// Obtain the value contained by this wrapper
     var wrappedValue: Value {
-        _lock.lock()
-        let value = _value
-        _lock.unlock()
-        return value
+        _lock.lock { _value }
     }
     
     var projectedValue: Self {
@@ -46,19 +43,17 @@ struct AtomicProperty<Value> {
     /// - Important: Do not attempt to access the `AtomicProperty` container inside
     ///   the `mutationBlock` as it may cause a deadlock.
     mutating func mutate<Result>(_ mutationBlock: (inout Value) throws -> Result) rethrows -> Result {
-        _lock.lock()
-        let result = try mutationBlock(&_value)
-        _lock.unlock()
-        return result
+        try _lock.lock {
+            try mutationBlock(&_value)
+        }
     }
     
     /// Perform an operation on the value granted that it will not change during the execution of the block
     /// - Important: Do not attempt to access the `AtomicProperty` container inside
     ///   the `mutationBlock` as it may cause a deadlock.
     func synchronize<Result>(_ synchronizeBlock: (Value) throws -> Result) rethrows -> Result {
-        _lock.lock()
-        let result = try synchronizeBlock(_value)
-        _lock.unlock()
-        return result
+        try _lock.lock {
+            try synchronizeBlock(_value)
+        }
     }
 }

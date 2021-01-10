@@ -37,6 +37,7 @@ class NineAnimatorLogger {
     }
     
     private let _systemLogger: OSLog
+    private let _cachedLogMessagesLock: NSLock
     private var _cachedLogMessagesHead: LogMessageListItem?
     private var _cachedLogMessagesTail: LogMessageListItem?
     private var _cachedLogMessagesCount: Int = 0
@@ -46,6 +47,7 @@ class NineAnimatorLogger {
         
         // Maintains a reference to the system log object
         _systemLogger = logObject
+        _cachedLogMessagesLock = .init()
         
         // Setup uncaught exception handler
         NineAnimatorLogger.setupCrashHandler()
@@ -156,15 +158,18 @@ extension NineAnimatorLogger {
     
     /// Retrieve the most recent log messages
     func retrieveMostRecentMessages(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache) -> [LogMessage] {
-        var result = [LogMessage]()
-        var currentItem = _cachedLogMessagesTail
-        
-        while let unwrappedCurrentItem = currentItem {
-            result.append(unwrappedCurrentItem.message)
-            currentItem = unwrappedCurrentItem.previousItem
+        // Critical section
+        _cachedLogMessagesLock.lock {
+            var result = [LogMessage]()
+            var currentItem = _cachedLogMessagesTail
+            
+            while let unwrappedCurrentItem = currentItem {
+                result.append(unwrappedCurrentItem.message)
+                currentItem = unwrappedCurrentItem.previousItem
+            }
+            
+            return result
         }
-        
-        return result
     }
 }
 
@@ -255,23 +260,26 @@ extension NineAnimatorLogger {
         )
         _logToSystemLogger(message, level: level, arguments: logMessage.parameters)
         
-        // Store the message item in memory
-        let logMessageItem = LogMessageListItem(logMessage)
-        if let tail = _cachedLogMessagesTail {
-            tail.nextItem = logMessageItem
-            logMessageItem.previousItem = tail
-            _cachedLogMessagesTail = logMessageItem
-            
-            if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {
-                _cachedLogMessagesCount += 1
+        // Critical section
+        _cachedLogMessagesLock.lock {
+            // Store the message item in memory
+            let logMessageItem = LogMessageListItem(logMessage)
+            if let tail = _cachedLogMessagesTail {
+                tail.nextItem = logMessageItem
+                logMessageItem.previousItem = tail
+                _cachedLogMessagesTail = logMessageItem
+                
+                if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {
+                    _cachedLogMessagesCount += 1
+                } else {
+                    // Remove the first item
+                    _cachedLogMessagesHead = _cachedLogMessagesHead?.nextItem
+                }
             } else {
-                // Remove the first item
-                _cachedLogMessagesHead = _cachedLogMessagesHead?.nextItem
+                _cachedLogMessagesHead = logMessageItem
+                _cachedLogMessagesTail = logMessageItem
+                _cachedLogMessagesCount = 1
             }
-        } else {
-            _cachedLogMessagesHead = logMessageItem
-            _cachedLogMessagesTail = logMessageItem
-            _cachedLogMessagesCount = 1
         }
     }
 }
