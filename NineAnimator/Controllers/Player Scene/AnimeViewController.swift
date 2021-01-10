@@ -89,6 +89,8 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var previousEpisodeRetrivalError: Error?
     
+    private var shouldPromptBatchEpisodeMarking = true
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -1064,6 +1066,25 @@ extension AnimeViewController {
     }
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
+        guard let selectedEpisodeLink = self.contextMenuSelectedEpisode,
+              let anime = self.anime else {
+            return DispatchQueue.main.async {
+                [weak self] in self?.concludeContextMenu()
+            }
+        }
+        
+        let markCurrentEpisodeAsComplete: () -> Void = {
+            [weak self] in
+            anime.trackingContext.update(progress: 1.0, forEpisodeLink: selectedEpisodeLink)
+            anime.trackingContext.endWatching(episode: selectedEpisodeLink)
+            DispatchQueue.main.async { self?.concludeContextMenu() }
+        }
+        
+        // Skip mark all episodes prompt for this anime
+        if !shouldPromptBatchEpisodeMarking {
+            return markCurrentEpisodeAsComplete()
+        }
+        
         // Ask the user if they want to mark previous episodes "Completed" as well
         let alertMessage = UIAlertController(
             title: "Mark Episode As Complete",
@@ -1071,38 +1092,41 @@ extension AnimeViewController {
             preferredStyle: .actionSheet
         )
         
-        alertMessage.addAction((UIAlertAction(title: "Only This Episode", style: .default) { [weak self] _ in
-            if let episodeLink = self?.contextMenuSelectedEpisode,
-               let tracker = self?.anime?.trackingContext {
-                tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
-                tracker.endWatching(episode: episodeLink)
-                DispatchQueue.main.async { self?.concludeContextMenu() }
-            }
-        }))
+        alertMessage.addAction(.init(title: "Only This Episode", style: .default) {
+            _ in markCurrentEpisodeAsComplete()
+        })
         
-        alertMessage.addAction((UIAlertAction(title: "Mark All Previous Episodes", style: .default) {
+        alertMessage.addAction(.init(title: "All Previous Episodes", style: .default) {
             [weak self] _ in
-            // Retrieve currently selected and previous episodeLinks
-            if let selectedEpisodeLink = self?.contextMenuSelectedEpisode,
-               let tracker = self?.anime?.trackingContext,
-               let currentEpisodeLinkIndex = self?.anime?.episodeLinks.firstIndex(of: selectedEpisodeLink),
-               let episodeLinksArraySlice = self?.anime?.episodeLinks[0...currentEpisodeLinkIndex] {
-                // Mark all episodeLinks as complete, this is very intensive
-                DispatchQueue.global(qos: .userInitiated).async {
+            // Mark all episodeLinks as complete, this is very intensive
+            DispatchQueue.global().async {
+                // Retrieve currently selected and previous episodeLinks
+                if let currentEpisodeLinkIndex = anime.episodeLinks.firstIndex(of: selectedEpisodeLink) {
+                    let episodeLinksArraySlice = anime.episodeLinks[0...currentEpisodeLinkIndex]
                     let episodeLinksToUpdate = Array(episodeLinksArraySlice)
-                    tracker.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
+                    anime.trackingContext.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
                     
                     // Only call this method for the current episodeLink, to reduce unnecessary network requests to Anime Listing Services
-                    tracker.endWatching(episode: selectedEpisodeLink)
+                    anime.trackingContext.endWatching(episode: selectedEpisodeLink)
+                    
                     DispatchQueue.main.async {
                         // Reload entire section to prevent weird UI bugs
                         self?.concludeContextMenu(reloadAllRows: true)
                     }
                 }
             }
-        }))
+        })
         
-        alertMessage.addAction((UIAlertAction(title: "Cancel", style: .cancel)))
+        alertMessage.addAction(.init(title: "Don't Ask Again", style: .default) {
+            [weak self] _ in
+            self?.shouldPromptBatchEpisodeMarking = false
+            markCurrentEpisodeAsComplete()
+        })
+        
+        alertMessage.addAction(.init(title: "Cancel", style: .cancel) {
+            [weak self] _ in self?.concludeContextMenu()
+        })
+        
         present(alertMessage, animated: true)
     }
     

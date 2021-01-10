@@ -87,7 +87,7 @@ extension NineAnimatorUser {
             object: self,
             userInfo: [
                 "episodeLinks": [episodes],
-                "progress": clippedProgress
+                "updatedProgress": clippedProgress
             ]
         )
 
