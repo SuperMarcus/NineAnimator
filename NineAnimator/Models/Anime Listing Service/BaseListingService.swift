@@ -24,6 +24,7 @@ class BaseListingService: SessionDelegate {
     var identifier: String { "" }
     
     /// An internal structure that stores and maps the `ListingAnimeReference` to the `ListingAnimeTracking`
+    @AtomicProperty
     private var referenceToTrackingMap = [ListingAnimeReference: ListingAnimeTracking]()
     
     var persistedProperties: [String: Any] {
@@ -80,7 +81,13 @@ class BaseListingService: SessionDelegate {
     
     unowned var parent: NineAnimator
     
-    private(set) lazy var session: Alamofire.Session = {
+    /// Ensure Alamofire Session does not get initilized more than once by synchronizing reads to `lazySession`
+    private let lock = NSLock()
+    private var session: Alamofire.Session {
+        lock.lock { lazySession }
+    }
+    
+    fileprivate lazy var lazySession: Alamofire.Session = {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
