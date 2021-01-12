@@ -23,13 +23,13 @@ import Foundation
 ///
 /// For how to trigger an update, see `DiscoverySceneViewController`
 protocol RecommendationSource: AnyObject {
-    typealias Piority = Double
+    typealias Priority = Double
     
     /// The user-friendly name of this recommendation source
     var name: String { get }
     
-    /// The piority of this recommendation collection when sorting
-    var piority: Piority { get }
+    /// The priority of this recommendation collection when sorting
+    var priority: Priority { get }
     
     /// If the recommendation should be presented in the anime discovery scene
     var shouldPresentRecommendation: Bool { get }
@@ -128,15 +128,15 @@ struct Recommendation {
     }
 }
 
-// Some default piority levels
-extension RecommendationSource.Piority {
-    static let defaultAbsolute: RecommendationSource.Piority = 1000
+// Some default priority levels
+extension RecommendationSource.Priority {
+    static let defaultAbsolute: RecommendationSource.Priority = 1000
     
-    static let defaultHigh: RecommendationSource.Piority = 750
+    static let defaultHigh: RecommendationSource.Priority = 750
     
-    static let defaultMedium: RecommendationSource.Piority = 500
+    static let defaultMedium: RecommendationSource.Priority = 500
     
-    static let defaultLow: RecommendationSource.Piority = 250
+    static let defaultLow: RecommendationSource.Priority = 250
 }
 
 extension RecommendationSource {

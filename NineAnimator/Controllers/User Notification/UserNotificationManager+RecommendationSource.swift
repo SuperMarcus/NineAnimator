@@ -22,7 +22,7 @@ import Foundation
 extension UserNotificationManager {
     class SubscribedAnimeRecommendationSource: RecommendationSource {
         var name = "Subscriptions"
-        var piority: RecommendationSource.Piority = .defaultHigh
+        var priority: RecommendationSource.Priority = .defaultHigh
         var shouldPresentRecommendation: Bool { true }
         
         func shouldReload(recommendation: Recommendation) -> Bool {

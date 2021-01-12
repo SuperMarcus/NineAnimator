@@ -132,7 +132,7 @@ extension NineAnimator {
     func sortedRecommendationSources() -> [RecommendationSource] {
         let pool = additionalRecommendationSources
         // Later will add the featured containers
-        return pool.sorted { $0.piority > $1.piority }
+        return pool.sorted { $0.priority > $1.priority }
     }
     
     func register(additionalRecommendationSource source: RecommendationSource) {

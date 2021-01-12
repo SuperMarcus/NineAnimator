@@ -221,7 +221,7 @@ extension NARequestManager {
         }
         
         /// Create a promise that interprets the response data as a specific string type
-        func responseString<Encoding>(interpretAs encoding: Encoding.Type) -> NineAnimatorPromise<String> where Encoding : _UnicodeEncoding, Encoding.CodeUnit == Data.Element {
+        func responseString<Encoding>(interpretAs encoding: Encoding.Type) -> NineAnimatorPromise<String> where Encoding: _UnicodeEncoding, Encoding.CodeUnit == Data.Element {
             self.responseData.then {
                 .init(decoding: $0, as: encoding)
             }
