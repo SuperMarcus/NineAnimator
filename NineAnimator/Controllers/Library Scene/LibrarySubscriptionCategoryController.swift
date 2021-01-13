@@ -32,6 +32,11 @@ class LibrarySubscriptionCategoryController: MinFilledCollectionViewController, 
             minimalSize: .init(width: 300, height: 110)
         )
         
+        // Drag and Drop support
+        collectionView.dragDelegate = self
+        collectionView.dropDelegate = self
+        collectionView.dragInteractionEnabled = true
+        
         // Perform fetch request and update cells
         subscriptionUpdateContainer = StatefulAsyncTaskContainer {
             [weak self] _ in DispatchQueue.main.async {
@@ -92,6 +97,77 @@ extension LibrarySubscriptionCategoryController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let link = cachedWatchedAnimeItems[indexPath.item]
         RootViewController.shared?.open(immedietly: link, in: self)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        indexPath.section == 0
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        self.moveSubscriptionItem(fromIndex: sourceIndexPath.item, toIndex: destinationIndexPath.item)
+    }
+}
+
+extension LibrarySubscriptionCategoryController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        [ self.makeDragItem(for: self.cachedWatchedAnimeItems[indexPath.item]) ]
+    }
+    
+    private func makeDragItem(for link: AnyLink) -> UIDragItem {
+        let attributedText = NSMutableAttributedString(string: link.name)
+        attributedText.addAttributes([
+            .link: link.cloudRedirectionUrl
+        ], range: attributedText.string.matchingRange)
+        let itemProvider = NSItemProvider(object: attributedText)
+        return UIDragItem(itemProvider: itemProvider)
+    }
+}
+
+extension LibrarySubscriptionCategoryController: UICollectionViewDropDelegate {
+    func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
+        guard session.items.count == 1 else {
+            Log.error("[ibrarySubscriptionCategoryController] Drag session initiated with unexpected number of items: %@", session.items.count)
+            return .init(operation: .cancel)
+        }
+        
+        if collectionView.hasActiveDrag {
+            return .init(operation: .move)
+        } else {
+            return .init(operation: .cancel)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
+        guard let dropItem = coordinator.items.first else {
+            return Log.error("[ibrarySubscriptionCategoryController] Cannot perform drop with no drop items.")
+        }
+        
+        guard let destinationIndexPath = coordinator.destinationIndexPath else {
+            return Log.error("[ibrarySubscriptionCategoryController] Cannot perform drop with undefined destinationIndexPath.")
+        }
+        
+        switch coordinator.proposal.operation {
+        case .move:
+            guard let sourceIndexPath = dropItem.sourceIndexPath else {
+                return Log.error("[ibrarySubscriptionCategoryController] UIDropOperation.move did not define a source index path.")
+            }
+            
+            self.collectionView.performBatchUpdates({
+                self.moveSubscriptionItem(fromIndex: sourceIndexPath.item, toIndex: destinationIndexPath.item)
+                self.collectionView.deleteItems(at: [ sourceIndexPath ])
+                self.collectionView.insertItems(at: [ destinationIndexPath ])
+            }, completion: nil)
+        default:
+            Log.info("[ibrarySubscriptionCategoryController] Unimplemented drop operation %@", coordinator.proposal.operation)
+        }
+    }
+    
+    private func moveSubscriptionItem(fromIndex sourceIndex: Int, toIndex destinationIndex: Int) {
+        let originalItem = cachedWatchedAnimeItems.remove(at: sourceIndex)
+        cachedWatchedAnimeItems.insert(originalItem, at: destinationIndex)
+        
+        let originalSubscriptionAnimeLink = NineAnimator.default.user.subscribedAnimes.remove(at: sourceIndex)
+        NineAnimator.default.user.subscribedAnimes.insert(originalSubscriptionAnimeLink, at: destinationIndex)
     }
 }
 
