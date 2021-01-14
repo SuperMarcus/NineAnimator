@@ -21,17 +21,16 @@ import Foundation
 
 /// An atomic property wrapper that protects the values from concurrent access and mutations
 @propertyWrapper
-class AtomicProperty<Value> {
+struct AtomicProperty<Value> {
     private var _value: Value
     private let _lock: NSLock
     
     /// Obtain/Set the value contained by this wrapper
     var wrappedValue: Value {
-        get { _lock.lock { _value } }
-        set { _lock.lock { _value =  newValue } }
+        _lock.lock { _value }
     }
     
-    var projectedValue: AtomicProperty<Value> {
+    var projectedValue: Self {
         self
     }
     
@@ -43,7 +42,7 @@ class AtomicProperty<Value> {
     /// Mutate the value contained in the wrapped
     /// - Important: Do not attempt to access the `AtomicProperty` container inside
     ///   the `mutationBlock` as it may cause a deadlock.
-    func mutate<Result>(_ mutationBlock: (inout Value) throws -> Result) rethrows -> Result {
+    mutating func mutate<Result>(_ mutationBlock: (inout Value) throws -> Result) rethrows -> Result {
         try _lock.lock {
             try mutationBlock(&_value)
         }

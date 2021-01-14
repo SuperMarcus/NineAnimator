@@ -24,7 +24,7 @@ class BaseListingService: SessionDelegate {
     var identifier: String { "" }
     
     /// An internal structure that stores and maps the `ListingAnimeReference` to the `ListingAnimeTracking`
-    @AtomicProperty
+    private let referenceTrackingLock = NSLock()
     private var referenceToTrackingMap = [ListingAnimeReference: ListingAnimeTracking]()
     
     var persistedProperties: [String: Any] {
@@ -82,9 +82,9 @@ class BaseListingService: SessionDelegate {
     unowned var parent: NineAnimator
     
     /// Ensure Alamofire Session does not get initilized more than once by synchronizing reads to `lazySession`
-    private let lock = NSLock()
+    private let sessionLock = NSLock()
     private var session: Alamofire.Session {
-        lock.lock { lazySession }
+        sessionLock.lock { lazySession }
     }
     
     fileprivate lazy var lazySession: Alamofire.Session = {
@@ -144,7 +144,9 @@ class BaseListingService: SessionDelegate {
     
     /// Retrieve the corresponding `ListingAnimeTracking` for the reference
     func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {
-        referenceToTrackingMap[reference]
+        referenceTrackingLock.lock {
+            referenceToTrackingMap[reference]
+        }
     }
     
     /// Obtain the corresponding `ListingAnimeTracking` for the reference with an updated progress.
@@ -162,14 +164,15 @@ class BaseListingService: SessionDelegate {
     func donateTracking(_ tracking: ListingAnimeTracking?, forReference reference: ListingAnimeReference) {
         // Obtain a mutable tracking
         var processedTracking = tracking
+        referenceTrackingLock.lock {
+            // If the episodes of the new tracking is not set, use the previous value
+            if let tracking = tracking,
+                let existingTracking = self.referenceToTrackingMap[reference] {
+                processedTracking?.episodes = tracking.episodes ?? existingTracking.episodes
+            }
         
-        // If the episodes of the new tracking is not set, use the previous value
-        if let tracking = tracking,
-            let existingTracking = self.referenceToTrackingMap[reference] {
-            processedTracking?.episodes = tracking.episodes ?? existingTracking.episodes
+            // Store the new tracking value in the interval structure
+            referenceToTrackingMap[reference] = processedTracking
         }
-        
-        // Store the new tracking value in the interval structure
-        self.referenceToTrackingMap[reference] = processedTracking
     }
 }
