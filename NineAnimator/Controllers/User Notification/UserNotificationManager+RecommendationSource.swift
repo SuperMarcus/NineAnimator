@@ -26,13 +26,13 @@ extension UserNotificationManager {
         var shouldPresentRecommendation: Bool { true }
         
         func shouldReload(recommendation: Recommendation) -> Bool {
-            let oldSet = recommendation.items.reduce(into: Set<AnyLink>()) {
-                $0.insert($1.link)
+            let currentlyDisplayedAnimeLinks: [AnimeLink] = recommendation.items.compactMap {
+                switch $0.link {
+                case .anime(let anime): return anime
+                default: return nil
+                }
             }
-            let currentSet = NineAnimator.default.user.subscribedAnimes.reduce(into: Set<AnyLink>()) {
-                $0.insert(.anime($1))
-            }
-            return oldSet != currentSet
+            return currentlyDisplayedAnimeLinks != NineAnimator.default.user.subscribedAnimes
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
