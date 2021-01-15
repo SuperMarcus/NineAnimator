@@ -65,6 +65,29 @@ extension NineAnimatorUser {
     }
     
     /**
+     Move AnimeLink from one index to another index in the user's watch list
+     */
+    func moveSubscription(fromIndex sourceIndex: Int, toIndex destinationIndex: Int) {
+        // Ensure index is in bounds of array
+        guard (0...subscribedAnimes.count - 1).contains(sourceIndex) else {
+            return Log.error("[User+Subscriptions] Tried to move subscription from index that is out of bounds.")
+        }
+        let originalSubscriptionAnimeLink = subscribedAnimes.remove(at: sourceIndex)
+        subscribedAnimes.insert(originalSubscriptionAnimeLink, at: destinationIndex)
+        NotificationCenter.default.post(name: .sourceDidUpdateRecommendation, object: self)
+    }
+    
+    /**
+     An alias of moveSubscription(fromIndex:toIndex)
+     */
+    func moveSubscription(withLink animeLink: AnimeLink, toIndex destinationIndex: Int) {
+        guard let indexOfAnimeLink = subscribedAnimes.firstIndex(of: animeLink) else {
+            return Log.error("[User+Subscription] Tried moving an animeLink that does not exist in the user's subscribed anime)")
+        }
+        moveSubscription(fromIndex: indexOfAnimeLink, toIndex: destinationIndex)
+    }
+    
+    /**
      An alias of unwatch(anime: AnimeLink)
      */
     func unsubscribe(anime: Anime) { unsubscribe(anime: anime.link) }
