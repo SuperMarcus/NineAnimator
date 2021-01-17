@@ -25,7 +25,7 @@ extension Anilist {
         
         var name: String = "Anime For You"
         
-        var piority: Piority = .defaultLow
+        var priority: Priority = .defaultLow
         
         private let parent: Anilist
         
@@ -38,20 +38,10 @@ extension Anilist {
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
-            let queue = DispatchQueue.global()
-            return NineAnimatorPromise(queue: queue) {
-                (callback: @escaping ((Void?, Error?) -> Void)) in
-                // Request after 0.5 seconds to avoid congestion
-                queue.asyncAfter(deadline: .now() + 0.5) {
-                    callback((), nil)
-                }
-                return nil
-            } .thenPromise {
-                self.parent.graphQL(fileQuery: "AnilistUserRecommendations", variables: [
-                    "page": 0,
-                    "perPage": 50
-                ])
-            } .then {
+            parent.graphQL(fileQuery: "AnilistUserRecommendations", variables: [
+                "page": 0,
+                "perPage": 50
+            ]) .then {
                 responseDictionary in
                 
                 let recommendations = try DictionaryDecoder().decode(
