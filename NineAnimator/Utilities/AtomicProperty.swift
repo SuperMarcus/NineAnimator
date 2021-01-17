@@ -23,9 +23,9 @@ import Foundation
 @propertyWrapper
 struct AtomicProperty<Value> {
     private var _value: Value
-    private var _lock: NSLock
+    private let _lock: NSLock
     
-    /// Obtain the value contained by this wrapper
+    /// Obtain/Set the value contained by this wrapper
     var wrappedValue: Value {
         _lock.lock { _value }
     }

@@ -126,12 +126,12 @@ extension LibrarySubscriptionCategoryController: UICollectionViewDragDelegate {
 extension LibrarySubscriptionCategoryController: UICollectionViewDropDelegate {
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
         guard session.items.count == 1 else {
-            Log.error("[ibrarySubscriptionCategoryController] Drag session initiated with unexpected number of items: %@", session.items.count)
+            Log.error("[LibrarySubscriptionCategoryController] Drag session initiated with unexpected number of items: %@", session.items.count)
             return .init(operation: .cancel)
         }
         
         if collectionView.hasActiveDrag {
-            return .init(operation: .move)
+            return .init(operation: .move, intent: .insertAtDestinationIndexPath)
         } else {
             return .init(operation: .cancel)
         }
@@ -139,17 +139,17 @@ extension LibrarySubscriptionCategoryController: UICollectionViewDropDelegate {
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
         guard let dropItem = coordinator.items.first else {
-            return Log.error("[ibrarySubscriptionCategoryController] Cannot perform drop with no drop items.")
+            return Log.error("[LibrarySubscriptionCategoryController] Cannot perform drop with no drop items.")
         }
         
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
-            return Log.error("[ibrarySubscriptionCategoryController] Cannot perform drop with undefined destinationIndexPath.")
+            return Log.error("[LibrarySubscriptionCategoryController] Cannot perform drop with undefined destinationIndexPath.")
         }
         
         switch coordinator.proposal.operation {
         case .move:
             guard let sourceIndexPath = dropItem.sourceIndexPath else {
-                return Log.error("[ibrarySubscriptionCategoryController] UIDropOperation.move did not define a source index path.")
+                return Log.error("[LibrarySubscriptionCategoryController] UIDropOperation.move did not define a source index path.")
             }
             
             self.collectionView.performBatchUpdates({
@@ -157,17 +157,16 @@ extension LibrarySubscriptionCategoryController: UICollectionViewDropDelegate {
                 self.collectionView.deleteItems(at: [ sourceIndexPath ])
                 self.collectionView.insertItems(at: [ destinationIndexPath ])
             }, completion: nil)
+            coordinator.drop(dropItem.dragItem, toItemAt: destinationIndexPath)
         default:
-            Log.info("[ibrarySubscriptionCategoryController] Unimplemented drop operation %@", coordinator.proposal.operation)
+            Log.info("[LibrarySubscriptionCategoryController] Unimplemented drop operation %@", coordinator.proposal.operation)
         }
     }
     
     private func moveSubscriptionItem(fromIndex sourceIndex: Int, toIndex destinationIndex: Int) {
         let originalItem = cachedWatchedAnimeItems.remove(at: sourceIndex)
         cachedWatchedAnimeItems.insert(originalItem, at: destinationIndex)
-        
-        let originalSubscriptionAnimeLink = NineAnimator.default.user.subscribedAnimes.remove(at: sourceIndex)
-        NineAnimator.default.user.subscribedAnimes.insert(originalSubscriptionAnimeLink, at: destinationIndex)
+        NineAnimator.default.user.moveSubscription(fromIndex: sourceIndex, toIndex: destinationIndex)
     }
 }
 

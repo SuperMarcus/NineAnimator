@@ -25,7 +25,7 @@ extension MyAnimeList {
         
         let name: String = "Anime For You"
         
-        let piority: Piority = .defaultLow
+        let priority: Priority = .defaultLow
         
         private let parent: MyAnimeList
         
@@ -38,25 +38,14 @@ extension MyAnimeList {
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
-            let queue = DispatchQueue.global()
-            return NineAnimatorPromise(queue: queue) {
-                (callback: @escaping ((Void?, Error?) -> Void)) in
-                // Request after 0.5 seconds to avoid congestion
-                queue.asyncAfter(deadline: .now() + 0.5) {
-                    callback((), nil)
-                }
-                return nil
-            } .thenPromise {
-                [weak self] in
-                self?.parent.apiRequest(
-                    "/anime/suggestions",
-                    query: [
-                        "limit": 50,
-                        "offset": 0,
-                        "fields": "media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
-                    ]
-                )
-            } .then {
+            parent.apiRequest(
+                "/anime/suggestions",
+                query: [
+                    "limit": 50,
+                    "offset": 0,
+                    "fields": "media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"
+                ]
+            ) .then {
                [weak self] responseObject in
                guard let self = self else { return nil }
                let references = try responseObject.data.compactMap {
