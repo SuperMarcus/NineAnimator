@@ -58,7 +58,7 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
             return requestManager.request(
                 "/api/anime",
                 handling: .ajax,
-                headers: [ "x-access-token": "1rj2vRtegS8Y60B3w3qNZm5T2Q0TN2NR" ]
+                headers: [ "x-access-token": "0df14814b9e590a1f26d3071a4ed7974" ]
             ) .responseData
               .then {
                     try JSONSerialization.jsonObject(with: $0, options: []) as? [NSDictionary]

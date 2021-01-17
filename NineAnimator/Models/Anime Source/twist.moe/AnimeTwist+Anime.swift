@@ -40,7 +40,7 @@ extension NASourceAnimeTwist {
             self.requestManager.request(
                 "/api/anime/\(info.slug)/sources",
                 handling: .ajax,
-                headers: [ "x-access-token": "1rj2vRtegS8Y60B3w3qNZm5T2Q0TN2NR" ]
+                headers: [ "x-access-token": "0df14814b9e590a1f26d3071a4ed7974" ]
             )
             .responseString
             .then { (info, $0) }
@@ -56,6 +56,9 @@ extension NASourceAnimeTwist {
                 image: info.artworkUrl,
                 source: self
             )
+            // Twist Uses different cdn for ongoing animes
+            let availableCDN = info.isOngoing ?  "https://at-cdn.bunny.sh" : "https://twistcdn.bunny.sh"
+            
             let episodesList = sourceList.compactMap {
                 episode -> (EpisodeLink, String)? in
                 guard let identifier = episode["id"] as? Int,
@@ -75,7 +78,8 @@ extension NASourceAnimeTwist {
                 additionalAttributes: [
                     "twist.source": Dictionary(uniqueKeysWithValues: episodesList.map {
                         ($0.0, $0.1)
-                    })
+                    }),
+                    "availableCDN": availableCDN
                 ],
                 description: "No description available on Anime Twist.",
                 on: ["twist.moe": "Anime Twist"],
