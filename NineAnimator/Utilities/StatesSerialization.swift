@@ -42,18 +42,22 @@ private struct StateSerializationFile: Codable {
  */
 func export(_ configuration: NineAnimatorUser) -> URL? {
     do {
+        let trackingData: [AnimeLink: Data] = Dictionary(configuration.recentAnimes.compactMap {
+            anime in do {
+                let context = NineAnimator.default.trackingContext(for: anime)
+                let data = try context.export()
+                return (anime, data)
+            } catch { Log.error("[Model.export] Unable to serialize tracking data for %@: %@", anime, error) }
+            return nil
+        }) { newest, _ in
+            newest // Only keep the most recent data
+        }
+        
         let file = StateSerializationFile(
             history: configuration.recentAnimes,
             progresses: configuration.persistedProgresses,
             exportedDate: Date(),
-            trackingData: Dictionary(uniqueKeysWithValues: configuration.recentAnimes.compactMap {
-                anime in do {
-                    let context = NineAnimator.default.trackingContext(for: anime)
-                    let data = try context.export()
-                    return (anime, data)
-                } catch { Log.error("[Model.export] Unable to serialize tracking data for %@: %@", anime, error) }
-                return nil
-            }),
+            trackingData: trackingData,
             subscriptions: configuration.subscribedAnimes
         )
         
