@@ -134,7 +134,7 @@ extension NACoreEngine {
                     return
                 }
                 
-                let task = promise.defer {
+                let task = promise.dispatch(on: NACoreEngine.sharedQueue).defer {
                     task in
                     guard let self = self else {
                         return
