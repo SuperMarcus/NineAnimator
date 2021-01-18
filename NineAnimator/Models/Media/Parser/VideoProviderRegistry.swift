@@ -55,6 +55,7 @@ class VideoProviderRegistry {
         defaultProvider.register(YourUploadParser(), forServer: "yuserver")
         defaultProvider.register(OpenStreamParser(), forServer: "oserver")
         defaultProvider.register(VidStreamParser(), forServer: "Vidstream")
+        defaultProvider.register(StreamSBParser(), forServer: "Streamsb")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
