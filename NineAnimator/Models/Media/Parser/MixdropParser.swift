@@ -38,50 +38,32 @@ class MixdropParser: VideoProviderParser {
             callback in session.request(sourceInfoUrl).responseString {
                 callback($0.value, $0.error)
             }
-        } .thenPromise {
+        } .then {
             responseContent in
             
-            let redirectRequestParams = try MixdropParser.videoURLParamsRegex
-                .firstMatch(in: responseContent)
-                .tryUnwrap(.responseError("URL Parameters not found"))
+            let decodedScript = try PackerDecoder().decode(responseContent)
+            let sourceMatchingExpr = try NSRegularExpression(
+                pattern: "MDCore\\.wurl=\"([^\"]+)",
+                options: []
+            )
+            
+            let videoAssetUrlString = try sourceMatchingExpr
+                .firstMatch(in: decodedScript)
+                .tryUnwrap(.responseError("Video asset not found"))
                 .firstMatchingGroup
                 .tryUnwrap()
             
-            guard let redirectRequestURL = URL(string: "https://mixdrop.co\(redirectRequestParams)") else {
-                throw NineAnimatorError.urlError
-            }
+            let resourceUrl = try URL(string: videoAssetUrlString.hasPrefix("//") ?  "https:\(videoAssetUrlString)" : videoAssetUrlString).tryUnwrap(.urlError)
             
-            return NineAnimatorPromise {
-                callback in session.request(redirectRequestURL).responseString {
-                    callback($0.value, $0.error)
-                }
-            }.then {
-                responseContent in
-                
-                let decodedScript = try PackerDecoder().decode(responseContent)
-                let sourceMatchingExpr = try NSRegularExpression(
-                    pattern: "MDCore\\.wurl=\"([^\"]+)",
-                    options: []
-                )
-                
-                let videoAssetUrlString = try sourceMatchingExpr
-                    .firstMatch(in: decodedScript)
-                    .tryUnwrap(.responseError("Video asset not found"))
-                    .firstMatchingGroup
-                    .tryUnwrap()
-                
-                let resourceUrl = try URL(string: videoAssetUrlString.hasPrefix("//") ?  "https:\(videoAssetUrlString)" : videoAssetUrlString).tryUnwrap(.urlError)
-                
-                Log.info("(Mixdrop Parser) found asset at %@", resourceUrl.absoluteString)
-                
-                return BasicPlaybackMedia(
-                    url: resourceUrl,
-                    parent: episode,
-                    contentType: "video/mp4",
-                    headers: [:],
-                    isAggregated: false
-                )
-            }
+            Log.info("(Mixdrop Parser) found asset at %@", resourceUrl.absoluteString)
+            
+            return BasicPlaybackMedia(
+                url: resourceUrl,
+                parent: episode,
+                contentType: "video/mp4",
+                headers: [:],
+                isAggregated: false
+            )
         } .handle(handler)
     }
     
