@@ -34,7 +34,8 @@ class NACoreEngine: NSObject {
     let requestManager: NARequestManager
     
     private var _retainedPromises: [ObjectIdentifier: NineAnimatorAsyncTask]
-    private lazy var _jsExports: NACoreEngineExportsNineAnimatorProtocol = NACoreEngineExportsNineAnimator(parent: self)
+    private lazy var _jsExports = NACoreEngineExportsNineAnimator(parent: self)
+    private lazy var _jsLogger = NACoreEngineExportsLogging(engine: self, logger: Log)
     
     /// Initialize the CoreEngine with a provided request manager
     /// - Important: The initializer should never be called from inside the NACoreEngine.sharedQueue, as it will cause a deadlock.
@@ -62,6 +63,7 @@ class NACoreEngine: NSObject {
     private func initializeGlobalValues() {
         // Objects
         self.jsContext.setObject(self._jsExports, forKeyedSubscript: "NineAnimator" as NSString)
+        self.jsContext.setObject(self._jsLogger, forKeyedSubscript: "Log" as NSString)
         
         // Types
         self.jsContext.setObject(NACoreEngineExportsAnimeLink.self, forKeyedSubscript: "AnimeLink" as NSString)

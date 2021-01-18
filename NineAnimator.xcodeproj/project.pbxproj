@@ -47,6 +47,8 @@
 		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
 		2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107710249EFBFB007B82D9 /* Fox@3x.png */; };
 		2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107711249EFBFC007B82D9 /* Fox@2x.png */; };
+		2C11187125B624F500BD49D2 /* CoreExportsLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */; };
+		2C11187D25B62BD100BD49D2 /* StreamSBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11187C25B62BD000BD49D2 /* StreamSBParser.swift */; };
 		2C12EDCD21BDD4930064D2BD /* PlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */; };
 		2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */; };
 		2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */; };
@@ -488,7 +490,6 @@
 		BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */; };
 		BFE3339F24F353F1004B680F /* FourAnime+LinkRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */; };
 		BFE34BF324EF5B670054F3AE /* MyAnimeList+UserRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */; };
-		BFF3660125B4FF75005C1E83 /* StreamSBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */; };
 		BFF3FC2D24DE200E00E37351 /* AnimeHub+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 		C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */; };
@@ -572,6 +573,8 @@
 		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
 		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
+		2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsLogging.swift; sourceTree = "<group>"; };
+		2C11187C25B62BD000BD49D2 /* StreamSBParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamSBParser.swift; sourceTree = "<group>"; };
 		2C12EDCC21BDD4930064D2BD /* PlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackMedia.swift; sourceTree = "<group>"; };
 		2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillPresentationController.swift; sourceTree = "<group>"; };
@@ -1097,7 +1100,6 @@
 		BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookParser.swift; sourceTree = "<group>"; };
 		BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+LinkRetriever.swift"; sourceTree = "<group>"; };
 		BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+UserRecommendations.swift"; sourceTree = "<group>"; };
-		BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSBParser.swift; sourceTree = "<group>"; };
 		BFF3FC2C24DE200E00E37351 /* AnimeHub+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Search.swift"; sourceTree = "<group>"; };
 		BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsSceneController+DocumentPicker.swift"; sourceTree = "<group>"; };
 		C8E12CFE2422136000B0AF6A /* AnimeUnity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeUnity.swift; sourceTree = "<group>"; };
@@ -1328,6 +1330,7 @@
 				2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */,
 				2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */,
 				2C34F09D2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift */,
+				2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */,
 			);
 			path = Exports;
 			sourceTree = "<group>";
@@ -2160,6 +2163,7 @@
 		2CE1F84622EEB9B8005448FF /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				2C11187C25B62BD000BD49D2 /* StreamSBParser.swift */,
 				2C91297021BB60CD00284FD0 /* VideoProviderParser.swift */,
 				2CE1F84722EEB9E6005448FF /* VideoProviderRegistry.swift */,
 				2C91297221BB61BE00284FD0 /* RapidVideoParser.swift */,
@@ -2194,7 +2198,6 @@
 				BF1924A824E1FB12008164C2 /* YourUploadParser.swift */,
 				BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */,
 				2C78275D253CF5E600F96A77 /* VidStreamParser.swift */,
-				BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2848,6 +2851,7 @@
 				2CFE2DA2227D441700030B1F /* DictionaryEncoder.swift in Sources */,
 				2CFD3F8124BCE6D50056E68E /* NACoreDataLibrary+Context.swift in Sources */,
 				2C4ABC7921B59CC8009B4D47 /* NineAnimator.swift in Sources */,
+				2C11187125B624F500BD49D2 /* CoreExportsLogging.swift in Sources */,
 				2C8519AF22CC9AAE00EEF3AC /* Kissanime+Anime.swift in Sources */,
 				65ED215924DB3B740040844C /* MonosChinos.swift in Sources */,
 				2C684BD62291B70C00E1BA35 /* AnimePahe+LinkRetrival.swift in Sources */,
@@ -2939,7 +2943,6 @@
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,
 				2C48001F2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift in Sources */,
 				2C0554AD24BD615300228434 /* NACoreDataDataSource.swift in Sources */,
-				BFF3660125B4FF75005C1E83 /* StreamSBParser.swift in Sources */,
 				2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */,
 				2C4ABC9821B825A5009B4D47 /* AnimeViewController.swift in Sources */,
 				2C4ABC7F21B6D69E009B4D47 /* UIView+BackgroundShadow.swift in Sources */,
@@ -2982,6 +2985,7 @@
 				2C7B7AAE229736B7002EC74C /* XStreamParser.swift in Sources */,
 				2C7A1D582251393300DD83A5 /* UIAlertController+Error.swift in Sources */,
 				2C83E06625269B7F00B00850 /* HAnime.swift in Sources */,
+				2C11187D25B62BD100BD49D2 /* StreamSBParser.swift in Sources */,
 				BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */,
 				2CA4B7FF23B1E84C00B4E6F7 /* AnimeDao+RequestModifier.swift in Sources */,
 				2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */,
