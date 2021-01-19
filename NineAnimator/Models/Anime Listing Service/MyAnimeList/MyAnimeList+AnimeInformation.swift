@@ -122,6 +122,19 @@ extension MyAnimeList {
                 animeInformation["Created At"] = dateFormatter.string(from: createdDate)
             }
             
+            if let airingStatus = animeEntry.valueIfPresent(at: "status", type: String.self) {
+                switch airingStatus {
+                case "finished_airing":
+                    animeInformation["Airing Status"] = AiringStatus.finished.rawValue
+                case "currently_airing":
+                    animeInformation["Airing Status"] = AiringStatus.currentlyAiring.rawValue
+                case "not_yet_aired":
+                    animeInformation["Airing Status"] = AiringStatus.notReleased.rawValue
+                default:
+                    animeInformation["Airing Status"] = AiringStatus.unknown.rawValue
+                }
+            }
+            
             animeInformation["Start Date"] = animeEntry.valueIfPresent(at: "start_date", type: String.self)
             animeInformation["End Date"] = animeEntry.valueIfPresent(at: "end_date", type: String.self)
             animeInformation["Popularity"] = animeEntry.valueIfPresent(at: "popularity", type: Int.self)
@@ -146,7 +159,7 @@ extension MyAnimeList {
     
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         apiRequest("/anime/\(reference.uniqueIdentifier)", query: [
-            "fields": "alternative_titles,average_episode_duration,broadcast,created_at,end_date,main_picture,mean,media_type,nsfw,num_scoring_users,popularity,rank,synopsis,title,background,related_anime,related_anime{node{my_list_status{start_date,finish_date}}},num_episodes,start_date"
+            "fields": "alternative_titles,average_episode_duration,broadcast,created_at,end_date,status,main_picture,mean,media_type,nsfw,num_scoring_users,popularity,rank,synopsis,title,background,related_anime,related_anime{node{my_list_status{start_date,finish_date}}},num_episodes,start_date"
         ]).then {
             response in
             guard let animeEntry = response.data.first else {

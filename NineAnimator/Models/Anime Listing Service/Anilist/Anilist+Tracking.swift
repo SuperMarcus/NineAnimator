@@ -39,7 +39,7 @@ extension Anilist {
         _collections = nil
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool = true) {
         // First, get the episode number
         guard let episodeNumber = episodeNumber else {
             Log.info("[AniList.co] Not pushing states because episode number cannot be inferred.")
@@ -51,8 +51,30 @@ extension Anilist {
             for: reference,
             withUpdatedEpisodeProgress: episodeNumber
         )
-        
+        // Update the Episode Progress
         update(reference, newTracking: updatedTracking)
+        
+        if shouldUpdateTrackingState {
+            // Retrieve detailed anime information to determine if tracking state needs updating
+            let listingInfoTask = self.listingAnime(from: reference)
+            .defer { _ in self.cleanupReferencePool() }
+            .error {
+                Log.error("[AniList.co] Failed To Retrieve Anime Listing Information with error: %@", $0)
+            }
+            .finally {
+                [weak self] listingInfo in
+                guard let self = self else { return }
+                // If the anime has finished airing, and the user has completed the last episode, mark the anime as completed
+                if let currentAiringStatus = listingInfo.information["Airing Status"],
+                   currentAiringStatus == AiringStatus.finished.rawValue,
+                   let totalNumOfEpisodes = updatedTracking.episodes,
+                   totalNumOfEpisodes <= updatedTracking.currentProgress {
+                    Log.info("[AniList.co] User has finished last episode of anime. Moving %@ to completed list.", reference.name)
+                    self.update(reference, newState: .finished)
+                }
+            }
+            _mutationRequestReferencePool.append(listingInfoTask)
+        }
     }
     
     func update(_ reference: ListingAnimeReference, newTracking: ListingAnimeTracking) {

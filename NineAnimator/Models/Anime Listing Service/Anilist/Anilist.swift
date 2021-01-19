@@ -224,7 +224,7 @@ extension Anilist {
         _mutationRequestReferencePool.append(task)
     }
     
-    private func cleanupReferencePool() {
+    internal func cleanupReferencePool() {
         _mutationRequestReferencePool.removeAll {
             ($0 as! NineAnimatorPromise<NSDictionary>).isResolved
         }
