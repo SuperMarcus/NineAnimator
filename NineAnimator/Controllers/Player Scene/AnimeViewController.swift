@@ -1091,6 +1091,8 @@ extension AnimeViewController {
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
         guard let selectedEpisodeLink = self.contextMenuSelectedEpisode,
+              let selectedIndexPath = self.contextMenuSelectedIndexPath,
+              let selectedEpisodeCell = tableView.cellForRow(at: selectedIndexPath),
               let anime = self.anime else {
             return DispatchQueue.main.async {
                 [weak self] in self?.concludeContextMenu()
@@ -1149,6 +1151,9 @@ extension AnimeViewController {
         alertMessage.addAction(.init(title: "Cancel", style: .cancel) {
             [weak self] _ in self?.concludeContextMenu()
         })
+        
+        alertMessage.popoverPresentationController?.sourceView = selectedEpisodeCell
+        alertMessage.popoverPresentationController?.sourceRect = selectedEpisodeCell.bounds
         
         present(alertMessage, animated: true)
     }
