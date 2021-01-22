@@ -56,6 +56,7 @@ class VideoProviderRegistry {
         defaultProvider.register(OpenStreamParser(), forServer: "oserver")
         defaultProvider.register(VidStreamParser(), forServer: "Vidstream")
         defaultProvider.register(StreamSBParser(), forServer: "Streamsb")
+        defaultProvider.register(DoodParser(), forServer: "Doodstream")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
