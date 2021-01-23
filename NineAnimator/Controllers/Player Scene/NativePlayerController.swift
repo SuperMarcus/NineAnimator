@@ -75,6 +75,11 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     // State of the player
     private(set) var state: State = .idle
     
+    // Timer used to automatically hide the mouse cursor after 2 second of inactivity
+    #if targetEnvironment(macCatalyst)
+    private var mouseTimer: Timer?
+    #endif
+    
     override private init() {
         super.init()
         
@@ -150,6 +155,12 @@ extension NativePlayerController {
                 userInfo: [ "media": firstMedia ]
             )
         }
+        
+        // Remove mouse movement timer
+        #if targetEnvironment(macCatalyst)
+        mouseTimer?.invalidate()
+        mouseTimer = nil
+        #endif
         
         // Clear the queue and dismiss the old player view controller
         clearQueue()
@@ -252,10 +263,34 @@ extension NativePlayerController {
             }
         }
     }
+    #if targetEnvironment(macCatalyst)
+    func playerViewController(_ playerViewController: AVPlayerViewController, willBeginFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        // Hide cursor during fullscreen playback after inactivity
+        if mouseTimer == nil {
+            mouseTimer = Timer.scheduledTimer(
+                timeInterval: TimeInterval(2), // Check inactivity every 2 sec
+                target: self,
+                selector: #selector(shouldHideMouse),
+                userInfo: nil,
+                repeats: true
+            )
+        }
+    }
+    #endif
 }
 
 // MARK: - AVPlayer & AVPlayerItem observers
 extension NativePlayerController {
+    #if targetEnvironment(macCatalyst)
+    @objc private func shouldHideMouse() {
+        let secondsSinceLastMouseMovement = Float(CGEventSource.secondsSinceLastEventType(CGEventSourceStateID.combinedSessionState, eventType: CGEventType.mouseMoved))
+        // Hide the cursor after 2 seconds of inactivity
+        if secondsSinceLastMouseMovement > 2 {
+            NSCursor.setHiddenUntilMouseMoves(true)
+        }
+    }
+    #endif
+    
     private func onPlayerStatusChange(player _: AVPlayer, change _: NSKeyValueObservedChange<AVPlayer.Status>) {
         Log.debug("[NativePlayerController] Player status changed to %@.", player.status.rawValue)
     }
