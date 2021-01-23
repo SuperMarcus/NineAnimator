@@ -45,20 +45,31 @@ extension NASourceFourAnime {
                 source: self
             )
             
-            // Obtain the list of episodes
-            let episodes = try bowl.select("ul.episodes>li").reduce(into: [EpisodeLink]()) {
-                collection, container in
-                let episodeName = try container
+            // Obtain list of episodes and their links
+            let episodeNamesAndLinks = try bowl.select("ul.episodes>li").reduce(into: [(String, String)]()) {
+                totalCollection, currentContainer in
+                let episodeName = try currentContainer
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
-                let episodeLink = try container.select("a").attr("href")
+                let episodeLink = try currentContainer.select("a").attr("href")
                 
-                collection.append(.init(
-                    identifier: episodeLink,
-                    name: episodeName,
-                    server: NASourceFourAnime.FourAnimeStream,
-                    parent: reconstructedAnimeLink
-                ))
+                totalCollection.append((episodeName, episodeLink))
+            }
+            
+            // Add each episode to every server
+            var episodeCollection = Anime.EpisodesCollection()
+            for (serverIdentifier, _) in NASourceFourAnime.knownServers {
+                var currentCollection = [EpisodeLink]()
+                
+                for (episodeName, episodeLink) in episodeNamesAndLinks {
+                    currentCollection.append(.init(
+                        identifier: episodeLink,
+                        name: episodeName,
+                        server: serverIdentifier,
+                        parent: link
+                    ))
+                }
+                episodeCollection[serverIdentifier] = currentCollection
             }
             
             // Information
@@ -99,8 +110,8 @@ extension NASourceFourAnime {
                 alias: "",
                 additionalAttributes: additionalAttributes,
                 description: animeSynopsis,
-                on: [ NASourceFourAnime.FourAnimeStream: "4anime" ],
-                episodes: [ NASourceFourAnime.FourAnimeStream: episodes ],
+                on: NASourceFourAnime.knownServers,
+                episodes: episodeCollection,
                 episodesAttributes: [:]
             )
         }

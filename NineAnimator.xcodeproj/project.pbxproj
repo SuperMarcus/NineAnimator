@@ -458,6 +458,7 @@
 		65ED215D24DB3BC50040844C /* MonosChinos+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED215C24DB3BC50040844C /* MonosChinos+Search.swift */; };
 		65ED215F24DB3BD30040844C /* MonosChinos+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED215E24DB3BD30040844C /* MonosChinos+Anime.swift */; };
 		65ED216124DB3BE00040844C /* MonosChinos+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */; };
+		BF04566325BA7CA800A7D154 /* DoodParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF04566225BA7CA800A7D154 /* DoodParser.swift */; };
 		BF064BAF24E30ACD005A44EB /* OpenStreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */; };
 		BF1924A924E1FB12008164C2 /* YourUploadParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1924A824E1FB12008164C2 /* YourUploadParser.swift */; };
 		BF1CBEFC25253006003354B5 /* Aniwatch+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */; };
@@ -1056,6 +1057,7 @@
 		65ED215C24DB3BC50040844C /* MonosChinos+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Search.swift"; sourceTree = "<group>"; };
 		65ED215E24DB3BD30040844C /* MonosChinos+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Anime.swift"; sourceTree = "<group>"; };
 		65ED216024DB3BE00040844C /* MonosChinos+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MonosChinos+Episode.swift"; sourceTree = "<group>"; };
+		BF04566225BA7CA800A7D154 /* DoodParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoodParser.swift; sourceTree = "<group>"; };
 		BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenStreamParser.swift; sourceTree = "<group>"; };
 		BF1924A824E1FB12008164C2 /* YourUploadParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourUploadParser.swift; sourceTree = "<group>"; };
 		BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Search.swift"; sourceTree = "<group>"; };
@@ -2138,6 +2140,7 @@
 				BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */,
 				2C78275D253CF5E600F96A77 /* VidStreamParser.swift */,
 				BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */,
+				BF04566225BA7CA800A7D154 /* DoodParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -3063,6 +3066,7 @@
 				6520A111246B6F4C001D9634 /* StreamTapeParser.swift in Sources */,
 				2C9325C424ACDE34001E3708 /* DiscordPresenceController.swift in Sources */,
 				2C23AE3A2229912100512150 /* Promise+Success.swift in Sources */,
+				BF04566325BA7CA800A7D154 /* DoodParser.swift in Sources */,
 				BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */,
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,

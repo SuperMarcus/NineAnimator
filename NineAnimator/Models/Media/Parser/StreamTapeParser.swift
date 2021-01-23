@@ -24,7 +24,7 @@ class StreamTapeParser: VideoProviderParser {
     var aliases: [String] { [ "streamtape", "Sreamtape" ] }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: "'innerHTML'\\]\\s*=\\s*'([^']+)",
+        pattern: #"innerHTML\s=\s*"([^"]+)" \+ '([^']+)"#,
         options: []
     )
     
@@ -41,9 +41,8 @@ class StreamTapeParser: VideoProviderParser {
                 let sourceUrlString = try StreamTapeParser
                     .playerSourceRegex
                     .firstMatch(in: responseContent)
-                    .tryUnwrap(.providerError("Unable to find the streaming resource"))
-                    .firstMatchingGroup
-                    .tryUnwrap()
+                    .tryUnwrap(.providerError("Unable to find the streaming resource"))[1...2] // Combine the seperated links into one
+                    .joined()
                 let sourceUrl = try URL(
                     protocolRelativeString: sourceUrlString,
                     relativeTo: episode.target
