@@ -66,8 +66,12 @@ extension Kitsu {
         _mutationTaskPool.append(task)
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool = true) {
         collectMutationTaskPoolGarbage()
+        
+        if shouldUpdateTrackingState {
+            Log.info("[Kitsu.io] Cannot update Tracking State because NineAnimator doesn't support retrieving anime details from Kitsu.")
+        }
         
         // First, get the episode number
         guard let episodeNumber = episodeNumber else {

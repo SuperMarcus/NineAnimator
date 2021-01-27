@@ -218,7 +218,8 @@ class TrackingContext {
                 reference.parentService.update(
                     reference,
                     didComplete: episode,
-                    episodeNumber: self.suggestingEpisodeNumber(for: episode)
+                    episodeNumber: self.suggestingEpisodeNumber(for: episode),
+                    shouldUpdateTrackingState: true
                 )
             }
             
