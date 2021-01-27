@@ -79,9 +79,9 @@ func export(_ configuration: NineAnimatorUser) -> URL? {
 
 func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAnimatorUser.MergePiority) throws {
     // Read the contents of the configuration file
-    guard fileUrl.startAccessingSecurityScopedResource() == true else {
-        throw NineAnimatorError.unknownError("Failed to access security scoped resource")
-    }
+    // Normally we would check if this function call return true to determine
+    // if it succeeded, however it creates false negatives, so we ignore it.
+    _ = fileUrl.startAccessingSecurityScopedResource()
     let serializedConfiguration = try Data(contentsOf: fileUrl)
     fileUrl.stopAccessingSecurityScopedResource()
     
@@ -111,9 +111,9 @@ func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAni
 
 func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) throws {
     // Read the contents of the configuration file
-    guard fileUrl.startAccessingSecurityScopedResource() == true else {
-        throw NineAnimatorError.unknownError("Failed to access security scoped resource")
-    }
+    // Normally we would check if this function call return true to determine
+    // if it succeeded, however it creates false negatives, so we ignore it.
+    _ = fileUrl.startAccessingSecurityScopedResource()
     let serializedConfiguration = try Data(contentsOf: fileUrl)
     fileUrl.stopAccessingSecurityScopedResource()
     
