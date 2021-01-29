@@ -57,7 +57,7 @@ extension NASourceNineAnimeOld {
         return .success(())
     }
     
-    //9anime returns 503 instead of 404 status when request not found
+    // 9anime returns 503 instead of 404 status when request not found
     class func _contentNotFoundMiddleware(
         request: URLRequest?,
         response: HTTPURLResponse,

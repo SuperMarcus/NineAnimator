@@ -26,8 +26,8 @@ extension NASourceAnimeSaturn {
             handling: .browsing
         ) .responseString
           .then { responseContent in
-            //div.text-center>div.text-center>div a
-            //div.current-anime>div.row>div a
+            // div.text-center>div.text-center>div a
+            // div.current-anime>div.row>div a
             let endpointURL = self.endpointURL
             let bowl = try SwiftSoup.parse(responseContent)
             let recentadded = try bowl.select("div.container.p-3.shadow.rounded.bg-dark-as-box div.main-anime-card div a")
