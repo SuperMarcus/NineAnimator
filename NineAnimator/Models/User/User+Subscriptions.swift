@@ -31,6 +31,7 @@ extension NineAnimatorUser {
                 return Log.error("Subscribed animes failed to encode")
             }
             _freezer.set(data, forKey: Keys.subscribedAnimeList)
+            NotificationCenter.default.post(name: .subscriptionsDidUpdate, object: self)
         }
     }
     
@@ -51,7 +52,7 @@ extension NineAnimatorUser {
      */
     func subscribe(anime: Anime) {
         subscribe(uncached: anime.link)
-        UserNotificationManager.default.update(anime, shouldFireSubscriptionEvent: true)
+        UserNotificationManager.default.update(anime)
     }
     
     /**
@@ -61,7 +62,7 @@ extension NineAnimatorUser {
         var newWatchList = subscribedAnimes.filter { $0 != link }
         newWatchList.append(link)
         subscribedAnimes = newWatchList
-        UserNotificationManager.default.lazyPersist(link, shouldFireSubscriptionEvent: true)
+        UserNotificationManager.default.lazyPersist(link)
     }
     
     /**
@@ -74,7 +75,6 @@ extension NineAnimatorUser {
         }
         let originalSubscriptionAnimeLink = subscribedAnimes.remove(at: sourceIndex)
         subscribedAnimes.insert(originalSubscriptionAnimeLink, at: destinationIndex)
-        NotificationCenter.default.post(name: .sourceDidUpdateRecommendation, object: self)
     }
     
     /**
