@@ -54,7 +54,6 @@ extension Simkl {
     }
     
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool = true) {
-        
         if shouldUpdateTrackingState {
             Log.info("[Simkl] Cannot update Tracking State because NineAnimator doesn't support retrieving anime details from Simkl.")
         }
