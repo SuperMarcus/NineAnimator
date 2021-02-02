@@ -110,8 +110,10 @@ protocol ListingService: AnyObject {
     ///
     /// The episodeNumber passed in as parameter is not guarenteed to be the furtherest episode
     /// that the user has completed. It is the episode that the user has just finished watching.
+    ///
     /// Only called if the service returns true for `isCapableOfPersistingAnimeState`
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?)
+    /// - Parameter shouldUpdateTrackingState: True by Default. Moves the ListingAnimeReference to the user's Completed list if they have finished watching the last episode.
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool)
     
     /// Retrieve the listing anime from the reference
     ///

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jMC-Us-Crt">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,7 @@
             <objects>
                 <navigationController id="jMC-Us-Crt" customClass="ApplicationNavigationController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ohi-wf-YdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -29,11 +29,11 @@
             <objects>
                 <viewController id="KaR-BB-YXs" customClass="SetupWelcomeViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nJU-bs-eUA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="High Resolution App Icon" translatesAutoresizingMaskIntoConstraints="NO" id="NZD-ju-Ak5">
-                                <rect key="frame" x="107.5" y="158.5" width="160" height="160"/>
+                                <rect key="frame" x="107.66666666666669" y="231" width="160" height="160"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="jSm-mD-K2m"/>
                                     <constraint firstAttribute="width" constant="240" id="m2z-KC-7sU"/>
@@ -57,7 +57,7 @@
                                 </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to NineAnimator" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGR-Zv-VIj">
-                                <rect key="frame" x="32" y="341.5" width="311" height="76.5"/>
+                                <rect key="frame" x="32" y="414" width="311" height="76.666666666666686"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -72,8 +72,8 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYj-Vw-fYO">
-                                <rect key="frame" x="150.5" y="629" width="74" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eYj-Vw-fYO">
+                                <rect key="frame" x="150.66666666666666" y="740" width="74" height="30"/>
                                 <state key="normal" title="Skip Setup"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -82,8 +82,8 @@
                                     <action selector="onSkipSetupButtonTap:" destination="KaR-BB-YXs" eventType="touchUpInside" id="4zN-ru-oyG"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-Cw-RXt" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="32" y="571" width="311" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtk-Cw-RXt" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="682" width="311" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="iio-fq-qhK"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="wg2-6X-0oC"/>
@@ -102,7 +102,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="20" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="8VJ-Os-i4X">
-                                <rect key="frame" x="32" y="476" width="311" height="79"/>
+                                <rect key="frame" x="32" y="587" width="311" height="79"/>
                                 <string key="text">NineAnimator is an open source anime browsing software developed by Marcus Zhou, licensed under the GNU General Public License version 3. NineAnimator is not designed to promote piracy nor to support any third party websites. By continuing, you agree to our terms of use and privacy policy.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,6 +113,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="z89-lB-9YG"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="z89-lB-9YG" firstAttribute="trailing" secondItem="JGR-Zv-VIj" secondAttribute="trailing" constant="32" id="0tX-n7-2eF"/>
@@ -133,7 +134,6 @@
                             <constraint firstItem="z89-lB-9YG" firstAttribute="trailing" secondItem="rtk-Cw-RXt" secondAttribute="trailing" priority="750" constant="32" id="eSI-K6-9c4"/>
                             <constraint firstItem="eYj-Vw-fYO" firstAttribute="top" secondItem="rtk-Cw-RXt" secondAttribute="bottom" constant="8" id="r9M-a6-0vN"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="z89-lB-9YG"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -159,11 +159,11 @@
             <objects>
                 <viewController id="wDX-X9-8vj" customClass="SetupWhatsNewViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nII-mF-i9B">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ier-uY-wii" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="32" y="585" width="311" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ier-uY-wii" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="696" width="311" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Hfv-eB-L9O"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="QyP-cB-2Vw"/>
@@ -182,7 +182,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's New" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="ikj-0J-JNE">
-                                <rect key="frame" x="104" y="106.5" width="167" height="36"/>
+                                <rect key="frame" x="103" y="179" width="169" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -198,16 +198,16 @@
                                 </variation>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2j-NB-Fkv" userLabel="New Features Container View">
-                                <rect key="frame" x="32" y="158.5" width="311" height="350"/>
+                                <rect key="frame" x="32" y="231" width="311" height="350"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Es9-cv-aHe" userLabel="First Feature">
-                                        <rect key="frame" x="0.0" y="0.0" width="311" height="115.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="115.66666666666667"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8DS-lO-J59">
-                                                <rect key="frame" x="8" y="26.5" width="62" height="62.5"/>
+                                                <rect key="frame" x="8.0000000000000036" y="26.666666666666689" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Library Icon HD" translatesAutoresizingMaskIntoConstraints="NO" id="tDZ-GG-UII">
-                                                        <rect key="frame" x="12.5" y="12.5" width="37.5" height="37.5"/>
+                                                        <rect key="frame" x="12.333333333333336" y="12.333333333333314" width="37.333333333333336" height="37.333333333333336"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -229,7 +229,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Library" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="ouh-B2-M5f">
-                                                <rect key="frame" x="94" y="24.5" width="201" height="24"/>
+                                                <rect key="frame" x="94.333333333333329" y="24.666666666666657" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="eAS-am-UIV"/>
                                                 </constraints>
@@ -247,8 +247,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="The Library interface has been redesigned to present you with the most relevant information." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
-                                                <rect key="frame" x="94" y="50.5" width="209" height="39.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="You can now re-arrange your subscriptions in the Library tab. You can also mark multiple episodes as complete at once." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwc-kf-mgL">
+                                                <rect key="frame" x="94.333333333333329" y="50.666666666666686" width="208.66666666666669" height="52.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -279,13 +279,13 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-rz-uSl" userLabel="Second Feature">
-                                        <rect key="frame" x="0.0" y="115.5" width="311" height="115.5"/>
+                                        <rect key="frame" x="0.0" y="115.66666666666669" width="311" height="115.33333333333331"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JH6-I0-KQl">
-                                                <rect key="frame" x="8" y="26.5" width="62" height="62.5"/>
+                                                <rect key="frame" x="8.0000000000000036" y="26.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Cloud Sync HD" translatesAutoresizingMaskIntoConstraints="NO" id="msk-98-ctr">
-                                                        <rect key="frame" x="12.5" y="12.5" width="37.5" height="37.5"/>
+                                                        <rect key="frame" x="12.333333333333336" y="12.666666666666686" width="37.333333333333336" height="37.333333333333336"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
@@ -307,7 +307,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Anime Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="TMt-Pq-6FS" userLabel="Tracking Service">
-                                                <rect key="frame" x="94" y="24.5" width="201" height="24"/>
+                                                <rect key="frame" x="94.333333333333329" y="24.333333333333314" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="F5o-pt-dez"/>
                                                 </constraints>
@@ -326,7 +326,7 @@
                                                 </variation>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="This version of NineAnimator improves compatibility with supported sources and servers." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V1d-j4-fS2">
-                                                <rect key="frame" x="94" y="50.5" width="209" height="39.5"/>
+                                                <rect key="frame" x="94.333333333333329" y="50.333333333333314" width="208.66666666666669" height="39.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -360,17 +360,17 @@
                                         <rect key="frame" x="0.0" y="231" width="311" height="119"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="keW-rL-lk1">
-                                                <rect key="frame" x="8" y="28.5" width="62" height="62"/>
+                                                <rect key="frame" x="8.0000000000000036" y="28.333333333333318" width="62.333333333333343" height="62.333333333333343"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Privacy HD" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
-                                                        <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Yellow Warning" translatesAutoresizingMaskIntoConstraints="NO" id="4tt-2A-VQU">
+                                                        <rect key="frame" x="0.0" y="0.0" width="62.333333333333336" height="62.333333333333336"/>
                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="4tt-2A-VQU" secondAttribute="height" id="fDS-no-lOe"/>
                                                         </constraints>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" name="systemPurpleColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" red="1" green="0.81553268430000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="width" secondItem="keW-rL-lk1" secondAttribute="width" id="Egh-sj-Ak3"/>
                                                     <constraint firstItem="4tt-2A-VQU" firstAttribute="centerX" secondItem="keW-rL-lk1" secondAttribute="centerX" id="Ldd-hp-gu9"/>
@@ -383,8 +383,8 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Privacy &amp; Security" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
-                                                <rect key="frame" x="94" y="26" width="201" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" text="Reliability" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Kf-LC-01q">
+                                                <rect key="frame" x="94.333333333333329" y="26" width="200.66666666666669" height="24"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="1rX-M8-WCC"/>
                                                 </constraints>
@@ -402,8 +402,8 @@
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="23"/>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="We've updated our privacy policy to include our macOS app and cloud services. Learn more on our website." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
-                                                <rect key="frame" x="94" y="52" width="209" height="39.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="751" text="We have fixed many bugs and crashes in this version of NineAnimator." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1Q-9Z-lK6">
+                                                <rect key="frame" x="94.333333333333329" y="52.000000000000007" width="208.66666666666669" height="26.333333333333336"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -453,7 +453,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="500" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-aH-85Y">
-                                <rect key="frame" x="32" y="529.5" width="311" height="39.5"/>
+                                <rect key="frame" x="32" y="640.33333333333337" width="311" height="39.666666666666629"/>
                                 <string key="text">NineAnimator is under active development. New features and bug fixes are rolled out on a weekly basis. It is recommended that you to keep the app up to date.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -464,6 +464,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="5kK-AM-XJg"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YWE-aH-85Y" firstAttribute="trailing" secondItem="Ier-uY-wii" secondAttribute="trailing" id="0WD-ra-meP"/>
@@ -484,7 +485,6 @@
                             <constraint firstItem="Ier-uY-wii" firstAttribute="centerX" secondItem="nII-mF-i9B" secondAttribute="centerX" id="ycJ-4b-3ji"/>
                             <constraint firstItem="y2j-NB-Fkv" firstAttribute="centerY" secondItem="nII-mF-i9B" secondAttribute="centerY" priority="750" id="zn6-Pi-VDv"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5kK-AM-XJg"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -510,11 +510,11 @@
             <objects>
                 <viewController id="M7g-u9-piU" customClass="SetupThemeViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a1x-IL-AZV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-lJ-xk8" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="32" y="585" width="311" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h82-lJ-xk8" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="696" width="311" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="VDV-se-gev"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="sQ4-ck-4SD"/>
@@ -533,7 +533,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Appearance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aVI-dM-rv8">
-                                <rect key="frame" x="134.5" y="309.5" width="106" height="24"/>
+                                <rect key="frame" x="134.66666666666666" y="382" width="106" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -543,7 +543,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Light" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGW-3m-qyq">
-                                <rect key="frame" x="24" y="251.5" width="327" height="54"/>
+                                <rect key="frame" x="24" y="324" width="327" height="54"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -556,7 +556,7 @@
                                 </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ok1-aG-zqs">
-                                <rect key="frame" x="32" y="503" width="311" height="66"/>
+                                <rect key="frame" x="32" y="614.33333333333337" width="311" height="65.666666666666629"/>
                                 <string key="text">Setting the appearance to Dynamic allows NineAnimator to change the theme according to the brightness of the screen.
 After setup, you can change the theme settings in the Settings menu.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -568,7 +568,7 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yQX-1k-GWU">
-                                <rect key="frame" x="78.5" y="456" width="218" height="32"/>
+                                <rect key="frame" x="78.666666666666686" y="567.33333333333337" width="218" height="32"/>
                                 <segments>
                                     <segment title="Light"/>
                                     <segment title="Dark"/>
@@ -579,6 +579,7 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </connections>
                             </segmentedControl>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="I27-wt-7D8"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aVI-dM-rv8" firstAttribute="centerX" secondItem="a1x-IL-AZV" secondAttribute="centerX" id="82y-ir-bQP"/>
@@ -597,7 +598,6 @@ After setup, you can change the theme settings in the Settings menu.</string>
                             <constraint firstItem="I27-wt-7D8" firstAttribute="trailing" secondItem="JGW-3m-qyq" secondAttribute="trailing" constant="24" id="mu9-9V-Zxq"/>
                             <constraint firstItem="ok1-aG-zqs" firstAttribute="top" secondItem="yQX-1k-GWU" secondAttribute="bottom" constant="16" id="xG8-pU-uUY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="I27-wt-7D8"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -622,11 +622,11 @@ After setup, you can change the theme settings in the Settings menu.</string>
             <objects>
                 <viewController id="bYt-YE-NKs" customClass="SetupServerSelectionViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qy8-Wy-qnh">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5A-Fz-yzu" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="32" y="585" width="311" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5A-Fz-yzu" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="696" width="311" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="EE8-vX-bQo"/>
                                     <constraint firstAttribute="height" constant="50" id="XZa-bg-hGE"/>
@@ -645,7 +645,7 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select A Website" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="RjP-7k-vGp">
-                                <rect key="frame" x="69" y="76" width="237" height="36"/>
+                                <rect key="frame" x="69" y="120" width="237" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -661,14 +661,14 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </variation>
                             </label>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBz-oc-OhO" customClass="ServerSelectionView" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="16" y="162.5" width="343" height="351"/>
+                                <rect key="frame" x="16" y="206.33333333333337" width="343" height="418"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRT-ib-AcS">
-                                <rect key="frame" x="32" y="529.5" width="311" height="39.5"/>
+                                <rect key="frame" x="32" y="640.33333333333337" width="311" height="39.666666666666629"/>
                                 <string key="text">NineAnimator is not affliated with any of the websites listed above. Your personal information and history are not shared with the above websites.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -679,7 +679,7 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find your favorite anime streaming website and NineAnimator will use it to provide contents, just for you." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ui-C3-ly1">
-                                <rect key="frame" x="32" y="116" width="311" height="26.5"/>
+                                <rect key="frame" x="32" y="160" width="311" height="26.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -689,6 +689,7 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="xlg-Eb-d8P"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V5A-Fz-yzu" firstAttribute="leading" secondItem="xlg-Eb-d8P" secondAttribute="leading" priority="750" constant="32" id="40I-7Z-x9L"/>
@@ -713,7 +714,6 @@ After setup, you can change the theme settings in the Settings menu.</string>
                             <constraint firstItem="xlg-Eb-d8P" firstAttribute="bottom" secondItem="V5A-Fz-yzu" secondAttribute="bottom" constant="32" id="u0z-07-m3f"/>
                             <constraint firstItem="sBz-oc-OhO" firstAttribute="leading" secondItem="V5A-Fz-yzu" secondAttribute="leading" priority="750" constant="-64" id="yXq-Tn-FTx"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xlg-Eb-d8P"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -754,11 +754,11 @@ After setup, you can change the theme settings in the Settings menu.</string>
             <objects>
                 <viewController id="Rpq-aZ-KUE" customClass="SetupFinishingViewController" customModule="NineAnimator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lwc-Ft-87a">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Join us on Discord" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x9M-KR-UlF">
-                                <rect key="frame" x="32" y="333.5" width="311" height="36"/>
+                                <rect key="frame" x="32" y="406" width="311" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -773,8 +773,8 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
                                 </variation>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eV-r3-Bap" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="32" y="585" width="311" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eV-r3-Bap" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="32" y="696" width="311" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="Jg8-nQ-qGq"/>
                                     <constraint firstAttribute="width" relation="lessThanOrEqual" constant="320" id="fld-rq-3ZA"/>
@@ -802,8 +802,8 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2o-HH-QfF">
-                                <rect key="frame" x="140.5" y="435.5" width="94" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2o-HH-QfF">
+                                <rect key="frame" x="140.66666666666666" y="508" width="94" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <state key="normal" title="Open Discord"/>
                                 <userDefinedRuntimeAttributes>
@@ -814,13 +814,14 @@ After setup, you can change the theme settings in the Settings menu.</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Discord Logo HD" translatesAutoresizingMaskIntoConstraints="NO" id="EWT-Ha-nGW">
-                                <rect key="frame" x="117.5" y="177.5" width="140" height="140"/>
+                                <rect key="frame" x="117.66666666666669" y="250" width="140" height="140"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EWT-Ha-nGW" secondAttribute="height" multiplier="1:1" id="Fh6-jv-idV"/>
                                     <constraint firstAttribute="width" constant="140" id="YlH-Gg-tgm"/>
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="da4-cs-2HZ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="5eV-r3-Bap" firstAttribute="leading" secondItem="da4-cs-2HZ" secondAttribute="leading" priority="750" constant="32" id="0P6-Q7-job"/>
@@ -839,7 +840,6 @@ After setup, you can change the theme settings in the Settings menu.</string>
                             <constraint firstItem="EWT-Ha-nGW" firstAttribute="centerX" secondItem="Lwc-Ft-87a" secondAttribute="centerX" id="oTG-1m-HIJ"/>
                             <constraint firstItem="da4-cs-2HZ" firstAttribute="bottom" secondItem="5eV-r3-Bap" secondAttribute="bottom" constant="32" id="vSP-zp-7dk"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="da4-cs-2HZ"/>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                         </userDefinedRuntimeAttributes>
@@ -858,11 +858,28 @@ After setup, you can change the theme settings in the Settings menu.</string>
             <point key="canvasLocation" x="3719" y="-75"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="5eV-r3-Bap">
+            <size key="intrinsicContentSize" width="64" height="41"/>
+        </designable>
+        <designable name="Ier-uY-wii">
+            <size key="intrinsicContentSize" width="97" height="41"/>
+        </designable>
+        <designable name="V5A-Fz-yzu">
+            <size key="intrinsicContentSize" width="97" height="41"/>
+        </designable>
+        <designable name="h82-lJ-xk8">
+            <size key="intrinsicContentSize" width="97" height="41"/>
+        </designable>
+        <designable name="rtk-Cw-RXt">
+            <size key="intrinsicContentSize" width="97" height="41"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Cloud Sync HD" width="1200" height="1200"/>
         <image name="Discord Logo HD" width="600" height="686"/>
         <image name="High Resolution App Icon" width="2048" height="2048"/>
         <image name="Library Icon HD" width="2000" height="2000"/>
-        <image name="Privacy HD" width="1200" height="1200"/>
+        <image name="Yellow Warning" width="35" height="35"/>
     </resources>
 </document>

@@ -47,17 +47,11 @@ extension MyAnimeList {
         _mutationTaskPool.append(task)
     }
     
-    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?) {
+    func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool = true) {
         collectMutationTaskPoolGarbage()
         
         guard let episodeNumber = episodeNumber else {
             Log.info("[MyAnimeList] Not pushing states because episode number cannot be inferred.")
-            return
-        }
-        
-        // No need for update if the previous progress is higher than the current
-        if let previousTracking = progressTracking(for: reference),
-            previousTracking.currentProgress >= episodeNumber {
             return
         }
         
@@ -67,6 +61,27 @@ extension MyAnimeList {
             withUpdatedEpisodeProgress: episodeNumber
         )
         update(reference, newTracking: newTracking)
+        
+        if shouldUpdateTrackingState {
+            let listingInfoTask = self.listingAnime(from: reference)
+            .defer { _ in self.collectMutationTaskPoolGarbage() }
+            .error {
+                Log.error("[MyAnimeList] Failed To Retrieve Anime Listing Information with error: %@", $0)
+            }
+            .finally {
+                [weak self] listingInfo in
+                guard let self = self else { return }
+                // If the anime has finished airing, and the user has completed the last episode, mark the anime as completed
+                if let currentAiringStatus = listingInfo.information["Airing Status"],
+                   currentAiringStatus == AiringStatus.finished.rawValue,
+                   let totalNumOfEpisodes = newTracking.episodes,
+                   totalNumOfEpisodes <= newTracking.currentProgress {
+                    Log.info("[MyAnimeList] User has finished last episode of anime. Moving %@ to completed list.", reference.name)
+                    self.update(reference, newState: .finished)
+                }
+            }
+            _mutationTaskPool.append(listingInfoTask)
+        }
     }
     
     func collectMutationTaskPoolGarbage() {

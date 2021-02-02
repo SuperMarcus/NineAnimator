@@ -60,3 +60,5 @@ opt_in_rules: # some rules are only opt-in
   - yoda_condition
 trailing_whitespace:
   ignores_empty_lines: true
+inclusive_language:
+  override_allowed_terms: ["master"]

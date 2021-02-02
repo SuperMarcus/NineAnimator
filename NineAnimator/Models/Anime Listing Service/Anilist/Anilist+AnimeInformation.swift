@@ -144,10 +144,10 @@ extension Anilist {
             
             if let status = mediaEntry["status"] as? String {
                 switch status {
-                case "FINISHED": information["Airing Status"] = "Finished"
-                case "RELEASING": information["Airing Status"] = "Ongoing"
-                case "NOT_YET_RELEASED": information["Airing Status"] = "Not Yet Released"
-                case "CANCELLED": information["Airing Status"] = "Cancelled"
+                case "FINISHED": information["Airing Status"] = AiringStatus.finished.rawValue
+                case "RELEASING": information["Airing Status"] = AiringStatus.currentlyAiring.rawValue
+                case "NOT_YET_RELEASED": information["Airing Status"] = AiringStatus.notReleased.rawValue
+                case "CANCELLED": information["Airing Status"] = AiringStatus.cancelled.rawValue
                 default: break
                 }
             }

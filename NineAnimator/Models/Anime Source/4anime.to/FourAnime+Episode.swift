@@ -21,6 +21,14 @@ import Foundation
 import SwiftSoup
 
 extension NASourceFourAnime {
+    /// 4anime provides multiple links for each episode, however they are not shown to the user
+    static let knownServers = [
+        "server1": "Server 1",
+        "server2": "Server 2",
+        "server3": "Server 3",
+        "server4": "Server 4"
+    ]
+    
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise.firstly {
             try URL(string: link.identifier).tryUnwrap()
@@ -31,45 +39,52 @@ extension NASourceFourAnime {
             ).responseString
         } .then {
             episodePageContent in
-            let bowl = try SwiftSoup.parse(episodePageContent)
-            let videoElement = try bowl.select("video")
-            let videoSource: URL
             
-            let jwPlayerSetupMatchingExpr = try NSRegularExpression(
-                pattern: "file:\\s*\"([^\"]+)",
-                options: []
-            )
+            // MARK: Scraping Methods
             
-            // If a valid url was found from the page's video tag
-            if !videoElement.isEmpty(),
-                let videoUrl = URL(string: try videoElement.attr("src")) {
-                // Video element was found, using the presented one
-                videoSource = videoUrl
-                Log.info("[NASourceFourAnime] Resource found from page source.")
-            } else if !videoElement.isEmpty(),
-                let source = try videoElement.select("source").first(),
-                let videoUrl = URL(string: try source.attr("src")) {
-                // Video element found under the source tag nested in the video element
-                videoSource = videoUrl
-                Log.info("[NASourceFourAnime] Resource found from page source (nested).")
-            } else if let jwPlayerUrlString = jwPlayerSetupMatchingExpr
-                    .firstMatch(in: episodePageContent)?
-                    .firstMatchingGroup,
-                let jwPlayerUrl = URL(
-                    string: jwPlayerUrlString,
-                    relativeTo: link.parent.link
-                ) {
-                // Latest 4anime page appears to be including the jwplayer configs in plaintext
-                videoSource = jwPlayerUrl
-                Log.info("[NASourceFourAnime] Resource found from packed scripts (plain.jwplayer.setup).")
-            } else {
-                // If no video element is present, try decoding the video asset url
-                // from the PACKER script
-                let decodedScript = try PackerDecoder().decode(episodePageContent)
+            // Tries to extract link from PACKER script (via video tags)
+            func server1Scraper() throws -> URL? {
+                let bowl = try SwiftSoup.parse(episodePageContent)
+                let packedScript = try bowl.select("#justtothetop > script").eq(1).html()
+                let decodedScript = try PackerDecoder().decode(packedScript)
                 
-                // Two variants found from 4anime's site
                 let sourceMatchingExpr = try NSRegularExpression(
                     pattern: "src=\\\\*\"([^\"\\\\]+)",
+                    options: []
+                )
+                if let sourceUrlString = sourceMatchingExpr
+                        .firstMatch(in: decodedScript)?
+                        .firstMatchingGroup,
+                    let sourceUrl = URL(
+                        string: sourceUrlString,
+                        relativeTo: link.parent.link
+                    ) {
+                    // Video tag src attribute
+                    Log.info("[NASourceFourAnime] Resource found from packed scripts (video tag).")
+                    return sourceUrl
+                }
+                return nil
+            }
+            
+            // Tries to find video element under the source tag nested in the video element
+            func server2Scraper() throws -> URL? {
+                let bowl = try SwiftSoup.parse(episodePageContent)
+                let videoElement = try bowl.select("video")
+                if !videoElement.isEmpty(),
+                    let source = try videoElement.select("source").first(),
+                    let videoUrl = URL(string: try source.attr("src")) {
+                    Log.info("[NASourceFourAnime] Resource found from page source (nested).")
+                    return videoUrl
+                }
+                return nil
+            }
+            
+            // Decode the video asset url from the PACKER script
+            func server3Scraper() throws -> URL? {
+                let decodedScript = try PackerDecoder().decode(episodePageContent)
+                
+                let jwPlayerSetupMatchingExpr = try NSRegularExpression(
+                    pattern: "file:\\s*\"([^\"]+)",
                     options: []
                 )
                 
@@ -80,27 +95,46 @@ extension NASourceFourAnime {
                         string: jwPlayerUrlString,
                         relativeTo: link.parent.link
                     ) {
-                    // 1. JWPlayer setup script
-                    videoSource = jwPlayerUrl
+                    // JWPlayer setup script
                     Log.info("[NASourceFourAnime] Resource found from packed scripts (packer.jwplayer.setup).")
-                } else if let sourceUrlString = sourceMatchingExpr
-                        .firstMatch(in: decodedScript)?
-                        .firstMatchingGroup,
-                    let sourceUrl = URL(
-                        string: sourceUrlString,
-                        relativeTo: link.parent.link
-                    ) {
-                    // 2. Video tag src attribute
-                    videoSource = sourceUrl
-                    Log.info("[NASourceFourAnime] Resource found from packed scripts (video tag).")
-                } else {
-                    throw NineAnimatorError.providerError("Unable to resolve playback url from provider response")
+                    return jwPlayerUrl
                 }
+                return nil
+            }
+            
+            // Tries to find a valid url from the page's video tag
+            func server4Scraper() throws -> URL? {
+                let bowl = try SwiftSoup.parse(episodePageContent)
+                let videoElement = try bowl.select("video")
+                if !videoElement.isEmpty(),
+                   let videoUrl = URL(string: try videoElement.attr("src")) {
+                    Log.info("[NASourceFourAnime] Resource found from page source.")
+                    return videoUrl
+                }
+                return nil
+            }
+            
+            var videoURL: URL?
+            
+            switch link.server {
+            case "server1":
+                videoURL = try server1Scraper()
+            case "server2":
+                videoURL = try server2Scraper()
+            case "server3":
+                videoURL = try server3Scraper()
+            case "server4":
+                videoURL = try server4Scraper()
+            default: break
+            }
+            
+            guard let unwrappedVideoURL = videoURL else {
+                throw NineAnimatorError.providerError("Unable to retrieve video link for this server.")
             }
             
             return Episode(
                 link,
-                target: videoSource,
+                target: unwrappedVideoURL,
                 parent: anime,
                 userInfo: [
                     DummyParser.Options.headers: [

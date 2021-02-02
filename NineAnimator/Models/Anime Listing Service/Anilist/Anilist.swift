@@ -224,9 +224,10 @@ extension Anilist {
         _mutationRequestReferencePool.append(task)
     }
     
-    private func cleanupReferencePool() {
+    func cleanupReferencePool() {
+        // Remove all resolved promises
         _mutationRequestReferencePool.removeAll {
-            ($0 as! NineAnimatorPromise<NSDictionary>).isResolved
+            ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
         }
     }
 }

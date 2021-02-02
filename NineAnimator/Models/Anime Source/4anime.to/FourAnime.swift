@@ -58,7 +58,7 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        server == NASourceFourAnime.FourAnimeStream
+        NASourceFourAnime.knownServers.keys.contains(server)
             ? DummyParser.registeredInstance : nil
     }
     
@@ -67,7 +67,6 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     }
     
     override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
-        anime.servers.keys.contains(NASourceFourAnime.FourAnimeStream)
-            ? [NASourceFourAnime.FourAnimeStream] : []
+        ["server1", "server2", "server3", "server4"]
     }
 }

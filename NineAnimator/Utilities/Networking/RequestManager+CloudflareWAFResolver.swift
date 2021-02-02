@@ -92,7 +92,7 @@ class CloudflareWAFResolver {
 }
 
 // MARK: - Retrier
-//extension CloudflareWAFResolver {
+// extension CloudflareWAFResolver {
 //    func retry(_ request: Request, for session: Session, dueTo inputError: Error) -> NineAnimatorPromise<NARequestRetryDirective> {
 //        let error: NineAnimatorError.CloudflareAuthenticationChallenge
 //
@@ -220,7 +220,7 @@ class CloudflareWAFResolver {
 //
 //        return promise
 //    }
-//}
+// }
 
 // MARK: - Challenge Resolver
 private extension CloudflareWAFResolver {
@@ -275,7 +275,7 @@ private extension CloudflareWAFResolver {
             let domDocumentKey: NSString = "document"
             
             let domGetElementById: @convention(block) (String, String) -> Any = {
-                [challengePageContent] domId, second in
+                [challengePageContent] domId, _ in
                 do {
                     Log.debug("[CF_WAF] Get DOM Element %@", domId)
                     let bowl = try SwiftSoup.parse(challengePageContent)

@@ -110,6 +110,15 @@ extension Notification.Name {
     static let externalPlaybackDidEnd =
         Notification.Name("com.marcuszhou.nineanimator.externalPlaybackDidEnd")
     
+    /**
+     Fired when the list of recommendation items are updated in a particular RecommendationSource
+     
+     ## Object
+     - The object for this notification is the updated `RecommendationSource`
+     */
+    static let sourceDidUpdateRecommendation =
+        Notification.Name("com.marcuszhou.nineanimator.sourceDidUpdateRecommendation")
+    
     /// Fired when HomeKit status is updated
     static let homeDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.homeDidUpdate")
@@ -122,9 +131,8 @@ extension Notification.Name {
     static let offlineAccessStateDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.offlineAccessStateDidUpdate")
     
-    /// Fired when the list of recommendation items are updated in a particular RecommendationSource
-    static let sourceDidUpdateRecommendation =
-        Notification.Name("com.marcuszhou.nineanimator.sourceDidUpdateRecommendation")
+    /// Fired when the user's subscribed anime list has updated
+    static let subscriptionsDidUpdate = Notification.Name("com.marcuszhou.nineanimator.subscriptionsDidUpdate")
     
     /// Fired when the rich presence has been updated.
     static let presenceControllerDidUpdatePresence =
