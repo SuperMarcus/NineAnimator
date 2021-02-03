@@ -48,6 +48,7 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://twist.moe" }
     
+    fileprivate var _cachedDescriptor: SourceDescriptor?
     fileprivate var _listedAnime: [AnimeTwistListedAnime]?
     
     // swiftlint:disable closure_end_indentation
@@ -108,6 +109,17 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
         }
     }
     // swiftlint:enable closure_end_indentation
+    
+    func requestDescriptor() -> NineAnimatorPromise<SourceDescriptor> {
+        if let cachedDescriptor = self._cachedDescriptor {
+            return .success(cachedDescriptor)
+        }
+        
+        return requestUncachedDescriptor().then {
+            self._cachedDescriptor = $0
+            return $0
+        }
+    }
     
     fileprivate let animeListMatchingRegex = try! NSRegularExpression(pattern: "window\\.__NUXT__=([^<]+)", options: [])
     

@@ -113,7 +113,7 @@
 		2C3D7BF62210825B0045D648 /* BadNineAnime+Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BF52210825B0045D648 /* BadNineAnime+Reachability.swift */; };
 		2C3D7BF92210ADB80045D648 /* AnimeTwist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BF82210ADB80045D648 /* AnimeTwist.swift */; };
 		2C3D7BFB2210AE1D0045D648 /* AnimeTwist+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BFA2210AE1D0045D648 /* AnimeTwist+Anime.swift */; };
-		2C3D7BFD2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BFC2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift */; };
+		2C3D7BFD2210AE3C0045D648 /* AnimeTwist+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BFC2210AE3C0045D648 /* AnimeTwist+Search.swift */; };
 		2C3D7BFF2210AE540045D648 /* AnimeTwist+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7BFE2210AE540045D648 /* AnimeTwist+Featured.swift */; };
 		2C3D7C012210AE640045D648 /* AnimeTwist+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7C002210AE640045D648 /* AnimeTwist+Episode.swift */; };
 		2C3D7C032210AE780045D648 /* AnimeTwist+LinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3D7C022210AE780045D648 /* AnimeTwist+LinkRetriver.swift */; };
@@ -476,6 +476,7 @@
 		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
 		BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */; };
 		BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */; };
+		BFD0F7D725CA35B100621241 /* AnimeTwist+SourceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0F7D625CA35B100621241 /* AnimeTwist+SourceDescriptor.swift */; };
 		BFE3339F24F353F1004B680F /* FourAnime+LinkRetriever.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */; };
 		BFE34BF324EF5B670054F3AE /* MyAnimeList+UserRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */; };
 		BFF3660125B4FF75005C1E83 /* StreamSBParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */; };
@@ -629,7 +630,7 @@
 		2C3D7BF52210825B0045D648 /* BadNineAnime+Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BadNineAnime+Reachability.swift"; sourceTree = "<group>"; };
 		2C3D7BF82210ADB80045D648 /* AnimeTwist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTwist.swift; sourceTree = "<group>"; };
 		2C3D7BFA2210AE1D0045D648 /* AnimeTwist+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Anime.swift"; sourceTree = "<group>"; };
-		2C3D7BFC2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+ContentProvider.swift"; sourceTree = "<group>"; };
+		2C3D7BFC2210AE3C0045D648 /* AnimeTwist+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Search.swift"; sourceTree = "<group>"; };
 		2C3D7BFE2210AE540045D648 /* AnimeTwist+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Featured.swift"; sourceTree = "<group>"; };
 		2C3D7C002210AE640045D648 /* AnimeTwist+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+Episode.swift"; sourceTree = "<group>"; };
 		2C3D7C022210AE780045D648 /* AnimeTwist+LinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+LinkRetriver.swift"; sourceTree = "<group>"; };
@@ -1075,6 +1076,7 @@
 		BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Anime.swift"; sourceTree = "<group>"; };
 		BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode.swift"; sourceTree = "<group>"; };
 		BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookParser.swift; sourceTree = "<group>"; };
+		BFD0F7D625CA35B100621241 /* AnimeTwist+SourceDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeTwist+SourceDescriptor.swift"; sourceTree = "<group>"; };
 		BFE3339D24F34D77004B680F /* FourAnime+LinkRetriever.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FourAnime+LinkRetriever.swift"; sourceTree = "<group>"; };
 		BFE34BF124EF550A0054F3AE /* MyAnimeList+UserRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MyAnimeList+UserRecommendations.swift"; sourceTree = "<group>"; };
 		BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreamSBParser.swift; sourceTree = "<group>"; };
@@ -1318,10 +1320,11 @@
 			children = (
 				2C3D7BF82210ADB80045D648 /* AnimeTwist.swift */,
 				2C3D7BFA2210AE1D0045D648 /* AnimeTwist+Anime.swift */,
-				2C3D7BFC2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift */,
+				2C3D7BFC2210AE3C0045D648 /* AnimeTwist+Search.swift */,
 				2C3D7BFE2210AE540045D648 /* AnimeTwist+Featured.swift */,
 				2C3D7C002210AE640045D648 /* AnimeTwist+Episode.swift */,
 				2C3D7C022210AE780045D648 /* AnimeTwist+LinkRetriver.swift */,
+				BFD0F7D625CA35B100621241 /* AnimeTwist+SourceDescriptor.swift */,
 			);
 			path = twist.moe;
 			sourceTree = "<group>";
@@ -2729,6 +2732,7 @@
 				2C42577B23241D2B00FCCCCE /* Simkl.swift in Sources */,
 				2C4ABC8521B74A51009B4D47 /* Featured.swift in Sources */,
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
+				BFD0F7D725CA35B100621241 /* AnimeTwist+SourceDescriptor.swift in Sources */,
 				2CAD375822261BDE008AD6B4 /* MyAnimeList.swift in Sources */,
 				2C055AF724AAAF9300FCAC25 /* WonderfulSubs+Featured.swift in Sources */,
 				2CCC746021C06D1B0007502A /* BadNineAnime+Featured.swift in Sources */,
@@ -2913,7 +2917,7 @@
 				2C055AFF24AAB0E300FCAC25 /* SearchMasterAnime.swift in Sources */,
 				2C433157220B35C100A2E64F /* StringArray+FirstMatchingGroup.swift in Sources */,
 				C8E12D092422143700B0AF6A /* AnimeUnity+Search.swift in Sources */,
-				2C3D7BFD2210AE3C0045D648 /* AnimeTwist+ContentProvider.swift in Sources */,
+				2C3D7BFD2210AE3C0045D648 /* AnimeTwist+Search.swift in Sources */,
 				2CE18B102374C7ED00771A16 /* LibraryTipGenericCell.swift in Sources */,
 				C8E12D072422142A00B0AF6A /* AnimeUnity+RequestModifier.swift in Sources */,
 				2C1C717B2219046700760A69 /* ListingAnime+InitializeFromEntry.swift in Sources */,
@@ -3454,6 +3458,7 @@
 		2C4ABC6E21B5881F009B4D47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3461,6 +3466,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -3480,6 +3486,7 @@
 		2C4ABC6F21B5881F009B4D47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = arm64;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3487,6 +3494,7 @@
 				CURRENT_PROJECT_VERSION = 5;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
