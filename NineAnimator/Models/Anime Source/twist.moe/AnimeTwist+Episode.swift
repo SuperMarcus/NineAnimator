@@ -96,8 +96,12 @@ extension NASourceAnimeTwist {
             let episodeUrl = availableCDN.appendingPathComponent(episodePath)
             Log.info("[twist.moe] Decrypted video URL at %@", episodeUrl.absoluteString)
             
-            // Construt Episode struct
-            return Episode(link, target: episodeUrl, parent: anime)
+            // Construct Episode struct
+            return Episode(
+                link,
+                target: episodeUrl,
+                parent: anime
+            )
         }
     }
     

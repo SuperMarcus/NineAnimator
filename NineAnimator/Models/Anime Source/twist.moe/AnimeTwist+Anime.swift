@@ -37,15 +37,18 @@ extension NASourceAnimeTwist {
             $0.first { $0.slug == slug }
         } .thenPromise {
             info in
+            self.requestDescriptor().then { ($0, info) }
+        } .thenPromise {
+            sourceDescriptor, info in
             self.requestManager.request(
                 "/api/anime/\(info.slug)/sources",
                 handling: .ajax,
                 headers: [ "x-access-token": "0df14814b9e590a1f26d3071a4ed7974" ]
             )
             .responseString
-            .then { (info, $0) }
+            .then { (sourceDescriptor, info, $0) }
         } .then {
-            info, sourceListString in
+            sourceDescriptor, info, sourceListString in
             guard let sourceListData = sourceListString.data(using: .utf8),
                 let sourceList = try JSONSerialization.jsonObject(with: sourceListData, options: []) as? [NSDictionary] else {
                 throw NineAnimatorError.providerError("Unable to fetch sources list")
@@ -57,7 +60,7 @@ extension NASourceAnimeTwist {
                 source: self
             )
             // Twist Uses different cdn for ongoing animes
-            let availableCDN = info.isOngoing ?  "https://at-cdn.bunny.sh" : "https://twistcdn.bunny.sh"
+            let availableCDN = info.isOngoing ?  sourceDescriptor.ongoingAnimeCDN : sourceDescriptor.regularAnimeCDN
             
             let episodesList = sourceList.compactMap {
                 episode -> (EpisodeLink, String)? in
