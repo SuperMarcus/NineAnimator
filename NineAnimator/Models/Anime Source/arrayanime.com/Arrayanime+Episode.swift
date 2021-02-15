@@ -27,8 +27,14 @@ extension NASourceArrayanime {
     ]
     
     fileprivate struct EpisodeResponse: Decodable {
-        let links: [String]
+        let links: [EpisodeLinks]
         let link: String? // Ignoring this link
+        let totalepisode: String
+    }
+    
+    fileprivate struct EpisodeLinks: Decodable {
+        let link: String
+        let name: String
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -46,9 +52,17 @@ extension NASourceArrayanime {
         }.then {
             episodeResponse -> Episode in
             
-            // Server selection
-            let episodeSources = try (link.server == "gstore" ? episodeResponse.links.first : episodeResponse.links.last).tryUnwrap(.urlError)
-            let episodeURL = try URL(string: episodeSources).tryUnwrap(.urlError)
+            // Sever Selection
+            var episodeSource: String = ""
+            episodeResponse.links.forEach { episodeLink in
+                if link.server == "gstore" && episodeLink.name.contains("HDP") {
+                    episodeSource = episodeLink.link
+                } else if link.server == "cloud9" && episodeLink.name.contains("1080P") {
+                    episodeSource = episodeLink.link
+                }
+            }
+
+            let episodeURL = try URL(string: episodeSource).tryUnwrap(.urlError)
             
             return Episode(
                 link,
