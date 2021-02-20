@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate var taskPool = Set<HashingTaskWrapper>()
     
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
+    var backgroundAudioNotificationController = AudioBackgroundController()
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Shared AppDelegate reference
@@ -169,11 +170,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Mark the task container as ready for collection
         backgroundTaskContainer?.collect()
+        
+        // Force app to run in background
+        backgroundAudioNotificationController.startBackgroundAudio()
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Update isActive flag
         isActive = true
+        
+        // Stop forcing app to run in background
+        backgroundAudioNotificationController.stopBackgroundAudio()
         
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
@@ -195,7 +202,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Mark the app as inactive
         isActive = false
-        
         // Update quick actions
         updateHomescreenQuickActions(application)
     }

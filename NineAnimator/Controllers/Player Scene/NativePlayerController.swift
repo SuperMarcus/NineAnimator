@@ -220,6 +220,7 @@ extension NativePlayerController {
         // Do not restore to fullscreen if PiP ended because the video has finished playing
         guard self.currentPlaybackTMinus != 0.0 else {
             Log.debug("[NativePlayerController] PiP playback will end because video has finished playing")
+            state = .idle
             return completionHandler(false)
         }
         
