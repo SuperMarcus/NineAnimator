@@ -26,7 +26,7 @@ extension NASourceAnimeHub {
         "fdserver": "FDserver",
         // "xserver": "Xserver", Seems like this no episodes support this server
         "oserver": "Oserver",
-        "mpserver": "MPserver",
+        "mserver": "Mserver",
         "yuserver": "YUserver"
         // "hserver": "Hserver" Excluding until we update HydraX parser
     ]

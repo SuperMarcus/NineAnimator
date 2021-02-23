@@ -38,10 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Number of objects that has requested to disable the screen idle timer
     private(set) var screenOnRequestCount = 0
     
+    /// Number of objects that has requested to prevent the app from becoming suspended
+    private(set) var preventSuspensionRequestCount = 0
+    private var backgroundAudioNotificationController = AudioBackgroundController()
+    
     fileprivate var taskPool = Set<HashingTaskWrapper>()
     
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
-    var backgroundAudioNotificationController = AudioBackgroundController()
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         // Shared AppDelegate reference
@@ -165,21 +168,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Update quick actions
         updateHomescreenQuickActions(application)
         
-        // Schedule the next background refresh tasks
-        scheduleBackgroundUpdateTasks()
+        // Schedule the next background tasks
+        scheduleAllBackgroundTasks()
         
         // Mark the task container as ready for collection
         backgroundTaskContainer?.collect()
         
-        // Force app to run in background
-        backgroundAudioNotificationController.startBackgroundAudio()
+        // Prevent app from becoming suspended if requested
+        if self.preventSuspensionRequestCount > 0 {
+            backgroundAudioNotificationController.startBackgroundAudio()
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Update isActive flag
         isActive = true
         
-        // Stop forcing app to run in background
+        // Stop background audio as the app cannot be suspended anymore
         backgroundAudioNotificationController.stopBackgroundAudio()
         
         // Check the pasteboard when moved to the application
@@ -557,5 +562,33 @@ extension AppDelegate {
             UIApplication.shared.isIdleTimerDisabled = true
         }
         return ScreenOnRequestHandler(self)
+    }
+}
+
+// MARK: - Suspension Prevention Requests
+extension AppDelegate {
+    /// An object to keep reference to in order to request the app from becoming suspended
+    class PreventSuspensionRequestHandler {
+        private weak var parent: AppDelegate?
+        
+        fileprivate init(_ parent: AppDelegate) {
+            self.parent = parent
+        }
+        
+        deinit { parent?.didLoseReferenceToPreventSuspensionHelper() }
+    }
+    
+    fileprivate func didLoseReferenceToPreventSuspensionHelper() {
+        self.preventSuspensionRequestCount -= 1
+        if self.preventSuspensionRequestCount <= 0 {
+            self.preventSuspensionRequestCount = 0
+            self.backgroundAudioNotificationController.stopBackgroundAudio()
+        }
+    }
+    
+    /// Request the app from being suspended
+    func requestAppFromBeingSuspended() -> PreventSuspensionRequestHandler? {
+        self.preventSuspensionRequestCount += 1
+        return PreventSuspensionRequestHandler(self)
     }
 }
