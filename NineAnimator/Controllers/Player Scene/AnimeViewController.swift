@@ -90,6 +90,9 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     private var previousEpisodeRetrivalError: Error?
     
     private var shouldPromptBatchEpisodeMarking = true
+
+    /// Represents the currently displayed sorting of episodes
+    private var currentEpisodeSorting = NineAnimator.default.user.episodeListingOrder
     
     override var canBecomeFirstResponder: Bool {
         true
@@ -97,6 +100,14 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // Update the sorting of episodes if user has adjusted settings
+        let userSortOption = NineAnimator.default.user.episodeListingOrder
+        if userSortOption != currentEpisodeSorting {
+            Log.info("[AnimeViewController] User's episode sort option changed. Reloading episode list")
+            reloadEpisodeTableViewSection()
+            currentEpisodeSorting = userSortOption
+        }
         
         // Remove lines at the end of the table
         tableView.tableFooterView = UIView()
@@ -449,7 +460,7 @@ extension AnimeViewController {
         guard let episodeLink = episodeLink else { return }
         
         episodeRequestTask?.cancel()
-        NotificationCenter.default.removeObserver(self)
+        // NotificationCenter.default.removeObserver(self)
         
         let content = OfflineContentManager.shared.content(for: episodeLink)
         
@@ -793,13 +804,15 @@ extension AnimeViewController {
             [weak self] in
             var suggestingEpisodeLink: EpisodeLink?
             
-            func update(_ link: EpisodeLink, reason: AnimePredictedEpisodeTableViewCell.SuggestionReason) {
+            func update(_ link: EpisodeLink?, reason: AnimePredictedEpisodeTableViewCell.SuggestionReason?) {
                 DispatchQueue.main.async {
-                    cell.episodeLink = link
-                    cell.reason = reason
+                    cell.setPresenting(link: link, reason: reason)
                 }
             }
             
+            // Display placeholder information. This is required for anime with many episodes
+            update(nil, reason: nil)
+
             if availableEpisodes.count > 1 {
                 // The policy for suggestion is:
                 // 1. If an episode with a progress of 0.01...0.80 exists, suggest that episode
@@ -843,6 +856,27 @@ extension AnimeViewController {
                 Section.indexSet(.suggestion),
                 with: .automatic
             )
+        }
+    }
+}
+
+// MARK: - Handling episode sorting events
+extension AnimeViewController {
+    @IBAction private func onSwitchEpisodeSortButtonTapped(_ sender: Any) {
+        Log.info("[AnimeViewController] Switch Episode Sort Button Tapped. Updating user defaults and reloading episode section.")
+        // Switch Sort Order in Settings
+        let savedSortOrder = NineAnimator.default.user.episodeListingOrder
+        let newSortOrder: NineAnimatorUser.EpisodeListingOrder = (savedSortOrder == .ordered ? .reversed : .ordered)
+        NineAnimator.default.user.episodeListingOrder = newSortOrder
+        self.currentEpisodeSorting = newSortOrder
+        reloadEpisodeTableViewSection()
+    }
+    
+    func reloadEpisodeTableViewSection() {
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadSections(Section.indexSet(.episodes, .suggestion), with: .automatic)
         }
     }
 }
