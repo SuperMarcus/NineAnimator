@@ -43,13 +43,13 @@ extension NASourceArrayanime {
             let animeID = anime.link.link.lastPathComponent
             guard !animeID.isEmpty else { throw NineAnimatorError.urlError }
             return animeID
-        }.thenPromise {
+        } .thenPromise {
             animeID -> NineAnimatorPromise<EpisodeResponse> in
             self.requestManager.request(
-                url: self.vercelEndpoint.absoluteString + "/watching/\(animeID)/\(link.name)",
-                handling: .default
+                url: self.vercelEndpoint.appendingPathComponent("/watching/\(animeID)/\(link.name)"),
+                handling: .ajax
             ) .responseDecodable(type: EpisodeResponse.self)
-        }.then {
+        } .then {
             episodeResponse -> Episode in
             
             // Sever Selection
@@ -59,6 +59,8 @@ extension NASourceArrayanime {
                     episodeSource = episodeLink.link
                 } else if link.server == "cloud9" && episodeLink.name.contains("1080P") {
                     episodeSource = episodeLink.link
+                } else if link.server == "cloud9" && episodeSource.isEmpty {
+                    episodeSource = episodeLink.link // Other quality if 1080p is unavailable
                 }
             }
 

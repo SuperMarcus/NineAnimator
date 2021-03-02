@@ -46,9 +46,8 @@ extension NASourceArrayanime {
         } .thenPromise {
             animeID in
             self.requestManager.request(
-                url: self.vercelEndpoint.absoluteString + "/details/\(animeID)",
-                handling: .default,
-                method: .get
+                url: self.vercelEndpoint.appendingPathComponent("/details/\(animeID)"),
+                handling: .ajax
             ) .responseDecodable(type: AnimeResponse.self)
               .then { ($0, animeID) }
         } .then {
@@ -64,7 +63,10 @@ extension NASourceArrayanime {
                 let reconstructedAnimeLink = AnimeLink(
                     title: animeEntry.title,
                     link: link.link,
-                    image: try URL(string: animeEntry.image).tryUnwrap(.urlError),
+                    image: try URL(
+                        protocolRelativeString: animeEntry.image,
+                        relativeTo: link.link
+                    ).tryUnwrap(.urlError),
                     source: self
                 )
                     
@@ -76,19 +78,14 @@ extension NASourceArrayanime {
                 if totalEpisode > 0 {
                     // We assume each server contains every episode
                     for (serverIdentifier, _) in NASourceArrayanime.knownServers {
-                        var currentCollection = [EpisodeLink]()
-                        
-                        for episodeNo in 1...totalEpisode {
-                            let currentEpisodeLink = EpisodeLink(
+                        episodeCollection[serverIdentifier] = (1...totalEpisode).map { episodeNo in
+                            EpisodeLink(
                                 identifier: "\(animeID)-\(episodeNo)",
                                 name: "\(episodeNo)",
                                 server: serverIdentifier,
                                 parent: reconstructedAnimeLink
                             )
-                            currentCollection.append(currentEpisodeLink)
                         }
-                        
-                        episodeCollection[serverIdentifier] = currentCollection
                     }
                 }
                 
@@ -101,7 +98,7 @@ extension NASourceArrayanime {
                     episodes: episodeCollection
                 )
             }
-            return animeDetails[safe: 0]
+            return animeDetails.first
         }
     }
 }

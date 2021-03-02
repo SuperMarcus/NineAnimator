@@ -37,7 +37,7 @@ class NASourceArrayanime: BaseSource, Source, PromiseSource {
     #endif
 
     var siteDescription: String {
-        "ArrayAnime allows you to stream subtitled anime and movies in HD. NineAnimator has experimental support for this website."
+        "ArrayAnime allows you to stream subtitled, dubbed, chinese anime and movies in HD. NineAnimator has experimental support for this website."
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {

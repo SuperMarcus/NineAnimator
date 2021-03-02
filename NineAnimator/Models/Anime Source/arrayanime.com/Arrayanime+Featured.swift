@@ -40,8 +40,8 @@ extension NASourceArrayanime {
     
     fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
-            url: self.vercelEndpoint.absoluteString + "/newseason/1",
-            handling: .default
+            url: self.vercelEndpoint.appendingPathComponent("/newseason/1"),
+            handling: .ajax
         ) .responseDecodable(
             type: AnimeResponse.self
         ) .then {
@@ -65,8 +65,8 @@ extension NASourceArrayanime {
     
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
-            url: self.vercelEndpoint.absoluteString + "/recentlyadded/1",
-            handling: .default
+            url: self.vercelEndpoint.appendingPathComponent("/recentlyadded/1"),
+            handling: .ajax
         ) .responseDecodable(
             type: AnimeResponse.self
         ) .then {

@@ -34,27 +34,29 @@ extension NASourceArrayanime {
     class SearchAgent: ContentProvider {
         var title: String
 
-        var totalPages: Int? { 1 } // Unknown no. of pages
-        var availablePages: Int { _results == nil ? 0 : 1 }
-        var moreAvailable: Bool { _results == nil }
+        var totalPages: Int?
+        var availablePages: Int { _results.count }
+        var moreAvailable: Bool { totalPages == nil || _results.count < totalPages! }
         
         weak var delegate: ContentProviderDelegate?
         private var parent: NASourceArrayanime
         private var performingTask: NineAnimatorAsyncTask?
-        private var _results: [AnimeLink]?
+        private var _results = [[AnimeLink]]()
         
         func links(on page: Int) -> [AnyLink] {
-            page == 0 ? _results?.map { .anime($0) } ?? [] : []
+            _results[page].map { .anime($0) }
         }
         
         func more() {
-            guard performingTask == nil else { return }
+            guard moreAvailable && performingTask == nil else { return }
+            
             // Arrayanime includes the search title in the URL path, hence need to encode
             let encodedTitle = self.title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+            var newPage = availablePages + 1
             
             performingTask = parent.requestManager.request(
-                parent.vercelEndpoint.absoluteString + "/search/\(encodedTitle ?? "")/1",
-                handling: .default
+                url: parent.vercelEndpoint.appendingPathComponent("/search/\(encodedTitle ?? "")/\(newPage)"),
+                handling: .ajax
             ) .responseDecodable(type: SearchResponse.self).then {
                 searchResponse -> [AnimeLink] in
                 let searchResults = try searchResponse.results.map {
@@ -70,7 +72,10 @@ extension NASourceArrayanime {
                     .tryUnwrap(.urlError)
                     
                     let animeURL = try URL(string: encodedLink).tryUnwrap(.urlError)
-                    let animeImage = try URL(string: encodedImage).tryUnwrap(.urlError)
+                    let animeImage = try URL(
+                        protocolRelativeString: encodedImage,
+                        relativeTo: animeURL
+                    ).tryUnwrap(.urlError)
                     
                     return AnimeLink(
                         title: searchEntry.title,
@@ -82,12 +87,19 @@ extension NASourceArrayanime {
                 return searchResults
             } .then {
                 results -> [AnimeLink] in
+                // No results or last page
                 if results.isEmpty {
-                    throw NineAnimatorError.searchError("No results found")
-                } else { return results }
+                    if self.totalPages == nil {
+                        throw NineAnimatorError.searchError("No results found")
+                    } else { newPage -= 1 }
+                }
+                
+                return results
             } .error {
                 [weak self] in
                 guard let self = self else { return }
+                
+                self.totalPages = 0
 
                 // Reset performing task if the error is not 404
                 if !($0 is NineAnimatorError.SearchError) {
@@ -98,8 +110,11 @@ extension NASourceArrayanime {
             } .finally {
                 [weak self] in
                 guard let self = self else { return }
-                self._results = $0
-                self.delegate?.pageIncoming(0, from: self)
+                self.performingTask = nil
+                self.totalPages = newPage + 1
+                self._results.append($0)
+                
+                self.delegate?.pageIncoming(newPage, from: self)
             }
         }
         
