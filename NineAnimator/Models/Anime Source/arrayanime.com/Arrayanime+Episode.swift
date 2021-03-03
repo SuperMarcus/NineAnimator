@@ -54,13 +54,18 @@ extension NASourceArrayanime {
             
             // Sever Selection
             var episodeSource: String = ""
-            episodeResponse.links.forEach { episodeLink in
-                if link.server == "gstore" && episodeLink.name.contains("HDP") {
-                    episodeSource = episodeLink.link
-                } else if link.server == "cloud9" && episodeLink.name.contains("1080P") {
-                    episodeSource = episodeLink.link
-                } else if link.server == "cloud9" && episodeSource.isEmpty {
-                    episodeSource = episodeLink.link // Other quality if 1080p is unavailable
+            
+            if link.server == "gstore" {
+                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("HDP") }) {
+                    episodeSource = episodeResponse.links[index].link
+                }
+            } else if link.server == "cloud9" {
+                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("1080P") }) {
+                    episodeSource = episodeResponse.links[index].link
+                } else {
+                    // Other quality if 1080p is unavailable
+                    // Cloud9 is always at the last index, assuming Cloud9 server exists
+                    episodeSource = episodeResponse.links.last!.link
                 }
             }
 
