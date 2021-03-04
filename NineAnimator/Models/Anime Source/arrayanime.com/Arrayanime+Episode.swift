@@ -65,7 +65,7 @@ extension NASourceArrayanime {
                 } else {
                     // Other quality if 1080p is unavailable
                     // Cloud9 is always at the last index, assuming Cloud9 server exists
-                    episodeSource = episodeResponse.links.last!.link
+                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).link
                 }
             }
 
