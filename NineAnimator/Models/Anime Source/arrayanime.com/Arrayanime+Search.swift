@@ -36,7 +36,7 @@ extension NASourceArrayanime {
 
         var totalPages: Int?
         var availablePages: Int { _results.count }
-        var moreAvailable: Bool { totalPages == nil || _results.count < totalPages! }
+        var moreAvailable: Bool { totalPages == nil || _results.count <= totalPages! }
         
         weak var delegate: ContentProviderDelegate?
         private var parent: NASourceArrayanime
@@ -52,26 +52,21 @@ extension NASourceArrayanime {
             
             // Arrayanime includes the search title in the URL path, hence need to encode
             let encodedTitle = self.title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-            var newPage = availablePages + 1
+            let newPage = availablePages
             
             performingTask = parent.requestManager.request(
-                url: parent.vercelEndpoint.appendingPathComponent("/search/\(encodedTitle ?? "")/\(newPage)"),
+                url: parent.vercelEndpoint.appendingPathComponent("/search/\(encodedTitle ?? "")/\(newPage + 1)"),
                 handling: .ajax
             ) .responseDecodable(type: SearchResponse.self).then {
                 searchResponse -> [AnimeLink] in
                 let searchResults = try searchResponse.results.map {
                     searchEntry -> AnimeLink in
                     
-                    let originalString = self.parent.vercelEndpoint.absoluteString + "/details/\(searchEntry.id)"
-                    let encodedLink = try originalString
-                        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-                        .tryUnwrap(.urlError)
-                    
                     let encodedImage = try searchEntry.image
                     .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) // Thanks uttiya
                     .tryUnwrap(.urlError)
                     
-                    let animeURL = try URL(string: encodedLink).tryUnwrap(.urlError)
+                    let animeURL = try URL(string: "/details/\(searchEntry.id)", relativeTo: self.parent.vercelEndpoint).tryUnwrap(.urlError)
                     let animeImage = try URL(
                         protocolRelativeString: encodedImage,
                         relativeTo: animeURL
@@ -91,7 +86,9 @@ extension NASourceArrayanime {
                 if results.isEmpty {
                     if self.totalPages == nil {
                         throw NineAnimatorError.searchError("No results found")
-                    } else { newPage -= 1 }
+                    } else { self.totalPages = newPage }
+                } else {
+                    self.totalPages = newPage + 1
                 }
                 
                 return results
@@ -111,7 +108,6 @@ extension NASourceArrayanime {
                 [weak self] in
                 guard let self = self else { return }
                 self.performingTask = nil
-                self.totalPages = newPage + 1
                 self._results.append($0)
                 
                 self.delegate?.pageIncoming(newPage, from: self)
