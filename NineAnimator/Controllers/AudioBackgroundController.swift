@@ -20,13 +20,17 @@
 import AVFoundation
 import UIKit
 
+/// Controller used to play background audio to keep the app alive in the background
 class AudioBackgroundController {
     private var audioPlayer: AVAudioPlayer
     var isPlaying: Bool = false
     
     init() {
         let silentAudio = NSDataAsset(name: "Silence Audio")!
-        audioPlayer = try! AVAudioPlayer(data: silentAudio.data, fileTypeHint: AVFileType.wav.rawValue)
+        audioPlayer = try! AVAudioPlayer(
+            data: silentAudio.data,
+            fileTypeHint: AVFileType.wav.rawValue
+        )
     }
     
     func startBackgroundAudio() {

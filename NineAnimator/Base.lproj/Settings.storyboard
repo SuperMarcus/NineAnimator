@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -2092,6 +2092,8 @@ The system may delete downloaded contents when storage space is low.</string>
 
 Enable Prevent Purging to protect episodes from being deleted by the system. The system will try to remove other resources before purging the downloaded episodes.
 
+Enable Download In Background to continue downloading episodes in the background. This may use more battery.
+
 Remaining storage capacity displayed in this screen may be different from the Settings app.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="PT7-bd-o7u">
@@ -2205,12 +2207,49 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="J4G-dZ-WXn">
+                                        <rect key="frame" x="16" y="572.5" width="343" height="48"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J4G-dZ-WXn" id="FUN-cf-Pdt">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download In Background" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5k-UG-i6V" userLabel="Download In Background">
+                                                    <rect key="frame" x="16" y="11" width="254" height="26"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tQs-oc-KsU">
+                                                    <rect key="frame" x="278" y="8.5" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="onBackgroundDownloadSwitchDidChange:" destination="ewc-lA-d04" eventType="valueChanged" id="nFo-wl-2Je"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="V5k-UG-i6V" firstAttribute="bottom" secondItem="FUN-cf-Pdt" secondAttribute="bottomMargin" id="1Nz-kK-cRZ"/>
+                                                <constraint firstItem="V5k-UG-i6V" firstAttribute="top" secondItem="FUN-cf-Pdt" secondAttribute="topMargin" id="55U-WW-F9y"/>
+                                                <constraint firstItem="tQs-oc-KsU" firstAttribute="centerY" secondItem="FUN-cf-Pdt" secondAttribute="centerY" id="Dir-GO-sFd"/>
+                                                <constraint firstItem="V5k-UG-i6V" firstAttribute="leading" secondItem="FUN-cf-Pdt" secondAttribute="leadingMargin" id="NIL-NG-yey"/>
+                                                <constraint firstItem="tQs-oc-KsU" firstAttribute="leading" secondItem="V5k-UG-i6V" secondAttribute="trailing" constant="8" id="W0X-gh-t3l"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tQs-oc-KsU" secondAttribute="trailing" id="eo4-wa-Oxp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection id="Auk-8G-CGc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.images.remove" textLabel="hNx-wP-LZ9" style="IBUITableViewCellStyleDefault" id="zF4-ge-HAm">
-                                        <rect key="frame" x="16" y="748" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="860" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zF4-ge-HAm" id="k6t-lg-aXA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -2231,7 +2270,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.downloads.remove" textLabel="Zaa-23-f0r" style="IBUITableViewCellStyleDefault" id="dIB-SF-EyU">
-                                        <rect key="frame" x="16" y="792" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="904" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dIB-SF-EyU" id="giq-mE-1A8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -2268,6 +2307,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                     <navigationItem key="navigationItem" title="Storage" id="4ye-Yb-8qS"/>
                     <connections>
                         <outlet property="autoRetrySwitch" destination="9Ed-rH-AdI" id="tbb-8p-WvC"/>
+                        <outlet property="backgroundDownloadSwitch" destination="tQs-oc-KsU" id="UKc-Ul-W2m"/>
                         <outlet property="cachedImageUsageLabel" destination="lcW-Lk-ZTP" id="UVv-6o-A2x"/>
                         <outlet property="downloadsUsageLabel" destination="uIR-9j-Tzk" id="fOm-ah-jyP"/>
                         <outlet property="preventPurgingSwitch" destination="bLb-RU-sAA" id="KNQ-6p-6Ka"/>
@@ -2767,14 +2807,8 @@ See the complete credit list in the "Credits" page.</string>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

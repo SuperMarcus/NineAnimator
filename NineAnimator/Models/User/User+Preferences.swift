@@ -115,6 +115,18 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.sendDownloadNotifications) }
     }
     
+    var downloadEpisodesInBackground: Bool {
+        get {
+            _freezer.typedValue(
+                forKey: Keys.downloadEpisodesInBackground,
+                default: true
+            )
+        }
+        set {
+            _freezer.set(newValue, forKey: Keys.downloadEpisodesInBackground)
+        }
+    }
+    
     /// The name of the current theme
     var theme: String {
         get { _freezer.string(forKey: Keys.theme) ?? "light" }

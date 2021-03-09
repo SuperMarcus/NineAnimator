@@ -349,7 +349,9 @@ extension OfflineContentManager {
             screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
             
             // Request the app to play audio to prevent it from going into the background
-            preventSuspensionRequestHandler = AppDelegate.shared?.requestAppFromBeingSuspended()
+            if NineAnimator.default.user.downloadEpisodesInBackground {
+                preventSuspensionRequestHandler = AppDelegate.shared?.requestAppFromBeingSuspended()
+            }
             
             // If there are items in the delay list, schedule a timer
             if let largestInterval = reEnqueuingContents.compactMap({
