@@ -57,8 +57,10 @@ extension NASourceAnimeHub {
             self.requestManager.request(
                 "ajax/anime/load_episodes_v2",
                 handling: .ajax,
+                method: .post,
                 query: ["s": link.server],
-                parameters: ["episode_id": episodeID]
+                parameters: ["episode_id": episodeID],
+                headers: [ "referer": anime.link.link.absoluteString ]
                 ).responseDecodable(type: EpisodeResponse.self)
         } .then {
             episodeResponse in
