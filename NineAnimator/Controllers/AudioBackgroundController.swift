@@ -36,7 +36,7 @@ class AudioBackgroundController {
     func startBackgroundAudio() {
         guard !isPlaying else { return }
         do {
-            Log.debug("Starting Background Download Audio")
+            Log.debug("Starting Background Audio")
             audioPlayer.volume = 0.0
             audioPlayer.numberOfLoops = -1
             let session = AVAudioSession.sharedInstance()
@@ -45,7 +45,7 @@ class AudioBackgroundController {
             audioPlayer.play()
             isPlaying = true
         } catch {
-            Log.error("Failed to setup audio session for background download: %@", error)
+            Log.error("Failed to setup audio session for background: %@", error)
         }
     }
     
