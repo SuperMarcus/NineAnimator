@@ -25,7 +25,7 @@ extension Anilist {
             let titles = mediaEntry.title
             return [titles?.english, titles?.native, titles?.romaji, titles?.userPreferred]
                 .compactMap { $0 }
-                .reduce(0.0) { max($0, $1.proximity(to: link.title)) }
+                .reduce(0.0) { max($0, $1.proximity(to: link.title, caseSensitive: false)) }
         }
         
         return graphQL(fileQuery: "AniListSearchReference", variables: [

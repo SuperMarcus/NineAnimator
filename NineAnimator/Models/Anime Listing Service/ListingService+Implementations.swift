@@ -99,7 +99,7 @@ extension ListingAnimeName {
     
     func proximity(to anime: AnimeLink) -> Double {
         [ native, english, romaji, `default` ].reduce(0.0) {
-            max($0, $1.proximity(to: anime.title))
+            max($0, $1.proximity(to: anime.title, caseSensitive: false))
         }
     }
 }
