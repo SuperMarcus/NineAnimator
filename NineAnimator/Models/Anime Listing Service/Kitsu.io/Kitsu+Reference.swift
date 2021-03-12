@@ -31,7 +31,7 @@ extension Kitsu {
             let bestMatchOptional = try matchedObjects.map {
                 match -> (Double, ListingAnimeReference) in
                 let titles = (match.attributes["titles"] as? [String: String]) ?? [:]
-                let proximity = titles.reduce(0.0) { max($0, $1.value.proximity(to: link.title)) }
+                let proximity = titles.reduce(0.0) { max($0, $1.value.proximity(to: link.title, caseSensitive: false)) }
                 return (proximity, try ListingAnimeReference(self, withAnimeObject: match))
             } .max { $0.0 < $1.0 }
             guard let bestMatch = bestMatchOptional else {

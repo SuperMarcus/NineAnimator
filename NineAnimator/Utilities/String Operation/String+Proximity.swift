@@ -22,7 +22,8 @@ import Foundation
 extension String {
     /// Calculate the distance between two strings with Jaro–Winkler
     ///
-    /// - parameter t: The target string to be compared to with `self`
+    /// - parameter to: The target string to be compared to with `self`
+    /// - parameter caseSensitive: Determines if the proximity calculated should be case sensitive
     /// - returns: The proximity of the two strings, ranging from `0.0` to `1.0` (with
     ///             `1.0` means the two strings are closer)
     ///
@@ -32,9 +33,19 @@ extension String {
     ///
     /// Authored by [Imizaac](https://rosettacode.org/wiki/User:Imizaac):
     /// [Jaro_distance#Swift](https://rosettacode.org/wiki/Jaro_distance#Swift)
-    func proximity(to comparingString: String) -> Double {
-        let s = withoutUnicodeRomanNumerals.map { $0 }
-        let t = comparingString.withoutUnicodeRomanNumerals.map { $0 }
+    func proximity(to comparingString: String, caseSensitive: Bool) -> Double {
+        var firstString = self
+        var secondString = comparingString
+        
+        // If distance is not case sensitive, convert all strings to lowercase
+        if !caseSensitive {
+            firstString = firstString.lowercased()
+            secondString = secondString.lowercased()
+        }
+        
+        let s = firstString.withoutUnicodeRomanNumerals.map { $0 }
+        let t = secondString.withoutUnicodeRomanNumerals.map { $0 }
+        
         let s_len: Int = s.count
         let t_len: Int = t.count
         

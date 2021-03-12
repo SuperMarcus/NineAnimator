@@ -56,7 +56,7 @@ extension MyAnimeList {
                 }
                 
                 let proximity = allTitles.reduce(0) {
-                    max($0, $1.proximity(to: link.title))
+                    max($0, $1.proximity(to: link.title, caseSensitive: false))
                 }
                 
                 return (proximity, reference)
