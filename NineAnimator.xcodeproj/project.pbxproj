@@ -470,6 +470,7 @@
 		BF5FC2B9252BC1600074495C /* Aniwatch+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */; };
 		BF5FC2BE252BC9BC0074495C /* Aniwatch+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */; };
 		BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
+		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */; };
 		BF95264424F1E72300924B79 /* Anilist+GQLRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95264324F1E72300924B79 /* Anilist+GQLRecommendation.swift */; };
 		BF95264624F1EAF600924B79 /* Anilist+UserRecommendations.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF95264524F1EAF600924B79 /* Anilist+UserRecommendations.swift */; };
@@ -1074,6 +1075,7 @@
 		BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Search.swift"; sourceTree = "<group>"; };
 		BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Anime.swift"; sourceTree = "<group>"; };
 		BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Episode.swift"; sourceTree = "<group>"; };
+		BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBackgroundController.swift; sourceTree = "<group>"; };
 		BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AnilistUserRecommendations.graphql; sourceTree = "<group>"; };
 		BF95264324F1E72300924B79 /* Anilist+GQLRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+GQLRecommendation.swift"; sourceTree = "<group>"; };
 		BF95264524F1EAF600924B79 /* Anilist+UserRecommendations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Anilist+UserRecommendations.swift"; sourceTree = "<group>"; };
@@ -1517,6 +1519,7 @@
 				2CAA70CF21CFF10B00F0D082 /* RootViewController.swift */,
 				2CA1DD5B21E2B404009241CB /* HomeController.swift */,
 				2C9325C324ACDE34001E3708 /* DiscordPresenceController.swift */,
+				BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2485,7 +2488,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "Marcus Zhou";
 				TargetAttributes = {
 					2C2196CD21DAC555002059D3 = {
@@ -2730,6 +2733,7 @@
 				2C5330E62509194F007C8067 /* BadNineAnime+RequestModifier.swift in Sources */,
 				2CA1DD4321E18FDB009241CB /* BadNineAnime+LinkRetriver.swift in Sources */,
 				2CA4B7F523B1CA2700B4E6F7 /* AnimeDao.swift in Sources */,
+				BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */,
 				2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */,
 				2C8F6E8922062C220047798B /* OfflineAnimeViewController.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
@@ -3369,6 +3373,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3417,7 +3425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3431,6 +3439,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -3473,7 +3485,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -3486,7 +3498,10 @@
 		2C4ABC6E21B5881F009B4D47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = arm64;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -3514,7 +3529,10 @@
 		2C4ABC6F21B5881F009B4D47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = arm64;
+				ARCHS = (
+					arm64,
+					x86_64,
+				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
