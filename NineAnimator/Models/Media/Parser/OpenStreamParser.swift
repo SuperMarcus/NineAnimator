@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 class OpenStreamParser: VideoProviderParser {
-    var aliases: [String] { [] }
+    var aliases: [String] { [ "mserver" ] }
     
     static let streamXVideoSource = try! NSRegularExpression(
         pattern: #""file":"([^"]+)"#,
@@ -29,17 +29,17 @@ class OpenStreamParser: VideoProviderParser {
     )
     
     func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        if episode.target.host?.lowercased() == "embed.streamx.me" {
-            return parseWithStreamX(episode: episode, with: session, onCompletion: handler)
+        if episode.target.host?.lowercased() == "embed.vodstream.xyz" {
+            return parseWithVodstream(episode: episode, with: session, onCompletion: handler)
         } else {
-            // Currently only supports parsing from StreamX domain
+            // Currently only supports parsing from vodstream domain
             return NineAnimatorPromise.fail(NineAnimatorError.providerError(
                 "No parser compatible with Episode's target domain"
             )).handle(handler)
         }
     }
     
-    func parseWithStreamX(episode: Episode, with session: Session, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parseWithVodstream(episode: Episode, with session: Session, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         session.request(
             episode.target,
             headers: [ "referer": episode.parent.link.link.absoluteString ]

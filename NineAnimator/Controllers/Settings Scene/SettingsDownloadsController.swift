@@ -28,6 +28,7 @@ class SettingsDownloadsController: UITableViewController {
     @IBOutlet private weak var autoRetrySwitch: UISwitch!
     @IBOutlet private weak var preventPurgingSwitch: UISwitch!
     @IBOutlet private weak var sendNotificationsSwitch: UISwitch!
+    @IBOutlet private weak var backgroundDownloadSwitch: UISwitch!
     
     private var usageLoadingTask: NineAnimatorAsyncTask?
     private var statistics: UsageStatistics?
@@ -195,6 +196,10 @@ class SettingsDownloadsController: UITableViewController {
             NineAnimator.default.user.sendDownloadsNotifications,
             animated: true
         )
+        backgroundDownloadSwitch.setOn(
+            NineAnimator.default.user.downloadEpisodesInBackground,
+            animated: true
+        )
     }
     
     @IBAction private func onAutoRetrySwitchDidChange(_ sender: UISwitch) {
@@ -212,6 +217,10 @@ class SettingsDownloadsController: UITableViewController {
         if sender.isOn { // Request notification permissions
             UserNotificationManager.default.requestNotificationPermissions()
         }
+    }
+    
+    @IBAction private func onBackgroundDownloadSwitchDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.downloadEpisodesInBackground = sender.isOn
     }
 }
 

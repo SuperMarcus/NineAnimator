@@ -44,6 +44,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     fileprivate var dequeueDelayTimer: Timer?
     
     fileprivate var screenOnRequestHandler: AppDelegate.ScreenOnRequestHandler?
+    fileprivate var preventSuspensionRequestHandler: AppDelegate.PreventSuspensionRequestHandler?
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
@@ -349,6 +350,11 @@ extension OfflineContentManager {
             // Request the screen to be kept on while there are items in the queue
             screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
             
+            // Request the app to play audio to prevent it from going into the background
+            if NineAnimator.default.user.downloadEpisodesInBackground {
+                preventSuspensionRequestHandler = AppDelegate.shared?.requestAppFromBeingSuspended()
+            }
+            
             // If there are items in the delay list, schedule a timer
             if let largestInterval = reEnqueuingContents.compactMap({
                     $0.lastDownloadAttempt?.timeIntervalSinceNow
@@ -368,7 +374,10 @@ extension OfflineContentManager {
                     Log.debug("[OfflineContentManager] Scheduling a delay timer for an interval of %@ seconds for the next dequeue.", delayInterval)
                 }
             }
-        } else { screenOnRequestHandler = nil }
+        } else {
+            screenOnRequestHandler = nil
+            preventSuspensionRequestHandler = nil
+        }
     }
     
     /// Preserve the next queued contents if the number of tasks drop to below the threshold
@@ -378,8 +387,9 @@ extension OfflineContentManager {
                 return Log.info("[OfflineContentManager] Network currently unreachable. Contents will be preserved later.")
             }
             
-            guard AppDelegate.shared?.isActive == true else {
-                return Log.info("[OfflineContentManager] App not in foreground. More contents will be preserved later.")
+            guard let appDelegate = AppDelegate.shared,
+                  appDelegate.isActive || self.preventSuspensionRequestHandler != nil else {
+                return Log.info("[OfflineContentManager] App is suspended. More contents will be preserved later.")
             }
             
             let availableSpots = self.maximalConcurrentTasks - self.numberOfPreservingTasks
