@@ -47,7 +47,7 @@ class LegacyUserDefaultsModelMigrator: ModelMigrator {
             currentStepProcessingItem: 0
         )
         
-        // Perform the migration asynchonously
+        // Perform the migration asynchronously
         queue.async {
             self.performMigration(sourceVersion: sourceVersion)
         }

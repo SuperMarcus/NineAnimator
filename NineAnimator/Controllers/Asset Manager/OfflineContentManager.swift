@@ -105,15 +105,17 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         do {
             let fs = FileManager.default
             
-            // According to the guidelines, the recreatable
-            // materials should be stored in cache directory
-            let cacheDiractory = try fs.url(
-                for: .cachesDirectory,
+            // Normally, we would save downloads in the documents folder
+            // However, since our mac app is not sandboxed to support
+            // discord rpc, the documents folder can be wiped/corrupted
+            // by the user accidentally.
+            let appSupportDirectory = try fs.url(
+                for: .applicationSupportDirectory,
                 in: .allDomainsMask,
                 appropriateFor: nil,
                 create: true
             )
-            let persistentDirectory = cacheDiractory.appendingPathComponent("com.marcuszhou.nineanimator.OfflineContents")
+            let persistentDirectory = appSupportDirectory.appendingPathComponent("com.marcuszhou.nineanimator.OfflineContents")
             
             // Create the directory if it does not exists
             try fs.createDirectory(
