@@ -55,6 +55,10 @@ extension NASourceArrayanime {
             let animeDetails = try animeResponse.results.map {
                 animeEntry -> Anime in
                 
+                let encodedImage = try animeEntry.image
+                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                .tryUnwrap(.urlError)
+
                 // Parsing Anime Information
                 var additionalAnimeAttributes = [Anime.AttributeKey: Any]()
                 additionalAnimeAttributes[.airDate] = animeEntry.relased
@@ -64,7 +68,7 @@ extension NASourceArrayanime {
                     title: animeEntry.title,
                     link: link.link,
                     image: try URL(
-                        protocolRelativeString: animeEntry.image,
+                        protocolRelativeString: encodedImage,
                         relativeTo: link.link
                     ).tryUnwrap(.urlError),
                     source: self
