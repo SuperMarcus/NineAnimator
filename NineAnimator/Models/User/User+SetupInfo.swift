@@ -58,20 +58,27 @@ extension NineAnimatorUser {
     
     /// Versions of NineAnimator that are compatible with the current model
     var modelCompatibleVersions: ClosedRange<NineAnimatorVersion> {
-        NineAnimatorVersion(major: 1, minor: 2, patch: 6, build: 15)...(.current)
+        NineAnimatorVersion(major: 1, minor: 2, patch: 7, build: 6)...(.current)
     }
     
-    /// A list of ModelMigrator built in to the current version of NineAnimator
+    /// A list of ModelMigrators built in to the current version of NineAnimator
+    ///
+    /// Sorted from oldest to newest. This is the order which the migrators should be executed in
     var builtinMigrators: [ModelMigrator] {
-        [ LegacyUserDefaultsModelMigrator() ]
+        [
+            LegacyUserDefaultsModelMigrator(),
+            CachedDownloadsToAppSupportDataMigrator()
+        ]
     }
     
-    /// Returns a ModelMigrator available to migrate an outdated model
+    /// Returns all ModelMigrators available to migrate an outdated model
+    ///
+    /// Sorted from oldest to newest. This is the order which the migrators should be executed in
     /// - Returns: nil if the current version is compatible or if no model migrator is available for the current model version
-    func availableModelMigrator() -> ModelMigrator? {
+    func availableModelMigrators() -> [ModelMigrator]? {
         if !didSetupLatestVersion, let modelVersion = setupVersion {
-            return builtinMigrators.first {
-                migrator in migrator.inputVersionRange.contains(modelVersion)
+            return builtinMigrators.filter { migrator in
+                migrator.inputVersionRange.contains(modelVersion)
             }
         }
         return nil

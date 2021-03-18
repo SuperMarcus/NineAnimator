@@ -92,6 +92,12 @@ NineAnimator supports the following anime websites:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
+- [ArrayAnime](https://arrayanime.com)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
 - [AnimeUnity](https://animeunity.it) (Italian)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links

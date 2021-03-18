@@ -26,7 +26,7 @@ extension NASourceAnimeHub {
         "fdserver": "FDserver",
         // "xserver": "Xserver", Seems like this no episodes support this server
         "oserver": "Oserver",
-        "mpserver": "MPserver",
+        "mserver": "Mserver",
         "yuserver": "YUserver"
         // "hserver": "Hserver" Excluding until we update HydraX parser
     ]
@@ -57,8 +57,10 @@ extension NASourceAnimeHub {
             self.requestManager.request(
                 "ajax/anime/load_episodes_v2",
                 handling: .ajax,
+                method: .post,
                 query: ["s": link.server],
-                parameters: ["episode_id": episodeID]
+                parameters: ["episode_id": episodeID],
+                headers: [ "referer": anime.link.link.absoluteString ]
                 ).responseDecodable(type: EpisodeResponse.self)
         } .then {
             episodeResponse in

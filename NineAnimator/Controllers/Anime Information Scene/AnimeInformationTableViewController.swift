@@ -531,7 +531,7 @@ extension AnimeInformationTableViewController {
                     results.compactMap {
                         anyLink -> (Double, AnimeLink)? in
                         if case .anime(let link) = anyLink {
-                            return (information?.name.proximity(to: link) ?? indexingName.proximity(to: link.title), link)
+                            return (information?.name.proximity(to: link) ?? indexingName.proximity(to: link.title, caseSensitive: false), link)
                         } else { return nil }
                     } .max { $0.0 < $1.0 },
                     or: .searchError("No matching anime found")

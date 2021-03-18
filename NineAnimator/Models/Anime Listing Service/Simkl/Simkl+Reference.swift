@@ -36,7 +36,7 @@ extension Simkl {
             response -> SimklMediaEntry? in
             let possibleEntries = try response.map {
                 try DictionaryDecoder().decode(SimklMediaEntry.self, from: $0)
-            } .map { entry in (entry.title.proximity(to: link.title), entry) }
+            } .map { entry in (entry.title.proximity(to: link.title, caseSensitive: false), entry) }
             var returningItem = possibleEntries.first?.1
             
             if let maximalProximityItem = possibleEntries.max(by: { $0.0 < $1.0 }),
