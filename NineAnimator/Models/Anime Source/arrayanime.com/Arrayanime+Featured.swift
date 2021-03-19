@@ -49,13 +49,17 @@ extension NASourceArrayanime {
             let seasonalAnime = try animeResponse.results
                 .map {
                 animeEntry -> AnimeLink in
-                
+                    
+                let encodedImage = try animeEntry.image
+                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                .tryUnwrap(.urlError)
+                    
                 let animeURL = try URL(string: self.endpoint + "/ani/\(animeEntry.id)").tryUnwrap(.urlError)
                 
                 return AnimeLink(
                     title: animeEntry.title,
                     link: animeURL,
-                    image: try URL(string: animeEntry.image).tryUnwrap(.urlError),
+                    image: try URL(string: encodedImage).tryUnwrap(.urlError),
                     source: self
                 )
             }
@@ -75,12 +79,16 @@ extension NASourceArrayanime {
                 .map {
                 animeEntry -> AnimeLink in
                 
+                let encodedImage = try animeEntry.image
+                .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+                .tryUnwrap(.urlError)
+                    
                 let animeURL = try URL(string: self.endpoint + "/ani/\(animeEntry.id)").tryUnwrap(.urlError)
                 
                 return AnimeLink(
                     title: animeEntry.title,
                     link: animeURL,
-                    image: try URL(string: animeEntry.image).tryUnwrap(.urlError),
+                    image: try URL(string: encodedImage).tryUnwrap(.urlError),
                     source: self
                 )
             }

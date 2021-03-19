@@ -66,7 +66,7 @@ extension NASourceArrayanime {
                     .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) // Thanks uttiya
                     .tryUnwrap(.urlError)
                     
-                    let animeURL = try URL(string: "/details/\(searchEntry.id)", relativeTo: self.parent.vercelEndpoint).tryUnwrap(.urlError)
+                    let animeURL = try URL(string: self.parent.endpoint + "/ani/\(searchEntry.id)").tryUnwrap(.urlError)
                     let animeImage = try URL(
                         protocolRelativeString: encodedImage,
                         relativeTo: animeURL
