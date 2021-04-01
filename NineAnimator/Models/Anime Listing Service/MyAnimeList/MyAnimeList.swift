@@ -34,6 +34,7 @@ class MyAnimeList: BaseListingService, ListingService {
         URL(string: "https://api.myanimelist.net/v2")!
     }
     
+    @AtomicProperty
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     lazy var _allCollections: [Collection] = [

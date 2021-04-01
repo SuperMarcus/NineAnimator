@@ -104,6 +104,7 @@ class NineAnimator: SessionDelegate {
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
     /// An in-memory cache of all the loaded anime
+    @AtomicProperty
     fileprivate var cachedAnimeMap = [AnimeLink: (Date, Anime)]()
     
     /// Global queue for modify internal configurations
@@ -328,7 +329,9 @@ extension NineAnimator {
             result, error in // Doesn't care about strong reference to self
             // If the result is not nil, cache the retrieved anime
             if let result = result {
-                self.cachedAnimeMap[link] = (Date(), result)
+                self.$cachedAnimeMap.mutate {
+                    $0[link] = (Date(), result)
+                }
                 // Call the original handler
                 handler(result, nil)
             } else if let cachedAnime = cachedVersion?.1 {
