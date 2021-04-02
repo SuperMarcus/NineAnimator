@@ -163,6 +163,7 @@ extension NineAnimator {
         register(source: NASourceAnimePahe(with: self))
         register(source: NASourceFourAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
+        register(source: NASourcePantsubase(with: self))
         register(source: NASourceNineAnime(with: self))
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceAnimeKisa(with: self))

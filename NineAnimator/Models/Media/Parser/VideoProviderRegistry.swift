@@ -57,6 +57,7 @@ class VideoProviderRegistry {
         defaultProvider.register(VidStreamParser(), forServer: "Vidstream")
         defaultProvider.register(StreamSBParser(), forServer: "Streamsb")
         defaultProvider.register(DoodParser(), forServer: "Doodstream")
+        defaultProvider.register(PantsudriveParser(), forServer: "pantsudrive")
         
         // Private parsers are registered from their own source instances
         return defaultProvider
