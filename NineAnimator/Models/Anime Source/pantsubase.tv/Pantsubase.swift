@@ -37,7 +37,7 @@ class NASourcePantsubase: BaseSource, Source, PromiseSource {
     #endif
 
     var siteDescription: String {
-        "Pantsubase provides a fast, high quality option to watch anime. Nineanimator has fairly good support for this site."
+        "Pantsubase hosts videos on Google Drive, for incredibly fast streaming. Credit to Paper#1932 on discord for the recommendation"
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
