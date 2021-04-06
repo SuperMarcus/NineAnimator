@@ -21,8 +21,11 @@ import Foundation
 
 extension MyAnimeList {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
-        apiRequest("/anime", query: [
-            "q": link.title, // Search with the link's title
+        // MyAnimeList has a search character limit of 60
+        // Unfortunately some anime titles are longer than that... thanks
+        let shortenedTitle = String(link.title.prefix(60))
+        return apiRequest("/anime", query: [
+            "q": shortenedTitle, // Search with the link's title
             "limit": 50,
             "offset": 0,
             "fields": "alternative_titles,media_type,num_episodes,my_list_status{start_date,finish_date,num_episodes_watched}"

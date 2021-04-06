@@ -469,6 +469,12 @@
 		BF1CBEFC25253006003354B5 /* Aniwatch+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */; };
 		BF5FC2B9252BC1600074495C /* Aniwatch+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */; };
 		BF5FC2BE252BC9BC0074495C /* Aniwatch+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */; };
+		BF762C47261685BB00265DA4 /* Pantsubase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C46261685BB00265DA4 /* Pantsubase.swift */; };
+		BF762C4C2616884800265DA4 /* Pantsubase+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C4B2616884800265DA4 /* Pantsubase+Featured.swift */; };
+		BF762C5126169D8400265DA4 /* Pantsubase+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C5026169D8400265DA4 /* Pantsubase+Search.swift */; };
+		BF762C5C2616A8BA00265DA4 /* Pantsubase+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C5B2616A8BA00265DA4 /* Pantsubase+Anime.swift */; };
+		BF762C612616A8FB00265DA4 /* Pantsubase+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C602616A8FB00265DA4 /* Pantsubase+Episode.swift */; };
+		BF762C662616BDBD00265DA4 /* PantsudriveParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */; };
 		BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
 		BF86795425F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86795325F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift */; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
@@ -1076,6 +1082,12 @@
 		BF1CBEFB25253006003354B5 /* Aniwatch+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Search.swift"; sourceTree = "<group>"; };
 		BF5FC2B8252BC1600074495C /* Aniwatch+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Anime.swift"; sourceTree = "<group>"; };
 		BF5FC2BD252BC9BC0074495C /* Aniwatch+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Aniwatch+Episode.swift"; sourceTree = "<group>"; };
+		BF762C46261685BB00265DA4 /* Pantsubase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pantsubase.swift; sourceTree = "<group>"; };
+		BF762C4B2616884800265DA4 /* Pantsubase+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Featured.swift"; sourceTree = "<group>"; };
+		BF762C5026169D8400265DA4 /* Pantsubase+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Search.swift"; sourceTree = "<group>"; };
+		BF762C5B2616A8BA00265DA4 /* Pantsubase+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Anime.swift"; sourceTree = "<group>"; };
+		BF762C602616A8FB00265DA4 /* Pantsubase+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Episode.swift"; sourceTree = "<group>"; };
+		BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantsudriveParser.swift; sourceTree = "<group>"; };
 		BF86795325F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDownloadsToAppSupportDataMigrator.swift; sourceTree = "<group>"; };
 		BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBackgroundController.swift; sourceTree = "<group>"; };
 		BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AnilistUserRecommendations.graphql; sourceTree = "<group>"; };
@@ -1858,6 +1870,7 @@
 		2C8536832231BC5400A5CFB9 /* Anime Source */ = {
 			isa = PBXGroup;
 			children = (
+				BF762C452616857C00265DA4 /* pantsubase.tv */,
 				65225FF425C925D600C7A453 /* arrayanime.com */,
 				2C83E05A25269B5800B00850 /* hanime.tv */,
 				BF9EF266251D3B92007E8FB5 /* aniwatch.me */,
@@ -2160,6 +2173,7 @@
 				2C78275D253CF5E600F96A77 /* VidStreamParser.swift */,
 				BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */,
 				BF04566225BA7CA800A7D154 /* DoodParser.swift */,
+				BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -2343,6 +2357,18 @@
 				2CB8A4AE24DC7A0E00F7EAC7 /* MonoChinos+RequestModifier.swift */,
 			);
 			path = monoschinos.com;
+			sourceTree = "<group>";
+		};
+		BF762C452616857C00265DA4 /* pantsubase.tv */ = {
+			isa = PBXGroup;
+			children = (
+				BF762C46261685BB00265DA4 /* Pantsubase.swift */,
+				BF762C4B2616884800265DA4 /* Pantsubase+Featured.swift */,
+				BF762C5026169D8400265DA4 /* Pantsubase+Search.swift */,
+				BF762C5B2616A8BA00265DA4 /* Pantsubase+Anime.swift */,
+				BF762C602616A8FB00265DA4 /* Pantsubase+Episode.swift */,
+			);
+			path = pantsubase.tv;
 			sourceTree = "<group>";
 		};
 		BF9EF266251D3B92007E8FB5 /* aniwatch.me */ = {
@@ -2726,6 +2752,7 @@
 				2CAA70D021CFF10B00F0D082 /* RootViewController.swift in Sources */,
 				2C98D672225C09DA001FF874 /* NAAuthenticationViewController.swift in Sources */,
 				2C66779A21BC2671000E5ACC /* ContentListViewController.swift in Sources */,
+				BF762C47261685BB00265DA4 /* Pantsubase.swift in Sources */,
 				2C6677B921BD9C2A000E5ACC /* RecentlyWatchedAnimeTableViewCell.swift in Sources */,
 				2C48001D2370B9CC00ADB03F /* MinFilledCollectionViewController.swift in Sources */,
 				C8E12CFF2422136000B0AF6A /* AnimeUnity.swift in Sources */,
@@ -2804,6 +2831,7 @@
 				2C055B0024AAB0E300FCAC25 /* EpisodeMasterAnime.swift in Sources */,
 				2C8519B122CCA03C00EEF3AC /* Kissanime+Episode.swift in Sources */,
 				2C8519C022D31F0900EEF3AC /* AnimeKisa+Featured.swift in Sources */,
+				BF762C4C2616884800265DA4 /* Pantsubase+Featured.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
 				2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */,
 				BF9EF268251D3BCF007E8FB5 /* Aniwatch.swift in Sources */,
@@ -3060,6 +3088,7 @@
 				2CDC276E25474EBA0076EC08 /* NSManagedObjectContext+PerformWithResults.swift in Sources */,
 				2CF0C520238AF39C0047BEBA /* Simulator+AVAssetDownloadTask.swift in Sources */,
 				2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */,
+				BF762C662616BDBD00265DA4 /* PantsudriveParser.swift in Sources */,
 				2C7B7AA52295A57E002EC74C /* PackerDecoder.swift in Sources */,
 				2C2C54F122159E4700BAA76E /* String+Proximity.swift in Sources */,
 				2C6677A021BC4664000E5ACC /* ListingEntryTableViewCell.swift in Sources */,
@@ -3067,6 +3096,7 @@
 				2C86BD0921F0169F002D876A /* DummyParser.swift in Sources */,
 				2C23AE422229FE5600512150 /* MyAnimeList+Collections.swift in Sources */,
 				2C2C54FD221606CA00BAA76E /* User+Synchronize.swift in Sources */,
+				BF762C5C2616A8BA00265DA4 /* Pantsubase+Anime.swift in Sources */,
 				2C23AE402229EDEA00512150 /* StaticListingAnimeCollection.swift in Sources */,
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */,
@@ -3111,6 +3141,7 @@
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2CA4B7FD23B1E83A00B4E6F7 /* AnimeDao+Episode.swift in Sources */,
+				BF762C612616A8FB00265DA4 /* Pantsubase+Episode.swift in Sources */,
 				2C480019237078C500ADB03F /* TimeInterval+DurationDescription.swift in Sources */,
 				2C5E4EE2236F6CE20089B84E /* HydraXParser.swift in Sources */,
 				2C6677B621BD8FA1000E5ACC /* ContentErrorTableViewCell.swift in Sources */,
@@ -3144,6 +3175,7 @@
 				2C83E06725269B7F00B00850 /* HAnime+Featured.swift in Sources */,
 				2C643326238D7928006447D5 /* SettingsStorageTipCell.swift in Sources */,
 				2CCC746421C07C700007502A /* BadNineAnime+Anime.swift in Sources */,
+				BF762C5126169D8400265DA4 /* Pantsubase+Search.swift in Sources */,
 				65ED216124DB3BE00040844C /* MonosChinos+Episode.swift in Sources */,
 				2C66779E21BC36A5000E5ACC /* BufferedContent.swift in Sources */,
 				2C93BD4C22220BE3000411CB /* Kitsu+Reference.swift in Sources */,

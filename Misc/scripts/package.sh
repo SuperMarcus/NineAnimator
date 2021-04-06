@@ -18,6 +18,7 @@ package_iOS() {
     
     mkdir -p Payload
     cp -r "${BIN_PKG_PATH}" "Payload/${APPNAME}.app"
+    rm -rf "Payload/${APPNAME}.app/Frameworks"
     zip -9 -r "${PACKAGE_NAME}.ipa" Payload
     rm -rf Payload
     

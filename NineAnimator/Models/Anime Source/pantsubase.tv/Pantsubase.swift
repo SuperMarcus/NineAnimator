@@ -25,31 +25,29 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceArrayanime: BaseSource, Source, PromiseSource {
-    var name: String { "arrayanime.com" }
+class NASourcePantsubase: BaseSource, Source, PromiseSource {
+    var name: String { "pantsubase.tv" }
     
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { #imageLiteral(resourceName: "Arrayanime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "Pantsubase Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { #imageLiteral(resourceName: "Arrayanime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "Pantsubase Site Icon") }
     #endif
 
     var siteDescription: String {
-        "ArrayAnime allows you to stream subtitled, dubbed, chinese anime and movies in HD. NineAnimator has experimental support for this website."
+        "Pantsubase hosts videos on Google Drive, for incredibly fast streaming. Credit to Paper#1932 on discord for the recommendation"
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
         \.romaji
     }
     
-    override var endpoint: String { "https://arrayanime.com" }
-    
-    let vercelEndpoint = URL(string: "https://arrayanimeapi.vercel.app/api")!
+    override var endpoint: String { "https://pantsubase.tv" }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        DummyParser.registeredInstance
+        VideoProviderRegistry.default.provider(for: name)
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {

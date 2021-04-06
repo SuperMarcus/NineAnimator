@@ -73,7 +73,9 @@ extension Anilist {
                     self.update(reference, newState: .finished)
                 }
             }
-            _mutationRequestReferencePool.append(listingInfoTask)
+            $_mutationRequestReferencePool.mutate {
+                $0.append(listingInfoTask)
+            }
         }
     }
     

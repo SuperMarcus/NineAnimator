@@ -315,7 +315,7 @@ extension SettingsSceneController {
                 ? swText?.uppercased() : swText?.lowercased()
         }
         
-        // To be gramatically correct :D
+        // To be grammatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         

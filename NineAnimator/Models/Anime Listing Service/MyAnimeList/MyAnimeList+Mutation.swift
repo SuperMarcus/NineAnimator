@@ -44,7 +44,9 @@ extension MyAnimeList {
                 Log.info("[MyAnimeList] Mutation made")
                 self?.collectMutationTaskPoolGarbage()
             }
-        _mutationTaskPool.append(task)
+        $_mutationTaskPool.mutate {
+            $0.append(task)
+        }
     }
     
     func update(_ reference: ListingAnimeReference, didComplete episode: EpisodeLink, episodeNumber: Int?, shouldUpdateTrackingState: Bool = true) {
@@ -80,14 +82,18 @@ extension MyAnimeList {
                     self.update(reference, newState: .finished)
                 }
             }
-            _mutationTaskPool.append(listingInfoTask)
+            $_mutationTaskPool.mutate {
+                $0.append(listingInfoTask)
+            }
         }
     }
     
     func collectMutationTaskPoolGarbage() {
         // Remove all resolved promises
-        _mutationTaskPool.removeAll {
-            ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
+        $_mutationTaskPool.mutate {
+            $0.removeAll {
+                ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
+            }
         }
     }
     
@@ -110,7 +116,9 @@ extension MyAnimeList {
                 self.collectMutationTaskPoolGarbage()
                 self.donateTracking(newTracking, forReference: reference)
         }
-        _mutationTaskPool.append(task)
+        $_mutationTaskPool.mutate {
+            $0.append(task)
+        }
     }
     
     /// Construct the `ListingAnimeTracking` from the AnimeObject's `node` dictionary

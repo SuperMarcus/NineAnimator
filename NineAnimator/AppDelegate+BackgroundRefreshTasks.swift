@@ -83,8 +83,8 @@ extension AppDelegate {
         
         let taskContainer = StatefulAsyncTaskContainer {
             container in
-            task.setTaskCompleted(success: container.state != .failed)
             self.removeTask(container)
+            task.setTaskCompleted(success: container.state != .failed)
         }
         
         task.expirationHandler = {
@@ -119,13 +119,13 @@ extension AppDelegate {
             scheduler.register(
                 forTaskWithIdentifier: AppDelegate.subscriptionUpdateProcessingTaskIdentifier,
                 using: nil
-            ) { task in self.handleSubscriptionUpdateTask(task as! BGProcessingTask) }
+            ) { task in self.handleSubscriptionUpdateTask(task) }
             
             // Subscription update refresh task
             scheduler.register(
                 forTaskWithIdentifier: AppDelegate.subscriptionUpdateRefreshTaskIdentifier,
                 using: nil
-            ) { task in self.handleSubscriptionUpdateTask(task as! BGAppRefreshTask) }
+            ) { task in self.handleSubscriptionUpdateTask(task) }
         } else {
             // Fetch for generating episode update notifications once in two hours
             UIApplication.shared.setMinimumBackgroundFetchInterval(
