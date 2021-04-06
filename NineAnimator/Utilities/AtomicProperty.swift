@@ -42,6 +42,7 @@ class AtomicProperty<Value> {
     /// Mutate the value contained in the wrapped
     /// - Important: Do not attempt to access the `AtomicProperty` container inside
     ///   the `mutationBlock` as it may cause a deadlock.
+    @discardableResult
     func mutate<Result>(_ mutationBlock: (inout Value) throws -> Result) rethrows -> Result {
         try _lock.lock {
             try mutationBlock(&_value)

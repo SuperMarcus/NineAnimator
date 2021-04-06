@@ -83,8 +83,8 @@ extension AppDelegate {
         
         let taskContainer = StatefulAsyncTaskContainer {
             container in
-            task.setTaskCompleted(success: container.state != .failed)
             self.removeTask(container)
+            task.setTaskCompleted(success: container.state != .failed)
         }
         
         task.expirationHandler = {

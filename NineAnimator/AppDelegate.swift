@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private(set) var preventSuspensionRequestCount = 0
     private var backgroundAudioNotificationController = AudioBackgroundController()
     
+    @AtomicProperty
     fileprivate var taskPool = Set<HashingTaskWrapper>()
     
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
@@ -236,7 +237,9 @@ extension AppDelegate {
     func submitTask(_ task: NineAnimatorAsyncTask?) {
         if let task = task {
             let wrapper = HashingTaskWrapper(wrapped: task)
-            taskPool.insert(wrapper)
+            $taskPool.mutate {
+                $0.insert(wrapper)
+            }
         }
     }
     
@@ -244,7 +247,9 @@ extension AppDelegate {
     func removeTask(_ task: NineAnimatorAsyncTask?) {
         if let task = task {
             let wrapper = HashingTaskWrapper(wrapped: task)
-            taskPool.remove(wrapper)
+            $taskPool.mutate {
+                $0.remove(wrapper)
+            }
         }
     }
 }
