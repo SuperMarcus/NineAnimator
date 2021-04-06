@@ -23,39 +23,68 @@ import BackgroundTasks
 
 import UIKit
 
+/// Currently, both the refresh task and processing task are the same
 @available(iOS 13.0, *)
 extension AppDelegate {
-    /// Identifier for the subscription update task
-    fileprivate static let subscriptionUpdateTaskIdentifier = "com.marcuszhou.nineanimator.refresh.subscription"
+    /// Identifier for the subscription update refresh task
+    fileprivate static let subscriptionUpdateRefreshTaskIdentifier = "com.marcuszhou.nineanimator.refresh.subscription"
     
-    fileprivate func scheduleSubscriptionUpdateTasks() {
+    /// Identifier for the subscription update processing task
+    fileprivate static let subscriptionUpdateProcessingTaskIdentifier = "com.marcuszhou.nineanimator.processingTask.subscription"
+    
+    fileprivate func scheduleSubscriptionUpdateProcessingTasks() {
         do {
-            let request = BGProcessingTaskRequest(
-                identifier: AppDelegate.subscriptionUpdateTaskIdentifier
+            let processingRequest = BGProcessingTaskRequest(
+                identifier: AppDelegate.subscriptionUpdateProcessingTaskIdentifier
             )
             
             // Set the next scheduled date to 45 minutes from now
             let scheduledDate = Date(timeIntervalSinceNow: 45 * 60)
-            request.earliestBeginDate = scheduledDate
+            processingRequest.earliestBeginDate = scheduledDate
+            processingRequest.requiresExternalPower = false
+            processingRequest.requiresNetworkConnectivity = true
             
             // Submit the request to the global scheduler
-            try BGTaskScheduler.shared.submit(request)
+            try BGTaskScheduler.shared.submit(processingRequest)
+            Log.debug("[AppDelegate] Scheduling the next processing date to %@", scheduledDate)
+        } catch {
+            Log.error("[AppDelegate] Unable to submit background processing task: %@", error)
+        }
+    }
+    
+    fileprivate func scheduleSubscriptionUpdateRefreshTasks() {
+        do {
+            let refreshRequest = BGAppRefreshTaskRequest(
+                identifier: AppDelegate.subscriptionUpdateRefreshTaskIdentifier
+            )
+            
+            // Set the next scheduled date to 30 minutes from now
+            let scheduledDate = Date(timeIntervalSinceNow: 30 * 60)
+            refreshRequest.earliestBeginDate = scheduledDate
+            
+            // Submit the request to the global scheduler
+            try BGTaskScheduler.shared.submit(refreshRequest)
             Log.debug("[AppDelegate] Scheduling the next refresh date to %@", scheduledDate)
         } catch {
             Log.error("[AppDelegate] Unable to submit background refresh task: %@", error)
         }
     }
     
-    fileprivate func handleSubscriptionUpdateTask(_ task: BGProcessingTask) {
-        Log.info("[AppDelegate] Running subscription update task...")
+    /// Both the processing task and app refresh task will call this method
+    fileprivate func handleSubscriptionUpdateTask(_ task: BGTask) {
+        Log.info("[AppDelegate] Running subscription update background task...")
         
         // Schedule the next update
-        scheduleSubscriptionUpdateTasks()
+        if task is BGProcessingTask {
+            scheduleSubscriptionUpdateProcessingTasks()
+        } else {
+            scheduleSubscriptionUpdateRefreshTasks()
+        }
         
         let taskContainer = StatefulAsyncTaskContainer {
             container in
-            task.setTaskCompleted(success: container.state != .failed)
             self.removeTask(container)
+            task.setTaskCompleted(success: container.state != .failed)
         }
         
         task.expirationHandler = {
@@ -67,6 +96,7 @@ extension AppDelegate {
                 container.cancel()
                 self.removeTask(container)
             }
+            task.setTaskCompleted(success: false)
         }
         
         // Perform the fetch
@@ -79,17 +109,23 @@ extension AppDelegate {
 
 // MARK: - Registering tasks
 extension AppDelegate {
-    /// Register NineAnimator's background refresh tasks
+    /// Register NineAnimator's background tasks
     func registerBackgroundUpdateTasks() {
         if #available(iOS 13.0, *) {
             // Using BackgroundTasks framework on iOS 13+
             let scheduler = BGTaskScheduler.shared
             
-            // Subscription update task
+            // Subscription update processing task
             scheduler.register(
-                forTaskWithIdentifier: AppDelegate.subscriptionUpdateTaskIdentifier,
+                forTaskWithIdentifier: AppDelegate.subscriptionUpdateProcessingTaskIdentifier,
                 using: nil
-            ) { task in self.handleSubscriptionUpdateTask(task as! BGProcessingTask) }
+            ) { task in self.handleSubscriptionUpdateTask(task) }
+            
+            // Subscription update refresh task
+            scheduler.register(
+                forTaskWithIdentifier: AppDelegate.subscriptionUpdateRefreshTaskIdentifier,
+                using: nil
+            ) { task in self.handleSubscriptionUpdateTask(task) }
         } else {
             // Fetch for generating episode update notifications once in two hours
             UIApplication.shared.setMinimumBackgroundFetchInterval(
@@ -98,10 +134,11 @@ extension AppDelegate {
         }
     }
     
-    /// Schedule the next run date for the background update tasks
-    func scheduleBackgroundUpdateTasks() {
+    /// Schedule the next run date for all background tasks
+    func scheduleAllBackgroundTasks() {
         if #available(iOS 13.0, *) {
-            scheduleSubscriptionUpdateTasks()
+            scheduleSubscriptionUpdateProcessingTasks()
+            scheduleSubscriptionUpdateRefreshTasks()
         }
     }
 }

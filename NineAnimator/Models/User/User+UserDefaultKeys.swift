@@ -31,6 +31,7 @@ extension NineAnimatorUser {
         static var autoRestartInterruptedDownloadTasks: String { "episode.download.autorestart" }
         static var preventAVAssetPurge: String { "episode.download.preventPurge" }
         static var sendDownloadNotifications: String { "episode.download.sendDownloadNotifications" }
+        static var downloadEpisodesInBackground: String { "episode.download.inBackground" }
         static var recentEpisode: String { "episode.recent" }
         static var recentSource: String { "source.recent" }
         static var searchHistory: String { "history.search" }

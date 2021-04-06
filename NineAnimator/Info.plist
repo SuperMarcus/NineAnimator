@@ -2,8 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AVInitialRouteSharingPolicy</key>
+	<string>LongFormVideo</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
+		<string>com.marcuszhou.nineanimator.processingTask.subscription</string>
 		<string>com.marcuszhou.nineanimator.refresh.subscription</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
@@ -266,6 +269,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIWhitePointAdaptivityStyle</key>
+	<string>UIWhitePointAdaptivityStyleVideo</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

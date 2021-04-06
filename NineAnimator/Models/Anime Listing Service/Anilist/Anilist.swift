@@ -33,6 +33,7 @@ class Anilist: BaseListingService, ListingService {
     var _collections: [ListingAnimeCollection]?
     
     /// Hold reference to mutation requests
+    @AtomicProperty
     var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
     
     override var identifier: String {
@@ -221,13 +222,17 @@ extension Anilist {
             self.cleanupReferencePool()
             onCompletion?(true)
         }
-        _mutationRequestReferencePool.append(task)
+        $_mutationRequestReferencePool.mutate {
+            $0.append(task)
+        }
     }
     
     func cleanupReferencePool() {
         // Remove all resolved promises
-        _mutationRequestReferencePool.removeAll {
-            ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
+        $_mutationRequestReferencePool.mutate {
+            $0.removeAll {
+                ($0 as? NineAnimatorPromiseProtocol)?.isResolved == true
+            }
         }
     }
 }

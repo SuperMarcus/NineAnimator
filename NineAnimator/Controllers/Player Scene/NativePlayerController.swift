@@ -220,6 +220,7 @@ extension NativePlayerController {
         // Do not restore to fullscreen if PiP ended because the video has finished playing
         guard self.currentPlaybackTMinus != 0.0 else {
             Log.debug("[NativePlayerController] PiP playback will end because video has finished playing")
+            state = .idle
             return completionHandler(false)
         }
         
@@ -390,9 +391,19 @@ extension NativePlayerController {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(
-                .playback,
-                mode: .moviePlayback)
+            if #available(iOS 13.0, *) {
+                try audioSession.setCategory(
+                    .playback,
+                    mode: .moviePlayback,
+                    policy: .longFormVideo
+                )
+            } else {
+                // Fallback on older versions
+                try audioSession.setCategory(
+                    .playback,
+                    mode: .moviePlayback
+                )
+            }
             try audioSession.setActive(true, options: [])
         } catch { Log.error("Unable to setup audio session - %@", error) }
     }

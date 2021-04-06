@@ -43,7 +43,7 @@ class SetupWelcomeViewController: UIViewController {
     @IBOutlet private weak var skipSetupButton: UIButton!
     
     private var didShowAnimation = false
-    private var scheduledDataMigrator = NineAnimator.default.user.availableModelMigrator()
+    private var scheduledDataMigrators = NineAnimator.default.user.availableModelMigrators()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,7 +65,7 @@ class SetupWelcomeViewController: UIViewController {
         if NineAnimator.default.user.setupVersion != nil {
             welcomeTitleLabel.text = "Welcome Back"
             
-            if scheduledDataMigrator != nil {
+            if scheduledDataMigrators != nil {
                 welcomeTitleLabel.text = "Updating Data"
                 continueButton.isEnabled = false
                 skipSetupButton.isEnabled = false
@@ -118,22 +118,23 @@ class SetupWelcomeViewController: UIViewController {
             )
         }
         
-        // Perform migration
-        if let modelVersion = NineAnimator.default.user.setupVersion, let migrator = scheduledDataMigrator {
+        // Perform migrations
+        if let modelVersion = NineAnimator.default.user.setupVersion,
+           let migrator = scheduledDataMigrators?.first {
             migrator.delegate = self
             migrator.beginMigration(sourceVersion: modelVersion)
         }
     }
     
     @IBAction private func onSkipSetupButtonTap(_ sender: Any) {
-        if scheduledDataMigrator == nil {
+        if scheduledDataMigrators == nil {
             NineAnimator.default.user.markDidSetupLatestVersion()
             dismiss(animated: true)
         }
     }
     
     @IBAction private func onContinueButtonTap(_ sender: Any) {
-        if scheduledDataMigrator == nil {
+        if scheduledDataMigrators == nil {
             performSegue(withIdentifier: "continue", sender: self)
         }
     }
@@ -149,12 +150,20 @@ extension SetupWelcomeViewController: ModelMigratorDelegate {
     }
     
     func migrator(didCompleteMigration migrator: ModelMigrator, withError error: Error?) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.continueButton.isEnabled = true
-                self.skipSetupButton.isEnabled = true
-                self.welcomeTitleLabel.text = "Welcome Back"
-                self.scheduledDataMigrator = nil
+        // Remove the completed migrator, and start the next migrator if available
+        scheduledDataMigrators?.removeFirst()
+        if let modelVersion = NineAnimator.default.user.setupVersion,
+           let nextMigrator = scheduledDataMigrators?.first {
+            nextMigrator.delegate = self
+            nextMigrator.beginMigration(sourceVersion: modelVersion)
+        } else {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.3) {
+                    self.continueButton.isEnabled = true
+                    self.skipSetupButton.isEnabled = true
+                    self.welcomeTitleLabel.text = "Welcome Back"
+                    self.scheduledDataMigrators = nil
+                }
             }
         }
     }
