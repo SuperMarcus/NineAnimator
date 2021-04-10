@@ -565,7 +565,17 @@ extension LibrarySceneController {
     var defaultCollectionHeaderHeight: CGFloat { 50 }
     
     /// Number of recently watched anime to be shown
-    var maximalNumberOfRecentlyWatched: Int { 6 }
+    var maximalNumberOfRecentlyWatched: Int {
+        guard let totalWindowWidth = self.view.window?.frame.width else {
+            return 6 // Default to 6
+        }
+        // Calculate how many cells can fit in one row
+        // Each cell is 100 in width + 10 padding on each side
+        let numOfCellsPerRow = Int(floor(totalWindowWidth / 120))
+        
+        // Multiply by 2 for two rows
+        return numOfCellsPerRow * 2
+    }
     
     /// Retrieve the CollectionSource for the section
     func collectionSource(forSection section: Int) -> CollectionSource {
