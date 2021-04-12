@@ -93,6 +93,19 @@ class LibrarySceneController: MinFilledCollectionViewController {
         self.reloadTips()
         self.reloadCollections(failedOnly: true)
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        // Wait until view has transitioned to new bounds
+        coordinator.animate(alongsideTransition: nil) { _ in
+            UIView.performWithoutAnimation {
+                // Reload recently watched anime collection view without reloading cache
+                self.collectionView.reloadSections([
+                    Section.recentlyWatched.rawValue
+                ])
+            }
+        }
+    }
 }
 
 // MARK: - Data Loading
@@ -154,8 +167,12 @@ extension LibrarySceneController {
         
         // Run the task in the background so it doesn't block the main thread
         recentlyWatchedListLoadingTask = NineAnimatorPromise.firstly {
-            [maximalNumberOfRecentlyWatched] () -> [AnimeLink] in
-            // Load 6 recently watch anime
+            () -> [AnimeLink] in
+            // Determine the number of recent entries to cache into memory
+            // depending on the display's width/height (whatever is bigger)
+            let screenBounds = UIScreen.main.bounds
+            let numOfEntriesToLoad = self.numOfRecentlyWatchedCellsFittingIn(max(screenBounds.height, screenBounds.width))
+            
             let browsingHistory = NineAnimator.default.user.recentAnimes
             let sortedRecordMap = browsingHistory.compactMap {
                 anime -> (AnimeLink, TrackingContext.PlaybackProgressRecord)? in
@@ -164,7 +181,7 @@ extension LibrarySceneController {
                     return (anime, record)
                 } else { return nil }
             } .sorted { $0.1.enqueueDate > $1.1.enqueueDate }
-            return sortedRecordMap[0..<min(maximalNumberOfRecentlyWatched, sortedRecordMap.count)].map {
+            return sortedRecordMap[0..<min(numOfEntriesToLoad, sortedRecordMap.count)].map {
                 $0.0
             }
         } .dispatch(on: .main) .error {
@@ -252,7 +269,8 @@ extension LibrarySceneController {
         switch Section.from(section) {
         case .categories: return categories.count
         case .tips: return tips.count
-        case .recentlyWatched: return cachedRecentlyWatchedList.count
+        case .recentlyWatched:
+            return min(maximalNumberOfRecentlyWatched, cachedRecentlyWatchedList.count)
         case .collection:
             if let state = collectionState(forSection: section) {
                 switch state {
@@ -561,17 +579,22 @@ extension LibrarySceneController {
     /// Default row height for cells
     var defaultRowHeight: CGFloat { 80 }
     
-    /// Hight for the collections headers
+    /// Height for the collections headers
     var defaultCollectionHeaderHeight: CGFloat { 50 }
     
-    /// Number of recently watched anime to be shown
+    /// Number of recently watched anime to be shown based on current window size
     var maximalNumberOfRecentlyWatched: Int {
         guard let totalWindowWidth = self.view.window?.frame.width else {
             return 6 // Default to 6
         }
+        return numOfRecentlyWatchedCellsFittingIn(totalWindowWidth)
+    }
+    
+    /// Determines the number of cells required to display two rows given a certain width
+    func numOfRecentlyWatchedCellsFittingIn(_ totalWidth: CGFloat) -> Int {
         // Calculate how many cells can fit in one row
-        // Each cell is 100 in width + 10 padding on each side
-        let numOfCellsPerRow = Int(floor(totalWindowWidth / 120))
+        // Each cell is 100 in width + 7 minimum padding on each side
+        let numOfCellsPerRow = Int(floor(totalWidth / 114))
         
         // Multiply by 2 for two rows
         return numOfCellsPerRow * 2
