@@ -248,7 +248,16 @@ extension SettingsSceneController {
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 return
             }
-            
+            // The share menu on mac is practically useless, so we instead use the file explorer
+            #if targetEnvironment(macCatalyst)
+            if #available(iOS 14.0, *) {
+                let documentPickerController = UIDocumentPickerViewController(forExporting: [exportedSettingsUrl])
+                present(documentPickerController, animated: true)
+            } else { // Fallback on earlier version of mac
+                let documentPickerController = UIDocumentPickerViewController(url: exportedSettingsUrl, in: .exportToService)
+                present(documentPickerController, animated: true)
+            }
+            #else // Use the standard share menu for non-macs
             let activityController = UIActivityViewController(activityItems: [exportedSettingsUrl], applicationActivities: nil)
             
             if let popoverController = activityController.popoverPresentationController {
@@ -257,6 +266,7 @@ extension SettingsSceneController {
             }
             
             present(activityController, animated: true, completion: nil)
+            #endif
         case "settings.history.import":
             if #available(iOS 14.0, *) {
                 let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: [UTType("nineanimator.config")!])
