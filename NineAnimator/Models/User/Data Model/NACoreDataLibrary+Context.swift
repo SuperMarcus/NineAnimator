@@ -63,6 +63,14 @@ extension NACoreDataLibrary.Context {
     /// Update the recently accessed record for the link
     func updateLibraryRecord(forLink link: AnyLink) throws {
         let record = try _obtainManagedRecord(forAnyLink: link)
+        // Update metadata for the link
+        // This is important in cases such as where Anime Sources may have initially
+        // provided incorrect data (ex. parsed a broken artworkURL), but later provides
+        // correct information (ex. user has updated the app to fix parser)
+        if let artworkURL = link.artwork {
+            record.link?.artwork = artworkURL
+        }
+        record.link?.name = link.name
         record.lastAccess = Date()
         try _coreDataContext.save()
     }
