@@ -151,6 +151,7 @@ extension NineAnimatorLogger {
         
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.dateEncodingStrategy = .millisecondsSince1970
         
         let serializedLogData = try encoder.encode(outputFileStruct)
         try serializedLogData.write(to: outputFileUrl)
