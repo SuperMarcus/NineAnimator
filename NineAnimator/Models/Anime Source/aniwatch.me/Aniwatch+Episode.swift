@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 extension NASourceAniwatch {
-    static let knownServers = [
+    /*static let knownServers = [
         "endub": "Aniwatch (English Dub)",
         "ensub": "Aniwatch (English Sub)",
         "dedub": "Aniwatch (German Dub)",
@@ -50,10 +50,11 @@ extension NASourceAniwatch {
         let hd: String?
         let ld: String?
         let sd: String?
-    }
+    }*/
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise<(Int, String, String)>.firstly {
+        .fail()
+        /*NineAnimatorPromise<(Int, String, String)>.firstly {
             // Extract Episode ID, and convert server name
             guard let episodeID = Int(link.identifier), let episodeLang = NASourceAniwatch.serverLanguages[link.server] else { throw NineAnimatorError.urlError }
             // Extract Anime ID From Anime Link URL
@@ -114,6 +115,6 @@ extension NASourceAniwatch {
                     DummyParser.Options.contentType: "application/x-mpegurl"
                 ]
             )
-        }
+        }*/
     }
 }
