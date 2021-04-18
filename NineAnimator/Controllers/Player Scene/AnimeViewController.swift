@@ -1021,7 +1021,66 @@ extension AnimeViewController {
 
 // MARK: - Actions for Episodes
 extension AnimeViewController {
+    /// Context menu item that can cast to both UIAction and UIMenuItem
+    ///
+    /// Used to support iOS 13+ and below
+    private struct BackwardsCompatibleContextMenuItem {
+        var title: String
+        var image: UIImage?
+        var action: Selector
+        weak var parent: AnimeViewController?
+        
+        @available(iOS 13.0, *)
+        func toUIAction() -> UIAction {
+            .init(
+                title: title,
+                image: image,
+                handler: { _ in parent?.perform(action) }
+            )
+        }
+        
+        func toUIMenuItem() -> UIMenuItem {
+            .init(title: title, action: action)
+        }
+    }
+    
+    @available(iOS 13.0, *)
+    override func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let targetCell = tableView.cellForRow(at: indexPath) else { return nil }
+        
+        // Obtain the episode link
+        var targetEpisodeLink: EpisodeLink?
+        
+        if let episodeCell = targetCell as? EpisodeTableViewCell {
+            targetEpisodeLink = episodeCell.episodeLink
+        } else if let episodeCell = targetCell as? DetailedEpisodeTableViewCell {
+            targetEpisodeLink = episodeCell.episodeLink
+        }
+        
+        guard let unwrappedEpisodeLink = targetEpisodeLink else { return nil }
+        
+        contextMenuSelectedEpisode = unwrappedEpisodeLink
+        contextMenuSelectedIndexPath = indexPath
+        
+        return .init(
+            identifier: nil,
+            previewProvider: nil
+        ) { [weak self] _ in
+            let availableUIAction = self?.generateMenuActions(for: unwrappedEpisodeLink)
+                .map { $0.toUIAction() }
+            
+            return UIMenu(
+                title: "Episode: \(unwrappedEpisodeLink.name)",
+                identifier: nil,
+                options: [],
+                children: availableUIAction ?? []
+            )
+        }
+    }
+    
     @IBAction private func onLongPress(_ recognizer: UILongPressGestureRecognizer) {
+        // Only used as fallback in < iOS 13 devices
+        if #available(iOS 13.0, *) { return }
         if recognizer.state == .began {
             // Obtain the touch position, indexPath, and cell
             let targetTouchPosition = recognizer.location(in: tableView)
@@ -1053,29 +1112,9 @@ extension AnimeViewController {
         
         let targetRect = tableView.convert(sourceView.frame, to: view)
         let editMenu = UIMenuController.shared
-        var availableMenuItems = [UIMenuItem]()
         
-        switch episodeLink.playbackProgress {
-        case 0..<0.05:
-            availableMenuItems.append(UIMenuItem(
-                title: "Mark as Completed",
-                action: #selector(contextMenu(markAsWatched:))
-            ))
-        case 0.05..<0.8:
-            availableMenuItems.append(UIMenuItem(
-                title: "Unwatch",
-                action: #selector(contextMenu(markAsUnwatched:))
-            ))
-            availableMenuItems.append(UIMenuItem(
-                title: "Finished",
-                action: #selector(contextMenu(markAsWatched:))
-            ))
-        default:
-            availableMenuItems.append(UIMenuItem(
-                title: "Unwatch",
-                action: #selector(contextMenu(markAsUnwatched:))
-            ))
-        }
+        let availableMenuItems = generateMenuActions(for: episodeLink)
+            .map { $0.toUIMenuItem() }
         
         // Save the available actions
         editMenu.menuItems = availableMenuItems
@@ -1089,7 +1128,38 @@ extension AnimeViewController {
         }
     }
     
-    @objc private func contextMenu(markAsWatched sender: UIMenuController) {
+    private func generateMenuActions(for episodeLink: EpisodeLink) -> [BackwardsCompatibleContextMenuItem] {
+        var availableMenuItems = [BackwardsCompatibleContextMenuItem]()
+        
+        switch episodeLink.playbackProgress {
+        case 0..<0.05:
+            availableMenuItems.append(.init(
+                title: "Mark as Completed",
+                action: #selector(contextMenuMarkAsWatched),
+                parent: self
+            ))
+        case 0.05..<0.8:
+            availableMenuItems.append(.init(
+                title: "Unwatch",
+                action: #selector(contextMenuMarkAsUnwatched),
+                parent: self
+            ))
+            availableMenuItems.append(.init(
+                title: "Finished",
+                action: #selector(contextMenuMarkAsWatched),
+                parent: self
+            ))
+        default:
+            availableMenuItems.append(.init(
+                title: "Unwatch",
+                action: #selector(contextMenuMarkAsUnwatched),
+                parent: self
+            ))
+        }
+        return availableMenuItems
+    }
+    
+    @objc func contextMenuMarkAsWatched() {
         guard let selectedEpisodeLink = self.contextMenuSelectedEpisode,
               let selectedIndexPath = self.contextMenuSelectedIndexPath,
               let selectedEpisodeCell = tableView.cellForRow(at: selectedIndexPath),
@@ -1158,7 +1228,7 @@ extension AnimeViewController {
         present(alertMessage, animated: true)
     }
     
-    @objc private func contextMenu(markAsUnwatched sender: UIMenuController) {
+    @objc func contextMenuMarkAsUnwatched() {
         if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
             tracker.update(progress: 0.0, forEpisodeLink: episodeLink)
         }
@@ -1169,7 +1239,7 @@ extension AnimeViewController {
     /// - Parameters:
     ///     - batchUpdatePerformed: Boolean indicating if more than 1 episode's progress has been updated.
     private func concludeContextMenu(batchUpdatePerformed: Bool = false) {
-        /// Do not reload tableView if batch update has occured.
+        /// Do not reload tableView if batch update has occurred.
         /// `onBatchPlaybackProgressDidUpdate(:_)` will handle reloading the tableView
         if let targetIndexPath = contextMenuSelectedIndexPath, !batchUpdatePerformed {
             tableView.performBatchUpdates({
