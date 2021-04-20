@@ -53,8 +53,6 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
     
     private let animeCachingDirectory: URL
     
-    private let subscriptionRecommendationSource = SubscribedAnimeRecommendationSource()
-    
     override init() {
         let fileManager = FileManager.default
         self.animeCachingDirectory = try! fileManager.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -73,7 +71,12 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         registerNotificationCategories()
         
         // Add anime subscription as a recommendation source
-        NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
+        NineAnimator.default.register(additionalRecommendationSource: SubscribedAnimeRecommendationSource())
+        
+        // Add featured and latest anime recommendation sources
+        let featuredRecommendationSource = FeaturedAnimeRecommendation()
+        NineAnimator.default.register(additionalRecommendationSource: featuredRecommendationSource)
+        NineAnimator.default.register(additionalRecommendationSource: featuredRecommendationSource.latestAnimeRecommendationSource)
     }
 }
 

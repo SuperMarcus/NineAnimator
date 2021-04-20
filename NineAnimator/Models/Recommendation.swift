@@ -42,7 +42,7 @@ protocol RecommendationSource: AnyObject {
 }
 
 /// Representing a recommended item
-struct RecommendingItem {
+struct RecommendingItem: Hashable {
     enum CaptionStyle {
         case standard
         case highlight
