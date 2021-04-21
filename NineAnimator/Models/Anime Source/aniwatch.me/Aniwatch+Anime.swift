@@ -22,7 +22,7 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAniwatch {
-    fileprivate struct AnimeEntry: Decodable {
+    /*fileprivate struct AnimeEntry: Decodable {
         let airing_end: String
         let airing_start: String
         let cover: String
@@ -56,10 +56,11 @@ extension NASourceAniwatch {
         let endub: Int
         let dub: Bool
         let sub: Bool
-    }
+    }*/
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        NineAnimatorPromise<String>.firstly {
+        .fail()
+        /*NineAnimatorPromise<String>.firstly {
             // Extract Anime ID From URL
             let animeID = link.link.lastPathComponent
             guard !animeID.isEmpty else { throw NineAnimatorError.urlError }
@@ -176,6 +177,6 @@ extension NASourceAniwatch {
                 episodes: episodeCollection,
                 episodesAttributes: episodeInfoMap
             )
-        }
+        }*/
     }
 }

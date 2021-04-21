@@ -164,11 +164,9 @@ extension NineAnimator {
         register(source: NASourceFourAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
         register(source: NASourcePantsubase(with: self))
-        register(source: NASourceNineAnime(with: self))
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceAnimeKisa(with: self))
         register(source: NASourceAnimeKisa.ExperimentalSource(with: self))
-        register(source: NASourceAniwatch(with: self))
         register(source: NASourceHAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeDao(with: self))
@@ -182,6 +180,8 @@ extension NineAnimator {
         // Disabled sources
         register(source: NASourceWonderfulSubs(with: self))
         register(source: NASourceMasterAnime(with: self))
+        register(source: NASourceNineAnime(with: self))
+        register(source: NASourceAniwatch(with: self))
     }
 }
 

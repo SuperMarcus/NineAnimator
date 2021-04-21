@@ -22,7 +22,7 @@ import Foundation
 import SwiftSoup
 
 extension NASourceAniwatch {
-    fileprivate struct SeasonalAnimeResponse: Decodable {
+    /*fileprivate struct SeasonalAnimeResponse: Decodable {
         let success: Bool
         let error: String?
         let entries: [AniwatchAnimeEntry]?
@@ -32,10 +32,11 @@ extension NASourceAniwatch {
         let title: String
         let cover: String
         let detail_id: Int
-    }
+    }*/
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        self.requestManager.request(
+        .fail()
+        /*self.requestManager.request(
             url: self.ajexEndpoint.absoluteString,
             handling: .default,
             method: .post,
@@ -73,6 +74,6 @@ extension NASourceAniwatch {
                 featured: seasonalAnime,
                 latest: []
             )
-        }
+        }*/
     }
 }
