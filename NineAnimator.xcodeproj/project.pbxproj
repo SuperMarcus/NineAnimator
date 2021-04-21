@@ -343,6 +343,11 @@
 		2C9C44FE21CD2B33004C8F0C /* SettingsSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsSceneController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
 		2C9C450221CD56B0004C8F0C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C450121CD56B0004C8F0C /* Notifications.swift */; };
+		2C9F11172624AAF5001BDC50 /* CoreBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11162624AAF5001BDC50 /* CoreBundle.swift */; };
+		2C9F11202624AC1B001BDC50 /* ZIPFoundation in Frameworks */ = {isa = PBXBuildFile; productRef = 2C9F111F2624AC1B001BDC50 /* ZIPFoundation */; };
+		2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */; };
+		2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */; };
+		2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */; };
 		2CA1DD4321E18FDB009241CB /* BadNineAnime+LinkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4221E18FDB009241CB /* BadNineAnime+LinkRetriver.swift */; };
 		2CA1DD4521E1B765009241CB /* BadNineAnime+StreamParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD4421E1B765009241CB /* BadNineAnime+StreamParser.swift */; };
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
@@ -921,6 +926,10 @@
 		2C9C44FD21CD2B33004C8F0C /* SettingsSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
 		2C9C450121CD56B0004C8F0C /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		2C9F11162624AAF5001BDC50 /* CoreBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBundle.swift; sourceTree = "<group>"; };
+		2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreBundle+Manifest.swift"; sourceTree = "<group>"; };
+		2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBundleProvider.swift; sourceTree = "<group>"; };
+		2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreBundleProvider+Flat.swift"; sourceTree = "<group>"; };
 		2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nineanimator_banner.jpg; sourceTree = "<group>"; };
 		2CA1DD4021E18FC6009241CB /* MasterAnimeLinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterAnimeLinkRetriver.swift; sourceTree = "<group>"; };
 		2CA1DD4221E18FDB009241CB /* BadNineAnime+LinkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BadNineAnime+LinkRetriver.swift"; sourceTree = "<group>"; };
@@ -1174,6 +1183,7 @@
 				2CB67048249FCA24006C11A9 /* SwiftSoup in Frameworks */,
 				2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */,
 				2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */,
+				2C9F11202624AC1B001BDC50 /* ZIPFoundation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,6 +1460,7 @@
 		2C45E1C3256ECF460068678B /* NineAnimatorCore */ = {
 			isa = PBXGroup;
 			children = (
+				2C9F11152624AAE7001BDC50 /* Bundle */,
 				2CB24EBC259FC7BF00538BCF /* Proxies */,
 				2C368A052592F0580069DE91 /* Exports */,
 				2C3689FF2592F04F0069DE91 /* CoreEngine.swift */,
@@ -2078,6 +2089,17 @@
 			path = "Settings Scene";
 			sourceTree = "<group>";
 		};
+		2C9F11152624AAE7001BDC50 /* Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				2C9F11162624AAF5001BDC50 /* CoreBundle.swift */,
+				2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */,
+				2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */,
+				2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */,
+			);
+			path = Bundle;
+			sourceTree = "<group>";
+		};
 		2CA4B7F323B1CA0D00B4E6F7 /* animedao.com */ = {
 			isa = PBXGroup;
 			children = (
@@ -2232,7 +2254,6 @@
 				BF1924A824E1FB12008164C2 /* YourUploadParser.swift */,
 				BF064BAE24E30ACD005A44EB /* OpenStreamParser.swift */,
 				2C78275D253CF5E600F96A77 /* VidStreamParser.swift */,
-				BFF3660025B4FF75005C1E83 /* StreamSBParser.swift */,
 				BF04566225BA7CA800A7D154 /* DoodParser.swift */,
 				BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */,
 			);
@@ -2548,6 +2569,7 @@
 				2C18FDEC24AAD85400F021BE /* AppCenterCrashes */,
 				2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */,
 				2C9325C124ACDDD3001E3708 /* SwordRPC */,
+				2C9F111F2624AC1B001BDC50 /* ZIPFoundation */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -2631,6 +2653,7 @@
 				2CB6704C249FCA65006C11A9 /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 				2C18FDEB24AAD85400F021BE /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */,
+				2C9F111E2624AC1B001BDC50 /* XCRemoteSwiftPackageReference "ZIPFoundation" */,
 			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
 			projectDirPath = "";
@@ -2832,8 +2855,10 @@
 				2C78275E253CF5E600F96A77 /* VidStreamParser.swift in Sources */,
 				2C4ABC8321B7401B009B4D47 /* AnimeLink.swift in Sources */,
 				6501C34C248F2B4300FE9AA9 /* EasyLoadParser.swift in Sources */,
+				2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */,
 				2C91297121BB60CD00284FD0 /* VideoProviderParser.swift in Sources */,
 				2CE1F84E22EEC3D9005448FF /* CompositionalPlaybackMedia.swift in Sources */,
+				2C9F11172624AAF5001BDC50 /* CoreBundle.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
 				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
 				2C95C1DC23E9FD0500430B19 /* SettingsPreferredSourceController.swift in Sources */,
@@ -2969,6 +2994,7 @@
 				2C93BD5022220C41000411CB /* Kitsu+Information.swift in Sources */,
 				650A5CCB24DBCCBD00C01CC7 /* UqloadParser.swift in Sources */,
 				2C93BD562222E7AD000411CB /* Kitsu+User.swift in Sources */,
+				2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */,
 				2C1C7196221B1C3000760A69 /* InformationSceneHeadingView.swift in Sources */,
 				2C8E962523B9E3A400415F92 /* ProxyDataParser.swift in Sources */,
 				2C6A390E23A08A0D00FC00A9 /* NineAnimator+ImageResourceRequestModifier.swift in Sources */,
@@ -3211,6 +3237,7 @@
 				BF04566325BA7CA800A7D154 /* DoodParser.swift in Sources */,
 				BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */,
 				C8E12D052422140D00B0AF6A /* AnimeUnity+Episode.swift in Sources */,
+				2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */,
 				526A018821BD7DB900A90385 /* AVPlayerItem+ProviderParsers.swift in Sources */,
 				2CA4B7FD23B1E83A00B4E6F7 /* AnimeDao+Episode.swift in Sources */,
 				BF762C612616A8FB00265DA4 /* Pantsubase+Episode.swift in Sources */,
@@ -3771,6 +3798,14 @@
 				kind = branch;
 			};
 		};
+		2C9F111E2624AC1B001BDC50 /* XCRemoteSwiftPackageReference "ZIPFoundation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/weichsel/ZIPFoundation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.12;
+			};
+		};
 		2CB67040249FC9E3006C11A9 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -3828,6 +3863,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */;
 			productName = SwordRPC;
+		};
+		2C9F111F2624AC1B001BDC50 /* ZIPFoundation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C9F111E2624AC1B001BDC50 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
+			productName = ZIPFoundation;
 		};
 		2CB67041249FC9E3006C11A9 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
