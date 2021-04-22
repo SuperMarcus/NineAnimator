@@ -62,7 +62,7 @@ extension UserNotificationManager {
                     self,
                     items: featuredItems,
                     title: "Featured Anime",
-                    subtitle: self.currentlyLoadedSource.name
+                    subtitle: "On \(self.currentlyLoadedSource.name)"
                 )
             }
         }
@@ -98,7 +98,7 @@ extension UserNotificationManager {
                         self,
                         items: latestAnime,
                         title: "Latest Anime",
-                        subtitle: parent.currentlyLoadedSource.name
+                        subtitle: "On \(parent.currentlyLoadedSource.name)"
                     )
                 )
             }
