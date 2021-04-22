@@ -97,16 +97,17 @@ class DiscoverySceneViewController: UITableViewController {
         }
     }
     
-    @available(iOS 13.0, *)
-    override var keyCommands: [UIKeyCommand]? {
-        [
-            UIKeyCommand(
-                title: "Refresh All Recommendations",
-                action: #selector(reloadRecommendationList),
-                input: "r",
-                modifierFlags: .command
-            )
-        ]
+    override open var keyCommands: [UIKeyCommand]? {
+        if #available(iOS 13.0, *) {
+            return [
+                UIKeyCommand(
+                    title: "Refresh All Recommendations",
+                    action: #selector(reloadRecommendationList),
+                    input: "r",
+                    modifierFlags: .command
+                )
+            ]
+        } else { return nil }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
