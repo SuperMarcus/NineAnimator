@@ -97,12 +97,14 @@ class DiscoverySceneViewController: UITableViewController {
         }
     }
     
+    @available(iOS 13.0, *)
     override var keyCommands: [UIKeyCommand]? {
         [
             UIKeyCommand(
                 title: "Refresh All Recommendations",
                 action: #selector(reloadRecommendationList),
-                input: "r", modifierFlags: .command
+                input: "r",
+                modifierFlags: .command
             )
         ]
     }
