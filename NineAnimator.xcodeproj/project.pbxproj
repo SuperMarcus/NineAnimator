@@ -476,6 +476,7 @@
 		BF762C612616A8FB00265DA4 /* Pantsubase+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C602616A8FB00265DA4 /* Pantsubase+Episode.swift */; };
 		BF762C662616BDBD00265DA4 /* PantsudriveParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */; };
 		BF76D9F524EA27C000734C43 /* AnimeHub+Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */; };
+		BF7D075E26324F5500842CBC /* SourceDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7D075D26324F5500842CBC /* SourceDescriptionTableViewCell.swift */; };
 		BF86795425F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF86795325F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift */; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BF95264224F1E06B00924B79 /* AnilistUserRecommendations.graphql in Resources */ = {isa = PBXBuildFile; fileRef = BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */; };
@@ -1088,6 +1089,7 @@
 		BF762C5B2616A8BA00265DA4 /* Pantsubase+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Anime.swift"; sourceTree = "<group>"; };
 		BF762C602616A8FB00265DA4 /* Pantsubase+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pantsubase+Episode.swift"; sourceTree = "<group>"; };
 		BF762C652616BDBD00265DA4 /* PantsudriveParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantsudriveParser.swift; sourceTree = "<group>"; };
+		BF7D075D26324F5500842CBC /* SourceDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 		BF86795325F99BBC0046773E /* CachedDownloadsToAppSupportDataMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedDownloadsToAppSupportDataMigrator.swift; sourceTree = "<group>"; };
 		BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBackgroundController.swift; sourceTree = "<group>"; };
 		BF95264124F1E06B00924B79 /* AnilistUserRecommendations.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = AnilistUserRecommendations.graphql; sourceTree = "<group>"; };
@@ -2189,6 +2191,7 @@
 				2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */,
 				2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */,
 				2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */,
+				BF7D075D26324F5500842CBC /* SourceDescriptionTableViewCell.swift */,
 			);
 			path = "Anime Scene";
 			sourceTree = "<group>";
@@ -2918,6 +2921,7 @@
 				2CAEA891235D385400AC2370 /* LibraryHeaderView.swift in Sources */,
 				2C4FDDAC22482AE90059B7D8 /* UrlFormEncoding.swift in Sources */,
 				2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */,
+				BF7D075E26324F5500842CBC /* SourceDescriptionTableViewCell.swift in Sources */,
 				2CBDBC5B24BCBC0F000B360D /* UserLibrary.xcdatamodeld in Sources */,
 				2C8374EA24AF808A0009F8D7 /* SettingsRichPresenceController.swift in Sources */,
 				2C6A390A23A0180B00FC00A9 /* FourAnime+Episode.swift in Sources */,
