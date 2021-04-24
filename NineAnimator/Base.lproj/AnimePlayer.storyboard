@@ -454,7 +454,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episodes On Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiw-M9-fr6">
                                             <rect key="frame" x="20" y="11" width="394" height="24.5"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="Fym-9D-vLS"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Fym-9D-vLS"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                             <nil key="textColor"/>
