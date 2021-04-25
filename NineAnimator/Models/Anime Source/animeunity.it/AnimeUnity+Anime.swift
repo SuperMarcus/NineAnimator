@@ -56,9 +56,9 @@ extension NASourceAnimeUnity {
                 let eng_title = decodedResponse.titleEng
                 let episodesList = decodedResponse.episodes.compactMap {
                     episode -> (EpisodeLink) in
-                    let link_ep = String(episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4)).addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+                    let link_ep = String(episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4))
                     return (EpisodeLink(
-                        identifier: link_ep ?? "",
+                        identifier: link_ep,
                         name: episode.number,
                         server: NASourceAnimeUnity.AnimeUnityStream,
                         parent: reconstructedAnimeLink

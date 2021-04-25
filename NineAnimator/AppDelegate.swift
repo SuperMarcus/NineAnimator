@@ -38,6 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     /// Number of objects that has requested to disable the screen idle timer
     private(set) var screenOnRequestCount = 0
     
+    /// Number of objects that has requested to prevent the app from becoming suspended
+    private(set) var preventSuspensionRequestCount = 0
+    private var backgroundAudioNotificationController = AudioBackgroundController()
+    
+    @AtomicProperty
     fileprivate var taskPool = Set<HashingTaskWrapper>()
     
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
@@ -164,16 +169,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Update quick actions
         updateHomescreenQuickActions(application)
         
-        // Schedule the next background refresh tasks
-        scheduleBackgroundUpdateTasks()
+        // Schedule the next background tasks
+        scheduleAllBackgroundTasks()
         
         // Mark the task container as ready for collection
         backgroundTaskContainer?.collect()
+        
+        // Prevent app from becoming suspended if requested
+        if self.preventSuspensionRequestCount > 0 {
+            backgroundAudioNotificationController.startBackgroundAudio()
+        }
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Update isActive flag
         isActive = true
+        
+        // Stop background audio as the app cannot be suspended anymore
+        backgroundAudioNotificationController.stopBackgroundAudio()
         
         // Check the pasteboard when moved to the application
         if NineAnimator.default.user.detectsPasteboardLinks { fetchUrlFromPasteboard() }
@@ -195,7 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         // Mark the app as inactive
         isActive = false
-        
         // Update quick actions
         updateHomescreenQuickActions(application)
     }
@@ -225,7 +237,9 @@ extension AppDelegate {
     func submitTask(_ task: NineAnimatorAsyncTask?) {
         if let task = task {
             let wrapper = HashingTaskWrapper(wrapped: task)
-            taskPool.insert(wrapper)
+            $taskPool.mutate {
+                $0.insert(wrapper)
+            }
         }
     }
     
@@ -233,7 +247,9 @@ extension AppDelegate {
     func removeTask(_ task: NineAnimatorAsyncTask?) {
         if let task = task {
             let wrapper = HashingTaskWrapper(wrapped: task)
-            taskPool.remove(wrapper)
+            $taskPool.mutate {
+                $0.remove(wrapper)
+            }
         }
     }
 }
@@ -427,7 +443,7 @@ fileprivate extension AppDelegate {
     }
     
     func setupCrashHandler() {
-        MSCrashes.setUserConfirmationHandler {
+        Crashes.userConfirmationHandler = {
             _ in
             let alertController = UIAlertController(
                 title: "Oops, the app crashed.",
@@ -436,15 +452,15 @@ fileprivate extension AppDelegate {
             )
             
             alertController.addAction(UIAlertAction(title: "Don't send", style: .cancel) {
-                _ in MSCrashes.notify(with: .dontSend)
+                _ in Crashes.notify(with: .dontSend)
             })
             
             alertController.addAction(UIAlertAction(title: "Send", style: .default) {
-                _ in MSCrashes.notify(with: .send)
+                _ in Crashes.notify(with: .send)
             })
             
             alertController.addAction(UIAlertAction(title: "Always send", style: .default) {
-                _ in MSCrashes.notify(with: .always)
+                _ in Crashes.notify(with: .always)
             })
             
             // Show the alert controller.
@@ -551,5 +567,33 @@ extension AppDelegate {
             UIApplication.shared.isIdleTimerDisabled = true
         }
         return ScreenOnRequestHandler(self)
+    }
+}
+
+// MARK: - Suspension Prevention Requests
+extension AppDelegate {
+    /// An object to keep reference to in order to request the app from becoming suspended
+    class PreventSuspensionRequestHandler {
+        private weak var parent: AppDelegate?
+        
+        fileprivate init(_ parent: AppDelegate) {
+            self.parent = parent
+        }
+        
+        deinit { parent?.didLoseReferenceToPreventSuspensionHelper() }
+    }
+    
+    fileprivate func didLoseReferenceToPreventSuspensionHelper() {
+        self.preventSuspensionRequestCount -= 1
+        if self.preventSuspensionRequestCount <= 0 {
+            self.preventSuspensionRequestCount = 0
+            self.backgroundAudioNotificationController.stopBackgroundAudio()
+        }
+    }
+    
+    /// Request the app from being suspended
+    func requestAppFromBeingSuspended() -> PreventSuspensionRequestHandler? {
+        self.preventSuspensionRequestCount += 1
+        return PreventSuspensionRequestHandler(self)
     }
 }

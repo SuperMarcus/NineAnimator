@@ -64,7 +64,10 @@ class SetupServerSelectionViewController: UIViewController {
             didShowAnimations = true
             UIView.animate(
                 views: [ titleLabel ],
-                animations: [ AnimationType.from(direction: .top, offset: 16) ],
+                animations: [
+//                    AnimationType.from(direction: .top, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: -16))
+                ],
                 initialAlpha: 0,
                 finalAlpha: 1,
                 delay: 0,
@@ -73,7 +76,10 @@ class SetupServerSelectionViewController: UIViewController {
             )
             UIView.animate(
                 views: [ subtitleLabel ],
-                animations: [ AnimationType.from(direction: .bottom, offset: 16) ],
+                animations: [
+//                    AnimationType.from(direction: .bottom, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: 16))
+                ],
                 initialAlpha: 0,
                 finalAlpha: 1,
                 delay: 0,
@@ -91,7 +97,10 @@ class SetupServerSelectionViewController: UIViewController {
             )
             UIView.animate(
                 views: selectionView.visibleCells,
-                animations: [ AnimationType.from(direction: .bottom, offset: 32) ],
+                animations: [
+//                    AnimationType.from(direction: .bottom, offset: 32)
+                    AnimationType.vector(.init(dx: 0, dy: 32))
+                ],
                 initialAlpha: 0,
                 finalAlpha: 1,
                 delay: 0,

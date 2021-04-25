@@ -34,6 +34,7 @@ class MyAnimeList: BaseListingService, ListingService {
         URL(string: "https://api.myanimelist.net/v2")!
     }
     
+    @AtomicProperty
     var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
     lazy var _allCollections: [Collection] = [
@@ -224,9 +225,9 @@ extension MyAnimeList {
             if let error = responseObject["error"] as? String,
                 let message = responseObject["message"] as? String {
                 switch error {
-                case "invalid_grant": //Invalid credentials
+                case "invalid_grant": // Invalid credentials
                     throw NineAnimatorError.authenticationRequiredError(message, nil)
-                case "website_login_required": //Mal account is inactive (therefore requires a google recaptcha)
+                case "website_login_required": // Mal account is inactive (therefore requires a google recaptcha)
                     throw NineAnimatorError.authenticationRequiredError("Please login with Safari before logging in with NineAnimator", self.legacyLoginPage)
                 case "too_many_failed_login_attempts":
                     throw NineAnimatorError.authenticationRequiredError(message, nil)

@@ -20,9 +20,29 @@
 import Foundation
 
 extension Notification.Name {
-    /// Fired when the playback progress has been updated in the NineAnimatorUser
+    /**
+    Fired when the playback progress has been updated in the NineAnimatorUser
+     
+     ## UserInfo
+     - Provides the episodeLink and it's updated playback progress:
+     - "episodeLink": `EpisodeLink`,
+     - "updatedProgress": `Float`
+     
+    */
     static let playbackProgressDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.playbackProgressDidUpdate")
+    
+    /**
+    Fired when the playback progress has been updated for multiple episodes in the NineAnimatorUser
+     
+     ## UserInfo
+     - Provides array of episodeLink's and it's updated playback progress:
+     - "episodeLinks": `[EpisodeLink]`,
+     - "updatedProgress": `Float`
+     
+    */
+    static let batchPlaybackProgressDidUpdate =
+        Notification.Name("com.marcuszhou.nineanimator.batchPlaybackProgressDidUpdate")
     
     /// Fired when the video is starting to play
     ///
@@ -90,6 +110,15 @@ extension Notification.Name {
     static let externalPlaybackDidEnd =
         Notification.Name("com.marcuszhou.nineanimator.externalPlaybackDidEnd")
     
+    /**
+     Fired when the list of recommendation items are updated in a particular RecommendationSource
+     
+     ## Object
+     - The object for this notification is the updated `RecommendationSource`
+     */
+    static let sourceDidUpdateRecommendation =
+        Notification.Name("com.marcuszhou.nineanimator.sourceDidUpdateRecommendation")
+    
     /// Fired when HomeKit status is updated
     static let homeDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.homeDidUpdate")
@@ -102,9 +131,8 @@ extension Notification.Name {
     static let offlineAccessStateDidUpdate =
         Notification.Name("com.marcuszhou.nineanimator.offlineAccessStateDidUpdate")
     
-    /// Fired when the list of recommendation items are updated in a particular RecommendationSource
-    static let sourceDidUpdateRecommendation =
-        Notification.Name("com.marcuszhou.nineanimator.sourceDidUpdateRecommendation")
+    /// Fired when the user's subscribed anime list has updated
+    static let subscriptionsDidUpdate = Notification.Name("com.marcuszhou.nineanimator.subscriptionsDidUpdate")
     
     /// Fired when the rich presence has been updated.
     static let presenceControllerDidUpdatePresence =

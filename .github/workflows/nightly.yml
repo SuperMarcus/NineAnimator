@@ -1,0 +1,35 @@
+name: Nightly Build
+on: [push]
+
+jobs:
+  build:
+    
+    runs-on: macos-latest
+    
+    strategy:
+      matrix:
+        platform: ['iOS', 'macOS']
+    
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: Fetch Commit Info
+      id: commitinfo
+      run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+    - name: Setup Xcode
+      uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Build ${{ matrix.platform }}
+      run: xcodebuild -scheme NineAnimator -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+    - name: Package ${{ matrix.platform }}
+      run: ./Misc/scripts/package.sh "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
+    - name: Upload ${{ matrix.platform }} Symbols
+      run: ./Misc/scripts/upload_symbols.sh ${{ secrets.APPCENTER_TOKEN }}
+    - name: Upload ${{ matrix.platform }} Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}
+        path: build/*
+        if-no-files-found: error

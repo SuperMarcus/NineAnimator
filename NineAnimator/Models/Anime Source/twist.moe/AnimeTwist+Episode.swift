@@ -22,7 +22,7 @@ import CryptoKit
 import Foundation
 
 extension NASourceAnimeTwist {
-    fileprivate static let encryptionKey = "LXgIVP&PorO68Rq7dTx8N^lP!Fa5sGJ^*XK".data(using: .utf8)!
+    fileprivate static let encryptionKey = "267041df55ca2b36f2e322d05ee2c9cf".data(using: .utf8)!
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         guard let sourcePool = anime.additionalAttributes["twist.source"] as? [EpisodeLink: String],
@@ -90,11 +90,18 @@ extension NASourceAnimeTwist {
             }
             
             // Construct episode target url
-            let episodeUrl = self.endpointURL.appendingPathComponent(episodePath)
+            let availableCDN = try (anime.additionalAttributes["availableCDN"] as? String)
+                .tryUnwrap(.decodeError("Could not get available CDN"))
+                .asURL()
+            let episodeUrl = availableCDN.appendingPathComponent(episodePath)
             Log.info("[twist.moe] Decrypted video URL at %@", episodeUrl.absoluteString)
             
-            // Construt Episode struct
-            return Episode(link, target: episodeUrl, parent: anime)
+            // Construct Episode struct
+            return Episode(
+                link,
+                target: episodeUrl,
+                parent: anime
+            )
         }
     }
     

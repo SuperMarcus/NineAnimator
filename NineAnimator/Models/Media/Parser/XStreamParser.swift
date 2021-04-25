@@ -24,7 +24,7 @@ import Foundation
 class XStreamParser: VideoProviderParser {
     var aliases: [String] { [ "XStream", "XStreamCDN", "fembed" ] }
     
-    private static let apiBaseSourceURL = URL(string: "https://www.xstreamcdn.com/api/source/")!
+    private static let apiBaseSourceURL = URL(string: "https://fcdn.stream/api/source/")!
     
     private struct SourcesAPIResponse: Codable {
         var success: Bool
@@ -51,7 +51,7 @@ class XStreamParser: VideoProviderParser {
             return session.request(
                 XStreamParser.apiBaseSourceURL.appendingPathComponent(resourceIdentifier),
                 method: .post,
-                parameters: [ "r": "", "d": "www.xstreamcdn.com" ],
+                parameters: [ "r": "", "d": "fcdn.stream" ],
                 encoding: URLEncoding.default
             ) .responseJSON {
                 response in

@@ -28,6 +28,9 @@ import Foundation
 class NASourceNineAnime: BaseSource, Source, PromiseSource {
     let name: String = "9anime.ru"
     
+    // Disable for now
+    override var isEnabled: Bool { false }
+    
     var aliases: [String] { [] }
     
     override var endpoint: String { self._cachedDescriptor?.currentHost ?? "https://www12.9anime.ru" }

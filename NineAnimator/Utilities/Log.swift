@@ -25,8 +25,19 @@ class NineAnimatorLogger {
     typealias Logger = ((StaticString, Any...) -> Void)
     
     static let maximalInMemoryMessagesCache = 512
+    static var didSetupRuntimeExceptionHandler = false
+    static var previousTopLevelExceptionHandler: NSUncaughtExceptionHandler?
+    static var crashRuntimeLogsDirectory: URL? {
+        try? FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+        ).appendingPathComponent("com.marcuszhou.NineAnimator.crashes")
+    }
     
     private let _systemLogger: OSLog
+    private let _cachedLogMessagesLock: NSLock
     private var _cachedLogMessagesHead: LogMessageListItem?
     private var _cachedLogMessagesTail: LogMessageListItem?
     private var _cachedLogMessagesCount: Int = 0
@@ -36,6 +47,10 @@ class NineAnimatorLogger {
         
         // Maintains a reference to the system log object
         _systemLogger = logObject
+        _cachedLogMessagesLock = .init()
+        
+        // Setup uncaught exception handler
+        NineAnimatorLogger.setupCrashHandler()
     }
 }
 
@@ -102,7 +117,18 @@ extension NineAnimatorLogger {
 // MARK: - Exporting Logs
 extension NineAnimatorLogger {
     /// Dump logs from the current session to a file
-    func exportRuntimeLogs(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache, privacyOptions: ExportPrivacyOption = []) throws -> URL {
+    func exportRuntimeLogs(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache, privacyOptions: ExportPrivacyOption = [], additionalInfo: [String: String]? = nil) throws -> URL {
+        let exportDate = Date()
+        let outputFileName = "NineAnimatorLog-\(Int(exportDate.timeIntervalSince1970)).json"
+        let outputFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(outputFileName)
+        
+        try exportRuntimeLogs(toUrl: outputFileUrl, maxItems: maxItems, privacyOptions: privacyOptions)
+        
+        return outputFileUrl
+    }
+    
+    /// Dump logs from the current session to a specific file
+    func exportRuntimeLogs(toUrl outputFileUrl: URL, maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache, privacyOptions: ExportPrivacyOption = [], additionalInfo: [String: String]? = nil) throws {
         // Redact messages
         let messages = retrieveMostRecentMessages(maxItems: maxItems).map {
             message -> LogMessage in
@@ -117,30 +143,34 @@ extension NineAnimatorLogger {
             return mutatedMessage
         }
         
-        let outputFileStruct = ExportFile(exportPrivacyOptions: privacyOptions, messages: messages)
-        let outputFileName = "NineAnimatorLog-\(Int(outputFileStruct.exportDate.timeIntervalSince1970)).json"
-        let outputFileUrl = FileManager.default.temporaryDirectory.appendingPathComponent(outputFileName)
+        let outputFileStruct = ExportFile(
+            exportPrivacyOptions: privacyOptions,
+            messages: messages,
+            additionalInfo: additionalInfo
+        )
         
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
+        encoder.dateEncodingStrategy = .millisecondsSince1970
         
         let serializedLogData = try encoder.encode(outputFileStruct)
         try serializedLogData.write(to: outputFileUrl)
-        
-        return outputFileUrl
     }
     
     /// Retrieve the most recent log messages
     func retrieveMostRecentMessages(maxItems: Int = NineAnimatorLogger.maximalInMemoryMessagesCache) -> [LogMessage] {
-        var result = [LogMessage]()
-        var currentItem = _cachedLogMessagesTail
-        
-        while let unwrappedCurrentItem = currentItem {
-            result.append(unwrappedCurrentItem.message)
-            currentItem = unwrappedCurrentItem.previousItem
+        // Critical section
+        _cachedLogMessagesLock.lock {
+            var result = [LogMessage]()
+            var currentItem = _cachedLogMessagesTail
+            
+            while let unwrappedCurrentItem = currentItem {
+                result.append(unwrappedCurrentItem.message)
+                currentItem = unwrappedCurrentItem.previousItem
+            }
+            
+            return result
         }
-        
-        return result
     }
 }
 
@@ -190,6 +220,7 @@ extension NineAnimatorLogger {
         var version = NineAnimatorVersion.current.stringRepresentation
         var exportPrivacyOptions: ExportPrivacyOption
         var messages: [LogMessage]
+        var additionalInfo: [String: String]?
     }
     
     /// Internal list for caching log messages in memory
@@ -230,24 +261,97 @@ extension NineAnimatorLogger {
         )
         _logToSystemLogger(message, level: level, arguments: logMessage.parameters)
         
-        // Store the message item in memory
-        let logMessageItem = LogMessageListItem(logMessage)
-        if let tail = _cachedLogMessagesTail {
-            tail.nextItem = logMessageItem
-            logMessageItem.previousItem = tail
-            _cachedLogMessagesTail = logMessageItem
-            
-            if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {
-                _cachedLogMessagesCount += 1
+        // Critical section
+        _cachedLogMessagesLock.lock {
+            // Store the message item in memory
+            let logMessageItem = LogMessageListItem(logMessage)
+            if let tail = _cachedLogMessagesTail {
+                tail.nextItem = logMessageItem
+                logMessageItem.previousItem = tail
+                _cachedLogMessagesTail = logMessageItem
+                
+                if _cachedLogMessagesCount < NineAnimatorLogger.maximalInMemoryMessagesCache {
+                    _cachedLogMessagesCount += 1
+                } else {
+                    // Remove the first item
+                    _cachedLogMessagesHead = _cachedLogMessagesHead?.nextItem
+                }
             } else {
-                // Remove the first item
-                _cachedLogMessagesHead = _cachedLogMessagesHead?.nextItem
+                _cachedLogMessagesHead = logMessageItem
+                _cachedLogMessagesTail = logMessageItem
+                _cachedLogMessagesCount = 1
             }
-        } else {
-            _cachedLogMessagesHead = logMessageItem
-            _cachedLogMessagesTail = logMessageItem
-            _cachedLogMessagesCount = 1
         }
+    }
+}
+
+// MARK: - Crash Reporter
+private extension NineAnimatorLogger {
+    /// Replace the original top level exception handler with ours
+    static func setupCrashHandler() {
+        if !NineAnimatorLogger.didSetupRuntimeExceptionHandler {
+            NineAnimatorLogger.previousTopLevelExceptionHandler = NSGetUncaughtExceptionHandler()
+            NSSetUncaughtExceptionHandler {
+                exception in
+                NineAnimatorLogger.handleUncaughtException(exception: exception)
+                NineAnimatorLogger.previousTopLevelExceptionHandler?(exception)
+            }
+        }
+    }
+    
+    static func handleUncaughtException(exception: NSException) {
+        var options = ExportPrivacyOption()
+        
+        if NineAnimator.default.user.crashReporterRedactLogs {
+            options.insert(.redactParameters)
+        }
+        
+        do {
+            if let crashesDir = NineAnimatorLogger.crashRuntimeLogsDirectory {
+                // Create directory if not exists
+                try FileManager.default.createDirectory(
+                    at: crashesDir,
+                    withIntermediateDirectories: true,
+                    attributes: nil
+                )
+                
+                let crashDate = Date()
+                let outputFileUrl = crashesDir.appendingPathComponent("NineAnimatorRuntime.\(crashDate.timeIntervalSince1970).json")
+                
+                // Write runtime logs previous to the crash
+                try Log.exportRuntimeLogs(toUrl: outputFileUrl, privacyOptions: options, additionalInfo: [
+                    "NSException.name": exception.name.rawValue,
+                    "NSException.reason": exception.reason ?? "<unknown reason>"
+                ])
+                
+                Log.info("[NineAnimatorLogger] Crash runtime log written to %@", outputFileUrl.absoluteString)
+            }
+        } catch {
+            Log.error("[NineAnimatorLogger] Cannot write pre-crash runtime logs: %@", error)
+        }
+    }
+}
+
+extension NineAnimatorLogger {
+    /// Find previously created but unsent runtime logs
+    static func findUnsentRuntimeLogs() -> [URL] {
+        if let crashesDir = NineAnimatorLogger.crashRuntimeLogsDirectory {
+            do {
+                let possibleCrashRunetimeLogs = try FileManager.default.contentsOfDirectory(
+                    at: crashesDir,
+                    includingPropertiesForKeys: nil,
+                    options: []
+                )
+                
+                return possibleCrashRunetimeLogs.filter {
+                    $0.pathExtension == "json"
+                }
+            } catch {
+                Log.error("[NineAnimatorLogger] Unable to collect pre-crash runtime logs: %@", error)
+            }
+        }
+        
+        return []
     }
 }
 

@@ -2,8 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AVInitialRouteSharingPolicy</key>
+	<string>LongFormVideo</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
+		<string>com.marcuszhou.nineanimator.processingTask.subscription</string>
 		<string>com.marcuszhou.nineanimator.refresh.subscription</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,13 +41,6 @@
 					<string>9 Testboi</string>
 				</array>
 			</dict>
-			<key>NsxHalloween</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>NsxHalloween</string>
-				</array>
-			</dict>
 			<key>B&apos;day by Nsx</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -66,6 +62,13 @@
 					<string>Fox</string>
 				</array>
 			</dict>
+			<key>NsxHalloween</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>NsxHalloween</string>
+				</array>
+			</dict>
 			<key>Nsxtop&apos;s 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
@@ -78,6 +81,27 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Tydox&apos;s 9</string>
+				</array>
+			</dict>
+			<key>Tydox Square</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox Square</string>
+				</array>
+			</dict>
+			<key>Use&apos;s Inverted</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Use&apos;s Inverted</string>
+				</array>
+			</dict>
+			<key>Zeref&apos;s Collection</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Zeref&apos;s Collection</string>
 				</array>
 			</dict>
 		</dict>
@@ -86,11 +110,11 @@
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
-			<key>Bald Man</key>
+			<key>9 Testboi</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Bald Man</string>
+					<string>9 Testboi</string>
 				</array>
 			</dict>
 			<key>B&apos;day by Nsx</key>
@@ -100,18 +124,11 @@
 					<string>B&apos;day by Nsx</string>
 				</array>
 			</dict>
-			<key>NsxHalloween</key>
+			<key>Bald Man</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>NsxHalloween</string>
-				</array>
-			</dict>
-			<key>9 Testboi</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>9 Testboi</string>
+					<string>Bald Man</string>
 				</array>
 			</dict>
 			<key>Fox</key>
@@ -119,6 +136,13 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Fox</string>
+				</array>
+			</dict>
+			<key>NsxHalloween</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>NsxHalloween</string>
 				</array>
 			</dict>
 			<key>Nsxtop&apos;s 9</key>
@@ -133,6 +157,27 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Tydox&apos;s 9</string>
+				</array>
+			</dict>
+			<key>Tydox Square</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Tydox Square</string>
+				</array>
+			</dict>
+			<key>Zeref&apos;s Collection</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Zeref&apos;s Collection</string>
+				</array>
+			</dict>
+			<key>Use&apos;s Inverted</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Use&apos;s Inverted</string>
 				</array>
 			</dict>
 		</dict>
@@ -224,6 +269,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIWhitePointAdaptivityStyle</key>
+	<string>UIWhitePointAdaptivityStyleVideo</string>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>

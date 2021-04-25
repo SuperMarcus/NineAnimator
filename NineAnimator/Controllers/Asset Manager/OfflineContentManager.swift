@@ -44,6 +44,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
     fileprivate var dequeueDelayTimer: Timer?
     
     fileprivate var screenOnRequestHandler: AppDelegate.ScreenOnRequestHandler?
+    fileprivate var preventSuspensionRequestHandler: AppDelegate.PreventSuspensionRequestHandler?
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
     
@@ -104,15 +105,17 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
         do {
             let fs = FileManager.default
             
-            // According to the guidelines, the recreatable
-            // materials should be stored in cache directory
-            let cacheDiractory = try fs.url(
-                for: .cachesDirectory,
+            // Normally, we would save downloads in the documents folder
+            // However, since our mac app is not sandboxed to support
+            // discord rpc, the documents folder can be wiped/corrupted
+            // by the user accidentally.
+            let appSupportDirectory = try fs.url(
+                for: .applicationSupportDirectory,
                 in: .allDomainsMask,
                 appropriateFor: nil,
                 create: true
             )
-            let persistentDirectory = cacheDiractory.appendingPathComponent("com.marcuszhou.nineanimator.OfflineContents")
+            let persistentDirectory = appSupportDirectory.appendingPathComponent("com.marcuszhou.nineanimator.OfflineContents")
             
             // Create the directory if it does not exists
             try fs.createDirectory(
@@ -347,6 +350,11 @@ extension OfflineContentManager {
             // Request the screen to be kept on while there are items in the queue
             screenOnRequestHandler = AppDelegate.shared?.requestScreenOn()
             
+            // Request the app to play audio to prevent it from going into the background
+            if NineAnimator.default.user.downloadEpisodesInBackground {
+                preventSuspensionRequestHandler = AppDelegate.shared?.requestAppFromBeingSuspended()
+            }
+            
             // If there are items in the delay list, schedule a timer
             if let largestInterval = reEnqueuingContents.compactMap({
                     $0.lastDownloadAttempt?.timeIntervalSinceNow
@@ -366,7 +374,10 @@ extension OfflineContentManager {
                     Log.debug("[OfflineContentManager] Scheduling a delay timer for an interval of %@ seconds for the next dequeue.", delayInterval)
                 }
             }
-        } else { screenOnRequestHandler = nil }
+        } else {
+            screenOnRequestHandler = nil
+            preventSuspensionRequestHandler = nil
+        }
     }
     
     /// Preserve the next queued contents if the number of tasks drop to below the threshold
@@ -376,8 +387,9 @@ extension OfflineContentManager {
                 return Log.info("[OfflineContentManager] Network currently unreachable. Contents will be preserved later.")
             }
             
-            guard AppDelegate.shared?.isActive == true else {
-                return Log.info("[OfflineContentManager] App not in foreground. More contents will be preserved later.")
+            guard let appDelegate = AppDelegate.shared,
+                  appDelegate.isActive || self.preventSuspensionRequestHandler != nil else {
+                return Log.info("[OfflineContentManager] App is suspended. More contents will be preserved later.")
             }
             
             let availableSpots = self.maximalConcurrentTasks - self.numberOfPreservingTasks
@@ -439,7 +451,8 @@ extension OfflineContentManager {
             }
             
             // Move the item
-            try fs.moveItem(at: location, to: destinationUrl)
+            try fs.copyItem(at: location, to: destinationUrl)
+            try? fs.removeItem(at: location) // Fails on jailbroken devices
             
             // Set the resource to be excluded from backups
             var resourceValues = URLResourceValues()

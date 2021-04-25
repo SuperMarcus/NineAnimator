@@ -31,11 +31,11 @@ class InformationReferenceCollectionViewCell: UICollectionViewCell {
         
         // Load image
         artworkImageView.alpha = 0.0
-        artworkImageView.kf.setImage(with: reference.artwork, completionHandler: {
+        artworkImageView.kf.setImage(with: reference.artwork, progressBlock: nil) {
             [weak artworkImageView] _ in UIView.animate(withDuration: 0.2) {
                 artworkImageView?.alpha = 1.0
             }
-        })
+        }
         
         // Set name
         referenceNameLabel.text = reference.name

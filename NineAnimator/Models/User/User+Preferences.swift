@@ -115,6 +115,18 @@ extension NineAnimatorUser {
         set { _freezer.set(newValue, forKey: Keys.sendDownloadNotifications) }
     }
     
+    var downloadEpisodesInBackground: Bool {
+        get {
+            _freezer.typedValue(
+                forKey: Keys.downloadEpisodesInBackground,
+                default: true
+            )
+        }
+        set {
+            _freezer.set(newValue, forKey: Keys.downloadEpisodesInBackground)
+        }
+    }
+    
     /// The name of the current theme
     var theme: String {
         get { _freezer.string(forKey: Keys.theme) ?? "light" }
@@ -187,7 +199,7 @@ extension NineAnimatorUser {
     
     /// Include anime name and episode number in rich presence
     var richPresenceShowAnimeName: Bool {
-        get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: true) }
+        get { _freezer.typedValue(forKey: Keys.richPresenceShowAnimeName, default: false) }
         set { _freezer.set(newValue, forKey: Keys.richPresenceShowAnimeName) }
     }
     
@@ -195,6 +207,12 @@ extension NineAnimatorUser {
     var optOutAnalytics: Bool {
         get { _freezer.typedValue(forKey: Keys.optOutAnalytics, default: false) }
         set { _freezer.set(newValue, forKey: Keys.optOutAnalytics) }
+    }
+    
+    /// Whether the crash reporter should redact runtime logs attached with a crash report.
+    var crashReporterRedactLogs: Bool {
+        get { _freezer.typedValue(forKey: Keys.crashReporterShouldRedactLogs, default: false) }
+        set { _freezer.set(newValue, forKey: Keys.crashReporterShouldRedactLogs) }
     }
     
     /// Discovered app icons

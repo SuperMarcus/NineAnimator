@@ -40,6 +40,15 @@ struct ListingAnimeName: CustomStringConvertible {
     let native: String
 }
 
+/// Representing the airing status of an anime
+enum AiringStatus: String {
+    case currentlyAiring = "Ongoing"
+    case finished = "Finished"
+    case notReleased = "Not Yet Released"
+    case cancelled = "Cancelled"
+    case unknown = "Unknown Airing Status"
+}
+
 /// Representing a '2D' character in the anime
 struct ListingAnimeCharacter {
     /// Name of the character in the anime

@@ -179,33 +179,22 @@ extension UserNotificationManager {
     /// Add the anime but do not cache the episodes until the app becomes inactive or the user enters the anime.
     ///
     /// - Note: See persist(_ watcher: WatchedAnime)
-    func lazyPersist(_ link: AnimeLink, shouldFireSubscriptionEvent: Bool = false) {
+    func lazyPersist(_ link: AnimeLink) {
         lazyPersistPool.insert(link)
-        
-        if shouldFireSubscriptionEvent {
-            subscriptionRecommendationSource.fireDidUpdateNotification()
-        }
     }
     
     /// Update cached anime episodes
-    func update(_ anime: Anime, shouldFireSubscriptionEvent: Bool = false) {
+    func update(_ anime: Anime) {
         let newWatcher = WatchedAnime(
             link: anime.link,
             episodeNames: anime.episodes.uniqueEpisodeNames,
             lastCheck: Date()
         )
         persist(newWatcher)
-        
-        if shouldFireSubscriptionEvent {
-            subscriptionRecommendationSource.fireDidUpdateNotification()
-        }
     }
     
     /// Update cached anime episodes
     func remove(_ anime: AnimeLink) {
-        // Fire update event
-        subscriptionRecommendationSource.fireDidUpdateNotification()
-        
         // Check if the anime is not yet fetched
         guard lazyPersistPool.remove(anime) == nil else { return }
         

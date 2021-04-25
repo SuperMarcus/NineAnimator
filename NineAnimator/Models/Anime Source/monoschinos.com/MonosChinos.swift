@@ -44,7 +44,7 @@ class NASourceMonosChinos: BaseSource, Source, PromiseSource {
         \.romaji
     }
     
-    override var endpoint: String { "https://monoschinos.com" }
+    override var endpoint: String { "https://monoschinos2.com" }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
         VideoProviderRegistry.default.provider(for: name)

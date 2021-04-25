@@ -16,6 +16,7 @@ In this document, you'll find a set of guidelines for contributing and some reso
 - [Styleguides](#styleguides)
     - [Git Commits](#git-commits)
     - [Swift Styleguide](#swift-styleguide)
+- [Contributing Assets](#contributing-assets)
 
 ### I just have a question
 
@@ -31,6 +32,7 @@ Optionally, you can also use our [r/NineAnimator](https://reddit.com/r/NineAnima
 * **Suggesting Enhancements**: Use the [issue tracker](https://github.com/SuperMarcus/NineAnimator/issues/new/choose) with the `Feature Request` template to suggest an enhancement.
 * **Help Translating the App**: Use our [Crowdin site](https://translate.9ani.app) at [https://translate.9ani.app](https://translate.9ani.app) to help translate NineAnimator into different languages.
 * **Code Contribution**: Whether you implemented a new anime source or fixed a bug, feel free to open a pull request from your fork. Make sure you read the [styleguides](#styleguides) section.
+* **Assets & Designs**: Creating a new app icon for NineAnimator? Have suggestions on the designs? See the [Contributing Assets](#contributing-assets) section.
 
 Feel free to talk to us on our [Discord server](https://discord.gg/dzTVzeW) before contributing.
 
@@ -121,3 +123,11 @@ A few points to keep in mind:
 * Prefer extensions over single files. Split large files into multiple smaller files with `+` extensions (ex. `User.swift`, `User+Preferences.swift`, `User+History.swift`).
 
 We use `swiftlint` to ensure the tidiness of our code. Before submitting your code, run `swiftlint` to check for potential styling violations.
+
+### Contributing Assets
+
+Please use our [Discord server](https://discord.gg/dzTVzeW) for suggestions related to UI designs and visual
+experiences.
+
+* **App Icon Submissions**: please submit your design to the #app-icon-suggestions channel. Community-contributed app icons should be rendered with a resolution of 180x180 or higher.
+* **Visuals & Designs**: please send your design or suggestions to the #suggestions channel.

@@ -65,14 +65,16 @@ class SetupFinishingViewController: UIViewController {
             UIView.animate(
                 views: [ discordLogoView, finishTitleLabel ],
                 animations: [
-                    AnimationType.from(direction: .top, offset: 16)
+//                    AnimationType.from(direction: .top, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: -16))
                 ],
                 duration: 0.5
             )
             UIView.animate(
                 views: [ finishSubtitleLabel, openDiscordButton ],
                 animations: [
-                    AnimationType.from(direction: .bottom, offset: 16)
+//                    AnimationType.from(direction: .bottom, offset: 16)
+                    AnimationType.vector(.init(dx: 0, dy: -16))
                 ],
                 duration: 0.5
             )

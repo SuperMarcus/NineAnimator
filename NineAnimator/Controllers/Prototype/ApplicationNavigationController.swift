@@ -68,7 +68,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
                               didShow viewController: UIViewController,
                               animated: Bool) {
         // Track screen view events to better resolve crashes/bugs
-        MSAnalytics.trackEvent(
+        Analytics.trackEvent(
             "Entered Scene",
             withProperties: ["sceneName": viewController.className]
         )
@@ -128,6 +128,7 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
         updateAppearance(withTheme: Theme.current)
     }
 }
+
 private extension UIViewController {
     var className: String {
         // Removes The Module Name Prefix

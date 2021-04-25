@@ -32,6 +32,10 @@ class NineAnimatorCloud {
     
     private(set) lazy var requestManager = NACloudRequestManager(parent: self)
     
+    // swiftlint:disable weak_delegate
+    private let appCenterCrashesDelegate = NAAppCenterCrashesDelegate()
+    // swiftlint:enable weak_delegate
+    
     /// Build identifier used to communicate and identify the build with NineAnimator cloud services
     ///
     /// Build identifier is calculated by mixing and hashing the states of various supported sources and server parsers.
@@ -60,10 +64,11 @@ class NineAnimatorCloud {
     
     func setup() {
         // Setup analytical service
-        MSAppCenter.start(buildIdentifier, withServices: [
-            MSCrashes.self,
-            MSAnalytics.self
+        Crashes.delegate = appCenterCrashesDelegate
+        AppCenter.start(withAppSecret: buildIdentifier, services: [
+            Crashes.self,
+            Analytics.self
         ])
-        MSAnalytics.setEnabled(!NineAnimator.default.user.optOutAnalytics)
+        Analytics.enabled = !NineAnimator.default.user.optOutAnalytics
     }
 }

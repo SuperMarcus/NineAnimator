@@ -248,7 +248,16 @@ extension SettingsSceneController {
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 return
             }
-            
+            // The share menu on mac is practically useless, so we instead use the file explorer
+            #if targetEnvironment(macCatalyst)
+            if #available(iOS 14.0, *) {
+                let documentPickerController = UIDocumentPickerViewController(forExporting: [exportedSettingsUrl])
+                present(documentPickerController, animated: true)
+            } else { // Fallback on earlier version of mac
+                let documentPickerController = UIDocumentPickerViewController(url: exportedSettingsUrl, in: .exportToService)
+                present(documentPickerController, animated: true)
+            }
+            #else // Use the standard share menu for non-macs
             let activityController = UIActivityViewController(activityItems: [exportedSettingsUrl], applicationActivities: nil)
             
             if let popoverController = activityController.popoverPresentationController {
@@ -257,6 +266,18 @@ extension SettingsSceneController {
             }
             
             present(activityController, animated: true, completion: nil)
+            #endif
+        case "settings.history.import":
+            if #available(iOS 14.0, *) {
+                let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: [UTType("nineanimator.config")!])
+                documentPickerController.delegate = self
+                self.present(documentPickerController, animated: true)
+            } else {
+                // Fallback on earlier versions
+                let documentPickerController = UIDocumentPickerViewController(documentTypes: ["nineanimator.config"], in: .open)
+                documentPickerController.delegate = self
+                self.present(documentPickerController, animated: true)
+            }
         default: return
         }
     }
@@ -304,7 +325,7 @@ extension SettingsSceneController {
                 ? swText?.uppercased() : swText?.lowercased()
         }
         
-        // To be gramatically correct :D
+        // To be grammatically correct :D
         let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         
@@ -387,7 +408,7 @@ extension SettingsSceneController {
         let previousState = NineAnimator.default.user.enableExperimentalSources
         NineAnimator.default.user.enableExperimentalSources = !previousState
         Log.info("[SettingsSceneController] F.Counter triggered. Current state is %@", !previousState)
-        MSAnalytics.trackEvent("exp.counter.trigger", withProperties: [
+        Analytics.trackEvent("exp.counter.trigger", withProperties: [
             "state": previousState ? "back to normal" : "xp",
             "counter": _fTimerCounter.description
         ])

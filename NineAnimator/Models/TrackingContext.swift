@@ -42,6 +42,10 @@ class TrackingContext {
     private var performingTaskPool = [NineAnimatorAsyncTask]()
     private let queue = DispatchQueue(label: "com.marcuszhou.NineAnimator.TrackingContext")
     
+    /// Private CoreData Library context.
+    /// - Important: Only use this variable inside the private queue!!
+    private lazy var privateLibraryContext = NineAnimator.default.user.coreDataLibrary.createBackgroundContext()
+    
     private unowned var parent: NineAnimator
     private let link: AnimeLink
     private let stateConfigurationUrl: URL
@@ -214,7 +218,8 @@ class TrackingContext {
                 reference.parentService.update(
                     reference,
                     didComplete: episode,
-                    episodeNumber: self.suggestingEpisodeNumber(for: episode)
+                    episodeNumber: self.suggestingEpisodeNumber(for: episode),
+                    shouldUpdateTrackingState: true
                 )
             }
             
@@ -309,21 +314,23 @@ extension TrackingContext {
     /// - Important: This method is not thread safe. It should be run
     ///              synchronously within the queue.
     private func discoverRelatedLinks(with reference: ListingAnimeReference) {
-        let recentAnime = self.parent.user.recentAnimes
-        for comparingAnime in recentAnime where comparingAnime != self.link {
-            let comparingTrackingContext = self.parent.trackingContext(for: comparingAnime)
-            if comparingTrackingContext.listingAnimeReferences.contains(where: {
-                _, value in value == reference
-            }) {
-                self.relatedLinks.insert(comparingAnime)
-                // Save the related link
-                comparingTrackingContext.relatedLinks.insert(self.link)
-                
-                // Cache the tracking context if had began watching
-                if self.relatedTrackingContexts != nil,
-                    self.relatedTrackingContexts?[self.link] == nil {
-                    self.relatedTrackingContexts?[self.link] =
-                        NineAnimator.default.trackingContext(for: self.link)
+        let recentAnime = (try? self.privateLibraryContext.fetchRecents()) ?? []
+        for comparingLink in recentAnime {
+            if case let .anime(comparingAnime) = comparingLink, comparingAnime != self.link {
+                let comparingTrackingContext = self.parent.trackingContext(for: comparingAnime)
+                if comparingTrackingContext.listingAnimeReferences.contains(where: {
+                    _, value in value == reference
+                }) {
+                    self.relatedLinks.insert(comparingAnime)
+                    // Save the related link
+                    comparingTrackingContext.relatedLinks.insert(self.link)
+                    
+                    // Cache the tracking context if had began watching
+                    if self.relatedTrackingContexts != nil,
+                        self.relatedTrackingContexts?[self.link] == nil {
+                        self.relatedTrackingContexts?[self.link] =
+                            NineAnimator.default.trackingContext(for: self.link)
+                    }
                 }
             }
         }
@@ -351,6 +358,27 @@ extension TrackingContext {
                 )
             )
             self.updateDate = Date()
+            self.save()
+        }
+    }
+    
+    /// Enqueue new records for multiple episodes with a playback progress
+    func updateRecord(_ progress: Double, forEpisodeNumbers episodes: [Int]) {
+        queue.async(flags: [ .barrier ]) {
+            // Remove all old records
+            self.progressRecords.removeAll { episodes.contains($0.episodeNumber) }
+            // Insert new records
+            let currentDate = Date()
+            episodes.forEach {
+                self.progressRecords.append(
+                    PlaybackProgressRecord(
+                        episodeNumber: $0,
+                        progress: progress,
+                        enqueueDate: currentDate
+                    )
+                )
+            }
+            self.updateDate = currentDate
             self.save()
         }
     }
@@ -403,6 +431,18 @@ extension TrackingContext {
         if let episodeNumber = suggestingEpisodeNumber(for: episodeLink) {
             updateRecord(progress, forEpisodeNumber: episodeNumber)
         }
+    }
+    
+    /// Batch update the playback progress
+    ///
+    /// This also persists the progresses to NineAnimatorUser
+    func update(progress: Double, forEpisodeLinks episodeLinks: [EpisodeLink]) {
+        parent.user.update(progress: Float(progress), for: episodeLinks)
+        // Only record progresses for episodes if the episode number can be infered
+        let episodeNumbers = episodeLinks
+            .compactMap { suggestingEpisodeNumber(for: $0) }
+        
+        updateRecord(progress, forEpisodeNumbers: episodeNumbers)
     }
     
     /// When user selects a new streaming server

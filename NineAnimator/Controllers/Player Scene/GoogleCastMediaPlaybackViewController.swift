@@ -65,6 +65,8 @@ class GoogleCastMediaPlaybackViewController: UIViewController, HalfFillViewContr
     
     private var castDummyAudioPlayer: AVAudioPlayer?
     
+    private var preventSuspensionRequestHandler: AppDelegate.PreventSuspensionRequestHandler?
+    
     private var impactGenerator: UIImpactFeedbackGenerator?
     
     // The amount of time (in seconds) that fast forward and rewind button seeks
@@ -286,13 +288,13 @@ extension GoogleCastMediaPlaybackViewController {
 // MARK: - Updates from media server
 extension GoogleCastMediaPlaybackViewController {
     func playback(update media: CastMedia, mediaStatus status: CastMediaStatus) {
-        coverImage.kf.setImage(with: media.poster, completionHandler: {
+        coverImage.kf.setImage(with: media.poster, progressBlock: nil) {
             result in
             guard let image = try? result.get().image else { return }
             // Set poster image but let the updater to push it to the now playing center
             self.sharedNowPlayingInfo[MPMediaItemPropertyArtwork] =
                 MPMediaItemArtwork(boundsSize: image.size) { _ in image }
-        })
+        }
         coverImage.kf.indicatorType = .activity
         
         updateUI(playbackProgress: Float(status.currentTime), volume: nil, isPaused: status.playerState == .paused)
@@ -377,30 +379,13 @@ extension GoogleCastMediaPlaybackViewController {
 // MARK: - Dummy audio players for control center and lock screen controls
 extension GoogleCastMediaPlaybackViewController {
     private func startDummyPlayer() {
-        do {
-            Log.info("Starting cast dummy audio player")
-            guard let dummyAudioAsset = NSDataAsset(name: "CastDummyAudio")
-                else { throw NineAnimatorError.urlError }
-            
-            let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playback, mode: .moviePlayback)
-            try audioSession.setActive(true)
-            
-            castDummyAudioPlayer?.stop()
-            
-            try castDummyAudioPlayer = AVAudioPlayer(data: dummyAudioAsset.data, fileTypeHint: "mp3")
-            castDummyAudioPlayer?.numberOfLoops = -1
-            castDummyAudioPlayer?.volume = 0.01
-            castDummyAudioPlayer?.prepareToPlay()
-            castDummyAudioPlayer?.play()
-        } catch { Log.error(error) }
+        // Prevent the app from going to the background, as this stops chromecasting
+        preventSuspensionRequestHandler = AppDelegate.shared?.requestAppFromBeingSuspended()
     }
     
     private func stopDummyPlayer() {
-        Log.info("Stopping cast dummy audio player")
-        self.castDummyAudioPlayer?.stop()
-        self.castDummyAudioPlayer = nil
-        try? AVAudioSession.sharedInstance().setActive(false, options: [])
+        // Allow the app to go to the background
+        preventSuspensionRequestHandler = nil
     }
     
     private func nowPlaying(setup episode: Episode) {

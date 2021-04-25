@@ -1,4 +1,4 @@
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------=== //
 //
 // This source file is largely a copy of code from Swift.org open source project's
 // files JSONEncoder.swift and Codeable.swift.
@@ -16,7 +16,7 @@
 // Modifications and additional code here is copyright (c) 2018 Sam Deane, and
 // is licensed under the same terms.
 //
-//===----------------------------------------------------------------------===//
+// ===----------------------------------------------------------------------=== //
 
 import Foundation
 

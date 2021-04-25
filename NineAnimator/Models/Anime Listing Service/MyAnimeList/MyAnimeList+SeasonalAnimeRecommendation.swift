@@ -22,7 +22,7 @@ import Foundation
 extension MyAnimeList {
     class TrendingAnimeRecommendation: RecommendationSource {
         let name = "Trending"
-        let piority: RecommendationSource.Piority = .defaultLow
+        let priority: RecommendationSource.Priority = .defaultLow
         var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList
@@ -36,26 +36,15 @@ extension MyAnimeList {
         }
         
         func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
-            let queue = DispatchQueue.global()
-            return NineAnimatorPromise(queue: queue) {
-                (callback: @escaping ((Void?, Error?) -> Void)) in
-                // Request after 0.5 seconds to avoid congestion
-                queue.asyncAfter(deadline: .now() + 0.5) {
-                    callback((), nil)
-                }
-                return nil
-            } .thenPromise {
-                [weak self] in
-                self?.parent.apiRequest(
-                    "/anime/ranking",
-                    query: [
-                        "ranking_type": "trend",
-                        "limit": 25,
-                        "offset": 0,
-                        "fields": "media_type,my_list_status{start_date,finish_date}"
-                    ]
-                )
-            } .then {
+            parent.apiRequest(
+                "/anime/ranking",
+                query: [
+                    "ranking_type": "trend",
+                    "limit": 25,
+                    "offset": 0,
+                    "fields": "media_type,my_list_status{start_date,finish_date}"
+                ]
+            ) .then {
                 [weak self] responseObject in
                 guard let self = self else { return nil }
                 let formatter = DateFormatter()
@@ -90,7 +79,7 @@ extension MyAnimeList {
     
     class SeasonalAnimeRecommendation: RecommendationSource {
         let name = "Seasonal Anime"
-        let piority: RecommendationSource.Piority = .defaultLow
+        let priority: RecommendationSource.Priority = .defaultLow
         var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList

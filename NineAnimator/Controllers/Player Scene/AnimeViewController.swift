@@ -89,6 +89,12 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
     
     private var previousEpisodeRetrivalError: Error?
     
+    private var shouldPromptBatchEpisodeMarking = true
+    
+    override var canBecomeFirstResponder: Bool {
+        true
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -128,6 +134,14 @@ class AnimeViewController: UITableViewController, AVPlayerViewControllerDelegate
             name: .playbackDidEnd,
             object: nil
         )
+        
+        // Receive batch update playback progress notification and reload episode tableview section
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onBatchPlaybackProgressDidUpdate(_:)),
+            name: .batchPlaybackProgressDidUpdate,
+            object: nil
+        )
     }
     
     override func didMove(toParent parent: UIViewController?) {
@@ -158,7 +172,7 @@ extension AnimeViewController {
         animeRequestTask = NineAnimator.default.anime(with: link) {
             [weak self] anime, error in
             // Keep track of the usage and error rates of each source
-            MSAnalytics.trackEvent("Load Anime", withProperties: [
+            Analytics.trackEvent("Load Anime", withProperties: [
                 "source": link.source.name,
                 "success": error == nil ? "YES" : "NO",
                 "source_success": "\(link.source.name) - \(error == nil ? "Success" : "Error")"
@@ -276,7 +290,7 @@ extension AnimeViewController {
         self.episodeLink = nil
         self.animeLink = link
         
-        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+        Analytics.trackEvent("Visit Anime", withProperties: [
             "source": link.source.name
         ])
     }
@@ -296,7 +310,7 @@ extension AnimeViewController {
     func setPresenting(episode link: EpisodeLink) {
         self.episodeLink = link
         
-        MSAnalytics.trackEvent("Visit Anime", withProperties: [
+        Analytics.trackEvent("Visit Anime", withProperties: [
             "source": link.parent.source.name
         ])
     }
@@ -412,6 +426,18 @@ extension AnimeViewController {
         self.episodeLink = episodeLink
         
         retrieveAndPlay()
+    }
+    
+    @objc func onBatchPlaybackProgressDidUpdate(_ notification: Notification) {
+        Log.info("[AnimeViewController] Batch Playback Progress Notification Received. Reloading TableView Episode Section")
+        DispatchQueue.main.async {
+            [weak self] in
+            guard let self = self else { return }
+            self.tableView.performBatchUpdates {
+                self.tableView.reloadSections(Section.indexSet(.episodes), with: .fade)
+                self.tableView.setNeedsLayout()
+            }
+        }
     }
 }
 
@@ -1064,11 +1090,72 @@ extension AnimeViewController {
     }
     
     @objc private func contextMenu(markAsWatched sender: UIMenuController) {
-        if let episodeLink = contextMenuSelectedEpisode, let tracker = anime?.trackingContext {
-            tracker.update(progress: 1.0, forEpisodeLink: episodeLink)
-            tracker.endWatching(episode: episodeLink)
+        guard let selectedEpisodeLink = self.contextMenuSelectedEpisode,
+              let selectedIndexPath = self.contextMenuSelectedIndexPath,
+              let selectedEpisodeCell = tableView.cellForRow(at: selectedIndexPath),
+              let anime = self.anime else {
+            return DispatchQueue.main.async {
+                [weak self] in self?.concludeContextMenu()
+            }
         }
-        DispatchQueue.main.async { self.concludeContextMenu() }
+        
+        let markCurrentEpisodeAsComplete: () -> Void = {
+            [weak self] in
+            anime.trackingContext.update(progress: 1.0, forEpisodeLink: selectedEpisodeLink)
+            anime.trackingContext.endWatching(episode: selectedEpisodeLink)
+            DispatchQueue.main.async { self?.concludeContextMenu() }
+        }
+        
+        // Skip mark all episodes prompt for this anime
+        if !shouldPromptBatchEpisodeMarking {
+            return markCurrentEpisodeAsComplete()
+        }
+        
+        // Ask the user if they want to mark previous episodes "Completed" as well
+        let alertMessage = UIAlertController(
+            title: "Mark Episode As Complete",
+            message: "Do you want to mark previous episodes as complete?",
+            preferredStyle: .actionSheet
+        )
+        
+        alertMessage.addAction(.init(title: "Only This Episode", style: .default) {
+            _ in markCurrentEpisodeAsComplete()
+        })
+        
+        alertMessage.addAction(.init(title: "All Previous Episodes", style: .default) {
+            [weak self] _ in
+            // Mark all episodeLinks as complete, this is very intensive
+            DispatchQueue.global().async {
+                // Retrieve currently selected and previous episodeLinks
+                if let currentEpisodeLinkIndex = anime.episodeLinks.firstIndex(of: selectedEpisodeLink) {
+                    let episodeLinksArraySlice = anime.episodeLinks[0...currentEpisodeLinkIndex]
+                    let episodeLinksToUpdate = Array(episodeLinksArraySlice)
+                    anime.trackingContext.update(progress: 1.0, forEpisodeLinks: episodeLinksToUpdate)
+                    
+                    // Only call this method for the current episodeLink, to reduce unnecessary network requests to Anime Listing Services
+                    anime.trackingContext.endWatching(episode: selectedEpisodeLink)
+                    
+                    DispatchQueue.main.async {
+                        self?.concludeContextMenu(batchUpdatePerformed: true)
+                    }
+                }
+            }
+        })
+        
+        alertMessage.addAction(.init(title: "Don't Ask Again", style: .default) {
+            [weak self] _ in
+            self?.shouldPromptBatchEpisodeMarking = false
+            markCurrentEpisodeAsComplete()
+        })
+        
+        alertMessage.addAction(.init(title: "Cancel", style: .cancel) {
+            [weak self] _ in self?.concludeContextMenu()
+        })
+        
+        alertMessage.popoverPresentationController?.sourceView = selectedEpisodeCell
+        alertMessage.popoverPresentationController?.sourceRect = selectedEpisodeCell.bounds
+        
+        present(alertMessage, animated: true)
     }
     
     @objc private func contextMenu(markAsUnwatched sender: UIMenuController) {
@@ -1078,8 +1165,13 @@ extension AnimeViewController {
         DispatchQueue.main.async { self.concludeContextMenu() }
     }
     
-    private func concludeContextMenu() {
-        if let targetIndexPath = contextMenuSelectedIndexPath {
+    /// Closes context menu and reloads episodeLink's tableViewRow
+    /// - Parameters:
+    ///     - batchUpdatePerformed: Boolean indicating if more than 1 episode's progress has been updated.
+    private func concludeContextMenu(batchUpdatePerformed: Bool = false) {
+        /// Do not reload tableView if batch update has occured.
+        /// `onBatchPlaybackProgressDidUpdate(:_)` will handle reloading the tableView
+        if let targetIndexPath = contextMenuSelectedIndexPath, !batchUpdatePerformed {
             tableView.performBatchUpdates({
                 tableView.reloadRows(at: [targetIndexPath], with: .fade)
                 tableView.setNeedsLayout()
@@ -1088,10 +1180,6 @@ extension AnimeViewController {
         
         contextMenuSelectedIndexPath = nil
         contextMenuSelectedEpisode = nil
-    }
-    
-    override var canBecomeFirstResponder: Bool {
-        true
     }
     
     func offlineAccessButton(

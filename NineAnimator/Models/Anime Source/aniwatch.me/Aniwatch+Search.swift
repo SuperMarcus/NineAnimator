@@ -37,7 +37,7 @@ extension NASourceAniwatch {
             page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
-        lazy var searchParameters: [String: Any] = [
+        /*lazy var searchParameters: [String: Any] = [
             "action": "search",
             "animelist": [2],
             "anyGenre": false,
@@ -66,10 +66,10 @@ extension NASourceAniwatch {
             let cover: String
             let title: String
             let detail_id: Int
-        }
+        }*/
         
         func more() {
-            if performingTask == nil {
+            /*if performingTask == nil {
                 performingTask = parent.requestManager.request(
                     parent.ajexEndpoint.absoluteString,
                     handling: .default,
@@ -115,7 +115,7 @@ extension NASourceAniwatch {
                     self._results = $0
                     self.delegate?.pageIncoming(0, from: self)
                 }
-            }
+            }*/
         }
         init(_ query: String, withParent parent: NASourceAniwatch) {
             self.parent = parent

@@ -75,6 +75,11 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     // State of the player
     private(set) var state: State = .idle
     
+    // Timer used to automatically hide the mouse cursor after 2 second of inactivity
+    #if targetEnvironment(macCatalyst)
+    private var mouseTimer: Timer?
+    #endif
+    
     override private init() {
         super.init()
         
@@ -132,7 +137,7 @@ extension NativePlayerController {
         playerViewController.userActivity?.delegate = self
         
         // Track the server that's being used the most
-        MSAnalytics.trackEvent("Playback", withProperties: [
+        Analytics.trackEvent("Playback", withProperties: [
             "source_server": "\(media.link.parent.source.name) (\(media.link.server))"
         ])
     }
@@ -150,6 +155,12 @@ extension NativePlayerController {
                 userInfo: [ "media": firstMedia ]
             )
         }
+        
+        // Remove mouse movement timer
+        #if targetEnvironment(macCatalyst)
+        mouseTimer?.invalidate()
+        mouseTimer = nil
+        #endif
         
         // Clear the queue and dismiss the old player view controller
         clearQueue()
@@ -217,7 +228,14 @@ extension NativePlayerController {
     }
     
     func playerViewController(_ playerViewController: AVPlayerViewController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-        Log.debug("[NativePlayerController] Restoring from PiP playbacck...")
+        // Do not restore to fullscreen if PiP ended because the video has finished playing
+        guard self.currentPlaybackTMinus != 0.0 else {
+            Log.debug("[NativePlayerController] PiP playback will end because video has finished playing")
+            state = .idle
+            return completionHandler(false)
+        }
+        
+        Log.debug("[NativePlayerController] Restoring from PiP playback...")
         RootViewController.shared?.presentOnTop(playerViewController, animated: true) { completionHandler(true) }
         state = .fullscreen
     }
@@ -246,10 +264,34 @@ extension NativePlayerController {
             }
         }
     }
+    #if targetEnvironment(macCatalyst)
+    func playerViewController(_ playerViewController: AVPlayerViewController, willBeginFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        // Hide cursor during fullscreen playback after inactivity
+        if mouseTimer == nil {
+            mouseTimer = Timer.scheduledTimer(
+                timeInterval: TimeInterval(2), // Check inactivity every 2 sec
+                target: self,
+                selector: #selector(shouldHideMouse),
+                userInfo: nil,
+                repeats: true
+            )
+        }
+    }
+    #endif
 }
 
 // MARK: - AVPlayer & AVPlayerItem observers
 extension NativePlayerController {
+    #if targetEnvironment(macCatalyst)
+    @objc private func shouldHideMouse() {
+        let secondsSinceLastMouseMovement = Float(CGEventSource.secondsSinceLastEventType(CGEventSourceStateID.combinedSessionState, eventType: CGEventType.mouseMoved))
+        // Hide the cursor after 2 seconds of inactivity
+        if secondsSinceLastMouseMovement > 2 {
+            NSCursor.setHiddenUntilMouseMoves(true)
+        }
+    }
+    #endif
+    
     private func onPlayerStatusChange(player _: AVPlayer, change _: NSKeyValueObservedChange<AVPlayer.Status>) {
         Log.debug("[NativePlayerController] Player status changed to %@.", player.status.rawValue)
     }
@@ -384,9 +426,19 @@ extension NativePlayerController {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(
-                .playback,
-                mode: .moviePlayback)
+            if #available(iOS 13.0, *) {
+                try audioSession.setCategory(
+                    .playback,
+                    mode: .moviePlayback,
+                    policy: .longFormVideo
+                )
+            } else {
+                // Fallback on older versions
+                try audioSession.setCategory(
+                    .playback,
+                    mode: .moviePlayback
+                )
+            }
             try audioSession.setActive(true, options: [])
         } catch { Log.error("Unable to setup audio session - %@", error) }
     }

@@ -23,7 +23,7 @@ import SwiftSoup
 extension NASourceMonosChinos {
     static let knownServers = [
         "Cloud": "MonosChinos",
-        "Verystream": "VeryStream",
+        "Streamtape": "Streamtape",
         "Fembed": "Fembed",
         "Clipwatching": "ClipWatching",
         "Uqload": "Uqload",

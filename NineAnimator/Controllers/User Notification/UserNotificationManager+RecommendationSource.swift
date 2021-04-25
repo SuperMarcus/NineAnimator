@@ -22,10 +22,32 @@ import Foundation
 extension UserNotificationManager {
     class SubscribedAnimeRecommendationSource: RecommendationSource {
         var name = "Subscriptions"
-        var piority: RecommendationSource.Piority = .defaultHigh
+        var priority: RecommendationSource.Priority = .defaultHigh
         var shouldPresentRecommendation: Bool { true }
         
+        init() {
+            // Observe changes to the user's subscriptions
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(subscriptionsHasUpdated),
+                name: .subscriptionsDidUpdate,
+                object: nil
+            )
+        }
+        
+        @objc func subscriptionsHasUpdated() {
+            // Force Reload the Entire Recommendation Source
+            fireDidUpdateNotification()
+        }
+        
         func shouldReload(recommendation: Recommendation) -> Bool {
+            // We only compare the contents of the subscription lists BUT NOT the
+            // order of the lists. This is because the Recommendation Source
+            // can display the subscription list out of order intentionally.
+            // Ex. A subscription item will always be displayed first if it
+            // contains a new unwatched episode.
+            // If the user manually re-arranges the order of their list, the
+            // `subscriptionDidUpdate` observer will manually reload this source
             let oldSet = recommendation.items.reduce(into: Set<AnyLink>()) {
                 $0.insert($1.link)
             }

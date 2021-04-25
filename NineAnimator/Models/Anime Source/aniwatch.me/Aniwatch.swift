@@ -44,7 +44,7 @@ class NASourceAniwatch: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://aniwatch.me" }
     
-    let ajexEndpoint = URL(string: "https://aniwatch.me/api/ajax/APIHandle")!
+    /*let ajexEndpoint = URL(string: "https://aniwatch.me/api/ajax/APIHandle")!
     
     lazy var XSRFRequestModifier: NARequestAdapter = XSRFTokenModifier(parent: self)
     lazy var AuthRequestModifier: NARequestAdapter = AuthSessionModifier(parent: self)
@@ -53,18 +53,22 @@ class NASourceAniwatch: BaseSource, Source, PromiseSource {
         super.init(with: parent)
         requestManager.enqueueAdapter(XSRFRequestModifier)
         requestManager.enqueueAdapter(AuthRequestModifier)
-    }
+    }*/
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        NASourceAniwatch.knownServers.keys.contains(server) ? DummyParser.registeredInstance : nil
+        nil
+        // NASourceAniwatch.knownServers.keys.contains(server) ? DummyParser.registeredInstance : nil
     }
     
     override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
-        if purpose == .googleCast { return [] }
-        return [ "ensub", "endub", "desub", "dedub" ]
+        []
+        /*if purpose == .googleCast { return [] }
+        return [ "ensub", "endub", "desub", "dedub" ]*/
     }
     
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
         .fail()
     }
+    
+    override var isEnabled: Bool { false }
 }

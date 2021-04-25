@@ -31,6 +31,7 @@ extension NineAnimatorUser {
                 return Log.error("Subscribed animes failed to encode")
             }
             _freezer.set(data, forKey: Keys.subscribedAnimeList)
+            NotificationCenter.default.post(name: .subscriptionsDidUpdate, object: self)
         }
     }
     
@@ -51,7 +52,7 @@ extension NineAnimatorUser {
      */
     func subscribe(anime: Anime) {
         subscribe(uncached: anime.link)
-        UserNotificationManager.default.update(anime, shouldFireSubscriptionEvent: true)
+        UserNotificationManager.default.update(anime)
     }
     
     /**
@@ -61,7 +62,29 @@ extension NineAnimatorUser {
         var newWatchList = subscribedAnimes.filter { $0 != link }
         newWatchList.append(link)
         subscribedAnimes = newWatchList
-        UserNotificationManager.default.lazyPersist(link, shouldFireSubscriptionEvent: true)
+        UserNotificationManager.default.lazyPersist(link)
+    }
+    
+    /**
+     Move AnimeLink from one index to another index in the user's watch list
+     */
+    func moveSubscription(fromIndex sourceIndex: Int, toIndex destinationIndex: Int) {
+        // Ensure index is in bounds of array
+        guard (0...subscribedAnimes.count - 1).contains(sourceIndex) else {
+            return Log.error("[User+Subscriptions] Tried to move subscription from index that is out of bounds.")
+        }
+        let originalSubscriptionAnimeLink = subscribedAnimes.remove(at: sourceIndex)
+        subscribedAnimes.insert(originalSubscriptionAnimeLink, at: destinationIndex)
+    }
+    
+    /**
+     An alias of moveSubscription(fromIndex:toIndex)
+     */
+    func moveSubscription(withLink animeLink: AnimeLink, toIndex destinationIndex: Int) {
+        guard let indexOfAnimeLink = subscribedAnimes.firstIndex(of: animeLink) else {
+            return Log.error("[User+Subscription] Tried moving an animeLink that does not exist in the user's subscribed anime)")
+        }
+        moveSubscription(fromIndex: indexOfAnimeLink, toIndex: destinationIndex)
     }
     
     /**

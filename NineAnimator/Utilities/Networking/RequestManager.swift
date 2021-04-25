@@ -169,7 +169,7 @@ extension NARequestManager {
         
         /// Create a promise that resolves into a string
         var responseString: NineAnimatorPromise<String> {
-            self._makePromise { $0.responseString(completionHandler: $1) }
+            self.responseString(interpretAs: UTF8.self)
         }
         
         /// Create a promise that receives and decodes a JSON-encoded response
@@ -218,6 +218,22 @@ extension NARequestManager {
             self._makePromise {
                 $0.responseDecodable(of: type, decoder: decoder, completionHandler: $1)
             }
+        }
+        
+        /// Create a promise that interprets the response data as a specific string type
+        func responseString<Encoding>(interpretAs encoding: Encoding.Type) -> NineAnimatorPromise<String> where Encoding: _UnicodeEncoding, Encoding.CodeUnit == Data.Element {
+            self.responseData.then {
+                .init(decoding: $0, as: encoding)
+            }
+        }
+        
+        /// Create a promise that interprets the response data based on response header
+        ///
+        /// This used to be the default solution. However, many website seems to include non-standard characteres in responses, which seriously messes with swift's String.
+        func responseString(decodeWithCharsetFromHeader: Bool) -> NineAnimatorPromise<String> {
+            decodeWithCharsetFromHeader ? self._makePromise {
+                $0.responseString(completionHandler: $1)
+            } : self.responseString
         }
         
         private func _makePromise<S, E>(withResponseGenerator makeResponse: @escaping (Alamofire.DataRequest, @escaping (Alamofire.DataResponse<S, E>) -> Void) -> Alamofire.DataRequest) -> NineAnimatorPromise<S> {

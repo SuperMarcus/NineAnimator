@@ -104,6 +104,7 @@ class NineAnimator: SessionDelegate {
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
     /// An in-memory cache of all the loaded anime
+    @AtomicProperty
     fileprivate var cachedAnimeMap = [AnimeLink: (Date, Anime)]()
     
     /// Global queue for modify internal configurations
@@ -132,7 +133,7 @@ extension NineAnimator {
     func sortedRecommendationSources() -> [RecommendationSource] {
         let pool = additionalRecommendationSources
         // Later will add the featured containers
-        return pool.sorted { $0.piority > $1.piority }
+        return pool.sorted { $0.priority > $1.priority }
     }
     
     func register(additionalRecommendationSource source: RecommendationSource) {
@@ -162,15 +163,15 @@ extension NineAnimator {
         register(source: NASourceAnimePahe(with: self))
         register(source: NASourceFourAnime(with: self))
         register(source: NASourceAnimeTwist(with: self))
-        register(source: NASourceNineAnime(with: self))
+        register(source: NASourcePantsubase(with: self))
         register(source: NASourceAnimeUltima(with: self))
         register(source: NASourceAnimeKisa(with: self))
         register(source: NASourceAnimeKisa.ExperimentalSource(with: self))
-        register(source: NASourceAniwatch(with: self))
         register(source: NASourceHAnime(with: self))
         register(source: NASourceGogoAnime(with: self))
         register(source: NASourceAnimeDao(with: self))
         register(source: NASourceAnimeHub(with: self))
+        register(source: NASourceArrayanime(with: self))
         register(source: NASourceKissanime(with: self))
         register(source: NASourceAnimeUnity(with: self))
         register(source: NASourceMonosChinos(with: self))
@@ -179,6 +180,8 @@ extension NineAnimator {
         // Disabled sources
         register(source: NASourceWonderfulSubs(with: self))
         register(source: NASourceMasterAnime(with: self))
+        register(source: NASourceNineAnime(with: self))
+        register(source: NASourceAniwatch(with: self))
     }
 }
 
@@ -234,7 +237,7 @@ extension NineAnimator {
             var holdingReferenceContext: TrackingContext? = context
             NineAnimator.globalConfigurationQueue.asyncAfter(deadline: .now() + 10) {
                 holdingReferenceContext = nil
-                _ = holdingReferenceContext // Just to silent the warning
+                _ = holdingReferenceContext // Just to silence the warning
             }
         }
         
@@ -327,7 +330,9 @@ extension NineAnimator {
             result, error in // Doesn't care about strong reference to self
             // If the result is not nil, cache the retrieved anime
             if let result = result {
-                self.cachedAnimeMap[link] = (Date(), result)
+                self.$cachedAnimeMap.mutate {
+                    $0[link] = (Date(), result)
+                }
                 // Call the original handler
                 handler(result, nil)
             } else if let cachedAnime = cachedVersion?.1 {
