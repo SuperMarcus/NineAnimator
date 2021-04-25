@@ -128,8 +128,16 @@ extension NASourceHAnime {
         let tempUrl = try URL(string: url).tryUnwrap(.urlError)
         let realUrl = "\(tempUrl.path)?quality=\(quality)"
         
-        return cdn == "cps"
-            ? "https://i1.wp.com/static-assets.droidbuzz.top\(realUrl)"
-            : "https://i1.wp.com/dynamic-assets.imageg.top\(realUrl)"
+        if cdn == "cps" {
+            let cdns = [
+                "https://i1.wp.com/static-assets.airharte.top\(realUrl)",
+                "https://i1.wp.com/static-assets.akidoo.top\(realUrl)",
+                "https://i1.wp.com/static-assets.mobilius.top\(realUrl)"
+            ]
+            
+            return cdns.randomElement()!
+        }
+        
+        return "https://i1.wp.com/dynamic-assets.imageg.top\(realUrl)"
     }
 }
