@@ -29,7 +29,12 @@ extension NASourceAnimeUnity {
             return Episode(
                 link,
                 target: videoUrl,
-                parent: anime
+                parent: anime,
+                userInfo: [
+                    DummyParser.Options.headers: [
+                        "Referer": ""
+                    ]
+                ]
             )
         }
     }
