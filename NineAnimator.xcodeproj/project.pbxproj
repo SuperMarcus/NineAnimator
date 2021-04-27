@@ -2600,7 +2600,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Marcus Zhou";
 				TargetAttributes = {
 					2C2196CD21DAC555002059D3 = {
@@ -3787,7 +3787,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
+				minimumVersion = 4.1.1;
 			};
 		};
 		2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */ = {
@@ -3811,7 +3811,7 @@
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.15.8;
+				minimumVersion = 6.3.0;
 			};
 		};
 		2CB67043249FCA06006C11A9 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
@@ -3819,7 +3819,7 @@
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.1;
+				minimumVersion = 5.4.3;
 			};
 		};
 		2CB67046249FCA24006C11A9 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
@@ -3834,8 +3834,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SuperMarcus/OpenCastSwift";
 			requirement = {
-				branch = spm;
-				kind = branch;
+				kind = revision;
+				revision = c1a5994b57c6f33b92cb8bcf87e981783b99cac9;
 			};
 		};
 		2CB6704C249FCA65006C11A9 /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {

@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 import Kingfisher
 
-class NineAnimator: SessionDelegate {
+class NineAnimator: Alamofire.SessionDelegate {
     static var `default` = NineAnimator()
     
     /// NineAnimator runtime properties
