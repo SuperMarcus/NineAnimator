@@ -75,7 +75,7 @@ extension NASourceAnimeKisa {
             (needle: String) throws -> NSRegularExpression in
             try NSRegularExpression(pattern: "var \(needle)\\s+=\\s+\\\"([^\"]+)", options: [])
         }
-        var obtainedSources = [
+        var obtainedSources: [String: String] = [
             "adless": try buildExp("GoogleVideo"),
             "fembed": try buildExp("Fembed"),
             "mp4upload": try buildExp("MP4Upload"),
