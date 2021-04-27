@@ -23,13 +23,31 @@ import Foundation
 class StreamSBParser: VideoProviderParser {
     var aliases: [String] { [] }
     
-    let videoSourceRegex = try! NSRegularExpression(
+    private let apiPath = URL(string: "https://streamsb.net/play")!
+    
+    private let videoSourceRegex = try! NSRegularExpression(
         pattern: #"file:"([^"]+)"#,
         options: .caseInsensitive
     )
     
+    private let embedIDRegex = try! NSRegularExpression(
+        pattern: #"(?<=embed-).+?(?=\.)"#,
+        options: .caseInsensitive
+    )
+    
+    private func retrieveId(from path: String) -> String? {
+        self.embedIDRegex
+            .firstMatch(in: path)?
+            .first
+    }
+    
     func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
-        session.request(episode.target).responseString {
+        let videoID = retrieveId(from: episode.target.absoluteString) ?? episode.target.absoluteString
+        let requestURL = apiPath.appendingPathComponent(videoID)
+        return session.request(
+            requestURL,
+            parameters: [ "auto": 1, "referer": episode.link.identifier ]
+        ).responseString {
             response in
             do {
                 let responseContent: String

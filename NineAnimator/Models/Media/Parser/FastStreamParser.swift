@@ -54,7 +54,9 @@ class FastStreamParser: VideoProviderParser {
                         throw NineAnimatorError.providerError("Cannot find a streambale resource in the selected page")
                 }
                 
-                guard let resourceUrl = URL(string: resourceUrlString) else {
+                guard let resourceUrl = URL(
+                        string: resourceUrlString,
+                        relativeTo: URL(string: "https://www1.animeultima.to")) else {
                     throw NineAnimatorError.urlError
                 }
                 

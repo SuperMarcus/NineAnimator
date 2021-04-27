@@ -23,7 +23,7 @@ import Foundation
 class PantsudriveParser: VideoProviderParser {
     var aliases: [String] { [] }
     
-    private static let apiURL = URL(string: "https://play.api-web.site/anime/videourl.php")!
+    private static let apiURL = URL(string: "https://gogo-stream.com/ajax.php")!
     
     private func getVideoID(url: URL) -> String? {
         guard let url = URLComponents(string: url.absoluteString) else {
@@ -33,7 +33,7 @@ class PantsudriveParser: VideoProviderParser {
     }
     
     private struct APIResponse: Codable {
-        let url: [PlaybackFiles]
+        let source: [PlaybackFiles]
     }
     
     private struct PlaybackFiles: Codable {
@@ -63,8 +63,8 @@ class PantsudriveParser: VideoProviderParser {
                 case .success(let response):
                     do {
                         let videoURLString = try response
-                            .url
-                            .first
+                            .source
+                            .last
                             .tryUnwrap(.decodeError("First Video URL"))
                             .file
                         
