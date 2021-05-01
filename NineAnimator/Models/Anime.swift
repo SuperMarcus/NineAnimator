@@ -211,7 +211,7 @@ struct Anime {
             return select(server: recentServer)
         }
         
-        // If the previous server is not available, then pioritize
+        // If the previous server is not available, then prioritize
         // the server used previously by the user for this anime
         if let previousServer = trackingContext.previousSessionServer,
             servers[previousServer] != nil {

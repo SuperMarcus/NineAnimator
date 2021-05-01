@@ -265,7 +265,7 @@ extension RootViewController {
             }
         })
         
-        alert.addAction(UIAlertAction(title: "Merge - Pioritize Local", style: .default) {
+        alert.addAction(UIAlertAction(title: "Merge - Prioritize Local", style: .default) {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .localFirst)
@@ -274,7 +274,7 @@ extension RootViewController {
             }
         })
         
-        alert.addAction(UIAlertAction(title: "Merge - Pioritize Importing", style: .default) {
+        alert.addAction(UIAlertAction(title: "Merge - Prioritize Importing", style: .default) {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .remoteFirst)
