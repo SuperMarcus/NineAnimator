@@ -32,11 +32,11 @@ class RootViewController: UITabBarController, Themable {
                 topController = presentedController
             } // Special case for UINavigationController
             else if let nav = topController as? UINavigationController,
-                      let presentedController = nav.visibleViewController {
+                    let presentedController = nav.visibleViewController {
                 topController = presentedController
             } // Special case for UITabBarController
             else if let tab = topController as? UITabBarController,
-                      let presentedController = tab.selectedViewController {
+                    let presentedController = tab.selectedViewController {
                 topController = presentedController
             } else { break }
         }
