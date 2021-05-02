@@ -256,10 +256,22 @@ extension RootViewController {
             presentOnTop(errorAlert)
         }
         
+        func showConfirmationMessage() {
+            let confirmationAlert = UIAlertController(
+                title: "Backup Imported",
+                message: "This backup was imported successfully",
+                preferredStyle: .alert
+            )
+            
+            confirmationAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            presentOnTop(confirmationAlert)
+        }
+        
         alert.addAction(UIAlertAction(title: "Replace Current", style: .destructive) {
             _ in
             do {
                 try replace(NineAnimator.default.user, with: config)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
@@ -269,6 +281,7 @@ extension RootViewController {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .localFirst)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
@@ -278,6 +291,7 @@ extension RootViewController {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .remoteFirst)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
