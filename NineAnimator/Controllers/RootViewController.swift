@@ -259,7 +259,7 @@ extension RootViewController {
         func showConfirmationMessage() {
             let confirmationAlert = UIAlertController(
                 title: "Backup Imported",
-                message: "This backup was imported successfully",
+                message: "Backup was imported successfully",
                 preferredStyle: .alert
             )
             
