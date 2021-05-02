@@ -203,9 +203,9 @@ extension RootViewController {
             if let navigationController = viewController.navigationController {
                 navigationController.pushViewController(targetViewController, animated: true)
             } else { viewController.present(targetViewController, animated: true) }
-        } else { // If no view controller is provided, present the link in the featured tab
-            // Jump to Featured tab
-            selectedIndex = 0
+        } else {
+            // If no view controller is provided, present the link in the watch next tab
+            navigate(toScene: .toWatch)
             
             guard let navigationController = viewControllers?.first as? ApplicationNavigationController else {
                 Log.error("The first view controller is not ApplicationNavigationController.")
