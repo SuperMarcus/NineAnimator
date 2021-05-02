@@ -24,12 +24,23 @@ class RootViewController: UITabBarController, Themable {
     
     private weak var castControllerDelegate: AnyObject?
     
+    /// The top view controller visible by the user
     private var topViewController: UIViewController {
-        var topViewController: UIViewController = self
-        while let next = topViewController.presentedViewController {
-            topViewController = next
+        var topController: UIViewController = self
+        while true {
+            if let presentedController = topController.presentedViewController {
+                topController = presentedController
+            } // Special case for UINavigationController
+            else if let nav = topController as? UINavigationController,
+                      let presentedController = nav.visibleViewController {
+                topController = presentedController
+            }// Special case for UITabBarController
+            else if let tab = topController as? UITabBarController,
+                      let presentedController = tab.selectedViewController {
+                topController = presentedController
+            } else { break }
         }
-        return topViewController
+        return topController
     }
 
     override func viewDidLoad() {
