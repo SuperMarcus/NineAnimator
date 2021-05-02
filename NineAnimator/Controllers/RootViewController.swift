@@ -242,8 +242,8 @@ extension RootViewController {
     
     fileprivate func _restore(_ config: URL) {
         let alert = UIAlertController(
-            title: "Import Configurations",
-            message: "How do you want to import this configuration?",
+            title: "Import Backup",
+            message: "How do you want to import this backup?",
             preferredStyle: .alert
         )
         
