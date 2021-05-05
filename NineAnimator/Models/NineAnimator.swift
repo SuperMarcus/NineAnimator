@@ -103,6 +103,8 @@ class NineAnimator: Alamofire.SessionDelegate {
     /// Container for the cached references to tracking contexts
     fileprivate var trackingContextReferences = [AnimeLink: WeakRef<TrackingContext>]()
     
+    fileprivate var trackingContextGarbageCollectionTimer: Timer?
+    
     /// An in-memory cache of all the loaded anime
     @AtomicProperty
     fileprivate var cachedAnimeMap = [AnimeLink: (Date, Anime)]()
@@ -216,9 +218,9 @@ extension NineAnimator {
     
     /// Retrieve the tracking context for the anime
     func trackingContext(for anime: AnimeLink) -> TrackingContext {
-        // Remove dead contexts
-        collectGarbage()
-        // Return the context dirctly if it has been created
+        // Schedule garbage collection
+        scheduleGarbageCollection()
+        // Return the context directly if it has been created
         if let context: TrackingContext = NineAnimator.globalConfigurationQueue.sync(execute: {
             trackingContextReferences[anime]?.object
         }) { return context }
@@ -263,7 +265,22 @@ extension NineAnimator {
         register(service: Simkl(self))
     }
     
-    /// Remove all expired weak references
+    /// Schedules garbage collection to remove all expired weak `TrackingContext`  references
+    func scheduleGarbageCollection() {
+        DispatchQueue.main.async {
+            guard self.trackingContextGarbageCollectionTimer == nil else { return }
+            // Trigger collection after 15 seconds to bundle multiple collection requests into one
+            self.trackingContextGarbageCollectionTimer = Timer.scheduledTimer(
+                withTimeInterval: TimeInterval(15),
+                repeats: false
+            ) { _ in
+                self.collectGarbage()
+                self.trackingContextGarbageCollectionTimer = nil
+            }
+        }
+    }
+    
+    /// Removes all expired weak `TrackingContext` references
     private func collectGarbage() {
         NineAnimator.globalConfigurationQueue.sync(flags: [ .barrier ]) {
             let before = self.trackingContextReferences.count
