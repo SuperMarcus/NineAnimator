@@ -378,6 +378,7 @@ extension AnimeViewController {
                 cell.makeThemable()
                 cell.setPresenting(
                     episode,
+                    trackingContext: anime!.trackingContext,
                     additionalInformation: detailedEpisodeInfo,
                     parent: self
                 ) { [weak self] _ in
@@ -389,7 +390,7 @@ extension AnimeViewController {
             } else {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "anime.episode", for: indexPath) as! EpisodeTableViewCell
                 cell.makeThemable()
-                cell.setPresenting(episode, parent: self)
+                cell.setPresenting(episode, trackingContext: anime!.trackingContext, parent: self)
                 return cell
             }
         }

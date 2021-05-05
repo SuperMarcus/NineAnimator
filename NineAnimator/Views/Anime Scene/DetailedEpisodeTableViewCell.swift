@@ -40,6 +40,8 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     
     private(set) var episodeLink: EpisodeLink?
     
+    private(set) var trackingContext: TrackingContext?
+    
     private(set) var episodeInformation: Anime.AdditionalEpisodeLinkInformation?
     
     private var progress: Float {
@@ -66,10 +68,12 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     
     /// Initialize this cell
     func setPresenting(_ episodeLink: EpisodeLink,
+                       trackingContext: TrackingContext,
                        additionalInformation info: Anime.AdditionalEpisodeLinkInformation,
                        parent: AnimeViewController,
                        didResizeCell: @escaping (DetailedEpisodeTableViewCell) -> Void) {
         self.episodeLink = episodeLink
+        self.trackingContext = trackingContext
         self.offlineAccessButton.setPresenting(episodeLink, delegate: parent)
         self.offlineAccessButton.delegate = parent
         self.onStateChange = didResizeCell
@@ -120,9 +124,10 @@ class DetailedEpisodeTableViewCell: UITableViewCell {
     }
     
     @objc private func onProgressUpdate() {
-        guard let episodeLink = episodeLink else { return }
+        guard let episodeLink = episodeLink,
+              let trackingContext = trackingContext else { return }
         
-        let currentProgress = Float(episodeLink.playbackProgress)
+        let currentProgress = Float(trackingContext.playbackProgress(for: episodeLink))
         
         DispatchQueue.main.async {
             [weak self] in
