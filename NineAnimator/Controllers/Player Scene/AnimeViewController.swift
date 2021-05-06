@@ -268,6 +268,14 @@ extension AnimeViewController {
         NineAnimator.default.user.entering(anime: anime.link)
         NineAnimator.default.user.push()
         
+        // Update metadata for the link in the users subscription
+        // This is important in cases such as where Anime Sources may have initially
+        // provided incorrect data (ex. parsed a broken artworkURL), but later provides
+        // correct information (ex. user has updated the app to fix parser)
+        if NineAnimator.default.user.isSubscribing(anime) {
+            NineAnimator.default.user.updateMetadata(for: anime.link)
+        }
+        
         // Setup userActivity
         self.prepareContinuity()
     }

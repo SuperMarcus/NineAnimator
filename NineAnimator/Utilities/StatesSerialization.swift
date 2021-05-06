@@ -107,7 +107,7 @@ func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAni
         var finalSubscriptionsSet = Set<AnimeLink>()
         configuration.subscribedAnimes.forEach { finalSubscriptionsSet.insert($0) }
         backupSubscriptions.forEach { finalSubscriptionsSet.insert($0) }
-        configuration.subscribedAnimes = finalSubscriptionsSet.map { $0 }
+        configuration.replaceAllSubscriptions(with: Array(finalSubscriptionsSet))
     }
 }
 
@@ -128,7 +128,7 @@ func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) throws {
     
     // Restoring subscription list
     if let subscriptions = preservedStates.subscriptions {
-        configuration.subscribedAnimes = subscriptions
+        configuration.replaceAllSubscriptions(with: subscriptions)
     }
     
     // Restoring the tracking data

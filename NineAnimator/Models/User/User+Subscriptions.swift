@@ -24,7 +24,7 @@ extension NineAnimatorUser {
     /**
      Returns the list of anime currently set to be notified for updates
      */
-    var subscribedAnimes: [AnimeLink] {
+    private(set) var subscribedAnimes: [AnimeLink] {
         get { decodeIfPresent([AnimeLink].self, from: _freezer.value(forKey: Keys.subscribedAnimeList)) ?? [] }
         set {
             guard let data = encodeIfPresent(data: newValue) else {
@@ -65,6 +65,12 @@ extension NineAnimatorUser {
         UserNotificationManager.default.lazyPersist(link)
     }
     
+    /// Replace the user's subscription with a new list
+    func replaceAllSubscriptions(with newSubscriptions: [AnimeLink]) {
+        Log.info("[User+Subscriptions] Replacing user subscription list")
+        subscribedAnimes = newSubscriptions
+    }
+    
     /**
      Move AnimeLink from one index to another index in the user's watch list
      */
@@ -91,6 +97,29 @@ extension NineAnimatorUser {
      An alias of unwatch(anime: AnimeLink)
      */
     func unsubscribe(anime: Anime) { unsubscribe(anime: anime.link) }
+    
+    /// Updates the metadata (title, image, etc) of an animelink stored in the user's subscriptions
+    /// - Parameter linkWithNewMetaData: The animelink that contains the updated metadata
+    /// - Note: The AnimeLink's URL cannot be updated as it is used as a unique identifier
+    func updateMetadata(for linkWithNewMetaData: AnimeLink) {
+        // Find the original link in the users subscription
+        // This uses the animelink's link property since its used as a unique ID
+        guard let originalLinkIndex = subscribedAnimes.firstIndex(of: linkWithNewMetaData) else {
+            return Log.error("[User+Subscription] Tried updating the metadata of an animelink that does not exist in the user's subscribed anime")
+        }
+        
+        // Only update subscription list if metadata has changed
+        guard !isMetadataSame(subscribedAnimes[originalLinkIndex], linkWithNewMetaData) else { return }
+        
+        // Replace the old link
+        subscribedAnimes[originalLinkIndex] = linkWithNewMetaData
+    }
+    
+    /// Helper function to compare metadata between two animelinks
+    private func isMetadataSame(_ firstLink: AnimeLink, _ secondLink: AnimeLink) -> Bool {
+        firstLink.image == secondLink.image
+            && firstLink.title == secondLink.title
+    }
     
     /**
      Remove the anime from the watch list
