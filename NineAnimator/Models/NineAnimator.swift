@@ -277,6 +277,7 @@ extension NineAnimator {
                 self.collectGarbage()
                 self.trackingContextGarbageCollectionTimer = nil
             }
+            self.trackingContextGarbageCollectionTimer?.tolerance = 5
         }
     }
     
