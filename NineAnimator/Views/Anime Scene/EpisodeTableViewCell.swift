@@ -22,6 +22,8 @@ import UIKit
 class EpisodeTableViewCell: UITableViewCell {
     private(set) var episodeLink: EpisodeLink?
     
+    private(set) var trackingContext: TrackingContext?
+    
     var onStateChange: ((EpisodeTableViewCell) -> Void)?
     
     @IBOutlet private weak var titleLabel: UILabel!
@@ -60,7 +62,7 @@ class EpisodeTableViewCell: UITableViewCell {
     }
     
     /// Initialize the current cell
-    func setPresenting(_ episodeLink: EpisodeLink, parent: AnimeViewController) {
+    func setPresenting(_ episodeLink: EpisodeLink, trackingContext: TrackingContext, parent: AnimeViewController) {
         self.episodeLink = episodeLink
         self.offlineAccessButton.setPresenting(episodeLink, delegate: parent)
         
@@ -81,10 +83,12 @@ class EpisodeTableViewCell: UITableViewCell {
     }
     
     @objc private func onProgressUpdate() {
-        guard let link = episodeLink else { return }
+        guard let trackingContext = trackingContext,
+              let episodeLink = episodeLink else { return }
         
-        let currentProgress = Float(link.playbackProgress)
+        let currentProgress = Float(trackingContext.playbackProgress(for: episodeLink))
         
+        print(episodeLink.playbackProgress)
         DispatchQueue.main.async {
             [weak self] in
             guard let self = self else { return }
