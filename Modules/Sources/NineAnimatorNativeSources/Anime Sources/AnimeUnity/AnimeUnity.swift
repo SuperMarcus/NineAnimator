@@ -52,7 +52,7 @@ class NASourceAnimeUnity: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://animeunity.it" }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier

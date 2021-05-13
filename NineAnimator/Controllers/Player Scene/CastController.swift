@@ -17,10 +17,10 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import OpenCastSwift
 import NineAnimatorCommon
 import NineAnimatorNativeParsers
 import NineAnimatorNativeSources
+import OpenCastSwift
 import UIKit
 
 class CastController: CastDeviceScannerDelegate, CastClientDelegate {

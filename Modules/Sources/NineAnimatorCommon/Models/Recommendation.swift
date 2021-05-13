@@ -114,11 +114,11 @@ public struct Recommendation {
     
     /// The default constructor for generating a Recommendation object
     public init(_ source: RecommendationSource,
-         items: [RecommendingItem],
-         title: String,
-         subtitle: String = "",
-         style: Style = .standard,
-         onGenerateCompleteListProvider: @escaping () -> ContentProvider? = { nil }) {
+                items: [RecommendingItem],
+                title: String,
+                subtitle: String = "",
+                style: Style = .standard,
+                onGenerateCompleteListProvider: @escaping () -> ContentProvider? = { nil }) {
         self.source = source
         self.items = items
         self.title = title

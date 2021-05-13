@@ -80,7 +80,7 @@ class NASourceWonderfulSubs: BaseSource, Source, PromiseSource {
         _recommendServer(for: anime, ofPurpose: purpose)
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
     }
 }

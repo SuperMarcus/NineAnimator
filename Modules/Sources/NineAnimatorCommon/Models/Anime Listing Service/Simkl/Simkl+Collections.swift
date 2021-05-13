@@ -149,7 +149,7 @@ public extension Simkl {
             try container.encodeIfPresent(correspondingState, forKey: .correspondingState)
         }
         
-        required public init(from decoder: Decoder) throws {
+        public required init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: Keys.self)
             self.simkl = NineAnimator.default.service(type: Simkl.self)
             self.key = try container.decode(String.self, forKey: .key)

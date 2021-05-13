@@ -34,10 +34,10 @@ public struct StaticListingAnimeCollection: ListingAnimeCollection {
     public var userInfo: [String: Any]
     
     public init(_ parent: ListingService,
-         name: String,
-         identifier: String,
-         collection: [ListingAnimeReference],
-         userInfo: [String: Any] = [:]) {
+                name: String,
+                identifier: String,
+                collection: [ListingAnimeReference],
+                userInfo: [String: Any] = [:]) {
         self.parentService = parent
         self.title = name
         self.identifier = identifier

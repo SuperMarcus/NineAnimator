@@ -34,7 +34,7 @@ public class Simkl: BaseListingService, ListingService {
         "com.marcuszhou.nineanimator.service.simkl"
     }
     
-    required public init(_ parent: NineAnimator) {
+    public required init(_ parent: NineAnimator) {
         super.init(parent)
     }
 }

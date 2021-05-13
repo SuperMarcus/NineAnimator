@@ -20,8 +20,8 @@
 import Alamofire
 import AVKit
 import Foundation
-import SwiftSoup
 import NineAnimatorCommon
+import SwiftSoup
 
 class RapidVideoParser: VideoProviderParser {
     var aliases: [String] {

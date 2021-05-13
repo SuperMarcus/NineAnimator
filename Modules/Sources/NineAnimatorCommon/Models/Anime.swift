@@ -62,12 +62,12 @@ public struct Anime {
     
     /// Initialize this Anime as a conventional anime
     public init(_ link: AnimeLink,
-         alias: String = "",
-         additionalAttributes: [AttributeKey: Any] = [:],
-         description: String,
-         on servers: [ServerIdentifier: String],
-         episodes: [ServerIdentifier: EpisodeLinksCollection],
-         episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation] = [:]) {
+                alias: String = "",
+                additionalAttributes: [AttributeKey: Any] = [:],
+                description: String,
+                on servers: [ServerIdentifier: String],
+                episodes: [ServerIdentifier: EpisodeLinksCollection],
+                episodesAttributes: [EpisodeLink: AdditionalEpisodeLinkInformation] = [:]) {
         self.link = link
         self.servers = servers
         self.episodes = episodes
@@ -84,11 +84,10 @@ public struct Anime {
     
     /// Initialize this Anime as the parent of a series
     public init(_ link: AnimeLink,
-         alias: String = "",
-         additionalAttributes: [AttributeKey: Any] = [:],
-         description: String,
-         children: [Anime]
-        ) {
+                alias: String = "",
+                additionalAttributes: [AttributeKey: Any] = [:],
+                description: String,
+                children: [Anime]) {
         self.link = link
         self.alias = alias
         self.additionalAttributes = additionalAttributes
@@ -245,12 +244,11 @@ public extension Anime {
         public var title: String?
         
         public init(parent: EpisodeLink,
-             synopsis: String? = nil,
-             airDate: String? = nil,
-             season: String? = nil,
-             episodeNumber: Int? = nil,
-             title: String? = nil
-            ) {
+                    synopsis: String? = nil,
+                    airDate: String? = nil,
+                    season: String? = nil,
+                    episodeNumber: Int? = nil,
+                    title: String? = nil) {
             self.parent = parent
             self.synopsis = synopsis
             self.airDate = airDate

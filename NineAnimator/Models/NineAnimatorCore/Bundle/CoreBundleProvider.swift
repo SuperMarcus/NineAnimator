@@ -23,7 +23,7 @@ import NineAnimatorNativeParsers
 import NineAnimatorNativeSources
 
 @available(iOS 13.0, *)
-protocol NACoreEngineBundleProvider: AnyObject, NSObjectProtocol {
+protocol NACoreEngineBundleProvider: NSObjectProtocol {
     /// Load the core bundle
     func retrieveBundle() -> NineAnimatorPromise<NACoreEngineBundle>
     

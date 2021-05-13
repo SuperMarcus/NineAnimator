@@ -53,7 +53,7 @@ class NASourceNineAnime: BaseSource, Source, PromiseSource {
     private var _cachedDescriptor: SourceDescriptor?
     private var _serverInfoCache = [String: (Date, AnimeServerList)]()
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         self.setupGlobalRequestModifier()
     }

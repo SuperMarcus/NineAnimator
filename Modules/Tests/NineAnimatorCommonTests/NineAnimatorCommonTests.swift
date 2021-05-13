@@ -1,11 +1,11 @@
-    import XCTest
-    @testable import NineAnimatorCommon
+@testable import NineAnimatorCommon
+import XCTest
 
-    final class NineAnimatorCommonTests: XCTestCase {
-        func testExample() {
-            // This is an example of a functional test case.
-            // Use XCTAssert and related functions to verify your tests produce the correct
-            // results.
-            XCTAssertEqual(NineAnimatorCommon().text, "Hello, World!")
-        }
+final class NineAnimatorCommonTests: XCTestCase {
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct
+        // results.
+        XCTAssertEqual(NineAnimatorCommon().text, "Hello, World!")
     }
+}

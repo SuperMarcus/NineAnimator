@@ -63,9 +63,9 @@ open class NineAnimatorError: NSError {
     public weak var relatedRequestManager: NARequestManager?
     
     public init(_ code: Int,
-         message: String,
-         failiureReason: String? = nil,
-         userInfo: [String: Any]? = nil) {
+                message: String,
+                failiureReason: String? = nil,
+                userInfo: [String: Any]? = nil) {
         // At the moment, all parameters of the error is stored in the
         // userInfo dictionary
         var newUserInfo = userInfo ?? [:]
@@ -81,15 +81,15 @@ open class NineAnimatorError: NSError {
     }
     
     // Right now, using message as localized description
-    public override var localizedDescription: String {
+    override public var localizedDescription: String {
         userInfo["message"] as? String ?? super.localizedDescription
     }
     
-    public override var localizedFailureReason: String? {
+    override public var localizedFailureReason: String? {
         userInfo["failiureReason"] as? String
     }
     
-    public override var description: String {
+    override public var description: String {
         if let localizedFailureReason = localizedFailureReason {
             return "NineAnimatorError(\(code)) \(localizedDescription): \(localizedFailureReason)"
         } else { return "NineAnimatorError(\(code)) \(localizedDescription)" }
@@ -211,7 +211,7 @@ public extension NineAnimatorError {
             super.init(coder: aDecoder)
         }
         
-        public override var localizedRecoverySuggestion: String? {
+        override public var localizedRecoverySuggestion: String? {
             // If the recovery url exists
             if userInfo["authenticationUrl"] is URL {
                 return "You may perform the authentication with the opening link, after which NineAnimator may re-attempt the request."
@@ -220,7 +220,7 @@ public extension NineAnimatorError {
             return nil
         }
         
-        public override var localizedRecoveryOptions: [String]? {
+        override public var localizedRecoveryOptions: [String]? {
             if userInfo["authenticationUrl"] is URL {
                 return [ "Open Link" ]
             }
@@ -309,9 +309,9 @@ public extension NineAnimatorError {
         }
         
         public init(unavailableEpisode: EpisodeLink,
-             alternativeEpisodes: [EpisodeLink]? = nil,
-             updatedServerMap: [Anime.ServerIdentifier: String]? = nil,
-             userInfo: [String: Any]? = nil) {
+                    alternativeEpisodes: [EpisodeLink]? = nil,
+                    updatedServerMap: [Anime.ServerIdentifier: String]? = nil,
+                    userInfo: [String: Any]? = nil) {
             var updatingUserInfo = userInfo ?? [:]
             let unavailableServerName = updatedServerMap?[unavailableEpisode.server]
             

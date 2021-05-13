@@ -138,7 +138,7 @@ class NASourceAnimeTwist: BaseSource, Source, PromiseSource {
         return VideoProviderRegistry.default.provider(DummyParser.self)
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
     }
 }

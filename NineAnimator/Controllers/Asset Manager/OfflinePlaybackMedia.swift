@@ -18,10 +18,10 @@
 //
 
 import AVKit
-import OpenCastSwift
 import NineAnimatorCommon
 import NineAnimatorNativeParsers
 import NineAnimatorNativeSources
+import OpenCastSwift
 
 /// The playback media for offline content
 struct OfflinePlaybackMedia: PlaybackMedia {

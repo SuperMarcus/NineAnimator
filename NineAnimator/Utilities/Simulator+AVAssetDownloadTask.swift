@@ -33,7 +33,7 @@ public class AVAssetDownloadTask: URLSessionTask {
         AVURLAsset(url: URL(fileURLWithPath: "/tmp/doesnotexists"))
     }
     
-    public override init() {
+    override public init() {
         super.init()
     }
 }
@@ -49,7 +49,7 @@ public class AVAssetDownloadURLSession: URLSession {
         return nil
     }
     
-    public override init() {
+    override public init() {
         super.init()
     }
     
@@ -57,13 +57,14 @@ public class AVAssetDownloadURLSession: URLSession {
         self.init()
     }
     
-    public convenience init(configuration: URLSessionConfiguration,
-                     assetDownloadDelegate delegate: AVAssetDownloadDelegate?,
-                     delegateQueue: OperationQueue?) {
+    public convenience init(
+        configuration: URLSessionConfiguration,
+        assetDownloadDelegate delegate: AVAssetDownloadDelegate?,
+        delegateQueue: OperationQueue?) {
         self.init()
     }
     
-    public override func getAllTasks(completionHandler: @escaping ([URLSessionTask]) -> Void) {
+    override public func getAllTasks(completionHandler: @escaping ([URLSessionTask]) -> Void) {
         DispatchQueue.main.async {
             completionHandler([])
         }

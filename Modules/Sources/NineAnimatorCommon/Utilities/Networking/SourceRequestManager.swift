@@ -25,7 +25,7 @@ open class NABaseSourceRequestManager: NAEndpointRelativeRequestManager {
     private(set) weak var source: BaseSource?
     
     /// Endpoint URL retrieved from the source object
-    public override var endpointURL: URL? {
+    override public var endpointURL: URL? {
         source?.endpointURL
     }
     

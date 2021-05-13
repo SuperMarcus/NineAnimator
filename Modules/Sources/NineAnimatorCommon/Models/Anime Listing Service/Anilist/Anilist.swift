@@ -40,7 +40,7 @@ public class Anilist: BaseListingService, ListingService {
         "com.marcuszhou.nineanimator.service.anilist"
     }
     
-    required public init(_ parent: NineAnimator) {
+    public required init(_ parent: NineAnimator) {
         super.init(parent)
     }
     

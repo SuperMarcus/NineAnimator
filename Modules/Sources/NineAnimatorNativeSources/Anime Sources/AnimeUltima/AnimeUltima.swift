@@ -80,7 +80,7 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         } else { return super.recommendServer(for: anime) }
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         registerPrivateParsers()
     }

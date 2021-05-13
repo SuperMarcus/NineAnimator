@@ -48,7 +48,7 @@ class NASourceAnimeKisa: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://animekisa.tv" }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier

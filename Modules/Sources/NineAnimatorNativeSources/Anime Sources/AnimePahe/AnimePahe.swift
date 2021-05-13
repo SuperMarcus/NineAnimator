@@ -64,7 +64,7 @@ class NASourceAnimePahe: BaseSource, Source, PromiseSource {
             (components[1] == "play" || components[1] == "anime")
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
     }
 }

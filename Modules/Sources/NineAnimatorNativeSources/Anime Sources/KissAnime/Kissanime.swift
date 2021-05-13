@@ -52,7 +52,7 @@ class NASourceKissanime: BaseSource, Source, PromiseSource {
         false
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier

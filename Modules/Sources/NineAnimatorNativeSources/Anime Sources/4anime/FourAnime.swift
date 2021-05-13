@@ -51,7 +51,7 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
     
     override var endpoint: String { "https://4anime.to" }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier

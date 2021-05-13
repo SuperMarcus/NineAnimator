@@ -424,7 +424,7 @@ class NASourceMasterAnime: BaseSource, Source {
         return VideoProviderRegistry.default.provider(for: name)
     }
     
-    required override init(with parent: NineAnimator) {
+    override required init(with parent: NineAnimator) {
         super.init(with: parent)
     }
 }

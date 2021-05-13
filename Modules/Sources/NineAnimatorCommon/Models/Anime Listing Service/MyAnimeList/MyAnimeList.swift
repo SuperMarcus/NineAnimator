@@ -37,7 +37,7 @@ public class MyAnimeList: BaseListingService, ListingService {
     @AtomicProperty
     public var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
-    lazy public var _allCollections: [Collection] = [
+    public lazy var _allCollections: [Collection] = [
         ("watching", "Currently Watching"),
         ("plan_to_watch", "Plan to Watch"),
         ("completed", "Completed"),
