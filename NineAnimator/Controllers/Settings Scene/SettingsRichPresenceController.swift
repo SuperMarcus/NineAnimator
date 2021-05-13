@@ -25,9 +25,9 @@ import UIKit
 class SettingsRichPresenceController: UITableViewController {
     /// Current status of the rich presence service
     class var currentStatus: String {
-        NineAnimator.presenceController.isAvailable ?
+        DiscordPresenceController.shared.isAvailable ?
             NineAnimator.default.user.richPresenceEnabled ?
-                NineAnimator.presenceController.isConnected ? "Connected" : "Available"
+            DiscordPresenceController.shared.isConnected ? "Connected" : "Available"
                 : "Disabled"
             : "Unavailable"
     }
@@ -59,16 +59,16 @@ class SettingsRichPresenceController: UITableViewController {
     
     private func _updateUIComponents() {
         richPresenceEnabledSwitch.isEnabled =
-            NineAnimator.presenceController.isAvailable
+            DiscordPresenceController.shared.isAvailable
         richPresenceEnabledSwitch.setOn(
-            NineAnimator.presenceController.isAvailable
+            DiscordPresenceController.shared.isAvailable
                 && NineAnimator.default.user.richPresenceEnabled,
             animated: true
         )
         richPresenceShowAnimeTitleSwitch.isEnabled =
-            NineAnimator.presenceController.isAvailable
+            DiscordPresenceController.shared.isAvailable
         richPresenceShowAnimeTitleSwitch.setOn(
-            NineAnimator.presenceController.isAvailable
+            DiscordPresenceController.shared.isAvailable
                 && NineAnimator.default.user.richPresenceShowAnimeName,
             animated: true
         )
@@ -78,7 +78,7 @@ class SettingsRichPresenceController: UITableViewController {
     @IBAction private func _onEnableSwitchToggle(_ sender: UISwitch) {
         NineAnimator.default.user.richPresenceEnabled = sender.isOn
         _updateStatusText()
-        NineAnimator.presenceController.reset()
+        DiscordPresenceController.shared.reset()
     }
     
     @IBAction private func _onShowAnimeSwitchToggle(_ sender: UISwitch) {

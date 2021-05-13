@@ -122,6 +122,11 @@ extension DiscordPresenceController {
     }
 }
 
+extension DiscordPresenceController {
+    /// Shared rich presence controller
+    static let shared = DiscordPresenceController()
+}
+
 #if canImport(SwordRPC)
 // MARK: - SwordRPCDelegate
 extension DiscordPresenceController: SwordRPCDelegate {

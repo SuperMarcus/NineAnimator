@@ -49,9 +49,9 @@ class FeaturedViewController: UITableViewController {
         didSet { sourceSelectionButton.isEnabled = requestTask == nil }
     }
     
-    var loadingSource: Source?
+    var loadingSource: NineAnimatorCommon.Source?
     
-    var source: Source { NineAnimator.default.user.source }
+    var source: NineAnimatorCommon.Source { NineAnimator.default.user.source }
     
     func reload() {
         featuredAnimePage = nil

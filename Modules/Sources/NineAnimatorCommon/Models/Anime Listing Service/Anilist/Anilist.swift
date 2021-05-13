@@ -145,7 +145,7 @@ public extension Anilist {
 internal extension Anilist {
     func graphQL(fileQuery bundleResourceName: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
         NineAnimatorPromise.firstly {
-            guard let resourceUrl = Bundle.main.url(
+            guard let resourceUrl = Bundle.module.url(
                     forResource: bundleResourceName,
                     withExtension: "graphql"
                 ) else {

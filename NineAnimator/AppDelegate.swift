@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Setup additional services
         NineAnimator.default.cloud.setup()
-        NineAnimator.presenceController.setup()
+        DiscordPresenceController.shared.setup()
         
         return true
     }

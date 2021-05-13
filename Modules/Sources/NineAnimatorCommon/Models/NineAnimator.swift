@@ -27,10 +27,6 @@ public class NineAnimator: Alamofire.SessionDelegate {
     /// NineAnimator runtime properties
     public internal(set) static var runtime = NineAnimatorRuntime()
     
-    /// Discord rich presence controller
-    // TODO
-//    public internal(set) static var presenceController = DiscordPresenceController()
-    
     /// Generate random application UUID
     public internal(set) static var applicationRuntimeUuid = UUID()
     
