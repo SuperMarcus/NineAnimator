@@ -21,6 +21,9 @@ import AVFoundation
 import Kingfisher
 import MediaPlayer
 import OpenCastSwift
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 enum CastDeviceState {

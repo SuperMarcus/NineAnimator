@@ -20,6 +20,9 @@
 import CoreSpotlight
 import Foundation
 import Kingfisher
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// A helper struct that facilitates NineAnimator continuity functions

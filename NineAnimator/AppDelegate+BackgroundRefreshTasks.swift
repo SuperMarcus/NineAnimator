@@ -21,6 +21,9 @@
 import BackgroundTasks
 #endif
 
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// Currently, both the refresh task and processing task are the same

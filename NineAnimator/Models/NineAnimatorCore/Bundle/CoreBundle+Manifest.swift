@@ -19,6 +19,9 @@
 
 import CryptoKit
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 @available(iOS 13.0, *)
 extension NACoreEngineBundle {

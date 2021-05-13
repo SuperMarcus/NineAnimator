@@ -18,6 +18,9 @@
 //
 
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 extension UserNotificationManager {
     class SubscribedAnimeRecommendationSource: RecommendationSource {

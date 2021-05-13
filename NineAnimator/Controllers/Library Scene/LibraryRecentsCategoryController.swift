@@ -18,6 +18,9 @@
 //
 
 import CoreData
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 class LibraryRecentsCategoryController: MinFilledCollectionViewController, LibraryCategoryReceiverController, NSFetchedResultsControllerDelegate {

@@ -18,6 +18,9 @@
 //
 
 import Kingfisher
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// Retriving the cached artwork/poster for anime

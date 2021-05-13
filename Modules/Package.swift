@@ -22,8 +22,8 @@ import Foundation
 import PackageDescription
 
 let package = Package(
-    name: "NineAnimatorCommon",
-    platforms: [ .iOS("12.3"), .tvOS(.v13), .watchOS(.v7) ],
+    name: "NineAnimatorModules",
+    platforms: [ .iOS(.v12), .tvOS(.v13), .watchOS(.v7) ],
     products: [
         .library(
             name: "NineAnimatorCommon",

@@ -19,6 +19,9 @@
 
 import Foundation
 import JavaScriptCore
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// The `NineAnimator` object exposed to the JavaScript environment.
 @available(iOS 13, *)

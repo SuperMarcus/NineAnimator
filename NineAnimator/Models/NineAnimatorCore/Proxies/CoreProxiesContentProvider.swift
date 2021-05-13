@@ -19,6 +19,9 @@
 
 import Foundation
 import JavaScriptCore
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 @available(iOS 13, *)
 @objc class NACoreEngineProxiesContentProvider: NSObject, ContentProvider {

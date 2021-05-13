@@ -20,6 +20,9 @@
 import AppCenterAnalytics
 import AVKit
 import Kingfisher
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import SafariServices
 import UIKit
 import UserNotifications

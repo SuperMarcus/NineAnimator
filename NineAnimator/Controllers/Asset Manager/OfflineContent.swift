@@ -20,6 +20,9 @@
 import Alamofire
 import AVFoundation
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// Representing the state of the object
 enum OfflineState {

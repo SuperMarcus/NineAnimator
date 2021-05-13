@@ -19,6 +19,9 @@
 
 import AVKit
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 ///
 /// Manages offline contents such as downloads

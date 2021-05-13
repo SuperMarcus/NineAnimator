@@ -21,8 +21,12 @@ import Foundation
 import NineAnimatorCommon
 
 public enum NativeParsers {
+    internal static var initialized = false
+    
     /// Register the default set of sources
     public static func initialize() {
+        guard !initialized else { return }
+        
         let defaultProvider = VideoProviderRegistry.default
         
         // A list of public parsers
@@ -56,5 +60,7 @@ public enum NativeParsers {
         defaultProvider.register(StreamSBParser(), forServer: "Streamsb")
         defaultProvider.register(DoodParser(), forServer: "Doodstream")
         defaultProvider.register(PantsudriveParser(), forServer: "pantsudrive")
+        
+        initialized = true
     }
 }

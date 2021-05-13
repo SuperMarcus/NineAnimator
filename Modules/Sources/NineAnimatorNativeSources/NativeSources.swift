@@ -21,8 +21,12 @@ import Foundation
 import NineAnimatorCommon
 
 public enum NativeSources {
+    internal static var initialized = false
+    
     /// Register the default set of sources
     public static func initialize() {
+        guard !initialized else { return }
+        
         let registry = NineAnimator.default
         
         registry.register(sourceType: NASourceAnimePahe.self)
@@ -47,5 +51,7 @@ public enum NativeSources {
         registry.register(sourceType: NASourceMasterAnime.self)
         registry.register(sourceType: NASourceNineAnime.self)
         registry.register(sourceType: NASourceAniwatch.self)
+        
+        initialized = true
     }
 }

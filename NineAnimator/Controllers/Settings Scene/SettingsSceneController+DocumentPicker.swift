@@ -18,6 +18,9 @@
 //
 
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// Handles Importing Nineanimator Config Files

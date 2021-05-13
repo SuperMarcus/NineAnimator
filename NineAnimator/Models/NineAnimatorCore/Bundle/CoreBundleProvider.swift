@@ -18,6 +18,9 @@
 //
 
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 @available(iOS 13.0, *)
 protocol NACoreEngineBundleProvider: AnyObject, NSObjectProtocol {

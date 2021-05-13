@@ -18,6 +18,9 @@
 //
 
 import AVFoundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// Controller used to play background audio to keep the app alive in the background

@@ -20,6 +20,9 @@
 import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 class SettingsDebuggingController: UITableViewController {

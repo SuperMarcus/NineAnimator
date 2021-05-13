@@ -167,6 +167,9 @@
 		2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */; };
 		2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */; };
 		2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */; };
+		2CA0D97F264CC192009EFF76 /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D97E264CC192009EFF76 /* NineAnimatorCommon */; };
+		2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */; };
+		2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */; };
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
 		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
 		2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */; };
@@ -562,10 +565,13 @@
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CB67042249FC9E3006C11A9 /* Kingfisher in Frameworks */,
 				2CB6704E249FCA65006C11A9 /* ViewAnimator in Frameworks */,
+				2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */,
 				2CB67045249FCA06006C11A9 /* Alamofire in Frameworks */,
 				2C18FDEF24AAD85400F021BE /* AppCenterAnalytics in Frameworks */,
 				2CB67048249FCA24006C11A9 /* SwiftSoup in Frameworks */,
 				2CB6704B249FCA48006C11A9 /* OpenCastSwift in Frameworks */,
+				2CA0D97F264CC192009EFF76 /* NineAnimatorCommon in Frameworks */,
+				2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */,
 				2C18FDED24AAD85400F021BE /* AppCenterCrashes in Frameworks */,
 				2C9F11202624AC1B001BDC50 /* ZIPFoundation in Frameworks */,
 			);
@@ -1325,6 +1331,9 @@
 				2C18FDEE24AAD85400F021BE /* AppCenterAnalytics */,
 				2C9325C124ACDDD3001E3708 /* SwordRPC */,
 				2C9F111F2624AC1B001BDC50 /* ZIPFoundation */,
+				2CA0D97E264CC192009EFF76 /* NineAnimatorCommon */,
+				2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */,
+				2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -2316,6 +2325,18 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2C9F111E2624AC1B001BDC50 /* XCRemoteSwiftPackageReference "ZIPFoundation" */;
 			productName = ZIPFoundation;
+		};
+		2CA0D97E264CC192009EFF76 /* NineAnimatorCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorCommon;
+		};
+		2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorNativeParsers;
+		};
+		2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorNativeSources;
 		};
 		2CB67041249FC9E3006C11A9 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

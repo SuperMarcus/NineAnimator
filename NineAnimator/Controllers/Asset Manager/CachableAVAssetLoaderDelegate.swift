@@ -19,6 +19,9 @@
 
 import AVFoundation
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 class CachableAVAssetLoaderDelegate: NSObject, AVAssetResourceLoaderDelegate {
     private var loadingRequestMap = [AVAssetResourceLoadingRequest: NineAnimatorAsyncTask]()

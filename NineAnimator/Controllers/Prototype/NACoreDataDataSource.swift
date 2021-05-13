@@ -19,6 +19,9 @@
 
 import CoreData
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 /// A data source used to process managed results controllers

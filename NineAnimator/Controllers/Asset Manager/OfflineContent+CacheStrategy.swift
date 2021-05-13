@@ -18,6 +18,9 @@
 //
 
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 extension OfflineContent {
     /// Change the cache strategy of the resources to make AVKit ignore the Cache-Control parameters

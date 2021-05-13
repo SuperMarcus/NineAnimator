@@ -20,6 +20,9 @@
 import CryptoKit
 import Foundation
 import JavaScriptCore
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 @available(iOS 13.0, *)
 class NACoreEngineBundle: NSObject {

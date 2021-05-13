@@ -19,6 +19,9 @@
 
 import AVKit
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// Preserving video
 class OfflineEpisodeContent: OfflineContent {

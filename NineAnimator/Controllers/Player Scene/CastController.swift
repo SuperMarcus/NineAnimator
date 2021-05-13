@@ -18,6 +18,9 @@
 //
 
 import OpenCastSwift
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 class CastController: CastDeviceScannerDelegate, CastClientDelegate {

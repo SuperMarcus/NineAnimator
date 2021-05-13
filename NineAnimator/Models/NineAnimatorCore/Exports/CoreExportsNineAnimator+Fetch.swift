@@ -20,6 +20,9 @@
 import Alamofire
 import Foundation
 import JavaScriptCore
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// FetchAPI Response object
 @available(iOS 13, *)

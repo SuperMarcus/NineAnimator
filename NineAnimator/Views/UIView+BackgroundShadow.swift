@@ -17,6 +17,9 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 // https://stackoverflow.com/questions/805872/how-do-i-draw-a-shadow-under-a-uiview

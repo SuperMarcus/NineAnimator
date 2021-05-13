@@ -19,6 +19,9 @@
 
 import CryptoKit
 import Foundation
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// NACoreEngineFlatBundleProvider reads a flat core bundle from either a remote URL or local filesystem.
 ///

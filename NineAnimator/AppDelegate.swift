@@ -19,6 +19,9 @@
 
 import AppCenterCrashes
 import Kingfisher
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 import UserNotifications
 
@@ -48,6 +51,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        // Initialize sources and parsers
+        NativeParsers.initialize()
+        NativeSources.initialize()
+        
         // Shared AppDelegate reference
         AppDelegate.shared = self
         

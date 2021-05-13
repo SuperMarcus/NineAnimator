@@ -19,6 +19,9 @@
 
 import Foundation
 import JavaScriptCore
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 
 /// Helper functions for type conversions
 @available(iOS 13, *)

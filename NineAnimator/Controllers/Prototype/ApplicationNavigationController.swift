@@ -18,6 +18,9 @@
 //
 
 import AppCenterAnalytics
+import NineAnimatorCommon
+import NineAnimatorNativeParsers
+import NineAnimatorNativeSources
 import UIKit
 
 protocol BlendInViewController { }
