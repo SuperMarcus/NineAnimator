@@ -72,6 +72,9 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         // Tell the system what categories of notifications this app supports
         registerNotificationCategories()
         
+        // Register subscription listener
+        NineAnimator.user.addSubscriptionListener(self)
+        
         // Add anime subscription as a recommendation source
         NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
     }
@@ -515,6 +518,11 @@ extension UserNotificationManager {
             return nil
         }
     }
+}
+
+// MARK: - Subscription Changes
+extension UserNotificationManager: NineAnimatorUser.SubscriptionListener {
+    // TODO
 }
 
 // MARK: - Notification identifiers/File Name paths
