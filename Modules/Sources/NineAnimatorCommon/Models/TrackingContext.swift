@@ -341,9 +341,9 @@ private extension TrackingContext {
 // MARK: - Playback progress persistence
 public extension TrackingContext {
     struct PlaybackProgressRecord: Codable {
-        var episodeNumber: Int
-        var progress: Double
-        var enqueueDate: Date
+        public var episodeNumber: Int
+        public var progress: Double
+        public var enqueueDate: Date
     }
     
     /// Enqueue a new record for an episode with playback progress

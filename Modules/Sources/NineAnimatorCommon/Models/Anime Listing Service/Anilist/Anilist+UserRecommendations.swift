@@ -19,25 +19,25 @@
 
 import Foundation
 
-extension Anilist {
+public extension Anilist {
     class AnilistUserRecommendations: RecommendationSource {
-        var shouldPresentRecommendation: Bool { parent.didSetup }
+        public var shouldPresentRecommendation: Bool { parent.didSetup }
         
-        var name: String = "Anime For You"
+        public var name: String = "Anime For You"
         
-        var priority: Priority = .defaultLow
+        public var priority: Priority = .defaultLow
         
         private let parent: Anilist
         
-        init(_ parent: Anilist) {
+        public init(_ parent: Anilist) {
             self.parent = parent
         }
         
-        func shouldReload(recommendation: Recommendation) -> Bool {
+        public func shouldReload(recommendation: Recommendation) -> Bool {
             false
         }
         
-        func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
+        public func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             parent.graphQL(fileQuery: "AnilistUserRecommendations", variables: [
                 "page": 0,
                 "perPage": 50

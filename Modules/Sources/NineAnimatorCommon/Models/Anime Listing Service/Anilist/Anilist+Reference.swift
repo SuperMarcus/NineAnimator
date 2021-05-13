@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Anilist {
+public extension Anilist {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
         func nameProximity(_ mediaEntry: GQLMedia) -> Double {
             let titles = mediaEntry.title

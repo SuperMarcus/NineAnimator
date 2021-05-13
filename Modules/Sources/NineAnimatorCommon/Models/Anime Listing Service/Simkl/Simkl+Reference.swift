@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Simkl {
+public extension Simkl {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
         apiRequest(
             "/search/anime",
@@ -59,7 +59,9 @@ extension Simkl {
             )
         }
     }
+}
     
+extension Simkl {
     func episodeObjects(forReference reference: ListingAnimeReference) -> NineAnimatorPromise<[SimklEpisodeEntry]> {
         if let cachedEntries = cachedReferenceEpisodes[reference.uniqueIdentifier] {
             return .success(cachedEntries)

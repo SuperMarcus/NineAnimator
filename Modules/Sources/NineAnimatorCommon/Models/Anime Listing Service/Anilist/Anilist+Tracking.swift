@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Anilist {
+public extension Anilist {
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         // Convert NineAnimator state to Anilist state enum
         let state: String
@@ -100,7 +100,7 @@ extension Anilist {
     }
     
     /// Create the `ListingAnimeTracking` from query results
-    func createReferenceTracking(from mediaList: GQLMediaList?, withSupplementalMedia media: GQLMedia) -> ListingAnimeTracking? {
+    internal func createReferenceTracking(from mediaList: GQLMediaList?, withSupplementalMedia media: GQLMedia) -> ListingAnimeTracking? {
         // Supposingly it's only valid for a currently watching anime
         if /* mediaList?.status == .current, */let progress = mediaList?.progress {
             return ListingAnimeTracking(

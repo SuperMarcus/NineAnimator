@@ -19,26 +19,26 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
         .success(_allCollections)
     }
 }
 
-extension MyAnimeList {
+public extension MyAnimeList {
     class Collection: ListingAnimeCollection {
         private unowned var myAnimeList: MyAnimeList
         
         /// The key of this collection
         private let key: String
         
-        weak var delegate: ContentProviderDelegate? { didSet { reset() } }
+        public weak var delegate: ContentProviderDelegate? { didSet { reset() } }
         
         /// The human readable title of this collection
-        var title: String
+        public var title: String
         
         /// The offset of the next page
-        var nextPageOffset: Int?
+        public var nextPageOffset: Int?
         
         /// The loaded references
         private var references = [[ListingAnimeReference]]()
@@ -55,7 +55,7 @@ extension MyAnimeList {
     }
 }
 
-extension MyAnimeList.Collection {
+public extension MyAnimeList.Collection {
     /// If there is a next page
     var moreAvailable: Bool { nextPageOffset != nil }
     
@@ -76,7 +76,7 @@ extension MyAnimeList.Collection {
     func links(on page: Int) -> [AnyLink] { references[page].map { .listingReference($0) } }
 }
 
-extension MyAnimeList.Collection {
+public extension MyAnimeList.Collection {
     /// Remove all cached entries and reset the collection.
     fileprivate func reset() {
         self.nextPageOffset = 0

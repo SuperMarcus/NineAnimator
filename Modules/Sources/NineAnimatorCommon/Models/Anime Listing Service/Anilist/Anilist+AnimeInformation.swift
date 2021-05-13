@@ -20,23 +20,23 @@
 import Foundation
 import SwiftSoup
 
-extension Anilist {
+public extension Anilist {
     class AnilistListingAnimeInformation: ListingAnimeInformation {
-        var reference: ListingAnimeReference
-        var name: ListingAnimeName
-        var artwork: URL
-        var wallpapers: [URL]
-        var siteUrl: URL
-        var description: String
-        var information: [String: String]
+        public var reference: ListingAnimeReference
+        public var name: ListingAnimeName
+        public var artwork: URL
+        public var wallpapers: [URL]
+        public var siteUrl: URL
+        public var description: String
+        public var information: [String: String]
         
-        var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> {
+        public var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> {
             .success(_airingEpisodes)
         }
-        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
+        public var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
             .success(_characters)
         }
-        var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
+        public var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
             .firstly {
                 [_statistics] in
                 guard _statistics.ratingsDistribution.count > 1 else {
@@ -45,10 +45,10 @@ extension Anilist {
                 return _statistics
             }
         }
-        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
+        public var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
             .firstly { [_relations] in _relations }
         }
-        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
+        public var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
         
         // For now, all optional properties are fetched with other values
         var _characters: [ListingAnimeCharacter]

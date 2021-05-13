@@ -19,13 +19,13 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     class UserRecommendations: RecommendationSource {
-        var shouldPresentRecommendation: Bool { parent.didSetup }
+        public var shouldPresentRecommendation: Bool { parent.didSetup }
         
-        let name: String = "Anime For You"
+        public let name: String = "Anime For You"
         
-        let priority: Priority = .defaultLow
+        public let priority: Priority = .defaultLow
         
         private let parent: MyAnimeList
         
@@ -33,11 +33,11 @@ extension MyAnimeList {
             self.parent = parent
         }
         
-        func shouldReload(recommendation: Recommendation) -> Bool {
+        public func shouldReload(recommendation: Recommendation) -> Bool {
             false
         }
         
-        func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
+        public func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             parent.apiRequest(
                 "/anime/suggestions",
                 query: [

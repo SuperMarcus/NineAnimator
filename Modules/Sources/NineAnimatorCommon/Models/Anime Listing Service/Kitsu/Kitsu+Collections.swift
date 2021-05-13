@@ -19,28 +19,28 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     class KitsuAnimeCollection: ListingAnimeCollection {
-        var parentService: ListingService { parent }
+        public var parentService: ListingService { parent }
         
-        var title: String
-        var totalPages: Int?
-        var availablePages: Int { results.count }
-        var moreAvailable: Bool { totalPages == nil }
-        weak var delegate: ContentProviderDelegate?
+        public var title: String
+        public var totalPages: Int?
+        public var availablePages: Int { results.count }
+        public var moreAvailable: Bool { totalPages == nil }
+        public weak var delegate: ContentProviderDelegate?
         
         private var identifier: String
         private var results = [[ListingAnimeReference]]()
         private var requestTask: NineAnimatorAsyncTask?
         private var parent: Kitsu
         
-        func links(on page: Int) -> [AnyLink] {
+        public func links(on page: Int) -> [AnyLink] {
             let results = self.results
             guard results.count > page else { return [] }
             return results[page].map { .listingReference($0) }
         }
         
-        func more() {
+        public func more() {
             guard requestTask == nil, moreAvailable else { return }
             let offset = results.reduce(0) { $0 + $1.count }
             let limit = 20
@@ -106,7 +106,7 @@ extension Kitsu {
             }
         }
         
-        init (_ statusIdentifier: String, readableStatus: String, parent: Kitsu) {
+        internal init(_ statusIdentifier: String, readableStatus: String, parent: Kitsu) {
             self.title = readableStatus
             self.identifier = statusIdentifier
             self.parent = parent

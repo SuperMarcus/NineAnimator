@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Simkl {
+public extension Simkl {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
         // Check if there is an update to the collections
         return apiRequest(
@@ -108,22 +108,22 @@ extension Simkl {
 }
 
 // MARK: - Collection structure
-extension Simkl {
+public extension Simkl {
     class Collection: ListingAnimeCollection, Codable {
         private let simkl: Simkl
         private let key: String
         private let references: [ListingAnimeReference]
         private let correspondingState: ListingAnimeTrackingState?
         
-        let title: String
+        public let title: String
         
         // MARK: Standard interfaces for ListingAnimeCollection
         
-        weak var delegate: ContentProviderDelegate?
-        var parentService: ListingService { simkl }
-        var totalPages: Int? { 1 }
-        var availablePages: Int { 1 }
-        var moreAvailable: Bool { false }
+        public weak var delegate: ContentProviderDelegate?
+        public var parentService: ListingService { simkl }
+        public var totalPages: Int? { 1 }
+        public var availablePages: Int { 1 }
+        public var moreAvailable: Bool { false }
         
         init(_ key: String, title: String, state: ListingAnimeTrackingState?, parent: Simkl, references: [ListingAnimeReference]) {
             self.key = key
@@ -133,15 +133,15 @@ extension Simkl {
             self.correspondingState = state
         }
         
-        func links(on page: Int) -> [AnyLink] {
+        public func links(on page: Int) -> [AnyLink] {
             page == 0 ? references.map { .listingReference($0) } : []
         }
         
-        func more() { }
+        public func more() { }
         
         // MARK: Implementations for Codable
         
-        func encode(to encoder: Encoder) throws {
+        public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: Keys.self)
             try container.encode(key, forKey: .key)
             try container.encode(title, forKey: .title)
@@ -149,7 +149,7 @@ extension Simkl {
             try container.encodeIfPresent(correspondingState, forKey: .correspondingState)
         }
         
-        required init(from decoder: Decoder) throws {
+        required public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: Keys.self)
             self.simkl = NineAnimator.default.service(type: Simkl.self)
             self.key = try container.decode(String.self, forKey: .key)

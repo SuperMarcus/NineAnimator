@@ -24,20 +24,20 @@ import Foundation
 import CryptoKit
 #endif
 
-class MyAnimeList: BaseListingService, ListingService {
-    var name: String { "MyAnimeList.net" }
+public class MyAnimeList: BaseListingService, ListingService {
+    public var name: String { "MyAnimeList.net" }
     
-    override var identifier: String { "com.marcuszhou.nineanimator.service.mal" }
+    override public var identifier: String { "com.marcuszhou.nineanimator.service.mal" }
     
     /// MAL api endpoint
-    var endpoint: URL {
+    public var endpoint: URL {
         URL(string: "https://api.myanimelist.net/v2")!
     }
     
     @AtomicProperty
-    var _mutationTaskPool = [NineAnimatorAsyncTask]()
+    public var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
-    lazy var _allCollections: [Collection] = [
+    lazy public var _allCollections: [Collection] = [
         ("watching", "Currently Watching"),
         ("plan_to_watch", "Plan to Watch"),
         ("completed", "Completed"),
@@ -45,7 +45,7 @@ class MyAnimeList: BaseListingService, ListingService {
         ("dropped", "Dropped")
     ] .map { Collection(self, key: $0.0, title: $0.1) }
     
-    override func onRegister() {
+    override public func onRegister() {
         super.onRegister()
         
         parent.register(additionalRecommendationSource: SeasonalAnimeRecommendation(self))
@@ -55,7 +55,7 @@ class MyAnimeList: BaseListingService, ListingService {
 }
 
 // MARK: - Capabilities
-extension MyAnimeList {
+public extension MyAnimeList {
     var isCapableOfListingAnimeInformation: Bool { true }
     
     var isCapableOfPersistingAnimeState: Bool { didSetup }
@@ -66,7 +66,7 @@ extension MyAnimeList {
 // MARK: - Authentications
 extension MyAnimeList {
     @available(iOS 13.0, *)
-    internal var authenticationUrl: URL {
+    public var authenticationUrl: URL {
         // Take the hash of the uniquely generated runtime identifier as the code verifier
         let sessionIdData = NineAnimator.applicationRuntimeUuidData
         let challengeSalt = Bundle.main.bundleIdentifier ?? ""
@@ -95,9 +95,9 @@ extension MyAnimeList {
     
     /// Single-Sign-On Callback Scheme
     @available(iOS 13.0, *)
-    internal var ssoCallbackScheme: String { "nineanimator-list-auth" }
+    public var ssoCallbackScheme: String { "nineanimator-list-auth" }
     
-    internal var legacyLoginPage: URL {
+    public var legacyLoginPage: URL {
         URL(string: "https://myanimelist.net/login.php")!
     }
     
@@ -125,11 +125,11 @@ extension MyAnimeList {
         _savedClientID ?? "09b2968a89641f412c62a9803fcd2e57"
     }
     
-    var didSetup: Bool { accessToken != nil }
+    public var didSetup: Bool { accessToken != nil }
     
-    var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
+    public var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
-    func deauthenticate() {
+    public func deauthenticate() {
         Log.info("[MyAnimeList] Removing credentials")
         accessToken = nil
         refreshToken = nil
@@ -138,7 +138,7 @@ extension MyAnimeList {
     
     /// Authenticate the session with username and password
     @available(iOS, deprecated: 13.0, message: "Use of legacy MAL authentication schemes.")
-    func authenticate(withUser user: String, password: String) -> NineAnimatorPromise<Void> {
+    public func authenticate(withUser user: String, password: String) -> NineAnimatorPromise<Void> {
         NineAnimatorPromise.firstly {
             [clientIdentifier] in
             var formBuilder = URLComponents()
@@ -164,7 +164,7 @@ extension MyAnimeList {
     }
     
     /// Authenticate the session with the callback URL
-    func authenticate(withSSOCallbackUrl url: URL) -> Error? {
+    public func authenticate(withSSOCallbackUrl url: URL) -> Error? {
         do {
             // Decode authentication parameters from query
             let authParamsDict = try formDecode(url.query ?? "")
@@ -260,7 +260,7 @@ extension MyAnimeList {
 }
 
 // MARK: - Request Helper
-extension MyAnimeList {
+internal extension MyAnimeList {
     struct OAuthInitialResponse: Codable {
         var accessToken: String
         var tokenType: String

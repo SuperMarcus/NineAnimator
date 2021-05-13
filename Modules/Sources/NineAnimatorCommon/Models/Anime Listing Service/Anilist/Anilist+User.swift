@@ -19,14 +19,15 @@
 
 import Foundation
 
-extension Anilist {
+public extension Anilist {
     struct User {
-        let id: Int
-        let name: String
-        let siteUrl: URL
-        let mediaListOptions: GQLMediaListOptions
+        public let id: Int
+        public let name: String
+        public let siteUrl: URL
         
-        init(_ gqlUser: GQLUser) throws {
+        internal let mediaListOptions: GQLMediaListOptions
+        
+        internal init(_ gqlUser: GQLUser) throws {
             self.id = try gqlUser.id.tryUnwrap()
             self.name = try gqlUser.name.tryUnwrap()
             self.siteUrl = try URL(

@@ -20,25 +20,25 @@
 import Alamofire
 import Foundation
 
-class Kitsu: BaseListingService, ListingService {
-    var name: String { "Kitsu.io" }
+public class Kitsu: BaseListingService, ListingService {
+    public var name: String { "Kitsu.io" }
     
     /// Anilist API endpoint
-    let endpoint = URL(string: "https://kitsu.io/api/edge")!
+    public let endpoint = URL(string: "https://kitsu.io/api/edge")!
     
-    var _cachedUser: User?
-    var _mutationTaskPool = [NineAnimatorAsyncTask]()
+    internal var _cachedUser: User?
+    internal var _mutationTaskPool = [NineAnimatorAsyncTask]()
     
-    override var identifier: String {
+    override public var identifier: String {
         "com.marcuszhou.nineanimator.service.kitsu"
     }
     
-    required init(_ parent: NineAnimator) {
+    required public init(_ parent: NineAnimator) {
         super.init(parent)
     }
 }
 
-extension Kitsu {
+public extension Kitsu {
     var isCapableOfListingAnimeInformation: Bool {
         false
     }
@@ -69,14 +69,14 @@ extension Kitsu {
         set { persistedProperties["access_token_expiration"] = newValue }
     }
     
-    var oauthUrl: URL { URL(string: "https://kitsu.io/api/oauth/token")! }
+    public var oauthUrl: URL { URL(string: "https://kitsu.io/api/oauth/token")! }
     
-    var didSetup: Bool { accessToken != nil && refreshToken != nil }
+    public var didSetup: Bool { accessToken != nil && refreshToken != nil }
     
-    var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
+    public var didExpire: Bool { accessTokenExpirationDate.timeIntervalSinceNow < 0 }
     
     // swiftlint:disable closure_end_indentation
-    func authenticate(user: String, password: String) -> NineAnimatorPromise<Void> {
+    public func authenticate(user: String, password: String) -> NineAnimatorPromise<Void> {
         NineAnimatorPromise.firstly {
             () -> Data? in
             var queryBuilder = URLComponents()
@@ -118,7 +118,7 @@ extension Kitsu {
     }
     
     /// Reauthenticate the session if it is setup and expired
-    func reauthenticateIfNeeded() -> NineAnimatorPromise<Void> {
+    public func reauthenticateIfNeeded() -> NineAnimatorPromise<Void> {
         didSetup && didExpire ? reauthenticate() : .success(())
     }
     
@@ -165,7 +165,7 @@ extension Kitsu {
     }
     
     /// Remove credentials
-    func deauthenticate() {
+    public func deauthenticate() {
         Log.info("[Kitsu.io] Removing credentials")
         accessToken = nil
         refreshToken = nil
@@ -175,7 +175,7 @@ extension Kitsu {
 }
 
 // MARK: - Request helper
-extension Kitsu {
+internal extension Kitsu {
     /// Representing a standard JSON: API data object
     struct APIObject {
         let identifier: String

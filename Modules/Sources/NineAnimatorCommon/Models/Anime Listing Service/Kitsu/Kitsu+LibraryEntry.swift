@@ -19,13 +19,13 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     struct LibraryEntry: Codable {
-        let identifier: String
-        let progress: Int
-        let status: String
+        public let identifier: String
+        public let progress: Int
+        public let status: String
         
-        init(from libraryEntry: APIObject) throws {
+        internal init(from libraryEntry: APIObject) throws {
             guard libraryEntry.type == "libraryEntries" else {
                 throw NineAnimatorError.responseError("An non-\"libraryEntries\" typed object was passed to the constructor of LibraryEntry")
             }

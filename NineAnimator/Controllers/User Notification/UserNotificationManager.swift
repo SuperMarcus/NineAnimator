@@ -76,7 +76,7 @@ class UserNotificationManager: NSObject, UNUserNotificationCenterDelegate {
         registerNotificationCategories()
         
         // Register subscription listener
-        NineAnimator.user.addSubscriptionListener(self)
+        NineAnimator.default.user.addSubscriptionListener(self)
         
         // Add anime subscription as a recommendation source
         NineAnimator.default.register(additionalRecommendationSource: subscriptionRecommendationSource)
@@ -524,8 +524,22 @@ extension UserNotificationManager {
 }
 
 // MARK: - Subscription Changes
-extension UserNotificationManager: NineAnimatorUser.SubscriptionListener {
-    // TODO
+extension UserNotificationManager: UserSubscriptionListener {
+    func userSubscription(didSubscribeLink link: AnimeLink) {
+        self.lazyPersist(link)
+    }
+    
+    func userSubscription(didSubscribeLoadedAnime anime: Anime) {
+        self.update(anime)
+    }
+    
+    func userSubscription(didUnsubscribeLink link: AnimeLink) {
+        self.remove(link)
+    }
+    
+    func userSubscription(didUnsubscribeAllAnime links: [AnimeLink]) {
+        links.forEach(self.remove(_:))
+    }
 }
 
 // MARK: - Notification identifiers/File Name paths

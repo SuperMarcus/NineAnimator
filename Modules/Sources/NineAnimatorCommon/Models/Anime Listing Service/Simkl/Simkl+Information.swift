@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Simkl {
+public extension Simkl {
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         // Not implemented for Simkl
         return .fail()

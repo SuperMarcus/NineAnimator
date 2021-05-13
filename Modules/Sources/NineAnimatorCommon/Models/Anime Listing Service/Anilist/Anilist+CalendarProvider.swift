@@ -20,21 +20,21 @@
 import Foundation
 import SwiftSoup
 
-extension Anilist {
+public extension Anilist {
     class WeeklyCalendar: CalendarProvider, AttributedContentProvider {
-        private(set) var totalPages: Int?
-        weak var delegate: ContentProviderDelegate?
+        public private(set) var totalPages: Int?
+        public weak var delegate: ContentProviderDelegate?
         
         private var loadedItems = [[CalendarItem]]()
         private var loadingTask: NineAnimatorAsyncTask?
         private let parent: Anilist
         private let initialDate: Date
         
-        func links(on page: Int) -> [AnyLink] {
+        public func links(on page: Int) -> [AnyLink] {
             loadedItems[page].map { .listingReference($0.reference) }
         }
         
-        func more() {
+        public func more() {
             guard loadingTask == nil, moreAvailable else { return }
             
             // Create the loading task
@@ -89,7 +89,7 @@ extension Anilist {
             }
         }
         
-        func date(for link: AnyLink, on page: Int) -> Date {
+        public func date(for link: AnyLink, on page: Int) -> Date {
             guard case let .listingReference(reference) = link else {
                 return .distantPast
             }
@@ -100,7 +100,7 @@ extension Anilist {
                 .date ?? .distantPast
         }
         
-        func attributes(for link: AnyLink, index: Int, on page: Int) -> ContentAttributes? {
+        public func attributes(for link: AnyLink, index: Int, on page: Int) -> ContentAttributes? {
             let requestingItem = loadedItems[page][index]
             let subtitleText: String
             
@@ -134,7 +134,7 @@ extension Anilist {
     }
 }
 
-extension Anilist.WeeklyCalendar {
+public extension Anilist.WeeklyCalendar {
     var availablePages: Int { loadedItems.count }
     var moreAvailable: Bool { totalPages == nil }
     var title: String { "This Week" }

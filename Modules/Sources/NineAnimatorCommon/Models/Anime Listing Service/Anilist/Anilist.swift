@@ -20,31 +20,31 @@
 import Alamofire
 import Foundation
 
-class Anilist: BaseListingService, ListingService {
-    var name: String { "AniList.co" }
+public class Anilist: BaseListingService, ListingService {
+    public var name: String { "AniList.co" }
     
     /// Anilist API endpoint
-    let endpoint = URL(string: "https://graphql.anilist.co")!
+    public let endpoint = URL(string: "https://graphql.anilist.co")!
     
     /// Cached current user settings
-    var _currentUser: User?
+    internal var _currentUser: User?
     
     /// Cached collections, invalidated when an mutation request has been made
-    var _collections: [ListingAnimeCollection]?
+    internal var _collections: [ListingAnimeCollection]?
     
     /// Hold reference to mutation requests
     @AtomicProperty
-    var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
+    internal var _mutationRequestReferencePool = [NineAnimatorAsyncTask]()
     
-    override var identifier: String {
+    override public var identifier: String {
         "com.marcuszhou.nineanimator.service.anilist"
     }
     
-    required init(_ parent: NineAnimator) {
+    required public init(_ parent: NineAnimator) {
         super.init(parent)
     }
     
-    override func onRegister() {
+    override public func onRegister() {
         super.onRegister()
         
         // Register the "This Week" recommendation row
@@ -55,7 +55,7 @@ class Anilist: BaseListingService, ListingService {
 }
 
 // MARK: - Exposed interface
-extension Anilist {
+public extension Anilist {
     var isCapableOfListingAnimeInformation: Bool {
         true
     }
@@ -91,7 +91,7 @@ extension Anilist {
 }
 
 // MARK: - Tokens & authentication data
-extension Anilist {
+public extension Anilist {
     private var accessToken: String? {
         get { persistedProperties["access_token"] as? String }
         set { persistedProperties["access_token"] = newValue }
@@ -142,7 +142,7 @@ extension Anilist {
 }
 
 // MARK: - Making requests
-extension Anilist {
+internal extension Anilist {
     func graphQL(fileQuery bundleResourceName: String, variables: [String: CustomStringConvertible]) -> NineAnimatorPromise<NSDictionary> {
         NineAnimatorPromise.firstly {
             guard let resourceUrl = Bundle.main.url(

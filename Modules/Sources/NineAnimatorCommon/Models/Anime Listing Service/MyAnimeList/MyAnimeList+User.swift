@@ -19,10 +19,10 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     struct User {
-        let identifier: Int
-        let name: String
+        public let identifier: Int
+        public let name: String
         
         init(_ userEntry: NSDictionary) throws {
             identifier = try userEntry.value(at: "id", type: Int.self)

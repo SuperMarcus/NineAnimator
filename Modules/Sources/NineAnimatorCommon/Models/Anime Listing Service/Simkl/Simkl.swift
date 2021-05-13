@@ -20,27 +20,27 @@
 import Alamofire
 import Foundation
 
-class Simkl: BaseListingService, ListingService {
-    var name: String { "Simkl" }
+public class Simkl: BaseListingService, ListingService {
+    public var name: String { "Simkl" }
     
     /// Simkl API endpoint
-    let endpoint = URL(string: "https://api.simkl.com")!
+    public let endpoint = URL(string: "https://api.simkl.com")!
     
-    var cachedReferenceEpisodes = [String: [SimklEpisodeEntry]]()
+    internal var cachedReferenceEpisodes = [String: [SimklEpisodeEntry]]()
     
-    var mutationQueues = [NineAnimatorAsyncTask]()
+    internal var mutationQueues = [NineAnimatorAsyncTask]()
     
-    override var identifier: String {
+    override public var identifier: String {
         "com.marcuszhou.nineanimator.service.simkl"
     }
     
-    required init(_ parent: NineAnimator) {
+    required public init(_ parent: NineAnimator) {
         super.init(parent)
     }
 }
 
 // MARK: - Capabilities
-extension Simkl {
+public extension Simkl {
     var isCapableOfListingAnimeInformation: Bool { false }
     
     var isCapableOfPersistingAnimeState: Bool { didSetup }
@@ -99,22 +99,22 @@ extension Simkl {
     }
     
     /// The Single-Sign-On URL for Simkl
-    var ssoUrl: URL {
+    public var ssoUrl: URL {
         URL(string: "https://simkl.com/oauth/authorize?response_type=code&client_id=\(clientId)&redirect_uri=https%3A%2F%2Fnineanimator-api.marcuszhou.com%2Fapi%2Flink_simkl%2Fauthorize")!
     }
     
     /// Single-Sign-On Callback Scheme
-    var ssoCallbackScheme: String { "nineanimator-list-auth" }
+    public var ssoCallbackScheme: String { "nineanimator-list-auth" }
     
     /// NineAnimator Simkl Client Identifier
-    var clientId: String {
+    public var clientId: String {
         "d90575da9e8e76005f9148b981885c4f051dbb2634ccb67cca01f87bcbeb1ecf"
     }
     
-    var didSetup: Bool { accessToken != nil && code != nil }
+    public var didSetup: Bool { accessToken != nil && code != nil }
     
     /// Remove user credentials
-    func deauthenticate() {
+    public func deauthenticate() {
         Log.info("[Simkl] Removing credentials and data")
         code = nil
         accessToken = nil
@@ -122,7 +122,7 @@ extension Simkl {
     }
     
     /// Authenticate the user with the redirecting url
-    func authenticate(withUrl url: URL) -> Error? {
+    public func authenticate(withUrl url: URL) -> Error? {
         do {
             // Decode authentication parameters from query
             let authParams = try formDecode(url.query ?? "")

@@ -20,7 +20,7 @@
 import Foundation
 import SwiftSoup
 
-extension Anilist {
+public extension Anilist {
     func requestWeeklyCalendar() -> NineAnimatorPromise<[Anilist.CalendarItem]> {
         // Fetch calendar items from the start of today
         let startOfToday = Calendar.current.startOfDay(for: Date())
@@ -64,9 +64,9 @@ extension Anilist {
     }
     
     class ThisWeekRecommendationSource: RecommendationSource {
-        let name = "This Week"
-        let priority: RecommendationSource.Priority = .defaultHigh
-        var shouldPresentRecommendation: Bool { true }
+        public let name = "This Week"
+        public let priority: RecommendationSource.Priority = .defaultHigh
+        public var shouldPresentRecommendation: Bool { true }
         
         private var generatedRecommendation: Recommendation?
         private let parent: Anilist
@@ -75,11 +75,11 @@ extension Anilist {
             self.parent = parent
         }
         
-        func shouldReload(recommendation: Recommendation) -> Bool {
+        public func shouldReload(recommendation: Recommendation) -> Bool {
             false
         }
         
-        func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
+        public func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             if let cachedRecommendation = generatedRecommendation {
                 return .success(cachedRecommendation)
             }

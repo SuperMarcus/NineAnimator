@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Simkl {
+public extension Simkl {
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         do {
             let updateTask = apiRequest(

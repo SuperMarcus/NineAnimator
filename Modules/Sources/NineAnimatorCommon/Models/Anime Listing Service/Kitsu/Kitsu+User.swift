@@ -19,10 +19,10 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     struct User {
-        let name: String
-        let identifier: String
+        public let name: String
+        public let identifier: String
     }
     
     func currentUser() -> NineAnimatorPromise<User> {

@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Anilist {
+public extension Anilist {
     func collections() -> NineAnimatorPromise<[ListingAnimeCollection]> {
         // If cached collections does exists
         if let cachedCollections = _collections {

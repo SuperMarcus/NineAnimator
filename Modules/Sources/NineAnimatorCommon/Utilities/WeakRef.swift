@@ -20,7 +20,7 @@
 import Foundation
 
 public class WeakRef<T: AnyObject> {
-    private(set) weak var object: T?
+    public private(set) weak var object: T?
     
     public init (_ object: T) {
         self.object = object

@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
         // MyAnimeList has a search character limit of 60
         // Unfortunately some anime titles are longer than that... thanks

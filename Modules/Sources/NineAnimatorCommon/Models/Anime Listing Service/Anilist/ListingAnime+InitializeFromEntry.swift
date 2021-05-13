@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension ListingAnimeReference {
+internal extension ListingAnimeReference {
     init(_ parent: Anilist, withMediaEntry mediaEntry: NSDictionary) throws {
         // Required Information
         guard let identifier = mediaEntry["id"] as? Int,
@@ -68,7 +68,7 @@ extension ListingAnimeReference {
     }
 }
 
-extension StaticListingAnimeCollection {
+internal extension StaticListingAnimeCollection {
     init(_ parent: Anilist, withCollectionObject collection: Anilist.GQLMediaListGroup) throws {
         self.init(
             parent,

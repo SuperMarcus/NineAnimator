@@ -19,9 +19,9 @@
 
 import Foundation
 
-extension Simkl {
+public extension Simkl {
     struct User: Codable {
-        var name: String
+        public var name: String
     }
     
     func currentUser() -> NineAnimatorPromise<User> {

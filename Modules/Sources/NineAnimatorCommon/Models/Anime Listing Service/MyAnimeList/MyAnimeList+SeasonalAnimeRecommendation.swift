@@ -19,11 +19,11 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     class TrendingAnimeRecommendation: RecommendationSource {
-        let name = "Trending"
-        let priority: RecommendationSource.Priority = .defaultLow
-        var shouldPresentRecommendation: Bool { true }
+        public let name = "Trending"
+        public let priority: RecommendationSource.Priority = .defaultLow
+        public var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList
         
@@ -31,11 +31,11 @@ extension MyAnimeList {
             self.parent = parent
         }
         
-        func shouldReload(recommendation: Recommendation) -> Bool {
+        public func shouldReload(recommendation: Recommendation) -> Bool {
             false
         }
         
-        func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
+        public func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             parent.apiRequest(
                 "/anime/ranking",
                 query: [
@@ -78,9 +78,9 @@ extension MyAnimeList {
     }
     
     class SeasonalAnimeRecommendation: RecommendationSource {
-        let name = "Seasonal Anime"
-        let priority: RecommendationSource.Priority = .defaultLow
-        var shouldPresentRecommendation: Bool { true }
+        public let name = "Seasonal Anime"
+        public let priority: RecommendationSource.Priority = .defaultLow
+        public var shouldPresentRecommendation: Bool { true }
         
         private let parent: MyAnimeList
         
@@ -88,11 +88,11 @@ extension MyAnimeList {
             self.parent = parent
         }
         
-        func shouldReload(recommendation: Recommendation) -> Bool {
+        public func shouldReload(recommendation: Recommendation) -> Bool {
             false
         }
         
-        func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
+        public func generateRecommendations() -> NineAnimatorPromise<Recommendation> {
             let calendar = Calendar.current
             let date = Date()
             let year = calendar.component(.year, from: date)

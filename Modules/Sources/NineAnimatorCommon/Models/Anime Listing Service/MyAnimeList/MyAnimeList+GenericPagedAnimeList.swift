@@ -19,27 +19,27 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     class GenericAnimeList: ContentProvider {
-        var title: String
-        weak var delegate: ContentProviderDelegate?
-        var additionalQueryParameters: [String: CustomStringConvertible]
-        var apiPath: String
+        public var title: String
+        public weak var delegate: ContentProviderDelegate?
+        public var additionalQueryParameters: [String: CustomStringConvertible]
+        public var apiPath: String
         
-        var moreAvailable: Bool { nextPageOffset != nil }
-        var availablePages: Int { loadedPages.count }
-        var totalPages: Int? { moreAvailable ? nil : availablePages }
+        public var moreAvailable: Bool { nextPageOffset != nil }
+        public var availablePages: Int { loadedPages.count }
+        public var totalPages: Int? { moreAvailable ? nil : availablePages }
         
-        let parent: MyAnimeList
-        private(set) var loadedPages = [[ListingAnimeReference]]()
-        private(set) var nextPageOffset: Int?
+        public let parent: MyAnimeList
+        public private(set) var loadedPages = [[ListingAnimeReference]]()
+        public private(set) var nextPageOffset: Int?
         private var currentFetchTask: NineAnimatorAsyncTask?
         
-        func links(on page: Int) -> [AnyLink] {
+        public func links(on page: Int) -> [AnyLink] {
             loadedPages[page].map { .listingReference($0) }
         }
         
-        func more() {
+        public func more() {
             // Make sure no current fetch task is in progress
             guard currentFetchTask == nil,
                 let requestingPage = nextPageOffset else { return }

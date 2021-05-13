@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     func reference(from link: AnimeLink) -> NineAnimatorPromise<ListingAnimeReference> {
         apiRequest("/anime", query: [
             "fields[anime]": "canonicalTitle,posterImage,titles",

@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     func listingAnime(from reference: ListingAnimeReference) -> NineAnimatorPromise<ListingAnimeInformation> {
         .fail(.unknownError)
     }

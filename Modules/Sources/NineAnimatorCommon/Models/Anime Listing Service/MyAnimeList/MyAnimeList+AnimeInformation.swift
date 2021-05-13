@@ -19,15 +19,15 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     class MyAnimeListListingAnimeInformation: ListingAnimeInformation {
-        var reference: ListingAnimeReference
-        var name: ListingAnimeName
-        var artwork: URL
-        var wallpapers: [URL]
-        var siteUrl: URL
-        var description: String
-        var information: [String: String]
+        public var reference: ListingAnimeReference
+        public var name: ListingAnimeName
+        public var artwork: URL
+        public var wallpapers: [URL]
+        public var siteUrl: URL
+        public var description: String
+        public var information: [String: String]
         
         private var _meanRatings: Double?
         private var _numRatings: Int?
@@ -35,14 +35,14 @@ extension MyAnimeList {
         private var _numEpisodes: Int?
         private var _parent: MyAnimeList
 
-        var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
-        var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> { .fail(.unknownError) }
+        public var reviews: NineAnimatorPromise<[ListingAnimeReview]> { .fail(.unknownError) }
+        public var futureAiringSchedules: NineAnimatorPromise<[ListingAiringEpisode]> { .fail(.unknownError) }
         
-        var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
+        public var relatedReferences: NineAnimatorPromise<[ListingAnimeReference]> {
             .success(_relatedAnimeReferences)
         }
         
-        var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
+        public var characters: NineAnimatorPromise<[ListingAnimeCharacter]> {
             self._parent.jikanRequestCharactersAndStaffs(self.reference).then {
                 charactersResponse in charactersResponse.characters.compactMap {
                     (character: JikanCharacter) -> ListingAnimeCharacter? in
@@ -58,7 +58,7 @@ extension MyAnimeList {
             }
         }
         
-        var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
+        public var statistics: NineAnimatorPromise<ListingAnimeStatistics> {
             self._parent.jikanRequestAnimeStatistics(self.reference).then {
                 [weak self] jikanStats in
                 guard let self = self else { return nil }

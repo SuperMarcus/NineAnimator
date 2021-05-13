@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension MyAnimeList {
+public extension MyAnimeList {
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         collectMutationTaskPoolGarbage()
         

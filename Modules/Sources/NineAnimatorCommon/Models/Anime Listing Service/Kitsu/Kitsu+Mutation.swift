@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension Kitsu {
+public extension Kitsu {
     func update(_ reference: ListingAnimeReference, newState: ListingAnimeTrackingState) {
         // Cleanup any previous completed mutation request
         collectMutationTaskPoolGarbage()

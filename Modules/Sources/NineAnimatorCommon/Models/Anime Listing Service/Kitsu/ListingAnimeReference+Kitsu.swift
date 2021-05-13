@@ -19,7 +19,7 @@
 
 import Foundation
 
-extension ListingAnimeReference {
+internal extension ListingAnimeReference {
     init(_ parent: Kitsu, withAnimeObject animeObject: Kitsu.APIObject, libraryEntry: Kitsu.LibraryEntry? = nil) throws {
         // Save identifier
         let uniqueIdentifier = animeObject.identifier

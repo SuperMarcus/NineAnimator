@@ -26,7 +26,7 @@ import SwiftSoup
 /// NARequestManager modernizes the legacy APIs used in the BaseSource class. All of the request methods in this class are promise-based.
 open class NARequestManager: NSObject {
     /// Alamofire session used internally
-    private(set) lazy var session: Alamofire.Session = {
+    public private(set) lazy var session: Alamofire.Session = {
         let configuration = URLSessionConfiguration.default
         configuration.httpShouldSetCookies = true
         configuration.httpCookieAcceptPolicy = .always
@@ -40,7 +40,7 @@ open class NARequestManager: NSObject {
     }()
     
     /// Current User-Agent for requests made from this request manager
-    private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
+    public private(set) var currentIdentity = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1 Safari/605.1.15"
     
     /// Retrieve/set the credential manager for this request manager
     public var credentialManager: NACredentialManager?
@@ -59,7 +59,7 @@ open class NARequestManager: NSObject {
     fileprivate var _internalRetryPolicy = Alamofire.RetryPolicy(retryLimit: 3)
     private var _validations = [Alamofire.DataRequest.Validation]()
     
-    public override init() {
+    override public init() {
         super.init()
         self._registerBuiltinMiddlewares()
     }
