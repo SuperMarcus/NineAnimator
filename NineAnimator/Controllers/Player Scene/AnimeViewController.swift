@@ -344,7 +344,7 @@ extension AnimeViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
-        case .suggestion, .synopsis:
+        case .suggestion, .synopsis, .sourceDescription:
             return anime == nil ? 0 : 1
         case .episodes:
             return anime?.numberOfEpisodeLinks ?? 0
@@ -366,6 +366,16 @@ extension AnimeViewController {
                 tableView?.beginUpdates()
                 tableView?.setNeedsLayout()
                 tableView?.endUpdates()
+            }
+            return cell
+        case .sourceDescription:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "anime.source.description", for: indexPath) as! SourceDescriptionTableViewCell
+            
+            cell.setPresenting(
+                source: anime!.source,
+                server: anime!.servers[server!] ?? "No server"
+            ) { [weak self] cell in
+                self?.showSelectServerDialog(sourceView: cell)
             }
             return cell
         case .episodes:
@@ -889,7 +899,9 @@ extension AnimeViewController {
         if anime != nil {
             actionSheet.addAction({
                 let action = UIAlertAction(title: "Select Server", style: .default) {
-                    [weak self] _ in self?.showSelectServerDialog()
+                    [weak self] _ in
+                    guard let self = self else { return }
+                    self.showSelectServerDialog(sourceView: self.moreOptionsButton)
                 }
                 action.image = #imageLiteral(resourceName: "Server")
                 action.textAlignment = .left
@@ -942,11 +954,12 @@ extension AnimeViewController {
         present(actionSheet, animated: true, completion: nil)
     }
     
-    private func showSelectServerDialog() {
+    private func showSelectServerDialog(sourceView: UIView) {
         let alertView = UIAlertController(title: "Select Server", message: nil, preferredStyle: .actionSheet)
         
         if let popover = alertView.popoverPresentationController {
-            popover.sourceView = moreOptionsButton
+            popover.sourceView = sourceView
+            popover.sourceRect = sourceView.bounds
         }
         
         for server in anime!.servers {
@@ -988,7 +1001,7 @@ extension AnimeViewController {
         self.server = server
         
         tableView.reloadSections(
-            Section.indexSet(.episodes, .suggestion),
+            Section.indexSet(.episodes, .suggestion, .sourceDescription),
             with: .automatic
         )
         
@@ -1477,7 +1490,9 @@ fileprivate extension AnimeViewController {
         
         case synopsis = 1
         
-        case episodes = 2
+        case sourceDescription = 2
+        
+        case episodes = 3
         
         subscript(_ item: Int) -> IndexPath {
             IndexPath(item: item, section: self.rawValue)
@@ -1506,5 +1521,5 @@ fileprivate extension AnimeViewController {
 }
 
 fileprivate extension Array where Element == AnimeViewController.Section {
-    static let all: [AnimeViewController.Section] = [ .suggestion, .synopsis, .episodes ]
+    static let all: [AnimeViewController.Section] = [ .suggestion, .synopsis, .sourceDescription, .episodes ]
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="K93-Pu-iF1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -85,7 +85,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-ty-bvP" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAP-ty-bvP" customClass="ThemedSolidButton" customModule="NineAnimator" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="67.5" width="120" height="30"/>
                                             <color key="backgroundColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                             <constraints>
@@ -160,7 +160,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="☆ ☆ ☆ ☆ ☆" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Nu-af-HRp">
-                                                    <rect key="frame" x="8" y="4" width="102.5" height="20.5"/>
+                                                    <rect key="frame" x="8" y="4" width="102" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -170,7 +170,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading Ratings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCq-le-ZsX">
-                                                    <rect key="frame" x="8" y="24.5" width="102.5" height="13.5"/>
+                                                    <rect key="frame" x="8" y="24.5" width="102" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -413,7 +413,7 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </textView>
-                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFd-Ay-cFU">
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFd-Ay-cFU">
                                             <rect key="frame" x="347" y="0.0" width="51" height="39"/>
                                             <state key="normal" title="Expand"/>
                                             <userDefinedRuntimeAttributes>
@@ -444,8 +444,76 @@
                                     <outlet property="synopsisContainerTextView" destination="Qx1-Ur-pF8" id="z7V-qd-YfC"/>
                                 </connections>
                             </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="anime.source.description" id="L8S-Y2-CtP" customClass="SourceDescriptionTableViewCell" customModule="NineAnimator" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="456" width="414" height="59.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L8S-Y2-CtP" id="cJn-6B-Mjk">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="59.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Episodes On Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fiw-M9-fr6">
+                                            <rect key="frame" x="20" y="11" width="394" height="24.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Fym-9D-vLS"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pts-cQ-XVd">
+                                            <rect key="frame" x="20" y="40.5" width="46" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="zAw-YR-wF4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z8e-tp-uBo">
+                                            <rect key="frame" x="71" y="40.5" width="84" height="14"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="14" id="hN5-3k-Ew4"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <state key="normal" title="Server Name"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="onServerTitleClicked:" destination="L8S-Y2-CtP" eventType="touchUpInside" id="r8F-2y-AAw"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="pts-cQ-XVd" firstAttribute="top" secondItem="fiw-M9-fr6" secondAttribute="bottom" constant="5" id="3wO-oh-czF"/>
+                                        <constraint firstItem="pts-cQ-XVd" firstAttribute="leading" secondItem="fiw-M9-fr6" secondAttribute="leading" id="5Vf-y2-S9S"/>
+                                        <constraint firstAttribute="trailing" secondItem="fiw-M9-fr6" secondAttribute="trailing" id="8ZU-Bb-msW"/>
+                                        <constraint firstItem="Z8e-tp-uBo" firstAttribute="leading" secondItem="pts-cQ-XVd" secondAttribute="trailing" constant="5" id="GUj-gR-PEo"/>
+                                        <constraint firstAttribute="bottom" secondItem="pts-cQ-XVd" secondAttribute="bottom" constant="5" id="LqZ-rm-6zY"/>
+                                        <constraint firstItem="Z8e-tp-uBo" firstAttribute="bottom" secondItem="pts-cQ-XVd" secondAttribute="bottom" id="Q3q-XG-bD8"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Z8e-tp-uBo" secondAttribute="trailing" id="SBn-YL-fcx"/>
+                                        <constraint firstItem="fiw-M9-fr6" firstAttribute="leading" secondItem="cJn-6B-Mjk" secondAttribute="leadingMargin" id="nh3-YI-TEe"/>
+                                        <constraint firstItem="fiw-M9-fr6" firstAttribute="top" secondItem="cJn-6B-Mjk" secondAttribute="topMargin" id="v3s-k5-x39"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="serverTitleButton" destination="Z8e-tp-uBo" id="sY3-ri-wcc"/>
+                                    <outlet property="sourceHeaderTitle" destination="fiw-M9-fr6" id="pyD-qX-eDd"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode" rowHeight="62" id="0Uk-RM-2XQ" customClass="EpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="456" width="414" height="62"/>
+                                <rect key="frame" x="0.0" y="515.5" width="414" height="62"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0Uk-RM-2XQ" id="rZ2-du-FqS">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
@@ -465,7 +533,7 @@
                                             <rect key="frame" x="20" y="31.5" width="339" height="19.5"/>
                                             <subviews>
                                                 <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="250" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="yQy-Cx-TTd">
-                                                    <rect key="frame" x="0.0" y="9" width="120" height="2"/>
+                                                    <rect key="frame" x="0.0" y="8" width="120" height="4"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" priority="250" id="5LK-XI-l3X"/>
@@ -532,7 +600,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="anime.episode.detailed" rowHeight="113" id="aDw-5S-Pc5" customClass="DetailedEpisodeTableViewCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="518" width="414" height="113"/>
+                                <rect key="frame" x="0.0" y="577.5" width="414" height="113"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aDw-5S-Pc5" id="Iex-hH-e25">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
@@ -572,7 +640,7 @@
                                             <rect key="frame" x="20" y="82" width="374" height="19"/>
                                             <subviews>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" verticalCompressionResistancePriority="500" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="AZL-hm-aqK">
-                                                    <rect key="frame" x="0.0" y="8.5" width="120" height="2"/>
+                                                    <rect key="frame" x="0.0" y="7.5" width="120" height="4"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="ejN-uq-5LL"/>
@@ -692,6 +760,20 @@
             <point key="canvasLocation" x="758" y="133"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="B2n-TQ-hy9">
+            <size key="intrinsicContentSize" width="144" height="28"/>
+        </designable>
+        <designable name="TAP-ty-bvP">
+            <size key="intrinsicContentSize" width="85" height="30"/>
+        </designable>
+        <designable name="Wev-7V-WQ7">
+            <size key="intrinsicContentSize" width="144" height="28"/>
+        </designable>
+        <designable name="wRU-Fx-6li">
+            <size key="intrinsicContentSize" width="20" height="22"/>
+        </designable>
+    </designables>
     <resources>
         <image name="Cloud Download" width="28" height="28"/>
         <image name="Compass" width="35" height="35"/>
