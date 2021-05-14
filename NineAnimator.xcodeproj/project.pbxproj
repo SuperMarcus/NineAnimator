@@ -487,6 +487,7 @@
 		BFA0704C24DE596D00E7C8BE /* Array+SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */; };
 		BFAA489524DE0723009BE142 /* AnimeHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489424DE0723009BE142 /* AnimeHub.swift */; };
 		BFAA489724DE0BA6009BE142 /* AnimeHub+Featured.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */; };
+		BFAD190B262E5EE700D944D2 /* UserNotificationManager+FeaturedAnimeRecommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFAD190A262E5EE700D944D2 /* UserNotificationManager+FeaturedAnimeRecommendation.swift */; };
 		BFBAEF5224DF228B00ADA414 /* AnimeHub+Anime.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */; };
 		BFCBEE6624E0C4E100D8C54B /* FacebookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */; };
 		BFD0F7D725CA35B100621241 /* AnimeTwist+SourceDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD0F7D625CA35B100621241 /* AnimeTwist+SourceDescriptor.swift */; };
@@ -1099,6 +1100,7 @@
 		BFA0704B24DE596D00E7C8BE /* Array+SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+SafeSubscript.swift"; sourceTree = "<group>"; };
 		BFAA489424DE0723009BE142 /* AnimeHub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeHub.swift; sourceTree = "<group>"; };
 		BFAA489624DE0BA6009BE142 /* AnimeHub+Featured.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Featured.swift"; sourceTree = "<group>"; };
+		BFAD190A262E5EE700D944D2 /* UserNotificationManager+FeaturedAnimeRecommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserNotificationManager+FeaturedAnimeRecommendation.swift"; sourceTree = "<group>"; };
 		BFBAEF5124DF228B00ADA414 /* AnimeHub+Anime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Anime.swift"; sourceTree = "<group>"; };
 		BFCB22AA24DF378800406034 /* AnimeHub+Episode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimeHub+Episode.swift"; sourceTree = "<group>"; };
 		BFCBEE6524E0C4E100D8C54B /* FacebookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookParser.swift; sourceTree = "<group>"; };
@@ -2280,6 +2282,7 @@
 			children = (
 				2C3545A421DA84F500321B18 /* UserNotificationManager.swift */,
 				2C60EAB92266A22400280637 /* UserNotificationManager+RecommendationSource.swift */,
+				BFAD190A262E5EE700D944D2 /* UserNotificationManager+FeaturedAnimeRecommendation.swift */,
 			);
 			path = "User Notification";
 			sourceTree = "<group>";
@@ -2810,6 +2813,7 @@
 				2C055B0124AAB0E300FCAC25 /* MasterAnimeLinkRetriver.swift in Sources */,
 				2C1C716F221853AD00760A69 /* Anilist.swift in Sources */,
 				2C6CF24E221C2E090009D554 /* InformationSceneHeadingTableViewCell.swift in Sources */,
+				BFAD190B262E5EE700D944D2 /* UserNotificationManager+FeaturedAnimeRecommendation.swift in Sources */,
 				2C0CFC3D2263D9AB00EC793E /* DiscoveryLoadingTableViewCell.swift in Sources */,
 				2C2C54FF221606F800BAA76E /* User+UserDefaultKeys.swift in Sources */,
 				2CE5B8E0225ECAC200A2CF89 /* SetupFinishingViewController.swift in Sources */,

@@ -97,6 +97,19 @@ class DiscoverySceneViewController: UITableViewController {
         }
     }
     
+    override open var keyCommands: [UIKeyCommand]? {
+        if #available(iOS 13.0, *) {
+            return [
+                UIKeyCommand(
+                    title: "Refresh All Recommendations",
+                    action: #selector(reloadRecommendationList),
+                    input: "r",
+                    modifierFlags: .command
+                )
+            ]
+        } else { return nil }
+    }
+    
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.makeThemable()
     }
@@ -318,7 +331,7 @@ fileprivate extension DiscoverySceneViewController {
     }
     
     /// Reload the entire recommendation list
-    func reloadRecommendationList(shouldInformTableView: Bool = true) {
+    @objc func reloadRecommendationList(shouldInformTableView: Bool = true) {
         // Abort all previous tasks
         recommendationLoadingTasks = [:]
         recommendationList = NineAnimator
