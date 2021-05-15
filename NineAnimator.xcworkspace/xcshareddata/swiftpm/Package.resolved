@@ -3,7 +3,7 @@
     "pins": [
       {
         "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
           "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
@@ -30,7 +30,7 @@
       },
       {
         "package": "Kingfisher",
-        "repositoryURL": "https://github.com/onevcat/Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
           "revision": "44450a8f564d7c0165f736ba2250649ff8d3e556",
@@ -39,7 +39,7 @@
       },
       {
         "package": "OpenCastSwift",
-        "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift",
+        "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift.git",
         "state": {
           "branch": null,
           "revision": "c1a5994b57c6f33b92cb8bcf87e981783b99cac9",
@@ -60,13 +60,13 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf",
         "state": {
           "branch": null,
-          "revision": "bfe4255ff60f22a41cafa113059668571ed5d461",
-          "version": "1.16.0"
+          "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
+          "version": "1.17.0"
         }
       },
       {
         "package": "SwiftSoup",
-        "repositoryURL": "https://github.com/scinfu/SwiftSoup",
+        "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
           "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
@@ -98,15 +98,6 @@
           "branch": null,
           "revision": "d3034df845182f9cf0b10fcf35e742541c1926b8",
           "version": "3.0.2"
-        }
-      },
-      {
-        "package": "ZIPFoundation",
-        "repositoryURL": "https://github.com/weichsel/ZIPFoundation.git",
-        "state": {
-          "branch": null,
-          "revision": "cf10bbff6ac3b873e97b36b9784c79866a051a8e",
-          "version": "0.9.12"
         }
       }
     ]

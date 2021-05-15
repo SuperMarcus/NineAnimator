@@ -26,65 +26,25 @@ let package = Package(
     platforms: [ .iOS(.v12), .tvOS(.v13), .watchOS(.v7) ],
     products: [
         .library(
-            name: "NineAnimatorCommon",
-            targets: [ "NineAnimatorCommon" ]
-        ),
-        .library(
             name: "NineAnimatorNativeSources",
+            type: .dynamic,
             targets: [ "NineAnimatorNativeSources" ]
         ),
         .library(
             name: "NineAnimatorNativeParsers",
+            type: .dynamic,
             targets: [ "NineAnimatorNativeParsers" ]
         ),
         .library(
             name: "NineAnimatorNativeListServices",
+            type: .dynamic,
             targets: [ "NineAnimatorNativeListServices" ]
         )
     ],
     dependencies: [
-        .package(
-            name: "Alamofire",
-            url: "https://github.com/Alamofire/Alamofire.git",
-            from: "5.4.3"
-        ),
-        .package(
-            name: "SwiftSoup",
-            url: "https://github.com/scinfu/SwiftSoup.git",
-            from: "2.3.2"
-        ),
-        .package(
-            name: "Kingfisher",
-            url: "https://github.com/onevcat/Kingfisher.git",
-            from: "6.3.0"
-        ),
-        .package(
-            name: "OpenCastSwift",
-            url: "https://github.com/SuperMarcus/OpenCastSwift.git",
-            .revision("c1a5994b57c6f33b92cb8bcf87e981783b99cac9")
-        ),
-        .package(
-            name: "AppCenter",
-            url: "https://github.com/microsoft/appcenter-sdk-apple.git",
-            from: "4.1.1"
-        )
+        .package(name: "NineAnimatorCommon", path: "../Common")
     ],
     targets: [
-        .target(
-            name: "NineAnimatorCommon",
-            dependencies: [
-                "Alamofire",
-                "SwiftSoup",
-                "Kingfisher",
-                "OpenCastSwift",
-                .product(name: "AppCenterCrashes", package: "AppCenter"),
-                .product(name: "AppCenterAnalytics", package: "AppCenter")
-            ],
-            exclude: [
-                "Utilities/DictionaryCoding/LICENSE.md",
-                "Utilities/DictionaryCoding/README.md"
-            ]
-        ),
         .target(
             name: "NineAnimatorNativeSources",
             dependencies: [
