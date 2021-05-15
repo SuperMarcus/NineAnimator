@@ -23,7 +23,8 @@ import NineAnimatorNativeSources
 import UIKit
 
 protocol ServerSelectionViewDataSource: AnyObject {
-    var sources: [Source] { get }
+    /// All enabled anime sources contained in the data source
+    var enabledSources: [Source] { get }
 }
 
 protocol ServerSelectionViewDelegate: AnyObject {
@@ -72,9 +73,7 @@ class ServerSelectionView: UITableView, UITableViewDelegate, UITableViewDataSour
     
     /// Reload the list of available sources form the `serverDataSource`
     override func reloadData() {
-        self._sources = serverDataSource?.sources.filter {
-            $0.isEnabled
-        } ?? []
+        self._sources = serverDataSource?.enabledSources ?? []
         super.reloadData()
     }
 }

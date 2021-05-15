@@ -211,9 +211,12 @@ public extension NineAnimatorUser {
             let source = NineAnimator.default.source(with: sourceName),
             source.isEnabled {
             return source
-        } else {
+        } else if let firstAvailableSource = NineAnimator.default.sources.values.first(where: { $0.isEnabled }) {
             // Return the first available source
-            return NineAnimator.default.sources.first { $0.isEnabled }!
+            return firstAvailableSource
+        } else {
+            Log.error("[NineAnimatorUser] No source is available. Was NineAnimator properly initialized? Returning a dummy instead.")
+            return DummySource.sharedInstance
         }
     }
     

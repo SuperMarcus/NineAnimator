@@ -77,3 +77,52 @@ public class ContentAttributes {
         self.description = description
     }
 }
+
+/// A static ContentProvider container
+public class StaticContentProvider: ContentProvider {
+    public typealias ResultType = Result<[AnyLink], Error>
+    
+    /// Title of the provider
+    public let title: String
+    
+    /// Contained results
+    public let containedResults: ResultType
+    
+    /// ContentProvider delegate
+    public weak var delegate: ContentProviderDelegate?
+    
+    /// If more contents will be available later
+    /// - Note: This property always returns false for StaticContentProvider
+    public var moreAvailable: Bool { false }
+    
+    /// Total page counts. This getter returns `ContentProvider.availablePages`.
+    public var totalPages: Int? { availablePages }
+    
+    /// Available page counts. 1 if the container contains any results (even if empty); 0 otherwise.
+    public var availablePages: Int {
+        if case .success = self.containedResults {
+            return 1
+        } else { return 0 }
+    }
+    
+    public func links(on page: Int) -> [AnyLink] {
+        page == 0 ? (try? self.containedResults.get()) ?? [] : []
+    }
+    
+    /// Request more contents
+    /// - Note: StaticContentProvider calls the delegate method directly whenever more() is called
+    public func more() {
+        switch self.containedResults {
+        case .success:
+            delegate?.pageIncoming(0, from: self)
+        case let .failure(error):
+            delegate?.onError(error, from: self)
+        }
+    }
+    
+    /// Initialize the StaticContentProvider with a title string and a result
+    public init(title: String, result: ResultType) {
+        self.title = title
+        self.containedResults = result
+    }
+}

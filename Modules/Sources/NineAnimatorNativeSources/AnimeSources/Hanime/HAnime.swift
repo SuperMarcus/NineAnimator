@@ -26,7 +26,7 @@ import UIKit
 import AppKit
 #endif
 
-/// Made with love by Jack_ the Awsomedude
+/// Made with ❤️ by Jack_ the Awsomedude
 class NASourceHAnime: BaseSource, Source, PromiseSource {
     var name: String { "hanime.tv" }
     

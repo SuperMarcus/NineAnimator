@@ -91,7 +91,7 @@ public struct ListingAnimeStatistics {
     /// The total number of episodes
     public let episodesCount: Int?
     
-    public init(ratingsDistribution: [Double : Double], numberOfRatings: Int, episodesCount: Int? = nil) {
+    public init(ratingsDistribution: [Double: Double], numberOfRatings: Int, episodesCount: Int? = nil) {
         self.ratingsDistribution = ratingsDistribution
         self.numberOfRatings = numberOfRatings
         self.episodesCount = episodesCount

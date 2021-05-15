@@ -90,7 +90,7 @@ public class NineAnimator: Alamofire.SessionDelegate {
     public private(set) lazy var user = NineAnimatorUser()
     
     /// Container for the list of sources
-    public private(set) var sources = [Source]()
+    public private(set) var sources = [String: Source]()
     
     /// Container for the list of tracking services
     public private(set) var trackingServices = [ListingService]()
@@ -139,8 +139,23 @@ public extension NineAnimator {
 
 // MARK: - Source management
 public extension NineAnimator {
+    /// Returns an array of enabled sources
+    var enabledSources: [Source] {
+        self.sources.values.filter(\.isEnabled)
+    }
+    
     /// Register a new source
-    func register(source: Source) { sources.append(source) }
+    func register(source: Source) {
+        let registeringSourceTypeName = String(describing: type(of: source))
+        
+        if let registeredSource = self.sources[source.name] {
+            let existingSourceTypeName = String(describing: type(of: registeredSource))
+            Log.fault("[NineAnimator] Cannot register anime source \"%@\" (%@) because another source (%@) has been registered with the same name. Remove the previous source before registering the new one.", source.name, registeringSourceTypeName, existingSourceTypeName)
+        } else {
+            self.sources[source.name] = source
+            Log.info("[NineAnimator] Registered anime source \"%@\" (%@).", source.name, registeringSourceTypeName)
+        }
+    }
     
     /// Register a source by its type
     func register<SourceType: Source>(sourceType: SourceType.Type) {
@@ -150,13 +165,31 @@ public extension NineAnimator {
     
     /// Remove a source from the pool
     func remove(source: Source) {
-        sources.removeAll { $0.name == source.name }
+        guard let removedSource = self.sources.removeValue(forKey: source.name) else {
+            return Log.error("[NineAnimator] Failed to remove source with name \"%@\" because it was not registered.", source.name)
+        }
+        
+        let removedSourceType = String(describing: type(of: removedSource))
+        
+        // Check if the one removed is the same instance as the parameter
+        if ObjectIdentifier(removedSource) != ObjectIdentifier(source) {
+            let parameterSourceType = String(describing: type(of: source))
+            Log.fault("[NineAnimator] Removed a different instance of anime source \"%@\" (%@) than the one specified by the parameter (%@)!", removedSource.name, removedSourceType, parameterSourceType)
+        } else {
+            Log.info("[NineAnimator] Removed source \"%@\" (%@).", source.name, removedSourceType)
+        }
     }
     
     /// Find the source with name
     func source(with name: String) -> Source? {
-        sources.first {
-            $0.name == name || $0.aliases.contains(name)
+        if sources.isEmpty {
+            Log.error("[NineAnimator] No source has been registered!! Has NineAnimator been properly initialized?")
+            return nil
+        }
+        
+        // Lookup by name directory, else search for aliases
+        return sources[name] ?? sources.values.first {
+            $0.aliases.contains(name)
         }
     }
 }
@@ -254,7 +287,7 @@ public extension NineAnimator {
 // MARK: - Retriving and identifying links
 public extension NineAnimator {
     func link(with url: URL, handler: @escaping NineAnimatorCallback<AnyLink>) -> NineAnimatorAsyncTask? {
-        guard let parentSource = sources.first(where: { $0.canHandle(url: url) }) else {
+        guard let parentSource = sources.values.first(where: { $0.canHandle(url: url) }) else {
             handler(nil, NineAnimatorError.urlError)
             return nil
         }
@@ -263,7 +296,7 @@ public extension NineAnimator {
     }
     
     func canHandle(link: URL) -> Bool {
-        sources.contains { $0.canHandle(url: link) }
+        sources.values.contains { $0.canHandle(url: link) }
     }
 }
 

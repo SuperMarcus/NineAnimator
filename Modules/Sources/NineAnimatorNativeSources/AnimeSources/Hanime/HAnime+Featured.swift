@@ -125,20 +125,24 @@ extension NASourceHAnime {
         guard !url.isEmpty else {
             return ""
         }
-        
+                
+        if url.contains(".pages.dev/") || url.contains(".imgur.com/") {
+            return url
+        }
+                
         let tempUrl = try URL(string: url).tryUnwrap(.urlError)
         let realUrl = "\(tempUrl.path)?quality=\(quality)"
-        
+                
         if cdn == "cps" {
             let cdns = [
-                "https://i1.wp.com/static-assets.airharte.top\(realUrl)",
-                "https://i1.wp.com/static-assets.akidoo.top\(realUrl)",
-                "https://i1.wp.com/static-assets.mobilius.top\(realUrl)"
+                "https://i0.wp.com/ba.alphafish.top\(realUrl)",
+                "https://i1.wp.com/ba.apperoni.top\(realUrl)",
+                "https://i2.wp.com/ba.balley.top\(realUrl)"
             ]
             
             return cdns.randomElement()!
         }
-        
-        return "https://i1.wp.com/dynamic-assets.imageg.top\(realUrl)"
+                
+        return "https://i1.wp.com/da.imageg.top\(realUrl)"
     }
 }

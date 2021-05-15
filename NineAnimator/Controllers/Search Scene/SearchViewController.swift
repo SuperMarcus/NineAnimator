@@ -266,7 +266,7 @@ extension SearchViewController {
             popover.permittedArrowDirections = .up
         }
         
-        for source in NineAnimator.default.sources where source.isEnabled {
+        for source in NineAnimator.default.enabledSources {
             let action = UIAlertAction(title: source.name, style: .default) {
                 [weak self] _ in
                 NineAnimator.default.user.select(source: source)

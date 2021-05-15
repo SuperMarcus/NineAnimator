@@ -109,6 +109,8 @@ class NACoreEngineFlatBundleProvider: NSObject, NACoreEngineBundleProvider {
         return try .init(rawRepresentation: keyContent)
     }
     
+    // swiftlint:disable large_tuple
+    // ...yeah, yeah, blah, blah, blah
     private func readSignedContent(_ resourcePath: String) throws -> (content: Data, signature: Data, url: URL) {
         let resourceUrl = bundleUrl.appendingPathComponent(resourcePath)
         let resourceSignatureUrl = bundleUrl.appendingPathComponent(resourcePath + ".sig")
@@ -119,4 +121,5 @@ class NACoreEngineFlatBundleProvider: NSObject, NACoreEngineBundleProvider {
             resourceUrl
         )
     }
+    // swiftlint:enable large_tuple
 }
