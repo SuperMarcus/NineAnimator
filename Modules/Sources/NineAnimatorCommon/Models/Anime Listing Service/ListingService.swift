@@ -38,6 +38,12 @@ public struct ListingAnimeTracking {
     public func newTracking(withUpdatedProgress progress: Int) -> ListingAnimeTracking {
         ListingAnimeTracking(currentProgress: progress, episodes: episodes)
     }
+    
+    /// Public initializer
+    public init(currentProgress: Int, episodes: Int? = nil) {
+        self.currentProgress = currentProgress
+        self.episodes = episodes
+    }
 }
 
 /// Representing a reference that can be used to identify a particular anime on the `Listing Service`
@@ -85,6 +91,7 @@ public protocol ListingService: AnyObject {
     /// to-watch) from this service
     var isCapableOfRetrievingAnimeState: Bool { get }
     
+    /// Default initializer
     init(_: NineAnimator)
     
     /// Find the corresponding reference to the anime link

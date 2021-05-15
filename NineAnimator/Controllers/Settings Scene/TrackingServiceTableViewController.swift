@@ -19,6 +19,7 @@
 
 import AuthenticationServices
 import NineAnimatorCommon
+import NineAnimatorNativeListServices
 import NineAnimatorNativeParsers
 import NineAnimatorNativeSources
 import SafariServices

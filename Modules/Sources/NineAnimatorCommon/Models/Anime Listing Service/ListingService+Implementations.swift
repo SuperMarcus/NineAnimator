@@ -21,7 +21,7 @@ import Foundation
 
 // ListingAnimeReference+Codable
 public extension ListingAnimeReference {
-    enum Keys: CodingKey {
+    internal enum Keys: CodingKey {
         case service
         case identifier
         case state
@@ -33,7 +33,7 @@ public extension ListingAnimeReference {
     init(_ parent: ListingService,
          name: String,
          identifier: String,
-         state: ListingAnimeTrackingState?,
+         state: ListingAnimeTrackingState? = nil,
          artwork: URL? = nil,
          userInfo: [String: Any] = [:]) {
         self.parentService = parent
@@ -60,36 +60,19 @@ public extension ListingAnimeReference {
         name = try container.decode(String.self, forKey: .name)
         state = try container.decodeIfPresent(ListingAnimeTrackingState.self, forKey: .state)
         
-        // Decode user info
-//        let encodedUserInfo = try container.decode(Data.self, forKey: .userInfo)
-//        guard let decodedUserInfo = try PropertyListSerialization.propertyList(
-//            from: encodedUserInfo,
-//            options: [],
-//            format: nil
-//            ) as? [String: Any] else {
-//                throw NineAnimatorError.decodeError
-//        }
-//        userInfo = decodedUserInfo
+        // userInfo will not be decoded
         userInfo = [:]
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: Keys.self)
         
-        // Encode basic info
+        // Encode basic info; userInfo will not be encoded
         try container.encode(parentService.name, forKey: .service)
         try container.encode(uniqueIdentifier, forKey: .identifier)
         try container.encodeIfPresent(artwork, forKey: .artwork)
         try container.encode(name, forKey: .name)
         try container.encodeIfPresent(state, forKey: .state)
-        
-        // Not encoding user info
-//        let encodedUserInfo = try PropertyListSerialization.data(
-//            fromPropertyList: userInfo,
-//            format: .binary,
-//            options: 0
-//        )
-//        try container.encode(encodedUserInfo, forKey: .userInfo)
     }
 }
 
@@ -104,6 +87,7 @@ public extension ListingAnimeName {
     }
 }
 
+// ListingAnimeReference+Hashable
 public extension ListingAnimeReference {
     func hash(into hasher: inout Hasher) {
         hasher.combine(parentService.name)

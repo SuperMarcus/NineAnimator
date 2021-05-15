@@ -20,6 +20,7 @@
 import AppCenterCrashes
 import Kingfisher
 import NineAnimatorCommon
+import NineAnimatorNativeListServices
 import NineAnimatorNativeParsers
 import NineAnimatorNativeSources
 import UIKit
@@ -54,6 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Initialize sources and parsers
         NativeParsers.initialize()
         NativeSources.initialize()
+        NativeListServices.initialize()
         
         // Shared AppDelegate reference
         AppDelegate.shared = self

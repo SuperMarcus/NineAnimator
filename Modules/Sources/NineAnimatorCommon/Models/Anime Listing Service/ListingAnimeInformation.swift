@@ -38,6 +38,13 @@ public struct ListingAnimeName: CustomStringConvertible {
     ///
     /// An empty string if it does not exists
     public let native: String
+    
+    public init(default: String, english: String = "", romaji: String = "", native: String = "") {
+        self.default = `default`
+        self.english = english
+        self.romaji = romaji
+        self.native = native
+    }
 }
 
 /// Representing the airing status of an anime
@@ -62,6 +69,13 @@ public struct ListingAnimeCharacter {
     
     /// An image of the anime character
     public let image: URL
+    
+    public init(name: String, role: String, voiceActorName: String, image: URL) {
+        self.name = name
+        self.role = role
+        self.voiceActorName = voiceActorName
+        self.image = image
+    }
 }
 
 /// Representing the ratings of an anime
@@ -76,6 +90,12 @@ public struct ListingAnimeStatistics {
     
     /// The total number of episodes
     public let episodesCount: Int?
+    
+    public init(ratingsDistribution: [Double : Double], numberOfRatings: Int, episodesCount: Int? = nil) {
+        self.ratingsDistribution = ratingsDistribution
+        self.numberOfRatings = numberOfRatings
+        self.episodesCount = episodesCount
+    }
 }
 
 /// Representing the ratings
@@ -85,6 +105,11 @@ public struct ListingAnimeReview {
     
     /// The content of the review
     public let content: String
+    
+    public init(author: String, content: String) {
+        self.author = author
+        self.content = content
+    }
 }
 
 /// Representing an airing episode
@@ -94,6 +119,11 @@ public struct ListingAiringEpisode {
     
     /// Episode number
     public var episodeNumber: Int
+    
+    public init(scheduled: Date, episodeNumber: Int) {
+        self.scheduled = scheduled
+        self.episodeNumber = episodeNumber
+    }
 }
 
 /// Representing the detailed information of an listed anime

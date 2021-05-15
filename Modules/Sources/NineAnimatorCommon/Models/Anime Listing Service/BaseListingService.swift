@@ -21,7 +21,7 @@ import Alamofire
 import Foundation
 
 open class BaseListingService: SessionDelegate {
-    public var identifier: String { "" }
+    open var identifier: String { "" }
     
     /// An internal structure that stores and maps the `ListingAnimeReference` to the `ListingAnimeTracking`
     private let referenceTrackingLock = NSLock()
@@ -129,7 +129,7 @@ open class BaseListingService: SessionDelegate {
     ///
     /// Typically the first portion of the episode name contains the
     /// episode number.
-    public func suggestEpisodeNumber(from name: String) -> Int {
+    open func suggestEpisodeNumber(from name: String) -> Int {
         if let nameFirstPortion = name.split(separator: " ").first,
             let episodeNumber = Int(String(nameFirstPortion)) {
             return episodeNumber
@@ -140,7 +140,7 @@ open class BaseListingService: SessionDelegate {
     }
     
     /// A template onRegister method
-    public func onRegister() { }
+    open func onRegister() { }
     
     /// Retrieve the corresponding `ListingAnimeTracking` for the reference
     public func progressTracking(for reference: ListingAnimeReference) -> ListingAnimeTracking? {

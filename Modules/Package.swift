@@ -36,6 +36,10 @@ let package = Package(
         .library(
             name: "NineAnimatorNativeParsers",
             targets: [ "NineAnimatorNativeParsers" ]
+        ),
+        .library(
+            name: "NineAnimatorNativeListServices",
+            targets: [ "NineAnimatorNativeListServices" ]
         )
     ],
     dependencies: [
@@ -79,17 +83,11 @@ let package = Package(
             exclude: [
                 "Utilities/DictionaryCoding/LICENSE.md",
                 "Utilities/DictionaryCoding/README.md"
-            ],
-            resources: [
-                .process("Models/Anime Listing Service/Anilist/GraphQL/Query")
             ]
         ),
         .target(
             name: "NineAnimatorNativeSources",
             dependencies: [
-                "Alamofire",
-                "SwiftSoup",
-                "Kingfisher",
                 "NineAnimatorCommon"
             ],
             exclude: []
@@ -97,12 +95,19 @@ let package = Package(
         .target(
             name: "NineAnimatorNativeParsers",
             dependencies: [
-                "Alamofire",
-                "SwiftSoup",
-                "Kingfisher",
                 "NineAnimatorCommon"
             ],
             exclude: []
+        ),
+        .target(
+            name: "NineAnimatorNativeListServices",
+            dependencies: [
+                "NineAnimatorCommon"
+            ],
+            exclude: [],
+            resources: [
+                .process("ListServices/Anilist/GraphQL/Query")
+            ]
         )
     ]
 )

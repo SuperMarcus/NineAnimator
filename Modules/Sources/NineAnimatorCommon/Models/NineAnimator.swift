@@ -120,8 +120,7 @@ public class NineAnimator: Alamofire.SessionDelegate {
         // Init reachability manager
         reachability = NetworkReachabilityManager()
         
-        // Register implemented sources and services
-        registerDefaultServices()
+        // Register Kingfisher request modifier
         setupGlobalImageRequestModifiers()
     }
 }
@@ -168,6 +167,12 @@ public extension NineAnimator {
     func register(service: ListingService) {
         trackingServices.append(service)
         service.onRegister()
+    }
+    
+    /// Register the list service by its implementation type
+    func register<ListingServiceType: ListingService>(serviceType: ListingServiceType.Type) {
+        let serviceInstance = ListingServiceType(self)
+        return register(service: serviceInstance)
     }
     
     /// Remove the service with name
@@ -231,13 +236,6 @@ public extension NineAnimator {
             }
         }
         return trackingContexts
-    }
-    
-    private func registerDefaultServices() {
-        register(service: Anilist(self))
-        register(service: Kitsu(self))
-        register(service: MyAnimeList(self))
-        register(service: Simkl(self))
     }
     
     /// Remove all expired weak references
