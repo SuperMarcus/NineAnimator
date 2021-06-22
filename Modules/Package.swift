@@ -18,7 +18,6 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
-import Foundation
 import PackageDescription
 
 let package = Package(
@@ -42,29 +41,29 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "NineAnimatorCommon", path: "../Common")
+        .package(
+            url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
+            .branch("master")
+        )
     ],
     targets: [
         .target(
             name: "NineAnimatorNativeSources",
             dependencies: [
                 "NineAnimatorCommon"
-            ],
-            exclude: []
+            ]
         ),
         .target(
             name: "NineAnimatorNativeParsers",
             dependencies: [
                 "NineAnimatorCommon"
-            ],
-            exclude: []
+            ]
         ),
         .target(
             name: "NineAnimatorNativeListServices",
             dependencies: [
                 "NineAnimatorCommon"
             ],
-            exclude: [],
             resources: [
                 .process("ListServices/Anilist/GraphQL/Query")
             ]

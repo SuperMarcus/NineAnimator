@@ -215,8 +215,6 @@
 		2CF0C522238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */; };
 		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
 		2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFC16AD265063480052FE8A /* ViewAnimator */; };
-		2CFC16BC2650658F0052FE8A /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2CFC16B52650658E0052FE8A /* README.md */; };
-		2CFC16BD2650658F0052FE8A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2CFC16B62650658E0052FE8A /* .gitignore */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
@@ -540,11 +538,6 @@
 		2CF0C521238AFF660047BEBA /* UIViewController+NavigationAppearanceTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+NavigationAppearanceTools.swift"; sourceTree = "<group>"; };
 		2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipImagedCell.swift; sourceTree = "<group>"; };
 		2CF8912121DB39A1006D4799 /* icon_rendered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_rendered.png; sourceTree = "<group>"; };
-		2CFC16B42650658E0052FE8A /* NineAnimatorCommonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NineAnimatorCommonTests.swift; sourceTree = "<group>"; };
-		2CFC16B52650658E0052FE8A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		2CFC16B62650658E0052FE8A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		2CFC16B72650658E0052FE8A /* Package.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
-		2CFC16BA2650658E0052FE8A /* NineAnimatorCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NineAnimatorCommon.swift; sourceTree = "<group>"; };
 		52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+DeselectRows.swift"; sourceTree = "<group>"; };
 		52F6A4F221DABDB00005D78D /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = SOURCE_ROOT; };
 		BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBackgroundController.swift; sourceTree = "<group>"; };
@@ -815,7 +808,6 @@
 		2C4ABC5221B5881E009B4D47 /* NineAnimator */ = {
 			isa = PBXGroup;
 			children = (
-				2CFC16B12650658E0052FE8A /* Common */,
 				2C5F57BB21C9F3E2008FC503 /* NineAnimator.entitlements */,
 				2C4ABC8B21B75FD2009B4D47 /* Storyboards */,
 				2C4ABC8621B753C9009B4D47 /* Utilities */,
@@ -1269,50 +1261,6 @@
 			path = "User Notification";
 			sourceTree = "<group>";
 		};
-		2CFC16B12650658E0052FE8A /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				2CFC16B22650658E0052FE8A /* Tests */,
-				2CFC16B52650658E0052FE8A /* README.md */,
-				2CFC16B62650658E0052FE8A /* .gitignore */,
-				2CFC16B72650658E0052FE8A /* Package.swift */,
-				2CFC16B82650658E0052FE8A /* Sources */,
-			);
-			path = Common;
-			sourceTree = SOURCE_ROOT;
-		};
-		2CFC16B22650658E0052FE8A /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				2CFC16B32650658E0052FE8A /* NineAnimatorCommonTests */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		2CFC16B32650658E0052FE8A /* NineAnimatorCommonTests */ = {
-			isa = PBXGroup;
-			children = (
-				2CFC16B42650658E0052FE8A /* NineAnimatorCommonTests.swift */,
-			);
-			path = NineAnimatorCommonTests;
-			sourceTree = "<group>";
-		};
-		2CFC16B82650658E0052FE8A /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				2CFC16B92650658E0052FE8A /* NineAnimatorCommon */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		2CFC16B92650658E0052FE8A /* NineAnimatorCommon */ = {
-			isa = PBXGroup;
-			children = (
-				2CFC16BA2650658E0052FE8A /* NineAnimatorCommon.swift */,
-			);
-			path = NineAnimatorCommon;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1492,7 +1440,6 @@
 				2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */,
 				2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */,
 				2C34F0512594403100D16F64 /* Tydox Square@3x.png in Resources */,
-				2CFC16BC2650658F0052FE8A /* README.md in Resources */,
 				2C34F0542594403100D16F64 /* Zeref's Collection@2x.png in Resources */,
 				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
@@ -1503,7 +1450,6 @@
 				2C83E0AE2526F4B500B00850 /* Nsxtop's 9@2x.png in Resources */,
 				2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */,
 				2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */,
-				2CFC16BD2650658F0052FE8A /* .gitignore in Resources */,
 				2C86C1E5225D6D8500950ABF /* Setup.storyboard in Resources */,
 				2C71DEC8226E179B004F3AC3 /* ServerSelection.storyboard in Resources */,
 				2C4ABC5B21B5881F009B4D47 /* Assets.xcassets in Resources */,
