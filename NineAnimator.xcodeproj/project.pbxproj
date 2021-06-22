@@ -211,11 +211,8 @@
 		BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; };
 		BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF6820E626817EFC004DCDBD /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */; };
-		BF6820E726817EFC004DCDBD /* NineAnimatorNativeSources in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF6820E926817F08004DCDBD /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */; };
-		BF6820EA26817F08004DCDBD /* NineAnimatorNativeParsers in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF6820EC26817F15004DCDBD /* NineAnimatorNativeListServices in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */; };
-		BF6820ED26817F15004DCDBD /* NineAnimatorNativeListServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 /* End PBXBuildFile section */
@@ -252,9 +249,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */,
-				BF6820EA26817F08004DCDBD /* NineAnimatorNativeParsers in Embed Frameworks */,
-				BF6820ED26817F15004DCDBD /* NineAnimatorNativeListServices in Embed Frameworks */,
-				BF6820E726817EFC004DCDBD /* NineAnimatorNativeSources in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;

@@ -26,17 +26,14 @@ let package = Package(
     products: [
         .library(
             name: "NineAnimatorNativeSources",
-            type: .dynamic,
             targets: [ "NineAnimatorNativeSources" ]
         ),
         .library(
             name: "NineAnimatorNativeParsers",
-            type: .dynamic,
             targets: [ "NineAnimatorNativeParsers" ]
         ),
         .library(
             name: "NineAnimatorNativeListServices",
-            type: .dynamic,
             targets: [ "NineAnimatorNativeListServices" ]
         )
     ],
