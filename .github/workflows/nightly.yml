@@ -22,7 +22,7 @@ jobs:
       with:
         xcode-version: latest-stable
     - name: Build ${{ matrix.platform }}
-      run: xcodebuild -scheme NineAnimator -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
+      run: xcodebuild -workspace "NineAnimator.xcworkspace" -scheme NineAnimator -configuration Release -destination generic/platform=${{ matrix.platform }} archive -archivePath "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
     - name: Package ${{ matrix.platform }}
       run: ./Misc/scripts/package.sh "build/NineAnimator_Nightly.${{ matrix.platform }}.xcarchive" ${{ matrix.platform }} "NineAnimator_Nightly.${{ steps.commitinfo.outputs.sha_short }}.${{ matrix.platform }}"
     - name: Upload ${{ matrix.platform }} Symbols
