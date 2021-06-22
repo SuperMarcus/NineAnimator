@@ -164,9 +164,6 @@
 		2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */; };
 		2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */; };
 		2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */; };
-		2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */; };
-		2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */; };
-		2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */; };
 		2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5B21E2B404009241CB /* HomeController.swift */; };
 		2CA1DD6021E2BDCA009241CB /* HomeIntegrationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA1DD5F21E2BDCA009241CB /* HomeIntegrationTableViewController.swift */; };
 		2CA5BF1C221E1AC600317AE7 /* FrequencyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA5BF1B221E1AC600317AE7 /* FrequencyChartView.swift */; };
@@ -203,9 +200,6 @@
 		2CE18B0E2374996800771A16 /* LibraryRecentlyWatchedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */; };
 		2CE18B102374C7ED00771A16 /* LibraryTipGenericCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */; };
 		2CE18B122374D69200771A16 /* LibrarySceneController+Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */; };
-		2CE2FDF4265070AB00319466 /* NineAnimatorNativeListServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2CE5B8E0225ECAC200A2CF89 /* SetupFinishingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */; };
 		2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE721F66D49007EECC4 /* Continuity.swift */; };
 		2CEBE8FE22074401006A64CC /* UISearchBar+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBE8FD22074401006A64CC /* UISearchBar+Themable.swift */; };
@@ -216,6 +210,12 @@
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 		BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; };
 		BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BF6820E626817EFC004DCDBD /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */; };
+		BF6820E726817EFC004DCDBD /* NineAnimatorNativeSources in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BF6820E926817F08004DCDBD /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */; };
+		BF6820EA26817F08004DCDBD /* NineAnimatorNativeParsers in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		BF6820EC26817F15004DCDBD /* NineAnimatorNativeListServices in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */; };
+		BF6820ED26817F15004DCDBD /* NineAnimatorNativeListServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 /* End PBXBuildFile section */
@@ -252,9 +252,9 @@
 			dstSubfolderSpec = 10;
 			files = (
 				BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */,
-				2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */,
-				2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */,
-				2CE2FDF4265070AB00319466 /* NineAnimatorNativeListServices in Embed Frameworks */,
+				BF6820EA26817F08004DCDBD /* NineAnimatorNativeParsers in Embed Frameworks */,
+				BF6820ED26817F15004DCDBD /* NineAnimatorNativeListServices in Embed Frameworks */,
+				BF6820E726817EFC004DCDBD /* NineAnimatorNativeSources in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,13 +563,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF6820E926817F08004DCDBD /* NineAnimatorNativeParsers in Frameworks */,
 				BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */,
+				BF6820EC26817F15004DCDBD /* NineAnimatorNativeListServices in Frameworks */,
 				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
-				2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */,
-				2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */,
+				BF6820E626817EFC004DCDBD /* NineAnimatorNativeSources in Frameworks */,
 				2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */,
-				2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1319,11 +1319,11 @@
 			name = NineAnimator;
 			packageProductDependencies = (
 				2C9325C124ACDDD3001E3708 /* SwordRPC */,
-				2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */,
-				2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */,
-				2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */,
 				2CFC16AD265063480052FE8A /* ViewAnimator */,
 				BF6820E226817C93004DCDBD /* NineAnimatorCommon */,
+				BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */,
+				BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */,
+				BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -2256,18 +2256,6 @@
 			package = 2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */;
 			productName = SwordRPC;
 		};
-		2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NineAnimatorNativeParsers;
-		};
-		2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NineAnimatorNativeSources;
-		};
-		2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NineAnimatorNativeListServices;
-		};
 		2CFC16AD265063480052FE8A /* ViewAnimator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */;
@@ -2277,6 +2265,18 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */;
 			productName = NineAnimatorCommon;
+		};
+		BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorNativeSources;
+		};
+		BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorNativeParsers;
+		};
+		BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorNativeListServices;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
