@@ -19,7 +19,7 @@ package_iOS() {
     mkdir -p Payload
     cp -r "${BIN_PKG_PATH}" "Payload/${APPNAME}.app"
     echo "[*] Removing Non-NineAnimator Dynamic Libraries:"
-    find "Payload/NineAnimator.app/Frameworks" -type f \( \! -name 'NineAnimator*' \) -exec echo "Removing: {}" \; -exec rm {} \;
+    find "Payload/NineAnimator.app/Frameworks" -depth 1 -type f \( \! -name 'NineAnimator*' \) -exec echo "Removing: {}" \; -exec rm {} \;
     zip -9 -r "${PACKAGE_NAME}.ipa" Payload
     rm -rf Payload
     
