@@ -209,7 +209,6 @@
 		2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFC16AD265063480052FE8A /* ViewAnimator */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
 		BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; };
-		BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF6820E626817EFC004DCDBD /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E526817EFC004DCDBD /* NineAnimatorNativeSources */; };
 		BF6820E926817F08004DCDBD /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E826817F08004DCDBD /* NineAnimatorNativeParsers */; };
 		BF6820EC26817F15004DCDBD /* NineAnimatorNativeListServices in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820EB26817F15004DCDBD /* NineAnimatorNativeListServices */; };
@@ -240,20 +239,6 @@
 			remoteInfo = NineAnimator;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		2C6C4730238E1E00001E723C /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2C046EE3244D3AFE00C5C788 /* modify_proj.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = modify_proj.gif; sourceTree = "<group>"; };
@@ -1304,7 +1289,6 @@
 				2C4ABC4D21B5881E009B4D47 /* Frameworks */,
 				2C4ABC4E21B5881E009B4D47 /* Resources */,
 				2CB67050249FD0BC006C11A9 /* Process macCatalyst Entitlements */,
-				2C6C4730238E1E00001E723C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
