@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "NineAnimatorCommon",
+        "repositoryURL": "https://github.com/SuperMarcus/NineAnimatorCommon.git",
+        "state": {
+          "branch": "master",
+          "revision": "8c3c5fd14f7e04fffbe2584e3f05a1e81047e2a6",
+          "version": null
+        }
+      },
+      {
         "package": "OpenCastSwift",
         "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift.git",
         "state": {
