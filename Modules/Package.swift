@@ -18,7 +18,20 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import Foundation
 import PackageDescription
+
+let packageDir = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+let naCommonDependency: Package.Dependency
+
+if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent().appendingPathComponent("Common").path) {
+    naCommonDependency = .package(name: "NineAnimatorCommon", path: "../Common")
+} else {
+    naCommonDependency = .package(
+        url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
+        .branch("master")
+    )
+}
 
 let package = Package(
     name: "NineAnimatorModules",
@@ -40,12 +53,7 @@ let package = Package(
             targets: [ "NineAnimatorNativeListServices" ]
         )
     ],
-    dependencies: [
-        .package(
-            url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
-            .branch("master")
-        )
-    ],
+    dependencies: [ naCommonDependency ],
     targets: [
         .target(
             name: "NineAnimatorNativeSources",
