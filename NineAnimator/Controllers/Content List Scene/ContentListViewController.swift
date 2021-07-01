@@ -153,7 +153,7 @@ extension ContentListViewController {
         // Open the link if it exists
         if let cell = cell as? ListingEntryTableViewCell,
             let link = cell.link {
-            RootViewController.shared?.open(immedietly: link, in: self)
+            RootViewController.shared?.open(immedietly: link, method: .inController(self))
         }
     }
 }

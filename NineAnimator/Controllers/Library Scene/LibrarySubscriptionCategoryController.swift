@@ -99,7 +99,7 @@ extension LibrarySubscriptionCategoryController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let link = cachedWatchedAnimeItems[indexPath.item]
-        RootViewController.shared?.open(immedietly: link, in: self)
+        RootViewController.shared?.open(immedietly: link, method: .inController(self))
     }
     
     override func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {

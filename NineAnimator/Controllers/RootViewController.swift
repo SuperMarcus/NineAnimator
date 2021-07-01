@@ -59,7 +59,7 @@ class RootViewController: UITabBarController, Themable {
         // Open the pending if there is any
         if let pendingOpeningLink = RootViewController._pendingOpeningLink {
             RootViewController._pendingOpeningLink = nil
-            open(immedietly: pendingOpeningLink)
+            open(immedietly: pendingOpeningLink, method: .inWatchTab)
         }
         
         // Restore config if there is any
@@ -144,7 +144,7 @@ extension RootViewController {
     /// Open an `AnyLink` struct
     static func open(whenReady link: AnyLink) {
         if let sharedRootViewController = shared {
-            sharedRootViewController.open(immedietly: link)
+            sharedRootViewController.open(immedietly: link, method: .inWatchTab)
         } else { _pendingOpeningLink = link }
     }
     
@@ -167,7 +167,46 @@ extension RootViewController {
 extension RootViewController {
     fileprivate static var _pendingOpeningLink: AnyLink?
     
-    func open(immedietly link: AnyLink, in viewController: UIViewController? = nil) {
+    enum LinkOpeningMethod {
+        /// Opens the link in the controller's nearest navigation controller or presents it modally if no navigation controller is found
+        case inController(UIViewController)
+        /// Opens the link in the navigation controller that is currently selected in the UITabBarController
+        case inCurrentlyDisplayedTab
+        /// Opens the link in the watch next tab
+        /// - Note: Any UIViewControllers in the watch next tab will be popped off the navigation stack before opening the link
+        case inWatchTab
+    }
+    
+    func open(immedietly link: AnyLink, method: LinkOpeningMethod) {
+        guard let controllerForLink = retrieveViewController(forLink: link) else {
+            Log.error("[RootViewController] Failed to retrieve view controller for anylink: %@", link)
+            return
+        }
+        
+        switch method {
+        case let .inController(controller):
+            if let navigationController = controller.navigationController {
+                navigationController.pushViewController(controllerForLink, animated: true)
+            } else { controller.present(controllerForLink, animated: true) }
+        case .inWatchTab:
+            guard let navController = viewControllers?[NineAnimatorRootScene.toWatch.rawValue] as? ApplicationNavigationController else {
+                Log.error("[RootViewController] The watch next tab controller is not ApplicationNavigationController.")
+                return
+            }
+            self.navigate(toScene: .toWatch)
+            navController.popToRootViewController(animated: true)
+            navController.pushViewController(controllerForLink, animated: true)
+        case .inCurrentlyDisplayedTab:
+            guard let navController = viewControllers?[selectedIndex] as? ApplicationNavigationController else {
+                Log.error("[RootViewController] The currently selected tab controller is not ApplicationNavigationController.")
+                return
+            }
+            navController.pushViewController(controllerForLink, animated: true)
+        }
+    }
+    
+    /// Initializes view controller responsible for the corresponding AnyLink
+    private func retrieveViewController(forLink link: AnyLink) -> UIViewController? {
         let targetViewController: UIViewController
         
         // Determine if the link is supported
@@ -178,7 +217,7 @@ extension RootViewController {
             // Instantiate the view controller from storyboard
             guard let animeViewController = storyboard.instantiateInitialViewController() as? AnimeViewController else {
                 Log.error("The view controller instantiated from AnimePlayer.storyboard is not AnimeViewController.")
-                return
+                return nil
             }
             
             // Initialize the AnimeViewController with the link
@@ -190,35 +229,14 @@ extension RootViewController {
             // Instantiate the view controller from storyboard
             guard let animeInformationController = storyboard.instantiateInitialViewController() as? AnimeInformationTableViewController else {
                 Log.error("The view controller instantiated from AnimeInformation.storyboard is not AnimeInformationTableViewController.")
-                return
+                return nil
             }
             
             // Initialize the AnimeInformationTableViewController with the link
             animeInformationController.setPresenting(link)
             targetViewController = animeInformationController
         }
-        
-        // If a view controller is provided
-        if let viewController = viewController {
-            // If the provided view controller has a navigation controller,
-            // open the link in the navigation controller. Else present it
-            // directly from the provided view controller.
-            if let navigationController = viewController.navigationController {
-                navigationController.pushViewController(targetViewController, animated: true)
-            } else { viewController.present(targetViewController, animated: true) }
-        } else { // If no view controller is provided, present the link in the featured tab
-            // Jump to Featured tab
-            selectedIndex = 0
-            
-            guard let navigationController = viewControllers?.first as? ApplicationNavigationController else {
-                Log.error("The first view controller is not ApplicationNavigationController.")
-                return
-            }
-            
-            // Pop to root view controller
-            navigationController.popToRootViewController(animated: true)
-            navigationController.pushViewController(targetViewController, animated: true)
-        }
+        return targetViewController
     }
 }
 

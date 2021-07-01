@@ -139,7 +139,7 @@ class AnimeScheduleCollectionViewController: MinFilledCollectionViewController, 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let view = collectionView.cellForItem(at: indexPath) as? CalendarAnimeCell,
             let item = view.representingScheduledAnime {
-            RootViewController.shared?.open(immedietly: item.link, in: self)
+            RootViewController.shared?.open(immedietly: item.link, method: .inController(self))
         }
     }
 }

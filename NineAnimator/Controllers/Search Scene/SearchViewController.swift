@@ -205,12 +205,12 @@ extension SearchViewController {
                 if case let .anime(animeLink) = link {
                     // Open the anime link directly if the current source is the link's source
                     if animeLink.source.name == source.name {
-                        RootViewController.shared?.open(immedietly: link, in: self)
+                        RootViewController.shared?.open(immedietly: link, method: .inController(self))
                     } else {
                         performSearch(keywords: item.keywords)
                     }
                 } else {
-                    RootViewController.shared?.open(immedietly: link, in: self)
+                    RootViewController.shared?.open(immedietly: link, method: .inController(self))
                 }
             } else { // For keywords, just search directly
                 performSearch(keywords: item.keywords)
