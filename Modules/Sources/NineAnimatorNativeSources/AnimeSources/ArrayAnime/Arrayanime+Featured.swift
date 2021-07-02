@@ -34,14 +34,18 @@ extension NASourceArrayanime {
     }
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
+        /*NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
             popularAnimeUpdates, latestAnimeUpdates
-        ]) .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
+        ]) .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }*/
+        latestAnimeUpdates
+            .then { result in
+                BasicFeaturedContainer(featured: [], latest: result)
+            }
     }
     
-    fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
+    /*fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
-            url: self.vercelEndpoint.appendingPathComponent("/newseason/1"),
+            url: self.animeDetailsEndpoint.appendingPathComponent("/newseason/1"),
             handling: .ajax
         ) .responseDecodable(
             type: AnimeResponse.self
@@ -66,11 +70,11 @@ extension NASourceArrayanime {
             }
             return seasonalAnime
         }
-    }
+    }*/
     
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
-            url: self.vercelEndpoint.appendingPathComponent("/recentlyadded/1"),
+            url: self.animeDetailsEndpoint.appendingPathComponent("/recentlyadded/1"),
             handling: .ajax
         ) .responseDecodable(
             type: AnimeResponse.self

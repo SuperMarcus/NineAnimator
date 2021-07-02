@@ -24,7 +24,7 @@ import NineAnimatorCommon
 class PantsudriveParser: VideoProviderParser {
     var aliases: [String] { [] }
     
-    private static let apiURL = URL(string: "https://gogo-stream.com/ajax.php")!
+    private static let apiURL = URL(string: "https://play.api-web.site/anime/src.php")!
     
     private func getVideoID(url: URL) -> String? {
         guard let url = URLComponents(string: url.absoluteString) else {
@@ -34,12 +34,12 @@ class PantsudriveParser: VideoProviderParser {
     }
     
     private struct APIResponse: Codable {
-        let source: [PlaybackFiles]
+        let url: [PlaybackFile]
     }
     
-    private struct PlaybackFiles: Codable {
-        let file: String
-        let label: String
+    private struct PlaybackFile: Codable {
+        let src: String
+        let type: String
     }
     
     func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
@@ -64,21 +64,23 @@ class PantsudriveParser: VideoProviderParser {
                 case .success(let response):
                     do {
                         let videoURLString = try response
-                            .source
+                            .url
                             .last
                             .tryUnwrap(.decodeError("First Video URL"))
-                            .file
+                            .src
                         
                         let videoURL = try URL(string: videoURLString)
                             .tryUnwrap(.decodeError("Video URL"))
+                        
+                        let isHLS = videoURL.pathExtension == "m3u8"
                         
                         callback(
                             BasicPlaybackMedia(
                                 url: videoURL,
                                 parent: episode,
-                                contentType: "video/mp4",
+                                contentType: isHLS ? "application/vnd.apple.mpegurl" : "video/mp4",
                                 headers: [:],
-                                isAggregated: false
+                                isAggregated: isHLS
                         ), nil)
                     } catch { callback(nil, error) }
                 default: callback(nil, response.error ?? NineAnimatorError.unknownError)

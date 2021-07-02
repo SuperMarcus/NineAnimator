@@ -56,7 +56,7 @@ extension NASourceArrayanime {
             let newPage = availablePages
             
             performingTask = parent.requestManager.request(
-                url: parent.vercelEndpoint.appendingPathComponent("/search/\(encodedTitle ?? "")/\(newPage + 1)"),
+                url: parent.searchEndpoint.appendingPathComponent("/search/\(encodedTitle ?? "")/\(newPage + 1)"),
                 handling: .ajax
             ) .responseDecodable(type: SearchResponse.self).then {
                 searchResponse -> [AnimeLink] in
