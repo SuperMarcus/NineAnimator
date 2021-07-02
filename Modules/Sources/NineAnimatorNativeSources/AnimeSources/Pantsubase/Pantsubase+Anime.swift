@@ -82,14 +82,14 @@ extension NASourcePantsubase {
                 
                 // Get anime info
                 let animeSynopsis = (try bowl
-                    .select("div.info > ul")[safe: 2]?
+                    .select("div.info > ul")[safe: 3]?
                     .text()) ?? ""
                 
                 // Additional Anime Attributes
                 var additionalAttributes = [Anime.AttributeKey: Any]()
                 
                 let airDate = (try bowl
-                    .select("div.info > ul")[safe:0]?
+                    .select("div.info > ul")[safe:1]?
                     .text()) ?? ""
                 additionalAttributes[.airDate] = airDate
                 
