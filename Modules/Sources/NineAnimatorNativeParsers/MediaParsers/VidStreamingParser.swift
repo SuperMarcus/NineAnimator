@@ -51,7 +51,7 @@ class VidStreamingParser: VideoProviderParser {
                     url: resourceUrl,
                     parent: episode,
                     contentType: isHLSAsset ? "application/vnd.apple.mpegurl" : "video/mp4",
-                    headers: [ "Referer": "https://vidstreaming.io/" ],
+                    headers: [ "Referer": episode.target.absoluteString ],
                     isAggregated: isHLSAsset
                 ), nil)
             } catch { handler(nil, error) }
