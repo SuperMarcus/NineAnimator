@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -595,9 +595,7 @@
                     <navigationItem key="navigationItem" title="Watch Next" id="AWC-Sv-NA3">
                         <barButtonItem key="rightBarButtonItem" title="Select Source" id="S9D-GU-IOj">
                             <connections>
-                                <segue destination="16P-Tr-XC2" kind="popoverPresentation" popoverAnchorBarButtonItem="S9D-GU-IOj" id="QIE-hh-9O1">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
+                                <action selector="selectSourceButtonPressed:" destination="9sh-0o-xaW" id="lGm-40-TUc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -776,14 +774,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xvy-Li-u1R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1137.68115942029" y="107.8125"/>
-        </scene>
-        <!--ServerSelection-->
-        <scene sceneID="g8v-Gs-nG0">
-            <objects>
-                <viewControllerPlaceholder storyboardName="ServerSelection" id="16P-Tr-XC2" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="L1C-dx-18P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="193" y="510"/>
         </scene>
         <!--Watch Next-->
         <scene sceneID="d6G-dE-Ax4">
