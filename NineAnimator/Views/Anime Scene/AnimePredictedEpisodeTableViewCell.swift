@@ -27,6 +27,20 @@ class AnimePredictedEpisodeTableViewCell: UITableViewCell {
     
     @IBOutlet private weak var suggestingEpisodeNameLabel: UILabel!
     
+    @IBOutlet private var switchEpisodeSortButton: UIButton!
+    
+    func setPresenting(link: EpisodeLink?, reason: SuggestionReason?) {
+        episodeLink = link
+        self.reason = reason ?? .start
+        
+        // Update episode sort button. By default the arrow image is pointing down for "Ordered" sorting.
+        if NineAnimator.default.user.episodeListingOrder == .reversed {
+            self.switchEpisodeSortButton.transform = CGAffineTransform(rotationAngle: .pi)
+        } else {
+            self.switchEpisodeSortButton.transform = .identity
+        }
+    }
+    
     /// The link to the episode that this cell is suggesting
     var episodeLink: EpisodeLink? {
         didSet {
