@@ -427,11 +427,9 @@ extension SettingsSceneController {
     }
     
     private func clearActivities() {
-        if #available(iOS 12.0, *) {
-            NSUserActivity.deleteAllSavedUserActivities {
-                [weak self] in DispatchQueue.main.async {
-                    self?.updatePreferencesUI()
-                }
+        NSUserActivity.deleteAllSavedUserActivities {
+            [weak self] in DispatchQueue.main.async {
+                self?.updatePreferencesUI()
             }
         }
     }
