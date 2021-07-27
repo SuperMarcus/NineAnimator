@@ -89,7 +89,7 @@ extension RecentlyViewedTableViewController {
         switch Section(rawValue: section)! {
         case .continueWatching: return NineAnimator.default.user.lastEpisode == nil ? 0 : 1
         case .statefulAnime: return statefulAnime.count
-        case .recentAnime: return NineAnimator.default.user.recentAnimes.count
+        case .recentAnime: return NineAnimator.default.user.countOfRecents
         case .collections: return NineAnimator.default.trackingServices.filter { $0.isCapableOfRetrievingAnimeState }.isEmpty ? 0 : 1
         }
     }
@@ -106,7 +106,7 @@ extension RecentlyViewedTableViewController {
             return cell
         case .recentAnime:
             let cell = tableView.dequeueReusableCell(withIdentifier: "recent.anime", for: indexPath) as! RecentlyWatchedAnimeTableViewCell
-            let animes = NineAnimator.default.user.recentAnimes
+            let animes = NineAnimator.default.user.retrieveRecents()
             let anime = animes[indexPath.item]
             cell.animeLink = anime
             return cell
@@ -176,9 +176,9 @@ extension RecentlyViewedTableViewController {
                 _, _ in
                 guard let cell = tableView.cellForRow(at: indexPath) as? RecentlyWatchedAnimeTableViewCell,
                     let animeLink = cell.animeLink else { return }
-                NineAnimator.default.user.recentAnimes = NineAnimator.default.user.recentAnimes.filter {
+                NineAnimator.default.user.setRecents(to: NineAnimator.default.user.retrieveRecents().filter {
                     $0 != animeLink
-                }
+                })
                 tableView.deleteRows(at: [indexPath], with: .automatic)
             }
             

@@ -329,7 +329,7 @@ extension SettingsSceneController {
         }
         
         // To be grammatically correct :D
-        let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
+        let recentAnimeCount = NineAnimator.default.user.countOfRecents
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         
         let subscribedAnimeCount = NineAnimator.default.user.subscribedAnimes.count
