@@ -45,7 +45,7 @@ private struct StateSerializationFile: Codable {
  */
 func export(_ configuration: NineAnimatorUser) -> URL? {
     do {
-        let trackingData: [AnimeLink: Data] = Dictionary(configuration.recentAnimes.compactMap {
+        let trackingData: [AnimeLink: Data] = Dictionary(configuration.retrieveRecents().compactMap {
             anime in do {
                 let context = NineAnimator.default.trackingContext(for: anime)
                 let data = try context.export()
@@ -57,7 +57,7 @@ func export(_ configuration: NineAnimatorUser) -> URL? {
         }
         
         let file = StateSerializationFile(
-            history: configuration.recentAnimes,
+            history: configuration.retrieveRecents(),
             progresses: configuration.persistedProgresses,
             exportedDate: Date(),
             trackingData: trackingData,
@@ -92,12 +92,12 @@ func merge(_ configuration: NineAnimatorUser, with fileUrl: URL, policy: NineAni
     
     let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
     
-    let piorityHistory = policy == .localFirst ? configuration.recentAnimes : preservedStates.history
-    let secondaryHistory = policy == .localFirst ? preservedStates.history : configuration.recentAnimes
+    let piorityHistory = policy == .localFirst ? configuration.retrieveRecents() : preservedStates.history
+    let secondaryHistory = policy == .localFirst ? preservedStates.history : configuration.retrieveRecents()
     
-    configuration.recentAnimes = piorityHistory + secondaryHistory.filter {
+    configuration.setRecents(to: piorityHistory + secondaryHistory.filter {
         item in !piorityHistory.contains { $0 == item }
-    }
+    })
     
     let piroityPersistedProgresses = policy == .localFirst ? configuration.persistedProgresses : preservedStates.progresses
     let secondaryPersistedProgresses = policy == .localFirst ? preservedStates.progresses : configuration.persistedProgresses
@@ -126,7 +126,7 @@ func replace(_ configuration: NineAnimatorUser, with fileUrl: URL) throws {
     
     let preservedStates = try PropertyListDecoder().decode(StateSerializationFile.self, from: serializedConfiguration)
     
-    configuration.recentAnimes = preservedStates.history
+    configuration.setRecents(to: preservedStates.history)
     configuration.persistedProgresses = preservedStates.progresses
     
     // Restoring subscription list

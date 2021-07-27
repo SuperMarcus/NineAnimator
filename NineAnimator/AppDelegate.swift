@@ -589,7 +589,8 @@ extension AppDelegate {
             self.parent = parent
         }
         
-        deinit { parent?.didLoseReferenceToPreventSuspensionHelper() }
+        deinit { parent?.didLoseReferenceToPreventSuspensionHelper()
+        }
     }
     
     fileprivate func didLoseReferenceToPreventSuspensionHelper() {

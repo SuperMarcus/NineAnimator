@@ -329,7 +329,7 @@ extension SettingsSceneController {
         }
         
         // To be grammatically correct :D
-        let recentAnimeCount = NineAnimator.default.user.recentAnimes.count
+        let recentAnimeCount = NineAnimator.default.user.countOfRecents
         viewingHistoryStatsLabel.text = "\(recentAnimeCount) \(recentAnimeCount == 1 ? "Item" : "Items")"
         
         let subscribedAnimeCount = NineAnimator.default.user.subscribedAnimes.count
@@ -427,11 +427,9 @@ extension SettingsSceneController {
     }
     
     private func clearActivities() {
-        if #available(iOS 12.0, *) {
-            NSUserActivity.deleteAllSavedUserActivities {
-                [weak self] in DispatchQueue.main.async {
-                    self?.updatePreferencesUI()
-                }
+        NSUserActivity.deleteAllSavedUserActivities {
+            [weak self] in DispatchQueue.main.async {
+                self?.updatePreferencesUI()
             }
         }
     }

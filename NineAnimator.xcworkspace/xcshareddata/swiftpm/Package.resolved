@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "013bffe628b49433d7bc334146a4ed8c507c0e32",
-          "version": "4.1.1"
+          "revision": "6d60d2361445e959b4fbb3a9d0dbae0e07eead1a",
+          "version": "4.2.0"
         }
       },
       {
@@ -51,7 +51,7 @@
         "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift.git",
         "state": {
           "branch": null,
-          "revision": "c1a5994b57c6f33b92cb8bcf87e981783b99cac9",
+          "revision": "5f0328feb73b811180a88b60cc6ed36bfb76bf03",
           "version": null
         }
       },
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
         "state": {
           "branch": null,
-          "revision": "de6b8f9db4b2a0aa859a5507550a70548e4da936",
-          "version": "1.8.1"
+          "revision": "d747ab5de269cd44022bbe96ff9609d8626694ab",
+          "version": "1.9.0"
         }
       },
       {

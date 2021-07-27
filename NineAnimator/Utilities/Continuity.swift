@@ -18,11 +18,8 @@
 //
 
 import CoreSpotlight
-import Foundation
 import Kingfisher
 import NineAnimatorCommon
-import NineAnimatorNativeParsers
-import NineAnimatorNativeSources
 import UIKit
 
 /// A helper struct that facilitates NineAnimator continuity functions
@@ -61,11 +58,8 @@ enum Continuity {
         activity.isEligibleForHandoff = true
         activity.isEligibleForPublicIndexing = true
         activity.needsSave = false
-        
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = true
-            activity.persistentIdentifier = identifier(for: link.link)
-        }
+        activity.isEligibleForPrediction = true
+        activity.persistentIdentifier = identifier(for: link.link)
         
         do {
             let encoder = PropertyListEncoder()
@@ -104,14 +98,11 @@ enum Continuity {
         activity.isEligibleForHandoff = true
         activity.isEligibleForPublicIndexing = false
         activity.needsSave = true
+        activity.isEligibleForPrediction = false
+        activity.persistentIdentifier = "\(identifier(for: link.parent.link)).\(link.identifier)"
         
         // Expire after two days
         activity.expirationDate = Date() + 172800
-        
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = false
-            activity.persistentIdentifier = "\(identifier(for: link.parent.link)).\(link.identifier)"
-        }
         
         // Will not update the user info yet. It should be updated by the video player later.
         return activity
@@ -119,7 +110,7 @@ enum Continuity {
     
     /// Obtain the activity for resuming last watched anime
     ///
-    /// This activity is meant for Siri Shortcuts and Sportlight
+    /// This activity is meant for Siri Shortcuts and Spotlight
     static func activityForResumeLastAnime() -> NSUserActivity {
         let activity = NSUserActivity(activityType: activityTypeResumePlayback)
         
@@ -130,10 +121,7 @@ enum Continuity {
         activity.isEligibleForHandoff = false
         activity.isEligibleForPublicIndexing = true
         activity.needsSave = false
-        
-        if #available(iOS 12.0, *) {
-            activity.isEligibleForPrediction = true
-        }
+        activity.isEligibleForPrediction = true
         
         return activity
     }
