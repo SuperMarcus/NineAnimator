@@ -25,37 +25,33 @@ import UIKit
 
 /// Controller used to play background audio to keep the app alive in the background
 class AudioBackgroundController {
-    private var audioPlayer: AVAudioPlayer
-    var isPlaying: Bool = false
-    
-    init() {
+    private lazy var audioPlayer: AVAudioPlayer = {
         let silentAudio = NSDataAsset(name: "Silence Audio")!
-        audioPlayer = try! AVAudioPlayer(
+        let player = try! AVAudioPlayer(
             data: silentAudio.data,
             fileTypeHint: AVFileType.wav.rawValue
         )
-    }
+        player.volume = .zero
+        player.numberOfLoops = -1
+        return player
+    }()
     
     func startBackgroundAudio() {
-        guard !isPlaying else { return }
+        guard !audioPlayer.isPlaying else { return }
         do {
             Log.debug("Starting Background Audio")
-            audioPlayer.volume = 0.0
-            audioPlayer.numberOfLoops = -1
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, options: .mixWithOthers)
             try session.setActive(true)
             audioPlayer.play()
-            isPlaying = true
         } catch {
             Log.error("Failed to setup audio session for background: %@", error)
         }
     }
     
     func stopBackgroundAudio() {
-        guard isPlaying else { return }
+        guard audioPlayer.isPlaying else { return }
         Log.debug("Stopping Background Audio")
         audioPlayer.stop()
-        isPlaying = false
     }
 }

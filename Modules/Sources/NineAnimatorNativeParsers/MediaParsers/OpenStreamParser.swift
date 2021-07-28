@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 class OpenStreamParser: VideoProviderParser {
-    var aliases: [String] { [ "mserver" ] }
+    var aliases: [String] { [ "mserver", "gserver" ] }
     
     static let streamXVideoSource = try! NSRegularExpression(
         pattern: #""file":"([^"]+)"#,
@@ -65,8 +65,8 @@ class OpenStreamParser: VideoProviderParser {
                 handler(BasicPlaybackMedia(
                     url: sourceURL,
                     parent: episode,
-                    contentType: "video/mp4",
-                    headers: [:],
+                    contentType: "application/vnd.apple.mpegurl",
+                    headers: ["User-Agent": self.defaultUserAgent],
                     isAggregated: true
                 ), nil)
             } catch { handler(nil, error) }

@@ -47,7 +47,7 @@ extension NASourceArrayanime {
         } .thenPromise {
             animeID in
             self.requestManager.request(
-                url: self.vercelEndpoint.appendingPathComponent("/details/\(animeID)"),
+                url: self.animeDetailsEndpoint.appendingPathComponent("/details/\(animeID)"),
                 handling: .ajax
             ) .responseDecodable(type: AnimeResponse.self)
               .then { ($0, animeID) }

@@ -176,17 +176,18 @@ extension LibrarySceneController {
             let screenBounds = UIScreen.main.bounds
             let numOfEntriesToLoad = self.numOfRecentlyWatchedCellsFittingIn(max(screenBounds.height, screenBounds.width))
             
-            let browsingHistory = NineAnimator.default.user.recentAnimes
-            let sortedRecordMap = browsingHistory.compactMap {
-                anime -> (AnimeLink, TrackingContext.PlaybackProgressRecord)? in
-                let context = NineAnimator.default.trackingContext(for: anime)
-                if let record = context.mostRecentRecord {
-                    return (anime, record)
-                } else { return nil }
-            } .sorted { $0.1.enqueueDate > $1.1.enqueueDate }
-            return sortedRecordMap[0..<min(numOfEntriesToLoad, sortedRecordMap.count)].map {
-                $0.0
-            }
+            let browsingHistory = NineAnimator.default.user.retrieveRecents(fetchLimit: numOfEntriesToLoad)
+            let sortedRecordMap = browsingHistory
+                .compactMap {
+                    anime -> (AnimeLink, TrackingContext.PlaybackProgressRecord)? in
+                    let context = NineAnimator.default.trackingContext(for: anime)
+                    if let record = context.mostRecentRecord {
+                        return (anime, record)
+                    } else { return nil }
+                }
+                .sorted { $0.1.enqueueDate > $1.1.enqueueDate }
+                .map { $0.0 }
+            return sortedRecordMap
         } .dispatch(on: .main) .error {
             [weak self] error in
             Log.error("[LibrarySceneController] THIS SHOULD NOT HAPPEN - Finished loading recently watched list with an error: %@", error)
@@ -648,7 +649,7 @@ extension LibrarySceneController {
             segueIdentifier: "library.category.recents",
             tintColor: #colorLiteral(red: 1, green: 0.6235294118, blue: 0.03921568627, alpha: 1),
             icon: #imageLiteral(resourceName: "History Icon HD")
-        ) { "\(user.recentAnimes.count)" })
+        ) { "\(user.countOfRecents)" })
         
         // Subscribed
         categories.append(.init(

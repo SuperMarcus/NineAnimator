@@ -90,11 +90,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         }
         
         // Links from recents
-        var recentAnimeList = NineAnimator.default.user.recentAnimes
-        
-        if recentAnimeList.count > 50 { // Limit to the 50 most recent items
-            recentAnimeList = Array(recentAnimeList[0..<50])
-        }
+        let recentAnimeList = NineAnimator.default.user.retrieveRecents(fetchLimit: 50)
         
         let recentAnimeItems: [Item] = Set(recentAnimeList).map {
             recent in .init(.anime(recent), ofType: .recents, acceptsDeleteAction: false)

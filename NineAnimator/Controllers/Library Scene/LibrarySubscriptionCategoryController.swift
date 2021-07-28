@@ -226,15 +226,27 @@ extension LibrarySubscriptionCategoryController {
             menuItems.append(.init(
                 title: "Unsubscribe", // Get to use SFSymbols here because >= iOS 13 !!
                 image: UIImage(systemName: "bell.slash.fill"),
-                identifier: nil
+                attributes: .destructive
             ) { [weak self] _ in
                 self?.unsubscribe(relatedLink, indexPath: indexPath)
             })
             
+            menuItems.append(.init(
+                title: "Share",
+                image: UIImage(systemName: "square.and.arrow.up")
+            ) { [weak self] _ in
+                guard let self = self else { return }
+
+                // Present the share sheet
+                RootViewController.shared?.presentShareSheet(
+                    forLink: relatedLink,
+                    from: sourceCell,
+                    inViewController: self
+                )
+            })
+            
             return UIMenu(
                 title: "Subscribed Anime",
-                identifier: nil,
-                options: [],
                 children: menuItems
             )
         }

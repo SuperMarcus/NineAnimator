@@ -28,7 +28,8 @@ extension NASourceAnimeHub {
         // "xserver": "Xserver", Seems like this no episodes support this server
         "oserver": "Oserver",
         "mserver": "Mserver",
-        "yuserver": "YUserver"
+        "yuserver": "YUserver",
+        "gserver": "Gserver"
         // "hserver": "Hserver" Excluding until we update HydraX parser
     ]
     /// Represents the response from AnimeHub episode endpoint

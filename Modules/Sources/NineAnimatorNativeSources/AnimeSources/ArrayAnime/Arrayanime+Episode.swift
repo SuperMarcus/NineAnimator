@@ -34,8 +34,8 @@ extension NASourceArrayanime {
     }
     
     fileprivate struct EpisodeLinks: Decodable {
-        let link: String
-        let name: String
+        let src: String
+        let size: String
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -47,7 +47,7 @@ extension NASourceArrayanime {
         } .thenPromise {
             animeID -> NineAnimatorPromise<EpisodeResponse> in
             self.requestManager.request(
-                url: self.vercelEndpoint.appendingPathComponent("/watching/\(animeID)/\(link.name)"),
+                url: self.animeDetailsEndpoint.appendingPathComponent("/watching/\(animeID)/\(link.name)"),
                 handling: .ajax
             ) .responseDecodable(type: EpisodeResponse.self)
         } .then {
@@ -57,16 +57,16 @@ extension NASourceArrayanime {
             var episodeSource: String = ""
             
             if link.server == "gstore" {
-                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("HDP") }) {
-                    episodeSource = episodeResponse.links[index].link
+                if let index = episodeResponse.links.firstIndex(where: { $0.size.contains("High Speed") }) {
+                    episodeSource = episodeResponse.links[index].src
                 }
             } else if link.server == "cloud9" {
-                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("1080P") }) {
-                    episodeSource = episodeResponse.links[index].link
+                if let index = episodeResponse.links.firstIndex(where: { $0.size.contains("1080P") }) {
+                    episodeSource = episodeResponse.links[index].src
                 } else {
                     // Other quality if 1080p is unavailable
                     // Cloud9 is always at the last index, assuming Cloud9 server exists
-                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).link
+                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).src
                 }
             }
 
