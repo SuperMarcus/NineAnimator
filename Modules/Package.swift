@@ -29,7 +29,7 @@ if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent()
 } else {
     naCommonDependency = .package(
         url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
-        .exact("b75d541be940ee41d1a93fc3ebbdd6199069b2d2")
+        .revision("b75d541be940ee41d1a93fc3ebbdd6199069b2d2")
     )
 }
 
