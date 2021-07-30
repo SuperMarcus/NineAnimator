@@ -21,10 +21,10 @@ import AVKit
 import SwiftUI
 
 @available(iOS 14.0, *)
-extension ImageSearchResultsView {
+extension ImageSearchResultsScene {
     struct LoopingVideoPlayer: UIViewRepresentable {
         let videoURL: URL
-
+        
         func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoopingVideoPlayer>) {
         }
 

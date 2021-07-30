@@ -23,9 +23,9 @@ import NineAnimatorNativeListServices
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct ImageSearchSelectorView: View {
+struct ImageSearchSelectorScene: View {
     private let traceMoeEngine = TraceMoe()
-    @State private var selectedImage: SelectedImage = .none
+    @State private var selectedImage: SelectedImage?
     @State private var imageUploadState: ImageUploadState = .completed
 
     @State private var inputTextURL = ""
@@ -37,7 +37,6 @@ struct ImageSearchSelectorView: View {
     @State private var shouldDisplayResultsView: Bool = false
 
     var body: some View {
-        // To-Do: Remove VStack if i plan not to use it
         VStack {
             Form {
                 ImagePreview(
@@ -77,7 +76,7 @@ struct ImageSearchSelectorView: View {
                 })
                 .disabled(isUploadButtonDisabled)
             }
-            NavigationLink(destination: ImageSearchResultsView(searchResults: $searchResults), isActive: $shouldDisplayResultsView) { EmptyView() }
+            NavigationLink(destination: ImageSearchResultsScene(searchResults: $searchResults), isActive: $shouldDisplayResultsView) { EmptyView() }
         }
         .sheet(
             isPresented: $shouldDisplayPhotoPicker,
@@ -116,7 +115,7 @@ struct ImageSearchSelectorView: View {
 
 // View methods
 @available(iOS 14.0, *)
-private extension ImageSearchSelectorView {
+private extension ImageSearchSelectorScene {
     func loadInputURL() {
         // Dismiss keyboard
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
@@ -137,7 +136,7 @@ private extension ImageSearchSelectorView {
     
     func uploadImage() {
         func handleError(_ error: Error) {
-            Log.error("[ImageSearchSelectorView] Failed To Upload Image: %@", error)
+            Log.error("[ImageSearchSelectorScene] Failed To Upload Image: %@", error)
             imageUploadState = .errored(error: error)
             shouldDisplayError = true
         }
@@ -150,7 +149,7 @@ private extension ImageSearchSelectorView {
         
         switch selectedImage {
         case .none:
-            Log.error("[ImageSearchSelectorView] Tried Uploading Without A Selected Image")
+            Log.error("[ImageSearchSelectorScene] Tried Uploading Without A Selected Image")
         case let .localImage(localImage):
             imageUploadState = .uploading(task: traceMoeEngine.search(with: localImage)
                 .error { handleError($0) }
@@ -164,6 +163,7 @@ private extension ImageSearchSelectorView {
 
     func generateErrorAlert() -> Alert {
         guard case let .errored(error) = imageUploadState else {
+            assertionFailure("Alert displayed without any error!")
             return Alert(
                 title: Text("Unknown Error"),
                 message: Text("Unknown Error"),
@@ -196,7 +196,7 @@ private extension ImageSearchSelectorView {
 
 // Internal State
 @available(iOS 14.0, *)
-extension ImageSearchSelectorView {
+extension ImageSearchSelectorScene {
     enum ImageUploadState {
         /// The selected image has been downloaded/uploaded
         case completed
@@ -217,16 +217,13 @@ extension ImageSearchSelectorView {
 
         /// Represents a URL pointing to an image stored remotely
         case remoteURL(URL)
-        
-        /// No image has been selected
-        case none
     }
 }
 
 @available(iOS 14.0, *)
-private extension ImageSearchSelectorView {
+private extension ImageSearchSelectorScene {
     struct ImagePreview: View {
-        @Binding fileprivate var selectedImage: SelectedImage
+        @Binding fileprivate var selectedImage: SelectedImage?
         @Binding fileprivate var imageState: ImageUploadState
         @Binding fileprivate var shouldDisplayError: Bool
         
@@ -273,7 +270,7 @@ private extension ImageSearchSelectorView {
 struct ImageSelector_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ImageSearchSelectorView().preferredColorScheme(.light)
+            ImageSearchSelectorScene().preferredColorScheme(.light)
         }
     }
 }

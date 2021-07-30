@@ -22,11 +22,11 @@ import PhotosUI
 import SwiftUI
 
 @available(iOS 14.0, *)
-extension ImageSearchSelectorView {
+extension ImageSearchSelectorScene {
     struct PhotoPicker: UIViewControllerRepresentable {
         @Binding var isPresented: Bool
-        @Binding var selectedImageState: ImageSearchSelectorView.ImageUploadState
-        @Binding var selectedImage: ImageSearchSelectorView.SelectedImage
+        @Binding var selectedImageState: ImageSearchSelectorScene.ImageUploadState
+        @Binding var selectedImage: ImageSearchSelectorScene.SelectedImage?
 
         func makeUIViewController(context: Context) -> PHPickerViewController {
             var configuration = PHPickerConfiguration()
@@ -66,10 +66,11 @@ extension ImageSearchSelectorView {
                 item.loadObject(ofClass: UIImage.self) {
                     image, error in
 
-                    guard error == nil else {
+                    if let error = error {
                         Log.error(error)
-                        return self.parent.selectedImageState = .errored(error: error!)
+                        return self.parent.selectedImageState = .errored(error: error)
                     }
+                    
                     guard let image = image as? UIImage else {
                         Log.error("[PhotoPickerController] Could not convert item to image")
                         return self.parent.selectedImageState = .errored(

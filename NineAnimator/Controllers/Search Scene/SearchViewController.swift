@@ -294,7 +294,7 @@ extension SearchViewController {
     
     @available(iOS 14.0, *)
     @objc func onReverseImageSearchButtonTapped() {
-        let hostingView = UIHostingController(rootView: ImageSearchSelectorView())
+        let hostingView = UIHostingController(rootView: ImageSearchSelectorScene())
         // Manually setting the nav title here to fix a SwiftUI issue
         // where the nav title pops in without an animation
         hostingView.navigationItem.title = "Image Search"

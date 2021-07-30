@@ -17,34 +17,30 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AVKit
 import Kingfisher
 import NineAnimatorCommon
 import NineAnimatorNativeListServices
 import SwiftUI
 
 @available(iOS 14.0, *)
-struct ImageSearchResultsView: View {
+struct ImageSearchResultsScene: View {
     @Binding var searchResults: [TraceMoe.TraceMoeSearchResult]
     
     var body: some View {
         ScrollView {
             AdaptiveStack(horizontalAlignment: .leading, verticalAlignment: .top, verticalSpacing: 15) {
                 TopResultView(result: searchResults[0])
-                    // Assigning manual id to ensure smooth transitions when
-                    // adaptive stack switches between HStack and VStack
-                    .id("FIRST RESULT")
                 if searchResults.count > 1 {
                     VStack(alignment: .leading) {
                         Text("Similar Results")
                             .font(.title2)
                             .fontWeight(.bold)
-                        ForEach(searchResults[1...], id: \.video) { searchResult in
+                        ForEach(searchResults[1...], id: \.video) {
+                            searchResult in
                             SimilarAnimeView(result: searchResult)
                         }
                     }
-                    // Assigning manual id to ensure smooth transitions when
-                    // adaptive stack switches between HStack and VStack
-                    .id("SIMILAR RESULTS")
                 }
             }
             .padding([.bottom, .horizontal])
@@ -57,12 +53,12 @@ struct ImageSearchResultsView: View {
 }
 
 @available(iOS 14.0, *)
-private extension ImageSearchResultsView {
+private extension ImageSearchResultsScene {
     struct TopResultView: View {
         let result: TraceMoe.TraceMoeSearchResult
         @State private var imageRequestTask: NineAnimatorAsyncTask?
         @State private var imageURL: URL?
-        @State private var animeSynopsis: String?
+        @ScaledMetric private var imageHeight: CGFloat = 150
         
         var body: some View {
             VStack(alignment: .leading) {
@@ -76,16 +72,18 @@ private extension ImageSearchResultsView {
                             KFImage(coverURL)
                                 .fade(duration: 0.5)
                                 .resizable()
-                                .frame(width: 100, height: 150)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .frame(height: imageHeight)
                                 .cornerRadius(8)
                         } else {
                             ProgressView()
-                                .frame(width: 100, height: 150, alignment: .center)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .frame(height: imageHeight)
                                 .foregroundColor(.clear)
                         }
                         VStack(alignment: .leading) {
                             AnimeTitlesView(result: result)
-                            AnimeDetailedInfoView(result: result, synopsis: $animeSynopsis)
+                            AnimeDetailedInfoView(result: result)
                         }
                     }
                 }
@@ -109,7 +107,6 @@ private extension ImageSearchResultsView {
                 .finally {
                     animeInfo in
                     imageURL = animeInfo.artwork
-                    animeSynopsis = animeInfo.description
                 }
         }
         
@@ -123,32 +120,10 @@ private extension ImageSearchResultsView {
             )
             
             let link = AnyLink.listingReference(listingReference)
-            RootViewController.shared?.open(immedietly: link, method: .inCurrentlyDisplayedTab)
-        }
-    }
-    
-    struct AnimeDetailedInfoView: View {
-        let result: TraceMoe.TraceMoeSearchResult
-        @Binding var synopsis: String?
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                if let ep = result.episode?.value,
-                   !ep.isEmpty {
-                    Text("Episode: \(ep)")
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                }
-                if let synopsis = synopsis {
-                    Text(synopsis)
-                        .font(.subheadline)
-                        .fontWeight(.light)
-                        .lineLimit(2)
-                }
-                Text("Similarity: \(Int(result.similarity * 100))%")
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-            }
+            RootViewController.shared?.open(
+                immedietly: link,
+                method: .inCurrentlyDisplayedTab
+            )
         }
     }
     
@@ -159,10 +134,13 @@ private extension ImageSearchResultsView {
             Button { openAnilistView() } label: {
                 HStack {
                     VStack(alignment: .leading) {
-                        Text(result.anilist.title.english ?? "No English Title")
+                        Text(
+                            result.anilist.title.english ??
+                            result.anilist.title.native ??
+                            "No Title")
                             .font(.title3)
                             .lineLimit(2)
-                        AnimeDetailedInfoView(result: result, synopsis: .constant(nil))
+                        AnimeDetailedInfoView(result: result)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     LoopingVideoPlayer(videoURL: result.video)
@@ -182,7 +160,10 @@ private extension ImageSearchResultsView {
             )
             
             let link = AnyLink.listingReference(listingReference)
-            RootViewController.shared?.open(immedietly: link, method: .inCurrentlyDisplayedTab)
+            RootViewController.shared?.open(
+                immedietly: link,
+                method: .inCurrentlyDisplayedTab
+            )
         }
     }
     
@@ -209,6 +190,24 @@ private extension ImageSearchResultsView {
                         .lineLimit(1)
                         .foregroundColor(.gray)
                 }
+            }
+        }
+    }
+    
+    struct AnimeDetailedInfoView: View {
+        let result: TraceMoe.TraceMoeSearchResult
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                if let ep = result.episode?.value,
+                   !ep.isEmpty {
+                    Text("Episode: \(ep)")
+                        .font(.subheadline)
+                        .fontWeight(.light)
+                }
+                Text("Similarity: \(Int(result.similarity * 100))%")
+                    .font(.subheadline)
+                    .fontWeight(.medium)
             }
         }
     }
