@@ -197,6 +197,9 @@
 		2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275B25467F580076EC08 /* B'day by Nsx@2x.png */; };
 		2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277225476A670076EC08 /* Bald Man@2x.png */; };
 		2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC277325476A670076EC08 /* Bald Man@3x.png */; };
+		2CE1371326B31CA400F59CB0 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE1371226B31CA400F59CB0 /* AppCenterDistribute */; };
+		2CE1371526B31CA400F59CB0 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE1371426B31CA400F59CB0 /* AppCenterCrashes */; };
+		2CE1371726B31CA400F59CB0 /* AppCenterAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */; };
 		2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD2242BD349009FEB9C /* SharedPointerEffectDelegate.swift */; };
 		2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE15DD4242BD9B2009FEB9C /* UIView+PointerEffects.swift */; };
 		2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE18B0B2374839100771A16 /* LibrarySubscriptionCell.swift */; };
@@ -572,11 +575,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */,
+				2CE1371526B31CA400F59CB0 /* AppCenterCrashes in Frameworks */,
 				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */,
+				2CE1371326B31CA400F59CB0 /* AppCenterDistribute in Frameworks */,
 				2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */,
 				2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */,
+				2CE1371726B31CA400F59CB0 /* AppCenterAnalytics in Frameworks */,
 				2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1344,6 +1350,9 @@
 				2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */,
 				2CFC16AD265063480052FE8A /* ViewAnimator */,
 				BF6820E226817C93004DCDBD /* NineAnimatorCommon */,
+				2CE1371226B31CA400F59CB0 /* AppCenterDistribute */,
+				2CE1371426B31CA400F59CB0 /* AppCenterCrashes */,
+				2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -1423,6 +1432,7 @@
 				2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */,
 				2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */,
 				BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */,
+				2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
 			projectDirPath = "";
@@ -2256,6 +2266,14 @@
 				kind = branch;
 			};
 		};
+		2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.0;
+			};
+		};
 		2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator";
@@ -2268,8 +2286,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SuperMarcus/NineAnimatorCommon.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = b75d541be940ee41d1a93fc3ebbdd6199069b2d2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -2291,6 +2309,21 @@
 		2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NineAnimatorNativeListServices;
+		};
+		2CE1371226B31CA400F59CB0 /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		2CE1371426B31CA400F59CB0 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterAnalytics;
 		};
 		2CFC16AD265063480052FE8A /* ViewAnimator */ = {
 			isa = XCSwiftPackageProductDependency;

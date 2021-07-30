@@ -3,6 +3,7 @@ excluded: # paths to ignore during linting. Takes precedence over `included`.
   - fastlane
   - Common/.build
   - Modules/.build
+  - NineAnimatorCore/.build
 disabled_rules: # rule identifiers to exclude from running
   - closure_parameter_position
   - force_cast

@@ -41,8 +41,8 @@
         "package": "NineAnimatorCommon",
         "repositoryURL": "https://github.com/SuperMarcus/NineAnimatorCommon.git",
         "state": {
-          "branch": "master",
-          "revision": "be4004a86b0e041cfe182894e9ca4c83d9d3e8d1",
+          "branch": null,
+          "revision": "b75d541be940ee41d1a93fc3ebbdd6199069b2d2",
           "version": null
         }
       },
