@@ -129,7 +129,7 @@ public extension TraceMoe {
         public let userPreferred: String?
     }
 
-    /// Abstracts Trace.moe episode (Int or String) to a string value type
+    /// Abstracts Trace.moe's custom episode type to a string value type
     struct TraceMoeEpisode: Codable {
         public let value: String
 
@@ -139,13 +139,14 @@ public extension TraceMoe {
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.singleValueContainer()
-            // Attempt to decode from String, Int, and Double
             if let str = try? container.decode(String.self) {
                 value = str
             } else if let int = try? container.decode(Int.self) {
                 value = String(int)
             } else if let double = try? container.decode(Double.self) {
                 value = String(double)
+            } else if let array = try? container.decode([Int].self) {
+                value = array.description
             } else {
                 throw DecodingError.typeMismatch(String.self, .init(codingPath: decoder.codingPath, debugDescription: "Could not convert trace.moe episode into String"))
             }
