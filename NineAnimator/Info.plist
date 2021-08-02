@@ -104,6 +104,41 @@
 					<string>Zeref&apos;s Collection</string>
 				</array>
 			</dict>
+			<key>Twodiback</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodiback</string>
+				</array>
+			</dict>
+			<key>Twodi Light</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodi Light</string>
+				</array>
+			</dict>
+			<key>Twodi Dark</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodi Dark</string>
+				</array>
+			</dict>
+			<key>Furwa&apos;s Theme</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Furwa&apos;s Theme</string>
+				</array>
+			</dict>
+			<key>Anudeep&apos;s Colossus</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Anudeep&apos;s Colossus</string>
+				</array>
+			</dict>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
@@ -178,6 +213,41 @@
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>Use&apos;s Inverted</string>
+				</array>
+			</dict>
+			<key>Twodiback</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodiback</string>
+				</array>
+			</dict>
+			<key>Twodi Light</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodi Light</string>
+				</array>
+			</dict>
+			<key>Twodi Dark</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Twodi Dark</string>
+				</array>
+			</dict>
+			<key>Furwa&apos;s Theme</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Furwa&apos;s Theme</string>
+				</array>
+			</dict>
+			<key>Anudeep&apos;s Colossus</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Anudeep&apos;s Colossus</string>
 				</array>
 			</dict>
 		</dict>

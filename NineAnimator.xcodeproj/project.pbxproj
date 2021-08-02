@@ -191,6 +191,16 @@
 		2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */; };
 		2CD9B9A621FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */; };
 		2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */; };
+		2CDABE2026B85E1B00957380 /* Twodiback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE1E26B85E1B00957380 /* Twodiback@3x.png */; };
+		2CDABE2126B85E1B00957380 /* Twodiback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE1F26B85E1B00957380 /* Twodiback@2x.png */; };
+		2CDABE2426B85E6C00957380 /* Twodi Light@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2226B85E6C00957380 /* Twodi Light@3x.png */; };
+		2CDABE2526B85E6C00957380 /* Twodi Light@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2326B85E6C00957380 /* Twodi Light@2x.png */; };
+		2CDABE2826B85E9900957380 /* Twodi Dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2626B85E9900957380 /* Twodi Dark@3x.png */; };
+		2CDABE2926B85E9900957380 /* Twodi Dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2726B85E9900957380 /* Twodi Dark@2x.png */; };
+		2CDABE2C26B85EBD00957380 /* Furwa's Theme@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2A26B85EBD00957380 /* Furwa's Theme@3x.png */; };
+		2CDABE2D26B85EBD00957380 /* Furwa's Theme@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2B26B85EBD00957380 /* Furwa's Theme@2x.png */; };
+		2CDABE3026B85EDF00957380 /* Anudeep's Colossus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2E26B85EDF00957380 /* Anudeep's Colossus@2x.png */; };
+		2CDABE3126B85EDF00957380 /* Anudeep's Colossus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDABE2F26B85EDF00957380 /* Anudeep's Colossus@3x.png */; };
 		2CDC275525467E900076EC08 /* NsxHalloween@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */; };
 		2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */; };
 		2CDC275C25467F580076EC08 /* B'day by Nsx@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */; };
@@ -484,6 +494,16 @@
 		2CD9B9A321FE4AB100203442 /* AnimeAirDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeAirDateView.swift; sourceTree = "<group>"; };
 		2CD9B9A521FE605B00203442 /* AnimeSynopsisCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeSynopsisCellTableViewCell.swift; sourceTree = "<group>"; };
 		2CDA17A422065456009543F9 /* OfflineEpisodeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeTableViewCell.swift; sourceTree = "<group>"; };
+		2CDABE1E26B85E1B00957380 /* Twodiback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodiback@3x.png"; sourceTree = "<group>"; };
+		2CDABE1F26B85E1B00957380 /* Twodiback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodiback@2x.png"; sourceTree = "<group>"; };
+		2CDABE2226B85E6C00957380 /* Twodi Light@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodi Light@3x.png"; sourceTree = "<group>"; };
+		2CDABE2326B85E6C00957380 /* Twodi Light@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodi Light@2x.png"; sourceTree = "<group>"; };
+		2CDABE2626B85E9900957380 /* Twodi Dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodi Dark@3x.png"; sourceTree = "<group>"; };
+		2CDABE2726B85E9900957380 /* Twodi Dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Twodi Dark@2x.png"; sourceTree = "<group>"; };
+		2CDABE2A26B85EBD00957380 /* Furwa's Theme@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Furwa's Theme@3x.png"; sourceTree = "<group>"; };
+		2CDABE2B26B85EBD00957380 /* Furwa's Theme@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Furwa's Theme@2x.png"; sourceTree = "<group>"; };
+		2CDABE2E26B85EDF00957380 /* Anudeep's Colossus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anudeep's Colossus@2x.png"; sourceTree = "<group>"; };
+		2CDABE2F26B85EDF00957380 /* Anudeep's Colossus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Anudeep's Colossus@3x.png"; sourceTree = "<group>"; };
 		2CDC275325467E8F0076EC08 /* NsxHalloween@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@2x.png"; sourceTree = "<group>"; };
 		2CDC275425467E8F0076EC08 /* NsxHalloween@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NsxHalloween@3x.png"; sourceTree = "<group>"; };
 		2CDC275A25467F580076EC08 /* B'day by Nsx@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "B'day by Nsx@3x.png"; sourceTree = "<group>"; };
@@ -993,6 +1013,8 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2CDABE1F26B85E1B00957380 /* Twodiback@2x.png */,
+				2CDABE1E26B85E1B00957380 /* Twodiback@3x.png */,
 				2C34F04C2594403100D16F64 /* Tydox Square@2x.png */,
 				2C34F04B2594403000D16F64 /* Tydox Square@3x.png */,
 				2C34F0502594403100D16F64 /* Use's Inverted@2x.png */,
@@ -1013,6 +1035,14 @@
 				2C83E07F2526C51A00B00850 /* Tydox's 9@3x.png */,
 				2C107711249EFBFC007B82D9 /* Fox@2x.png */,
 				2C107710249EFBFB007B82D9 /* Fox@3x.png */,
+				2CDABE2326B85E6C00957380 /* Twodi Light@2x.png */,
+				2CDABE2226B85E6C00957380 /* Twodi Light@3x.png */,
+				2CDABE2726B85E9900957380 /* Twodi Dark@2x.png */,
+				2CDABE2626B85E9900957380 /* Twodi Dark@3x.png */,
+				2CDABE2B26B85EBD00957380 /* Furwa's Theme@2x.png */,
+				2CDABE2A26B85EBD00957380 /* Furwa's Theme@3x.png */,
+				2CDABE2E26B85EDF00957380 /* Anudeep's Colossus@2x.png */,
+				2CDABE2F26B85EDF00957380 /* Anudeep's Colossus@3x.png */,
 			);
 			path = "Alternative Icons";
 			sourceTree = "<group>";
@@ -1451,8 +1481,11 @@
 				2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */,
 				2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */,
 				2C34F0512594403100D16F64 /* Tydox Square@3x.png in Resources */,
+				2CDABE2C26B85EBD00957380 /* Furwa's Theme@3x.png in Resources */,
 				2C34F0542594403100D16F64 /* Zeref's Collection@2x.png in Resources */,
 				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
+				2CDABE2826B85E9900957380 /* Twodi Dark@3x.png in Resources */,
+				2CDABE2526B85E6C00957380 /* Twodi Light@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
 				2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */,
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
@@ -1467,15 +1500,22 @@
 				2C83E0872526C62D00B00850 /* 9 Testboi@3x.png in Resources */,
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
+				2CDABE2D26B85EBD00957380 /* Furwa's Theme@2x.png in Resources */,
+				2CDABE2026B85E1B00957380 /* Twodiback@3x.png in Resources */,
 				2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */,
+				2CDABE2926B85E9900957380 /* Twodi Dark@2x.png in Resources */,
 				2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 				2C34F0522594403100D16F64 /* Tydox Square@2x.png in Resources */,
+				2CDABE3026B85EDF00957380 /* Anudeep's Colossus@2x.png in Resources */,
 				2CDC275D25467F580076EC08 /* B'day by Nsx@2x.png in Resources */,
+				2CDABE3126B85EDF00957380 /* Anudeep's Colossus@3x.png in Resources */,
 				2C34F0532594403100D16F64 /* Use's Inverted@3x.png in Resources */,
+				2CDABE2126B85E1B00957380 /* Twodiback@2x.png in Resources */,
 				2C979F17235A16C400BC8699 /* Library.storyboard in Resources */,
 				2CDC277525476A670076EC08 /* Bald Man@3x.png in Resources */,
+				2CDABE2426B85E6C00957380 /* Twodi Light@3x.png in Resources */,
 				2C71DEC0226CF6DF004F3AC3 /* ServerSelectionCell.xib in Resources */,
 				2C34F0552594403100D16F64 /* Zeref's Collection@3x.png in Resources */,
 				2C83E0AD2526F4B500B00850 /* Nsxtop's 9@3x.png in Resources */,
