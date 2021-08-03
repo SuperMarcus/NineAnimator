@@ -418,8 +418,10 @@ extension NativePlayerController {
 // MARK: - Update settings
 extension NativePlayerController {
     @objc func onUserPreferenceDidChange(notification _: Notification) {
-        playerViewController.allowsPictureInPicturePlayback = shouldUsePictureInPicture
-        // Ignoring the others since those are retrived on app state changes
+        DispatchQueue.main.async {
+            // Ignoring the others since those are retrived on app state changes
+            self.playerViewController.allowsPictureInPicturePlayback = self.shouldUsePictureInPicture
+        }
     }
 }
 
