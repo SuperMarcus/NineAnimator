@@ -25,7 +25,7 @@ import NineAnimatorCommon
 class XStreamParser: VideoProviderParser {
     var aliases: [String] { [ "XStream", "XStreamCDN", "fembed" ] }
     
-    private static let apiBaseSourceURL = URL(string: "https://fcdn.stream/api/source/")!
+    private static let apiBaseSourceURL = URL(string: "https://embedsito.com/api/source/")!
     
     private struct SourcesAPIResponse: Codable {
         var success: Bool
@@ -52,7 +52,7 @@ class XStreamParser: VideoProviderParser {
             return session.request(
                 XStreamParser.apiBaseSourceURL.appendingPathComponent(resourceIdentifier),
                 method: .post,
-                parameters: [ "r": "", "d": "fcdn.stream" ],
+                parameters: [ "r": "", "d": "embedsito.com" ],
                 encoding: URLEncoding.default
             ) .responseJSON {
                 response in
