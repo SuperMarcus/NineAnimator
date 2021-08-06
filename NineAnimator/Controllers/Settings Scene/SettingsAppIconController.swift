@@ -42,7 +42,12 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             "B'day by Nsx",
             "Tydox Square",
             "Use's Inverted",
-            "Zeref's Collection"
+            "Zeref's Collection",
+            "Twodiback",
+            "Twodi Light",
+            "Twodi Dark",
+            "Furwa's Theme",
+            "Anudeep's Colossus"
         ] .filter { availableAppIcons.contains($0) }
     }()
     
