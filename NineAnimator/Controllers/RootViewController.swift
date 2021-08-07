@@ -179,7 +179,7 @@ extension RootViewController {
     
     func open(immedietly link: AnyLink, method: LinkOpeningMethod) {
         guard let controllerForLink = retrieveViewController(forLink: link) else {
-            Log.error("[RootViewController] Failed to retrieve view controller for anylink: %@", link)
+            Log.error("[RootViewController] Failed to retrieve view controller to handle anylink: %@", link)
             return
         }
         

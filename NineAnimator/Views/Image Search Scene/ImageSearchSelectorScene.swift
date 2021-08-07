@@ -49,7 +49,11 @@ struct ImageSearchSelectorScene: View {
                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 300, maxHeight: 300, alignment: .center)
                 Section(header: Text("ENTER IMAGE LINK")) {
                     HStack {
-                        TextField("Enter URL", text: $inputTextURL, onEditingChanged: { _ in }, onCommit: { loadInputURL() })
+                        TextField(
+                            "Enter URL",
+                            text: $inputTextURL,
+                            onEditingChanged: { _ in },
+                            onCommit: { loadInputURL() })
                             .textFieldStyle(PlainTextFieldStyle())
                             .textContentType(.URL)
                             .keyboardType(.URL)
@@ -57,7 +61,7 @@ struct ImageSearchSelectorScene: View {
                             .autocapitalization(.none)
                         Button("Load URL") { loadInputURL() }
                             .buttonStyle(PlainButtonStyle())
-                            .foregroundColor(Color.accentColor)
+                            .foregroundColor(.accentColor)
                     }
                 }
                 Section(header: Text("UPLOAD IMAGE")) {
@@ -76,7 +80,9 @@ struct ImageSearchSelectorScene: View {
                 })
                 .disabled(isUploadButtonDisabled)
             }
-            NavigationLink(destination: ImageSearchResultsScene(searchResults: $searchResults), isActive: $shouldDisplayResultsView) { EmptyView() }
+            NavigationLink(
+                destination: ImageSearchResultsScene(searchResults: $searchResults),
+                isActive: $shouldDisplayResultsView) { EmptyView() }
         }
         .sheet(
             isPresented: $shouldDisplayPhotoPicker,

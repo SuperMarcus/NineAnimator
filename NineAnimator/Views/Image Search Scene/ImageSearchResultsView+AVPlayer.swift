@@ -24,16 +24,18 @@ import SwiftUI
 extension ImageSearchResultsScene {
     struct LoopingVideoPlayer: UIViewRepresentable {
         let videoURL: URL
+        @Binding var isPlaying: Bool
         
-        func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<LoopingVideoPlayer>) {
+        func updateUIView(_ uiView: LoopingPlayerUIView, context: UIViewRepresentableContext<LoopingVideoPlayer>) {
+            uiView.isPlaying = isPlaying
         }
 
-        func makeUIView(context: Context) -> UIView {
+        func makeUIView(context: Context) -> LoopingPlayerUIView {
             LoopingPlayerUIView(frame: .zero, url: videoURL)
         }
     }
     
-    private class LoopingPlayerUIView: UIView {
+    class LoopingPlayerUIView: UIView {
         private let playerLayer = AVPlayerLayer()
         private let loadingIndicator = UIActivityIndicatorView()
         private var playerLooper: AVPlayerLooper?
@@ -86,6 +88,14 @@ extension ImageSearchResultsScene {
 
             // Start the video
             self.player.play()
+        }
+        
+        var isPlaying: Bool {
+            get { player.rate == 1 }
+            set {
+                let playRate: Float = newValue ? 1 : 0
+                player.rate = playRate
+            }
         }
 
         override func layoutSubviews() {

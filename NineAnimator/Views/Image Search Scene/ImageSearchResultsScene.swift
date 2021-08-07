@@ -58,11 +58,12 @@ private extension ImageSearchResultsScene {
         let result: TraceMoe.TraceMoeSearchResult
         @State private var imageRequestTask: NineAnimatorAsyncTask?
         @State private var imageURL: URL?
+        @State var shouldPlayPreview = true
         @ScaledMetric private var imageHeight: CGFloat = 150
         
         var body: some View {
             VStack(alignment: .leading) {
-                LoopingVideoPlayer(videoURL: result.video)
+                LoopingVideoPlayer(videoURL: result.video, isPlaying: $shouldPlayPreview)
                     .cornerRadius(8)
                     .aspectRatio(16/9, contentMode: .fit)
                     .frame(maxWidth: .infinity)
@@ -93,6 +94,8 @@ private extension ImageSearchResultsScene {
             .onLoad {
                 retrieveAnilistInfo()
             }
+            .onDisappear { shouldPlayPreview = false }
+            .onAppear { shouldPlayPreview = true }
         }
         
         func retrieveAnilistInfo() {
@@ -119,9 +122,8 @@ private extension ImageSearchResultsScene {
                 artwork: imageURL
             )
             
-            let link = AnyLink.listingReference(listingReference)
             RootViewController.shared?.open(
-                immedietly: link,
+                immedietly: .listingReference(listingReference),
                 method: .inCurrentlyDisplayedTab
             )
         }
@@ -129,6 +131,7 @@ private extension ImageSearchResultsScene {
     
     struct SimilarAnimeView: View {
         let result: TraceMoe.TraceMoeSearchResult
+        @State var shouldPlayPreview = true
         
         var body: some View {
             Button { openAnilistView() } label: {
@@ -143,12 +146,14 @@ private extension ImageSearchResultsScene {
                         AnimeDetailedInfoView(result: result)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    LoopingVideoPlayer(videoURL: result.video)
+                    LoopingVideoPlayer(videoURL: result.video, isPlaying: $shouldPlayPreview)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             }
             // Prevent button from changing text colour to accent colour
             .foregroundColor(.primary)
+            .onDisappear { shouldPlayPreview = false }
+            .onAppear { shouldPlayPreview = true }
         }
         
         func openAnilistView() {
