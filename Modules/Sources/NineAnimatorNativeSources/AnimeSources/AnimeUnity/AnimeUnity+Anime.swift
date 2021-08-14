@@ -28,7 +28,6 @@ extension NASourceAnimeUnity {
     }
     struct  SearchResponseRecordsData: Codable {
         var titleEng: String?
-        var episodes: [SearchResponseRecordsAnime]
     }
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager
@@ -39,14 +38,21 @@ extension NASourceAnimeUnity {
                 let data = responseContent
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                 let bowl = try SwiftSoup.parse(utf8Text)
+                let decoder = JSONDecoder()
+                // Info
                 var encoded = try bowl.select("video-player").attr("anime")
                 encoded = encoded.replacingOccurrences(of: "\n", with: "")
                 let data_json = try encoded.data(using: .utf8).tryUnwrap()
-                let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
                 let user: SearchResponseRecordsData
                     = try decoder.decode(SearchResponseRecordsData.self, from: data_json)
-                let decodedResponse = user
+                // Episodes
+                var ep = try bowl.select("video-player").attr("episodes")
+                ep = ep.replacingOccurrences(of: "\n", with: "")
+                let ep_json = try ep.data(using: .utf8).tryUnwrap()
+                let ep_decoded: [SearchResponseRecordsAnime]
+                    = try decoder.decode([SearchResponseRecordsAnime].self, from: ep_json)
+                // Decode
                 let reconstructedAnimeLink = AnimeLink(
                     title: link.title,
                     link: link.link,
@@ -54,8 +60,8 @@ extension NASourceAnimeUnity {
                     source: self
                 )
                 // Obtain the list of episodes
-                let eng_title = decodedResponse.titleEng
-                let episodesList = decodedResponse.episodes.compactMap {
+                let eng_title = user.titleEng
+                let episodesList = ep_decoded.compactMap {
                     episode -> (EpisodeLink) in
                     let link_ep = String(episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4))
                     return (EpisodeLink(
