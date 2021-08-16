@@ -42,7 +42,7 @@ extension LibrarySceneController {
                 let anime = updatedAnimeLinks.first {
                 RootViewController.shared?.open(
                     immedietly: .anime(anime),
-                    in: parent
+                    method: .inController(parent)
                 )
             } else if let category = parent.category(withIdentifier: "library.category.subscribed") {
                 // Else present the subscription category

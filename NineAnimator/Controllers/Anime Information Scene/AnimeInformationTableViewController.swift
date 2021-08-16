@@ -319,7 +319,8 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
             let cell = tableView.dequeueReusableCell(withIdentifier: "anime.related", for: indexPath) as! InformationSceneRelatedTableViewCell
             cell.initialize(_relatedReferences!) {
                 [weak self] reference in
-                RootViewController.shared?.open(immedietly: .listingReference(reference), in: self)
+                guard let self = self else { return }
+                RootViewController.shared?.open(immedietly: .listingReference(reference), method: .inController(self))
             }
             return cell
         case .airingSchedule:
@@ -658,7 +659,7 @@ extension AnimeInformationTableViewController {
     /// Open the match directly
     private func onPerfectMatch(_ animeLink: AnimeLink) {
         if presentingAnimeInformation == nil { navigationController?.popViewController(animated: true) }
-        RootViewController.shared?.open(immedietly: .anime(animeLink), in: self)
+        RootViewController.shared?.open(immedietly: .anime(animeLink), method: .inController(self))
     }
     
     /// Present options to the user for multiple match

@@ -70,7 +70,7 @@ class InformationSceneHeadingView: UIView, Themable {
         optionsButton.isEnabled = false
         
         animeArtworkImageView.alpha = 0.0
-        animeArtworkImageView.kf.setImage(with: reference.artwork, progressBlock: nil) {
+        animeArtworkImageView.kf.setImage(with: reference.artwork) {
             [weak animeArtworkImageView] _ in
             UIView.animate(withDuration: 0.1) {
                 animeArtworkImageView?.alpha = 1.0
@@ -87,6 +87,7 @@ class InformationSceneHeadingView: UIView, Themable {
                 }
             }
         }
+        animeArtworkImageView.kf.setImage(with: animeInformation.artwork, options: [.transition(.fade(0.2))])
         
         UIView.animate(withDuration: 0.2) {
             [weak self] in

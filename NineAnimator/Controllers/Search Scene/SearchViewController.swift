@@ -18,8 +18,7 @@
 //
 
 import NineAnimatorCommon
-import NineAnimatorNativeParsers
-import NineAnimatorNativeSources
+import SwiftUI
 import UIKit
 
 class SearchViewController: UITableViewController, UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
@@ -67,6 +66,17 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, UISe
         
         // Hide table cell separators at empty state
         tableView.tableFooterView = UIView()
+        
+        // Add Reverse Image Search Button
+        if #available(iOS 14.0, *) {
+            navigationItem.rightBarButtonItems?
+                .insert(UIBarButtonItem(
+                            barButtonSystemItem: .camera,
+                            target: self,
+                            action: #selector(onReverseImageSearchButtonTapped)),
+                        at: 0
+                )
+        }
         
         // Themes
         tableView.makeThemable()
@@ -201,12 +211,12 @@ extension SearchViewController {
                 if case let .anime(animeLink) = link {
                     // Open the anime link directly if the current source is the link's source
                     if animeLink.source.name == source.name {
-                        RootViewController.shared?.open(immedietly: link, in: self)
+                        RootViewController.shared?.open(immedietly: link, method: .inController(self))
                     } else {
                         performSearch(keywords: item.keywords)
                     }
                 } else {
-                    RootViewController.shared?.open(immedietly: link, in: self)
+                    RootViewController.shared?.open(immedietly: link, method: .inController(self))
                 }
             } else { // For keywords, just search directly
                 performSearch(keywords: item.keywords)
@@ -280,6 +290,15 @@ extension SearchViewController {
         
         alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alertView, animated: true)
+    }
+    
+    @available(iOS 14.0, *)
+    @objc func onReverseImageSearchButtonTapped() {
+        let hostingView = UIHostingController(rootView: ImageSearchSelectorScene())
+        // Manually setting the nav title here to fix a SwiftUI issue
+        // where the nav title pops in without an animation
+        hostingView.navigationItem.title = "Image Search"
+        navigationController?.pushViewController(hostingView, animated: true)
     }
 }
 

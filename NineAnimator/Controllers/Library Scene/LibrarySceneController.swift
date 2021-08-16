@@ -435,7 +435,7 @@ extension LibrarySceneController {
             let anime = cachedRecentlyWatchedList[indexPath.item]
             RootViewController.shared?.open(
                 immedietly: .anime(anime),
-                in: self
+                method: .inController(self)
             )
         case .collection:
             let collection = self.collection(atPath: indexPath)
