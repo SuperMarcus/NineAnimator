@@ -123,4 +123,5 @@ Common/
 
 # Do not include the nacore module
 NineAnimatorCore/
+NineAnimatorDependencies/
 

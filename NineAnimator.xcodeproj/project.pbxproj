@@ -26,7 +26,6 @@
 		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
 		2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107710249EFBFB007B82D9 /* Fox@3x.png */; };
 		2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107711249EFBFC007B82D9 /* Fox@2x.png */; };
-		2C11187125B624F500BD49D2 /* CoreExportsLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */; };
 		2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */; };
 		2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */; };
 		2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */; };
@@ -54,20 +53,10 @@
 		2C34F0542594403100D16F64 /* Zeref's Collection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F04E2594403100D16F64 /* Zeref's Collection@2x.png */; };
 		2C34F0552594403100D16F64 /* Zeref's Collection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F04F2594403100D16F64 /* Zeref's Collection@3x.png */; };
 		2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C34F0502594403100D16F64 /* Use's Inverted@2x.png */; };
-		2C34F0702594507700D16F64 /* CoreExportsAnime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */; };
-		2C34F0782594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */; };
-		2C34F084259654FF00D16F64 /* CoreExportsEpisode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */; };
-		2C34F09E2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C34F09D2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift */; };
 		2C3545A521DA84F500321B18 /* UserNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3545A421DA84F500321B18 /* UserNotificationManager.swift */; };
 		2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */; };
 		2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */; };
 		2C35C968227F223700D469E6 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C35C967227F223700D469E6 /* CalendarHeaderView.swift */; };
-		2C368A002592F0500069DE91 /* CoreEngine+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3689FE2592F04F0069DE91 /* CoreEngine+Types.swift */; };
-		2C368A012592F0500069DE91 /* CoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3689FF2592F04F0069DE91 /* CoreEngine.swift */; };
-		2C368A0A2592F0580069DE91 /* CoreExportsAnimeLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C368A062592F0580069DE91 /* CoreExportsAnimeLink.swift */; };
-		2C368A0B2592F0580069DE91 /* CoreExportsEpisodeLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C368A072592F0580069DE91 /* CoreExportsEpisodeLink.swift */; };
-		2C368A0C2592F0580069DE91 /* CoreExportsNineAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C368A082592F0580069DE91 /* CoreExportsNineAnimator.swift */; };
-		2C368A0D2592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C368A092592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift */; };
 		2C45F73E23E4FC9D009916DB /* ScreenshotAutomation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45F73D23E4FC9D009916DB /* ScreenshotAutomation.swift */; };
 		2C45F74623E4FCBB009916DB /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C45F74523E4FCBB009916DB /* SnapshotHelper.swift */; };
 		2C4800112370618D00ADB03F /* LibrarySubscriptionCategoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4800102370618D00ADB03F /* LibrarySubscriptionCategoryController.swift */; };
@@ -160,10 +149,6 @@
 		2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C9C44F921CD2405004C8F0C /* Settings.storyboard */; };
 		2C9C44FE21CD2B33004C8F0C /* SettingsSceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FD21CD2B33004C8F0C /* SettingsSceneController.swift */; };
 		2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */; };
-		2C9F11172624AAF5001BDC50 /* CoreBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11162624AAF5001BDC50 /* CoreBundle.swift */; };
-		2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */; };
-		2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */; };
-		2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */; };
 		2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */; };
 		2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */; };
 		2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */; };
@@ -177,7 +162,6 @@
 		2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB004242200AEBC00351B7E /* OfflineContent.swift */; };
 		2CB004272200B0FD00351B7E /* OfflineEpisodeContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */; };
 		2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */; };
-		2CB24EBE259FC7D800538BCF /* CoreProxiesContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB24EBD259FC7D800538BCF /* CoreProxiesContentProvider.swift */; };
 		2CB4AF96239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB4AF95239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift */; };
 		2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CA1DD5D21E2B423009241CB /* HomeKit.framework */; platformFilter = ios; };
 		2CB9919421FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB9919321FEAC5D0055B7A7 /* DetailedEpisodeTableViewCell.swift */; };
@@ -295,7 +279,6 @@
 		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
 		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
-		2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsLogging.swift; sourceTree = "<group>"; };
 		2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillPresentationController.swift; sourceTree = "<group>"; };
 		2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -326,20 +309,10 @@
 		2C34F04E2594403100D16F64 /* Zeref's Collection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zeref's Collection@2x.png"; sourceTree = "<group>"; };
 		2C34F04F2594403100D16F64 /* Zeref's Collection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Zeref's Collection@3x.png"; sourceTree = "<group>"; };
 		2C34F0502594403100D16F64 /* Use's Inverted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Use's Inverted@2x.png"; sourceTree = "<group>"; };
-		2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAnime.swift; sourceTree = "<group>"; };
-		2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsAdditionalEpisodeLinkInformation.swift; sourceTree = "<group>"; };
-		2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsEpisode.swift; sourceTree = "<group>"; };
-		2C34F09D2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreExportsPlaybackMedia.swift; sourceTree = "<group>"; };
 		2C3545A421DA84F500321B18 /* UserNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotificationManager.swift; sourceTree = "<group>"; };
 		2C35C961227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeScheduleCollectionViewController.swift; sourceTree = "<group>"; };
 		2C35C965227E94B900D469E6 /* CalendarAnimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAnimeCell.swift; sourceTree = "<group>"; };
 		2C35C967227F223700D469E6 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
-		2C3689FE2592F04F0069DE91 /* CoreEngine+Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreEngine+Types.swift"; sourceTree = "<group>"; };
-		2C3689FF2592F04F0069DE91 /* CoreEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreEngine.swift; sourceTree = "<group>"; };
-		2C368A062592F0580069DE91 /* CoreExportsAnimeLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExportsAnimeLink.swift; sourceTree = "<group>"; };
-		2C368A072592F0580069DE91 /* CoreExportsEpisodeLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExportsEpisodeLink.swift; sourceTree = "<group>"; };
-		2C368A082592F0580069DE91 /* CoreExportsNineAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreExportsNineAnimator.swift; sourceTree = "<group>"; };
-		2C368A092592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreExportsNineAnimator+Fetch.swift"; sourceTree = "<group>"; };
 		2C3F456123798B77007410B6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVFoundation.framework; sourceTree = DEVELOPER_DIR; };
 		2C3F456323798B84007410B6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		2C45E1B3256C34560068678B /* scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scripts; sourceTree = "<group>"; };
@@ -460,10 +433,6 @@
 		2C9C44FA21CD2405004C8F0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		2C9C44FD21CD2B33004C8F0C /* SettingsSceneController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSceneController.swift; sourceTree = "<group>"; };
 		2C9C44FF21CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutNineAnimatorTableViewController.swift; sourceTree = "<group>"; };
-		2C9F11162624AAF5001BDC50 /* CoreBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBundle.swift; sourceTree = "<group>"; };
-		2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreBundle+Manifest.swift"; sourceTree = "<group>"; };
-		2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreBundleProvider.swift; sourceTree = "<group>"; };
-		2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreBundleProvider+Flat.swift"; sourceTree = "<group>"; };
 		2CA1DD3E21DD5BF3009241CB /* nineanimator_banner.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nineanimator_banner.jpg; sourceTree = "<group>"; };
 		2CA1DD5B21E2B404009241CB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		2CA1DD5D21E2B423009241CB /* HomeKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HomeKit.framework; path = System/Library/Frameworks/HomeKit.framework; sourceTree = SDKROOT; };
@@ -476,7 +445,6 @@
 		2CB004242200AEBC00351B7E /* OfflineContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineContent.swift; sourceTree = "<group>"; };
 		2CB004262200B0FD00351B7E /* OfflineEpisodeContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineEpisodeContent.swift; sourceTree = "<group>"; };
 		2CB0042822024BDA00351B7E /* CachedAnimeArtworkRetriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedAnimeArtworkRetriver.swift; sourceTree = "<group>"; };
-		2CB24EBD259FC7D800538BCF /* CoreProxiesContentProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreProxiesContentProvider.swift; sourceTree = "<group>"; };
 		2CB2D556237A3255009D91D1 /* recents_long_press.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = recents_long_press.jpeg; sourceTree = "<group>"; };
 		2CB4AF95239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachableAVAssetLoaderDelegate.swift; sourceTree = "<group>"; };
 		2CB5F2B9244006A9002461CD /* .github */ = {isa = PBXFileReference; lastKnownFileType = text; path = .github; sourceTree = SOURCE_ROOT; };
@@ -737,30 +705,9 @@
 			path = NineAnimatorTests;
 			sourceTree = "<group>";
 		};
-		2C368A052592F0580069DE91 /* Exports */ = {
-			isa = PBXGroup;
-			children = (
-				2C368A062592F0580069DE91 /* CoreExportsAnimeLink.swift */,
-				2C368A072592F0580069DE91 /* CoreExportsEpisodeLink.swift */,
-				2C368A082592F0580069DE91 /* CoreExportsNineAnimator.swift */,
-				2C368A092592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift */,
-				2C34F06F2594507700D16F64 /* CoreExportsAnime.swift */,
-				2C34F0772594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift */,
-				2C34F083259654FF00D16F64 /* CoreExportsEpisode.swift */,
-				2C34F09D2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift */,
-				2C11187025B624F500BD49D2 /* CoreExportsLogging.swift */,
-			);
-			path = Exports;
-			sourceTree = "<group>";
-		};
 		2C45E1C3256ECF460068678B /* NineAnimatorCore */ = {
 			isa = PBXGroup;
 			children = (
-				2C9F11152624AAE7001BDC50 /* Bundle */,
-				2CB24EBC259FC7BF00538BCF /* Proxies */,
-				2C368A052592F0580069DE91 /* Exports */,
-				2C3689FF2592F04F0069DE91 /* CoreEngine.swift */,
-				2C3689FE2592F04F0069DE91 /* CoreEngine+Types.swift */,
 			);
 			path = NineAnimatorCore;
 			sourceTree = "<group>";
@@ -1151,17 +1098,6 @@
 			path = "Settings Scene";
 			sourceTree = "<group>";
 		};
-		2C9F11152624AAE7001BDC50 /* Bundle */ = {
-			isa = PBXGroup;
-			children = (
-				2C9F11162624AAF5001BDC50 /* CoreBundle.swift */,
-				2C9F11242624AC55001BDC50 /* CoreBundle+Manifest.swift */,
-				2C9F11292624B1AF001BDC50 /* CoreBundleProvider.swift */,
-				2C9F112E2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift */,
-			);
-			path = Bundle;
-			sourceTree = "<group>";
-		};
 		2CAA70D121CFF40900F0D082 /* Player Scene */ = {
 			isa = PBXGroup;
 			children = (
@@ -1185,14 +1121,6 @@
 				2CB4AF95239AD1B700EE4EDA /* CachableAVAssetLoaderDelegate.swift */,
 			);
 			path = "Asset Manager";
-			sourceTree = "<group>";
-		};
-		2CB24EBC259FC7BF00538BCF /* Proxies */ = {
-			isa = PBXGroup;
-			children = (
-				2CB24EBD259FC7D800538BCF /* CoreProxiesContentProvider.swift */,
-			);
-			path = Proxies;
 			sourceTree = "<group>";
 		};
 		2CCD952B23E50253005D4402 /* fastlane */ = {
@@ -1626,8 +1554,6 @@
 				2C8F6E8922062C220047798B /* OfflineAnimeViewController.swift in Sources */,
 				2C6677AA21BD5F22000E5ACC /* RecentlyViewedTableViewController.swift in Sources */,
 				2CE15DD3242BD349009FEB9C /* SharedPointerEffectDelegate.swift in Sources */,
-				2C9F112F2624BBE2001BDC50 /* CoreBundleProvider+Flat.swift in Sources */,
-				2C9F11172624AAF5001BDC50 /* CoreBundle.swift in Sources */,
 				2C12EDE021BDE7960064D2BD /* ApplicationNavigationController.swift in Sources */,
 				2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */,
 				2C95C1DC23E9FD0500430B19 /* SettingsPreferredSourceController.swift in Sources */,
@@ -1638,7 +1564,6 @@
 				2C90C6A0236F8BF900C18620 /* LibraryTrackingCollectionController.swift in Sources */,
 				2C60EABA2266A22400280637 /* UserNotificationManager+RecommendationSource.swift in Sources */,
 				2C0DA2E2238B1CCF002C6447 /* PortionBarLabels.swift in Sources */,
-				2C34F09E2597C8FE00D16F64 /* CoreExportsPlaybackMedia.swift in Sources */,
 				2C0E755A2262495200DF3AC4 /* QuickActionsTableViewCell+Cell.swift in Sources */,
 				2C83E07A2526AED300B00850 /* SettingsAppIconAlternativeIconCell.swift in Sources */,
 				2CCD952F23E53776005D4402 /* AppDelegate+Environment.swift in Sources */,
@@ -1650,7 +1575,6 @@
 				2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */,
 				2CED3A4E22039C9200318D49 /* OfflinePlaybackMedia.swift in Sources */,
 				2C71DEC3226CF79D004F3AC3 /* ServerSelectionCell.swift in Sources */,
-				2C34F084259654FF00D16F64 /* CoreExportsEpisode.swift in Sources */,
 				2C0CFC4322640B6600EC793E /* DiscoveryStandardCell+Cell.swift in Sources */,
 				2CD9B9A421FE4AB100203442 /* AnimeAirDateView.swift in Sources */,
 				2C98D674225CB525001FF874 /* ThemedBorderButton.swift in Sources */,
@@ -1658,20 +1582,16 @@
 				2C71DEC5226E0610004F3AC3 /* ServerSelectionView.swift in Sources */,
 				2CA1DD5C21E2B404009241CB /* HomeController.swift in Sources */,
 				2C90C6A6236F98C600C18620 /* LibraryTrackingReferenceCell.swift in Sources */,
-				2C11187125B624F500BD49D2 /* CoreExportsLogging.swift in Sources */,
 				2C90C6A4236F988100C18620 /* LibraryUntrackedReferenceCell.swift in Sources */,
 				2CB004252200AEBC00351B7E /* OfflineContent.swift in Sources */,
 				2C96DAE424562A2F007A29B0 /* InformationSceneAiringEpisodeCell.swift in Sources */,
 				2CAA70D321CFF42A00F0D082 /* NativePlayerController.swift in Sources */,
-				2C368A0D2592F0580069DE91 /* CoreExportsNineAnimator+Fetch.swift in Sources */,
 				2C9383CD21FBF442008C0D01 /* UIView+MakeThemable.swift in Sources */,
 				2C1C717322186EC900760A69 /* TrackingServiceTableViewController.swift in Sources */,
 				2C93BD43221E1FE8000411CB /* InformationSceneStatisticsTableViewCell.swift in Sources */,
-				2C34F0782594EF5D00D16F64 /* CoreExportsAdditionalEpisodeLinkInformation.swift in Sources */,
 				2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */,
 				2C6CF254221CA1C20009D554 /* InformationSceneCharactersTableViewCell.swift in Sources */,
 				2C480015237061EC00ADB03F /* LibraryRecentsCategoryController.swift in Sources */,
-				2C9F11252624AC55001BDC50 /* CoreBundle+Manifest.swift in Sources */,
 				2C1C7196221B1C3000760A69 /* InformationSceneHeadingView.swift in Sources */,
 				2C665574235CED9300A6126A /* LibraryCategoryCell.swift in Sources */,
 				2C0E7555226230B200DF3AC4 /* SectionProtocol.swift in Sources */,
@@ -1681,7 +1601,6 @@
 				2C25DF7F2649C64A00BF2C3C /* StatesSerialization.swift in Sources */,
 				2C35C966227E94B900D469E6 /* CalendarAnimeCell.swift in Sources */,
 				2C60EAB822655C5F00280637 /* DiscoveryErrorTableViewCell.swift in Sources */,
-				2C368A002592F0500069DE91 /* CoreEngine+Types.swift in Sources */,
 				2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */,
 				2C1C7193221B11D400760A69 /* AnimeInformationTableViewController.swift in Sources */,
 				2C48001F2370CE1E00ADB03F /* LibraryDownloadingAnimeCell.swift in Sources */,
@@ -1717,7 +1636,6 @@
 				2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */,
 				2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */,
 				2C9C450021CD3067004C8F0C /* AboutNineAnimatorTableViewController.swift in Sources */,
-				2C368A0A2592F0580069DE91 /* CoreExportsAnimeLink.swift in Sources */,
 				2C0E7558226241A500DF3AC4 /* QuickActionsTableViewCell.swift in Sources */,
 				2C4ABC7D21B6B3F2009B4D47 /* FeaturedAnimeTableViewCell.swift in Sources */,
 				2CDA17A522065456009543F9 /* OfflineEpisodeTableViewCell.swift in Sources */,
@@ -1739,11 +1657,8 @@
 				2C6677A021BC4664000E5ACC /* ListingEntryTableViewCell.swift in Sources */,
 				2C91296D21BAD10B00284FD0 /* EpisodeTableViewCell.swift in Sources */,
 				2C35C962227DFB4500D469E6 /* AnimeScheduleCollectionViewController.swift in Sources */,
-				2C34F0702594507700D16F64 /* CoreExportsAnime.swift in Sources */,
 				2C6677B421BD8770000E5ACC /* EpisodeAccessoryProcessIndicator.swift in Sources */,
-				2C368A012592F0500069DE91 /* CoreEngine.swift in Sources */,
 				2CD9B9A221FE41AD00203442 /* AnimeRatingView.swift in Sources */,
-				2C368A0C2592F0580069DE91 /* CoreExportsNineAnimator.swift in Sources */,
 				2C0CFC4122640A1200EC793E /* DiscoveryStandardTableViewCell.swift in Sources */,
 				2C7FD5822359060800E37A89 /* MinFilledFlowLayoutHelper.swift in Sources */,
 				2CE15DD5242BD9B2009FEB9C /* UIView+PointerEffects.swift in Sources */,
@@ -1751,12 +1666,10 @@
 				2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */,
 				2CD7825821FFE4DA00477FC6 /* OfflineContentManager.swift in Sources */,
 				2C95C1DE23E9FE4100430B19 /* SettingsPreferredSourceCell.swift in Sources */,
-				2C368A0B2592F0580069DE91 /* CoreExportsEpisodeLink.swift in Sources */,
 				2C18BA572557519F005CD7D9 /* SettingsDebuggingController.swift in Sources */,
 				2C1C7189221A6C8300760A69 /* ListingCollectionEntryTableViewCell.swift in Sources */,
 				2C1C716C221845A800760A69 /* ContentListingLoadingTableViewCell.swift in Sources */,
 				2C9325C424ACDE34001E3708 /* DiscordPresenceController.swift in Sources */,
-				2C9F112A2624B1AF001BDC50 /* CoreBundleProvider.swift in Sources */,
 				2C6677B621BD8FA1000E5ACC /* ContentErrorTableViewCell.swift in Sources */,
 				2C9383DD21FE0CE9008C0D01 /* AnimeHeadingView.swift in Sources */,
 				2C4ABC7521B599A2009B4D47 /* FeaturedViewController.swift in Sources */,
@@ -1771,7 +1684,6 @@
 				2C4ABC9021B76941009B4D47 /* RecentlyUpdatedAnimeTableViewCell.swift in Sources */,
 				2C60EABE2267CA9C00280637 /* DiscoverySceneViewController+QuickActions.swift in Sources */,
 				2C643326238D7928006447D5 /* SettingsStorageTipCell.swift in Sources */,
-				2CB24EBE259FC7D800538BCF /* CoreProxiesContentProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
