@@ -34,8 +34,8 @@ extension NASourceArrayanime {
     }
     
     fileprivate struct EpisodeLinks: Decodable {
-        let src: String
-        let size: String
+        let link: String
+        let name: String
     }
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -57,16 +57,16 @@ extension NASourceArrayanime {
             var episodeSource: String = ""
             
             if link.server == "gstore" {
-                if let index = episodeResponse.links.firstIndex(where: { $0.size.contains("High Speed") }) {
-                    episodeSource = episodeResponse.links[index].src
+                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("(HDP - mp4)") }) {
+                    episodeSource = episodeResponse.links[index].link
                 }
             } else if link.server == "cloud9" {
-                if let index = episodeResponse.links.firstIndex(where: { $0.size.contains("1080P") }) {
-                    episodeSource = episodeResponse.links[index].src
+                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("(1080P - mp4)") }) {
+                    episodeSource = episodeResponse.links[index].link
                 } else {
                     // Other quality if 1080p is unavailable
                     // Cloud9 is always at the last index, assuming Cloud9 server exists
-                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).src
+                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).link
                 }
             }
 
