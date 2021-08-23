@@ -24,7 +24,6 @@ import NineAnimatorCommon
 extension NASourceArrayanime {
     static let knownServers = [
         "gstore": "Google Video",
-        "cloud9": "Cloud9"
     ]
     
     fileprivate struct EpisodeResponse: Decodable {
@@ -59,14 +58,6 @@ extension NASourceArrayanime {
             if link.server == "gstore" {
                 if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("(HDP - mp4)") }) {
                     episodeSource = episodeResponse.links[index].link
-                }
-            } else if link.server == "cloud9" {
-                if let index = episodeResponse.links.firstIndex(where: { $0.name.contains("(1080P - mp4)") }) {
-                    episodeSource = episodeResponse.links[index].link
-                } else {
-                    // Other quality if 1080p is unavailable
-                    // Cloud9 is always at the last index, assuming Cloud9 server exists
-                    episodeSource = try episodeResponse.links.last.tryUnwrap(.EpisodeServerNotAvailableError(unavailableEpisode: link)).link
                 }
             }
 
