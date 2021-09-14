@@ -45,6 +45,7 @@ public enum NativeSources {
         registry.register(sourceType: NASourceAnimeUnity.self)
         registry.register(sourceType: NASourceMonosChinos.self)
         registry.register(sourceType: NASourceAnimeSaturn.self)
+        registry.register(sourceType: NASourceAnimeWorld.self)
         
         // Disabled sources
         registry.register(sourceType: NASourceWonderfulSubs.self)
