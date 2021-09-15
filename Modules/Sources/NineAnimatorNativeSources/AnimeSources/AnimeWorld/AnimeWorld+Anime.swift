@@ -30,6 +30,7 @@ extension NASourceAnimeWorld {
                 responseContent -> Anime in
                 let bowl = try SwiftSoup.parse(responseContent)
                 let animeTitle = try bowl.select("div.widget-title h1").attr("data-jtitle")
+                let engTitle = try bowl.select("div.widget-title h1").text()
                 let animeArtworkUrl = URL(
                     string: try bowl.select(".cover>img").attr("src")
                     ) ?? link.image
@@ -58,9 +59,7 @@ extension NASourceAnimeWorld {
                 }
                 
                 // Information
-                let alias = try bowl.select("div.box-trasparente-alternativo.rounded").first()?.text()
                 let animeSynopsis = try bowl.select("div.info div.desc").text()
-                // var additionalAttributes = [Anime.AttributeKey: Any]()
                 // Attributes
                 let additionalAttributes = try bowl.select("div.row div.info div.row dd").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
                     let info = try entry.html()
@@ -75,10 +74,9 @@ extension NASourceAnimeWorld {
                         attributes[.ratingScale] = Float(10.0)
                     }
                 }
-                print(additionalAttributes.debugDescription)
                 return Anime(
                     reconstructedAnimeLink,
-                    alias: alias ?? animeTitle,
+                    alias: engTitle ?? animeTitle,
                     additionalAttributes: additionalAttributes,
                     description: animeSynopsis,
                     on: [ NASourceAnimeWorld.AnimeWorldStream: "AnimeWorld" ],
