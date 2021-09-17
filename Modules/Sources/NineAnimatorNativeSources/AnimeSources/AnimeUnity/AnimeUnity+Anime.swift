@@ -24,6 +24,7 @@ import SwiftSoup
 extension NASourceAnimeUnity {
     struct SearchResponseRecordsAnime: Codable {
         var number: String = ""
+        var createdAt: String? = ""
         var link: String = ""
     }
     struct  SearchResponseRecordsData: Codable {
@@ -36,6 +37,7 @@ extension NASourceAnimeUnity {
             .then {
                 responseContent -> Anime in
                 let data = responseContent
+                var episodeAttributes = [EpisodeLink: Anime.AdditionalEpisodeLinkInformation]()
                 let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                 let bowl = try SwiftSoup.parse(utf8Text)
                 let decoder = JSONDecoder()
@@ -61,15 +63,26 @@ extension NASourceAnimeUnity {
                 )
                 // Obtain the list of episodes
                 let eng_title = user.titleEng
-                let episodesList = ep_decoded.compactMap {
-                    episode -> (EpisodeLink) in
-                    let link_ep = String(episode.link.replacingOccurrences(of: "\\", with: "").dropLast(4))
-                    return (EpisodeLink(
+                let episodesMap = ep_decoded.map {
+                        episodeInfo -> (EpisodeLink) in
+                    let link_ep = String(episodeInfo.link.replacingOccurrences(of: "\\", with: "").dropLast(4))
+                    var arr = (episodeInfo.createdAt ?? "").split(separator: " ")[0].split(separator: "-")
+                    arr.reverse()
+                    let dateString = arr.joined(separator: "-")
+                    let ep = (EpisodeLink(
                         identifier: link_ep,
-                        name: episode.number,
+                        name: episodeInfo.number,
                         server: NASourceAnimeUnity.AnimeUnityStream,
                         parent: reconstructedAnimeLink
-                    ))
+                        ))
+                    let info = Anime.AdditionalEpisodeLinkInformation(
+                        parent: ep,
+                        airDate: dateString,
+                        episodeNumber: Int(episodeInfo.number),
+                        title: "Episodio " + episodeInfo.number
+                    )
+                    episodeAttributes[ep] = info
+                    return (ep)
                 }
                 // Information
                 let synopsis = try bowl.select("div.description").text()
@@ -92,7 +105,8 @@ extension NASourceAnimeUnity {
                     additionalAttributes: additionalAttributes,
                     description: synopsis,
                     on: [ NASourceAnimeUnity.AnimeUnityStream: "AnimeUnity" ],
-                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodesList]
+                    episodes: [ NASourceAnimeUnity.AnimeUnityStream: episodesMap ],
+                    episodesAttributes: episodeAttributes
                 )
             }
     }
