@@ -33,10 +33,9 @@ extension NASourceAnimeWorld {
                         if video.contains("download-file.php?id=") {
                             video = video.replacingOccurrences(of: "download-file.php?id=", with: "")
                         }
-                        print(video)
                         return Episode(
                             link,
-                            target: try video.asURL(),
+                            target: try URL(protocolRelativeString: video, relativeTo: self.endpointURL).tryUnwrap(),
                             parent: anime
                         )
                     }

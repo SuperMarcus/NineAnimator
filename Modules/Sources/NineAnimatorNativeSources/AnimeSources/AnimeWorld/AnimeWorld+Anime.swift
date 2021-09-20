@@ -22,6 +22,9 @@ import NineAnimatorCommon
 import SwiftSoup
 
 extension NASourceAnimeWorld {
+    private static let regex = try! NSRegularExpression(
+        pattern: "[0-9]{2} [A-Za-z]* [0-9]{4}"
+    )
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager
             .request(url: link.link, handling: .browsing)
@@ -63,8 +66,7 @@ extension NASourceAnimeWorld {
                 // Attributes
                 let additionalAttributes = try bowl.select("div.row div.info div.row dd").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
                     let info = try entry.html()
-                    let regex = try! NSRegularExpression(pattern: "[0-9]{2} [A-Za-z]* [0-9]{4}")
-                    let results = regex.matches(in: info)
+                    let results = NASourceAnimeWorld.regex.matches(in: info)
                     if !results.isEmpty {
                         attributes[.airDate] = info
                     }
