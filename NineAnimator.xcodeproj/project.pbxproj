@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2C0554AD24BD615300228434 /* NACoreDataDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0554AC24BD615300228434 /* NACoreDataDataSource.swift */; };
+		2C0A6A5A278B8235005D69D6 /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 2C0A6A59278B8235005D69D6 /* NineAnimatorCommon */; };
+		2C0A6A5B278B8235005D69D6 /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2C0A6A59278B8235005D69D6 /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2C0CFC372263B26900EC793E /* ThisWeekTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC362263B26900EC793E /* ThisWeekTableViewCell.swift */; };
 		2C0CFC3D2263D9AB00EC793E /* DiscoveryLoadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC3C2263D9AB00EC793E /* DiscoveryLoadingTableViewCell.swift */; };
 		2C0CFC3F2263DE9B00EC793E /* ThisWeekTableViewCell+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0CFC3E2263DE9B00EC793E /* ThisWeekTableViewCell+Cell.swift */; };
@@ -211,8 +213,6 @@
 		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
 		2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFC16AD265063480052FE8A /* ViewAnimator */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
-		BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; };
-		BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 /* End PBXBuildFile section */
@@ -248,7 +248,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */,
+				2C0A6A5B278B8235005D69D6 /* NineAnimatorCommon in Embed Frameworks */,
 				2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */,
 				2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */,
 				2CE2FDF4265070AB00319466 /* NineAnimatorNativeListServices in Embed Frameworks */,
@@ -554,13 +554,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */,
 				2CE1371526B31CA400F59CB0 /* AppCenterCrashes in Frameworks */,
 				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */,
 				2CE1371326B31CA400F59CB0 /* AppCenterDistribute in Frameworks */,
 				2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */,
+				2C0A6A5A278B8235005D69D6 /* NineAnimatorCommon in Frameworks */,
 				2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */,
 				2CE1371726B31CA400F59CB0 /* AppCenterAnalytics in Frameworks */,
 				2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */,
@@ -1287,10 +1287,10 @@
 				2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */,
 				2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */,
 				2CFC16AD265063480052FE8A /* ViewAnimator */,
-				BF6820E226817C93004DCDBD /* NineAnimatorCommon */,
 				2CE1371226B31CA400F59CB0 /* AppCenterDistribute */,
 				2CE1371426B31CA400F59CB0 /* AppCenterCrashes */,
 				2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */,
+				2C0A6A59278B8235005D69D6 /* NineAnimatorCommon */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -1321,7 +1321,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = "Marcus Zhou";
 				TargetAttributes = {
 					2C2196CD21DAC555002059D3 = {
@@ -1369,7 +1369,6 @@
 			packageReferences = (
 				2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */,
 				2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */,
-				BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */,
 				2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
@@ -2190,8 +2189,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SuperMarcus/SwordRPC";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = 2fdbaff6a8fe6823bf1fce50790e8f7762eaa729;
 			};
 		};
 		2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
@@ -2199,7 +2198,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
+				minimumVersion = 4.4.1;
 			};
 		};
 		2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
@@ -2207,20 +2206,16 @@
 			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.2;
-			};
-		};
-		BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SuperMarcus/NineAnimatorCommon.git";
-			requirement = {
-				kind = revision;
-				revision = b75d541be940ee41d1a93fc3ebbdd6199069b2d2;
+				minimumVersion = 3.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2C0A6A59278B8235005D69D6 /* NineAnimatorCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorCommon;
+		};
 		2C9325C124ACDDD3001E3708 /* SwordRPC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */;
@@ -2257,11 +2252,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */;
 			productName = ViewAnimator;
-		};
-		BF6820E226817C93004DCDBD /* NineAnimatorCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */;
-			productName = NineAnimatorCommon;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -5,6 +5,9 @@
       location = "group:NineAnimatorCore">
    </FileRef>
    <FileRef
+      location = "group:Common">
+   </FileRef>
+   <FileRef
       location = "group:Modules">
    </FileRef>
    <FileRef

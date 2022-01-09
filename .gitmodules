@@ -1,0 +1,5 @@
+[submodule "Common"]
+	path = Common
+    url = https://github.com/SuperMarcus/NineAnimatorCommon.git
+    branch = master
+
