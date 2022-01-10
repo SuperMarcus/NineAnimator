@@ -71,9 +71,10 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
                               didShow viewController: UIViewController,
                               animated: Bool) {
         // Track screen view events to better resolve crashes/bugs
+        let presentingSceneName = NSStringFromClass(viewController.classForCoder).components(separatedBy: ".").last ?? "Unknown Scene"
         Analytics.trackEvent(
             "Entered Scene",
-            withProperties: ["sceneName": viewController.className]
+            withProperties: [ "sceneName": presentingSceneName ]
         )
         
         // Don't bother DontBotherViewController
@@ -129,12 +130,5 @@ class ApplicationNavigationController: UINavigationController, UINavigationContr
     @available(iOS 13.0, *)
     func resetNavigationBarStyle() {
         updateAppearance(withTheme: Theme.current)
-    }
-}
-
-private extension UIViewController {
-    var className: String {
-        // Removes The Module Name Prefix
-        NSStringFromClass(self.classForCoder).components(separatedBy: ".").last ?? "Unknown UIViewController Class"
     }
 }
