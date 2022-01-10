@@ -23,7 +23,7 @@ import NineAnimatorCommon
 
 extension NASourceArrayanime {
     static let knownServers = [
-        "gstore": "Google Video",
+        "gstore": "Google Video"
     ]
     
     fileprivate struct EpisodeResponse: Decodable {

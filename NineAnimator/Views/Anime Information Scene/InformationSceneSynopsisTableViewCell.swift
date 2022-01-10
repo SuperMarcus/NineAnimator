@@ -33,7 +33,7 @@ class InformationSceneSynopsisTableViewCell: UITableViewCell {
         didSet { synopsisContainer.text = information?.description }
     }
     
-    private var isCollapsed: Bool = true {
+    private var isCollapsed = true {
         didSet {
             guard let collapseLayoutConstraint = collapseLayoutConstraint else { return }
             if isCollapsed {

@@ -56,15 +56,11 @@ class CloudNineParser: VideoProviderParser {
             // Make the request to the URL
             return session.request(
                 CloudNineParser.apiBaseSourceURL.appendingPathComponent(resourceIdentifier)
-            ) .responseJSON {
+            ) .responseDecodable(of: SourcesAPIResponse.self) {
                 response in
                 switch response.result {
-                case .success(let responseDictionary as NSDictionary):
+                case .success(let decodedResponse):
                     do {
-                        let decodedResponse = try DictionaryDecoder().decode(
-                            SourcesAPIResponse.self,
-                            from: responseDictionary
-                        )
                         let selectedSource = try decodedResponse
                             .data
                             .sources

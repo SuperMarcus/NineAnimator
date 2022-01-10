@@ -34,7 +34,7 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     
     // Fade navigation bar when presenting alerts so we don't get those ugly unmatched
     // status bar backgrounds
-    private var isAlertPresenting: Bool = false {
+    private var isAlertPresenting = false {
         didSet {
             UIView.animate(withDuration: 0.2) { [weak self] in self?.adjustNavigationBarStyle() }
         }

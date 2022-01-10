@@ -54,15 +54,11 @@ class XStreamParser: VideoProviderParser {
                 method: .post,
                 parameters: [ "r": "", "d": "embedsito.com" ],
                 encoding: URLEncoding.default
-            ) .responseJSON {
+            ) .responseDecodable(of: SourcesAPIResponse.self) {
                 response in
                 switch response.result {
-                case .success(let responseDictionary as NSDictionary):
+                case .success(let decodedResponse):
                     do {
-                        let decodedResponse = try DictionaryDecoder().decode(
-                            SourcesAPIResponse.self,
-                            from: responseDictionary
-                        )
                         let selectedSource = try decodedResponse
                             .data
                             .last

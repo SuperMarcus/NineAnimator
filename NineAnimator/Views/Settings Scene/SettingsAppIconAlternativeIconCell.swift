@@ -24,7 +24,7 @@ import UIKit
 
 class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
     private(set) var representingIconName: String?
-    private(set) var isCurrentlySelected: Bool = false
+    private(set) var isCurrentlySelected = false
     
     @IBOutlet private var iconNameLabel: UILabel!
     @IBOutlet private var iconPreviewView: UIImageView!

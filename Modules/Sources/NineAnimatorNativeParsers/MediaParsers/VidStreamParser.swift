@@ -59,15 +59,11 @@ class VidStreamParser: VideoProviderParser {
             return session.request(
                 VidStreamParser.apiBaseSourceURL.appendingPathComponent(resourceIdentifier),
                 headers: additionalResourceRequestHeaders
-            ) .responseJSON {
+            ) .responseDecodable(of: APIResponse.self) {
                 response in
                 switch response.result {
-                case .success(let responseDictionary as NSDictionary):
+                case .success(let decodedResponse):
                     do {
-                        let decodedResponse = try DictionaryDecoder().decode(
-                            APIResponse.self,
-                            from: responseDictionary
-                        )
                         let selectedSource = try decodedResponse
                             .media
                             .sources
