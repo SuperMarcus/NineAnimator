@@ -28,6 +28,7 @@
 		2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107711249EFBFC007B82D9 /* Fox@2x.png */; };
 		2C128525278BAE6F00425E01 /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 2C128524278BAE6F00425E01 /* NineAnimatorCommon */; };
 		2C128526278BAE6F00425E01 /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2C128524278BAE6F00425E01 /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2C128528278CC61900425E01 /* AppDelegate+CrashDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */; };
 		2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */; };
 		2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */; };
 		2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */; };
@@ -279,6 +280,7 @@
 		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
 		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
+		2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CrashDelegate.swift"; sourceTree = "<group>"; };
 		2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillPresentationController.swift; sourceTree = "<group>"; };
 		2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -790,6 +792,7 @@
 				2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */,
 				2CCD952E23E53776005D4402 /* AppDelegate+Environment.swift */,
 				2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */,
+				2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */,
 				2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */,
 				2C4ABC5F21B5881F009B4D47 /* Info.plist */,
 			);
@@ -1625,6 +1628,7 @@
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
+				2C128528278CC61900425E01 /* AppDelegate+CrashDelegate.swift in Sources */,
 				2C35C968227F223700D469E6 /* CalendarHeaderView.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
@@ -1964,7 +1968,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2024,7 +2028,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2050,7 +2054,8 @@
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2081,7 +2086,8 @@
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
