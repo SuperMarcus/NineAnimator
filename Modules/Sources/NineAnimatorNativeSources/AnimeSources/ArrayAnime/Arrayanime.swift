@@ -45,6 +45,9 @@ class NASourceArrayanime: BaseSource, Source, PromiseSource {
         \.romaji
     }
     
+    // Disable due to Arrayanime constantly changing API domain
+    override var isEnabled: Bool { false }
+    
     override var endpoint: String { "https://arrayanime.com" }
     
     let searchEndpoint = URL(string: "https://t-arrayapi.vercel.app/api/")!
