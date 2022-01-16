@@ -26,7 +26,7 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceZoroAnime: BaseSource, Source, PromiseSource {    
+class NASourceZoroAnime: BaseSource, Source, PromiseSource {
     var name: String { "zoro.to" }
     
     var aliases: [String] { [] }
@@ -49,7 +49,12 @@ class NASourceZoroAnime: BaseSource, Source, PromiseSource {
     let ajaxEndpoint = URL(string: "https://zoro.to/ajax/")!
 
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        VideoProviderRegistry.default.provider(for: name) ?? VideoProviderRegistry.default.provider(for: server)
+        switch name {
+        case "VidStreaming", "Vidcloud":
+            return VideoProviderRegistry.default.provider(for: "RapidCloud")
+        default:
+            return VideoProviderRegistry.default.provider(for: name) ?? VideoProviderRegistry.default.provider(for: server)
+        }
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {

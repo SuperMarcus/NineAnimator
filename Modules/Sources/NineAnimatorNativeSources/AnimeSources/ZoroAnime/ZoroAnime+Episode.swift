@@ -37,10 +37,10 @@ extension NASourceZoroAnime {
     }
     
     static let knownServers = [
-        "vidstreaming": "Vidstreaming",
-        "vidcloud": "Vidcloud",
-        "streamSB": "StreamSB",
-        "streamtape": "Streamtape"
+        "VidStreaming": "VidStreaming", // Uses rapidcloud parser
+        "vidcloud": "Vidcloud",         // Uses rapidcloud parser
+        /* "Streamsb": "Streamsb", */   // Disabled due to broken parser
+        "Streamtape": "Streamtape"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -70,18 +70,18 @@ extension NASourceZoroAnime {
                 var episodeSource: String = ""
                 
                 // serverId identifier
-                // 4 - Vidstreaming
+                // 4 - VidStreaming
                 // 1 - Vidcloud
-                // 5 - StreamSB
+                // 5 - Streamsb
                 // 3 - Streamtape
                 for (serverId, sourceId) in episodeList {
-                    if serverId == "4" && link.server == "vidstreaming" {
+                    if serverId == "4" && link.server == "VidStreaming" {
                         episodeSource = sourceId
                     } else if serverId == "1" && link.server == "vidcloud" {
                         episodeSource = sourceId
-                    } else if serverId == "5" && link.server == "streamSB" {
-                        episodeSource = sourceId
-                    } else if serverId == "3" && link.server == "streamtape" {
+                    /* } else if serverId == "5" && link.server == "Streamsb" {
+                        episodeSource = sourceId */
+                    } else if serverId == "3" && link.server == "Streamtape" {
                         episodeSource = sourceId
                     }
                 }

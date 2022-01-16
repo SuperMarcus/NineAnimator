@@ -57,7 +57,7 @@ extension NASourceZoroAnime {
                 relativeTo: self.endpointURL
             ).tryUnwrap(.urlError)
             let animeSynopsis = try animeDetailsBowl.select(".film-description > div").text()
-            let animeSynonyms = try animeDetailsBowl.select(".anisc-info > .item")[2].select("span.name").text()
+            let animeSynonyms = try animeDetailsBowl.select(".anisc-info > .item")[safe: 2]!.select("span.name").text()
             
             // Reconstruct AnimeLink
             let reconstructedAnimeLink = AnimeLink(
@@ -66,6 +66,10 @@ extension NASourceZoroAnime {
                 image: animeCoverURL,
                 source: self
             )
+            
+            // Set Anime Air Date
+            var additionalAnimeAttributes = [Anime.AttributeKey: Any]()
+            additionalAnimeAttributes[.airDate] = try animeDetailsBowl.select(".anisc-info > .item")[safe: 3]!.select("span.name").text()
             
             let episodesBowl = try SwiftSoup.parse(episodesResponse.html)
             let episodeList = try episodesBowl.select(".ss-list > .ep-item").compactMap {
@@ -112,6 +116,7 @@ extension NASourceZoroAnime {
             return Anime(
                 reconstructedAnimeLink,
                 alias: animeSynonyms,
+                additionalAttributes: additionalAnimeAttributes,
                 description: animeSynopsis,
                 on: NASourceZoroAnime.knownServers,
                 episodes: episodeCollection,
