@@ -38,7 +38,7 @@ class NASourceZoroAnime: BaseSource, Source, PromiseSource {
     #endif
 
     var siteDescription: String {
-        "Zoro.to allows you to stream subbed or dubbed in ultra HD quality. NineAnimator has experimental support for this website."
+        "zoro.to allows you to stream subbed or dubbed in ultra HD quality. NineAnimator has experimental support for this website."
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {

@@ -39,7 +39,7 @@ extension NASourceZoroAnime {
     static let knownServers = [
         "VidStreaming": "VidStreaming", // Uses rapidcloud parser
         "vidcloud": "Vidcloud",         // Uses rapidcloud parser
-        /* "Streamsb": "Streamsb", */   // Disabled due to broken parser
+        "Streamsb": "Streamsb",
         "Streamtape": "Streamtape"
     ]
     
@@ -69,18 +69,21 @@ extension NASourceZoroAnime {
                 // Server Selection
                 var episodeSource: String = ""
                 
+                // add support for subs & dubs
+                
                 // serverId identifier
                 // 4 - VidStreaming
                 // 1 - Vidcloud
                 // 5 - Streamsb
                 // 3 - Streamtape
+                // There's probably a better way to do this
                 for (serverId, sourceId) in episodeList {
                     if serverId == "4" && link.server == "VidStreaming" {
                         episodeSource = sourceId
                     } else if serverId == "1" && link.server == "vidcloud" {
                         episodeSource = sourceId
-                    /* } else if serverId == "5" && link.server == "Streamsb" {
-                        episodeSource = sourceId */
+                    } else if serverId == "5" && link.server == "Streamsb" {
+                        episodeSource = sourceId
                     } else if serverId == "3" && link.server == "Streamtape" {
                         episodeSource = sourceId
                     }

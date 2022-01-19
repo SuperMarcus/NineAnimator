@@ -29,7 +29,7 @@ class RapidCloudParser: VideoProviderParser {
     
     private struct SourcesAPIResponse: Codable {
         let sources: [Source]
-        let sourcesBackup: [String] // idk what's in this empty array
+        let sourcesBackup: [String?]
         let tracks: [Track]
     }
 
@@ -48,9 +48,7 @@ class RapidCloudParser: VideoProviderParser {
         NineAnimatorPromise<PlaybackMedia> {
             callback in
             let episodeComponents = episode.target.pathComponents
-            
-            print(episodeComponents)
-            
+                        
             guard episodeComponents.count == 3 else {
                 handler(nil, NineAnimatorError.urlError)
                 return nil
