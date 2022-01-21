@@ -30,9 +30,7 @@ public enum NativeSources {
         let registry = NineAnimator.default
         
         registry.register(sourceType: NASourceAnimePahe.self)
-        registry.register(sourceType: NASourceFourAnime.self)
         registry.register(sourceType: NASourceAnimeTwist.self)
-        registry.register(sourceType: NASourcePantsubase.self)
         registry.register(sourceType: NASourceAnimeUltima.self)
         registry.register(sourceType: NASourceAnimeKisa.self)
         registry.register(sourceType: NASourceAnimeKisa.ExperimentalSource.self)
@@ -52,6 +50,8 @@ public enum NativeSources {
         registry.register(sourceType: NASourceMasterAnime.self)
         registry.register(sourceType: NASourceNineAnime.self)
         registry.register(sourceType: NASourceAniwatch.self)
+        registry.register(sourceType: NASourcePantsubase.self)
+        registry.register(sourceType: NASourceFourAnime.self)
         
         initialized = true
     }

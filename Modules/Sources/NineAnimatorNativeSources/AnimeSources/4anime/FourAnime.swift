@@ -29,6 +29,9 @@ import AppKit
 class NASourceFourAnime: BaseSource, Source, PromiseSource {
     var name: String { "4anime.to" }
     
+    // 4anime is no longer available
+    override var isEnabled: Bool { false }
+    
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
