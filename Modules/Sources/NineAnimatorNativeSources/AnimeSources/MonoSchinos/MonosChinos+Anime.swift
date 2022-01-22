@@ -29,10 +29,10 @@ extension NASourceMonosChinos {
         ) .responseString.then {
             responseContent -> Anime in
             let bowl = try SwiftSoup.parse(responseContent)
-            let animeTitle = try bowl.select("header > .row > div > h1.Title").text()
+            let animeTitle = try bowl.select(".chapterdetails > h1").text()
             
             let animeArtworkUrl = URL(
-                string: try bowl.select("header > .row > div:first-child > .Image > figure > img").attr("src")
+                string: try bowl.select(".chapterpic > img").attr("src")
             ) ?? link.image
             let reconstructedAnimeLink = AnimeLink(
                 title: animeTitle,
@@ -42,13 +42,16 @@ extension NASourceMonosChinos {
             )
             
             // Obtain the list of episodes
-            let episodeList = try bowl.select(".SerieCaps > a").compactMap {
+            let episodeList = try bowl.select(".allanimes > .row > .col-item").compactMap {
                 episodeElement -> (identifier: String, episodeName: String) in
-                let episodeIdentifier = try episodeElement.attr("href")
+                let episodeIdentifier = try episodeElement.select("a").attr("href")
                 let episodeName = try episodeElement.text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 return (episodeIdentifier, episodeName)
             }
+            print("\n\n")
+            print(episodeList)
+            print("\n\n")
             
             if episodeList.isEmpty {
                 throw NineAnimatorError.responseError("No episode found for this anime")
@@ -57,24 +60,23 @@ extension NASourceMonosChinos {
             // Collection of episodes
             var episodeCollection = Anime.EpisodesCollection()
             var episodeAttributes = [EpisodeLink: Anime.AdditionalEpisodeLinkInformation]()
-            
+                        
             for (serverIdentifier, _) in NASourceMonosChinos.knownServers {
                 var currentCollection = [EpisodeLink]()
                 
                 for (episodeIdentifier, episodeName) in episodeList {
                     var conventionalEpisodeName = episodeName
-                    
                     let matchingRegex = try NSRegularExpression(
-                        pattern: "(\\d+)\\sSub|Latino\\s(\\d+)",
+                        pattern: "(\\d+)",
                         options: [.caseInsensitive]
                     )
+                    // error in tryUnwrap()
                     let episodeNumberMatch = try matchingRegex
                         .firstMatch(in: episodeName)
                         .tryUnwrap()
                         .firstMatchingGroup
                         .tryUnwrap()
                     let inferredEpisodeNumber = Int(episodeNumberMatch)
-                    
                     if let eNumber = inferredEpisodeNumber {
                         conventionalEpisodeName = "\(eNumber) - \(episodeName)"
                     }
@@ -100,7 +102,7 @@ extension NASourceMonosChinos {
                 
                 episodeCollection[serverIdentifier] = currentCollection.reversed()
             }
-            
+
             // Information
             let animeSynopsis = try bowl
                 .select("header > .row > div > .Description > p")
@@ -115,7 +117,7 @@ extension NASourceMonosChinos {
                 .trimmingCharacters(in: .whitespacesAndNewlines)
                 .components(separatedBy: " ")
             
-            additionalAnimeAttributes[.airDate] = date[1]
+//            additionalAnimeAttributes[.airDate] = date[0]
             
             return Anime(
                 reconstructedAnimeLink,
