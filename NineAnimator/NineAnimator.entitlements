@@ -2,15 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>com.apple.developer.associated-domains</key>
-	<array>
-		<string>webcredentials:nineanimator-api.marcuszhou.com</string>
-		<string>applinks:nineanimator-api.marcuszhou.com</string>
-		<string>activitycontinuation:nineanimator-api.marcuszhou.com</string>
-		<string>webcredentials:9ani.app</string>
-		<string>applinks:9ani.app</string>
-		<string>activitycontinuation:9ani.app</string>
-	</array>
 	<key>com.apple.developer.homekit</key>
 	<true/>
 	<key>com.apple.security.app-sandbox</key>

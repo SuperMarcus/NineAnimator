@@ -36,7 +36,7 @@ import HomeKit
 class HomeController: NSObject {
     static let shared = HomeController()
     
-    private var _isReady: Bool = false
+    private var _isReady = false
     
     /// Cached instance of HMHomeManagerAuthorizationStatus
     /// - Note: Annotated as Any? for backwards-compatibility

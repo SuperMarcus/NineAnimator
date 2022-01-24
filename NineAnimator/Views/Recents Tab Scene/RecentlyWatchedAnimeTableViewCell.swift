@@ -29,7 +29,7 @@ class RecentlyWatchedAnimeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var sourceTitleLabel: UILabel!
     @IBOutlet private weak var notificationEnabledImage: UIImageView!
     
-    var animeLink: AnimeLink? = nil {
+    var animeLink: AnimeLink? {
         didSet {
             guard let link = animeLink else { return }
             coverImageView.kf.setImage(with: link.image)

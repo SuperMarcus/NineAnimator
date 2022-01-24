@@ -63,7 +63,7 @@ extension NASourceAnimeWorld {
                             let animeTitle = try entry.select("a").attr("data-jtitle")
                             let url = try entry.select("a").attr("href")
                             let animeLinkURLString = url.trimmingCharacters(in: .whitespacesAndNewlines)
-                            let animeArtworkPath = try entry.select("img").attr("src")                   
+                            let animeArtworkPath = try entry.select("img").attr("src")
                             guard let animeUrl = URL(string: animeLinkURLString, relativeTo: endpointUrl),
                                   let coverImage = URL(string: animeArtworkPath, relativeTo: endpointUrl)
                             else {

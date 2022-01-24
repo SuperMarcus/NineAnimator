@@ -33,7 +33,7 @@ extension NASourceAnimeWorld {
                 responseContent -> Anime in
                 let bowl = try SwiftSoup.parse(responseContent)
                 let animeTitle = try bowl.select("div.widget-title h1").attr("data-jtitle")
-                let engTitle = try bowl.select("div.widget-title h1").text()
+                let engTitle = try? bowl.select("div.widget-title h1").text()
                 let animeArtworkUrl = URL(
                     string: try bowl.select(".cover>img").attr("src")
                     ) ?? link.image

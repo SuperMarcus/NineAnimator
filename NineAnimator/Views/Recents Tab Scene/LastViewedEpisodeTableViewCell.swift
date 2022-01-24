@@ -32,7 +32,7 @@ class LastViewedEpisodeTableViewCell: UITableViewCell, Themable {
     @IBOutlet private weak var sourceTitleLabel: UILabel!
     @IBOutlet private weak var backgroundBlurView: UIVisualEffectView!
     
-    var episodeLink: EpisodeLink? = nil {
+    var episodeLink: EpisodeLink? {
         didSet {
             guard let link = episodeLink else { return }
             let coverImageLink = link.parent.image
