@@ -39,7 +39,7 @@ class RapidCloudParser: VideoProviderParser {
     }
     
     private struct Track: Codable {
-        let file: String
+        let file: String?
         let kind: String
         let label: String?
     }
@@ -74,34 +74,35 @@ class RapidCloudParser: VideoProviderParser {
                         
                         Log.info("(RapidCloud Parser) found asset at %@", resourceUrl.absoluteString)
                         
-                        // Need to figure out how to get subtitles working
-                        /* let subtitles = try decodedResponse
-                            .tracks[safe: 1]
-                            .tryUnwrap(.providerError("No available subtitle was found"))
-                        
-                        Log.info("(RapidCloud Parser) found subtitle at %@", subtitles.file)
-                        
-                        callback(CompositionalPlaybackMedia(
-                            url: resourceUrl,
-                            parent: episode,
-                            contentType: "application/vnd.apple.mpegurl",
-                            headers: [:],
-                            subtitles: [
-                                (
-                                    url: try URL(string: subtitles.file).tryUnwrap(),
-                                    name: subtitles.kind,
-                                    language: try subtitles.label.tryUnwrap()
+                        let subtitles = try decodedResponse.tracks.compactMap {
+                            track -> (url: URL, name: String, language: String)? in
+                            if track.kind == "captions" {
+                                return  (
+                                    url: try URL(string: track.file!).tryUnwrap(),
+                                    name: track.kind,
+                                    language: try track.label.tryUnwrap()
                                 )
-                            ]
-                        ), nil) */
+                            }
+                            return nil
+                        }
                         
-                        callback(BasicPlaybackMedia(
-                            url: resourceUrl,
-                            parent: episode,
-                            contentType: "application/vnd.apple.mpegurl",
-                            headers: [:],
-                            isAggregated: true
-                        ), nil)
+                        if subtitles.isEmpty {
+                            callback(BasicPlaybackMedia(
+                                url: resourceUrl,
+                                parent: episode,
+                                contentType: "application/vnd.apple.mpegurl",
+                                headers: [:],
+                                isAggregated: true
+                            ), nil)
+                        } else {
+                            callback(CompositionalPlaybackMedia(
+                                url: resourceUrl,
+                                parent: episode,
+                                contentType: "application/vnd.apple.mpegurl",
+                                headers: [:],
+                                subtitles: subtitles
+                            ), nil)
+                        }
                     } catch { callback(nil, error) }
                 default: callback(nil, response.error ?? NineAnimatorError.unknownError)
                 }

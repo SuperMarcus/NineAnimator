@@ -37,10 +37,10 @@ extension NASourceZoroAnime {
     }
     
     static let knownServers = [
-        "VidStreaming": "VidStreaming", // Uses rapidcloud parser
-        "vidcloud": "Vidcloud",         // Uses rapidcloud parser
-        "Streamsb": "Streamsb",
-        "Streamtape": "Streamtape"
+        "VidStreaming (Sub)": "VidStreaming (Sub)", // Uses rapidcloud parser
+        "Vidcloud (Sub)": "Vidcloud (Sub)",         // Uses rapidcloud parser
+        "Streamsb (Sub)": "Streamsb (Sub)",
+        "Streamtape (Sub)": "Streamtape (Sub)"
     ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
@@ -53,8 +53,8 @@ extension NASourceZoroAnime {
             ) .responseDecodable(type: serverResponse.self).thenPromise {
                 serverResponse in
                 let bowl = try SwiftSoup.parse(serverResponse.html)
-                
-                let episodeList = try bowl.select(".server-item").compactMap {
+                let episodeSubOrDub = link.server.localizedCaseInsensitiveContains("sub") ? "sub" : "dub"
+                let episodeList = try bowl.select(".servers-\(episodeSubOrDub) > .ps__-list > .server-item").compactMap {
                     episodeElement -> (serverId: String, sourceId: String) in
                     let serverId = try episodeElement.attr("data-server-id")
                     let sourceId = try episodeElement.attr("data-id")
@@ -78,13 +78,13 @@ extension NASourceZoroAnime {
                 // 3 - Streamtape
                 // There's probably a better way to do this
                 for (serverId, sourceId) in episodeList {
-                    if serverId == "4" && link.server == "VidStreaming" {
+                    if serverId == "4" && link.server.contains("VidStreaming") {
                         episodeSource = sourceId
-                    } else if serverId == "1" && link.server == "vidcloud" {
+                    } else if serverId == "1" && link.server.contains("Vidcloud") {
                         episodeSource = sourceId
-                    } else if serverId == "5" && link.server == "Streamsb" {
+                    } else if serverId == "5" && link.server.contains("Streamsb") {
                         episodeSource = sourceId
-                    } else if serverId == "3" && link.server == "Streamtape" {
+                    } else if serverId == "3" && link.server.contains("Streamtape") {
                         episodeSource = sourceId
                     }
                 }

@@ -71,6 +71,20 @@ extension NASourceZoroAnime {
             var additionalAnimeAttributes = [Anime.AttributeKey: Any]()
             additionalAnimeAttributes[.airDate] = try animeDetailsBowl.select(".anisc-info > .item")[safe: 3]!.select("span.name").text()
             
+            var availableServerList = NASourceZoroAnime.knownServers
+            // Check if anime has dubbed episodes, also incorrectly assume each every supported server is available
+            let animeStats = try animeDetailsBowl.select(".film-stats > span > .tick-dub").text()
+            if animeStats.localizedCaseInsensitiveContains("dub") {
+                let knownDubbedServers = [
+                    "VidStreaming (Dub)": "VidStreaming (Dub)", // Uses rapidcloud parser
+                    "Vidcloud (Dub)": "Vidcloud (Dub)",         // Uses rapidcloud parser
+                    "Streamsb (Dub)": "Streamsb (Dub)",
+                    "Streamtape (Dub)": "Streamtape (Dub)"
+                ]
+                
+                availableServerList.merge(knownDubbedServers) { $1 }
+            }
+            
             let episodesBowl = try SwiftSoup.parse(episodesResponse.html)
             let episodeList = try episodesBowl.select(".ss-list > .ep-item").compactMap {
                 episodeElement -> (identifier: String, episodeNumber: String, episodeTitle: String) in
@@ -90,7 +104,7 @@ extension NASourceZoroAnime {
             var episodeInfo = [EpisodeLink: Anime.AdditionalEpisodeLinkInformation]()
 
             // We incorrectly assume each server contains every episode
-            for (serverIdentifier, _) in NASourceZoroAnime.knownServers {
+            for (serverIdentifier, _) in availableServerList {
                 var currentCollection = [EpisodeLink]()
 
                 for (episodeIdentifier, episodeName, episodeTitle) in episodeList {
@@ -118,7 +132,7 @@ extension NASourceZoroAnime {
                 alias: animeSynonyms,
                 additionalAttributes: additionalAnimeAttributes,
                 description: animeSynopsis,
-                on: NASourceZoroAnime.knownServers,
+                on: availableServerList,
                 episodes: episodeCollection,
                 episodesAttributes: episodeInfo
             )

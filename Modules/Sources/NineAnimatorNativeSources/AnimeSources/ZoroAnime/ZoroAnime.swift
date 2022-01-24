@@ -38,7 +38,7 @@ class NASourceZoroAnime: BaseSource, Source, PromiseSource {
     #endif
 
     var siteDescription: String {
-        "zoro.to allows you to stream subbed or dubbed in ultra HD quality. NineAnimator has experimental support for this website."
+        "Zoro is a popular ads-free anime streaming websites that allows you to stream subbed in multiple langagues or dubbed in ultra HD quality. NineAnimator has experimental support for this website."
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
@@ -49,9 +49,14 @@ class NASourceZoroAnime: BaseSource, Source, PromiseSource {
     let ajaxEndpoint = URL(string: "https://zoro.to/ajax/")!
 
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        switch name {
-        case "VidStreaming", "Vidcloud":
+        switch server {
+        case _ where server.contains("VidStreaming"),
+             _ where server.contains("Vidcloud"):
             return VideoProviderRegistry.default.provider(for: "RapidCloud")
+        case _ where server.contains("Streamsb"):
+            return VideoProviderRegistry.default.provider(for: "Streamsb")
+        case _ where server.contains("Streamtape"):
+            return VideoProviderRegistry.default.provider(for: "Streamtape")
         default:
             return VideoProviderRegistry.default.provider(for: name) ?? VideoProviderRegistry.default.provider(for: server)
         }
