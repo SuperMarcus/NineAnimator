@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 extension NASourceArrayanime {
-    fileprivate struct AnimeResponse: Decodable {
+    /* fileprivate struct AnimeResponse: Decodable {
         let results: [AnimeEntry]
     }
     
@@ -36,10 +36,11 @@ extension NASourceArrayanime {
         let title: String
         let totalepisode: String
         let type: String
-    }
+    } */
 
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        NineAnimatorPromise<String>.firstly {
+        .fail(.contentUnavailableError("ArrayAnime is no longer available on NineAnimator"))
+        /* NineAnimatorPromise<String>.firstly {
             // Extract Anime ID From URL
             let animeID = link.link.lastPathComponent
             guard !animeID.isEmpty else { throw NineAnimatorError.urlError }
@@ -104,6 +105,6 @@ extension NASourceArrayanime {
                 )
             }
             return animeDetails.first
-        }
+        } */
     }
 }

@@ -40,7 +40,6 @@ public enum NativeSources {
         registry.register(sourceType: NASourceGogoAnime.self)
         registry.register(sourceType: NASourceAnimeDao.self)
         registry.register(sourceType: NASourceAnimeHub.self)
-        registry.register(sourceType: NASourceArrayanime.self)
         registry.register(sourceType: NASourceKissanime.self)
         registry.register(sourceType: NASourceAnimeUnity.self)
         registry.register(sourceType: NASourceMonosChinos.self)
@@ -53,7 +52,8 @@ public enum NativeSources {
         registry.register(sourceType: NASourceMasterAnime.self)
         registry.register(sourceType: NASourceNineAnime.self)
         registry.register(sourceType: NASourceAniwatch.self)
-        
+        registry.register(sourceType: NASourceArrayanime.self)
+
         initialized = true
     }
 }

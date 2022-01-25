@@ -35,7 +35,7 @@ let naCommonDependency: Package.Dependency = .package(name: "NineAnimatorCommon"
 
 let package = Package(
     name: "NineAnimatorModules",
-    platforms: [ .iOS(.v12), .tvOS(.v13), .watchOS(.v7) ],
+    platforms: [ .iOS(.v13), .tvOS(.v13), .watchOS(.v7) ],
     products: [
         .library(
             name: "NineAnimatorNativeSources",
