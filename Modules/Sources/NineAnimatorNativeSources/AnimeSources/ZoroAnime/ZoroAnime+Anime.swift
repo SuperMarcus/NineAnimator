@@ -23,7 +23,6 @@ import SwiftSoup
 
 extension NASourceZoroAnime {
     fileprivate struct EpisodesResponse: Decodable {
-        let continueWatch: Bool?
         let html: String
         let status: Bool
         let totalItems: Int

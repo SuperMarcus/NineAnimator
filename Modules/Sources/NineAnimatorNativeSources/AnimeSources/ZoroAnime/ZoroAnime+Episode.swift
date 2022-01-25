@@ -68,9 +68,7 @@ extension NASourceZoroAnime {
                 
                 // Server Selection
                 var episodeSource: String = ""
-                
-                // add support for subs & dubs
-                
+                                
                 // serverId identifier
                 // 4 - VidStreaming
                 // 1 - Vidcloud
