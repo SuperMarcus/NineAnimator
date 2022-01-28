@@ -30,7 +30,6 @@ let VIDEOBIN = "videobin"
 let MP4UPLOAD = "mp4upload"
 let serverList = [FEMBED, UQLOAD, PLAYERSB, STREAMTAPE, VIDEOBIN, MP4UPLOAD]
 
-
 extension NASourceMonosChinos {
     static let knownServers = [
         "Cloud": "MonosChinos",
@@ -77,7 +76,6 @@ extension NASourceMonosChinos {
                 }
             }
             
-
             let decodedData = Data(base64Encoded: encodedPlayerId)!
             let decodedString = String(data: decodedData, encoding: .utf8)!
             
