@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 extension NASourceArrayanime {
-    static let knownServers = [
+    /* static let knownServers = [
         "gstore": "Google Video",
     ]
     
@@ -35,10 +35,11 @@ extension NASourceArrayanime {
     fileprivate struct EpisodeLinks: Decodable {
         let link: String
         let name: String
-    }
+    } */
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        NineAnimatorPromise<String>.firstly {
+        .fail(.contentUnavailableError("ArrayAnime is no longer available on NineAnimator"))
+        /* NineAnimatorPromise<String>.firstly {
             // Extract Anime ID From URL
             let animeID = anime.link.link.lastPathComponent
             guard !animeID.isEmpty else { throw NineAnimatorError.urlError }
@@ -68,6 +69,6 @@ extension NASourceArrayanime {
                 target: episodeURL,
                 parent: anime
             )
-        }
+        } */
     }
 }

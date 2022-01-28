@@ -26,6 +26,9 @@
 		2C0FA3B9226E6A7A00108D27 /* SetupServerSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */; };
 		2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107710249EFBFB007B82D9 /* Fox@3x.png */; };
 		2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C107711249EFBFC007B82D9 /* Fox@2x.png */; };
+		2C128525278BAE6F00425E01 /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 2C128524278BAE6F00425E01 /* NineAnimatorCommon */; };
+		2C128526278BAE6F00425E01 /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2C128524278BAE6F00425E01 /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2C128528278CC61900425E01 /* AppDelegate+CrashDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */; };
 		2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */; };
 		2C12EDDC21BDE6B20064D2BD /* HalfFillPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */; };
 		2C12EDDD21BDE6B20064D2BD /* HalfFillTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */; };
@@ -211,8 +214,6 @@
 		2CF17D122375D19400B38DDB /* LibraryTipImagedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF17D112375D19400B38DDB /* LibraryTipImagedCell.swift */; };
 		2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */ = {isa = PBXBuildFile; productRef = 2CFC16AD265063480052FE8A /* ViewAnimator */; };
 		52CADD6721BD86F40077BEB1 /* UITableView+DeselectRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CADD6621BD86F40077BEB1 /* UITableView+DeselectRows.swift */; };
-		BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; };
-		BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */ = {isa = PBXBuildFile; productRef = BF6820E226817C93004DCDBD /* NineAnimatorCommon */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		BF9203DC25E07E6E00CB2D91 /* AudioBackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF9203DB25E07E6E00CB2D91 /* AudioBackgroundController.swift */; };
 		BFF95F0A257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFF95F09257C2DA8001F8484 /* SettingsSceneController+DocumentPicker.swift */; };
 /* End PBXBuildFile section */
@@ -248,7 +249,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				BF6820E426817C93004DCDBD /* NineAnimatorCommon in Embed Frameworks */,
+				2C128526278BAE6F00425E01 /* NineAnimatorCommon in Embed Frameworks */,
 				2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */,
 				2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */,
 				2CE2FDF4265070AB00319466 /* NineAnimatorNativeListServices in Embed Frameworks */,
@@ -279,6 +280,7 @@
 		2C0FA3B8226E6A7A00108D27 /* SetupServerSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupServerSelectionViewController.swift; sourceTree = "<group>"; };
 		2C107710249EFBFB007B82D9 /* Fox@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@3x.png"; sourceTree = "<group>"; };
 		2C107711249EFBFC007B82D9 /* Fox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fox@2x.png"; sourceTree = "<group>"; };
+		2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+CrashDelegate.swift"; sourceTree = "<group>"; };
 		2C12EDD721BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillViewControllerProtocol.swift; sourceTree = "<group>"; };
 		2C12EDD821BDE6B20064D2BD /* HalfFillPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillPresentationController.swift; sourceTree = "<group>"; };
 		2C12EDD921BDE6B20064D2BD /* HalfFillTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HalfFillTransitionAnimator.swift; sourceTree = "<group>"; };
@@ -554,13 +556,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF6820E326817C93004DCDBD /* NineAnimatorCommon in Frameworks */,
 				2CE1371526B31CA400F59CB0 /* AppCenterCrashes in Frameworks */,
 				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */,
 				2CE1371326B31CA400F59CB0 /* AppCenterDistribute in Frameworks */,
 				2CA0D983264CC192009EFF76 /* NineAnimatorNativeSources in Frameworks */,
+				2C128525278BAE6F00425E01 /* NineAnimatorCommon in Frameworks */,
 				2CFC16AE265063480052FE8A /* ViewAnimator in Frameworks */,
 				2CE1371726B31CA400F59CB0 /* AppCenterAnalytics in Frameworks */,
 				2CA0D981264CC192009EFF76 /* NineAnimatorNativeParsers in Frameworks */,
@@ -790,6 +792,7 @@
 				2C4ABC5321B5881E009B4D47 /* AppDelegate.swift */,
 				2CCD952E23E53776005D4402 /* AppDelegate+Environment.swift */,
 				2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */,
+				2C128527278CC61900425E01 /* AppDelegate+CrashDelegate.swift */,
 				2C4ABC5A21B5881F009B4D47 /* Assets.xcassets */,
 				2C4ABC5F21B5881F009B4D47 /* Info.plist */,
 			);
@@ -1287,10 +1290,10 @@
 				2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */,
 				2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */,
 				2CFC16AD265063480052FE8A /* ViewAnimator */,
-				BF6820E226817C93004DCDBD /* NineAnimatorCommon */,
 				2CE1371226B31CA400F59CB0 /* AppCenterDistribute */,
 				2CE1371426B31CA400F59CB0 /* AppCenterCrashes */,
 				2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */,
+				2C128524278BAE6F00425E01 /* NineAnimatorCommon */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -1321,7 +1324,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Marcus Zhou";
 				TargetAttributes = {
 					2C2196CD21DAC555002059D3 = {
@@ -1369,7 +1372,6 @@
 			packageReferences = (
 				2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */,
 				2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */,
-				BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */,
 				2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 2C4ABC5121B5881E009B4D47 /* Products */;
@@ -1626,6 +1628,7 @@
 				2C12EDDE21BDE6B20064D2BD /* HalfFillTransitionDelegate.swift in Sources */,
 				2CE18B0C2374839100771A16 /* LibrarySubscriptionCell.swift in Sources */,
 				2C9383D421FCCC43008C0D01 /* UILabel+StyleAttributes.swift in Sources */,
+				2C128528278CC61900425E01 /* AppDelegate+CrashDelegate.swift in Sources */,
 				2C35C968227F223700D469E6 /* CalendarHeaderView.swift in Sources */,
 				2C12EDDB21BDE6B20064D2BD /* HalfFillViewControllerProtocol.swift in Sources */,
 				2CB0042922024BDA00351B7E /* CachedAnimeArtworkRetriver.swift in Sources */,
@@ -1965,7 +1968,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2025,7 +2028,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -2051,7 +2054,8 @@
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2082,7 +2086,8 @@
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = NineAnimator/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"IPHONEOS_DEPLOYMENT_TARGET[sdk=macosx*]" = 14.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2190,8 +2195,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SuperMarcus/SwordRPC";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = 2fdbaff6a8fe6823bf1fce50790e8f7762eaa729;
 			};
 		};
 		2CE1371126B31CA400F59CB0 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
@@ -2199,7 +2204,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.0;
+				minimumVersion = 4.4.1;
 			};
 		};
 		2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */ = {
@@ -2207,20 +2212,16 @@
 			repositoryURL = "https://github.com/marcosgriselli/ViewAnimator";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.2;
-			};
-		};
-		BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SuperMarcus/NineAnimatorCommon.git";
-			requirement = {
-				kind = revision;
-				revision = b75d541be940ee41d1a93fc3ebbdd6199069b2d2;
+				minimumVersion = 3.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2C128524278BAE6F00425E01 /* NineAnimatorCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorCommon;
+		};
 		2C9325C124ACDDD3001E3708 /* SwordRPC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2C9325C024ACDDD3001E3708 /* XCRemoteSwiftPackageReference "SwordRPC" */;
@@ -2257,11 +2258,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2CFC16AC265063480052FE8A /* XCRemoteSwiftPackageReference "ViewAnimator" */;
 			productName = ViewAnimator;
-		};
-		BF6820E226817C93004DCDBD /* NineAnimatorCommon */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = BF6820E126817C93004DCDBD /* XCRemoteSwiftPackageReference "NineAnimatorCommon" */;
-			productName = NineAnimatorCommon;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

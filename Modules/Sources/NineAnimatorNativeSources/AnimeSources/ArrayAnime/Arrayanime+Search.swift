@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 extension NASourceArrayanime {
-    fileprivate struct SearchResponse: Decodable {
+    /* fileprivate struct SearchResponse: Decodable {
         let results: [SearchEntry]
     }
 
@@ -30,7 +30,7 @@ extension NASourceArrayanime {
         let id: String
         let title: String
         let image: String
-    }
+    } */
 
     class SearchAgent: ContentProvider {
         var title: String
@@ -49,7 +49,7 @@ extension NASourceArrayanime {
         }
         
         func more() {
-            guard moreAvailable && performingTask == nil else { return }
+            /* guard moreAvailable && performingTask == nil else { return }
             
             // Arrayanime includes the search title in the URL path, hence need to encode
             let encodedTitle = self.title.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
@@ -112,7 +112,7 @@ extension NASourceArrayanime {
                 self._results.append($0)
                 
                 self.delegate?.pageIncoming(newPage, from: self)
-            }
+            } */
         }
         
         init(_ query: String, withParent parent: NASourceArrayanime) {

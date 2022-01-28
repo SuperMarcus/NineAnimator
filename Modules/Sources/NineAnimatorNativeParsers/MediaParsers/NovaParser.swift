@@ -43,15 +43,11 @@ class NovaParser: VideoProviderParser {
         guard let sourceInfoUrl = URL(string: "https://www.novelplanet.me/api/source/\(videoIdentifier)")
             else { return NineAnimatorPromise.fail(NineAnimatorError.urlError).handle(callback) }
         
-        return session.request(sourceInfoUrl, method: .post).responseJSON {
+        return session.request(sourceInfoUrl, method: .post).responseDecodable(of: SourcesAPIResponse.self) {
             response in
             switch response.result {
-            case .success(let responseDictionary as NSDictionary):
+            case .success(let decodedResponse):
                 do {
-                    let decodedResponse = try DictionaryDecoder().decode(
-                        SourcesAPIResponse.self,
-                        from: responseDictionary
-                    )
                     let selectedSource = try decodedResponse
                         .data
                         .last

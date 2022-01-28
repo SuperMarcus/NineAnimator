@@ -22,20 +22,20 @@ import Foundation
 import PackageDescription
 
 let packageDir = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-let naCommonDependency: Package.Dependency
+let naCommonDependency: Package.Dependency = .package(name: "NineAnimatorCommon", path: "../Common")
 
-if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent().appendingPathComponent("Common").path) {
-    naCommonDependency = .package(name: "NineAnimatorCommon", path: "../Common")
-} else {
-    naCommonDependency = .package(
-        url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
-        .revision("b75d541be940ee41d1a93fc3ebbdd6199069b2d2")
-    )
-}
+// if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent().appendingPathComponent("Common").path) {
+//    naCommonDependency = .package(name: "NineAnimatorCommon", path: "../Common")
+// } else {
+//    naCommonDependency = .package(
+//        url: "https://github.com/SuperMarcus/NineAnimatorCommon.git",
+//        .revision("b75d541be940ee41d1a93fc3ebbdd6199069b2d2")
+//    )
+// }
 
 let package = Package(
     name: "NineAnimatorModules",
-    platforms: [ .iOS(.v12), .tvOS(.v13), .watchOS(.v7) ],
+    platforms: [ .iOS(.v13), .tvOS(.v13), .watchOS(.v7) ],
     products: [
         .library(
             name: "NineAnimatorNativeSources",

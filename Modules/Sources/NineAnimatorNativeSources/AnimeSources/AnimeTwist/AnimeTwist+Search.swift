@@ -28,7 +28,7 @@ extension NASourceAnimeTwist {
         
         var availablePages: Int = 1
         
-        var moreAvailable: Bool = false
+        var moreAvailable = false
         
         weak var delegate: ContentProviderDelegate?
         

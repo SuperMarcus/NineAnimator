@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "f96b619bcb2383b43d898402283924b80e2c4bae",
-          "version": "5.4.3"
+          "revision": "f82c23a8a7ef8dc1a49a8bfc6a96883e79121864",
+          "version": "5.5.0"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "6d60d2361445e959b4fbb3a9d0dbae0e07eead1a",
-          "version": "4.2.0"
+          "revision": "b84bc8a39ff04bc8d5ae7b4d230c171c562891aa",
+          "version": "4.4.1"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/IBM-Swift/BlueSocket.git",
         "state": {
           "branch": null,
-          "revision": "c9894fd117457f1d006575fbfb2fdfd6f79eac03",
-          "version": "1.0.200"
+          "revision": "dd924c3bc2c1c144c42b8dda3896f1a03115ded4",
+          "version": "2.0.2"
         }
       },
       {
@@ -33,17 +33,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "44450a8f564d7c0165f736ba2250649ff8d3e556",
-          "version": "6.3.0"
-        }
-      },
-      {
-        "package": "NineAnimatorCommon",
-        "repositoryURL": "https://github.com/SuperMarcus/NineAnimatorCommon.git",
-        "state": {
-          "branch": null,
-          "revision": "b75d541be940ee41d1a93fc3ebbdd6199069b2d2",
-          "version": null
+          "revision": "0c02c46cfdc0656ce74fd0963a75e5000a0b7f23",
+          "version": "7.1.2"
         }
       },
       {
@@ -51,7 +42,7 @@
         "repositoryURL": "https://github.com/SuperMarcus/OpenCastSwift.git",
         "state": {
           "branch": null,
-          "revision": "5f0328feb73b811180a88b60cc6ed36bfb76bf03",
+          "revision": "0cb71ddaabd1128f5745ff5f37f6af26bea82d36",
           "version": null
         }
       },
@@ -60,8 +51,17 @@
         "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
         "state": {
           "branch": null,
-          "revision": "d747ab5de269cd44022bbe96ff9609d8626694ab",
-          "version": "1.9.0"
+          "revision": "6b27393cad517c067dceea85fadf050e70c4ceaa",
+          "version": "1.10.1"
+        }
+      },
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser",
+        "state": {
+          "branch": null,
+          "revision": "6b2aa2748a7881eebb9f84fb10c01293e15b52ca",
+          "version": "0.5.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf",
         "state": {
           "branch": null,
-          "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
-          "version": "1.17.0"
+          "revision": "7e2c5f3cbbeea68e004915e3a8961e20bd11d824",
+          "version": "1.18.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "774dc9c7213085db8aa59595e27c1cd22e428904",
-          "version": "2.3.2"
+          "revision": "45a7566f7ec2de0b977f28e825f8df874f210327",
+          "version": "2.3.6"
         }
       },
       {
@@ -95,8 +95,8 @@
         "package": "SwordRPC",
         "repositoryURL": "https://github.com/SuperMarcus/SwordRPC",
         "state": {
-          "branch": "master",
-          "revision": "04d6ac5ad1040a4ba6ebea696a2cc7b0b327f886",
+          "branch": null,
+          "revision": "2fdbaff6a8fe6823bf1fce50790e8f7762eaa729",
           "version": null
         }
       },
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/marcosgriselli/ViewAnimator",
         "state": {
           "branch": null,
-          "revision": "d3034df845182f9cf0b10fcf35e742541c1926b8",
-          "version": "3.0.2"
+          "revision": "55f1c46241b181c3e0b68d70edb6d87926c7d183",
+          "version": "3.1.0"
         }
       }
     ]
