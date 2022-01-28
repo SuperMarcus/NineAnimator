@@ -37,7 +37,7 @@ extension NASourcePantsubase {
             page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
-        func more() {
+        func more() {/*
             if performingTask == nil {
                 performingTask = parent.requestManager.request(
                     url: parent.endpointURL.appendingPathComponent("/search"),
@@ -96,7 +96,7 @@ extension NASourcePantsubase {
                    self._results = $0
                    self.delegate?.pageIncoming(0, from: self)
                }
-            }
+            }*/
         }
         
         init(_ query: String, withParent parent: NASourcePantsubase) {
