@@ -44,7 +44,7 @@ extension NASourceAnimeSaturn {
                         let video = try bowl.select("video source").attr("src")
                         var finalurl: URL
                         if video.isEmpty {
-                            finalurl = try URL(string: NASourceAnimeSaturn.regex.firstMatch(in: bowl.debugDescription)?.first ?? "").tryUnwrap()
+                            finalurl = try URL(string: NASourceAnimeSaturn.regex.firstMatch(in: utf8Text)?.first ?? "").tryUnwrap()
                         } else {
                             finalurl = try URL(protocolRelativeString: video, relativeTo: self.endpointURL).tryUnwrap()
                         }
