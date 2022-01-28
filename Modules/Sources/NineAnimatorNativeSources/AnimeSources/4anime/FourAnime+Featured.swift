@@ -23,6 +23,8 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
+        .fail(.contentUnavailableError("4Anime is no longer available on NineAnimator"))
+        /*
         requestManager.request("/", handling: .browsing).responseString.then {
             responseContent in
             let endpointURL = self.endpointURL
@@ -82,6 +84,6 @@ extension NASourceFourAnime {
                 featured: popularAnimeLinks,
                 latest: recentAnimeLinks
             )
-        }
+        }*/
     }
 }

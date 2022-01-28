@@ -39,7 +39,7 @@ extension NASourceFourAnime {
             page == 0 ? _results?.map { .anime($0) } ?? [] : []
         }
         
-        func more() {
+        func more() { /*
             if performingTask == nil {
                 performingTask = parent.requestManager.request(
                     url: self.encodedW3CQueryUrl,
@@ -99,7 +99,7 @@ extension NASourceFourAnime {
                     self._results = $0
                     self.delegate?.pageIncoming(0, from: self)
                 }
-            }
+            }*/
         }
         
         private var encodedW3CQueryUrl: URL {
