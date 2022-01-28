@@ -110,12 +110,12 @@ extension NASourceMonosChinos {
                 .trimmingCharacters(in: .whitespacesAndNewlines)
             
             // Attributes
-            var additionalAnimeAttributes = [Anime.AttributeKey: Any]()
-            let date = try bowl
+           let additionalAnimeAttributes = [Anime.AttributeKey: Any]() /*
+//            let date = try bowl
                 .select("header > .row > div > .after-title")
                 .text()
                 .trimmingCharacters(in: .whitespacesAndNewlines)
-                .components(separatedBy: " ")
+                .components(separatedBy: " ") */
             
 //            additionalAnimeAttributes[.airDate] = date[0]
             
