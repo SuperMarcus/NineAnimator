@@ -20,12 +20,13 @@
 import Foundation
 import NineAnimatorCommon
 
-extension NASourcePantsubase {
+extension NASourcePantsubase {/*
     static let knownServers = [
         "pantsudrive": "Pantsudrive" // These names lol
     ]
-    
+    */
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        .fail(.contentUnavailableError("Pantsubase is no longer available on NineAnimator")) /*
         requestManager.request(url: link.identifier)
             .responseBowl
             .then {
@@ -45,6 +46,6 @@ extension NASourcePantsubase {
                     target: iFrameURL,
                     parent: anime
                 )
-            }
+            } */
     }
 }
