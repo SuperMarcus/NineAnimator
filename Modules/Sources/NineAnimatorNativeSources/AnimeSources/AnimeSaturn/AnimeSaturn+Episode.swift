@@ -21,6 +21,9 @@ import NineAnimatorCommon
 import SwiftSoup
 
 extension NASourceAnimeSaturn {
+    private static let regex = try! NSRegularExpression(
+        pattern: "(https)(.*)(.m3u8)"
+    )
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         self.requestManager.request(url: link.identifier, handling: .browsing)
             .responseData
@@ -38,10 +41,16 @@ extension NASourceAnimeSaturn {
                         let data = responseContent
                         let utf8Text = String(data: data, encoding: .utf8) ?? String(decoding: data, as: UTF8.self)
                         let  bowl = try SwiftSoup.parse(utf8Text)
-                        let video = try bowl.select("video source").attr("src").replacingOccurrences(of: "http://", with: "https://")
+                        let video = try bowl.select("video source").attr("src")
+                        var finalurl: URL
+                        if video.isEmpty {
+                            finalurl = try URL(string: NASourceAnimeSaturn.regex.firstMatch(in: bowl.debugDescription)?.first ?? "").tryUnwrap()
+                        } else {
+                            finalurl = try URL(protocolRelativeString: video, relativeTo: self.endpointURL).tryUnwrap()
+                        }
                         return Episode(
                             link,
-                            target: try video.asURL(),
+                            target: finalurl,
                             parent: anime
                         )
                     }
