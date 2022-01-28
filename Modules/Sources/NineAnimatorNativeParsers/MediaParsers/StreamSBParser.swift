@@ -27,7 +27,6 @@ class StreamSBParser: VideoProviderParser {
     private struct StreamSBAPIResponse: Codable {
         let streamData: StreamData
         let statusCode: Int
-        let userData: UserData
     }
 
     private struct StreamData: Codable {
@@ -44,13 +43,6 @@ class StreamSBParser: VideoProviderParser {
     private struct Logo: Codable {
         let hide: String
         let url: String
-    }
-
-    private struct UserData: Codable {
-        let ua: Int
-        let uas: [Int?]
-        let uew, adb, uam, pr: Int
-        let id, uet: Int
     }
     
     private let apiPath: String = "https://watchsb.com/sourcesx38/7361696b6f757c7c\("HEXVIDEOID")7c7c7361696b6f757c7c73747265616d7362/7361696b6f757c7c363136653639366436343663363136653639366436343663376337633631366536393664363436633631366536393664363436633763376336313665363936643634366336313665363936643634366337633763373337343732363536313664373336327c7c7361696b6f757c7c73747265616d7362"
@@ -85,10 +77,6 @@ class StreamSBParser: VideoProviderParser {
                 case .success(let decodedResponse):
                     do {
                         let streamData = decodedResponse.streamData
-                        
-                        if streamData.title != "video" {
-                            throw NineAnimatorError.providerError("Unable to get resource URL")
-                        }
 
                         let resourceUrl = try URL(string: streamData.file ?? streamData.backup).tryUnwrap(.urlError)
 
