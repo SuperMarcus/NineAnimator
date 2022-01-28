@@ -28,6 +28,7 @@ extension NASourceFourAnime {
     )
 
     func link(from url: URL) -> NineAnimatorPromise<AnyLink> {
+        .fail()/*
         NineAnimatorPromise<URL>.firstly {
             let urlString = url.absoluteString
             
@@ -64,6 +65,6 @@ extension NASourceFourAnime {
                 image: animeArtworkUrl,
                 source: self
             ))
-        }
+        }*/
     }
 }

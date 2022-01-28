@@ -58,13 +58,12 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier
-        setupGlobalRequestModifier()
+//        setupGlobalRequestModifier()
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        NASourceFourAnime.knownServers.keys.contains(server)
-            ? DummyParser.registeredInstance : nil
-    }
+            DummyParser.registeredInstance
+        }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
         recommendServers(for: anime, ofPurpose: .playback).first
