@@ -27,8 +27,9 @@ Currently only a selection of video streaming hosts is supported by NineAnimator
 - GoUnlimited
 - Streamtape
 - Nova
+- RapidCloud
 
-For a more complete and updated list of supported video streaming hosts, visit our [VideoProviderRegistry](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Models/Media/Parser/VideoProviderRegistry.swift#L28)
+For a more complete and updated list of supported video streaming hosts, visit our [NativeParsers](https://github.com/SuperMarcus/NineAnimator/blob/master/Modules/Sources/NineAnimatorNativeParsers/NativeParsers.swift#L32)
 
 
 All of the sources above support downloading. More hosts may be added later.
@@ -38,18 +39,6 @@ Feel free to open an issue to request additional hosts.
 
 NineAnimator supports the following anime websites:
 
-- [4anime](https://4anime.to)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
-- [9anime.ru](https://9anime.ru)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [x] Open arbitrary links
-    - [x] Anime synopsis
-    - [x] Detailed anime attributes (Ratings and Air Date)
-    - [ ] Detailed episode synopsis
 - [AnimeKisa](https://animekisa.tv)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
@@ -92,12 +81,6 @@ NineAnimator supports the following anime websites:
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
     - [ ] Detailed episode synopsis
-- [ArrayAnime](https://arrayanime.com)
-    - [x] Basic features (featured list, notifications, search, and playback)
-    - [ ] Open arbitrary links
-    - [x] Anime synopsis
-    - [ ] Detailed anime attributes (Only Air Date is available)
-    - [ ] Detailed episode synopsis
 - [AnimeUnity](https://animeunity.it) (Italian)
     - [x] Basic features (featured list, notifications, search, and playback)
     - [ ] Open arbitrary links
@@ -116,6 +99,12 @@ NineAnimator supports the following anime websites:
     - [x] Anime synopsis
     - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
+ - [Zoro](https://zoro.to)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
 - ~~[redacted](#?)~~
 - ~~[masterani.me](https://masterani.me)~~ (no longer available)
     - [x] Basic features (featured list, notifications, search, and playback)
@@ -128,4 +117,22 @@ NineAnimator supports the following anime websites:
     - [ ] Open arbitrary links
     - [x] Anime synopsis
     - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- ~~[4anime](https://4anime.to)~~ (no longer available)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- ~~[ArrayAnime](https://arrayanime.com)~~ (no longer available)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [ ] Open arbitrary links
+    - [x] Anime synopsis
+    - [ ] Detailed anime attributes (Only Air Date is available)
+    - [ ] Detailed episode synopsis
+- ~~[9anime.ru](https://9anime.ru)~~ (disabled until further notice)
+    - [x] Basic features (featured list, notifications, search, and playback)
+    - [x] Open arbitrary links
+    - [x] Anime synopsis
+    - [x] Detailed anime attributes (Ratings and Air Date)
     - [ ] Detailed episode synopsis
