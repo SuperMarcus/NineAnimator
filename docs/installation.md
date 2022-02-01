@@ -68,7 +68,7 @@ To build this app, you will need to have the latest version of Xcode installed. 
 Terminal app and clone the project to your local machine.
 
 ```sh
-$ git clone https://github.com/SuperMarcus/NineAnimator.git
+$ git clone --recursive https://github.com/SuperMarcus/NineAnimator.git
 ```
 
 #### Step Two: Modify Project Settings
