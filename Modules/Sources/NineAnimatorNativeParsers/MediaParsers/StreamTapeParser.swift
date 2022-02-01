@@ -25,7 +25,7 @@ class StreamTapeParser: VideoProviderParser {
     var aliases: [String] { [ "streamtape", "Sreamtape" ] }
     
     static let playerSourceRegex = try! NSRegularExpression(
-        pattern: #"innerHTML\s=\s*"([^"]+)" \+ '([^']+)"#,
+        pattern: #"innerHTML\s=\s*'([^"]+)'\+ \('\w{3}([^']+)"#,
         options: []
     )
     

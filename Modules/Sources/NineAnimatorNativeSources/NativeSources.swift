@@ -38,12 +38,12 @@ public enum NativeSources {
         registry.register(sourceType: NASourceGogoAnime.self)
         registry.register(sourceType: NASourceAnimeDao.self)
         registry.register(sourceType: NASourceAnimeHub.self)
-        registry.register(sourceType: NASourceArrayanime.self)
         registry.register(sourceType: NASourceKissanime.self)
         registry.register(sourceType: NASourceAnimeUnity.self)
         registry.register(sourceType: NASourceMonosChinos.self)
         registry.register(sourceType: NASourceAnimeSaturn.self)
         registry.register(sourceType: NASourceAnimeWorld.self)
+        registry.register(sourceType: NASourceZoroAnime.self)
         
         // Disabled sources
         registry.register(sourceType: NASourceWonderfulSubs.self)
@@ -52,7 +52,8 @@ public enum NativeSources {
         registry.register(sourceType: NASourceAniwatch.self)
         registry.register(sourceType: NASourcePantsubase.self)
         registry.register(sourceType: NASourceFourAnime.self)
-        
+        registry.register(sourceType: NASourceArrayanime.self)
+      
         initialized = true
     }
 }

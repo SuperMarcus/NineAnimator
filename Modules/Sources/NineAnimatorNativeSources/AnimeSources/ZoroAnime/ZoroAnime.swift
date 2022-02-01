@@ -26,36 +26,40 @@ import UIKit
 import AppKit
 #endif
 
-class NASourceArrayanime: BaseSource, Source, PromiseSource {
-    var name: String { "arrayanime.com" }
+class NASourceZoroAnime: BaseSource, Source, PromiseSource {
+    var name: String { "zoro.to" }
     
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { #imageLiteral(resourceName: "Arrayanime Site Icon") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "Zoro Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { #imageLiteral(resourceName: "Arrayanime Site Icon") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "Zoro Site Icon") }
     #endif
 
     var siteDescription: String {
-        "ArrayAnime allows you to stream subtitled, dubbed, chinese anime and movies in HD. NineAnimator has experimental support for this website."
+        "Zoro is a popular ads-free anime streaming websites that allows you to stream subbed in multiple langagues or dubbed in ultra HD quality. NineAnimator has experimental support for this website."
     }
     
     var preferredAnimeNameVariant: KeyPath<ListingAnimeName, String> {
         \.romaji
     }
     
-    // Disable due to Arrayanime constantly changing API domain
-    override var isEnabled: Bool { false }
-    
-    override var endpoint: String { "https://arrayanime.com" }
-    
-    // let searchEndpoint = URL(string: "https://t-arrayapi.vercel.app/api/")!
-    
-    // let animeDetailsEndpoint = URL(string: "https://apitest-mu.vercel.app/api/")!
-    
+    override var endpoint: String { "https://zoro.to" }
+    let ajaxEndpoint = URL(string: "https://zoro.to/ajax/")!
+
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        DummyParser.registeredInstance
+        switch server {
+        case _ where server.contains("VidStreaming"),
+             _ where server.contains("Vidcloud"):
+            return VideoProviderRegistry.default.provider(for: "RapidCloud")
+        case _ where server.contains("Streamsb"):
+            return VideoProviderRegistry.default.provider(for: "Streamsb")
+        case _ where server.contains("Streamtape"):
+            return VideoProviderRegistry.default.provider(for: "Streamtape")
+        default:
+            return VideoProviderRegistry.default.provider(for: name) ?? VideoProviderRegistry.default.provider(for: server)
+        }
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {

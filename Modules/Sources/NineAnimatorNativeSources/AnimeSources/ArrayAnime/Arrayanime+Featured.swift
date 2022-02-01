@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 extension NASourceArrayanime {
-    fileprivate struct AnimeResponse: Codable {
+    /* fileprivate struct AnimeResponse: Codable {
         let results: [AnimeEntry]
     }
     
@@ -31,19 +31,20 @@ extension NASourceArrayanime {
         let id: String
         let image: String
         let episodenumber: String?
-    }
+    } */
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        /*NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
+        .fail(.contentUnavailableError("ArrayAnime is no longer available on NineAnimator"))
+        /* NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
             popularAnimeUpdates, latestAnimeUpdates
-        ]) .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }*/
+        ]) .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
         latestAnimeUpdates
             .then { result in
                 BasicFeaturedContainer(featured: [], latest: result)
-            }
+            } */
     }
     
-    /*fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
+    /* fileprivate var popularAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
             url: self.animeDetailsEndpoint.appendingPathComponent("/newseason/1"),
             handling: .ajax
@@ -70,7 +71,7 @@ extension NASourceArrayanime {
             }
             return seasonalAnime
         }
-    }*/
+    }
     
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         self.requestManager.request(
@@ -99,5 +100,5 @@ extension NASourceArrayanime {
             }
             return recentAnime
         }
-    }
+    } */
 }

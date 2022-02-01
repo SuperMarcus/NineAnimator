@@ -60,6 +60,7 @@ public enum NativeParsers {
         defaultProvider.register(StreamSBParser(), forServer: "Streamsb")
         defaultProvider.register(DoodParser(), forServer: "Doodstream")
         defaultProvider.register(PantsudriveParser(), forServer: "pantsudrive")
+        defaultProvider.register(RapidCloudParser(), forServer: "RapidCloud")
         
         initialized = true
     }
