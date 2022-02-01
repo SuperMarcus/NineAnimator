@@ -69,7 +69,6 @@ extension NASourceMonosChinos {
             for (serverName, dataPlayerId) in episodeList {
                 for server in serverList {
                     // link.server is the server the NineAnimator user selected
-//                    print(String(format: "------------\nServer Name: %@\nUser Selected Server: %@\nServer Being Checked: %@\n----------------", serverName, link.server, server))
                     if serverName.caseInsensitiveCompare(server) == .orderedSame && link.server.caseInsensitiveCompare(server) == .orderedSame {
                         encodedPlayerId = dataPlayerId
                     }

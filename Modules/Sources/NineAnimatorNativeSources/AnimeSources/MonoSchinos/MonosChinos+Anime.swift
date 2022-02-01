@@ -49,9 +49,6 @@ extension NASourceMonosChinos {
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 return (episodeIdentifier, episodeName)
             }
-            print("\n\n")
-            print(episodeList)
-            print("\n\n")
             
             if episodeList.isEmpty {
                 throw NineAnimatorError.responseError("No episode found for this anime")
