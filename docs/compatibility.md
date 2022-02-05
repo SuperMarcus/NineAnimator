@@ -2,7 +2,7 @@
 
 ### iOS/iPadOS Compatibility
 
-NineAnimator is compatible with devices running iOS 11.2 or later. This
+NineAnimator is compatible with devices running iOS 13.0 or later. This
 includes iPhones and iPads.
 
 The app is tested on the following devices running the latest operating

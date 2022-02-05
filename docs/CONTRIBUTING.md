@@ -21,8 +21,8 @@ In this document, you'll find a set of guidelines for contributing and some reso
 ### I just have a question
 
 For faster responses, use our [Discord server](https://discord.gg/dzTVzeW) for questions.
-* Chances are your question has been answered by one of our moderators. Make sure to check the `#faq` channel and the pinned messages in the `#general` and `#help` channels.
-* If you can't find what you're looking for, post your inquiry in the `#help` channel.
+* Chances are your question has been answered by one of our moderators. Make sure to check the `#faq` channel and the pinned messages in the `#general` and `#app-support` channels.
+* If you can't find what you're looking for, post your inquiry in the `#app-support` channel.
 
 Optionally, you can also use our [r/NineAnimator](https://reddit.com/r/NineAnimator) subreddit.
 
@@ -42,10 +42,10 @@ Feel free to talk to us on our [Discord server](https://discord.gg/dzTVzeW) befo
 
 NineAnimator is a typical Cocoa Touch iOS application following the Model-View-Controller (MVC) design pattern. There are many resources online for you to learn the MVC design, but in short, you should know the responsibility of each component and keep the additional code at where it should be.
 
-**Model**: NineAnimator, at its core, is a collection of parsers and analyzers. The [`NineAnimator/Models`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models) directory hosts all of the parsing logic and user-configurable.
-* **Anime Source**: Under the `Models` folder, you'll find the [`Anime Source`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Anime%20Source). Code under this folder fetches data from different source anime websites, decodes it, and present the information to other components of NineAnimator. For each source website, NineAnimator creates a distinct `Source` class. `Source` encapsulates the functionalities and capabilities of the anime website.
-* **Media Parser**: Media Parsers, located under the [`Media/Parser`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Media/Parser) folder in the models, are classes that accept a URL to a streaming site and return a locally streamable URL. Media Parsers are used to support playbacks with native players (and cast). NineAnimator parsers will conform to the `VideoProviderParser` protocol.
-* **Anime Listing Service**: The list services are third-party tracking and information services implemented under the [`Anime List Service`](https://github.com/SuperMarcus/NineAnimator/tree/master/NineAnimator/Models/Anime%20Listing%20Service) folder under models. List services conform to the `ListingService` protocol and declare their capabilities through the `var isCapableOf<capability>: Bool` getters. List services also provide the matching `ListingAnimeReference` for each `AnimeLink`.
+**Model**: NineAnimator, at its core, is a collection of parsers and analyzers. The [`Modules/Sources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources) directory hosts all of the parsing logic and user-configurable.
+* **Anime Source**: Under the `Modules/Sources` folder, you'll find the [`NineAnimatorNativeSources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeSources). Code under this folder fetches data from different source anime websites, decodes it, and present the information to other components of NineAnimator. For each source website, NineAnimator creates a distinct `Source` class. `Source` encapsulates the functionalities and capabilities of the anime website.
+* **Media Parser**: Media Parsers, located under the [`NineAnimatorNativeParsers`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeParsers) folder under `Modules/Sources`, are classes that accept a URL to a streaming site and return a locally streamable URL. Media Parsers are used to support playbacks with native players (and cast). NineAnimator parsers will conform to the `VideoProviderParser` protocol.
+* **Anime Listing Service**: The list services are third-party tracking and information services implemented under the [`NineAnimatorNativeListServices`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeListServices) folder under `Modules/Sources`. List services conform to the `ListingService` protocol and declare their capabilities through the `var isCapableOf<capability>: Bool` getters. List services also provide the matching `ListingAnimeReference` for each `AnimeLink`.
 
 **View**: The views define the look and feel of the UI components. NineAnimator employs several mechanisms to construct and configure the UI. In general, NineAnimator's design follows that of the latest iOS system apps.
 * **Storyboards and Xibs**: NineAnimator defines most of the UIs with storyboards. We also use auto-layout extensively for adaptive layouts and device variants.
@@ -63,7 +63,7 @@ NineAnimator is a typical Cocoa Touch iOS application following the Model-View-C
 
 Most operations in NineAnimator are performed asynchronously (optionally on a different thread). This ensures that any time consuming or intensive tasks won't block the main thread.
 
-At the center of NineAnimator's asynchronous framework is the [`NineAnimatorPromise` class](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Utilities/Asynchronous/Promise.swift). This class borrows the idea of promise and bridges the legacy callback mechanisms.
+At the center of NineAnimator's asynchronous framework is the [`NineAnimatorPromise` class](https://github.com/SuperMarcus/NineAnimatorCommon/blob/master/Sources/NineAnimatorCommon/Utilities/Asynchronous/Promise.swift). This class borrows the idea of promise and bridges the legacy callback mechanisms.
 
 > Note: As a safety measure, be sure to maintain a reference to the promise instance for the duration of the task. Losing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
 
