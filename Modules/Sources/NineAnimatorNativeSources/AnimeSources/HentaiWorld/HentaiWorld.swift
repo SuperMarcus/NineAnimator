@@ -38,7 +38,7 @@ class NASourceHentaiWorld: BaseSource, Source, PromiseSource {
     var siteLogo: NSImage { #imageLiteral(resourceName: "HentaiWorld Site Icon") }
     #endif
     var siteDescription: String {
-        "HentaiWorld è un server italiano. HentaiWorld is a free website that provides Italian subtitled anime."
+        "HentaiWorld è un server italiano. HentaiWorld is a free website that provides Italian subtitled hanime."
     }
     
     class var HentaiWorldStream: Anime.ServerIdentifier {
