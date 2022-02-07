@@ -33,9 +33,9 @@ class NASourceHentaiWorld: BaseSource, Source, PromiseSource {
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
-    var siteLogo: UIImage { #imageLiteral(resourceName: "HentaiWorld Site Logo") }
+    var siteLogo: UIImage { #imageLiteral(resourceName: "HentaiWorld Site Icon") }
     #elseif canImport(AppKit)
-    var siteLogo: NSImage { #imageLiteral(resourceName: "HentaiWorld Site Logo") }
+    var siteLogo: NSImage { #imageLiteral(resourceName: "HentaiWorld Site Icon") }
     #endif
     var siteDescription: String {
         "HentaiWorld è un server italiano. HentaiWorld is a free website that provides Italian subtitled anime."
