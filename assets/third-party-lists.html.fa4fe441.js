@@ -1,0 +1,1 @@
+const t={key:"v-0e56133d",path:"/guide/third-party-lists.html",title:"Third-Party Lists",lang:"en-US",frontmatter:{title:"Third-Party Lists",lang:"en-US"},excerpt:"",headers:[],git:{updatedTime:1645474257e3,contributors:[{name:"Marcus Zhou",email:"other.marcus@icloud.com",commits:1}]},filePathRelative:"guide/third-party-lists.md"};export{t as data};
