@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./docs/.vuepress",
+    "module": "ES2020",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@configs/*": ["configs/*"],
+      "@styles/*": ["styles/*"]
+    },
+    "types": ["vite/client", "@types/jest"]
+  },
+  "include": ["**/.vuepress/**/*", "packages/**/*"],
+  "exclude": ["node_modules", ".temp", "lib", "dist"]
+}
