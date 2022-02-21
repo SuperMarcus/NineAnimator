@@ -51,7 +51,11 @@ extension NASourceAnimeSaturn {
                         return Episode(
                             link,
                             target: finalurl,
-                            parent: anime
+                            parent: anime,
+                            userInfo: [
+                                DummyParser.Options.isAggregated: video.isEmpty,
+                                DummyParser.Options.contentType: video.isEmpty ? "application/vnd.apple.mpegurl" : "video/mp4"
+                            ]
                         )
                     }
             }
