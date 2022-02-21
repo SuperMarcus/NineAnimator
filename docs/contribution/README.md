@@ -76,7 +76,7 @@ At the center of NineAnimator's asynchronous framework is the [`NineAnimatorProm
 
 > Note: As a safety measure, be sure to maintain a reference to the promise instance for the duration of the task. Losing reference to an unresolved promise will result in the executing task being cancelled. Inside the promise, all references to the blocks or tasks will be removed as soon as the promise task returns.
 
-```Swift
+```swift
 let promise = NineAnimatorPromise.firstly {
     () -> Int in
     var result: Int
