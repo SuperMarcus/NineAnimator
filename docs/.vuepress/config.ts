@@ -6,7 +6,7 @@ import { navbar, sidebar } from "./configs";
 const isProd = process.env.NODE_ENV === "production";
 
 const config = defineUserConfig<DefaultThemeOptions>({
-  base: "/",
+  base: "/NineAnimator-website/",
 
   // prettier-ignore
   head: [
