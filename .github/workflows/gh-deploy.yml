@@ -1,18 +1,16 @@
-name: Build and deploy website
+name: Build and Deploy Website
 
 on:
   push:
     branches:
       - docs
-    paths:
-      - "docs/**"
 
 jobs:
   build-deploy:
     concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
 
       - name: Setup Node 17
@@ -21,7 +19,7 @@ jobs:
           node-version: 17
 
       # cache node_modules
-      - name: Cache dependencies
+      - name: Cache Dependencies
         uses: actions/cache@v2
         id: yarn-cache
         with:
@@ -31,17 +29,20 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install dependencies
+      - name: Install Dependencies
         if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn --frozen-lockfile
 
-      - name: Build website
+      - name: Build Website
         run: yarn docs:build
 
       - name: Add .nojekyll
         run: touch docs/.vuepress/dist/.nojekyll
+      
+      - name: Copy CNAME
+        run: cp CNAME docs/.vuepress/dist/
 
-      - name: Deploy website
+      - name: Deploy Website
         uses: JamesIves/github-pages-deploy-action@v4.2.5
         with:
           branch: gh-pages
