@@ -66,7 +66,7 @@ class NASourceHentaiWorld: BaseSource, Source, PromiseSource {
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
         recommendServers(for: anime, ofPurpose: .playback).first
     }
-    override var isEnabled: Bool { NineAnimator.default.user.allowNSFWContent }
+    override var isEnabled: Bool { NineAnimator.default.user.allowNSFWContent && NineAnimator.default.user.enableExperimentalSources }
     override func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
         anime.servers.keys.contains(NASourceHentaiWorld.HentaiWorldStream)
             ? [NASourceHentaiWorld.HentaiWorldStream] : []
