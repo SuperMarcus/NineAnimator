@@ -37,7 +37,7 @@ jobs:
         run: yarn docs:build
 
       - name: Add .nojekyll
-        run: touch ./public/.nojekyll
+        run: touch docs/.vuepress/dist/.nojekyll
 
       - name: Deploy website
         uses: JamesIves/github-pages-deploy-action@v4.2.5
