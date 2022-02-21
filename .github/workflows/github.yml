@@ -1,0 +1,49 @@
+name: Build and deploy website
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node 17
+        uses: actions/setup-node@v2
+        with:
+          node-version: 17
+
+      # cache node_modules
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        id: yarn-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn --frozen-lockfile
+
+      - name: Build website
+        run: yarn docs:build
+
+      - name: Add .nojekyll
+        run: touch ./public/.nojekyll
+
+      - name: Deploy website
+        uses: JamesIves/github-pages-deploy-action@4.2.5
+        with:
+          branch: gh-pages
+          folder: docs/.vuepress/dist
+          git-config-name: "github-actions[bot]"
+          git-config-email: "github-actions[bot]@users.noreply.github.com"
+          commit-message: ${{ github.event.head_commit.message }}
