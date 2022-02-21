@@ -12,9 +12,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
   head: [
     ["link", { rel: "icon", type:"image/png", sizes:"16x16", href:`/images/icons/favicon-16x16.png` }],
     ["link", { rel: "icon", type:"image/png", sizes:"32x32", href:`/images/icons/favicon-32x32.png` }],
-    ["link", { rel: "manifest", href:"/manifest.webmanifest"}], ["meta", {name:"application-name", content:"NineAnimator" }],
-    ["meta", { name: "apple-mobile-web-app-title", content:"NineAnimator"}], ["meta", {name:"apple-mobile-web-app-status-bar-style", content:"black" }],
-    ["link", { rel: "apple-touch-icon", href:`/images/icons/apple-touch-icon.png`}, ], ["link", {rel:"mask-icon", href:"/images/icons/safari-pinned-tab.svg", color:"#8e5af7" }],
+    ["link", { rel: "manifest", href:"/manifest.webmanifest"}],
+    ["link", { rel: "apple-touch-icon", href:`/images/icons/apple-touch-icon.png`}, ],
+    ["link", {rel:"mask-icon", href:"/images/icons/safari-pinned-tab.svg", color:"#8e5af7" }],
+    ["meta", {name:"application-name", content:"NineAnimator" }],
+    ["meta", { name: "apple-mobile-web-app-title", content:"NineAnimator"}],
+    ["meta", {name:"apple-mobile-web-app-status-bar-style", content:"black" }],
     ["meta", { name: "msapplication-TileColor", content:"#8e5af7"}],
     ["meta", { name: "theme-color", content:"#8e5af7"}],
   ],
@@ -90,6 +93,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
             theme: "dark-plus",
           }
         : false,
+    ],
+    [
+      "@vuepress/pwa",
+      {
+        skipWaiting: true,
+      },
     ],
   ],
 });
