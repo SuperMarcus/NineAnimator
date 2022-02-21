@@ -1,39 +1,125 @@
-# Introduction
+---
+title: Getting Started
+lang: en-US
+---
 
-VuePress is a markdown-centered static site generator. You can write your content (documentations, blogs, etc.) in [Markdown](https://en.wikipedia.org/wiki/Markdown), then VuePress will help you to generate a static site to host them.
+# Getting Started
 
-The purpose of creating VuePress was to support the documentation of Vue.js and its sub-projects, but now it has been helping a large amount of users to build their documentation, blogs, and other static sites.
+## Features
 
-## How It Works
+- Ads Free and no logins
+- Super-duper clean UIs + Dark Mode
+- Get notifications when new episodes come out
+- Apple's native video playback interface
+- Picture in Picture playback on iPads/iOS 14+ devices
+- Chromecast/Google Cast with lockscreen & control center support
+- Playback History & Auto Resumes
+- Support [Multiple Anime Websites](supported-sources.md)
+- Integration with HomeKit
+- Discord Rich Presence integration (macOS only)
+- Handoff & Siri Shortcuts
+- Download & play episodes offline
+- Third party anime [listing & tracking websites](third-party-lists.md) (view & edit)
+- Custom anime lists, e.g. favorites and to-watch list (currently retrieved from tracking websites; mutations are work-in-progress)
 
-A VuePress site is in fact a single-page application (SPA) powered by [Vue](https://v3.vuejs.org/) and [Vue Router](https://next.router.vuejs.org).
+### Google Cast
 
-Routes are generated according to the relative path of your markdown files. Each Markdown file is compiled into HTML with [markdown-it](https://github.com/markdown-it/markdown-it) and then processed as the template of a Vue component. This allows you to directly use Vue inside your Markdown files and is great when you need to embed dynamic content.
+NineAnimator supports playing back on both AirPlay (via Apple's native media player) and
+Chromecast/Google Cast devices. However, not all of the steaming sources are supported
+on Chromecast. Check [Video Sources](supported-sources.md) for details.
 
-During development, we start a normal dev-server, and serve the VuePress site as a normal SPA. If you’ve used Vue before, you will notice the familiar development experience when you are writing and developing with VuePress.
+To use Google Cast in NineAnimator, tap on the Google Cast icon on the navigation bar.
+A window will pop up to prompt you to select a playback device. Once the device is
+connected, click "Done" and select an episode from the episode list. The video will
+starts playing automatically on the Google Cast device.
 
-During build, we create a server-rendered version of the VuePress site and render the corresponding HTML by virtually visiting each route. This approach is inspired by [Nuxt](https://nuxtjs.org/)'s `nuxt generate` command and other projects like [Gatsby](https://www.gatsbyjs.org/).
+The playback control interface will appear once the playback starts. You may use the
+volume up/down buttons to adjust the volume.
 
-## Why Not ...?
+To disconnect from a Google Cast device, tap on the Google Cast icon on the navigation
+bar and tap the device that is already connected.
 
-### Nuxt
+### Picture in Picture Playback
 
-Nuxt is an outstanding Vue SSR framework, and it is capable of doing what VuePress does. But Nuxt is designed for building applications, while VuePress is more lightweight and focused on content-centric static sites.
+This feature is only supported on iPads, Macs, and iOS 14+ devices.
 
-### VitePress
+The Picture in Picture (PiP) icon will appear on the top left corner of the player once PiP
+is ready. You may tap on this icon to initiate PiP playback. To restore fullscreen playback,
+tap the restore button on the PiP window.
 
-VitePress is the little brother of VuePress. It's also created and maintained by our Vue.js team. It's even more lightweight and faster than VuePress. However, as a tradeoff, it's more opinionated and less configurable. For example, it does not support plugins. But VitePress is powerful enough to make your content online if you don't need advanced customizations.
+### Notifications & Subscription
 
-It might not be an appropriate comparison, but you can take VuePress and VitePress as Laravel and Lumen.
+Subscribing anime in NineAnimator is implemented with Apple's Background Application
+Refresh. NineAnimator will actively poll the available episodes and compares it with
+locally cached episodes.
 
-### Docsify / Docute
+<img src="https://github.com/SuperMarcus/NineAnimator/raw/master/Misc/Media/notification_example.jpg" width="320" />
 
-Both are great projects and also Vue-powered. Except they are both fully runtime-driven and therefore not SEO-friendly. If you don’t care for SEO and don’t want to mess with installing dependencies, these are still great choices.
+To subscribe an anime, long press on the anime in the Recents category of your Library.
 
-### Hexo
+<img src="https://github.com/SuperMarcus/NineAnimator/raw/master/Misc/Media/recents_long_press.jpeg" width="320" />
 
-Hexo has been serving the Vue 2.x docs well. The biggest problem is that its theming system is static and string-based - we want to take advantage of Vue for both the layout and the interactivity. Also, Hexo’s Markdown rendering isn’t the most flexible to configure.
+Or simply tap on the subscribe button when you are viewing any anime.
 
-### GitBook
+<img src="https://github.com/SuperMarcus/NineAnimator/raw/master/Misc/Media/subscribe_button.jpg" width="320" />
 
-We’ve been using GitBook for most of our sub project docs. The primary problem with GitBook is that its development reload performance is intolerable with a large amount of files. The default theme also has a pretty limiting navigation structure, and the theming system is, again, not Vue based. The team behind GitBook is also more focused on turning it into a commercial product rather than an open-source tool.
+### Smart Home Integration
+
+NineAnimator can be configured to run Home scenes when the playback starts and
+ends. The default behavior is to only run the scenes when the video is playing on
+external screens (e.g. Google Cast, AirPlay). However, you may change that in the
+`Settings` -> `Home` panel.
+
+- NineAnimator runs `Starts Playing` scene immediately after the video starts playing
+- The `Ends Playing` scene will be performed 15 seconds before video playback ends
+
+<img src="https://github.com/SuperMarcus/NineAnimator/raw/master/Misc/Media/homekit.jpg" width="320" />
+
+See [`Notifications`](https://github.com/SuperMarcus/NineAnimatorCommon/blob/master/Sources/NineAnimatorCommon/Utilities/Notifications.swift) and
+[`HomeController`](https://github.com/SuperMarcus/NineAnimator/blob/master/NineAnimator/Controllers/HomeController.swift) for implementation
+details.
+
+### Handoff & Siri Shortcuts
+
+NineAnimator supports Apple's handoff and Siri Shortcuts. This enables you to seamlessly
+switch between devices when browsing and viewing anime.
+
+<img src="https://github.com/SuperMarcus/NineAnimator/raw/master/Misc/Media/continuity.jpg" width="320" />
+
+When you browse an anime, depending on the device you are using, the NineAnimator icon
+will show up on the dock (iPad) or the task switcher of your other devices. You may tap
+on the icon to continue browsing or watching on the new device.
+
+To add a siri shortcut, navigate to the system settings app. Find NineAnimator under
+the root menu, tap `Siri & Search`, then tap `Shortcuts`.
+
+### Download Episodes
+
+NineAnimator can download episodes for later playback. Tap on the cloud icon in the anime browser
+to initiate download tasks. Downloaded episodes will appear in the Recents tab.
+
+There are some limitations to NineAnimator's ability to download and playback videos:
+
+- NineAnimator only supports downloading videos from a selection of [streaming sources](supported-sources.md)
+- Downloaded videos are only available to local playback. You may encounter problems playing offline episodes on AirPlay devices, and, if you are connected to a Google Cast device, NineAnimator will still attempt to fetch online resources for playback.
+
+## Device Compatibility
+
+### iOS/iPadOS Compatibility
+
+NineAnimator is compatible with devices running iOS 13.0 or later. This
+includes iPhones and iPads.
+
+The app is tested on the following devices running the latest operating
+systems:
+
+- iPhone Xs Max
+- iPhone 11
+- iPad 9.7-inch (2018)
+- iPad Pro 11-inch (2018)
+
+### macOS Compatibility
+
+Starting from version 1.2.6 build 12, NineAnimator releases will include
+a macCatalyst binary build. macCatalyst allows you to run NineAnimator
+on compatible macOS devices.

@@ -1,44 +1,44 @@
 ---
 title: Frequently Asked Questions
 lang: en-US
+sidebar: auto
 ---
 
 # Frequently Asked Questions
 
-If you have questions about the app and our plans or need help with installing the app, try checking our guides and faq entries. If you haven't found what you needed, feel free to join the Discord and ask.
+If you have questions about the app and our plans or need help with installing the app, try checking our guides and faq entries. If you haven't found what you needed, feel free to join the [Discord](https://discord.gg/dzTVzeW) and ask.
 
 ## General Information
 
 ### How do I install the app?
 
-[installation guide](/guide/installation/)
+Refer to the [installation guide](../../guide/installation/) for a more detailed explanation. For the most updated guide, please view the **#installation** channel on our Discord server.
+
+### How can I install NineAnimator on MacOS?
+
+Starting from version 1.2.6 build 12, NineAnimator releases will include a macCatalyst binary build. macCatalyst allows you to run NineAnimator on compatible macOS devices. [https://github.com/SuperMarcus/NineAnimator/releases](https://github.com/SuperMarcus/NineAnimator/releases)
+
+### How do I backup my data?
+
+In `Preferences` Settings in the Watch Next tab, scroll down and click on `Export History` and save it to files.
 
 ### Will NineAnimator ever support other languages beside English?
 
-It is a planned feature, you can help translate the app over at https://translate.9ani.app/
+It is a planned feature, you can help translate the app over at [https://translate.9ani.app/](https://translate.9ani.app/).
 
 ### Will this app be available on Android?
 
 NineAnimator is designed for iOS and iPadOS, written with Swift, which (as of now) only supports iOS. Many components of NineAnimator (such as Handoff, HomeKit, SiriKit, and video player) uses Apple's propitiatory frameworks, which makes them impossible to be ported to Android.
 
-### Disclaimer
-
-:::: warning NineAnimator is not hosting any copyrighted content.
-We are not affiliated with or responsible for any source.
-
-Source are community made.
-
-**We are not responsible if it is / has:**
-slow, down, missing chapters, bad image quality, another language or another manga.
-::::
-
 ## Troubleshooting
 
 ### The app crashes on launch
 
-## Features
+The AppStore/TestFlight version is deprecated, please update your app using other installation method.
 
-### How can I make a backup of my library?
+### Refresh Token is invalid error
+
+If you are using MyAnimeList, the refresh token has expired, reauthenticate to MAL in the app to get a new refresh token.
 
 ## Source
 
@@ -56,17 +56,13 @@ Do you like a particular website which is currently not supported by NineAnimato
 
 > **Contribute**
 >
-> Would you like to make this extension a reality? You can contribute to its development! Check our [source development](/help/contribution/extension-development/) guide to get started. If you need help or have any questions, feel free to use our Discord server `#code` channel.
+> Would you like to make this source a reality? You can contribute to its development! Check our [source development](../../contribution/source-development/) guide to get started. If you need help or have any questions, feel free to use our Discord server `#code` channel.
 
 ## Bugs and feature requests
 
 ### How to export the app logs?
 
-Go to Settings and press "**Export logs**".
-
-### How to export a source logs?
-
-Go to Settings, External Sources. Then select a source and press "**Export logs**".
+Go to Settings and scroll down to the `Data and Privacy` section. Then navigate into `Data and Privacy` and tap "**Export Runtime logs**".
 
 ### I found a bug, what should I do?
 

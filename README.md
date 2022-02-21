@@ -13,3 +13,17 @@
 ## README
 
 NineAnimator Repo hosting the website
+
+- Set the correct base in `docs/.vuepress/config.js`.
+- Change `LICENSE` if needed
+- Change `package.json` if needed
+- Check that documents and copyright information are accurate
+
+## Contribution
+
+Want to contribute? Check our Contributing Guide and issues for beginners!
+
+```bash
+yarn install # install all dependencies
+yarn docs:dev # serves VuePress' own docs with itself
+```

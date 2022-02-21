@@ -7,8 +7,24 @@ export const en: NavbarConfig = [
     text: "Guide",
     children: [
       {
-        text: "Getting started",
+        text: "Getting Started",
         link: "/guide/getting-started/",
+      },
+      {
+        text: "Installation",
+        link: "/guide/installation/",
+      },
+      {
+        text: "Supported Sources",
+        link: "/guide/supported-sources/",
+      },
+      {
+        text: "Third Party Lists",
+        link: "/guide/third-party-lists/",
+      },
+      {
+        text: "Backups",
+        link: "/guide/backups/",
       },
       // Reserved for NACore
       // {
@@ -17,15 +33,16 @@ export const en: NavbarConfig = [
       // },
     ],
   },
-  {
-    text: "Tools",
-    children: [
-      {
-        text: "Backup Viewer",
-        link: "/tools/backup-viewer/",
-      },
-    ],
-  },
+  // Disable for now
+  // {
+  //   text: "Tools",
+  //   children: [
+  //     {
+  //       text: "Backup Viewer",
+  //       link: "/tools/backup-viewer/",
+  //     },
+  //   ],
+  // },
   {
     text: "Contribution",
     children: [
@@ -36,6 +53,10 @@ export const en: NavbarConfig = [
       {
         text: "Source Development",
         link: "/contribution/source-development/",
+      },
+      {
+        text: "Credits",
+        link: "/contribution/credits/",
       },
     ],
   },
