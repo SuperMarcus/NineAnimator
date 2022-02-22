@@ -40,6 +40,7 @@ export const en: SidebarConfig = {
         "/contribution/source-development/quickstart",
         "/contribution/source-development/parsing-guide",
         "/contribution/source-development/function-definitions",
+        "/contribution/source-development/model-reference",
       ],
     },
   ],

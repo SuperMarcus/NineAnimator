@@ -25,6 +25,7 @@ Developing a source is pretty easy, you only need basic programming knowledge. S
 - Check out the [quickstart](quickstart/) guide for a place to begin.
 
 - Use on of our guide and tutorial to learn more about source development:
-  - [Source development quickstart](quickstart/)
-  - [A practical guide to Parsing](parsing-guide/)
-  - [Function definitions](function-definitions/)
+  - [Source Development Quickstart](quickstart/)
+  - [A Guide to Parse Data](parsing-guide/)
+  - [Function Definitions](function-definitions/)
+  - [Model Reference](model-reference/)

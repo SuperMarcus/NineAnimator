@@ -1,13 +1,14 @@
 ---
 title: Function Definitions
 lang: en-US
+sidebarDepth: 1
 ---
 
 # Function Definitions
 
-NineAnimatorCommon [`AnimeSource/Source.swift`](https://github.com/SuperMarcus/NineAnimatorCommon/blob/master/Sources/NineAnimatorCommon/Models/AnimeSource/Source.swift) function definitions.
+See NineAnimatorCommon [`AnimeSource/Source.swift`](https://github.com/SuperMarcus/NineAnimatorCommon/blob/master/Sources/NineAnimatorCommon/Models/AnimeSource/Source.swift) function definitions for implementation.
 
-## featured
+## `featured`
 
 ### Method signature
 
@@ -17,19 +18,18 @@ func featured(_ handler: @escaping NineAnimatorCallback<FeaturedContainer>) -> N
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type                                      | Description           |
+| --------- | ----------------------------------------- | --------------------- |
+| `handler` | NineAnimatorCallback\<FeaturedContainer\> | An optional parameter |
 
 ### Returns
 
-NineAnimatorAsyncTask
+The featured function return a `NineAnimatorAsyncTask`. In a source implementation, the function should return [`NineAnimatorPromise<FeaturedContainer>`](/contribution/source-development/function-reference#featuredcontainer).
 
 ### Example Implementation
 
 ```swift
- /// Implementation for the new featured page
-fileprivate func featured() -> NineAnimatorPromise<FeaturedContainer> {
+func featured() -> NineAnimatorPromise<FeaturedContainer> {
     self.requestManager
         .request("/", handling: .browsing)
         .responseString
@@ -72,7 +72,7 @@ fileprivate func featured() -> NineAnimatorPromise<FeaturedContainer> {
 }
 ```
 
-## anime
+## `anime`
 
 ### Method signature
 
@@ -82,15 +82,90 @@ func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type                          | Description |
+| --------- | ----------------------------- | ----------- |
+| `link`    | AnimeLink                     | NIL FOR NOW |
+| `handler` | NineAnimatorCallback\<Anime\> | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+The anime function return a `NineAnimatorAsyncTask`. In a source implementation, the function should return [`NineAnimatorPromise<Anime>`](/contribution/source-development/function-reference#anime).
 
-## episode
+### Example Implementation
+
+```swift
+func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
+    self.requestManager
+        .request(url: link.link, handling: .browsing)
+        .responseString
+        .then {
+            responseContent -> Anime in
+            let bowl = try SwiftSoup.parse(responseContent)
+            let animeTitle = try bowl.select("div.container.anime-title-as.mb-3.w-100 b").text()
+            let animeArtworkUrl = URL(
+                string: try bowl.select(".cover>img").attr("src")
+                ) ?? link.image
+            let reconstructedAnimeLink = AnimeLink(
+                title: animeTitle,
+                link: link.link,
+                image: animeArtworkUrl,
+                source: self
+            )
+
+            // Obtain the list of episodes
+            let episodes = try bowl.select("div.tab-content div div.episodes-button").reduce(into: [EpisodeLink]()) {
+                collection, container in
+                let name =  try container.select("a").text().components(separatedBy: " ")
+                let episodeName = name[1]
+                var episodeLink = try container.select("a").attr("href")
+                episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
+                if !episodeLink.isEmpty {
+                    collection.append(.init(
+                        identifier: episodeLink,
+                        name: episodeName,
+                        server: NASourceAnimeSaturn.AnimeSaturnStream,
+                        parent: reconstructedAnimeLink
+                        ))
+                }
+            }
+
+            // Information
+            let alias = try bowl.select("div.box-trasparente-alternativo.rounded").first()?.text()
+            let animeSynopsis = try bowl.select("#shown-trama").text()
+            // var additionalAttributes = [Anime.AttributeKey: Any]()
+            // Attributes
+            let additionalAttributes = try bowl.select("div.container.shadow.rounded.bg-dark-as-box.mb-3.p-3.w-100.text-white").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
+                let info = try entry.html().components(separatedBy: "<br>")
+                for elem in info {
+                    if elem.contains("<b>Voto:</b> ") {
+                        var rat = elem.components(separatedBy: "<b>Voto:</b> ")
+                        rat = rat[safe: 1]?.components(separatedBy: "/") ?? []
+                        let rating = ((rat[safe: 0] ?? "") as NSString).floatValue
+                        attributes[.rating] = rating
+                        attributes[.ratingScale] = Float(5.0)
+                    }
+                    if elem.contains("<b>Data di uscita:</b> ") {
+                        let rat = elem.components(separatedBy: "<b>Data di uscita:</b> ")
+                        let airdate = rat[safe: 1]
+                        attributes[.airDate] = airdate
+                    }
+                }
+            }
+
+            return Anime(
+                reconstructedAnimeLink,
+                alias: alias ?? animeTitle,
+                additionalAttributes: additionalAttributes,
+                description: animeSynopsis,
+                on: [ NASourceAnimeSaturn.AnimeSaturnStream: "AnimeSaturn" ],
+                episodes: [ NASourceAnimeSaturn.AnimeSaturnStream: episodes ],
+                episodesAttributes: [:]
+            )
+        }
+}
+```
+
+## `episode`
 
 ### Method signature
 
@@ -100,15 +175,39 @@ func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping Nin
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type                            | Description |
+| --------- | ------------------------------- | ----------- |
+| `link`    | EpisodeLink                     | NIL FOR NOW |
+| `with`    | Anime                           | NIL FOR NOW |
+| `handler` | NineAnimatorCallback\<Episode\> | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+The episode function return a `NineAnimatorAsyncTask`. In a source implementation, the function should return [`NineAnimatorPromise<Episode>`](/contribution/source-development/function-reference#episode).
 
-## search
+### Example Implementation
+
+```swift
+func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
+        requestManager.request(url: link.identifier)
+            .responseBowl
+            .then {
+                bowl in
+                let iFrameURL = try URL(string: bowl
+                    .select("#iframe-to-load")
+                    .attr("src"))
+                    .tryUnwrap()
+
+                return Episode(
+                    link,
+                    target: iFrameURL,
+                    parent: anime
+                )
+            }
+    }
+```
+
+## `search`
 
 ### Method signature
 
@@ -118,15 +217,15 @@ func search(keyword: String) -> ContentProvider
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type   | Description |
+| --------- | ------ | ----------- |
+| `keyword` | String | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+ContentProvider
 
-## suggestProvider
+## `suggestProvider`
 
 ### Method signature
 
@@ -136,15 +235,25 @@ func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier,
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter        | Type                   | Description |
+| ---------------- | ---------------------- | ----------- |
+| `episode`        | Episode                | NIL FOR NOW |
+| `forServer`      | Anime.ServerIdentifier | NIL FOR NOW |
+| `withServerName` | String                 | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+VideoProviderParser
 
-## link
+### Example Implementation
+
+```swift
+func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
+    VideoProviderRegistry.default.provider(for: name)
+}
+```
+
+## `link`
 
 ### Method signature
 
@@ -154,68 +263,86 @@ func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> 
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type                            | Description |
+| --------- | ------------------------------- | ----------- |
+| `url`     | URL                             | NIL FOR NOW |
+| `handler` | NineAnimatorCallback\<AnyLink\> | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+The link function return a `NineAnimatorAsyncTask`. In a source implementation, the function should return `NineAnimatorPromise<AnyLink>`.
 
-## canHandle
+## `canHandle`
 
 ### Method signature
 
 ```swift
-/// Return true if this source supports translating contents
-/// from the provided URL
 func canHandle(url: URL) -> Bool
 ```
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type | Description |
+| --------- | ---- | ----------- |
+| `url`     | URL  | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+Given a url, this function should return a `boolean` value. If the source supports translating contents, it should return true from the provided URL.
 
-## recommendServer
+## `recommendServer`
+
+Recommend a preferred server for the anime object
 
 ### Method signature
 
 ```swift
-/// Recommend a preferred server for the anime object
 func recommendServer(for anime: Anime) -> Anime.ServerIdentifier?
 ```
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter | Type  | Description |
+| --------- | ----- | ----------- |
+| `for`     | Anime | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+Anime.ServerIdentifier
 
-## recommendServers
+### Example Implementation
+
+```swift
+func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
+    recommendServers(for: anime, ofPurpose: .playback).first
+}
+```
+
+## `recommendServers`
 
 ### Method signature
 
+Recommend a list of servers (ordered from the best to the worst) for a particular purpose
+
 ```swift
-/// Recommend a list of servers (ordered from the best to the worst) for a particular purpose
 func recommendServers(for anime: Anime, ofPurpose: VideoProviderParser.Purpose) -> [Anime.ServerIdentifier]
 ```
 
 ### Parameters
 
-| Parameter | Type                                      | Description |
-| --------- | ----------------------------------------- | ----------- |
-| `handler` | NineAnimatorCallback\<FeaturedContainer\> | NIL FOR NOW |
+| Parameter   | Type                        | Description |
+| ----------- | --------------------------- | ----------- |
+| `for`       | Anime                       | NIL FOR NOW |
+| `ofPurpose` | VideoProviderParser.Purpose | NIL FOR NOW |
 
 ### Returns
 
-NineAnimatorAsyncTask
+This function should return an array of servers (ordered from the best to the worst). The return type is \[Anime.ServerIdentifier\].
+
+### Example Implementation
+
+```swift
+func recommendServers(for anime: Anime, ofPurpose purpose: VideoProviderParserParsingPurpose) -> [Anime.ServerIdentifier] {
+    ["server1", "server2", "server3", "server4"]
+}
+```
