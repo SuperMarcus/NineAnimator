@@ -11,9 +11,8 @@ NineAnimator is a typical Cocoa Touch iOS application following the Model-View-C
 
 **Model**: NineAnimator, at its core, is a collection of parsers and analyzers. The [`Modules/Sources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources) directory hosts all of the parsing logic and user-configurable.
 
-**View**: The views define the look and feel of the UI components. NineAnimator employs several mechanisms to construct and configure the UI. In general, NineAnimator's design follows that of the latest iOS system apps.
-
-**Controllers**: Controllers of NineAnimator manages the internal flow and logics.
+- **Anime Source**: Under the `Modules/Sources` folder, you'll find the [`NineAnimatorNativeSources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeSources). Code under this folder fetches data from different source anime websites, decodes it, and present the information to other components of NineAnimator. For each source website, NineAnimator creates a distinct `Source` class. `Source` encapsulates the functionalities and capabilities of the anime website.
+- **Media Parser**: Media Parsers, located under the [`NineAnimatorNativeParsers`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeParsers) folder under `Modules/Sources`, are classes that accept a URL to a streaming site and return a locally streamable URL. Media Parsers are used to support playbacks with native players (and cast). NineAnimator parsers will conform to the `VideoProviderParser` protocol.
 
 For development of sources, we are only going to touch the `Model`. More specifically, the [`NineAnimatorNativeSources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeSources) and [`NineAnimatorNativeParsers`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeParsers) directories.
 
@@ -28,5 +27,4 @@ Developing a source is pretty easy, you only need basic programming knowledge. S
 - Use on of our guide and tutorial to learn more about source development:
   - [Source development quickstart](quickstart/)
   - [A practical guide to Parsing](parsing-guide/)
-  - [Class definitions](class-definitions/)
   - [Function definitions](function-definitions/)
