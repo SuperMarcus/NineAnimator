@@ -40,11 +40,12 @@ The AppStore/TestFlight version is deprecated, please update your app using othe
 
 If you are using MyAnimeList, the refresh token has expired, reauthenticate to MAL in the app to get a new refresh token.
 
+### Google Cast feature does not work
+
+Only some sources work with Google Cast. Refer to [supported sources](../../guide/supported-sources/) for the full list.
+Eg. "VidStreaming/VidCDN", "MyCloud", "F5 Beta a.k.a. PrettyFast.to", "FastStream" will not work with Google Cast.
+
 ## Source
-
-### Adding other sources
-
-The app allow the user to install community made source repositories.
 
 ### Request a source
 

@@ -42,6 +42,7 @@ const config = defineUserConfig<DefaultThemeOptions>({
     logo: "/images/logo.png",
     repo: "SuperMarcus/NineAnimator",
     docsDir: "docs",
+    docsBranch: "docs",
 
     // theme-level locales config
     locales: {
@@ -59,7 +60,7 @@ const config = defineUserConfig<DefaultThemeOptions>({
         sidebar: sidebar.en,
 
         // page meta
-        editLinkText: "Edit this page on GitHub",
+        editLinkText: "Help us improve this page!",
       },
     },
 
@@ -68,6 +69,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
       git: isProd,
       // // use shiki plugin in production mode instead
       prismjs: !isProd,
+    },
+  },
+
+  markdown: {
+    code: {
+      lineNumbers: 4,
     },
   },
 

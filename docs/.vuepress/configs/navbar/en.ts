@@ -6,26 +6,11 @@ export const en: NavbarConfig = [
   {
     text: "Guide",
     children: [
-      {
-        text: "Getting Started",
-        link: "/guide/getting-started/",
-      },
-      {
-        text: "Installation",
-        link: "/guide/installation/",
-      },
-      {
-        text: "Supported Sources",
-        link: "/guide/supported-sources/",
-      },
-      {
-        text: "Third Party Lists",
-        link: "/guide/third-party-lists/",
-      },
-      {
-        text: "Backups",
-        link: "/guide/backups/",
-      },
+      "/guide/getting-started/",
+      "/guide/installation/",
+      "/guide/supported-sources/",
+      "/guide/third-party-lists/",
+      "/guide/backups/",
       // Reserved for NACore
       // {
       //   text: "External Source",
@@ -36,28 +21,15 @@ export const en: NavbarConfig = [
   // Disable for now
   // {
   //   text: "Tools",
-  //   children: [
-  //     {
-  //       text: "Backup Viewer",
-  //       link: "/tools/backup-viewer/",
-  //     },
-  //   ],
+  //   children: ["/tools/backup-viewer"],
   // },
   {
     text: "Contribution",
     children: [
-      {
-        text: "Contribute to NineAnimator",
-        link: "/contribution/",
-      },
-      {
-        text: "Source Development",
-        link: "/contribution/source-development/",
-      },
-      {
-        text: "Credits",
-        link: "/contribution/credits/",
-      },
+      "/contribution/",
+      "/contribution/source-development/",
+      "/contribution/runtime/",
+      "/contribution/credits/",
     ],
   },
   {
@@ -71,10 +43,6 @@ export const en: NavbarConfig = [
           {
             text: "GitHub",
             link: "https://github.com/SuperMarcus/NineAnimator",
-          },
-          {
-            text: "Website",
-            link: "https://nineanimator.marcuszhou.com/",
           },
         ],
       },

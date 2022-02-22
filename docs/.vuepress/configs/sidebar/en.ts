@@ -27,7 +27,21 @@ export const en: SidebarConfig = {
       children: [
         "/contribution/",
         "/contribution/source-development/",
+        "/contribution/runtime/",
         "/contribution/credits/",
+      ],
+    },
+  ],
+  "/contribution/source-development/": [
+    {
+      text: "Source Development",
+      collapsible: true,
+      children: [
+        "/contribution/source-development/",
+        "/contribution/source-development/quickstart",
+        "/contribution/source-development/parsing-guide",
+        "/contribution/source-development/class-definitions",
+        "/contribution/source-development/function-definitions",
       ],
     },
   ],
