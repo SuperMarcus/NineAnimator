@@ -82,10 +82,10 @@ func anime(from link: AnimeLink, _ handler: @escaping NineAnimatorCallback<Anime
 
 ### Parameters
 
-| Parameter | Type                          | Description |
-| --------- | ----------------------------- | ----------- |
-| `link`    | AnimeLink                     | NIL FOR NOW |
-| `handler` | NineAnimatorCallback\<Anime\> | NIL FOR NOW |
+| Parameter | Type                          | Description                                          |
+| --------- | ----------------------------- | ---------------------------------------------------- |
+| `link`    | AnimeLink                     | The `AnimeLink` object struct for all possible links |
+| `handler` | NineAnimatorCallback\<Anime\> | NineAnimatorCallback for Anime                       |
 
 ### Returns
 
@@ -175,11 +175,11 @@ func episode(from link: EpisodeLink, with anime: Anime, _ handler: @escaping Nin
 
 ### Parameters
 
-| Parameter | Type                            | Description |
-| --------- | ------------------------------- | ----------- |
-| `link`    | EpisodeLink                     | NIL FOR NOW |
-| `with`    | Anime                           | NIL FOR NOW |
-| `handler` | NineAnimatorCallback\<Episode\> | NIL FOR NOW |
+| Parameter | Type                            | Description                                                                   |
+| --------- | ------------------------------- | ----------------------------------------------------------------------------- |
+| `link`    | EpisodeLink                     | The `EpisodeLink` information of an episode                                   |
+| `with`    | Anime                           | The Anime object represents a collection of information about the `AnimeLink` |
+| `handler` | NineAnimatorCallback\<Episode\> | NineAnimatorCallback for Episode                                              |
 
 ### Returns
 
@@ -217,9 +217,9 @@ func search(keyword: String) -> ContentProvider
 
 ### Parameters
 
-| Parameter | Type   | Description |
-| --------- | ------ | ----------- |
-| `keyword` | String | NIL FOR NOW |
+| Parameter | Type   | Description      |
+| --------- | ------ | ---------------- |
+| `keyword` | String | The search query |
 
 ### Returns
 
@@ -235,11 +235,12 @@ func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier,
 
 ### Parameters
 
-| Parameter        | Type                   | Description |
-| ---------------- | ---------------------- | ----------- |
-| `episode`        | Episode                | NIL FOR NOW |
-| `forServer`      | Anime.ServerIdentifier | NIL FOR NOW |
-| `withServerName` | String                 | NIL FOR NOW |
+| Parameter        | Type                   | Description                                                               |
+| ---------------- | ---------------------- | ------------------------------------------------------------------------- |
+| `episode`        | Episode                | The Episode object is a struct that wraps information of an anime episode |
+|                  |
+| `forServer`      | Anime.ServerIdentifier | An array of the Anime struct ServerIdentifier                             |
+| `withServerName` | String                 | The server name selected                                                  |
 
 ### Returns
 
@@ -263,10 +264,10 @@ func link(from url: URL, _ handler: @escaping NineAnimatorCallback<AnyLink>) -> 
 
 ### Parameters
 
-| Parameter | Type                            | Description |
-| --------- | ------------------------------- | ----------- |
-| `url`     | URL                             | NIL FOR NOW |
-| `handler` | NineAnimatorCallback\<AnyLink\> | NIL FOR NOW |
+| Parameter | Type                            | Description                      |
+| --------- | ------------------------------- | -------------------------------- |
+| `url`     | URL                             | The URL of the anime site        |
+| `handler` | NineAnimatorCallback\<AnyLink\> | NineAnimatorCallback for AnyLink |
 
 ### Returns
 
@@ -284,7 +285,7 @@ func canHandle(url: URL) -> Bool
 
 | Parameter | Type | Description |
 | --------- | ---- | ----------- |
-| `url`     | URL  | NIL FOR NOW |
+| `url`     | URL  | NIL         |
 
 ### Returns
 
@@ -302,9 +303,9 @@ func recommendServer(for anime: Anime) -> Anime.ServerIdentifier?
 
 ### Parameters
 
-| Parameter | Type  | Description |
-| --------- | ----- | ----------- |
-| `for`     | Anime | NIL FOR NOW |
+| Parameter | Type  | Description                                                                   |
+| --------- | ----- | ----------------------------------------------------------------------------- |
+| `for`     | Anime | The Anime object represents a collection of information about the `AnimeLink` |
 
 ### Returns
 
@@ -330,10 +331,10 @@ func recommendServers(for anime: Anime, ofPurpose: VideoProviderParser.Purpose) 
 
 ### Parameters
 
-| Parameter   | Type                        | Description |
-| ----------- | --------------------------- | ----------- |
-| `for`       | Anime                       | NIL FOR NOW |
-| `ofPurpose` | VideoProviderParser.Purpose | NIL FOR NOW |
+| Parameter   | Type                        | Description                                                                   |
+| ----------- | --------------------------- | ----------------------------------------------------------------------------- |
+| `for`       | Anime                       | The Anime object represents a collection of information about the `AnimeLink` |
+| `ofPurpose` | VideoProviderParser.Purpose | The purpose of the selection of parser, streaming or downloading              |
 
 ### Returns
 
