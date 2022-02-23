@@ -92,7 +92,7 @@ const config = defineUserConfig<DefaultThemeOptions>({
         components: {
           BackupViewer: path.resolve(
             __dirname,
-            "./components/BackupViewer.vue"
+            "./components/BackupViewer/BackupViewer.vue"
           ),
         },
       },

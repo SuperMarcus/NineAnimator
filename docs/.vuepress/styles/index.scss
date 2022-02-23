@@ -9,8 +9,11 @@
 
 /* page-specific rules */
 .backup-viewer-page {
+  // Display full with the Backup Viewer page
   .theme-default-content {
-    // Display full with the Backup Viewer page
+    max-width: 100%;
+  }
+  .page-meta {
     max-width: 100%;
   }
 }
