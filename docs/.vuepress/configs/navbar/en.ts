@@ -18,11 +18,10 @@ export const en: NavbarConfig = [
       // },
     ],
   },
-  // Disable for now
-  // {
-  //   text: "Tools",
-  //   children: ["/tools/backup-viewer"],
-  // },
+  {
+    text: "Tools",
+    children: ["/tools/backup-viewer"],
+  },
   {
     text: "Contribution",
     children: [

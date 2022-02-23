@@ -16,6 +16,8 @@ NineAnimator is a typical Cocoa Touch iOS application following the Model-View-C
 
 For development of sources, we are only going to touch the `Model`. More specifically, the [`NineAnimatorNativeSources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeSources) and [`NineAnimatorNativeParsers`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeParsers) directories.
 
+Most operations in NineAnimator are performed asynchronously (optionally on a different thread). This also applies to [`NineAnimatorNativeSources`](https://github.com/SuperMarcus/NineAnimator/tree/master/Modules/Sources/NineAnimatorNativeSources) This ensures that any time consuming or intensive tasks won't block the main thread. Make sure to read NineAnimator's [asynchronous](/contribution/#asynchronous) framework and [styleguides](/contribution/#styleguides) before contributing.
+
 ## Where do I start?
 
 Developing a source is pretty easy, you only need basic programming knowledge. Some understanding of git may help but is not required.

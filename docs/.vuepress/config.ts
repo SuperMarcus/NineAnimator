@@ -89,7 +89,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
     [
       "@vuepress/plugin-register-components",
       {
-        componentsDir: path.resolve(__dirname, "./components"),
+        components: {
+          BackupViewer: path.resolve(
+            __dirname,
+            "./components/BackupViewer.vue"
+          ),
+        },
       },
     ],
     // only enable shiki plugin in production mode

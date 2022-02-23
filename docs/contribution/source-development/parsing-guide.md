@@ -145,26 +145,25 @@ let paragraphTextOne: String = try body.select("div[lang='pt']").text();
 
 ## A NineAnimator Parsing Example
 
-The same concept apply when parsing data in NineAnimator using SwiftSoup. The example below shows how to parse data for the `AnimeSource+Featured.swift` file.
+The same concept apply when parsing data in NineAnimator using SwiftSoup. As mentioned, most operations in NineAnimator are performed asynchronously with NineAnimator's asynchronous framework: [`NineAnimatorPromise` class](https://github.com/SuperMarcus/NineAnimatorCommon/blob/master/Sources/NineAnimatorCommon/Utilities/Asynchronous/Promise.swift). The example below shows how to parse data for the `AnimeSource+Featured.swift` file using NineAnimatorPromise.
 
 ::: tip
-NineAnimator provides useful utilities to help you parse the html `responseBowl` when making a requests with NineAnimator's `requestManager`.
+NineAnimator provides useful utilities to help you parse the html and return a `Document` object: `responseBowl` when making a requests with NineAnimator's `requestManager`. This means you do not need to do `SwiftSoup.parse(htmlString)`.
 :::
 
 <CodeGroup>
   <CodeGroupItem title="GogoAnime+Featured.swift">
 
-```swift{13,17,21,37,43}
+```swift{12,16,20,36,42}
 extension NASourceGogoAnime {
     // ...
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {
         // Browse home
         return requestManager.request("/", handling: .browsing)
-            .responseString
+            .responseBowl
             .then {
-                content -> [AnimeLink] in
+                bowl -> [AnimeLink] in
                 Log.info("Loading GogoAnime ongoing releases page")
-                let bowl = try SwiftSoup.parse(content)
                 return try bowl
                     // Selecting all the <a> element that is the direct child of elements with the "img" class
                     .select(".last_episodes>ul>li")

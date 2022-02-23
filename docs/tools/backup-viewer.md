@@ -1,6 +1,7 @@
 ---
 title: Backup Viewer
 lang: en-US
+pageClass: backup-viewer-page
 ---
 
 # NineAnimator Backup Viewer (WIP)

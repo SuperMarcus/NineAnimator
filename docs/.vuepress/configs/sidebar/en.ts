@@ -14,13 +14,12 @@ export const en: SidebarConfig = {
       ],
     },
   ],
-  // Disable for now
-  // "/tools/": [
-  //   {
-  //     text: "Tools",
-  //     children: ["/tools/backup-viewer"],
-  //   },
-  // ],
+  "/tools/": [
+    {
+      text: "Tools",
+      children: ["/tools/backup-viewer"],
+    },
+  ],
   "/contribution/": [
     {
       text: "Contribution",
