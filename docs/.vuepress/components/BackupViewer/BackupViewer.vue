@@ -78,6 +78,9 @@ async function recursiveParsePlist(object: any[] | Buffer): Promise<any[]> {
 }
 
 async function handleFileRead($event: Event) {
+  // Clear previous data if there is any
+  backupData.data = [];
+
   // Create the Uint8 Array from the uploaded file Array Buffer
   let arrayBuffer: Uint8Array = new Uint8Array(
     fileReader.result as ArrayBuffer
@@ -156,6 +159,7 @@ function editAnimeLink(data) {
 // lifecycle hooks
 onMounted(() => {
   fileReader = new window.FileReader();
+  window.Buffer = Buffer;
 });
 </script>
 
@@ -208,7 +212,7 @@ onMounted(() => {
       accept=".naconfig"
     />
     a NineAnimator
-    <code>.naConfig</code>
+    <code>.naconfig</code>
     backup
   </h2>
 

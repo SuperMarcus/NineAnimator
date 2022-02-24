@@ -1,11 +1,12 @@
-import { defineUserConfig } from "@vuepress/cli";
+import type { ViteBundlerOptions } from "@vuepress/bundler-vite";
 import type { DefaultThemeOptions } from "@vuepress/theme-default";
+import { defineUserConfig } from "@vuepress/cli";
 import { path } from "@vuepress/utils";
 import { navbar, sidebar } from "./configs";
 
 const isProd = process.env.NODE_ENV === "production";
 
-const config = defineUserConfig<DefaultThemeOptions>({
+const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
   base: "/",
 
   // prettier-ignore
@@ -35,8 +36,16 @@ const config = defineUserConfig<DefaultThemeOptions>({
   bundler:
     // specify bundler via environment variable
     process.env.DOCS_BUNDLER ??
-    // use vite by default
-    "@vuepress/vite",
+    // use bundler-vite by default
+    "@vuepress/bundler-vite",
+
+  bundlerConfig: {
+    viteOptions: {
+      define: {
+        "process.env.NODE_DEBUG": false,
+      },
+    },
+  },
 
   themeConfig: {
     logo: "/images/logo.png",
