@@ -440,3 +440,10 @@ html.dark .card__description {
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
+
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}

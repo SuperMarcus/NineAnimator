@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// import Modal from "./Modal.vue";
 import { Buffer } from "buffer";
 import { ref, reactive, computed, onMounted } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 import bplistParser from "bplist-parser";
 // import bplistCreator from "bplist-creator";
 
@@ -36,7 +36,7 @@ var fileReader;
 const tabs = ["history", "subscriptions"];
 const trackSerialized = new Set();
 const currentTab = ref("history");
-const file = ref<File | Blob | null>();
+const file = ref<File | null>();
 const backupData: { data: NineAnimatorBackup[] } = reactive({
   data: [],
 });
@@ -52,10 +52,6 @@ const resultData = computed(() => {
     ? searchState.filteredData
     : backupData.data[0][currentTab.value];
 });
-
-// const toggleModal = () => {
-//   modalActive.value = !modalActive.value;
-// };
 
 // Performance heavy function 😢, should only be used if needed, eg. exporting to JSON
 async function recursiveParsePlist(object: any[] | Buffer): Promise<any[]> {
@@ -92,12 +88,17 @@ async function handleFileRead($event: Event) {
   try {
     let data: NineAnimatorBackup[] = await bplistParser.parseFile(buffer);
     if (data) {
-      console.info("[DEBUG]: ", new Date(), data);
+      // console.info("[DEBUG]: ", new Date(), data);
 
       backupData.data = data;
     }
   } catch (error) {
     console.error("Failed to parse data, something went wrong.");
+    notify({
+      type: "error",
+      title: "🛑 Error: Backup Viewer",
+      text: "Failed to parse data, something went wrong.",
+    });
   }
 }
 
@@ -110,7 +111,15 @@ function onFileChanged($event: Event) {
   if (target && target.files) {
     file.value = target.files[0];
 
-    fileReader.onloadend = handleFileRead;
+    if (file.value.name.toLowerCase().endsWith(".naconfig")) {
+      fileReader.onloadend = handleFileRead;
+    } else {
+      notify({
+        type: "warn",
+        title: "⚠ Warning: Backup Viewer",
+        text: "Invalid file format",
+      });
+    }
     if (fileReader && file.value instanceof Blob) {
       fileReader.readAsArrayBuffer(file.value);
     }
@@ -133,6 +142,14 @@ function handleSearchInput($event: Event) {
   searchState.filteredData = filteredData;
 }
 
+function editAnimeLink(data) {
+  notify({
+    type: "warn",
+    title: "⚠ Warning: Backup Viewer",
+    text: "Not yet implemented",
+  });
+}
+
 // lifecycle hooks
 onMounted(() => {
   fileReader = new window.FileReader();
@@ -140,6 +157,13 @@ onMounted(() => {
 </script>
 
 <template>
+  <notifications
+    position="top right"
+    :style="{
+      marginTop: '57.5938px',
+    }"
+  />
+
   <!-- TODO: Export, Clicking into an anime pops up a modal for you to edit  -->
   <h2>
     <svg id="svg__gooey" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -246,6 +270,7 @@ onMounted(() => {
                 'https://9ani.app/static/resources/artwork_not_available.jpg',
             }"
           />
+
           <div class="card__overlay">
             <div class="card__header">
               <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
@@ -260,6 +285,28 @@ onMounted(() => {
                 <h3 class="card__title">{{ value.title }}</h3>
                 <span class="card__status">{{ value.source }}</span>
               </div>
+              <span
+                id="editButton"
+                class="top-right"
+                @click="editAnimeLink(value)"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#000000"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path
+                    d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4"
+                  />
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                </svg>
+              </span>
             </div>
             <a
               class="card__description"
