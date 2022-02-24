@@ -2,11 +2,12 @@
 import { Buffer } from "buffer";
 import { ref, reactive, computed, onMounted } from "vue";
 import { notify } from "@kyvg/vue3-notification";
+import cloneDeep from "lodash/cloneDeep";
 import bplistParser from "bplist-parser";
-// import bplistCreator from "bplist-creator";
+import bplistCreator from "bplist-creator";
 
 interface NineAnimatorBackup {
-  exportedDate: string;
+  exportedDate: string | Date;
   progresses: { [key: string]: number };
   trackingData: TrackingDatum[] | Uint8Array;
   subscriptions: AnimeLink[];
@@ -148,6 +149,65 @@ function handleSearchInput($event: Event) {
   searchState.filteredData = filteredData;
 }
 
+async function handleExport(type: string) {
+  if (backupData.data.length) {
+    var userBackupBuf;
+
+    let exportUserBackup = cloneDeep(backupData.data);
+    exportUserBackup[0]["exportedDate"] = new Date();
+
+    if (type === "bplist") {
+      // Creating the Plist buffer
+      userBackupBuf = await bplistCreator(exportUserBackup);
+    } else if (type === "JSON") {
+      userBackupBuf = await recursiveParsePlist(exportUserBackup);
+    }
+    // Creating the file
+    downloadBlob(
+      type === "bplist" ? userBackupBuf : JSON.stringify(userBackupBuf),
+      `${String(exportUserBackup[0]["exportedDate"])}.${
+        type === "bplist" ? "naconfig" : "json"
+      }`,
+      type === "bplist" ? "application/octet-stream" : "application/json"
+    );
+
+    notify({
+      type: "success",
+      title: "⚠ Success: Backup Viewer",
+      text: `Exported backup as ${type === "bplist" ? "naconfig" : "JSON"}`,
+    });
+  } else {
+    notify({
+      type: "warn",
+      title: "⚠ Warning: Backup Viewer",
+      text: "Upload a file first",
+    });
+  }
+}
+
+function downloadURL(data, fileName) {
+  const a = document.createElement("a");
+  a.href = data;
+  a.download = fileName;
+  document.body.appendChild(a);
+  a.style.display = "none";
+  a.click();
+  a.remove();
+}
+
+function downloadBlob(data, fileName, mimeType) {
+  // create a Blob from our buffer
+  const blob = new Blob([data], {
+    type: mimeType,
+  });
+
+  const url = window.URL.createObjectURL(blob);
+
+  downloadURL(url, fileName);
+
+  setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+}
+
 function editAnimeLink(data) {
   notify({
     type: "warn",
@@ -193,7 +253,7 @@ onMounted(() => {
     </svg>
 
     <span id="svg-wrapper">
-      <button id="gooey__button" @click="onChooseFile" filter="url(#gooey)">
+      <button class="gooey__button" @click="onChooseFile" filter="url(#gooey)">
         Upload
         <span class="bubbles">
           <span class="bubble"></span>
@@ -214,6 +274,14 @@ onMounted(() => {
     a NineAnimator
     <code>.naconfig</code>
     backup
+
+    <span id="export-button">
+      <button id="export-json-button" @click="handleExport('JSON')">
+        Export JSON
+      </button>
+
+      <button @click="handleExport('bplist')">naconfig</button>
+    </span>
   </h2>
 
   <div v-if="backupData.data.length">

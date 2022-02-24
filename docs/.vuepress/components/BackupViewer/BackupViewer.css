@@ -12,7 +12,8 @@ svg#svg__gooey {
   left: -4000px;
 }
 
-#gooey__button {
+.gooey__button {
+  color: #fff;
   border-radius: 10px;
   cursor: pointer;
   padding: 0.6rem;
@@ -27,25 +28,25 @@ svg#svg__gooey {
   filter: url("#gooey");
 }
 
-#gooey__button:hover {
+.gooey__button:hover {
   background-color: #673bcc;
 }
 
-#gooey__button:hover .bubbles .bubble {
+.gooey__button:hover .bubbles .bubble {
   background-color: #673bcc;
 }
 
-#gooey__button:focus {
+.gooey__button:focus {
   outline: none;
 }
-#gooey__button .bubbles {
+.gooey__button .bubbles {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 }
-#gooey__button .bubbles .bubble {
+.gooey__button .bubbles .bubble {
   background-color: #5a34b0;
   border-radius: 100%;
   position: absolute;
@@ -54,7 +55,7 @@ svg#svg__gooey {
   display: block;
   z-index: -1;
 }
-#gooey__button .bubbles .bubble:nth-child(1) {
+.gooey__button .bubbles .bubble:nth-child(1) {
   left: 31px;
   width: 25px;
   height: 25px;
@@ -63,7 +64,7 @@ svg#svg__gooey {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
-#gooey__button .bubbles .bubble:nth-child(2) {
+.gooey__button .bubbles .bubble:nth-child(2) {
   left: 22px;
   width: 25px;
   height: 25px;
@@ -72,7 +73,7 @@ svg#svg__gooey {
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
 }
-#gooey__button .bubbles .bubble:nth-child(3) {
+.gooey__button .bubbles .bubble:nth-child(3) {
   left: 42px;
   width: 25px;
   height: 25px;
@@ -82,7 +83,7 @@ svg#svg__gooey {
   animation-delay: 1s;
 }
 
-#gooey__button .bubbles .bubble:nth-child(4) {
+.gooey__button .bubbles .bubble:nth-child(4) {
   left: 19px;
   width: 25px;
   height: 25px;
@@ -92,7 +93,7 @@ svg#svg__gooey {
   animation-delay: 1.6s;
 }
 
-#gooey__button .bubbles .bubble:nth-child(5) {
+.gooey__button .bubbles .bubble:nth-child(5) {
   left: 11px;
   width: 25px;
   height: 25px;
@@ -446,4 +447,29 @@ html.dark .card__description {
   top: 8px;
   right: 8px;
   cursor: pointer;
+}
+
+#export-button {
+  float: right;
+}
+#export-button button {
+  cursor: pointer;
+  float: left;
+  position: relative;
+  color: #fff;
+  padding: 0.6rem;
+  border: none;
+  background-color: #5a34b0;
+}
+#export-button button:hover {
+  background-color: #673bcc;
+}
+#export-button button:nth-child(1) {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: solid 1px #fff;
+}
+#export-button button:nth-child(2) {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
