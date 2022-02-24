@@ -5,13 +5,42 @@ import { ref, reactive, computed, onMounted } from "vue";
 import bplistParser from "bplist-parser";
 // import bplistCreator from "bplist-creator";
 
+interface NineAnimatorBackup {
+  exportedDate: string;
+  progresses: { [key: string]: number };
+  trackingData: TrackingDatum[] | Uint8Array;
+  subscriptions: AnimeLink[];
+  history: AnimeLink[];
+}
+
+interface AnimeLink {
+  title: string;
+  source: string;
+  image: Link;
+  link: Link;
+}
+
+interface TrackingDatum {
+  title?: string;
+  source?: string;
+  image?: Link;
+  link?: Link;
+  data?: number[];
+}
+
+interface Link {
+  relative: string;
+}
+
 var fileReader;
-// const modalActive = ref(false);
+const tabs = ["history", "subscriptions"];
+const trackSerialized = new Set();
+const currentTab = ref("history");
 const file = ref<File | Blob | null>();
-const backupData: { data: [any?] } = reactive({
+const backupData: { data: NineAnimatorBackup[] } = reactive({
   data: [],
 });
-const searchState = reactive({
+const searchState: { filteredData: AnimeLink[]; query: string } = reactive({
   filteredData: [],
   query: "",
 });
@@ -21,12 +50,36 @@ const hasSearchResults = computed(() => {
 const resultData = computed(() => {
   return hasSearchResults.value
     ? searchState.filteredData
-    : backupData.data[0]?.history; // hard coding history for now
+    : backupData.data[0][currentTab.value];
 });
 
 // const toggleModal = () => {
 //   modalActive.value = !modalActive.value;
 // };
+
+// Performance heavy function 😢, should only be used if needed, eg. exporting to JSON
+async function recursiveParsePlist(object: any[] | Buffer): Promise<any[]> {
+  if (Buffer.isBuffer(object)) {
+    object = await bplistParser.parseFile(object);
+  }
+
+  await Object.keys(object).forEach(async (key) => {
+    if (typeof object[key] === "object") {
+      await recursiveParsePlist(object[key]);
+    }
+    if (object[key] instanceof Uint8Array) {
+      // We know that trackingData has a nested serialized trackingContext and non-serialized AnimeLink
+      // Hence, we assume that all nested serialized data are from trackingData, trackingContext
+      // Used to keep track which data are serialized so that we can serialize them when exporting
+      trackSerialized.add(key);
+
+      object[key] = await bplistParser.parseFile(object[key]);
+      await recursiveParsePlist(object[key]);
+    }
+  });
+
+  return object;
+}
 
 async function handleFileRead($event: Event) {
   // Create the Uint8 Array from the uploaded file Array Buffer
@@ -37,7 +90,7 @@ async function handleFileRead($event: Event) {
   let buffer: Buffer = Buffer.from(arrayBuffer);
 
   try {
-    let data = await bplistParser.parseFile(buffer);
+    let data: NineAnimatorBackup[] = await bplistParser.parseFile(buffer);
     if (data) {
       console.info("[DEBUG]: ", new Date(), data);
 
@@ -68,8 +121,7 @@ function handleSearchInput($event: Event) {
   const target = $event.target as HTMLInputElement;
   const query = target.value.trim();
 
-  // hard coding history for now
-  const filteredData = backupData.data[0]?.history.filter((data) => {
+  const filteredData = backupData.data[0][currentTab.value].filter((data) => {
     const { title, source } = data;
     return (
       title.toLowerCase().includes(query.toLowerCase()) ||
@@ -88,9 +140,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- TODO: Search Bar | Upload | Export -->
-  <!-- The Library UI, with tabs to change lists -->
-  <!-- Clicking into an anime pops up a modal for you to edit -->
+  <!-- TODO: Export, Clicking into an anime pops up a modal for you to edit  -->
   <h2>
     <svg id="svg__gooey" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
@@ -134,74 +184,96 @@ onMounted(() => {
     <code>.naConfig</code>
     backup
   </h2>
-  <!-- Hardcoding history for now -->
-  <div v-if="backupData.data.length > 0 && backupData.data[0]?.history">
-    <h2>
-      History | Exported on
-      {{ backupData.data[0]?.exportedDate?.toDateString() }}
-    </h2>
-    <form
-      class="search-box"
-      role="search"
-      :style="{
-        display: 'block',
-        marginRight: '19.2px',
-      }"
-    >
-      <input
-        type="text"
-        placeholder="Type here"
-        aria-label="Search"
-        :style="{ width: '100%' }"
-        @input="handleSearchInput"
-      />
-    </form>
-    <div class="cards">
+
+  <div v-if="backupData.data.length">
+    <div class="tabs">
       <div
-        class="card"
-        v-for="(value, index) in resultData"
-        :key="`${value.title}-${value.source}-${index}`"
+        v-for="(tab, index) in tabs"
+        class="tab"
+        :key="tab"
+        v-on:click="(currentTab = tab) && (searchState.query = '')"
       >
-        <img
-          v-if="value.image?.relative !== undefined"
-          class="card__image"
-          alt=""
-          v-lazy="{
-            src: value.image?.relative,
-            loading:
-              'https://c.tenor.com/RgF5keyruhcAAAAM/alex-geerken-geerken.gif',
-            error:
-              'https://9ani.app/static/resources/artwork_not_available.jpg',
-          }"
+        <label :for="`tabs2-${index}`">
+          {{ tab && tab.charAt(0).toUpperCase() + tab.slice(1) }}</label
+        >
+        <input
+          :id="`tabs2-${index}`"
+          name="tabs-two"
+          type="radio"
+          :checked="index == 0 ? 'checked' : null"
         />
-        <div class="card__overlay">
-          <div class="card__header">
-            <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
-              <path>
-                <animate
-                  attributeName="d"
-                  values="M 40 80 c 22 0 40 -22 40 -40 v 40 Z"
-                />
-              </path>
-            </svg>
-            <div class="card__header-text">
-              <h3 class="card__title">{{ value.title }}</h3>
-              <span class="card__status">{{ value.source }}</span>
+      </div>
+    </div>
+
+    <div id="content-container">
+      <h2>
+        Exported on
+        {{ backupData.data[0]?.exportedDate?.toDateString() }}
+      </h2>
+      <form
+        class="search-box"
+        role="search"
+        :style="{
+          display: 'block',
+          marginRight: '19.2px',
+        }"
+      >
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Search..."
+          aria-label="Search"
+          :style="{ width: '100%' }"
+          @input="handleSearchInput"
+        />
+      </form>
+      <div class="cards">
+        <h2 v-if="!resultData.length">No data</h2>
+        <div
+          class="card"
+          v-for="(value, index) in resultData"
+          :key="`${value.title}-${value.source}-${index}`"
+        >
+          <img
+            v-if="value.image?.relative !== undefined"
+            class="card__image"
+            alt=""
+            v-lazy="{
+              src: value.image?.relative,
+              loading:
+                'https://c.tenor.com/RgF5keyruhcAAAAM/alex-geerken-geerken.gif',
+              error:
+                'https://9ani.app/static/resources/artwork_not_available.jpg',
+            }"
+          />
+          <div class="card__overlay">
+            <div class="card__header">
+              <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
+                <path>
+                  <animate
+                    attributeName="d"
+                    values="M 40 80 c 22 0 40 -22 40 -40 v 40 Z"
+                  />
+                </path>
+              </svg>
+              <div class="card__header-text">
+                <h3 class="card__title">{{ value.title }}</h3>
+                <span class="card__status">{{ value.source }}</span>
+              </div>
             </div>
+            <a
+              class="card__description"
+              :href="value.link?.relative"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {{ value.link?.relative }}
+            </a>
           </div>
-          <a
-            class="card__description"
-            :href="value.link?.relative"
-            target="_blank"
-            rel="noreferrer noopener"
-          >
-            {{ value.link?.relative }}
-          </a>
         </div>
       </div>
     </div>
   </div>
-  <div v-else></div>
 </template>
 
 <style scoped>

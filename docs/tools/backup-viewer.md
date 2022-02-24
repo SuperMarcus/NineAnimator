@@ -18,10 +18,12 @@ entries:
 - `trackingData`: A dictionary keyed by `AnimeLink` for the serialized `TrackingContext`.
 - `subscriptions`: A list of serialized `AnimeLink` for your subscribed anime.
 
+Note: Only `history` and `subscriptions` will be available for viewing.
+
 To view your library:
 
 1. [Export a backup](/guide/backups.html#creating-backups) of your library
-2. [Restore](/guide/backups.html#restoring-backups) the edited version of your library (optional)
+2. ~~[Restore](/guide/backups.html#restoring-backups) the edited version of your library (optional)~~ (Unavailable for now)
 
 <aside>Please note that the viewer can take some time on <b>large</b> libraries.</aside>
 <br/>

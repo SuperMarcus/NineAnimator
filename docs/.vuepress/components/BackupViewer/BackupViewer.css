@@ -272,7 +272,6 @@ svg#svg__gooey {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   padding: 0;
-  list-style-type: none;
 }
 
 .card {
@@ -387,4 +386,57 @@ html.dark .card__title {
 html.dark .card__tagline html.dark .card__status,
 html.dark .card__description {
   color: #585858;
+}
+
+.tabs {
+  display: block;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0;
+  overflow: hidden;
+}
+.tabs [class^="tab"] label,
+.tabs [class*=" tab"] label {
+  cursor: pointer;
+  display: block;
+  line-height: 1em;
+  padding: 1.5rem 0;
+  text-align: center;
+  font-size: 1.3rem;
+}
+.tabs [class^="tab"] [type="radio"],
+.tabs [class*=" tab"] [type="radio"] {
+  border-bottom: 1px solid rgba(239, 237, 239, 0.5);
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: block;
+  width: 100%;
+}
+.tabs [class^="tab"] [type="radio"]:hover,
+.tabs [class^="tab"] [type="radio"]:focus,
+.tabs [class*=" tab"] [type="radio"]:hover,
+.tabs [class*=" tab"] [type="radio"]:focus {
+  border-bottom: 1px solid var(--c-text-accent);
+}
+.tabs [class^="tab"] [type="radio"]:checked,
+.tabs [class*=" tab"] [type="radio"]:checked {
+  border-bottom: 2px solid var(--c-text-accent);
+}
+
+.tabs .tab {
+  width: 50%;
+}
+
+.tabs + div#content-container {
+  /* opacity: 0; */
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
