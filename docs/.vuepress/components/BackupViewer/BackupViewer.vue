@@ -111,17 +111,20 @@ function onFileChanged($event: Event) {
   if (target && target.files) {
     file.value = target.files[0];
 
-    if (file.value.name.toLowerCase().endsWith(".naconfig")) {
-      fileReader.onloadend = handleFileRead;
+    fileReader.onloadend = handleFileRead;
+
+    if (
+      fileReader &&
+      file.value instanceof Blob &&
+      file.value.name.toLowerCase().endsWith(".naconfig")
+    ) {
+      fileReader.readAsArrayBuffer(file.value);
     } else {
       notify({
         type: "warn",
         title: "⚠ Warning: Backup Viewer",
         text: "Invalid file format",
       });
-    }
-    if (fileReader && file.value instanceof Blob) {
-      fileReader.readAsArrayBuffer(file.value);
     }
   }
 }
