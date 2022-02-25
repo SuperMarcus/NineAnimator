@@ -4,7 +4,7 @@ lang: en-US
 pageClass: backup-viewer-page
 ---
 
-# NineAnimator Backup Viewer (WIP)
+# NineAnimator Backup Viewer
 
 ::: tip How do I use the Backup Viewer?
 
@@ -33,10 +33,3 @@ To view your library:
 <br/>
 
 <BackupViewer/>
-
-<style scoped>
-.custom-block.aside
-{
-    text-align: left;
-}
-</style>
