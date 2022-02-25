@@ -10,20 +10,30 @@
 	</p>
 </div>
 
-## README
+## Contributing
 
-NineAnimator Repo hosting the website
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-- Set the correct base in `docs/.vuepress/config.js`.
-- Change `LICENSE` if needed
-- Change `package.json` if needed
-- Check that documents and copyright information are accurate
+- [Contributing guide](https://nineanimator.marcuszhou.com/contribution/)
+- [Discord server](https://discord.gg/dzTVzeW)
 
-## Contribution
+### Prerequisites
 
-Want to contribute? Check our Contributing Guide and issues for beginners!
+You should update node to version 17 or above to improve the functionality or be obligatory for security purposes. For the project, it will be using `yarn` as the package manager.
 
 ```bash
-yarn install # install all dependencies
-yarn docs:dev # serves VuePress' own docs with itself
+npm install -g yarn@latest
 ```
+
+### Quick start
+
+To get a local development copy up and running follow these simple example steps.
+
+```bash
+yarn install
+yarn docs:dev
+```
+
+## LICENSE
+
+The website is distributed under the MIT License. See [`LICENSE`](./LICENSE) for more information.

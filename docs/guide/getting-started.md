@@ -5,6 +5,8 @@ lang: en-US
 
 # Getting Started
 
+A simple yet elegant way of waching anime on your favorite anime websites. NineAnimator is a free and open source anime watching app for iOS and macOS. GPLv3 Licensed.
+
 ## Features
 
 - Ads Free and no logins
@@ -41,7 +43,9 @@ bar and tap the device that is already connected.
 
 ### Picture in Picture Playback
 
+::: warning
 This feature is only supported on iPads, Macs, and iOS 14+ devices.
+:::
 
 The Picture in Picture (PiP) icon will appear on the top left corner of the player once PiP
 is ready. You may tap on this icon to initiate PiP playback. To restore fullscreen playback,

@@ -1,11 +1,12 @@
-import { defineUserConfig } from "@vuepress/cli";
+import type { ViteBundlerOptions } from "@vuepress/bundler-vite";
 import type { DefaultThemeOptions } from "@vuepress/theme-default";
+import { defineUserConfig } from "@vuepress/cli";
 import { path } from "@vuepress/utils";
 import { navbar, sidebar } from "./configs";
 
 const isProd = process.env.NODE_ENV === "production";
 
-const config = defineUserConfig<DefaultThemeOptions>({
+const config = defineUserConfig<DefaultThemeOptions, ViteBundlerOptions>({
   base: "/",
 
   // prettier-ignore
@@ -35,13 +36,22 @@ const config = defineUserConfig<DefaultThemeOptions>({
   bundler:
     // specify bundler via environment variable
     process.env.DOCS_BUNDLER ??
-    // use vite by default
-    "@vuepress/vite",
+    // use bundler-vite by default
+    "@vuepress/bundler-vite",
+
+  bundlerConfig: {
+    viteOptions: {
+      define: {
+        "process.env.NODE_DEBUG": false,
+      },
+    },
+  },
 
   themeConfig: {
     logo: "/images/logo.png",
     repo: "SuperMarcus/NineAnimator",
     docsDir: "docs",
+    docsBranch: "docs",
 
     // theme-level locales config
     locales: {
@@ -59,7 +69,7 @@ const config = defineUserConfig<DefaultThemeOptions>({
         sidebar: sidebar.en,
 
         // page meta
-        editLinkText: "Edit this page on GitHub",
+        editLinkText: "Help us improve this page!",
       },
     },
 
@@ -68,6 +78,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
       git: isProd,
       // // use shiki plugin in production mode instead
       prismjs: !isProd,
+    },
+  },
+
+  markdown: {
+    code: {
+      lineNumbers: 4,
     },
   },
 
@@ -82,7 +98,12 @@ const config = defineUserConfig<DefaultThemeOptions>({
     [
       "@vuepress/plugin-register-components",
       {
-        componentsDir: path.resolve(__dirname, "./components"),
+        components: {
+          BackupViewer: path.resolve(
+            __dirname,
+            "./components/BackupViewer/BackupViewer.vue"
+          ),
+        },
       },
     ],
     // only enable shiki plugin in production mode

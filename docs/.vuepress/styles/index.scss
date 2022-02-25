@@ -6,3 +6,14 @@
   // extra
   scroll-behavior: smooth;
 }
+
+/* page-specific rules */
+.backup-viewer-page {
+  // Display full with the Backup Viewer page
+  .theme-default-content {
+    max-width: 100%;
+  }
+  .page-meta {
+    max-width: 100%;
+  }
+}
