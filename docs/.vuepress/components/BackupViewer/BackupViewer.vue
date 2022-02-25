@@ -5,6 +5,7 @@ import { notify } from "@kyvg/vue3-notification";
 import bplistParser from "bplist-parser";
 import { NineAnimatorBackup, AnimeLink } from "./NineAnimatorBackup";
 import ExportButton from "./ExportButton.vue";
+import Modal from "./Modal.vue";
 
 var fileReader;
 const tabs = ["history", "subscriptions"];
@@ -17,6 +18,11 @@ const searchState: { filteredData: AnimeLink[]; query: string } = reactive({
   filteredData: [],
   query: "",
 });
+const modalState: { currentData: AnimeLink | Object; isModalVisible: boolean } =
+  reactive({
+    currentData: {},
+    isModalVisible: false,
+  });
 const hasSearchResults = computed(() => {
   return searchState.filteredData && searchState.query !== "";
 });
@@ -99,11 +105,8 @@ function handleSearchInput($event: Event) {
 }
 
 function editAnimeLink(data) {
-  notify({
-    type: "warn",
-    title: "⚠ Warning: Backup Viewer",
-    text: "Not yet implemented",
-  });
+  modalState.currentData = data;
+  modalState.isModalVisible = true;
 }
 
 // lifecycle hooks
@@ -122,6 +125,12 @@ onMounted(() => {
   />
 
   <!-- TODO: Clicking into an anime pops up a modal for you to edit  -->
+  <Modal
+    v-if="modalState.isModalVisible"
+    @close="modalState.isModalVisible = false"
+    v-model:currentData="modalState.currentData"
+  />
+
   <h2>
     <svg id="svg__gooey" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>

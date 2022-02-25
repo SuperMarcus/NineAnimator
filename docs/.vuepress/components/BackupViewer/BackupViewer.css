@@ -278,10 +278,11 @@ svg#svg__gooey {
 .card {
   position: relative;
   display: block;
-  height: 100%;
   border-radius: calc(40 * 1px);
   overflow: hidden;
   text-decoration: none;
+  max-height: 320px;
+  /* max-width: 218px; */
 }
 
 .card__image {
@@ -447,4 +448,12 @@ html.dark .card__description {
   top: 8px;
   right: 8px;
   cursor: pointer;
+}
+
+#editButton > svg {
+  stroke: #fff;
+}
+
+html.dark #editButton > svg {
+  stroke: #000000;
 }
