@@ -238,7 +238,6 @@ func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier,
 | Parameter        | Type                   | Description                                                               |
 | ---------------- | ---------------------- | ------------------------------------------------------------------------- |
 | `episode`        | Episode                | The Episode object is a struct that wraps information of an anime episode |
-|                  |
 | `forServer`      | Anime.ServerIdentifier | An array of the Anime struct ServerIdentifier                             |
 | `withServerName` | String                 | The server name selected                                                  |
 

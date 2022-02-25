@@ -1,6 +1,7 @@
 ---
 title: Backup Viewer
 lang: en-US
+sidebar: false
 pageClass: backup-viewer-page
 ---
 
@@ -8,7 +9,7 @@ pageClass: backup-viewer-page
 
 ::: tip How do I use the Backup Viewer?
 
-NineAnimator uses a properity format `.naconfig` for backing up of your libraries.
+NineAnimator uses a propriety format `.naconfig` for backing up of your libraries.
 The `.naconfig` is essentially a binary, property list encoded dictionary with three
 entries:
 
