@@ -397,7 +397,7 @@ html.dark .card__description {
   -webkit-flex-wrap: wrap;
   -moz-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin: 0;
+  margin-top: 2rem;
   overflow: hidden;
 }
 .tabs [class^="tab"] label,
@@ -447,29 +447,4 @@ html.dark .card__description {
   top: 8px;
   right: 8px;
   cursor: pointer;
-}
-
-#export-button {
-  float: right;
-}
-#export-button button {
-  cursor: pointer;
-  float: left;
-  position: relative;
-  color: #fff;
-  padding: 0.6rem;
-  border: none;
-  background-color: #5a34b0;
-}
-#export-button button:hover {
-  background-color: #673bcc;
-}
-#export-button button:nth-child(1) {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-right: solid 1px #fff;
-}
-#export-button button:nth-child(2) {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
 }

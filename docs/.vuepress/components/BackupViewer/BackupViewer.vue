@@ -2,40 +2,12 @@
 import { Buffer } from "buffer";
 import { ref, reactive, computed, onMounted } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import cloneDeep from "lodash/cloneDeep";
 import bplistParser from "bplist-parser";
-import bplistCreator from "bplist-creator";
-
-interface NineAnimatorBackup {
-  exportedDate: string | Date;
-  progresses: { [key: string]: number };
-  trackingData: TrackingDatum[] | Uint8Array;
-  subscriptions: AnimeLink[];
-  history: AnimeLink[];
-}
-
-interface AnimeLink {
-  title: string;
-  source: string;
-  image: Link;
-  link: Link;
-}
-
-interface TrackingDatum {
-  title?: string;
-  source?: string;
-  image?: Link;
-  link?: Link;
-  data?: number[];
-}
-
-interface Link {
-  relative: string;
-}
+import { NineAnimatorBackup, AnimeLink } from "./NineAnimatorBackup";
+import ExportButton from "./ExportButton.vue";
 
 var fileReader;
 const tabs = ["history", "subscriptions"];
-const trackSerialized = new Set();
 const currentTab = ref("history");
 const file = ref<File | null>();
 const backupData: { data: NineAnimatorBackup[] } = reactive({
@@ -54,33 +26,10 @@ const resultData = computed(() => {
     : backupData.data[0][currentTab.value];
 });
 
-// Performance heavy function 😢, should only be used if needed, eg. exporting to JSON
-async function recursiveParsePlist(object: any[] | Buffer): Promise<any[]> {
-  if (Buffer.isBuffer(object)) {
-    object = await bplistParser.parseFile(object);
-  }
-
-  await Object.keys(object).forEach(async (key) => {
-    if (typeof object[key] === "object") {
-      await recursiveParsePlist(object[key]);
-    }
-    if (object[key] instanceof Uint8Array) {
-      // We know that trackingData has a nested serialized trackingContext and non-serialized AnimeLink
-      // Hence, we assume that all nested serialized data are from trackingData, trackingContext
-      // Used to keep track which data are serialized so that we can serialize them when exporting
-      trackSerialized.add(key);
-
-      object[key] = await bplistParser.parseFile(object[key]);
-      await recursiveParsePlist(object[key]);
-    }
-  });
-
-  return object;
-}
-
 async function handleFileRead($event: Event) {
   // Clear previous data if there is any
   backupData.data = [];
+  currentTab.value = "history";
 
   // Create the Uint8 Array from the uploaded file Array Buffer
   let arrayBuffer: Uint8Array = new Uint8Array(
@@ -149,65 +98,6 @@ function handleSearchInput($event: Event) {
   searchState.filteredData = filteredData;
 }
 
-async function handleExport(type: string) {
-  if (backupData.data.length) {
-    var userBackupBuf;
-
-    let exportUserBackup = cloneDeep(backupData.data);
-    exportUserBackup[0]["exportedDate"] = new Date();
-
-    if (type === "bplist") {
-      // Creating the Plist buffer
-      userBackupBuf = await bplistCreator(exportUserBackup);
-    } else if (type === "JSON") {
-      userBackupBuf = await recursiveParsePlist(exportUserBackup);
-    }
-    // Creating the file
-    downloadBlob(
-      type === "bplist" ? userBackupBuf : JSON.stringify(userBackupBuf),
-      `${String(exportUserBackup[0]["exportedDate"])}.${
-        type === "bplist" ? "naconfig" : "json"
-      }`,
-      type === "bplist" ? "application/octet-stream" : "application/json"
-    );
-
-    notify({
-      type: "success",
-      title: "⚠ Success: Backup Viewer",
-      text: `Exported backup as ${type === "bplist" ? "naconfig" : "JSON"}`,
-    });
-  } else {
-    notify({
-      type: "warn",
-      title: "⚠ Warning: Backup Viewer",
-      text: "Upload a file first",
-    });
-  }
-}
-
-function downloadURL(data, fileName) {
-  const a = document.createElement("a");
-  a.href = data;
-  a.download = fileName;
-  document.body.appendChild(a);
-  a.style.display = "none";
-  a.click();
-  a.remove();
-}
-
-function downloadBlob(data, fileName, mimeType) {
-  // create a Blob from our buffer
-  const blob = new Blob([data], {
-    type: mimeType,
-  });
-
-  const url = window.URL.createObjectURL(blob);
-
-  downloadURL(url, fileName);
-
-  setTimeout(() => window.URL.revokeObjectURL(url), 1000);
-}
-
 function editAnimeLink(data) {
   notify({
     type: "warn",
@@ -231,7 +121,7 @@ onMounted(() => {
     }"
   />
 
-  <!-- TODO: Export, Clicking into an anime pops up a modal for you to edit  -->
+  <!-- TODO: Clicking into an anime pops up a modal for you to edit  -->
   <h2>
     <svg id="svg__gooey" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
@@ -275,13 +165,7 @@ onMounted(() => {
     <code>.naconfig</code>
     backup
 
-    <span id="export-button">
-      <button id="export-json-button" @click="handleExport('JSON')">
-        Export JSON
-      </button>
-
-      <button @click="handleExport('bplist')">naconfig</button>
-    </span>
+    <ExportButton :userBackup="backupData.data" />
   </h2>
 
   <div v-if="backupData.data.length">
