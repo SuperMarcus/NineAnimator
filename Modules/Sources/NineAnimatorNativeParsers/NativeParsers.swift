@@ -61,6 +61,7 @@ public enum NativeParsers {
         defaultProvider.register(DoodParser(), forServer: "Doodstream")
         defaultProvider.register(PantsudriveParser(), forServer: "pantsudrive")
         defaultProvider.register(RapidCloudParser(), forServer: "RapidCloud")
+        defaultProvider.register(GoLoadParser(), forServer: "GoLoad.Pro")
         
         initialized = true
     }

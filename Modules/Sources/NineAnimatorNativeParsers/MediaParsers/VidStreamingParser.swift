@@ -25,7 +25,7 @@ import NineAnimatorCommon
 
 class VidStreamingParser: VideoProviderParser {
     var aliases: [String] {
-        [ "VidStreaming", "VidCDN", "Gogo Server" ]
+        [ "VidStreaming", "VidCDN" ]
     }
     
     private static let videoSourceRegex = try! NSRegularExpression(
