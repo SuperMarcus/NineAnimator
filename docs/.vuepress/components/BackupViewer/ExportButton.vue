@@ -1,7 +1,6 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import cloneDeep from "lodash/cloneDeep";
 import bplistParser from "bplist-parser";
 import bplistCreator from "bplist-creator";
 import { NineAnimatorBackup } from "./NineAnimatorBackup";
@@ -10,8 +9,13 @@ export default defineComponent({
   props: {
     userBackup: Object as PropType<NineAnimatorBackup[]>,
   },
+  data() {
+    return {
+      exportUserBackup: [] as NineAnimatorBackup[] | undefined,
+    };
+  },
   mounted() {
-    this.userBackup;
+    this.exportUserBackup = this.userBackup;
   },
   methods: {
     // Performance heavy function 😢, should only be used if needed, eg. exporting to JSON
@@ -38,20 +42,20 @@ export default defineComponent({
         var userBackupBuf;
 
         try {
-          // Cloning to not mutate the original data
-          let exportUserBackup = cloneDeep(this.userBackup);
-          exportUserBackup[0]["exportedDate"] = new Date();
+          this.exportUserBackup![0]["exportedDate"] = new Date();
 
           if (type === "bplist") {
             // Creating the Plist buffer
-            userBackupBuf = await bplistCreator(exportUserBackup);
+            userBackupBuf = await bplistCreator(this.exportUserBackup!);
           } else if (type === "JSON") {
-            userBackupBuf = await this.recursiveParsePlist(exportUserBackup);
+            userBackupBuf = await this.recursiveParsePlist(
+              this.exportUserBackup!
+            );
           }
           // Creating the file
           this.downloadBlob(
             type === "bplist" ? userBackupBuf : JSON.stringify(userBackupBuf),
-            `${String(exportUserBackup[0]["exportedDate"])}.${
+            `${String(this.exportUserBackup![0]["exportedDate"])}.${
               type === "bplist" ? "naconfig" : "json"
             }`,
             type === "bplist" ? "application/octet-stream" : "application/json"
