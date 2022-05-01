@@ -41,17 +41,17 @@ extension NASourceMonosChinos {
         func more() {
             if performingTask == nil {
                 performingTask = parent.requestManager.request(
-                    "/search",
+                    "/buscar",
                     handling: .browsing,
                     query: [ "q": title ]
                 ) .responseString.then {
                     [parent] responseContent -> [AnimeLink]? in
                     try SwiftSoup.parse(responseContent)
-                        .select(".row > article > a")
+                        .select(".row > div > a")
                         .compactMap {
                             container -> AnimeLink? in
-                            if let imageContainer = try container.select(".cover > img").first(),
-                                let titleContainer = try container.select("h3.Title").first() {
+                            if let imageContainer = try container.select(".series > .seriesimg > img").first(),
+                                let titleContainer = try container.select("h5.seristitles").first() {
                                     let animeTitle = titleContainer
                                         .ownText()
                                         .trimmingCharacters(in: .whitespacesAndNewlines)

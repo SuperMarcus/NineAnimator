@@ -26,10 +26,10 @@ extension NASourceMonosChinos {
         self.requestManager.request("/emision", handling: .browsing).responseString.then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
-            let seasonAnime = try bowl.select(".container > .row > article > a").map {
+            let seasonAnime = try bowl.select(".heromain > .row > div > a").map {
                 animeContainer -> AnimeLink in
                 let artworkUrl = URL(
-                    string: try animeContainer.select(".Image > figure > img").attr("src")
+                    string: try animeContainer.select(".series > .seriesimg > img").attr("src")
                 ) ?? NineAnimator.placeholderArtworkUrl
                 
                 let animeLink = try URL(
@@ -37,7 +37,7 @@ extension NASourceMonosChinos {
                 ).tryUnwrap()
                 
                 let animeTitle = try animeContainer
-                    .select("h3.Title")
+                    .select("h5.seristitles")
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 
