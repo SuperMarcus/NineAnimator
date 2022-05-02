@@ -23,13 +23,14 @@ import SwiftSoup
 
 extension NASourceAnimeHub {
     static let knownServers = [
-        "fserver": "Fserver",
-        "fdserver": "FDserver",
+        // "fserver": "Fserver", animehub doesn't use this server anymore
+        // "fdserver": "FDserver", same as Fserver
         // "xserver": "Xserver", Seems like this no episodes support this server
-        "oserver": "Oserver",
-        "mserver": "Mserver",
-        "yuserver": "YUserver",
-        "gserver": "Gserver"
+        "oserver": "OpenStream",
+        "mserver": "OpenStream 2",
+        "gserver": "OpenStream 3",
+        "yuserver": "YourUpload",
+        "mpserver": "Mp4Upload"
         // "hserver": "Hserver" Excluding until we update HydraX parser
     ]
     /// Represents the response from AnimeHub episode endpoint
