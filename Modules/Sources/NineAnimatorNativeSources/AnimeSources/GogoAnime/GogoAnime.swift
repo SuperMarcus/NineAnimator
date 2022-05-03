@@ -28,7 +28,7 @@ import AppKit
 #endif
 
 class NASourceGogoAnime: BaseSource, Source, PromiseSource {
-    var name: String { "gogoanime.tv" }
+    var name: String { "gogoanime.gg" }
     
     var aliases: [String] { [] }
     

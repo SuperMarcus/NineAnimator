@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 class OpenStreamParser: VideoProviderParser {
-    var aliases: [String] { [ "mserver", "gserver" ] }
+    var aliases: [String] { [ "openstream 2", "openstream 3", "openstream", ] }
     
     static let streamXVideoSource = try! NSRegularExpression(
         pattern: #""file":"([^"]+)"#,
