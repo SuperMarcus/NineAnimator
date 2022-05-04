@@ -17,6 +17,8 @@
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
 
+import AppCenter
+import AppCenterAnalytics
 import AppCenterCrashes
 import Kingfisher
 import NineAnimatorCommon
@@ -31,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static weak var shared: AppDelegate?
     
     private var shortcutItem: UIApplicationShortcutItem?
+    
+    private let crashesDelegateRef = NAAppCenterCrashesDelegate()
     
     var window: UIWindow?
     
@@ -65,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.configureEnvironment()
         
         // Setup additional services
+        self.setupAppCenter()
         NineAnimator.default.cloud.setup()
         DiscordPresenceController.shared.setup()
         
@@ -605,5 +610,17 @@ extension AppDelegate {
     func requestAppFromBeingSuspended() -> PreventSuspensionRequestHandler? {
         self.preventSuspensionRequestCount += 1
         return PreventSuspensionRequestHandler(self)
+    }
+}
+
+// MARK: - App Center
+extension AppDelegate {
+    func setupAppCenter() {
+        Crashes.delegate = crashesDelegateRef
+        AppCenter.start(withAppSecret: NineAnimator.default.cloud.buildIdentifier, services: [
+            Crashes.self,
+            Analytics.self
+        ])
+        Analytics.enabled = !NineAnimator.default.user.optOutAnalytics
     }
 }
