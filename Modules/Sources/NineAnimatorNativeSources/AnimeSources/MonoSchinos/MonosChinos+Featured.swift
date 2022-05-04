@@ -37,7 +37,7 @@ extension NASourceMonosChinos {
                 ).tryUnwrap()
                 
                 let animeTitle = try animeContainer
-                    .select("div > h5")
+                    .select("h5.seristitles")
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 
