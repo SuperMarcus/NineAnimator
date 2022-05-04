@@ -29,9 +29,6 @@ import AppKit
 class NASourcePantsubase: BaseSource, Source, PromiseSource {
     var name: String { "pantsubase.tv" }
     
-    // Disable for now
-    override var isEnabled: Bool { false }
-    
     var aliases: [String] { [] }
     
     #if canImport(UIKit)

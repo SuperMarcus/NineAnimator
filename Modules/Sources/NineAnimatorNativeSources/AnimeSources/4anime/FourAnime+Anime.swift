@@ -23,7 +23,6 @@ import SwiftSoup
 
 extension NASourceFourAnime {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        .fail(.contentUnavailableError("4Anime is no longer available on NineAnimator"))/*
         (self.isAnimeLink(url: link.link) ? .success(link) : self.resolveAnimeLink(
             from: link.link,
             artworkUrl: link.image
@@ -147,6 +146,6 @@ extension NASourceFourAnime {
     
     /// Checks if the provided link points to an anime page
     private func isAnimeLink(url: URL) -> Bool {
-        url.pathComponents.contains("anime")*/
+        url.pathComponents.contains("anime")
     }
 }

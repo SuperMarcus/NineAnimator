@@ -22,7 +22,6 @@ import NineAnimatorCommon
 
 extension NASourcePantsubase {
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        .fail(.contentUnavailableError("Pantsubase is no longer available on NineAnimator"))/*
         self.requestManager.request(endpoint)
             .responseBowl
             .then { bowl in
@@ -57,6 +56,6 @@ extension NASourcePantsubase {
                         )
                     }
                 return BasicFeaturedContainer(featured: [], latest: links)
-            }*/
+            }
     }
 }

@@ -30,7 +30,9 @@ public enum NativeSources {
         let registry = NineAnimator.default
         
         registry.register(sourceType: NASourceAnimePahe.self)
+        registry.register(sourceType: NASourceFourAnime.self)
         registry.register(sourceType: NASourceAnimeTwist.self)
+        registry.register(sourceType: NASourcePantsubase.self)
         registry.register(sourceType: NASourceAnimeUltima.self)
         registry.register(sourceType: NASourceAnimeKisa.self)
         registry.register(sourceType: NASourceAnimeKisa.ExperimentalSource.self)
@@ -38,21 +40,21 @@ public enum NativeSources {
         registry.register(sourceType: NASourceGogoAnime.self)
         registry.register(sourceType: NASourceAnimeDao.self)
         registry.register(sourceType: NASourceAnimeHub.self)
-        registry.register(sourceType: NASourceArrayanime.self)
         registry.register(sourceType: NASourceKissanime.self)
         registry.register(sourceType: NASourceAnimeUnity.self)
         registry.register(sourceType: NASourceMonosChinos.self)
         registry.register(sourceType: NASourceAnimeSaturn.self)
         registry.register(sourceType: NASourceAnimeWorld.self)
+        registry.register(sourceType: NASourceZoroAnime.self)
+        registry.register(sourceType: NASourceHentaiWorld.self)
         
         // Disabled sources
         registry.register(sourceType: NASourceWonderfulSubs.self)
         registry.register(sourceType: NASourceMasterAnime.self)
         registry.register(sourceType: NASourceNineAnime.self)
         registry.register(sourceType: NASourceAniwatch.self)
-        registry.register(sourceType: NASourcePantsubase.self)
-        registry.register(sourceType: NASourceFourAnime.self)
-        
+        registry.register(sourceType: NASourceArrayanime.self)
+
         initialized = true
     }
 }

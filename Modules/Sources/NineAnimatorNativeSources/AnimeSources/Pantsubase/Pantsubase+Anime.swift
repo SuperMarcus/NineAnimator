@@ -22,7 +22,6 @@ import NineAnimatorCommon
 
 extension NASourcePantsubase {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        .fail(.contentUnavailableError("Pantsubase is no longer available on NineAnimator"))/*
         requestManager.request(url: link.link)
             .responseBowl
             .then {
@@ -101,6 +100,6 @@ extension NASourcePantsubase {
                     on: NASourcePantsubase.knownServers,
                     episodes: episodeCollection
                 )
-            }*/
+            }
     }
 }

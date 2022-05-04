@@ -29,9 +29,6 @@ import AppKit
 class NASourceFourAnime: BaseSource, Source, PromiseSource {
     var name: String { "4anime.to" }
     
-    // 4anime is no longer available
-    override var isEnabled: Bool { false }
-    
     var aliases: [String] { [] }
     
     #if canImport(UIKit)
@@ -58,12 +55,13 @@ class NASourceFourAnime: BaseSource, Source, PromiseSource {
         super.init(with: parent)
         
         // Setup Kingfisher request modifier
-//        setupGlobalRequestModifier()
+        setupGlobalRequestModifier()
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-            DummyParser.registeredInstance
-        }
+        NASourceFourAnime.knownServers.keys.contains(server)
+            ? DummyParser.registeredInstance : nil
+    }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
         recommendServers(for: anime, ofPurpose: .playback).first

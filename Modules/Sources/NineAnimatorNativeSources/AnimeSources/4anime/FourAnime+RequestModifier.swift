@@ -16,7 +16,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with NineAnimator.  If not, see <http://www.gnu.org/licenses/>.
 //
-/*
+
 import Foundation
 import Kingfisher
 import NineAnimatorCommon
@@ -35,4 +35,3 @@ extension NASourceFourAnime: Kingfisher.ImageDownloadRequestModifier {
         return modifiedRequest
     }
 }
-*/

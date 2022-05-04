@@ -21,17 +21,16 @@ import Foundation
 import NineAnimatorCommon
 import SwiftSoup
 
-extension NASourceFourAnime {/*
+extension NASourceFourAnime {
     /// 4anime provides multiple links for each episode, however they are not shown to the user
     static let knownServers = [
         "server1": "Server 1",
         "server2": "Server 2",
         "server3": "Server 3",
         "server4": "Server 4"
-    ]*/
+    ]
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        .fail(.contentUnavailableError("4Anime is no longer available on NineAnimator"))/*
         NineAnimatorPromise.firstly {
             try URL(string: link.identifier).tryUnwrap()
         } .thenPromise {
@@ -145,6 +144,6 @@ extension NASourceFourAnime {/*
                     ]
                 ]
             )
-        }*/
+        }
     }
 }
