@@ -46,7 +46,7 @@ class StreamSBParser: VideoProviderParser {
     }
     
     private static let versionRegex = try! NSRegularExpression(
-        pattern: #"/app\.v1\.(\d{2})\.js"#,
+        pattern: #"app(\.v\d+\.\d+)?\.js"#,
         options: .caseInsensitive
     )
     
