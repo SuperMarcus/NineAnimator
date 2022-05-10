@@ -21,6 +21,15 @@ import Foundation
 import NineAnimatorCommon
 import SwiftSoup
 
+// server constants, probably a much better way to do this
+let FEMBED = "Fembed"
+let UQLOAD = "uqload"
+let PLAYERSB = "playersb"
+let STREAMTAPE = "streamtape"
+let VIDEOBIN = "videobin"
+let MP4UPLOAD = "mp4upload"
+let serverList = [FEMBED, UQLOAD, PLAYERSB, STREAMTAPE, VIDEOBIN, MP4UPLOAD]
+
 extension NASourceMonosChinos {
     static let knownServers = [
         "Cloud": "MonosChinos",
@@ -29,11 +38,11 @@ extension NASourceMonosChinos {
         "Clipwatching": "ClipWatching",
         "Uqload": "Uqload",
         "Mp4upload": "Mp4Upload",
-//        "Ok": "Ok", Note: Commenting for now
+        //        "Ok": "Ok", Note: Commenting for now
         "Videobin": "Videobin",
         "Senvid2": "SendVid"
     ]
-    
+
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise.firstly {
             URL(string: link.identifier)
@@ -47,22 +56,40 @@ extension NASourceMonosChinos {
             episodeUrl, responseContent in
             
             let bowl = try SwiftSoup.parse(responseContent)
-            let playerId = try bowl.select("li[title=\(link.server)]").attr("data-tplayernv")
-
+            var encodedPlayerId = ""; // because variable can't be guaranteed to have a value, needs further fixing from the loop below
+            
+            let episodeList = try bowl.select("#play-video > a").compactMap {
+                episodeElement -> (serverId: String, sourceId: String) in
+                let serverName = try episodeElement.text()
+                let dataPlayerId = try episodeElement.attr("data-player")
+                
+                return (serverName, dataPlayerId )
+            }
+            
+            for (serverName, dataPlayerId) in episodeList {
+                for server in serverList {
+                    // link.server is the server the NineAnimator user selected
+                    if serverName.caseInsensitiveCompare(server) == .orderedSame && link.server.caseInsensitiveCompare(server) == .orderedSame {
+                        encodedPlayerId = dataPlayerId
+                    }
+                }
+            }
+            
+            let decodedData = Data(base64Encoded: encodedPlayerId)!
+            let decodedString = String(data: decodedData, encoding: .utf8)!
+            
             // Check if server is available for this episode
-            guard !playerId.isEmpty else {
+            guard !encodedPlayerId.isEmpty else {
                 throw NineAnimatorError.responseError("This episode is not available on the selected server")
             }
             
-            let playerElement = try bowl.select("#\(playerId)").html()
-            
             let urlMatchingRegex = try NSRegularExpression(
-                pattern: "\\?url=(.*)(?:&amp;|&)id",
+                pattern: "\\?url=(.*)",
                 options: []
             )
             
             let urlParamMatch = try urlMatchingRegex
-                .firstMatch(in: playerElement)
+                .firstMatch(in: decodedString)
                 .tryUnwrap(.responseError("Cannot find a valid URL to the resource"))
                 .firstMatchingGroup
                 .tryUnwrap()
