@@ -69,7 +69,7 @@ extension NASourceAnimePahe {
                 "/api",
                 handling: .ajax,
                 query: [
-                    "m": "embed",
+                    "m": "links",
                     "id": animeIdentifier,
                     "p": link.server,
                     "session": episodeEntry.session ?? ""
