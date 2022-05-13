@@ -38,8 +38,9 @@ class RapidCloudParser: VideoProviderParser {
     private var webSocket: URLSessionWebSocketTask?
     private var semaphore = DispatchSemaphore(value: 0)
     private var sid: String = ""
+    private var timer: Timer?
     
-    func parse(episode: Episode, with session: Session, forPurpose _: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
+    func parse(episode: Episode, with session: Session, forPurpose purpose: Purpose, onCompletion handler: @escaping NineAnimatorCallback<PlaybackMedia>) -> NineAnimatorAsyncTask {
         NineAnimatorPromise {
             callback in session.request(
                 episode.target,
@@ -62,7 +63,7 @@ class RapidCloudParser: VideoProviderParser {
                                         .firstMatchingGroup)
                 .tryUnwrap(.providerError("Could not find recaptchaNumber"))
             
-            return self.getTokenRecaptcha(with: session, recaptchaSiteKey: recaptchaSiteKey, url: episode.target)
+            return CaptchaSolver().getTokenRecaptcha(with: session, recaptchaSiteKey: recaptchaSiteKey, url: episode.target)
                 .thenPromise {
                     token -> NineAnimatorPromise<PlaybackMedia> in
                     
@@ -73,7 +74,7 @@ class RapidCloudParser: VideoProviderParser {
                     }
                     
                     let resourceIdentifer = episodeComponents[2]
-                    let sid = self.wss()
+                    let sid = self.wss(forPurpose: purpose)
                                         
                     return NineAnimatorPromise {
                         callback in session.request(
@@ -153,29 +154,14 @@ class RapidCloudParser: VideoProviderParser {
     }
     
     func isParserRecommended(forPurpose purpose: Purpose) -> Bool {
-        // Subtitle not support for offline playback
-        return purpose != .download
+        // Not suitable for download/cast as difficult to cancel websocket
+        return purpose == .playback
     }
 }
 
 // MARK: - Request Helpers
 private extension RapidCloudParser {
     private static let WS_SOCKET_URL = "wss://ws1.rapid-cloud.ru/socket.io/?EIO=4&transport=websocket"
-    private static let RECAPTCHA_API_JS = "https://www.google.com/recaptcha/api.js"
-
-    private static let vTokenRegex = try! NSRegularExpression(
-        pattern: #"releases/([^/&?#]+)"#,
-        options: .caseInsensitive
-    )
-    private static let recaptchaTokenRegex =  try! NSRegularExpression(
-        pattern: #"recaptcha-token.+?=\"(.+?)\""#,
-        options: .caseInsensitive
-    )
-    private static let tokenRegex =  try! NSRegularExpression(
-        pattern: #"rresp\",\"(.+?)\""#,
-        options: .caseInsensitive
-    )
-    
     private static let sidRegex =  try! NSRegularExpression(
         pattern: #"\"sid\":\"(.+?)\""#,
         options: .caseInsensitive
@@ -185,7 +171,7 @@ private extension RapidCloudParser {
         DispatchQueue.global().async { [weak self] in self?.disconnect() }
     }
     
-    private func wss() -> String {
+    private func wss(forPurpose purpose: Purpose) -> String {
         Log.info("(RapidCloud Parser) Websocket session started")
         NotificationCenter.default.addObserver(
             self,
@@ -203,125 +189,73 @@ private extension RapidCloudParser {
         send(text: "40")
         _ = semaphore.wait(timeout: .now() + 5)
         
+        if purpose != .playback {
+            // Disconnect after 1/2 an hour, if socket is still alive
+            DispatchQueue.main.async {
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(self.disconnect), userInfo: nil, repeats: false)
+            }
+        }
+        
         return sid
     }
     
     private func receive() {
-        webSocket?.receive { [weak self] result in
-            switch result {
-            case .failure(let error):
-                Log.error("(RapidCloud Parser) Websocket receive error %@", error)
-            case .success(let message):
-                switch message {
-                case .data(let data): Log.info("(RapidCloud Parser) Websocket receive data %@", data)
-                case .string(let message):
-                    if message.starts(with: "40") {
-                        self?.sid = RapidCloudParser.sidRegex.firstMatch(in: message)?.firstMatchingGroup ?? ""
-                        self?.semaphore.signal()
-                    } else if message == "2" {
-                        self?.send(text: "3")
+        if webSocket != nil {
+            webSocket?.receive { [weak self] result in
+                switch result {
+                case .failure(let error):
+                    Log.error("(RapidCloud Parser) Websocket receive error %@", error)
+                    self?.disconnect()
+                case .success(let message):
+                    switch message {
+                    case .data(let data): Log.info("(RapidCloud Parser) Websocket receive data %@", data)
+                    case .string(let message):
+                        if message.starts(with: "40") {
+                            self?.sid = RapidCloudParser.sidRegex.firstMatch(in: message)?.firstMatchingGroup ?? ""
+                            self?.semaphore.signal()
+                        } else if message == "2" {
+                            self?.send(text: "3")
+                        }
+                    @unknown default:
+                        break
                     }
-                @unknown default:
-                    break
+                    self?.receive()
                 }
-            self?.receive()
             }
         }
     }
     
     private func send(text: String) {
-        let message = URLSessionWebSocketTask.Message.string(text)
-        webSocket?.send(message) { error in
-            if let error = error {
-                Log.error("(RapidCloud Parser) Websocket send error %@", error)
+        if webSocket != nil {
+            let message = URLSessionWebSocketTask.Message.string(text)
+            webSocket?.send(message) { error in
+                if let error = error {
+                    Log.error("(RapidCloud Parser) Websocket send error %@", error)
+                }
             }
         }
     }
     
     private func ping() {
-        webSocket?.sendPing { error in
-            if let error = error {
-                Log.error("(RapidCloud Parser) Websocket ping error %@", error)
-            } else {
-                // Websocket connect still alive
-                DispatchQueue.global().asyncAfter(deadline: .now() + 10) { [weak self] in
-                    self?.ping()
+        if webSocket != nil {
+            webSocket?.sendPing { error in
+                if let error = error {
+                    Log.error("(RapidCloud Parser) Websocket ping error %@", error)
+                } else {
+                    // Websocket connect still alive
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 10) { [weak self] in
+                        self?.ping()
+                    }
                 }
             }
         }
     }
     
-    private func disconnect() {
+    @objc private func disconnect() {
         Log.info("(RapidCloud Parser) Websocket session ended")
         webSocket?.cancel(with: .goingAway, reason: "Connection ended".data(using: .utf8))
-    }
-    
-    func getTokenRecaptcha(with session: Session, recaptchaSiteKey: String, url: URL) -> NineAnimatorPromise<String> {
-        NineAnimatorPromise {
-            callback in session.request(
-                RapidCloudParser.RECAPTCHA_API_JS,
-                parameters: [ "render": recaptchaSiteKey ],
-                headers: [ "referer": url.absoluteString ]
-            ).responseString {
-                callback($0.value, $0.error)
-            }
-        } .thenPromise {
-            recaptchaOut in
-            
-            let vToken = try (
-                RapidCloudParser.vTokenRegex.firstMatch(in: recaptchaOut)?.firstMatchingGroup
-            ).tryUnwrap()
-            let domain = "https://\(url.host!):443".data(using: .utf8)?.base64EncodedString().replacingOccurrences(of: "=", with: "") ?? ""
-            
-            return NineAnimatorPromise {
-                callback in session.request(
-                    "https://www.google.com/recaptcha/api2/anchor",
-                    parameters: [
-                        "ar": 1,
-                        "k": recaptchaSiteKey,
-                        "co": domain,
-                        "hi": "en",
-                        "v": vToken,
-                        "size": "invisible",
-                        "cb": 123456789
-                    ]
-                ) .responseString {
-                    callback($0.value, $0.error)
-                }
-            } .thenPromise {
-                anchorOut in
-                            
-                let recaptchaToken = try (
-                    RapidCloudParser.recaptchaTokenRegex.firstMatch(in: anchorOut)?.firstMatchingGroup
-                ).tryUnwrap()
-                
-                return NineAnimatorPromise {
-                    callback in session.request(
-                        "https://www.google.com/recaptcha/api2/reload?k=\(recaptchaSiteKey)",
-                        method: .post,
-                        parameters: [
-                            "v": vToken,
-                            "reason": "q",
-                            "k": recaptchaSiteKey,
-                            "c": recaptchaToken,
-                            "sa": "",
-                            "co": domain
-                        ],
-                        headers: [ "referer": "https://www.google.com/recaptcha/api2" ]
-                    ).responseString {
-                        callback($0.value, $0.error)
-                    }
-                } .then {
-                    tokenOut in
-                    
-                    let token = try (
-                        RapidCloudParser.tokenRegex.firstMatch(in: tokenOut)?.firstMatchingGroup
-                    ).tryUnwrap()
-                    
-                    return token
-                }
-            }
-        }
+        webSocket = nil
     }
 }
 
