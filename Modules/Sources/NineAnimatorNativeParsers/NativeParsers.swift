@@ -62,7 +62,8 @@ public enum NativeParsers {
         defaultProvider.register(PantsudriveParser(), forServer: "pantsudrive")
         defaultProvider.register(RapidCloudParser(), forServer: "RapidCloud")
         defaultProvider.register(GoLoadParser(), forServer: "GoLoad.Pro")
-        
+        defaultProvider.register(VideoVardParser(), forServer: "VideoVard")
+
         initialized = true
     }
 }
