@@ -109,7 +109,7 @@ class StreamSBParser: VideoProviderParser {
         self.getAlias(url: episode.target, with: session)
             .thenPromise {
                 alias -> NineAnimatorPromise<PlaybackMedia> in
-                let videoID = episode.target.deletingPathExtension().lastPathComponent
+                let videoID = episode.target.deletingPathExtension().lastPathComponent.replacingOccurrences(of: "embed-", with: "")
                 
                 let hexVideoID = Data(videoID.utf8).map {
                     String(format: "%x", $0 )
