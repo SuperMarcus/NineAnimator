@@ -48,7 +48,7 @@ class DoodParser: VideoProviderParser {
                     .tryUnwrap(.providerError("Could not get Video URL from Regex"))
                 
                 let md5URL = try URL(
-                    string: "https://dood.to" + md5UrlString
+                    string: "https://dood.ws" + md5UrlString
                 ).tryUnwrap()
                 
                 // Extract the token from the URL
@@ -86,7 +86,7 @@ class DoodParser: VideoProviderParser {
                             url: directVideoURL,
                             parent: episode,
                             contentType: "video/mp4",
-                            headers: [ "Referer": "https://dood.to/"],
+                            headers: [ "Referer": "https://dood.ws/"],
                             isAggregated: false
                         ), nil)
                     } catch { handler(nil, error) }

@@ -32,7 +32,7 @@
     </a>
 </p>
 
-A simple yet elegant way of waching anime on your favorite anime websites.
+A simple yet elegant way of watching anime on your favorite anime websites.
 NineAnimator is a free and open source anime watching app for iOS and macOS. GPLv3 Licensed.
 
     
