@@ -24,12 +24,14 @@ import SwiftSoup
 extension NASourceAnimeDao {
     /// A list of servers that are known to exists on AnimeDao
     static let knownServerMap = [
-        "#gstore": (name: "Google Video", switcher: "gstore"),
+//        "#gstore": (name: "Google Video", switcher: "gstore"), seems to be removed
         "#hls": (name: "ProxyData", switcher: "hls"),
         "#gounlimited": (name: "GoUnlimited", switcher: "gounlimited"),
         "#fembed": (name: "Fembed", switcher: "fembed"),
         "#mixdrop": (name: "Mixdrop", switcher: "mixdrop"),
-        "#hydrax": (name: "HydraX", switcher: "hydrax")
+//        "#hydrax": (name: "HydraX", switcher: "hydrax"), seems to be removed
+        "#sb": (name: "Streamsb", switcher: "sb"),
+        "#streamtape": (name: "Streamtape", switcher: "streamtape")
     ]
     
     static let attributeMatchingExpr = try! NSRegularExpression(
