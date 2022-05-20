@@ -63,6 +63,7 @@ public enum NativeParsers {
         defaultProvider.register(RapidCloudParser(), forServer: "RapidCloud")
         defaultProvider.register(GoLoadParser(), forServer: "GoLoad.Pro")
         defaultProvider.register(VideoVardParser(), forServer: "VideoVard")
+        defaultProvider.register(DailymotionParser(), forServer: "Dailymotion")
 
         initialized = true
     }

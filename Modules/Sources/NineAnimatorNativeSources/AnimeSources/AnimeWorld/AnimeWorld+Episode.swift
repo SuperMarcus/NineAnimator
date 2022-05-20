@@ -20,7 +20,7 @@ import Foundation
 import NineAnimatorCommon
 import SwiftSoup
 
-extension NASourceAnimeWorld {    
+extension NASourceAnimeWorld {
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         self.requestManager.request(url: link.identifier, handling: .browsing)
             .responseBowl
