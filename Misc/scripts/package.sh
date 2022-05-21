@@ -17,7 +17,7 @@ package_iOS() {
     echo "[*] Generating .ipa archive..."
     
     mkdir -p Payload
-    cp -r "${BIN_PKG_PATH}" "Payload/${APPNAME}.app"
+    cp -R "${BIN_PKG_PATH}" "Payload/${APPNAME}.app"
     echo "[*] Removing Non-NineAnimator Dynamic Libraries:"
     find "Payload/${APPNAME}.app/Frameworks" -depth 1 -type f \( \! -name 'NineAnimator*' \) -exec echo "Removing: {}" \; -exec rm {} \;
     zip -9 -r "${PACKAGE_NAME}.ipa" Payload
@@ -25,7 +25,7 @@ package_iOS() {
     
     echo "[*] Generating .dSYM archive..."
     
-    cp -r "${XCARCHIVE}/dSYMs" "dSYMs"
+    cp -R "${XCARCHIVE}/dSYMs" "dSYMs"
     zip -9 -r "${PACKAGE_NAME}.dSYMs.zip" "dSYMs"
     rm -rf dSYMs
     
@@ -36,14 +36,15 @@ package_macOS() {
     pushd "${TMPDIR}"
     
     echo "[*] Generating .zip archive..."
-    cp -r "${BIN_PKG_PATH}" "${APPNAME}.app"
+    cp -R "${BIN_PKG_PATH}" "${APPNAME}.app"
     cp "${LICENSE_FILE}" "LICENSE"
+    codesign --force --deep --sign - "${APPNAME}.app"
     zip -9 -r "${PACKAGE_NAME}.zip" "${APPNAME}.app" "LICENSE"
     rm -rf "${APPNAME}.app" "LICENSE"
     
     echo "[*] Generating .dSYM archive..."
     
-    cp -r "${XCARCHIVE}/dSYMs" "dSYMs"
+    cp -R "${XCARCHIVE}/dSYMs" "dSYMs"
     zip -9 -r "${PACKAGE_NAME}.dSYMs.zip" "dSYMs"
     rm -rf dSYMs
     
