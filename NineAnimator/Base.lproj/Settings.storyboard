@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="1QF-QW-wC1">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,14 +20,14 @@
                             <tableViewSection headerTitle="About NineAnimator" id="20X-06-AJb">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Wu1-sV-neO" style="IBUITableViewCellStyleDefault" id="9rc-5k-bvB">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9rc-5k-bvB" id="XnV-ia-ExR">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="About" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Wu1-sV-neO">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -40,14 +40,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settings.viewrepo" textLabel="OUZ-2Z-Nei" style="IBUITableViewCellStyleDefault" id="7XN-yH-KRf">
-                                        <rect key="frame" x="16" y="99.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="75.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7XN-yH-KRf" id="fye-lH-13N">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="GitHub Repository" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OUZ-2Z-Nei">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -61,10 +61,10 @@
                             <tableViewSection headerTitle="General" footerTitle="Set appearance dynamically.  App Icon cannot be changed on macOS." id="ZJI-L3-7zk">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="HHq-C6-H5e" detailTextLabel="TxJ-Zg-qNb" style="IBUITableViewCellStyleValue1" id="qzg-0b-VdB">
-                                        <rect key="frame" x="16" y="207" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="176.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qzg-0b-VdB" id="CWY-Nb-b9C">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="App Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HHq-C6-H5e">
@@ -75,7 +75,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Default" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="TxJ-Zg-qNb">
-                                                    <rect key="frame" x="253" y="12" width="55" height="20.5"/>
+                                                    <rect key="frame" x="255.5" y="12" width="55" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -92,7 +92,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="WKB-4y-fLS">
-                                        <rect key="frame" x="16" y="251" width="343" height="50"/>
+                                        <rect key="frame" x="16" y="220" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WKB-4y-fLS" id="ixt-Xm-TAg">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
@@ -133,14 +133,14 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Jft-Jx-qgv">
-                                        <rect key="frame" x="16" y="301" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="270" width="343" height="47.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jft-Jx-qgv" id="tsb-96-dab">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dynamic Appearance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xP9-AS-NPt">
-                                                    <rect key="frame" x="16" y="11.5" width="254" height="21"/>
+                                                    <rect key="frame" x="16" y="13.5" width="254" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -150,7 +150,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="lSk-5N-CFL">
-                                                    <rect key="frame" x="278" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="278" y="8" width="51" height="31.5"/>
                                                     <connections>
                                                         <action selector="onDynamicAppearanceDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="ihn-uR-OtV"/>
                                                     </connections>
@@ -171,14 +171,14 @@
                             <tableViewSection footerTitle="Browse anime you've added to your collections and connect with anime tracking services." id="5UB-9w-oPI">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="m9r-kn-kk7" style="IBUITableViewCellStyleDefault" id="vtn-kp-VY3">
-                                        <rect key="frame" x="16" y="425" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="390" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vtn-kp-VY3" id="HCR-VG-IzN">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Downloads &amp; Storage" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="m9r-kn-kk7">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -191,10 +191,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="zf6-9h-gav" detailTextLabel="OnI-zr-2Cs" style="IBUITableViewCellStyleValue1" id="nak-E7-NFu">
-                                        <rect key="frame" x="16" y="469" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="433.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nak-E7-NFu" id="rmi-et-SQ7">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Rich Presence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zf6-9h-gav">
@@ -205,7 +205,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Enabled" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OnI-zr-2Cs">
-                                                    <rect key="frame" x="246.5" y="12" width="61.5" height="20.5"/>
+                                                    <rect key="frame" x="249" y="12" width="61.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -222,10 +222,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="W4K-f9-Rrg" detailTextLabel="oJY-Uv-hLj" style="IBUITableViewCellStyleValue1" id="phW-yl-CAH">
-                                        <rect key="frame" x="16" y="513" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="477" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="phW-yl-CAH" id="eou-o8-MwE">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Preferred Anime List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W4K-f9-Rrg">
@@ -236,7 +236,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="MyAnimeList.net" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oJY-Uv-hLj">
-                                                    <rect key="frame" x="181.5" y="12" width="126.5" height="20.5"/>
+                                                    <rect key="frame" x="184" y="12" width="126.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -252,14 +252,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="BDo-SJ-NV8" style="IBUITableViewCellStyleDefault" id="KtS-kv-Zim">
-                                        <rect key="frame" x="16" y="557" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="520.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KtS-kv-Zim" id="rAq-5c-VCU">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Third-Party Anime Lists" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BDo-SJ-NV8">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -276,7 +276,7 @@
                             <tableViewSection footerTitle="Sort episodes from oldest to newest (Ordered) or from newest to oldest (Reversed)." id="UxF-RW-Y6p">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="ZGI-4p-RQT">
-                                        <rect key="frame" x="16" y="665" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="622.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZGI-4p-RQT" id="Vvu-Pd-mfs">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -311,7 +311,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="dgw-6u-reO">
-                                        <rect key="frame" x="16" y="709" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="666.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dgw-6u-reO" id="jNR-hn-O6a">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -346,13 +346,13 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="FzX-Wm-E1l">
-                                        <rect key="frame" x="16" y="753" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="710.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FzX-Wm-E1l" id="c69-Wg-t4z">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Allow NSFW Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nrj-vR-ORT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Allow NSFW Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nrj-vR-ORT">
                                                     <rect key="frame" x="16" y="11.5" width="254" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -362,7 +362,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-JA-uD9">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6yh-JA-uD9">
                                                     <rect key="frame" x="278" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onAllowNSFWDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Ado-Hp-ewc"/>
@@ -381,13 +381,13 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="50" id="4td-cI-giU">
-                                        <rect key="frame" x="16" y="797" width="343" height="50"/>
+                                        <rect key="frame" x="16" y="754.5" width="343" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4td-cI-giU" id="FXE-v7-8hA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhg-Wl-1ep">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sort Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mhg-Wl-1ep">
                                                     <rect key="frame" x="8" y="14.5" width="166" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -397,7 +397,7 @@
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="900" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Ue-S7z">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="260" verticalHuggingPriority="900" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="1000" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="QFr-Ue-S7z">
                                                     <rect key="frame" x="182" y="10" width="153" height="31"/>
                                                     <segments>
                                                         <segment title="Reversed"/>
@@ -428,19 +428,19 @@
 NineAnimator uses Background App Refresh to determine if a new episode of a subscribed anime has been released.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Bf7-Pu-dBT">
-                                        <rect key="frame" x="16" y="938.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="884.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Bf7-Pu-dBT" id="7Jv-k7-Ho0">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BFt-ME-5uJ">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="BFt-ME-5uJ">
                                                     <rect key="frame" x="286" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onShowStreamsInNotificationDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="T4a-ul-J75"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Available Streams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKK-PI-ugJ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Show Available Streams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKK-PI-ugJ">
                                                     <rect key="frame" x="8" y="11.5" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -462,20 +462,20 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="CDE-MG-fiI" detailTextLabel="7Ky-4E-HeC" style="IBUITableViewCellStyleValue1" id="5rn-67-5mc">
-                                        <rect key="frame" x="16" y="982.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="928.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5rn-67-5mc" id="tM1-zu-u0J">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Current Subscriptions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CDE-MG-fiI">
-                                                    <rect key="frame" x="15" y="12" width="166.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Current Subscriptions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CDE-MG-fiI">
+                                                    <rect key="frame" x="8" y="12" width="166.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Items" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ky-4E-HeC">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="0 Items" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7Ky-4E-HeC">
                                                     <rect key="frame" x="278.5" y="12" width="56.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -486,20 +486,20 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="2ol-44-Ha5" detailTextLabel="1D4-d4-eg5" style="IBUITableViewCellStyleValue1" id="ZKI-hf-ZyL">
-                                        <rect key="frame" x="16" y="1026.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="972.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZKI-hf-ZyL" id="xMv-AW-CLZ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2ol-44-Ha5">
-                                                    <rect key="frame" x="15" y="12" width="49" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2ol-44-Ha5">
+                                                    <rect key="frame" x="8" y="12" width="49" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Checking..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1D4-d4-eg5">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Checking..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1D4-d4-eg5">
                                                     <rect key="frame" x="249.5" y="12" width="85.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -510,14 +510,14 @@ NineAnimator uses Background App Refresh to determine if a new episode of a subs
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.notification.unsubscribe" textLabel="hGc-BW-frZ" style="IBUITableViewCellStyleDefault" id="7Te-DO-Vux">
-                                        <rect key="frame" x="16" y="1070.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1016.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7Te-DO-Vux" id="Xv0-VE-rcD">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Unsubscribe All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hGc-BW-frZ">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Unsubscribe All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hGc-BW-frZ">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -539,13 +539,13 @@ Enabling Background Playback will allow audio to be played while NineAnimator is
 Fallback to Browser directs the app to open the playback page in Safari when failing to retrieve the content.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.pip" id="qhX-cq-vU4">
-                                        <rect key="frame" x="16" y="1286" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1210.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qhX-cq-vU4" id="OSj-kC-9rq">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Picture in Picture Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-np-Dks">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Picture in Picture Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KSq-np-Dks">
                                                     <rect key="frame" x="8" y="11.5" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -555,7 +555,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-YN-aHk">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6vy-YN-aHk">
                                                     <rect key="frame" x="286" y="8" width="51" height="28"/>
                                                     <connections>
                                                         <action selector="onPiPDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="bNU-Fd-iPa"/>
@@ -573,13 +573,13 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.background" rowHeight="49" id="n4D-7A-fGL">
-                                        <rect key="frame" x="16" y="1330" width="343" height="49"/>
+                                        <rect key="frame" x="16" y="1254.5" width="343" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="n4D-7A-fGL" id="YQZ-Ov-IMJ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Background Playback" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gAn-bf-I7y">
                                                     <rect key="frame" x="8" y="14" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -589,7 +589,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="l15-ir-tZP">
                                                     <rect key="frame" x="286" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onBackgroundPlaybackDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="Thu-pY-uHV"/>
@@ -608,13 +608,13 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="settings.playback.browser" rowHeight="49" id="lHh-KO-m79">
-                                        <rect key="frame" x="16" y="1379" width="343" height="49"/>
+                                        <rect key="frame" x="16" y="1303.5" width="343" height="49"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lHh-KO-m79" id="mF9-8T-lcr">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="49"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fallback to Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPl-8j-R24">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Fallback to Browser" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CPl-8j-R24">
                                                     <rect key="frame" x="8" y="14" width="270" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -624,7 +624,7 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="amF-Cb-8Hv">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="amF-Cb-8Hv">
                                                     <rect key="frame" x="286" y="8" width="51" height="33"/>
                                                     <connections>
                                                         <action selector="onPlaybackFallbackToBrowserDidChange:" destination="avc-gc-Mj2" eventType="valueChanged" id="txC-ln-kTz"/>
@@ -643,14 +643,14 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="0eR-hu-Qxf" style="IBUITableViewCellStyleDefault" id="30T-PY-VFY">
-                                        <rect key="frame" x="16" y="1428" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1352.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="30T-PY-VFY" id="eTQ-k1-6uJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="326.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eR-hu-Qxf">
-                                                    <rect key="frame" x="15" y="0.0" width="301" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0eR-hu-Qxf">
+                                                    <rect key="frame" x="8" y="0.0" width="310.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -663,14 +663,14 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.playback.cast.controller" textLabel="7gK-el-Ee1" style="IBUITableViewCellStyleDefault" id="Gfi-kw-cMp">
-                                        <rect key="frame" x="16" y="1472" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1396.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gfi-kw-cMp" id="Bba-gR-8CX">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Open Cast Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gK-el-Ee1">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Open Cast Controller" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gK-el-Ee1">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -690,14 +690,14 @@ Fallback to Browser directs the app to open the playback page in Safari when fai
 Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and Spotlight search entries.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="settings.debugging" textLabel="UZq-HT-LUa" style="IBUITableViewCellStyleDefault" id="bet-VK-CLy">
-                                        <rect key="frame" x="16" y="1751.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1646.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bet-VK-CLy" id="qXL-V5-oXP">
-                                            <rect key="frame" x="0.0" y="0.0" width="324" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="326.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Analytics &amp; Improvements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UZq-HT-LUa">
-                                                    <rect key="frame" x="15" y="0.0" width="301" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Analytics &amp; Improvements" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UZq-HT-LUa">
+                                                    <rect key="frame" x="8" y="0.0" width="310.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -710,14 +710,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.export" textLabel="AVN-Z6-xDl" style="IBUITableViewCellStyleDefault" id="7k5-mS-bTC">
-                                        <rect key="frame" x="16" y="1795.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1690.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7k5-mS-bTC" id="0lt-wk-XIg">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Create Backup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AVN-Z6-xDl">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Create Backup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AVN-Z6-xDl">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -730,14 +730,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.import" textLabel="4q0-gi-TPk" style="IBUITableViewCellStyleDefault" id="prz-Dq-rcA" userLabel="settings.history.import">
-                                        <rect key="frame" x="16" y="1839.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1734.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="prz-Dq-rcA" id="8lr-Ed-Nfu">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Import Backup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4q0-gi-TPk">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Import Backup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4q0-gi-TPk">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -750,14 +750,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.cache" textLabel="1VP-oc-aqz" style="IBUITableViewCellStyleDefault" id="PVj-MT-9I3">
-                                        <rect key="frame" x="16" y="1883.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1778.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PVj-MT-9I3" id="MPd-xb-7NG">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1VP-oc-aqz">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1VP-oc-aqz">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -770,14 +770,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.search" textLabel="oqf-KR-CRA" style="IBUITableViewCellStyleDefault" id="oPk-Xa-CSY">
-                                        <rect key="frame" x="16" y="1927.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1822.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oPk-Xa-CSY" id="bZU-c8-uAL">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Search History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqf-KR-CRA">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Search History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oqf-KR-CRA">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -790,20 +790,20 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.recents" textLabel="jcd-Wl-m61" detailTextLabel="Rns-aJ-RlM" style="IBUITableViewCellStyleValue1" id="P1L-Nj-oEr">
-                                        <rect key="frame" x="16" y="1971.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1866.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="P1L-Nj-oEr" id="GUF-UM-X8f">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Browse History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcd-Wl-m61">
-                                                    <rect key="frame" x="15" y="12" width="159.5" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Browse History" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jcd-Wl-m61">
+                                                    <rect key="frame" x="8" y="12" width="159.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0 Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rns-aJ-RlM">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="0 Item" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rns-aJ-RlM">
                                                     <rect key="frame" x="286.5" y="12" width="48.5" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -818,14 +818,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.download" textLabel="1X7-X7-huV" style="IBUITableViewCellStyleDefault" id="0ur-OD-NVC">
-                                        <rect key="frame" x="16" y="2015.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1910.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0ur-OD-NVC" id="VLu-rd-6yQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Downloads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1X7-X7-huV">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Downloads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1X7-X7-huV">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -839,14 +839,14 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.activities" textLabel="dIG-JR-U2D" style="IBUITableViewCellStyleDefault" id="A67-qe-KDF">
-                                        <rect key="frame" x="16" y="2059.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1954.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="A67-qe-KDF" id="ZJ4-s2-eF9">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Shortcuts and Spotlight Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dIG-JR-U2D">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Shortcuts and Spotlight Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dIG-JR-U2D">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -860,13 +860,13 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="settings.history.reset" id="24A-0U-h1t">
-                                        <rect key="frame" x="16" y="2103.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1998.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="24A-0U-h1t" id="tu1-Qe-wbN">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-wL-Vag">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Reset" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zWP-wL-Vag">
                                                     <rect key="frame" x="8" y="11" width="327" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -936,7 +936,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="source" textLabel="jGy-CK-BGd" style="IBUITableViewCellStyleDefault" id="TQc-Re-DbC" customClass="SettingsPreferredSourceCell" customModule="NineAnimator" customModuleProvider="target">
-                                <rect key="frame" x="16" y="55.5" width="343" height="43.5"/>
+                                <rect key="frame" x="16" y="32" width="343" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TQc-Re-DbC" id="6Zv-pR-AYx" customClass="SettingsPreferredSourceCell" customModule="NineAnimator" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
@@ -985,7 +985,7 @@ Clear Shortcuts and Spotlight Items will delete all NineAnimator shortcuts and S
 For Home integration to function, at least one HomeKit compatible accessory have to be setup in the Home app and at least one scene needs to be available. You may add more scenes in the Home app.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="home.scene.externalOnly" rowHeight="46" id="WwA-Z7-qJ2" userLabel="home.scene.externalOnly">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="46"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WwA-Z7-qJ2" id="kLP-es-qzp">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="46"/>
@@ -1019,10 +1019,10 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="home.scene.start" textLabel="V91-yy-Rkb" detailTextLabel="LoF-UE-Pdv" style="IBUITableViewCellStyleValue1" id="tCm-cB-oyJ">
-                                        <rect key="frame" x="16" y="101.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="78" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tCm-cB-oyJ" id="PZm-BK-KSZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Starts Playing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V91-yy-Rkb">
@@ -1033,7 +1033,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LoF-UE-Pdv">
-                                                    <rect key="frame" x="231" y="12" width="77" height="20.5"/>
+                                                    <rect key="frame" x="233.5" y="12" width="77" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -1043,10 +1043,10 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="home.scene.end" textLabel="q0P-aj-Wkc" detailTextLabel="6wJ-Cg-cKO" style="IBUITableViewCellStyleValue1" id="OiD-3d-Uez" userLabel="home.scene.end">
-                                        <rect key="frame" x="16" y="145.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="121.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OiD-3d-Uez" id="abQ-1k-53p">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Ends Playing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="q0P-aj-Wkc">
@@ -1057,7 +1057,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6wJ-Cg-cKO">
-                                                    <rect key="frame" x="231" y="12" width="77" height="20.5"/>
+                                                    <rect key="frame" x="233.5" y="12" width="77" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
@@ -1117,8 +1117,8 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="J9V-2o-va9">
-                                            <rect key="frame" x="35" y="100" width="38" height="52"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="J9V-2o-va9">
+                                            <rect key="frame" x="35" y="100" width="38" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -1127,15 +1127,28 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="8na-Xw-5IC">
+                                            <rect key="frame" x="35" y="117" width="38" height="14.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isPrimaryText" value="NO"/>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="J9V-2o-va9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dJ2-zG-TG4" secondAttribute="leading" priority="800" constant="14" id="0yE-Fy-7lx"/>
+                                        <constraint firstItem="J9V-2o-va9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dJ2-zG-TG4" secondAttribute="leading" priority="800" constant="12" id="0yE-Fy-7lx"/>
                                         <constraint firstItem="6jS-3k-bWr" firstAttribute="top" secondItem="dJ2-zG-TG4" secondAttribute="top" constant="12" id="CnF-KU-tfA"/>
-                                        <constraint firstAttribute="bottom" secondItem="J9V-2o-va9" secondAttribute="bottom" constant="4" id="PoT-np-7pI"/>
+                                        <constraint firstItem="8na-Xw-5IC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dJ2-zG-TG4" secondAttribute="leading" priority="800" constant="14" id="HnW-6t-qua"/>
+                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="8na-Xw-5IC" secondAttribute="bottom" constant="8" id="Pea-Fg-EdE"/>
                                         <constraint firstItem="J9V-2o-va9" firstAttribute="top" secondItem="6jS-3k-bWr" secondAttribute="bottom" constant="4" id="qL0-wP-MzJ"/>
                                         <constraint firstItem="6jS-3k-bWr" firstAttribute="centerX" secondItem="dJ2-zG-TG4" secondAttribute="centerX" id="rdo-Kw-0Az"/>
                                         <constraint firstItem="J9V-2o-va9" firstAttribute="centerX" secondItem="dJ2-zG-TG4" secondAttribute="centerX" id="sBM-DI-ShJ"/>
                                         <constraint firstItem="6jS-3k-bWr" firstAttribute="leading" secondItem="dJ2-zG-TG4" secondAttribute="leading" priority="749" constant="12" id="xj6-dK-Ejs"/>
+                                        <constraint firstItem="8na-Xw-5IC" firstAttribute="top" secondItem="J9V-2o-va9" secondAttribute="bottom" id="yIy-Cc-lJb"/>
+                                        <constraint firstItem="8na-Xw-5IC" firstAttribute="centerX" secondItem="dJ2-zG-TG4" secondAttribute="centerX" id="zWf-Ku-gXn"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
@@ -1154,6 +1167,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="isThemable" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="iconAuthorLabel" destination="8na-Xw-5IC" id="VAA-Ri-Lvm"/>
                                     <outlet property="iconContentView" destination="dJ2-zG-TG4" id="CFw-fD-tKF"/>
                                     <outlet property="iconNameLabel" destination="J9V-2o-va9" id="BnZ-XO-b02"/>
                                     <outlet property="iconPreviewView" destination="6jS-3k-bWr" id="IVM-l6-NIq"/>
@@ -1215,7 +1229,7 @@ For Home integration to function, at least one HomeKit compatible accessory have
 NineAnimator is not affiliated with AniList.co.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.anilist.header" rowHeight="126" id="MYg-L7-BIb">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="126"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MYg-L7-BIb" id="Zxc-9M-tab">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="126"/>
@@ -1257,10 +1271,10 @@ NineAnimator is not affiliated with AniList.co.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.anilist.status" textLabel="fhT-FK-ILc" detailTextLabel="Avi-8B-KpP" style="IBUITableViewCellStyleValue1" id="oZl-Si-fmB">
-                                        <rect key="frame" x="16" y="181.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="158" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oZl-Si-fmB" id="dvH-fZ-JKC">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fhT-FK-ILc">
@@ -1293,7 +1307,7 @@ NineAnimator is not affiliated with AniList.co.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.anilist.pushUpdates" rowHeight="47" id="lmu-OH-tqb">
-                                        <rect key="frame" x="16" y="225.5" width="343" height="47"/>
+                                        <rect key="frame" x="16" y="201.5" width="343" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lmu-OH-tqb" id="cFj-k1-9az">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="47"/>
@@ -1332,14 +1346,14 @@ NineAnimator is not affiliated with AniList.co.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.anilist.action" textLabel="Kql-zU-bRq" style="IBUITableViewCellStyleDefault" id="Ehe-DM-c31">
-                                        <rect key="frame" x="16" y="272.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="248.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ehe-DM-c31" id="mc0-Xs-4a2">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Setup AniList.co" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kql-zU-bRq">
-                                                    <rect key="frame" x="16" y="0.0" width="311" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="311" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -1361,7 +1375,7 @@ NineAnimator is not affiliated with AniList.co.</string>
 NineAnimator is not affiliated with Kitsu.io.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.header" rowHeight="126" id="ZzN-jk-VgZ">
-                                        <rect key="frame" x="16" y="456" width="343" height="126"/>
+                                        <rect key="frame" x="16" y="414" width="343" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZzN-jk-VgZ" id="Cx7-Pa-crA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="126"/>
@@ -1402,10 +1416,10 @@ NineAnimator is not affiliated with Kitsu.io.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.status" textLabel="6ow-N9-6M8" detailTextLabel="d3R-vQ-52G" style="IBUITableViewCellStyleValue1" id="zz3-Nw-Iu0">
-                                        <rect key="frame" x="16" y="582" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="540" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zz3-Nw-Iu0" id="q15-lp-Qv4">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6ow-N9-6M8">
@@ -1437,7 +1451,7 @@ NineAnimator is not affiliated with Kitsu.io.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.kitsu.pushUpdates" id="bNv-bF-MtV">
-                                        <rect key="frame" x="16" y="626" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="583.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bNv-bF-MtV" id="ufl-eA-HHy">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1473,7 +1487,7 @@ NineAnimator is not affiliated with Kitsu.io.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.kitsu.action" textLabel="qV5-lV-yLf" style="IBUITableViewCellStyleDefault" id="ilf-Bn-2TC">
-                                        <rect key="frame" x="16" y="670" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="627.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ilf-Bn-2TC" id="vDd-bY-AXQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -1503,13 +1517,13 @@ MyAnimeList.net is a property of MyAnimeList, LLC. ©2015 All Rights Reserved.
 NineAnimator is not affiliated with MyAnimeList.net.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.mal.header" rowHeight="126" id="WiZ-Eu-eSL">
-                                        <rect key="frame" x="16" y="837.5" width="343" height="126"/>
+                                        <rect key="frame" x="16" y="779.5" width="343" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WiZ-Eu-eSL" id="ffG-Ww-R2i">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyAnimeList Icon" translatesAutoresizingMaskIntoConstraints="NO" id="VHq-N0-Xss">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="MyAnimeList Icon" translatesAutoresizingMaskIntoConstraints="NO" id="VHq-N0-Xss">
                                                     <rect key="frame" x="46.5" y="35" width="250" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="DVB-eh-2dl"/>
@@ -1519,7 +1533,7 @@ NineAnimator is not affiliated with MyAnimeList.net.</string>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MYANIMELIST.NET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXa-yX-XOv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="MYANIMELIST.NET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXa-yX-XOv">
                                                     <rect key="frame" x="114" y="85" width="115" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1546,21 +1560,21 @@ NineAnimator is not affiliated with MyAnimeList.net.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.mal.status" textLabel="Rbz-Nj-bSj" detailTextLabel="SkT-L9-D11" style="IBUITableViewCellStyleValue1" id="ako-ap-jY9">
-                                        <rect key="frame" x="16" y="963.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="905.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ako-ap-jY9" id="5at-3L-oMZ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rbz-Nj-bSj">
-                                                    <rect key="frame" x="16" y="12" width="49" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rbz-Nj-bSj">
+                                                    <rect key="frame" x="8" y="12" width="49" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SkT-L9-D11">
-                                                    <rect key="frame" x="250" y="12" width="77" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="SkT-L9-D11">
+                                                    <rect key="frame" x="258" y="12" width="77" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1575,14 +1589,14 @@ NineAnimator is not affiliated with MyAnimeList.net.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.mal.action" textLabel="bH1-Rj-cxO" style="IBUITableViewCellStyleDefault" id="WBM-Nh-MGU">
-                                        <rect key="frame" x="16" y="1007.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="949.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WBM-Nh-MGU" id="Oqh-Fa-C0m">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Setup MyAnimeList.net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bH1-Rj-cxO">
-                                                    <rect key="frame" x="16" y="0.0" width="311" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Setup MyAnimeList.net" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bH1-Rj-cxO">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -1603,13 +1617,13 @@ NineAnimator is not affiliated with MyAnimeList.net.</string>
 NineAnimator is not affiliated with simkl.com.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.simkl.header" rowHeight="126" id="kqF-lZ-HvV">
-                                        <rect key="frame" x="16" y="1239" width="343" height="126"/>
+                                        <rect key="frame" x="16" y="1143.5" width="343" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kqF-lZ-HvV" id="jZf-kw-7CQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="126"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Simkl Icon" translatesAutoresizingMaskIntoConstraints="NO" id="1NB-hr-B7i">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Simkl Icon" translatesAutoresizingMaskIntoConstraints="NO" id="1NB-hr-B7i">
                                                     <rect key="frame" x="46.5" y="32" width="250" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="ZJP-BV-WWV"/>
@@ -1619,7 +1633,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="ignoresInvertColors" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIMKL.COM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwG-xM-EqT">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="SIMKL.COM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwG-xM-EqT">
                                                     <rect key="frame" x="135.5" y="82" width="72.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1646,20 +1660,20 @@ NineAnimator is not affiliated with simkl.com.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="service.simkl.status" textLabel="uZi-hX-u8x" detailTextLabel="4vz-rG-dvA" style="IBUITableViewCellStyleValue1" id="XrU-lk-B1K">
-                                        <rect key="frame" x="16" y="1365" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1269.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XrU-lk-B1K" id="XXw-4m-ca6">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uZi-hX-u8x">
-                                                    <rect key="frame" x="15" y="12" width="49" height="20.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Status" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uZi-hX-u8x">
+                                                    <rect key="frame" x="8" y="12" width="49" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vz-rG-dvA">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Not Setup" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4vz-rG-dvA">
                                                     <rect key="frame" x="258" y="12" width="77" height="20.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1675,14 +1689,14 @@ NineAnimator is not affiliated with simkl.com.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="service.simkl.action" textLabel="xLV-v6-fh9" style="IBUITableViewCellStyleDefault" id="yAL-M1-WxQ">
-                                        <rect key="frame" x="16" y="1409" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1313.5" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yAL-M1-WxQ" id="vzH-Oe-z3z">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Setup Simkl.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xLV-v6-fh9">
-                                                    <rect key="frame" x="15" y="0.0" width="320" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Setup Simkl.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xLV-v6-fh9">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="controlAccentColor" catalog="System" colorSpace="catalog"/>
@@ -1734,14 +1748,14 @@ NineAnimator is not affiliated with simkl.com.</string>
                             <tableViewSection headerTitle="Discord Rich Presence" footerTitle="Rich Presence integration is only available on the macOS version of NineAnimator." id="7ve-qh-eJ7">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="Xga-R0-viW">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="47.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xga-R0-viW" id="bee-eJ-hn6">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable Rich Presence" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKG-YA-MEK">
-                                                    <rect key="frame" x="16" y="11.5" width="254" height="21"/>
+                                                    <rect key="frame" x="16" y="13.5" width="254" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1751,7 +1765,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jIg-4T-PJx">
-                                                    <rect key="frame" x="278" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="278" y="8" width="51" height="31.5"/>
                                                     <connections>
                                                         <action selector="_onEnableSwitchToggle:" destination="Fv1-Ez-qVP" eventType="valueChanged" id="xp3-V3-0aV"/>
                                                     </connections>
@@ -1772,7 +1786,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="ugW-Py-Ptp" detailTextLabel="PuS-sL-Ohy" style="IBUITableViewCellStyleValue1" id="ZoM-a3-ZER">
-                                        <rect key="frame" x="16" y="99.5" width="343" height="43.5"/>
+                                        <rect key="frame" x="16" y="79.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZoM-a3-ZER" id="x9r-wK-OZO">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
@@ -1812,14 +1826,14 @@ NineAnimator is not affiliated with simkl.com.</string>
                             <tableViewSection footerTitle="Include information about the currently watching episode on the rich presence." id="F2u-yS-1Me">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="0xL-Sb-L2t">
-                                        <rect key="frame" x="16" y="207" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="181.5" width="343" height="47.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0xL-Sb-L2t" id="kwn-cB-uXb">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Currently Watching" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m0r-Qw-HAp">
-                                                    <rect key="frame" x="16" y="11.5" width="254" height="21"/>
+                                                    <rect key="frame" x="16" y="13.5" width="254" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1829,7 +1843,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="irn-bE-VXh">
-                                                    <rect key="frame" x="278" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="278" y="8" width="51" height="31.5"/>
                                                     <connections>
                                                         <action selector="_onShowAnimeSwitchToggle:" destination="Fv1-Ez-qVP" eventType="valueChanged" id="aiw-Dd-wNd"/>
                                                     </connections>
@@ -1882,7 +1896,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                             <tableViewSection headerTitle="Storage" id="jtv-aO-g6G">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="95" id="FJK-Ua-Tzg" customClass="SettingsStorageGraphCell" customModule="NineAnimator" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="95"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FJK-Ua-Tzg" id="khW-FW-77Y">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="95"/>
@@ -1969,7 +1983,7 @@ NineAnimator is not affiliated with simkl.com.</string>
                             <tableViewSection id="Qlr-p0-gtf">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Cfa-ts-6im" imageView="swj-rA-7Bk" rowHeight="85" style="IBUITableViewCellStyleDefault" id="cE6-ss-oU2" customClass="SettingsStorageTipCell" customModule="NineAnimator" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="185.5" width="343" height="85"/>
+                                        <rect key="frame" x="16" y="162" width="343" height="85"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cE6-ss-oU2" id="4bK-gc-BOx">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="85"/>
@@ -2016,10 +2030,10 @@ The system may delete downloaded contents when storage space is low.</string>
                             <tableViewSection id="7gS-Cm-r7T">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="KjW-mL-37B" detailTextLabel="uIR-9j-Tzk" style="IBUITableViewCellStyleValue1" id="zGH-eX-iyI">
-                                        <rect key="frame" x="16" y="305.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="282" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zGH-eX-iyI" id="umT-IS-mrF">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Episodes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KjW-mL-37B">
@@ -2051,10 +2065,10 @@ The system may delete downloaded contents when storage space is low.</string>
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="xUc-BH-HNC" detailTextLabel="lcW-Lk-ZTP" style="IBUITableViewCellStyleValue1" id="PCW-Ht-50w">
-                                        <rect key="frame" x="16" y="349.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="325.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PCW-Ht-50w" id="uWd-7t-Be8">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xUc-BH-HNC">
@@ -2097,7 +2111,7 @@ Enable Download In Background to continue downloading episodes in the background
 Remaining storage capacity displayed in this screen may be different from the Settings app.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="48" id="PT7-bd-o7u">
-                                        <rect key="frame" x="16" y="428.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="404" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PT7-bd-o7u" id="SW9-2x-sla">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2134,7 +2148,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="aIA-VG-GwS">
-                                        <rect key="frame" x="16" y="476.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="452" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aIA-VG-GwS" id="iqM-wb-NSX">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2171,7 +2185,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="7lb-jp-r5i">
-                                        <rect key="frame" x="16" y="524.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="500" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7lb-jp-r5i" id="gXT-mD-eJQ">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2208,7 +2222,7 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="48" id="J4G-dZ-WXn">
-                                        <rect key="frame" x="16" y="572.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="548" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J4G-dZ-WXn" id="FUN-cf-Pdt">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2249,14 +2263,14 @@ Remaining storage capacity displayed in this screen may be different from the Se
                             <tableViewSection id="Auk-8G-CGc">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.images.remove" textLabel="hNx-wP-LZ9" style="IBUITableViewCellStyleDefault" id="zF4-ge-HAm">
-                                        <rect key="frame" x="16" y="860" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="808" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zF4-ge-HAm" id="k6t-lg-aXA">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hNx-wP-LZ9">
-                                                    <rect key="frame" x="16" y="0.0" width="311" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear Cached Images" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hNx-wP-LZ9">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="linkColor"/>
@@ -2270,14 +2284,14 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="storage.downloads.remove" textLabel="Zaa-23-f0r" style="IBUITableViewCellStyleDefault" id="dIB-SF-EyU">
-                                        <rect key="frame" x="16" y="904" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="852" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dIB-SF-EyU" id="giq-mE-1A8">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Clear All Downloads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zaa-23-f0r">
-                                                    <rect key="frame" x="16" y="0.0" width="311" height="44"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" text="Clear All Downloads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Zaa-23-f0r">
+                                                    <rect key="frame" x="8" y="0.0" width="327" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemRedColor"/>
@@ -2332,10 +2346,10 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                 <string key="footerTitle">NineAnimator is a free, open source iOS anime watching application developed by Marcus Zhou (other.marcus@icloud.com) under the GNU General Public License version 3.  NineAnimator is not designed to promote piracy, nor to support anime piracy websites.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="about.version" textLabel="A3J-Ya-mRo" detailTextLabel="EeO-5U-kPF" style="IBUITableViewCellStyleValue1" id="ZXX-84-uGw">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZXX-84-uGw" id="GfS-oZ-qOh">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A3J-Ya-mRo">
@@ -2356,10 +2370,10 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="about.build" textLabel="xjp-AG-MX5" detailTextLabel="Dt8-B6-aD6" style="IBUITableViewCellStyleValue1" id="h9a-4K-sfQ">
-                                        <rect key="frame" x="16" y="99.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="75.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="h9a-4K-sfQ" id="Ewd-gu-AZU">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Build" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xjp-AG-MX5">
@@ -2380,14 +2394,14 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.viewrepo" textLabel="0ne-Hh-nMP" style="IBUITableViewCellStyleDefault" id="dyi-RY-36i">
-                                        <rect key="frame" x="16" y="143.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="119" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dyi-RY-36i" id="WCX-Sq-mbz">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="GitHub Repository" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0ne-Hh-nMP">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2397,14 +2411,14 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.issue" textLabel="hZK-F2-4cA" style="IBUITableViewCellStyleDefault" id="e2a-gK-yOx">
-                                        <rect key="frame" x="16" y="187.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="162.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="e2a-gK-yOx" id="k7A-uF-rZK">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Report Issues" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hZK-F2-4cA">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2414,14 +2428,14 @@ Remaining storage capacity displayed in this screen may be different from the Se
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.discord" textLabel="zQD-NZ-dqC" style="IBUITableViewCellStyleDefault" id="xIS-4R-LGx">
-                                        <rect key="frame" x="16" y="231.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="206" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xIS-4R-LGx" id="xRs-ka-vm0">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Discuss on Discord" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zQD-NZ-dqC">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2441,14 +2455,14 @@ By setting up third-party tracking services, you agree for NineAnimator to uploa
 Your playback history and preferences may be stored in your iCloud account.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy.policy" textLabel="3bY-Q0-VOr" style="IBUITableViewCellStyleDefault" id="RYb-Co-2vy">
-                                        <rect key="frame" x="16" y="447" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="399.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RYb-Co-2vy" id="WHo-EJ-bRd">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Privacy Policy" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3bY-Q0-VOr">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2458,14 +2472,14 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.privacy" textLabel="N8M-Jf-n7k" style="IBUITableViewCellStyleDefault" id="V5E-7b-5XW">
-                                        <rect key="frame" x="16" y="491" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="443" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V5E-7b-5XW" id="lJY-c3-1ET">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Manage Personal Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="N8M-Jf-n7k">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2475,14 +2489,14 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="about.privacy.analytics.optOut" id="orH-GQ-LET">
-                                        <rect key="frame" x="16" y="535" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="486.5" width="343" height="47.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orH-GQ-LET" id="pE4-Iy-LFr">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="47.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opt-out Analytics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHw-KD-pcc">
-                                                    <rect key="frame" x="16" y="11.5" width="254" height="21"/>
+                                                    <rect key="frame" x="16" y="13.5" width="254" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -2492,7 +2506,7 @@ Your playback history and preferences may be stored in your iCloud account.</str
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pVb-6h-Klh">
-                                                    <rect key="frame" x="278" y="8" width="51" height="28"/>
+                                                    <rect key="frame" x="278" y="8" width="51" height="31.5"/>
                                                     <connections>
                                                         <action selector="didToggleOptOutAnalyticsSwitch:" destination="Rvs-DG-kmr" eventType="valueChanged" id="bpJ-PC-I9j"/>
                                                     </connections>
@@ -2523,14 +2537,14 @@ NineAnimator is distributed in the hope that it will be useful, but WITHOUT ANY 
 You should have received a copy of the GNU General Public License along with NineAnimator.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.license" textLabel="p2c-ro-yj3" style="IBUITableViewCellStyleDefault" id="3WC-jV-54E">
-                                        <rect key="frame" x="16" y="910.5" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="824" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3WC-jV-54E" id="OKY-Es-GnJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="License" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="p2c-ro-yj3">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2611,14 +2625,14 @@ This software is covered by Elegant Chaos' liberal license: http://elegantchaos.
 See the complete credit list in the "Credits" page.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="about.credits" textLabel="LfV-dW-fu4" style="IBUITableViewCellStyleDefault" id="edi-Jf-1sC">
-                                        <rect key="frame" x="16" y="1302" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="1172" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="edi-Jf-1sC" id="02i-0k-mmN">
-                                            <rect key="frame" x="0.0" y="0.0" width="316" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="318.5" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Credits" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LfV-dW-fu4">
-                                                    <rect key="frame" x="16" y="0.0" width="292" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="294.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -2657,7 +2671,7 @@ See the complete credit list in the "Credits" page.</string>
                                 <string key="footerTitle">By switching on Opt-out Analytics, the app will no longer automatically collect analytical data. We use analytical data to get insights on how people use our Services so that we can make our Services better. See our Privacy Policy for what data we collect and how we use it.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="analytics.optOutAnalytics" rowHeight="48" id="yeE-Ve-gBL">
-                                        <rect key="frame" x="16" y="55.5" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="32" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yeE-Ve-gBL" id="GIk-nm-Nth">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2699,7 +2713,7 @@ See the complete credit list in the "Credits" page.</string>
                                 <string key="footerTitle">Remove the dynamic portions of the runtime logs sent with the crash reports. NineAnimator automatically saves the runtime logs from a crashed session and attaches them with the crash reports.</string>
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="analytics.redactLogs" rowHeight="48" id="k7w-Yb-XDH">
-                                        <rect key="frame" x="16" y="259" width="343" height="48"/>
+                                        <rect key="frame" x="16" y="216" width="343" height="48"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k7w-Yb-XDH" id="CII-lg-PSt">
                                             <rect key="frame" x="0.0" y="0.0" width="343" height="48"/>
@@ -2740,14 +2754,14 @@ See the complete credit list in the "Credits" page.</string>
                             <tableViewSection footerTitle="Export the current session runtime logs for debugging purposes." id="yXF-MW-GTr">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="analytics.exportLogs" textLabel="NuA-hZ-4xE" style="IBUITableViewCellStyleDefault" id="Egs-nk-tpx">
-                                        <rect key="frame" x="16" y="419" width="343" height="44"/>
+                                        <rect key="frame" x="16" y="350.5" width="343" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Egs-nk-tpx" id="2EF-5Q-Tlw">
-                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Export Runtime Logs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NuA-hZ-4xE">
-                                                    <rect key="frame" x="16" y="0.0" width="311" height="44"/>
+                                                    <rect key="frame" x="16" y="0.0" width="311" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="linkColor"/>
