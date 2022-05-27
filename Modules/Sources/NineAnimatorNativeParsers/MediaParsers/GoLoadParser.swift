@@ -53,7 +53,7 @@ class GoLoadParser: VideoProviderParser {
             
             let keyMatch = GoLoadParser.keysRegex.matches(in: streamingPage).map { match in
                 (0 ..< match.numberOfRanges).map {
-                    return String(streamingPage[match.range(at: $0)])
+                    String(streamingPage[match.range(at: $0)])
                 }
             }
             

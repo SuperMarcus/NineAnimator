@@ -89,7 +89,7 @@ extension NASourcePantsubase {
                 var additionalAttributes = [Anime.AttributeKey: Any]()
                 
                 let airDate = (try bowl
-                    .select("div.info > ul")[safe:1]?
+                    .select("div.info > ul")[safe: 1]?
                     .text()) ?? ""
                 additionalAttributes[.airDate] = airDate
                 

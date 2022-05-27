@@ -54,7 +54,7 @@ extension NASourceZoroAnime {
                     ]
                 ) .responseBowl .then {
                 bowl -> [AnyLink] in
-                return try bowl.select(".film_list-wrap > .flw-item").map {
+                try bowl.select(".film_list-wrap > .flw-item").map {
                     item in
                     let artworkLinkString = try item.select(".film-poster > img").attr("data-src")
                     let artworkLink = try URL(
@@ -67,6 +67,7 @@ extension NASourceZoroAnime {
                         relativeTo: parent.endpointURL
                     ).tryUnwrap()
                     let animeTitle = try animeTitleElement.text()
+                    
                     return AnimeLink(
                         title: animeTitle,
                         link: animePageLink,

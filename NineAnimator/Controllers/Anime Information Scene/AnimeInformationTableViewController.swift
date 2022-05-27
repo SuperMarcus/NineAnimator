@@ -177,7 +177,9 @@ class AnimeInformationTableViewController: UITableViewController, DontBotherView
     private func onAnimeInformationDidLoad(_ information: ListingAnimeInformation) {
         // Store information
         presentingAnimeInformation = information
-        enumeratedInformationList = information.information.map { $0 }
+        enumeratedInformationList = information.information.map {
+            (name: $0.key, value: $0.value)
+        }
         
         // Update table view
         tableView.reloadSections(Section.indexSet([

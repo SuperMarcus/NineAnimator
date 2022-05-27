@@ -35,8 +35,7 @@ class VideoVardParser: VideoProviderParser {
                 cb($0.value, $0.error)
             }
         } .thenPromise {
-            hashResponse in
-            return NineAnimatorPromise {
+            hashResponse in NineAnimatorPromise {
                 cb in session.request(
                     VideoVardParser.apiBaseSourceURL.appendingPathComponent("player/setup"),
                     method: .post,
@@ -49,43 +48,43 @@ class VideoVardParser: VideoProviderParser {
                 ).responseDecodable(of: SetupResponse.self) {
                     cb($0.value, $0.error)
                 }
-            } .then {
-                setupResponse -> PlaybackMedia in
-                
-                // is there a cleaner way to replace corresponding characters?
-                let key = String(setupResponse.seed.map {
-                    switch $0 {
-                    case "0": return "5"
-                    case "1": return "6"
-                    case "2": return "7"
-                    case "5": return "0"
-                    case "6": return "1"
-                    case "7": return "2"
-                    default: return $0
-                    }
-                })
-                let fileAsset = String(self.decrypt(ascii: setupResponse.src, keystr: key).map {
-                    switch $0 {
-                    case "0": return "5"
-                    case "1": return "6"
-                    case "2": return "7"
-                    case "5": return "0"
-                    case "6": return "1"
-                    case "7": return "2"
-                    default: return $0
-                    }
-                })
-                
-                Log.info("(VideoVard Parser) found asset at %@", fileAsset)
-                                
-                return BasicPlaybackMedia(
-                    url: try URL(string: fileAsset).tryUnwrap(.providerError("Unable to find the decrypt file resource")),
-                    parent: episode,
-                    contentType: "application/vnd.apple.mpegurl",
-                    headers: [ "Referer": episode.target.absoluteString ],
-                    isAggregated: true
-                )
             }
+        } .then {
+            setupResponse -> PlaybackMedia in
+            
+            // is there a cleaner way to replace corresponding characters?
+            let key = String(setupResponse.seed.map {
+                switch $0 {
+                case "0": return "5"
+                case "1": return "6"
+                case "2": return "7"
+                case "5": return "0"
+                case "6": return "1"
+                case "7": return "2"
+                default: return $0
+                }
+            })
+            let fileAsset = String(self.decrypt(ascii: setupResponse.src, keystr: key).map {
+                switch $0 {
+                case "0": return "5"
+                case "1": return "6"
+                case "2": return "7"
+                case "5": return "0"
+                case "6": return "1"
+                case "7": return "2"
+                default: return $0
+                }
+            })
+            
+            Log.info("(VideoVard Parser) found asset at %@", fileAsset)
+                            
+            return BasicPlaybackMedia(
+                url: try URL(string: fileAsset).tryUnwrap(.providerError("Unable to find the decrypt file resource")),
+                parent: episode,
+                contentType: "application/vnd.apple.mpegurl",
+                headers: [ "Referer": episode.target.absoluteString ],
+                isAggregated: true
+            )
         } .handle(handler)
     }
     
