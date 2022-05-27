@@ -38,6 +38,12 @@
 		2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */; };
 		2C12EDE721BDFFFF0064D2BD /* CastController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE621BDFFFF0064D2BD /* CastController.swift */; };
 		2C12EDE921BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */; };
+		2C17D3292840889400B7E2EA /* Blush Max Glow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D3272840889300B7E2EA /* Blush Max Glow@2x.png */; };
+		2C17D32A2840889400B7E2EA /* Blush Max Glow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D3282840889300B7E2EA /* Blush Max Glow@3x.png */; };
+		2C17D32D284088AD00B7E2EA /* Rounded Cotton Candy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D32B284088AD00B7E2EA /* Rounded Cotton Candy@3x.png */; };
+		2C17D32E284088AD00B7E2EA /* Rounded Cotton Candy@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D32C284088AD00B7E2EA /* Rounded Cotton Candy@2x.png */; };
+		2C17D331284088C600B7E2EA /* Sandman's Corner@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D32F284088C600B7E2EA /* Sandman's Corner@3x.png */; };
+		2C17D332284088C600B7E2EA /* Sandman's Corner@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2C17D330284088C600B7E2EA /* Sandman's Corner@2x.png */; };
 		2C17E08921D7D67000E3FD1F /* UnavailableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */; };
 		2C18BA572557519F005CD7D9 /* SettingsDebuggingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */; };
 		2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C1C716622183FA500760A69 /* AnimeListing.storyboard */; };
@@ -290,6 +296,12 @@
 		2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastMediaPlaybackViewController.swift; sourceTree = "<group>"; };
 		2C12EDE621BDFFFF0064D2BD /* CastController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastController.swift; sourceTree = "<group>"; };
 		2C12EDE821BE13920064D2BD /* GoogleCastDeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastDeviceTableViewCell.swift; sourceTree = "<group>"; };
+		2C17D3272840889300B7E2EA /* Blush Max Glow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blush Max Glow@2x.png"; sourceTree = "<group>"; };
+		2C17D3282840889300B7E2EA /* Blush Max Glow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blush Max Glow@3x.png"; sourceTree = "<group>"; };
+		2C17D32B284088AD00B7E2EA /* Rounded Cotton Candy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rounded Cotton Candy@3x.png"; sourceTree = "<group>"; };
+		2C17D32C284088AD00B7E2EA /* Rounded Cotton Candy@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rounded Cotton Candy@2x.png"; sourceTree = "<group>"; };
+		2C17D32F284088C600B7E2EA /* Sandman's Corner@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandman's Corner@3x.png"; sourceTree = "<group>"; };
+		2C17D330284088C600B7E2EA /* Sandman's Corner@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sandman's Corner@2x.png"; sourceTree = "<group>"; };
 		2C17E08821D7D67000E3FD1F /* UnavailableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnavailableTableViewCell.swift; sourceTree = "<group>"; };
 		2C18BA562557519F005CD7D9 /* SettingsDebuggingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDebuggingController.swift; sourceTree = "<group>"; };
 		2C1C716722183FA500760A69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/AnimeListing.storyboard; sourceTree = "<group>"; };
@@ -947,6 +959,12 @@
 		2C83E06B2526A77600B00850 /* Alternative Icons */ = {
 			isa = PBXGroup;
 			children = (
+				2C17D330284088C600B7E2EA /* Sandman's Corner@2x.png */,
+				2C17D32F284088C600B7E2EA /* Sandman's Corner@3x.png */,
+				2C17D32C284088AD00B7E2EA /* Rounded Cotton Candy@2x.png */,
+				2C17D32B284088AD00B7E2EA /* Rounded Cotton Candy@3x.png */,
+				2C17D3272840889300B7E2EA /* Blush Max Glow@2x.png */,
+				2C17D3282840889300B7E2EA /* Blush Max Glow@3x.png */,
 				2CDABE1F26B85E1B00957380 /* Twodiback@2x.png */,
 				2CDABE1E26B85E1B00957380 /* Twodiback@3x.png */,
 				2C34F04C2594403100D16F64 /* Tydox Square@2x.png */,
@@ -1393,15 +1411,19 @@
 				2C107712249EFBFC007B82D9 /* Fox@3x.png in Resources */,
 				2C83E0812526C51B00B00850 /* Tydox's 9@3x.png in Resources */,
 				2C107713249EFBFC007B82D9 /* Fox@2x.png in Resources */,
+				2C17D331284088C600B7E2EA /* Sandman's Corner@3x.png in Resources */,
 				2C34F0562594403100D16F64 /* Use's Inverted@2x.png in Resources */,
 				2C34F0512594403100D16F64 /* Tydox Square@3x.png in Resources */,
 				2CDABE2C26B85EBD00957380 /* Furwa's Theme@3x.png in Resources */,
+				2C17D3292840889400B7E2EA /* Blush Max Glow@2x.png in Resources */,
 				2C34F0542594403100D16F64 /* Zeref's Collection@2x.png in Resources */,
 				2C83E0802526C51B00B00850 /* Tydox's 9@2x.png in Resources */,
 				2CDABE2826B85E9900957380 /* Twodi Dark@3x.png in Resources */,
 				2CDABE2526B85E6C00957380 /* Twodi Light@2x.png in Resources */,
 				2C1C7190221B118700760A69 /* AnimeInformation.storyboard in Resources */,
+				2C17D332284088C600B7E2EA /* Sandman's Corner@2x.png in Resources */,
 				2CDC275625467E900076EC08 /* NsxHalloween@3x.png in Resources */,
+				2C17D32A2840889400B7E2EA /* Blush Max Glow@3x.png in Resources */,
 				2C0E755022621C3600DF3AC4 /* AnimeDiscovery.storyboard in Resources */,
 				2C4ABC8E21B76010009B4D47 /* AnimePlayer.storyboard in Resources */,
 				2C4ABC5E21B5881F009B4D47 /* LaunchScreen.storyboard in Resources */,
@@ -1414,11 +1436,13 @@
 				2C83E0872526C62D00B00850 /* 9 Testboi@3x.png in Resources */,
 				2C9C44FB21CD2405004C8F0C /* Settings.storyboard in Resources */,
 				2C12EDE321BDE9230064D2BD /* GoogleCastMediaControl.storyboard in Resources */,
+				2C17D32E284088AD00B7E2EA /* Rounded Cotton Candy@2x.png in Resources */,
 				2CDABE2D26B85EBD00957380 /* Furwa's Theme@2x.png in Resources */,
 				2CDABE2026B85E1B00957380 /* Twodiback@3x.png in Resources */,
 				2C1C716822183FA500760A69 /* AnimeListing.storyboard in Resources */,
 				2CDABE2926B85E9900957380 /* Twodi Dark@2x.png in Resources */,
 				2CDC277425476A670076EC08 /* Bald Man@2x.png in Resources */,
+				2C17D32D284088AD00B7E2EA /* Rounded Cotton Candy@3x.png in Resources */,
 				2C8F6E8722062BB90047798B /* OfflineAnimeViewer.storyboard in Resources */,
 				2C4ABC5921B5881E009B4D47 /* Main.storyboard in Resources */,
 				2C34F0522594403100D16F64 /* Tydox Square@2x.png in Resources */,

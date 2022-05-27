@@ -59,7 +59,10 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             "Twodi Light",
             "Twodi Dark",
             "Furwa's Theme",
-            "Anudeep's Colossus"
+            "Anudeep's Colossus",
+            "Blush Max Glow",
+            "Rounded Cotton Candy",
+            "Sandman's Corner"
         ] .compactMap {
             communityIconName in alternativeIcon(forName: communityIconName)
         } .sorted(by: <)

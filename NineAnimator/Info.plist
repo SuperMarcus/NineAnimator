@@ -175,12 +175,78 @@
 					<string>Zeref&apos;s Collection</string>
 				</array>
 			</dict>
+			<key>Blush Max Glow</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Blush</string>
+				<key>Author</key>
+				<string>Ex#3389</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Blush Max Glow</string>
+				</array>
+			</dict>
+			<key>Rounded Cotton Candy</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Cotton Candy</string>
+				<key>Author</key>
+				<string>Ex#3389</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Rounded Cotton Candy</string>
+				</array>
+			</dict>
+			<key>Sandman&apos;s Corner</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Corner</string>
+				<key>Author</key>
+				<string>sandman#0768</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Sandman&apos;s Corner</string>
+				</array>
+			</dict>
 		</dict>
 	</dict>
 	<key>CFBundleIcons~ipad</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
 		<dict>
+			<key>Sandman&apos;s Corner</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Corner</string>
+				<key>Author</key>
+				<string>sandman#0768</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Sandman&apos;s Corner</string>
+				</array>
+			</dict>
+			<key>Rounded Cotton Candy</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Cotton Candy</string>
+				<key>Author</key>
+				<string>Ex#3389</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Rounded Cotton Candy</string>
+				</array>
+			</dict>
+			<key>Blush Max Glow</key>
+			<dict>
+				<key>DisplayName</key>
+				<string>Blush</string>
+				<key>Author</key>
+				<string>Ex#3389</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Blush Max Glow</string>
+				</array>
+			</dict>
 			<key>9 Testboi</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
