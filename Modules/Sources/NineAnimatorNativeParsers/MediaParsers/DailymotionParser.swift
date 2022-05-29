@@ -26,8 +26,9 @@ class DailymotionParser: VideoProviderParser {
         [ "Dailymotion", "Daily motion" ]
     }
 
-    private static let baseSourceURL = URL(string: "https://www.dailymotion.com/")!
+    private static let baseSourceURL = URL(string: "https://www.dailymotion.com")!
     private static let graphqlApiBase = URL(string: "https://graphql.api.dailymotion.com/")!
+    
     private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -84,7 +85,7 @@ class DailymotionParser: VideoProviderParser {
                 callback($0.value, $0.error)
             }
         } .thenPromise {
-            tokenResponse -> NineAnimatorPromise<PlaybackMedia> in
+            tokenResponse -> NineAnimatorPromise<PasswordResponse> in
             
             let videoId = episode.target.lastPathComponent
             let password = episode.userInfo["password"]
@@ -110,37 +111,37 @@ class DailymotionParser: VideoProviderParser {
                     parameters: body,
                     encoding: JSONEncoding.default,
                     headers: headers
-                ).responseDecodable(of: PasswordResponse.self, decoder: self.decoder) {
+                ) .responseDecodable(of: PasswordResponse.self, decoder: self.decoder) {
                     callback($0.value, $0.error)
                 }
-            } .thenPromise {
-                passwordResponse -> NineAnimatorPromise<PlaybackMedia> in
-                                
-                let xid = passwordResponse.data.video.xid
-                
-                return NineAnimatorPromise {
-                    callback in session.request(
-                        DailymotionParser.baseSourceURL.appendingPathComponent("player/metadata/video/\(xid)")
-                    ) .responseDecodable(of: MetadataResponse.self, decoder: self.decoder) {
-                        callback($0.value, $0.error)
-                    }
-                } .then {
-                    metadataResponse -> PlaybackMedia in
-
-                    let resourceUrl = try URL(string: metadataResponse.qualities.auto.first?.url ?? "").tryUnwrap(.urlError)
-                    let isHLSAsset = (metadataResponse.qualities.auto.first?.type.contains("mpegURL") ?? false)
-                    
-                    Log.info("(Dailymotion Parser) found asset at %@", resourceUrl.absoluteString)
-
-                    return BasicPlaybackMedia(
-                        url: resourceUrl,
-                        parent: episode,
-                        contentType: isHLSAsset ? "application/vnd.apple.mpegurl" : "video/mp4",
-                        headers: [ "referer": episode.target.absoluteString ],
-                        isAggregated: isHLSAsset
-                    )
+            }
+        } .thenPromise {
+            passwordResponse -> NineAnimatorPromise<MetadataResponse> in
+                            
+            let xid = passwordResponse.data.video.xid
+            
+            return NineAnimatorPromise {
+                callback in session.request(
+                    DailymotionParser.baseSourceURL.appendingPathComponent("player/metadata/video/\(xid)")
+                ) .responseDecodable(of: MetadataResponse.self, decoder: self.decoder) {
+                    callback($0.value, $0.error)
                 }
             }
+        } .then {
+            metadataResponse -> PlaybackMedia in
+
+            let resourceUrl = try URL(string: metadataResponse.qualities.auto.first?.url ?? "").tryUnwrap(.urlError)
+            let isHLSAsset = (metadataResponse.qualities.auto.first?.type.contains("mpegURL") ?? false)
+            
+            Log.info("(Dailymotion Parser) found asset at %@", resourceUrl.absoluteString)
+
+            return BasicPlaybackMedia(
+                url: resourceUrl,
+                parent: episode,
+                contentType: isHLSAsset ? "application/vnd.apple.mpegurl" : "video/mp4",
+                headers: [ "referer": episode.target.absoluteString ],
+                isAggregated: isHLSAsset
+            )
         } .handle(handler)
     }
     
