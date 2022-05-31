@@ -24,15 +24,27 @@ import NineAnimatorNativeSources
 import UIKit
 
 class SettingsAppIconController: MinFilledCollectionViewController {
-    private lazy var availableAppIcons: [String] = {
+    private lazy var availableAppIcons: [AlternativeAppIcon] = {
         guard let declaredAltIcons = Bundle.main.infoDictionary?.value(at: "CFBundleIcons.CFBundleAlternateIcons") as? [String: Any] else {
             return []
         }
         
-        return Array(declaredAltIcons.keys)
+        return declaredAltIcons.compactMap {
+            iconValuePair in
+            let (iconName, iconProperties) = iconValuePair
+            
+            guard let iconProperties = iconProperties as? [String: Any] else {
+                return nil
+            }
+            
+            let iconAuthor = (iconProperties["Author"] as? String) ?? "Unknown"
+            let iconDisplayName = iconProperties["DisplayName"] as? String
+            
+            return AlternativeAppIcon(name: iconName, displayName: iconDisplayName, author: iconAuthor)
+        } .sorted(by: <)
     }()
     
-    private lazy var communityContributedIcons: [String] = {
+    private lazy var communityContributedIcons: [AlternativeAppIcon] = {
         // A list of app icons contributed by our discord community
         [
             "Tydox's 9",
@@ -47,29 +59,38 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             "Twodi Light",
             "Twodi Dark",
             "Furwa's Theme",
-            "Anudeep's Colossus"
-        ] .filter { availableAppIcons.contains($0) }
-    }()
-    
-    private lazy var discoverableIcons: [String] = {
-        availableAppIcons.filter {
-            !communityContributedIcons.contains($0)
+            "Anudeep's Colossus",
+            "Blush Max Glow",
+            "Rounded Cotton Candy",
+            "Sandman's Corner"
+        ] .compactMap {
+            communityIconName in alternativeIcon(forName: communityIconName)
         } .sorted(by: <)
     }()
     
-    private lazy var discoveredIconsSet = Set(NineAnimator.default.user.discoveredAppIcons)
+    private lazy var discoverableIcons: [AlternativeAppIcon] = {
+        let communityIcons = communityContributedIcons
+        
+        return availableAppIcons.filter {
+            availableIcon in !communityIcons.contains(availableIcon)
+        } .sorted(by: <)
+    }()
     
-    private var currentSelection: String? {
-        UIApplication.shared.alternateIconName
+    private lazy var discoveredIconsSet = Set(NineAnimator.default.user.discoveredAppIcons.compactMap {
+        discoveredIconName in alternativeIcon(forName: discoveredIconName)
+    })
+    
+    private var currentSelection: AlternativeAppIcon? {
+        alternativeIcon(forName: UIApplication.shared.alternateIconName)
     }
     
     private var currentSelectionCellPath: IndexPath {
-        indexPath(forIconName: currentSelection)
+        indexPath(forIcon: currentSelection)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setLayoutParameters(alwaysFillLine: false, minimalSize: .init(width: 80, height: 130))
+        setLayoutParameters(alwaysFillLine: false, minimalSize: .init(width: 90, height: 130))
         configureForTransparentScrollEdge()
     }
     
@@ -90,9 +111,9 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             for: indexPath
         ) as! SettingsAppIconAlternativeIconCell
         
-        let iconName = self.iconName(forIndex: indexPath)
-        cell.setPresenting(iconName, isUnlocked: self.isIconUnlocked(iconName: iconName))
-        cell.setIsCurrentIcon(currentSelection == iconName, animated: false)
+        let altIcon = self.alternativeIcon(forIndex: indexPath)
+        cell.setPresenting(altIcon, isUnlocked: self.isIconUnlocked(icon: altIcon))
+        cell.setIsCurrentIcon(currentSelection == altIcon, animated: false)
         
         return cell
     }
@@ -117,20 +138,20 @@ class SettingsAppIconController: MinFilledCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedIconName = iconName(forIndex: indexPath)
+        let selectedIcon = alternativeIcon(forIndex: indexPath)
         let previousIndex = currentSelectionCellPath
         
         // Of course...anyone can bypass this. But that wouldn't be fun would it?
-        guard self.isIconUnlocked(iconName: selectedIconName) else {
+        guard self.isIconUnlocked(icon: selectedIcon) else {
             return Log.info("[SettingsAppIconController] Per uttiya's request, this icon cannot be used because it hasn't been discovered.")
         }
         
         Analytics.trackEvent("App Magic #1001", withProperties: [
-            "previousIcon": selectedIconName ?? "default",
-            "currentIcon": currentSelection ?? "default"
+            "previousIcon": selectedIcon?.name ?? "default",
+            "currentIcon": currentSelection?.name ?? "default"
         ])
         
-        UIApplication.shared.setAlternateIconName(selectedIconName) {
+        UIApplication.shared.setAlternateIconName(selectedIcon?.name) {
             [weak self] error in
             guard error == nil else {
                 return Log.error(error)
@@ -155,8 +176,8 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         .init(top: 0, left: 12, bottom: 16, right: 12)
     }
     
-    private func indexPath(forIconName iconName: String?) -> IndexPath {
-        if let selection = iconName {
+    private func indexPath(forIcon icon: AlternativeAppIcon?) -> IndexPath {
+        if let selection = icon {
             if let index = communityContributedIcons.firstIndex(of: selection) {
                 return .init(item: index, section: 1)
             } else if let index = discoverableIcons.firstIndex(of: selection) {
@@ -167,7 +188,7 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         return .init(item: 0, section: 0)
     }
     
-    private func iconName(forIndex indexPath: IndexPath) -> String? {
+    private func alternativeIcon(forIndex indexPath: IndexPath) -> AlternativeAppIcon? {
         switch indexPath.section {
         case 1: return communityContributedIcons[indexPath.item]
         case 2: return discoverableIcons[indexPath.item]
@@ -175,12 +196,31 @@ class SettingsAppIconController: MinFilledCollectionViewController {
         }
     }
     
-    private func isIconUnlocked(iconName: String?) -> Bool {
-        if let iconName = iconName, !communityContributedIcons.contains(iconName) {
-            return discoveredIconsSet.contains(iconName)
+    private func alternativeIcon(forName name: String?) -> AlternativeAppIcon? {
+        availableAppIcons.first { $0.name == name }
+    }
+    
+    private func isIconUnlocked(icon: AlternativeAppIcon?) -> Bool {
+        if let icon = icon, !communityContributedIcons.contains(icon) {
+            return discoveredIconsSet.contains(icon)
         }
         
         return true
+    }
+}
+
+// MARK: - Helper Structs
+extension SettingsAppIconController {
+    struct AlternativeAppIcon: Hashable, Comparable {
+        var name: String
+        var displayName: String?
+        var author: String
+        
+        static func < (lhs: SettingsAppIconController.AlternativeAppIcon, rhs: SettingsAppIconController.AlternativeAppIcon) -> Bool {
+            let lhsSortingName = lhs.displayName ?? lhs.name
+            let rhsSortingName = rhs.displayName ?? rhs.name
+            return lhsSortingName == rhsSortingName ? lhs.author < rhs.author : lhsSortingName < rhsSortingName
+        }
     }
 }
 

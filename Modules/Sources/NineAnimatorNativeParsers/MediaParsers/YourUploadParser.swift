@@ -22,7 +22,7 @@ import Foundation
 import NineAnimatorCommon
 
 class YourUploadParser: VideoProviderParser {
-    var aliases: [String] { [ "yourupload", ] }
+    var aliases: [String] { [ "yourupload" ] }
     
     static let videoSourceRegex = try! NSRegularExpression(
         pattern: #"file: '([^']+)"#,

@@ -46,7 +46,7 @@ class StreamSBParser: VideoProviderParser {
     }
     
     private static let versionRegex = try! NSRegularExpression(
-        pattern: #"/app\.v1\.(\d{2})\.js"#,
+        pattern: #"app(\.v\d+\.\d+)?\.js"#,
         options: .caseInsensitive
     )
     
@@ -109,7 +109,7 @@ class StreamSBParser: VideoProviderParser {
         self.getAlias(url: episode.target, with: session)
             .thenPromise {
                 alias -> NineAnimatorPromise<PlaybackMedia> in
-                let videoID = episode.target.deletingPathExtension().lastPathComponent
+                let videoID = episode.target.deletingPathExtension().lastPathComponent.replacingOccurrences(of: "embed-", with: "")
                 
                 let hexVideoID = Data(videoID.utf8).map {
                     String(format: "%x", $0 )

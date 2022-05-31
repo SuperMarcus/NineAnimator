@@ -37,7 +37,7 @@ extension NASourceAnimePahe {
             let bowl = try SwiftSoup.parse(responseContent)
             
             // Find the anime identifier with a regex
-            let animeIdentifierRegex = try NSRegularExpression(pattern: "anime-(\\d+)", options: [ .caseInsensitive ])
+            let animeIdentifierRegex = try NSRegularExpression(pattern: "let id = \"([-\\w]+-[\\w]+)\"", options: [ .caseInsensitive ])
             let animeIdentifier = try (animeIdentifierRegex.firstMatch(in: responseContent)?.firstMatchingGroup).tryUnwrap(.responseError("Unable to find the matching anime identifier on animepahe.com"))
             
             // Find the synopsis in the container
@@ -92,7 +92,7 @@ extension NASourceAnimePahe {
             episodeRange, perPageEntries, animeIdentifier, animeSynopsis, animeAttributes, reconstructedAnimeLink -> Anime in
             // Using a little trick here: since animepahe lists episodes in pages, it is
             // slow and quite unreasonable to interate through all pages. Therefore, stores
-            // the episode number and page number in the episode identifeir, and then
+            // the episode number and page number in the episode identifier, and then
             // uses that information to request the real episode identifier when requesting
             // the Episode object.
             let episodeIdentifiers: [(episodeNumber: Int, page: Int)] = episodeRange

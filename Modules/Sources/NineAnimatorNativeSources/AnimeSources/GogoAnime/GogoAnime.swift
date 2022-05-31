@@ -30,7 +30,7 @@ import AppKit
 class NASourceGogoAnime: BaseSource, Source, PromiseSource {
     var name: String { "gogoanime.gg" }
     
-    var aliases: [String] { [] }
+    var aliases: [String] { [ "gogoanime.tv" ] }
     
 #if canImport(UIKit)
     var siteLogo: UIImage { #imageLiteral(resourceName: "GogoAnime Site Icon") }

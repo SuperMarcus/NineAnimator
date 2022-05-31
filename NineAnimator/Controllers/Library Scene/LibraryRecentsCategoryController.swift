@@ -207,10 +207,11 @@ extension LibraryRecentsCategoryController {
     }
     
     @IBAction private func onLongPressGestureRegconized(_ sender: UILongPressGestureRecognizer) {
-        if #available(iOS 13.0, *) {
-            // Not doing anything for iOS 13.0+ since
-            // actions are presented with context menus
-        } else if sender.state == .began {
+        if #unavailable(iOS 13.0) {
+            guard sender.state == .began else {
+                return
+            }
+            
             let location = sender.location(in: collectionView)
             // Obtain the cell
             if let indexPath = collectionView.indexPathForItem(at: location),

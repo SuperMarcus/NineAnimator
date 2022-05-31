@@ -23,29 +23,33 @@ import NineAnimatorNativeSources
 import UIKit
 
 class SettingsAppIconAlternativeIconCell: UICollectionViewCell, Themable {
-    private(set) var representingIconName: String?
+    private(set) var representingIcon: SettingsAppIconController.AlternativeAppIcon?
     private(set) var isCurrentlySelected = false
     
-    @IBOutlet private var iconNameLabel: UILabel!
-    @IBOutlet private var iconPreviewView: UIImageView!
-    @IBOutlet private var iconContentView: UIView!
+    @IBOutlet private weak var iconNameLabel: UILabel!
+    @IBOutlet private weak var iconPreviewView: UIImageView!
+    @IBOutlet private weak var iconContentView: UIView!
+    @IBOutlet private weak var iconAuthorLabel: UILabel!
     
     override func prepareForReuse() {
         iconPreviewView.layer.borderColor = Theme.current.background.cgColor
         isCurrentlySelected = false
     }
     
-    func setPresenting(_ alternativeIconName: String?, isUnlocked: Bool) {
+    func setPresenting(_ alternativeIcon: SettingsAppIconController.AlternativeAppIcon?, isUnlocked: Bool) {
         if !isUnlocked {
             iconPreviewView.image = #imageLiteral(resourceName: "Unknwon Square")
-        } else if let alternativeIconName = alternativeIconName,
-           let iconResource = Bundle.main.url(forResource: "\(alternativeIconName)@3x", withExtension: "png") {
+        } else if let alternativeIcon = alternativeIcon,
+                  let iconResource = Bundle.main.url(forResource: "\(alternativeIcon.name)@3x", withExtension: "png") {
             iconPreviewView.kf.setImage(with: iconResource)
         } else {
             iconPreviewView.image = #imageLiteral(resourceName: "High Resolution App Icon")
         }
         
-        iconNameLabel.text = isUnlocked ? alternativeIconName ?? "Default" : "?"
+        let displayName = alternativeIcon?.displayName ?? alternativeIcon?.name ?? "Default"
+        iconNameLabel.text = isUnlocked ? displayName : "?"
+        iconAuthorLabel.text = isUnlocked ? alternativeIcon?.author ?? "NineAnimator" : "???"
+        representingIcon = alternativeIcon
     }
     
     func setIsCurrentIcon(_ isCurrent: Bool, animated: Bool) {

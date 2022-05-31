@@ -30,7 +30,8 @@ extension NASourceAnimeHub {
         "mserver": "OpenStream 2",
         "gserver": "OpenStream 3",
         "yuserver": "YourUpload",
-        "mpserver": "Mp4Upload"
+        "mpserver": "Mp4Upload",
+        "lserver": "Dailymotion"
         // "hserver": "Hserver" Excluding until we update HydraX parser
     ]
     /// Represents the response from AnimeHub episode endpoint
@@ -44,7 +45,7 @@ extension NASourceAnimeHub {
         let download_get: String
     }
 
-    static let urlRegex = try! NSRegularExpression(pattern: #"((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)"#, options: .caseInsensitive)
+//    static let urlRegex = try! NSRegularExpression(pattern: #"(?:http|https):\/\/([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:\/~+#-]*[\w@?^=%&\/~+#-])"#, options: .caseInsensitive)
     
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
         NineAnimatorPromise<String>.firstly {
@@ -74,22 +75,25 @@ extension NASourceAnimeHub {
                     .EpisodeServerNotAvailableError(unavailableEpisode: link)
             }
             
-            // Extract URL from iframe
-            var iframeURLString = try (NASourceAnimeHub.urlRegex.firstMatch(in: episodeResponse.value)?
-                .firstMatchingGroup)
-                .tryUnwrap()
+            let bowl = try SwiftSoup.parse(episodeResponse.value)
+            let iframeURLString = try bowl.select("iframe").attr("src")
             
-            // Add URL scheme if not present
-            if !iframeURLString.hasPrefix("https://") {
-                iframeURLString = "https://\(iframeURLString)"
-            }
+//            // Extract URL from iframe
+//            var iframeURLString = try (NASourceAnimeHub.urlRegex.firstMatch(in: episodeResponse.value)?[safe: 0])
+//                .tryUnwrap()
+        
+//            // Add URL scheme if not present
+//            if !iframeURLString.hasPrefix("https://") {
+//                iframeURLString = "https://\(iframeURLString)"
+//            }
             
-            let iframeURL = try URL(string: iframeURLString).tryUnwrap()
+            let iframeURL = try URL(string: iframeURLString, relativeTo: self.endpointURL).tryUnwrap()
             
             return Episode(
                 link,
                 target: iframeURL,
-                parent: anime
+                parent: anime,
+                userInfo: ["password": "anime"]
             )
         }
     }

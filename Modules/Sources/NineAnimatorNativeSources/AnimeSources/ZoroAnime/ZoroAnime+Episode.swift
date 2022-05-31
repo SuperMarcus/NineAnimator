@@ -93,7 +93,7 @@ extension NASourceZoroAnime {
                     query: [ "id": episodeSource ]
                 ).responseDecodable(type: episodeResponse.self).then {
                     episodeResponse in
-                    return Episode(link, target: try URL(string: episodeResponse.link).tryUnwrap(), parent: anime)
+                    Episode(link, target: try URL(string: episodeResponse.link).tryUnwrap(), parent: anime)
                 }
         }
     }
