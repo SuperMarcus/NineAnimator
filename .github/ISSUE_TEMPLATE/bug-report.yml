@@ -52,7 +52,7 @@ body:
     attributes:
       label: iOS version
       description: |
-        You can find this somewhere in your Android settings.
+        You can find this in your Device settings.
       placeholder: |
         Example: "iOS 13"
     validations:
