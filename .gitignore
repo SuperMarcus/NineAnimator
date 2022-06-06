@@ -125,3 +125,5 @@ Common/
 NineAnimatorCore/
 NineAnimatorDependencies/
 
+Modules/.swiftpm/xcode
+
