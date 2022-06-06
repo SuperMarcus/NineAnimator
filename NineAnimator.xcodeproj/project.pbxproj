@@ -129,6 +129,7 @@
 		2C86C1EB225D6F9F00950ABF /* SetupWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EA225D6F9F00950ABF /* SetupWelcomeViewController.swift */; };
 		2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EE225D7FB600950ABF /* SetupWhatsNewViewController.swift */; };
 		2C8C8862284DF00300C85C9A /* NineAnimatorCoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */; };
+		2C8C8864284E415900C85C9A /* NineAnimatorCoreServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */; };
 		2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */; };
 		2C8F6E8222061CE30047798B /* OfflineAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */; };
@@ -256,6 +257,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2C8C8864284E415900C85C9A /* NineAnimatorCoreServices in Embed Frameworks */,
 				2C128526278BAE6F00425E01 /* NineAnimatorCommon in Embed Frameworks */,
 				2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */,
 				2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */,
