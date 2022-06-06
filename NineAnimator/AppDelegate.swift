@@ -56,10 +56,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundTaskContainer: StatefulAsyncTaskContainer?
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        // Initialize sources and parsers
-        NativeParsers.initialize()
-        NativeSources.initialize()
-        NativeListServices.initialize()
+        // First thing to do...initialize modules
+        NineAnimator.default.loadModules()
         
         // Shared AppDelegate reference
         AppDelegate.shared = self
@@ -99,6 +97,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Finish Setup
         setupImageCacher()
         setupCrashHandler()
+        
+        // Fetch availability data
+        NineAnimator.default.cloud.renewAvailabilityData()
         
         return true
     }

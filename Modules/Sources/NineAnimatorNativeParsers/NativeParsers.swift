@@ -20,11 +20,11 @@
 import Foundation
 import NineAnimatorCommon
 
-public enum NativeParsers {
+public class NativeParsers: NSObject, NineAnimatorModule {
     internal static var initialized = false
     
     /// Register the default set of sources
-    public static func initialize() {
+    public class func initModule(with parent: NineAnimator) {
         guard !initialized else { return }
         
         let defaultProvider = VideoProviderRegistry.default
