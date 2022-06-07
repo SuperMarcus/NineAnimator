@@ -20,20 +20,16 @@
 import Foundation
 import NineAnimatorCommon
 
-public class NativeListServices: NSObject, NineAnimatorModule {
-    internal static var initialized = false
-    
-    /// Register the default set of sources
+/// This file doesn't contain any actual code. NineAnimatorCore's services are declared in the NineAnimatorCore module.
+public class CoreServices: NSObject, NineAnimatorModule {
     public class func initModule(with parent: NineAnimator) {
-        guard !initialized else { return }
-        
-        let registry = NineAnimator.default
-        
-        registry.register(serviceType: Anilist.self)
-        registry.register(serviceType: Kitsu.self)
-        registry.register(serviceType: MyAnimeList.self)
-        registry.register(serviceType: Simkl.self)
-        
-        initialized = true
+        // Forward initialization call to core module
+        if let coreServicesClass = Bundle(for: Self.self).classNamed("NineAnimatorCore.NineAnimatorCoreServices"),
+           coreServicesClass != Self.self,
+           let coreServiceInitFunction = coreServicesClass.initModule(with:) {
+            coreServiceInitFunction(parent)
+        } else {
+            Log.info("[NineAnimaotrCoreServices] This version of NineAnimator was not built with NineAnimatorCore support.")
+        }
     }
 }

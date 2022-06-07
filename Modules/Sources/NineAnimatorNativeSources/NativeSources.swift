@@ -20,11 +20,11 @@
 import Foundation
 import NineAnimatorCommon
 
-public enum NativeSources {
+public class NativeSources: NSObject, NineAnimatorModule {
     internal static var initialized = false
     
     /// Register the default set of sources
-    public static func initialize() {
+    public class func initModule(with parent: NineAnimator) {
         guard !initialized else { return }
         
         let registry = NineAnimator.default

@@ -21,8 +21,22 @@
 import Foundation
 import PackageDescription
 
+var packageDependencies = [Package.Dependency]()
+
+// NineAnimatorCommon module
 let packageDir = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-let naCommonDependency: Package.Dependency = .package(name: "NineAnimatorCommon", path: "../Common")
+packageDependencies.append(
+    .package(name: "NineAnimatorCommon", path: "../Common")
+)
+
+// NineAnimatorCore module (optional)
+let hasCoreServices: Bool
+if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent().appendingPathComponent("NineAnimatorCore").path) {
+    packageDependencies.append(
+        .package(name: "NineAnimatorCore", path: "../NineAnimatorCore")
+    )
+    hasCoreServices = true
+} else { hasCoreServices = false }
 
 // if FileManager.default.fileExists(atPath: packageDir.deletingLastPathComponent().appendingPathComponent("Common").path) {
 //    naCommonDependency = .package(name: "NineAnimatorCommon", path: "../Common")
@@ -51,9 +65,14 @@ let package = Package(
             name: "NineAnimatorNativeListServices",
             type: .dynamic,
             targets: [ "NineAnimatorNativeListServices" ]
+        ),
+        .library(
+            name: "NineAnimatorCoreServices",
+            type: .dynamic,
+            targets: [ "NineAnimatorCoreServices" ]
         )
     ],
-    dependencies: [ naCommonDependency ],
+    dependencies: packageDependencies,
     targets: [
         .target(
             name: "NineAnimatorNativeSources",
@@ -75,6 +94,12 @@ let package = Package(
             resources: [
                 .process("ListServices/Anilist/GraphQL/Query")
             ]
+        ),
+        .target(
+            name: "NineAnimatorCoreServices",
+            dependencies: hasCoreServices ? [
+                "NineAnimatorCore"
+            ] : [ "NineAnimatorCommon" ]
         )
     ]
 )

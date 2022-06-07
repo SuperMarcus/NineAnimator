@@ -128,6 +128,8 @@
 		2C86C1E8225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C86C1E6225D6DC800950ABF /* SelflessAuthenticationWebViewController.storyboard */; };
 		2C86C1EB225D6F9F00950ABF /* SetupWelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EA225D6F9F00950ABF /* SetupWelcomeViewController.swift */; };
 		2C86C1EF225D7FB600950ABF /* SetupWhatsNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86C1EE225D7FB600950ABF /* SetupWhatsNewViewController.swift */; };
+		2C8C8862284DF00300C85C9A /* NineAnimatorCoreServices in Frameworks */ = {isa = PBXBuildFile; productRef = 2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */; };
+		2C8C8864284E415900C85C9A /* NineAnimatorCoreServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2C8E962323B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8E962223B9CE6A00415F92 /* AppDelegate+BackgroundRefreshTasks.swift */; };
 		2C8F6E802205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E7F2205E76D0047798B /* AnimePredictedEpisodeTableViewCell.swift */; };
 		2C8F6E8222061CE30047798B /* OfflineAnimeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8F6E8122061CE30047798B /* OfflineAnimeTableViewCell.swift */; };
@@ -255,6 +257,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2C8C8864284E415900C85C9A /* NineAnimatorCoreServices in Embed Frameworks */,
 				2C128526278BAE6F00425E01 /* NineAnimatorCommon in Embed Frameworks */,
 				2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */,
 				2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */,
@@ -569,6 +572,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CE1371526B31CA400F59CB0 /* AppCenterCrashes in Frameworks */,
+				2C8C8862284DF00300C85C9A /* NineAnimatorCoreServices in Frameworks */,
 				2C9325C224ACDDD3001E3708 /* SwordRPC in Frameworks */,
 				2CB6704F249FCB26006C11A9 /* HomeKit.framework in Frameworks */,
 				2CA0D98526502C03009EFF76 /* NineAnimatorNativeListServices in Frameworks */,
@@ -1296,6 +1300,7 @@
 				2CE1371426B31CA400F59CB0 /* AppCenterCrashes */,
 				2CE1371626B31CA400F59CB0 /* AppCenterAnalytics */,
 				2C128524278BAE6F00425E01 /* NineAnimatorCommon */,
+				2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */,
 			);
 			productName = NineAnimator;
 			productReference = 2C4ABC5021B5881E009B4D47 /* NineAnimator.app */;
@@ -2057,7 +2062,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
@@ -2068,7 +2073,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2089,7 +2094,7 @@
 				CODE_SIGN_ENTITLEMENTS = NineAnimator/NineAnimator.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 1;
 				DERIVE_MACCATALYST_PRODUCT_BUNDLE_IDENTIFIER = YES;
 				DEVELOPMENT_TEAM = 8WB2V923XT;
 				ENABLE_BITCODE = NO;
@@ -2100,7 +2105,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.7;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcuszhou.NineAnimator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2229,6 +2234,10 @@
 		2C128524278BAE6F00425E01 /* NineAnimatorCommon */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NineAnimatorCommon;
+		};
+		2C8C8861284DF00300C85C9A /* NineAnimatorCoreServices */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NineAnimatorCoreServices;
 		};
 		2C9325C124ACDDD3001E3708 /* SwordRPC */ = {
 			isa = XCSwiftPackageProductDependency;

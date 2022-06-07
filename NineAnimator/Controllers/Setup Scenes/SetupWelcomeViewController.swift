@@ -39,14 +39,23 @@ class SetupWelcomeViewController: UIViewController {
         Theme.current.preferredStatusBarStyle
     }
     
+    // Whether to dismiss the setup scene automatically after the availability data becomes available
+    fileprivate static var dismissConfigurationAfterAvailabilityDataRetrival: Bool {
+        true
+    }
+    
     @IBOutlet private weak var appIconImageView: UIImageView!
     @IBOutlet private weak var welcomeTitleLabel: UILabel!
     @IBOutlet private weak var continueButton: ThemedSolidButton!
     @IBOutlet private weak var eulaLabel: UILabel!
     @IBOutlet private weak var skipSetupButton: UIButton!
+    @IBOutlet private weak var setupLicenseLabel: UILabel!
     
     private var didShowAnimation = false
-    private var scheduledDataMigrators = NineAnimator.default.user.availableModelMigrators()
+    private var scheduledDataMigrators: [ModelMigrator]?
+    private var requiredConfigurations = false
+    private var availabilityDataFetchingTask: NineAnimatorAsyncTask?
+    private var licenseText: String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -61,18 +70,74 @@ class SetupWelcomeViewController: UIViewController {
             continueButton.alpha = 0.0
             eulaLabel.alpha = 0.0
             skipSetupButton.alpha = 0.0
+            licenseText = setupLicenseLabel.text
         }
         
         // If NineAnimator was updated from a previous version,
         // change the title to "Welcome Back"
         if NineAnimator.default.user.setupVersion != nil {
-            welcomeTitleLabel.text = "Welcome Back"
-            
-            if scheduledDataMigrators != nil {
+            if let availableMigrators = NineAnimator.default.user.availableModelMigrators(),
+               !availableMigrators.isEmpty {
                 welcomeTitleLabel.text = "Updating Data"
                 continueButton.isEnabled = false
                 skipSetupButton.isEnabled = false
+                requiredConfigurations = true
+                scheduledDataMigrators = availableMigrators
             }
+        }
+    }
+    
+    func ensureAvailabilityData() {
+        if !NineAnimator.default.cloud.isAvailabilityDataCached(),
+           case .none = availabilityDataFetchingTask {
+            UIView.animate(withDuration: 0.3) {
+                self.continueButton.isEnabled = false
+                self.skipSetupButton.isEnabled = false
+                self.welcomeTitleLabel.text = "Checking Sources"
+            }
+            
+            availabilityDataFetchingTask = NineAnimator.default.cloud
+                .retrieveAvailabilityData()
+                .dispatch(on: .main)
+                .defer {
+                    [weak self] _ in self?.availabilityDataFetchingTask = nil
+                }
+                .error {
+                    [weak self] error in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    // Indicates that there is an error
+                    UIView.animate(withDuration: 0.3) {
+                        self.continueButton.isEnabled = true
+                        self.skipSetupButton.isEnabled = false
+                        self.welcomeTitleLabel.text = "NineAnimator Unavailable"
+                        self.setupLicenseLabel.text = "NineAnimator is unable to continue because we failed to retrieve a critical piece of data that is required for the app to function: \(error.localizedDescription)"
+                        self.continueButton.setTitle("Retry", for: .normal)
+                        self.requiredConfigurations = true // Window won't dismiss automatically after this
+                    }
+                }
+                .finally {
+                    [weak self] _ in
+                    guard let self = self else {
+                        return
+                    }
+                    
+                    // Dismiss automatically if there was no user interaction
+                    if !self.requiredConfigurations && Self.dismissConfigurationAfterAvailabilityDataRetrival {
+                        return self.dismiss(animated: true)
+                    }
+                    
+                    // Restore button states
+                    UIView.animate(withDuration: 0.3) {
+                        self.continueButton.isEnabled = true
+                        self.skipSetupButton.isEnabled = true
+                        self.welcomeTitleLabel.text = "Welcome to NineAnimator"
+                        self.setupLicenseLabel.text = self.licenseText
+                        self.continueButton.setTitle("Continue", for: .normal)
+                    }
+                }
         }
     }
     
@@ -126,19 +191,26 @@ class SetupWelcomeViewController: UIViewController {
            let migrator = scheduledDataMigrators?.first {
             migrator.delegate = self
             migrator.beginMigration(sourceVersion: modelVersion)
+        } else if !NineAnimator.default.cloud.isAvailabilityDataCached() {
+            ensureAvailabilityData()
         }
     }
     
     @IBAction private func onSkipSetupButtonTap(_ sender: Any) {
-        if scheduledDataMigrators == nil {
+        if scheduledDataMigrators == nil || scheduledDataMigrators?.isEmpty == true,
+           NineAnimator.default.cloud.isAvailabilityDataCached() {
             NineAnimator.default.user.markDidSetupLatestVersion()
             dismiss(animated: true)
         }
     }
     
     @IBAction private func onContinueButtonTap(_ sender: Any) {
-        if scheduledDataMigrators == nil {
-            performSegue(withIdentifier: "continue", sender: self)
+        if !NineAnimator.default.cloud.isAvailabilityDataCached() {
+            return ensureAvailabilityData()
+        }
+        
+        if scheduledDataMigrators == nil || scheduledDataMigrators?.isEmpty == true {
+            return performSegue(withIdentifier: "continue", sender: self)
         }
     }
 }
@@ -161,11 +233,15 @@ extension SetupWelcomeViewController: ModelMigratorDelegate {
             nextMigrator.beginMigration(sourceVersion: modelVersion)
         } else {
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 0.3) {
-                    self.continueButton.isEnabled = true
-                    self.skipSetupButton.isEnabled = true
-                    self.welcomeTitleLabel.text = "Welcome Back"
-                    self.scheduledDataMigrators = nil
+                if NineAnimator.default.cloud.isAvailabilityDataCached() {
+                    UIView.animate(withDuration: 0.3) {
+                        self.continueButton.isEnabled = true
+                        self.skipSetupButton.isEnabled = true
+                        self.welcomeTitleLabel.text = "Welcome Back"
+                        self.scheduledDataMigrators = nil
+                    }
+                } else {
+                    self.ensureAvailabilityData()
                 }
             }
         }
