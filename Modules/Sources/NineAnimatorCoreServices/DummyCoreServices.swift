@@ -29,7 +29,7 @@ public class CoreServices: NSObject, NineAnimatorModule {
            let coreServiceInitFunction = coreServicesClass.initModule(with:) {
             coreServiceInitFunction(parent)
         } else {
-            Log.info("[NineAnimaotrCoreServices] This version of NineAnimator was not built with NineAnimatorCore support.")
+            Log.info("[NineAnimatorCoreServices] This version of NineAnimator was not built with NineAnimatorCore support.")
         }
     }
 }
