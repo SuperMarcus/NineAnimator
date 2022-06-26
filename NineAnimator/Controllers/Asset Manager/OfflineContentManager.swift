@@ -476,7 +476,7 @@ extension OfflineContentManager {
     
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
         Log.info(
-            "[OfflineContentManager] Downlaod task (%@) for session %@ has completed.",
+            "[OfflineContentManager] Download task (%@) for session %@ has completed.",
             task.taskIdentifier,
             session.configuration.identifier ?? "[Unknown Identifier]"
         )
