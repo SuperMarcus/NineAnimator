@@ -114,7 +114,7 @@ class OfflineContentManager: NSObject, AVAssetDownloadDelegate, URLSessionDownlo
             // by the user accidentally.
             let appSupportDirectory = try fs.url(
                 for: .applicationSupportDirectory,
-                in: .allDomainsMask,
+                in: .userDomainMask,
                 appropriateFor: nil,
                 create: true
             )
