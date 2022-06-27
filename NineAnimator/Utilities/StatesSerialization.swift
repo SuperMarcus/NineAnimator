@@ -48,7 +48,7 @@ func exportConfig(_ configuration: NineAnimatorUser) -> URL? {
         let trackingData: [AnimeLink: Data] = Dictionary(configuration.retrieveRecents().compactMap {
             anime in do {
                 let context = NineAnimator.default.trackingContext(for: anime)
-                let data = try context.export()
+                let data = try context.exportToData()
                 return (anime, data)
             } catch { Log.error("[Model.export] Unable to serialize tracking data for %@: %@", anime, error) }
             return nil
