@@ -49,7 +49,7 @@ class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
         \.english
     }
     
-    override var endpoint: String { "https://animesaturn.it" }
+    override var endpoint: String { "https://animesaturn.com" }
     
     override required init(with parent: NineAnimator) {
         super.init(with: parent)
