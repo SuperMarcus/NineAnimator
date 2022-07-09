@@ -59,8 +59,12 @@ class NASourceAnimeWorld: BaseSource, Source, PromiseSource {
     }
     
     func suggestProvider(episode: Episode, forServer server: Anime.ServerIdentifier, withServerName name: String) -> VideoProviderParser? {
-        server == NASourceAnimeWorld.AnimeWorldStream
-            ? DummyParser.registeredInstance : nil
+        switch name {
+        case NASourceAnimeWorld.AnimeWorldStream:
+            return DummyParser.registeredInstance
+        default:
+            return VideoProviderRegistry.default.provider(for: name)
+        }
     }
     
     override func recommendServer(for anime: Anime) -> Anime.ServerIdentifier? {
