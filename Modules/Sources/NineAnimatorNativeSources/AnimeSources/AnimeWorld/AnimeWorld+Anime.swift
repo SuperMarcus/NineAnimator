@@ -44,39 +44,7 @@ extension NASourceAnimeWorld {
                     source: self
                 )
                 
-//                // Obtain the list of episodes
-//                let episodes = try bowl.select("div.active ul li.episode").reduce(into: [EpisodeLink]()) {
-//                    collection, container in
-//                    let name =  try container.select("a").text()
-//                    let episodeName = name
-//                    var episodeLink = try container.select("a").attr("href")
-//                    episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
-//                    if !episodeLink.isEmpty {
-//                        collection.append(.init(
-//                            identifier: self.endpoint + (episodeLink) ,
-//                            name: episodeName,
-//                            server: NASourceAnimeWorld.AnimeWorldStream,
-//                            parent: reconstructedAnimeLink
-//                            ))
-//                    }
-//                }
-                
-                // Information
-                let animeSynopsis = try bowl.select("div.info div.desc").text()
-                // Attributes
-                let additionalAttributes = try bowl.select("div.row div.info div.row dd").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
-                    let info = try entry.html()
-                    let results = NASourceAnimeWorld.regex.matches(in: info)
-                    if !results.isEmpty {
-                        attributes[.airDate] = info
-                    }
-                    if entry.debugDescription.contains("rating") {
-                        let rate = try entry.select("dd span").text()
-                        attributes[.rating] = (rate as NSString).floatValue
-                        attributes[.ratingScale] = Float(10.0)
-                    }
-                }
-                
+                // Obtain the list of episodes
                 let serverMap = NASourceAnimeWorld.knownServerMap.mapValues { $0.name }
                 var episodeCollection = Anime.EpisodesCollection()
                 _ = try bowl.select(".widget-body > .server[data-name]").compactMap {
@@ -96,6 +64,22 @@ extension NASourceAnimeWorld {
                             server: serverName,
                             parent: reconstructedAnimeLink
                         )
+                    }
+                }
+                
+                // Information
+                let animeSynopsis = try bowl.select("div.info div.desc").text()
+                // Attributes
+                let additionalAttributes = try bowl.select("div.row div.info div.row dd").reduce(into: [Anime.AttributeKey: Any]()) { attributes, entry in
+                    let info = try entry.html()
+                    let results = NASourceAnimeWorld.regex.matches(in: info)
+                    if !results.isEmpty {
+                        attributes[.airDate] = info
+                    }
+                    if entry.debugDescription.contains("rating") {
+                        let rate = try entry.select("dd span").text()
+                        attributes[.rating] = (rate as NSString).floatValue
+                        attributes[.ratingScale] = Float(10.0)
                     }
                 }
                 
