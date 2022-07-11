@@ -28,12 +28,10 @@ import AppKit
 #endif
 
 class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
-    /*
-     * Alternative links:
-     * - animesaturn.cc
-     * - animesaturn.io
-     * - animesaturn.tv
-     */
+    /// Alternative links:
+    /// - animesaturn.cc
+    /// - animesaturn.io
+    /// - animesaturn.tv
     var name: String { "animesaturn.com" }
     
     var aliases: [String] { ["animesaturn.it"] }
