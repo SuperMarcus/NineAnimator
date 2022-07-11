@@ -43,12 +43,12 @@ private struct StateSerializationFile: Codable {
  Creating the .naconfig file for sharing and backing up anime watching
  histories.
  */
-func export(_ configuration: NineAnimatorUser) -> URL? {
+func exportConfig(_ configuration: NineAnimatorUser) -> URL? {
     do {
         let trackingData: [AnimeLink: Data] = Dictionary(configuration.retrieveRecents().compactMap {
             anime in do {
                 let context = NineAnimator.default.trackingContext(for: anime)
-                let data = try context.export()
+                let data = try context.exportToData()
                 return (anime, data)
             } catch { Log.error("[Model.export] Unable to serialize tracking data for %@: %@", anime, error) }
             return nil
