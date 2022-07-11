@@ -31,22 +31,12 @@ class StreamSBParser: VideoProviderParser {
 
     private struct StreamData: Codable {
         let file: String?
-        let cdnImg: String
-        let logo: Logo
-        let hash, length: String
         let subs: [String?]
-        let title, id: String
         let backup: String
-        let qlabel: [String: String]
-    }
-
-    private struct Logo: Codable {
-        let hide: String
-        let url: String
     }
     
     private static let versionRegex = try! NSRegularExpression(
-        pattern: #"app(\.v\d+\.\d+)?\.js"#,
+        pattern: #"app.+js[^\"']"#,
         options: .caseInsensitive
     )
     

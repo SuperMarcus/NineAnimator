@@ -354,7 +354,6 @@ extension VideoVardParser {
     
     struct SetupResponse: Decodable {
         var src: String
-        var tracks: [String]
         var seed: String
         var status: String
         var server_time: String

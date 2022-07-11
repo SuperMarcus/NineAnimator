@@ -21,20 +21,41 @@ import NineAnimatorCommon
 import SwiftSoup
 
 extension NASourceAnimeWorld {
+    static let knownServerMap = [
+        "AnimeWorld": (name: "AnimeWorld", id: "9"),
+        "VideoVard": (name: "VideoVard", id: "26"),
+//        "Streamlare": (name: "Streamlare", id: "25")
+        "Streamtape": (name: "Streamtape", id: "8"),
+        "Doodstream": (name: "Doodstream", id: "2"),
+//        "Userload": (name: "Userload", id: "17"),
+        "SB": (name: "Streamsb", id: "19")
+//        "VUP": (name: "VUP", id: "18")
+    ]
+    
     func episode(from link: EpisodeLink, with anime: Anime) -> NineAnimatorPromise<Episode> {
-        self.requestManager.request(url: link.identifier, handling: .browsing)
-            .responseBowl
-                .then {
-                    bowl in
-                    var video = try bowl.select("div.downloads div.widget-body a").attr("href").replacingOccurrences(of: "http://", with: "https://")
-                    if video.contains("download-file.php?id=") {
-                        video = video.replacingOccurrences(of: "download-file.php?id=", with: "")
-                    }
-                    return Episode(
-                        link,
-                        target: try URL(protocolRelativeString: video, relativeTo: self.endpointURL).tryUnwrap(),
-                        parent: anime
-                    )
-                }
+        self.requestManager.request(
+            url: self.endpointURL.appendingPathComponent("api/episode/info"),
+            handling: .ajax,
+            parameters: [ "id": link.identifier ]
+        )
+        .responseDecodable(type: EpisodeResponse.self )
+            .then {
+                episodeInfo in
+                
+                return Episode(
+                    link,
+                    target: try URL(protocolRelativeString: episodeInfo.grabber, relativeTo: self.endpointURL).tryUnwrap(),
+                    parent: anime
+                )
+            }
         }
+}
+
+// MARK: - Data Structures
+extension NASourceAnimeWorld {
+    struct EpisodeResponse: Codable {
+        let grabber: String
+        let name: String
+        let target: String
+    }
 }

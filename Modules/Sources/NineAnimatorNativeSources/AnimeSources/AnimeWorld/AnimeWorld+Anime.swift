@@ -45,19 +45,25 @@ extension NASourceAnimeWorld {
                 )
                 
                 // Obtain the list of episodes
-                let episodes = try bowl.select("div.active ul li.episode").reduce(into: [EpisodeLink]()) {
-                    collection, container in
-                    let name =  try container.select("a").text()
-                    let episodeName = name
-                    var episodeLink = try container.select("a").attr("href")
-                    episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
-                    if !episodeLink.isEmpty {
-                        collection.append(.init(
-                            identifier: self.endpoint + (episodeLink) ,
+                let serverMap = NASourceAnimeWorld.knownServerMap.mapValues { $0.name }
+                var episodeCollection = Anime.EpisodesCollection()
+                _ = try bowl.select(".widget-body > .server[data-name]").compactMap {
+                    container in
+                    let serverId = try container.attr("data-id")
+                    guard let serverName = NASourceAnimeWorld.knownServerMap.first(where: { $0.value.id == serverId })?.key else {
+                        return
+                    }
+                    let episodes = try container.select("ul li.episode")
+                    episodeCollection[serverName] = try episodes.compactMap {
+                        episode in
+                        let episodeName =  try episode.select("a").text()
+                        let episodeId = try episode.select("a").attr("data-id")
+                        return EpisodeLink(
+                            identifier: episodeId,
                             name: episodeName,
-                            server: NASourceAnimeWorld.AnimeWorldStream,
+                            server: serverName,
                             parent: reconstructedAnimeLink
-                            ))
+                        )
                     }
                 }
                 
@@ -76,13 +82,14 @@ extension NASourceAnimeWorld {
                         attributes[.ratingScale] = Float(10.0)
                     }
                 }
+                
                 return Anime(
                     reconstructedAnimeLink,
                     alias: engTitle ?? animeTitle,
                     additionalAttributes: additionalAttributes,
                     description: animeSynopsis,
-                    on: [ NASourceAnimeWorld.AnimeWorldStream: "AnimeWorld" ],
-                    episodes: [ NASourceAnimeWorld.AnimeWorldStream: episodes ],
+                    on: serverMap,
+                    episodes: episodeCollection,
                     episodesAttributes: [:]
                 )
             }
