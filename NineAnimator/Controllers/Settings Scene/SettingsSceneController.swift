@@ -246,7 +246,7 @@ extension SettingsSceneController {
                                continueActionName: "Clear Activities"
             ) { [weak self] in self?.clearActivities() }
         case "settings.history.export":
-            guard let exportedSettingsUrl = export(NineAnimator.default.user) else {
+            guard let exportedSettingsUrl = exportConfig(NineAnimator.default.user) else {
                 let alert = UIAlertController(title: "Error", message: "Cannot export configurations", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 return
