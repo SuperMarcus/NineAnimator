@@ -28,9 +28,15 @@ import AppKit
 #endif
 
 class NASourceAnimeSaturn: BaseSource, Source, PromiseSource {
+    /*
+     * Alternative links:
+     * - animesaturn.cc
+     * - animesaturn.io
+     * - animesaturn.tv
+     */
     var name: String { "animesaturn.com" }
     
-    var aliases: [String] { [] }
+    var aliases: [String] { ["animesaturn.it"] }
     
     #if canImport(UIKit)
     var siteLogo: UIImage { #imageLiteral(resourceName: "AnimeSaturn Site Icon") }
