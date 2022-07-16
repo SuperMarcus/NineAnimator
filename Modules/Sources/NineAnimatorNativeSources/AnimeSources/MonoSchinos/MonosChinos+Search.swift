@@ -51,7 +51,7 @@ extension NASourceMonosChinos {
                         .compactMap {
                             container -> AnimeLink? in
                             if let imageContainer = try container.select(".series > .seriesimg > img").first(),
-                                let titleContainer = try container.select("h5.seristitles").first() {
+                                let titleContainer = try container.select("h3.seristitles").first() {
                                     let animeTitle = titleContainer
                                         .ownText()
                                         .trimmingCharacters(in: .whitespacesAndNewlines)
