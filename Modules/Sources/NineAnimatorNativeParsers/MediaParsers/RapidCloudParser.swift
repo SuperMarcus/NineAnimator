@@ -34,7 +34,7 @@ class RapidCloudParser: VideoProviderParser {
         options: []
     )
     
-    private static let apiBaseSourceURL = URL(string: "https://rapid-cloud.ru/ajax/embed-6/getSources")!
+    private static let apiBaseSourceURL = URL(string: "https://rapid-cloud.co/ajax/embed-6/getSources")!
     private var webSocket: URLSessionWebSocketTask?
     private var semaphore = DispatchSemaphore(value: 0)
     private var sid: String = ""
@@ -127,8 +127,8 @@ class RapidCloudParser: VideoProviderParser {
                                 parent: episode,
                                 contentType: "application/vnd.apple.mpegurl",
                                 headers: [
-                                    "origin": "https://rapid-cloud.ru/",
-                                    "referer": "https://rapid-cloud.ru/",
+                                    "origin": "https://rapid-cloud.co/",
+                                    "referer": "https://rapid-cloud.co/",
                                     "user-agent": self.defaultUserAgent,
                                     "SID": sid
                                 ],
@@ -140,8 +140,8 @@ class RapidCloudParser: VideoProviderParser {
                                 parent: episode,
                                 contentType: "application/vnd.apple.mpegurl",
                                 headers: [
-                                    "origin": "https://rapid-cloud.ru/",
-                                    "referer": "https://rapid-cloud.ru/",
+                                    "origin": "https://rapid-cloud.co/",
+                                    "referer": "https://rapid-cloud.co/",
                                     "user-agent": self.defaultUserAgent,
                                     "SID": sid
                                 ],
@@ -161,7 +161,7 @@ class RapidCloudParser: VideoProviderParser {
 
 // MARK: - Request Helpers
 private extension RapidCloudParser {
-    private static let WS_SOCKET_URL = "wss://ws1.rapid-cloud.ru/socket.io/?EIO=4&transport=websocket"
+    private static let WS_SOCKET_URL = "wss://ws1.rapid-cloud.co/socket.io/?EIO=4&transport=websocket"
     private static let sidRegex =  try! NSRegularExpression(
         pattern: #"\"sid\":\"(.+?)\""#,
         options: .caseInsensitive
