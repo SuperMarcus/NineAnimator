@@ -108,9 +108,11 @@ class DiscordPresenceController {
         if self.currentPresence != presence {
             self.currentPresence = presence
             NotificationCenter.default.post(name: .presenceControllerDidUpdatePresence, object: self)
+            #if canImport(SwordRPC)
             _queue.async {
                 [weak self] in self?._updatePresenceIfPossible()
             }
+            #endif
         }
     }
 }
