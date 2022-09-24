@@ -105,6 +105,7 @@ class DiscordPresenceController {
     ///
     /// The presence controller automatically updates the current rich presence when a new video player state has been detected.
     func updatePresence(_ presence: Presence) {
+        #if canImport(SwordRPC)
         if self.currentPresence != presence {
             self.currentPresence = presence
             NotificationCenter.default.post(name: .presenceControllerDidUpdatePresence, object: self)
@@ -114,6 +115,7 @@ class DiscordPresenceController {
             }
             #endif
         }
+        #endif
     }
 }
 

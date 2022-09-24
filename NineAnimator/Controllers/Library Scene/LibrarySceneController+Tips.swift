@@ -110,6 +110,10 @@ extension LibrarySceneController {
                 .default
                 .animeWithNotifications()
                 .dispatch(on: .main)
+                .defer {
+                    [weak self] _ in
+                    self?._subscribedAnimeNotificationRetrivalTask = nil
+                }
                 .error {
                     [weak self] error in
                     Log.error("[LibrarySceneController] Unable to retrieve updated anime list: %@", error)
@@ -129,7 +133,6 @@ extension LibrarySceneController {
                             self.addTip(tip)
                         }
                     }
-                    self._subscribedAnimeNotificationRetrivalTask = nil
                 }
         }
         
