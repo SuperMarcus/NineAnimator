@@ -40,9 +40,7 @@ extension NASourceAnimeWorld {
         )
         .responseDecodable(type: EpisodeResponse.self )
             .then {
-                episodeInfo in
-                
-                return Episode(
+                episodeInfo in Episode(
                     link,
                     target: try URL(protocolRelativeString: episodeInfo.grabber, relativeTo: self.endpointURL).tryUnwrap(),
                     parent: anime
