@@ -62,7 +62,8 @@ class SettingsAppIconController: MinFilledCollectionViewController {
             "Anudeep's Colossus",
             "Blush Max Glow",
             "Rounded Cotton Candy",
-            "Sandman's Corner"
+            "Sandman's Corner",
+            "Handwriting"
         ] .compactMap {
             communityIconName in alternativeIcon(forName: communityIconName)
         } .sorted(by: <)

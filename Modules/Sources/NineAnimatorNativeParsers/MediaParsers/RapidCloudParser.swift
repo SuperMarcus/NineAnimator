@@ -37,6 +37,8 @@ class RapidCloudParser: VideoProviderParser {
         options: []
     )
     
+    private static let includeSidInMediaRequests = false
+    
     private static let apiBaseSourceURL = URL(string: "https://rapid-cloud.co/ajax/embed-6/getSources")!
     
     private static let localeLanguageList: [(name: String, code: String)] = {
@@ -142,12 +144,12 @@ class RapidCloudParser: VideoProviderParser {
             }
             
             var requestHeaders = [
-                "origin": "https://rapid-cloud.co/",
+//                "origin": "https://rapid-cloud.co/",
                 "referer": "https://rapid-cloud.co/",
                 "user-agent": self.defaultUserAgent
             ]
             
-            if let requestSid = resourceInfo.sid {
+            if Self.includeSidInMediaRequests, let requestSid = resourceInfo.sid {
                 requestHeaders["SID"] = requestSid
             }
             
@@ -203,14 +205,16 @@ class RapidCloudParser: VideoProviderParser {
         requestPurpose: Purpose,
         encryptionKey: Data
     ) -> NineAnimatorPromise<(SourcesAPIResponse, AdditionalResourceInfo)> {
-        NineAnimatorPromise.firstly {
+        let sid = self.initiateWebSocket(forPurpose: requestPurpose)
+        return NineAnimatorPromise.firstly {
             try Self.extractResourceID(from: iframeUrl)
         } .thenPromise {
             resourceIdentifer in NineAnimatorPromise<SourcesAPIResponse> {
                 callback in session.request(
                     RapidCloudParser.apiBaseSourceURL,
                     parameters: [
-                        "id": resourceIdentifer
+                        "id": resourceIdentifer,
+                        "sId": sid
                     ],
                     headers: [
                         "referer": iframeUrl.absoluteString,
@@ -228,7 +232,7 @@ class RapidCloudParser: VideoProviderParser {
         } .then {
             decodedResponse in
             let resourceInfo = AdditionalResourceInfo(
-                sid: self.initiateWebSocket(forPurpose: requestPurpose),
+                sid: sid,
                 encryptionKey: encryptionKey
             )
             return (decodedResponse, resourceInfo)
