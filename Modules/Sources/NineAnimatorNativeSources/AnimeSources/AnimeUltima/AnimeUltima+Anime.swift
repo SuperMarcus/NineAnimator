@@ -22,23 +22,27 @@ import NineAnimatorCommon
 import SwiftSoup
 
 extension NASourceAnimeUltima {
+    // The intermiddiate information for constructing the anime and episode links
+    
+    struct ConstructingEpisodeInformation {
+        var name: String?
+        var number: String
+        var airDate: String?
+        var url: URL
+    }
+    
+    struct ConstructingAnimeInformation {
+        var attributes: [Anime.AttributeKey: Any]
+        var episodes: [ConstructingEpisodeInformation]
+        var reconstructedLink: AnimeLink
+        var synopsis: String
+        var alias: String
+    }
+}
+
+extension NASourceAnimeUltima {
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
-        // The intermiddiate information for constructing the anime and episode links
-        typealias ConstructingEpisodeInformation = (
-            name: String?,
-            number: String,
-            airDate: String?,
-            url: URL
-        )
-        typealias ConstructingAnimeInformation = (
-            attributes: [Anime.AttributeKey: Any],
-            episodes: [ConstructingEpisodeInformation],
-            reconstructedLink: AnimeLink,
-            synopsis: String,
-            alias: String
-        )
-        
-        return self.requestManager.request(url: link.link, handling: .browsing)
+        self.requestManager.request(url: link.link, handling: .browsing)
             .responseString
             .then {
                 responseContent -> ConstructingAnimeInformation in
@@ -172,7 +176,12 @@ extension NASourceAnimeUltima {
                     }
                     
                     // Enqueue the episode information
-                    listOfEpisodes.append((episodeName, episodeNumber, episodeAirDate, episodeUrl))
+                    listOfEpisodes.append(.init(
+                        name: episodeName,
+                        number: episodeNumber,
+                        airDate: episodeAirDate,
+                        url: episodeUrl
+                    ))
                 }
                 
                 // Check to make sure that there is at least one episode
@@ -181,11 +190,11 @@ extension NASourceAnimeUltima {
                 }
                 
                 return ConstructingAnimeInformation(
-                    animeAdditionalAttributes,
-                    listOfEpisodes,
-                    reconstructedAnimeLink,
-                    animeSynopsis,
-                    animeAlias
+                    attributes: animeAdditionalAttributes,
+                    episodes: listOfEpisodes,
+                    reconstructedLink: reconstructedAnimeLink,
+                    synopsis: animeSynopsis,
+                    alias: animeAlias
                 )
             } .thenPromise {
                 information -> NineAnimatorPromise<(ConstructingAnimeInformation, EpisodePageInformation)> in

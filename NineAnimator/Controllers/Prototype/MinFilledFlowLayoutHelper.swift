@@ -29,14 +29,25 @@ import UIKit
 /// - Configure the collection view using `layoutHelper.configure(collectionView: collectionView)` on `viewDidLoad`
 /// - Forward `viewWillTransition()` and `viewWillAppear()` events to the helper
 class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
-    typealias LineLayoutParameters = (
-        ordinary: CGSize,
-        lastLine: CGSize,
-        lastLineOffset: Int,
-        ordinaryLineUnitCount: Int,
-        lastLineUnitCount: Int,
-        numberOfLines: Int
-    )
+    struct LineLayoutParameters {
+        var ordinary: CGSize
+        var lastLine: CGSize
+        var lastLineOffset: Int
+        var ordinaryLineUnitCount: Int
+        var lastLineUnitCount: Int
+        var numberOfLines: Int
+        
+        static var zero: LineLayoutParameters {
+            .init(
+                ordinary: .zero,
+                lastLine: .zero,
+                lastLineOffset: 0,
+                ordinaryLineUnitCount: 0,
+                lastLineUnitCount: 0,
+                numberOfLines: 0
+            )
+        }
+    }
     
     /// Data source for the collection view
     private weak var dataSource: UICollectionViewDataSource?
@@ -202,11 +213,11 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
     
     /// Recalculate the layout parameters
     private func calculateLayoutParameters(view: UICollectionView, layout: UICollectionViewFlowLayout, section: Int) -> LineLayoutParameters {
-        guard let dataSource = dataSource else { return (.zero, .zero, 0, 0, 0, 0) }
+        guard let dataSource = dataSource else { return .zero }
         
         let availableUnits = dataSource.collectionView(view, numberOfItemsInSection: section)
         
-        guard availableUnits > 0 else { return (.zero, .zero, 0, 0, 0, 0) }
+        guard availableUnits > 0 else { return .zero }
         
         let availableSpace = self.availableSpace(for: view, inSection: section)
         let variableParameter: WritableKeyPath<CGSize, CGFloat> =
@@ -248,13 +259,13 @@ class MinFilledFlowLayoutHelper: NSObject, UICollectionViewDelegateFlowLayout {
         lastLineSize[keyPath: variableParameter] = lastLineLength
         
         // Generate and cache result
-        let result = (
-            ordinalSize,
-            lastLineSize,
-            availableUnits / ordinalLineUnits * ordinalLineUnits,
-            ordinaryCount,
-            lastLineCount,
-            Int(ceil(Double(availableUnits) / Double(ordinalLineUnits)))
+        let result = LineLayoutParameters(
+            ordinary: ordinalSize,
+            lastLine: lastLineSize,
+            lastLineOffset: availableUnits / ordinalLineUnits * ordinalLineUnits,
+            ordinaryLineUnitCount: ordinaryCount,
+            lastLineUnitCount: lastLineCount,
+            numberOfLines: Int(ceil(Double(availableUnits) / Double(ordinalLineUnits)))
         )
         cachedLayoutParameters[section] = result
         return result

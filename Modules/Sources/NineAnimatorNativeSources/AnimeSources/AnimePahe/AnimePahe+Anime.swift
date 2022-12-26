@@ -33,7 +33,7 @@ extension NASourceAnimePahe {
     
     func anime(from link: AnimeLink) -> NineAnimatorPromise<Anime> {
         self.requestManager.request(url: link.link, handling: .browsing).responseString.thenPromise {
-            responseContent -> NineAnimatorPromise<(ClosedRange<Int>, Int, String, String, [Anime.AttributeKey: Any], AnimeLink)> in
+            responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             
             // Find the anime identifier with a regex
@@ -89,7 +89,14 @@ extension NASourceAnimePahe {
                 reconstructedAnimeLink
             ) }
         } .then {
-            episodeRange, perPageEntries, animeIdentifier, animeSynopsis, animeAttributes, reconstructedAnimeLink -> Anime in
+            (
+                episodeRange: ClosedRange<Int>,
+                perPageEntries: Int,
+                animeIdentifier: String,
+                animeSynopsis: String,
+                animeAttributes: [Anime.AttributeKey: Any],
+                reconstructedAnimeLink: AnimeLink
+            ) -> Anime in
             // Using a little trick here: since animepahe lists episodes in pages, it is
             // slow and quite unreasonable to interate through all pages. Therefore, stores
             // the episode number and page number in the episode identifier, and then
