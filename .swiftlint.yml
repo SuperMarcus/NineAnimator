@@ -18,6 +18,7 @@ disabled_rules: # rule identifiers to exclude from running
   - nesting
   - valid_ibinspectable
   - type_name
+  - large_tuple
 opt_in_rules: # some rules are only opt-in
   - anyobject_protocol
   - closure_spacing
@@ -55,12 +56,14 @@ opt_in_rules: # some rules are only opt-in
   - unavailable_function
   - unneeded_parentheses_in_closure_argument
   - untyped_error_in_catch
-  - unused_import
   - valid_ibinspectable
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_closing_braces
   - vertical_whitespace_opening_braces
   - yoda_condition
+analyzer_rules:
+  - unused_import
+  - unused_declaration
 trailing_whitespace:
   ignores_empty_lines: true
 inclusive_language:
