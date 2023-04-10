@@ -181,7 +181,7 @@ class RapidCloudParser: VideoProviderParser {
     
     private func locateEncryptionKey(_ frameContent: String, frameUrl: URL, session: Session) -> NineAnimatorPromise<Data> {
         NineAnimatorPromise<URLRequest>.firstly {
-            let resourceUrl = try URL(string: "https://raw.githubusercontent.com/consumet/rapidclown/main/key.txt?ts=\(Date().timeIntervalSince1970)")
+            let resourceUrl = try URL(string: "https://raw.githubusercontent.com/enimax-anime/key/e6/key.txt?ts=\(Date().timeIntervalSince1970)")
                 .tryUnwrap()
             var request = try URLRequest(url: resourceUrl, method: .get)
             request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData

@@ -19,6 +19,7 @@
 
 import Foundation
 import NineAnimatorCommon
+import SwiftSoup
 
 extension NASourceAnimePahe {
     // Individual episode items
@@ -66,26 +67,14 @@ extension NASourceAnimePahe {
             animeIdentifier, episodeEntry in
             // Retrieve streming target
             self.requestManager.request(
-                "/api",
-                handling: .ajax,
-                query: [
-                    "m": "links",
-                    "id": animeIdentifier,
-                    "p": link.server,
-                    "session": episodeEntry.session ?? ""
-                ]
-            ) .responseDictionary
-              .then { try DictionaryDecoder().decode(EmbedResponse.self, from: $0) }
+                url: "https://animepahe.ru/play/\(animeIdentifier)/\(episodeEntry.session ?? "")",
+                handling: .browsing
+            ).responseString
         } .then {
-            embed in
-            let allDefinitions = Dictionary(embed.data.flatMap {
-                $0.map { $0 }
-            }) { $1 }
-            
-            // Get the highest definition item
-            let selectedItem = try (allDefinitions["1080"] ?? allDefinitions["1080p"] ?? allDefinitions["720"] ?? allDefinitions["720p"] ?? allDefinitions.map { $0.value }.last)
-                .tryUnwrap(.responseError("No streaming source found for this episode"))
-            let targetUrl = try URL(string: selectedItem.kwik).tryUnwrap(.urlError)
+            responseContent in
+            let bowl = try SwiftSoup.parse(responseContent)
+            let embed = try bowl.select("[^data-resolution]").last().tryUnwrap().attr("data-src")
+            let targetUrl = try URL(string: embed).tryUnwrap(.urlError)
             
             // Construct the episode object
             return Episode(

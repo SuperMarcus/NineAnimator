@@ -30,20 +30,19 @@ extension NASourceAnimeDao {
           .then {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
-            let updatedAnimeContainer = try bowl.select("#new")
-            let featuredAnimeContainer = try bowl.select("#recent")
+            let updatedAnimeContainer = try bowl.select("div[aria-labelledby=\"latest-tab\"]")
+            let featuredAnimeContainer = try bowl.select("div[aria-labelledby=\"ongoing-tab\"]")
             
             let updatedAnimeList = try updatedAnimeContainer
-                .select(">div")
+                .select(">div .card-body")
                 .compactMap {
                     container -> AnimeLink? in
-                    if let imageContainer = try container.select("img").first(),
-                        let titleContainer = try container.select("a.latest-parent").first() {
-                        let animeTitle = titleContainer
-                            .ownText()
+                    if let imageContainer = try container.select(".animeposter > div > a > img").first(),
+                        let titleContainer = try container.select(".animeinfo > a").first() {
+                        let animeTitle = try titleContainer.select(".animeinfo_top .animename").text()
                             .trimmingCharacters(in: .whitespacesAndNewlines)
                         let animeUrl = try URL(
-                            string: try titleContainer.attr("href"),
+                            string: try container.select(".animeinfo > .animeparent").attr("href"),
                             relativeTo: self.endpointURL
                         ).tryUnwrap()
                         let artworkUrl = try URL(
@@ -63,12 +62,12 @@ extension NASourceAnimeDao {
                 }
             
             let featuredAnimeList = try featuredAnimeContainer
-                .select(">div>div")
+                .select(">div:last-child .card-body")
                 .compactMap {
                     container -> AnimeLink? in
-                    if let imageContainer = try container.select("img").first(),
-                        let titleContainer = try container.select(".ongoingtitle b").first(),
-                        let linkContainer = try container.select("a").first() {
+                    if let imageContainer = try container.select(".animeposter > div > a > img").first(),
+                        let titleContainer = try container.select(".animeinfo > a > div > span").first(),
+                        let linkContainer = try container.select(".animeinfo > a").first() {
                         let animeTitle = titleContainer
                             .ownText()
                             .trimmingCharacters(in: .whitespacesAndNewlines)
