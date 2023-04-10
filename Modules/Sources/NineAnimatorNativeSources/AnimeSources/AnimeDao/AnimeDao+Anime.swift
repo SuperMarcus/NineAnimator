@@ -49,16 +49,16 @@ extension NASourceAnimeDao {
             let bowl = try SwiftSoup.parse(responseContent)
             
             // Reconstruct Anime Link
-            let animeInfoContainer = try bowl.select("div.animeinfo-div")
+            let animeInfoContainer = try bowl.select("._animeinfo")
             let animeArtworkPath = try animeInfoContainer
-                .select(".animeinfo-poster img")
+                .select(".main-poster")
                 .attr("data-src")
             let animeArtworkUrl = URL(
                 string: animeArtworkPath,
                 relativeTo: self.endpointURL
             ) ?? link.image
             let animeTitle = try animeInfoContainer
-                .select(".animeinfo-div h2>b")
+                .select("h2>b")
                 .first()?
                 .ownText() ?? link.title
             let reconstructedAnimeLink = AnimeLink(
@@ -69,7 +69,7 @@ extension NASourceAnimeDao {
             )
             
             // Retrieve Episodes
-            let episodeContainers = try bowl.select("#eps > div > a")
+            let episodeContainers = try bowl.select("#episodes-tab-pane .episodelist")
             let episodeList = try episodeContainers.reduce(into: [
                 (
                     path: String,
@@ -80,9 +80,9 @@ extension NASourceAnimeDao {
                     airDate: String?
                 )
             ]()) { results, current in
-                let path = try current.attr("href")
-                let airDate = try current.select("span.pull-right").first()?.ownText()
-                let nameRaw = try current.select("div.anime-title")
+                let path = try current.select("a").attr("href")
+                let airDate = try current.select(".card-body .animeinfo .badge.date").text()
+                let nameRaw = try current.select("span.animename")
                     .text()
                     .trimmingCharacters(in: .whitespacesAndNewlines)
                 let name: String = {
@@ -106,7 +106,7 @@ extension NASourceAnimeDao {
                 
                 var fullName: String?
                 
-                if let episodeNameContainer = try current.select("span.latestanime-subtitle").first() {
+                if let episodeNameContainer = try current.select("div.animetitle span").first() {
                     fullName = episodeNameContainer.ownText()
                         .trimmingCharacters(in: .whitespacesAndNewlines)
                 }
@@ -146,7 +146,7 @@ extension NASourceAnimeDao {
             
             // Parsing Anime Information
             var additionalAnimeAttributes = [Anime.AttributeKey: Any]()
-            var animeSynopsis = ""
+            let animeSynopsis = try animeInfoContainer.select(".d-sm-block").text()
             var animeAliases = ""
             let attributeItemMatches = NASourceAnimeDao
                 .animeAttributeMatchingExpression
@@ -162,8 +162,6 @@ extension NASourceAnimeDao {
                 switch attributeKey {
                 case "year":
                     additionalAnimeAttributes[.airDate] = attributeValue
-                case "description":
-                    animeSynopsis = try Entities.unescape(attributeValue)
                 case "alternative":
                     animeAliases = attributeValue.replacingOccurrences(
                         of: ",",

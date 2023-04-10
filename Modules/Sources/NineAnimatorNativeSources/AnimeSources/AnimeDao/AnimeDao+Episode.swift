@@ -24,14 +24,14 @@ import SwiftSoup
 extension NASourceAnimeDao {
     /// A list of servers that are known to exists on AnimeDao
     static let knownServerMap = [
-//        "#gstore": (name: "Google Video", switcher: "gstore"), seems to be removed
-        "#hls": (name: "ProxyData", switcher: "hls"),
-        "#gounlimited": (name: "GoUnlimited", switcher: "gounlimited"),
-        "#fembed": (name: "Fembed", switcher: "fembed"),
-        "#mixdrop": (name: "Mixdrop", switcher: "mixdrop"),
-//        "#hydrax": (name: "HydraX", switcher: "hydrax"), seems to be removed
-        "#sb": (name: "Streamsb", switcher: "sb"),
-        "#streamtape": (name: "Streamtape", switcher: "streamtape")
+        "vstream": (name: "VidStreaming", switcher: "vstream"), // Not supported for now
+        "fm": (name: "FileMoon", switcher: "fm"), // Not supported for now
+        "vcdn": (name: "Fembed", switcher: "vcdn"),
+        "mixdrop": (name: "Mixdrop", switcher: "mixdrop"),
+        "streamsb": (name: "Streamsb", switcher: "streamsb"),
+        "streamtape": (name: "Streamtape", switcher: "streamtape"),
+        "doodstream": (name: "Doodstream", switcher: "doodstream"),
+        "mp4": (name: "Mp4Upload", switcher: "mp4")
     ]
     
     static let attributeMatchingExpr = try! NSRegularExpression(
@@ -71,8 +71,21 @@ extension NASourceAnimeDao {
             responseContent in
             let bowl = try SwiftSoup.parse(responseContent)
             let availableServerList = try bowl
-                .select("#videocontent li a")
-                .map { try $0.attr("href") }
+                .select("#videotab li button")
+                .map { el in
+                    let serverExpr = try NSRegularExpression(
+                        pattern: #"return\s+false;\s+(.+?)\(\)"#,
+                        options: []
+                    )
+                    
+                    let server = try (serverExpr
+                        .firstMatch(in: try el.attr("onclick"))?
+                        .firstMatchingGroup
+                    ).tryUnwrap()
+                    
+                    return server
+                }
+                        
             
             // Mark if this asset uses dummy parser
             var isPassthroughLink = false
