@@ -47,16 +47,16 @@ extension NASourceAnimeDao {
                 ) .responseString.then {
                     [parent] responseContent -> [AnimeLink]? in
                     try SwiftSoup.parse(responseContent)
-                        .select("a")
+                        .select(".card-body")
                         .compactMap {
                             container -> AnimeLink? in
-                            if let imageContainer = try container.select("img").first(),
-                                let titleContainer = try container.select(".ongoingtitle b").first() {
+                            if let imageContainer = try container.select(".animeposter a img").first(),
+                                let titleContainer = try container.select(".animeinfo > a .animename").first() {
                                 let animeTitle = titleContainer
                                     .ownText()
                                     .trimmingCharacters(in: .whitespacesAndNewlines)
                                 let animeUrl = try URL(
-                                    string: try container.attr("href"),
+                                    string: try container.select(".animeinfo > a").attr("href"),
                                     relativeTo: parent.endpointURL
                                 ).tryUnwrap()
                                 let artworkUrl = try URL(
