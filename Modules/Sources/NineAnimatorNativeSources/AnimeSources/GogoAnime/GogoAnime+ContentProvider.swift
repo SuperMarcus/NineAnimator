@@ -21,7 +21,6 @@ import Foundation
 import NineAnimatorCommon
 import SwiftSoup
 
-// swiftlint:disable closure_end_indentation
 extension NASourceGogoAnime {
     class GogoContentProvider: ContentProvider {
         var title: String

@@ -25,6 +25,7 @@ import UIKit
 class LibraryCategoryCell: UICollectionViewCell, Themable {
     // swiftlint:disable implicitly_unwrapped_optional
     private(set) unowned var category: LibrarySceneController.Category!
+    // swiftlint:enable implicitly_unwrapped_optional
     
     @IBOutlet private weak var categoryIcon: UIImageView!
     @IBOutlet private weak var categoryNameLabel: UILabel!

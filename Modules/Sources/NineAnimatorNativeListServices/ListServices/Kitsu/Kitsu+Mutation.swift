@@ -55,7 +55,7 @@ public extension Kitsu {
                             ]
                         ],
                         "type": "library-entries"
-                    ]
+                    ] as [String: Any]
                 ],
                 method: .post
             )
@@ -107,7 +107,7 @@ public extension Kitsu {
                             "mediaReaction": [ "data": nil ]
                         ],
                         "type": "library-entries"
-                    ]
+                    ] as [String: Any]
                 ],
                 method: .patch
             )

@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "78424be314842833c04bc3bef5b72e85fff99204",
-          "version": "5.6.4"
+          "revision": "bc268c28fb170f494de9e9927c371b8342979ece",
+          "version": "5.7.1"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "af4be924ad984cf4d16f4ae4df424e79a443d435",
-          "version": "7.6.2"
+          "revision": "e8625b80c413457b13ea9be75d07f6e9f5830c19",
+          "version": "7.7.0"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "f707b8680cddb96dc1855632340a572ef37bbb98",
-          "version": "2.5.3"
+          "revision": "0e96a20ffd37a515c5c963952d4335c89bed50a6",
+          "version": "2.6.0"
         }
       },
       {
@@ -98,6 +98,15 @@
           "branch": null,
           "revision": "55f1c46241b181c3e0b68d70edb6d87926c7d183",
           "version": "3.1.0"
+        }
+      },
+      {
+        "package": "ZIPFoundation",
+        "repositoryURL": "https://github.com/weichsel/ZIPFoundation.git",
+        "state": {
+          "branch": null,
+          "revision": "43ec568034b3731101dbf7670765d671c30f54f3",
+          "version": "0.9.16"
         }
       }
     ]

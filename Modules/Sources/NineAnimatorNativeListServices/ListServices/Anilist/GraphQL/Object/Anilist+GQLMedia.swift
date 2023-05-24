@@ -159,3 +159,4 @@ extension Anilist {
         var hasNextChunk: Bool?
     }
 }
+// swiftlint:enable discouraged_optional_boolean

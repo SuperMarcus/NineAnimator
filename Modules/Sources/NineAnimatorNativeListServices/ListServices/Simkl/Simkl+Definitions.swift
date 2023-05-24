@@ -20,10 +20,10 @@
 import Foundation
 import NineAnimatorCommon
 
-///
-/// Simkl API Codable Definitions were written based on the simkl
-/// API documentations on Apiry
-///
+//
+// Simkl API Codable Definitions were written based on the simkl
+// API documentations on Apiry
+//
 
 // MARK: - API Definitions
 extension Simkl {

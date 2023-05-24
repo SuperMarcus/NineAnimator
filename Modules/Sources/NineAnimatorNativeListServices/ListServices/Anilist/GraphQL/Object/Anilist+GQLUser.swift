@@ -42,3 +42,5 @@ extension Anilist {
         var advancedScoringEnabled: Bool?
     }
 }
+
+// swiftlint:enable discouraged_optional_boolean

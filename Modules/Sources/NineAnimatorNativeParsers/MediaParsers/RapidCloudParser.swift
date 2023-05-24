@@ -239,6 +239,8 @@ class RapidCloudParser: VideoProviderParser {
         }
     }
     
+    // Only used internally (to this class)
+    // swiftlint:disable function_parameter_count
     private func proceed(
         _ session: Session,
         withProtectedRequest iframeUrl: URL,
@@ -282,6 +284,7 @@ class RapidCloudParser: VideoProviderParser {
             }
         }
     }
+    // swiftlint:enable function_parameter_count
     
     private static func extractResourceID(from iframeUrl: URL) throws -> String {
         guard iframeUrl.pathComponents.count == 3 else {
@@ -421,7 +424,11 @@ private extension RapidCloudParser {
         var file: String?
         var kind: String
         var label: String?
+        
+        // Required to decode optional boolean json value
+        // swiftlint:disable discouraged_optional_boolean
         var `default`: Bool?
+        // swiftlint:enable discouraged_optional_boolean
     }
     
     struct AdditionalResourceInfo {

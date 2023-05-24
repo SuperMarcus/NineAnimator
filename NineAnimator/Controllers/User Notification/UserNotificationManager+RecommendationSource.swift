@@ -81,12 +81,10 @@ extension UserNotificationManager {
                         }
                         
                         // Add the subscribed anime without updates
-                        for anime in NineAnimator.default.user.subscribedAnimes {
-                            if !animeWithNotification.contains(anime) {
-                                recommendingItems.append(
-                                    RecommendingItem(.anime(anime))
-                                )
-                            }
+                        for anime in NineAnimator.default.user.subscribedAnimes where !animeWithNotification.contains(anime) {
+                            recommendingItems.append(
+                                RecommendingItem(.anime(anime))
+                            )
                         }
                         
                         // Construct the recommendation object

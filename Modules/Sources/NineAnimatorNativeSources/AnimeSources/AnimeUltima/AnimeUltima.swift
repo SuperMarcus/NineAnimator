@@ -67,12 +67,9 @@ class NASourceAnimeUltima: BaseSource, Source, PromiseSource {
         let serverPreferencesMap = anime.servers.mapValues {
             serverName -> Int in
             let matchingKey = serverName.lowercased()
-            for (key, piority) in preferencesTable {
-                if key.lowercased().hasSuffix(matchingKey) {
-                    return piority
-                }
-            }
-            return 500
+            return preferencesTable.first {
+                $0.key.lowercased().hasSuffix(matchingKey)
+            }?.value ?? 500
         }
         
         if let preferredServer = serverPreferencesMap.max(by: { $0.value < $1.value })?.key {

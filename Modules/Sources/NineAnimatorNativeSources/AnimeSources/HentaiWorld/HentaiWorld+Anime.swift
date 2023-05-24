@@ -53,7 +53,7 @@ extension NASourceHentaiWorld {
                     episodeLink = episodeLink.replacingOccurrences(of: "'", with: "\'")
                     if !episodeLink.isEmpty {
                         collection.append(.init(
-                            identifier: self.endpoint + (episodeLink) ,
+                            identifier: self.endpoint + (episodeLink),
                             name: episodeName,
                             server: NASourceHentaiWorld.HentaiWorldStream,
                             parent: reconstructedAnimeLink

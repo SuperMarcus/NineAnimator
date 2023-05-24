@@ -35,3 +35,5 @@ extension Anilist {
         var hasNextPage: Bool?
     }
 }
+
+// swiftlint:enable discouraged_optional_boolean

@@ -32,7 +32,7 @@ public extension Simkl {
                                 "title": reference.name,
                                 "to": self.stateToSimkl(newState),
                                 "ids": [ "simkl": reference.uniqueIdentifier ]
-                            ]
+                            ] as [String: Any]
                         ]
                     ],
                     options: []

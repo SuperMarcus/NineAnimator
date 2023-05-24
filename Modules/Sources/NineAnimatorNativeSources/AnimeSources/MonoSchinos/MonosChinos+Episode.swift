@@ -56,7 +56,7 @@ extension NASourceMonosChinos {
             episodeUrl, responseContent in
             
             let bowl = try SwiftSoup.parse(responseContent)
-            var encodedPlayerId = ""; // because variable can't be guaranteed to have a value, needs further fixing from the loop below
+            var encodedPlayerId = "" // because variable can't be guaranteed to have a value, needs further fixing from the loop below
             
             let episodeList = try bowl.select("#play-video > a").compactMap {
                 episodeElement -> (serverId: String, sourceId: String) in

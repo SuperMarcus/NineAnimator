@@ -85,7 +85,6 @@ extension NASourceAnimeDao {
                     
                     return server
                 }
-                        
             
             // Mark if this asset uses dummy parser
             var isPassthroughLink = false

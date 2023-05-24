@@ -27,7 +27,6 @@ import SafariServices
 import UIKit
 import UserNotifications
 
-// swiftlint:disable cyclomatic_complexity
 class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresentationControllerDelegate {
     @IBOutlet private weak var episodeListingOrderControl: UISegmentedControl!
     @IBOutlet private weak var detectClipboardLinksSwitch: UISwitch!

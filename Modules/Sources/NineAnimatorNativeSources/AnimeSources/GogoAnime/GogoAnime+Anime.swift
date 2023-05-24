@@ -21,7 +21,6 @@ import Foundation
 import NineAnimatorCommon
 import SwiftSoup
 
-// swiftlint:disable closure_end_indentation
 extension NASourceGogoAnime {
     fileprivate static let animeIdentifierRegex =
         try! NSRegularExpression(pattern: "id\\s+=\\s+(\\d+)", options: [])

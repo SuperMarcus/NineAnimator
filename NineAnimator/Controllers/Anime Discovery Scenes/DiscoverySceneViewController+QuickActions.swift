@@ -71,3 +71,5 @@ extension DiscoverySceneViewController {
         return listOfActions
     }
 }
+
+// swiftlint:enable object_literal

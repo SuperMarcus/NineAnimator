@@ -40,8 +40,10 @@ class ServerSelectionView: UITableView, UITableViewDelegate, UITableViewDataSour
     /// The delegate for this server selection view
     weak var serverSelectionDelegate: ServerSelectionViewDelegate?
     
+    // Delegate receiver shall hold reference
     // swiftlint:disable weak_delegate
     private var _defaultSelectionDelegate = DefaultSelectionAgent()
+    // swiftlint:enable weak_delegate
     
     private var _sources = [Source]()
     

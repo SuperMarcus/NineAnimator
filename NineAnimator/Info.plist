@@ -43,27 +43,27 @@
 					<string>9 Testboi</string>
 				</array>
 			</dict>
-			<key>Anudeep&apos;s Colossus</key>
+			<key>Anudeep's Colossus</key>
 			<dict>
 				<key>Author</key>
 				<string>Anudeep113#9006</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Anudeep&apos;s Colossus</string>
+					<string>Anudeep's Colossus</string>
 				</array>
 				<key>DisplayName</key>
 				<string>Colossus</string>
 			</dict>
-			<key>B&apos;day by Nsx</key>
+			<key>B'day by Nsx</key>
 			<dict>
 				<key>Author</key>
 				<string>biominimal#1386</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>B&apos;day by Nsx</string>
+					<string>B'day by Nsx</string>
 				</array>
 				<key>DisplayName</key>
-				<string>B&apos;day</string>
+				<string>B'day</string>
 			</dict>
 			<key>Bald Man</key>
 			<dict>
@@ -94,14 +94,25 @@
 					<string>Fox</string>
 				</array>
 			</dict>
-			<key>Furwa&apos;s Theme</key>
+			<key>Furwa's Theme</key>
 			<dict>
 				<key>Author</key>
 				<string>sandman#0768</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Furwa&apos;s Theme</string>
+					<string>Furwa's Theme</string>
 				</array>
+			</dict>
+			<key>Handwriting</key>
+			<dict>
+				<key>Author</key>
+				<string>neigh#5554</string>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Handwriting</string>
+				</array>
+				<key>DisplayName</key>
+				<string>Handwriting</string>
 			</dict>
 			<key>NsxHalloween</key>
 			<dict>
@@ -112,13 +123,13 @@
 					<string>NsxHalloween</string>
 				</array>
 			</dict>
-			<key>Nsxtop&apos;s 9</key>
+			<key>Nsxtop's 9</key>
 			<dict>
 				<key>Author</key>
 				<string>biominimal#1386</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Nsxtop&apos;s 9</string>
+					<string>Nsxtop's 9</string>
 				</array>
 			</dict>
 			<key>Rounded Cotton Candy</key>
@@ -132,13 +143,13 @@
 				<key>DisplayName</key>
 				<string>Cotton Candy</string>
 			</dict>
-			<key>Sandman&apos;s Corner</key>
+			<key>Sandman's Corner</key>
 			<dict>
 				<key>Author</key>
 				<string>sandman#0768</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Sandman&apos;s Corner</string>
+					<string>Sandman's Corner</string>
 				</array>
 				<key>DisplayName</key>
 				<string>Corner</string>
@@ -179,45 +190,34 @@
 					<string>Tydox Square</string>
 				</array>
 			</dict>
-			<key>Tydox&apos;s 9</key>
+			<key>Tydox's 9</key>
 			<dict>
 				<key>Author</key>
 				<string>Tydox#2220</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Tydox&apos;s 9</string>
+					<string>Tydox's 9</string>
 				</array>
 			</dict>
-			<key>Use&apos;s Inverted</key>
+			<key>Use's Inverted</key>
 			<dict>
 				<key>Author</key>
 				<string>manuell#1231</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Use&apos;s Inverted</string>
+					<string>Use's Inverted</string>
 				</array>
 			</dict>
-			<key>Zeref&apos;s Collection</key>
+			<key>Zeref's Collection</key>
 			<dict>
 				<key>Author</key>
 				<string>Harem God#2741</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Zeref&apos;s Collection</string>
+					<string>Zeref's Collection</string>
 				</array>
 				<key>DisplayName</key>
 				<string>Collection</string>
-			</dict>
-			<key>Handwriting</key>
-			<dict>
-				<key>Author</key>
-				<string>neigh#5554</string>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Handwriting</string>
-				</array>
-				<key>DisplayName</key>
-				<string>Handwriting</string>
 			</dict>
 		</dict>
 	</dict>
@@ -232,18 +232,18 @@
 					<string>9 Testboi</string>
 				</array>
 			</dict>
-			<key>Anudeep&apos;s Colossus</key>
+			<key>Anudeep's Colossus</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Anudeep&apos;s Colossus</string>
+					<string>Anudeep's Colossus</string>
 				</array>
 			</dict>
-			<key>B&apos;day by Nsx</key>
+			<key>B'day by Nsx</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>B&apos;day by Nsx</string>
+					<string>B'day by Nsx</string>
 				</array>
 			</dict>
 			<key>Bald Man</key>
@@ -271,11 +271,18 @@
 					<string>Fox</string>
 				</array>
 			</dict>
-			<key>Furwa&apos;s Theme</key>
+			<key>Furwa's Theme</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Furwa&apos;s Theme</string>
+					<string>Furwa's Theme</string>
+				</array>
+			</dict>
+			<key>Handwriting</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Handwriting</string>
 				</array>
 			</dict>
 			<key>NsxHalloween</key>
@@ -285,11 +292,11 @@
 					<string>NsxHalloween</string>
 				</array>
 			</dict>
-			<key>Nsxtop&apos;s 9</key>
+			<key>Nsxtop's 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Nsxtop&apos;s 9</string>
+					<string>Nsxtop's 9</string>
 				</array>
 			</dict>
 			<key>Rounded Cotton Candy</key>
@@ -303,13 +310,13 @@
 				<key>DisplayName</key>
 				<string>Cotton Candy</string>
 			</dict>
-			<key>Sandman&apos;s Corner</key>
+			<key>Sandman's Corner</key>
 			<dict>
 				<key>Author</key>
 				<string>sandman#0768</string>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Sandman&apos;s Corner</string>
+					<string>Sandman's Corner</string>
 				</array>
 				<key>DisplayName</key>
 				<string>Corner</string>
@@ -342,32 +349,25 @@
 					<string>Tydox Square</string>
 				</array>
 			</dict>
-			<key>Tydox&apos;s 9</key>
+			<key>Tydox's 9</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Tydox&apos;s 9</string>
+					<string>Tydox's 9</string>
 				</array>
 			</dict>
-			<key>Use&apos;s Inverted</key>
+			<key>Use's Inverted</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Use&apos;s Inverted</string>
+					<string>Use's Inverted</string>
 				</array>
 			</dict>
-			<key>Zeref&apos;s Collection</key>
+			<key>Zeref's Collection</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
-					<string>Zeref&apos;s Collection</string>
-				</array>
-			</dict>
-			<key>Handwriting</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Handwriting</string>
+					<string>Zeref's Collection</string>
 				</array>
 			</dict>
 		</dict>
@@ -431,7 +431,9 @@
 		<string>com.marcuszhou.nineanimator.activity.continueEpisode</string>
 	</array>
 	<key>UIApplicationRegistrationData</key>
-	<data>b6TFpcxX</data>
+	<data>
+	b6TFpcxX
+	</data>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

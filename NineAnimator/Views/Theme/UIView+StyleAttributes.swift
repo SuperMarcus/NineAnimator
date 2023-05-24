@@ -33,4 +33,5 @@ extension UIView {
     var overridingBackgroundSecondaryColor: Bool? {
         themableOptionsStore["background.seconary"] as? Bool
     }
+    // swiftlint:enable discouraged_optional_boolean
 }
