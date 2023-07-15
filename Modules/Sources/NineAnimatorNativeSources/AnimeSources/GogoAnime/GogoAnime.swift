@@ -46,9 +46,19 @@ class NASourceGogoAnime: BaseSource, Source, PromiseSource {
         \.english
     }
 
-    override var endpoint: String { "https://gogoanime.vet" }
+    override var endpoint: String { self._cachedDescriptor?.currentHost ?? "https://gogoanime.vet" }
 
-    let ajaxEndpoint = URL(string: "https://ajax.apimovie.xyz")!
+    var ajaxEndpoint: URL {
+        var dynamicEndpoint: URL?
+        
+        if let ajaxEndpointStr = self._cachedDescriptor?.currentAjaxEndpoint {
+            dynamicEndpoint = URL(string: ajaxEndpointStr)
+        }
+        
+        return dynamicEndpoint ?? URL(string: "https://ajax.apimovie.xyz")!
+    }
+    
+    private var _cachedDescriptor: SourceDescriptor?
 
     func search(keyword: String) -> ContentProvider {
         GogoContentProvider(query: keyword, parent: self)
@@ -60,5 +70,18 @@ class NASourceGogoAnime: BaseSource, Source, PromiseSource {
     
     override required init(with parent: NineAnimator) {
         super.init(with: parent)
+    }
+    
+    /// Request the source descriptor object
+    func requestDescriptor() -> NineAnimatorPromise<SourceDescriptor> {
+        // Serve cached descriptor is possible
+        if let cached = self._cachedDescriptor {
+            return .success(cached)
+        }
+        
+        return requestUncachedDescriptor().then {
+            self._cachedDescriptor = $0
+            return $0
+        }
     }
 }

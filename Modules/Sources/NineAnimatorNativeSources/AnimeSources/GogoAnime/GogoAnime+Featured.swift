@@ -28,9 +28,14 @@ extension NASourceGogoAnime {
         try! NSRegularExpression(pattern: "\\/(.+)-episode-\\d+$", options: .caseInsensitive)
     
     func featured() -> NineAnimatorPromise<FeaturedContainer> {
-        NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
-            popularAnimeUpdates, latestAnimeUpdates
-        ]) .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
+        self.requestDescriptor()
+            .thenPromise {
+                [weak self] _ -> NineAnimatorPromise<[[AnimeLink]]>? in
+                guard let self else { return nil }
+                return NineAnimatorPromise<[AnimeLink]>.queue(listOfPromises: [
+                    self.popularAnimeUpdates, self.latestAnimeUpdates
+                ])
+            } .then { results in BasicFeaturedContainer(featured: results[0], latest: results[1]) }
     }
     
     fileprivate var latestAnimeUpdates: NineAnimatorPromise<[AnimeLink]> {

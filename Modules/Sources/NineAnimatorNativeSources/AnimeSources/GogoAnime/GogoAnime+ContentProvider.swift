@@ -73,10 +73,13 @@ extension NASourceGogoAnime {
                     return
                 }
                 _lastRequest = _parent
-                    .requestManager
-                    .request(url: url, handling: .browsing)
-                    .responseString
-                    .then {
+                    .requestDescriptor()
+                    .thenPromise {
+                        [weak self] _ in self?._parent
+                            .requestManager
+                            .request(url: url, handling: .browsing)
+                            .responseString
+                    } .then {
                         [weak self] content -> [AnimeLink]? in
                         guard let self = self else { return nil }
                         

@@ -30,10 +30,12 @@ extension NASourceGogoAnime {
     }
     
     func anime(url: URL) -> NineAnimatorPromise<Anime> {
-        self.requestManager
-            .request(url: url, handling: .browsing)
-            .responseString
-            .thenPromise { content -> NineAnimatorPromise<(String, String)> in
+        self.requestDescriptor()
+            .thenPromise {
+                _ in self.requestManager
+                    .request(url: url, handling: .browsing)
+                    .responseString
+            } .thenPromise { content -> NineAnimatorPromise<(String, String)> in
                 guard let animeIdentifier = try? SwiftSoup.parse(content)
                     .select("input#movie_id.movie_id")
                     .attr("value") else {

@@ -51,9 +51,11 @@ extension NASourceGogoAnime {
     
     /// Retrieve the episode information struct for the episode at the particular path
     func episodeInformation(for episodePath: String) -> NineAnimatorPromise<NAGogoAnimeEpisodeInformation> {
-        requestManager.request(episodePath, handling: .browsing)
-            .responseString
-            .then { content in
+        self.requestDescriptor()
+            .thenPromise {
+                [weak self] _ in self?.requestManager.request(episodePath, handling: .browsing)
+                    .responseString
+            } .then { content in
                 let bowl = try SwiftSoup.parse(content)
                 
                 // Parse the streaming sources
