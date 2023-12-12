@@ -44,7 +44,7 @@ class NativePlayerController: NSObject, AVPlayerViewControllerDelegate, NSUserAc
     private let player = AVQueuePlayer()
     
     // AVPlayerViewController
-    private var playerViewController = AVPlayerViewController()
+    private var playerViewController = NativePlayerViewController()
     
     private var playerRateObservation: NSKeyValueObservation?
     
@@ -170,7 +170,7 @@ extension NativePlayerController {
         playerViewController.dismiss(animated: true, completion: nil)
         
         // Create and configure the new player view controller
-        playerViewController = AVPlayerViewController()
+        playerViewController = NativePlayerViewController()
         configurePlayerViewController()
     }
     

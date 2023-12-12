@@ -47,10 +47,11 @@ class SettingsSceneController: UITableViewController, Themable, UIAdaptivePresen
     @IBOutlet private weak var richPresenceStatusLabel: UILabel!
     @IBOutlet private weak var appIconTableViewCell: UITableViewCell!
     @IBOutlet private weak var currentAppIconLabel: UILabel!
-    
+    @IBOutlet private weak var forceLandscapePlayerSwitch: UISwitch!
+
     /// The path that the Settings view controller will be navigating to
     private var navigatingTo: EntryPath?
-    
+
     /// Dismissal handler
     private var onDismissal: (() -> Void)?
     private var _fTimerCounter = 0 {
@@ -126,6 +127,10 @@ extension SettingsSceneController {
     
     @IBAction private func onBackgroundPlaybackDidChange(_ sender: UISwitch) {
         NineAnimator.default.user.allowBackgroundPlayback = sender.isOn
+    }
+    
+    @IBAction private func onForceLandscapePlayerSwitchDidChange(_ sender: UISwitch) {
+        NineAnimator.default.user.forceLandscapePlayer = sender.isOn
     }
     
     @IBAction private func onPlaybackFallbackToBrowserDidChange(_ sender: UISwitch) {
@@ -299,6 +304,8 @@ extension SettingsSceneController {
         
         backgroundPlaybackSwitch.isEnabled = !pictureInPictureSwitch.isOn
         backgroundPlaybackSwitch.setOn(NineAnimator.default.user.allowBackgroundPlayback || (AVPictureInPictureController.isPictureInPictureSupported() && NineAnimator.default.user.allowPictureInPicturePlayback), animated: true)
+        
+        forceLandscapePlayerSwitch.setOn(NineAnimator.default.user.forceLandscapePlayer, animated: true)
         
         fallbackToBrowserSwitch.setOn(
             NineAnimator.default.user.playbackFallbackToBrowser,

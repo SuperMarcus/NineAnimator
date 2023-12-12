@@ -216,6 +216,7 @@
 		2CE2FDF4265070AB00319466 /* NineAnimatorNativeListServices in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D98426502C03009EFF76 /* NineAnimatorNativeListServices */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2CE2FDF5265070AD00319466 /* NineAnimatorNativeParsers in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D980264CC192009EFF76 /* NineAnimatorNativeParsers */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2CE2FDF6265070AE00319466 /* NineAnimatorNativeSources in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 2CA0D982264CC192009EFF76 /* NineAnimatorNativeSources */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2CE3CB3E2B2916AC00DC40F6 /* NativePlayerController+Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE3CB3D2B2916AC00DC40F6 /* NativePlayerController+Controller.swift */; };
 		2CE5B8E0225ECAC200A2CF89 /* SetupFinishingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */; };
 		2CEA0BE821F66D49007EECC4 /* Continuity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA0BE721F66D49007EECC4 /* Continuity.swift */; };
 		2CEBE8FE22074401006A64CC /* UISearchBar+Themable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEBE8FD22074401006A64CC /* UISearchBar+Themable.swift */; };
@@ -507,6 +508,7 @@
 		2CE18B0D2374996800771A16 /* LibraryRecentlyWatchedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryRecentlyWatchedCell.swift; sourceTree = "<group>"; };
 		2CE18B0F2374C7ED00771A16 /* LibraryTipGenericCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTipGenericCell.swift; sourceTree = "<group>"; };
 		2CE18B112374D69200771A16 /* LibrarySceneController+Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibrarySceneController+Tips.swift"; sourceTree = "<group>"; };
+		2CE3CB3D2B2916AC00DC40F6 /* NativePlayerController+Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NativePlayerController+Controller.swift"; sourceTree = "<group>"; };
 		2CE5B8DF225ECAC200A2CF89 /* SetupFinishingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupFinishingViewController.swift; sourceTree = "<group>"; };
 		2CE9FF8525699EB900D364E0 /* backups.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = backups.md; sourceTree = "<group>"; };
 		2CE9FF862569A60400D364E0 /* information_ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = information_ipad.png; sourceTree = "<group>"; };
@@ -1124,6 +1126,7 @@
 				2CAA70D221CFF42A00F0D082 /* NativePlayerController.swift */,
 				2C12EDE421BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift */,
 				2C12EDE621BDFFFF0064D2BD /* CastController.swift */,
+				2CE3CB3D2B2916AC00DC40F6 /* NativePlayerController+Controller.swift */,
 			);
 			path = "Player Scene";
 			sourceTree = "<group>";
@@ -1718,6 +1721,7 @@
 				2C12EDE521BDE9DB0064D2BD /* GoogleCastMediaPlaybackViewController.swift in Sources */,
 				2CD1A64E222EE32000121320 /* CollectionsTableViewCell.swift in Sources */,
 				2C0DA2E0238B10E4002C6447 /* PortionBarView.swift in Sources */,
+				2CE3CB3E2B2916AC00DC40F6 /* NativePlayerController+Controller.swift in Sources */,
 				2C4ABC5421B5881E009B4D47 /* AppDelegate.swift in Sources */,
 				2C8F6E8222061CE30047798B /* OfflineAnimeTableViewCell.swift in Sources */,
 				2C64FAB8236889F500AD0F45 /* UIView+StyleAttributes.swift in Sources */,
