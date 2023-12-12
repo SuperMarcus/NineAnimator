@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
         "state": {
           "branch": null,
-          "revision": "bc268c28fb170f494de9e9927c371b8342979ece",
-          "version": "5.7.1"
+          "revision": "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
+          "version": "5.8.1"
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "f2bcbd9eba88e32d2de9ce9512c4c47eabbf27ca",
-          "version": "5.0.2"
+          "revision": "1120c26835925f8314d035127c580bc71689c620",
+          "version": "5.0.4"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/onevcat/Kingfisher.git",
         "state": {
           "branch": null,
-          "revision": "e8625b80c413457b13ea9be75d07f6e9f5830c19",
-          "version": "7.7.0"
+          "revision": "add0a87ec4e31e2ca2a0b2085f0559201e4f5918",
+          "version": "7.10.1"
         }
       },
       {
@@ -69,8 +69,8 @@
         "repositoryURL": "https://github.com/scinfu/SwiftSoup.git",
         "state": {
           "branch": null,
-          "revision": "0e96a20ffd37a515c5c963952d4335c89bed50a6",
-          "version": "2.6.0"
+          "revision": "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
+          "version": "2.6.1"
         }
       },
       {
