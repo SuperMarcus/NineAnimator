@@ -41,9 +41,19 @@ class DiscoverySceneViewController: UITableViewController {
     private var recommendationLoadingTasks = [ObjectIdentifier: NineAnimatorAsyncTask]()
     private var dirtySources = Set<ObjectIdentifier>()
     private var shouldReloadDirtySourceImmedietly = false
-    
+        
     override var preferredStatusBarStyle: UIStatusBarStyle {
         Theme.current.preferredStatusBarStyle
+    }
+    
+    var source: Source { NineAnimator.default.user.source }
+    
+    @IBAction private func selectSourceButtonPressed(_ sender: Any) {
+        ServerSelectionViewController.presentSelectionDialog {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.selectSourceButton.title = self.source.name
+        }
     }
     
     override func viewDidLoad() {
@@ -86,6 +96,7 @@ class DiscoverySceneViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.makeThemable()
+        self.selectSourceButton.title = source.name
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
