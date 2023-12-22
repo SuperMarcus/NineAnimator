@@ -27,12 +27,23 @@ class RootViewController: UITabBarController, Themable {
     
     private weak var castControllerDelegate: AnyObject?
     
+    /// The top view controller visible by the user
     private var topViewController: UIViewController {
-        var topViewController: UIViewController = self
-        while let next = topViewController.presentedViewController {
-            topViewController = next
+        var topController: UIViewController = self
+        while true {
+            if let presentedController = topController.presentedViewController {
+                topController = presentedController
+            } // Special case for UINavigationController
+            else if let nav = topController as? UINavigationController,
+                    let presentedController = nav.visibleViewController {
+                topController = presentedController
+            } // Special case for UITabBarController
+            else if let tab = topController as? UITabBarController,
+                    let presentedController = tab.selectedViewController {
+                topController = presentedController
+            } else { break }
         }
-        return topViewController
+        return topController
     }
 
     override func viewDidLoad() {
@@ -208,9 +219,9 @@ extension RootViewController {
             if let navigationController = viewController.navigationController {
                 navigationController.pushViewController(targetViewController, animated: true)
             } else { viewController.present(targetViewController, animated: true) }
-        } else { // If no view controller is provided, present the link in the featured tab
-            // Jump to Featured tab
-            selectedIndex = 0
+        } else {
+            // If no view controller is provided, present the link in the watch next tab
+            navigate(toScene: .toWatch)
             
             guard let navigationController = viewControllers?.first as? ApplicationNavigationController else {
                 Log.error("The first view controller is not ApplicationNavigationController.")
@@ -247,8 +258,8 @@ extension RootViewController {
     
     fileprivate func _restore(_ config: URL) {
         let alert = UIAlertController(
-            title: "Import Configurations",
-            message: "How do you want to import this configuration?",
+            title: "Import Backup",
+            message: "How do you want to import this backup?",
             preferredStyle: .alert
         )
         
@@ -261,10 +272,22 @@ extension RootViewController {
             presentOnTop(errorAlert)
         }
         
+        func showConfirmationMessage() {
+            let confirmationAlert = UIAlertController(
+                title: "Backup Imported",
+                message: "Backup was imported successfully",
+                preferredStyle: .alert
+            )
+            
+            confirmationAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            presentOnTop(confirmationAlert)
+        }
+        
         alert.addAction(UIAlertAction(title: "Replace Current", style: .destructive) {
             _ in
             do {
                 try replace(NineAnimator.default.user, with: config)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
@@ -274,6 +297,7 @@ extension RootViewController {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .localFirst)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
@@ -283,6 +307,7 @@ extension RootViewController {
             _ in
             do {
                 try merge(NineAnimator.default.user, with: config, policy: .remoteFirst)
+                showConfirmationMessage()
             } catch {
                 showErrorAlert(error: error)
             }
